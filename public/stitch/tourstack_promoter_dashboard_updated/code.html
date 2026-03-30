@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Promoter Dashboard | TourStack</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-fixed-variant": "#3a485c",
+              "on-tertiary": "#ffffff",
+              "tertiary-fixed": "#ffddb8",
+              "secondary-container": "#d5e3fd",
+              "surface": "#f7f9fb",
+              "inverse-primary": "#ffccbc",
+              "surface-container-high": "#e6e8ea",
+              "primary-fixed": "#ffebdf",
+              "on-tertiary-container": "#ffb24b",
+              "secondary": "#515f74",
+              "on-secondary-container": "#57657b",
+              "on-background": "#191c1e",
+              "error-container": "#ffdad6",
+              "surface-bright": "#f7f9fb",
+              "surface-variant": "#e0e3e5",
+              "surface-dim": "#d8dadc",
+              "on-secondary-fixed": "#0d1c2f",
+              "error": "#ba1a1a",
+              "tertiary-fixed-dim": "#ffb95f",
+              "on-tertiary-fixed": "#2a1700",
+              "outline": "#85736d",
+              "primary": "#FF5A30",
+              "on-error": "#ffffff",
+              "on-surface": "#191c1e",
+              "secondary-fixed-dim": "#b9c7e0",
+              "surface-container-highest": "#e0e3e5",
+              "on-surface-variant": "#494455",
+              "on-primary-fixed-variant": "#a32a00",
+              "outline-variant": "#d7c1bb",
+              "primary-fixed-dim": "#ffccbc",
+              "primary-container": "#FF5A30",
+              "on-primary-container": "#ffffff",
+              "on-primary": "#ffffff",
+              "surface-tint": "#FF5A30",
+              "inverse-surface": "#2d3133",
+              "surface-container": "#eceef0",
+              "surface-container-lowest": "#ffffff",
+              "tertiary": "#523100",
+              "tertiary-container": "#714600",
+              "surface-container-low": "#f2f4f6",
+              "on-tertiary-fixed-variant": "#653e00",
+              "background": "#f7f9fb",
+              "on-error-container": "#93000a",
+              "on-primary-fixed": "#3e0b00",
+              "inverse-on-surface": "#eff1f3",
+              "on-secondary": "#ffffff",
+              "secondary-fixed": "#d5e3fd"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-orange-100/10 dark:border-orange-900/20 shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center h-16 px-6 md:px-12 w-full mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black tracking-tight text-[#FF5A30] font-headline">The Global Stage</span>
+<nav class="hidden md:flex gap-6">
+<a class="text-[#FF5A30] font-bold border-b-2 border-[#FF5A30] pb-1 font-headline" href="#">Platform</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-[#FF5A30] transition-colors font-headline" href="#">Discovery</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-[#FF5A30] transition-colors font-headline" href="#">Financing</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="bg-surface-container-highest border-none rounded-full pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 w-64" placeholder="Search tours..." type="text"/>
+</div>
+<button class="p-2 hover:bg-slate-50/50 rounded-lg transition-all active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+<button class="p-2 hover:bg-slate-50/50 rounded-lg transition-all active:scale-95">
+<span class="material-symbols-outlined text-on-surface-variant">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden bg-primary-container">
+<img alt="User profile" class="h-full w-full object-cover" data-alt="professional portrait of a creative executive with a modern neutral background and soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5mKU5q7ZGhNgic7oRDOHkD7g4foz_pMorXIkUZX3BezGT1vI4lIZPgg0Wu7d-ljYN2N53OqCHRWclrw6qtEsCndPosuAzMMjVPg4fJwfELGIeXwn34jHNkA8_1RgAILlDFc7R4utUEFf3Tx6ncTOqkA-dGHyE1u6smtwTn22LjPVYXHSMl7a-5zd4s60SC3SEzaPCONkEdKR3JYzoc-Q4W15ZLXkb3f89sGeVLj1Gmqj8COIZsWkDjKZozEavPg6AW6-c_JVIWdQ"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex pt-16 h-screen">
+<!-- SideNavBar -->
+<aside class="hidden lg:flex flex-col gap-2 py-6 h-full w-64 border-r border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 shrink-0">
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="h-10 w-10 bg-primary-container rounded-xl flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-sm text-on-surface">Tour Manager</h3>
+<p class="text-[10px] uppercase tracking-wider text-on-surface-variant font-semibold">Global Stage Pro</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 bg-orange-50 dark:bg-[#FF5A30]/10 text-[#FF5A30] rounded-xl mx-2 transition-all duration-200 ease-in-out font-headline font-semibold text-sm" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Overview</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl mx-2 transition-all duration-200 ease-in-out hover:translate-x-1 font-headline font-semibold text-sm" href="#">
+<span class="material-symbols-outlined">confirmation_number</span>
+<span>Tours</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl mx-2 transition-all duration-200 ease-in-out hover:translate-x-1 font-headline font-semibold text-sm" href="#">
+<span class="material-symbols-outlined">send</span>
+<span>Requests</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl mx-2 transition-all duration-200 ease-in-out hover:translate-x-1 font-headline font-semibold text-sm" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span>Financing</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-xl mx-2 transition-all duration-200 ease-in-out hover:translate-x-1 font-headline font-semibold text-sm" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<button class="w-full py-4 bg-[#FF5A30] text-on-primary rounded-xl font-headline font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95">
+                Start New Tour
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
+<!-- Header Section -->
+<div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="text-4xl font-black font-headline tracking-tight text-on-surface mb-2">Promoter Dashboard</h1>
+<p class="text-on-surface-variant font-medium">Welcome back, Stage One Productions. Here is your touring ecosystem.</p>
+</div>
+<div class="flex items-center gap-3 bg-surface-container-lowest p-2 rounded-xl shadow-sm">
+<span class="material-symbols-outlined text-tertiary-container ml-2">calendar_month</span>
+<span class="font-headline font-bold text-sm pr-4">Touring Season: Summer 2024</span>
+</div>
+</div>
+<!-- Bento Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-[#FF5A30]">
+<p class="text-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-4">Total Requests</p>
+<div class="flex items-end justify-between">
+<span class="text-4xl font-headline font-extrabold text-on-surface">142</span>
+<span class="text-[#FF5A30] font-bold flex items-center text-sm">+12% <span class="material-symbols-outlined text-xs">arrow_upward</span></span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-secondary">
+<p class="text-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-4">Approved Tours</p>
+<div class="flex items-end justify-between">
+<span class="text-4xl font-headline font-extrabold text-on-surface">38</span>
+<span class="text-slate-400 font-bold text-sm">Season Peak</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-tertiary-container">
+<p class="text-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-4">Pending Financing</p>
+<div class="flex items-end justify-between">
+<span class="text-4xl font-headline font-extrabold text-on-surface">$2.4M</span>
+<span class="text-tertiary-container font-bold flex items-center text-sm">8 Pending</span>
+</div>
+</div>
+<div class="relative overflow-hidden bg-primary-container p-6 rounded-xl shadow-sm flex flex-col justify-between">
+<div class="absolute top-0 right-0 p-2 opacity-20">
+<span class="material-symbols-outlined text-8xl" style="font-variation-settings: 'FILL' 1;">electric_bolt</span>
+</div>
+<p class="text-sm font-semibold text-on-primary-container uppercase tracking-wider mb-4 z-10">Next Show</p>
+<div class="z-10">
+<span class="block text-xl font-headline font-extrabold text-white leading-tight">Neon Shadows @ Wembley</span>
+<span class="text-orange-50 font-medium text-sm">In 4 days</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Requests Table -->
+<div class="lg:col-span-2 space-y-6">
+<div class="flex items-center justify-between">
+<h2 class="text-2xl font-headline font-bold text-on-surface">Your Requests</h2>
+<button class="text-sm font-bold text-[#FF5A30] flex items-center gap-1 hover:underline">
+                        View All <span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-high">
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant">Artist</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant">Date</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant">Status</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant text-right">Match</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/10">
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg overflow-hidden shrink-0">
+<img alt="Artist" class="h-full w-full object-cover" data-alt="close-up of an indie rock musician performing on stage with blue atmospheric lighting and smoke effects" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUQQfNDdTgx68ldF99DVk88ykm02ZF5hAFM9Zp82hdkUolvQLjrvMjkwy3ijXu8TDXa5Sp5VEzI3eyaiGNBH-nBotRABfdgcDWY9ue5W2CA6uu6mMwK4jrvpAqvdeuxmIwy2GiKO3iWpDPvrN1DbN1QlBm4ubkjCtTVK8H8Ln463Z9KUsx8Vs3V1lJKEea1fROpcoTQizKU0IncXZQgo--0vp60vC0bSlp-68cVcc6epdqA3NCOVFBScwx-P_JUIBCl-TTJRdGAVg"/>
+</div>
+<span class="font-headline font-bold text-on-surface">The Midnight Echo</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant font-medium">Oct 12, 2024</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-[10px] font-black uppercase tracking-tighter">Pending</span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="font-headline font-extrabold text-[#FF5A30]">94%</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg overflow-hidden shrink-0">
+<img alt="Artist" class="h-full w-full object-cover" data-alt="vibrant stage lights reflecting off a mirrored surface during a live electronic music concert" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgXVCiK7XsOmsTThPU_g3X78cKuo0ogP57es-dVzCe_ldS3EjQz1HHwjMNhgyJvxOLmza1078k4nDjWHbzGxnJDXAyll4ehX7wIK8wqA8GQMJKGOUqAEA-FrwlQoiCgXplZz7SzqorHvVcIKer8RBF9ycXRkg7Ijr4AEcgr3vTHtU3K-ryC8jKEJlJ8Cuw73dNMUacc4uFKofEdYIY94czWtD2UrhP-H8hlYKrKUHOE0YcWm7Ljxwe171DDPIMyf6Ur-QNTVjY5F4"/>
+</div>
+<span class="font-headline font-bold text-on-surface">Pulse Collective</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant font-medium">Nov 05, 2024</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-emerald-100 text-emerald-800 rounded-full text-[10px] font-black uppercase tracking-tighter">Approved</span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="font-headline font-extrabold text-[#FF5A30]">88%</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg overflow-hidden shrink-0">
+<img alt="Artist" class="h-full w-full object-cover" data-alt="wide shot of a stadium crowd silhouetted against a brilliant white stage explosion of light" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1ezKowZagB8USr5DCmeGO9ACzgjKR7qSj17eElhml9-B3XV4e5G8G7o4tL-CthexPr4tAxATA5aj5FS7sSWjgXm7vUU-XKH-G2PxVVMxAYyrv0FQ4q2VDeR2Az1DIdSa0HGrKgE2noOv4DKSDy6qs6OMX26mZ1ElZ37sXvxnRRDnXxY2-qPv5FDbD1CRjOzuCkcWuTeyJ97AH875CTXkjby4zBFtk1QhDkM44gQVXJ4HOApkoZl3KimjQeT-rtuO6sF7XLbjaGEU"/>
+</div>
+<span class="font-headline font-bold text-on-surface">Solar Orbit</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant font-medium">Sept 28, 2024</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-[10px] font-black uppercase tracking-tighter">Rejected</span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="font-headline font-extrabold text-[#FF5A30]">62%</span>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-10 w-10 rounded-lg overflow-hidden shrink-0">
+<img alt="Artist" class="h-full w-full object-cover" data-alt="close up of a jazz trumpeter in a dimly lit club with warm ambient orange glow" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBm3RM1-BhXSdrTRK1WiEXqxmheGDqQl4NA3RkQXFDioRxRDllhZMle-ZsXETS9vAHq-m-BbwM-l4LQ6CdsrXx1Jq-m-KO7QWSJmWZ18vW5peDmWD547K5IvLdYyMnK5IaJovGwtU1UNkc5sZiVI8N7BKDKsUcAVRIspR186wefLI4oNtkte52-CM-GnaA40VutwPrrLog2fGOtu7hkZq7aqyDGeBH4sxAw3UiakEFC9MyTVU3SboCt59YJlMGwHSZkorF-zD9oGM"/>
+</div>
+<span class="font-headline font-bold text-on-surface">Velvet Horizon</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-on-surface-variant font-medium">Dec 15, 2024</td>
+<td class="px-6 py-4">
+<span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-[10px] font-black uppercase tracking-tighter">Needs Revision</span>
+</td>
+<td class="px-6 py-4 text-right">
+<span class="font-headline font-extrabold text-[#FF5A30]">91%</span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Widgets Column -->
+<div class="space-y-8">
+<!-- Financing Status Widget -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline font-bold text-lg">Financing Status</h3>
+<span class="material-symbols-outlined text-[#FF5A30]">account_balance</span>
+</div>
+<div class="space-y-6">
+<div>
+<div class="flex justify-between text-sm mb-2">
+<span class="text-on-surface-variant font-medium">Summer Series Pool</span>
+<span class="font-bold text-[#FF5A30]">82% Funded</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
+<div class="bg-[#FF5A30] h-full rounded-full" style="width: 82%"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 bg-surface-container-low rounded-lg">
+<p class="text-[10px] uppercase font-bold text-on-surface-variant mb-1">Approved</p>
+<p class="text-xl font-headline font-extrabold text-on-surface">$1.8M</p>
+</div>
+<div class="p-4 bg-surface-container-low rounded-lg">
+<p class="text-[10px] uppercase font-bold text-on-surface-variant mb-1">Pending</p>
+<p class="text-xl font-headline font-extrabold text-tertiary-container">$640K</p>
+</div>
+</div>
+<button class="w-full py-3 bg-orange-50 text-[#FF5A30] font-headline font-bold text-sm rounded-lg hover:brightness-95 transition-all">
+                            Manage Treasury
+                        </button>
+</div>
+</div>
+<!-- Recent Activity Feed -->
+<div class="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+<h3 class="font-headline font-bold text-lg mb-6">Recent Activity</h3>
+<div class="space-y-6 relative before:absolute before:left-[11px] before:top-2 before:bottom-2 before:w-[2px] before:bg-surface-container-high">
+<div class="relative flex gap-4 pl-8">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center border-4 border-surface-container-lowest">
+<div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Tour Confirmed: 'Urban Pulse'</p>
+<p class="text-xs text-on-surface-variant">2 hours ago • Financing Approved</p>
+</div>
+</div>
+<div class="relative flex gap-4 pl-8">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-orange-100 flex items-center justify-center border-4 border-surface-container-lowest">
+<div class="w-2 h-2 rounded-full bg-[#FF5A30]"></div>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">New Artist Request</p>
+<p class="text-xs text-on-surface-variant">5 hours ago • Silver Lake Management</p>
+</div>
+</div>
+<div class="relative flex gap-4 pl-8">
+<div class="absolute left-0 top-1 w-6 h-6 rounded-full bg-tertiary-fixed flex items-center justify-center border-4 border-surface-container-lowest">
+<div class="w-2 h-2 rounded-full bg-tertiary-container"></div>
+</div>
+<div>
+<p class="text-sm font-bold text-on-surface">Document Required</p>
+<p class="text-xs text-on-surface-variant">Yesterday • Venue Contract - Wembley</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="w-full py-12 px-6 md:px-12 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 items-start">
+<div class="md:col-span-1">
+<span class="font-headline font-bold text-slate-900 dark:text-slate-100 text-xl block mb-4">The Global Stage</span>
+<p class="text-xs font-inter uppercase tracking-widest text-slate-500 leading-relaxed">
+                Powering the next generation of global live entertainment logistics.
+            </p>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant">Management</h4>
+<a class="font-inter text-xs uppercase tracking-widest text-slate-400 hover:text-[#FF5A30] transition-colors" href="#">Tours</a>
+<a class="font-inter text-xs uppercase tracking-widest text-slate-400 hover:text-[#FF5A30] transition-colors" href="#">Talent</a>
+<a class="font-inter text-xs uppercase tracking-widest text-slate-400 hover:text-[#FF5A30] transition-colors" href="#">Logistics</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant">Support</h4>
+<a class="font-inter text-xs uppercase tracking-widest text-slate-400 hover:text-[#FF5A30] transition-colors" href="#">Contact</a>
+<a class="font-inter text-xs uppercase tracking-widest text-slate-400 hover:text-[#FF5A30] transition-colors" href="#">Privacy Policy</a>
+<a class="font-inter text-xs uppercase tracking-widest text-slate-400 hover:text-[#FF5A30] transition-colors" href="#">Terms of Service</a>
+</div>
+<div class="flex flex-col gap-4">
+<h4 class="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant">Social</h4>
+<div class="flex gap-4">
+<button class="p-2 bg-surface-container rounded-lg hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-sm">alternate_email</span>
+</button>
+<button class="p-2 bg-surface-container rounded-lg hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-sm">share</span>
+</button>
+<button class="p-2 bg-surface-container rounded-lg hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-sm">public</span>
+</button>
+</div>
+<p class="text-[10px] font-inter uppercase tracking-widest text-slate-400 mt-4">© 2024 The Global Stage. All rights reserved.</p>
+</div>
+</div>
+</footer>
+</body></html>

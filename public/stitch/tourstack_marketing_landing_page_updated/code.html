@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-secondary-fixed-variant": "#3a485c",
+              "on-tertiary": "#ffffff",
+              "tertiary-fixed": "#ffddb8",
+              "secondary-container": "#d5e3fd",
+              "surface": "#f7f9fb",
+              "inverse-primary": "#ffccbe",
+              "surface-container-high": "#e6e8ea",
+              "primary-fixed": "#ffdad0",
+              "on-tertiary-container": "#ffb24b",
+              "secondary": "#515f74",
+              "on-secondary-container": "#57657b",
+              "on-background": "#191c1e",
+              "error-container": "#ffdad6",
+              "surface-bright": "#f7f9fb",
+              "surface-variant": "#e0e3e5",
+              "surface-dim": "#d8dadc",
+              "on-secondary-fixed": "#0d1c2f",
+              "error": "#ba1a1a",
+              "tertiary-fixed-dim": "#ffb95f",
+              "on-tertiary-fixed": "#2a1700",
+              "outline": "#7a7486",
+              "primary": "#FF5A30",
+              "on-error": "#ffffff",
+              "on-surface": "#191c1e",
+              "secondary-fixed-dim": "#b9c7e0",
+              "surface-container-highest": "#e0e3e5",
+              "on-surface-variant": "#494455",
+              "on-primary-fixed-variant": "#a42000",
+              "outline-variant": "#cbc3d7",
+              "primary-fixed-dim": "#ffb4a1",
+              "primary-container": "#FF5A30",
+              "on-primary-container": "#ffffff",
+              "on-primary": "#ffffff",
+              "surface-tint": "#FF5A30",
+              "inverse-surface": "#2d3133",
+              "surface-container": "#eceef0",
+              "surface-container-lowest": "#ffffff",
+              "tertiary": "#523100",
+              "tertiary-container": "#714600",
+              "surface-container-low": "#f2f4f6",
+              "on-tertiary-fixed-variant": "#653e00",
+              "background": "#f7f9fb",
+              "on-error-container": "#93000a",
+              "on-primary-fixed": "#3e0a00",
+              "inverse-on-surface": "#eff1f3",
+              "on-secondary": "#ffffff",
+              "secondary-fixed": "#d5e3fd"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-effect {
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+      .hero-gradient {
+        background: linear-gradient(135deg, rgba(255, 90, 48, 0.9) 0%, rgba(164, 32, 0, 0.7) 100%);
+      }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-b border-orange-100/10 dark:border-orange-900/20 shadow-sm dark:shadow-none">
+<nav class="flex justify-between items-center h-16 px-6 md:px-12 w-full mx-auto">
+<div class="flex items-center gap-8">
+<a class="text-2xl font-black tracking-tight text-primary dark:text-primary font-headline" href="#">The Global Stage</a>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-primary dark:text-primary font-bold border-b-2 border-primary dark:border-primary pb-1" href="#">Platform</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-primary/80 dark:hover:text-primary/80 transition-colors" href="#">Discovery</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-primary/80 dark:hover:text-primary/80 transition-colors" href="#">Financing</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-slate-50/50 dark:hover:bg-slate-800/50 rounded-lg transition-all active:opacity-80 active:scale-[0.99]">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+</button>
+<button class="p-2 hover:bg-slate-50/50 dark:hover:bg-slate-800/50 rounded-lg transition-all active:opacity-80 active:scale-[0.99]">
+<span class="material-symbols-outlined text-on-surface-variant">settings</span>
+</button>
+<div class="h-8 w-8 rounded-full bg-surface-container-highest overflow-hidden ml-2">
+<img alt="User profile" data-alt="professional portrait of a creative director in a minimalist studio setting with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBu6HEF7LqDOGOpbYapNPbl2_i9rnvTcylkyehL7kCNITq6Prxda146lRZdnpWGcWHaV-h8Sh8krToZuyBd8prwPtITGnpMSusA5dHpJU-jysC3m0yM7MNglcoqsytbLxPThVQSkYVeChqRGKuzBclrUhdSDmngLsaHl_LO4rQ2C6pdG3exmCD8bUq6w01U-ve8rtBFw3zQhnD2vpzWaDn4I1UiFNa9BrK5Nm9Zd9IXETkoZeFbvAKVz17FmsCD2LjcFl_JC7yssn4"/>
+</div>
+</div>
+</nav>
+</header>
+<!-- Hero Section -->
+<section class="relative min-h-screen flex items-center pt-16 overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Concert Crowd" class="w-full h-full object-cover" data-alt="high-energy live concert crowd at night with vibrant purple and blue stage lights and silhouette of hands up" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzmBZ4sptM2EkEigkgVtZoQswUChDcxcN0l6igDH_EBa2GLtVN7P1I0t88pF31shR8wCgzj8mSaIu9AyJPvDpAhc2Zn1ivhXJDcBLGQ5AzaptLJr7T6fzIAIrhumj7UB4lHs54qvzSr8qd20qkkM4-u_3ZS16w8T0TYa-lLii8xmKgEmUtd-6QMIxrtRTa2qj4P3QBHJI6nBv1QRVZg0oWkiaWSXSeE06motFRMGPuzO9rrRsgINcAeTbd-6DNlL26ZgKLmyAsnjE"/>
+<div class="absolute inset-0 hero-gradient"></div>
+</div>
+<div class="relative z-10 px-6 md:px-12 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<div class="space-y-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed rounded-full">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="text-xs font-bold tracking-widest uppercase">The Future of Touring</span>
+</div>
+<h1 class="font-headline font-extrabold text-5xl md:text-7xl text-white leading-[1.1] tracking-tight">
+                    Plan Live Music with <span class="text-white">Confidence</span>
+</h1>
+<p class="text-xl text-white/80 max-w-xl font-body leading-relaxed">
+                    TourStack by Ckrowd connects artists, promoters, and financiers on a single high-performance stage. Transform your global reach with smart booking.
+                </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<button class="px-8 py-4 bg-primary text-on-primary rounded-xl font-bold flex items-center gap-3 shadow-2xl shadow-primary/40 hover:scale-[1.02] transition-transform active:scale-[0.98]">
+                        Browse Tours
+                        <span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="px-8 py-4 glass-effect bg-white/10 text-white border border-white/20 rounded-xl font-bold hover:bg-white/20 transition-all">
+                        Watch Demo
+                    </button>
+</div>
+</div>
+<div class="hidden lg:block">
+<div class="glass-effect bg-white/10 p-1 rounded-2xl border border-white/20 shadow-2xl">
+<div class="bg-surface-container-lowest rounded-xl p-6">
+<div class="flex items-center justify-between mb-8">
+<h3 class="font-headline font-bold text-slate-900">Live Tour Analytics</h3>
+<span class="material-symbols-outlined text-primary">trending_up</span>
+</div>
+<div class="space-y-6">
+<div class="h-32 w-full bg-slate-50 rounded-lg flex items-end gap-2 p-4">
+<div class="w-full bg-orange-100 h-12 rounded-t-sm"></div>
+<div class="w-full bg-orange-200 h-24 rounded-t-sm"></div>
+<div class="w-full bg-orange-300 h-16 rounded-t-sm"></div>
+<div class="w-full bg-primary h-28 rounded-t-sm"></div>
+<div class="w-full bg-orange-400 h-20 rounded-t-sm"></div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+<p class="text-xs text-slate-500 uppercase tracking-wider mb-1">Ticket Sales</p>
+<p class="text-2xl font-black text-slate-900 font-headline">84.2k</p>
+</div>
+<div class="p-4 bg-slate-50 rounded-xl border border-slate-100">
+<p class="text-xs text-slate-500 uppercase tracking-wider mb-1">Total Revenue</p>
+<p class="text-2xl font-black text-slate-900 font-headline">$1.2M</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Value Proposition: The Global Stage -->
+<section class="py-24 px-6 md:px-12 bg-white">
+<div class="max-w-7xl mx-auto">
+<div class="mb-16 text-center">
+<h2 class="font-headline font-extrabold text-4xl md:text-5xl text-slate-900 mb-6 tracking-tight">The Global Stage</h2>
+<div class="w-20 h-1.5 bg-primary mx-auto rounded-full"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Bento Grid Style Cards -->
+<div class="group p-8 rounded-[2rem] bg-slate-50 hover:bg-white hover:shadow-2xl hover:shadow-orange-100 transition-all duration-500 border border-transparent hover:border-orange-100">
+<div class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">hub</span>
+</div>
+<h3 class="font-headline font-bold text-xl text-slate-900 mb-4">Centralized Workflow</h3>
+<p class="text-slate-600 leading-relaxed">Eliminate the fragmentation of planning. Manage routing, logistics, and communication in one unified cockpit.</p>
+</div>
+<div class="group p-8 rounded-[2rem] bg-slate-50 hover:bg-white hover:shadow-2xl hover:shadow-orange-100 transition-all duration-500 border border-transparent hover:border-orange-100">
+<div class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">temp_preferences_custom</span>
+</div>
+<h3 class="font-headline font-bold text-xl text-slate-900 mb-4">Smart Matching</h3>
+<p class="text-slate-600 leading-relaxed">Our AI-driven engine connects artists with promoters who match their genre, scale, and performance history.</p>
+</div>
+<div class="group p-8 rounded-[2rem] bg-slate-50 hover:bg-white hover:shadow-2xl hover:shadow-orange-100 transition-all duration-500 border border-transparent hover:border-orange-100">
+<div class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center text-primary mb-6 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">payments</span>
+</div>
+<h3 class="font-headline font-bold text-xl text-slate-900 mb-4">Financing &amp; Support</h3>
+<p class="text-slate-600 leading-relaxed">Access direct funding opportunities and secure escrow payments to protect every stakeholder in the ecosystem.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Split Audience Sections -->
+<section class="bg-surface-container-low overflow-hidden">
+<div class="grid grid-cols-1 lg:grid-cols-2">
+<!-- For Promoters -->
+<div class="relative py-24 px-6 md:px-12 lg:px-24 flex flex-col justify-center">
+<div class="absolute -right-12 top-1/2 -translate-y-1/2 opacity-[0.03] pointer-events-none hidden lg:block">
+<span class="material-symbols-outlined text-[30rem]">groups</span>
+</div>
+<div class="max-w-md relative z-10">
+<h4 class="font-label text-sm font-bold uppercase tracking-widest text-primary mb-4">For Promoters</h4>
+<h3 class="font-headline font-extrabold text-4xl text-slate-900 mb-6">Discover the Next World Tour.</h3>
+<p class="text-slate-600 text-lg mb-8 leading-relaxed">Access a curated database of verified talent ready for global expansion. TourStack provides the risk-assessment data and financing support you need to scale confidently.</p>
+<ul class="space-y-4 mb-10">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">check_circle</span>
+<span class="font-medium text-slate-800">Advanced talent discovery filters</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">check_circle</span>
+<span class="font-medium text-slate-800">Direct financing application bridge</span>
+</li>
+</ul>
+<a class="inline-flex items-center gap-2 font-bold text-primary group" href="#">
+                        Explore Promoter Tools
+                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+<!-- Image for Promoters -->
+<div class="h-96 lg:h-auto">
+<img alt="Music Producer" class="w-full h-full object-cover" data-alt="close-up of a music producer's hands working on a sophisticated digital soundboard in a moody orange-lit studio" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzWXPpYohajV9i7Nd0f9nzx-ZWA-tIa92UNiK1ciIptOjCXWTaS3dc_47Xao19pvyBY20pemwKhiZAORMyLQUsvnpz47j7Ty2kc-GwX4GsqJpk9nDK37jcHqTWWovvwUB0FWkOPtz32B-frt4qdx60UbG80S0Lo6dDt-VOsw-7eJhXNueDzYuhohAZFrva2dYqgIkUJU6RpnQs6-EbDYa6ksvtgbA69otuCbhFqP9M0P54dlvDSkfG7wB_C3dQcwrYXrM3f7VxuPI"/>
+</div>
+<!-- Image for Artists -->
+<div class="h-96 lg:h-auto lg:order-last">
+<img alt="Artist Performing" class="w-full h-full object-cover" data-alt="dynamic shot of a solo artist singing with intense emotion on a smoke-filled stage with a single bright spotlight" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbFVWZKlKsZYgRPvM0_3Z5o9HdJi657RnEtca1r4aYNUftgUS2nAOzMz417vGZwR_y_xW1veV6xagqfoflEtz6sZtDBxicjpLtLT7D-X1HDtHV8CxXlPso3y9Y582MCO0VKsaNLu0udmjL08bCvSPI_hUUHdLEg3UJEE8HJGjyKV1l7ZA9wJ9FCnxszkrE6UKyR62DNQ6FXMf3LB-96QpptnFowC5bbNUocWbod9gtnzTI7JjP43E_IkBxiscjfIuHBS2M9nIljEw"/>
+</div>
+<!-- For Artists -->
+<div class="relative py-24 px-6 md:px-12 lg:px-24 flex flex-col justify-center bg-white">
+<div class="absolute -left-12 top-1/2 -translate-y-1/2 opacity-[0.03] pointer-events-none hidden lg:block">
+<span class="material-symbols-outlined text-[30rem]">mic_external_on</span>
+</div>
+<div class="max-w-md relative z-10">
+<h4 class="font-label text-sm font-bold uppercase tracking-widest text-primary mb-4">For Artists</h4>
+<h3 class="font-headline font-extrabold text-4xl text-slate-900 mb-6">Your Market Expansion, Simplified.</h3>
+<p class="text-slate-600 text-lg mb-8 leading-relaxed">Turn fragmented booking requests into a structured growth plan. Own your data, secure your payments, and find the right partners for your next career milestone.</p>
+<ul class="space-y-4 mb-10">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">check_circle</span>
+<span class="font-medium text-slate-800">Structured booking request management</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5">check_circle</span>
+<span class="font-medium text-slate-800">Real-time revenue &amp; data tracking</span>
+</li>
+</ul>
+<a class="inline-flex items-center gap-2 font-bold text-primary group" href="#">
+                        Start Your Artist Journey
+                        <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Final CTA Section -->
+<section class="py-24 px-6 md:px-12 text-center bg-white relative overflow-hidden">
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-[120%] h-full opacity-[0.03] pointer-events-none">
+<svg class="w-full h-full" viewbox="0 0 100 100">
+<pattern height="10" id="grid" patternunits="userSpaceOnUse" width="10">
+<path d="M 10 0 L 0 0 0 10" fill="none" stroke="currentColor" stroke-width="0.5"></path>
+</pattern>
+<rect fill="url(#grid)" height="100" width="100"></rect>
+</svg>
+</div>
+<div class="max-w-3xl mx-auto relative z-10">
+<h2 class="font-headline font-extrabold text-4xl md:text-5xl text-slate-900 mb-8 tracking-tight">Join the Tour Ecosystem</h2>
+<p class="text-xl text-slate-600 mb-12 font-body">Ready to take your production to the next stage? Get started with TourStack and experience the future of live music management.</p>
+<div class="flex flex-col sm:flex-row gap-4 justify-center">
+<button class="px-10 py-5 bg-primary text-on-primary rounded-xl font-bold text-lg shadow-xl shadow-primary/20 hover:shadow-2xl hover:scale-[1.02] transition-all">
+                    Get Started Free
+                </button>
+<button class="px-10 py-5 bg-slate-900 text-white rounded-xl font-bold text-lg hover:bg-slate-800 transition-all">
+                    Contact Sales
+                </button>
+</div>
+<p class="mt-8 text-sm text-slate-400 font-medium">Trusted by 500+ global promoters and 2,000+ artists.</p>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full py-12 px-6 md:px-12 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 items-start max-w-7xl mx-auto">
+<div class="col-span-1 md:col-span-1">
+<div class="font-manrope font-bold text-slate-900 dark:text-slate-100 text-xl mb-4 uppercase tracking-tighter">The Global Stage</div>
+<p class="font-inter text-xs uppercase tracking-widest text-slate-500 mb-6">Empowering the live music industry with modern tools.</p>
+</div>
+<div>
+<h4 class="font-inter text-xs uppercase tracking-widest text-slate-500 mb-6 font-bold">Platform</h4>
+<ul class="space-y-4">
+<li><a class="text-slate-400 dark:text-slate-600 hover:text-primary transition-colors" href="#">Discovery</a></li>
+<li><a class="text-slate-400 dark:text-slate-600 hover:text-primary transition-colors" href="#">Analytics</a></li>
+<li><a class="text-slate-400 dark:text-slate-600 hover:text-primary transition-colors" href="#">Financing</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-inter text-xs uppercase tracking-widest text-slate-500 mb-6 font-bold">Company</h4>
+<ul class="space-y-4">
+<li><a class="text-slate-400 dark:text-slate-600 hover:text-primary transition-colors" href="#">Contact</a></li>
+<li><a class="text-slate-400 dark:text-slate-600 hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="text-slate-400 dark:text-slate-600 hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-inter text-xs uppercase tracking-widest text-slate-500 mb-6 font-bold">Stay Updated</h4>
+<div class="flex gap-2">
+<input class="bg-white dark:bg-slate-900 border-none rounded-lg focus:ring-2 focus:ring-primary text-sm w-full" placeholder="Email address" type="email"/>
+<button class="bg-primary text-on-primary p-2 rounded-lg">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 max-w-7xl mx-auto">
+<p class="font-inter text-xs uppercase tracking-widest text-slate-500">© 2024 The Global Stage. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">public</span>
+</a>
+<a class="text-slate-400 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">share</span>
+</a>
+</div>
+</div>
+</footer>
+</body></html>
