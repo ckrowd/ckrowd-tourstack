@@ -62,10 +62,10 @@ const tourSteps = [
 export default function DashboardPage() {
   return (
     <div className="bg-surface text-on-surface">
-      <TopNav activeLink="platform" showSearch />
+      <TopNav showSearch />
 
       <div className="flex pt-16 h-screen">
-        <SideNav activeItem="overview" />
+        <SideNav />
 
         <main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
           {/* Header */}

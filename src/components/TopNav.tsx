@@ -1,53 +1,49 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 interface TopNavProps {
-  activeLink?: "platform" | "discovery" | "financing";
   showSearch?: boolean;
 }
 
-export default function TopNav({
-  activeLink = "platform",
-  showSearch = false,
-}: TopNavProps) {
+export default function TopNav({ showSearch = false }: TopNavProps) {
+  const pathname = usePathname();
+
+  const activeLink =
+    pathname.startsWith("/dashboard")
+      ? "platform"
+      : pathname.startsWith("/discovery")
+      ? "discovery"
+      : pathname.startsWith("/financing")
+      ? "financing"
+      : null;
+
+  const linkClass = (key: string) =>
+    `transition-colors font-(family-name:--font-manrope) font-semibold ${
+      activeLink === key
+        ? "text-[#FF5A30] font-bold border-b-2 border-[#FF5A30] pb-1"
+        : "text-slate-500 hover:text-[#FF5A30]"
+    }`;
+
   return (
     <header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-orange-100/10 shadow-sm">
       <div className="flex justify-between items-center h-16 px-6 md:px-12 w-full mx-auto">
         <div className="flex items-center gap-8">
           <Link
             href="/"
-            className="text-2xl font-black tracking-tight text-[#FF5A30] font-[family-name:var(--font-manrope)]"
+            className="text-2xl font-black tracking-tight text-[#FF5A30] font-(family-name:--font-manrope)"
           >
             The Global Stage
           </Link>
           <nav className="hidden md:flex items-center gap-6">
-            <Link
-              href="/dashboard"
-              className={`transition-colors font-[family-name:var(--font-manrope)] font-semibold ${
-                activeLink === "platform"
-                  ? "text-[#FF5A30] font-bold border-b-2 border-[#FF5A30] pb-1"
-                  : "text-slate-500 hover:text-[#FF5A30]"
-              }`}
-            >
+            <Link href="/dashboard" className={linkClass("platform")}>
               Platform
             </Link>
-            <Link
-              href="/discovery"
-              className={`transition-colors font-[family-name:var(--font-manrope)] font-semibold ${
-                activeLink === "discovery"
-                  ? "text-[#FF5A30] font-bold border-b-2 border-[#FF5A30] pb-1"
-                  : "text-slate-500 hover:text-[#FF5A30]"
-              }`}
-            >
+            <Link href="/discovery" className={linkClass("discovery")}>
               Discovery
             </Link>
-            <Link
-              href="#"
-              className={`transition-colors font-[family-name:var(--font-manrope)] font-semibold ${
-                activeLink === "financing"
-                  ? "text-[#FF5A30] font-bold border-b-2 border-[#FF5A30] pb-1"
-                  : "text-slate-500 hover:text-[#FF5A30]"
-              }`}
-            >
+            <Link href="/financing" className={linkClass("financing")}>
               Financing
             </Link>
           </nav>

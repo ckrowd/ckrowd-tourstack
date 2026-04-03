@@ -74,7 +74,7 @@ const artists = [
 export default function DiscoveryPage() {
   return (
     <div className="bg-surface text-on-surface antialiased">
-      <TopNav activeLink="discovery" showSearch />
+      <TopNav showSearch />
 
       <main className="pt-24 pb-20 px-6 md:px-12 max-w-screen-2xl mx-auto flex flex-col gap-12">
         {/* Hero Header */}

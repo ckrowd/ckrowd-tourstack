@@ -712,7 +712,7 @@ export default function EOIPage() {
       </main>
 
       <div className="md:hidden fixed top-0 w-full z-50">
-        <TopNav activeLink="platform" />
+        <TopNav />
       </div>
     </div>
   );

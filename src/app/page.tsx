@@ -29,7 +29,7 @@ const whyCkrowd = [
 export default function LandingPage() {
   return (
     <div className="bg-[#f7f9fb] text-[#191c1e]">
-      <TopNav activeLink="platform" />
+      <TopNav />
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center pt-16 overflow-hidden">
@@ -54,12 +54,12 @@ export default function LandingPage() {
                 public
               </span>
               <span className="text-xs font-bold tracking-widest uppercase">
-                Pan-African Touring Ecosystem
+                Live Music Ecosystem
               </span>
             </div>
 
             <h1 className="font-(family-name:--font-manrope) font-extrabold text-5xl md:text-7xl text-white leading-[1.1] tracking-tight">
-              Touring as a{" "}
+              Concert & Touring as a {" "}
               <span className="text-white">Service.</span>
             </h1>
 
