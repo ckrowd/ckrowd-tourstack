@@ -7,6 +7,8 @@ const navItems = [
   { key: "overview", label: "Overview", icon: "dashboard", href: "/dashboard" },
   { key: "tours", label: "Tours", icon: "confirmation_number", href: "/tours" },
   { key: "requests", label: "Requests", icon: "send", href: "/eoi" },
+  { key: "apply", label: "Apply", icon: "how_to_reg", href: "/apply" },
+  { key: "crew", label: "Crew", icon: "engineering", href: "/crew" },
   { key: "settings", label: "Settings", icon: "settings", href: "/settings" },
 ];
 
