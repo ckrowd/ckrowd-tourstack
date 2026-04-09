@@ -71,14 +71,14 @@ export default function LandingPage() {
 
             <div className="flex flex-wrap gap-4 pt-4">
               <Link
-                href="/discovery"
+                href="/login"
                 className="px-8 py-4 bg-[#FF5A30] text-white rounded-xl font-bold flex items-center gap-3 shadow-2xl shadow-[#FF5A30]/40 hover:scale-[1.02] transition-transform active:scale-[0.98]"
               >
                 Browse Artistes &amp; Tours
                 <span className="material-symbols-outlined">arrow_forward</span>
               </Link>
               <Link
-                href="/dashboard"
+                href="/login"
                 className="px-8 py-4 glass-effect bg-white/10 text-white border border-white/20 rounded-xl font-bold hover:bg-white/20 transition-all"
               >
                 Promoter Dashboard
@@ -363,7 +363,7 @@ export default function LandingPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              href="/dashboard"
+              href="/login"
               className="px-10 py-5 bg-[#FF5A30] text-white rounded-xl font-bold text-lg shadow-xl shadow-[#FF5A30]/20 hover:shadow-2xl hover:scale-[1.02] transition-all"
             >
               Get Started as a Promoter

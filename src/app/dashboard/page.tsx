@@ -98,7 +98,7 @@ export default function DashboardPage() {
               <h2 className="font-(family-name:--font-manrope) font-bold text-base">
                 EOI Progress — Vanguard Echo (Pan-African Tour 2024)
               </h2>
-              <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-[10px] font-black uppercase tracking-tighter">
+              <span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-[10px] font-black tracking-tight">
                 Under Review
               </span>
             </div>
@@ -259,7 +259,7 @@ export default function DashboardPage() {
                         </td>
                         <td className="px-5 py-4">
                           <span
-                            className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter ${req.statusColor}`}
+                            className={`px-3 py-1 rounded-full text-[10px] font-black tracking-tight ${req.statusColor}`}
                           >
                             {req.status}
                           </span>

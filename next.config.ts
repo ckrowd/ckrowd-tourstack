@@ -9,6 +9,30 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: "/apply",
+        destination: "/onboarding",
+        permanent: true,
+      },
+      {
+        source: "/apply/:path*",
+        destination: "/onboarding/:path*",
+        permanent: true,
+      },
+      {
+        source: "/crew",
+        destination: "/workforce",
+        permanent: true,
+      },
+      {
+        source: "/crew/:path*",
+        destination: "/workforce/:path*",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;

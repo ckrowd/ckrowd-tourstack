@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Manrope, Inter } from "next/font/google";
 import "./globals.css";
+import { AuthProvider } from "@/context/AuthContext";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -15,9 +16,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "TourStack | The Global Stage",
+  title: "TourStack by Crowd",
   description:
-    "TourStack by Ckrowd connects artists, promoters, and financiers on a single high-performance stage.",
+    "TourStack by Crowd connects artists, promoters, and financiers on a single high-performance stage.",
 };
 
 export default function RootLayout({
@@ -33,7 +34,9 @@ export default function RootLayout({
           href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
         />
       </head>
-      <body className="min-h-full antialiased">{children}</body>
+      <body className="min-h-full antialiased">
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   );
 }

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import TopNav from "@/components/TopNav";
 import SideNav from "@/components/SideNav";
+import { useAuth } from "@/context/AuthContext";
 
 type Tab = "profile" | "venue" | "notifications" | "billing" | "security";
 
@@ -108,6 +109,7 @@ function Toggle({
 }
 
 function ProfileTab() {
+  const { markProfileComplete } = useAuth();
   return (
     <div className="space-y-6">
       <Section title="Company Information">
@@ -126,10 +128,11 @@ function ProfileTab() {
       <Section title="Public Profile" description="This information appears on your promoter profile visible to artiste managers.">
         <div className="space-y-5">
           <div>
-            <label className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5">
+            <label htmlFor="bio" className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5">
               Bio
             </label>
             <textarea
+              id="bio"
               rows={4}
               defaultValue="Stage One Productions is a premier live events company based in Accra, Ghana. We have produced over 50 major shows across West and East Africa since 2015."
               className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 resize-none"
@@ -147,6 +150,7 @@ function ProfileTab() {
       <div className="flex justify-end">
         <button
           type="button"
+          onClick={() => markProfileComplete()}
           className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all"
         >
           Save Changes
@@ -389,8 +393,8 @@ function BillingTab() {
                 { date: "Oct 1, 2024", desc: "Global Stage Pro — Monthly", amount: "$99.00", status: "Paid" },
                 { date: "Sep 1, 2024", desc: "Global Stage Pro — Monthly", amount: "$99.00", status: "Paid" },
                 { date: "Aug 1, 2024", desc: "Global Stage Pro — Monthly", amount: "$99.00", status: "Paid" },
-              ].map((row, i) => (
-                <tr key={i} className="hover:bg-surface-container-low transition-colors">
+              ].map((row) => (
+                <tr key={row.date} className="hover:bg-surface-container-low transition-colors">
                   <td className="px-5 py-4 text-sm text-on-surface-variant">{row.date}</td>
                   <td className="px-5 py-4 text-sm font-medium text-on-surface">{row.desc}</td>
                   <td className="px-5 py-4 text-sm font-bold text-on-surface">{row.amount}</td>
@@ -453,9 +457,9 @@ function SecurityTab() {
           {[
             { device: "Chrome on macOS", location: "Accra, Ghana", time: "Now", current: true },
             { device: "Safari on iPhone 15", location: "Accra, Ghana", time: "2 hours ago", current: false },
-          ].map((s, i) => (
+          ].map((s) => (
             <div
-              key={i}
+              key={s.device}
               className="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl"
             >
               <span className="material-symbols-outlined text-on-surface-variant">

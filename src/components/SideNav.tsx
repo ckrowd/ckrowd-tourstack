@@ -1,23 +1,31 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useAuth } from "@/context/AuthContext";
 
 const navItems = [
   { key: "overview", label: "Overview", icon: "dashboard", href: "/dashboard" },
   { key: "tours", label: "Tours", icon: "confirmation_number", href: "/tours" },
   { key: "requests", label: "Requests", icon: "send", href: "/eoi" },
-  { key: "apply", label: "Apply", icon: "how_to_reg", href: "/apply" },
-  { key: "crew", label: "Crew", icon: "engineering", href: "/crew" },
+  { key: "onboarding", label: "Onboarding", icon: "how_to_reg", href: "/onboarding" },
+  { key: "workforce", label: "Workforce", icon: "engineering", href: "/workforce" },
   { key: "settings", label: "Settings", icon: "settings", href: "/settings" },
 ];
 
 export default function SideNav() {
   const pathname = usePathname();
+  const router = useRouter();
+  const { logout } = useAuth();
 
   const activeItem = navItems.find(
     (item) => pathname === item.href || pathname.startsWith(`${item.href}/`)
   )?.key;
+
+  function handleLogout() {
+    logout();
+    router.push("/");
+  }
 
   return (
     <aside className="hidden lg:flex flex-col gap-2 py-6 h-full w-64 border-r border-slate-200 bg-slate-50 shrink-0">
@@ -30,7 +38,7 @@ export default function SideNav() {
             Tour Manager
           </h3>
           <p className="text-[10px] uppercase tracking-wider text-[#494455] font-semibold">
-            Global Stage Pro
+            Tour Stack Pro
           </p>
         </div>
       </div>
@@ -52,13 +60,20 @@ export default function SideNav() {
         ))}
       </nav>
 
-      <div className="px-4 mt-auto">
+      <div className="px-4 mt-auto space-y-3">
         <Link
           href="/eoi"
           className="block w-full py-4 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 text-center"
         >
           Start New Tour
         </Link>
+        <button
+          type="button"
+          onClick={handleLogout}
+          className="block w-full py-3 text-slate-500 hover:text-[#FF5A30] font-(family-name:--font-manrope) font-semibold text-sm transition-colors text-center"
+        >
+          Sign out
+        </button>
       </div>
     </aside>
   );
