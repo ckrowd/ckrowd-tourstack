@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 const navItems = [
@@ -22,15 +21,7 @@ export default function SideNav() {
 
   return (
     <aside className="hidden lg:flex flex-col gap-2 py-6 h-full w-64 border-r border-slate-200 bg-slate-50 shrink-0">
-      <div className="px-6 mb-8 flex items-center gap-3">
-        <Image src="/ckrowd-logo.png" alt="Ckrowd logo" width={36} height={36} />
-        <div className="flex flex-col leading-tight">
-          <span className="font-(family-name:--font-manrope) font-black text-base text-[#FF5A30]">Tourstack</span>
-          <span className="text-[10px] font-semibold text-black font-(family-name:--font-manrope)">by Ckrowd</span>
-        </div>
-      </div>
-
-      <nav className="flex-1 space-y-1">
+      <nav className="flex-1 space-y-1 mt-2">
         {navItems.map((item) => (
           <Link
             key={item.key}
