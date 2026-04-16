@@ -456,9 +456,11 @@ export default function CrewPage() {
 
   if (submitted) {
     return (
-      <div className="bg-surface text-on-surface min-h-screen flex">
+      <div className="bg-surface text-on-surface">
+        <TopNav />
+        <div className="flex pt-16 h-screen">
         <SideNav />
-        <main className="flex-1 min-h-screen overflow-y-auto bg-surface-container-low p-6 md:p-12 flex items-center justify-center">
+        <main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-12 flex items-center justify-center">
           <div className="text-center max-w-lg">
             <ScoreGauge score={wcs.total} />
             <div className="mt-8 mb-4">
@@ -514,15 +516,19 @@ export default function CrewPage() {
             </p>
           </div>
         </main>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-surface text-on-surface min-h-screen flex">
+    <div className="bg-surface text-on-surface">
+      <TopNav />
+
+      <div className="flex pt-16 h-screen">
       <SideNav />
 
-      <main className="flex-1 min-h-screen overflow-y-auto bg-surface-container-low p-6 md:p-12">
+      <main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-12">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <header className="mb-10">
@@ -1137,9 +1143,6 @@ export default function CrewPage() {
           )}
         </div>
       </main>
-
-      <div className="md:hidden fixed top-0 w-full z-50">
-        <TopNav />
       </div>
     </div>
   );

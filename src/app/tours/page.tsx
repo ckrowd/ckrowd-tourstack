@@ -129,7 +129,7 @@ export default function ToursPage() {
 
   return (
     <div className="bg-surface text-on-surface">
-      <TopNav showSearch />
+      <TopNav />
 
       <div className="flex pt-16 h-screen">
         <SideNav />

@@ -3,12 +3,10 @@
 import { useState } from "react";
 import TopNav from "@/components/TopNav";
 import SideNav from "@/components/SideNav";
-import { useAuth } from "@/context/AuthContext";
 
-type Tab = "profile" | "venue" | "notifications" | "billing" | "security";
+type Tab = "venue" | "notifications" | "billing" | "security";
 
 const tabs: { key: Tab; label: string; icon: string }[] = [
-  { key: "profile", label: "Profile", icon: "person" },
   { key: "venue", label: "Venue", icon: "stadium" },
   { key: "notifications", label: "Notifications", icon: "notifications" },
   { key: "billing", label: "Billing", icon: "credit_card" },
@@ -104,58 +102,6 @@ function Toggle({
           }`}
         />
       </button>
-    </div>
-  );
-}
-
-function ProfileTab() {
-  const { markProfileComplete } = useAuth();
-  return (
-    <div className="space-y-6">
-      <Section title="Company Information">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <Field label="Company Name" id="company-name" defaultValue="Stage One Productions" />
-          <Field label="Trading Name" id="trading-name" defaultValue="Stage One" />
-          <Field label="Contact Person" id="contact-name" defaultValue="Kwame Asante" />
-          <Field label="Job Title" id="job-title" defaultValue="Managing Director" />
-          <Field label="Email Address" id="email" type="email" defaultValue="kwame@stageone.gh" />
-          <Field label="Phone Number" id="phone" type="tel" defaultValue="+233 20 000 0000" />
-          <Field label="Country" id="country" defaultValue="Ghana" />
-          <Field label="City" id="city" defaultValue="Accra" />
-        </div>
-      </Section>
-
-      <Section title="Public Profile" description="This information appears on your promoter profile visible to artiste managers.">
-        <div className="space-y-5">
-          <div>
-            <label htmlFor="bio" className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5">
-              Bio
-            </label>
-            <textarea
-              id="bio"
-              rows={4}
-              defaultValue="Stage One Productions is a premier live events company based in Accra, Ghana. We have produced over 50 major shows across West and East Africa since 2015."
-              className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 resize-none"
-            />
-          </div>
-          <Field label="Website" id="website" type="url" defaultValue="https://stageone.gh" />
-          <Field
-            label="Social Handle (Instagram)"
-            id="instagram"
-            defaultValue="@stageonegh"
-          />
-        </div>
-      </Section>
-
-      <div className="flex justify-end">
-        <button
-          type="button"
-          onClick={() => markProfileComplete()}
-          className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all"
-        >
-          Save Changes
-        </button>
-      </div>
     </div>
   );
 }
@@ -509,7 +455,6 @@ function SecurityTab() {
 }
 
 const tabContent: Record<Tab, React.ReactNode> = {
-  profile: <ProfileTab />,
   venue: <VenueTab />,
   notifications: <NotificationsTab />,
   billing: <BillingTab />,
@@ -517,7 +462,7 @@ const tabContent: Record<Tab, React.ReactNode> = {
 };
 
 export default function SettingsPage() {
-  const [activeTab, setActiveTab] = useState<Tab>("profile");
+  const [activeTab, setActiveTab] = useState<Tab>("venue");
 
   return (
     <div className="bg-surface text-on-surface">

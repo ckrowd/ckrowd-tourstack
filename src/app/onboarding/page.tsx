@@ -922,10 +922,10 @@ export default function OnboardingPage() {
 
   if (submitted) {
     return (
-      <div className="bg-surface text-on-surface min-h-screen flex">
-        <SideNav />
-        <div className="flex-1 flex flex-col pt-16">
-          <TopNav />
+      <div className="bg-surface text-on-surface">
+        <TopNav />
+        <div className="flex pt-16 h-screen">
+          <SideNav />
           <main className="flex-1 flex items-center justify-center bg-surface-container-low p-8">
             <div className="text-center max-w-md">
               <div className="w-20 h-20 rounded-full bg-emerald-100 flex items-center justify-center mx-auto mb-6">
@@ -966,11 +966,11 @@ export default function OnboardingPage() {
   }
 
   return (
-    <div className="bg-surface text-on-surface min-h-screen flex">
-      <SideNav />
+    <div className="bg-surface text-on-surface">
+      <TopNav />
 
-      <div className="flex-1 flex flex-col min-h-screen pt-16">
-        <TopNav />
+      <div className="flex pt-16 h-screen">
+        <SideNav />
 
         <main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10">
           <div className="max-w-4xl mx-auto">

@@ -213,9 +213,11 @@ export default function ApplyPage() {
 
   if (submitted) {
     return (
-      <div className="bg-surface text-on-surface min-h-screen flex">
+      <div className="bg-surface text-on-surface">
+        <TopNav />
+        <div className="flex pt-16 h-screen">
         <SideNav />
-        <main className="flex-1 min-h-screen overflow-y-auto bg-surface-container-low p-6 md:p-12 flex items-center justify-center">
+        <main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-12 flex items-center justify-center">
           <div className="text-center max-w-lg">
             <div className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 bg-[#FF5A30]/10">
               <span
@@ -256,15 +258,19 @@ export default function ApplyPage() {
             </div>
           </div>
         </main>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-surface text-on-surface min-h-screen flex">
+    <div className="bg-surface text-on-surface">
+      <TopNav />
+
+      <div className="flex pt-16 h-screen">
       <SideNav />
 
-      <main className="flex-1 min-h-screen overflow-y-auto bg-surface-container-low p-6 md:p-12">
+      <main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-12">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
           <header className="mb-10">
@@ -798,9 +804,6 @@ export default function ApplyPage() {
           )}
         </div>
       </main>
-
-      <div className="md:hidden fixed top-0 w-full z-50">
-        <TopNav />
       </div>
     </div>
   );
