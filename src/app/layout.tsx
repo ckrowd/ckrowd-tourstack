@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope, Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/context/AuthContext";
+import QueryProvider from "@/components/QueryProvider";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -35,7 +36,9 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full antialiased">
-        <AuthProvider>{children}</AuthProvider>
+        <QueryProvider>
+          <AuthProvider>{children}</AuthProvider>
+        </QueryProvider>
       </body>
     </html>
   );

@@ -3,14 +3,24 @@
 import Link from "next/link";
 import { Suspense, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { applyForOpportunity, getOpportunity } from "@/app/actions";
+import { createEOI, getArtist } from "@/app/actions";
 import { useAuth } from "@/context/AuthContext";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 
-type OpportunityRecord = NonNullable<
-	Awaited<ReturnType<typeof getOpportunity>>["data"]
->;
+interface ArtistRecord {
+	id: string;
+	name: string;
+	genre?: string | null;
+	tour?: string | null;
+	markets?: string | null;
+	fee?: string | number | null;
+	window?: string | null;
+	bio?: string | null;
+	image_url?: string | null;
+	region?: string | null;
+	[key: string]: unknown;
+}
 
 type ApplicationForm = {
 	name: string;
@@ -148,9 +158,7 @@ function EOIPageContent() {
 	const { auth } = useAuth();
 	const [step, setStep] = useState(0);
 	const [form, setForm] = useState<ApplicationForm>(defaultForm);
-	const [opportunity, setOpportunity] = useState<OpportunityRecord | null>(
-		null,
-	);
+	const [artist, setArtist] = useState<ArtistRecord | null>(null);
 	const [loadingOpportunity, setLoadingOpportunity] = useState(true);
 	const [loadError, setLoadError] = useState<string | null>(null);
 	const [submitError, setSubmitError] = useState<string | null>(null);
@@ -185,22 +193,22 @@ function EOIPageContent() {
 				setLoadError(
 					"Choose an opportunity from discovery to start an application.",
 				);
-				setOpportunity(null);
+				setArtist(null);
 				return;
 			}
 
 			setLoadingOpportunity(true);
 			setLoadError(null);
 
-			const response = await getOpportunity(opportunityId);
+			const response = await getArtist(opportunityId);
 
 			if (!active) return;
 
 			if (response.success && response.data) {
-				setOpportunity(response.data);
+				setArtist(response.data);
 				setLoadError(null);
 			} else {
-				setOpportunity(null);
+				setArtist(null);
 				setLoadError(response.error ?? "Unable to load this opportunity.");
 			}
 
@@ -223,7 +231,7 @@ function EOIPageContent() {
 			return;
 		}
 
-		if (!opportunity) {
+		if (!artist) {
 			setSubmitError("Load an opportunity before submitting the application.");
 			return;
 		}
@@ -231,11 +239,12 @@ function EOIPageContent() {
 		setSubmitting(true);
 
 		try {
-			const response = await applyForOpportunity(
-				opportunity.id,
-				form.email,
-				form.name,
-			);
+			const response = await createEOI({
+				artistId: artist.id,
+				city: form.city,
+				capacity: estimatedAudience > 0 ? estimatedAudience : undefined,
+				notes: form.notes || undefined,
+			});
 			if (response.success) {
 				setSubmitted(true);
 				return;
@@ -263,9 +272,9 @@ function EOIPageContent() {
 	const estimatedAudience = form.audience
 		? Number(form.audience.replace(/,/g, ""))
 		: 0;
-	const selectedOpportunityTitle = opportunity?.title ?? "Selected opportunity";
+	const selectedOpportunityTitle = artist?.name ?? "Selected opportunity";
 
-	if (submitted && opportunity) {
+	if (submitted && artist) {
 		return (
 			<div className="bg-[#f6f4ef] text-slate-950 min-h-screen flex">
 				<SideNav />
@@ -284,8 +293,8 @@ function EOIPageContent() {
 								EOI submitted.
 							</h1>
 							<p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-slate-600">
-								Your application for {opportunity.title} has been received. The
-								Ckrowd team will review it and respond within 48 hours.
+								Your application for {artist.name} has been received. The Ckrowd
+								team will review it and respond within 48 hours.
 							</p>
 							<div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
 								<Link
@@ -346,27 +355,27 @@ function EOIPageContent() {
 								Go to discovery
 							</Link>
 						</div>
-					) : opportunity ? (
+					) : artist ? (
 						<div className="grid gap-8 xl:grid-cols-[1.25fr_0.75fr]">
 							<section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
 								<div className="mb-6 flex flex-wrap gap-2 text-[10px] font-bold uppercase tracking-[0.24em] text-slate-500">
 									<span className="rounded-full bg-slate-100 px-3 py-1 text-slate-700">
-										{opportunity.category ?? "General"}
+										{artist.genre ?? "General"}
 									</span>
 									<span className="rounded-full bg-slate-100 px-3 py-1 text-slate-700">
-										{opportunity.role_type ?? "Open role"}
+										{artist.tour ?? "Upcoming tour"}
 									</span>
 									<span className="rounded-full bg-slate-100 px-3 py-1 text-slate-700">
-										{opportunity.location}
+										{artist.markets}
 									</span>
 								</div>
 
 								<div className="mb-8">
 									<h2 className="text-2xl font-black tracking-tight text-slate-950 font-(family-name:--font-manrope)">
-										{opportunity.title}
+										{artist.name}
 									</h2>
 									<p className="mt-2 text-sm font-medium text-slate-500">
-										{opportunity.company}
+										{artist.genre}
 									</p>
 								</div>
 
@@ -471,9 +480,8 @@ function EOIPageContent() {
 												Review application
 											</h3>
 											<div className="mt-4 divide-y divide-slate-100 rounded-2xl bg-white p-4 shadow-sm">
-												{reviewRow("Opportunity", selectedOpportunityTitle)}
-												{reviewRow("Company", opportunity.company)}
-												{reviewRow("Location", opportunity.location)}
+												{reviewRow("Artist", selectedOpportunityTitle)}
+												{reviewRow("Markets", artist.markets ?? undefined)}
 												{reviewRow("Applicant", form.name)}
 												{reviewRow("Email", form.email)}
 												{reviewRow("Company / venue", form.company)}
@@ -540,16 +548,16 @@ function EOIPageContent() {
 							<aside className="space-y-6">
 								<div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
 									<p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-500">
-										Opportunity brief
+										Artist brief
 									</p>
 									<h3 className="mt-3 text-2xl font-black tracking-tight text-slate-950 font-(family-name:--font-manrope)">
-										{opportunity.title}
+										{artist.name}
 									</h3>
 									<p className="mt-2 text-sm font-medium text-slate-500">
-										{opportunity.company}
+										{artist.genre}
 									</p>
 									<p className="mt-4 text-sm leading-6 text-slate-600">
-										{opportunity.about}
+										{artist.tour}
 									</p>
 								</div>
 
@@ -560,36 +568,26 @@ function EOIPageContent() {
 									<div className="mt-4 space-y-4 text-sm text-slate-600">
 										<div>
 											<span className="block text-[10px] font-bold uppercase tracking-[0.24em] text-slate-400">
-												Salary
+												Fee
 											</span>
 											<span className="mt-1 block font-semibold text-slate-900">
-												{opportunity.salary ?? "Budget on request"}
+												{artist.fee ?? "Budget on request"}
 											</span>
 										</div>
 										<div>
 											<span className="block text-[10px] font-bold uppercase tracking-[0.24em] text-slate-400">
-												Role type
+												Markets
 											</span>
 											<span className="mt-1 block font-semibold text-slate-900">
-												{opportunity.role_type ?? "Open role"}
+												{artist.markets ?? "Not specified"}
 											</span>
 										</div>
 										<div>
 											<span className="block text-[10px] font-bold uppercase tracking-[0.24em] text-slate-400">
-												Category
+												Tour window
 											</span>
 											<span className="mt-1 block font-semibold text-slate-900">
-												{opportunity.category ?? "General"}
-											</span>
-										</div>
-										<div>
-											<span className="block text-[10px] font-bold uppercase tracking-[0.24em] text-slate-400">
-												Qualifications
-											</span>
-											<span className="mt-1 block font-semibold text-slate-900">
-												{opportunity.qualifications.length > 0
-													? opportunity.qualifications.join(", ")
-													: "Not specified"}
+												{artist.window ?? "TBD"}
 											</span>
 										</div>
 									</div>

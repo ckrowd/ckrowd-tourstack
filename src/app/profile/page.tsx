@@ -1,139 +1,258 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import TopNav from "@/components/TopNav";
 import SideNav from "@/components/SideNav";
 import { useAuth } from "@/context/AuthContext";
+import { getTourstackProfile, updateTourstackProfile } from "@/app/actions";
 
 function Section({
-  title,
-  description,
-  children,
+	title,
+	description,
+	children,
 }: {
-  title: string;
-  description?: string;
-  children: React.ReactNode;
+	title: string;
+	description?: string;
+	children: React.ReactNode;
 }) {
-  return (
-    <div className="bg-surface-container-lowest rounded-2xl p-8 shadow-sm space-y-6">
-      <div className="border-b border-outline-variant/20 pb-4">
-        <h3 className="font-(family-name:--font-manrope) font-bold text-lg text-on-surface">
-          {title}
-        </h3>
-        {description && (
-          <p className="text-sm text-on-surface-variant mt-1">{description}</p>
-        )}
-      </div>
-      {children}
-    </div>
-  );
+	return (
+		<div className="bg-surface-container-lowest rounded-2xl p-8 shadow-sm space-y-6">
+			<div className="border-b border-outline-variant/20 pb-4">
+				<h3 className="font-(family-name:--font-manrope) font-bold text-lg text-on-surface">
+					{title}
+				</h3>
+				{description && (
+					<p className="text-sm text-on-surface-variant mt-1">{description}</p>
+				)}
+			</div>
+			{children}
+		</div>
+	);
 }
 
 function Field({
-  label,
-  id,
-  defaultValue,
-  type = "text",
-  hint,
+	label,
+	id,
+	defaultValue,
+	value,
+	onChange,
+	type = "text",
+	hint,
 }: {
-  label: string;
-  id: string;
-  defaultValue?: string;
-  type?: string;
-  hint?: string;
+	label: string;
+	id: string;
+	defaultValue?: string;
+	value?: string;
+	onChange?: (v: string) => void;
+	type?: string;
+	hint?: string;
 }) {
-  return (
-    <div>
-      <label
-        htmlFor={id}
-        className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5"
-      >
-        {label}
-      </label>
-      <input
-        id={id}
-        type={type}
-        defaultValue={defaultValue}
-        className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30"
-      />
-      {hint && (
-        <p className="text-xs text-on-surface-variant mt-1.5">{hint}</p>
-      )}
-    </div>
-  );
+	return (
+		<div>
+			<label
+				htmlFor={id}
+				className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5"
+			>
+				{label}
+			</label>
+			<input
+				id={id}
+				type={type}
+				{...(onChange
+					? { value: value ?? "", onChange: (e) => onChange(e.target.value) }
+					: { defaultValue })}
+				className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30"
+			/>
+			{hint && <p className="text-xs text-on-surface-variant mt-1.5">{hint}</p>}
+		</div>
+	);
 }
 
 export default function ProfilePage() {
-  const { markProfileComplete } = useAuth();
+	const { markProfileComplete } = useAuth();
+	const [profile, setProfile] = useState({
+		companyName: "",
+		tradingName: "",
+		contactPerson: "",
+		jobTitle: "",
+		email: "",
+		phone: "",
+		country: "",
+		city: "",
+		bio: "",
+		websiteUrl: "",
+		instagramHandle: "",
+	});
+	const [saving, setSaving] = useState(false);
 
-  return (
-    <div className="bg-surface text-on-surface">
-      <TopNav />
+	useEffect(() => {
+		getTourstackProfile().then((res) => {
+			if (res.success && res.data) {
+				const d = res.data as Record<string, unknown>;
+				setProfile({
+					companyName: String(d.companyName ?? ""),
+					tradingName: String(d.tradingName ?? ""),
+					contactPerson: String(d.contactPerson ?? ""),
+					jobTitle: String(d.jobTitle ?? ""),
+					email: String(d.email ?? ""),
+					phone: String(d.phone ?? ""),
+					country: String(d.country ?? ""),
+					city: String(d.city ?? ""),
+					bio: String(d.bio ?? ""),
+					websiteUrl: String(d.websiteUrl ?? ""),
+					instagramHandle: String(d.instagramHandle ?? ""),
+				});
+			}
+		});
+	}, []);
 
-      <div className="flex pt-16 h-screen">
-        <SideNav />
+	const set = (key: keyof typeof profile) => (v: string) =>
+		setProfile((p) => ({ ...p, [key]: v }));
 
-        <main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
-          {/* Header */}
-          <div className="mb-8">
-            <span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
-              Promoter Portal
-            </span>
-            <h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
-              Profile
-            </h1>
-            <p className="text-on-surface-variant font-medium">
-              Manage your company information and public profile.
-            </p>
-          </div>
+	const handleSave = async () => {
+		setSaving(true);
+		await updateTourstackProfile({
+			companyName: profile.companyName || undefined,
+			tradingName: profile.tradingName || undefined,
+			contactPerson: profile.contactPerson || undefined,
+			jobTitle: profile.jobTitle || undefined,
+			bio: profile.bio || undefined,
+			phone: profile.phone || undefined,
+			country: profile.country || undefined,
+			city: profile.city || undefined,
+			websiteUrl: profile.websiteUrl || undefined,
+			instagramHandle: profile.instagramHandle || undefined,
+		});
+		setSaving(false);
+		markProfileComplete();
+	};
 
-          <div className="space-y-6">
-            <Section title="Company Information">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <Field label="Company Name" id="company-name" defaultValue="Stage One Productions" />
-                <Field label="Trading Name" id="trading-name" defaultValue="Stage One" />
-                <Field label="Contact Person" id="contact-name" defaultValue="Kwame Asante" />
-                <Field label="Job Title" id="job-title" defaultValue="Managing Director" />
-                <Field label="Email Address" id="email" type="email" defaultValue="kwame@stageone.gh" />
-                <Field label="Phone Number" id="phone" type="tel" defaultValue="+233 20 000 0000" />
-                <Field label="Country" id="country" defaultValue="Ghana" />
-                <Field label="City" id="city" defaultValue="Accra" />
-              </div>
-            </Section>
+	return (
+		<div className="bg-surface text-on-surface">
+			<TopNav />
 
-            <Section title="Public Profile" description="This information appears on your promoter profile visible to artiste managers.">
-              <div className="space-y-5">
-                <div>
-                  <label htmlFor="bio" className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5">
-                    Bio
-                  </label>
-                  <textarea
-                    id="bio"
-                    rows={4}
-                    defaultValue="Stage One Productions is a premier live events company based in Accra, Ghana. We have produced over 50 major shows across West and East Africa since 2015."
-                    className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 resize-none"
-                  />
-                </div>
-                <Field label="Website" id="website" type="url" defaultValue="https://stageone.gh" />
-                <Field
-                  label="Social Handle (Instagram)"
-                  id="instagram"
-                  defaultValue="@stageonegh"
-                />
-              </div>
-            </Section>
+			<div className="flex pt-16 h-screen">
+				<SideNav />
 
-            <div className="flex justify-end">
-              <button
-                type="button"
-                onClick={() => markProfileComplete()}
-                className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all"
-              >
-                Save Changes
-              </button>
-            </div>
-          </div>
-        </main>
-      </div>
-    </div>
-  );
+				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
+					{/* Header */}
+					<div className="mb-8">
+						<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+							Promoter Portal
+						</span>
+						<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
+							Profile
+						</h1>
+						<p className="text-on-surface-variant font-medium">
+							Manage your company information and public profile.
+						</p>
+					</div>
+
+					<div className="space-y-6">
+						<Section title="Company Information">
+							<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+								<Field
+									label="Company Name"
+									id="company-name"
+									value={profile.companyName}
+									onChange={set("companyName")}
+								/>
+								<Field
+									label="Trading Name"
+									id="trading-name"
+									value={profile.tradingName}
+									onChange={set("tradingName")}
+								/>
+								<Field
+									label="Contact Person"
+									id="contact-name"
+									value={profile.contactPerson}
+									onChange={set("contactPerson")}
+								/>
+								<Field
+									label="Job Title"
+									id="job-title"
+									value={profile.jobTitle}
+									onChange={set("jobTitle")}
+								/>
+								<Field
+									label="Email Address"
+									id="email"
+									type="email"
+									value={profile.email}
+									onChange={set("email")}
+								/>
+								<Field
+									label="Phone Number"
+									id="phone"
+									type="tel"
+									value={profile.phone}
+									onChange={set("phone")}
+								/>
+								<Field
+									label="Country"
+									id="country"
+									value={profile.country}
+									onChange={set("country")}
+								/>
+								<Field
+									label="City"
+									id="city"
+									value={profile.city}
+									onChange={set("city")}
+								/>
+							</div>
+						</Section>
+
+						<Section
+							title="Public Profile"
+							description="This information appears on your promoter profile visible to artiste managers."
+						>
+							<div className="space-y-5">
+								<div>
+									<label
+										htmlFor="bio"
+										className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5"
+									>
+										Bio
+									</label>
+									<textarea
+										id="bio"
+										rows={4}
+										value={profile.bio}
+										onChange={(e) => set("bio")(e.target.value)}
+										className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 resize-none"
+									/>
+								</div>
+								<Field
+									label="Website"
+									id="website"
+									type="url"
+									value={profile.websiteUrl}
+									onChange={set("websiteUrl")}
+								/>
+								<Field
+									label="Social Handle (Instagram)"
+									id="instagram"
+									value={profile.instagramHandle}
+									onChange={set("instagramHandle")}
+								/>
+							</div>
+						</Section>
+
+						<div className="flex justify-end">
+							<button
+								type="button"
+								onClick={handleSave}
+								disabled={saving}
+								className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:opacity-60"
+							>
+								{saving ? "Saving..." : "Save Changes"}
+							</button>
+						</div>
+					</div>
+				</main>
+			</div>
+		</div>
+	);
 }
