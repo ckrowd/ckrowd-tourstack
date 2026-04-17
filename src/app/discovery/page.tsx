@@ -2,106 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { getArtists } from "@/app/actions";
 import TopNav from "@/components/TopNav";
-
-const FALLBACK_ARTISTS = [
-	{
-		name: "Vanguard Echo",
-		genre: "Electronic / Pop",
-		tour: "Pan-African Tour 2024",
-		dates: "Aug 15 — Oct 20, 2024",
-		fee: "$25k — $45k per show",
-		feeMin: 25000,
-		feeMax: 45000,
-		markets: "Lagos · Accra · Nairobi",
-		region: "West Africa",
-		window: "Q3 2024 (Jul–Sep)",
-		trending: false,
-		img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCfoWQg4uRMI07wclIZKzfGjklZJ5PCMeHLOvgkYvHDWb80Z4WKS1F9Buuug2V2ODx8uWqGJBVjglrIJLCv5sktEvpq1iamNwmJbI9LT0aRTDK0AviKTmqrYnP9eUyqzHNEYlqEaWrY4i_buCOgnACH2Oqid1eqtvmfJAbMQgDRIwWGNfnXdMTLIzUpiVA-C47r4xin031Nv0lDXyD8E-nnf2g4EPkpw5up_vkzL8nPAm0irl1WFqBELnFf6ocju3IcVUEzbS21wrk",
-		imgAlt: "A charismatic singer performing under dramatic purple neon lights",
-	},
-	{
-		name: "The Northern Sights",
-		genre: "Indie Rock",
-		tour: "West Africa Run",
-		dates: "Sep 01 — Nov 12, 2024",
-		fee: "$12k — $20k per show",
-		feeMin: 12000,
-		feeMax: 20000,
-		markets: "Dakar · Abidjan · Lomé",
-		region: "West Africa",
-		window: "Q3 2024 (Jul–Sep)",
-		trending: false,
-		img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDd3UtHlE5dJV7XteJoq5By5XTYhbsoyKN3yng520PsHnxCTioeqHv1G1_GpMrFrYyTKaXgDQIR01QJP3NWEmhZo-vydbiQ6bBKrmT-7UBPuV8ofSK8ypqecDVRbgr2-jLES9Q5DHWVCwWsOIv53EOO0TL6bAcUF154LedAW4wlBaUvIxS3tLjNRiE6OnUqtZ7Q489ovLCWs4l0bUjpEzJ4Fgh_O8vPc3ODyXBcjNlhe94SLF__u2miZVaonIXZBJxN5rW2S33i1kw",
-		imgAlt: "Three band members in a rustic studio with warm natural lighting",
-	},
-	{
-		name: "Aria Velvet",
-		genre: "Neo-Soul / Jazz",
-		tour: "Continental Jazz Tour",
-		dates: "Oct 10 — Dec 22, 2024",
-		fee: "$8k — $15k per show",
-		feeMin: 8000,
-		feeMax: 15000,
-		markets: "Accra · Cape Town · Kampala",
-		region: "East Africa",
-		window: "Q4 2024 (Oct–Dec)",
-		trending: true,
-		img: "https://lh3.googleusercontent.com/aida-public/AB6AXuChcgGr3TxcalMqo-ST9P_5n6LSpGtfJBeYjeV6cwaO3YOiCIRC_d4ZzBh6XXIrm8aGwv1WrsmGB_FxmCHR4DmY2KNGCqFEGvknXa2_flGCNI3ffIOzvu4Y8RsbhuKGsMdWnnTIsnTQ18p_-tjjoyo4xrUUZrpxvZ8zlZiuoj3weN_cksOhyZEaS91LGVmDkUpbbo2llxzZqjl4F_xdHt2UifuyjJSbHxlS0REFGjXQfqUaYuSHKADz4FSFKIvh86nDNPszIFc8M9Q",
-		imgAlt:
-			"Soulful jazz singer with eyes closed holding a silver microphone in a moody jazz club",
-	},
-	{
-		name: "Frequency Shift",
-		genre: "Tech-House",
-		tour: "Summer Festival Circuit",
-		dates: "Jun 10 — Aug 30, 2024",
-		fee: "$40k — $75k per show",
-		feeMin: 40000,
-		feeMax: 75000,
-		markets: "Lagos · Johannesburg · Cairo",
-		region: "Southern Africa",
-		window: "Q3 2024 (Jul–Sep)",
-		trending: false,
-		img: "https://lh3.googleusercontent.com/aida-public/AB6AXuDCnldp3BG6jom6onZ4uSYCHhl--8JBW5XcS-VCbc-sMvwvvAaTxVwpeC9NrTpmY3I6_8dcvGDyBe79a5pTIB9O3YiQga_eX5EqROA-dJSUFeRbvt237xMDe76R02FlY2ljDwMLhrvERqJCbLcjEnU92TbO4F0SJnIi5io9q3rajJGWToSyXfSSbMr7ACs9nnNkuG21_NwmRIJenXWpmYekIivGjPsS8IQBzlxtVoDNeusZmXne_1ecDKpxuF515DGIeO7lLpSQ8zk",
-		imgAlt:
-			"DJ silhouette at a large festival stage with electric blue and pink light beams",
-	},
-	{
-		name: "Solana Roots",
-		genre: "World / Folk",
-		tour: "Roots & Routes Tour",
-		dates: "May 20 — Jul 15, 2025",
-		fee: "$5k — $12k per show",
-		feeMin: 5000,
-		feeMax: 12000,
-		markets: "Nairobi · Dar es Salaam · Kigali",
-		region: "East Africa",
-		window: "Q2 2025 (Apr–Jun)",
-		trending: false,
-		img: "https://lh3.googleusercontent.com/aida-public/AB6AXuAOKK9ZDZyfZbTtwqMpotZlzGetgF5IEsCXPyaRP8gEQujN--te0UgKnrlU50GI-czkXB5Z0hDdjPyLr3-rk_MzGpppsPanIhvqGwQHdGBjI5yBwW19-X_cmEEd0lmIkc7EU8JRkCchrFAEg6pXbEEpMFGdeAagT9FKBpBdhkfZMnIRRk5ieaZydh9swygY1kHU5PGtl5zsyBwb1TvSYjxfN8dKDuHqp5k98c11_fAT4Bmso8umqUhJr2oRauLjyJXHI6mb03kbBIM",
-		imgAlt:
-			"Street musician playing an exotic acoustic guitar in a Mediterranean plaza at sunset",
-	},
-	{
-		name: "Eleanor Thorne",
-		genre: "Modern Classical",
-		tour: "Africa Classical Series",
-		dates: "Jan 05 — Mar 20, 2025",
-		fee: "$15k — $30k per show",
-		feeMin: 15000,
-		feeMax: 30000,
-		markets: "Cairo · Tunis · Casablanca",
-		region: "North Africa",
-		window: "Q1 2025 (Jan–Mar)",
-		trending: false,
-		img: "https://lh3.googleusercontent.com/aida-public/AB6AXuCi18PBvAxxUOmxemsDq1Ny-SnwOe0mfNjah4nyXtrDCSapRC1vwX0zbXsJyWxMS1F5bRG75CUQ8Sb-MLOa5EykUjElNDyYxIP21vAVdb96BwNOU-Y03Hyq8Xg4XCIE--HUKhLT09hsZ9CuM06l0HAPMh3FkgoP31ODkk9YE9LDs7TXuA3nzcJlmJ_ad24-i-_4wlMnAkfgm2WfRBvu-9wZcbViA4JEKvAZP4XutgUDafIiE4Bg1STgDrk7VLDme5VMMNCiEOn-k6U",
-		imgAlt:
-			"Grand symphonic orchestra hall with a center spotlight on a grand piano",
-	},
-];
 
 const FEE_RANGES: { label: string; min: number; max: number }[] = [
 	{ label: "$5k – $15k", min: 5000, max: 15000 },
@@ -115,26 +19,19 @@ export default function DiscoveryPage() {
 	const [window, setWindow] = useState("All Windows");
 	const [feeRange, setFeeRange] = useState("All Ranges");
 	const [region, setRegion] = useState("All Africa");
-	const [artists, setArtists] =
-		useState<typeof FALLBACK_ARTISTS>(FALLBACK_ARTISTS);
 
-	useEffect(() => {
-		getArtists().then((res) => {
-			if (
-				res.success &&
-				res.data &&
-				Array.isArray(res.data) &&
-				res.data.length > 0
-			) {
-				setArtists(res.data as typeof FALLBACK_ARTISTS);
-			}
-		});
-	}, []);
+	const { data: artistsQuery } = useQuery({
+		queryKey: ["artists"],
+		queryFn: () => getArtists(),
+	});
+
+	const artists = artistsQuery?.data ?? [];
 
 	const filtered = artists.filter((a) => {
+		const aGenre = String(a.genre ?? "");
 		if (
 			genre !== "All Genres" &&
-			!a.genre.toLowerCase().includes(genre.toLowerCase().split(" ")[0])
+			!aGenre.toLowerCase().includes(genre.toLowerCase().split(" ")[0])
 		) {
 			// Map select options to genre data
 			const genreMap: Record<string, string[]> = {
@@ -146,15 +43,23 @@ export default function DiscoveryPage() {
 				"Modern Classical": ["classical"],
 			};
 			const keys = genreMap[genre] ?? [];
-			if (!keys.some((k) => a.genre.toLowerCase().includes(k))) return false;
+			if (!keys.some((k) => aGenre.toLowerCase().includes(k))) return false;
 		}
-		if (window !== "All Windows" && a.window !== window) return false;
+		if (window !== "All Windows" && String(a.tour_window ?? "") !== window)
+			return false;
 		if (feeRange !== "All Ranges") {
 			const range = FEE_RANGES.find((r) => r.label === feeRange);
-			if (range && !(a.feeMin <= range.max && a.feeMax >= range.min))
+			if (
+				range &&
+				!(
+					Number(a.fee_min ?? 0) <= range.max &&
+					Number(a.fee_max ?? 0) >= range.min
+				)
+			)
 				return false;
 		}
-		if (region !== "All Africa" && a.region !== region) return false;
+		if (region !== "All Africa" && String(a.region ?? "") !== region)
+			return false;
 		return true;
 	});
 
@@ -362,25 +267,30 @@ export default function DiscoveryPage() {
 							<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
 								{filtered.map((artist) => (
 									<div
-										key={
-											("id" in artist ? (artist.id as string) : undefined) ??
-											artist.name
-										}
+										key={String(artist.id ?? artist.name)}
 										className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group border border-transparent hover:border-outline-variant/20"
 									>
-										<div className="h-56 relative overflow-hidden">
-											<Image
-												src={artist.img}
-												alt={artist.imgAlt}
-												fill
-												className="object-cover group-hover:scale-110 transition-transform duration-700"
-											/>
+										<div className="h-56 relative overflow-hidden bg-surface-container-high">
+											{artist.image_url ? (
+												<Image
+													src={String(artist.image_url)}
+													alt={String(artist.name ?? "")}
+													fill
+													className="object-cover group-hover:scale-110 transition-transform duration-700"
+												/>
+											) : (
+												<div className="w-full h-full flex items-center justify-center">
+													<span className="material-symbols-outlined text-5xl text-on-surface-variant">
+														music_note
+													</span>
+												</div>
+											)}
 											<div className="absolute top-4 left-4">
 												<span className="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-bold text-[#FF5A30] uppercase tracking-tighter shadow-sm">
-													{artist.genre}
+													{String(artist.genre ?? "")}
 												</span>
 											</div>
-											{artist.trending && (
+											{!!artist.is_trending && (
 												<div className="absolute top-4 right-4">
 													<span className="bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shadow-sm">
 														Trending
@@ -390,14 +300,14 @@ export default function DiscoveryPage() {
 											{/* Tour name overlay */}
 											<div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/60 to-transparent p-4">
 												<span className="text-white text-xs font-bold uppercase tracking-wider opacity-90">
-													{artist.tour}
+													{String(artist.tour_name ?? "")}
 												</span>
 											</div>
 										</div>
 
 										<div className="p-5">
 											<h3 className="font-(family-name:--font-manrope) text-xl font-extrabold group-hover:text-[#FF5A30] transition-colors">
-												{artist.name}
+												{String(artist.name ?? "")}
 											</h3>
 											<div className="mt-3 space-y-2">
 												<div className="flex items-center gap-2 text-on-surface-variant">
@@ -405,7 +315,9 @@ export default function DiscoveryPage() {
 														event
 													</span>
 													<span className="text-sm font-medium">
-														{artist.dates}
+														{artist.tour_start && artist.tour_end
+															? `${new Date(String(artist.tour_start)).toLocaleDateString()} – ${new Date(String(artist.tour_end)).toLocaleDateString()}`
+															: String(artist.tour_window ?? "")}
 													</span>
 												</div>
 												<div className="flex items-center gap-2 text-on-surface-variant">
@@ -413,7 +325,9 @@ export default function DiscoveryPage() {
 														monetization_on
 													</span>
 													<span className="text-sm font-medium">
-														{artist.fee}
+														{artist.fee_min != null && artist.fee_max != null
+															? `$${Math.round(Number(artist.fee_min) / 1000)}k – $${Math.round(Number(artist.fee_max) / 1000)}k USD`
+															: "—"}
 													</span>
 												</div>
 												<div className="flex items-center gap-2 text-on-surface-variant">
@@ -421,13 +335,15 @@ export default function DiscoveryPage() {
 														location_on
 													</span>
 													<span className="text-sm font-medium">
-														{artist.markets}
+														{Array.isArray(artist.markets)
+															? (artist.markets as string[]).join(", ")
+															: String(artist.markets ?? "")}
 													</span>
 												</div>
 											</div>
 											<div className="mt-5">
 												<Link
-													href={`/eoi${"id" in artist ? `?id=${artist.id as string}` : ""}`}
+													href={`/eoi${artist.id ? `?id=${String(artist.id)}` : ""}`}
 													className="block w-full bg-[#FF5A30] py-3 rounded-xl text-white font-bold text-sm tracking-wide shadow-md shadow-[#FF5A30]/10 active:scale-[0.98] transition-all text-center"
 												>
 													Submit Expression of Interest

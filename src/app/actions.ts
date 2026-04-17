@@ -53,10 +53,16 @@ function extractError(err: unknown): string | undefined {
 	return undefined;
 }
 
+function extractPayload<T>(value: T | null | undefined) {
+	if (value == null) return undefined;
+	return ((value as T extends { data?: infer P } ? { data?: P } : never)
+		?.data || undefined) as T extends { data?: infer P } ? P : undefined;
+}
+
 export async function auth() {
 	const client = await createServerClient();
 	const { data } = await client.profile.session.get();
-	return data ?? undefined;
+	return data && "user" in data ? data : undefined;
 }
 
 export { auth as getSession };
@@ -128,7 +134,7 @@ export async function getArtists(params?: {
 		params ? { query: params } : {},
 	);
 	return {
-		data: data ?? undefined,
+		data: extractPayload(data),
 		success: !error,
 		error: extractError(error),
 	};
@@ -150,7 +156,7 @@ export async function getTourstackProfile() {
 	const client = await createServerClient();
 	const { data, error } = await client.tourstack.profile.get();
 	return {
-		data: data ?? undefined,
+		data: extractPayload(data),
 		success: !error,
 		error: extractError(error),
 	};
@@ -183,7 +189,7 @@ export async function getTourstackDashboard() {
 	const client = await createServerClient();
 	const { data, error } = await client.tourstack.dashboard.get();
 	return {
-		data: data ?? undefined,
+		data: extractPayload(data),
 		success: !error,
 		error: extractError(error),
 	};
@@ -197,7 +203,7 @@ export async function getEOIs(status?: string) {
 		status ? { query: { status } } : {},
 	);
 	return {
-		data: data ?? undefined,
+		data: extractPayload(data),
 		success: !error,
 		error: extractError(error),
 	};
@@ -240,7 +246,7 @@ export async function getTours(status?: string) {
 		status ? { query: { status } } : {},
 	);
 	return {
-		data: data ?? undefined,
+		data: extractPayload(data),
 		success: !error,
 		error: extractError(error),
 	};
@@ -274,7 +280,7 @@ export async function getFinancingApplications(status?: string) {
 		status ? { query: { status } } : {},
 	);
 	return {
-		data: data ?? undefined,
+		data: extractPayload(data),
 		success: !error,
 		error: extractError(error),
 	};
@@ -462,7 +468,7 @@ export async function getAdminEOIs(status?: string) {
 		status ? { query: { status } } : {},
 	);
 	return {
-		data: data ?? undefined,
+		data: extractPayload(data),
 		success: !error,
 		error: extractError(error),
 	};
@@ -474,7 +480,7 @@ export async function getAdminTours(status?: string) {
 		status ? { query: { status } } : {},
 	);
 	return {
-		data: data ?? undefined,
+		data: extractPayload(data),
 		success: !error,
 		error: extractError(error),
 	};

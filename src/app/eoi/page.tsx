@@ -1,26 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { createEOI, getArtist } from "@/app/actions";
 import { useAuth } from "@/context/AuthContext";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
-
-interface ArtistRecord {
-	id: string;
-	name: string;
-	genre?: string | null;
-	tour?: string | null;
-	markets?: string | null;
-	fee?: string | number | null;
-	window?: string | null;
-	bio?: string | null;
-	image_url?: string | null;
-	region?: string | null;
-	[key: string]: unknown;
-}
 
 type ApplicationForm = {
 	name: string;
@@ -158,73 +145,36 @@ function EOIPageContent() {
 	const { auth } = useAuth();
 	const [step, setStep] = useState(0);
 	const [form, setForm] = useState<ApplicationForm>(defaultForm);
-	const [artist, setArtist] = useState<ArtistRecord | null>(null);
-	const [loadingOpportunity, setLoadingOpportunity] = useState(true);
-	const [loadError, setLoadError] = useState<string | null>(null);
-	const [submitError, setSubmitError] = useState<string | null>(null);
-	const [submitting, setSubmitting] = useState(false);
-	const [submitted, setSubmitted] = useState(false);
 
-	useEffect(() => {
-		setForm((prev) => {
-			let changed = false;
-			const next = { ...prev };
+	const { data: artistQuery, isLoading: loadingOpportunity } = useQuery({
+		queryKey: ["artist", opportunityId],
+		queryFn: () => getArtist(opportunityId ?? ""),
+		enabled: !!opportunityId,
+	});
 
-			if (!prev.name && auth?.displayName) {
-				next.name = auth.displayName;
-				changed = true;
-			}
+	const artist = artistQuery?.success ? artistQuery.data : null;
+	const loadError = !opportunityId
+		? "Choose an opportunity from discovery to start an application."
+		: !artistQuery?.success && !loadingOpportunity
+			? (artistQuery?.error ?? "Unable to load this opportunity.")
+			: null;
 
-			if (!prev.email && auth?.email) {
-				next.email = auth.email;
-				changed = true;
-			}
+	const submitMutation = useMutation({
+		mutationFn: createEOI,
+	});
 
-			return changed ? next : prev;
-		});
-	}, [auth?.displayName, auth?.email]);
+	const submitted = submitMutation.isSuccess;
+	const submitting = submitMutation.isPending;
+	const submitError = submitMutation.error
+		? submitMutation.error instanceof Error
+			? submitMutation.error.message
+			: "Failed to submit application."
+		: submitMutation.data && !submitMutation.data.success
+			? (submitMutation.data.error ?? "Failed to submit application.")
+			: null;
 
-	useEffect(() => {
-		let active = true;
-
-		async function loadOpportunity() {
-			if (!opportunityId) {
-				setLoadingOpportunity(false);
-				setLoadError(
-					"Choose an opportunity from discovery to start an application.",
-				);
-				setArtist(null);
-				return;
-			}
-
-			setLoadingOpportunity(true);
-			setLoadError(null);
-
-			const response = await getArtist(opportunityId);
-
-			if (!active) return;
-
-			if (response.success && response.data) {
-				setArtist(response.data);
-				setLoadError(null);
-			} else {
-				setArtist(null);
-				setLoadError(response.error ?? "Unable to load this opportunity.");
-			}
-
-			setLoadingOpportunity(false);
-		}
-
-		void loadOpportunity();
-
-		return () => {
-			active = false;
-		};
-	}, [opportunityId]);
-
-	async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-		setSubmitError(null);
 
 		if (step < STEPS.length - 1) {
 			setStep((current) => current + 1);
@@ -232,34 +182,19 @@ function EOIPageContent() {
 		}
 
 		if (!artist) {
-			setSubmitError("Load an opportunity before submitting the application.");
 			return;
 		}
 
-		setSubmitting(true);
+		const estimatedAudience = form.audience
+			? Number(form.audience.replace(/,/g, ""))
+			: 0;
 
-		try {
-			const response = await createEOI({
-				artistId: artist.id,
-				city: form.city,
-				capacity: estimatedAudience > 0 ? estimatedAudience : undefined,
-				notes: form.notes || undefined,
-			});
-			if (response.success) {
-				setSubmitted(true);
-				return;
-			}
-
-			setSubmitError(response.error ?? "Failed to submit application.");
-		} catch (error) {
-			setSubmitError(
-				error instanceof Error
-					? error.message
-					: "Failed to submit application.",
-			);
-		} finally {
-			setSubmitting(false);
-		}
+		submitMutation.mutate({
+			artistId: artist.id,
+			city: form.city,
+			capacity: estimatedAudience > 0 ? estimatedAudience : undefined,
+			notes: form.notes || undefined,
+		});
 	}
 
 	function updateField<K extends keyof ApplicationForm>(
@@ -269,10 +204,10 @@ function EOIPageContent() {
 		setForm((prev) => ({ ...prev, [field]: value }));
 	}
 
+	const selectedOpportunityTitle = artist?.name ?? "Selected opportunity";
 	const estimatedAudience = form.audience
 		? Number(form.audience.replace(/,/g, ""))
 		: 0;
-	const selectedOpportunityTitle = artist?.name ?? "Selected opportunity";
 
 	if (submitted && artist) {
 		return (
@@ -363,7 +298,7 @@ function EOIPageContent() {
 										{artist.genre ?? "General"}
 									</span>
 									<span className="rounded-full bg-slate-100 px-3 py-1 text-slate-700">
-										{artist.tour ?? "Upcoming tour"}
+										{artist.tour_start ? artist.tour_start.toDateString() : "Upcoming tour"}
 									</span>
 									<span className="rounded-full bg-slate-100 px-3 py-1 text-slate-700">
 										{artist.markets}
@@ -389,7 +324,7 @@ function EOIPageContent() {
 													type="text"
 													autoComplete="name"
 													placeholder="Amina Bello"
-													value={form.name}
+													value={form.name || auth?.displayName || ""}
 													onChange={(event) =>
 														updateField("name", event.target.value)
 													}
@@ -404,7 +339,7 @@ function EOIPageContent() {
 													type="email"
 													autoComplete="email"
 													placeholder="you@company.com"
-													value={form.email}
+													value={form.email || auth?.email || ""}
 													onChange={(event) =>
 														updateField("email", event.target.value)
 													}
@@ -557,7 +492,7 @@ function EOIPageContent() {
 										{artist.genre}
 									</p>
 									<p className="mt-4 text-sm leading-6 text-slate-600">
-										{artist.tour}
+										{artist.tour_name}
 									</p>
 								</div>
 
@@ -571,7 +506,7 @@ function EOIPageContent() {
 												Fee
 											</span>
 											<span className="mt-1 block font-semibold text-slate-900">
-												{artist.fee ?? "Budget on request"}
+												{artist.fee_min ?? "Budget on request"}
 											</span>
 										</div>
 										<div>
@@ -587,7 +522,7 @@ function EOIPageContent() {
 												Tour window
 											</span>
 											<span className="mt-1 block font-semibold text-slate-900">
-												{artist.window ?? "TBD"}
+												{artist.tour_start ? artist.tour_start.toDateString() : "TBD"} - {artist.tour_end ? artist.tour_end.toDateString() : "TBD"}
 											</span>
 										</div>
 									</div>

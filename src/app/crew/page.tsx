@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { useMutation } from "@tanstack/react-query";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 import { registerCrewMember } from "@/app/actions";
@@ -508,9 +509,20 @@ function ScoreGauge({ score, max = 145 }: { score: number; max?: number }) {
 export default function CrewPage() {
 	const [step, setStep] = useState(0);
 	const [form, setForm] = useState<FormData>(defaultForm);
-	const [submitted, setSubmitted] = useState(false);
-	const [submitting, setSubmitting] = useState(false);
-	const [submitError, setSubmitError] = useState<string | null>(null);
+
+	const submitMutation = useMutation({
+		mutationFn: registerCrewMember,
+	});
+
+	const submitted = submitMutation.isSuccess;
+	const submitting = submitMutation.isPending;
+	const submitError = submitMutation.error
+		? submitMutation.error instanceof Error
+			? submitMutation.error.message
+			: "Submission failed. Please try again."
+		: submitMutation.data && !submitMutation.data.success
+			? (submitMutation.data.error ?? "Submission failed. Please try again.")
+			: null;
 
 	function set<K extends keyof FormData>(field: K, value: FormData[K]) {
 		setForm((prev) => ({ ...prev, [field]: value }));
@@ -675,14 +687,12 @@ export default function CrewPage() {
 						{/* Form Card */}
 						<div className="bg-surface-container-lowest rounded-2xl p-8 md:p-10 shadow-sm border border-outline-variant/10">
 							<form
-								onSubmit={async (e) => {
+								onSubmit={(e) => {
 									e.preventDefault();
 									if (step < STEPS.length - 1) {
 										setStep((s) => s + 1);
 									} else {
-										setSubmitting(true);
-										setSubmitError(null);
-										const result = await registerCrewMember({
+										submitMutation.mutate({
 											fullName: form.fullName,
 											email: form.email,
 											phone: form.phone || undefined,
@@ -698,14 +708,6 @@ export default function CrewPage() {
 											deployIn48h: form.deployIn48h === "yes",
 											crossBorderDocs: form.validPassport === "yes",
 										});
-										setSubmitting(false);
-										if (result.success) {
-											setSubmitted(true);
-										} else {
-											setSubmitError(
-												result.error ?? "Submission failed. Please try again.",
-											);
-										}
 									}
 								}}
 							>

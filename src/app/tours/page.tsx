@@ -2,51 +2,57 @@ import Image from "next/image";
 import Link from "next/link";
 import TopNav from "@/components/TopNav";
 import SideNav from "@/components/SideNav";
-import { getTours } from "@/app/actions";
-
-const EMPTY_TOURS: Record<string, unknown>[] = [];
-
-const upcomingMilestones = [
-	{
-		date: "Sept 28",
-		label: "Frequency Shift — Production call",
-		type: "call",
-		icon: "call",
-		color: "bg-blue-100 text-blue-600",
-	},
-	{
-		date: "Oct 01",
-		label: "Vanguard Echo — Venue contract deadline",
-		type: "deadline",
-		icon: "gavel",
-		color: "bg-yellow-100 text-yellow-700",
-	},
-	{
-		date: "Oct 12",
-		label: "Vanguard Echo — Show Day",
-		type: "show",
-		icon: "celebration",
-		color: "bg-[#FF5A30]/10 text-[#FF5A30]",
-	},
-	{
-		date: "Nov 05",
-		label: "Aria Velvet — Show Day",
-		type: "show",
-		icon: "celebration",
-		color: "bg-[#FF5A30]/10 text-[#FF5A30]",
-	},
-	{
-		date: "Nov 12",
-		label: "Aria Velvet — Settlement due",
-		type: "payment",
-		icon: "payments",
-		color: "bg-emerald-100 text-emerald-700",
-	},
-];
+import { getTours, getTourstackDashboard } from "@/app/actions";
 
 export default async function ToursPage() {
-	const toursResult = await getTours();
-	const tours = (toursResult.data ?? EMPTY_TOURS) as Record<string, unknown>[];
+	const [toursResult, dashboardResult] = await Promise.all([
+		getTours(),
+		getTourstackDashboard(),
+	]);
+	const tours = toursResult.data ?? [];
+	const dashData = dashboardResult.data;
+	const upcomingMilestones = (dashData?.upcomingMilestones ?? []).map((m) => {
+		const mType = String(m.type ?? "");
+		return {
+			date: new Date(String(m.date)).toLocaleDateString("en-US", {
+				month: "short",
+				day: "numeric",
+			}),
+			label: String(m.label ?? ""),
+			type: mType,
+			icon:
+				mType === "show"
+					? "celebration"
+					: mType === "call"
+						? "call"
+						: mType === "payment"
+							? "payments"
+							: "gavel",
+			color:
+				mType === "show"
+					? "bg-[#FF5A30]/10 text-[#FF5A30]"
+					: mType === "call"
+						? "bg-blue-100 text-blue-600"
+						: mType === "payment"
+							? "bg-emerald-100 text-emerald-700"
+							: "bg-yellow-100 text-yellow-700",
+		};
+	});
+	const venueMap = new Map<
+		string,
+		{ label: string; cap: string; shows: number }
+	>();
+	for (const t of tours) {
+		const key = String(t.venue ?? t.city ?? "Unknown venue");
+		const cap = t.capacity != null ? Number(t.capacity).toLocaleString() : "—";
+		const existing = venueMap.get(key);
+		if (existing) {
+			existing.shows++;
+		} else {
+			venueMap.set(key, { label: key, cap, shows: 1 });
+		}
+	}
+	const venueSummary = Array.from(venueMap.values()).slice(0, 5);
 
 	const confirmed = tours.filter(
 		(t) => String(t.status ?? "").toLowerCase() === "confirmed",
@@ -135,189 +141,215 @@ export default async function ToursPage() {
 					<div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
 						{/* Tour Cards */}
 						<div className="lg:col-span-8 space-y-5">
-							{tours.map((tour) => {
-								const ticketsSold =
-									typeof tour.ticketsSold === "number" ? tour.ticketsSold : 0;
-								const capacity =
-									typeof tour.capacity === "number" ? tour.capacity : 0;
-								const soldPct =
-									ticketsSold > 0 && capacity > 0
-										? Math.round((ticketsSold / capacity) * 100)
-										: 0;
-								const status = String(tour.status ?? "");
-								const statusLower = status.toLowerCase();
-								const statusColor =
-									statusLower === "confirmed"
-										? "bg-emerald-100 text-emerald-800"
-										: statusLower === "rejected"
-											? "bg-red-100 text-red-800"
-											: statusLower === "needs_revision" ||
-													statusLower === "needs revision"
-												? "bg-blue-100 text-blue-800"
-												: "bg-yellow-100 text-yellow-800";
-								const daysAway =
-									tour.daysAway != null
-										? Number(tour.daysAway)
-										: tour.date
-											? Math.round(
-													(new Date(String(tour.date)).getTime() - Date.now()) /
-														86400000,
-												)
-											: null;
-
-								return (
-									<div
-										key={String(tour.id)}
-										className="bg-surface-container-lowest rounded-2xl shadow-sm overflow-hidden border border-transparent hover:border-outline-variant/20 hover:shadow-lg transition-all duration-300"
+							{tours.length === 0 ? (
+								<div className="bg-surface-container-lowest rounded-2xl p-12 text-center shadow-sm">
+									<span className="material-symbols-outlined text-5xl text-on-surface-variant block mb-4">
+										confirmation_number
+									</span>
+									<h3 className="font-(family-name:--font-manrope) font-bold text-on-surface text-lg mb-2">
+										No tour stops yet
+									</h3>
+									<p className="text-on-surface-variant text-sm max-w-xs mx-auto mb-6">
+										Submit an Expression of Interest to get your first tour stop
+										confirmed.
+									</p>
+									<Link
+										href="/eoi"
+										className="inline-flex items-center gap-2 bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-bold text-sm hover:opacity-90 transition-opacity"
 									>
-										<div className="flex flex-col sm:flex-row">
-											{/* Image */}
-											<div className="sm:w-36 h-36 relative shrink-0 bg-surface-container-high flex items-center justify-center">
-												{tour.img ? (
-													<>
-														<Image
-															src={String(tour.img)}
-															alt={String(tour.imgAlt ?? "")}
-															fill
-															className="object-cover"
-														/>
-														<div className="absolute inset-0 bg-linear-to-r from-black/20 to-transparent sm:bg-linear-to-b sm:from-transparent sm:to-black/30" />
-													</>
-												) : (
-													<span className="material-symbols-outlined text-3xl text-on-surface-variant">
-														music_note
-													</span>
-												)}
-											</div>
+										<span className="material-symbols-outlined text-sm">
+											add
+										</span>
+										Submit EOI
+									</Link>
+								</div>
+							) : (
+								tours.map((tour) => {
+									const tourArtist = tour.artist;
+									const ticketsSold =
+										typeof tour.tickets_sold === "number"
+											? tour.tickets_sold
+											: 0;
+									const capacity =
+										typeof tour.capacity === "number" ? tour.capacity : 0;
+									const soldPct =
+										ticketsSold > 0 && capacity > 0
+											? Math.round((ticketsSold / capacity) * 100)
+											: 0;
+									const status = String(tour.status ?? "");
+									const statusLower = status.toLowerCase();
+									const statusColor =
+										statusLower === "confirmed"
+											? "bg-emerald-100 text-emerald-800"
+											: statusLower === "rejected"
+												? "bg-red-100 text-red-800"
+												: statusLower === "needs_revision" ||
+														statusLower === "needs revision"
+													? "bg-blue-100 text-blue-800"
+													: "bg-yellow-100 text-yellow-800";
+									const daysAway = tour.date
+										? Math.round((tour.date.getTime() - Date.now()) / 86400000)
+										: null;
 
-											{/* Content */}
-											<div className="flex-1 p-6 flex flex-col gap-3">
-												<div className="flex items-start justify-between gap-4">
-													<div>
-														<div className="flex items-center gap-2 flex-wrap">
-															<h3 className="font-(family-name:--font-manrope) font-extrabold text-lg text-on-surface">
-																{String(
-																	tour.artistName ?? tour.artiste ?? "Artist",
-																)}
-															</h3>
-															{tour.genre != null && tour.genre !== "" && (
-																<span className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded-full">
-																	{String(tour.genre)}
-																</span>
-															)}
-														</div>
-														<p className="text-sm text-on-surface-variant mt-0.5">
-															{String(tour.tour ?? tour.tourName ?? "")}
-														</p>
-													</div>
-													<span
-														className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter shrink-0 ${statusColor}`}
-													>
-														{status.replace(/_/g, " ")}
-													</span>
-												</div>
-
-												<div className="flex flex-wrap gap-x-5 gap-y-1.5 text-sm text-on-surface-variant">
-													{tour.city != null && tour.city !== "" && (
-														<span className="flex items-center gap-1.5">
-															<span className="material-symbols-outlined text-sm">
-																location_on
-															</span>
-															{String(tour.city)}
-														</span>
-													)}
-													{tour.date != null && tour.date !== "" && (
-														<span className="flex items-center gap-1.5">
-															<span className="material-symbols-outlined text-sm">
-																event
-															</span>
-															{String(tour.date)}
-														</span>
-													)}
-													{tour.fee != null && tour.fee !== "" && (
-														<span className="flex items-center gap-1.5">
-															<span className="material-symbols-outlined text-sm">
-																monetization_on
-															</span>
-															{String(tour.fee)}
-														</span>
-													)}
-													{tour.financing === true && (
-														<span className="flex items-center gap-1.5 text-[#FF5A30] font-semibold">
-															<span className="material-symbols-outlined text-sm">
-																account_balance
-															</span>
-															Financed
-															{tour.financingAmount
-																? ` · ${String(tour.financingAmount)}`
-																: ""}
-														</span>
-													)}
-												</div>
-
-												{statusLower === "confirmed" && capacity > 0 && (
-													<div className="mt-1">
-														<div className="flex justify-between text-xs text-on-surface-variant mb-1">
-															<span>Tickets Sold</span>
-															<span className="font-bold text-on-surface">
-																{ticketsSold.toLocaleString()} /{" "}
-																{capacity.toLocaleString()}
-															</span>
-														</div>
-														<div className="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
-															<div
-																className="bg-[#FF5A30] h-full rounded-full transition-all"
-																style={{ width: `${soldPct}%` }}
+									return (
+										<div
+											key={String(tour.id)}
+											className="bg-surface-container-lowest rounded-2xl shadow-sm overflow-hidden border border-transparent hover:border-outline-variant/20 hover:shadow-lg transition-all duration-300"
+										>
+											<div className="flex flex-col sm:flex-row">
+												{/* Image */}
+												<div className="sm:w-36 h-36 relative shrink-0 bg-surface-container-high flex items-center justify-center">
+													{tourArtist?.image_url ? (
+														<>
+															<Image
+																src={String(tourArtist.image_url)}
+																alt={String(tourArtist.name ?? "")}
+																fill
+																className="object-cover"
 															/>
-														</div>
-													</div>
-												)}
-
-												<div className="flex items-center justify-between mt-auto pt-1">
-													{daysAway != null ? (
-														daysAway > 0 ? (
-															<span className="text-xs text-on-surface-variant">
-																<span className="font-bold text-on-surface">
-																	{daysAway}d
-																</span>{" "}
-																until show
-															</span>
-														) : daysAway < 0 ? (
-															<span className="text-xs text-on-surface-variant">
-																Show passed {Math.abs(daysAway)}d ago
-															</span>
-														) : (
-															<span className="text-xs font-bold text-[#FF5A30]">
-																Show day!
-															</span>
-														)
+															<div className="absolute inset-0 bg-linear-to-r from-black/20 to-transparent sm:bg-linear-to-b sm:from-transparent sm:to-black/30" />
+														</>
 													) : (
-														<span />
+														<span className="material-symbols-outlined text-3xl text-on-surface-variant">
+															music_note
+														</span>
+													)}
+												</div>
+
+												{/* Content */}
+												<div className="flex-1 p-6 flex flex-col gap-3">
+													<div className="flex items-start justify-between gap-4">
+														<div>
+															<div className="flex items-center gap-2 flex-wrap">
+																<h3 className="font-(family-name:--font-manrope) font-extrabold text-lg text-on-surface">
+																	{String(tourArtist?.name ?? "Artist")}
+																</h3>
+																{tourArtist?.genre != null &&
+																	tourArtist.genre !== "" && (
+																		<span className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded-full">
+																			{String(tourArtist.genre)}
+																		</span>
+																	)}
+															</div>
+															<p className="text-sm text-on-surface-variant mt-0.5">
+																{String(
+																	tour.tour_name ?? tourArtist?.tour_name ?? "",
+																)}
+															</p>
+														</div>
+														<span
+															className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter shrink-0 ${statusColor}`}
+														>
+															{status.replace(/_/g, " ")}
+														</span>
+													</div>
+
+													<div className="flex flex-wrap gap-x-5 gap-y-1.5 text-sm text-on-surface-variant">
+														{tour.city != null && tour.city !== "" && (
+															<span className="flex items-center gap-1.5">
+																<span className="material-symbols-outlined text-sm">
+																	location_on
+																</span>
+																{String(tour.city)}
+															</span>
+														)}
+														{tour.date != null && (
+															<span className="flex items-center gap-1.5">
+																<span className="material-symbols-outlined text-sm">
+																	event
+																</span>
+																{tour.date.toLocaleDateString("en-US", {
+																	month: "short",
+																	day: "numeric",
+																	year: "numeric",
+																})}
+															</span>
+														)}
+														{tour.fee_usd != null && (
+															<span className="flex items-center gap-1.5">
+																<span className="material-symbols-outlined text-sm">
+																	monetization_on
+																</span>
+																${Number(tour.fee_usd).toLocaleString()}
+															</span>
+														)}
+														{tour.financing != null && (
+															<span className="flex items-center gap-1.5 text-[#FF5A30] font-semibold">
+																<span className="material-symbols-outlined text-sm">
+																	account_balance
+																</span>
+																Financed
+																{tour.financing_amount
+																	? ` · $${Number(tour.financing_amount).toLocaleString()}`
+																	: ""}
+															</span>
+														)}
+													</div>
+
+													{statusLower === "confirmed" && capacity > 0 && (
+														<div className="mt-1">
+															<div className="flex justify-between text-xs text-on-surface-variant mb-1">
+																<span>Tickets Sold</span>
+																<span className="font-bold text-on-surface">
+																	{ticketsSold.toLocaleString()} /{" "}
+																	{capacity.toLocaleString()}
+																</span>
+															</div>
+															<div className="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+																<div
+																	className="bg-[#FF5A30] h-full rounded-full transition-all"
+																	style={{ width: `${soldPct}%` }}
+																/>
+															</div>
+														</div>
 													)}
 
-													<div className="flex items-center gap-2">
-														{(statusLower === "needs_revision" ||
-															statusLower === "needs revision") && (
-															<Link
-																href="/eoi"
-																className="text-xs font-bold text-[#FF5A30] border border-[#FF5A30]/30 px-3 py-1.5 rounded-lg hover:bg-[#FF5A30]/5 transition-colors"
-															>
-																Revise EOI
-															</Link>
+													<div className="flex items-center justify-between mt-auto pt-1">
+														{daysAway != null ? (
+															daysAway > 0 ? (
+																<span className="text-xs text-on-surface-variant">
+																	<span className="font-bold text-on-surface">
+																		{daysAway}d
+																	</span>{" "}
+																	until show
+																</span>
+															) : daysAway < 0 ? (
+																<span className="text-xs text-on-surface-variant">
+																	Show passed {Math.abs(daysAway)}d ago
+																</span>
+															) : (
+																<span className="text-xs font-bold text-[#FF5A30]">
+																	Show day!
+																</span>
+															)
+														) : (
+															<span />
 														)}
-														<button
-															type="button"
-															className="text-xs font-bold text-on-surface-variant border border-outline-variant/30 px-3 py-1.5 rounded-lg hover:bg-surface-container-low transition-colors"
-														>
-															View Details
-														</button>
+
+														<div className="flex items-center gap-2">
+															{(statusLower === "needs_revision" ||
+																statusLower === "needs revision") && (
+																<Link
+																	href="/eoi"
+																	className="text-xs font-bold text-[#FF5A30] border border-[#FF5A30]/30 px-3 py-1.5 rounded-lg hover:bg-[#FF5A30]/5 transition-colors"
+																>
+																	Revise EOI
+																</Link>
+															)}
+															<button
+																type="button"
+																className="text-xs font-bold text-on-surface-variant border border-outline-variant/30 px-3 py-1.5 rounded-lg hover:bg-surface-container-low transition-colors"
+															>
+																View Details
+															</button>
+														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-								);
-							})}
+									);
+								})
+							)}
 						</div>
 
 						{/* Sidebar: Milestones */}
@@ -327,8 +359,16 @@ export default async function ToursPage() {
 									Upcoming Milestones
 								</h3>
 								<div className="space-y-4">
-									{upcomingMilestones.map((m, i) => (
-										<div key={i} className="flex items-start gap-4">
+									{upcomingMilestones.length === 0 && (
+										<p className="text-sm text-on-surface-variant text-center py-2">
+											No upcoming milestones
+										</p>
+									)}
+									{upcomingMilestones.map((m) => (
+										<div
+											key={`${m.date}-${m.label}`}
+											className="flex items-start gap-4"
+										>
 											<div
 												className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${m.color}`}
 											>
@@ -358,15 +398,12 @@ export default async function ToursPage() {
 									Venue Summary
 								</h3>
 								<div className="space-y-3">
-									{[
-										{
-											label: "Alliance Française, Accra",
-											cap: "1,200",
-											shows: 1,
-										},
-										{ label: "Eko Convention Centre", cap: "3,000", shows: 1 },
-										{ label: "Freedom Park, Lagos", cap: "5,000", shows: 1 },
-									].map((v) => (
+									{venueSummary.length === 0 && (
+										<p className="text-sm text-on-surface-variant text-center py-2">
+											No venues yet
+										</p>
+									)}
+									{venueSummary.map((v) => (
 										<div
 											key={v.label}
 											className="flex items-center gap-3 py-2 border-b border-outline-variant/10 last:border-0"

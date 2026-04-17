@@ -10,29 +10,6 @@ import {
 import { getSession, signIn, signOut, signUp } from "@/app/actions";
 import type { AuthState } from "@/lib/auth";
 
-type SessionUser = {
-	email?: string | null;
-	name?: string | null;
-	displayName?: string | null;
-	role?: string | null;
-};
-
-type SessionAccount = {
-	first_name?: string | null;
-	last_name?: string | null;
-	stage_name?: string | null;
-	bio?: string | null;
-	location?: string | null;
-};
-
-type SessionPayload =
-	| {
-			user?: SessionUser;
-			account?: SessionAccount;
-	  }
-	| null
-	| undefined;
-
 interface AuthContextValue {
 	auth: AuthState | null;
 	isLoading: boolean;
@@ -59,10 +36,12 @@ const AuthContext = createContext<AuthContextValue>({
 	markProfileComplete: () => undefined,
 });
 
-function buildDisplayName(session: SessionPayload): string {
+function buildDisplayName(
+	session: Awaited<ReturnType<typeof getSession>>,
+): string {
 	const user = session?.user;
 	const account = session?.account;
-	const directName = user?.displayName || user?.name || account?.stage_name;
+	const directName = user?.name || account?.stage_name;
 	if (directName) return directName;
 
 	const firstName = account?.first_name?.trim() || "";
@@ -73,7 +52,9 @@ function buildDisplayName(session: SessionPayload): string {
 	return user?.email?.split("@")[0] || "TourStack User";
 }
 
-function toAuthState(session: SessionPayload): AuthState | null {
+function toAuthState(
+	session: Awaited<ReturnType<typeof getSession>>,
+): AuthState | null {
 	if (!session?.user) return null;
 
 	return {

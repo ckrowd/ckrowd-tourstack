@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import TopNav from "@/components/TopNav";
 import SideNav from "@/components/SideNav";
 import { useAuth } from "@/context/AuthContext";
@@ -70,7 +71,14 @@ function Field({
 
 export default function ProfilePage() {
 	const { markProfileComplete } = useAuth();
-	const [profile, setProfile] = useState({
+	const queryClient = useQueryClient();
+
+	const { data: profileQuery } = useQuery({
+		queryKey: ["tourstackProfile"],
+		queryFn: getTourstackProfile,
+	});
+
+	const emptyProfile = {
 		companyName: "",
 		tradingName: "",
 		contactPerson: "",
@@ -82,36 +90,48 @@ export default function ProfilePage() {
 		bio: "",
 		websiteUrl: "",
 		instagramHandle: "",
+	};
+
+	const serverProfile = useMemo(() => {
+		if (profileQuery?.success && profileQuery.data) {
+			const d = profileQuery.data;
+			return {
+				companyName: String(d.company_name ?? ""),
+				tradingName: String(d.trading_name ?? ""),
+				contactPerson: String(d.contact_person ?? ""),
+				jobTitle: String(d.job_title ?? ""),
+				email: "",
+				phone: String(d.phone ?? ""),
+				country: String(d.country ?? ""),
+				city: String(d.city ?? ""),
+				bio: String(d.bio ?? ""),
+				websiteUrl: String(d.website_url ?? ""),
+				instagramHandle: String(d.instagram_handle ?? ""),
+			};
+		}
+		return null;
+	}, [profileQuery]);
+
+	const [localEdits, setLocalEdits] = useState<Partial<typeof emptyProfile>>(
+		{},
+	);
+
+	const profile = { ...emptyProfile, ...serverProfile, ...localEdits };
+
+	const saveMutation = useMutation({
+		mutationFn: updateTourstackProfile,
+		onSuccess: () => {
+			setLocalEdits({});
+			void queryClient.invalidateQueries({ queryKey: ["tourstackProfile"] });
+			markProfileComplete();
+		},
 	});
-	const [saving, setSaving] = useState(false);
 
-	useEffect(() => {
-		getTourstackProfile().then((res) => {
-			if (res.success && res.data) {
-				const d = res.data as Record<string, unknown>;
-				setProfile({
-					companyName: String(d.companyName ?? ""),
-					tradingName: String(d.tradingName ?? ""),
-					contactPerson: String(d.contactPerson ?? ""),
-					jobTitle: String(d.jobTitle ?? ""),
-					email: String(d.email ?? ""),
-					phone: String(d.phone ?? ""),
-					country: String(d.country ?? ""),
-					city: String(d.city ?? ""),
-					bio: String(d.bio ?? ""),
-					websiteUrl: String(d.websiteUrl ?? ""),
-					instagramHandle: String(d.instagramHandle ?? ""),
-				});
-			}
-		});
-	}, []);
+	const set = (key: keyof typeof emptyProfile) => (v: string) =>
+		setLocalEdits((p) => ({ ...p, [key]: v }));
 
-	const set = (key: keyof typeof profile) => (v: string) =>
-		setProfile((p) => ({ ...p, [key]: v }));
-
-	const handleSave = async () => {
-		setSaving(true);
-		await updateTourstackProfile({
+	const handleSave = () => {
+		saveMutation.mutate({
 			companyName: profile.companyName || undefined,
 			tradingName: profile.tradingName || undefined,
 			contactPerson: profile.contactPerson || undefined,
@@ -123,8 +143,6 @@ export default function ProfilePage() {
 			websiteUrl: profile.websiteUrl || undefined,
 			instagramHandle: profile.instagramHandle || undefined,
 		});
-		setSaving(false);
-		markProfileComplete();
 	};
 
 	return (
@@ -244,10 +262,10 @@ export default function ProfilePage() {
 							<button
 								type="button"
 								onClick={handleSave}
-								disabled={saving}
+								disabled={saveMutation.isPending}
 								className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:opacity-60"
 							>
-								{saving ? "Saving..." : "Save Changes"}
+								{saveMutation.isPending ? "Saving..." : "Save Changes"}
 							</button>
 						</div>
 					</div>

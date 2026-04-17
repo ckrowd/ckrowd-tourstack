@@ -5,41 +5,41 @@ import { AuthProvider } from "@/context/AuthContext";
 import QueryProvider from "@/components/QueryProvider";
 
 const manrope = Manrope({
-  variable: "--font-manrope",
-  subsets: ["latin"],
-  weight: ["400", "600", "700", "800"],
+	variable: "--font-manrope",
+	subsets: ["latin"],
+	weight: ["400", "600", "700", "800"],
 });
 
 const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
+	variable: "--font-inter",
+	subsets: ["latin"],
+	weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
-  title: "TourStack by Crowd",
-  description:
-    "TourStack by Crowd connects artists, promoters, and financiers on a single high-performance stage.",
+	title: "TourStack by Crowd",
+	description:
+		"TourStack by Crowd connects artists, promoters, and financiers on a single high-performance stage.",
 };
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en" className={`${manrope.variable} ${inter.variable}`}>
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        />
-      </head>
-      <body className="min-h-full antialiased">
-        <QueryProvider>
-          <AuthProvider>{children}</AuthProvider>
-        </QueryProvider>
-      </body>
-    </html>
-  );
+	return (
+		<html lang="en" className={`${manrope.variable} ${inter.variable}`}>
+			<head>
+				<link
+					rel="stylesheet"
+					href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+				/>
+			</head>
+			<body className="min-h-full antialiased">
+				<QueryProvider>
+					<AuthProvider>{children}</AuthProvider>
+				</QueryProvider>
+			</body>
+		</html>
+	);
 }

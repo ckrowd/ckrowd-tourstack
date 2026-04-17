@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import { getAdminEOIs, getAdminTours } from "@/app/actions";
@@ -31,8 +30,21 @@ export default async function AdminPage() {
 		getAdminTours(),
 	]);
 
-	const eois = (eoisResult.data ?? []) as Record<string, unknown>[];
-	const tourProjects = (toursResult.data ?? []) as Record<string, unknown>[];
+	const eois = eoisResult.data ?? [];
+	const tourProjects = toursResult.data ?? [];
+	const activeTourCount = tourProjects.filter((t) =>
+		["confirmed", "under_review", "active"].includes(
+			String(t.status ?? "").toLowerCase(),
+		),
+	).length;
+	const pendingEOICount = eois.filter((e) =>
+		["pending", "pending_review"].includes(
+			String(e.status ?? "").toLowerCase(),
+		),
+	).length;
+	const approvedStopCount = eois.filter(
+		(e) => String(e.status ?? "").toLowerCase() === "approved",
+	).length;
 	return (
 		<div className="bg-surface-container-low min-h-screen text-on-surface">
 			{/* Admin Top Bar */}
@@ -142,25 +154,25 @@ export default async function AdminPage() {
 						{[
 							{
 								label: "Active Tour Projects",
-								value: "6",
+								value: String(activeTourCount),
 								icon: "confirmation_number",
 								accent: "border-[#FF5A30]",
 							},
 							{
 								label: "EOIs Received",
-								value: "49",
+								value: String(eois.length),
 								icon: "send",
 								accent: "border-secondary",
 							},
 							{
 								label: "Pending Review",
-								value: "18",
+								value: String(pendingEOICount),
 								icon: "pending",
 								accent: "border-yellow-400",
 							},
 							{
 								label: "Approved Stops",
-								value: "14",
+								value: String(approvedStopCount),
 								icon: "task_alt",
 								accent: "border-emerald-500",
 							},
@@ -192,12 +204,27 @@ export default async function AdminPage() {
 									EOI Review Queue
 								</h2>
 								<span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-black">
-									18 Pending
+									{pendingEOICount} Pending
 								</span>
 							</div>
 
 							<div className="space-y-4">
+								{eois.length === 0 && (
+									<div className="bg-surface-container-lowest rounded-2xl p-12 text-center shadow-sm">
+										<span className="material-symbols-outlined text-5xl text-on-surface-variant block mb-4">
+											inbox
+										</span>
+										<p className="font-(family-name:--font-manrope) font-bold text-on-surface text-lg mb-2">
+											No EOIs yet
+										</p>
+										<p className="text-on-surface-variant text-sm">
+											EOI submissions will appear here for review.
+										</p>
+									</div>
+								)}
 								{eois.map((eoi) => {
+									const eoiArtist = eoi.artist;
+									const eoiPromoter = eoi.promoter;
 									const status = String(eoi.status ?? "pending");
 									const statusColor =
 										status === "approved"
@@ -208,10 +235,10 @@ export default async function AdminPage() {
 													? "bg-blue-100 text-blue-800"
 													: "bg-yellow-100 text-yellow-800";
 									const matchScore =
-										typeof eoi.matchScore === "number"
-											? eoi.matchScore
-											: typeof eoi.matchScore === "string"
-												? Number(eoi.matchScore)
+										typeof eoi.match_score === "number"
+											? eoi.match_score
+											: typeof eoi.match_score === "string"
+												? Number(eoi.match_score)
 												: 0;
 									return (
 										<div
@@ -220,19 +247,10 @@ export default async function AdminPage() {
 										>
 											{/* Row top */}
 											<div className="flex items-start gap-4">
-												<div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 relative bg-surface-container-high flex items-center justify-center">
-													{eoi.img ? (
-														<Image
-															src={String(eoi.img)}
-															alt={String(eoi.imgAlt ?? "")}
-															fill
-															className="object-cover"
-														/>
-													) : (
-														<span className="material-symbols-outlined text-on-surface-variant">
-															music_note
-														</span>
-													)}
+												<div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 bg-surface-container-high flex items-center justify-center">
+													<span className="material-symbols-outlined text-on-surface-variant">
+														music_note
+													</span>
 												</div>
 												<div className="flex-1 min-w-0">
 													<div className="flex items-center gap-2 flex-wrap mb-1">
@@ -248,14 +266,14 @@ export default async function AdminPage() {
 														</span>
 													</div>
 													<h3 className="font-(family-name:--font-manrope) font-bold text-on-surface">
-														{String(eoi.artistName ?? eoi.artiste ?? "Artist")}
+														{String(eoiArtist?.name ?? "Artist")}
 														<span className="text-on-surface-variant font-normal text-sm ml-1">
-															— {String(eoi.tour ?? eoi.artistId ?? "")}
+															— {String(eoiArtist?.tour_name ?? "")}
 														</span>
 													</h3>
 													<p className="text-sm text-on-surface-variant mt-0.5">
 														<span className="font-semibold text-on-surface">
-															{String(eoi.promoter ?? eoi.promoterName ?? "")}
+															{String(eoiPromoter?.company_name ?? "")}
 														</span>
 														{" · "}
 														{String(eoi.city ?? "")}
@@ -269,15 +287,11 @@ export default async function AdminPage() {
 													{
 														icon: "event",
 														label: "Date",
-														value: eoi.date
-															? new Date(String(eoi.date)).toLocaleDateString()
-															: String(
-																	eoi.createdAt
-																		? new Date(
-																				String(eoi.createdAt),
-																			).toLocaleDateString()
-																		: "—",
-																),
+														value: eoi.created_at
+															? new Date(
+																	String(eoi.created_at),
+																).toLocaleDateString()
+															: "—",
 													},
 													{
 														icon: "location_on",
@@ -326,7 +340,7 @@ export default async function AdminPage() {
 														<MatchBar score={matchScore} />
 													</div>
 												</div>
-												{eoi.funding != null && (
+												{eoi.funding_type != null && (
 													<div className="flex items-center gap-2 text-xs text-on-surface-variant">
 														<span className="material-symbols-outlined text-xs">
 															account_balance
@@ -334,17 +348,17 @@ export default async function AdminPage() {
 														<span>
 															Funding:{" "}
 															<span className="font-semibold text-on-surface">
-																{String(eoi.funding)}
+																{String(eoi.funding_type)}
 															</span>
 														</span>
 													</div>
 												)}
-												{eoi.flag != null && (
+												{eoi.flag_note != null && (
 													<div className="flex items-center gap-2 px-3 py-1.5 bg-red-50 rounded-lg text-xs text-red-700 font-semibold">
 														<span className="material-symbols-outlined text-xs text-red-500">
 															flag
 														</span>
-														{String(eoi.flag)}
+														{String(eoi.flag_note)}
 													</div>
 												)}
 											</div>
@@ -537,34 +551,49 @@ export default async function AdminPage() {
 									Active Tour Projects
 								</h3>
 								<div className="space-y-4">
-									{tourProjects.map((t) => (
-										<div
-											key={String(t.id ?? t.name)}
-											className="flex items-center justify-between gap-4 py-3 border-b border-outline-variant/10 last:border-none"
-										>
-											<div className="flex-1 min-w-0">
-												<p className="text-sm font-bold text-on-surface truncate">
-													{String(t.name ?? t.tour ?? "Tour")}
-												</p>
-												<p className="text-xs text-on-surface-variant mt-0.5">
-													{t.eois != null ? `${String(t.eois)} EOIs` : ""}
-													{t.approved != null
-														? ` · ${String(t.approved)} approved`
-														: ""}
-												</p>
-											</div>
-											<span
-												className={`shrink-0 px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-tighter ${
-													String(t.status ?? "draft") === "active" ||
-													String(t.status ?? "") === "Active"
-														? "bg-emerald-100 text-emerald-700"
-														: "bg-slate-100 text-slate-500"
-												}`}
-											>
-												{String(t.status ?? "Draft")}
+									{tourProjects.length === 0 && (
+										<div className="bg-surface-container-low rounded-2xl p-8 text-center">
+											<span className="material-symbols-outlined text-4xl text-on-surface-variant block mb-3">
+												confirmation_number
 											</span>
+											<p className="font-(family-name:--font-manrope) font-bold text-on-surface mb-1">
+												No tour projects yet
+											</p>
+											<p className="text-on-surface-variant text-sm">
+												Publish a tour project using the form.
+											</p>
 										</div>
-									))}
+									)}
+									{tourProjects.map((t) => {
+										const tArtist = t.artist;
+										return (
+											<div
+												key={String(t.id)}
+												className="flex items-center justify-between gap-4 py-3 border-b border-outline-variant/10 last:border-none"
+											>
+												<div className="flex-1 min-w-0">
+													<p className="text-sm font-bold text-on-surface truncate">
+														{String(
+															tArtist?.name ?? tArtist?.tour_name ?? "Tour",
+														)}
+													</p>
+													<p className="text-xs text-on-surface-variant mt-0.5">
+														{String(tArtist?.genre ?? "")}
+													</p>
+												</div>
+												<span
+													className={`shrink-0 px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-tighter ${
+														String(t.status ?? "draft") === "active" ||
+														String(t.status ?? "") === "Active"
+															? "bg-emerald-100 text-emerald-700"
+															: "bg-slate-100 text-slate-500"
+													}`}
+												>
+													{String(t.status ?? "Draft")}
+												</span>
+											</div>
+										);
+									})}
 								</div>
 							</div>
 

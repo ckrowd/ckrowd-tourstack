@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState, useRef } from "react";
+import { useMutation } from "@tanstack/react-query";
 import { registerStakeholder } from "@/app/actions";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
@@ -38,7 +39,6 @@ function Label({
 }
 
 function CheckGroup({
-	name,
 	options,
 	value,
 	onChange,
@@ -232,10 +232,21 @@ function reviewRow(
 export default function ApplyPage() {
 	const [step, setStep] = useState(0);
 	const [form, setForm] = useState<FormData>(defaultForm);
-	const [submitted, setSubmitted] = useState(false);
-	const [submitting, setSubmitting] = useState(false);
-	const [submitError, setSubmitError] = useState<string | null>(null);
 	const fileInputRef = useRef<HTMLInputElement>(null);
+
+	const submitMutation = useMutation({
+		mutationFn: registerStakeholder,
+	});
+
+	const submitted = submitMutation.isSuccess;
+	const submitting = submitMutation.isPending;
+	const submitError = submitMutation.error
+		? submitMutation.error instanceof Error
+			? submitMutation.error.message
+			: "Failed to submit application."
+		: submitMutation.data && !submitMutation.data.success
+			? (submitMutation.data.error ?? "Failed to submit application.")
+			: null;
 
 	function set<K extends keyof FormData>(field: K, value: FormData[K]) {
 		setForm((prev) => ({ ...prev, [field]: value }));
@@ -328,58 +339,39 @@ export default function ApplyPage() {
 						{/* Form Card */}
 						<div className="bg-surface-container-lowest rounded-2xl p-8 md:p-10 shadow-sm border border-outline-variant/10">
 							<form
-								onSubmit={async (e) => {
+								onSubmit={(e) => {
 									e.preventDefault();
 									if (step < STEPS.length - 1) {
 										setStep((s) => s + 1);
 									} else {
-										setSubmitting(true);
-										setSubmitError(null);
-										try {
-											const country =
-												form.cityCountry.split(",").pop()?.trim() ??
-												form.cityCountry;
-											const response = await registerStakeholder({
-												category: "service",
-												name: form.fullName,
-												email: form.email,
-												phone: form.phone,
-												company: form.company || undefined,
-												country,
-												extraData: {
-													cityCountry: form.cityCountry,
-													yearsExperience: form.yearsExperience,
-													eventsLastYear: form.eventsLastYear,
-													largestCrowd: form.largestCrowd,
-													artistLevel: form.artistLevel,
-													hostedLargeVenue: form.hostedLargeVenue,
-													instagram: form.instagram,
-													twitter: form.twitter,
-													youtube: form.youtube,
-													ticketLinks: form.ticketLinks,
-													hasRegisteredBusiness: form.hasRegisteredBusiness,
-													hasActiveBankAccount: form.hasActiveBankAccount,
-													hasBrandSponsors: form.hasBrandSponsors,
-													intent: form.intent,
-													estimatedBudget: form.estimatedBudget,
-												},
-											});
-											if (response.success) {
-												setSubmitted(true);
-											} else {
-												setSubmitError(
-													response.error ?? "Failed to submit application.",
-												);
-											}
-										} catch (err) {
-											setSubmitError(
-												err instanceof Error
-													? err.message
-													: "Failed to submit application.",
-											);
-										} finally {
-											setSubmitting(false);
-										}
+										const country =
+											form.cityCountry.split(",").pop()?.trim() ??
+											form.cityCountry;
+										submitMutation.mutate({
+											category: "service",
+											name: form.fullName,
+											email: form.email,
+											phone: form.phone,
+											company: form.company || undefined,
+											country,
+											extraData: {
+												cityCountry: form.cityCountry,
+												yearsExperience: form.yearsExperience,
+												eventsLastYear: form.eventsLastYear,
+												largestCrowd: form.largestCrowd,
+												artistLevel: form.artistLevel,
+												hostedLargeVenue: form.hostedLargeVenue,
+												instagram: form.instagram,
+												twitter: form.twitter,
+												youtube: form.youtube,
+												ticketLinks: form.ticketLinks,
+												hasRegisteredBusiness: form.hasRegisteredBusiness,
+												hasActiveBankAccount: form.hasActiveBankAccount,
+												hasBrandSponsors: form.hasBrandSponsors,
+												intent: form.intent,
+												estimatedBudget: form.estimatedBudget,
+											},
+										});
 									}
 								}}
 							>
