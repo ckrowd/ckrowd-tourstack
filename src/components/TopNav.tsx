@@ -27,6 +27,8 @@ export default function TopNav() {
       ? "discovery"
       : pathname.startsWith("/financing")
       ? "financing"
+      : pathname.startsWith("/insurance")
+      ? "insurance"
       : null;
 
   const linkClass = (key: string) =>
@@ -64,6 +66,9 @@ export default function TopNav() {
               </Link>
               <Link href="/financing" className={linkClass("financing")}>
                 Financing
+              </Link>
+              <Link href="/insurance" className={linkClass("insurance")}>
+                Insurance
               </Link>
             </nav>
           </div>
