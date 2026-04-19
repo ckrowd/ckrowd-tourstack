@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
@@ -1095,6 +1095,16 @@ function DirectoryTab({ entries }: { entries: StakeholderEntry[] }) {
 
 const STORAGE_KEY = "onboardedStakeholders";
 
+function loadStoredEntries(): StakeholderEntry[] {
+	if (typeof window === "undefined") return [];
+	try {
+		const raw = window.localStorage.getItem(STORAGE_KEY);
+		return raw ? (JSON.parse(raw) as StakeholderEntry[]) : [];
+	} catch {
+		return [];
+	}
+}
+
 const SERVICE_STEPS = ["Category", "Company", "Services", "Declaration"];
 const ARTMGMT_STEPS = ["Category", "Company", "Roster", "Declaration"];
 // Workforce has its own page at /workforce
@@ -1116,16 +1126,7 @@ export default function OnboardingPage() {
 		useState<ArtmgmtForm>(defaultArtmgmtForm);
 
 	const [submitted, setSubmitted] = useState(false);
-	const [entries, setEntries] = useState<StakeholderEntry[]>([]);
-
-	useEffect(() => {
-		try {
-			const raw = localStorage.getItem(STORAGE_KEY);
-			if (raw) setEntries(JSON.parse(raw) as StakeholderEntry[]);
-		} catch {
-			// ignore
-		}
-	}, []);
+	const [entries, setEntries] = useState<StakeholderEntry[]>(loadStoredEntries);
 
 	function setServiceField<K extends keyof ServiceForm>(
 		k: K,

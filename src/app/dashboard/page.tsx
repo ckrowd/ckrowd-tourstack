@@ -208,48 +208,48 @@ export default async function DashboardPage() {
 								</span>
 							</div>
 						</div>
-					</div>
 
-					<div className="relative overflow-hidden bg-[#FF5A30] p-6 rounded-xl shadow-sm flex flex-col justify-between">
-						<div className="absolute top-0 right-0 p-2 opacity-20">
-							<span
-								className="material-symbols-outlined text-8xl"
-								style={{ fontVariationSettings: "'FILL' 1" }}
-							>
-								electric_bolt
-							</span>
-						</div>
-						<p className="text-sm font-semibold text-white uppercase tracking-wider mb-4 z-10">
-							Next Show
-						</p>
-						<div className="z-10">
-							{nextMilestone ? (
-								<>
-									<span className="block text-xl font-(family-name:--font-manrope) font-extrabold text-white leading-tight">
-										{String(nextMilestoneTour?.venue ?? "TBD")} @{" "}
-										{String(nextMilestoneTour?.city ?? "TBD")}
-									</span>
-									<span className="text-orange-50 font-medium text-sm">
-										{new Date(String(nextMilestone.date)).toLocaleDateString(
-											"en-US",
-											{
-												month: "short",
-												day: "numeric",
-												year: "numeric",
-											},
-										)}
-									</span>
-								</>
-							) : (
-								<>
-									<span className="block text-xl font-(family-name:--font-manrope) font-extrabold text-white leading-tight">
-										No upcoming shows
-									</span>
-									<span className="text-orange-50 font-medium text-sm">
-										Submit an EOI to get started
-									</span>
-								</>
-							)}
+						<div className="relative overflow-hidden bg-[#FF5A30] p-6 rounded-xl shadow-sm flex flex-col justify-between">
+							<div className="absolute top-0 right-0 p-2 opacity-20">
+								<span
+									className="material-symbols-outlined text-8xl"
+									style={{ fontVariationSettings: "'FILL' 1" }}
+								>
+									electric_bolt
+								</span>
+							</div>
+							<p className="text-sm font-semibold text-white uppercase tracking-wider mb-4 z-10">
+								Next Show
+							</p>
+							<div className="z-10">
+								{nextMilestone ? (
+									<>
+										<span className="block text-xl font-(family-name:--font-manrope) font-extrabold text-white leading-tight">
+											{String(nextMilestoneTour?.venue ?? "TBD")} @{" "}
+											{String(nextMilestoneTour?.city ?? "TBD")}
+										</span>
+										<span className="text-orange-50 font-medium text-sm">
+											{new Date(String(nextMilestone.date)).toLocaleDateString(
+												"en-US",
+												{
+													month: "short",
+													day: "numeric",
+													year: "numeric",
+												},
+											)}
+										</span>
+									</>
+								) : (
+									<>
+										<span className="block text-xl font-(family-name:--font-manrope) font-extrabold text-white leading-tight">
+											No upcoming shows
+										</span>
+										<span className="text-orange-50 font-medium text-sm">
+											Submit an EOI to get started
+										</span>
+									</>
+								)}
+							</div>
 						</div>
 					</div>
 

@@ -4,6 +4,10 @@ import TopNav from "@/components/TopNav";
 import SideNav from "@/components/SideNav";
 import { getTours, getTourstackDashboard } from "@/app/actions";
 
+function getDaysAway(date: Date | null | undefined): number | null {
+	return date ? Math.round((date.getTime() - Date.now()) / 86400000) : null;
+}
+
 export default async function ToursPage() {
 	const [toursResult, dashboardResult] = await Promise.all([
 		getTours(),
@@ -187,9 +191,7 @@ export default async function ToursPage() {
 														statusLower === "needs revision"
 													? "bg-blue-100 text-blue-800"
 													: "bg-yellow-100 text-yellow-800";
-									const daysAway = tour.date
-										? Math.round((tour.date.getTime() - Date.now()) / 86400000)
-										: null;
+												const daysAway = getDaysAway(tour.date);
 
 									return (
 										<div

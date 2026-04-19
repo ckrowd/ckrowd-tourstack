@@ -97,7 +97,7 @@ export default async function AdminPage() {
 							{ icon: "bar_chart", label: "Reports", active: false },
 							{ icon: "settings", label: "Settings", active: false },
 						].map((item) => (
-							<a
+							<Link
 								key={item.label}
 								href="/"
 								className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-(family-name:--font-manrope) font-semibold transition-all ${
@@ -110,7 +110,7 @@ export default async function AdminPage() {
 									{item.icon}
 								</span>
 								{item.label}
-							</a>
+							</Link>
 						))}
 					</nav>
 					<div className="px-3 mt-auto">
