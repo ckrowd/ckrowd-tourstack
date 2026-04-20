@@ -1,5 +1,6 @@
 import Link from "next/link";
 import TopNav from "@/components/TopNav";
+import FinancingQuickApply from "@/components/FinancingQuickApply";
 import { getFinancingApplications } from "@/app/actions";
 
 const products = [
@@ -187,6 +188,9 @@ export default async function FinancingPage() {
 					<h2 className="font-(family-name:--font-manrope) text-2xl font-bold mb-8">
 						My Applications
 					</h2>
+					<div id="quick-apply" className="mb-8">
+						<FinancingQuickApply />
+					</div>
 					{applications.length === 0 ? (
 						<div className="bg-surface-container-lowest rounded-2xl p-12 text-center shadow-sm">
 							<span className="material-symbols-outlined text-5xl text-on-surface-variant block mb-4">
@@ -268,6 +272,14 @@ export default async function FinancingPage() {
 												</p>
 											</div>
 										</div>
+										<div className="mt-4">
+											<Link
+												href={`/financing/${String(app.id)}`}
+												className="text-sm font-bold text-[#FF5A30] hover:underline"
+											>
+												View details
+											</Link>
+										</div>
 									</div>
 								);
 							})}
@@ -336,7 +348,7 @@ export default async function FinancingPage() {
 										{p.eligibility}
 									</span>
 									<Link
-										href="/eoi"
+										href="#quick-apply"
 										className="text-[#FF5A30] font-bold text-sm flex items-center gap-1 hover:gap-2 transition-all"
 									>
 										Apply{" "}

@@ -38,7 +38,7 @@ const CATEGORY_ICONS: Record<Category, string> = {
 /* ─────────────────────── Shared UI ─────────────────────── */
 
 const inputClass =
-	"w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm";
+	"w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm";
 
 function Label({
 	htmlFor,
@@ -433,7 +433,7 @@ function ServiceProviderForm({
 						id="sp-clients"
 						rows={3}
 						placeholder="List any notable artists, promoters, or events you have worked with..."
-						className="w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
+							className="w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
 						value={form.pastClients}
 						onChange={(e) => setField("pastClients", e.target.value)}
 					/>
@@ -446,7 +446,7 @@ function ServiceProviderForm({
 						id="sp-certs"
 						rows={2}
 						placeholder="e.g. PSNC membership, ISO certification, safety licenses..."
-						className="w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
+							className="w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
 						value={form.certifications}
 						onChange={(e) => setField("certifications", e.target.value)}
 					/>
@@ -740,7 +740,7 @@ function ArtMgmtForm({
 						id="am-artists"
 						rows={3}
 						placeholder="List the main artists or acts you represent..."
-						className="w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
+							className="w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
 						value={form.artistsRepresented}
 						onChange={(e) => setField("artistsRepresented", e.target.value)}
 					/>
@@ -753,7 +753,7 @@ function ArtMgmtForm({
 						id="am-collabs"
 						rows={3}
 						placeholder="e.g. Nigeria, Ghana, UK, USA — collaborations with Coachella, Afronation..."
-						className="w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
+							className="w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
 						value={form.pastCollaborations}
 						onChange={(e) => setField("pastCollaborations", e.target.value)}
 					/>

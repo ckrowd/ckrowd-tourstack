@@ -338,12 +338,12 @@ export default async function ToursPage() {
 																	Revise EOI
 																</Link>
 															)}
-															<button
-																type="button"
+															<Link
+																href={`/tours/${String(tour.id)}`}
 																className="text-xs font-bold text-on-surface-variant border border-outline-variant/30 px-3 py-1.5 rounded-lg hover:bg-surface-container-low transition-colors"
 															>
 																View Details
-															</button>
+															</Link>
 														</div>
 													</div>
 												</div>

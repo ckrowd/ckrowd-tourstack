@@ -246,10 +246,10 @@ const defaultForm: FormData = {
 /* ─────────────────────────── shared UI ─────────────────────────── */
 
 const inputClass =
-	"w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm";
+	"w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm";
 
 const selectClass =
-	"w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm appearance-none";
+	"w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm appearance-none";
 
 function Label({
 	htmlFor,
@@ -1071,7 +1071,7 @@ export default function CrewPage() {
 													id="markets"
 													rows={3}
 													placeholder="e.g. Nigeria, Ghana, Côte d'Ivoire, Senegal, Kenya..."
-													className="w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
+													className="w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
 													value={form.marketsWorked}
 													onChange={(e) => set("marketsWorked", e.target.value)}
 												/>
@@ -1222,7 +1222,7 @@ export default function CrewPage() {
 													id="portfolio"
 													rows={3}
 													placeholder="Google Drive, YouTube, LinkedIn, personal website..."
-													className="w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
+													className="w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
 													value={form.portfolioLinks}
 													onChange={(e) =>
 														set("portfolioLinks", e.target.value)
@@ -1251,7 +1251,7 @@ export default function CrewPage() {
 												id="equipment"
 												rows={3}
 												placeholder="List any owned or certified equipment relevant to your role..."
-												className="w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
+												className="w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
 												value={form.equipment}
 												onChange={(e) => set("equipment", e.target.value)}
 											/>

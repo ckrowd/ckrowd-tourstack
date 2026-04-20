@@ -118,7 +118,7 @@ export default function DiscoveryPage() {
 								id="filter-genre"
 								value={genre}
 								onChange={(e) => setGenre(e.target.value)}
-								className="w-full bg-surface-container-lowest border-none rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A30]/20 appearance-none outline-none"
+								className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A30]/20 appearance-none outline-none"
 							>
 								<option>All Genres</option>
 								<option>Afrobeats</option>
@@ -146,7 +146,7 @@ export default function DiscoveryPage() {
 								id="filter-window"
 								value={window}
 								onChange={(e) => setWindow(e.target.value)}
-								className="w-full bg-surface-container-lowest border-none rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A30]/20 appearance-none outline-none"
+								className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A30]/20 appearance-none outline-none"
 							>
 								<option>All Windows</option>
 								<option>Q3 2024 (Jul–Sep)</option>
@@ -172,7 +172,7 @@ export default function DiscoveryPage() {
 								id="filter-fee"
 								value={feeRange}
 								onChange={(e) => setFeeRange(e.target.value)}
-								className="w-full bg-surface-container-lowest border-none rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A30]/20 appearance-none outline-none"
+								className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A30]/20 appearance-none outline-none"
 							>
 								<option>All Ranges</option>
 								<option>$5k – $15k</option>
@@ -198,7 +198,7 @@ export default function DiscoveryPage() {
 								id="filter-region"
 								value={region}
 								onChange={(e) => setRegion(e.target.value)}
-								className="w-full bg-surface-container-lowest border-none rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A30]/20 appearance-none outline-none"
+								className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A30]/20 appearance-none outline-none"
 							>
 								<option>All Africa</option>
 								<option>West Africa</option>

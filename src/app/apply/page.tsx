@@ -16,10 +16,10 @@ const STEPS = [
 ];
 
 const inputClass =
-	"w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm";
+	"w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm";
 
 const selectClass =
-	"w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm appearance-none";
+	"w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm appearance-none";
 
 function Label({
 	htmlFor,
@@ -752,7 +752,7 @@ export default function ApplyPage() {
 															id={item.id}
 															type="url"
 															placeholder={`${item.label} — ${item.placeholder}`}
-															className="w-full pl-11 pr-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm"
+															className="w-full pl-11 pr-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm"
 															value={form[item.field]}
 															onChange={(e) => set(item.field, e.target.value)}
 														/>

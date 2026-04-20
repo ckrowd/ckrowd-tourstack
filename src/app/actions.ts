@@ -1,6 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 import { createClient } from "@ckrowd/ckrowd-prisma";
 
 export type Params<T extends (...args: any) => any> = NonNullable<
@@ -60,6 +61,10 @@ function extractError(err: unknown): string | undefined {
 
 function extractPayload<T>(value: T | null | undefined) {
 	if (value == null) return undefined;
+	const response = value as unknown as Response;
+	if (response.status === 401 && ["POST", "PUT", "DELETE"].includes(response.headers.get("X-Request-Method")??"GET")) {
+		redirect( "/login" );
+	}
 	return ((value as T extends { data?: infer P } ? { data?: P } : never)
 		?.data || undefined) as T extends { data?: infer P } ? P : undefined;
 }
@@ -131,7 +136,7 @@ export async function getArtists(
 	);
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -140,7 +145,7 @@ export async function getArtist(id: string) {
 	const { data, error } = await client.tourstack.discovery({ id }).get();
 	return {
 		data: data?.data ? data.data : undefined,
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -151,7 +156,7 @@ export async function getTourstackProfile() {
 	const { data, error } = await client.tourstack.profile.get();
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -162,7 +167,7 @@ export async function updateTourstackProfile(
 	const { data, error } = await client.tourstack.profile.patch(body);
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -173,7 +178,7 @@ export async function getTourstackDashboard() {
 	const { data, error } = await client.tourstack.dashboard.get();
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -186,7 +191,7 @@ export async function getEOIs(status?: string) {
 	);
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -195,7 +200,7 @@ export async function getEOI(id: string) {
 	const { data, error } = await client.tourstack.eoi({ id }).get();
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -206,7 +211,7 @@ export async function createEOI(
 	const { data, error } = await client.tourstack.eoi.post(body);
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -218,7 +223,7 @@ export async function getTours(status?: string) {
 	);
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -227,7 +232,7 @@ export async function getTour(id: string) {
 	const { data, error } = await client.tourstack.tours({ id }).get();
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -236,7 +241,7 @@ export async function getTourMilestones(id: string) {
 	const { data, error } = await client.tourstack.tours({ id }).milestones.get();
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -248,7 +253,7 @@ export async function getFinancingApplications(status?: string) {
 	);
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -257,7 +262,7 @@ export async function getFinancingApplication(id: string) {
 	const { data, error } = await client.tourstack.financing({ id }).get();
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -268,7 +273,7 @@ export async function applyForFinancing(
 	const { data, error } = await client.tourstack.financing.post(body);
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -283,7 +288,7 @@ export async function getCrewMembers(
 	);
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -292,7 +297,7 @@ export async function getCrewMember(id: string) {
 	const { data, error } = await client.tourstack.workforce({ id }).get();
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -303,7 +308,7 @@ export async function registerCrewMember(
 	const { data, error } = await client.tourstack.workforce.post(body);
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -316,7 +321,7 @@ export async function registerStakeholder(
 	const { data, error } = await client.tourstack.onboarding.post(body);
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -327,7 +332,7 @@ export async function getOnboardingLinks() {
 	const { data, error } = await client.tourstack["onboarding-links"].get();
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -336,7 +341,7 @@ export async function createOnboardingLink(body: Payload<typeof client.tourstack
 	const { data, error } = await client.tourstack["onboarding-links"].post(body);
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -347,7 +352,7 @@ export async function getOnboardingLink(token: string) {
 	}).get();
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -358,7 +363,7 @@ export async function revokeOnboardingLink(token: string) {
 	}).delete();
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -372,7 +377,7 @@ export async function submitOnboardingLink(
 	}).submit.post(body);
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -385,7 +390,7 @@ export async function getAdminEOIs(status?: string) {
 	);
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
@@ -396,7 +401,7 @@ export async function getAdminTours(status?: string) {
 	);
 	return {
 		data: extractPayload(data),
-		success: !error,
+		success: !error && data?.success,
 		error: extractError(error),
 	};
 }

@@ -19,7 +19,7 @@ export default function TopNav() {
   const [notifOpen, setNotifOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
 
-  const SIDEBAR_ROUTES = ["/dashboard", "/tours", "/eoi", "/onboarding", "/profile", "/settings", "/workforce", "/crew"];
+  const SIDEBAR_ROUTES = ["/dashboard", "/tours", "/eoi", "/onboarding", "/stakeholders", "/profile", "/settings", "/workforce", "/crew"];
   const activeLink =
     SIDEBAR_ROUTES.some((r) => pathname === r || pathname.startsWith(r + "/"))
       ? "platform"

@@ -1553,10 +1553,10 @@ const STEPS = [
 ];
 
 const inputClass =
-  "w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm";
+  "w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm";
 
 const selectClass =
-  "w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm appearance-none";
+  "w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm appearance-none";
 
 function Label({ htmlFor, children }: { htmlFor: string; children: React.ReactNode }) {
   return (
@@ -1910,7 +1910,7 @@ export default function EOIPage() {
                             id="artiste-fee"
                             type="text"
                             placeholder="0.00"
-                            className="w-full pl-8 pr-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm"
+                            className="w-full pl-8 pr-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm"
                             value={form.artisteFee}
                             onChange={(e) => set("artisteFee", e.target.value)}
                           />
@@ -1946,7 +1946,7 @@ export default function EOIPage() {
                             id="ticket-price"
                             type="text"
                             placeholder="0.00"
-                            className="w-full pl-8 pr-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm"
+                            className="w-full pl-8 pr-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm"
                             value={form.ticketPrice}
                             onChange={(e) => set("ticketPrice", e.target.value)}
                           />
@@ -1963,7 +1963,7 @@ export default function EOIPage() {
                             id="total-budget"
                             type="text"
                             placeholder="0.00"
-                            className="w-full pl-8 pr-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm"
+                            className="w-full pl-8 pr-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm"
                             value={form.totalBudget}
                             onChange={(e) => set("totalBudget", e.target.value)}
                           />
@@ -2031,7 +2031,7 @@ export default function EOIPage() {
                           id="event-concept"
                           rows={4}
                           placeholder="Describe the event format, your production capacity, and any unique elements you're bringing to this Tour Stop..."
-                          className="w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
+                          className="w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
                           value={form.eventConcept}
                           onChange={(e) => set("eventConcept", e.target.value)}
                         />

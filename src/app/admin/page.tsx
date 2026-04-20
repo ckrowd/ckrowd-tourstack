@@ -508,7 +508,7 @@ export default async function AdminPage() {
 										<div className="relative">
 											<select
 												id="admin-genre"
-												className="w-full px-4 py-2.5 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none appearance-none"
+												className="w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl text-sm font-medium text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none appearance-none"
 											>
 												<option>Afrobeats</option>
 												<option>Afropop</option>
