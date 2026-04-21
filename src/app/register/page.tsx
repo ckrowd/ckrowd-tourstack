@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useAuth } from "@/context/AuthContext";
+import { useSession, useRegister } from "@/context/AuthContext";
 
 export default function RegisterPage() {
 	const router = useRouter();
-	const { auth, isLoading, register: registerAccount } = useAuth();
+	const { data: session, isLoading } = useSession();
+	const registerMutation = useRegister();
 
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
@@ -15,41 +16,32 @@ export default function RegisterPage() {
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [error, setError] = useState<string | null>(null);
-	const [submitting, setSubmitting] = useState(false);
 
 	useEffect(() => {
-		if (!isLoading && auth?.authenticated) {
+		if (!isLoading && session?.user) {
 			router.replace("/dashboard");
 		}
-	}, [auth?.authenticated, isLoading, router]);
+	}, [session?.user, isLoading, router]);
 
-	async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		setError(null);
-		setSubmitting(true);
-
-		try {
-			const success = await registerAccount({
-				firstName,
-				lastName,
-				email,
-				password,
-				confirmPassword,
-			});
-
-			if (success) {
-				router.replace("/dashboard");
-			} else {
-				router.replace("/login?registered=1");
-			}
-		} catch (err) {
-			setError(err instanceof Error ? err.message : "Registration failed");
-		} finally {
-			setSubmitting(false);
-		}
+		registerMutation.mutate(
+			{ firstName, lastName, email, password, confirmPassword },
+			{
+				onSuccess: (result) => {
+					if (!result.success) {
+						setError(result.error ?? "Registration failed");
+					} else {
+						router.replace("/dashboard");
+					}
+				},
+				onError: () => setError("Registration failed"),
+			},
+		);
 	}
 
-	if (isLoading && !auth) {
+	if (isLoading && !session) {
 		return (
 			<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 text-slate-600">
 				Loading session...
@@ -190,10 +182,10 @@ export default function RegisterPage() {
 
 						<button
 							type="submit"
-							disabled={submitting}
+							disabled={registerMutation.isPending}
 							className="w-full py-3 bg-[#FF5A30] text-white font-bold rounded-xl shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60"
 						>
-							{submitting ? "Creating account..." : "Create account"}
+							{registerMutation.isPending ? "Creating account..." : "Create account"}
 						</button>
 					</form>
 

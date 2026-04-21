@@ -3,43 +3,44 @@
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
-import { useAuth } from "@/context/AuthContext";
+import { useSession, useLogin } from "@/context/AuthContext";
 
 function LoginPageContent() {
 	const router = useRouter();
 	const searchParams = useSearchParams();
-	const { auth, isLoading, login } = useAuth();
+	const { data: session, isLoading } = useSession();
+	const loginMutation = useLogin();
 	const from = searchParams.get("from") ?? "/dashboard";
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [error, setError] = useState<string | null>(null);
-	const [submitting, setSubmitting] = useState(false);
 
 	useEffect(() => {
-		if (!isLoading && auth?.authenticated) {
+		if (!isLoading && session?.user) {
 			router.replace(from);
 		}
-	}, [auth?.authenticated, from, isLoading, router]);
+	}, [session?.user, from, isLoading, router]);
 
-	async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		setError(null);
-		setSubmitting(true);
-
-		try {
-			const success = await login(email, password);
-			if (success) {
-				router.replace(from);
-			}
-		} catch (err) {
-			setError(err instanceof Error ? err.message : "Sign in failed");
-		} finally {
-			setSubmitting(false);
-		}
+		loginMutation.mutate(
+			{ email, password },
+			{
+				onSuccess: (result) => {
+					if (!result.success) {
+						setError(result.error ?? "Invalid email or password");
+					} else {
+						router.replace(from);
+					}
+				},
+				onError: () => setError("Sign in failed"),
+			},
+		);
 	}
 
-	if (isLoading && !auth) {
+	if (isLoading && !session) {
 		return (
 			<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 text-slate-600">
 				Loading session...
@@ -119,10 +120,10 @@ function LoginPageContent() {
 
 						<button
 							type="submit"
-							disabled={submitting}
+							disabled={loginMutation.isPending}
 							className="w-full py-3 bg-[#FF5A30] text-white font-bold rounded-xl shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60"
 						>
-							{submitting ? "Signing in..." : "Sign in"}
+							{loginMutation.isPending ? "Signing in..." : "Sign in"}
 						</button>
 					</form>
 

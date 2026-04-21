@@ -46,24 +46,9 @@ const client = createClient({
 	},
 });
 
-function extractError(err: unknown): string | undefined {
-	if (!err) return undefined;
-	if (typeof err === "string") return err;
-	if (typeof err === "object" && err !== null) {
-		// Handle better-auth error responses
-		if ("error" in err && typeof (err as { error: unknown }).error === "string") {
-			return (err as { error: string }).error;
-		}
-		if ("message" in err && typeof (err as { message: unknown }).message === "string") {
-			return (err as { message: string }).message;
-		}
-		const v = (err as { value?: unknown }).value;
-		if (typeof v === "string") return v;
-		if (typeof v === "object" && v !== null && "message" in v) {
-			return String((v as { message: unknown }).message);
-		}
-	}
-	return undefined;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function extractError(err: any): string {
+	return err?.value?.error ?? err?.value?.message ?? "Something went wrong";
 }
 
 function extractPayload<T>(value: T | null | undefined) {
@@ -76,118 +61,29 @@ function extractPayload<T>(value: T | null | undefined) {
 		?.data || undefined) as T extends { data?: infer P } ? P : undefined;
 }
 
-export async function auth() {
-	try {
-		const { data, error } = await client.profile.session.get();
-		
-		// If there's an error, return undefined to indicate no session
-		if (error) {
-			return undefined;
-		}
-		
-		// Return the data if it contains a user, otherwise undefined
-		return data && "user" in data ? data : undefined;
-	} catch (err) {
-		// If there's an exception (e.g., network error), return undefined
-		return undefined;
-	}
+export async function getSession() {
+	const { data, error } = await client.profile.session.get();
+	if (error || !data || !("user" in data)) return null;
+	return data;
 }
 
-export { auth as getSession };
-
-export async function signIn(formData: FormData) {
-	const email = formData.get("email") as string;
-	const password = formData.get("password") as string;
-
-	if (!email || !password) {
-		return { success: false, error: "Email and password are required" };
-	}
-
-	try {
-		const result = await client.auth["sign-in"].email.post({
-			email,
-			password,
-		});
-		
-		// Check if there's an error in the result
-		if (result.error) {
-			return { success: false, error: extractError(result.error) };
-		}
-		
-		// If we get here, authentication was successful
-		return { success: true, error: undefined };
-	} catch (err) {
-		// Handle network errors or other exceptions
-		return { success: false, error: extractError(err) || "Authentication failed" };
-	}
+export async function signIn(email: string, password: string) {
+	const { error } = await client.auth["sign-in"].email.post({ email, password });
+	if (error) return { success: false, error: extractError(error) };
+	return { success: true };
 }
 
-export async function signUp(formData: FormData) {
-	const first_name = formData.get("first_name") as string;
-	const last_name = formData.get("last_name") as string;
-	const email = formData.get("email") as string;
-	const password = formData.get("password") as string;
-	const confirm_password = formData.get("confirm_password") as string;
-
-	if (!first_name || !last_name || !email || !password) {
-		return { success: false, error: "All fields are required" };
-	}
-
-	if (password !== confirm_password) {
-		return { success: false, error: "Passwords don't match" };
-	}
-
-	try {
-		const result = await client.auth["sign-up"].email.post({
-			name: `${first_name} ${last_name}`,
-			email,
-			password,
-		});
-		
-		// Check if there's an error in the result
-		if (result.error) {
-			return { success: false, error: extractError(result.error) };
-		}
-		
-		// If we get here, registration was successful
-		return { success: true, error: undefined };
-	} catch (err) {
-		// Handle network errors or other exceptions
-		return { success: false, error: extractError(err) || "Registration failed" };
-	}
+export async function signUp(name: string, email: string, password: string, confirmPassword: string) {
+	if (password !== confirmPassword) return { success: false, error: "Passwords don't match" };
+	const { error } = await client.auth["sign-up"].email.post({ name, email, password });
+	if (error) return { success: false, error: extractError(error) };
+	return { success: true };
 }
 
-export async function signOut(params: { redirectTo?: string } = {}) {
-	try {
-		const result = await client.auth["sign-out"].post();
-		
-		// Check if there's an error in the result
-		if (result.error) {
-			return {
-				success: false,
-				error: extractError(result.error),
-				redirectTo: undefined,
-			};
-		}
-		
-		// If we get here, sign out was successful
-		const jar = await cookies();
-		jar.delete("better-auth.session_token");
-		jar.delete("__Secure-better-auth.session_token");
-		
-		return {
-			success: true,
-			error: undefined,
-			redirectTo: params.redirectTo ?? "/",
-		};
-	} catch (err) {
-		// Handle network errors or other exceptions
-		return {
-			success: false,
-			error: extractError(err) || "Sign out failed",
-			redirectTo: undefined,
-		};
-	}
+export async function signOut() {
+	const { error } = await client.auth["sign-out"].post();
+	if (error) return { success: false };
+	return { success: true };
 }
 
 export async function getArtists(

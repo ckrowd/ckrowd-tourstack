@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import { useAuth } from "@/context/AuthContext";
+import { useSession, useLogout } from "@/context/AuthContext";
 
 const NOTIFICATIONS = [
   { id: "n1", icon: "task_alt", color: "text-emerald-500", title: "EOI Approved", body: "Aria Velvet — Accra, Ghana", time: "2h ago" },
@@ -15,7 +15,8 @@ const NOTIFICATIONS = [
 export default function TopNav() {
   const pathname = usePathname();
   const router = useRouter();
-  const { auth, logout } = useAuth();
+  const { data: session } = useSession();
+  const logoutMutation = useLogout();
   const [notifOpen, setNotifOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
 
@@ -38,11 +39,10 @@ export default function TopNav() {
         : "text-slate-500 hover:text-[#FF5A30]"
     }`;
 
-  const userInitial = auth?.email ? auth.email[0].toUpperCase() : "U";
+  const userInitial = session?.user?.email ? session.user.email[0].toUpperCase() : "U";
 
   function handleLogout() {
-    logout();
-    router.push("/");
+    logoutMutation.mutate(undefined, { onSettled: () => router.push("/") });
   }
 
   return (
@@ -89,7 +89,7 @@ export default function TopNav() {
             </div>
 
             {/* Avatar / dropdown */}
-            {auth?.authenticated ? (
+            {session?.user ? (
               <div className="relative ml-2">
                 <button
                   type="button"

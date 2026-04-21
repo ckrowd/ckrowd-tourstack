@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import TopNav from "@/components/TopNav";
 import SideNav from "@/components/SideNav";
-import { useAuth } from "@/context/AuthContext";
 import { getTourstackProfile, updateTourstackProfile } from "@/app/actions";
 
 function Section({
@@ -70,7 +69,6 @@ function Field({
 }
 
 export default function ProfilePage() {
-	const { markProfileComplete } = useAuth();
 	const queryClient = useQueryClient();
 
 	const { data: profileQuery } = useQuery({
@@ -123,7 +121,6 @@ export default function ProfilePage() {
 		onSuccess: () => {
 			setLocalEdits({});
 			void queryClient.invalidateQueries({ queryKey: ["tourstackProfile"] });
-			markProfileComplete();
 		},
 	});
 
