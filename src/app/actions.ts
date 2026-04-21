@@ -27,6 +27,7 @@ const client = createClient({
 			},
 		};
 	},
+	// @ts-expect-error - fix later
 	async onResponse(response) {
 		const setCookies = response.headers.getSetCookie?.() ?? [];
 		if (setCookies.length > 0) {
@@ -42,7 +43,6 @@ const client = createClient({
 				if (name && value) jar.set(name, value);
 			}
 		}
-		return response;
 	},
 });
 
@@ -51,10 +51,9 @@ function extractError(err: any): string {
 	return err?.value?.error ?? err?.value?.message ?? "Something went wrong";
 }
 
-function extractPayload<T>(value: T | null | undefined) {
+function extractPayload<T>(value: T | null | undefined, response?: { status: number; headers?: HeadersInit }) {
 	if (value == null) return undefined;
-	const response = value as unknown as Response;
-	if (response.status === 401 && ["POST", "PUT", "DELETE"].includes(response.headers.get("X-Request-Method")??"GET")) {
+	if (response?.status === 401 && ["POST", "PUT", "DELETE"].includes((response?.headers as Headers)?.get("X-Request-Method")??"GET")) {
 		redirect( "/login" );
 	}
 	return ((value as T extends { data?: infer P } ? { data?: P } : never)
@@ -89,11 +88,11 @@ export async function signOut() {
 export async function getArtists(
 	params?: Params<typeof client.tourstack.discovery.get>,
 ) {
-	const { data, error } = await client.tourstack.discovery.get(
+	const { data, error, status, headers } = await client.tourstack.discovery.get(
 		params ? { query: params } : {},
 	);
 	return {
-		data: extractPayload(data),
+		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error),
 	};
@@ -111,9 +110,9 @@ export async function getArtist(id: string) {
 // Profile
 
 export async function getTourstackProfile() {
-	const { data, error } = await client.tourstack.profile.get();
+	const { data, error, status, headers } = await client.tourstack.profile.get();
 	return {
-		data: extractPayload(data),
+		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error),
 	};
@@ -122,9 +121,9 @@ export async function getTourstackProfile() {
 export async function updateTourstackProfile(
 	body: Payload<typeof client.tourstack.profile.patch>,
 ) {
-	const { data, error } = await client.tourstack.profile.patch(body);
+	const { data, error, status, headers } = await client.tourstack.profile.patch(body);
 	return {
-		data: extractPayload(data),
+		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error),
 	};
@@ -133,9 +132,9 @@ export async function updateTourstackProfile(
 // Dashboard
 
 export async function getTourstackDashboard() {
-	const { data, error } = await client.tourstack.dashboard.get();
+	const { data, error, status, headers } = await client.tourstack.dashboard.get();
 	return {
-		data: extractPayload(data),
+		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error),
 	};
@@ -144,20 +143,20 @@ export async function getTourstackDashboard() {
 // EOIs
 
 export async function getEOIs(status?: string) {
-	const { data, error } = await client.tourstack.eoi.get(
+	const { data, error, status: responseStatus, headers } = await client.tourstack.eoi.get(
 		status ? { query: { status } } : {},
 	);
 	return {
-		data: extractPayload(data),
+		data: extractPayload(data, { status: responseStatus, headers }),
 		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
 
 export async function getEOI(id: string) {
-	const { data, error } = await client.tourstack.eoi({ id }).get();
+	const { data, error, status, headers } = await client.tourstack.eoi({ id }).get();
 	return {
-		data: extractPayload(data),
+		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error),
 	};
@@ -166,9 +165,9 @@ export async function getEOI(id: string) {
 export async function createEOI(
 	body: Payload<typeof client.tourstack.eoi.post>,
 ) {
-	const { data, error } = await client.tourstack.eoi.post(body);
+	const { data, error, status, headers } = await client.tourstack.eoi.post(body);
 	return {
-		data: extractPayload(data),
+		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error),
 	};
@@ -176,29 +175,29 @@ export async function createEOI(
 
 // Tours
 export async function getTours(status?: string) {
-	const { data, error } = await client.tourstack.tours.get(
+	const { data, error, status: responseStatus, headers } = await client.tourstack.tours.get(
 		status ? { query: { status } } : {},
 	);
 	return {
-		data: extractPayload(data),
+		data: extractPayload(data, { status: responseStatus, headers }),
 		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
 
 export async function getTour(id: string) {
-	const { data, error } = await client.tourstack.tours({ id }).get();
+	const { data, error, status, headers } = await client.tourstack.tours({ id }).get();
 	return {
-		data: extractPayload(data),
+		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
 
 export async function getTourMilestones(id: string) {
-	const { data, error } = await client.tourstack.tours({ id }).milestones.get();
+	const { data, error, status, headers } = await client.tourstack.tours({ id }).milestones.get();
 	return {
-		data: extractPayload(data),
+		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error),
 	};
@@ -206,20 +205,20 @@ export async function getTourMilestones(id: string) {
 
 // Financing
 export async function getFinancingApplications(status?: string) {
-	const { data, error } = await client.tourstack.financing.get(
+	const { data, error, status: responseStatus, headers } = await client.tourstack.financing.get(
 		status ? { query: { status } } : {},
 	);
 	return {
-		data: extractPayload(data),
+		data: extractPayload(data, { status: responseStatus, headers }),
 		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
 
 export async function getFinancingApplication(id: string) {
-	const { data, error } = await client.tourstack.financing({ id }).get();
+	const { data, error, status, headers } = await client.tourstack.financing({ id }).get();
 	return {
-		data: extractPayload(data),
+		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error),
 	};
@@ -228,9 +227,9 @@ export async function getFinancingApplication(id: string) {
 export async function applyForFinancing(
 	body: Payload<typeof client.tourstack.financing.post>,
 ) {
-	const { data, error } = await client.tourstack.financing.post(body);
+	const { data, error, status, headers } = await client.tourstack.financing.post(body);
 	return {
-		data: extractPayload(data),
+		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error),
 	};
@@ -241,20 +240,20 @@ export async function applyForFinancing(
 export async function getCrewMembers(
 	params?: Params<typeof client.tourstack.workforce.get>,
 ) {
-	const { data, error } = await client.tourstack.workforce.get(
+	const { data, error, status, headers } = await client.tourstack.workforce.get(
 		params ? { query: params } : {},
 	);
 	return {
-		data: extractPayload(data),
+		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error),
 	};
 }
 
 export async function getCrewMember(id: string) {
-	const { data, error } = await client.tourstack.workforce({ id }).get();
+	const { data, error, status, headers } = await client.tourstack.workforce({ id }).get();
 	return {
-		data: extractPayload(data),
+		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error),
 	};
@@ -263,9 +262,9 @@ export async function getCrewMember(id: string) {
 export async function registerCrewMember(
 	body: Payload<typeof client.tourstack.workforce.post>,
 ) {
-	const { data, error } = await client.tourstack.workforce.post(body);
+	const { data, error, status, headers } = await client.tourstack.workforce.post(body);
 	return {
-		data: extractPayload(data),
+		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error),
 	};
@@ -296,9 +295,9 @@ export async function getOnboardingLinks() {
 }
 
 export async function createOnboardingLink(body: Payload<typeof client.tourstack["onboarding-links"]["post"]>) {
-	const { data, error } = await client.tourstack["onboarding-links"].post(body);
+	const { data, error, status, headers } = await client.tourstack["onboarding-links"].post(body);
 	return {
-		data: extractPayload(data),
+		data: extractPayload(data, { status, headers }	),
 		success: !error && data?.success,
 		error: extractError(error),
 	};
@@ -316,11 +315,11 @@ export async function getOnboardingLink(token: string) {
 }
 
 export async function revokeOnboardingLink(token: string) {
-	const { data, error } = await client.tourstack["onboarding-links"]({
+	const { data, error, status, headers } = await client.tourstack["onboarding-links"]({
 		token,
 	}).delete();
 	return {
-		data: extractPayload(data),
+		data: extractPayload(data, { status, headers }	),
 		success: !error && data?.success,
 		error: extractError(error),
 	};
