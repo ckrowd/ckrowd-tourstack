@@ -536,7 +536,7 @@ function EOIPageContent() {
 	);
 }
 
-export default function EOIPage() {
+export default function EOIPage () {
 	return (
 		<Suspense
 			fallback={
@@ -548,3 +548,4 @@ export default function EOIPage() {
 			<EOIPageContent />
 		</Suspense>
 	);
+}
