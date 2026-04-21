@@ -108,6 +108,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
 				const nextAuth = await refreshAuth();
 				if (!nextAuth) {
+					// If we got here, authentication succeeded but session loading failed
 					throw new Error("Signed in, but failed to load the session");
 				}
 
