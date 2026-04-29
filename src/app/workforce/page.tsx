@@ -1,4 +1,5 @@
 "use client";
+import Footer from "@/components/Footer";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -621,7 +622,8 @@ export default function WorkforcePage() {
 								<span className="font-semibold">workforce@ckrowd.africa</span>
 							</p>
 						</div>
-					</main>
+					  <Footer />
+</main>
 				</div>
 			</div>
 		);
@@ -1630,7 +1632,8 @@ export default function WorkforcePage() {
 							</div>
 						)}
 					</div>
-				</main>
+				  <Footer />
+</main>
 			</div>
 		</div>
 	);

@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
 import TopNav from "@/components/TopNav";
@@ -454,7 +455,8 @@ export default async function ToursPage() {
 							</Link>
 						</aside>
 					</div>
-				</main>
+				  <Footer />
+</main>
 			</div>
 		</div>
 	);

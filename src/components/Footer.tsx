@@ -93,26 +93,7 @@ export default function Footer() {
         <p className="font-[family-name:var(--font-inter)] text-xs uppercase tracking-widest text-slate-500">
           &copy; 2024 Tour Stack by Crowd. All rights reserved.
         </p>
-        <div className="flex gap-6">
-          <a
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Twitter / X"
-            className="text-slate-400 hover:text-[#FF5A30] transition-colors"
-          >
-            <span className="material-symbols-outlined">public</span>
-          </a>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-            className="text-slate-400 hover:text-[#FF5A30] transition-colors"
-          >
-            <span className="material-symbols-outlined">share</span>
-          </a>
-        </div>
+
       </div>
     </footer>
   );

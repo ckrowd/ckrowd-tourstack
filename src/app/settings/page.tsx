@@ -1,4 +1,5 @@
 "use client";
+import Footer from "@/components/Footer";
 
 import { useState } from "react";
 import TopNav from "@/components/TopNav";
@@ -506,7 +507,8 @@ export default function SettingsPage() {
 
           {/* Tab Content */}
           {tabContent[activeTab]}
-        </main>
+          <Footer />
+</main>
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Link from "next/link";
 import TopNav from "@/components/TopNav";
 import FinancingQuickApply from "@/components/FinancingQuickApply";
@@ -370,7 +371,7 @@ export default async function FinancingPage() {
 							How It Works
 						</h2>
 						<div className="relative pl-8">
-							<div className="absolute left-3 top-2 bottom-2 w-px bg-outline-variant/40" />
+							<div className="absolute left-[14px] top-2 bottom-2 w-px bg-outline-variant/40" />
 							<div className="space-y-8">
 								{steps.map((s, i) => (
 									<div key={s.step} className="relative flex gap-6">
@@ -473,7 +474,8 @@ export default async function FinancingPage() {
 						))}
 					</div>
 				</section>
-			</main>
+			  <Footer />
+</main>
 		</div>
 	);
 }

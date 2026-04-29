@@ -1,4 +1,5 @@
 "use client";
+import Footer from "@/components/Footer";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -312,7 +313,7 @@ function ServiceProviderForm({
 							className={inputClass}
 							required
 							value={form.phone}
-							onChange={(e) => setField("phone", e.target.value)}
+							onChange={(e) => setField("phone", e.target.value.replace(/\D/g, ""))}
 						/>
 					</div>
 					<div>
@@ -622,7 +623,7 @@ function ArtMgmtForm({
 							className={inputClass}
 							required
 							value={form.phone}
-							onChange={(e) => setField("phone", e.target.value)}
+							onChange={(e) => setField("phone", e.target.value.replace(/\D/g, ""))}
 						/>
 					</div>
 					<div>
@@ -1269,7 +1270,8 @@ export default function OnboardingPage() {
 								</button>
 							</div>
 						</div>
-					</main>
+					  <Footer />
+</main>
 				</div>
 			</div>
 		);
@@ -1427,7 +1429,8 @@ export default function OnboardingPage() {
 							</div>
 						)}
 					</div>
-				</main>
+				  <Footer />
+</main>
 			</div>
 		</div>
 	);
