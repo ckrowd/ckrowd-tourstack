@@ -153,6 +153,8 @@ function EOIPageContent() {
 		enabled: !!opportunityId,
 	});
 
+	type ArtistData = NonNullable<Awaited<ReturnType<typeof getArtist>>["data"]>;
+
 	const artist = artistQuery?.success 
 		? artistQuery.data 
 		: (!opportunityId ? {
@@ -164,7 +166,7 @@ function EOIPageContent() {
 			tour_end: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
 			markets: "Multiple Territories",
 			fee_min: "TBD"
-		} as any : null);
+		} as unknown as ArtistData : null);
 		
 	const loadError = opportunityId && !artistQuery?.success && !loadingOpportunity
 		? (artistQuery?.error ?? "Unable to load this opportunity.")
