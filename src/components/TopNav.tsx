@@ -74,23 +74,25 @@ export default function TopNav() {
           </div>
 
           <div className="flex items-center gap-4">
-            {/* Notifications */}
-            <div className="relative">
-              <button
-                type="button"
-                aria-label="Open notifications"
-                aria-expanded={notifOpen}
-                onClick={() => setNotifOpen((v) => !v)}
-                className="p-2 hover:bg-slate-50/50 rounded-lg transition-all active:scale-95 relative"
-              >
-                <span className="material-symbols-outlined text-[#494455]">notifications</span>
-                <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#FF5A30] rounded-full" />
-              </button>
-            </div>
-
-            {/* Avatar / dropdown */}
+            {/* User Controls */}
             {session?.user ? (
-              <div className="relative ml-2">
+              <>
+                {/* Notifications */}
+                <div className="relative">
+                  <button
+                    type="button"
+                    aria-label="Open notifications"
+                    aria-expanded={notifOpen}
+                    onClick={() => setNotifOpen((v) => !v)}
+                    className="p-2 hover:bg-slate-50/50 rounded-lg transition-all active:scale-95 relative"
+                  >
+                    <span className="material-symbols-outlined text-[#494455]">notifications</span>
+                    <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#FF5A30] rounded-full" />
+                  </button>
+                </div>
+
+                {/* Avatar / dropdown */}
+                <div className="relative ml-2">
                 <button
                   type="button"
                   aria-label="Open profile menu"
@@ -138,6 +140,7 @@ export default function TopNav() {
                   </>
                 )}
               </div>
+              </>
             ) : (
               <Link
                 href="/login"

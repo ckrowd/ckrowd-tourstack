@@ -1,5 +1,4 @@
 "use client";
-import Footer from "@/components/Footer";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -554,8 +553,7 @@ export default function WorkforcePage() {
 								<span className="font-semibold">workforce@ckrowd.africa</span>
 							</p>
 						</div>
-					  <Footer />
-</main>
+					  </main>
 				</div>
 			</div>
 		);
@@ -569,7 +567,7 @@ export default function WorkforcePage() {
 				<SideNav />
 
 				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-12">
-					<div className="max-w-4xl mx-auto">
+					<div className="w-full">
 						{/* Header */}
 						<header className="mb-10">
 							<div className="flex items-start justify-between gap-4">
@@ -1564,8 +1562,7 @@ export default function WorkforcePage() {
 							</div>
 						)}
 					</div>
-				  <Footer />
-</main>
+				  </main>
 			</div>
 		</div>
 	);

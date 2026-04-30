@@ -1,4 +1,3 @@
-import Footer from "@/components/Footer";
 import Link from "next/link";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
@@ -19,7 +18,7 @@ export default async function FinancingDetailPage({
 			<div className="flex pt-16 h-screen">
 				<SideNav />
 				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
-					<div className="mx-auto max-w-4xl space-y-6">
+					<div className="w-full space-y-6">
 						<div className="flex items-center justify-between gap-3">
 							<div>
 								<p className="text-xs font-bold uppercase tracking-widest text-[#FF5A30]">
@@ -106,8 +105,7 @@ export default async function FinancingDetailPage({
 							</div>
 						)}
 					</div>
-				  <Footer />
-</main>
+				  </main>
 			</div>
 		</div>
 	);
