@@ -46,7 +46,6 @@ const client = createClient({
 	},
 });
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function extractError(err: any): string {
 	return err?.value?.error ?? err?.value?.message ?? "Something went wrong";
 }

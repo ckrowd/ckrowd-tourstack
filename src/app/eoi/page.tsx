@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { Suspense, useState } from "react";
+import Footer from "@/components/Footer";
 import { useSearchParams } from "next/navigation";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { createEOI, getArtist } from "@/app/actions";
@@ -152,12 +153,24 @@ function EOIPageContent() {
 		enabled: !!opportunityId,
 	});
 
-	const artist = artistQuery?.success ? artistQuery.data : null;
-	const loadError = !opportunityId
-		? "Choose an opportunity from discovery to start an application."
-		: !artistQuery?.success && !loadingOpportunity
-			? (artistQuery?.error ?? "Unable to load this opportunity.")
-			: null;
+	type ArtistData = NonNullable<Awaited<ReturnType<typeof getArtist>>["data"]>;
+
+	const artist = artistQuery?.success 
+		? artistQuery.data 
+		: (!opportunityId ? {
+			id: "general",
+			name: "General Expression of Interest",
+			genre: "All Genres",
+			tour_name: "General Application",
+			tour_start: new Date(),
+			tour_end: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
+			markets: "Multiple Territories",
+			fee_min: "TBD"
+		} as unknown as ArtistData : null);
+		
+	const loadError = opportunityId && !artistQuery?.success && !loadingOpportunity
+		? (artistQuery?.error ?? "Unable to load this opportunity.")
+		: null;
 
 	const submitMutation = useMutation({
 		mutationFn: createEOI,
@@ -211,10 +224,12 @@ function EOIPageContent() {
 
 	if (submitted && artist) {
 		return (
-			<div className="bg-[#f6f4ef] text-slate-950 min-h-screen flex">
-				<SideNav />
-				<main className="flex-1 min-h-screen overflow-y-auto px-6 py-6 md:px-12 md:py-10">
-					<div className="mx-auto flex min-h-[calc(100vh-5rem)] max-w-3xl items-center justify-center">
+			<div className="bg-surface text-on-surface">
+				<TopNav />
+				<div className="flex pt-16 h-screen">
+					<SideNav />
+					<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-12">
+						<div className="mx-auto flex min-h-[calc(100vh-5rem)] max-w-3xl items-center justify-center">
 						<div className="w-full rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-sm md:p-12">
 							<div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
 								<span
@@ -247,18 +262,20 @@ function EOIPageContent() {
 							</div>
 						</div>
 					</div>
+					<Footer />
 				</main>
 			</div>
+		</div>
 		);
 	}
 
 	return (
-		<div className="bg-[#f6f4ef] text-slate-950 min-h-screen flex">
-			<SideNav />
-			<main className="flex-1 min-h-screen overflow-y-auto px-6 py-6 md:px-12 md:py-10">
-				<TopNav />
-
-				<div className="mx-auto max-w-5xl pt-20">
+		<div className="bg-surface text-on-surface">
+			<TopNav />
+			<div className="flex pt-16 h-screen">
+				<SideNav />
+				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-12">
+					<div className="mx-auto max-w-5xl">
 					<header className="mb-10">
 						<span className="mb-3 block text-xs font-bold uppercase tracking-[0.3em] text-[#FF5A30]">
 							TourStack - Expression of Interest
@@ -291,20 +308,8 @@ function EOIPageContent() {
 							</Link>
 						</div>
 					) : artist ? (
-						<div className="grid gap-8 xl:grid-cols-[1.25fr_0.75fr]">
+						<div className="max-w-3xl mx-auto">
 							<section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
-								<div className="mb-6 flex flex-wrap gap-2 text-[10px] font-bold uppercase tracking-[0.24em] text-slate-500">
-									<span className="rounded-full bg-slate-100 px-3 py-1 text-slate-700">
-										{artist.genre ?? "General"}
-									</span>
-									<span className="rounded-full bg-slate-100 px-3 py-1 text-slate-700">
-										{artist.tour_start ? artist.tour_start.toDateString() : "Upcoming tour"}
-									</span>
-									<span className="rounded-full bg-slate-100 px-3 py-1 text-slate-700">
-										{artist.markets}
-									</span>
-								</div>
-
 								<div className="mb-8">
 									<h2 className="text-2xl font-black tracking-tight text-slate-950 font-(family-name:--font-manrope)">
 										{artist.name}
@@ -479,60 +484,13 @@ function EOIPageContent() {
 									</div>
 								</form>
 							</section>
-
-							<aside className="space-y-6">
-								<div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-									<p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-500">
-										Artist brief
-									</p>
-									<h3 className="mt-3 text-2xl font-black tracking-tight text-slate-950 font-(family-name:--font-manrope)">
-										{artist.name}
-									</h3>
-									<p className="mt-2 text-sm font-medium text-slate-500">
-										{artist.genre}
-									</p>
-									<p className="mt-4 text-sm leading-6 text-slate-600">
-										{artist.tour_name}
-									</p>
-								</div>
-
-								<div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-									<p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-500">
-										Key facts
-									</p>
-									<div className="mt-4 space-y-4 text-sm text-slate-600">
-										<div>
-											<span className="block text-[10px] font-bold uppercase tracking-[0.24em] text-slate-400">
-												Fee
-											</span>
-											<span className="mt-1 block font-semibold text-slate-900">
-												{artist.fee_min ?? "Budget on request"}
-											</span>
-										</div>
-										<div>
-											<span className="block text-[10px] font-bold uppercase tracking-[0.24em] text-slate-400">
-												Markets
-											</span>
-											<span className="mt-1 block font-semibold text-slate-900">
-												{artist.markets ?? "Not specified"}
-											</span>
-										</div>
-										<div>
-											<span className="block text-[10px] font-bold uppercase tracking-[0.24em] text-slate-400">
-												Tour window
-											</span>
-											<span className="mt-1 block font-semibold text-slate-900">
-												{artist.tour_start ? artist.tour_start.toDateString() : "TBD"} - {artist.tour_end ? artist.tour_end.toDateString() : "TBD"}
-											</span>
-										</div>
-									</div>
-								</div>
-							</aside>
 						</div>
 					) : null}
 				</div>
+				<Footer />
 			</main>
 		</div>
+	</div>
 	);
 }
 
@@ -540,7 +498,7 @@ export default function EOIPage () {
 	return (
 		<Suspense
 			fallback={
-				<div className="flex min-h-screen items-center justify-center bg-[#f6f4ef] text-sm font-medium text-slate-600">
+				<div className="flex min-h-screen items-center justify-center bg-surface-container-low text-sm font-medium text-on-surface-variant">
 					Loading opportunity...
 				</div>
 			}

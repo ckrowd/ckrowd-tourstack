@@ -1,4 +1,5 @@
 "use client";
+import Footer from "@/components/Footer";
 
 import { useMemo, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -202,7 +203,7 @@ export default function ProfilePage() {
 									id="phone"
 									type="tel"
 									value={profile.phone}
-									onChange={set("phone")}
+									onChange={(v) => set("phone")(v.replace(/\D/g, ""))}
 								/>
 								<Field
 									label="Country"
@@ -266,7 +267,8 @@ export default function ProfilePage() {
 							</button>
 						</div>
 					</div>
-				</main>
+				  <Footer />
+</main>
 			</div>
 		</div>
 	);

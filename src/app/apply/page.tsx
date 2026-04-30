@@ -1,4 +1,5 @@
 "use client";
+import Footer from "@/components/Footer";
 
 import Link from "next/link";
 import { useState, useRef } from "react";
@@ -304,7 +305,8 @@ export default function ApplyPage() {
 								</Link>
 							</div>
 						</div>
-					</main>
+					  <Footer />
+</main>
 				</div>
 			</div>
 		);
@@ -420,7 +422,7 @@ export default function ApplyPage() {
 													placeholder="+234 800 000 0000"
 													className={inputClass}
 													value={form.phone}
-													onChange={(e) => set("phone", e.target.value)}
+													onChange={(e) => set("phone", e.target.value.replace(/\D/g, ""))}
 													required
 												/>
 											</div>
@@ -1048,7 +1050,8 @@ export default function ApplyPage() {
 							</div>
 						)}
 					</div>
-				</main>
+				  <Footer />
+</main>
 			</div>
 		</div>
 	);

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="w-full py-12 px-6 md:px-12 border-t border-slate-200 bg-slate-50">
+    <footer className="w-full mt-16 py-12 px-6 md:px-12 border-t border-slate-200 bg-slate-50">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8 items-start max-w-7xl mx-auto">
         <div className="md:col-span-1">
           <div className="font-[family-name:var(--font-manrope)] font-bold text-slate-900 text-xl mb-4">
@@ -93,26 +93,7 @@ export default function Footer() {
         <p className="font-[family-name:var(--font-inter)] text-xs uppercase tracking-widest text-slate-500">
           &copy; 2024 Tour Stack by Crowd. All rights reserved.
         </p>
-        <div className="flex gap-6">
-          <a
-            href="https://twitter.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Twitter / X"
-            className="text-slate-400 hover:text-[#FF5A30] transition-colors"
-          >
-            <span className="material-symbols-outlined">public</span>
-          </a>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Instagram"
-            className="text-slate-400 hover:text-[#FF5A30] transition-colors"
-          >
-            <span className="material-symbols-outlined">share</span>
-          </a>
-        </div>
+
       </div>
     </footer>
   );

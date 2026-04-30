@@ -1,4 +1,5 @@
 "use client";
+import Footer from "@/components/Footer";
 
 import Link from "next/link";
 import { useState } from "react";
@@ -248,9 +249,6 @@ const defaultForm: FormData = {
 const inputClass =
 	"w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm";
 
-const selectClass =
-	"w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm appearance-none";
-
 function Label({
 	htmlFor,
 	children,
@@ -270,71 +268,6 @@ function Label({
 				<span className="ml-1 font-normal italic text-xs">(optional)</span>
 			)}
 		</label>
-	);
-}
-
-function SelectGroup({
-	options,
-	value,
-	onChange,
-	multi,
-	cols = 2,
-}: {
-	options: string[];
-	value: string | string[];
-	onChange: (v: string | string[]) => void;
-	multi?: boolean;
-	cols?: number;
-}) {
-	function toggle(opt: string) {
-		if (multi) {
-			const arr = value as string[];
-			onChange(
-				arr.includes(opt) ? arr.filter((x) => x !== opt) : [...arr, opt],
-			);
-		} else {
-			onChange(value === opt ? "" : opt);
-		}
-	}
-	function isChecked(opt: string) {
-		return multi ? (value as string[]).includes(opt) : value === opt;
-	}
-	return (
-		<div
-			className={`grid gap-3 ${cols === 3 ? "grid-cols-1 sm:grid-cols-3" : "grid-cols-1 sm:grid-cols-2"}`}
-		>
-			{options.map((opt) => {
-				const checked = isChecked(opt);
-				return (
-					<button
-						key={opt}
-						type="button"
-						onClick={() => toggle(opt)}
-						className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold border transition-all text-left ${
-							checked
-								? "bg-[#FF5A30]/10 border-[#FF5A30] text-[#FF5A30]"
-								: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A30]/40"
-						}`}
-					>
-						<span
-							className={`w-5 h-5 rounded flex items-center justify-center shrink-0 border-2 transition-colors ${
-								checked ? "bg-[#FF5A30] border-[#FF5A30]" : "border-current"
-							}`}
-						>
-							{checked && (
-								<span
-									className="material-symbols-outlined text-white"
-									style={{ fontSize: 12 }}
-								>
-									check
-								</span>
-							)}
-						</span>
-						{opt}
-					</button>
-				);
-			})}
-		</div>
 	);
 }
 
@@ -621,7 +554,8 @@ export default function WorkforcePage() {
 								<span className="font-semibold">workforce@ckrowd.africa</span>
 							</p>
 						</div>
-					</main>
+					  <Footer />
+</main>
 				</div>
 			</div>
 		);
@@ -1630,7 +1564,8 @@ export default function WorkforcePage() {
 							</div>
 						)}
 					</div>
-				</main>
+				  <Footer />
+</main>
 			</div>
 		</div>
 	);

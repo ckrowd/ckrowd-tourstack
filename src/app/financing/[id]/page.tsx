@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Link from "next/link";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
@@ -105,7 +106,8 @@ export default async function FinancingDetailPage({
 							</div>
 						)}
 					</div>
-				</main>
+				  <Footer />
+</main>
 			</div>
 		</div>
 	);

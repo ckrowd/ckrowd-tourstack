@@ -1,4 +1,5 @@
 "use client";
+import Footer from "@/components/Footer";
 
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -213,7 +214,8 @@ export default function OnboardingLinksPage() {
 							)}
 						</section>
 					</div>
-				</main>
+				  <Footer />
+</main>
 			</div>
 		</div>
 	);

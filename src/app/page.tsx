@@ -32,7 +32,7 @@ export default function LandingPage() {
       <TopNav />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center pt-16 overflow-hidden">
+      <section className="relative min-h-[100dvh] flex items-center py-24 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             alt="High-energy live concert crowd at night with vibrant stage lights and raised hands"
@@ -69,17 +69,17 @@ export default function LandingPage() {
               from discovery to execution.
             </p>
 
-            <div className="flex flex-wrap gap-4 pt-4">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-4 pt-4">
               <Link
                 href="/login"
-                className="px-8 py-4 bg-[#FF5A30] text-white rounded-xl font-bold flex items-center gap-3 shadow-2xl shadow-[#FF5A30]/40 hover:scale-[1.02] transition-transform active:scale-[0.98]"
+                className="w-full sm:w-auto justify-center px-6 md:px-8 py-3 md:py-4 bg-[#FF5A30] text-white rounded-xl font-bold flex items-center gap-3 shadow-2xl shadow-[#FF5A30]/40 hover:scale-[1.02] transition-transform active:scale-[0.98]"
               >
                 Browse Artistes &amp; Tours
                 <span className="material-symbols-outlined">arrow_forward</span>
               </Link>
               <Link
                 href="/login"
-                className="px-8 py-4 glass-effect bg-white/10 text-white border border-white/20 rounded-xl font-bold hover:bg-white/20 transition-all"
+                className="w-full sm:w-auto justify-center text-center flex items-center px-6 md:px-8 py-3 md:py-4 glass-effect bg-white/10 text-white border border-white/20 rounded-xl font-bold hover:bg-white/20 transition-all"
               >
                 Promoter Dashboard
               </Link>

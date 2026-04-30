@@ -1,7 +1,9 @@
 "use client";
+import Footer from "@/components/Footer";
 import { useState } from "react";
 import Link from "next/link";
 import TopNav from "@/components/TopNav";
+import StepForm from "@/components/StepForm";
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 
@@ -364,7 +366,7 @@ export default function InsurancePage() {
                     <p className="font-(family-name:--font-manrope) font-bold text-white">{current.label} — Onboarding</p>
                   </div>
                   <div className="relative pl-10 pr-4 py-4 flex flex-col gap-0">
-                    <div className="absolute left-6 top-6 bottom-6 w-px bg-outline-variant/30" />
+                    <div className="absolute left-[38px] top-6 bottom-6 w-px bg-outline-variant/30" />
                     {current.steps.map((step, i) => (
                       <button
                         key={step.id}
@@ -382,7 +384,7 @@ export default function InsurancePage() {
                             <span className="material-symbols-outlined text-sm">check</span>
                           ) : step.id}
                         </div>
-                        <div>
+                        <div className="pl-6">
                           <p className={`text-sm font-bold font-(family-name:--font-manrope) ${activeStep === step.id ? "text-[#FF5A30]" : "text-on-surface"}`}>{step.label}</p>
                           <p className="text-xs text-on-surface-variant">Step {step.id} of {current.steps.length}</p>
                         </div>
@@ -430,6 +432,13 @@ export default function InsurancePage() {
                         </div>
                       </div>
                       <p className="text-on-surface-variant leading-relaxed mb-8">{step.detail}</p>
+                      
+                      <form onSubmit={(e) => {
+                        e.preventDefault();
+                        if (activeStep < current.steps.length) setActiveStep(activeStep + 1);
+                        else setActiveTab("profile");
+                      }}>
+                        <StepForm stakeholderId={current.id} stepId={step.id} />
 
                       {step.id === 4 && (
                         <div className="bg-green-50 border border-green-200 rounded-xl p-5 mb-6 flex gap-4 items-start">
@@ -453,21 +462,22 @@ export default function InsurancePage() {
 
                       <div className="flex gap-3">
                         {activeStep > 1 && (
-                          <button onClick={() => setActiveStep(activeStep - 1)} className="px-6 py-2.5 rounded-xl border border-outline-variant text-sm font-bold text-on-surface hover:bg-surface-container-low transition-all">
+                          <button type="button" onClick={() => setActiveStep(activeStep - 1)} className="px-6 py-2.5 rounded-xl border border-outline-variant text-sm font-bold text-on-surface hover:bg-surface-container-low transition-all">
                             ← Previous
                           </button>
                         )}
                         {activeStep < current.steps.length && (
-                          <button onClick={() => setActiveStep(activeStep + 1)} className="px-6 py-2.5 rounded-xl bg-[#FF5A30] text-white text-sm font-bold hover:opacity-90 transition-all shadow-lg shadow-[#FF5A30]/20">
+                          <button type="submit" className="px-6 py-2.5 rounded-xl bg-[#FF5A30] text-white text-sm font-bold hover:opacity-90 transition-all shadow-lg shadow-[#FF5A30]/20">
                             Continue → Step {activeStep + 1}
                           </button>
                         )}
                         {activeStep === current.steps.length && (
-                          <button onClick={() => setActiveTab("profile")} className="px-6 py-2.5 rounded-xl bg-green-600 text-white text-sm font-bold hover:opacity-90 transition-all">
+                          <button type="submit" className="px-6 py-2.5 rounded-xl bg-green-600 text-white text-sm font-bold hover:opacity-90 transition-all">
                             ✓ Complete — View Coverage
                           </button>
                         )}
                       </div>
+                      </form>
                     </div>
 
                     {/* Progress bar */}
@@ -601,7 +611,7 @@ export default function InsurancePage() {
                 <div className="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/10 shadow-sm">
                   <h3 className="font-(family-name:--font-manrope) font-bold mb-5">Certification Pathway</h3>
                   <div className="relative pl-8 flex flex-col gap-0">
-                    <div className="absolute left-3 top-2 bottom-2 w-px bg-outline-variant/30" />
+                    <div className="absolute left-[30px] top-2 bottom-2 w-px bg-outline-variant/30" />
                     {current.steps.map((step, i) => (
                       <div key={step.id} className="relative flex gap-4 py-3">
                         <div className={`absolute -left-4 w-7 h-7 rounded-full flex items-center justify-center text-xs font-black border-2 shrink-0 ${
@@ -609,7 +619,7 @@ export default function InsurancePage() {
                         }`}>
                           {i === 0 ? <span className="material-symbols-outlined text-sm">check</span> : step.id}
                         </div>
-                        <div className="flex-1">
+                        <div className="flex-1 pl-6">
                           <div className="flex items-center justify-between gap-2">
                             <p className="text-sm font-bold font-(family-name:--font-manrope)">{step.label}</p>
                             <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full ${i === 0 ? "bg-green-100 text-green-700" : "bg-surface-container text-on-surface-variant"}`}>
@@ -697,7 +707,8 @@ export default function InsurancePage() {
           </div>
         )}
 
-      </main>
+        <Footer />
+</main>
     </div>
   );
 }
