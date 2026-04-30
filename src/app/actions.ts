@@ -361,3 +361,14 @@ export async function getAdminTours(status?: string) {
 		error: extractError(error),
 	};
 }
+
+export async function createAdminTour(
+	body: Payload<typeof client.tourstack.admin.tours.post>,
+) {
+	const { data, error, status, headers } = await client.tourstack.admin.tours.post(body);
+	return {
+		data: extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
