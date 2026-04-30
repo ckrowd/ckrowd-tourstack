@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient } from "@ckrowd/ckrowd-prisma";
+import { extractResponseCookies } from "@ckrowd/ckrowd-prisma/utils";
 
 export type Params<T extends (...args: any) => any> = NonNullable<
 	Parameters<T>[0]
@@ -29,18 +30,11 @@ const client = createClient({
 	},
 	// @ts-expect-error - fix later
 	async onResponse(response) {
-		const setCookies = response.headers.getSetCookie?.() ?? [];
-		if (setCookies.length > 0) {
+		const responseCookies = extractResponseCookies(response);
+		if (responseCookies.length > 0) {
 			const jar = await cookies();
-			for (const cookieStr of setCookies) {
-				const parts = cookieStr.split(";").map((p) => p.trim());
-				const nameValue = parts[0];
-				if (!nameValue) continue;
-				const eqIdx = nameValue.indexOf("=");
-				if (eqIdx === -1) continue;
-				const name = nameValue.slice(0, eqIdx).trim();
-				const value = nameValue.slice(eqIdx + 1).trim();
-				if (name && value) jar.set(name, value);
+			for (const cookie of responseCookies) {
+				jar.set(cookie.name, cookie.value, cookie.options);
 			}
 		}
 	},
