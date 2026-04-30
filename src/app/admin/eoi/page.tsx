@@ -174,7 +174,7 @@ export default async function AdminEOIPage() {
                     <span className="text-xs font-bold text-on-surface-variant w-20 shrink-0">
                       Match Score
                     </span>
-                    <div className="flex-1 max-w-sm">
+                    <div className="flex-1">
                       <MatchBar score={matchScore} />
                     </div>
                   </div>
@@ -192,7 +192,7 @@ export default async function AdminEOIPage() {
                     </div>
                   )}
                   {eoi.flag_note != null && (
-                    <div className="flex items-center gap-2 px-3 py-1.5 bg-red-50 rounded-lg text-xs text-red-700 font-semibold max-w-fit">
+                    <div className="flex items-center gap-2 px-3 py-1.5 bg-red-50 rounded-lg text-xs text-red-700 font-semibold">
                       <span className="material-symbols-outlined text-xs text-red-500">
                         flag
                       </span>

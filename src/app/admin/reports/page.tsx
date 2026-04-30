@@ -29,7 +29,7 @@ export default function AdminReportsPage() {
         <h2 className="text-2xl font-(family-name:--font-manrope) font-black text-on-surface mb-2">
           Reports Dashboard Coming Soon
         </h2>
-        <p className="text-on-surface-variant max-w-md mx-auto">
+        <p className="text-on-surface-variant">
           We are currently aggregating data across your active tour projects. 
           Detailed financial breakdowns, ticket sale projections, and risk analysis will be available here shortly.
         </p>

@@ -140,7 +140,7 @@ function Stepper({ current }: { current: number }) {
 								)}
 							</div>
 							<span
-								className={`mt-2 text-[10px] font-bold uppercase tracking-wider text-center max-w-16 leading-tight ${
+								className={`mt-2 text-[10px] font-bold uppercase tracking-wider text-center  leading-tight ${
 									active
 										? "text-[#FF5A30]"
 										: done
@@ -261,8 +261,8 @@ export default function ApplyPage() {
 				<div className="flex pt-16 h-screen">
 					<SideNav />
 					<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-12 flex items-center justify-center">
-						<div className="text-center max-w-lg">
-							<div className="w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-6 bg-[#FF5A30]/10">
+						<div className="text-center">
+							<div className="w-24 h-24 rounded-full flex items-center justify-center mb-6 bg-[#FF5A30]/10">
 								<span
 									className="material-symbols-outlined text-[#FF5A30] text-5xl"
 									style={{ fontVariationSettings: "'FILL' 1" }}

@@ -66,7 +66,7 @@ export default function CreateTourPage() {
         </div>
       </div>
 
-      <div className="bg-surface-container-lowest rounded-2xl p-6 md:p-8 shadow-sm max-w-3xl">
+      <div className="bg-surface-container-lowest rounded-2xl p-6 md:p-8 shadow-sm">
         <div className="flex items-center gap-2 mb-8">
           <span className="material-symbols-outlined text-[#FF5A30]">
             add_circle

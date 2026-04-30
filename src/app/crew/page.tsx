@@ -348,7 +348,7 @@ function Stepper({ current }: { current: number }) {
 								)}
 							</div>
 							<span
-								className={`mt-2 text-[10px] font-bold uppercase tracking-wider text-center max-w-16 leading-tight ${
+								className={`mt-2 text-[10px] font-bold uppercase tracking-wider text-center  leading-tight ${
 									active
 										? "text-[#FF5A30]"
 										: done
@@ -419,13 +419,13 @@ function ScoreGauge({ score, max = 145 }: { score: number; max?: number }) {
 				</div>
 			</div>
 
-			<div className="mt-4 h-2 bg-surface-container-highest rounded-full overflow-hidden max-w-xs mx-auto">
+			<div className="mt-4 h-2 bg-surface-container-highest rounded-full overflow-hidden">
 				<div
 					className={`h-full rounded-full transition-all duration-700 ${barColor}`}
 					style={{ width: `${pct}%` }}
 				/>
 			</div>
-			<div className="flex justify-between text-[10px] text-on-surface-variant font-semibold mt-1 max-w-xs mx-auto">
+			<div className="flex justify-between text-[10px] text-on-surface-variant font-semibold mt-1">
 				<span>0</span>
 				<span>50</span>
 				<span>70</span>
@@ -470,7 +470,7 @@ export default function CrewPage() {
 				<div className="flex pt-16 h-screen">
 					<SideNav />
 					<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-12 flex items-center justify-center">
-						<div className="text-center max-w-lg">
+						<div className="text-center">
 							<ScoreGauge score={wcs.total} />
 							<div className="mt-8 mb-4">
 								<h1 className="text-3xl font-extrabold tracking-tight text-on-surface mb-2 font-(family-name:--font-manrope)">
