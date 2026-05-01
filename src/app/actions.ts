@@ -297,8 +297,9 @@ export async function createOnboardingLink(body: Payload<typeof client.tourstack
 }
 
 export async function getOnboardingLink(token: string) {
+	const apiUrl = process.env.API_URL ?? "https://gateway.ckrowd.com";
 	const res = await fetch(
-		`${process.env.API_URL}/tourstack/onboarding-links/${token}`
+		`${apiUrl}/tourstack/onboarding-links/${token}`
 	);
 	const data = await res.json();
 	return {
