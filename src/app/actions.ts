@@ -297,13 +297,14 @@ export async function createOnboardingLink(body: Payload<typeof client.tourstack
 }
 
 export async function getOnboardingLink(token: string) {
-	const { data, error } = await client.tourstack["onboarding-links"]({
-		token,
-	}).get();
+	const res = await fetch(
+		`${process.env.API_URL}/tourstack/onboarding-links/${token}`
+	);
+	const data = await res.json();
 	return {
-		data: extractPayload(data),
-		success: !error && data?.success,
-		error: extractError(error),
+		data: data?.data,
+		success: res.ok && data?.success,
+		error: data?.error ?? null,
 	};
 }
 
