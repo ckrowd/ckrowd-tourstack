@@ -1,5 +1,4 @@
 "use client";
-import Footer from "@/components/Footer";
 
 import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -48,7 +47,7 @@ export default function OnboardingLinksPage() {
 			<div className="flex pt-16 h-screen">
 				<SideNav />
 				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
-					<div className="mx-auto max-w-5xl space-y-8">
+					<div className="w-full space-y-8">
 						<header>
 							<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
 								Onboarding Links
@@ -214,8 +213,7 @@ export default function OnboardingLinksPage() {
 							)}
 						</section>
 					</div>
-				  <Footer />
-</main>
+				  </main>
 			</div>
 		</div>
 	);

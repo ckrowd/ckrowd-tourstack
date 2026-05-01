@@ -1,5 +1,4 @@
 "use client";
-import Footer from "@/components/Footer";
 
 import { useState } from "react";
 import Link from "next/link";
@@ -1270,8 +1269,7 @@ export default function OnboardingPage() {
 								</button>
 							</div>
 						</div>
-					  <Footer />
-</main>
+					  </main>
 				</div>
 			</div>
 		);
@@ -1285,7 +1283,7 @@ export default function OnboardingPage() {
 				<SideNav />
 
 				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10">
-					<div className="max-w-4xl mx-auto">
+					<div className="w-full">
 						{/* Header */}
 						<header className="mb-8">
 							<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-3">
@@ -1429,8 +1427,7 @@ export default function OnboardingPage() {
 							</div>
 						)}
 					</div>
-				  <Footer />
-</main>
+				  </main>
 			</div>
 		</div>
 	);

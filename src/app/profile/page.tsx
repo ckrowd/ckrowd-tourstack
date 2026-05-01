@@ -1,5 +1,4 @@
 "use client";
-import Footer from "@/components/Footer";
 
 import { useMemo, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -267,8 +266,7 @@ export default function ProfilePage() {
 							</button>
 						</div>
 					</div>
-				  <Footer />
-</main>
+				  </main>
 			</div>
 		</div>
 	);

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import Footer from "@/components/Footer";
+
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 import {
@@ -551,10 +551,7 @@ export default async function DashboardPage() {
 						</div>
 					</div>
 
-					<div className="mt-16">
-						<Footer />
-					</div>
-				</main>
+					</main>
 			</div>
 		</div>
 	);

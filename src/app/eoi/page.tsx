@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Suspense, useState } from "react";
-import Footer from "@/components/Footer";
+
 import { useSearchParams } from "next/navigation";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { createEOI, getArtist } from "@/app/actions";
@@ -262,8 +262,7 @@ function EOIPageContent() {
 							</div>
 						</div>
 					</div>
-					<Footer />
-				</main>
+					</main>
 			</div>
 		</div>
 		);
@@ -275,7 +274,7 @@ function EOIPageContent() {
 			<div className="flex pt-16 h-screen">
 				<SideNav />
 				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-12">
-					<div className="mx-auto max-w-5xl">
+					<div className="w-full">
 					<header className="mb-10">
 						<span className="mb-3 block text-xs font-bold uppercase tracking-[0.3em] text-[#FF5A30]">
 							TourStack - Expression of Interest
@@ -308,7 +307,7 @@ function EOIPageContent() {
 							</Link>
 						</div>
 					) : artist ? (
-						<div className="max-w-3xl mx-auto">
+						<div className="w-full">
 							<section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
 								<div className="mb-8">
 									<h2 className="text-2xl font-black tracking-tight text-slate-950 font-(family-name:--font-manrope)">
@@ -487,8 +486,7 @@ function EOIPageContent() {
 						</div>
 					) : null}
 				</div>
-				<Footer />
-			</main>
+				</main>
 		</div>
 	</div>
 	);
