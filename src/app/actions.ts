@@ -24,7 +24,6 @@ const client = createClient({
 			...options,
 			headers: {
 				...(options.headers as Record<string, string>),
-				"x-app-origin": "tourstack",
 				Cookie: cookieString,
 			},
 		};
