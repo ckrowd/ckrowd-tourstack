@@ -229,9 +229,9 @@ function EOIPageContent() {
 				<div className="flex pt-16 h-screen">
 					<SideNav />
 					<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-12">
-						<div className="mx-auto flex min-h-[calc(100vh-5rem)] max-w-3xl items-center justify-center">
+						<div className="flex min-h-[calc(100vh-5rem)] items-center justify-center">
 						<div className="w-full rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-sm md:p-12">
-							<div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+							<div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
 								<span
 									className="material-symbols-outlined text-4xl"
 									style={{ fontVariationSettings: "'FILL' 1" }}
@@ -242,7 +242,7 @@ function EOIPageContent() {
 							<h1 className="text-3xl font-black tracking-tight text-slate-950 font-(family-name:--font-manrope)">
 								EOI submitted.
 							</h1>
-							<p className="mx-auto mt-4 max-w-xl text-sm leading-6 text-slate-600">
+							<p className="mt-4 text-sm leading-6 text-slate-600">
 								Your application for {artist.name} has been received. The Ckrowd
 								team will review it and respond within 48 hours.
 							</p>
@@ -282,7 +282,7 @@ function EOIPageContent() {
 						<h1 className="text-4xl font-black tracking-tight text-slate-950 md:text-5xl font-(family-name:--font-manrope)">
 							Apply for a live opportunity.
 						</h1>
-						<p className="mt-5 max-w-3xl text-lg leading-relaxed text-slate-600">
+						<p className="mt-5 text-lg leading-relaxed text-slate-600">
 							Complete the short application below and submit it directly
 							through the package apply endpoint.
 						</p>

@@ -363,7 +363,7 @@ function SecurityTab() {
   return (
     <div className="space-y-6">
       <Section title="Change Password">
-        <div className="space-y-4 max-w-md">
+        <div className="space-y-4">
           <Field label="Current Password" id="cur-pw" type="password" />
           <Field label="New Password" id="new-pw" type="password" hint="Minimum 8 characters with at least one number and symbol." />
           <Field label="Confirm New Password" id="confirm-pw" type="password" />
