@@ -1,24 +1,35 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { Link, usePathname, useRouter } from "@/i18n/routing";
 import { useState } from "react";
 import { useSession, useLogout } from "@/context/AuthContext";
+import { useTranslations, useLocale } from 'next-intl';
 
-const NOTIFICATIONS = [
-  { id: "n1", icon: "task_alt", color: "text-emerald-500", title: "EOI Approved", body: "Aria Velvet — Accra, Ghana", time: "2h ago" },
-  { id: "n2", icon: "edit_note", color: "text-[#FF5A30]", title: "Revision Requested", body: "Frequency Shift — budget too low", time: "Yesterday" },
-  { id: "n3", icon: "send", color: "text-blue-500", title: "EOI Submitted", body: "Vanguard Echo — pending review", time: "3 days ago" },
-];
+
 
 export default function TopNav() {
   const pathname = usePathname();
   const router = useRouter();
+  const locale = useLocale();
   const { data: session } = useSession();
   const logoutMutation = useLogout();
   const [notifOpen, setNotifOpen] = useState(false);
   const [profileOpen, setProfileOpen] = useState(false);
+  const t = useTranslations('TopNav');
+  const tCommon = useTranslations('Common');
+
+  // Since the raw data from JSON might not have all fields (icon, color), I'll map them.
+  const staticNotifs = [
+    { id: "n1", icon: "task_alt", color: "text-emerald-500" },
+    { id: "n2", icon: "edit_note", color: "text-[#FF5A30]" },
+    { id: "n3", icon: "send", color: "text-blue-500" },
+  ];
+  const translatedNotifications = (t.raw('notificationsList') as { title: string; body: string; time: string }[]).map((n, i) => ({
+    ...n,
+    ...staticNotifs[i],
+    id: staticNotifs[i].id
+  }));
 
   const SIDEBAR_ROUTES = ["/dashboard", "/tours", "/eoi", "/onboarding", "/stakeholders", "/profile", "/settings", "/workforce", "/crew"];
   const activeLink =
@@ -45,6 +56,11 @@ export default function TopNav() {
     logoutMutation.mutate(undefined, { onSettled: () => router.push("/") });
   }
 
+  const toggleLocale = () => {
+    const nextLocale = locale === 'en' ? 'fr' : 'en';
+    router.replace(pathname, { locale: nextLocale });
+  };
+
   return (
     <>
       <header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-orange-100/10 shadow-sm">
@@ -53,32 +69,40 @@ export default function TopNav() {
             <Link href="/" className="flex items-center gap-2.5">
               <Image src="/ckrowd-logo.png" alt="Ckrowd logo" width={36} height={36} />
               <div className="flex flex-col leading-tight">
-                <span className="text-lg font-black tracking-tight text-[#FF5A30] font-(family-name:--font-manrope)">Tourstack</span>
-                <span className="text-[10px] font-semibold text-black font-(family-name:--font-manrope)">by Ckrowd</span>
+                <span className="text-lg font-black tracking-tight text-[#FF5A30] font-(family-name:--font-manrope)">{tCommon('brandName')}</span>
+                <span className="text-[10px] font-semibold text-black font-(family-name:--font-manrope)">{tCommon('brandBy')}</span>
               </div>
             </Link>
             <nav className="hidden md:flex items-center gap-6">
               <Link href="/dashboard" className={linkClass("platform")}>
-                Dashboard
+                {t('dashboard')}
               </Link>
               <Link href="/discovery" className={linkClass("discovery")}>
-                Discovery
+                {t('discovery')}
               </Link>
               <Link href="/financing" className={linkClass("financing")}>
-                Financing
+                {t('financing')}
               </Link>
               <Link href="/insurance" className={linkClass("insurance")}>
-                Insurance
+                {t('insurance')}
               </Link>
             </nav>
           </div>
 
           <div className="flex items-center gap-4">
+            {/* Locale Switcher */}
+            <button
+              onClick={toggleLocale}
+              className="text-xs font-bold px-2 py-1 rounded-md border border-slate-200 hover:bg-slate-50 transition-colors uppercase"
+            >
+              {locale === 'en' ? 'FR' : 'EN'}
+            </button>
+
             {/* Notifications */}
             <div className="relative">
               <button
                 type="button"
-                aria-label="Open notifications"
+                aria-label={t('openNotifications')}
                 aria-expanded={notifOpen}
                 onClick={() => setNotifOpen((v) => !v)}
                 className="p-2 hover:bg-slate-50/50 rounded-lg transition-all active:scale-95 relative"
@@ -93,7 +117,7 @@ export default function TopNav() {
               <div className="relative ml-2">
                 <button
                   type="button"
-                  aria-label="Open profile menu"
+                  aria-label={t('openProfileMenu')}
                   aria-expanded={profileOpen}
                   onClick={() => setProfileOpen((v) => !v)}
                   className="h-8 w-8 rounded-full bg-[#FF5A30] flex items-center justify-center text-white text-xs font-bold select-none hover:opacity-90 transition-opacity active:scale-95"
@@ -105,7 +129,7 @@ export default function TopNav() {
                   <>
                     <button
                       type="button"
-                      aria-label="Close profile menu"
+                      aria-label={t('closeProfileMenu')}
                       className="fixed inset-0 z-40 w-full h-full cursor-default bg-transparent border-none"
                       onClick={() => setProfileOpen(false)}
                     />
@@ -116,7 +140,7 @@ export default function TopNav() {
                         className="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors font-(family-name:--font-manrope)"
                       >
                         <span className="material-symbols-outlined text-base text-[#494455]">person</span>
-                        Profile
+                        {tCommon('profile')}
                       </Link>
                       <Link
                         href="/settings"
@@ -124,7 +148,7 @@ export default function TopNav() {
                         className="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors font-(family-name:--font-manrope)"
                       >
                         <span className="material-symbols-outlined text-base text-[#494455]">settings</span>
-                        Settings
+                        {tCommon('settings')}
                       </Link>
                       <button
                         type="button"
@@ -132,7 +156,7 @@ export default function TopNav() {
                         className="flex items-center gap-3 w-full px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors font-(family-name:--font-manrope)"
                       >
                         <span className="material-symbols-outlined text-base text-[#494455]">logout</span>
-                        Sign out
+                        {tCommon('signOut')}
                       </button>
                     </div>
                   </>
@@ -143,7 +167,7 @@ export default function TopNav() {
                 href="/login"
                 className="ml-2 px-4 py-2 bg-[#FF5A30] text-white text-sm font-bold rounded-xl hover:opacity-90 transition-opacity"
               >
-                Sign in
+                {tCommon('signIn')}
               </Link>
             )}
           </div>
@@ -156,7 +180,7 @@ export default function TopNav() {
           {/* Backdrop */}
           <button
             type="button"
-            aria-label="Close notifications"
+            aria-label={t('closeNotifications')}
             className="fixed inset-0 z-40 w-full h-full cursor-default bg-transparent border-none"
             onClick={() => setNotifOpen(false)}
           />
@@ -164,23 +188,23 @@ export default function TopNav() {
           <div
             className="fixed top-16 right-4 md:right-12 z-50 w-80 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden"
             role="dialog"
-            aria-label="Notifications"
+            aria-label={t('notifications')}
           >
             <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100">
               <h3 className="font-(family-name:--font-manrope) font-bold text-sm text-slate-900">
-                Notifications
+                {t('notifications')}
               </h3>
               <button
                 type="button"
                 onClick={() => setNotifOpen(false)}
                 className="text-slate-400 hover:text-slate-600 transition-colors"
-                aria-label="Close notifications"
+                aria-label={t('closeNotifications')}
               >
                 <span className="material-symbols-outlined text-sm">close</span>
               </button>
             </div>
             <ul className="divide-y divide-slate-50">
-              {NOTIFICATIONS.map((n) => (
+              {translatedNotifications.map((n) => (
                 <li key={n.id} className="flex items-start gap-3 px-5 py-4 hover:bg-slate-50 transition-colors">
                   <span className={`material-symbols-outlined text-lg mt-0.5 shrink-0 ${n.color}`}>
                     {n.icon}
@@ -199,7 +223,7 @@ export default function TopNav() {
                 className="text-xs font-semibold text-[#FF5A30] hover:underline"
                 onClick={() => setNotifOpen(false)}
               >
-                Mark all as read
+                {t('markAllAsRead')}
               </button>
             </div>
           </div>

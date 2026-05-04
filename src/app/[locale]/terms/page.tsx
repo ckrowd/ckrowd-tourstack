@@ -1,0 +1,60 @@
+import Link from "next/link";
+import TopNav from "@/components/TopNav";
+import Footer from "@/components/Footer";
+import { getTranslations, setRequestLocale } from 'next-intl/server';
+
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export default async function TermsPage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
+  const t = await getTranslations('TermsPage');
+
+  return (
+    <div className="bg-surface text-on-surface min-h-screen flex flex-col">
+      <TopNav />
+      <main className="flex-1 pt-32 pb-20 px-6">
+        <div className="max-w-3xl mx-auto">
+          <span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+            {t('legal')}
+          </span>
+          <h1 className="text-5xl font-black font-(family-name:--font-manrope) tracking-tight mb-4">
+            {t('title')}
+          </h1>
+          <p className="text-on-surface-variant font-medium mb-12">
+            {t('lastUpdated')}
+          </p>
+
+          <div className="space-y-12">
+            {(t.raw('sections') as { title: string; content: string }[]).map((section, idx) => (
+              <section key={idx}>
+                <h2 className="text-xl font-bold font-(family-name:--font-manrope) mb-4">
+                  {section.title}
+                </h2>
+                <div className="text-on-surface-variant leading-relaxed space-y-4">
+                  <p>
+                    {idx === 4 ? (
+                      section.content.split('{contactLink}').map((part, i, arr) => (
+                        <span key={i}>
+                          {part}
+                          {i < arr.length - 1 && (
+                            <Link href="/contact" className="text-[#FF5A30] font-bold hover:underline">
+                              {t('contactLink')}
+                            </Link>
+                          )}
+                        </span>
+                      ))
+                    ) : section.content}
+                  </p>
+                </div>
+              </section>
+            ))}
+          </div>
+        </div>
+      </main>
+      <Footer />
+    </div>
+  );
+}

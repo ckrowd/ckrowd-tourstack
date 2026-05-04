@@ -1,171 +1,195 @@
+import { useTranslations } from 'next-intl';
+
 export default function StepForm({ stakeholderId, stepId }: { stakeholderId: string; stepId: number }) {
+  const t = useTranslations('StepForm');
+
   const inputClass = "w-full px-4 py-3 bg-surface border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm";
   const labelClass = "block text-[10px] font-bold text-on-surface-variant uppercase tracking-wider mb-1.5";
   const fileClass = "block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:font-semibold file:bg-[#FF5A30]/10 file:text-[#FF5A30] hover:file:bg-[#FF5A30]/20 transition-all cursor-pointer";
 
-  if (stakeholderId === "promoter") {
-    if (stepId === 1) return (
-      <div className="space-y-4 mb-8">
-        <div><label className={labelClass}>Company Name</label><input type="text" className={inputClass} placeholder="e.g. Live Nation Africa" required /></div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div><label className={labelClass}>Primary Markets</label><input type="text" className={inputClass} placeholder="e.g. Lagos, Accra" required /></div>
-          <div><label className={labelClass}>Expected Tour Budget</label><input type="text" className={inputClass} placeholder="e.g. $50,000" required /></div>
-        </div>
-      </div>
-    );
-    if (stepId === 2) return (
-      <div className="space-y-4 mb-8">
-        <div><label className={labelClass}>Upload Prior Certifications (Optional)</label><input type="file" className={fileClass} /></div>
-      </div>
-    );
-    if (stepId === 3) return (
-      <div className="space-y-4 mb-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div><label className={labelClass}>Director BVN / NIN</label><input type="text" className={inputClass} placeholder="11-digit BVN" required /></div>
-          <div><label className={labelClass}>Company Registration No (RC)</label><input type="text" className={inputClass} placeholder="e.g. RC 1234567" required /></div>
-        </div>
-      </div>
-    );
-    if (stepId === 4) return (
-      <div className="space-y-4 mb-8">
-        <div><label className={labelClass}>Coverage Start Date</label><input type="date" className={inputClass} required /></div>
-        <label className="flex items-start gap-3 mt-4">
-          <input type="checkbox" className="mt-1 w-4 h-4 text-[#FF5A30] border-outline-variant/30 rounded focus:ring-[#FF5A30]" required />
-          <span className="text-sm text-on-surface-variant">I agree to the SanlamAllianz terms of service and authorize automatic premium deduction from my enterprise account.</span>
-        </label>
-      </div>
-    );
-    if (stepId === 5) return (
-      <div className="mb-8 p-4 bg-surface-container rounded-xl border border-outline-variant/10">
-        <label className="flex items-start gap-3">
-          <input type="checkbox" className="mt-1 w-4 h-4 text-[#FF5A30] border-outline-variant/30 rounded focus:ring-[#FF5A30]" required />
-          <span className="text-sm text-on-surface-variant">I acknowledge that Tour Finance facilities are unlocked and agree to submit event budgets for underwriting.</span>
-        </label>
-      </div>
-    );
-  }
 
-  if (stakeholderId === "workforce") {
-    if (stepId === 1) return (
-      <div className="space-y-4 mb-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div><label className={labelClass}>Primary Role</label><select className={inputClass} required><option value="">Select Role</option><option value="sound">Sound Engineer</option><option value="light">Lighting Tech</option><option value="stage">Stage Manager</option></select></div>
-          <div><label className={labelClass}>Years of Experience</label><input type="number" className={inputClass} placeholder="e.g. 5" required /></div>
+  const renderStep = () => {
+    if (stakeholderId === "promoter") {
+      if (stepId === 1) return (
+        <div className="space-y-4 mb-8">
+          <div><label className={labelClass}>{t('promoter.step1.companyName')}</label><input type="text" className={inputClass} placeholder={t('promoter.step1.companyNamePlaceholder')} required /></div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div><label className={labelClass}>{t('promoter.step1.primaryMarkets')}</label><input type="text" className={inputClass} placeholder={t('promoter.step1.primaryMarketsPlaceholder')} required /></div>
+            <div><label className={labelClass}>{t('promoter.step1.expectedBudget')}</label><input type="text" className={inputClass} placeholder={t('promoter.step1.expectedBudgetPlaceholder')} required /></div>
+          </div>
         </div>
-      </div>
-    );
-    if (stepId === 2) return (
-      <div className="space-y-4 mb-8">
-        <div><label className={labelClass}>Upload Government ID</label><input type="file" className={fileClass} required /></div>
-        <div><label className={labelClass}>Reference Email</label><input type="email" className={inputClass} placeholder="reference@example.com" required /></div>
-      </div>
-    );
-    if (stepId === 3) return (
-      <div className="space-y-4 mb-8">
-        <p className="text-sm text-on-surface-variant italic">Role-Specific Training required for this step.</p>
-      </div>
-    );
-    if (stepId === 4) return (
-      <div className="space-y-4 mb-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div><label className={labelClass}>Next of Kin Name</label><input type="text" className={inputClass} placeholder="Full Name" required /></div>
-          <div><label className={labelClass}>Next of Kin Phone</label><input type="text" className={inputClass} placeholder="Phone Number" required /></div>
+      );
+      if (stepId === 2) return (
+        <div className="space-y-4 mb-8">
+          <div><label className={labelClass}>{t('promoter.step2.certifications')}</label><input type="file" className={fileClass} /></div>
         </div>
-      </div>
-    );
-    if (stepId === 5) return (
-      <div className="space-y-4 mb-8">
-        <div><label className={labelClass}>Passport Number</label><input type="text" className={inputClass} placeholder="For cross-border deployment" required /></div>
-        <div><label className={labelClass}>Preferred Currency for Payroll</label><select className={inputClass} required><option value="">Select Currency</option><option value="USD">USD</option><option value="NGN">NGN</option><option value="ZAR">ZAR</option><option value="KES">KES</option></select></div>
-      </div>
-    );
-  }
+      );
+      if (stepId === 3) return (
+        <div className="space-y-4 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div><label className={labelClass}>{t('promoter.step3.directorBvn')}</label><input type="text" className={inputClass} placeholder={t('promoter.step3.directorBvnPlaceholder')} required /></div>
+            <div><label className={labelClass}>{t('promoter.step3.rcNumber')}</label><input type="text" className={inputClass} placeholder={t('promoter.step3.rcNumberPlaceholder')} required /></div>
+          </div>
+        </div>
+      );
+      if (stepId === 4) return (
+        <div className="space-y-4 mb-8">
+          <div><label className={labelClass}>{t('promoter.step4.startDate')}</label><input type="date" className={inputClass} required /></div>
+          <label className="flex items-start gap-3 mt-4">
+            <input type="checkbox" className="mt-1 w-4 h-4 text-[#FF5A30] border-outline-variant/30 rounded focus:ring-[#FF5A30]" required />
+            <span className="text-sm text-on-surface-variant">{t('promoter.step4.terms')}</span>
+          </label>
+        </div>
+      );
+      if (stepId === 5) return (
+        <div className="mb-8 p-4 bg-surface-container rounded-xl border border-outline-variant/10">
+          <label className="flex items-start gap-3">
+            <input type="checkbox" className="mt-1 w-4 h-4 text-[#FF5A30] border-outline-variant/30 rounded focus:ring-[#FF5A30]" required />
+            <span className="text-sm text-on-surface-variant">{t('promoter.step5.acknowledgement')}</span>
+          </label>
+        </div>
+      );
+    }
 
-  if (stakeholderId === "vendor") {
-    if (stepId === 1) return (
-      <div className="space-y-4 mb-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div><label className={labelClass}>Business Category</label><select className={inputClass} required><option value="">Select Category</option><option value="equipment">Equipment Supply</option><option value="logistics">Logistics</option><option value="catering">Catering</option></select></div>
-          <div><label className={labelClass}>Capacity / Fleet Size</label><input type="text" className={inputClass} placeholder="e.g. 3 Trucks" required /></div>
+    if (stakeholderId === "workforce") {
+      if (stepId === 1) return (
+        <div className="space-y-4 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div><label className={labelClass}>{t('workforce.step1.role')}</label><select className={inputClass} required><option value="">{t('workforce.step1.roleSelect')}</option><option value="sound">{t('roles.sound')}</option><option value="light">{t('roles.light')}</option><option value="stage">{t('roles.stage')}</option></select></div>
+            <div><label className={labelClass}>{t('workforce.step1.experience')}</label><input type="number" className={inputClass} placeholder={t('workforce.step1.experiencePlaceholder')} required /></div>
+          </div>
         </div>
-      </div>
-    );
-    if (stepId === 2) return (
-      <div className="space-y-4 mb-8">
-        <div><label className={labelClass}>Upload CAC / Business Registration</label><input type="file" className={fileClass} required /></div>
-        <div><label className={labelClass}>Tax Clearance Certificate</label><input type="file" className={fileClass} required /></div>
-      </div>
-    );
-    if (stepId === 3) return (
-      <div className="space-y-4 mb-8">
-        <div><label className={labelClass}>Public Profile Description</label><textarea className={inputClass} rows={3} placeholder="Describe your services..." required></textarea></div>
-        <div><label className={labelClass}>Upload Logo</label><input type="file" className={fileClass} required /></div>
-      </div>
-    );
-    if (stepId === 4) return (
-      <div className="space-y-4 mb-8">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div><label className={labelClass}>Estimated Equipment Value ($)</label><input type="number" className={inputClass} placeholder="e.g. 150000" required /></div>
-          <div><label className={labelClass}>Primary Storage Location</label><input type="text" className={inputClass} placeholder="City, Country" required /></div>
+      );
+      if (stepId === 2) return (
+        <div className="space-y-4 mb-8">
+          <div><label className={labelClass}>{t('workforce.step2.id')}</label><input type="file" className={fileClass} required /></div>
+          <div><label className={labelClass}>{t('workforce.step2.referenceEmail')}</label><input type="email" className={inputClass} placeholder={t('workforce.step2.referenceEmailPlaceholder')} required /></div>
         </div>
-      </div>
-    );
-    if (stepId === 5) return (
-      <div className="mb-8 p-4 bg-surface-container rounded-xl border border-outline-variant/10">
-        <label className="flex items-start gap-3">
-          <input type="checkbox" className="mt-1 w-4 h-4 text-[#FF5A30] border-outline-variant/30 rounded focus:ring-[#FF5A30]" required />
-          <span className="text-sm text-on-surface-variant">I acknowledge Working Capital Access is unlocked.</span>
-        </label>
-      </div>
-    );
-  }
+      );
+      if (stepId === 3) return (
+        <div className="space-y-4 mb-8">
+          <p className="text-sm text-on-surface-variant italic">{t('workforce.step3.training')}</p>
+        </div>
+      );
+      if (stepId === 4) return (
+        <div className="space-y-4 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div><label className={labelClass}>{t('workforce.step4.kinName')}</label><input type="text" className={inputClass} placeholder={t('workforce.step4.kinNamePlaceholder')} required /></div>
+            <div><label className={labelClass}>{t('workforce.step4.kinPhone')}</label><input type="text" className={inputClass} placeholder={t('workforce.step4.kinPhonePlaceholder')} required /></div>
+          </div>
+        </div>
+      );
+      if (stepId === 5) return (
+        <div className="space-y-4 mb-8">
+          <div><label className={labelClass}>{t('workforce.step5.passport')}</label><input type="text" className={inputClass} placeholder={t('workforce.step5.passportPlaceholder')} required /></div>
+          <div><label className={labelClass}>{t('workforce.step5.currency')}</label><select className={inputClass} required><option value="">{t('workforce.step5.currencySelect')}</option><option value="USD">USD</option><option value="NGN">NGN</option><option value="ZAR">ZAR</option><option value="KES">KES</option></select></div>
+        </div>
+      );
+    }
 
-  if (stakeholderId === "talent") {
-    if (stepId === 1) return (
-      <div className="space-y-4 mb-8">
-        <div><label className={labelClass}>Agency Name</label><input type="text" className={inputClass} placeholder="e.g. Star Management" required /></div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div><label className={labelClass}>Artists on Roster</label><input type="number" className={inputClass} placeholder="e.g. 5" required /></div>
-          <div><label className={labelClass}>Territory Preferences</label><input type="text" className={inputClass} placeholder="e.g. West Africa, EU" required /></div>
+    if (stakeholderId === "vendor") {
+      if (stepId === 1) return (
+        <div className="space-y-4 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div><label className={labelClass}>{t('vendor.step1.category')}</label><select className={inputClass} required><option value="">{t('vendor.step1.categorySelect')}</option><option value="equipment">{t('categories.equipment')}</option><option value="logistics">{t('categories.logistics')}</option><option value="catering">{t('categories.catering')}</option></select></div>
+            <div><label className={labelClass}>{t('vendor.step1.capacity')}</label><input type="text" className={inputClass} placeholder={t('vendor.step1.capacityPlaceholder')} required /></div>
+          </div>
         </div>
-      </div>
-    );
-    if (stepId === 2) return (
-      <div className="space-y-4 mb-8">
-        <div><label className={labelClass}>Artist Name</label><input type="text" className={inputClass} placeholder="Select Artist..." required /></div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div><label className={labelClass}>Upload Technical Rider</label><input type="file" className={fileClass} required /></div>
-          <div><label className={labelClass}>Upload Fee Schedule</label><input type="file" className={fileClass} required /></div>
+      );
+      if (stepId === 2) return (
+        <div className="space-y-4 mb-8">
+          <div><label className={labelClass}>{t('vendor.step2.registration')}</label><input type="file" className={fileClass} required /></div>
+          <div><label className={labelClass}>{t('vendor.step2.tax')}</label><input type="file" className={fileClass} required /></div>
         </div>
-      </div>
-    );
-    if (stepId === 3) return (
-      <div className="space-y-4 mb-8">
-        <div><label className={labelClass}>Proposed Block Rate ($)</label><input type="text" className={inputClass} placeholder="e.g. $10,000 per stop" required /></div>
-        <label className="flex items-start gap-3 mt-4">
-          <input type="checkbox" className="mt-1 w-4 h-4 text-[#FF5A30] border-outline-variant/30 rounded focus:ring-[#FF5A30]" required />
-          <span className="text-sm text-on-surface-variant">I accept the Ckrowd standard terms for performance contracts.</span>
-        </label>
-      </div>
-    );
-    if (stepId === 4) return (
-      <div className="mb-8 p-4 bg-surface-container rounded-xl border border-outline-variant/10">
-        <label className="flex items-start gap-3">
-          <input type="checkbox" className="mt-1 w-4 h-4 text-[#FF5A30] border-outline-variant/30 rounded focus:ring-[#FF5A30]" required />
-          <span className="text-sm text-on-surface-variant">I acknowledge the non-appearance terms embedded in my contract.</span>
-        </label>
-      </div>
-    );
-    if (stepId === 5) return (
-      <div className="space-y-4 mb-8">
-        <div><label className={labelClass}>Agency Bank Name</label><input type="text" className={inputClass} placeholder="e.g. Access Bank" required /></div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div><label className={labelClass}>Account Number</label><input type="text" className={inputClass} placeholder="10 digits" required /></div>
-          <div><label className={labelClass}>Routing/Sort Code</label><input type="text" className={inputClass} placeholder="Sort Code" required /></div>
+      );
+      if (stepId === 3) return (
+        <div className="space-y-4 mb-8">
+          <div><label className={labelClass}>{t('vendor.step3.bio')}</label><textarea className={inputClass} rows={3} placeholder={t('vendor.step3.bioPlaceholder')} required></textarea></div>
+          <div><label className={labelClass}>{t('vendor.step3.logo')}</label><input type="file" className={fileClass} required /></div>
         </div>
-      </div>
-    );
-  }
+      );
+      if (stepId === 4) return (
+        <div className="space-y-4 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div><label className={labelClass}>{t('vendor.step4.value')}</label><input type="number" className={inputClass} placeholder={t('vendor.step4.valuePlaceholder')} required /></div>
+            <div><label className={labelClass}>{t('vendor.step4.storage')}</label><input type="text" className={inputClass} placeholder={t('vendor.step4.storagePlaceholder')} required /></div>
+          </div>
+        </div>
+      );
+      if (stepId === 5) return (
+        <div className="mb-8 p-4 bg-surface-container rounded-xl border border-outline-variant/10">
+          <label className="flex items-start gap-3">
+            <input type="checkbox" className="mt-1 w-4 h-4 text-[#FF5A30] border-outline-variant/30 rounded focus:ring-[#FF5A30]" required />
+            <span className="text-sm text-on-surface-variant">{t('vendor.step5.acknowledgement')}</span>
+          </label>
+        </div>
+      );
+    }
 
-  return null;
+    if (stakeholderId === "talent") {
+      if (stepId === 1) return (
+        <div className="space-y-4 mb-8">
+          <div><label className={labelClass}>{t('talent.step1.agency')}</label><input type="text" className={inputClass} placeholder={t('talent.step1.agencyPlaceholder')} required /></div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div><label className={labelClass}>{t('talent.step1.roster')}</label><input type="number" className={inputClass} placeholder={t('talent.step1.rosterPlaceholder')} required /></div>
+            <div><label className={labelClass}>{t('talent.step1.territory')}</label><input type="text" className={inputClass} placeholder={t('talent.step1.territoryPlaceholder')} required /></div>
+          </div>
+        </div>
+      );
+      if (stepId === 2) return (
+        <div className="space-y-4 mb-8">
+          <div><label className={labelClass}>{t('talent.step2.artist')}</label><input type="text" className={inputClass} placeholder={t('talent.step2.artistPlaceholder')} required /></div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div><label className={labelClass}>{t('talent.step2.rider')}</label><input type="file" className={fileClass} required /></div>
+            <div><label className={labelClass}>{t('talent.step2.feeSchedule')}</label><input type="file" className={fileClass} required /></div>
+          </div>
+        </div>
+      );
+      if (stepId === 3) return (
+        <div className="space-y-4 mb-8">
+          <div><label className={labelClass}>{t('talent.step3.rate')}</label><input type="text" className={inputClass} placeholder={t('talent.step3.ratePlaceholder')} required /></div>
+          <label className="flex items-start gap-3 mt-4">
+            <input type="checkbox" className="mt-1 w-4 h-4 text-[#FF5A30] border-outline-variant/30 rounded focus:ring-[#FF5A30]" required />
+            <span className="text-sm text-on-surface-variant">{t('talent.step3.terms')}</span>
+          </label>
+        </div>
+      );
+      if (stepId === 4) return (
+        <div className="mb-8 p-4 bg-surface-container rounded-xl border border-outline-variant/10">
+          <label className="flex items-start gap-3">
+            <input type="checkbox" className="mt-1 w-4 h-4 text-[#FF5A30] border-outline-variant/30 rounded focus:ring-[#FF5A30]" required />
+            <span className="text-sm text-on-surface-variant">{t('talent.step4.terms')}</span>
+          </label>
+        </div>
+      );
+      if (stepId === 5) return (
+        <div className="space-y-4 mb-8">
+          <div><label className={labelClass}>{t('talent.step5.bankName')}</label><input type="text" className={inputClass} placeholder={t('talent.step5.bankNamePlaceholder')} required /></div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div><label className={labelClass}>{t('talent.step5.accountNumber')}</label><input type="text" className={inputClass} placeholder={t('talent.step5.accountNumberPlaceholder')} required /></div>
+            <div><label className={labelClass}>{t('talent.step5.routingCode')}</label><input type="text" className={inputClass} placeholder={t('talent.step5.routingCodePlaceholder')} required /></div>
+          </div>
+        </div>
+      );
+    }
+
+    return null;
+  };
+
+  return (
+    <div
+      onInvalidCapture={(e) => {
+        const target = e.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+        if (target.validity.valueMissing) {
+          target.setCustomValidity(t('validation.required'));
+        }
+      }}
+      onChangeCapture={(e) => {
+        const target = e.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+        target.setCustomValidity('');
+      }}
+    >
+      {renderStep()}
+    </div>
+  );
 }
