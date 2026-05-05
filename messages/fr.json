@@ -1864,9 +1864,9 @@
     "genres": {
       "afrobeats": "Afrobeats",
       "electronic": "Électronique",
-      "indieRock": "Indie Rock",
-      "jazzSoul": "Jazz & Soul",
-      "worldFolk": "World / Folk",
+      "indieRock": "Rock indépendant",
+      "jazzSoul": "Jazz et Soul",
+      "worldFolk": "Musique du monde / Folk",
       "modernClassical": "Classique moderne"
     },
     "windows": {
@@ -2102,10 +2102,10 @@
       "daysAgo": "Il y a {count}j"
     },
     "stats": {
-      "eoisSubmitted": "EOI soumis",
+      "eoisSubmitted": "EOI soumises",
       "newThisMonth": "+{count} ce mois-ci",
-      "approved": "Approuvés",
-      "confirmed": "Confirmés",
+      "approved": "Approuvées",
+      "confirmed": "Confirmées",
       "financingStatus": "Statut du financement",
       "noApps": "Pas de demandes",
       "nextShow": "Prochain spectacle",
@@ -2259,7 +2259,7 @@
       "afrobeats": "Afrobeats",
       "afropop": "Afropop",
       "electronic": "Électronique",
-      "jazzSoul": "Jazz & Soul",
+      "jazzSoul": "Jazz et Soul",
       "worldFolk": "Musique du monde / Folk",
       "hipHop": "Hip-Hop"
     }
