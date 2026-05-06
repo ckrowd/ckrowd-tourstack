@@ -709,8 +709,8 @@ export default function PublicOnboardingLinkPage({
 }: {
   params: Promise<{ token: string }>;
 }) {
-  const { token } = use(params);
-  const t = useTranslations("StakeholderRegistrationPage");
+	const t = useTranslations('StakeholderRegistrationPage');
+	const { token } = use(params);
 
   const linkQuery = useQuery({
     queryKey: ["onboardingLink", token],
