@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { useLogout, useSession } from "@/context/AuthContext";
-import { Link, usePathname, useRouter } from "@/i18n/routing";
+import { Link, usePathname, useRouter, routing } from "@/i18n/routing";
 
 export default function TopNav() {
 	const pathname = usePathname();
@@ -14,6 +14,7 @@ export default function TopNav() {
 	const logoutMutation = useLogout();
 	const [notifOpen, setNotifOpen] = useState(false);
 	const [profileOpen, setProfileOpen] = useState(false);
+	const [langOpen, setLangOpen] = useState(false);
 	const t = useTranslations("TopNav");
 	const tCommon = useTranslations("Common");
 
@@ -73,11 +74,6 @@ export default function TopNav() {
 		logoutMutation.mutate(undefined, { onSettled: () => router.push("/") });
 	}
 
-	const toggleLocale = () => {
-		const nextLocale = locale === "en" ? "fr" : "en";
-		router.replace(pathname, { locale: nextLocale });
-	};
-
 	return (
 		<>
 			<header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-orange-100/10 shadow-sm">
@@ -116,29 +112,62 @@ export default function TopNav() {
 					</div>
 
 					<div className="flex items-center gap-4">
-						{/* Locale Switcher */}
-						<button
-							onClick={toggleLocale}
-							className="text-xs font-bold px-2 py-1 rounded-md border border-slate-200 hover:bg-slate-50 transition-colors uppercase"
-						>
-							{locale === "en" ? "FR" : "EN"}
-						</button>
-
-						{/* Notifications */}
+						{/* Locale Switcher Dropdown */}
 						<div className="relative">
 							<button
 								type="button"
-								aria-label={t("openNotifications")}
-								aria-expanded={notifOpen}
-								onClick={() => setNotifOpen((v) => !v)}
-								className="p-2 hover:bg-slate-50/50 rounded-lg transition-all active:scale-95 relative"
+								onClick={() => setLangOpen((v) => !v)}
+								className="flex items-center gap-0.5 text-xs font-bold px-2 py-1 rounded-md border border-slate-200 hover:bg-slate-50 transition-colors uppercase"
+								aria-haspopup="listbox"
+								aria-expanded={langOpen}
 							>
-								<span className="material-symbols-outlined text-[#494455]">
-									notifications
-								</span>
-								<span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#FF5A30] rounded-full" />
+								{locale.toUpperCase()}
+								<span className="material-symbols-outlined text-[14px] leading-none">expand_more</span>
 							</button>
+							{langOpen && (
+								<>
+									<button
+										type="button"
+										className="fixed inset-0 z-40 w-full h-full cursor-default bg-transparent border-none"
+										onClick={() => setLangOpen(false)}
+										aria-label="Close language menu"
+									/>
+									<div className="absolute right-0 top-9 z-50 w-20 bg-white rounded-xl shadow-lg border border-slate-100 overflow-hidden" role="listbox">
+										{(routing.locales as readonly string[]).map((l) => (
+											<button
+												key={l}
+												type="button"
+												role="option"
+												aria-selected={locale === l}
+												onClick={() => { router.replace(pathname, { locale: l as "en" | "fr" }); setLangOpen(false); }}
+												className={`flex items-center justify-between w-full px-3 py-2 text-xs font-bold uppercase hover:bg-slate-50 transition-colors ${locale === l ? "text-[#FF5A30]" : "text-slate-600"}`}
+											>
+												{l.toUpperCase()}
+												{locale === l && <span className="material-symbols-outlined text-[12px] leading-none">check</span>}
+											</button>
+										))}
+									</div>
+								</>
+							)}
 						</div>
+
+						{/* Notifications — authenticated users only */}
+						{session?.user && (
+							<div className="relative">
+								<button
+									type="button"
+									aria-label={t("openNotifications")}
+									aria-expanded={notifOpen}
+									onClick={() => setNotifOpen((v) => !v)}
+									className="p-2 hover:bg-slate-50/50 rounded-lg transition-all active:scale-95 relative"
+								>
+									<span className="material-symbols-outlined text-[#494455]">
+										notifications
+									</span>
+									<span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#FF5A30] rounded-full" />
+								</button>
+							</div>
+						)}
 
 						{/* Avatar / dropdown */}
 						{session?.user ? (
