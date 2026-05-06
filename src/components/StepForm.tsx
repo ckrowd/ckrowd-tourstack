@@ -1,3 +1,5 @@
+"use client";
+
 import { useTranslations } from 'next-intl';
 
 export default function StepForm({ stakeholderId, stepId }: { stakeholderId: string; stepId: number }) {
