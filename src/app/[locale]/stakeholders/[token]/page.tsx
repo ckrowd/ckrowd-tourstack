@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { use, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Link } from "@/i18n/routing";
 import {
@@ -28,14 +28,15 @@ const defaultForm: FormState = {
 export default function PublicOnboardingLinkPage({
 	params,
 }: {
-	params: { token: string };
+	params: Promise<{ token: string }>;
 }) {
 	const t = useTranslations('StakeholderRegistrationPage');
+	const { token } = use(params);
 	const [form, setForm] = useState<FormState>(defaultForm);
 
 	const linkQuery = useQuery({
-		queryKey: ["onboardingLink", params.token],
-		queryFn: () => getOnboardingLink(params.token),
+		queryKey: ["onboardingLink", token],
+		queryFn: () => getOnboardingLink(token),
 	});
 
 	const submitMutation = useMutation({
@@ -46,7 +47,7 @@ export default function PublicOnboardingLinkPage({
 			company?: string;
 			country: string;
 			extraData?: Record<string, unknown>;
-		}) => submitOnboardingLink(params.token, body),
+		}) => submitOnboardingLink(token, body),
 	});
 
 	const link = linkQuery.data?.success ? linkQuery.data.data : null;

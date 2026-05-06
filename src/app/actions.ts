@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient } from "@ckrowd/ckrowd-prisma";
+import { extractResponseCookies } from "@ckrowd/ckrowd-prisma/utils";
 
 export type Params<T extends (...args: any) => any> = NonNullable<
 	Parameters<T>[0]
@@ -29,18 +30,11 @@ const client = createClient({
 	},
 	// @ts-expect-error - fix later
 	async onResponse(response) {
-		const setCookies = response.headers.getSetCookie?.() ?? [];
-		if (setCookies.length > 0) {
+		const responseCookies = extractResponseCookies(response);
+		if (responseCookies.length > 0) {
 			const jar = await cookies();
-			for (const cookieStr of setCookies) {
-				const parts = cookieStr.split(";").map((p) => p.trim());
-				const nameValue = parts[0];
-				if (!nameValue) continue;
-				const eqIdx = nameValue.indexOf("=");
-				if (eqIdx === -1) continue;
-				const name = nameValue.slice(0, eqIdx).trim();
-				const value = nameValue.slice(eqIdx + 1).trim();
-				if (name && value) jar.set(name, value);
+			for (const cookie of responseCookies) {
+				jar.set(cookie.name, cookie.value, cookie.options);
 			}
 		}
 	},
@@ -303,13 +297,15 @@ export async function createOnboardingLink(body: Payload<typeof client.tourstack
 }
 
 export async function getOnboardingLink(token: string) {
-	const { data, error } = await client.tourstack["onboarding-links"]({
-		token,
-	}).get();
+	const apiUrl = process.env.API_URL ?? "https://gateway.ckrowd.com";
+	const res = await fetch(
+		`${apiUrl}/tourstack/onboarding-links/${token}`
+	);
+	const data = await res.json();
 	return {
-		data: extractPayload(data),
-		success: !error && data?.success,
-		error: extractError(error),
+		data: data?.data,
+		success: res.ok && data?.success,
+		error: data?.error ?? null,
 	};
 }
 
