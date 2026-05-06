@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import TopNav from "@/components/TopNav";
 import Footer from "@/components/Footer";
 import { getTranslations, setRequestLocale } from 'next-intl/server';
