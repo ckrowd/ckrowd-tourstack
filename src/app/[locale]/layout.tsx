@@ -23,9 +23,59 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'Metadata' });
 
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://tourstack.ckrowd.com';
+
   return {
-    title: t('title'),
-    description: t('description')
+    title: {
+      template: '%s | Tourstack by Ckrowd',
+      default: t('title'),
+    },
+    description: t('description'),
+    applicationName: 'Tourstack',
+    keywords: ['live music', 'touring', 'concerts', 'africa', 'promoters', 'artists', 'financing', 'insurance'],
+    authors: [{ name: 'Ckrowd', url: 'https://ckrowd.africa' }],
+    metadataBase: new URL(baseUrl),
+    alternates: {
+      canonical: `/${locale}`,
+      languages: {
+        'en': '/en',
+        'fr': '/fr',
+      },
+    },
+    openGraph: {
+      title: t('title'),
+      description: t('description'),
+      url: `/${locale}`,
+      siteName: 'Tourstack by Ckrowd',
+      images: [
+        {
+          url: '/og-image.jpg', // Placeholder for actual OG image
+          width: 1200,
+          height: 630,
+          alt: 'Tourstack by Ckrowd',
+        },
+      ],
+      locale: locale,
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: t('title'),
+      description: t('description'),
+      creator: '@ckrowdafrica',
+      images: ['/og-image.jpg'],
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
   };
 }
 

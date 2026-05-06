@@ -11,13 +11,13 @@ export default function FinancingQuickApply() {
 	const router = useRouter();
 
 	const FINANCING_PRODUCTS = [
-		t('products.tourStopAdvance'),
-		t('products.venueBuildOutCredit'),
-		t('products.eventInsuranceBundle'),
-		t('products.marketingTicketingFloat'),
+		{ id: 'tourStopAdvance', label: t('products.tourStopAdvance') },
+		{ id: 'venueBuildOutCredit', label: t('products.venueBuildOutCredit') },
+		{ id: 'eventInsuranceBundle', label: t('products.eventInsuranceBundle') },
+		{ id: 'marketingTicketingFloat', label: t('products.marketingTicketingFloat') },
 	] as const;
 
-	const [product, setProduct] = useState<string>(FINANCING_PRODUCTS[0]);
+	const [product, setProduct] = useState<string>(FINANCING_PRODUCTS[0].id);
 	const [amountRequested, setAmountRequested] = useState("");
 	const currency = "USD";
 
@@ -96,9 +96,9 @@ export default function FinancingQuickApply() {
 							}
 							className={selectClass}
 						>
-							{FINANCING_PRODUCTS.map((value) => (
-								<option key={value} value={value}>
-									{value}
+							{FINANCING_PRODUCTS.map(({ id, label }) => (
+								<option key={id} value={id}>
+									{label}
 								</option>
 							))}
 						</select>
