@@ -1,18 +1,18 @@
 import Link from "next/link";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getTour, getTourMilestones } from "@/app/actions";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
-import { getTour, getTourMilestones } from "@/app/actions";
-import { getTranslations, setRequestLocale } from 'next-intl/server';
 
 export default async function TourDetailPage({
 	params,
 }: {
-	params: Promise<{ id: string, locale: string }>;
+	params: Promise<{ id: string; locale: string }>;
 }) {
 	const { id, locale } = await params;
 	setRequestLocale(locale);
-	const t = await getTranslations('TourDetailPage');
-	
+	const t = await getTranslations("TourDetailPage");
+
 	const [tourResult, milestonesResult] = await Promise.all([
 		getTour(id),
 		getTourMilestones(id),
@@ -40,24 +40,28 @@ export default async function TourDetailPage({
 						<div className="flex flex-wrap items-center justify-between gap-3">
 							<div>
 								<p className="text-xs font-bold uppercase tracking-widest text-[#FF5A30]">
-									{t('tagline')}
+									{t("tagline")}
 								</p>
 								<h1 className="text-3xl font-(family-name:--font-manrope) font-extrabold text-on-surface mt-1">
-									{tour?.artist?.name ? String(tour.artist.name) : t('defaultTitle')}
+									{tour?.artist?.name
+										? String(tour.artist.name)
+										: t("defaultTitle")}
 								</h1>
 							</div>
 							<Link
 								href="/tours"
 								className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-outline-variant/30 text-sm font-bold text-on-surface-variant hover:bg-surface-container-low"
 							>
-								<span className="material-symbols-outlined text-sm">arrow_back</span>
-								{t('actions.back')}
+								<span className="material-symbols-outlined text-sm">
+									arrow_back
+								</span>
+								{t("actions.back")}
 							</Link>
 						</div>
 
 						{!tourResult.success || !tour ? (
 							<div className="bg-rose-50 border border-rose-200 text-rose-700 rounded-2xl p-6 text-sm font-medium">
-								{tourResult.error ?? t('errors.load')}
+								{tourResult.error ?? t("errors.load")}
 							</div>
 						) : (
 							<div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -65,13 +69,19 @@ export default async function TourDetailPage({
 									<div className="flex items-start justify-between gap-3">
 										<div>
 											<h2 className="text-xl font-(family-name:--font-manrope) font-bold">
-												{String(tour.tour_name ?? tour.artist?.tour_name ?? t('defaultTourName'))}
+												{String(
+													tour.tour_name ??
+														tour.artist?.tour_name ??
+														t("defaultTourName"),
+												)}
 											</h2>
 											<p className="text-sm text-on-surface-variant mt-1">
 												{String(tour.artist?.genre ?? "")}
 											</p>
 										</div>
-										<span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter ${statusColor}`}>
+										<span
+											className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter ${statusColor}`}
+										>
 											{String(tour.status ?? "pending").replace(/_/g, " ")}
 										</span>
 									</div>
@@ -79,19 +89,23 @@ export default async function TourDetailPage({
 									<div className="grid grid-cols-2 md:grid-cols-3 gap-3">
 										<div className="bg-surface-container-low rounded-xl p-3">
 											<p className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">
-												{t('fields.city')}
+												{t("fields.city")}
 											</p>
-											<p className="text-sm font-bold mt-1">{String(tour.city ?? "-")}</p>
+											<p className="text-sm font-bold mt-1">
+												{String(tour.city ?? "-")}
+											</p>
 										</div>
 										<div className="bg-surface-container-low rounded-xl p-3">
 											<p className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">
-												{t('fields.venue')}
+												{t("fields.venue")}
 											</p>
-											<p className="text-sm font-bold mt-1">{String(tour.venue ?? "-")}</p>
+											<p className="text-sm font-bold mt-1">
+												{String(tour.venue ?? "-")}
+											</p>
 										</div>
 										<div className="bg-surface-container-low rounded-xl p-3">
 											<p className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">
-												{t('fields.date')}
+												{t("fields.date")}
 											</p>
 											<p className="text-sm font-bold mt-1">
 												{tour.date
@@ -105,7 +119,7 @@ export default async function TourDetailPage({
 										</div>
 										<div className="bg-surface-container-low rounded-xl p-3">
 											<p className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">
-												{t('fields.fee')}
+												{t("fields.fee")}
 											</p>
 											<p className="text-sm font-bold mt-1">
 												{tour.fee_usd != null
@@ -115,7 +129,7 @@ export default async function TourDetailPage({
 										</div>
 										<div className="bg-surface-container-low rounded-xl p-3">
 											<p className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">
-												{t('fields.capacity')}
+												{t("fields.capacity")}
 											</p>
 											<p className="text-sm font-bold mt-1">
 												{tour.capacity != null
@@ -125,7 +139,7 @@ export default async function TourDetailPage({
 										</div>
 										<div className="bg-surface-container-low rounded-xl p-3">
 											<p className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">
-												{t('fields.ticketsSold')}
+												{t("fields.ticketsSold")}
 											</p>
 											<p className="text-sm font-bold mt-1">
 												{tour.tickets_sold != null
@@ -138,29 +152,39 @@ export default async function TourDetailPage({
 
 								<section className="lg:col-span-4 bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
 									<h3 className="text-base font-(family-name:--font-manrope) font-bold mb-4">
-										{t('milestones.title')}
+										{t("milestones.title")}
 									</h3>
 									{!milestonesResult.success ? (
 										<p className="text-sm text-rose-700">
-											{milestonesResult.error ?? t('errors.milestones')}
+											{milestonesResult.error ?? t("errors.milestones")}
 										</p>
 									) : milestones.length === 0 ? (
-										<p className="text-sm text-on-surface-variant">{t('milestones.empty')}</p>
+										<p className="text-sm text-on-surface-variant">
+											{t("milestones.empty")}
+										</p>
 									) : (
 										<div className="space-y-3">
 											{milestones.map((m) => (
-												<div key={String(m.id)} className="rounded-xl bg-surface-container-low p-3">
+												<div
+													key={String(m.id)}
+													className="rounded-xl bg-surface-container-low p-3"
+												>
 													<p className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">
 														{String(m.type ?? "milestone")}
 													</p>
-													<p className="text-sm font-bold mt-1">{String(m.label ?? "")}</p>
+													<p className="text-sm font-bold mt-1">
+														{String(m.label ?? "")}
+													</p>
 													<p className="text-xs text-on-surface-variant mt-1">
 														{m.date
-															? new Date(String(m.date)).toLocaleDateString(locale, {
-																	month: "short",
-																	day: "numeric",
-																	year: "numeric",
-																})
+															? new Date(String(m.date)).toLocaleDateString(
+																	locale,
+																	{
+																		month: "short",
+																		day: "numeric",
+																		year: "numeric",
+																	},
+																)
 															: "-"}
 													</p>
 												</div>
@@ -171,7 +195,7 @@ export default async function TourDetailPage({
 							</div>
 						)}
 					</div>
-				  </main>
+				</main>
 			</div>
 		</div>
 	);

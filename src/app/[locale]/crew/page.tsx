@@ -1,113 +1,113 @@
 "use client";
 
-import { Link } from "@/i18n/routing";
-import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { registerCrewMember } from "@/app/actions";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
-import { registerCrewMember } from "@/app/actions";
-import { useTranslations } from 'next-intl';
+import { Link } from "@/i18n/routing";
 
 /* ─────────────────────────── constants ─────────────────────────── */
 
 function useCrewConstants() {
-	const t = useTranslations('CrewPage');
+	const t = useTranslations("CrewPage");
 
 	const STEPS = [
-		{ label: t('steps.personal') },
-		{ label: t('steps.role') },
-		{ label: t('steps.touring') },
-		{ label: t('steps.credentials') },
-		{ label: t('steps.wcs') },
+		{ label: t("steps.personal") },
+		{ label: t("steps.role") },
+		{ label: t("steps.touring") },
+		{ label: t("steps.credentials") },
+		{ label: t("steps.wcs") },
 	];
 
 	const ROLES = [
-		t('roles.stageManager'),
-		t('roles.productionManager'),
-		t('roles.tourManager'),
-		t('roles.fohEngineer'),
-		t('roles.monitorEngineer'),
-		t('roles.lightingDesigner'),
-		t('roles.rigger'),
-		t('roles.backlineTech'),
-		t('roles.pyrotechnics'),
-		t('roles.logisticsCoordinator'),
-		t('roles.securityLead'),
-		t('roles.merchandiseManager'),
-		t('roles.hospitalityManager'),
-		t('roles.videoTech'),
-		t('roles.photographer'),
-		t('roles.other'),
+		t("roles.stageManager"),
+		t("roles.productionManager"),
+		t("roles.tourManager"),
+		t("roles.fohEngineer"),
+		t("roles.monitorEngineer"),
+		t("roles.lightingDesigner"),
+		t("roles.rigger"),
+		t("roles.backlineTech"),
+		t("roles.pyrotechnics"),
+		t("roles.logisticsCoordinator"),
+		t("roles.securityLead"),
+		t("roles.merchandiseManager"),
+		t("roles.hospitalityManager"),
+		t("roles.videoTech"),
+		t("roles.photographer"),
+		t("roles.other"),
 	];
 
 	const TIER_CONFIG = [
 		{
 			tier: 1,
-			label: t('tiers.tier1.label'),
-			range: t('tiers.tier1.range'),
+			label: t("tiers.tier1.label"),
+			range: t("tiers.tier1.range"),
 			color: "slate",
 			bg: "bg-slate-100",
 			text: "text-slate-700",
 			border: "border-slate-300",
 			ring: "ring-slate-300",
 			perks: [
-				t('tiers.tier1.perks.database'),
-				t('tiers.tier1.perks.noDeployment'),
-				t('tiers.tier1.perks.training'),
-				t('tiers.tier1.perks.assessment'),
+				t("tiers.tier1.perks.database"),
+				t("tiers.tier1.perks.noDeployment"),
+				t("tiers.tier1.perks.training"),
+				t("tiers.tier1.perks.assessment"),
 			],
 			aya: null,
 		},
 		{
 			tier: 2,
-			label: t('tiers.tier2.label'),
-			range: t('tiers.tier2.range'),
+			label: t("tiers.tier2.label"),
+			range: t("tiers.tier2.range"),
 			color: "emerald",
 			bg: "bg-emerald-100",
 			text: "text-emerald-800",
 			border: "border-emerald-300",
 			ring: "ring-emerald-400",
 			perks: [
-				t('tiers.tier2.perks.local'),
-				t('tiers.tier2.perks.payment'),
-				t('tiers.tier2.perks.insurance'),
+				t("tiers.tier2.perks.local"),
+				t("tiers.tier2.perks.payment"),
+				t("tiers.tier2.perks.insurance"),
 			],
-			aya: t('tiers.tier2.aya'),
+			aya: t("tiers.tier2.aya"),
 		},
 		{
 			tier: 3,
-			label: t('tiers.tier3.label'),
-			range: t('tiers.tier3.range'),
+			label: t("tiers.tier3.label"),
+			range: t("tiers.tier3.range"),
 			color: "blue",
 			bg: "bg-blue-100",
 			text: "text-blue-800",
 			border: "border-blue-300",
 			ring: "ring-blue-400",
 			perks: [
-				t('tiers.tier3.perks.cluster'),
-				t('tiers.tier3.perks.preferred'),
-				t('tiers.tier3.perks.terms'),
-				t('tiers.tier3.perks.perDiem'),
+				t("tiers.tier3.perks.cluster"),
+				t("tiers.tier3.perks.preferred"),
+				t("tiers.tier3.perks.terms"),
+				t("tiers.tier3.perks.perDiem"),
 			],
-			aya: t('tiers.tier3.aya'),
+			aya: t("tiers.tier3.aya"),
 		},
 		{
 			tier: 4,
-			label: t('tiers.tier4.label'),
-			range: t('tiers.tier4.range'),
+			label: t("tiers.tier4.label"),
+			range: t("tiers.tier4.range"),
 			color: "amber",
 			bg: "bg-amber-100",
 			text: "text-amber-800",
 			border: "border-amber-400",
 			ring: "ring-amber-500",
 			perks: [
-				t('tiers.tier4.perks.panAfrican'),
-				t('tiers.tier4.perks.leadRole'),
-				t('tiers.tier4.perks.fastTerms'),
-				t('tiers.tier4.perks.equipmentInsurance'),
-				t('tiers.tier4.perks.mentorship'),
+				t("tiers.tier4.perks.panAfrican"),
+				t("tiers.tier4.perks.leadRole"),
+				t("tiers.tier4.perks.fastTerms"),
+				t("tiers.tier4.perks.equipmentInsurance"),
+				t("tiers.tier4.perks.mentorship"),
 			],
-			aya: t('tiers.tier4.aya'),
+			aya: t("tiers.tier4.aya"),
 		},
 	];
 
@@ -117,11 +117,11 @@ function useCrewConstants() {
 /* ─────────────────────────── scoring ─────────────────────────── */
 
 function calcWCS(form: FormData, t: ReturnType<typeof useTranslations>) {
-	const yearsOptions = t.raw('sections.touring.options.years');
-	const scaleOptions = t.raw('sections.touring.options.scale');
-	const availabilityOptions = t.raw('sections.touring.options.availability');
-	const yesNoOptions = t.raw('sections.touring.options.deploy48h');
-	const passportOptions = t.raw('sections.touring.options.passport');
+	const yearsOptions = t.raw("sections.touring.options.years");
+	const scaleOptions = t.raw("sections.touring.options.scale");
+	const availabilityOptions = t.raw("sections.touring.options.availability");
+	const yesNoOptions = t.raw("sections.touring.options.deploy48h");
+	const passportOptions = t.raw("sections.touring.options.passport");
 
 	// Base — Experience (max 35)
 	const expMap: Record<string, number> = {
@@ -156,22 +156,22 @@ function calcWCS(form: FormData, t: ReturnType<typeof useTranslations>) {
 	// Bonus
 	const bonusItems: { label: string; pts: number; earned: boolean }[] = [
 		{
-			label: t('sections.wcs.bonuses.deployment'),
+			label: t("sections.wcs.bonuses.deployment"),
 			pts: 10,
 			earned: form.deployIn48h === yesNoOptions[0],
 		},
 		{
-			label: t('sections.wcs.bonuses.passport'),
+			label: t("sections.wcs.bonuses.passport"),
 			pts: 10,
 			earned: form.validPassport === passportOptions[0],
 		},
 		{
-			label: t('sections.wcs.bonuses.reference'),
+			label: t("sections.wcs.bonuses.reference"),
 			pts: 15,
 			earned: form.refereeName.trim().length > 0,
 		},
 		{
-			label: t('sections.wcs.bonuses.portfolio'),
+			label: t("sections.wcs.bonuses.portfolio"),
 			pts: 10,
 			earned: form.portfolioLinks.trim().length > 0,
 		},
@@ -301,14 +301,16 @@ function RadioGroup({
 						key={opt}
 						type="button"
 						onClick={() => onChange(opt)}
-						className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold border transition-all text-left ${checked
+						className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold border transition-all text-left ${
+							checked
 								? "bg-[#FF5A30]/10 border-[#FF5A30] text-[#FF5A30]"
 								: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A30]/40"
-							}`}
+						}`}
 					>
 						<span
-							className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 border-2 transition-colors ${checked ? "border-[#FF5A30]" : "border-current"
-								}`}
+							className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 border-2 transition-colors ${
+								checked ? "border-[#FF5A30]" : "border-current"
+							}`}
 						>
 							{checked && (
 								<span className="w-2.5 h-2.5 rounded-full bg-[#FF5A30] block" />
@@ -322,7 +324,13 @@ function RadioGroup({
 	);
 }
 
-function Stepper({ current, steps }: { current: number; steps: { label: string }[] }) {
+function Stepper({
+	current,
+	steps,
+}: {
+	current: number;
+	steps: { label: string }[];
+}) {
 	const progress = (current / (steps.length - 1)) * 100;
 	return (
 		<div className="mb-12">
@@ -341,10 +349,11 @@ function Stepper({ current, steps }: { current: number; steps: { label: string }
 							className="relative z-10 flex flex-col items-center"
 						>
 							<div
-								className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ring-4 ring-surface-container-low ${done || active
+								className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ring-4 ring-surface-container-low ${
+									done || active
 										? "bg-[#FF5A30] text-white"
 										: "bg-surface-variant text-on-surface-variant"
-									}`}
+								}`}
 							>
 								{done ? (
 									<span
@@ -358,12 +367,13 @@ function Stepper({ current, steps }: { current: number; steps: { label: string }
 								)}
 							</div>
 							<span
-								className={`mt-2 text-[10px] font-bold uppercase tracking-wider text-center  leading-tight ${active
+								className={`mt-2 text-[10px] font-bold uppercase tracking-wider text-center  leading-tight ${
+									active
 										? "text-[#FF5A30]"
 										: done
 											? "text-[#FF5A30]/70"
 											: "text-on-surface-variant"
-									}`}
+								}`}
 							>
 								{step.label}
 							</span>
@@ -377,7 +387,17 @@ function Stepper({ current, steps }: { current: number; steps: { label: string }
 
 /* ─────────────────────────── WCS score display ─────────────────────────── */
 
-function ScoreGauge({ score, max = 145, tierConfig, labels }: { score: number; max?: number; tierConfig: ReturnType<typeof useCrewConstants>["TIER_CONFIG"]; labels: { tier: string } }) {
+function ScoreGauge({
+	score,
+	max = 145,
+	tierConfig,
+	labels,
+}: {
+	score: number;
+	max?: number;
+	tierConfig: ReturnType<typeof useCrewConstants>["TIER_CONFIG"];
+	labels: { tier: string };
+}) {
 	const pct = Math.min((score / max) * 100, 100);
 	const tier =
 		tierConfig[score >= 86 ? 3 : score >= 71 ? 2 : score >= 51 ? 1 : 0];
@@ -448,7 +468,7 @@ function ScoreGauge({ score, max = 145, tierConfig, labels }: { score: number; m
 /* ─────────────────────────── main page ─────────────────────────── */
 
 export default function CrewPage() {
-	const t = useTranslations('CrewPage');
+	const t = useTranslations("CrewPage");
 	const { STEPS, ROLES, TIER_CONFIG } = useCrewConstants();
 	const [step, setStep] = useState(0);
 	const [form, setForm] = useState<FormData>(defaultForm);
@@ -483,13 +503,17 @@ export default function CrewPage() {
 					<SideNav />
 					<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-12 flex items-center justify-center">
 						<div className="text-center">
-							<ScoreGauge score={wcs.total} tierConfig={TIER_CONFIG} labels={{ tier: "Tier" }} />
+							<ScoreGauge
+								score={wcs.total}
+								tierConfig={TIER_CONFIG}
+								labels={{ tier: "Tier" }}
+							/>
 							<div className="mt-8 mb-4">
 								<h1 className="text-3xl font-extrabold tracking-tight text-on-surface mb-2 font-(family-name:--font-manrope)">
-									{t('success.title')}
+									{t("success.title")}
 								</h1>
 								<p className="text-on-surface-variant">
-									{t('success.description')}
+									{t("success.description")}
 								</p>
 							</div>
 
@@ -538,7 +562,7 @@ export default function CrewPage() {
 											star
 										</span>
 										<span className={`text-xs font-bold ${tier.text}`}>
-											{t('success.aya')}: {tier.aya}
+											{t("success.aya")}: {tier.aya}
 										</span>
 									</div>
 								)}
@@ -549,13 +573,13 @@ export default function CrewPage() {
 									href="/dashboard"
 									className="px-8 py-3 bg-[#FF5A30] text-white rounded-xl font-bold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform"
 								>
-									{t('actions.dashboard')}
+									{t("actions.dashboard")}
 								</Link>
 								<Link
 									href="/discovery"
 									className="px-8 py-3 bg-surface-container-lowest text-on-surface rounded-xl font-bold border border-outline-variant/20 hover:bg-surface-container-low transition-colors"
 								>
-									{t('actions.discovery')}
+									{t("actions.discovery")}
 								</Link>
 							</div>
 						</div>
@@ -579,14 +603,12 @@ export default function CrewPage() {
 							<div className="flex items-start justify-between gap-4">
 								<div>
 									<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-3">
-										{t('registry')}
+										{t("registry")}
 									</span>
 									<h1 className="text-4xl font-extrabold tracking-tight text-on-surface mb-2">
-										{t('title')}
+										{t("title")}
 									</h1>
-									<p className="text-on-surface-variant">
-										{t('description')}
-									</p>
+									<p className="text-on-surface-variant">{t("description")}</p>
 								</div>
 								{/* Live score pill */}
 								{step > 0 && (
@@ -634,8 +656,12 @@ export default function CrewPage() {
 											yearsExperience: form.yearsExperience,
 											largestEvent: form.largestEvent,
 											tourAvailability: form.tourAvailability,
-											deployIn48h: form.deployIn48h === t.raw('sections.touring.options.deploy48h')[0],
-											crossBorderDocs: form.validPassport === t.raw('sections.touring.options.passport')[0],
+											deployIn48h:
+												form.deployIn48h ===
+												t.raw("sections.touring.options.deploy48h")[0],
+											crossBorderDocs:
+												form.validPassport ===
+												t.raw("sections.touring.options.passport")[0],
 										});
 									}
 								}}
@@ -648,17 +674,21 @@ export default function CrewPage() {
 												person
 											</span>
 											<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
-												{t('sections.personal.title')}
+												{t("sections.personal.title")}
 											</h3>
 										</div>
 
 										<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 											<div>
-												<Label htmlFor="full-name">{t('sections.personal.fields.fullName')}</Label>
+												<Label htmlFor="full-name">
+													{t("sections.personal.fields.fullName")}
+												</Label>
 												<input
 													id="full-name"
 													type="text"
-													placeholder={t('sections.personal.fields.fullNamePlaceholder')}
+													placeholder={t(
+														"sections.personal.fields.fullNamePlaceholder",
+													)}
 													className={inputClass}
 													required
 													value={form.fullName}
@@ -667,23 +697,29 @@ export default function CrewPage() {
 											</div>
 											<div>
 												<Label htmlFor="pref-name" optional>
-													{t('sections.personal.fields.preferredName')}
+													{t("sections.personal.fields.preferredName")}
 												</Label>
 												<input
 													id="pref-name"
 													type="text"
-													placeholder={t('sections.personal.fields.preferredNamePlaceholder')}
+													placeholder={t(
+														"sections.personal.fields.preferredNamePlaceholder",
+													)}
 													className={inputClass}
 													value={form.preferredName}
 													onChange={(e) => set("preferredName", e.target.value)}
 												/>
 											</div>
 											<div>
-												<Label htmlFor="phone">{t('sections.personal.fields.phone')}</Label>
+												<Label htmlFor="phone">
+													{t("sections.personal.fields.phone")}
+												</Label>
 												<input
 													id="phone"
 													type="tel"
-													placeholder={t('sections.personal.fields.phonePlaceholder')}
+													placeholder={t(
+														"sections.personal.fields.phonePlaceholder",
+													)}
 													className={inputClass}
 													required
 													value={form.phone}
@@ -692,23 +728,29 @@ export default function CrewPage() {
 											</div>
 											<div>
 												<Label htmlFor="whatsapp" optional>
-													{t('sections.personal.fields.whatsapp')}
+													{t("sections.personal.fields.whatsapp")}
 												</Label>
 												<input
 													id="whatsapp"
 													type="tel"
-													placeholder={t('sections.personal.fields.whatsappPlaceholder')}
+													placeholder={t(
+														"sections.personal.fields.whatsappPlaceholder",
+													)}
 													className={inputClass}
 													value={form.whatsapp}
 													onChange={(e) => set("whatsapp", e.target.value)}
 												/>
 											</div>
 											<div className="md:col-span-2">
-												<Label htmlFor="email">{t('sections.personal.fields.email')}</Label>
+												<Label htmlFor="email">
+													{t("sections.personal.fields.email")}
+												</Label>
 												<input
 													id="email"
 													type="email"
-													placeholder={t('sections.personal.fields.emailPlaceholder')}
+													placeholder={t(
+														"sections.personal.fields.emailPlaceholder",
+													)}
 													className={inputClass}
 													required
 													value={form.email}
@@ -716,11 +758,15 @@ export default function CrewPage() {
 												/>
 											</div>
 											<div>
-												<Label htmlFor="city">{t('sections.personal.fields.city')}</Label>
+												<Label htmlFor="city">
+													{t("sections.personal.fields.city")}
+												</Label>
 												<input
 													id="city"
 													type="text"
-													placeholder={t('sections.personal.fields.cityPlaceholder')}
+													placeholder={t(
+														"sections.personal.fields.cityPlaceholder",
+													)}
 													className={inputClass}
 													required
 													value={form.cityBase}
@@ -728,11 +774,15 @@ export default function CrewPage() {
 												/>
 											</div>
 											<div>
-												<Label htmlFor="country">{t('sections.personal.fields.country')}</Label>
+												<Label htmlFor="country">
+													{t("sections.personal.fields.country")}
+												</Label>
 												<input
 													id="country"
 													type="text"
-													placeholder={t('sections.personal.fields.countryPlaceholder')}
+													placeholder={t(
+														"sections.personal.fields.countryPlaceholder",
+													)}
 													className={inputClass}
 													required
 													value={form.country}
@@ -740,11 +790,15 @@ export default function CrewPage() {
 												/>
 											</div>
 											<div>
-												<Label htmlFor="nationality">{t('sections.personal.fields.nationality')}</Label>
+												<Label htmlFor="nationality">
+													{t("sections.personal.fields.nationality")}
+												</Label>
 												<input
 													id="nationality"
 													type="text"
-													placeholder={t('sections.personal.fields.nationalityPlaceholder')}
+													placeholder={t(
+														"sections.personal.fields.nationalityPlaceholder",
+													)}
 													className={inputClass}
 													required
 													value={form.nationality}
@@ -753,18 +807,20 @@ export default function CrewPage() {
 											</div>
 											<div>
 												<Label htmlFor="national-id" optional>
-													{t('sections.personal.fields.nationalId')}
+													{t("sections.personal.fields.nationalId")}
 												</Label>
 												<input
 													id="national-id"
 													type="text"
-													placeholder={t('sections.personal.fields.nationalIdPlaceholder')}
+													placeholder={t(
+														"sections.personal.fields.nationalIdPlaceholder",
+													)}
 													className={inputClass}
 													value={form.nationalId}
 													onChange={(e) => set("nationalId", e.target.value)}
 												/>
 												<p className="text-xs text-on-surface-variant mt-1.5 italic">
-													{t('sections.personal.fields.nationalIdHint')}
+													{t("sections.personal.fields.nationalIdHint")}
 												</p>
 											</div>
 										</div>
@@ -779,15 +835,15 @@ export default function CrewPage() {
 												engineering
 											</span>
 											<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
-												{t('sections.role.title')}
+												{t("sections.role.title")}
 											</h3>
 										</div>
 
 										<div>
 											<Label>
-												{t('sections.role.fields.primaryRole')}{" "}
+												{t("sections.role.fields.primaryRole")}{" "}
 												<span className="font-normal italic">
-													{t('sections.role.fields.primaryRoleHint')}
+													{t("sections.role.fields.primaryRoleHint")}
 												</span>
 											</Label>
 											<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
@@ -805,16 +861,18 @@ export default function CrewPage() {
 																		: [...form.roles, role],
 																);
 															}}
-															className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold border transition-all text-left ${checked
+															className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold border transition-all text-left ${
+																checked
 																	? "bg-[#FF5A30]/10 border-[#FF5A30] text-[#FF5A30]"
 																	: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A30]/40"
-																}`}
+															}`}
 														>
 															<span
-																className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${checked
+																className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
+																	checked
 																		? "border-[#FF5A30] bg-[#FF5A30]"
 																		: "border-current"
-																	}`}
+																}`}
 															>
 																{checked && (
 																	<span
@@ -834,7 +892,9 @@ export default function CrewPage() {
 
 										{form.roles.includes(ROLES[ROLES.length - 1]) && (
 											<div>
-												<Label htmlFor="other-role">{t('sections.role.fields.otherRole')}</Label>
+												<Label htmlFor="other-role">
+													{t("sections.role.fields.otherRole")}
+												</Label>
 												<input
 													id="other-role"
 													type="text"
@@ -855,24 +915,26 @@ export default function CrewPage() {
 												travel_explore
 											</span>
 											<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
-												{t('sections.touring.title')}
+												{t("sections.touring.title")}
 											</h3>
 										</div>
 
 										<div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-10">
 											<div className="space-y-6">
 												<div>
-													<Label>{t('sections.touring.fields.yearsExp')}</Label>
+													<Label>{t("sections.touring.fields.yearsExp")}</Label>
 													<RadioGroup
-														options={t.raw('sections.touring.options.years')}
+														options={t.raw("sections.touring.options.years")}
 														value={form.yearsExperience}
 														onChange={(v) => set("yearsExperience", v)}
 													/>
 												</div>
 												<div>
-													<Label>{t('sections.touring.fields.largestEvent')}</Label>
+													<Label>
+														{t("sections.touring.fields.largestEvent")}
+													</Label>
 													<RadioGroup
-														options={t.raw('sections.touring.options.scale')}
+														options={t.raw("sections.touring.options.scale")}
 														value={form.largestEvent}
 														onChange={(v) => set("largestEvent", v)}
 													/>
@@ -881,25 +943,33 @@ export default function CrewPage() {
 
 											<div className="space-y-6">
 												<div>
-													<Label>{t('sections.touring.fields.tourAvailability')}</Label>
+													<Label>
+														{t("sections.touring.fields.tourAvailability")}
+													</Label>
 													<RadioGroup
-														options={t.raw('sections.touring.options.availability')}
+														options={t.raw(
+															"sections.touring.options.availability",
+														)}
 														value={form.tourAvailability}
 														onChange={(v) => set("tourAvailability", v)}
 													/>
 												</div>
 												<div>
-													<Label>{t('sections.touring.fields.deploy48h')}</Label>
+													<Label>
+														{t("sections.touring.fields.deploy48h")}
+													</Label>
 													<RadioGroup
-														options={t.raw('sections.touring.options.deploy48h')}
+														options={t.raw(
+															"sections.touring.options.deploy48h",
+														)}
 														value={form.deployIn48h}
 														onChange={(v) => set("deployIn48h", v)}
 													/>
 												</div>
 												<div>
-													<Label>{t('sections.touring.fields.passport')}</Label>
+													<Label>{t("sections.touring.fields.passport")}</Label>
 													<RadioGroup
-														options={t.raw('sections.touring.options.passport')}
+														options={t.raw("sections.touring.options.passport")}
 														value={form.validPassport}
 														onChange={(v) => set("validPassport", v)}
 													/>
@@ -917,28 +987,36 @@ export default function CrewPage() {
 												verified
 											</span>
 											<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
-												{t('sections.credentials.title')}
+												{t("sections.credentials.title")}
 											</h3>
 										</div>
 
 										<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 											<div>
-												<Label htmlFor="markets">{t('sections.credentials.fields.markets')}</Label>
+												<Label htmlFor="markets">
+													{t("sections.credentials.fields.markets")}
+												</Label>
 												<input
 													id="markets"
 													type="text"
-													placeholder={t('sections.credentials.fields.marketsPlaceholder')}
+													placeholder={t(
+														"sections.credentials.fields.marketsPlaceholder",
+													)}
 													className={inputClass}
 													value={form.marketsWorked}
 													onChange={(e) => set("marketsWorked", e.target.value)}
 												/>
 											</div>
 											<div>
-												<Label htmlFor="day-rate">{t('sections.credentials.fields.dayRate')}</Label>
+												<Label htmlFor="day-rate">
+													{t("sections.credentials.fields.dayRate")}
+												</Label>
 												<input
 													id="day-rate"
 													type="text"
-													placeholder={t('sections.credentials.fields.dayRatePlaceholder')}
+													placeholder={t(
+														"sections.credentials.fields.dayRatePlaceholder",
+													)}
 													className={inputClass}
 													value={form.dayRate}
 													onChange={(e) => set("dayRate", e.target.value)}
@@ -946,24 +1024,30 @@ export default function CrewPage() {
 											</div>
 											<div className="md:col-span-2">
 												<Label htmlFor="portfolio" optional>
-													{t('sections.credentials.fields.portfolio')}
+													{t("sections.credentials.fields.portfolio")}
 												</Label>
 												<input
 													id="portfolio"
 													type="text"
-													placeholder={t('sections.credentials.fields.portfolioPlaceholder')}
+													placeholder={t(
+														"sections.credentials.fields.portfolioPlaceholder",
+													)}
 													className={inputClass}
 													value={form.portfolioLinks}
-													onChange={(e) => set("portfolioLinks", e.target.value)}
+													onChange={(e) =>
+														set("portfolioLinks", e.target.value)
+													}
 												/>
 											</div>
 											<div className="md:col-span-2">
 												<Label htmlFor="gear" optional>
-													{t('sections.credentials.fields.equipment')}
+													{t("sections.credentials.fields.equipment")}
 												</Label>
 												<textarea
 													id="gear"
-													placeholder={t('sections.credentials.fields.equipmentPlaceholder')}
+													placeholder={t(
+														"sections.credentials.fields.equipmentPlaceholder",
+													)}
 													className={`${inputClass} h-24 resize-none pt-3`}
 													value={form.equipment}
 													onChange={(e) => set("equipment", e.target.value)}
@@ -977,7 +1061,9 @@ export default function CrewPage() {
 											</p>
 											<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 												<div>
-													<Label htmlFor="ref-name">{t('sections.credentials.fields.refereeName')}</Label>
+													<Label htmlFor="ref-name">
+														{t("sections.credentials.fields.refereeName")}
+													</Label>
 													<input
 														id="ref-name"
 														type="text"
@@ -987,33 +1073,47 @@ export default function CrewPage() {
 													/>
 												</div>
 												<div>
-													<Label htmlFor="ref-company">{t('sections.credentials.fields.refereeCompany')}</Label>
+													<Label htmlFor="ref-company">
+														{t("sections.credentials.fields.refereeCompany")}
+													</Label>
 													<input
 														id="ref-company"
 														type="text"
 														className={inputClass}
 														value={form.refereeCompany}
-														onChange={(e) => set("refereeCompany", e.target.value)}
+														onChange={(e) =>
+															set("refereeCompany", e.target.value)
+														}
 													/>
 												</div>
 												<div>
-													<Label htmlFor="ref-contact">{t('sections.credentials.fields.refereeContact')}</Label>
+													<Label htmlFor="ref-contact">
+														{t("sections.credentials.fields.refereeContact")}
+													</Label>
 													<input
 														id="ref-contact"
 														type="text"
 														className={inputClass}
 														value={form.refereeContact}
-														onChange={(e) => set("refereeContact", e.target.value)}
+														onChange={(e) =>
+															set("refereeContact", e.target.value)
+														}
 													/>
 												</div>
 												<div>
-													<Label htmlFor="ref-rel">{t('sections.credentials.fields.refereeRelationship')}</Label>
+													<Label htmlFor="ref-rel">
+														{t(
+															"sections.credentials.fields.refereeRelationship",
+														)}
+													</Label>
 													<input
 														id="ref-rel"
 														type="text"
 														className={inputClass}
 														value={form.refereeRelationship}
-														onChange={(e) => set("refereeRelationship", e.target.value)}
+														onChange={(e) =>
+															set("refereeRelationship", e.target.value)
+														}
 													/>
 												</div>
 											</div>
@@ -1029,13 +1129,17 @@ export default function CrewPage() {
 												analytics
 											</span>
 											<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
-												{t('sections.wcs.title')}
+												{t("sections.wcs.title")}
 											</h3>
 										</div>
 
 										<div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
 											<div>
-												<ScoreGauge score={wcs.total} tierConfig={TIER_CONFIG} labels={{ tier: "Tier" }} />
+												<ScoreGauge
+													score={wcs.total}
+													tierConfig={TIER_CONFIG}
+													labels={{ tier: "Tier" }}
+												/>
 											</div>
 
 											<div className="space-y-6">
@@ -1045,12 +1149,20 @@ export default function CrewPage() {
 													</h4>
 													<div className="space-y-3">
 														<div className="flex justify-between text-sm">
-															<span className="text-on-surface-variant">Base Score</span>
-															<span className="font-bold">{wcs.base} / 100</span>
+															<span className="text-on-surface-variant">
+																Base Score
+															</span>
+															<span className="font-bold">
+																{wcs.base} / 100
+															</span>
 														</div>
 														<div className="flex justify-between text-sm">
-															<span className="text-on-surface-variant">Bonus Score</span>
-															<span className="font-bold text-emerald-600">+{wcs.bonus}</span>
+															<span className="text-on-surface-variant">
+																Bonus Score
+															</span>
+															<span className="font-bold text-emerald-600">
+																+{wcs.bonus}
+															</span>
 														</div>
 														<div className="h-px bg-outline-variant/10 my-2" />
 														<div className="flex justify-between text-base">
@@ -1064,16 +1176,17 @@ export default function CrewPage() {
 
 												<div className="space-y-3">
 													<p className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">
-														{t('sections.wcs.bonuses.title')}
+														{t("sections.wcs.bonuses.title")}
 													</p>
 													<div className="grid grid-cols-1 gap-2">
 														{wcs.bonusItems.map((item) => (
 															<div
 																key={item.label}
-																className={`flex items-center justify-between p-3 rounded-xl border text-xs font-bold ${item.earned
+																className={`flex items-center justify-between p-3 rounded-xl border text-xs font-bold ${
+																	item.earned
 																		? "bg-emerald-50 border-emerald-200 text-emerald-800"
 																		: "bg-surface-container-low border-outline-variant/10 text-on-surface-variant opacity-60"
-																	}`}
+																}`}
 															>
 																<span>{item.label}</span>
 																{item.earned ? (
@@ -1093,34 +1206,42 @@ export default function CrewPage() {
 										<div className="pt-8 border-t border-outline-variant/10 space-y-6">
 											<div className="bg-surface-container-low rounded-2xl p-6 border border-outline-variant/10">
 												<h4 className="font-bold text-on-surface mb-2">
-													{t('sections.wcs.declaration.title')}
+													{t("sections.wcs.declaration.title")}
 												</h4>
 												<p className="text-sm text-on-surface-variant leading-relaxed">
-													{t('sections.wcs.declaration.text')}
+													{t("sections.wcs.declaration.text")}
 												</p>
 											</div>
 
 											<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 												<div>
-													<Label htmlFor="sig-name">{t('sections.wcs.declaration.name')}</Label>
+													<Label htmlFor="sig-name">
+														{t("sections.wcs.declaration.name")}
+													</Label>
 													<input
 														id="sig-name"
 														type="text"
 														className={inputClass}
 														required
 														value={form.declarationName}
-														onChange={(e) => set("declarationName", e.target.value)}
+														onChange={(e) =>
+															set("declarationName", e.target.value)
+														}
 													/>
 												</div>
 												<div>
-													<Label htmlFor="sig-date">{t('sections.wcs.declaration.date')}</Label>
+													<Label htmlFor="sig-date">
+														{t("sections.wcs.declaration.date")}
+													</Label>
 													<input
 														id="sig-date"
 														type="date"
 														className={inputClass}
 														required
 														value={form.declarationDate}
-														onChange={(e) => set("declarationDate", e.target.value)}
+														onChange={(e) =>
+															set("declarationDate", e.target.value)
+														}
 													/>
 												</div>
 											</div>
@@ -1133,15 +1254,16 @@ export default function CrewPage() {
 									<button
 										type="button"
 										onClick={() => setStep((s) => s - 1)}
-										className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-all ${step === 0
+										className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-all ${
+											step === 0
 												? "opacity-0 pointer-events-none"
 												: "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low"
-											}`}
+										}`}
 									>
 										<span className="material-symbols-outlined text-sm">
 											arrow_back
 										</span>
-										{t('actions.back')}
+										{t("actions.back")}
 									</button>
 
 									<button
@@ -1152,13 +1274,13 @@ export default function CrewPage() {
 										{submitting ? (
 											<>
 												<span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-												{t('actions.submitting')}
+												{t("actions.submitting")}
 											</>
 										) : (
 											<>
 												{step === STEPS.length - 1
-													? t('actions.submit')
-													: t('actions.continue')}
+													? t("actions.submit")
+													: t("actions.continue")}
 												<span className="material-symbols-outlined text-sm">
 													{step === STEPS.length - 1 ? "send" : "arrow_forward"}
 												</span>

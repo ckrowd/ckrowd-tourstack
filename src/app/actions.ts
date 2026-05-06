@@ -1,9 +1,8 @@
 "use server";
 
+import { createClient } from "@ckrowd/ckrowd-prisma";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { createClient } from "@ckrowd/ckrowd-prisma";
-
 
 export type Params<T extends (...args: any) => any> = NonNullable<
 	Parameters<T>[0]
@@ -30,10 +29,13 @@ function extractResponseCookies(response: Response) {
 		const options: Record<string, string | boolean | number | Date> = {};
 		for (const attr of attrs) {
 			const attrEq = attr.indexOf("=");
-			const key = attrEq >= 0 ? attr.slice(0, attrEq).trim().toLowerCase() : attr.trim().toLowerCase();
+			const key =
+				attrEq >= 0
+					? attr.slice(0, attrEq).trim().toLowerCase()
+					: attr.trim().toLowerCase();
 			const val = attrEq >= 0 ? attr.slice(attrEq + 1).trim() : "";
 			if (key === "expires") options.expires = new Date(val);
-			else if (key === "max-age") options.maxAge = parseInt(val);
+			else if (key === "max-age") options.maxAge = parseInt(val, 10);
 			else if (key === "domain") options.domain = val;
 			else if (key === "path") options.path = val;
 			else if (key === "secure") options.secure = true;
@@ -75,10 +77,18 @@ function extractError(err: any): string {
 	return err?.value?.error ?? err?.value?.message ?? "Something went wrong";
 }
 
-function extractPayload<T>(value: T | null | undefined, response?: { status: number; headers?: HeadersInit }) {
+function extractPayload<T>(
+	value: T | null | undefined,
+	response?: { status: number; headers?: HeadersInit },
+) {
 	if (value == null) return undefined;
-	if (response?.status === 401 && ["POST", "PUT", "DELETE"].includes((response?.headers as Headers)?.get("X-Request-Method")??"GET")) {
-		redirect( "/login" );
+	if (
+		response?.status === 401 &&
+		["POST", "PUT", "DELETE"].includes(
+			(response?.headers as Headers)?.get("X-Request-Method") ?? "GET",
+		)
+	) {
+		redirect("/login");
 	}
 	return ((value as T extends { data?: infer P } ? { data?: P } : never)
 		?.data || undefined) as T extends { data?: infer P } ? P : undefined;
@@ -91,14 +101,27 @@ export async function getSession() {
 }
 
 export async function signIn(email: string, password: string) {
-	const { error } = await client.auth["sign-in"].email.post({ email, password });
+	const { error } = await client.auth["sign-in"].email.post({
+		email,
+		password,
+	});
 	if (error) return { success: false, error: extractError(error) };
 	return { success: true };
 }
 
-export async function signUp(name: string, email: string, password: string, confirmPassword: string) {
-	if (password !== confirmPassword) return { success: false, error: "Passwords don't match" };
-	const { error } = await client.auth["sign-up"].email.post({ name, email, password });
+export async function signUp(
+	name: string,
+	email: string,
+	password: string,
+	confirmPassword: string,
+) {
+	if (password !== confirmPassword)
+		return { success: false, error: "Passwords don't match" };
+	const { error } = await client.auth["sign-up"].email.post({
+		name,
+		email,
+		password,
+	});
 	if (error) return { success: false, error: extractError(error) };
 	return { success: true };
 }
@@ -145,7 +168,8 @@ export async function getTourstackProfile() {
 export async function updateTourstackProfile(
 	body: Payload<typeof client.tourstack.profile.patch>,
 ) {
-	const { data, error, status, headers } = await client.tourstack.profile.patch(body);
+	const { data, error, status, headers } =
+		await client.tourstack.profile.patch(body);
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
@@ -156,7 +180,8 @@ export async function updateTourstackProfile(
 // Dashboard
 
 export async function getTourstackDashboard() {
-	const { data, error, status, headers } = await client.tourstack.dashboard.get();
+	const { data, error, status, headers } =
+		await client.tourstack.dashboard.get();
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
@@ -167,9 +192,12 @@ export async function getTourstackDashboard() {
 // EOIs
 
 export async function getEOIs(status?: string) {
-	const { data, error, status: responseStatus, headers } = await client.tourstack.eoi.get(
-		status ? { query: { status } } : {},
-	);
+	const {
+		data,
+		error,
+		status: responseStatus,
+		headers,
+	} = await client.tourstack.eoi.get(status ? { query: { status } } : {});
 	return {
 		data: extractPayload(data, { status: responseStatus, headers }),
 		success: !error && data?.success,
@@ -178,7 +206,9 @@ export async function getEOIs(status?: string) {
 }
 
 export async function getEOI(id: string) {
-	const { data, error, status, headers } = await client.tourstack.eoi({ id }).get();
+	const { data, error, status, headers } = await client.tourstack
+		.eoi({ id })
+		.get();
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
@@ -189,7 +219,8 @@ export async function getEOI(id: string) {
 export async function createEOI(
 	body: Payload<typeof client.tourstack.eoi.post>,
 ) {
-	const { data, error, status, headers } = await client.tourstack.eoi.post(body);
+	const { data, error, status, headers } =
+		await client.tourstack.eoi.post(body);
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
@@ -199,9 +230,12 @@ export async function createEOI(
 
 // Tours
 export async function getTours(status?: string) {
-	const { data, error, status: responseStatus, headers } = await client.tourstack.tours.get(
-		status ? { query: { status } } : {},
-	);
+	const {
+		data,
+		error,
+		status: responseStatus,
+		headers,
+	} = await client.tourstack.tours.get(status ? { query: { status } } : {});
 	return {
 		data: extractPayload(data, { status: responseStatus, headers }),
 		success: !error && data?.success,
@@ -210,7 +244,9 @@ export async function getTours(status?: string) {
 }
 
 export async function getTour(id: string) {
-	const { data, error, status, headers } = await client.tourstack.tours({ id }).get();
+	const { data, error, status, headers } = await client.tourstack
+		.tours({ id })
+		.get();
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
@@ -219,7 +255,9 @@ export async function getTour(id: string) {
 }
 
 export async function getTourMilestones(id: string) {
-	const { data, error, status, headers } = await client.tourstack.tours({ id }).milestones.get();
+	const { data, error, status, headers } = await client.tourstack
+		.tours({ id })
+		.milestones.get();
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
@@ -229,9 +267,12 @@ export async function getTourMilestones(id: string) {
 
 // Financing
 export async function getFinancingApplications(status?: string) {
-	const { data, error, status: responseStatus, headers } = await client.tourstack.financing.get(
-		status ? { query: { status } } : {},
-	);
+	const {
+		data,
+		error,
+		status: responseStatus,
+		headers,
+	} = await client.tourstack.financing.get(status ? { query: { status } } : {});
 	return {
 		data: extractPayload(data, { status: responseStatus, headers }),
 		success: !error && data?.success,
@@ -240,7 +281,9 @@ export async function getFinancingApplications(status?: string) {
 }
 
 export async function getFinancingApplication(id: string) {
-	const { data, error, status, headers } = await client.tourstack.financing({ id }).get();
+	const { data, error, status, headers } = await client.tourstack
+		.financing({ id })
+		.get();
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
@@ -251,7 +294,8 @@ export async function getFinancingApplication(id: string) {
 export async function applyForFinancing(
 	body: Payload<typeof client.tourstack.financing.post>,
 ) {
-	const { data, error, status, headers } = await client.tourstack.financing.post(body);
+	const { data, error, status, headers } =
+		await client.tourstack.financing.post(body);
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
@@ -275,7 +319,9 @@ export async function getCrewMembers(
 }
 
 export async function getCrewMember(id: string) {
-	const { data, error, status, headers } = await client.tourstack.workforce({ id }).get();
+	const { data, error, status, headers } = await client.tourstack
+		.workforce({ id })
+		.get();
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
@@ -286,7 +332,8 @@ export async function getCrewMember(id: string) {
 export async function registerCrewMember(
 	body: Payload<typeof client.tourstack.workforce.post>,
 ) {
-	const { data, error, status, headers } = await client.tourstack.workforce.post(body);
+	const { data, error, status, headers } =
+		await client.tourstack.workforce.post(body);
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
@@ -318,10 +365,13 @@ export async function getOnboardingLinks() {
 	};
 }
 
-export async function createOnboardingLink(body: Payload<typeof client.tourstack["onboarding-links"]["post"]>) {
-	const { data, error, status, headers } = await client.tourstack["onboarding-links"].post(body);
+export async function createOnboardingLink(
+	body: Payload<(typeof client.tourstack)["onboarding-links"]["post"]>,
+) {
+	const { data, error, status, headers } =
+		await client.tourstack["onboarding-links"].post(body);
 	return {
-		data: extractPayload(data, { status, headers }	),
+		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error),
 	};
@@ -329,9 +379,7 @@ export async function createOnboardingLink(body: Payload<typeof client.tourstack
 
 export async function getOnboardingLink(token: string) {
 	const apiUrl = process.env.API_URL ?? "https://gateway.ckrowd.com";
-	const res = await fetch(
-		`${apiUrl}/tourstack/onboarding-links/${token}`
-	);
+	const res = await fetch(`${apiUrl}/tourstack/onboarding-links/${token}`);
 	const data = await res.json();
 	return {
 		data: data?.data,
@@ -341,11 +389,13 @@ export async function getOnboardingLink(token: string) {
 }
 
 export async function revokeOnboardingLink(token: string) {
-	const { data, error, status, headers } = await client.tourstack["onboarding-links"]({
+	const { data, error, status, headers } = await client.tourstack[
+		"onboarding-links"
+	]({
 		token,
 	}).delete();
 	return {
-		data: extractPayload(data, { status, headers }	),
+		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error),
 	};
@@ -353,7 +403,9 @@ export async function revokeOnboardingLink(token: string) {
 
 export async function submitOnboardingLink(
 	token: string,
-	body: Payload<ReturnType<typeof client.tourstack["onboarding-links"]>["submit"]["post"]>,
+	body: Payload<
+		ReturnType<(typeof client.tourstack)["onboarding-links"]>["submit"]["post"]
+	>,
 ) {
 	const { data, error } = await client.tourstack["onboarding-links"]({
 		token,
@@ -392,7 +444,8 @@ export async function getAdminTours(status?: string) {
 export async function createAdminTour(
 	body: Payload<typeof client.tourstack.admin.tours.post>,
 ) {
-	const { data, error, status, headers } = await client.tourstack.admin.tours.post(body);
+	const { data, error, status, headers } =
+		await client.tourstack.admin.tours.post(body);
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,

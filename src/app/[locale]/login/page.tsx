@@ -1,10 +1,10 @@
 "use client";
 
-import { Link, useRouter } from "@/i18n/routing";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { Suspense, useEffect, useState } from "react";
-import { useSession, useLogin } from "@/context/AuthContext";
-import { useTranslations } from 'next-intl';
+import { useLogin, useSession } from "@/context/AuthContext";
+import { Link, useRouter } from "@/i18n/routing";
 
 function LoginPageContent() {
 	const router = useRouter();
@@ -12,8 +12,8 @@ function LoginPageContent() {
 	const { data: session, isLoading } = useSession();
 	const loginMutation = useLogin();
 	const from = searchParams.get("from") ?? "/dashboard";
-  const t = useTranslations('LoginPage');
-  const tCommon = useTranslations('Common');
+	const t = useTranslations("LoginPage");
+	const tCommon = useTranslations("Common");
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -33,12 +33,12 @@ function LoginPageContent() {
 			{
 				onSuccess: (result) => {
 					if (!result.success) {
-						setError(result.error ?? t('errorInvalid'));
+						setError(result.error ?? t("errorInvalid"));
 					} else {
 						router.replace(from);
 					}
 				},
-				onError: () => setError(t('errorFailed')),
+				onError: () => setError(t("errorFailed")),
 			},
 		);
 	}
@@ -46,7 +46,7 @@ function LoginPageContent() {
 	if (isLoading && !session) {
 		return (
 			<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 text-slate-600">
-				{t('loading')}
+				{t("loading")}
 			</div>
 		);
 	}
@@ -59,21 +59,19 @@ function LoginPageContent() {
 						href="/"
 						className="text-3xl font-black tracking-tight text-[#FF5A30] font-(family-name:--font-manrope)"
 					>
-						{tCommon('brandName')} {tCommon('brandBy')}
+						{tCommon("brandName")} {tCommon("brandBy")}
 					</Link>
 					<p className="mt-2 text-sm text-slate-500 font-medium">
-						{t('description')}
+						{t("description")}
 					</p>
 				</div>
 
 				<div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
 					<div className="mb-8">
 						<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-slate-900 mb-1">
-							{t('title')}
+							{t("title")}
 						</h1>
-						<p className="text-sm text-slate-500">
-							{t('description')}
-						</p>
+						<p className="text-sm text-slate-500">{t("description")}</p>
 					</div>
 
 					<form onSubmit={handleSubmit} className="space-y-5">
@@ -82,13 +80,13 @@ function LoginPageContent() {
 								htmlFor="email"
 								className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
 							>
-								{t('email')}
+								{t("email")}
 							</label>
 							<input
 								id="email"
 								type="email"
 								autoComplete="email"
-								placeholder={t('emailPlaceholder')}
+								placeholder={t("emailPlaceholder")}
 								value={email}
 								onChange={(event) => setEmail(event.target.value)}
 								required
@@ -101,13 +99,13 @@ function LoginPageContent() {
 								htmlFor="password"
 								className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
 							>
-								{t('password')}
+								{t("password")}
 							</label>
 							<input
 								id="password"
 								type="password"
 								autoComplete="current-password"
-								placeholder={t('passwordPlaceholder')}
+								placeholder={t("passwordPlaceholder")}
 								value={password}
 								onChange={(event) => setPassword(event.target.value)}
 								required
@@ -126,35 +124,35 @@ function LoginPageContent() {
 							disabled={loginMutation.isPending}
 							className="w-full py-3 bg-[#FF5A30] text-white font-bold rounded-xl shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60"
 						>
-							{loginMutation.isPending ? t('signingIn') : t('signIn')}
+							{loginMutation.isPending ? t("signingIn") : t("signIn")}
 						</button>
 					</form>
 
 					<p className="text-center text-sm text-slate-500 mt-6">
-						{t('noAccount')}{" "}
+						{t("noAccount")}{" "}
 						<Link
 							href="/register"
 							className="text-[#FF5A30] font-semibold hover:underline"
 						>
-							{t('register')}
+							{t("register")}
 						</Link>
 					</p>
 				</div>
 
 				<p className="text-center text-xs text-slate-400 mt-6">
-					{t('agreeTo')}{" "}
+					{t("agreeTo")}{" "}
 					<Link
 						href="/terms"
 						className="hover:text-[#FF5A30] transition-colors"
 					>
-						{t('terms')}
+						{t("terms")}
 					</Link>{" "}
-					{t('and')}{" "}
+					{t("and")}{" "}
 					<Link
 						href="/privacy"
 						className="hover:text-[#FF5A30] transition-colors"
 					>
-						{t('privacy')}
+						{t("privacy")}
 					</Link>
 					.
 				</p>
@@ -164,12 +162,12 @@ function LoginPageContent() {
 }
 
 export default function LoginPage() {
-  const t = useTranslations('LoginPage');
+	const t = useTranslations("LoginPage");
 	return (
 		<Suspense
 			fallback={
 				<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 text-slate-600">
-					{t('loading')}
+					{t("loading")}
 				</div>
 			}
 		>

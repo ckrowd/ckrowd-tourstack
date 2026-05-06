@@ -1,23 +1,23 @@
 "use client";
-import Footer from "@/components/Footer";
+import { useQuery } from "@tanstack/react-query";
 
 import Image from "next/image";
-import { Link } from "@/i18n/routing";
+import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
 import { getArtists } from "@/app/actions";
+import Footer from "@/components/Footer";
 import TopNav from "@/components/TopNav";
-import { useTranslations, useLocale } from 'next-intl';
+import { Link } from "@/i18n/routing";
 
 export default function DiscoveryPage() {
-	const t = useTranslations('DiscoveryPage');
+	const t = useTranslations("DiscoveryPage");
 	const locale = useLocale();
 
 	const FEE_RANGES: { label: string; min: number; max: number }[] = [
-		{ label: t('feeRanges.r1'), min: 5000, max: 15000 },
-		{ label: t('feeRanges.r2'), min: 15000, max: 50000 },
-		{ label: t('feeRanges.r3'), min: 50000, max: 150000 },
-		{ label: t('feeRanges.r4'), min: 150000, max: Infinity },
+		{ label: t("feeRanges.r1"), min: 5000, max: 15000 },
+		{ label: t("feeRanges.r2"), min: 15000, max: 50000 },
+		{ label: t("feeRanges.r3"), min: 50000, max: 150000 },
+		{ label: t("feeRanges.r4"), min: 150000, max: Infinity },
 	];
 
 	const [genre, setGenre] = useState("All Genres");
@@ -77,15 +77,17 @@ export default function DiscoveryPage() {
 				<header className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
 					<div className="lg:col-span-8">
 						<span className="text-[#FF5A30] font-bold uppercase tracking-widest text-xs mb-4 block">
-							{t('hero.platform')}
+							{t("hero.platform")}
 						</span>
 						<h1 className="font-(family-name:--font-manrope) text-5xl md:text-6xl font-extrabold text-on-surface leading-tight tracking-tighter">
-							{t.rich('hero.title', {
-								spanNode: (chunks) => <span className="text-[#FF5A30]">{chunks}</span>
+							{t.rich("hero.title", {
+								spanNode: (chunks) => (
+									<span className="text-[#FF5A30]">{chunks}</span>
+								),
 							})}
 						</h1>
 						<p className="mt-6 text-on-surface-variant text-lg max-w-xl leading-relaxed">
-							{t('hero.description')}
+							{t("hero.description")}
 						</p>
 					</div>
 					<div className="lg:col-span-4 flex justify-start lg:justify-end pb-2">
@@ -98,10 +100,10 @@ export default function DiscoveryPage() {
 							</span>
 							<div>
 								<p className="font-(family-name:--font-manrope) font-bold text-on-tertiary-fixed leading-tight">
-									{t('trending.title')}
+									{t("trending.title")}
 								</p>
 								<p className="text-on-tertiary-fixed-variant text-sm mt-1 leading-relaxed">
-									{t('trending.description')}
+									{t("trending.description")}
 								</p>
 							</div>
 						</div>
@@ -115,7 +117,7 @@ export default function DiscoveryPage() {
 							htmlFor="filter-genre"
 							className="block text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5 ml-1"
 						>
-							{t('filters.genre')}
+							{t("filters.genre")}
 						</label>
 						<div className="relative">
 							<select
@@ -124,13 +126,15 @@ export default function DiscoveryPage() {
 								onChange={(e) => setGenre(e.target.value)}
 								className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A30]/20 appearance-none outline-none"
 							>
-								<option value="All Genres">{t('filters.allGenres')}</option>
-								<option value="Afrobeats">{t('genres.afrobeats')}</option>
-								<option value="Electronic">{t('genres.electronic')}</option>
-								<option value="Indie Rock">{t('genres.indieRock')}</option>
-								<option value="Jazz & Soul">{t('genres.jazzSoul')}</option>
-								<option value="World / Folk">{t('genres.worldFolk')}</option>
-								<option value="Modern Classical">{t('genres.modernClassical')}</option>
+								<option value="All Genres">{t("filters.allGenres")}</option>
+								<option value="Afrobeats">{t("genres.afrobeats")}</option>
+								<option value="Electronic">{t("genres.electronic")}</option>
+								<option value="Indie Rock">{t("genres.indieRock")}</option>
+								<option value="Jazz & Soul">{t("genres.jazzSoul")}</option>
+								<option value="World / Folk">{t("genres.worldFolk")}</option>
+								<option value="Modern Classical">
+									{t("genres.modernClassical")}
+								</option>
 							</select>
 							<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">
 								expand_more
@@ -143,7 +147,7 @@ export default function DiscoveryPage() {
 							htmlFor="filter-window"
 							className="block text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5 ml-1"
 						>
-							{t('filters.availableWindow')}
+							{t("filters.availableWindow")}
 						</label>
 						<div className="relative">
 							<select
@@ -152,11 +156,19 @@ export default function DiscoveryPage() {
 								onChange={(e) => setWindow(e.target.value)}
 								className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A30]/20 appearance-none outline-none"
 							>
-								<option value="All Windows">{t('filters.allWindows')}</option>
-								<option value="Q3 2024 (Jul–Sep)">{t('windows.q3_2024')}</option>
-								<option value="Q4 2024 (Oct–Dec)">{t('windows.q4_2024')}</option>
-								<option value="Q1 2025 (Jan–Mar)">{t('windows.q1_2025')}</option>
-								<option value="Q2 2025 (Apr–Jun)">{t('windows.q2_2025')}</option>
+								<option value="All Windows">{t("filters.allWindows")}</option>
+								<option value="Q3 2024 (Jul–Sep)">
+									{t("windows.q3_2024")}
+								</option>
+								<option value="Q4 2024 (Oct–Dec)">
+									{t("windows.q4_2024")}
+								</option>
+								<option value="Q1 2025 (Jan–Mar)">
+									{t("windows.q1_2025")}
+								</option>
+								<option value="Q2 2025 (Apr–Jun)">
+									{t("windows.q2_2025")}
+								</option>
 							</select>
 							<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">
 								calendar_today
@@ -169,7 +181,7 @@ export default function DiscoveryPage() {
 							htmlFor="filter-fee"
 							className="block text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5 ml-1"
 						>
-							{t('filters.feeRange')}
+							{t("filters.feeRange")}
 						</label>
 						<div className="relative">
 							<select
@@ -178,7 +190,7 @@ export default function DiscoveryPage() {
 								onChange={(e) => setFeeRange(e.target.value)}
 								className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A30]/20 appearance-none outline-none"
 							>
-								<option value="All Ranges">{t('filters.allRanges')}</option>
+								<option value="All Ranges">{t("filters.allRanges")}</option>
 								{FEE_RANGES.map((r) => (
 									<option key={r.label} value={r.label}>
 										{r.label}
@@ -196,7 +208,7 @@ export default function DiscoveryPage() {
 							htmlFor="filter-region"
 							className="block text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5 ml-1"
 						>
-							{t('filters.region')}
+							{t("filters.region")}
 						</label>
 						<div className="relative">
 							<select
@@ -205,11 +217,13 @@ export default function DiscoveryPage() {
 								onChange={(e) => setRegion(e.target.value)}
 								className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A30]/20 appearance-none outline-none"
 							>
-								<option value="All Africa">{t('filters.allAfrica')}</option>
-								<option value="West Africa">{t('regions.westAfrica')}</option>
-								<option value="East Africa">{t('regions.eastAfrica')}</option>
-								<option value="Southern Africa">{t('regions.southernAfrica')}</option>
-								<option value="North Africa">{t('regions.northAfrica')}</option>
+								<option value="All Africa">{t("filters.allAfrica")}</option>
+								<option value="West Africa">{t("regions.westAfrica")}</option>
+								<option value="East Africa">{t("regions.eastAfrica")}</option>
+								<option value="Southern Africa">
+									{t("regions.southernAfrica")}
+								</option>
+								<option value="North Africa">{t("regions.northAfrica")}</option>
 							</select>
 							<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">
 								public
@@ -228,7 +242,7 @@ export default function DiscoveryPage() {
 						className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-bold text-sm flex items-center gap-2 hover:opacity-90 transition-all shadow-lg shadow-[#FF5A30]/20 self-end"
 					>
 						<span className="material-symbols-outlined text-sm">tune</span>
-						{t('filters.resetFilters')}
+						{t("filters.resetFilters")}
 					</button>
 				</section>
 
@@ -237,18 +251,18 @@ export default function DiscoveryPage() {
 					<div className="lg:col-span-9">
 						<div className="flex items-center justify-between mb-8">
 							<h2 className="font-(family-name:--font-manrope) text-2xl font-bold">
-								{t('activeTourProjects')}{" "}
+								{t("activeTourProjects")}{" "}
 								<span className="text-on-surface-variant font-normal text-lg">
 									({filtered.length})
 								</span>
 							</h2>
 							<div className="flex items-center gap-2 text-on-surface-variant text-sm font-medium">
-								<span>{t('sortBy.label')}</span>
+								<span>{t("sortBy.label")}</span>
 								<button
 									type="button"
 									className="text-[#FF5A30] font-bold flex items-center gap-1"
 								>
-									{t('sortBy.newestFirst')}{" "}
+									{t("sortBy.newestFirst")}{" "}
 									<span className="material-symbols-outlined text-xs">
 										arrow_drop_down
 									</span>
@@ -261,12 +275,8 @@ export default function DiscoveryPage() {
 								<span className="material-symbols-outlined text-5xl mb-4">
 									search_off
 								</span>
-								<p className="font-bold text-lg">
-									{t('noResults.title')}
-								</p>
-								<p className="text-sm mt-1">
-									{t('noResults.description')}
-								</p>
+								<p className="font-bold text-lg">{t("noResults.title")}</p>
+								<p className="text-sm mt-1">{t("noResults.description")}</p>
 							</div>
 						) : (
 							<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -298,7 +308,7 @@ export default function DiscoveryPage() {
 											{!!artist.is_trending && (
 												<div className="absolute top-4 right-4">
 													<span className="bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shadow-sm">
-														{t('trendingLabel')}
+														{t("trendingLabel")}
 													</span>
 												</div>
 											)}
@@ -351,7 +361,7 @@ export default function DiscoveryPage() {
 													href={`/eoi${artist.id ? `?id=${String(artist.id)}` : ""}`}
 													className="block w-full bg-[#FF5A30] py-3 rounded-xl text-white font-bold text-sm tracking-wide shadow-md shadow-[#FF5A30]/10 active:scale-[0.98] transition-all text-center"
 												>
-													{t('submitEoi')}
+													{t("submitEoi")}
 												</Link>
 											</div>
 										</div>
@@ -366,29 +376,29 @@ export default function DiscoveryPage() {
 						{/* How it Works */}
 						<div className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
 							<h3 className="font-(family-name:--font-manrope) text-xl font-bold mb-6">
-								{t('howItWorks.title')}
+								{t("howItWorks.title")}
 							</h3>
 							<div className="space-y-7">
 								{[
 									{
 										step: "01",
-										title: t('howItWorks.step1.title'),
-										desc: t('howItWorks.step1.description'),
+										title: t("howItWorks.step1.title"),
+										desc: t("howItWorks.step1.description"),
 									},
 									{
 										step: "02",
-										title: t('howItWorks.step2.title'),
-										desc: t('howItWorks.step2.description'),
+										title: t("howItWorks.step2.title"),
+										desc: t("howItWorks.step2.description"),
 									},
 									{
 										step: "03",
-										title: t('howItWorks.step3.title'),
-										desc: t('howItWorks.step3.description'),
+										title: t("howItWorks.step3.title"),
+										desc: t("howItWorks.step3.description"),
 									},
 									{
 										step: "04",
-										title: t('howItWorks.step4.title'),
-										desc: t('howItWorks.step4.description'),
+										title: t("howItWorks.step4.title"),
+										desc: t("howItWorks.step4.description"),
 									},
 								].map((item) => (
 									<div key={item.step} className="flex gap-4">
@@ -411,7 +421,7 @@ export default function DiscoveryPage() {
 									href="/eoi"
 									className="w-full text-[#FF5A30] font-bold text-sm flex items-center justify-center gap-2 py-2 hover:bg-primary-fixed/30 rounded-lg transition-colors"
 								>
-									{t('howItWorks.startEoi')}{" "}
+									{t("howItWorks.startEoi")}{" "}
 									<span className="material-symbols-outlined text-sm">
 										arrow_forward
 									</span>
@@ -423,16 +433,16 @@ export default function DiscoveryPage() {
 						<div className="bg-linear-to-br from-[#FF5A30] to-[#cc4826] rounded-2xl p-8 text-white relative overflow-hidden group">
 							<div className="relative z-10">
 								<h4 className="font-(family-name:--font-manrope) text-xl font-bold leading-tight">
-									{t('financing.title')}
+									{t("financing.title")}
 								</h4>
 								<p className="text-white/90 text-sm mt-3 leading-relaxed">
-									{t('financing.description')}
+									{t("financing.description")}
 								</p>
 								<Link
 									href="/eoi"
 									className="mt-6 inline-block bg-white text-[#FF5A30] px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider hover:scale-105 transition-transform"
 								>
-									{t('financing.applyButton')}
+									{t("financing.applyButton")}
 								</Link>
 							</div>
 							<span className="material-symbols-outlined absolute -bottom-4 -right-4 text-white/10 text-[120px] rotate-12 group-hover:scale-110 transition-transform duration-500">
@@ -443,14 +453,17 @@ export default function DiscoveryPage() {
 						{/* Platform Stats */}
 						<div className="bg-surface-container-high rounded-2xl p-8">
 							<h3 className="font-(family-name:--font-manrope) font-bold text-sm uppercase tracking-widest text-on-surface-variant mb-6">
-								{t('platformStats.title')}
+								{t("platformStats.title")}
 							</h3>
 							<div className="grid grid-cols-2 gap-4">
 								{[
-									{ value: "24", label: t('platformStats.markets') },
-									{ value: "500+", label: t('platformStats.promoters') },
-									{ value: `${filtered.length}`, label: t('platformStats.activeTours') },
-									{ value: "48h", label: t('platformStats.avgReview') },
+									{ value: "24", label: t("platformStats.markets") },
+									{ value: "500+", label: t("platformStats.promoters") },
+									{
+										value: `${filtered.length}`,
+										label: t("platformStats.activeTours"),
+									},
+									{ value: "48h", label: t("platformStats.avgReview") },
 								].map((stat) => (
 									<div
 										key={stat.label}
@@ -468,8 +481,8 @@ export default function DiscoveryPage() {
 						</div>
 					</aside>
 				</div>
-			  <Footer />
-</main>
+				<Footer />
+			</main>
 		</div>
 	);
 }

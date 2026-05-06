@@ -1,113 +1,113 @@
 "use client";
 
-import { Link } from "@/i18n/routing";
-import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { registerCrewMember } from "@/app/actions";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
-import { registerCrewMember } from "@/app/actions";
-import { useTranslations } from 'next-intl';
+import { Link } from "@/i18n/routing";
 
 /* ─────────────────────────── constants ─────────────────────────── */
 
 function useWorkforceConstants() {
-	const t = useTranslations('WorkforcePage');
+	const t = useTranslations("WorkforcePage");
 
 	const STEPS = [
-		{ label: t('steps.personal') },
-		{ label: t('steps.role') },
-		{ label: t('steps.touring') },
-		{ label: t('steps.credentials') },
-		{ label: t('steps.wcs') },
+		{ label: t("steps.personal") },
+		{ label: t("steps.role") },
+		{ label: t("steps.touring") },
+		{ label: t("steps.credentials") },
+		{ label: t("steps.wcs") },
 	];
 
 	const ROLES = [
-		t('roles.stageManager'),
-		t('roles.productionManager'),
-		t('roles.tourManager'),
-		t('roles.fohEngineer'),
-		t('roles.monitorEngineer'),
-		t('roles.lightingDesigner'),
-		t('roles.rigger'),
-		t('roles.backlineTech'),
-		t('roles.pyrotechnics'),
-		t('roles.logisticsCoordinator'),
-		t('roles.securityLead'),
-		t('roles.merchandiseManager'),
-		t('roles.hospitalityManager'),
-		t('roles.videoTech'),
-		t('roles.photographer'),
-		t('roles.other'),
+		t("roles.stageManager"),
+		t("roles.productionManager"),
+		t("roles.tourManager"),
+		t("roles.fohEngineer"),
+		t("roles.monitorEngineer"),
+		t("roles.lightingDesigner"),
+		t("roles.rigger"),
+		t("roles.backlineTech"),
+		t("roles.pyrotechnics"),
+		t("roles.logisticsCoordinator"),
+		t("roles.securityLead"),
+		t("roles.merchandiseManager"),
+		t("roles.hospitalityManager"),
+		t("roles.videoTech"),
+		t("roles.photographer"),
+		t("roles.other"),
 	];
 
 	const TIER_CONFIG = [
 		{
 			tier: 1,
-			label: t('tiers.tier1.label'),
-			range: t('tiers.tier1.range'),
+			label: t("tiers.tier1.label"),
+			range: t("tiers.tier1.range"),
 			color: "slate",
 			bg: "bg-slate-100",
 			text: "text-slate-700",
 			border: "border-slate-300",
 			ring: "ring-slate-300",
 			perks: [
-				t('tiers.tier1.perks.database'),
-				t('tiers.tier1.perks.noDeployment'),
-				t('tiers.tier1.perks.training'),
-				t('tiers.tier1.perks.assessment'),
+				t("tiers.tier1.perks.database"),
+				t("tiers.tier1.perks.noDeployment"),
+				t("tiers.tier1.perks.training"),
+				t("tiers.tier1.perks.assessment"),
 			],
 			aya: null,
 		},
 		{
 			tier: 2,
-			label: t('tiers.tier2.label'),
-			range: t('tiers.tier2.range'),
+			label: t("tiers.tier2.label"),
+			range: t("tiers.tier2.range"),
 			color: "emerald",
 			bg: "bg-emerald-100",
 			text: "text-emerald-800",
 			border: "border-emerald-300",
 			ring: "ring-emerald-400",
 			perks: [
-				t('tiers.tier2.perks.local'),
-				t('tiers.tier2.perks.payment'),
-				t('tiers.tier2.perks.insurance'),
+				t("tiers.tier2.perks.local"),
+				t("tiers.tier2.perks.payment"),
+				t("tiers.tier2.perks.insurance"),
 			],
-			aya: t('tiers.tier2.aya'),
+			aya: t("tiers.tier2.aya"),
 		},
 		{
 			tier: 3,
-			label: t('tiers.tier3.label'),
-			range: t('tiers.tier3.range'),
+			label: t("tiers.tier3.label"),
+			range: t("tiers.tier3.range"),
 			color: "blue",
 			bg: "bg-blue-100",
 			text: "text-blue-800",
 			border: "border-blue-300",
 			ring: "ring-blue-400",
 			perks: [
-				t('tiers.tier3.perks.cluster'),
-				t('tiers.tier3.perks.preferred'),
-				t('tiers.tier3.perks.terms'),
-				t('tiers.tier3.perks.perDiem'),
+				t("tiers.tier3.perks.cluster"),
+				t("tiers.tier3.perks.preferred"),
+				t("tiers.tier3.perks.terms"),
+				t("tiers.tier3.perks.perDiem"),
 			],
-			aya: t('tiers.tier3.aya'),
+			aya: t("tiers.tier3.aya"),
 		},
 		{
 			tier: 4,
-			label: t('tiers.tier4.label'),
-			range: t('tiers.tier4.range'),
+			label: t("tiers.tier4.label"),
+			range: t("tiers.tier4.range"),
 			color: "amber",
 			bg: "bg-amber-100",
 			text: "text-amber-800",
 			border: "border-amber-400",
 			ring: "ring-amber-500",
 			perks: [
-				t('tiers.tier4.perks.panAfrican'),
-				t('tiers.tier4.perks.lead'),
-				t('tiers.tier4.perks.terms'),
-				t('tiers.tier4.perks.insurance'),
-				t('tiers.tier4.perks.mentorship'),
+				t("tiers.tier4.perks.panAfrican"),
+				t("tiers.tier4.perks.lead"),
+				t("tiers.tier4.perks.terms"),
+				t("tiers.tier4.perks.insurance"),
+				t("tiers.tier4.perks.mentorship"),
 			],
-			aya: t('tiers.tier4.aya'),
+			aya: t("tiers.tier4.aya"),
 		},
 	];
 
@@ -119,29 +119,29 @@ function useWorkforceConstants() {
 function calcWCS(form: FormData, t: ReturnType<typeof useTranslations>) {
 	// Base — Experience (max 35)
 	const expMap: Record<string, number> = {
-		[t('role.yearsExperience.options.lessThan1')]: 5,
-		[t('role.yearsExperience.options.1to3')]: 14,
-		[t('role.yearsExperience.options.4to7')]: 21,
-		[t('role.yearsExperience.options.8to12')]: 28,
-		[t('role.yearsExperience.options.13plus')]: 35,
+		[t("role.yearsExperience.options.lessThan1")]: 5,
+		[t("role.yearsExperience.options.1to3")]: 14,
+		[t("role.yearsExperience.options.4to7")]: 21,
+		[t("role.yearsExperience.options.8to12")]: 28,
+		[t("role.yearsExperience.options.13plus")]: 35,
 	};
 	const expPts = expMap[form.yearsExperience] ?? 0;
 
 	// Base — Scale (max 40)
 	const scaleMap: Record<string, number> = {
-		[t('role.largestEvent.options.under500')]: 5,
-		[t('role.largestEvent.options.500to2000')]: 15,
-		[t('role.largestEvent.options.2001to10000')]: 25,
-		[t('role.largestEvent.options.10001to50000')]: 33,
-		[t('role.largestEvent.options.50000plus')]: 40,
+		[t("role.largestEvent.options.under500")]: 5,
+		[t("role.largestEvent.options.500to2000")]: 15,
+		[t("role.largestEvent.options.2001to10000")]: 25,
+		[t("role.largestEvent.options.10001to50000")]: 33,
+		[t("role.largestEvent.options.50000plus")]: 40,
 	};
 	const scalePts = scaleMap[form.largestEvent] ?? 0;
 
 	// Base — Touring availability (max 25)
 	const tourMap: Record<string, number> = {
-		[t('touring.availability.options.move')]: 25,
-		[t('touring.availability.options.flexible')]: 14,
-		[t('touring.availability.options.local')]: 5,
+		[t("touring.availability.options.move")]: 25,
+		[t("touring.availability.options.flexible")]: 14,
+		[t("touring.availability.options.local")]: 5,
 	};
 	const tourPts = tourMap[form.tourAvailability] ?? 0;
 
@@ -150,22 +150,22 @@ function calcWCS(form: FormData, t: ReturnType<typeof useTranslations>) {
 	// Bonus
 	const bonusItems: { label: string; pts: number; earned: boolean }[] = [
 		{
-			label: t('bonus.deployment48h'),
+			label: t("bonus.deployment48h"),
 			pts: 10,
-			earned: form.deployIn48h === t('touring.deploy48h.options.yes'),
+			earned: form.deployIn48h === t("touring.deploy48h.options.yes"),
 		},
 		{
-			label: t('bonus.passport'),
+			label: t("bonus.passport"),
 			pts: 10,
-			earned: form.validPassport === t('touring.passport.options.yes'),
+			earned: form.validPassport === t("touring.passport.options.yes"),
 		},
 		{
-			label: t('bonus.reference'),
+			label: t("bonus.reference"),
 			pts: 15,
 			earned: form.refereeName.trim().length > 0,
 		},
 		{
-			label: t('bonus.portfolio'),
+			label: t("bonus.portfolio"),
 			pts: 10,
 			earned: form.portfolioLinks.trim().length > 0,
 		},
@@ -266,7 +266,7 @@ function Label({
 	children: React.ReactNode;
 	optional?: boolean;
 }) {
-	const t = useTranslations('WorkforcePage.shared');
+	const t = useTranslations("WorkforcePage.shared");
 	return (
 		<label
 			htmlFor={htmlFor}
@@ -274,7 +274,9 @@ function Label({
 		>
 			{children}
 			{optional && (
-				<span className="ml-1 font-normal italic text-xs">({t('optional')})</span>
+				<span className="ml-1 font-normal italic text-xs">
+					({t("optional")})
+				</span>
 			)}
 		</label>
 	);
@@ -298,14 +300,16 @@ function RadioGroup({
 						key={opt}
 						type="button"
 						onClick={() => onChange(opt)}
-						className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold border transition-all text-left ${checked
+						className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold border transition-all text-left ${
+							checked
 								? "bg-[#FF5A30]/10 border-[#FF5A30] text-[#FF5A30]"
 								: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A30]/40"
-							}`}
+						}`}
 					>
 						<span
-							className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 border-2 transition-colors ${checked ? "border-[#FF5A30]" : "border-current"
-								}`}
+							className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 border-2 transition-colors ${
+								checked ? "border-[#FF5A30]" : "border-current"
+							}`}
 						>
 							{checked && (
 								<span className="w-2.5 h-2.5 rounded-full bg-[#FF5A30] block" />
@@ -319,7 +323,13 @@ function RadioGroup({
 	);
 }
 
-function Stepper({ current, steps }: { current: number; steps: { label: string }[] }) {
+function Stepper({
+	current,
+	steps,
+}: {
+	current: number;
+	steps: { label: string }[];
+}) {
 	const progress = (current / (steps.length - 1)) * 100;
 	return (
 		<div className="mb-12">
@@ -338,10 +348,11 @@ function Stepper({ current, steps }: { current: number; steps: { label: string }
 							className="relative z-10 flex flex-col items-center"
 						>
 							<div
-								className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ring-4 ring-surface-container-low ${done || active
+								className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ring-4 ring-surface-container-low ${
+									done || active
 										? "bg-[#FF5A30] text-white"
 										: "bg-surface-variant text-on-surface-variant"
-									}`}
+								}`}
 							>
 								{done ? (
 									<span
@@ -355,12 +366,13 @@ function Stepper({ current, steps }: { current: number; steps: { label: string }
 								)}
 							</div>
 							<span
-								className={`mt-2 text-[10px] font-bold uppercase tracking-wider text-center  leading-tight ${active
+								className={`mt-2 text-[10px] font-bold uppercase tracking-wider text-center  leading-tight ${
+									active
 										? "text-[#FF5A30]"
 										: done
 											? "text-[#FF5A30]/70"
 											: "text-on-surface-variant"
-									}`}
+								}`}
 							>
 								{step.label}
 							</span>
@@ -374,8 +386,16 @@ function Stepper({ current, steps }: { current: number; steps: { label: string }
 
 /* ─────────────────────────── WCS score display ─────────────────────────── */
 
-function ScoreGauge({ score, max = 145, tierConfig }: { score: number; max?: number; tierConfig: ReturnType<typeof useWorkforceConstants>["TIER_CONFIG"] }) {
-	const t = useTranslations('WorkforcePage.score');
+function ScoreGauge({
+	score,
+	max = 145,
+	tierConfig,
+}: {
+	score: number;
+	max?: number;
+	tierConfig: ReturnType<typeof useWorkforceConstants>["TIER_CONFIG"];
+}) {
+	const t = useTranslations("WorkforcePage.score");
 	const pct = Math.min((score / max) * 100, 100);
 	const tier =
 		tierConfig[score >= 86 ? 3 : score >= 71 ? 2 : score >= 51 ? 1 : 0];
@@ -422,7 +442,7 @@ function ScoreGauge({ score, max = 145, tierConfig }: { score: number; max?: num
 									? "badge"
 									: "person"}
 					</span>
-					{t('tier')} {tier.tier} — {tier.label}
+					{t("tier")} {tier.tier} — {tier.label}
 				</div>
 			</div>
 
@@ -446,7 +466,7 @@ function ScoreGauge({ score, max = 145, tierConfig }: { score: number; max?: num
 /* ─────────────────────────── main page ─────────────────────────── */
 
 export default function WorkforcePage() {
-	const t = useTranslations('WorkforcePage');
+	const t = useTranslations("WorkforcePage");
 	const { STEPS, ROLES, TIER_CONFIG } = useWorkforceConstants();
 	const [step, setStep] = useState(0);
 	const [form, setForm] = useState<FormData>(defaultForm);
@@ -460,9 +480,9 @@ export default function WorkforcePage() {
 	const submitError = submitMutation.error
 		? submitMutation.error instanceof Error
 			? submitMutation.error.message
-			: t('errors.failed')
+			: t("errors.failed")
 		: submitMutation.data && !submitMutation.data.success
-			? (submitMutation.data.error ?? t('errors.failed'))
+			? (submitMutation.data.error ?? t("errors.failed"))
 			: null;
 
 	function set<K extends keyof FormData>(field: K, value: FormData[K]) {
@@ -484,10 +504,10 @@ export default function WorkforcePage() {
 							<ScoreGauge score={wcs.total} tierConfig={TIER_CONFIG} />
 							<div className="mt-8 mb-4">
 								<h1 className="text-3xl font-extrabold tracking-tight text-on-surface mb-2 font-(family-name:--font-manrope)">
-									{t('success.title')}
+									{t("success.title")}
 								</h1>
 								<p className="text-on-surface-variant">
-									{t('success.description')}
+									{t("success.description")}
 								</p>
 							</div>
 
@@ -508,7 +528,7 @@ export default function WorkforcePage() {
 													: "person"}
 									</span>
 									<h4 className={`text-sm font-bold ${tier.text}`}>
-										{t('score.tier')} {tier.tier} — {tier.label}
+										{t("score.tier")} {tier.tier} — {tier.label}
 									</h4>
 								</div>
 								<ul className="space-y-1.5">
@@ -536,7 +556,7 @@ export default function WorkforcePage() {
 											star
 										</span>
 										<span className={`text-xs font-bold ${tier.text}`}>
-											{t('success.ayaPilot')}: {tier.aya}
+											{t("success.ayaPilot")}: {tier.aya}
 										</span>
 									</div>
 								)}
@@ -547,17 +567,17 @@ export default function WorkforcePage() {
 									href="/dashboard"
 									className="px-8 py-3 bg-[#FF5A30] text-white rounded-xl font-bold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform"
 								>
-									{t('success.viewDashboard')}
+									{t("success.viewDashboard")}
 								</Link>
 								<Link
 									href="/discovery"
 									className="px-8 py-3 bg-surface-container-lowest text-on-surface rounded-xl font-bold border border-outline-variant/20 hover:bg-surface-container-low transition-colors"
 								>
-									{t('success.browseTours')}
+									{t("success.browseTours")}
 								</Link>
 							</div>
 							<p className="mt-6 text-xs text-on-surface-variant">
-								{t('success.enquiries')}:{" "}
+								{t("success.enquiries")}:{" "}
 								<span className="font-semibold">workforce@ckrowd.africa</span>
 							</p>
 						</div>
@@ -581,13 +601,13 @@ export default function WorkforcePage() {
 							<div className="flex items-start justify-between gap-4">
 								<div>
 									<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-3">
-										{t('header.platform')}
+										{t("header.platform")}
 									</span>
 									<h1 className="text-4xl font-extrabold tracking-tight text-on-surface mb-2">
-										{t('header.title')}
+										{t("header.title")}
 									</h1>
 									<p className="text-on-surface-variant">
-										{t('header.description')}
+										{t("header.description")}
 									</p>
 								</div>
 								{/* Live score pill (visible from step 1 onwards) */}
@@ -601,12 +621,12 @@ export default function WorkforcePage() {
 										<span
 											className={`text-[10px] font-bold uppercase tracking-wider ${tier.text} opacity-70`}
 										>
-											{t('score.wcs')}
+											{t("score.wcs")}
 										</span>
 										<span
 											className={`text-[10px] font-bold ${tier.text} mt-0.5`}
 										>
-											{t('score.tier')} {tier.tier}
+											{t("score.tier")} {tier.tier}
 										</span>
 									</div>
 								)}
@@ -615,7 +635,7 @@ export default function WorkforcePage() {
 							{/* Timer banner */}
 							<div className="mt-4 flex items-center gap-2 text-xs text-on-surface-variant">
 								<span className="material-symbols-outlined text-sm">timer</span>
-								{t('timer.completion')} &nbsp;·&nbsp; {t('timer.process')}
+								{t("timer.completion")} &nbsp;·&nbsp; {t("timer.process")}
 							</div>
 						</header>
 
@@ -656,17 +676,19 @@ export default function WorkforcePage() {
 												person
 											</span>
 											<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
-												{t('personal.title')}
+												{t("personal.title")}
 											</h3>
 										</div>
 
 										<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 											<div>
-												<Label htmlFor="full-name">{t('personal.fullName.label')}</Label>
+												<Label htmlFor="full-name">
+													{t("personal.fullName.label")}
+												</Label>
 												<input
 													id="full-name"
 													type="text"
-													placeholder={t('personal.fullName.placeholder')}
+													placeholder={t("personal.fullName.placeholder")}
 													className={inputClass}
 													required
 													value={form.fullName}
@@ -675,23 +697,25 @@ export default function WorkforcePage() {
 											</div>
 											<div>
 												<Label htmlFor="pref-name" optional>
-													{t('personal.preferredName.label')}
+													{t("personal.preferredName.label")}
 												</Label>
 												<input
 													id="pref-name"
 													type="text"
-													placeholder={t('personal.preferredName.placeholder')}
+													placeholder={t("personal.preferredName.placeholder")}
 													className={inputClass}
 													value={form.preferredName}
 													onChange={(e) => set("preferredName", e.target.value)}
 												/>
 											</div>
 											<div>
-												<Label htmlFor="phone">{t('personal.phone.label')}</Label>
+												<Label htmlFor="phone">
+													{t("personal.phone.label")}
+												</Label>
 												<input
 													id="phone"
 													type="tel"
-													placeholder={t('personal.phone.placeholder')}
+													placeholder={t("personal.phone.placeholder")}
 													className={inputClass}
 													required
 													value={form.phone}
@@ -700,23 +724,25 @@ export default function WorkforcePage() {
 											</div>
 											<div>
 												<Label htmlFor="whatsapp" optional>
-													{t('personal.whatsapp.label')}
+													{t("personal.whatsapp.label")}
 												</Label>
 												<input
 													id="whatsapp"
 													type="tel"
-													placeholder={t('personal.whatsapp.placeholder')}
+													placeholder={t("personal.whatsapp.placeholder")}
 													className={inputClass}
 													value={form.whatsapp}
 													onChange={(e) => set("whatsapp", e.target.value)}
 												/>
 											</div>
 											<div className="md:col-span-2">
-												<Label htmlFor="email">{t('personal.email.label')}</Label>
+												<Label htmlFor="email">
+													{t("personal.email.label")}
+												</Label>
 												<input
 													id="email"
 													type="email"
-													placeholder={t('personal.email.placeholder')}
+													placeholder={t("personal.email.placeholder")}
 													className={inputClass}
 													required
 													value={form.email}
@@ -724,11 +750,11 @@ export default function WorkforcePage() {
 												/>
 											</div>
 											<div>
-												<Label htmlFor="city">{t('personal.city.label')}</Label>
+												<Label htmlFor="city">{t("personal.city.label")}</Label>
 												<input
 													id="city"
 													type="text"
-													placeholder={t('personal.city.placeholder')}
+													placeholder={t("personal.city.placeholder")}
 													className={inputClass}
 													required
 													value={form.cityBase}
@@ -736,11 +762,13 @@ export default function WorkforcePage() {
 												/>
 											</div>
 											<div>
-												<Label htmlFor="country">{t('personal.country.label')}</Label>
+												<Label htmlFor="country">
+													{t("personal.country.label")}
+												</Label>
 												<input
 													id="country"
 													type="text"
-													placeholder={t('personal.country.placeholder')}
+													placeholder={t("personal.country.placeholder")}
 													className={inputClass}
 													required
 													value={form.country}
@@ -748,11 +776,13 @@ export default function WorkforcePage() {
 												/>
 											</div>
 											<div>
-												<Label htmlFor="nationality">{t('personal.nationality.label')}</Label>
+												<Label htmlFor="nationality">
+													{t("personal.nationality.label")}
+												</Label>
 												<input
 													id="nationality"
 													type="text"
-													placeholder={t('personal.nationality.placeholder')}
+													placeholder={t("personal.nationality.placeholder")}
 													className={inputClass}
 													required
 													value={form.nationality}
@@ -761,18 +791,18 @@ export default function WorkforcePage() {
 											</div>
 											<div>
 												<Label htmlFor="national-id" optional>
-													{t('personal.nationalId.label')}
+													{t("personal.nationalId.label")}
 												</Label>
 												<input
 													id="national-id"
 													type="text"
-													placeholder={t('personal.nationalId.placeholder')}
+													placeholder={t("personal.nationalId.placeholder")}
 													className={inputClass}
 													value={form.nationalId}
 													onChange={(e) => set("nationalId", e.target.value)}
 												/>
 												<p className="text-xs text-on-surface-variant mt-1.5 italic">
-													{t('personal.nationalId.hint')}
+													{t("personal.nationalId.hint")}
 												</p>
 											</div>
 										</div>
@@ -787,15 +817,15 @@ export default function WorkforcePage() {
 												engineering
 											</span>
 											<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
-												{t('role.title')}
+												{t("role.title")}
 											</h3>
 										</div>
 
 										<div>
 											<Label>
-												{t('role.primaryRole.label')}{" "}
+												{t("role.primaryRole.label")}{" "}
 												<span className="font-normal italic text-xs">
-													{t('role.primaryRole.hint')}
+													{t("role.primaryRole.hint")}
 												</span>
 											</Label>
 											<div className="mt-2 grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -814,16 +844,18 @@ export default function WorkforcePage() {
 																		: [...arr, role],
 																);
 															}}
-															className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-semibold border transition-all text-left ${checked
+															className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-semibold border transition-all text-left ${
+																checked
 																	? "bg-[#FF5A30]/10 border-[#FF5A30] text-[#FF5A30]"
 																	: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A30]/40"
-																}`}
+															}`}
 														>
 															<span
-																className={`w-4 h-4 rounded flex-shrink-0 flex items-center justify-center border-2 ${checked
+																className={`w-4 h-4 rounded flex-shrink-0 flex items-center justify-center border-2 ${
+																	checked
 																		? "bg-[#FF5A30] border-[#FF5A30]"
 																		: "border-current"
-																	}`}
+																}`}
 															>
 																{checked && (
 																	<span
@@ -841,13 +873,15 @@ export default function WorkforcePage() {
 											</div>
 										</div>
 
-										{form.roles.includes(t('roles.other')) && (
+										{form.roles.includes(t("roles.other")) && (
 											<div>
-												<Label htmlFor="other-role">{t('role.otherRole.label')}</Label>
+												<Label htmlFor="other-role">
+													{t("role.otherRole.label")}
+												</Label>
 												<input
 													id="other-role"
 													type="text"
-													placeholder={t('role.otherRole.placeholder')}
+													placeholder={t("role.otherRole.placeholder")}
 													className={inputClass}
 													value={form.otherRole}
 													onChange={(e) => set("otherRole", e.target.value)}
@@ -856,17 +890,15 @@ export default function WorkforcePage() {
 										)}
 
 										<div>
-											<Label>
-												{t('role.yearsExperience.label')}
-											</Label>
+											<Label>{t("role.yearsExperience.label")}</Label>
 											<div className="mt-2">
 												<RadioGroup
 													options={[
-														t('role.yearsExperience.options.lessThan1'),
-														t('role.yearsExperience.options.1to3'),
-														t('role.yearsExperience.options.4to7'),
-														t('role.yearsExperience.options.8to12'),
-														t('role.yearsExperience.options.13plus'),
+														t("role.yearsExperience.options.lessThan1"),
+														t("role.yearsExperience.options.1to3"),
+														t("role.yearsExperience.options.4to7"),
+														t("role.yearsExperience.options.8to12"),
+														t("role.yearsExperience.options.13plus"),
 													]}
 													value={form.yearsExperience}
 													onChange={(v) => set("yearsExperience", v)}
@@ -880,23 +912,21 @@ export default function WorkforcePage() {
 													>
 														add_circle
 													</span>
-													+{calcWCS(form, t).expPts} {t('shared.basePoints')}
+													+{calcWCS(form, t).expPts} {t("shared.basePoints")}
 												</div>
 											)}
 										</div>
 
 										<div>
-											<Label>
-												{t('role.largestEvent.label')}
-											</Label>
+											<Label>{t("role.largestEvent.label")}</Label>
 											<div className="mt-2">
 												<RadioGroup
 													options={[
-														t('role.largestEvent.options.under500'),
-														t('role.largestEvent.options.500to2000'),
-														t('role.largestEvent.options.2001to10000'),
-														t('role.largestEvent.options.10001to50000'),
-														t('role.largestEvent.options.50000plus'),
+														t("role.largestEvent.options.under500"),
+														t("role.largestEvent.options.500to2000"),
+														t("role.largestEvent.options.2001to10000"),
+														t("role.largestEvent.options.10001to50000"),
+														t("role.largestEvent.options.50000plus"),
 													]}
 													value={form.largestEvent}
 													onChange={(v) => set("largestEvent", v)}
@@ -910,7 +940,7 @@ export default function WorkforcePage() {
 													>
 														add_circle
 													</span>
-													+{calcWCS(form, t).scalePts} {t('shared.basePoints')}
+													+{calcWCS(form, t).scalePts} {t("shared.basePoints")}
 												</div>
 											)}
 										</div>
@@ -925,18 +955,18 @@ export default function WorkforcePage() {
 												travel_explore
 											</span>
 											<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
-												{t('touring.title')}
+												{t("touring.title")}
 											</h3>
 										</div>
 
 										<div>
-											<Label>{t('touring.availability.label')}</Label>
+											<Label>{t("touring.availability.label")}</Label>
 											<div className="mt-2">
 												<RadioGroup
 													options={[
-														t('touring.availability.options.move'),
-														t('touring.availability.options.local'),
-														t('touring.availability.options.flexible'),
+														t("touring.availability.options.move"),
+														t("touring.availability.options.local"),
+														t("touring.availability.options.flexible"),
 													]}
 													value={form.tourAvailability}
 													onChange={(v) => set("tourAvailability", v)}
@@ -950,24 +980,22 @@ export default function WorkforcePage() {
 													>
 														add_circle
 													</span>
-													+{calcWCS(form, t).tourPts} {t('shared.basePoints')}
+													+{calcWCS(form, t).tourPts} {t("shared.basePoints")}
 												</div>
 											)}
 										</div>
 
 										<div>
 											<div className="flex items-start justify-between gap-4 mb-2">
-												<Label>
-													{t('touring.deploy48h.label')}
-												</Label>
+												<Label>{t("touring.deploy48h.label")}</Label>
 												<span className="text-xs font-bold text-[#FF5A30] bg-[#FF5A30]/10 px-2 py-1 rounded-full shrink-0">
-													+{t('shared.bonusPointsValue', { pts: 10 })}
+													+{t("shared.bonusPointsValue", { pts: 10 })}
 												</span>
 											</div>
 											<RadioGroup
 												options={[
-													t('touring.deploy48h.options.yes'),
-													t('touring.deploy48h.options.no'),
+													t("touring.deploy48h.options.yes"),
+													t("touring.deploy48h.options.no"),
 												]}
 												value={form.deployIn48h}
 												onChange={(v) => set("deployIn48h", v)}
@@ -976,17 +1004,15 @@ export default function WorkforcePage() {
 
 										<div>
 											<div className="flex items-start justify-between gap-4 mb-2">
-												<Label optional>
-													{t('touring.passport.label')}
-												</Label>
+												<Label optional>{t("touring.passport.label")}</Label>
 												<span className="text-xs font-bold text-[#FF5A30] bg-[#FF5A30]/10 px-2 py-1 rounded-full shrink-0">
-													+{t('shared.bonusPointsValue', { pts: 10 })}
+													+{t("shared.bonusPointsValue", { pts: 10 })}
 												</span>
 											</div>
 											<RadioGroup
 												options={[
-													t('touring.passport.options.yes'),
-													t('touring.passport.options.no'),
+													t("touring.passport.options.yes"),
+													t("touring.passport.options.no"),
 												]}
 												value={form.validPassport}
 												onChange={(v) => set("validPassport", v)}
@@ -996,30 +1022,32 @@ export default function WorkforcePage() {
 										<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 											<div>
 												<Label htmlFor="markets" optional>
-													{t('touring.markets.label')}
+													{t("touring.markets.label")}
 												</Label>
 												<textarea
 													id="markets"
 													rows={3}
-													placeholder={t('touring.markets.placeholder')}
+													placeholder={t("touring.markets.placeholder")}
 													className="w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
 													value={form.marketsWorked}
 													onChange={(e) => set("marketsWorked", e.target.value)}
 												/>
 											</div>
 											<div>
-												<Label htmlFor="day-rate">{t('touring.dayRate.label')}</Label>
+												<Label htmlFor="day-rate">
+													{t("touring.dayRate.label")}
+												</Label>
 												<input
 													id="day-rate"
 													type="text"
-													placeholder={t('touring.dayRate.placeholder')}
+													placeholder={t("touring.dayRate.placeholder")}
 													className={inputClass}
 													required
 													value={form.dayRate}
 													onChange={(e) => set("dayRate", e.target.value)}
 												/>
 												<p className="text-xs text-on-surface-variant mt-1.5 italic">
-													{t('touring.dayRate.hint')}
+													{t("touring.dayRate.hint")}
 												</p>
 											</div>
 										</div>
@@ -1034,7 +1062,7 @@ export default function WorkforcePage() {
 												verified_user
 											</span>
 											<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
-												{t('credentials.title')}
+												{t("credentials.title")}
 											</h3>
 										</div>
 
@@ -1043,25 +1071,27 @@ export default function WorkforcePage() {
 											<div className="flex items-start justify-between gap-4 mb-4">
 												<div>
 													<h4 className="font-bold text-on-surface mb-1 font-(family-name:--font-manrope)">
-														{t('credentials.referee.label')}
+														{t("credentials.referee.label")}
 													</h4>
 													<p className="text-sm text-on-surface-variant">
-														{t('credentials.referee.hint')}
+														{t("credentials.referee.hint")}
 													</p>
 												</div>
 												<span className="shrink-0 text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1.5 rounded-full">
-													+{t('shared.bonusPointsValue', { pts: 15 })}
+													+{t("shared.bonusPointsValue", { pts: 15 })}
 												</span>
 											</div>
 											<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 												<div>
 													<Label htmlFor="ref-name" optional>
-														{t('credentials.referee.name.label')}
+														{t("credentials.referee.name.label")}
 													</Label>
 													<input
 														id="ref-name"
 														type="text"
-														placeholder={t('credentials.referee.name.placeholder')}
+														placeholder={t(
+															"credentials.referee.name.placeholder",
+														)}
 														className={inputClass}
 														value={form.refereeName}
 														onChange={(e) => set("refereeName", e.target.value)}
@@ -1069,12 +1099,14 @@ export default function WorkforcePage() {
 												</div>
 												<div>
 													<Label htmlFor="ref-company" optional>
-														{t('credentials.referee.company.label')}
+														{t("credentials.referee.company.label")}
 													</Label>
 													<input
 														id="ref-company"
 														type="text"
-														placeholder={t('credentials.referee.company.placeholder')}
+														placeholder={t(
+															"credentials.referee.company.placeholder",
+														)}
 														className={inputClass}
 														value={form.refereeCompany}
 														onChange={(e) =>
@@ -1084,12 +1116,14 @@ export default function WorkforcePage() {
 												</div>
 												<div>
 													<Label htmlFor="ref-contact" optional>
-														{t('credentials.referee.contact.label')}
+														{t("credentials.referee.contact.label")}
 													</Label>
 													<input
 														id="ref-contact"
 														type="text"
-														placeholder={t('credentials.referee.contact.placeholder')}
+														placeholder={t(
+															"credentials.referee.contact.placeholder",
+														)}
 														className={inputClass}
 														value={form.refereeContact}
 														onChange={(e) =>
@@ -1099,12 +1133,14 @@ export default function WorkforcePage() {
 												</div>
 												<div>
 													<Label htmlFor="ref-rel" optional>
-														{t('credentials.referee.relationship.label')}
+														{t("credentials.referee.relationship.label")}
 													</Label>
 													<input
 														id="ref-rel"
 														type="text"
-														placeholder={t('credentials.referee.relationship.placeholder')}
+														placeholder={t(
+															"credentials.referee.relationship.placeholder",
+														)}
 														className={inputClass}
 														value={form.refereeRelationship}
 														onChange={(e) =>
@@ -1121,7 +1157,7 @@ export default function WorkforcePage() {
 													>
 														check_circle
 													</span>
-													{t('shared.bonusPointsUnlocked', { pts: 15 })}
+													{t("shared.bonusPointsUnlocked", { pts: 15 })}
 												</div>
 											)}
 										</section>
@@ -1131,24 +1167,24 @@ export default function WorkforcePage() {
 											<div className="flex items-start justify-between gap-4 mb-4">
 												<div>
 													<h4 className="font-bold text-on-surface mb-1 font-(family-name:--font-manrope)">
-														{t('credentials.portfolio.label')}
+														{t("credentials.portfolio.label")}
 													</h4>
 													<p className="text-sm text-on-surface-variant">
-														{t('credentials.portfolio.hint')}
+														{t("credentials.portfolio.hint")}
 													</p>
 												</div>
 												<span className="shrink-0 text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1.5 rounded-full">
-													+{t('shared.bonusPointsValue', { pts: 10 })}
+													+{t("shared.bonusPointsValue", { pts: 10 })}
 												</span>
 											</div>
 											<div>
 												<Label htmlFor="portfolio" optional>
-													{t('credentials.portfolio.placeholder')}
+													{t("credentials.portfolio.placeholder")}
 												</Label>
 												<textarea
 													id="portfolio"
 													rows={3}
-													placeholder={t('credentials.portfolio.placeholder')}
+													placeholder={t("credentials.portfolio.placeholder")}
 													className="w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
 													value={form.portfolioLinks}
 													onChange={(e) =>
@@ -1164,7 +1200,7 @@ export default function WorkforcePage() {
 													>
 														check_circle
 													</span>
-													{t('shared.bonusPointsUnlocked', { pts: 10 })}
+													{t("shared.bonusPointsUnlocked", { pts: 10 })}
 												</div>
 											)}
 										</section>
@@ -1172,12 +1208,12 @@ export default function WorkforcePage() {
 										{/* Equipment */}
 										<div>
 											<Label htmlFor="equipment" optional>
-												{t('credentials.equipment.label')}
+												{t("credentials.equipment.label")}
 											</Label>
 											<textarea
 												id="equipment"
 												rows={3}
-												placeholder={t('credentials.equipment.placeholder')}
+												placeholder={t("credentials.equipment.placeholder")}
 												className="w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
 												value={form.equipment}
 												onChange={(e) => set("equipment", e.target.value)}
@@ -1194,7 +1230,7 @@ export default function WorkforcePage() {
 												analytics
 											</span>
 											<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
-												{t('score.liveScore')}
+												{t("score.liveScore")}
 											</h3>
 										</div>
 
@@ -1208,22 +1244,22 @@ export default function WorkforcePage() {
 											{/* Base */}
 											<div className="bg-surface-container-low rounded-2xl p-5 border border-outline-variant/10">
 												<h4 className="text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-4">
-													{t('score.breakdown.base', { pts: wcs.base })}
+													{t("score.breakdown.base", { pts: wcs.base })}
 												</h4>
 												<div className="space-y-3">
 													{[
 														{
-															label: t('score.breakdown.experience'),
+															label: t("score.breakdown.experience"),
 															pts: wcs.expPts,
 															max: 35,
 														},
 														{
-															label: t('score.breakdown.scale'),
+															label: t("score.breakdown.scale"),
 															pts: wcs.scalePts,
 															max: 40,
 														},
 														{
-															label: t('score.breakdown.availability'),
+															label: t("score.breakdown.availability"),
 															pts: wcs.tourPts,
 															max: 25,
 														},
@@ -1253,7 +1289,7 @@ export default function WorkforcePage() {
 											{/* Bonus */}
 											<div className="bg-surface-container-low rounded-2xl p-5 border border-outline-variant/10">
 												<h4 className="text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-4">
-													{t('score.breakdown.bonus', { pts: wcs.bonus })}
+													{t("score.breakdown.bonus", { pts: wcs.bonus })}
 												</h4>
 												<div className="space-y-3">
 													{wcs.bonusItems.map((b) => (
@@ -1308,7 +1344,8 @@ export default function WorkforcePage() {
 													<p
 														className={`text-xs font-bold uppercase tracking-wider ${tier.text} opacity-70`}
 													>
-														{t('score.tier')} {tier.tier} · {t('score.wcs')} {tier.range}
+														{t("score.tier")} {tier.tier} · {t("score.wcs")}{" "}
+														{tier.range}
 													</p>
 													<h4
 														className={`text-lg font-extrabold ${tier.text} font-(family-name:--font-manrope)`}
@@ -1351,7 +1388,7 @@ export default function WorkforcePage() {
 										{/* All 4 tiers reference */}
 										<details className="bg-surface-container-low rounded-2xl border border-outline-variant/10 overflow-hidden">
 											<summary className="px-6 py-4 cursor-pointer text-sm font-bold text-on-surface flex items-center justify-between">
-												<span>{t('matrix.title')}</span>
+												<span>{t("matrix.title")}</span>
 												<span className="material-symbols-outlined text-on-surface-variant">
 													expand_more
 												</span>
@@ -1360,13 +1397,13 @@ export default function WorkforcePage() {
 												{TIER_CONFIG.map((t_config) => (
 													<div
 														key={t_config.tier}
-														className={`rounded-xl p-4 border ${t_config.bg} ${t_config.border} ${t_config.tier === tier.tier ? "ring-2 " + t_config.ring : ""}`}
+														className={`rounded-xl p-4 border ${t_config.bg} ${t_config.border} ${t_config.tier === tier.tier ? `ring-2 ${t_config.ring}` : ""}`}
 													>
 														<div className="flex items-center justify-between mb-2">
 															<span
 																className={`text-xs font-bold uppercase ${t_config.text}`}
 															>
-																{t('matrix.tier', { n: t_config.tier })}
+																{t("matrix.tier", { n: t_config.tier })}
 															</span>
 															<span
 																className={`text-xs font-semibold ${t_config.text} opacity-70`}
@@ -1374,11 +1411,15 @@ export default function WorkforcePage() {
 																{t_config.range}
 															</span>
 														</div>
-														<p className={`text-sm font-bold ${t_config.text} mb-1`}>
+														<p
+															className={`text-sm font-bold ${t_config.text} mb-1`}
+														>
 															{t_config.label}
 														</p>
 														{t_config.aya && (
-															<p className={`text-xs ${t_config.text} opacity-70`}>
+															<p
+																className={`text-xs ${t_config.text} opacity-70`}
+															>
 																Aya: {t_config.aya}
 															</p>
 														)}
@@ -1394,14 +1435,14 @@ export default function WorkforcePage() {
 													gavel
 												</span>
 												<h4 className="font-bold text-on-surface font-(family-name:--font-manrope)">
-													{t('declaration.title')}
+													{t("declaration.title")}
 												</h4>
 											</div>
 											<ul className="space-y-2">
 												{[
-													t('declaration.clauses.accuracy'),
-													t('declaration.clauses.consent'),
-													t('declaration.clauses.misrepresentation'),
+													t("declaration.clauses.accuracy"),
+													t("declaration.clauses.consent"),
+													t("declaration.clauses.misrepresentation"),
 												].map((item) => (
 													<li
 														key={item}
@@ -1419,11 +1460,15 @@ export default function WorkforcePage() {
 											</ul>
 											<div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
 												<div>
-													<Label htmlFor="decl-name">{t('declaration.name.label')}</Label>
+													<Label htmlFor="decl-name">
+														{t("declaration.name.label")}
+													</Label>
 													<input
 														id="decl-name"
 														type="text"
-														placeholder={form.fullName || t('declaration.name.placeholder')}
+														placeholder={
+															form.fullName || t("declaration.name.placeholder")
+														}
 														className={inputClass}
 														required
 														value={form.declarationName}
@@ -1433,7 +1478,9 @@ export default function WorkforcePage() {
 													/>
 												</div>
 												<div>
-													<Label htmlFor="decl-date">{t('declaration.date.label')}</Label>
+													<Label htmlFor="decl-date">
+														{t("declaration.date.label")}
+													</Label>
 													<input
 														id="decl-date"
 														type="date"
@@ -1452,7 +1499,7 @@ export default function WorkforcePage() {
 											Ckrowd Africa Technologies · CTaaS Workforce Registry ·
 											WCS v0.1
 											<br />
-											{t('success.enquiries')}:{" "}
+											{t("success.enquiries")}:{" "}
 											<span className="font-semibold">
 												workforce@ckrowd.africa
 											</span>
@@ -1470,7 +1517,7 @@ export default function WorkforcePage() {
 											<span className="material-symbols-outlined">
 												arrow_back
 											</span>
-											{t('actions.back')}
+											{t("actions.back")}
 										</Link>
 									) : (
 										<button
@@ -1481,7 +1528,7 @@ export default function WorkforcePage() {
 											<span className="material-symbols-outlined">
 												arrow_back
 											</span>
-											{t('actions.back')}
+											{t("actions.back")}
 										</button>
 									)}
 									<div className="flex gap-4">
@@ -1489,7 +1536,7 @@ export default function WorkforcePage() {
 											type="button"
 											className="px-8 py-3 bg-secondary-container text-on-secondary-container rounded-xl font-bold hover:opacity-90 transition-opacity"
 										>
-											{t('actions.saveDraft')}
+											{t("actions.saveDraft")}
 										</button>
 										<button
 											type="submit"
@@ -1497,10 +1544,10 @@ export default function WorkforcePage() {
 											className="px-10 py-3 bg-linear-to-r from-[#FF5A30] to-[#cc4826] text-white rounded-xl font-bold shadow-xl shadow-[#FF5A30]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
 										>
 											{submitting
-												? t('actions.submitting')
+												? t("actions.submitting")
 												: step < STEPS.length - 1
-													? t('actions.continue')
-													: t('actions.submit')}
+													? t("actions.continue")
+													: t("actions.submit")}
 											{!submitting && (
 												<span className="material-symbols-outlined">
 													{step < STEPS.length - 1 ? "arrow_forward" : "send"}
@@ -1523,18 +1570,18 @@ export default function WorkforcePage() {
 								{[
 									{
 										icon: "bolt",
-										title: t('info.scoring.title'),
-										body: t('info.scoring.body'),
+										title: t("info.scoring.title"),
+										body: t("info.scoring.body"),
 									},
 									{
 										icon: "payments",
-										title: t('info.rate.title'),
-										body: t('info.rate.body'),
+										title: t("info.rate.title"),
+										body: t("info.rate.body"),
 									},
 									{
 										icon: "shield",
-										title: t('info.insurance.title'),
-										body: t('info.insurance.body'),
+										title: t("info.insurance.title"),
+										body: t("info.insurance.body"),
 									},
 								].map((item) => (
 									<div key={item.title} className="flex gap-4">
