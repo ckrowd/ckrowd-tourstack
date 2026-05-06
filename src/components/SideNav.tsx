@@ -1,20 +1,28 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-
-const navItems = [
-  { key: "overview", label: "Dashboard", icon: "dashboard", href: "/dashboard" },
-  { key: "tours", label: "Tours", icon: "confirmation_number", href: "/tours" },
-  { key: "requests", label: "Requests", icon: "send", href: "/eoi" },
-  { key: "onboarding", label: "Onboarding", icon: "how_to_reg", href: "/onboarding" },
-  { key: "stakeholders", label: "Invite Links", icon: "link", href: "/stakeholders" },
-  { key: "profile", label: "Profile", icon: "person", href: "/profile" },
-  { key: "settings", label: "Settings", icon: "settings", href: "/settings" },
-];
+import { Link, usePathname } from "@/i18n/routing";
+import { useTranslations } from 'next-intl';
 
 export default function SideNav() {
+  const t = useTranslations('SideNav');
   const pathname = usePathname();
+
+  interface NavItem {
+    key: string;
+    label: string;
+    icon: string;
+    href: string;
+  }
+
+  const navItems: NavItem[] = [
+    { key: "overview", label: t('dashboard'), icon: "dashboard", href: "/dashboard" },
+    { key: "tours", label: t('tours'), icon: "confirmation_number", href: "/tours" },
+    { key: "requests", label: t('requests'), icon: "send", href: "/eoi" },
+    { key: "onboarding", label: t('onboarding'), icon: "how_to_reg", href: "/onboarding" },
+    { key: "stakeholders", label: t('stakeholders'), icon: "groups", href: "/stakeholders" },
+    { key: "profile", label: t('profile'), icon: "person", href: "/profile" },
+    { key: "settings", label: t('settings'), icon: "settings", href: "/settings" },
+  ];
 
   const activeItem = navItems.find(
     (item) => pathname === item.href || pathname.startsWith(`${item.href}/`)
@@ -44,7 +52,7 @@ export default function SideNav() {
           href="/eoi"
           className="block w-full py-4 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 text-center"
         >
-          Start New Tour
+          {t('startNewTour')}
         </Link>
       </div>
     </aside>

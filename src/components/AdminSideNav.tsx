@@ -1,19 +1,27 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-
-const navItems = [
-  { key: "overview", label: "Overview", icon: "dashboard", href: "/admin" },
-  { key: "tours", label: "Tour Projects", icon: "confirmation_number", href: "/admin/tours" },
-  { key: "eoi", label: "EOI Reviews", icon: "send", href: "/admin/eoi" },
-  { key: "financing", label: "Financing", icon: "account_balance", href: "/admin/financing" },
-  { key: "reports", label: "Reports", icon: "bar_chart", href: "/admin/reports" },
-  { key: "settings", label: "Settings", icon: "settings", href: "/admin/settings" },
-];
+import { Link, usePathname } from "@/i18n/routing";
+import { useTranslations } from 'next-intl';
 
 export default function AdminSideNav() {
   const pathname = usePathname();
+  const t = useTranslations('AdminSideNav');
+
+  interface NavItem {
+    key: string;
+    label: string;
+    icon: string;
+    href: string;
+  }
+
+  const navItems: NavItem[] = [
+    { key: "overview", label: t('overview'), icon: "dashboard", href: "/admin" },
+    { key: "tours", label: t('tours'), icon: "confirmation_number", href: "/admin/tours" },
+    { key: "eoi", label: t('eoi'), icon: "send", href: "/admin/eoi" },
+    { key: "financing", label: t('financing'), icon: "account_balance", href: "/admin/financing" },
+    { key: "reports", label: t('reports'), icon: "bar_chart", href: "/admin/reports" },
+    { key: "settings", label: t('settings'), icon: "settings", href: "/admin/settings" },
+  ];
 
   // Highlight the current route
   const activeItem = navItems.find((item) => {
@@ -46,7 +54,7 @@ export default function AdminSideNav() {
           className="block w-full py-4 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 text-center flex items-center justify-center gap-2"
         >
           <span className="material-symbols-outlined text-sm">add</span>
-          New Tour Project
+          {t('newTour')}
         </Link>
       </div>
     </aside>

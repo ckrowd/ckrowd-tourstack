@@ -1,22 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/routing";
 import { useMutation } from "@tanstack/react-query";
 import { applyForFinancing } from "@/app/actions";
-
-const FINANCING_PRODUCTS = [
-	"Tour Stop Advance",
-	"Venue Build-Out Credit",
-	"Event Insurance Bundle",
-	"Marketing & Ticketing Float",
-] as const;
+import { useTranslations } from 'next-intl';
 
 export default function FinancingQuickApply() {
+	const t = useTranslations('FinancingQuickApply');
 	const router = useRouter();
-	const [product, setProduct] = useState<(typeof FINANCING_PRODUCTS)[number]>(
-		"Tour Stop Advance",
-	);
+
+	const FINANCING_PRODUCTS = [
+		t('products.tourStopAdvance'),
+		t('products.venueBuildOutCredit'),
+		t('products.eventInsuranceBundle'),
+		t('products.marketingTicketingFloat'),
+	] as const;
+
+	const [product, setProduct] = useState<string>(FINANCING_PRODUCTS[0]);
 	const [amountRequested, setAmountRequested] = useState("");
 	const currency = "USD";
 
@@ -40,27 +41,26 @@ export default function FinancingQuickApply() {
 	const errorMessage = applyMutation.error
 		? applyMutation.error instanceof Error
 			? applyMutation.error.message
-			: "Failed to submit financing application."
+			: t('errors.failed')
 		: applyMutation.data && !applyMutation.data.success
-			? (applyMutation.data.error ?? "Failed to submit financing application.")
+			? (applyMutation.data.error ?? t('errors.failed'))
 			: null;
 
 	return (
-			<section className="rounded-3xl border border-outline-variant/10 bg-surface-container-lowest p-8 shadow-sm md:p-10">
-				<div className="mb-6 flex items-start justify-between gap-4">
+		<section className="rounded-3xl border border-outline-variant/10 bg-surface-container-lowest p-8 shadow-sm md:p-10">
+			<div className="mb-6 flex items-start justify-between gap-4">
 				<div>
-						<p className="text-xs font-bold uppercase tracking-[0.3em] text-[#FF5A30]">
-						Quick Apply
+					<p className="text-xs font-bold uppercase tracking-[0.3em] text-[#FF5A30]">
+						{t('badge')}
 					</p>
-						<h2 className="mt-1 font-(family-name:--font-manrope) text-2xl font-bold text-on-surface">
-						Submit Financing Request
+					<h2 className="mt-1 font-(family-name:--font-manrope) text-2xl font-bold text-on-surface">
+						{t('title')}
 					</h2>
-						<p className="mt-2 max-w-2xl text-sm leading-relaxed text-on-surface-variant">
-							Choose a product, set the amount, and submit a financing request
-							for review.
-						</p>
+					<p className="mt-2 max-w-2xl text-sm leading-relaxed text-on-surface-variant">
+						{t('description')}
+					</p>
 				</div>
-					<span className="material-symbols-outlined text-2xl text-[#FF5A30]">
+				<span className="material-symbols-outlined text-2xl text-[#FF5A30]">
 					account_balance
 				</span>
 			</div>
@@ -73,7 +73,7 @@ export default function FinancingQuickApply() {
 						return;
 					}
 					applyMutation.mutate({
-						product,
+						product: product as Parameters<typeof applyForFinancing>[0]["product"],
 						amountRequested: parsedAmount,
 						currency,
 					});
@@ -85,16 +85,14 @@ export default function FinancingQuickApply() {
 						htmlFor="financing-product"
 						className={labelClass}
 					>
-						Product
+						{t('fields.product')}
 					</label>
 					<div className="relative">
 						<select
 							id="financing-product"
 							value={product}
 							onChange={(event) =>
-								setProduct(
-									event.target.value as (typeof FINANCING_PRODUCTS)[number],
-								)
+								setProduct(event.target.value)
 							}
 							className={selectClass}
 						>
@@ -115,15 +113,20 @@ export default function FinancingQuickApply() {
 						htmlFor="financing-amount"
 						className={labelClass}
 					>
-						Amount
+						{t('fields.amount')}
 					</label>
 					<input
 						id="financing-amount"
 						type="number"
 						min={1}
 						required
+						onInvalid={(e) => (e.target as HTMLInputElement).setCustomValidity(t('validation.required'))}
+						onInput={(e) => {
+							const target = e.target as HTMLInputElement;
+							target.setCustomValidity('');
+							setAmountRequested(target.value);
+						}}
 						value={amountRequested}
-						onChange={(event) => setAmountRequested(event.target.value)}
 						className={controlClass}
 					/>
 				</div>
@@ -134,7 +137,7 @@ export default function FinancingQuickApply() {
 							htmlFor="financing-currency"
 							className={labelClass}
 						>
-							Currency
+							{t('fields.currency')}
 						</label>
 						<input
 							id="financing-currency"
@@ -150,14 +153,14 @@ export default function FinancingQuickApply() {
 						disabled={applyMutation.isPending}
 						className={`inline-flex w-full items-center justify-center rounded-xl bg-[#FF5A30] p-3 text-sm font-bold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 md:self-end`}
 					>
-						{applyMutation.isPending ? "Submitting..." : "Apply"}
+						{applyMutation.isPending ? t('actions.submitting') : t('actions.apply')}
 					</button>
 				</div>
 			</form>
 
 			{applyMutation.data?.success && (
 				<p className="mt-3 text-sm text-emerald-700 font-medium">
-					Application submitted successfully.
+					{t('success')}
 				</p>
 			)}
 			{errorMessage && (
