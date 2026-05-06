@@ -3,6 +3,7 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { use, useState } from "react";
+import Image from "next/image";
 import { getOnboardingLink, submitOnboardingLink } from "@/app/actions";
 import { Link } from "@/i18n/routing";
 
@@ -702,6 +703,24 @@ function ArtistMgmtForm({
 	);
 }
 
+// ─── Brand Header ──────────────────────────────────────────────────────────────
+
+function BrandHeader() {
+	return (
+		<div className="flex items-center justify-center gap-2.5 mb-6">
+			<Image src="/ckrowd-logo.png" alt="Ckrowd" width={36} height={36} />
+			<div className="flex flex-col leading-tight">
+				<span className="text-lg font-black tracking-tight text-[#FF5A30] font-(family-name:--font-manrope)">
+					TourStack
+				</span>
+				<span className="text-[10px] font-semibold text-black font-(family-name:--font-manrope)">
+					by Ckrowd
+				</span>
+			</div>
+		</div>
+	);
+}
+
 // ─── Main Page ─────────────────────────────────────────────────────────────────
 
 export default function PublicOnboardingLinkPage({
@@ -736,6 +755,7 @@ export default function PublicOnboardingLinkPage({
 		return (
 			<div className="min-h-screen bg-surface-container-low flex items-center justify-center px-6">
 				<div className="max-w-md w-full bg-white rounded-2xl shadow-sm p-8 text-center">
+					<BrandHeader />
 					<div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-700 mx-auto flex items-center justify-center mb-4">
 						<span className="material-symbols-outlined text-3xl">check</span>
 					</div>
@@ -759,6 +779,7 @@ export default function PublicOnboardingLinkPage({
 	return (
 		<div className="min-h-screen bg-surface-container-low py-10 px-6">
 			<div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-sm p-6 md:p-8">
+				<BrandHeader />
 				{linkQuery.isLoading ? (
 					<>
 						<p className="text-xs font-bold uppercase tracking-widest text-[#FF5A30]">
