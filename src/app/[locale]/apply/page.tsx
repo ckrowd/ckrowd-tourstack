@@ -1,12 +1,12 @@
 "use client";
 
-import { Link } from "@/i18n/routing";
-import { useState, useRef } from "react";
 import { useMutation } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
+import { useRef, useState } from "react";
 import { registerStakeholder } from "@/app/actions";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
-import { useTranslations } from 'next-intl';
+import { Link } from "@/i18n/routing";
 
 const inputClass =
 	"w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm";
@@ -67,15 +67,17 @@ function CheckGroup({
 						key={opt}
 						type="button"
 						onClick={() => toggle(opt)}
-						className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold border transition-all ${checked
+						className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold border transition-all ${
+							checked
 								? "bg-[#FF5A30]/10 border-[#FF5A30] text-[#FF5A30]"
 								: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A30]/40"
-							}`}
+						}`}
 						aria-pressed={checked}
 					>
 						<span
-							className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${checked ? "border-[#FF5A30] bg-[#FF5A30]" : "border-current"
-								}`}
+							className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
+								checked ? "border-[#FF5A30] bg-[#FF5A30]" : "border-current"
+							}`}
 						>
 							{checked && (
 								<span
@@ -94,7 +96,13 @@ function CheckGroup({
 	);
 }
 
-function Stepper({ current, steps }: { current: number; steps: { label: string }[] }) {
+function Stepper({
+	current,
+	steps,
+}: {
+	current: number;
+	steps: { label: string }[];
+}) {
 	const progress = (current / (steps.length - 1)) * 100;
 	return (
 		<div className="mb-12">
@@ -113,10 +121,11 @@ function Stepper({ current, steps }: { current: number; steps: { label: string }
 							className="relative z-10 flex flex-col items-center"
 						>
 							<div
-								className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ring-4 ring-surface-container-low ${done || active
+								className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ring-4 ring-surface-container-low ${
+									done || active
 										? "bg-[#FF5A30] text-white"
 										: "bg-surface-variant text-on-surface-variant"
-									}`}
+								}`}
 							>
 								{done ? (
 									<span
@@ -130,12 +139,13 @@ function Stepper({ current, steps }: { current: number; steps: { label: string }
 								)}
 							</div>
 							<span
-								className={`mt-2 text-[10px] font-bold uppercase tracking-wider text-center  leading-tight ${active
+								className={`mt-2 text-[10px] font-bold uppercase tracking-wider text-center  leading-tight ${
+									active
 										? "text-[#FF5A30]"
 										: done
 											? "text-[#FF5A30]/70"
 											: "text-on-surface-variant"
-									}`}
+								}`}
 							>
 								{step.label}
 							</span>
@@ -222,17 +232,17 @@ function ReviewRow({
 }
 
 export default function ApplyPage() {
-	const t = useTranslations('ApplyPage');
+	const t = useTranslations("ApplyPage");
 	const [step, setStep] = useState(0);
 	const [form, setForm] = useState<FormData>(defaultForm);
 	const fileInputRef = useRef<HTMLInputElement>(null);
 
 	const STEPS = [
-		{ label: t('steps.basic') },
-		{ label: t('steps.experience') },
-		{ label: t('steps.gate') },
-		{ label: t('steps.credibility') },
-		{ label: t('steps.intent') },
+		{ label: t("steps.basic") },
+		{ label: t("steps.experience") },
+		{ label: t("steps.gate") },
+		{ label: t("steps.credibility") },
+		{ label: t("steps.intent") },
 	];
 
 	const submitMutation = useMutation({
@@ -272,7 +282,7 @@ export default function ApplyPage() {
 								</span>
 							</div>
 							<h1 className="text-3xl font-extrabold tracking-tight text-on-surface mb-3 font-(family-name:--font-manrope)">
-								{t('success.title')}
+								{t("success.title")}
 							</h1>
 							{isAyaEligible && (
 								<div className="mb-4 inline-flex items-center gap-2 bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-bold">
@@ -282,24 +292,24 @@ export default function ApplyPage() {
 									>
 										star
 									</span>
-									{t('success.aya')}
+									{t("success.aya")}
 								</div>
 							)}
 							<p className="text-on-surface-variant mb-8">
-								{t('success.description')}
+								{t("success.description")}
 							</p>
 							<div className="flex flex-col sm:flex-row gap-4 justify-center">
 								<Link
 									href="/dashboard"
 									className="px-8 py-3 bg-[#FF5A30] text-white rounded-xl font-bold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform"
 								>
-									{t('actions.dashboard')}
+									{t("actions.dashboard")}
 								</Link>
 								<Link
 									href="/discovery"
 									className="px-8 py-3 bg-surface-container-lowest text-on-surface rounded-xl font-bold border border-outline-variant/20 hover:bg-surface-container-low transition-colors"
 								>
-									{t('actions.discovery')}
+									{t("actions.discovery")}
 								</Link>
 							</div>
 						</div>
@@ -321,14 +331,12 @@ export default function ApplyPage() {
 						{/* Header */}
 						<header className="mb-10">
 							<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-3">
-								{t('promoterOnboarding')}
+								{t("promoterOnboarding")}
 							</span>
 							<h1 className="text-4xl font-extrabold tracking-tight text-on-surface mb-2">
-								{t('title')}
+								{t("title")}
 							</h1>
-							<p className="text-on-surface-variant">
-								{t('description')}
-							</p>
+							<p className="text-on-surface-variant">{t("description")}</p>
 						</header>
 
 						<Stepper current={step} steps={STEPS} />
@@ -380,16 +388,20 @@ export default function ApplyPage() {
 												person
 											</span>
 											<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
-												{t('sections.basic.title')}
+												{t("sections.basic.title")}
 											</h3>
 										</div>
 										<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 											<div>
-												<Label htmlFor="full-name">{t('sections.basic.fields.fullName')}</Label>
+												<Label htmlFor="full-name">
+													{t("sections.basic.fields.fullName")}
+												</Label>
 												<input
 													id="full-name"
 													type="text"
-													placeholder={t('sections.basic.fields.fullNamePlaceholder')}
+													placeholder={t(
+														"sections.basic.fields.fullNamePlaceholder",
+													)}
 													className={inputClass}
 													value={form.fullName}
 													onChange={(e) => set("fullName", e.target.value)}
@@ -397,11 +409,15 @@ export default function ApplyPage() {
 												/>
 											</div>
 											<div>
-												<Label htmlFor="company">{t('sections.basic.fields.company')}</Label>
+												<Label htmlFor="company">
+													{t("sections.basic.fields.company")}
+												</Label>
 												<input
 													id="company"
 													type="text"
-													placeholder={t('sections.basic.fields.companyPlaceholder')}
+													placeholder={t(
+														"sections.basic.fields.companyPlaceholder",
+													)}
 													className={inputClass}
 													value={form.company}
 													onChange={(e) => set("company", e.target.value)}
@@ -409,24 +425,32 @@ export default function ApplyPage() {
 											</div>
 											<div>
 												<Label htmlFor="phone">
-													{t('sections.basic.fields.phone')}
+													{t("sections.basic.fields.phone")}
 												</Label>
 												<input
 													id="phone"
 													type="tel"
-													placeholder={t('sections.basic.fields.phonePlaceholder')}
+													placeholder={t(
+														"sections.basic.fields.phonePlaceholder",
+													)}
 													className={inputClass}
 													value={form.phone}
-													onChange={(e) => set("phone", e.target.value.replace(/\D/g, ""))}
+													onChange={(e) =>
+														set("phone", e.target.value.replace(/\D/g, ""))
+													}
 													required
 												/>
 											</div>
 											<div>
-												<Label htmlFor="email">{t('sections.basic.fields.email')}</Label>
+												<Label htmlFor="email">
+													{t("sections.basic.fields.email")}
+												</Label>
 												<input
 													id="email"
 													type="email"
-													placeholder={t('sections.basic.fields.emailPlaceholder')}
+													placeholder={t(
+														"sections.basic.fields.emailPlaceholder",
+													)}
 													className={inputClass}
 													value={form.email}
 													onChange={(e) => set("email", e.target.value)}
@@ -434,11 +458,15 @@ export default function ApplyPage() {
 												/>
 											</div>
 											<div className="md:col-span-2">
-												<Label htmlFor="city-country">{t('sections.basic.fields.cityCountry')}</Label>
+												<Label htmlFor="city-country">
+													{t("sections.basic.fields.cityCountry")}
+												</Label>
 												<input
 													id="city-country"
 													type="text"
-													placeholder={t('sections.basic.fields.cityCountryPlaceholder')}
+													placeholder={t(
+														"sections.basic.fields.cityCountryPlaceholder",
+													)}
 													className={inputClass}
 													value={form.cityCountry}
 													onChange={(e) => set("cityCountry", e.target.value)}
@@ -457,14 +485,14 @@ export default function ApplyPage() {
 												workspace_premium
 											</span>
 											<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
-												{t('sections.experience.title')}
+												{t("sections.experience.title")}
 											</h3>
 										</div>
 
 										<div className="space-y-8">
 											<div>
 												<Label htmlFor="years-exp">
-													{t('sections.experience.fields.years')}
+													{t("sections.experience.fields.years")}
 												</Label>
 												<div className="relative mt-1.5">
 													<select
@@ -476,9 +504,11 @@ export default function ApplyPage() {
 														}
 													>
 														<option value="">-- Select range --</option>
-														{t.raw('sections.experience.options.years').map((opt: string) => (
-															<option key={opt}>{opt}</option>
-														))}
+														{t
+															.raw("sections.experience.options.years")
+															.map((opt: string) => (
+																<option key={opt}>{opt}</option>
+															))}
 													</select>
 													<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">
 														expand_more
@@ -488,7 +518,7 @@ export default function ApplyPage() {
 
 											<div>
 												<Label htmlFor="events-year">
-													{t('sections.experience.fields.events')}
+													{t("sections.experience.fields.events")}
 												</Label>
 												<div className="relative mt-1.5">
 													<select
@@ -500,9 +530,11 @@ export default function ApplyPage() {
 														}
 													>
 														<option value="">-- Select range --</option>
-														{t.raw('sections.experience.options.events').map((opt: string) => (
-															<option key={opt}>{opt}</option>
-														))}
+														{t
+															.raw("sections.experience.options.events")
+															.map((opt: string) => (
+																<option key={opt}>{opt}</option>
+															))}
 													</select>
 													<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">
 														expand_more
@@ -512,7 +544,7 @@ export default function ApplyPage() {
 
 											<div>
 												<Label htmlFor="crowd-size">
-													{t('sections.experience.fields.crowd')}
+													{t("sections.experience.fields.crowd")}
 												</Label>
 												<div className="relative mt-1.5">
 													<select
@@ -524,9 +556,11 @@ export default function ApplyPage() {
 														}
 													>
 														<option value="">-- Select range --</option>
-														{t.raw('sections.experience.options.crowd').map((opt: string) => (
-															<option key={opt}>{opt}</option>
-														))}
+														{t
+															.raw("sections.experience.options.crowd")
+															.map((opt: string) => (
+																<option key={opt}>{opt}</option>
+															))}
 													</select>
 													<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">
 														expand_more
@@ -536,14 +570,14 @@ export default function ApplyPage() {
 
 											<div>
 												<p className="block text-sm font-semibold text-on-surface-variant mb-3">
-													{t('sections.experience.fields.artistLevel')}{" "}
+													{t("sections.experience.fields.artistLevel")}{" "}
 													<span className="font-normal italic">
-														{t('sections.experience.fields.artistLevelHint')}
+														{t("sections.experience.fields.artistLevelHint")}
 													</span>
 												</p>
 												<CheckGroup
 													name="artist-level"
-													options={t.raw('sections.experience.options.levels')}
+													options={t.raw("sections.experience.options.levels")}
 													value={form.artistLevel}
 													onChange={(v) => set("artistLevel", v as string[])}
 													multi
@@ -561,16 +595,16 @@ export default function ApplyPage() {
 												lock_open
 											</span>
 											<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
-												{t('sections.gate.title')}
+												{t("sections.gate.title")}
 											</h3>
 										</div>
 										<p className="text-sm text-on-surface-variant -mt-6">
-											{t('sections.gate.description')}
+											{t("sections.gate.description")}
 										</p>
 
 										<div className="bg-surface-container-low rounded-2xl p-6 border border-outline-variant/10">
 											<p className="text-sm font-semibold text-on-surface mb-4">
-												{t('sections.gate.question')}
+												{t("sections.gate.question")}
 											</p>
 											<CheckGroup
 												name="large-venue"
@@ -615,7 +649,7 @@ export default function ApplyPage() {
 																	{form.proofFileName}
 																</p>
 																<p className="text-xs text-on-surface-variant">
-																	{t('sections.gate.clickToReplace')}
+																	{t("sections.gate.clickToReplace")}
 																</p>
 															</div>
 														</div>
@@ -625,13 +659,13 @@ export default function ApplyPage() {
 																cloud_upload
 															</span>
 															<p className="font-bold text-on-surface mb-1">
-																{t('sections.gate.uploadTitle')}
+																{t("sections.gate.uploadTitle")}
 															</p>
 															<p className="text-sm text-on-surface-variant">
-																{t('sections.gate.uploadDesc')}
+																{t("sections.gate.uploadDesc")}
 															</p>
 															<p className="text-xs text-on-surface-variant mt-2">
-																{t('sections.gate.uploadLimit')}
+																{t("sections.gate.uploadLimit")}
 															</p>
 														</>
 													)}
@@ -646,10 +680,10 @@ export default function ApplyPage() {
 													</span>
 													<div>
 														<p className="text-sm font-bold text-amber-800">
-															{t('sections.gate.ayaEligible')}
+															{t("sections.gate.ayaEligible")}
 														</p>
 														<p className="text-xs text-amber-700 mt-0.5">
-															{t('sections.gate.ayaEligibleDesc')}
+															{t("sections.gate.ayaEligibleDesc")}
 														</p>
 													</div>
 												</div>
@@ -663,10 +697,10 @@ export default function ApplyPage() {
 												</span>
 												<div>
 													<p className="text-sm font-bold text-on-surface">
-														{t('sections.gate.standardTier')}
+														{t("sections.gate.standardTier")}
 													</p>
 													<p className="text-xs text-on-surface-variant mt-0.5">
-														{t('sections.gate.standardTierDesc')}
+														{t("sections.gate.standardTierDesc")}
 													</p>
 												</div>
 											</div>
@@ -682,13 +716,13 @@ export default function ApplyPage() {
 												verified_user
 											</span>
 											<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
-												{t('sections.credibility.title')}
+												{t("sections.credibility.title")}
 											</h3>
 										</div>
 
 										<section>
 											<p className="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-4">
-												{t('sections.credibility.pastLinks')}
+												{t("sections.credibility.pastLinks")}
 											</p>
 											<div className="space-y-4">
 												{[
@@ -696,25 +730,33 @@ export default function ApplyPage() {
 														id: "instagram",
 														icon: "photo_camera",
 														field: "instagram" as const,
-														placeholder: t('sections.credibility.placeholders.instagram'),
+														placeholder: t(
+															"sections.credibility.placeholders.instagram",
+														),
 													},
 													{
 														id: "twitter",
 														icon: "tag",
 														field: "twitter" as const,
-														placeholder: t('sections.credibility.placeholders.twitter'),
+														placeholder: t(
+															"sections.credibility.placeholders.twitter",
+														),
 													},
 													{
 														id: "youtube",
 														icon: "play_circle",
 														field: "youtube" as const,
-														placeholder: t('sections.credibility.placeholders.youtube'),
+														placeholder: t(
+															"sections.credibility.placeholders.youtube",
+														),
 													},
 													{
 														id: "ticket-links",
 														icon: "confirmation_number",
 														field: "ticketLinks" as const,
-														placeholder: t('sections.credibility.placeholders.ticketing'),
+														placeholder: t(
+															"sections.credibility.placeholders.ticketing",
+														),
 													},
 												].map((item) => (
 													<div key={item.id} className="relative">
@@ -736,33 +778,34 @@ export default function ApplyPage() {
 
 										<section>
 											<p className="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-4">
-												{t('sections.credibility.business')}
+												{t("sections.credibility.business")}
 											</p>
 											<div className="space-y-3">
 												{[
 													{
 														id: "biz-reg",
-														label: t('sections.credibility.fields.registered'),
+														label: t("sections.credibility.fields.registered"),
 														field: "hasRegisteredBusiness" as const,
 													},
 													{
 														id: "bank-acct",
-														label: t('sections.credibility.fields.bank'),
+														label: t("sections.credibility.fields.bank"),
 														field: "hasActiveBankAccount" as const,
 													},
 													{
 														id: "sponsors",
-														label: t('sections.credibility.fields.sponsors'),
+														label: t("sections.credibility.fields.sponsors"),
 														field: "hasBrandSponsors" as const,
 													},
 												].map((item) => (
 													<label
 														key={item.id}
 														htmlFor={item.id}
-														className={`flex items-center gap-4 p-4 rounded-xl border cursor-pointer transition-all ${form[item.field]
+														className={`flex items-center gap-4 p-4 rounded-xl border cursor-pointer transition-all ${
+															form[item.field]
 																? "bg-[#FF5A30]/5 border-[#FF5A30]/30"
 																: "bg-surface-container-highest border-outline-variant/20 hover:border-[#FF5A30]/20"
-															}`}
+														}`}
 													>
 														<input
 															id={item.id}
@@ -791,18 +834,18 @@ export default function ApplyPage() {
 												rocket_launch
 											</span>
 											<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
-												{t('sections.intent.title')}
+												{t("sections.intent.title")}
 											</h3>
 										</div>
 
 										<div className="space-y-8">
 											<div>
 												<Label htmlFor="intent-q">
-													{t('sections.intent.question')}
+													{t("sections.intent.question")}
 												</Label>
 												<CheckGroup
 													name="intent"
-													options={t.raw('sections.intent.options')}
+													options={t.raw("sections.intent.options")}
 													value={form.intent}
 													onChange={(v) => set("intent", v as string[])}
 													multi
@@ -811,15 +854,17 @@ export default function ApplyPage() {
 
 											<div>
 												<Label htmlFor="budget">
-													{t('sections.intent.budget')}
+													{t("sections.intent.budget")}
 												</Label>
 												<input
 													id="budget"
 													type="text"
-													placeholder={t('sections.intent.budgetPlaceholder')}
+													placeholder={t("sections.intent.budgetPlaceholder")}
 													className={inputClass}
 													value={form.estimatedBudget}
-													onChange={(e) => set("estimatedBudget", e.target.value)}
+													onChange={(e) =>
+														set("estimatedBudget", e.target.value)
+													}
 												/>
 											</div>
 										</div>
@@ -827,20 +872,38 @@ export default function ApplyPage() {
 										<div className="pt-8 border-t border-outline-variant/10">
 											<div className="bg-surface-container-low rounded-2xl p-6 border border-outline-variant/10 mb-6">
 												<h4 className="font-bold text-on-surface mb-2">
-													{t('sections.review.title')}
+													{t("sections.review.title")}
 												</h4>
 												<p className="text-sm text-on-surface-variant">
-													{t('sections.review.description')}
+													{t("sections.review.description")}
 												</p>
 											</div>
 
 											<div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-1">
-												<ReviewRow label={t('sections.basic.fields.fullName')} value={form.fullName} />
-												<ReviewRow label={t('sections.basic.fields.company')} value={form.company} />
-												<ReviewRow label={t('sections.basic.fields.email')} value={form.email} />
-												<ReviewRow label={t('sections.basic.fields.cityCountry')} value={form.cityCountry} />
-												<ReviewRow label={t('sections.experience.fields.years')} value={form.yearsExperience} />
-												<ReviewRow label={t('sections.gate.question')} value={form.hostedLargeVenue} />
+												<ReviewRow
+													label={t("sections.basic.fields.fullName")}
+													value={form.fullName}
+												/>
+												<ReviewRow
+													label={t("sections.basic.fields.company")}
+													value={form.company}
+												/>
+												<ReviewRow
+													label={t("sections.basic.fields.email")}
+													value={form.email}
+												/>
+												<ReviewRow
+													label={t("sections.basic.fields.cityCountry")}
+													value={form.cityCountry}
+												/>
+												<ReviewRow
+													label={t("sections.experience.fields.years")}
+													value={form.yearsExperience}
+												/>
+												<ReviewRow
+													label={t("sections.gate.question")}
+													value={form.hostedLargeVenue}
+												/>
 											</div>
 										</div>
 									</div>
@@ -851,15 +914,16 @@ export default function ApplyPage() {
 									<button
 										type="button"
 										onClick={() => setStep((s) => s - 1)}
-										className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-all ${step === 0
+										className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-all ${
+											step === 0
 												? "opacity-0 pointer-events-none"
 												: "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low"
-											}`}
+										}`}
 									>
 										<span className="material-symbols-outlined text-sm">
 											arrow_back
 										</span>
-										{t('actions.back')}
+										{t("actions.back")}
 									</button>
 
 									<button
@@ -870,13 +934,13 @@ export default function ApplyPage() {
 										{submitting ? (
 											<>
 												<span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-												{t('actions.submitting')}
+												{t("actions.submitting")}
 											</>
 										) : (
 											<>
 												{step === STEPS.length - 1
-													? t('actions.submit')
-													: t('actions.continue')}
+													? t("actions.submit")
+													: t("actions.continue")}
 												<span className="material-symbols-outlined text-sm">
 													{step === STEPS.length - 1 ? "send" : "arrow_forward"}
 												</span>

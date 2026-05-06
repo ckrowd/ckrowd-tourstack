@@ -76,30 +76,48 @@
 
 /* Material Symbols baseline */
 .material-symbols-outlined {
-  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+	font-variation-settings:
+		"FILL" 0,
+		"wght" 400,
+		"GRAD" 0,
+		"opsz" 24;
 }
 
 /* Scrollbar hide utility */
-.no-scrollbar::-webkit-scrollbar { display: none; }
-.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar {
+	display: none;
+}
+.no-scrollbar {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
 
 /* Glassmorphism utility */
 .glass-effect {
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+	backdrop-filter: blur(20px);
+	-webkit-backdrop-filter: blur(20px);
 }
 
 /* Hero gradient overlay */
 .hero-gradient {
-  background: linear-gradient(135deg, rgba(255, 90, 48, 0.9) 0%, rgba(164, 32, 0, 0.7) 100%);
+	background: linear-gradient(
+		135deg,
+		rgba(255, 90, 48, 0.9) 0%,
+		rgba(164, 32, 0, 0.7) 100%
+	);
 }
 
 body {
-  font-family: var(--font-body);
-  color: var(--color-on-surface);
-  background-color: var(--color-surface);
+	font-family: var(--font-body);
+	color: var(--color-on-surface);
+	background-color: var(--color-surface);
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-headline);
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--font-headline);
 }

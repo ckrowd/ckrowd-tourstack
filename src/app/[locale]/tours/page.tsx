@@ -1,22 +1,22 @@
 import Image from "next/image";
-import { Link } from "@/i18n/routing";
-import TopNav from "@/components/TopNav";
-import SideNav from "@/components/SideNav";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getTours, getTourstackDashboard } from "@/app/actions";
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import SideNav from "@/components/SideNav";
+import TopNav from "@/components/TopNav";
+import { Link } from "@/i18n/routing";
 
 function getDaysAway(date: Date | null | undefined): number | null {
 	return date ? Math.round((date.getTime() - Date.now()) / 86400000) : null;
 }
 
 type Props = {
-  params: Promise<{ locale: string }>;
+	params: Promise<{ locale: string }>;
 };
 
 export default async function ToursPage({ params }: Props) {
-  const { locale } = await params;
-  setRequestLocale(locale);
-  const t = await getTranslations('ToursPage');
+	const { locale } = await params;
+	setRequestLocale(locale);
+	const t = await getTranslations("ToursPage");
 
 	const [toursResult, dashboardResult] = await Promise.all([
 		getTours(),
@@ -56,8 +56,11 @@ export default async function ToursPage({ params }: Props) {
 		{ label: string; cap: string; shows: number }
 	>();
 	for (const tour of tours) {
-		const key = String(tour.venue ?? tour.city ?? t('unknownVenue'));
-		const cap = tour.capacity != null ? Number(tour.capacity).toLocaleString(locale) : "—";
+		const key = String(tour.venue ?? tour.city ?? t("unknownVenue"));
+		const cap =
+			tour.capacity != null
+				? Number(tour.capacity).toLocaleString(locale)
+				: "—";
 		const existing = venueMap.get(key);
 		if (existing) {
 			existing.shows++;
@@ -94,13 +97,13 @@ export default async function ToursPage({ params }: Props) {
 					<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 						<div>
 							<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
-								{t('promoterPortal')}
+								{t("promoterPortal")}
 							</span>
 							<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
-								{t('title')}
+								{t("title")}
 							</h1>
 							<p className="text-on-surface-variant font-medium">
-								{t('description')}
+								{t("description")}
 							</p>
 						</div>
 						<Link
@@ -108,7 +111,7 @@ export default async function ToursPage({ params }: Props) {
 							className="flex items-center gap-2 bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all self-start md:self-auto"
 						>
 							<span className="material-symbols-outlined text-sm">add</span>
-							{t('newTourStop')}
+							{t("newTourStop")}
 						</Link>
 					</div>
 
@@ -116,22 +119,22 @@ export default async function ToursPage({ params }: Props) {
 					<div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
 						{[
 							{
-								label: t('stats.totalStops'),
+								label: t("stats.totalStops"),
 								value: tours.length.toString(),
 								color: "border-[#FF5A30]",
 							},
 							{
-								label: t('stats.confirmed'),
+								label: t("stats.confirmed"),
 								value: confirmed.length.toString(),
 								color: "border-emerald-400",
 							},
 							{
-								label: t('stats.inProgress'),
+								label: t("stats.inProgress"),
 								value: inProgress.length.toString(),
 								color: "border-yellow-400",
 							},
 							{
-								label: t('stats.rejected'),
+								label: t("stats.rejected"),
 								value: rejected.length.toString(),
 								color: "border-red-400",
 							},
@@ -159,10 +162,10 @@ export default async function ToursPage({ params }: Props) {
 										confirmation_number
 									</span>
 									<h3 className="font-(family-name:--font-manrope) font-bold text-on-surface text-lg mb-2">
-										{t('noStops')}
+										{t("noStops")}
 									</h3>
 									<p className="text-on-surface-variant text-sm max-w-xs mx-auto mb-6">
-										{t('noStopsDesc')}
+										{t("noStopsDesc")}
 									</p>
 									<Link
 										href="/eoi"
@@ -171,7 +174,7 @@ export default async function ToursPage({ params }: Props) {
 										<span className="material-symbols-outlined text-sm">
 											add
 										</span>
-										{t('submitEoi')}
+										{t("submitEoi")}
 									</Link>
 								</div>
 							) : (
@@ -198,7 +201,7 @@ export default async function ToursPage({ params }: Props) {
 														statusLower === "needs revision"
 													? "bg-blue-100 text-blue-800"
 													: "bg-yellow-100 text-yellow-800";
-												const daysAway = getDaysAway(tour.date);
+									const daysAway = getDaysAway(tour.date);
 
 									return (
 										<div
@@ -287,7 +290,7 @@ export default async function ToursPage({ params }: Props) {
 																<span className="material-symbols-outlined text-sm">
 																	account_balance
 																</span>
-																{t('financed')}
+																{t("financed")}
 																{tour.financing_amount
 																	? ` · $${Number(tour.financing_amount).toLocaleString(locale)}`
 																	: ""}
@@ -298,7 +301,7 @@ export default async function ToursPage({ params }: Props) {
 													{statusLower === "confirmed" && capacity > 0 && (
 														<div className="mt-1">
 															<div className="flex justify-between text-xs text-on-surface-variant mb-1">
-																<span>{t('ticketsSold')}</span>
+																<span>{t("ticketsSold")}</span>
 																<span className="font-bold text-on-surface">
 																	{ticketsSold.toLocaleString(locale)} /{" "}
 																	{capacity.toLocaleString(locale)}
@@ -318,17 +321,20 @@ export default async function ToursPage({ params }: Props) {
 															daysAway > 0 ? (
 																<span className="text-xs text-on-surface-variant">
 																	<span className="font-bold text-on-surface">
-																		{daysAway}{t('daysLetter')}
+																		{daysAway}
+																		{t("daysLetter")}
 																	</span>{" "}
-																	{t('untilShow')}
+																	{t("untilShow")}
 																</span>
 															) : daysAway < 0 ? (
 																<span className="text-xs text-on-surface-variant">
-																	{t('showPassed', { days: Math.abs(daysAway) })}
+																	{t("showPassed", {
+																		days: Math.abs(daysAway),
+																	})}
 																</span>
 															) : (
 																<span className="text-xs font-bold text-[#FF5A30]">
-																	{t('showDay')}
+																	{t("showDay")}
 																</span>
 															)
 														) : (
@@ -342,14 +348,14 @@ export default async function ToursPage({ params }: Props) {
 																	href="/eoi"
 																	className="text-xs font-bold text-[#FF5A30] border border-[#FF5A30]/30 px-3 py-1.5 rounded-lg hover:bg-[#FF5A30]/5 transition-colors"
 																>
-																	{t('reviseEoi')}
+																	{t("reviseEoi")}
 																</Link>
 															)}
 															<Link
 																href={`/tours/${String(tour.id)}`}
 																className="text-xs font-bold text-on-surface-variant border border-outline-variant/30 px-3 py-1.5 rounded-lg hover:bg-surface-container-low transition-colors"
 															>
-																{t('viewDetails')}
+																{t("viewDetails")}
 															</Link>
 														</div>
 													</div>
@@ -365,12 +371,12 @@ export default async function ToursPage({ params }: Props) {
 						<aside className="lg:col-span-4 space-y-6">
 							<div className="bg-surface-container-lowest rounded-2xl p-7 shadow-sm">
 								<h3 className="font-(family-name:--font-manrope) font-bold text-base mb-6">
-									{t('upcomingMilestones')}
+									{t("upcomingMilestones")}
 								</h3>
 								<div className="space-y-4">
 									{upcomingMilestones.length === 0 && (
 										<p className="text-sm text-on-surface-variant text-center py-2">
-											{t('noMilestones')}
+											{t("noMilestones")}
 										</p>
 									)}
 									{upcomingMilestones.map((m) => (
@@ -404,12 +410,12 @@ export default async function ToursPage({ params }: Props) {
 							{/* Venue snapshot */}
 							<div className="bg-surface-container-lowest rounded-2xl p-7 shadow-sm">
 								<h3 className="font-(family-name:--font-manrope) font-bold text-base mb-5">
-									{t('venueSummary')}
+									{t("venueSummary")}
 								</h3>
 								<div className="space-y-3">
 									{venueSummary.length === 0 && (
 										<p className="text-sm text-on-surface-variant text-center py-2">
-											{t('noVenues')}
+											{t("noVenues")}
 										</p>
 									)}
 									{venueSummary.map((v) => (
@@ -428,7 +434,7 @@ export default async function ToursPage({ params }: Props) {
 													{v.label}
 												</p>
 												<p className="text-xs text-on-surface-variant">
-													{t('cap')}: {v.cap} · {v.shows} {t('showSingle')}
+													{t("cap")}: {v.cap} · {v.shows} {t("showSingle")}
 												</p>
 											</div>
 										</div>
@@ -449,10 +455,10 @@ export default async function ToursPage({ params }: Props) {
 								</span>
 								<div>
 									<p className="font-(family-name:--font-manrope) font-bold text-sm">
-										{t('ctaFinancingTitle')}
+										{t("ctaFinancingTitle")}
 									</p>
 									<p className="text-xs text-orange-100 mt-0.5">
-										{t('ctaFinancingDesc')}
+										{t("ctaFinancingDesc")}
 									</p>
 								</div>
 								<span className="material-symbols-outlined ml-auto">
@@ -461,7 +467,7 @@ export default async function ToursPage({ params }: Props) {
 							</Link>
 						</aside>
 					</div>
-				  </main>
+				</main>
 			</div>
 		</div>
 	);

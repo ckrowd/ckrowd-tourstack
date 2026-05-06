@@ -1,18 +1,18 @@
-import Footer from "@/components/Footer";
-import { Link } from "@/i18n/routing";
-import TopNav from "@/components/TopNav";
-import FinancingQuickApply from "@/components/FinancingQuickApply";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getFinancingApplications } from "@/app/actions";
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import FinancingQuickApply from "@/components/FinancingQuickApply";
+import Footer from "@/components/Footer";
+import TopNav from "@/components/TopNav";
+import { Link } from "@/i18n/routing";
 
 type Props = {
-  params: Promise<{ locale: string }>;
+	params: Promise<{ locale: string }>;
 };
 
 export default async function FinancingPage({ params }: Props) {
-  const { locale } = await params;
-  setRequestLocale(locale);
-  const t = await getTranslations('FinancingPage');
+	const { locale } = await params;
+	setRequestLocale(locale);
+	const t = await getTranslations("FinancingPage");
 
 	const appsResult = await getFinancingApplications();
 	const applications = appsResult.data ?? [];
@@ -20,113 +20,117 @@ export default async function FinancingPage({ params }: Props) {
 	const products = [
 		{
 			icon: "account_balance",
-			name: t('products.p1.name'),
-			tag: t('products.p1.tag'),
+			name: t("products.p1.name"),
+			tag: t("products.p1.tag"),
 			tagColor: "bg-[#FF5A30]/10 text-[#FF5A30]",
-			description: t('products.p1.description'),
-			amount: t('products.p1.amount'),
-			term: t('products.p1.term'),
-			rate: t('products.p1.rate'),
-			eligibility: t('products.p1.eligibility'),
+			description: t("products.p1.description"),
+			amount: t("products.p1.amount"),
+			term: t("products.p1.term"),
+			rate: t("products.p1.rate"),
+			eligibility: t("products.p1.eligibility"),
 		},
 		{
 			icon: "groups",
-			name: t('products.p2.name'),
-			tag: t('products.p2.tag'),
+			name: t("products.p2.name"),
+			tag: t("products.p2.tag"),
 			tagColor: "bg-tertiary-fixed text-on-tertiary-fixed",
-			description: t('products.p2.description'),
-			amount: t('products.p2.amount'),
-			term: t('products.p2.term'),
-			rate: t('products.p2.rate'),
-			eligibility: t('products.p2.eligibility'),
+			description: t("products.p2.description"),
+			amount: t("products.p2.amount"),
+			term: t("products.p2.term"),
+			rate: t("products.p2.rate"),
+			eligibility: t("products.p2.eligibility"),
 		},
 		{
 			icon: "shield",
-			name: t('products.p3.name'),
-			tag: t('products.p3.tag'),
+			name: t("products.p3.name"),
+			tag: t("products.p3.tag"),
 			tagColor: "bg-surface-container-high text-on-surface-variant",
-			description: t('products.p3.description'),
-			amount: t('products.p3.amount'),
-			term: t('products.p3.term'),
-			rate: t('products.p3.rate'),
-			eligibility: t('products.p3.eligibility'),
+			description: t("products.p3.description"),
+			amount: t("products.p3.amount"),
+			term: t("products.p3.term"),
+			rate: t("products.p3.rate"),
+			eligibility: t("products.p3.eligibility"),
 		},
 		{
 			icon: "trending_up",
-			name: t('products.p4.name'),
-			tag: t('products.p4.tag'),
+			name: t("products.p4.name"),
+			tag: t("products.p4.tag"),
 			tagColor: "bg-[#FF5A30]/10 text-[#FF5A30]",
-			description: t('products.p4.description'),
-			amount: t('products.p4.amount'),
-			term: t('products.p4.term'),
-			rate: t('products.p4.rate'),
-			eligibility: t('products.p4.eligibility'),
+			description: t("products.p4.description"),
+			amount: t("products.p4.amount"),
+			term: t("products.p4.term"),
+			rate: t("products.p4.rate"),
+			eligibility: t("products.p4.eligibility"),
 		},
 	];
 
 	const steps = [
 		{
 			step: "01",
-			title: t('steps.s1.title'),
-			desc: t('steps.s1.description'),
+			title: t("steps.s1.title"),
+			desc: t("steps.s1.description"),
 		},
 		{
 			step: "02",
-			title: t('steps.s2.title'),
-			desc: t('steps.s2.description'),
+			title: t("steps.s2.title"),
+			desc: t("steps.s2.description"),
 		},
 		{
 			step: "03",
-			title: t('steps.s3.title'),
-			desc: t('steps.s3.description'),
+			title: t("steps.s3.title"),
+			desc: t("steps.s3.description"),
 		},
 		{
 			step: "04",
-			title: t('steps.s4.title'),
-			desc: t('steps.s4.description'),
+			title: t("steps.s4.title"),
+			desc: t("steps.s4.description"),
 		},
 		{
 			step: "05",
-			title: t('steps.s5.title'),
-			desc: t('steps.s5.description'),
+			title: t("steps.s5.title"),
+			desc: t("steps.s5.description"),
 		},
 	];
 
 	const partners = [
 		{
 			name: "AfriCapital Partners",
-			region: t('partners.p1.region'),
-			focus: t('partners.p1.focus'),
+			region: t("partners.p1.region"),
+			focus: t("partners.p1.focus"),
 		},
-		{ name: "Lagos Growth Fund", region: t('partners.p2.region'), focus: t('partners.p2.focus') },
+		{
+			name: "Lagos Growth Fund",
+			region: t("partners.p2.region"),
+			focus: t("partners.p2.focus"),
+		},
 		{
 			name: "East Africa Ventures",
-			region: t('partners.p3.region'),
-			focus: t('partners.p3.focus'),
+			region: t("partners.p3.region"),
+			focus: t("partners.p3.focus"),
 		},
 		{
 			name: "Rand Music Finance",
-			region: t('partners.p4.region'),
-			focus: t('partners.p4.focus'),
+			region: t("partners.p4.region"),
+			focus: t("partners.p4.focus"),
 		},
 	];
 
 	const faqs = [
 		{
-			q: t('faqs.f1.q'),
-			a: t('faqs.f1.a'),
+			q: t("faqs.f1.q"),
+			a: t("faqs.f1.a"),
 		},
 		{
-			q: t('faqs.f2.q'),
-			a: t('faqs.f2.a'),
+			q: t("faqs.f2.q"),
+			a: t("faqs.f2.a"),
 		},
 		{
-			q: t('faqs.f3.q'),
-			a: t('faqs.f3.a'),
+			q: t("faqs.f3.q"),
+			a: t("faqs.f3.a"),
 		},
 		{
-			q: t('faqs.f4.q'),
-			a: t('faqs.f4.a'),
+			q: t("faqs.f4.q"),
+			a: t("faqs.f4.a"),
 		},
 	];
 
@@ -139,28 +143,30 @@ export default async function FinancingPage({ params }: Props) {
 				<header className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
 					<div className="lg:col-span-7">
 						<span className="text-[#FF5A30] font-bold uppercase tracking-widest text-xs mb-4 block">
-							{t('hero.platform')}
+							{t("hero.platform")}
 						</span>
 						<h1 className="font-(family-name:--font-manrope) text-5xl md:text-6xl font-extrabold text-on-surface leading-tight tracking-tighter">
-							{t.rich('hero.title', {
-								spanNode: (chunks) => <span className="text-[#FF5A30]">{chunks}</span>
+							{t.rich("hero.title", {
+								spanNode: (chunks) => (
+									<span className="text-[#FF5A30]">{chunks}</span>
+								),
 							})}
 						</h1>
 						<p className="mt-6 text-on-surface-variant text-lg max-w-xl leading-relaxed">
-							{t('hero.description')}
+							{t("hero.description")}
 						</p>
 						<div className="mt-8 flex flex-wrap gap-4">
 							<Link
 								href="/eoi"
 								className="bg-[#FF5A30] text-white px-8 py-3.5 rounded-xl font-bold shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all"
 							>
-								{t('hero.applyButton')}
+								{t("hero.applyButton")}
 							</Link>
 							<a
 								href="#products"
 								className="border border-outline-variant px-8 py-3.5 rounded-xl font-bold text-on-surface hover:bg-surface-container-low transition-all"
 							>
-								{t('hero.exploreProducts')}
+								{t("hero.exploreProducts")}
 							</a>
 						</div>
 					</div>
@@ -168,10 +174,10 @@ export default async function FinancingPage({ params }: Props) {
 					{/* Stats strip */}
 					<div className="lg:col-span-5 grid grid-cols-2 gap-4">
 						{[
-							{ value: "$2.4M", label: t('stats.disbursed') },
-							{ value: "94%", label: t('stats.repayment') },
-							{ value: "48h", label: t('stats.decision') },
-							{ value: "18", label: t('stats.markets') },
+							{ value: "$2.4M", label: t("stats.disbursed") },
+							{ value: "94%", label: t("stats.repayment") },
+							{ value: "48h", label: t("stats.decision") },
+							{ value: "18", label: t("stats.markets") },
 						].map((s) => (
 							<div
 								key={s.label}
@@ -191,7 +197,7 @@ export default async function FinancingPage({ params }: Props) {
 				{/* My Applications */}
 				<section>
 					<h2 className="font-(family-name:--font-manrope) text-2xl font-bold mb-8">
-						{t('myApplications')}
+						{t("myApplications")}
 					</h2>
 					<div id="quick-apply" className="mb-8">
 						<FinancingQuickApply />
@@ -202,16 +208,16 @@ export default async function FinancingPage({ params }: Props) {
 								account_balance
 							</span>
 							<h3 className="font-(family-name:--font-manrope) font-bold text-on-surface text-lg mb-2">
-								{t('noApplications.title')}
+								{t("noApplications.title")}
 							</h3>
 							<p className="text-on-surface-variant text-sm max-w-xs mx-auto mb-6">
-								{t('noApplications.description')}
+								{t("noApplications.description")}
 							</p>
 							<Link
 								href="#products"
 								className="inline-flex items-center gap-2 bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-bold text-sm hover:opacity-90 transition-opacity"
 							>
-								{t('hero.exploreProducts')}
+								{t("hero.exploreProducts")}
 							</Link>
 						</div>
 					) : (
@@ -234,7 +240,7 @@ export default async function FinancingPage({ params }: Props) {
 										<div className="flex items-start justify-between gap-4 mb-4">
 											<div>
 												<p className="font-(family-name:--font-manrope) font-bold text-on-surface">
-													{String(app.product ?? t('application'))}
+													{String(app.product ?? t("application"))}
 												</p>
 												<p className="text-sm text-on-surface-variant mt-0.5">
 													{String(appArtist?.name ?? "")}
@@ -252,7 +258,7 @@ export default async function FinancingPage({ params }: Props) {
 										<div className="grid grid-cols-2 gap-3">
 											<div className="p-3 bg-surface-container-low rounded-lg">
 												<p className="text-[10px] uppercase font-bold text-on-surface-variant mb-1">
-													{t('requested')}
+													{t("requested")}
 												</p>
 												<p className="font-bold text-on-surface">
 													{String(app.currency ?? "USD")}{" "}
@@ -261,7 +267,7 @@ export default async function FinancingPage({ params }: Props) {
 											</div>
 											<div className="p-3 bg-surface-container-low rounded-lg">
 												<p className="text-[10px] uppercase font-bold text-on-surface-variant mb-1">
-													{t('applied')}
+													{t("applied")}
 												</p>
 												<p className="font-bold text-on-surface">
 													{app.created_at
@@ -281,7 +287,7 @@ export default async function FinancingPage({ params }: Props) {
 												href={`/financing/${String(app.id)}`}
 												className="text-sm font-bold text-[#FF5A30] hover:underline"
 											>
-												{t('viewDetails')}
+												{t("viewDetails")}
 											</Link>
 										</div>
 									</div>
@@ -294,7 +300,7 @@ export default async function FinancingPage({ params }: Props) {
 				{/* Products */}
 				<section id="products">
 					<h2 className="font-(family-name:--font-manrope) text-2xl font-bold mb-8">
-						{t('financingProducts')}
+						{t("financingProducts")}
 					</h2>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 						{products.map((p) => (
@@ -329,9 +335,9 @@ export default async function FinancingPage({ params }: Props) {
 
 								<div className="grid grid-cols-3 gap-3 pt-2 border-t border-outline-variant/20">
 									{[
-										{ label: t('tableLabels.amount'), value: p.amount },
-										{ label: t('tableLabels.term'), value: p.term },
-										{ label: t('tableLabels.cost'), value: p.rate },
+										{ label: t("tableLabels.amount"), value: p.amount },
+										{ label: t("tableLabels.term"), value: p.term },
+										{ label: t("tableLabels.cost"), value: p.rate },
 									].map((d) => (
 										<div key={d.label}>
 											<p className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
@@ -355,7 +361,7 @@ export default async function FinancingPage({ params }: Props) {
 										href="#quick-apply"
 										className="text-[#FF5A30] font-bold text-sm flex items-center gap-1 hover:gap-2 transition-all"
 									>
-										{t('apply')}
+										{t("apply")}
 										<span className="material-symbols-outlined text-sm">
 											arrow_forward
 										</span>
@@ -371,7 +377,7 @@ export default async function FinancingPage({ params }: Props) {
 					{/* Steps */}
 					<section className="lg:col-span-7">
 						<h2 className="font-(family-name:--font-manrope) text-2xl font-bold mb-8">
-							{t('howItWorksTitle')}
+							{t("howItWorksTitle")}
 						</h2>
 						<div className="relative pl-8">
 							<div className="absolute left-[14px] top-2 bottom-2 w-px bg-outline-variant/40" />
@@ -404,7 +410,7 @@ export default async function FinancingPage({ params }: Props) {
 					{/* Capital Partners */}
 					<section className="lg:col-span-5 space-y-6">
 						<h2 className="font-(family-name:--font-manrope) text-2xl font-bold">
-							{t('capitalPartners')}
+							{t("capitalPartners")}
 						</h2>
 						<div className="space-y-3">
 							{partners.map((p) => (
@@ -437,16 +443,16 @@ export default async function FinancingPage({ params }: Props) {
 						<div className="bg-linear-to-br from-[#FF5A30] to-[#cc4826] rounded-2xl p-8 text-white relative overflow-hidden">
 							<div className="relative z-10">
 								<h4 className="font-(family-name:--font-manrope) text-lg font-bold leading-tight">
-									{t('cta.title')}
+									{t("cta.title")}
 								</h4>
 								<p className="text-white/90 text-sm mt-2 leading-relaxed">
-									{t('cta.description')}
+									{t("cta.description")}
 								</p>
 								<Link
 									href="/eoi"
 									className="mt-5 inline-block bg-white text-[#FF5A30] px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider hover:scale-105 transition-transform"
 								>
-									{t('cta.button')}
+									{t("cta.button")}
 								</Link>
 							</div>
 							<span className="material-symbols-outlined absolute -bottom-4 -right-4 text-white/10 text-[120px] rotate-12">
@@ -459,7 +465,7 @@ export default async function FinancingPage({ params }: Props) {
 				{/* FAQ */}
 				<section>
 					<h2 className="font-(family-name:--font-manrope) text-2xl font-bold mb-8">
-						{t('faqTitle')}
+						{t("faqTitle")}
 					</h2>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 						{faqs.map((f) => (
@@ -477,8 +483,8 @@ export default async function FinancingPage({ params }: Props) {
 						))}
 					</div>
 				</section>
-			  <Footer />
-</main>
+				<Footer />
+			</main>
 		</div>
 	);
 }

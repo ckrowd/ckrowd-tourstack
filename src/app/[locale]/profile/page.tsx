@@ -1,11 +1,11 @@
 "use client";
 
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import TopNav from "@/components/TopNav";
-import SideNav from "@/components/SideNav";
 import { getTourstackProfile, updateTourstackProfile } from "@/app/actions";
-import { useTranslations } from 'next-intl';
+import SideNav from "@/components/SideNav";
+import TopNav from "@/components/TopNav";
 
 function Section({
 	title,
@@ -70,7 +70,7 @@ function Field({
 }
 
 export default function ProfilePage() {
-	const t = useTranslations('ProfilePage');
+	const t = useTranslations("ProfilePage");
 	const queryClient = useQueryClient();
 
 	const { data: profileQuery } = useQuery({
@@ -155,65 +155,65 @@ export default function ProfilePage() {
 					{/* Header */}
 					<div className="mb-8">
 						<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
-							{t('promoterPortal')}
+							{t("promoterPortal")}
 						</span>
 						<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
-							{t('title')}
+							{t("title")}
 						</h1>
 						<p className="text-on-surface-variant font-medium">
-							{t('description')}
+							{t("description")}
 						</p>
 					</div>
 
 					<div className="space-y-6">
-						<Section title={t('companyInfo.title')}>
+						<Section title={t("companyInfo.title")}>
 							<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 								<Field
-									label={t('companyInfo.fields.companyName')}
+									label={t("companyInfo.fields.companyName")}
 									id="company-name"
 									value={profile.companyName}
 									onChange={set("companyName")}
 								/>
 								<Field
-									label={t('companyInfo.fields.tradingName')}
+									label={t("companyInfo.fields.tradingName")}
 									id="trading-name"
 									value={profile.tradingName}
 									onChange={set("tradingName")}
 								/>
 								<Field
-									label={t('companyInfo.fields.contactPerson')}
+									label={t("companyInfo.fields.contactPerson")}
 									id="contact-name"
 									value={profile.contactPerson}
 									onChange={set("contactPerson")}
 								/>
 								<Field
-									label={t('companyInfo.fields.jobTitle')}
+									label={t("companyInfo.fields.jobTitle")}
 									id="job-title"
 									value={profile.jobTitle}
 									onChange={set("jobTitle")}
 								/>
 								<Field
-									label={t('companyInfo.fields.email')}
+									label={t("companyInfo.fields.email")}
 									id="email"
 									type="email"
 									value={profile.email}
 									onChange={set("email")}
 								/>
 								<Field
-									label={t('companyInfo.fields.phone')}
+									label={t("companyInfo.fields.phone")}
 									id="phone"
 									type="tel"
 									value={profile.phone}
 									onChange={(v) => set("phone")(v.replace(/\D/g, ""))}
 								/>
 								<Field
-									label={t('companyInfo.fields.country')}
+									label={t("companyInfo.fields.country")}
 									id="country"
 									value={profile.country}
 									onChange={set("country")}
 								/>
 								<Field
-									label={t('companyInfo.fields.city')}
+									label={t("companyInfo.fields.city")}
 									id="city"
 									value={profile.city}
 									onChange={set("city")}
@@ -222,8 +222,8 @@ export default function ProfilePage() {
 						</Section>
 
 						<Section
-							title={t('publicProfile.title')}
-							description={t('publicProfile.description')}
+							title={t("publicProfile.title")}
+							description={t("publicProfile.description")}
 						>
 							<div className="space-y-5">
 								<div>
@@ -231,7 +231,7 @@ export default function ProfilePage() {
 										htmlFor="bio"
 										className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5"
 									>
-										{t('publicProfile.fields.bio')}
+										{t("publicProfile.fields.bio")}
 									</label>
 									<textarea
 										id="bio"
@@ -242,14 +242,14 @@ export default function ProfilePage() {
 									/>
 								</div>
 								<Field
-									label={t('publicProfile.fields.website')}
+									label={t("publicProfile.fields.website")}
 									id="website"
 									type="url"
 									value={profile.websiteUrl}
 									onChange={set("websiteUrl")}
 								/>
 								<Field
-									label={t('publicProfile.fields.instagram')}
+									label={t("publicProfile.fields.instagram")}
 									id="instagram"
 									value={profile.instagramHandle}
 									onChange={set("instagramHandle")}
@@ -264,7 +264,9 @@ export default function ProfilePage() {
 								disabled={saveMutation.isPending}
 								className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:opacity-60"
 							>
-								{saveMutation.isPending ? t('actions.saving') : t('actions.save')}
+								{saveMutation.isPending
+									? t("actions.saving")
+									: t("actions.save")}
 							</button>
 						</div>
 					</div>

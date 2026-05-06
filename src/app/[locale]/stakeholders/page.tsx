@@ -1,22 +1,23 @@
 "use client";
 
-import { useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import SideNav from "@/components/SideNav";
-import TopNav from "@/components/TopNav";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
 import {
 	createOnboardingLink,
 	getOnboardingLinks,
 	revokeOnboardingLink,
 } from "@/app/actions";
-import { useTranslations } from 'next-intl';
+import SideNav from "@/components/SideNav";
+import TopNav from "@/components/TopNav";
 
 const CATEGORIES = ["service", "workforce", "artmgmt"] as const;
 
 export default function OnboardingLinksPage() {
-	const t = useTranslations('StakeholdersPage');
+	const t = useTranslations("StakeholdersPage");
 	const queryClient = useQueryClient();
-	const [category, setCategory] = useState<(typeof CATEGORIES)[number]>("service");
+	const [category, setCategory] =
+		useState<(typeof CATEGORIES)[number]>("service");
 	const [label, setLabel] = useState("");
 	const [expiresAt, setExpiresAt] = useState("");
 
@@ -52,19 +53,19 @@ export default function OnboardingLinksPage() {
 					<div className="w-full space-y-8">
 						<header>
 							<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
-								{t('header.platform')}
+								{t("header.platform")}
 							</span>
 							<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
-								{t('header.title')}
+								{t("header.title")}
 							</h1>
 							<p className="text-on-surface-variant font-medium">
-								{t('header.description')}
+								{t("header.description")}
 							</p>
 						</header>
 
 						<section className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10">
 							<h2 className="font-(family-name:--font-manrope) text-xl font-bold mb-4">
-								{t('createLink.title')}
+								{t("createLink.title")}
 							</h2>
 							<form
 								onSubmit={(event) => {
@@ -84,7 +85,7 @@ export default function OnboardingLinksPage() {
 										htmlFor="onboarding-category"
 										className="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1.5"
 									>
-										{t('createLink.category')}
+										{t("createLink.category")}
 									</label>
 									<div className="relative">
 										<select
@@ -114,14 +115,14 @@ export default function OnboardingLinksPage() {
 										htmlFor="onboarding-label"
 										className="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1.5"
 									>
-										{t('createLink.label.title')}
+										{t("createLink.label.title")}
 									</label>
 									<input
 										id="onboarding-label"
 										type="text"
 										value={label}
 										onChange={(event) => setLabel(event.target.value)}
-										placeholder={t('createLink.label.placeholder')}
+										placeholder={t("createLink.label.placeholder")}
 										className="w-full bg-surface-container-high rounded-xl px-4 py-3 text-sm text-on-surface border border-outline-variant/30 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
 									/>
 								</div>
@@ -131,7 +132,7 @@ export default function OnboardingLinksPage() {
 										htmlFor="onboarding-expiry"
 										className="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1.5"
 									>
-										{t('createLink.expires')}
+										{t("createLink.expires")}
 									</label>
 									<input
 										id="onboarding-expiry"
@@ -148,7 +149,9 @@ export default function OnboardingLinksPage() {
 										disabled={createMutation.isPending}
 										className="bg-[#FF5A30] text-white px-6 py-3 rounded-xl text-sm font-bold hover:opacity-90 disabled:opacity-60"
 									>
-										{createMutation.isPending ? t('createLink.creating') : t('createLink.submit')}
+										{createMutation.isPending
+											? t("createLink.creating")
+											: t("createLink.submit")}
 									</button>
 								</div>
 							</form>
@@ -156,16 +159,20 @@ export default function OnboardingLinksPage() {
 
 						<section className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10">
 							<h2 className="font-(family-name:--font-manrope) text-xl font-bold mb-4">
-								{t('existingLinks.title')}
+								{t("existingLinks.title")}
 							</h2>
 							{linksQuery.isLoading ? (
-								<p className="text-sm text-on-surface-variant">{t('existingLinks.loading')}</p>
+								<p className="text-sm text-on-surface-variant">
+									{t("existingLinks.loading")}
+								</p>
 							) : !linksQuery.data?.success ? (
 								<p className="text-sm text-rose-700">
-									{linksQuery.data?.error ?? t('existingLinks.error')}
+									{linksQuery.data?.error ?? t("existingLinks.error")}
 								</p>
 							) : links.length === 0 ? (
-								<p className="text-sm text-on-surface-variant">{t('existingLinks.noLinks')}</p>
+								<p className="text-sm text-on-surface-variant">
+									{t("existingLinks.noLinks")}
+								</p>
 							) : (
 								<div className="space-y-3">
 									{links.map((link) => (
@@ -175,36 +182,44 @@ export default function OnboardingLinksPage() {
 										>
 											<div className="min-w-0">
 												<p className="text-sm font-bold text-on-surface">
-													{(link.label ?? t('existingLinks.untitled'))}
+													{link.label ?? t("existingLinks.untitled")}
 												</p>
 												<p className="text-xs text-on-surface-variant mt-1 break-all">
 													{typeof window !== "undefined"
-														? `${window.location.origin}/stakeholders/${(link.token)}`
-														: `/stakeholders/${(link.token)}`}
+														? `${window.location.origin}/stakeholders/${link.token}`
+														: `/stakeholders/${link.token}`}
 												</p>
 												<p className="text-xs text-on-surface-variant mt-1">
-													{t(`categories.${link.category as typeof CATEGORIES[number]}`)} · {link.is_active ? t('status.active') : t('status.inactive')}
+													{t(
+														`categories.${link.category as (typeof CATEGORIES)[number]}`,
+													)}{" "}
+													·{" "}
+													{link.is_active
+														? t("status.active")
+														: t("status.inactive")}
 												</p>
 											</div>
 											<div className="flex items-center gap-2">
 												<button
 													type="button"
 													onClick={async () => {
-														const shareUrl = `${window.location.origin}/stakeholders/${(link.token)}`;
+														const shareUrl = `${window.location.origin}/stakeholders/${link.token}`;
 														await navigator.clipboard.writeText(shareUrl);
 													}}
 													className="px-3 py-2 rounded-lg text-xs font-bold border border-outline-variant/30 text-on-surface-variant hover:bg-surface-container-high"
 												>
-													{t('actions.copy')}
+													{t("actions.copy")}
 												</button>
 												{link.is_active && (
 													<button
 														type="button"
-														onClick={() => revokeMutation.mutate(String(link.token))}
+														onClick={() =>
+															revokeMutation.mutate(String(link.token))
+														}
 														disabled={revokeMutation.isPending}
 														className="px-3 py-2 rounded-lg text-xs font-bold bg-rose-50 text-rose-700 hover:bg-rose-100 disabled:opacity-60"
 													>
-														{t('actions.revoke')}
+														{t("actions.revoke")}
 													</button>
 												)}
 											</div>
@@ -214,7 +229,7 @@ export default function OnboardingLinksPage() {
 							)}
 						</section>
 					</div>
-				  </main>
+				</main>
 			</div>
 		</div>
 	);

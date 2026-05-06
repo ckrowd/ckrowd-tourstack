@@ -1,11 +1,11 @@
 "use client";
 
+import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
-import { Link } from "@/i18n/routing";
+import { registerStakeholder } from "@/app/actions";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
-import { registerStakeholder } from "@/app/actions";
-import { useTranslations, useLocale } from 'next-intl';
+import { Link } from "@/i18n/routing";
 
 /* ─────────────────────── Types ─────────────────────── */
 
@@ -44,7 +44,7 @@ function Label({
 	children: React.ReactNode;
 	optional?: boolean;
 }) {
-	const t = useTranslations('OnboardingPage.shared');
+	const t = useTranslations("OnboardingPage.shared");
 	return (
 		<label
 			htmlFor={htmlFor}
@@ -52,7 +52,9 @@ function Label({
 		>
 			{children}
 			{optional && (
-				<span className="ml-1 font-normal italic text-xs">({t('optional')})</span>
+				<span className="ml-1 font-normal italic text-xs">
+					({t("optional")})
+				</span>
 			)}
 		</label>
 	);
@@ -76,14 +78,16 @@ function RadioGroup({
 						key={opt}
 						type="button"
 						onClick={() => onChange(opt)}
-						className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold border transition-all text-left ${checked
+						className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold border transition-all text-left ${
+							checked
 								? "bg-[#FF5A30]/10 border-[#FF5A30] text-[#FF5A30]"
 								: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A30]/40"
-							}`}
+						}`}
 					>
 						<span
-							className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 border-2 transition-colors ${checked ? "border-[#FF5A30]" : "border-current"
-								}`}
+							className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 border-2 transition-colors ${
+								checked ? "border-[#FF5A30]" : "border-current"
+							}`}
 						>
 							{checked && (
 								<span className="w-2.5 h-2.5 rounded-full bg-[#FF5A30] block" />
@@ -106,32 +110,32 @@ function CategoryStep({
 	value: Category | "";
 	onChange: (v: Category) => void;
 }) {
-	const t = useTranslations('OnboardingPage.categoryStep');
+	const t = useTranslations("OnboardingPage.categoryStep");
 	const categories: {
 		key: Category;
 		label: string;
 		icon: string;
 		desc: string;
 	}[] = [
-			{
-				key: "service",
-				label: t('categories.service.label'),
-				icon: "build",
-				desc: t('categories.service.desc'),
-			},
-			{
-				key: "workforce",
-				label: t('categories.workforce.label'),
-				icon: "engineering",
-				desc: t('categories.workforce.desc'),
-			},
-			{
-				key: "artmgmt",
-				label: t('categories.artmgmt.label'),
-				icon: "music_note",
-				desc: t('categories.artmgmt.desc'),
-			},
-		];
+		{
+			key: "service",
+			label: t("categories.service.label"),
+			icon: "build",
+			desc: t("categories.service.desc"),
+		},
+		{
+			key: "workforce",
+			label: t("categories.workforce.label"),
+			icon: "engineering",
+			desc: t("categories.workforce.desc"),
+		},
+		{
+			key: "artmgmt",
+			label: t("categories.artmgmt.label"),
+			icon: "music_note",
+			desc: t("categories.artmgmt.desc"),
+		},
+	];
 
 	return (
 		<div className="space-y-6">
@@ -140,12 +144,10 @@ function CategoryStep({
 					category
 				</span>
 				<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
-					{t('title')}
+					{t("title")}
 				</h3>
 			</div>
-			<p className="text-sm text-on-surface-variant">
-				{t('description')}
-			</p>
+			<p className="text-sm text-on-surface-variant">{t("description")}</p>
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 				{categories.map((cat) => {
 					const selected = value === cat.key;
@@ -154,23 +156,26 @@ function CategoryStep({
 							key={cat.key}
 							type="button"
 							onClick={() => onChange(cat.key)}
-							className={`flex flex-col gap-4 p-6 rounded-2xl border-2 text-left transition-all ${selected
+							className={`flex flex-col gap-4 p-6 rounded-2xl border-2 text-left transition-all ${
+								selected
 									? "bg-[#FF5A30]/5 border-[#FF5A30]"
 									: "bg-surface-container-highest border-outline-variant/20 hover:border-[#FF5A30]/40"
-								}`}
+							}`}
 						>
 							<div
-								className={`w-12 h-12 rounded-xl flex items-center justify-center ${selected
+								className={`w-12 h-12 rounded-xl flex items-center justify-center ${
+									selected
 										? "bg-[#FF5A30] text-white"
 										: "bg-surface-container-low text-on-surface-variant"
-									}`}
+								}`}
 							>
 								<span className="material-symbols-outlined">{cat.icon}</span>
 							</div>
 							<div>
 								<p
-									className={`font-bold text-base font-(family-name:--font-manrope) mb-1 ${selected ? "text-[#FF5A30]" : "text-on-surface"
-										}`}
+									className={`font-bold text-base font-(family-name:--font-manrope) mb-1 ${
+										selected ? "text-[#FF5A30]" : "text-on-surface"
+									}`}
 								>
 									{cat.label}
 								</p>
@@ -231,21 +236,21 @@ function ServiceProviderForm({
 	setField: <K extends keyof ServiceForm>(k: K, v: ServiceForm[K]) => void;
 	step: number;
 }) {
-	const t = useTranslations('OnboardingPage.serviceForm');
+	const t = useTranslations("OnboardingPage.serviceForm");
 
 	const SERVICE_TYPES = [
-		t('serviceTypes.venue'),
-		t('serviceTypes.sound'),
-		t('serviceTypes.lighting'),
-		t('serviceTypes.logistics'),
-		t('serviceTypes.security'),
-		t('serviceTypes.catering'),
-		t('serviceTypes.ticketing'),
-		t('serviceTypes.marketing'),
-		t('serviceTypes.photography'),
-		t('serviceTypes.medical'),
-		t('serviceTypes.generator'),
-		t('serviceTypes.other'),
+		t("serviceTypes.venue"),
+		t("serviceTypes.sound"),
+		t("serviceTypes.lighting"),
+		t("serviceTypes.logistics"),
+		t("serviceTypes.security"),
+		t("serviceTypes.catering"),
+		t("serviceTypes.ticketing"),
+		t("serviceTypes.marketing"),
+		t("serviceTypes.photography"),
+		t("serviceTypes.medical"),
+		t("serviceTypes.generator"),
+		t("serviceTypes.other"),
 	];
 
 	if (step === 1) {
@@ -256,16 +261,18 @@ function ServiceProviderForm({
 						business
 					</span>
 					<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
-						{t('companyInfo.title')}
+						{t("companyInfo.title")}
 					</h3>
 				</div>
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 					<div className="md:col-span-2">
-						<Label htmlFor="sp-company">{t('companyInfo.companyName.label')}</Label>
+						<Label htmlFor="sp-company">
+							{t("companyInfo.companyName.label")}
+						</Label>
 						<input
 							id="sp-company"
 							type="text"
-							placeholder={t('companyInfo.companyName.placeholder')}
+							placeholder={t("companyInfo.companyName.placeholder")}
 							className={inputClass}
 							required
 							value={form.companyName}
@@ -273,11 +280,13 @@ function ServiceProviderForm({
 						/>
 					</div>
 					<div>
-						<Label htmlFor="sp-contact">{t('companyInfo.contactName.label')}</Label>
+						<Label htmlFor="sp-contact">
+							{t("companyInfo.contactName.label")}
+						</Label>
 						<input
 							id="sp-contact"
 							type="text"
-							placeholder={t('companyInfo.contactName.placeholder')}
+							placeholder={t("companyInfo.contactName.placeholder")}
 							className={inputClass}
 							required
 							value={form.contactName}
@@ -285,11 +294,11 @@ function ServiceProviderForm({
 						/>
 					</div>
 					<div>
-						<Label htmlFor="sp-email">{t('companyInfo.email.label')}</Label>
+						<Label htmlFor="sp-email">{t("companyInfo.email.label")}</Label>
 						<input
 							id="sp-email"
 							type="email"
-							placeholder={t('companyInfo.email.placeholder')}
+							placeholder={t("companyInfo.email.placeholder")}
 							className={inputClass}
 							required
 							value={form.email}
@@ -297,23 +306,25 @@ function ServiceProviderForm({
 						/>
 					</div>
 					<div>
-						<Label htmlFor="sp-phone">{t('companyInfo.phone.label')}</Label>
+						<Label htmlFor="sp-phone">{t("companyInfo.phone.label")}</Label>
 						<input
 							id="sp-phone"
 							type="tel"
-							placeholder={t('companyInfo.phone.placeholder')}
+							placeholder={t("companyInfo.phone.placeholder")}
 							className={inputClass}
 							required
 							value={form.phone}
-							onChange={(e) => setField("phone", e.target.value.replace(/\D/g, ""))}
+							onChange={(e) =>
+								setField("phone", e.target.value.replace(/\D/g, ""))
+							}
 						/>
 					</div>
 					<div>
-						<Label htmlFor="sp-country">{t('companyInfo.country.label')}</Label>
+						<Label htmlFor="sp-country">{t("companyInfo.country.label")}</Label>
 						<input
 							id="sp-country"
 							type="text"
-							placeholder={t('companyInfo.country.placeholder')}
+							placeholder={t("companyInfo.country.placeholder")}
 							className={inputClass}
 							required
 							value={form.country}
@@ -321,11 +332,11 @@ function ServiceProviderForm({
 						/>
 					</div>
 					<div>
-						<Label htmlFor="sp-city">{t('companyInfo.city.label')}</Label>
+						<Label htmlFor="sp-city">{t("companyInfo.city.label")}</Label>
 						<input
 							id="sp-city"
 							type="text"
-							placeholder={t('companyInfo.city.placeholder')}
+							placeholder={t("companyInfo.city.placeholder")}
 							className={inputClass}
 							required
 							value={form.city}
@@ -334,12 +345,12 @@ function ServiceProviderForm({
 					</div>
 					<div>
 						<Label htmlFor="sp-website" optional>
-							{t('companyInfo.website.label')}
+							{t("companyInfo.website.label")}
 						</Label>
 						<input
 							id="sp-website"
 							type="url"
-							placeholder={t('companyInfo.website.placeholder')}
+							placeholder={t("companyInfo.website.placeholder")}
 							className={inputClass}
 							value={form.website}
 							onChange={(e) => setField("website", e.target.value)}
@@ -358,11 +369,11 @@ function ServiceProviderForm({
 						build
 					</span>
 					<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
-						{t('experience.title')}
+						{t("experience.title")}
 					</h3>
 				</div>
 				<div>
-					<Label>{t('experience.serviceType.label')}</Label>
+					<Label>{t("experience.serviceType.label")}</Label>
 					<div className="mt-2 grid grid-cols-2 md:grid-cols-3 gap-3">
 						{SERVICE_TYPES.map((s) => {
 							const checked = form.serviceType === s;
@@ -371,10 +382,11 @@ function ServiceProviderForm({
 									key={s}
 									type="button"
 									onClick={() => setField("serviceType", s)}
-									className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-semibold border transition-all text-left ${checked
+									className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-semibold border transition-all text-left ${
+										checked
 											? "bg-[#FF5A30]/10 border-[#FF5A30] text-[#FF5A30]"
 											: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A30]/40"
-										}`}
+									}`}
 								>
 									<span
 										className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${checked ? "border-[#FF5A30]" : "border-current"}`}
@@ -388,13 +400,15 @@ function ServiceProviderForm({
 							);
 						})}
 					</div>
-					{form.serviceType === t('serviceTypes.other') && (
+					{form.serviceType === t("serviceTypes.other") && (
 						<div className="mt-4">
-							<Label htmlFor="sp-other-service">{t('experience.otherService.label')}</Label>
+							<Label htmlFor="sp-other-service">
+								{t("experience.otherService.label")}
+							</Label>
 							<input
 								id="sp-other-service"
 								type="text"
-								placeholder={t('experience.otherService.placeholder')}
+								placeholder={t("experience.otherService.placeholder")}
 								className={inputClass}
 								value={form.otherService}
 								onChange={(e) => setField("otherService", e.target.value)}
@@ -403,14 +417,16 @@ function ServiceProviderForm({
 					)}
 				</div>
 				<div>
-					<Label htmlFor="sp-years">{t('experience.yearsOperation.label')}</Label>
+					<Label htmlFor="sp-years">
+						{t("experience.yearsOperation.label")}
+					</Label>
 					<div className="mt-2">
 						<RadioGroup
 							options={[
-								t('experience.yearsOperation.options.lessThan1'),
-								t('experience.yearsOperation.options.1to3'),
-								t('experience.yearsOperation.options.4to7'),
-								t('experience.yearsOperation.options.8plus'),
+								t("experience.yearsOperation.options.lessThan1"),
+								t("experience.yearsOperation.options.1to3"),
+								t("experience.yearsOperation.options.4to7"),
+								t("experience.yearsOperation.options.8plus"),
 							]}
 							value={form.yearsOperation}
 							onChange={(v) => setField("yearsOperation", v)}
@@ -419,12 +435,12 @@ function ServiceProviderForm({
 				</div>
 				<div>
 					<Label htmlFor="sp-clients" optional>
-						{t('experience.pastClients.label')}
+						{t("experience.pastClients.label")}
 					</Label>
 					<textarea
 						id="sp-clients"
 						rows={3}
-						placeholder={t('experience.pastClients.placeholder')}
+						placeholder={t("experience.pastClients.placeholder")}
 						className="w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
 						value={form.pastClients}
 						onChange={(e) => setField("pastClients", e.target.value)}
@@ -432,12 +448,12 @@ function ServiceProviderForm({
 				</div>
 				<div>
 					<Label htmlFor="sp-certs" optional>
-						{t('experience.certifications.label')}
+						{t("experience.certifications.label")}
 					</Label>
 					<textarea
 						id="sp-certs"
 						rows={2}
-						placeholder={t('experience.certifications.placeholder')}
+						placeholder={t("experience.certifications.placeholder")}
 						className="w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
 						value={form.certifications}
 						onChange={(e) => setField("certifications", e.target.value)}
@@ -455,14 +471,14 @@ function ServiceProviderForm({
 						gavel
 					</span>
 					<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
-						{t('declaration.title')}
+						{t("declaration.title")}
 					</h3>
 				</div>
 				<ul className="space-y-2">
 					{[
-						t('declaration.clauses.accuracy'),
-						t('declaration.clauses.consent'),
-						t('declaration.clauses.misrepresentation'),
+						t("declaration.clauses.accuracy"),
+						t("declaration.clauses.consent"),
+						t("declaration.clauses.misrepresentation"),
 					].map((item) => (
 						<li
 							key={item}
@@ -480,11 +496,13 @@ function ServiceProviderForm({
 				</ul>
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 					<div>
-						<Label htmlFor="sp-decl-name">{t('declaration.representativeName.label')}</Label>
+						<Label htmlFor="sp-decl-name">
+							{t("declaration.representativeName.label")}
+						</Label>
 						<input
 							id="sp-decl-name"
 							type="text"
-							placeholder={t('declaration.representativeName.placeholder')}
+							placeholder={t("declaration.representativeName.placeholder")}
 							className={inputClass}
 							required
 							value={form.declarationName}
@@ -492,7 +510,7 @@ function ServiceProviderForm({
 						/>
 					</div>
 					<div>
-						<Label htmlFor="sp-decl-date">{t('declaration.date.label')}</Label>
+						<Label htmlFor="sp-decl-date">{t("declaration.date.label")}</Label>
 						<input
 							id="sp-decl-date"
 							type="date"
@@ -557,7 +575,7 @@ function ArtMgmtForm({
 	setField: <K extends keyof ArtmgmtForm>(k: K, v: ArtmgmtForm[K]) => void;
 	step: number;
 }) {
-	const t = useTranslations('OnboardingPage.artMgmtForm');
+	const t = useTranslations("OnboardingPage.artMgmtForm");
 
 	if (step === 1) {
 		return (
@@ -567,16 +585,18 @@ function ArtMgmtForm({
 						business
 					</span>
 					<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
-						{t('companyInfo.title')}
+						{t("companyInfo.title")}
 					</h3>
 				</div>
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 					<div className="md:col-span-2">
-						<Label htmlFor="am-company">{t('companyInfo.companyName.label')}</Label>
+						<Label htmlFor="am-company">
+							{t("companyInfo.companyName.label")}
+						</Label>
 						<input
 							id="am-company"
 							type="text"
-							placeholder={t('companyInfo.companyName.placeholder')}
+							placeholder={t("companyInfo.companyName.placeholder")}
 							className={inputClass}
 							required
 							value={form.companyName}
@@ -584,11 +604,13 @@ function ArtMgmtForm({
 						/>
 					</div>
 					<div>
-						<Label htmlFor="am-contact">{t('companyInfo.contactName.label')}</Label>
+						<Label htmlFor="am-contact">
+							{t("companyInfo.contactName.label")}
+						</Label>
 						<input
 							id="am-contact"
 							type="text"
-							placeholder={t('companyInfo.contactName.placeholder')}
+							placeholder={t("companyInfo.contactName.placeholder")}
 							className={inputClass}
 							required
 							value={form.contactName}
@@ -596,11 +618,11 @@ function ArtMgmtForm({
 						/>
 					</div>
 					<div>
-						<Label htmlFor="am-email">{t('companyInfo.email.label')}</Label>
+						<Label htmlFor="am-email">{t("companyInfo.email.label")}</Label>
 						<input
 							id="am-email"
 							type="email"
-							placeholder={t('companyInfo.email.placeholder')}
+							placeholder={t("companyInfo.email.placeholder")}
 							className={inputClass}
 							required
 							value={form.email}
@@ -608,23 +630,25 @@ function ArtMgmtForm({
 						/>
 					</div>
 					<div>
-						<Label htmlFor="am-phone">{t('companyInfo.phone.label')}</Label>
+						<Label htmlFor="am-phone">{t("companyInfo.phone.label")}</Label>
 						<input
 							id="am-phone"
 							type="tel"
-							placeholder={t('companyInfo.phone.placeholder')}
+							placeholder={t("companyInfo.phone.placeholder")}
 							className={inputClass}
 							required
 							value={form.phone}
-							onChange={(e) => setField("phone", e.target.value.replace(/\D/g, ""))}
+							onChange={(e) =>
+								setField("phone", e.target.value.replace(/\D/g, ""))
+							}
 						/>
 					</div>
 					<div>
-						<Label htmlFor="am-country">{t('companyInfo.country.label')}</Label>
+						<Label htmlFor="am-country">{t("companyInfo.country.label")}</Label>
 						<input
 							id="am-country"
 							type="text"
-							placeholder={t('companyInfo.country.placeholder')}
+							placeholder={t("companyInfo.country.placeholder")}
 							className={inputClass}
 							required
 							value={form.country}
@@ -632,11 +656,11 @@ function ArtMgmtForm({
 						/>
 					</div>
 					<div>
-						<Label htmlFor="am-city">{t('companyInfo.city.label')}</Label>
+						<Label htmlFor="am-city">{t("companyInfo.city.label")}</Label>
 						<input
 							id="am-city"
 							type="text"
-							placeholder={t('companyInfo.city.placeholder')}
+							placeholder={t("companyInfo.city.placeholder")}
 							className={inputClass}
 							required
 							value={form.city}
@@ -645,12 +669,12 @@ function ArtMgmtForm({
 					</div>
 					<div>
 						<Label htmlFor="am-website" optional>
-							{t('companyInfo.website.label')}
+							{t("companyInfo.website.label")}
 						</Label>
 						<input
 							id="am-website"
 							type="url"
-							placeholder={t('companyInfo.website.placeholder')}
+							placeholder={t("companyInfo.website.placeholder")}
 							className={inputClass}
 							value={form.website}
 							onChange={(e) => setField("website", e.target.value)}
@@ -658,12 +682,12 @@ function ArtMgmtForm({
 					</div>
 					<div>
 						<Label htmlFor="am-instagram" optional>
-							{t('companyInfo.instagram.label')}
+							{t("companyInfo.instagram.label")}
 						</Label>
 						<input
 							id="am-instagram"
 							type="text"
-							placeholder={t('companyInfo.instagram.placeholder')}
+							placeholder={t("companyInfo.instagram.placeholder")}
 							className={inputClass}
 							value={form.instagram}
 							onChange={(e) => setField("instagram", e.target.value)}
@@ -682,18 +706,18 @@ function ArtMgmtForm({
 						music_note
 					</span>
 					<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
-						{t('roster.title')}
+						{t("roster.title")}
 					</h3>
 				</div>
 				<div>
-					<Label>{t('roster.yearsOperation.label')}</Label>
+					<Label>{t("roster.yearsOperation.label")}</Label>
 					<div className="mt-2">
 						<RadioGroup
 							options={[
-								t('roster.yearsOperation.options.lessThan1'),
-								t('roster.yearsOperation.options.1to3'),
-								t('roster.yearsOperation.options.4to7'),
-								t('roster.yearsOperation.options.8plus'),
+								t("roster.yearsOperation.options.lessThan1"),
+								t("roster.yearsOperation.options.1to3"),
+								t("roster.yearsOperation.options.4to7"),
+								t("roster.yearsOperation.options.8plus"),
 							]}
 							value={form.yearsOperation}
 							onChange={(v) => setField("yearsOperation", v)}
@@ -701,15 +725,15 @@ function ArtMgmtForm({
 					</div>
 				</div>
 				<div>
-					<Label>{t('roster.rosterSize.label')}</Label>
+					<Label>{t("roster.rosterSize.label")}</Label>
 					<div className="mt-2">
 						<RadioGroup
 							options={[
-								t('roster.rosterSize.options.1to2'),
-								t('roster.rosterSize.options.3to5'),
-								t('roster.rosterSize.options.6to10'),
-								t('roster.rosterSize.options.11to20'),
-								t('roster.rosterSize.options.20plus'),
+								t("roster.rosterSize.options.1to2"),
+								t("roster.rosterSize.options.3to5"),
+								t("roster.rosterSize.options.6to10"),
+								t("roster.rosterSize.options.11to20"),
+								t("roster.rosterSize.options.20plus"),
 							]}
 							value={form.rosterSize}
 							onChange={(v) => setField("rosterSize", v)}
@@ -717,11 +741,11 @@ function ArtMgmtForm({
 					</div>
 				</div>
 				<div>
-					<Label htmlFor="am-genres">{t('roster.genres.label')}</Label>
+					<Label htmlFor="am-genres">{t("roster.genres.label")}</Label>
 					<input
 						id="am-genres"
 						type="text"
-						placeholder={t('roster.genres.placeholder')}
+						placeholder={t("roster.genres.placeholder")}
 						className={inputClass}
 						required
 						value={form.genres}
@@ -729,11 +753,11 @@ function ArtMgmtForm({
 					/>
 				</div>
 				<div>
-					<Label htmlFor="am-artists">{t('roster.artists.label')}</Label>
+					<Label htmlFor="am-artists">{t("roster.artists.label")}</Label>
 					<textarea
 						id="am-artists"
 						rows={3}
-						placeholder={t('roster.artists.placeholder')}
+						placeholder={t("roster.artists.placeholder")}
 						className="w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
 						value={form.artistsRepresented}
 						onChange={(e) => setField("artistsRepresented", e.target.value)}
@@ -741,12 +765,12 @@ function ArtMgmtForm({
 				</div>
 				<div>
 					<Label htmlFor="am-collabs" optional>
-						{t('roster.pastCollaborations.label')}
+						{t("roster.pastCollaborations.label")}
 					</Label>
 					<textarea
 						id="am-collabs"
 						rows={3}
-						placeholder={t('roster.pastCollaborations.placeholder')}
+						placeholder={t("roster.pastCollaborations.placeholder")}
 						className="w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
 						value={form.pastCollaborations}
 						onChange={(e) => setField("pastCollaborations", e.target.value)}
@@ -764,14 +788,14 @@ function ArtMgmtForm({
 						gavel
 					</span>
 					<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
-						{t('declaration.title')}
+						{t("declaration.title")}
 					</h3>
 				</div>
 				<ul className="space-y-2">
 					{[
-						t('declaration.clauses.accuracy'),
-						t('declaration.clauses.consent'),
-						t('declaration.clauses.misrepresentation'),
+						t("declaration.clauses.accuracy"),
+						t("declaration.clauses.consent"),
+						t("declaration.clauses.misrepresentation"),
 					].map((item) => (
 						<li
 							key={item}
@@ -789,11 +813,13 @@ function ArtMgmtForm({
 				</ul>
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 					<div>
-						<Label htmlFor="am-decl-name">{t('declaration.representativeName.label')}</Label>
+						<Label htmlFor="am-decl-name">
+							{t("declaration.representativeName.label")}
+						</Label>
 						<input
 							id="am-decl-name"
 							type="text"
-							placeholder={t('declaration.representativeName.placeholder')}
+							placeholder={t("declaration.representativeName.placeholder")}
 							className={inputClass}
 							required
 							value={form.declarationName}
@@ -801,7 +827,7 @@ function ArtMgmtForm({
 						/>
 					</div>
 					<div>
-						<Label htmlFor="am-decl-date">{t('declaration.date.label')}</Label>
+						<Label htmlFor="am-decl-date">{t("declaration.date.label")}</Label>
 						<input
 							id="am-decl-date"
 							type="date"
@@ -840,10 +866,11 @@ function Stepper({ steps, current }: { steps: string[]; current: number }) {
 							className="relative z-10 flex flex-col items-center"
 						>
 							<div
-								className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ring-4 ring-surface-container-low ${done || active
+								className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ring-4 ring-surface-container-low ${
+									done || active
 										? "bg-[#FF5A30] text-white"
 										: "bg-surface-variant text-on-surface-variant"
-									}`}
+								}`}
 							>
 								{done ? (
 									<span
@@ -857,12 +884,13 @@ function Stepper({ steps, current }: { steps: string[]; current: number }) {
 								)}
 							</div>
 							<span
-								className={`mt-2 text-[10px] font-bold uppercase tracking-wider text-center  leading-tight ${active
+								className={`mt-2 text-[10px] font-bold uppercase tracking-wider text-center  leading-tight ${
+									active
 										? "text-[#FF5A30]"
 										: done
 											? "text-[#FF5A30]/70"
 											: "text-on-surface-variant"
-									}`}
+								}`}
 							>
 								{label}
 							</span>
@@ -877,20 +905,20 @@ function Stepper({ steps, current }: { steps: string[]; current: number }) {
 /* ─────────────────────── Directory Tab ─────────────────────── */
 
 function DirectoryTab({ entries }: { entries: StakeholderEntry[] }) {
-	const t = useTranslations('OnboardingPage.directory');
+	const t = useTranslations("OnboardingPage.directory");
 	const locale = useLocale();
 
 	const CATEGORY_LABELS: Record<Category, string> = {
-		service: t('categories.service'),
-		workforce: t('categories.workforce'),
-		artmgmt: t('categories.artmgmt'),
+		service: t("categories.service"),
+		workforce: t("categories.workforce"),
+		artmgmt: t("categories.artmgmt"),
 	};
 
 	const FILTER_TABS: { key: "all" | Category; label: string }[] = [
-		{ key: "all", label: t('filters.all') },
-		{ key: "service", label: t('filters.service') },
-		{ key: "workforce", label: t('filters.workforce') },
-		{ key: "artmgmt", label: t('filters.artmgmt') },
+		{ key: "all", label: t("filters.all") },
+		{ key: "service", label: t("filters.service") },
+		{ key: "workforce", label: t("filters.workforce") },
+		{ key: "artmgmt", label: t("filters.artmgmt") },
 	];
 
 	const [filter, setFilter] = useState<"all" | Category>("all");
@@ -908,7 +936,7 @@ function DirectoryTab({ entries }: { entries: StakeholderEntry[] }) {
 					className="flex items-center gap-2 text-slate-500 hover:text-[#FF5A30] text-sm font-semibold mb-6 transition-colors"
 				>
 					<span className="material-symbols-outlined text-sm">arrow_back</span>
-					{t('backToDirectory')}
+					{t("backToDirectory")}
 				</button>
 
 				<div className="bg-surface-container-lowest rounded-2xl p-8 shadow-sm border border-outline-variant/10">
@@ -936,7 +964,7 @@ function DirectoryTab({ entries }: { entries: StakeholderEntry[] }) {
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<div>
 							<p className="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1">
-								{t('details.email')}
+								{t("details.email")}
 							</p>
 							<p className="text-sm text-on-surface font-medium">
 								{selected.email}
@@ -944,7 +972,7 @@ function DirectoryTab({ entries }: { entries: StakeholderEntry[] }) {
 						</div>
 						<div>
 							<p className="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1">
-								{t('details.phone')}
+								{t("details.phone")}
 							</p>
 							<p className="text-sm text-on-surface font-medium">
 								{selected.phone}
@@ -952,7 +980,7 @@ function DirectoryTab({ entries }: { entries: StakeholderEntry[] }) {
 						</div>
 						<div>
 							<p className="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1">
-								{t('details.country')}
+								{t("details.country")}
 							</p>
 							<p className="text-sm text-on-surface font-medium">
 								{selected.country}
@@ -960,7 +988,7 @@ function DirectoryTab({ entries }: { entries: StakeholderEntry[] }) {
 						</div>
 						<div>
 							<p className="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1">
-								{t('details.submitted')}
+								{t("details.submitted")}
 							</p>
 							<p className="text-sm text-on-surface font-medium">
 								{new Date(selected.submittedAt).toLocaleDateString(locale, {
@@ -985,10 +1013,11 @@ function DirectoryTab({ entries }: { entries: StakeholderEntry[] }) {
 						key={tab.key}
 						type="button"
 						onClick={() => setFilter(tab.key)}
-						className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${filter === tab.key
+						className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
+							filter === tab.key
 								? "bg-[#FF5A30] text-white shadow-md"
 								: "bg-surface-container-highest text-on-surface-variant hover:bg-surface-container-high"
-							}`}
+						}`}
 					>
 						{tab.label}
 						<span className="ml-2 text-xs opacity-70">
@@ -1006,10 +1035,10 @@ function DirectoryTab({ entries }: { entries: StakeholderEntry[] }) {
 						group_add
 					</span>
 					<p className="text-on-surface-variant font-medium">
-						{t('noEntries.title')}
+						{t("noEntries.title")}
 					</p>
 					<p className="text-sm text-on-surface-variant mt-1">
-						{t('noEntries.description')}
+						{t("noEntries.description")}
 					</p>
 				</div>
 			) : (
@@ -1018,16 +1047,16 @@ function DirectoryTab({ entries }: { entries: StakeholderEntry[] }) {
 						<thead>
 							<tr className="bg-surface-container-high">
 								<th className="px-5 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant">
-									{t('table.name')}
+									{t("table.name")}
 								</th>
 								<th className="px-5 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant hidden md:table-cell">
-									{t('table.category')}
+									{t("table.category")}
 								</th>
 								<th className="px-5 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant hidden lg:table-cell">
-									{t('table.country')}
+									{t("table.country")}
 								</th>
 								<th className="px-5 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant hidden md:table-cell">
-									{t('table.submitted')}
+									{t("table.submitted")}
 								</th>
 								<th className="px-5 py-4" />
 							</tr>
@@ -1078,7 +1107,7 @@ function DirectoryTab({ entries }: { entries: StakeholderEntry[] }) {
 											onClick={() => setSelected(entry)}
 											className="text-xs font-bold text-[#FF5A30] hover:underline"
 										>
-											{t('table.view')}
+											{t("table.view")}
 										</button>
 									</td>
 								</tr>
@@ -1106,7 +1135,7 @@ function loadStoredEntries(): StakeholderEntry[] {
 }
 
 export default function OnboardingPage() {
-	const t = useTranslations('OnboardingPage');
+	const t = useTranslations("OnboardingPage");
 	const [tab, setTab] = useState<"form" | "directory">("form");
 	const [category, setCategory] = useState<Category | "">("");
 	const [step, setStep] = useState(0); // 0 = category selection
@@ -1133,13 +1162,28 @@ export default function OnboardingPage() {
 		setArtmgmtFormState((prev) => ({ ...prev, [k]: v }));
 	}
 
-	const SERVICE_STEPS = [t('steps.category'), t('steps.company'), t('steps.services'), t('steps.declaration')];
-	const ARTMGMT_STEPS = [t('steps.category'), t('steps.company'), t('steps.roster'), t('steps.declaration')];
+	const SERVICE_STEPS = [
+		t("steps.category"),
+		t("steps.company"),
+		t("steps.services"),
+		t("steps.declaration"),
+	];
+	const ARTMGMT_STEPS = [
+		t("steps.category"),
+		t("steps.company"),
+		t("steps.roster"),
+		t("steps.declaration"),
+	];
 
 	function getStepsForCategory(cat: Category | "") {
 		if (cat === "service") return SERVICE_STEPS;
 		if (cat === "artmgmt") return ARTMGMT_STEPS;
-		return [t('steps.category'), t('steps.details'), t('steps.review'), t('steps.submit')];
+		return [
+			t("steps.category"),
+			t("steps.details"),
+			t("steps.review"),
+			t("steps.submit"),
+		];
 	}
 
 	const steps = getStepsForCategory(category);
@@ -1243,10 +1287,10 @@ export default function OnboardingPage() {
 								</span>
 							</div>
 							<h1 className="text-3xl font-extrabold tracking-tight text-on-surface mb-3 font-(family-name:--font-manrope)">
-								{t('success.title')}
+								{t("success.title")}
 							</h1>
 							<p className="text-on-surface-variant mb-8">
-								{t('success.description')}
+								{t("success.description")}
 							</p>
 							<div className="flex flex-col sm:flex-row gap-4 justify-center">
 								<button
@@ -1257,14 +1301,14 @@ export default function OnboardingPage() {
 									}}
 									className="px-8 py-3 bg-[#FF5A30] text-white rounded-xl font-bold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform"
 								>
-									{t('success.viewDirectory')}
+									{t("success.viewDirectory")}
 								</button>
 								<button
 									type="button"
 									onClick={resetForm}
 									className="px-8 py-3 bg-surface-container-lowest text-on-surface rounded-xl font-bold border border-outline-variant/20 hover:bg-surface-container-low transition-colors"
 								>
-									{t('success.onboardAnother')}
+									{t("success.onboardAnother")}
 								</button>
 							</div>
 						</div>
@@ -1286,13 +1330,13 @@ export default function OnboardingPage() {
 						{/* Header */}
 						<header className="mb-8">
 							<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-3">
-								{t('header.platform')}
+								{t("header.platform")}
 							</span>
 							<h1 className="text-4xl font-extrabold tracking-tight text-on-surface mb-2 font-(family-name:--font-manrope)">
-								{t('header.title')}
+								{t("header.title")}
 							</h1>
 							<p className="text-on-surface-variant">
-								{t('header.description')}
+								{t("header.description")}
 							</p>
 						</header>
 
@@ -1303,12 +1347,13 @@ export default function OnboardingPage() {
 									key={t_key}
 									type="button"
 									onClick={() => setTab(t_key)}
-									className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${tab === t_key
+									className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
+										tab === t_key
 											? "bg-white text-on-surface shadow-sm"
 											: "text-on-surface-variant hover:text-on-surface"
-										}`}
+									}`}
 								>
-									{t_key === "form" ? t('tabs.onboard') : t('tabs.directory')}
+									{t_key === "form" ? t("tabs.onboard") : t("tabs.directory")}
 									{t_key === "directory" && entries.length > 0 && (
 										<span className="ml-2 px-1.5 py-0.5 bg-[#FF5A30] text-white text-[10px] font-bold rounded-full">
 											{entries.length}
@@ -1340,16 +1385,16 @@ export default function OnboardingPage() {
 												</span>
 												<div>
 													<p className="text-sm font-semibold text-blue-800 mb-1">
-														{t('workforceNotice.title')}
+														{t("workforceNotice.title")}
 													</p>
 													<p className="text-xs text-blue-700">
-														{t('workforceNotice.description')}
+														{t("workforceNotice.description")}
 													</p>
 													<Link
 														href="/workforce"
 														className="mt-2 inline-flex items-center gap-1 text-xs font-bold text-blue-700 hover:underline"
 													>
-														{t('workforceNotice.link')}
+														{t("workforceNotice.link")}
 														<span className="material-symbols-outlined text-xs">
 															arrow_forward
 														</span>
@@ -1365,7 +1410,7 @@ export default function OnboardingPage() {
 												onClick={() => setStep(1)}
 												className="px-10 py-3 bg-linear-to-r from-[#FF5A30] to-[#cc4826] text-white rounded-xl font-bold shadow-xl shadow-[#FF5A30]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none"
 											>
-												{t('actions.continue')}
+												{t("actions.continue")}
 												<span className="material-symbols-outlined">
 													arrow_forward
 												</span>
@@ -1403,15 +1448,15 @@ export default function OnboardingPage() {
 													<span className="material-symbols-outlined">
 														arrow_back
 													</span>
-													{t('actions.back')}
+													{t("actions.back")}
 												</button>
 												<button
 													type="submit"
 													className="px-10 py-3 bg-linear-to-r from-[#FF5A30] to-[#cc4826] text-white rounded-xl font-bold shadow-xl shadow-[#FF5A30]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2"
 												>
 													{step < totalSteps - 1
-														? t('actions.continue')
-														: t('actions.submit')}
+														? t("actions.continue")
+														: t("actions.submit")}
 													<span className="material-symbols-outlined">
 														{step < totalSteps - 1 ? "arrow_forward" : "send"}
 													</span>

@@ -1,34 +1,36 @@
 import Image from "next/image";
-import { Link } from "@/i18n/routing";
-
-import SideNav from "@/components/SideNav";
-import TopNav from "@/components/TopNav";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
 	getEOIs,
+	getFinancingApplications,
 	getTourstackDashboard,
 	getTourstackProfile,
-	getFinancingApplications,
 } from "@/app/actions";
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import SideNav from "@/components/SideNav";
+import TopNav from "@/components/TopNav";
+import { Link } from "@/i18n/routing";
 
-function formatTimeAgo(date: Date, t: Awaited<ReturnType<typeof getTranslations>>): string {
+function formatTimeAgo(
+	date: Date,
+	t: Awaited<ReturnType<typeof getTranslations>>,
+): string {
 	const diff = Date.now() - date.getTime();
 	const hours = Math.floor(diff / 3600000);
 	const days = Math.floor(diff / 86400000);
-	if (hours < 1) return t('time.justNow');
-	if (hours < 24) return t('time.hoursAgo', { count: hours });
-	if (days === 1) return t('time.yesterday');
-	return t('time.daysAgo', { count: days });
+	if (hours < 1) return t("time.justNow");
+	if (hours < 24) return t("time.hoursAgo", { count: hours });
+	if (days === 1) return t("time.yesterday");
+	return t("time.daysAgo", { count: days });
 }
 
 type Props = {
-  params: Promise<{ locale: string }>;
+	params: Promise<{ locale: string }>;
 };
 
 export default async function DashboardPage({ params }: Props) {
-  const { locale } = await params;
-  setRequestLocale(locale);
-  const t = await getTranslations('DashboardPage');
+	const { locale } = await params;
+	setRequestLocale(locale);
+	const t = await getTranslations("DashboardPage");
 
 	const [eoisResult, dashboardResult, profileResult, financingResult] =
 		await Promise.all([
@@ -43,7 +45,7 @@ export default async function DashboardPage({ params }: Props) {
 	const profile = profileResult.data;
 	const companyName = profile?.company_name
 		? String(profile.company_name)
-		: t('yourOrganization');
+		: t("yourOrganization");
 	const financingApps = financingResult.data ?? [];
 	const latestFinancing = financingApps[0];
 	const recentEOIs = dashData?.recentEOIs ?? [];
@@ -65,14 +67,14 @@ export default async function DashboardPage({ params }: Props) {
 		"w-0";
 	const progressArtist = progressEOI?.artist;
 	const progressTitle = progressEOI
-		? t('eoiProgressTitle', {
+		? t("eoiProgressTitle", {
 				artist: progressArtist?.name ?? "Artist",
-				tour: progressArtist?.tour_name ? ` (${progressArtist.tour_name})` : ""
+				tour: progressArtist?.tour_name ? ` (${progressArtist.tour_name})` : "",
 			})
-		: t('noEoisYet');
+		: t("noEoisYet");
 	const progressStatusLabel = progressEOI
 		? t(`statuses.${String(progressEOI.status ?? "pending")}`)
-		: t('noEois');
+		: t("noEois");
 	const progressStatusColor = progressEOI
 		? String(progressEOI.status) === "approved"
 			? "bg-emerald-100 text-emerald-800"
@@ -81,11 +83,11 @@ export default async function DashboardPage({ params }: Props) {
 				: "bg-yellow-100 text-yellow-800"
 		: "bg-surface-container-high text-on-surface-variant";
 	const tourSteps = [
-		{ n: "01", label: t('steps.eoiSubmitted'), done: progressStepsDone >= 1 },
-		{ n: "02", label: t('steps.underReview'), done: progressStepsDone >= 2 },
-		{ n: "03", label: t('steps.matchScore'), done: progressStepsDone >= 3 },
-		{ n: "04", label: t('steps.decision'), done: progressStepsDone >= 4 },
-		{ n: "05", label: t('steps.confirmed'), done: progressStepsDone >= 5 },
+		{ n: "01", label: t("steps.eoiSubmitted"), done: progressStepsDone >= 1 },
+		{ n: "02", label: t("steps.underReview"), done: progressStepsDone >= 2 },
+		{ n: "03", label: t("steps.matchScore"), done: progressStepsDone >= 3 },
+		{ n: "04", label: t("steps.decision"), done: progressStepsDone >= 4 },
+		{ n: "05", label: t("steps.confirmed"), done: progressStepsDone >= 5 },
 	];
 	return (
 		<div className="bg-surface text-on-surface">
@@ -99,13 +101,13 @@ export default async function DashboardPage({ params }: Props) {
 					<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 						<div>
 							<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
-								{t('promoterPortal')}
+								{t("promoterPortal")}
 							</span>
 							<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
-								{t('title')}
+								{t("title")}
 							</h1>
 							<p className="text-on-surface-variant font-medium">
-								{t('welcomeBack', { name: companyName })}
+								{t("welcomeBack", { name: companyName })}
 							</p>
 						</div>
 						<div className="flex items-center gap-3 bg-surface-container-lowest p-2 rounded-xl shadow-sm">
@@ -113,7 +115,7 @@ export default async function DashboardPage({ params }: Props) {
 								calendar_month
 							</span>
 							<span className="font-(family-name:--font-manrope) font-bold text-sm pr-4">
-								{t('touringSeason')}: {t('touringSeasonYears')}
+								{t("touringSeason")}: {t("touringSeasonYears")}
 							</span>
 						</div>
 					</div>
@@ -170,7 +172,7 @@ export default async function DashboardPage({ params }: Props) {
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
 						<div className="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-[#FF5A30]">
 							<p className="text-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-4">
-								{t('stats.eoisSubmitted')}
+								{t("stats.eoisSubmitted")}
 							</p>
 							<div className="flex items-end justify-between">
 								<span className="text-4xl font-(family-name:--font-manrope) font-extrabold text-on-surface">
@@ -179,14 +181,14 @@ export default async function DashboardPage({ params }: Props) {
 										: eois.length}
 								</span>
 								<span className="text-[#FF5A30] font-bold flex items-center text-sm">
-									{t('stats.newThisMonth', { count: 2 })}
+									{t("stats.newThisMonth", { count: 2 })}
 								</span>
 							</div>
 						</div>
 
 						<div className="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-secondary">
 							<p className="text-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-4">
-								{t('stats.approved')}
+								{t("stats.approved")}
 							</p>
 							<div className="flex items-end justify-between">
 								<span className="text-4xl font-(family-name:--font-manrope) font-extrabold text-on-surface">
@@ -195,14 +197,14 @@ export default async function DashboardPage({ params }: Props) {
 										: 0}
 								</span>
 								<span className="text-emerald-600 font-bold text-sm">
-									{t('stats.confirmed')}
+									{t("stats.confirmed")}
 								</span>
 							</div>
 						</div>
 
 						<div className="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-tertiary-container">
 							<p className="text-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-4">
-								{t('stats.financingStatus')}
+								{t("stats.financingStatus")}
 							</p>
 							<div className="flex items-end justify-between">
 								<span className="text-4xl font-(family-name:--font-manrope) font-extrabold text-on-surface">
@@ -212,8 +214,10 @@ export default async function DashboardPage({ params }: Props) {
 								</span>
 								<span className="text-tertiary-container font-bold text-sm capitalize">
 									{latestFinancing
-										? t(`statuses.${String(latestFinancing.status ?? "pending")}`)
-										: t('stats.noApps')}
+										? t(
+												`statuses.${String(latestFinancing.status ?? "pending")}`,
+											)
+										: t("stats.noApps")}
 								</span>
 							</div>
 						</div>
@@ -228,7 +232,7 @@ export default async function DashboardPage({ params }: Props) {
 								</span>
 							</div>
 							<p className="text-sm font-semibold text-white uppercase tracking-wider mb-4 z-10">
-								{t('stats.nextShow')}
+								{t("stats.nextShow")}
 							</p>
 							<div className="z-10">
 								{nextMilestone ? (
@@ -251,10 +255,10 @@ export default async function DashboardPage({ params }: Props) {
 								) : (
 									<>
 										<span className="block text-xl font-(family-name:--font-manrope) font-extrabold text-white leading-tight">
-											{t('stats.noUpcomingShows')}
+											{t("stats.noUpcomingShows")}
 										</span>
 										<span className="text-orange-50 font-medium text-sm">
-											{t('stats.submitEoiPrompt')}
+											{t("stats.submitEoiPrompt")}
 										</span>
 									</>
 								)}
@@ -266,13 +270,13 @@ export default async function DashboardPage({ params }: Props) {
 						<div className="lg:col-span-2 space-y-6">
 							<div className="flex items-center justify-between">
 								<h2 className="text-2xl font-(family-name:--font-manrope) font-bold text-on-surface">
-									{t('myEoiSubmissions')}
+									{t("myEoiSubmissions")}
 								</h2>
 								<Link
 									href="/eoi"
 									className="text-sm font-bold text-[#FF5A30] flex items-center gap-1 hover:underline"
 								>
-									{t('newEoi')}{" "}
+									{t("newEoi")}{" "}
 									<span className="material-symbols-outlined text-sm">add</span>
 								</Link>
 							</div>
@@ -282,16 +286,16 @@ export default async function DashboardPage({ params }: Props) {
 									<thead>
 										<tr className="bg-surface-container-high">
 											<th className="px-5 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant">
-												{t('table.artistTour')}
+												{t("table.artistTour")}
 											</th>
 											<th className="px-5 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant hidden md:table-cell">
-												{t('table.venue')}
+												{t("table.venue")}
 											</th>
 											<th className="px-5 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant">
-												{t('table.status')}
+												{t("table.status")}
 											</th>
 											<th className="px-5 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant text-right">
-												{t('table.match')}
+												{t("table.match")}
 											</th>
 										</tr>
 									</thead>
@@ -303,10 +307,10 @@ export default async function DashboardPage({ params }: Props) {
 														confirmation_number
 													</span>
 													<p className="font-(family-name:--font-manrope) font-bold text-on-surface-variant text-sm">
-														{t('table.noEois')}
+														{t("table.noEois")}
 													</p>
 													<p className="text-xs text-on-surface-variant mt-1">
-														{t('table.noEoisDesc')}
+														{t("table.noEoisDesc")}
 													</p>
 													<Link
 														href="/discovery"
@@ -315,7 +319,7 @@ export default async function DashboardPage({ params }: Props) {
 														<span className="material-symbols-outlined text-sm">
 															search
 														</span>
-														{t('table.discoverArtistes')}
+														{t("table.discoverArtistes")}
 													</Link>
 												</td>
 											</tr>
@@ -396,7 +400,7 @@ export default async function DashboardPage({ params }: Props) {
 							<div className="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
 								<div className="flex items-center justify-between mb-6">
 									<h3 className="font-(family-name:--font-manrope) font-bold text-lg">
-										{t('financingStatus')}
+										{t("financingStatus")}
 									</h3>
 									<span className="material-symbols-outlined text-[#FF5A30]">
 										account_balance
@@ -407,10 +411,12 @@ export default async function DashboardPage({ params }: Props) {
 										<div>
 											<div className="flex justify-between text-sm mb-2">
 												<span className="text-on-surface-variant font-medium">
-													{String(latestFinancing.product ?? t('application'))}
+													{String(latestFinancing.product ?? t("application"))}
 												</span>
 												<span className="font-bold text-[#FF5A30] capitalize">
-													{t(`statuses.${String(latestFinancing.status ?? "pending")}`)}
+													{t(
+														`statuses.${String(latestFinancing.status ?? "pending")}`,
+													)}
 												</span>
 											</div>
 											<div className="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
@@ -428,16 +434,16 @@ export default async function DashboardPage({ params }: Props) {
 											</div>
 											<p className="text-xs text-on-surface-variant mt-1">
 												{String(latestFinancing.status) === "approved"
-													? t('financingApproved')
+													? t("financingApproved")
 													: String(latestFinancing.status) === "declined"
-														? t('financingDeclined')
-														: t('financingAssessment')}
+														? t("financingDeclined")
+														: t("financingAssessment")}
 											</p>
 										</div>
 										<div className="grid grid-cols-2 gap-4">
 											<div className="p-4 bg-surface-container-low rounded-lg">
 												<p className="text-[10px] uppercase font-bold text-on-surface-variant mb-1">
-													{t('requested')}
+													{t("requested")}
 												</p>
 												<p className="text-xl font-(family-name:--font-manrope) font-extrabold text-on-surface">
 													{String(latestFinancing.currency ?? "USD")}{" "}
@@ -448,10 +454,12 @@ export default async function DashboardPage({ params }: Props) {
 											</div>
 											<div className="p-4 bg-surface-container-low rounded-lg">
 												<p className="text-[10px] uppercase font-bold text-on-surface-variant mb-1">
-													{t('table.status')}
+													{t("table.status")}
 												</p>
 												<p className="text-xl font-(family-name:--font-manrope) font-extrabold text-tertiary-container capitalize">
-													{t(`statuses.${String(latestFinancing.status ?? "pending")}`)}
+													{t(
+														`statuses.${String(latestFinancing.status ?? "pending")}`,
+													)}
 												</p>
 											</div>
 										</div>
@@ -459,7 +467,7 @@ export default async function DashboardPage({ params }: Props) {
 											href="/financing"
 											className="block w-full py-3 bg-orange-50 text-[#FF5A30] font-(family-name:--font-manrope) font-bold text-sm rounded-lg hover:brightness-95 transition-all text-center"
 										>
-											{t('viewFinancingDetails')}
+											{t("viewFinancingDetails")}
 										</Link>
 									</div>
 								) : (
@@ -468,16 +476,16 @@ export default async function DashboardPage({ params }: Props) {
 											account_balance
 										</span>
 										<p className="text-sm font-bold text-on-surface-variant">
-											{t('noAppsYet')}
+											{t("noAppsYet")}
 										</p>
 										<p className="text-xs text-on-surface-variant mt-1">
-											{t('noAppsDesc')}
+											{t("noAppsDesc")}
 										</p>
 										<Link
 											href="/financing"
 											className="inline-flex items-center gap-1 mt-4 text-sm font-bold text-[#FF5A30] hover:underline"
 										>
-											{t('exploreFinancing')}
+											{t("exploreFinancing")}
 											<span className="material-symbols-outlined text-sm">
 												arrow_forward
 											</span>
@@ -489,7 +497,7 @@ export default async function DashboardPage({ params }: Props) {
 							{/* Activity Feed */}
 							<div className="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
 								<h3 className="font-(family-name:--font-manrope) font-bold text-lg mb-6">
-									{t('tourActivity')}
+									{t("tourActivity")}
 								</h3>
 								{recentEOIs.length === 0 ? (
 									<div className="text-center py-4">
@@ -497,7 +505,7 @@ export default async function DashboardPage({ params }: Props) {
 											inbox
 										</span>
 										<p className="text-sm text-on-surface-variant font-medium">
-											{t('noActivity')}
+											{t("noActivity")}
 										</p>
 									</div>
 								) : (
@@ -518,8 +526,10 @@ export default async function DashboardPage({ params }: Props) {
 													: eoiStatus === "needs_revision"
 														? "bg-[#FF5A30]"
 														: "bg-tertiary-container";
-											const activityLabel = t(`activityLabels.${eoiStatus}`, { artist: artistName });
-											
+											const activityLabel = t(`activityLabels.${eoiStatus}`, {
+												artist: artistName,
+											});
+
 											const timeAgo = eoi.created_at
 												? formatTimeAgo(new Date(String(eoi.created_at)), t)
 												: "";
@@ -552,8 +562,7 @@ export default async function DashboardPage({ params }: Props) {
 							</div>
 						</div>
 					</div>
-
-					</main>
+				</main>
 			</div>
 		</div>
 	);

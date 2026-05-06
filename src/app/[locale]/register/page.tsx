@@ -1,16 +1,16 @@
 "use client";
 
-import { Link, useRouter } from "@/i18n/routing";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { useSession, useRegister } from "@/context/AuthContext";
-import { useTranslations } from 'next-intl';
+import { useRegister, useSession } from "@/context/AuthContext";
+import { Link, useRouter } from "@/i18n/routing";
 
 export default function RegisterPage() {
 	const router = useRouter();
 	const { data: session, isLoading } = useSession();
 	const registerMutation = useRegister();
-  const t = useTranslations('RegisterPage');
-  const tCommon = useTranslations('Common');
+	const t = useTranslations("RegisterPage");
+	const tCommon = useTranslations("Common");
 
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
@@ -33,12 +33,12 @@ export default function RegisterPage() {
 			{
 				onSuccess: (result) => {
 					if (!result.success) {
-						setError(result.error ?? t('errorFailed'));
+						setError(result.error ?? t("errorFailed"));
 					} else {
 						router.replace("/dashboard");
 					}
 				},
-				onError: () => setError(t('errorFailed')),
+				onError: () => setError(t("errorFailed")),
 			},
 		);
 	}
@@ -46,7 +46,7 @@ export default function RegisterPage() {
 	if (isLoading && !session) {
 		return (
 			<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 text-slate-600">
-				{t('loading')}
+				{t("loading")}
 			</div>
 		);
 	}
@@ -59,21 +59,19 @@ export default function RegisterPage() {
 						href="/"
 						className="text-3xl font-black tracking-tight text-[#FF5A30] font-(family-name:--font-manrope)"
 					>
-						{tCommon('brandName')} {tCommon('brandBy')}
+						{tCommon("brandName")} {tCommon("brandBy")}
 					</Link>
 					<p className="mt-2 text-sm text-slate-500 font-medium">
-						{t('tagline')}
+						{t("tagline")}
 					</p>
 				</div>
 
 				<div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
 					<div className="mb-8">
 						<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-slate-900 mb-1">
-							{t('title')}
+							{t("title")}
 						</h1>
-						<p className="text-sm text-slate-500">
-							{t('description')}
-						</p>
+						<p className="text-sm text-slate-500">{t("description")}</p>
 					</div>
 
 					<form onSubmit={handleSubmit} className="space-y-4">
@@ -83,13 +81,13 @@ export default function RegisterPage() {
 									htmlFor="first-name"
 									className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
 								>
-									{t('firstName')}
+									{t("firstName")}
 								</label>
 								<input
 									id="first-name"
 									type="text"
 									autoComplete="given-name"
-									placeholder={t('firstNamePlaceholder')}
+									placeholder={t("firstNamePlaceholder")}
 									value={firstName}
 									onChange={(event) => setFirstName(event.target.value)}
 									required
@@ -102,13 +100,13 @@ export default function RegisterPage() {
 									htmlFor="last-name"
 									className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
 								>
-									{t('lastName')}
+									{t("lastName")}
 								</label>
 								<input
 									id="last-name"
 									type="text"
 									autoComplete="family-name"
-									placeholder={t('lastNamePlaceholder')}
+									placeholder={t("lastNamePlaceholder")}
 									value={lastName}
 									onChange={(event) => setLastName(event.target.value)}
 									required
@@ -122,13 +120,13 @@ export default function RegisterPage() {
 								htmlFor="email"
 								className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
 							>
-								{t('email')}
+								{t("email")}
 							</label>
 							<input
 								id="email"
 								type="email"
 								autoComplete="email"
-								placeholder={t('emailPlaceholder')}
+								placeholder={t("emailPlaceholder")}
 								value={email}
 								onChange={(event) => setEmail(event.target.value)}
 								required
@@ -142,13 +140,13 @@ export default function RegisterPage() {
 									htmlFor="password"
 									className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
 								>
-									{t('password')}
+									{t("password")}
 								</label>
 								<input
 									id="password"
 									type="password"
 									autoComplete="new-password"
-									placeholder={t('passwordPlaceholder')}
+									placeholder={t("passwordPlaceholder")}
 									value={password}
 									onChange={(event) => setPassword(event.target.value)}
 									required
@@ -161,13 +159,13 @@ export default function RegisterPage() {
 									htmlFor="confirm-password"
 									className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
 								>
-									{t('confirmPassword')}
+									{t("confirmPassword")}
 								</label>
 								<input
 									id="confirm-password"
 									type="password"
 									autoComplete="new-password"
-									placeholder={t('confirmPasswordPlaceholder')}
+									placeholder={t("confirmPasswordPlaceholder")}
 									value={confirmPassword}
 									onChange={(event) => setConfirmPassword(event.target.value)}
 									required
@@ -187,17 +185,19 @@ export default function RegisterPage() {
 							disabled={registerMutation.isPending}
 							className="w-full py-3 bg-[#FF5A30] text-white font-bold rounded-xl shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60"
 						>
-							{registerMutation.isPending ? t('creatingAccount') : t('createAccount')}
+							{registerMutation.isPending
+								? t("creatingAccount")
+								: t("createAccount")}
 						</button>
 					</form>
 
 					<p className="text-center text-sm text-slate-500 mt-6">
-						{t('alreadyHaveAccount')}{" "}
+						{t("alreadyHaveAccount")}{" "}
 						<Link
 							href="/login"
 							className="text-[#FF5A30] font-semibold hover:underline"
 						>
-							{t('signIn')}
+							{t("signIn")}
 						</Link>
 					</p>
 				</div>
