@@ -2353,7 +2353,89 @@
       "submitting": "Soumission...",
       "submit": "Soumettre l'inscription"
     },
-    "errorDefault": "Impossible de soumettre l'inscription."
+    "errorDefault": "Impossible de soumettre l'inscription.",
+    "serviceProvider": {
+      "tagline": "Invitation Prestataire de Services",
+      "title": "Inscription Prestataire de Services",
+      "fields": {
+        "contactName": "Nom du contact",
+        "companyName": "Nom de l'entreprise",
+        "email": "E-mail professionnel",
+        "phone": "Téléphone",
+        "country": "Pays",
+        "serviceType": "Type de service",
+        "yearsInBusiness": "Années d'activité (facultatif)",
+        "description": "Description des services",
+        "website": "Site web (facultatif)",
+        "certifications": "Certifications / Assurances (facultatif)"
+      },
+      "serviceTypes": {
+        "catering": "Restauration",
+        "security": "Sécurité",
+        "av_tech": "AV / Technologie",
+        "transportation": "Transport",
+        "staging": "Scénographie & Production",
+        "hospitality": "Hôtellerie",
+        "other": "Autre"
+      }
+    },
+    "workforce": {
+      "tagline": "Invitation Personnel",
+      "title": "Inscription Personnel",
+      "fields": {
+        "name": "Nom complet",
+        "email": "E-mail",
+        "phone": "Téléphone",
+        "country": "Pays",
+        "company": "Employeur actuel (facultatif)",
+        "role": "Rôle / Spécialité",
+        "yearsExperience": "Années d'expérience",
+        "skillsSummary": "Résumé des compétences",
+        "availability": "Disponibilité",
+        "availabilityPlaceholder": "ex. Juin–Août 2025",
+        "previousWork": "Tournées / Événements précédents (facultatif)"
+      },
+      "roles": {
+        "stage_crew": "Équipe de scène",
+        "lighting_tech": "Technicien éclairage",
+        "sound_tech": "Technicien son",
+        "security": "Sécurité",
+        "production_manager": "Directeur de production",
+        "driver": "Chauffeur / Transport",
+        "hospitality": "Hôtellerie",
+        "other": "Autre"
+      },
+      "experienceLevels": {
+        "0_1": "Moins d'1 an",
+        "1_3": "1 à 3 ans",
+        "3_5": "3 à 5 ans",
+        "5_10": "5 à 10 ans",
+        "10_plus": "10 ans et plus"
+      }
+    },
+    "artmgmt": {
+      "tagline": "Invitation Management Artistique",
+      "title": "Inscription Management Artistique",
+      "fields": {
+        "agencyName": "Agence / Nom de l'entreprise",
+        "contactName": "Nom du contact principal",
+        "email": "E-mail",
+        "phone": "Téléphone",
+        "country": "Pays",
+        "artistNames": "Nom(s) de l'artiste",
+        "genres": "Genre(s)",
+        "genresPlaceholder": "ex. Pop, Hip-Hop, R&B",
+        "managementType": "Type de management",
+        "bio": "Biographie de l'artiste / du roster",
+        "website": "Site web / Réseaux sociaux (facultatif)"
+      },
+      "managementTypes": {
+        "solo_artist": "Artiste solo",
+        "band_group": "Groupe / Band",
+        "label": "Label discographique",
+        "management_agency": "Agence de management"
+      }
+    }
   },
   "AdminEOIPage": {
     "badge": "Gestion des EOI",

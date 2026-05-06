@@ -3,7 +3,7 @@
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createClient } from "@ckrowd/ckrowd-prisma";
-import { extractResponseCookies } from "@ckrowd/ckrowd-prisma/utils";
+
 
 export type Params<T extends (...args: any) => any> = NonNullable<
 	Parameters<T>[0]
@@ -12,6 +12,37 @@ export type Params<T extends (...args: any) => any> = NonNullable<
 export type Payload<T extends (...args: any) => any> = NonNullable<
 	Parameters<T>[0]
 >;
+
+function extractResponseCookies(response: Response) {
+	const cookieStrings =
+		typeof (response.headers as any).getSetCookie === "function"
+			? (response.headers as any).getSetCookie()
+			: (response.headers.get("set-cookie") ?? "")
+					.split(/,(?=[^ ,]+=)/)
+					.filter(Boolean);
+
+	return (cookieStrings as string[]).filter(Boolean).map((raw) => {
+		const parts = raw.split(";").map((s) => s.trim());
+		const [nameValue, ...attrs] = parts;
+		const eq = nameValue.indexOf("=");
+		const name = nameValue.slice(0, eq).trim();
+		const value = nameValue.slice(eq + 1).trim();
+		const options: Record<string, string | boolean | number | Date> = {};
+		for (const attr of attrs) {
+			const attrEq = attr.indexOf("=");
+			const key = attrEq >= 0 ? attr.slice(0, attrEq).trim().toLowerCase() : attr.trim().toLowerCase();
+			const val = attrEq >= 0 ? attr.slice(attrEq + 1).trim() : "";
+			if (key === "expires") options.expires = new Date(val);
+			else if (key === "max-age") options.maxAge = parseInt(val);
+			else if (key === "domain") options.domain = val;
+			else if (key === "path") options.path = val;
+			else if (key === "secure") options.secure = true;
+			else if (key === "httponly") options.httpOnly = true;
+			else if (key === "samesite") options.sameSite = val.toLowerCase();
+		}
+		return { name, value, options };
+	});
+}
 
 const client = createClient({
 	async onRequest(_path, options) {

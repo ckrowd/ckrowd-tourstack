@@ -2353,7 +2353,89 @@
       "submitting": "Submitting...",
       "submit": "Submit Registration"
     },
-    "errorDefault": "Unable to submit registration."
+    "errorDefault": "Unable to submit registration.",
+    "serviceProvider": {
+      "tagline": "Service Provider Invitation",
+      "title": "Service Provider Registration",
+      "fields": {
+        "contactName": "Contact Name",
+        "companyName": "Company Name",
+        "email": "Business Email",
+        "phone": "Phone",
+        "country": "Country",
+        "serviceType": "Service Type",
+        "yearsInBusiness": "Years in Business (optional)",
+        "description": "Description of Services",
+        "website": "Website (optional)",
+        "certifications": "Certifications / Insurance (optional)"
+      },
+      "serviceTypes": {
+        "catering": "Catering",
+        "security": "Security",
+        "av_tech": "AV / Technology",
+        "transportation": "Transportation",
+        "staging": "Staging & Production",
+        "hospitality": "Hospitality",
+        "other": "Other"
+      }
+    },
+    "workforce": {
+      "tagline": "Workforce Invitation",
+      "title": "Workforce Registration",
+      "fields": {
+        "name": "Full Name",
+        "email": "Email",
+        "phone": "Phone",
+        "country": "Country",
+        "company": "Current Employer (optional)",
+        "role": "Role / Specialty",
+        "yearsExperience": "Years of Experience",
+        "skillsSummary": "Skills Summary",
+        "availability": "Availability",
+        "availabilityPlaceholder": "e.g. June–August 2025",
+        "previousWork": "Previous Tours / Events (optional)"
+      },
+      "roles": {
+        "stage_crew": "Stage Crew",
+        "lighting_tech": "Lighting Technician",
+        "sound_tech": "Sound Technician",
+        "security": "Security",
+        "production_manager": "Production Manager",
+        "driver": "Driver / Transport",
+        "hospitality": "Hospitality",
+        "other": "Other"
+      },
+      "experienceLevels": {
+        "0_1": "Less than 1 year",
+        "1_3": "1–3 years",
+        "3_5": "3–5 years",
+        "5_10": "5–10 years",
+        "10_plus": "10+ years"
+      }
+    },
+    "artmgmt": {
+      "tagline": "Artist Management Invitation",
+      "title": "Artist Management Registration",
+      "fields": {
+        "agencyName": "Agency / Company Name",
+        "contactName": "Primary Contact Name",
+        "email": "Email",
+        "phone": "Phone",
+        "country": "Country",
+        "artistNames": "Artist Name(s)",
+        "genres": "Genre(s)",
+        "genresPlaceholder": "e.g. Pop, Hip-Hop, R&B",
+        "managementType": "Management Type",
+        "bio": "Artist / Roster Bio",
+        "website": "Website / Socials (optional)"
+      },
+      "managementTypes": {
+        "solo_artist": "Solo Artist",
+        "band_group": "Band / Group",
+        "label": "Record Label",
+        "management_agency": "Management Agency"
+      }
+    }
   },
   "AdminEOIPage": {
     "badge": "EOI Management",
