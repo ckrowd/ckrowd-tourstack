@@ -3,9 +3,9 @@
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/routing";
 
-export default function AdminSideNav() {
+export default function FinancingAdminSideNav() {
 	const pathname = usePathname();
-	const t = useTranslations("AdminSideNav");
+	const t = useTranslations("FinancingAdminSideNav");
 
 	interface NavItem {
 		key: string;
@@ -19,33 +19,31 @@ export default function AdminSideNav() {
 			key: "overview",
 			label: t("overview"),
 			icon: "dashboard",
-			href: "/admin",
+			href: "/financing-admin",
 		},
 		{
-			key: "tours",
-			label: t("tours"),
-			icon: "confirmation_number",
-			href: "/admin/tours",
+			key: "applications",
+			label: t("applications"),
+			icon: "request_quote",
+			href: "/financing-admin/applications",
 		},
-		{ key: "eoi", label: t("eoi"), icon: "send", href: "/admin/eoi" },
 		{
-			key: "reports",
-			label: t("reports"),
-			icon: "bar_chart",
-			href: "/admin/reports",
+			key: "partners",
+			label: t("partners"),
+			icon: "account_balance",
+			href: "/financing-admin/partners",
 		},
 		{
 			key: "settings",
 			label: t("settings"),
-			icon: "settings",
-			href: "/admin/settings",
+			icon: "tune",
+			href: "/financing-admin/settings",
 		},
 	];
 
-	// Highlight the current route
 	const activeItem =
 		navItems.find((item) => {
-			if (item.href === "/admin") return pathname === "/admin";
+			if (item.href === "/financing-admin") return pathname === item.href;
 			return pathname.startsWith(item.href);
 		})?.key || "overview";
 
@@ -56,6 +54,7 @@ export default function AdminSideNav() {
 					<Link
 						key={item.key}
 						href={item.href}
+						aria-current={activeItem === item.key ? "page" : undefined}
 						className={`flex items-center gap-3 px-4 py-3 rounded-xl mx-2 transition-all duration-200 font-(family-name:--font-manrope) font-semibold text-sm ${
 							activeItem === item.key
 								? "bg-orange-50 text-[#FF5A30]"
@@ -70,11 +69,13 @@ export default function AdminSideNav() {
 
 			<div className="px-4 mt-auto">
 				<Link
-					href="/admin/tours/create"
+					href="/financing-admin/applications"
 					className="block w-full py-4 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 text-center flex items-center justify-center gap-2"
 				>
-					<span className="material-symbols-outlined text-sm">add</span>
-					{t("newTour")}
+					<span className="material-symbols-outlined text-sm">
+						rate_review
+					</span>
+					{t("reviewQueue")}
 				</Link>
 			</div>
 		</aside>

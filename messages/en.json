@@ -1074,7 +1074,13 @@
 						"7–10 years",
 						"10+ years"
 					],
-					"events": ["0–2", "3–5", "6–10", "11–20", "20+"],
+					"events": [
+						"0–2",
+						"3–5",
+						"6–10",
+						"11–20",
+						"20+"
+					],
 					"crowd": [
 						"Under 1,000",
 						"1,000–3,000",
@@ -1287,8 +1293,14 @@
 						"Flexible — depends on dates",
 						"Local crew only (single city)"
 					],
-					"deploy48h": ["Yes", "No"],
-					"passport": ["Yes — currently valid", "No — expired or none"]
+					"deploy48h": [
+						"Yes",
+						"No"
+					],
+					"passport": [
+						"Yes — currently valid",
+						"No — expired or none"
+					]
 				}
 			},
 			"credentials": {
@@ -1399,7 +1411,10 @@
 					"name": "Access Bank Plc",
 					"sub": "Pan-Africa · Tour Finance Facility"
 				},
-				{ "name": "PAPSS Network", "sub": "Pan-Africa · Payment Rails" }
+				{
+					"name": "PAPSS Network",
+					"sub": "Pan-Africa · Payment Rails"
+				}
 			],
 			"step": "Step {current} of {total}",
 			"activates": {
@@ -2335,7 +2350,6 @@
 			"required": "Please fill out this field."
 		}
 	},
-
 	"StakeholderRegistrationPage": {
 		"success": {
 			"title": "Registration submitted",
@@ -2476,6 +2490,383 @@
 			"pending": "Pending",
 			"approved": "Approved",
 			"declined": "Declined"
+		}
+	},
+	"FinancingAdminLayout": {
+		"brandEyebrow": "Ckrowd Capital",
+		"brand": "Financing Admin",
+		"unknownUser": "Finance operator"
+	},
+	"FinancingAdminSideNav": {
+		"brandEyebrow": "Ckrowd Capital",
+		"brand": "Financing Admin",
+		"overview": "Overview",
+		"applications": "Applications",
+		"partners": "Capital Partners",
+		"settings": "Settings",
+		"reviewQueue": "Review Queue",
+		"signOut": "Sign out",
+		"signingOut": "Signing out..."
+	},
+	"FinancingAdminLoginPage": {
+		"brandEyebrow": "Ckrowd Capital",
+		"brand": "Financing Admin",
+		"badge": "Financing Operations",
+		"heroTitle": "Capital review for TourStack funding requests.",
+		"heroDescription": "A dedicated operating console for underwriting, partner coordination, term sheets, and disbursement decisions.",
+		"footer": "Restricted access for authorized financing operators.",
+		"formEyebrow": "Secure access",
+		"title": "Sign in to financing admin",
+		"description": "Use your financing admin credentials to continue.",
+		"email": "Email Address",
+		"password": "Password",
+		"emailPlaceholder": "finance@company.com",
+		"passwordPlaceholder": "Your password",
+		"signIn": "Sign in",
+		"signingIn": "Signing in...",
+		"errorInvalid": "Invalid email or password",
+		"errorFailed": "Sign in failed",
+		"loading": "Loading session..."
+	},
+	"FinancingAdminPage": {
+		"badge": "Financing Operations",
+		"title": "Capital review dashboard",
+		"description": "Track financing requests, underwriting movement, approval exposure, and partner handoffs from a dedicated finance workspace.",
+		"reviewQueue": "Review Queue",
+		"queue": {
+			"title": "Recent financing requests",
+			"viewAll": "View All",
+			"amountLabel": "Requested",
+			"items": [
+				{
+					"id": "FIN-2048",
+					"promoter": "Stage One Productions",
+					"tour": "Lagos Arena Stop",
+					"product": "Tour Stop Advance",
+					"amount": "$75,000",
+					"status": "Under Review",
+					"statusKey": "underReview"
+				},
+				{
+					"id": "FIN-2039",
+					"promoter": "Pulse Nairobi",
+					"tour": "East Africa Weekend",
+					"product": "Marketing Float",
+					"amount": "$32,000",
+					"status": "Approved",
+					"statusKey": "approved"
+				},
+				{
+					"id": "FIN-2032",
+					"promoter": "Teranga Concerts",
+					"tour": "Dakar Festival Night",
+					"product": "Venue Build-Out Credit",
+					"amount": "$48,500",
+					"status": "Pending",
+					"statusKey": "pending"
+				}
+			]
+		},
+		"workflow": {
+			"title": "Finance workflow",
+			"items": [
+				{
+					"title": "Intake and document check",
+					"description": "Capture promoter, tour, requested product, and document completeness for each review.",
+					"icon": "fact_check"
+				},
+				{
+					"title": "Underwriting review",
+					"description": "Score risk, assign reviewers, compare event budget, and move requests into approval lanes.",
+					"icon": "rule"
+				},
+				{
+					"title": "Partner and term sheet",
+					"description": "Assign a bank or capital partner, attach term sheets, and track disbursement readiness.",
+					"icon": "contract"
+				}
+			]
+		}
+	},
+	"FinancingAdminApplicationsPage": {
+		"badge": "Application Review",
+		"title": "Financing applications",
+		"description": "Review promoter financing requests and move approved facilities toward term sheet and disbursement.",
+		"queueTitle": "Review queue",
+		"requestedOn": "Requested",
+		"searchPlaceholder": "Search promoter or tour",
+		"filters": {
+			"all": "All",
+			"underReview": "Under Review",
+			"approved": "Approved",
+			"disbursed": "Disbursed"
+		},
+		"fields": {
+			"product": "Product",
+			"documents": "Documents",
+			"partner": "Partner",
+			"decision": "Decision"
+		},
+		"actions": {
+			"sync": "Sync Applications",
+			"filter": "Filter",
+			"open": "Open",
+			"approve": "Approve",
+			"termSheet": "Term Sheet",
+			"reject": "Reject"
+		},
+		"items": [
+			{
+				"id": "FIN-2048",
+				"promoter": "Stage One Productions",
+				"tour": "Lagos Arena Stop",
+				"market": "Lagos, Nigeria",
+				"product": "Tour Stop Advance",
+				"amount": "$75,000",
+				"requested": "May 08",
+				"status": "Under Review",
+				"statusKey": "underReview",
+				"risk": "Medium Risk",
+				"riskKey": "medium",
+				"documents": "4 of 6",
+				"partner": "Unassigned"
+			},
+			{
+				"id": "FIN-2039",
+				"promoter": "Pulse Nairobi",
+				"tour": "East Africa Weekend",
+				"market": "Nairobi, Kenya",
+				"product": "Marketing Float",
+				"amount": "$32,000",
+				"requested": "May 06",
+				"status": "Approved",
+				"statusKey": "approved",
+				"risk": "Low Risk",
+				"riskKey": "low",
+				"documents": "6 of 6",
+				"partner": "Partner Bank"
+			},
+			{
+				"id": "FIN-2032",
+				"promoter": "Teranga Concerts",
+				"tour": "Dakar Festival Night",
+				"market": "Dakar, Senegal",
+				"product": "Venue Build-Out Credit",
+				"amount": "$48,500",
+				"requested": "May 03",
+				"status": "Pending",
+				"statusKey": "pending",
+				"risk": "High Risk",
+				"riskKey": "high",
+				"documents": "3 of 6",
+				"partner": "Unassigned"
+			}
+		],
+		"reviewChecklist": {
+			"title": "Review checklist",
+			"items": [
+				"Verify promoter profile, company registration, and TourStack history.",
+				"Confirm tour stop budget, venue capacity, and ticket forecast.",
+				"Check requested facility against product limits and repayment terms.",
+				"Assign capital partner and prepare term sheet after approval."
+			]
+		},
+		"reviewForm": {
+			"title": "Review form",
+			"fields": {
+				"decision": "Decision",
+				"partner": "Capital partner",
+				"termSheet": "Term sheet URL",
+				"note": "Reviewer note"
+			},
+			"options": {
+				"underReview": "Under Review",
+				"approved": "Approved",
+				"rejected": "Rejected",
+				"disbursed": "Disbursed"
+			},
+			"placeholders": {
+				"partner": "Assign a bank or capital desk",
+				"termSheet": "https://...",
+				"note": "Add underwriting notes, blockers, or next steps"
+			},
+			"submit": "Save Review"
+		}
+	},
+	"FinancingAdminPartnersPage": {
+		"badge": "Partner Desk",
+		"title": "Capital partners",
+		"description": "Coordinate banking, insurance, and credit review partners connected to TourStack financing.",
+		"directoryTitle": "Partner directory",
+		"lanesTitle": "Assignment lanes",
+		"capacityLabel": "Available capacity",
+		"actions": {
+			"addPartner": "Add Partner"
+		},
+		"cards": [
+			{
+				"key": "banks",
+				"title": "Banking Partners",
+				"description": "Track partner assignment, term sheet ownership, and approval handoffs.",
+				"icon": "account_balance"
+			},
+			{
+				"key": "insurers",
+				"title": "Insurance Partners",
+				"description": "Review insurance requirements attached to financed tour stops.",
+				"icon": "verified_user"
+			},
+			{
+				"key": "credit",
+				"title": "Credit Review",
+				"description": "Maintain scorecards, document checks, and review decisions.",
+				"icon": "fact_check"
+			}
+		],
+		"partners": [
+			{
+				"name": "Bridge Capital Desk",
+				"type": "Banking Partner",
+				"markets": "Nigeria, Ghana",
+				"capacity": "$250k",
+				"status": "Ready",
+				"statusKey": "ready",
+				"icon": "account_balance"
+			},
+			{
+				"name": "EventSure Africa",
+				"type": "Insurance Partner",
+				"markets": "Pan-African",
+				"capacity": "$120k",
+				"status": "Review",
+				"statusKey": "review",
+				"icon": "verified_user"
+			},
+			{
+				"name": "Tour Credit Committee",
+				"type": "Internal Review",
+				"markets": "All markets",
+				"capacity": "$500k",
+				"status": "Pending",
+				"statusKey": "pending",
+				"icon": "groups"
+			}
+		],
+		"lanes": [
+			{
+				"title": "Needs assignment",
+				"description": "Approved applications waiting for a capital partner.",
+				"icon": "assignment_ind"
+			},
+			{
+				"title": "Term sheet drafting",
+				"description": "Facilities with partner ownership but no signed term sheet.",
+				"icon": "contract"
+			},
+			{
+				"title": "Ready for disbursement",
+				"description": "Approved, documented, and ready for release.",
+				"icon": "payments"
+			}
+		],
+		"partnerForm": {
+			"title": "Partner form",
+			"fields": {
+				"name": "Partner name",
+				"type": "Partner type",
+				"markets": "Markets"
+			},
+			"options": {
+				"bank": "Banking Partner",
+				"insurance": "Insurance Partner",
+				"credit": "Credit Review"
+			},
+			"placeholders": {
+				"name": "e.g. Bridge Capital Desk",
+				"markets": "e.g. Nigeria, Ghana"
+			},
+			"submit": "Save Partner"
+		}
+	},
+	"FinancingAdminSettingsPage": {
+		"badge": "Configuration",
+		"title": "Financing settings",
+		"description": "Manage access boundaries and operating thresholds for financing workflows.",
+		"saveChanges": "Save Changes",
+		"policies": {
+			"title": "Review policy",
+			"items": [
+				{
+					"key": "role",
+					"title": "Require financing admin role",
+					"description": "Restrict this interface to financing operators.",
+					"enabled": true
+				},
+				{
+					"key": "documents",
+					"title": "Block approval until documents are complete",
+					"description": "Applications should require all mandatory documents before approval.",
+					"enabled": true
+				},
+				{
+					"key": "partner",
+					"title": "Require partner assignment before disbursement",
+					"description": "Approved facilities should have a bank, insurer, or internal capital owner.",
+					"enabled": false
+				}
+			]
+		},
+		"team": {
+			"title": "Finance team",
+			"invite": "Invite Finance Operator",
+			"emailPlaceholder": "operator@company.com",
+			"members": [
+				{
+					"name": "Finance Lead",
+					"email": "finance@ckrowd.com",
+					"role": "Owner"
+				},
+				{
+					"name": "Underwriting Desk",
+					"email": "underwriting@ckrowd.com",
+					"role": "Reviewer"
+				}
+			]
+		},
+		"thresholds": {
+			"title": "Thresholds",
+			"items": [
+				{
+					"label": "Auto review limit",
+					"value": "$15k",
+					"description": "Requests at or below this amount can enter a fast review lane.",
+					"icon": "bolt"
+				},
+				{
+					"label": "Committee review",
+					"value": "$50k+",
+					"description": "Requests above this amount should require senior review.",
+					"icon": "groups"
+				},
+				{
+					"label": "Document minimum",
+					"value": "6",
+					"description": "Required documents before approval and term sheet generation.",
+					"icon": "description"
+				}
+			]
+		},
+		"productForm": {
+			"title": "Product form",
+			"fields": {
+				"product": "Product name",
+				"limit": "Facility limit"
+			},
+			"placeholders": {
+				"product": "e.g. Tour Stop Advance",
+				"limit": "e.g. $30,000"
+			},
+			"submit": "Save Product"
 		}
 	},
 	"AdminReportsPage": {
