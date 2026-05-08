@@ -55,8 +55,12 @@ export default function OnboardingLinksPage() {
 			const a = document.createElement("a");
 			a.href = url;
 			a.download = "stakeholders.csv";
+			document.body.appendChild(a);
 			a.click();
-			URL.revokeObjectURL(url);
+			setTimeout(() => {
+				URL.revokeObjectURL(url);
+				document.body.removeChild(a);
+			}, 100);
 		},
 	});
 
@@ -90,7 +94,7 @@ export default function OnboardingLinksPage() {
 								<span className="material-symbols-outlined text-sm">
 									download
 								</span>
-								{exportMutation.isPending ? "Exporting…" : t("header.export")}
+								{exportMutation.isPending ? t("header.exporting") : t("header.export")}
 							</button>
 						</header>
 

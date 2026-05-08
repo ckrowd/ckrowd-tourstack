@@ -4,7 +4,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import {
 	deleteAccount,
 	disable2FA,
@@ -114,6 +114,8 @@ function Toggle({
 			</div>
 			<button
 				type="button"
+				role="switch"
+				aria-checked={on}
 				onClick={handleClick}
 				disabled={disabled}
 				className={`relative w-11 h-6 rounded-full transition-colors shrink-0 disabled:opacity-50 ${on ? "bg-[#FF5A30]" : "bg-surface-container-high"
@@ -276,7 +278,9 @@ function NotificationsTab() {
 			if (!email) throw new Error("No email found in session");
 			return subscribe ? subscribeNewsletter(email) : unsubscribeNewsletter(email);
 		},
-		onSuccess: (_, subscribe) => setIsSubscribed(subscribe),
+		onSuccess: (result, subscribe) => {
+			if (result.success) setIsSubscribed(subscribe);
+		},
 	});
 
 	return (
@@ -513,6 +517,7 @@ function BillingTab() {
 function SecurityTab() {
 	const t = useTranslations("SettingsPage.securityTab");
 	const router = useRouter();
+	const { locale } = useParams<{ locale: string }>();
 
 	// Sessions
 	const sessionQuery = useQuery({ queryKey: ["session"], queryFn: getSession });
@@ -561,7 +566,7 @@ function SecurityTab() {
 	const deleteMutation = useMutation({
 		mutationFn: deleteAccount,
 		onSuccess: (result) => {
-			if (result.success) router.push("/login");
+			if (result.success) router.push(`/${locale}/login`);
 		},
 	});
 
@@ -747,7 +752,7 @@ function SecurityTab() {
 							? "Signing out…"
 							: t("sessions.actions.revokeOthers")}
 					</button>
-					{revokeOthersMutation.isSuccess && (
+					{revokeOthersMutation.data?.success && (
 						<p className="text-xs text-emerald-600 text-center">
 							All other sessions have been signed out.
 						</p>

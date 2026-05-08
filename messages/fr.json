@@ -496,7 +496,8 @@
       "platform": "Liens d'intégration",
       "title": "Inviter des parties prenantes",
       "description": "Créez et gérez des liens d'intégration sécurisés pour les prestataires, la main-d'œuvre et les partenaires de gestion d'artistes.",
-      "export": "Exporter CSV"
+      "export": "Exporter CSV",
+      "exporting": "Exportation…"
     },
     "createLink": {
       "title": "Créer un nouveau lien",

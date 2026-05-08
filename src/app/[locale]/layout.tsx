@@ -145,15 +145,22 @@ export default async function RootLayout({
 		notFound();
 	}
 
-	// Enable static rendering
 	setRequestLocale(locale);
 
-	// Real session-based auth gate — validate against the backend, not a cookie
+	// Real session-based auth gate — validate against the backend, not a cookie.
+	// Reading headers() makes this layout dynamic; that is intentional for
+	// protected routes, and harmless for public ones since Next.js still statically
+	// renders pages that do not themselves call dynamic APIs.
 	const pathname = (await headers()).get("x-pathname") ?? "/";
 	if (isProtectedPath(pathname)) {
 		const session = await getSession();
 		if (!session) {
-			redirect(`/${locale}/login`);
+			const localePattern = routing.locales.join("|");
+			const normalizedFrom = pathname.replace(
+				new RegExp(`^\\/(${localePattern})(\\/|$)`),
+				"/",
+			) || "/";
+			redirect(`/${locale}/login?from=${encodeURIComponent(normalizedFrom)}`);
 		}
 	}
 

@@ -8,8 +8,9 @@ const intlMiddleware = createMiddleware(routing);
 // logged in. Real session validation happens in the [locale] layout via
 // getSession(), which calls the backend on every protected request.
 //
-// We only inject x-pathname so the layout server component can know which
-// route is being accessed without needing client-side routing state.
+// We inject x-pathname so the layout server component can know which route is
+// being accessed, and carry over all intlMiddleware response headers (rewrites,
+// locale cookies) so locale routing is fully preserved.
 export async function proxy(request: NextRequest) {
   const intlResponse = intlMiddleware(request);
 
@@ -18,15 +19,30 @@ export async function proxy(request: NextRequest) {
     return intlResponse;
   }
 
-  // Forward pathname as a request header so layout server components can read it
+  // Inject x-pathname into the request so layout server components can read it
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('x-pathname', request.nextUrl.pathname);
 
   const response = NextResponse.next({ request: { headers: requestHeaders } });
 
-  // Preserve any locale cookie next-intl may have set
-  const setCookie = intlResponse.headers.get('set-cookie');
-  if (setCookie) response.headers.set('set-cookie', setCookie);
+  // Copy all intlMiddleware response headers (preserves locale rewrites etc.)
+  intlResponse.headers.forEach((value, key) => {
+    if (key.toLowerCase() !== 'set-cookie') {
+      response.headers.set(key, value);
+    }
+  });
+
+  // Copy Set-Cookie values individually — getSetCookie() handles multiple
+  // cookies correctly where a single get('set-cookie') would combine them
+  const setCookies =
+    typeof intlResponse.headers.getSetCookie === 'function'
+      ? intlResponse.headers.getSetCookie()
+      : intlResponse.headers.get('set-cookie')
+        ? [intlResponse.headers.get('set-cookie') as string]
+        : [];
+  for (const cookie of setCookies) {
+    response.headers.append('set-cookie', cookie);
+  }
 
   return response;
 }

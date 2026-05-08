@@ -496,7 +496,8 @@
       "platform": "Onboarding Links",
       "title": "Invite Stakeholders",
       "description": "Create and manage secure onboarding links for services, workforce, and artist management partners.",
-      "export": "Export CSV"
+      "export": "Export CSV",
+      "exporting": "Exporting…"
     },
     "createLink": {
       "title": "Create New Link",
