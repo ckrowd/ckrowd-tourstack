@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import {
 	createOnboardingLink,
+	exportStakeholders,
 	getOnboardingLinks,
 	revokeOnboardingLink,
 } from "@/app/actions";
@@ -42,6 +43,23 @@ export default function OnboardingLinksPage() {
 		},
 	});
 
+	const exportMutation = useMutation({
+		mutationFn: () => exportStakeholders("csv"),
+		onSuccess: (result) => {
+			if (!result.success || !result.data) return;
+			const blob = new Blob(
+				[typeof result.data === "string" ? result.data : JSON.stringify(result.data)],
+				{ type: "text/csv" },
+			);
+			const url = URL.createObjectURL(blob);
+			const a = document.createElement("a");
+			a.href = url;
+			a.download = "stakeholders.csv";
+			a.click();
+			URL.revokeObjectURL(url);
+		},
+	});
+
 	const links = linksQuery.data?.success ? (linksQuery.data.data ?? []) : [];
 
 	return (
@@ -51,16 +69,29 @@ export default function OnboardingLinksPage() {
 				<SideNav />
 				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
 					<div className="w-full space-y-8">
-						<header>
-							<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
-								{t("header.platform")}
-							</span>
-							<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
-								{t("header.title")}
-							</h1>
-							<p className="text-on-surface-variant font-medium">
-								{t("header.description")}
-							</p>
+						<header className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+							<div>
+								<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+									{t("header.platform")}
+								</span>
+								<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
+									{t("header.title")}
+								</h1>
+								<p className="text-on-surface-variant font-medium">
+									{t("header.description")}
+								</p>
+							</div>
+							<button
+								type="button"
+								onClick={() => exportMutation.mutate()}
+								disabled={exportMutation.isPending}
+								className="flex items-center gap-2 px-5 py-2.5 bg-surface-container-lowest border border-outline-variant/30 rounded-xl text-sm font-bold text-on-surface hover:bg-surface-container transition-colors disabled:opacity-50 shrink-0"
+							>
+								<span className="material-symbols-outlined text-sm">
+									download
+								</span>
+								{exportMutation.isPending ? "Exporting…" : t("header.export")}
+							</button>
 						</header>
 
 						<section className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10">

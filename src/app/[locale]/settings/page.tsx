@@ -1,7 +1,20 @@
 "use client";
 
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import {
+	deleteAccount,
+	disable2FA,
+	getSession,
+	revokeOtherSessions,
+	setup2FA,
+	subscribeNewsletter,
+	unsubscribeNewsletter,
+	verify2FA,
+} from "@/app/actions";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 
@@ -67,12 +80,28 @@ function Toggle({
 	label,
 	description,
 	defaultChecked = false,
+	checked,
+	onChange,
+	disabled = false,
 }: {
 	label: string;
 	description?: string;
 	defaultChecked?: boolean;
+	checked?: boolean;
+	onChange?: (value: boolean) => void;
+	disabled?: boolean;
 }) {
-	const [on, setOn] = useState(defaultChecked);
+	const [internalOn, setInternalOn] = useState(defaultChecked);
+	const isControlled = checked !== undefined;
+	const on = isControlled ? checked : internalOn;
+
+	const handleClick = () => {
+		if (disabled) return;
+		const next = !on;
+		if (!isControlled) setInternalOn(next);
+		onChange?.(next);
+	};
+
 	return (
 		<div className="flex items-center justify-between gap-6 py-3 border-b border-outline-variant/10 last:border-0">
 			<div>
@@ -85,15 +114,14 @@ function Toggle({
 			</div>
 			<button
 				type="button"
-				onClick={() => setOn(!on)}
-				className={`relative w-11 h-6 rounded-full transition-colors shrink-0 ${
-					on ? "bg-[#FF5A30]" : "bg-surface-container-high"
-				}`}
+				onClick={handleClick}
+				disabled={disabled}
+				className={`relative w-11 h-6 rounded-full transition-colors shrink-0 disabled:opacity-50 ${on ? "bg-[#FF5A30]" : "bg-surface-container-high"
+					}`}
 			>
 				<span
-					className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform ${
-						on ? "translate-x-5" : "translate-x-0"
-					}`}
+					className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform ${on ? "translate-x-5" : "translate-x-0"
+						}`}
 				/>
 			</button>
 		</div>
@@ -238,6 +266,19 @@ function VenueTab() {
 
 function NotificationsTab() {
 	const t = useTranslations("SettingsPage.notificationsTab");
+
+	const sessionQuery = useQuery({ queryKey: ["session"], queryFn: getSession });
+	const [isSubscribed, setIsSubscribed] = useState(false);
+
+	const newsletterMutation = useMutation({
+		mutationFn: async (subscribe: boolean) => {
+			const email = sessionQuery.data?.user?.email;
+			if (!email) throw new Error("No email found in session");
+			return subscribe ? subscribeNewsletter(email) : unsubscribeNewsletter(email);
+		},
+		onSuccess: (_, subscribe) => setIsSubscribed(subscribe),
+	});
+
 	return (
 		<div className="space-y-6">
 			<Section title={t("email.title")}>
@@ -306,6 +347,21 @@ function NotificationsTab() {
 						</label>
 					))}
 				</div>
+			</Section>
+
+			<Section title={t("newsletter.title")}>
+				<Toggle
+					label={t("newsletter.label")}
+					description={t("newsletter.description")}
+					checked={isSubscribed}
+					disabled={newsletterMutation.isPending || sessionQuery.isLoading}
+					onChange={(val) => newsletterMutation.mutate(val)}
+				/>
+				{newsletterMutation.isPending && (
+					<p className="text-xs text-on-surface-variant mt-2">
+						{isSubscribed ? t("newsletter.unsubscribing") : t("newsletter.subscribing")}
+					</p>
+				)}
 			</Section>
 
 			<div className="flex justify-end">
@@ -456,6 +512,61 @@ function BillingTab() {
 
 function SecurityTab() {
 	const t = useTranslations("SettingsPage.securityTab");
+	const router = useRouter();
+
+	// Sessions
+	const sessionQuery = useQuery({ queryKey: ["session"], queryFn: getSession });
+	const revokeOthersMutation = useMutation({ mutationFn: revokeOtherSessions });
+	const session = sessionQuery.data;
+
+	// 2FA
+	const [twoFactorEnabled, setTwoFactorEnabled] = useState(false);
+	const [showSetup, setShowSetup] = useState(false);
+	const [totpCode, setTotpCode] = useState("");
+	const [qrCodeUrl, setQrCodeUrl] = useState<string | null>(null);
+
+	const setupMutation = useMutation({
+		mutationFn: setup2FA,
+		onSuccess: (result) => {
+			if (result.success && result.data) {
+				setQrCodeUrl(result.data.qrCodeUrl);
+			}
+			setShowSetup(true);
+		},
+	});
+
+	const verifyMutation = useMutation({
+		mutationFn: () => verify2FA(totpCode),
+		onSuccess: (result) => {
+			if (result.success) {
+				setTwoFactorEnabled(true);
+				setShowSetup(false);
+				setTotpCode("");
+				setQrCodeUrl(null);
+			}
+		},
+	});
+
+	const disableMutation = useMutation({
+		mutationFn: () => disable2FA(""),
+		onSuccess: (result) => {
+			if (result.success) setTwoFactorEnabled(false);
+		},
+	});
+
+	// Account Deletion
+	const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+	const [confirmEmail, setConfirmEmail] = useState("");
+
+	const deleteMutation = useMutation({
+		mutationFn: deleteAccount,
+		onSuccess: (result) => {
+			if (result.success) router.push("/login");
+		},
+	});
+
+	const userEmail = session?.user?.email ?? "";
+
 	return (
 		<div className="space-y-6">
 			<Section title={t("password.title")}>
@@ -491,28 +602,114 @@ function SecurityTab() {
 				title={t("twoFactor.title")}
 				description={t("twoFactor.description")}
 			>
-				<div className="flex items-center justify-between p-5 bg-surface-container-low rounded-xl">
-					<div className="flex items-center gap-4">
-						<div className="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center">
-							<span className="material-symbols-outlined text-on-surface-variant">
-								smartphone
-							</span>
+				<div className="space-y-4">
+					<div className="flex items-center justify-between p-5 bg-surface-container-low rounded-xl">
+						<div className="flex items-center gap-4">
+							<div className="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center">
+								<span className="material-symbols-outlined text-on-surface-variant">
+									smartphone
+								</span>
+							</div>
+							<div>
+								<p className="font-semibold text-sm text-on-surface">
+									{t("twoFactor.authenticator")}
+								</p>
+								<p className="text-xs text-on-surface-variant mt-0.5">
+									{twoFactorEnabled
+										? t("twoFactor.configured")
+										: t("twoFactor.notConfigured")}
+								</p>
+							</div>
 						</div>
-						<div>
-							<p className="font-semibold text-sm text-on-surface">
-								{t("twoFactor.authenticator")}
-							</p>
-							<p className="text-xs text-on-surface-variant mt-0.5">
-								{t("twoFactor.notConfigured")}
-							</p>
-						</div>
+						{twoFactorEnabled ? (
+							<button
+								type="button"
+								onClick={() => disableMutation.mutate()}
+								disabled={disableMutation.isPending}
+								className="text-sm font-bold text-red-500 border border-red-200 px-4 py-2 rounded-lg hover:bg-red-50 transition-colors disabled:opacity-50"
+							>
+								{disableMutation.isPending ? "…" : t("twoFactor.actions.disable")}
+							</button>
+						) : (
+							<button
+								type="button"
+								onClick={() => setupMutation.mutate()}
+								disabled={setupMutation.isPending || showSetup}
+								className="text-sm font-bold text-[#FF5A30] border border-[#FF5A30]/30 px-4 py-2 rounded-lg hover:bg-[#FF5A30]/5 transition-colors disabled:opacity-50"
+							>
+								{setupMutation.isPending ? "…" : t("twoFactor.actions.enable")}
+							</button>
+						)}
 					</div>
-					<button
-						type="button"
-						className="text-sm font-bold text-[#FF5A30] border border-[#FF5A30]/30 px-4 py-2 rounded-lg hover:bg-[#FF5A30]/5 transition-colors"
-					>
-						{t("twoFactor.actions.enable")}
-					</button>
+
+					{showSetup && (
+						<div className="rounded-xl border border-outline-variant/20 p-5 space-y-4 bg-surface-container-low">
+							<p className="text-sm font-semibold text-on-surface">
+								{t("twoFactor.setup.title")}
+							</p>
+							<p className="text-xs text-on-surface-variant">
+								{t("twoFactor.setup.instruction")}
+							</p>
+
+							{qrCodeUrl ? (
+								<div className="flex justify-center">
+									<Image src={qrCodeUrl} alt="2FA QR Code" width={160} height={160} />
+								</div>
+							) : (
+								<div className="w-40 h-40 mx-auto rounded-xl bg-surface-container-high flex items-center justify-center">
+									<span className="material-symbols-outlined text-3xl text-on-surface-variant">
+										qr_code_2
+									</span>
+								</div>
+							)}
+
+							{setupMutation.data && !setupMutation.data.success && (
+								<p className="text-xs text-red-500 text-center">
+									{setupMutation.data.error}
+								</p>
+							)}
+
+							<input
+								type="text"
+								inputMode="numeric"
+								maxLength={6}
+								value={totpCode}
+								onChange={(e) => setTotpCode(e.target.value.replace(/\D/g, ""))}
+								placeholder={t("twoFactor.setup.codePlaceholder")}
+								className="w-full bg-surface-container border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-center tracking-widest focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30"
+							/>
+
+							{verifyMutation.data && !verifyMutation.data.success && (
+								<p className="text-xs text-red-500 text-center">
+									{verifyMutation.data.error}
+								</p>
+							)}
+
+							<div className="flex gap-3">
+								<button
+									type="button"
+									onClick={() => {
+										setShowSetup(false);
+										setTotpCode("");
+										setQrCodeUrl(null);
+									}}
+									className="flex-1 py-2.5 border border-outline-variant/30 rounded-xl text-sm font-bold text-on-surface-variant hover:bg-surface-container transition-colors"
+								>
+									{t("twoFactor.setup.actions.cancel")}
+								</button>
+								<button
+									type="button"
+									onClick={() => verifyMutation.mutate()}
+									disabled={totpCode.length < 6 || verifyMutation.isPending}
+									className="flex-1 py-2.5 bg-[#FF5A30] text-white rounded-xl text-sm font-bold hover:opacity-90 transition-all disabled:opacity-50"
+								>
+									{verifyMutation.isPending
+										? "…"
+										: t("twoFactor.setup.actions.verify")}
+								</button>
+							</div>
+						</div>
+					)}
 				</div>
 			</Section>
 
@@ -521,69 +718,107 @@ function SecurityTab() {
 				description={t("sessions.description")}
 			>
 				<div className="space-y-3">
-					{[
-						{
-							device: "Chrome on macOS",
-							location: "Accra, Ghana",
-							time: "Now",
-							current: true,
-						},
-						{
-							device: "Safari on iPhone 15",
-							location: "Accra, Ghana",
-							time: "2 hours ago",
-							current: false,
-						},
-					].map((s) => (
-						<div
-							key={s.device}
-							className="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl"
-						>
+					{session && (
+						<div className="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl">
 							<span className="material-symbols-outlined text-on-surface-variant">
-								{s.device.includes("iPhone") ? "smartphone" : "laptop_mac"}
+								laptop_mac
 							</span>
 							<div className="flex-1">
 								<p className="text-sm font-semibold text-on-surface">
-									{s.device}
+									{session.user.email ?? session.user.name ?? "—"}
 								</p>
 								<p className="text-xs text-on-surface-variant">
-									{s.location} · {s.time}
+									{t("sessions.thisDevice")} ·{" "}
+									{new Date(session.expires).toLocaleDateString()}
 								</p>
 							</div>
-							{s.current ? (
-								<span className="text-[10px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">
-									{t("sessions.thisDevice")}
-								</span>
-							) : (
-								<button
-									type="button"
-									className="text-xs font-bold text-red-500 hover:text-red-700 transition-colors"
-								>
-									{t("sessions.actions.revoke")}
-								</button>
-							)}
+							<span className="text-[10px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-700 px-2 py-1 rounded-full">
+								{t("sessions.thisDevice")}
+							</span>
 						</div>
-					))}
+					)}
+					<button
+						type="button"
+						onClick={() => revokeOthersMutation.mutate()}
+						disabled={revokeOthersMutation.isPending}
+						className="w-full py-3 border border-red-200 rounded-xl text-sm font-bold text-red-500 hover:bg-red-50 transition-all disabled:opacity-50"
+					>
+						{revokeOthersMutation.isPending
+							? "Signing out…"
+							: t("sessions.actions.revokeOthers")}
+					</button>
+					{revokeOthersMutation.isSuccess && (
+						<p className="text-xs text-emerald-600 text-center">
+							All other sessions have been signed out.
+						</p>
+					)}
 				</div>
 			</Section>
 
 			<Section title={t("dangerZone.title")}>
-				<div className="flex items-center justify-between p-5 bg-red-50 rounded-xl border border-red-100">
-					<div>
-						<p className="font-bold text-sm text-red-800">
+				{!showDeleteConfirm ? (
+					<div className="flex items-center justify-between p-5 bg-red-50 rounded-xl border border-red-100">
+						<div>
+							<p className="font-bold text-sm text-red-800">
+								{t("dangerZone.delete.title")}
+							</p>
+							<p className="text-xs text-red-600 mt-0.5">
+								{t("dangerZone.delete.description")}
+							</p>
+						</div>
+						<button
+							type="button"
+							onClick={() => setShowDeleteConfirm(true)}
+							className="text-sm font-bold text-red-600 border border-red-300 px-4 py-2 rounded-lg hover:bg-red-100 transition-colors"
+						>
+							{t("dangerZone.actions.delete")}
+						</button>
+					</div>
+				) : (
+					<div className="rounded-xl border border-red-200 bg-red-50 p-5 space-y-4">
+						<p className="text-sm font-bold text-red-800">
 							{t("dangerZone.delete.title")}
 						</p>
-						<p className="text-xs text-red-600 mt-0.5">
-							{t("dangerZone.delete.description")}
+						<p className="text-xs text-red-600">
+							{t("dangerZone.confirm.instruction")}
 						</p>
+						<input
+							type="email"
+							value={confirmEmail}
+							onChange={(e) => setConfirmEmail(e.target.value)}
+							placeholder={t("dangerZone.confirm.emailPlaceholder")}
+							className="w-full bg-white border border-red-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-300"
+						/>
+						{deleteMutation.data && !deleteMutation.data.success && (
+							<p className="text-xs text-red-600">{deleteMutation.data.error}</p>
+						)}
+						<div className="flex gap-3">
+							<button
+								type="button"
+								onClick={() => {
+									setShowDeleteConfirm(false);
+									setConfirmEmail("");
+								}}
+								className="flex-1 py-2.5 border border-outline-variant/30 rounded-xl text-sm font-bold text-on-surface-variant hover:bg-surface-container transition-colors"
+							>
+								{t("dangerZone.confirm.actions.cancel")}
+							</button>
+							<button
+								type="button"
+								onClick={() => deleteMutation.mutate()}
+								disabled={
+									confirmEmail.trim().toLowerCase() !==
+									userEmail.trim().toLowerCase() || deleteMutation.isPending
+								}
+								className="flex-1 py-2.5 bg-red-600 text-white rounded-xl text-sm font-bold hover:bg-red-700 transition-colors disabled:opacity-50"
+							>
+								{deleteMutation.isPending
+									? "…"
+									: t("dangerZone.confirm.actions.confirm")}
+							</button>
+						</div>
 					</div>
-					<button
-						type="button"
-						className="text-sm font-bold text-red-600 border border-red-300 px-4 py-2 rounded-lg hover:bg-red-100 transition-colors"
-					>
-						{t("dangerZone.actions.delete")}
-					</button>
-				</div>
+				)}
 			</Section>
 		</div>
 	);
@@ -639,11 +874,10 @@ export default function SettingsPage() {
 								key={tab.key}
 								type="button"
 								onClick={() => setActiveTab(tab.key)}
-								className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-									activeTab === tab.key
+								className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all ${activeTab === tab.key
 										? "bg-[#FF5A30] text-white shadow-sm"
 										: "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low"
-								}`}
+									}`}
 							>
 								<span className="material-symbols-outlined text-sm">
 									{tab.icon}
