@@ -28,7 +28,6 @@ const client = createClient({
 			},
 		};
 	},
-	// @ts-expect-error - fix later
 	async onResponse(response) {
 		const responseCookies = extractResponseCookies(response);
 		if (responseCookies.length > 0) {
@@ -37,6 +36,7 @@ const client = createClient({
 				jar.set(cookie.name, cookie.value, cookie.options);
 			}
 		}
+		return response;
 	},
 });
 
@@ -437,7 +437,7 @@ export async function revokeOtherSessions() {
 // Newsletter
 
 export async function subscribeNewsletter(email: string) {
-	// @ts-expect-error - Eden Treaty proxy exposes .post at runtime; type incorrectly marks subscribe as callable
+	// @ts-expect-error - Eden Treaty mistyps newsletter.subscribe as EdenWS (callable); .post exists at runtime
 	const { data, error } = await client.newsletter.subscribe.post({ email });
 	return { success: !error && data?.success, error: extractError(error) };
 }
@@ -448,35 +448,29 @@ export async function unsubscribeNewsletter(email: string) {
 }
 
 // 2FA
-// Backend: add twoFactor plugin to Better Auth config to expose these endpoints.
 
 export async function setup2FA(): Promise<{
 	success: boolean;
 	data?: { qrCodeUrl: string; secret: string };
 	error: string;
 }> {
-	// @ts-expect-error - endpoint not yet in type definitions; backend to implement POST /auth/two-factor/enable
 	const { data, error } = await client.auth["two-factor"].enable.post({});
 	return { success: !error && data?.success, data: data?.data, error: extractError(error) };
 }
 
 export async function verify2FA(code: string): Promise<{ success: boolean; error: string }> {
-	// @ts-expect-error - endpoint not yet in type definitions; backend to implement POST /auth/two-factor/verify
 	const { data, error } = await client.auth["two-factor"].verify.post({ code });
 	return { success: !error && data?.success, error: extractError(error) };
 }
 
 export async function disable2FA(password: string): Promise<{ success: boolean; error: string }> {
-	// @ts-expect-error - endpoint not yet in type definitions; backend to implement POST /auth/two-factor/disable
 	const { data, error } = await client.auth["two-factor"].disable.post({ password });
 	return { success: !error && data?.success, error: extractError(error) };
 }
 
 // Account Deletion
-// Backend: expose POST /auth/delete-account to enable this.
 
 export async function deleteAccount(): Promise<{ success: boolean; error: string }> {
-	// @ts-expect-error - endpoint not yet in type definitions; backend to implement POST /auth/delete-account
 	const { data, error } = await client.auth["delete-account"].post({});
 	return { success: !error && data?.success, error: extractError(error) };
 }
@@ -484,6 +478,7 @@ export async function deleteAccount(): Promise<{ success: boolean; error: string
 // Stakeholders Export
 
 export async function exportStakeholders(format: "json" | "csv" = "csv") {
+	// @ts-expect-error - export route removed from type definitions in v1.1.31; backend to re-register GET /tourstack/onboarding-links/export
 	const { data, error } = await client.tourstack["onboarding-links"].export.get(
 		{ query: { format } },
 	);
