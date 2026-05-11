@@ -1,6 +1,8 @@
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
+import { redirect } from "next/navigation";
 import FinancingAdminSideNav from "@/components/FinancingAdminSideNav";
 import TopNav from "@/components/TopNav";
+import { getSession } from "@/app/actions";
 
 export default async function FinancingAdminLayout({
 	children,
@@ -11,7 +13,11 @@ export default async function FinancingAdminLayout({
 }) {
 	const { locale } = await params;
 	setRequestLocale(locale);
-	await getTranslations("FinancingAdminLayout");
+
+	const session = await getSession();
+	if (!session) {
+		redirect(`/${locale}/financing-admin/login`);
+	}
 
 	return (
 		<div className="bg-surface text-on-surface">
