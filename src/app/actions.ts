@@ -437,8 +437,7 @@ export async function revokeOtherSessions() {
 // Newsletter
 
 export async function subscribeNewsletter(email: string) {
-	// @ts-expect-error - Eden Treaty mistyps newsletter.subscribe as EdenWS (callable); .post exists at runtime
-	const { data, error } = await client.newsletter.subscribe.post({ email });
+	const { data, error } = await client.newsletter.join.post({ email });
 	return { success: !error && data?.success, error: extractError(error) };
 }
 
