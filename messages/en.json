@@ -1,2651 +1,2694 @@
 {
-	"LandingPage": {
-		"hero": {
-			"imageAlt": "High-energy live concert crowd at night with vibrant stage lights and raised hands",
-			"badge": "Live Music Ecosystem",
-			"title": "Concert & Touring as a <spanTag>Service.</spanTag>",
-			"description": "TourStack by Ckrowd connects concert & festival promoters with artiste management companies. Plan live music with confidence — from discovery to execution.",
-			"ctaPrimary": "Browse Artistes & Tours",
-			"ctaSecondary": "Promoter Dashboard"
-		},
-		"analytics": {
-			"title": "Tour Pipeline Overview",
-			"active": "Active Tour Projects",
-			"review": "EOIs Under Review",
-			"approved": "Approved Tour Stops",
-			"promoters": "Promoters",
-			"markets": "Markets"
-		},
-		"why": {
-			"badge": "Why TourStack",
-			"title": "Built for the Touring Business",
-			"description": "A dedicated platform for the entire touring ecosystem — Promoters, Artiste Management, Service Providers, Banks, Insurance, and Workforce."
-		},
-		"WhyCkrowd": {
-			"centralized": {
-				"icon": "hub",
-				"title": "Centralized Touring Workflow",
-				"desc": "Manage every stage of tour planning in one place — from discovery to execution. No fragmented spreadsheets, no missed messages."
-			},
-			"matching": {
-				"icon": "temp_preferences_custom",
-				"title": "Smart Promoter–Artiste Matching",
-				"desc": "Rule-based matching connects promoters with artistes based on date availability, venue capacity, and budget alignment."
-			},
-			"dataDriven": {
-				"icon": "bar_chart",
-				"title": "Data-Driven Event Planning",
-				"desc": "Generate business summaries with estimated revenue, cost projections, and risk notes — structured for financiers from day one."
-			},
-			"financing": {
-				"icon": "account_balance",
-				"title": "Financing & Insurance Support",
-				"desc": "Track financing requirements, connect with capital partners, and unlock insurance backing to scale ambitious live experiences."
-			}
-		},
-		"promoters": {
-			"badge": "For Promoters",
-			"title": "Join the Pan-African Tour Circuit.",
-			"description": "Become part of a structured, continent-wide touring network. Discover top-tier artistes, submit formal Expressions of Interest, and access financing support to bring ambitious shows to life.",
-			"features": {
-				"stop": "Show interest in being part of a Tour Stop",
-				"discovery": "Discover and submit EOIs for top-tier artistes",
-				"financing": "State financing needs for your concert or festival",
-				"alignment": "Streamline planning and align with other Tour Promoters"
-			},
-			"cta": "Browse Artistes & Tours",
-			"imageAlt": "Music producer working on a sophisticated digital soundboard in an orange-lit studio"
-		},
-		"artists": {
-			"badge": "For Artists & Management",
-			"title": "Expand into New Markets.",
-			"description": "State your touring intent, get matched with serious promoters, and receive structured high-quality booking requests. Reduce friction and grow with confidence across new territories.",
-			"features": {
-				"intent": "State interest to tour and set your availability window",
-				"matching": "Get matched with verified, serious promoters",
-				"eoi": "Receive structured Expressions of Interest",
-				"alignment": "Align on tour dates and expand into new markets"
-			},
-			"cta": "Start Your Touring Journey",
-			"imageAlt": "Solo artist performing with intense emotion on a smoke-filled stage under a single bright spotlight"
-		},
-		"how": {
-			"badge": "Platform Workflow",
-			"title": "From Discovery to Execution",
-			"step": "Step {number}"
-		},
-		"HowItWorks": {
-			"announcement": {
-				"icon": "campaign",
-				"title": "Ckrowd Announces Tour & Artistes",
-				"desc": "Admin creates a Tour Project on TourStack — including artiste roster, fee range, availability dates, and technical requirements."
-			},
-			"submission": {
-				"icon": "send",
-				"title": "Promoter Submits Expression of Interest",
-				"desc": "Promoters browse available artistes and tours, then submit a formal EOI with their venue, date, budget, and funding model."
-			},
-			"matching": {
-				"icon": "manage_search",
-				"title": "Matching & Review",
-				"desc": "TourStack scores each EOI against artiste requirements. Ckrowd team reviews flagged matches and makes informed decisions."
-			},
-			"decision": {
-				"icon": "task_alt",
-				"title": "Report & Decision",
-				"desc": "The system generates a business summary — estimated revenue, costs, and risk notes — structured for financiers. Admin approves, rejects, or requests revision."
-			}
-		},
-		"cta": {
-			"title": "Ready to Take the Stage?",
-			"description": "Join TourStack and become part of the Pan-African touring ecosystem. Whether you're a promoter, artiste management company, or service provider — this is your platform.",
-			"ctaPromoter": "Get Started as a Promoter",
-			"ctaBrowse": "Browse Artistes & Tours",
-			"trustedBy": "Trusted by 500+ promoters across 24 markets."
-		}
-	},
-	"TopNav": {
-		"dashboard": "Dashboard",
-		"discovery": "Discovery",
-		"financing": "Financing",
-		"insurance": "Insurance",
-		"notifications": "Notifications",
-		"openNotifications": "Open notifications",
-		"closeNotifications": "Close notifications",
-		"openProfileMenu": "Open profile menu",
-		"closeProfileMenu": "Close profile menu",
-		"markAllAsRead": "Mark all as read",
-		"notificationsList": [
-			{
-				"title": "EOI Approved",
-				"body": "Aria Velvet — Accra, Ghana",
-				"time": "2h ago"
-			},
-			{
-				"title": "Revision Requested",
-				"body": "Frequency Shift — budget too low",
-				"time": "Yesterday"
-			},
-			{
-				"title": "EOI Submitted",
-				"body": "Vanguard Echo — pending review",
-				"time": "3 days ago"
-			}
-		]
-	},
-	"LoginPage": {
-		"title": "Sign in",
-		"description": "Use your email and password to access your TourStack account.",
-		"email": "Email Address",
-		"password": "Password",
-		"emailPlaceholder": "you@yourcompany.com",
-		"passwordPlaceholder": "Your password",
-		"signIn": "Sign in",
-		"signingIn": "Signing in...",
-		"noAccount": "Don't have an account?",
-		"register": "Register",
-		"agreeTo": "By signing in you agree to our",
-		"terms": "Terms of Service",
-		"and": "and",
-		"privacy": "Privacy Policy",
-		"errorInvalid": "Invalid email or password",
-		"errorFailed": "Sign in failed",
-		"loading": "Loading session..."
-	},
-	"EOIPage": {
-		"stepper": {
-			"contact": "Contact",
-			"fit": "Fit",
-			"review": "Review"
-		},
-		"hero": {
-			"platform": "TourStack - Expression of Interest",
-			"title": "Apply for a live opportunity.",
-			"description": "Complete the short application below and submit it directly through the package apply endpoint."
-		},
-		"generalEoi": {
-			"name": "General Expression of Interest",
-			"genre": "All Genres",
-			"tourName": "General Application",
-			"markets": "Multiple Territories",
-			"fee_min": "TBD"
-		},
-		"loadError": "Unable to load this opportunity.",
-		"submitError": "Failed to submit application.",
-		"selectedOpportunity": "Selected opportunity",
-		"loadingOpportunity": "Loading opportunity...",
-		"form": {
-			"fullName": {
-				"label": "Full name",
-				"placeholder": "Amina Bello"
-			},
-			"email": {
-				"label": "Email address",
-				"placeholder": "you@company.com"
-			},
-			"company": {
-				"label": "Company or venue",
-				"placeholder": "Venue name or promoter brand"
-			},
-			"city": {
-				"label": "City / market",
-				"placeholder": "Lagos, Nairobi, Accra..."
-			},
-			"audience": {
-				"label": "Expected attendance",
-				"placeholder": "5,000"
-			},
-			"notes": {
-				"label": "Why this opportunity fits your venue",
-				"placeholder": "Tell the team about your venue, audience, and promotion plan."
-			}
-		},
-		"review": {
-			"title": "Review application",
-			"artist": "Artist",
-			"markets": "Markets",
-			"applicant": "Applicant",
-			"email": "Email",
-			"company": "Company / venue",
-			"city": "City / market",
-			"audience": "Expected attendance",
-			"notes": "Notes",
-			"estimatedAudience": "Estimated audience",
-			"disclaimer": "Submitting will send the application to the package endpoint using your current opportunity selection."
-		},
-		"actions": {
-			"back": "Back",
-			"cancel": "Cancel",
-			"submitting": "Submitting...",
-			"submit": "Submit application",
-			"continue": "Continue"
-		},
-		"success": {
-			"title": "EOI submitted.",
-			"description": "Your application for {artist} has been received. The Ckrowd team will review it and respond within 48 hours.",
-			"viewDashboard": "View dashboard",
-			"backToDiscovery": "Back to discovery"
-		}
-	},
-	"OnboardingPage": {
-		"shared": {
-			"optional": "optional"
-		},
-		"categoryStep": {
-			"title": "Select Stakeholder Category",
-			"description": "Choose the category that best describes the stakeholder you are onboarding. The form fields will adapt to your selection.",
-			"categories": {
-				"service": {
-					"label": "Service Provider",
-					"desc": "Venue operators, logistics companies, sound & lighting firms, catering, security, and other event service providers."
-				},
-				"workforce": {
-					"label": "Workforce",
-					"desc": "Stage managers, audio engineers, lighting designers, riggers, photographers, tour managers, and touring crew."
-				},
-				"artmgmt": {
-					"label": "Artist Management Company",
-					"desc": "Companies that represent and manage artists or bands seeking touring opportunities across new markets."
-				}
-			}
-		},
-		"serviceForm": {
-			"companyInfo": {
-				"title": "Company Information",
-				"companyName": {
-					"label": "Company / Organisation Name",
-					"placeholder": "e.g. Lagos Sound Systems Ltd"
-				},
-				"contactName": {
-					"label": "Primary Contact Person",
-					"placeholder": "e.g. Ade Okafor"
-				},
-				"email": {
-					"label": "Email Address",
-					"placeholder": "contact@company.com"
-				},
-				"phone": {
-					"label": "Phone Number",
-					"placeholder": "+234 800 000 0000"
-				},
-				"country": {
-					"label": "Country",
-					"placeholder": "e.g. Nigeria"
-				},
-				"city": {
-					"label": "City",
-					"placeholder": "e.g. Lagos"
-				},
-				"website": {
-					"label": "Website",
-					"placeholder": "https://yourcompany.com"
-				}
-			},
-			"experience": {
-				"title": "Services & Experience",
-				"serviceType": {
-					"label": "Primary Service Type"
-				},
-				"otherService": {
-					"label": "Specify your service",
-					"placeholder": "Describe your service"
-				},
-				"yearsOperation": {
-					"label": "Years in Operation",
-					"options": {
-						"lessThan1": "Less than 1 year",
-						"1to3": "1–3 years",
-						"4to7": "4–7 years",
-						"8plus": "8+ years"
-					}
-				},
-				"pastClients": {
-					"label": "Notable Past Clients / Events",
-					"placeholder": "List any notable artists, promoters, or events you have worked with..."
-				},
-				"certifications": {
-					"label": "Certifications, Licenses, or Affiliations",
-					"placeholder": "e.g. PSNC membership, ISO certification, safety licenses..."
-				}
-			},
-			"declaration": {
-				"title": "Declaration & Consent",
-				"clauses": {
-					"accuracy": "All information provided is accurate and complete to the best of our knowledge.",
-					"consent": "We consent to Tour Stack by Crowd holding and processing our data for partnership and deployment purposes.",
-					"misrepresentation": "We understand that misrepresentation may result in removal from the registry."
-				},
-				"representativeName": {
-					"label": "Authorised Representative Name",
-					"placeholder": "Full name"
-				},
-				"date": {
-					"label": "Date"
-				}
-			},
-			"serviceTypes": {
-				"venue": "Venue / Facilities",
-				"sound": "Sound & Audio",
-				"lighting": "Lighting & Staging",
-				"logistics": "Logistics & Transport",
-				"security": "Security",
-				"catering": "Catering & Hospitality",
-				"ticketing": "Ticketing & Box Office",
-				"marketing": "Marketing & PR",
-				"photography": "Photography / Videography",
-				"medical": "Medical / First Aid",
-				"generator": "Generator / Power",
-				"other": "Other"
-			}
-		},
-		"artMgmtForm": {
-			"companyInfo": {
-				"title": "Company Information",
-				"companyName": {
-					"label": "Company / Management Firm Name",
-					"placeholder": "e.g. Afrobeats Global Management"
-				},
-				"contactName": {
-					"label": "Primary Contact Person",
-					"placeholder": "e.g. Tunde Balogun"
-				},
-				"email": {
-					"label": "Email Address",
-					"placeholder": "contact@mgmt.com"
-				},
-				"phone": {
-					"label": "Phone Number",
-					"placeholder": "+234 800 000 0000"
-				},
-				"country": {
-					"label": "Country of Registration",
-					"placeholder": "e.g. Nigeria"
-				},
-				"city": {
-					"label": "City",
-					"placeholder": "e.g. Lagos"
-				},
-				"website": {
-					"label": "Website",
-					"placeholder": "https://yourmgmt.com"
-				},
-				"instagram": {
-					"label": "Instagram Handle",
-					"placeholder": "@yourmgmt"
-				}
-			},
-			"roster": {
-				"title": "Roster & Experience",
-				"yearsOperation": {
-					"label": "Years in Operation",
-					"options": {
-						"lessThan1": "Less than 1 year",
-						"1to3": "1–3 years",
-						"4to7": "4–7 years",
-						"8plus": "8+ years"
-					}
-				},
-				"rosterSize": {
-					"label": "Roster Size (Number of Acts Represented)",
-					"options": {
-						"1to2": "1–2 acts",
-						"3to5": "3–5 acts",
-						"6to10": "6–10 acts",
-						"11to20": "11–20 acts",
-						"20plus": "20+ acts"
-					}
-				},
-				"genres": {
-					"label": "Primary Genre(s)",
-					"placeholder": "e.g. Afrobeats, Hip-Hop, Afro-Soul, Highlife"
-				},
-				"artists": {
-					"label": "Artists / Acts Represented",
-					"placeholder": "List the main artists or acts you represent..."
-				},
-				"pastCollaborations": {
-					"label": "Past Tour Collaborations or Markets Toured",
-					"placeholder": "e.g. Nigeria, Ghana, UK, USA — collaborations with Coachella, Afronation..."
-				}
-			},
-			"declaration": {
-				"title": "Declaration & Consent",
-				"clauses": {
-					"accuracy": "All information provided is accurate and complete to the best of our knowledge.",
-					"consent": "We consent to Tour Stack by Crowd holding and processing our data for matching and deployment purposes.",
-					"misrepresentation": "We understand that misrepresentation may result in removal from the registry."
-				},
-				"representativeName": {
-					"label": "Authorised Representative Name",
-					"placeholder": "Full name"
-				},
-				"date": {
-					"label": "Date"
-				}
-			}
-		},
-		"directory": {
-			"categories": {
-				"service": "Service Provider",
-				"workforce": "Workforce",
-				"artmgmt": "Artist Mgmt Co"
-			},
-			"filters": {
-				"all": "All",
-				"service": "Service Providers",
-				"workforce": "Workforce",
-				"artmgmt": "Artist Mgmt"
-			},
-			"backToDirectory": "Back to Directory",
-			"details": {
-				"email": "Email",
-				"phone": "Phone",
-				"country": "Country",
-				"submitted": "Submitted"
-			},
-			"noEntries": {
-				"title": "No onboarded stakeholders yet.",
-				"description": "Use the \"Onboard Stakeholder\" tab to add the first entry."
-			},
-			"table": {
-				"name": "Name / Company",
-				"category": "Category",
-				"country": "Country",
-				"submitted": "Submitted",
-				"view": "View"
-			}
-		},
-		"header": {
-			"platform": "Platform Management",
-			"title": "Onboarding",
-			"description": "Register new stakeholders or browse the existing directory."
-		},
-		"tabs": {
-			"onboard": "Onboard Stakeholder",
-			"directory": "Directory"
-		},
-		"workforceNotice": {
-			"title": "Workforce registration is handled separately",
-			"description": "Crew members register via the dedicated Workforce portal which includes the WCS (Workforce Capability Score) system.",
-			"link": "Go to Workforce Registration"
-		},
-		"steps": {
-			"category": "Category",
-			"company": "Company",
-			"services": "Services",
-			"roster": "Roster",
-			"declaration": "Declaration",
-			"details": "Details",
-			"review": "Review",
-			"submit": "Submit"
-		},
-		"actions": {
-			"back": "Back",
-			"continue": "Continue",
-			"submit": "Submit Onboarding"
-		},
-		"success": {
-			"title": "Stakeholder Onboarded!",
-			"description": "The entry has been saved to the directory. You can view it under the Directory tab.",
-			"viewDirectory": "View Directory",
-			"onboardAnother": "Onboard Another"
-		}
-	},
-	"StakeholdersPage": {
-		"header": {
-			"platform": "Onboarding Links",
-			"title": "Invite Stakeholders",
-			"description": "Create and manage secure onboarding links for services, workforce, and artist management partners."
-		},
-		"createLink": {
-			"title": "Create New Link",
-			"category": "Category",
-			"label": {
-				"title": "Label",
-				"placeholder": "e.g. June Vendor Wave"
-			},
-			"expires": "Expires",
-			"submit": "Create Link",
-			"creating": "Creating..."
-		},
-		"existingLinks": {
-			"title": "Existing Links",
-			"loading": "Loading links...",
-			"error": "Unable to load links.",
-			"noLinks": "No links created yet.",
-			"untitled": "Untitled link"
-		},
-		"categories": {
-			"service": "Service Provider",
-			"workforce": "Workforce",
-			"artmgmt": "Artist Management"
-		},
-		"status": {
-			"active": "active",
-			"inactive": "inactive"
-		},
-		"actions": {
-			"copy": "Copy",
-			"revoke": "Revoke"
-		}
-	},
-	"WorkforcePage": {
-		"header": {
-			"platform": "CTaaS — Workforce Registry",
-			"title": "Workforce Registration",
-			"description": "Register as a verified CTaaS crew member. Your answers are scored instantly to determine your Workforce Capability Score and tier placement."
-		},
-		"timer": {
-			"completion": "Estimated completion: 3 minutes",
-			"process": "Submitted → Scored → Tiered"
-		},
-		"steps": {
-			"personal": "Personal",
-			"role": "Role",
-			"touring": "Touring",
-			"credentials": "Credentials",
-			"wcs": "WCS Score"
-		},
-		"personal": {
-			"title": "Personal Information",
-			"fullName": {
-				"label": "Full Name",
-				"placeholder": "e.g. Kofi Mensah"
-			},
-			"preferredName": {
-				"label": "Preferred Name / Stage Name",
-				"placeholder": "e.g. DJ Phantom"
-			},
-			"phone": {
-				"label": "Phone Number",
-				"placeholder": "+234 800 000 0000"
-			},
-			"whatsapp": {
-				"label": "WhatsApp Number (if different)",
-				"placeholder": "+233 20 000 0000"
-			},
-			"email": {
-				"label": "Email Address",
-				"placeholder": "yourname@email.com"
-			},
-			"city": {
-				"label": "City / Base Location",
-				"placeholder": "e.g. Lagos"
-			},
-			"country": {
-				"label": "Country",
-				"placeholder": "e.g. Nigeria"
-			},
-			"nationality": {
-				"label": "Nationality",
-				"placeholder": "e.g. Ghanaian"
-			},
-			"nationalId": {
-				"label": "National ID / Passport Number",
-				"placeholder": "Document number only",
-				"hint": "Required for cross-border eligibility — document number only."
-			}
-		},
-		"role": {
-			"title": "Role & Specialisation",
-			"primaryRole": {
-				"label": "Primary Role / Job Title",
-				"hint": "(select all that apply)"
-			},
-			"otherRole": {
-				"label": "Specify Other Role",
-				"placeholder": "Job title"
-			},
-			"yearsExperience": {
-				"label": "Years of Experience in this role",
-				"options": {
-					"lessThan1": "Less than 1 year",
-					"1to3": "1–3 years",
-					"4to7": "4–7 years",
-					"8to12": "8–12 years",
-					"13plus": "13+ years"
-				}
-			},
-			"largestEvent": {
-				"label": "Largest Event / Show Managed (Attendance)",
-				"options": {
-					"under500": "Under 500",
-					"500to2000": "500–2,000",
-					"2001to10000": "2,001–10,000",
-					"10001to50000": "10,001–50,000",
-					"50000plus": "50,000+"
-				}
-			}
-		},
-		"touring": {
-			"title": "Touring & Deployment",
-			"availability": {
-				"label": "Touring Availability",
-				"options": {
-					"move": "Yes, I can move with the tour",
-					"flexible": "Flexible — depends on dates",
-					"local": "Local crew only (single city)"
-				}
-			},
-			"deploy48h": {
-				"label": "Can you deploy within 48 hours notice?",
-				"options": {
-					"yes": "Yes",
-					"no": "No"
-				}
-			},
-			"passport": {
-				"label": "Do you have a valid passport for travel?",
-				"options": {
-					"yes": "Yes — currently valid",
-					"no": "No / Expired"
-				}
-			},
-			"markets": {
-				"label": "Markets Worked (where you have deployed before)",
-				"placeholder": "e.g. Nigeria, Ghana, South Africa, UK..."
-			},
-			"dayRate": {
-				"label": "Standard Individual Day Rate (USD)",
-				"placeholder": "e.g. 150",
-				"hint": "Provide a base figure — actual rates may vary per package."
-			}
-		},
-		"credentials": {
-			"title": "Credentials & Verification",
-			"referee": {
-				"label": "Industry Referee",
-				"name": {
-					"label": "Referee Name",
-					"placeholder": "Contact person"
-				},
-				"company": {
-					"label": "Referee Company",
-					"placeholder": "Production firm or promoter"
-				},
-				"contact": {
-					"label": "Referee Contact (WhatsApp/Email)",
-					"placeholder": "+234..."
-				},
-				"relationship": {
-					"label": "Relationship",
-					"placeholder": "e.g. Production Manager on [Tour Name]"
-				}
-			},
-			"portfolio": {
-				"label": "Portfolio / Showreel / Industry Certificate",
-				"placeholder": "Google Drive link, LinkedIn, or Website..."
-			},
-			"equipment": {
-				"label": "Tools / Equipment You Own (if any)",
-				"placeholder": "e.g. Audio interface, measurement mic, rigging kit..."
-			}
-		},
-		"declaration": {
-			"title": "Declaration",
-			"clauses": {
-				"accuracy": "I declare that the information provided is true and verifiable.",
-				"consent": "I consent to my WCS score and profile being shared with promoters and touring parties.",
-				"misrepresentation": "I understand that misrepresentation of experience results in a permanent ban."
-			},
-			"name": {
-				"label": "Full Legal Name (Electronic Signature)",
-				"placeholder": "Type full name"
-			},
-			"date": {
-				"label": "Date"
-			}
-		},
-		"score": {
-			"wcs": "WCS",
-			"tier": "Tier",
-			"calculating": "Calculating...",
-			"liveScore": "Live Score",
-			"breakdown": {
-				"base": "Base Score — {pts} pts",
-				"bonus": "Bonus Points — {pts} pts",
-				"experience": "Experience Level",
-				"scale": "Event Scale",
-				"availability": "Touring Availability"
-			}
-		},
-		"matrix": {
-			"title": "View Full Tier Assignment Matrix",
-			"tier": "Tier {n}"
-		},
-		"info": {
-			"scoring": {
-				"title": "Instant Scoring",
-				"body": "Your WCS score is calculated in real-time as you complete the form."
-			},
-			"rate": {
-				"title": "Locked Day Rate",
-				"body": "Your declared rate is locked in your crew profile upon certification."
-			},
-			"insurance": {
-				"title": "Insurance Included",
-				"body": "Tier 2+ crew receive group insurance coverage via SanlamAllianz."
-			}
-		},
-		"success": {
-			"title": "Registration Submitted!",
-			"description": "Your WCS score has been calculated. The Ckrowd team will verify your credentials and confirm your tier within 48 hours via WhatsApp or email.",
-			"viewDashboard": "View Dashboard",
-			"browseTours": "Browse Tours",
-			"enquiries": "Enquiries",
-			"ayaPilot": "Aya Nakamura Pilot"
-		},
-		"roles": {
-			"stageManager": "Stage Manager",
-			"productionManager": "Production Manager",
-			"tourManager": "Tour Manager",
-			"fohEngineer": "FOH Engineer",
-			"monitorEngineer": "Monitor Engineer",
-			"lightingDesigner": "Lighting Designer / Operator",
-			"rigger": "Rigger",
-			"backlineTech": "Backline Tech",
-			"pyrotechnics": "Pyrotechnics",
-			"logisticsCoordinator": "Logistics Coordinator",
-			"securityLead": "Security Lead",
-			"merchandiseManager": "Merchandise Manager",
-			"hospitalityManager": "Hospitality / Rider Manager",
-			"videoTech": "Video / LED Tech",
-			"photographer": "Photographer / Videographer",
-			"other": "Other"
-		},
-		"tiers": {
-			"tier1": {
-				"label": "Registered Worker",
-				"range": "0 – 50",
-				"perks": {
-					"database": "Database entry and profile created",
-					"noDeployment": "No tour deployment at this stage",
-					"training": "Training resources and upskilling pathways offered",
-					"assessment": "Eligible for re-assessment after 90 days"
-				}
-			},
-			"tier2": {
-				"label": "Certified Local Crew",
-				"range": "51 – 70",
-				"perks": {
-					"local": "Single-city tour deployment eligibility",
-					"payment": "Access Bank payment onboarding & day rate locked",
-					"insurance": "Group insurance coverage via SanlamAllianz"
-				},
-				"aya": "Eligible as local crew (per city)"
-			},
-			"tier3": {
-				"label": "Certified Touring Professional",
-				"range": "71 – 85",
-				"perks": {
-					"cluster": "Multi-city cluster deployment eligibility",
-					"preferred": "Preferred crew status — first call for regional tours",
-					"terms": "7-day payment terms post-tour completion",
-					"perDiem": "Cross-border per diem advance provided"
-				},
-				"aya": "Eligible for touring party (moves with tour)"
-			},
-			"tier4": {
-				"label": "CTaaS Master Technician",
-				"range": "86 – 100+",
-				"perks": {
-					"panAfrican": "Pan-African tour deployment eligibility",
-					"lead": "Lead role / department head assignment",
-					"terms": "3-day payment terms post-engagement",
-					"insurance": "Equipment and tools insurance coverage included",
-					"mentorship": "Training mentorship role — earns income from crew development"
-				},
-				"aya": "Eligible as department lead"
-			}
-		},
-		"bonus": {
-			"deployment48h": "48-hour deployment availability",
-			"passport": "Valid cross-border travel document",
-			"reference": "Verified reference from a Certified Promoter",
-			"portfolio": "Portfolio, showreel, or industry certificate"
-		},
-		"actions": {
-			"back": "Back",
-			"continue": "Continue",
-			"saveDraft": "Save Draft",
-			"submitting": "Submitting...",
-			"submit": "Submit Registration"
-		},
-		"shared": {
-			"basePoints": "base points",
-			"bonusPointsValue": "+{pts} bonus pts",
-			"bonusPointsUnlocked": "+{pts} bonus points unlocked",
-			"optional": "optional"
-		},
-		"errors": {
-			"failed": "Submission failed. Please try again."
-		}
-	},
-	"ProfilePage": {
-		"promoterPortal": "Promoter Portal",
-		"title": "Profile",
-		"description": "Manage your company information and public profile.",
-		"companyInfo": {
-			"title": "Company Information",
-			"fields": {
-				"companyName": "Company Name",
-				"tradingName": "Trading Name",
-				"contactPerson": "Contact Person",
-				"jobTitle": "Job Title",
-				"email": "Email Address",
-				"phone": "Phone Number",
-				"country": "Country",
-				"city": "City"
-			}
-		},
-		"publicProfile": {
-			"title": "Public Profile",
-			"description": "This information appears on your promoter profile visible to artiste managers.",
-			"fields": {
-				"bio": "Bio",
-				"website": "Website",
-				"instagram": "Social Handle (Instagram)"
-			}
-		},
-		"actions": {
-			"save": "Save Changes",
-			"saving": "Saving..."
-		}
-	},
-	"SettingsPage": {
-		"promoterPortal": "Promoter Portal",
-		"title": "Settings",
-		"description": "Manage your account, venues, and preferences.",
-		"tabs": {
-			"venue": "Venue",
-			"notifications": "Notifications",
-			"billing": "Billing",
-			"security": "Security"
-		},
-		"venueTab": {
-			"myVenues": {
-				"title": "My Venues",
-				"description": "Venues registered under your promoter account.",
-				"statuses": {
-					"verified": "Verified",
-					"pending": "Pending"
-				},
-				"actions": {
-					"edit": "Edit",
-					"addNew": "Add New Venue"
-				}
-			},
-			"venueDetails": {
-				"title": "Venue Details",
-				"description": "Update the primary venue on your account.",
-				"fields": {
-					"name": "Venue Name",
-					"type": "Venue Type",
-					"city": "City",
-					"country": "Country",
-					"seatedCap": "Seated Capacity",
-					"standingCap": "Standing Capacity",
-					"address": "Street Address",
-					"maps": "Google Maps URL"
-				},
-				"actions": {
-					"save": "Save Venue"
-				}
-			}
-		},
-		"notificationsTab": {
-			"email": {
-				"title": "Email Notifications",
-				"toggles": {
-					"eoiUpdates": {
-						"label": "EOI Status Updates",
-						"description": "When your EOI is approved, rejected, or needs revision"
-					},
-					"announcements": {
-						"label": "New Tour Announcements",
-						"description": "When Ckrowd announces a new artiste or tour project"
-					},
-					"financing": {
-						"label": "Financing Decisions",
-						"description": "When your financing application is reviewed"
-					},
-					"reminders": {
-						"label": "Show Reminders",
-						"description": "7-day and 24-hour reminders before your confirmed shows"
-					},
-					"settlement": {
-						"label": "Settlement Notifications",
-						"description": "When a post-show financial settlement is ready"
-					},
-					"platform": {
-						"label": "Platform Updates",
-						"description": "Product announcements and feature releases"
-					}
-				}
-			},
-			"inApp": {
-				"title": "In-App Notifications",
-				"toggles": {
-					"eoi": "EOI Activity",
-					"messages": "Message Alerts",
-					"milestones": "Milestone Reminders",
-					"tips": "Promoter Tips & Insights"
-				}
-			},
-			"digest": {
-				"title": "Digest Frequency",
-				"options": {
-					"realTime": "Real-time",
-					"daily": "Daily Digest",
-					"weekly": "Weekly Summary"
-				}
-			},
-			"actions": {
-				"save": "Save Preferences"
-			}
-		},
-		"billingTab": {
-			"currentPlan": {
-				"title": "Current Plan",
-				"proLabel": "Global Stage Pro",
-				"proDescription": "Unlimited EOIs · Priority review · Financing access",
-				"perMonth": "/ month",
-				"actions": {
-					"change": "Change Plan",
-					"cancel": "Cancel Subscription"
-				}
-			},
-			"paymentMethod": {
-				"title": "Payment Method",
-				"expires": "Expires",
-				"default": "Default",
-				"actions": {
-					"add": "Add Payment Method"
-				}
-			},
-			"history": {
-				"title": "Billing History",
-				"table": {
-					"date": "Date",
-					"description": "Description",
-					"amount": "Amount",
-					"status": "Status"
-				}
-			}
-		},
-		"securityTab": {
-			"password": {
-				"title": "Change Password",
-				"fields": {
-					"current": "Current Password",
-					"new": "New Password",
-					"confirm": "Confirm New Password"
-				},
-				"hint": "Minimum 8 characters with at least one number and symbol.",
-				"actions": {
-					"update": "Update Password"
-				}
-			},
-			"twoFactor": {
-				"title": "Two-Factor Authentication",
-				"description": "Add an extra layer of security to your account.",
-				"authenticator": "Authenticator App",
-				"notConfigured": "Not configured",
-				"actions": {
-					"enable": "Enable"
-				}
-			},
-			"sessions": {
-				"title": "Active Sessions",
-				"description": "Devices currently signed in to your account.",
-				"thisDevice": "This device",
-				"actions": {
-					"revoke": "Revoke"
-				}
-			},
-			"dangerZone": {
-				"title": "Danger Zone",
-				"delete": {
-					"title": "Delete Account",
-					"description": "Permanently removes all your data. This cannot be undone."
-				},
-				"actions": {
-					"delete": "Delete"
-				}
-			}
-		}
-	},
-	"ContactPage": {
-		"getInTouch": "Get in Touch",
-		"title": "Contact Us",
-		"description": "Have a question, need support, or want to partner with TourStack by Crowd? Reach out using the details below.",
-		"items": {
-			"general": "General Enquiries",
-			"workforce": "Workforce Registry",
-			"financing": "Financing & Partnerships",
-			"legal": "Legal & Privacy"
-		},
-		"location": {
-			"title": "Ckrowd Africa Technologies",
-			"subtitle": "Pan-African Live Events Platform"
-		}
-	},
-	"ApplyPage": {
-		"promoterOnboarding": "Ckrowd — Promoter Onboarding",
-		"title": "Promoter Intake Form",
-		"description": "Apply to become a verified Ckrowd promoter and unlock access to Pan-African tour stops, artist partnerships, and financing support.",
-		"steps": {
-			"basic": "Basic Info",
-			"experience": "Experience",
-			"gate": "Gate Check",
-			"credibility": "Credibility",
-			"intent": "Intent"
-		},
-		"sections": {
-			"basic": {
-				"title": "Basic Information",
-				"fields": {
-					"fullName": "Full Name",
-					"fullNamePlaceholder": "e.g. Amara Osei",
-					"company": "Company / Brand Name",
-					"companyPlaceholder": "e.g. Osei Live Events",
-					"phone": "Phone Number (WhatsApp preferred)",
-					"phonePlaceholder": "+234 800 000 0000",
-					"email": "Email Address",
-					"emailPlaceholder": "you@example.com",
-					"cityCountry": "City & Country",
-					"cityCountryPlaceholder": "e.g. Accra, Ghana"
-				}
-			},
-			"experience": {
-				"title": "Experience Snapshot",
-				"fields": {
-					"years": "Years of Promoting Experience",
-					"events": "Events Organized in the Last 12 Months",
-					"crowd": "Largest Crowd Successfully Hosted",
-					"artistLevel": "Artist Level Worked With",
-					"artistLevelHint": "(select all that apply)"
-				},
-				"options": {
-					"years": [
-						"0–1 years",
-						"2–3 years",
-						"4–6 years",
-						"7–10 years",
-						"10+ years"
-					],
-					"events": ["0–2", "3–5", "6–10", "11–20", "20+"],
-					"crowd": [
-						"Under 1,000",
-						"1,000–3,000",
-						"3,000–7,000",
-						"7,000–15,000",
-						"15,000+"
-					],
-					"levels": [
-						"Emerging/Local",
-						"Mid-tier National",
-						"Top-tier National",
-						"International"
-					]
-				}
-			},
-			"gate": {
-				"title": "Gate Check — Aya Pilot Eligibility",
-				"description": "The Aya Pilot is reserved for promoters with demonstrated large-venue experience. This gate check determines your eligibility tier.",
-				"question": "Have you ever executed an event in a 10,000+ capacity venue?",
-				"uploadTitle": "Upload Proof of Large Venue Event",
-				"uploadDesc": "Flyer, ticket link screenshot, video, or media coverage",
-				"uploadLimit": "PNG, JPG, MP4, or PDF — max 20MB",
-				"ayaEligible": "Aya Pilot Tier Unlocked",
-				"ayaEligibleDesc": "Your profile will be flagged for priority review and access to Aya Pilot features, including premium tour allocations and dedicated support.",
-				"standardTier": "Standard Tier",
-				"standardTierDesc": "You'll be reviewed for our standard promoter program. As you build your track record with Ckrowd, you can unlock higher tiers.",
-				"clickToReplace": "Click to replace"
-			},
-			"credibility": {
-				"title": "Credibility Signals",
-				"pastLinks": "Past Event Links (at least one)",
-				"placeholders": {
-					"instagram": "Instagram — https://instagram.com/your_handle",
-					"twitter": "Twitter / X — https://x.com/your_handle",
-					"youtube": "YouTube / TikTok — https://youtube.com/your_channel",
-					"ticketing": "Ticketing Links — https://tickets.example.com/your_event"
-				},
-				"business": "Business Credentials",
-				"fields": {
-					"registered": "Registered Business",
-					"bank": "Active Bank Account",
-					"sponsors": "Existing Brand Sponsors"
-				}
-			},
-			"intent": {
-				"title": "Intent & Budget",
-				"question": "What is your primary intent for using Ckrowd?",
-				"options": [
-					"Artist Discovery",
-					"Tour Stop Management",
-					"Financing / Grants",
-					"Workforce / Crewing",
-					"Sponsorship Support"
-				],
-				"budget": "Estimated Budget for your next major event (USD)",
-				"budgetPlaceholder": "e.g. 50,000"
-			},
-			"review": {
-				"title": "Review & Submit",
-				"description": "Please review your details before submitting. Incomplete or inaccurate profiles may delay verification."
-			}
-		},
-		"success": {
-			"title": "Application Received!",
-			"description": "Your promoter intake form has been submitted. The Ckrowd team will review your application and respond within 48 hours via email or WhatsApp.",
-			"aya": "Aya Pilot Eligible"
-		},
-		"actions": {
-			"back": "Back",
-			"continue": "Continue",
-			"submit": "Submit Application",
-			"submitting": "Submitting Application...",
-			"dashboard": "View Dashboard",
-			"discovery": "Browse Tours"
-		}
-	},
-	"CrewPage": {
-		"registry": "CTaaS — Workforce Registry",
-		"title": "Crew Registration",
-		"description": "Register as a verified CTaaS crew member. Your answers are scored instantly to determine your Workforce Capability Score and tier placement.",
-		"steps": {
-			"personal": "Personal",
-			"role": "Role",
-			"touring": "Touring",
-			"credentials": "Credentials",
-			"wcs": "WCS Score"
-		},
-		"roles": {
-			"stageManager": "Stage Manager",
-			"productionManager": "Production Manager",
-			"tourManager": "Tour Manager",
-			"fohEngineer": "FOH Engineer",
-			"monitorEngineer": "Monitor Engineer",
-			"lightingDesigner": "Lighting Designer / Operator",
-			"rigger": "Rigger",
-			"backlineTech": "Backline Tech",
-			"pyrotechnics": "Pyrotechnics",
-			"logisticsCoordinator": "Logistics Coordinator",
-			"securityLead": "Security Lead",
-			"merchandiseManager": "Merchandise Manager",
-			"hospitalityManager": "Hospitality / Rider Manager",
-			"videoTech": "Video / LED Tech",
-			"photographer": "Photographer / Videographer",
-			"other": "Other"
-		},
-		"tiers": {
-			"tier1": {
-				"label": "Registered Worker",
-				"range": "0 – 50",
-				"perks": {
-					"database": "Database entry and profile created",
-					"noDeployment": "No tour deployment at this stage",
-					"training": "Training resources and upskilling pathways offered",
-					"assessment": "Eligible for re-assessment after 90 days"
-				}
-			},
-			"tier2": {
-				"label": "Certified Local Crew",
-				"range": "51 – 70",
-				"perks": {
-					"local": "Single-city tour deployment eligibility",
-					"payment": "Access Bank payment onboarding & day rate locked",
-					"insurance": "Group insurance coverage via SanlamAllianz"
-				},
-				"aya": "Eligible as local crew (per city)"
-			},
-			"tier3": {
-				"label": "Certified Touring Professional",
-				"range": "71 – 85",
-				"perks": {
-					"cluster": "Multi-city cluster deployment eligibility",
-					"preferred": "Preferred crew status — first call for regional tours",
-					"terms": "7-day payment terms post-tour completion",
-					"perDiem": "Cross-border per diem advance provided"
-				},
-				"aya": "Eligible for touring party (moves with tour)"
-			},
-			"tier4": {
-				"label": "CTaaS Master Technician",
-				"range": "86 – 100+",
-				"perks": {
-					"panAfrican": "Pan-African tour deployment eligibility",
-					"leadRole": "Lead role / department head assignment",
-					"fastTerms": "3-day payment terms post-engagement",
-					"equipmentInsurance": "Equipment and tools insurance coverage included",
-					"mentorship": "Training mentorship role — earns income from crew development"
-				},
-				"aya": "Eligible as department lead"
-			}
-		},
-		"sections": {
-			"personal": {
-				"title": "Personal Information",
-				"fields": {
-					"fullName": "Full Name",
-					"fullNamePlaceholder": "e.g. Kofi Mensah",
-					"preferredName": "Preferred Name / Stage Name",
-					"preferredNamePlaceholder": "e.g. DJ Phantom",
-					"phone": "Phone Number",
-					"phonePlaceholder": "+234 800 000 0000",
-					"whatsapp": "WhatsApp Number (if different)",
-					"whatsappPlaceholder": "+233 20 000 0000",
-					"email": "Email Address",
-					"emailPlaceholder": "yourname@email.com",
-					"city": "City / Base Location",
-					"cityPlaceholder": "e.g. Lagos",
-					"country": "Country",
-					"countryPlaceholder": "e.g. Nigeria",
-					"nationality": "Nationality",
-					"nationalityPlaceholder": "e.g. Ghanaian",
-					"nationalId": "National ID / Passport Number",
-					"nationalIdPlaceholder": "Document number only",
-					"nationalIdHint": "Required for cross-border eligibility — document number only."
-				}
-			},
-			"role": {
-				"title": "Role & Specialisation",
-				"fields": {
-					"primaryRole": "Primary Role / Job Title",
-					"primaryRoleHint": "(select all that apply)",
-					"otherRole": "If 'Other', please specify"
-				}
-			},
-			"touring": {
-				"title": "Touring & Scale",
-				"fields": {
-					"yearsExp": "Years of Professional Industry Experience",
-					"largestEvent": "Largest Event / Crowd Size Worked",
-					"tourAvailability": "Touring Availability",
-					"deploy48h": "Can you deploy to a tour stop with 48 hours notice?",
-					"passport": "Do you hold a valid cross-border travel document?"
-				},
-				"options": {
-					"years": [
-						"Less than 1 year",
-						"1–3 years",
-						"4–7 years",
-						"8–12 years",
-						"13+ years"
-					],
-					"scale": [
-						"Under 500",
-						"500–2,000",
-						"2,001–10,000",
-						"10,001–50,000",
-						"50,000+"
-					],
-					"availability": [
-						"Yes, I can move with the tour",
-						"Flexible — depends on dates",
-						"Local crew only (single city)"
-					],
-					"deploy48h": ["Yes", "No"],
-					"passport": ["Yes — currently valid", "No — expired or none"]
-				}
-			},
-			"credentials": {
-				"title": "Credentials & References",
-				"fields": {
-					"markets": "Which markets have you worked in? (City/Country)",
-					"marketsPlaceholder": "e.g. Accra, Lagos, Nairobi",
-					"dayRate": "Average Professional Day Rate (USD)",
-					"dayRatePlaceholder": "e.g. 150",
-					"refereeName": "Referee Name",
-					"refereeCompany": "Referee Company / Event",
-					"refereeContact": "Referee WhatsApp / Email",
-					"refereeRelationship": "Your Relationship to Referee",
-					"portfolio": "Portfolio / Showreel / Certificate Links",
-					"portfolioPlaceholder": "Links to website, drive, or LinkedIn",
-					"equipment": "What professional tools/equipment do you own?",
-					"equipmentPlaceholder": "List key gear e.g. Console, Camera, Riggings"
-				}
-			},
-			"wcs": {
-				"title": "WCS Score",
-				"baseScore": "Base Score",
-				"bonusScore": "Bonus Score",
-				"totalScore": "Total Score",
-				"maxScore": "Max Score",
-				"bonuses": {
-					"title": "Bonus Factors",
-					"deployment": "48-hour deployment availability",
-					"passport": "Valid cross-border travel document",
-					"reference": "Verified reference from a Certified Promoter",
-					"portfolio": "Portfolio, showreel, or industry certificate"
-				},
-				"declaration": {
-					"title": "Declaration",
-					"text": "I certify that the information provided is true and accurate. I understand that CTaaS verified status is subject to credential verification and can be revoked if false information is provided.",
-					"name": "Full Name for Signature",
-					"date": "Date"
-				}
-			}
-		},
-		"success": {
-			"title": "Registration Submitted!",
-			"description": "Your WCS score has been calculated. The Ckrowd team will verify your credentials and confirm your tier within 48 hours via WhatsApp or email.",
-			"aya": "Aya Nakamura Pilot"
-		},
-		"actions": {
-			"back": "Back",
-			"continue": "Continue",
-			"submit": "Submit Registration",
-			"submitting": "Submitting...",
-			"dashboard": "View Dashboard",
-			"discovery": "Browse Tours"
-		}
-	},
-	"InsurancePage": {
-		"hub": "TourStack · Insurance Hub",
-		"hero": {
-			"title": "Insurance for <spanHighlight>Every Role.</spanHighlight><br></br>Built Into the Pipeline.",
-			"description": "SanlamAllianz-powered coverage embedded in the CTaaS certification pipeline — activating automatically as you onboard.",
-			"startOnboarding": "Start Onboarding",
-			"viewProducts": "View Products"
-		},
-		"productTags": {
-			"event": "EVENT INSURANCE",
-			"highest": "HIGHEST VALUE",
-			"sme": "SME INSURANCE",
-			"group": "GROUP INSURANCE",
-			"specialty": "SPECIALTY LINES",
-			"embedded": "EMBEDDED"
-		},
-		"stats": {
-			"portfolio": "Insurable Portfolio",
-			"markets": "SanlamAllianz Markets",
-			"lines": "Coverage Lines",
-			"roles": "Certified Roles",
-			"values": {
-				"portfolio": "$400M–600M",
-				"markets": "27",
-				"lines": "6",
-				"roles": "4"
-			}
-		},
-		"tabs": {
-			"overview": "Ecosystem Overview",
-			"onboarding": "Onboarding Flow",
-			"products": "Insurance Products",
-			"profile": "My Insurance Profile"
-		},
-		"overview": {
-			"pipelineTitle": "The Certification Pipeline",
-			"stakeholdersTitle": "Stakeholder Profiles",
-			"productsTitle": "Insurance Product Suite",
-			"cta": {
-				"title": "Ready to activate your coverage?",
-				"description": "Complete CTaaS certification and insurance activates automatically.",
-				"button": "Start Onboarding"
-			}
-		},
-		"onboarding": {
-			"selectRole": "Select your role",
-			"partners": "Insurance Partners",
-			"partnersList": [
-				{
-					"name": "SanlamAllianz Nigeria",
-					"sub": "Pan-Africa · All Insurance Lines"
-				},
-				{
-					"name": "Access Bank Plc",
-					"sub": "Pan-Africa · Tour Finance Facility"
-				},
-				{ "name": "PAPSS Network", "sub": "Pan-Africa · Payment Rails" }
-			],
-			"step": "Step {current} of {total}",
-			"activates": {
-				"title": "Insurance Activates at This Step",
-				"description": "SanlamAllianz coverage activates automatically upon certification completion. No separate application required."
-			},
-			"finance": {
-				"title": "Finance Products Unlocked",
-				"description": "Tour finance facilities are now available via Access Bank. Apply directly through the Financing tab."
-			},
-			"actions": {
-				"previous": "Previous",
-				"continue": "Continue → Step {next}",
-				"complete": "Complete — View Coverage"
-			},
-			"progress": "Onboarding Progress",
-			"progressDetail": "{current} of {total} steps completed"
-		},
-		"products": {
-			"apply": "Apply via EOI",
-			"underwriter": {
-				"title": "Insurance Underwriter",
-				"description": "Pan-African insurance leader. 27 markets. All product lines underwritten and managed in-partnership with Ckrowd.",
-				"portfolio": "Insurable Portfolio",
-				"scale": "at 5-year scale",
-				"brand": "SanlamAllianz",
-				"portfolioValue": "$600M"
-			}
-		},
-		"profile": {
-			"certification": "Certification Pathway",
-			"status": {
-				"complete": "COMPLETE",
-				"pending": "PENDING"
-			},
-			"financeTitle": "Available Finance Products",
-			"coverageTitle": "Your Coverage Profile",
-			"tableLabels": {
-				"premium": "Premium",
-				"term": "Term",
-				"amount": "Amount",
-				"cost": "Cost"
-			},
-			"cta": {
-				"title": "Complete certification to activate coverage",
-				"description": "Insurance products are embedded in the pipeline. No separate application required.",
-				"button": "CONTINUE ONBOARDING"
-			},
-			"bankName": "ACCESS BANK"
-		},
-		"faq": {
-			"title": "Frequently Asked Questions",
-			"items": [
-				{
-					"q": "Do I need to be certified before insurance activates?",
-					"a": "Yes. Insurance coverage activates automatically at Step 4 of the CTaaS certification pipeline. No separate insurance application is required."
-				},
-				{
-					"q": "Can I apply for finance before my EOI is approved?",
-					"a": "You can start the process, but finance eligibility is unlocked at Step 5 — after certification and bank onboarding are complete."
-				},
-				{
-					"q": "What happens if the event is cancelled?",
-					"a": "Promoter-initiated cancellation triggers the Event Cancellation policy. Claims are processed within 30 days via SanlamAllianz."
-				},
-				{
-					"q": "Is a bank account in Africa required?",
-					"a": "Yes. Funds and insurance premiums are routed via Access Bank. The enterprise account is opened as part of the onboarding pipeline."
-				}
-			]
-		},
-		"stakeholders": {
-			"promoter": {
-				"label": "Tour Promoter",
-				"tag": "CERTIFIED GLOBAL PARTNER",
-				"description": "Concert & event organisers running CTaaS-certified tour stops",
-				"products": [
-					"Event Cancellation",
-					"Promoter Business",
-					"Credit Guarantee",
-					"Audience Ticket Protection"
-				],
-				"steps": [
-					{
-						"label": "Submit EOI",
-						"detail": "Apply for a tour stop via the Discovery page. Complete your Expression of Interest and select your preferred markets."
-					},
-					{
-						"label": "Certification Training",
-						"detail": "Complete CTaaS LMS certification. Pass the Promoter module to unlock certified partner status."
-					},
-					{
-						"label": "Access Bank Onboarding",
-						"detail": "Open an Enterprise Account via the Ckrowd partnership with Access Bank. Required for insurance and finance activation."
-					},
-					{
-						"label": "Insurance Activation",
-						"detail": "SanlamAllianz Business Insurance activates upon certification completion. Coverage includes event cancellation, liability, and credit guarantee."
-					},
-					{
-						"label": "Finance Eligibility",
-						"detail": "Certified Access Bank account becomes Paymaster-eligible. Tour Stop Advance and Venue Build-Out Credit unlocked."
-					}
-				],
-				"coverage": [
-					{
-						"product": "Event Cancellation & Non-Appearance",
-						"type": "EVENT INSURANCE",
-						"desc": "Artist withdrawal, weather events, force majeure. Protects full event revenue.",
-						"premium": "1.5–3%",
-						"term": "Per Event"
-					},
-					{
-						"product": "Promoter Business Insurance",
-						"type": "SME INSURANCE",
-						"desc": "Public liability, property damage, business interruption for the promoter entity.",
-						"premium": "From $800/yr",
-						"term": "Annual"
-					},
-					{
-						"product": "Credit Guarantee Insurance",
-						"type": "HIGHEST VALUE",
-						"desc": "Underwrites Tour Stop Advance lending facility. Enables Access Bank lending.",
-						"premium": "0.8–1.2%",
-						"term": "Per Facility"
-					},
-					{
-						"product": "Audience Ticket Protection",
-						"type": "EMBEDDED",
-						"desc": "Embedded at checkout — refund guarantee for ticket holders if event is cancelled.",
-						"premium": "1–2% of ticket",
-						"term": "Per Event"
-					}
-				],
-				"financeProducts": [
-					{
-						"name": "Tour Stop Advance",
-						"amount": "Up to $30,000",
-						"term": "30–90 days",
-						"cost": "3–5% flat"
-					},
-					{
-						"name": "Venue Build-Out Credit",
-						"amount": "Up to $75,000",
-						"term": "6–18 months",
-						"cost": "12–15% p.a."
-					}
-				]
-			},
-			"workforce": {
-				"label": "Touring Workforce",
-				"tag": "TOURING AGENT",
-				"description": "Sound engineers, lighting crews, stage managers, production staff deployed across tour stops",
-				"products": [
-					"Group Personal Accident",
-					"Employer Liability",
-					"Contractor Coverage"
-				],
-				"steps": [
-					{
-						"label": "WCS Registration",
-						"detail": "Register as a Workforce Contractor on Ckrowd. Submit skills, experience, and availability."
-					},
-					{
-						"label": "Vetting & Verification",
-						"detail": "Skills assessment, reference check, and identity verification completed by Ckrowd operations."
-					},
-					{
-						"label": "Touring Agent Certification",
-						"detail": "Complete role-specific CTaaS training module. Earn your Touring Agent certification badge."
-					},
-					{
-						"label": "Group Insurance Activation",
-						"detail": "Personal accident, employer liability, and contractor coverage activated via SanlamAllianz group policy."
-					},
-					{
-						"label": "Cross-Border Deployment",
-						"detail": "Access cross-border payroll via PAPSS. Deploy to certified tour stops across 27 markets."
-					}
-				],
-				"coverage": [
-					{
-						"product": "Group Personal Accident",
-						"type": "GROUP INSURANCE",
-						"desc": "Personal accident and injury coverage for all certified touring workforce members.",
-						"premium": "From $200/yr",
-						"term": "Annual"
-					},
-					{
-						"product": "Employer Liability",
-						"type": "GROUP INSURANCE",
-						"desc": "Employer liability protection covering workplace injuries and claims.",
-						"premium": "From $350/yr",
-						"term": "Annual"
-					},
-					{
-						"product": "Contractor Coverage",
-						"type": "SPECIALTY",
-						"desc": "Professional indemnity and equipment coverage for independent contractors.",
-						"premium": "From $400/yr",
-						"term": "Annual"
-					}
-				],
-				"financeProducts": [
-					{
-						"name": "Contractor Float",
-						"amount": "Up to $15,000",
-						"term": "60 days",
-						"cost": "2.5% flat"
-					}
-				]
-			},
-			"vendor": {
-				"label": "SMEs & Vendors",
-				"tag": "ECOSYSTEM PARTNER",
-				"description": "Production companies, equipment suppliers, catering, merchandise, and transport providers",
-				"products": [
-					"Equipment & Cargo",
-					"Business Interruption",
-					"Professional Indemnity"
-				],
-				"steps": [
-					{
-						"label": "Vendor EOI",
-						"detail": "Submit Expression of Interest to supply services to certified tour stops. Specify your category and capacity."
-					},
-					{
-						"label": "Ckrowd Supplier Vetting",
-						"detail": "Capacity check, business registration verification, and quality assessment conducted by Ckrowd."
-					},
-					{
-						"label": "Approved Vendor Listing",
-						"detail": "Listed in Ckrowd Vendor Marketplace and matched to relevant tour stops based on geography and capacity."
-					},
-					{
-						"label": "Insurance Profile Creation",
-						"detail": "SME business insurance bundle activated via SanlamAllianz. Covers equipment, cargo, and business interruption."
-					},
-					{
-						"label": "Finance Access",
-						"detail": "Working capital pre-event financing unlocked for approved vendors with certified tour stop contracts."
-					}
-				],
-				"coverage": [
-					{
-						"product": "Aviation & Equipment Insurance",
-						"type": "SPECIALTY LINES",
-						"desc": "Charter aircraft, production equipment, and high-value cargo in transit.",
-						"premium": "Bespoke",
-						"term": "Per Tour"
-					},
-					{
-						"product": "Business Interruption",
-						"type": "SME INSURANCE",
-						"desc": "Revenue protection if supply contracts are disrupted due to event cancellation.",
-						"premium": "From $600/yr",
-						"term": "Annual"
-					},
-					{
-						"product": "Professional Indemnity",
-						"type": "SME INSURANCE",
-						"desc": "Covers service delivery failures and contractual liability claims.",
-						"premium": "From $450/yr",
-						"term": "Annual"
-					}
-				],
-				"financeProducts": [
-					{
-						"name": "Vendor Working Capital",
-						"amount": "Up to $15,000",
-						"term": "60 days",
-						"cost": "2.5% flat"
-					}
-				]
-			},
-			"talent": {
-				"label": "Artist Management",
-				"tag": "TALENT SUPPLIER",
-				"description": "Agencies and management companies supplying artists to CTaaS-certified tour stops",
-				"products": [
-					"Artist Non-Appearance",
-					"Tour Liability",
-					"Revenue Protection"
-				],
-				"steps": [
-					{
-						"label": "Talent Supplier Registration",
-						"detail": "Register your management company. Submit artist roster and territory preferences."
-					},
-					{
-						"label": "Artist LOI Submission",
-						"detail": "Submit Letter of Interest for specific tour stops. Attach artist technical rider and fee schedule."
-					},
-					{
-						"label": "Contract & Block Rate Agreement",
-						"detail": "Negotiate block-rate artist fee agreements with promoters via the Ckrowd platform."
-					},
-					{
-						"label": "Insurance Embed",
-						"detail": "Artist non-appearance and tour liability coverage embedded into performance contracts automatically."
-					},
-					{
-						"label": "Paymaster Integration",
-						"detail": "Artist fees routed via certified Paymaster. Milestone-based release tied to performance completion."
-					}
-				],
-				"coverage": [
-					{
-						"product": "Artist Non-Appearance",
-						"type": "EVENT INSURANCE",
-						"desc": "Covers artist cancellation due to illness, injury, or force majeure.",
-						"premium": "2–4%",
-						"term": "Per Event"
-					},
-					{
-						"product": "Tour Revenue Protection",
-						"type": "SPECIALTY",
-						"desc": "Revenue guarantee product protecting management fees and artist earnings.",
-						"premium": "1.5–3%",
-						"term": "Per Tour"
-					},
-					{
-						"product": "Production Liability",
-						"type": "EVENT INSURANCE",
-						"desc": "Third-party liability arising from artist performance and production activities.",
-						"premium": "From $500",
-						"term": "Per Event"
-					}
-				],
-				"financeProducts": [
-					{
-						"name": "Artist Fee Advance",
-						"amount": "Up to $30,000",
-						"term": "30–90 days",
-						"cost": "3–5% flat"
-					}
-				]
-			}
-		},
-		"ecosystemFlow": [
-			{
-				"label": "Register & EOI",
-				"desc": "Submit Expression of Interest and select your stakeholder type."
-			},
-			{
-				"label": "Vetting",
-				"desc": "Identity, capacity, and business credentials verified."
-			},
-			{
-				"label": "CTaaS Certification",
-				"desc": "Complete role-specific training on the Ckrowd LMS."
-			},
-			{
-				"label": "Bank Onboarding",
-				"desc": "Access Bank enterprise account opened via Ckrowd partnership."
-			},
-			{
-				"label": "Insurance Activation",
-				"desc": "SanlamAllianz product suite activates automatically."
-			},
-			{
-				"label": "Finance Eligibility",
-				"desc": "Tour finance products unlocked for certified accounts."
-			}
-		],
-		"productSuite": [
-			{
-				"name": "Event Cancellation",
-				"desc": "Protects event revenue against cancellation, non-appearance, and force majeure events."
-			},
-			{
-				"name": "Credit Guarantee",
-				"desc": "Underwrites Tour Stop Advance lending facility. Highest-value product in the portfolio."
-			},
-			{
-				"name": "Promoter Business",
-				"desc": "Public liability, property, and business interruption for promoter and vendor entities."
-			},
-			{
-				"name": "Touring Workforce",
-				"desc": "Group personal accident, employer liability, and contractor coverage for touring crew."
-			},
-			{
-				"name": "Aviation & Equipment",
-				"desc": "Charter aircraft, production equipment, and high-value cargo specialty coverage."
-			},
-			{
-				"name": "Audience Ticket Protection",
-				"desc": "Embedded refund guarantee for ticket holders. Activated at checkout automatically."
-			}
-		]
-	},
-	"PrivacyPage": {
-		"legal": "Legal",
-		"title": "Privacy Policy",
-		"lastUpdated": "Last updated: April 2026",
-		"sections": [
-			{
-				"title": "1. Information We Collect",
-				"content": "TourStack by Crowd collects information you provide when registering an account, submitting an Expression of Interest, or onboarding as a stakeholder. This includes your name, email address, phone number, company details, and venue information."
-			},
-			{
-				"title": "2. How We Use Your Information",
-				"content": "We use your information to facilitate tour bookings, verify stakeholder credentials, process EOI applications, and communicate platform updates. We do not sell your personal data to third parties."
-			},
-			{
-				"title": "3. Data Storage",
-				"content": "Your data is stored securely. For this platform version, certain preferences are stored locally in your browser via localStorage. Server-side data is protected through industry-standard encryption."
-			},
-			{
-				"title": "4. Contact",
-				"content": "For privacy-related enquiries, contact us at {contactLink} or email {email}."
-			}
-		],
-		"contactLink": "our contact page",
-		"email": "privacy@ckrowd.africa"
-	},
-	"TermsPage": {
-		"legal": "Legal",
-		"title": "Terms of Service",
-		"lastUpdated": "Last updated: April 2026",
-		"sections": [
-			{
-				"title": "1. Acceptance of Terms",
-				"content": "By accessing or using TourStack by Crowd, you agree to be bound by these Terms of Service. If you do not agree, you may not use the platform."
-			},
-			{
-				"title": "2. Platform Use",
-				"content": "TourStack is a B2B platform connecting promoters, service providers, and workforce professionals in the Pan-African live events industry. Use of the platform is restricted to registered businesses and verified individuals."
-			},
-			{
-				"title": "3. Accuracy of Information",
-				"content": "You agree to provide accurate, current, and complete information during registration and throughout your use of the platform. Misrepresentation may result in account suspension or removal."
-			},
-			{
-				"title": "4. Intellectual Property",
-				"content": "All content, branding, and platform design are the property of Ckrowd Africa Technologies. Unauthorised reproduction or distribution is prohibited."
-			},
-			{
-				"title": "5. Contact",
-				"content": "For terms-related enquiries, visit our {contactLink} or email {email}."
-			}
-		],
-		"contactLink": "contact page",
-		"email": "legal@ckrowd.africa"
-	},
-	"DiscoveryPage": {
-		"hero": {
-			"platform": "TourStack — Artiste & Tour Discovery",
-			"title": "Find Your Next <spanNode>Tour Stop.</spanNode>",
-			"description": "Browse artistes announced by Ckrowd Global Live for the Pan-African touring circuit. Submit an Expression of Interest to host a Tour Stop at your venue."
-		},
-		"trending": {
-			"title": "Trending Now",
-			"description": "Neo-Soul & Jazz acts seeing a 40% EOI surge for Q4 across East & West Africa."
-		},
-		"filters": {
-			"genre": "Genre",
-			"allGenres": "All Genres",
-			"availableWindow": "Available Window",
-			"allWindows": "All Windows",
-			"feeRange": "Fee Range (USD)",
-			"allRanges": "All Ranges",
-			"region": "Region",
-			"allAfrica": "All Africa",
-			"resetFilters": "Reset Filters"
-		},
-		"genres": {
-			"afrobeats": "Afrobeats",
-			"electronic": "Electronic",
-			"indieRock": "Indie Rock",
-			"jazzSoul": "Jazz & Soul",
-			"worldFolk": "World / Folk",
-			"modernClassical": "Modern Classical"
-		},
-		"windows": {
-			"q3_2024": "Q3 2024 (Jul–Sep)",
-			"q4_2024": "Q4 2024 (Oct–Dec)",
-			"q1_2025": "Q1 2025 (Jan–Mar)",
-			"q2_2025": "Q2 2025 (Apr–Jun)"
-		},
-		"feeRanges": {
-			"r1": "$5k – $15k",
-			"r2": "$15k – $50k",
-			"r3": "$50k – $150k",
-			"r4": "$150k+"
-		},
-		"regions": {
-			"westAfrica": "West Africa",
-			"eastAfrica": "East Africa",
-			"southernAfrica": "Southern Africa",
-			"northAfrica": "North Africa"
-		},
-		"activeTourProjects": "Active Tour Projects",
-		"sortBy": {
-			"label": "Sort by:",
-			"newestFirst": "Newest First"
-		},
-		"noResults": {
-			"title": "No results match your filters",
-			"description": "Try adjusting or resetting the filters above."
-		},
-		"trendingLabel": "Trending",
-		"submitEoi": "Submit Expression of Interest",
-		"howItWorks": {
-			"title": "How It Works",
-			"step1": {
-				"title": "Browse Tour Projects",
-				"description": "Ckrowd announces artistes and tours. Browse and filter by genre, date, fee, or region."
-			},
-			"step2": {
-				"title": "Submit Your EOI",
-				"description": "Submit a formal Expression of Interest with your venue, date, budget, and funding plan."
-			},
-			"step3": {
-				"title": "Matching & Review",
-				"description": "Ckrowd scores your EOI against artiste requirements and reviews your application."
-			},
-			"step4": {
-				"title": "Decision & Execution",
-				"description": "You receive Approved, Rejected, or Needs Revision — then proceed to planning."
-			},
-			"startEoi": "Start Your EOI"
-		},
-		"financing": {
-			"title": "Financing Support Available",
-			"description": "Get up to 40% of the artiste fee covered upfront through TourStack's capital partners.",
-			"applyButton": "Apply with EOI"
-		},
-		"platformStats": {
-			"title": "Platform Stats",
-			"markets": "Markets",
-			"promoters": "Promoters",
-			"activeTours": "Active Tours",
-			"avgReview": "Avg Review"
-		}
-	},
-	"FinancingPage": {
-		"hero": {
-			"platform": "TourStack — Financing & Insurance",
-			"title": "Capital for <spanNode>Every Tour Stop.</spanNode>",
-			"description": "TourStack connects promoters across Africa with purpose-built financing products — so cash flow never stands between you and a world-class show.",
-			"applyButton": "Apply via EOI",
-			"exploreProducts": "Explore Products"
-		},
-		"stats": {
-			"disbursed": "Disbursed to Date",
-			"repayment": "Repayment Rate",
-			"decision": "Avg Decision Time",
-			"markets": "Markets Covered"
-		},
-		"myApplications": "My Applications",
-		"noApplications": {
-			"title": "No applications yet",
-			"description": "Browse our financing products below and apply to cover your event costs."
-		},
-		"application": "Application",
-		"statuses": {
-			"pending": "Pending",
-			"approved": "Approved",
-			"declined": "Declined"
-		},
-		"requested": "Requested",
-		"applied": "Applied",
-		"viewDetails": "View details",
-		"financingProducts": "Financing Products",
-		"products": {
-			"p1": {
-				"name": "Tour Stop Advance",
-				"tag": "Most Popular",
-				"description": "Get up to 40% of the agreed artiste fee covered before the event date. Repaid automatically from gate receipts.",
-				"amount": "Up to $30,000",
-				"term": "30–90 days",
-				"rate": "3–5% flat fee",
-				"eligibility": "Approved EOI required"
-			},
-			"p2": {
-				"name": "Venue Build-Out Credit",
-				"tag": "Infrastructure",
-				"description": "Finance staging, sound, lighting, and production upgrades needed to host a qualifying tour stop.",
-				"amount": "Up to $75,000",
-				"term": "6–18 months",
-				"rate": "From 8% p.a.",
-				"eligibility": "Owned or leased venue"
-			},
-			"p3": {
-				"name": "Event Insurance Bundle",
-				"tag": "Risk Cover",
-				"description": "Comprehensive cover for cancellation, adverse weather, public liability, and artiste no-show.",
-				"amount": "Flexible",
-				"term": "Per event",
-				"rate": "From 1.2% of event budget",
-				"eligibility": "Open to all promoters"
-			},
-			"p4": {
-				"name": "Marketing & Ticketing Float",
-				"tag": "Growth",
-				"description": "Unlock working capital to run pre-event marketing and cover ticketing platform fees before revenue lands.",
-				"amount": "Up to $15,000",
-				"term": "60 days",
-				"rate": "2.5% flat fee",
-				"eligibility": "Active TourStack account"
-			}
-		},
-		"tableLabels": {
-			"amount": "Amount",
-			"term": "Term",
-			"cost": "Cost"
-		},
-		"apply": "Apply",
-		"howItWorksTitle": "How It Works",
-		"steps": {
-			"s1": {
-				"title": "Submit EOI",
-				"description": "Apply for a tour stop on the Discovery page. A confirmed EOI unlocks financing eligibility."
-			},
-			"s2": {
-				"title": "Select Product",
-				"description": "Choose the financing product that fits your event budget and timeline."
-			},
-			"s3": {
-				"title": "Upload Documents",
-				"description": "Submit venue contract, projected gate receipts, and ID verification."
-			},
-			"s4": {
-				"title": "Decision in 48h",
-				"description": "Our capital partners review and issue a term sheet within two business days."
-			},
-			"s5": {
-				"title": "Funds Disbursed",
-				"description": "Approved funds land in your account before the event build-out deadline."
-			}
-		},
-		"capitalPartners": "Capital Partners",
-		"partners": {
-			"p1": {
-				"region": "Pan-Africa",
-				"focus": "Event Finance"
-			},
-			"p2": {
-				"region": "West Africa",
-				"focus": "SME & Culture"
-			},
-			"p3": {
-				"region": "East Africa",
-				"focus": "Creative Economy"
-			},
-			"p4": {
-				"region": "Southern Africa",
-				"focus": "Live Entertainment"
-			}
-		},
-		"cta": {
-			"title": "Ready to Unlock Funding?",
-			"description": "Start your EOI and your financing profile in one flow.",
-			"button": "Get Started"
-		},
-		"faqTitle": "Frequently Asked Questions",
-		"faqs": {
-			"f1": {
-				"q": "Do I need a bank account in Africa to qualify?",
-				"a": "Yes. Funds are disbursed to a verified business account in the country of the tour stop. We support accounts in 18 African markets."
-			},
-			"f2": {
-				"q": "Can I apply for financing before my EOI is approved?",
-				"a": "You can start your financing profile at any time, but funds will only be released once your EOI is marked Approved by Ckrowd."
-			},
-			"f3": {
-				"q": "What happens if the event is cancelled?",
-				"a": "Cancellation triggered by the artiste is covered by the Event Insurance Bundle. Promoter-initiated cancellations are subject to the repayment schedule in your term sheet."
-			},
-			"f4": {
-				"q": "Is there a minimum event budget to qualify?",
-				"a": "Tour Stop Advance requires a minimum confirmed artiste fee of $5,000. Other products have their own thresholds as shown above."
-			}
-		}
-	},
-	"DashboardPage": {
-		"promoterPortal": "Promoter Portal",
-		"title": "Your Tour Dashboard",
-		"welcomeBack": "Welcome back, {name}. Track your EOIs and tour process below.",
-		"yourOrganization": "your organization",
-		"touringSeason": "Touring Season",
-		"touringSeasonYears": "2024 / 2025",
-		"eoiProgressTitle": "EOI Progress — {artist}{tour}",
-		"noEoisYet": "No EOIs yet",
-		"noEois": "No EOIs",
-		"myEoiSubmissions": "My EOI Submissions",
-		"newEoi": "New EOI",
-		"financingStatus": "Financing Status",
-		"application": "Application",
-		"financingApproved": "Financing approved",
-		"financingDeclined": "Application declined",
-		"financingAssessment": "Application under assessment",
-		"requested": "Requested",
-		"viewFinancingDetails": "View Financing Details",
-		"noAppsYet": "No applications yet",
-		"noAppsDesc": "Apply for financing to cover your event costs.",
-		"exploreFinancing": "Explore Financing",
-		"tourActivity": "Tour Activity",
-		"noActivity": "No activity yet",
-		"time": {
-			"justNow": "Just now",
-			"hoursAgo": "{count}h ago",
-			"yesterday": "Yesterday",
-			"daysAgo": "{count}d ago"
-		},
-		"stats": {
-			"eoisSubmitted": "EOIs Submitted",
-			"newThisMonth": "+{count} this month",
-			"approved": "Approved",
-			"confirmed": "Confirmed",
-			"financingStatus": "Financing Status",
-			"noApps": "No apps",
-			"nextShow": "Next Show",
-			"noUpcomingShows": "No upcoming shows",
-			"submitEoiPrompt": "Submit an EOI to get started"
-		},
-		"steps": {
-			"eoiSubmitted": "EOI Submitted",
-			"underReview": "Under Review",
-			"matchScore": "Match Score",
-			"decision": "Decision",
-			"confirmed": "Confirmed"
-		},
-		"table": {
-			"artistTour": "Artiste / Tour",
-			"venue": "Venue",
-			"status": "Status",
-			"match": "Match",
-			"noEois": "No EOIs submitted yet",
-			"noEoisDesc": "Browse artistes and submit your first Expression of Interest.",
-			"discoverArtistes": "Discover Artistes"
-		},
-		"activityLabels": {
-			"approved": "EOI Approved — {artist}",
-			"needs_revision": "Revision Requested — {artist}",
-			"rejected": "EOI Rejected — {artist}",
-			"pending": "EOI Submitted — {artist}",
-			"pending_review": "EOI Submitted — {artist}"
-		}
-	},
-	"ToursPage": {
-		"promoterPortal": "Promoter Portal",
-		"title": "My Tours",
-		"description": "Track every tour stop — from EOI submission to show-day settlement.",
-		"newTourStop": "New Tour Stop",
-		"unknownVenue": "Unknown venue",
-		"noStops": "No tour stops yet",
-		"noStopsDesc": "Submit an Expression of Interest to get your first tour stop confirmed.",
-		"submitEoi": "Submit EOI",
-		"financed": "Financed",
-		"ticketsSold": "Tickets Sold",
-		"daysLetter": "d",
-		"untilShow": "until show",
-		"showPassed": "Show passed {days}d ago",
-		"showDay": "Show day!",
-		"reviseEoi": "Revise EOI",
-		"viewDetails": "View Details",
-		"upcomingMilestones": "Upcoming Milestones",
-		"noMilestones": "No upcoming milestones",
-		"venueSummary": "Venue Summary",
-		"noVenues": "No venues yet",
-		"cap": "Cap",
-		"showSingle": "show",
-		"ctaFinancingTitle": "Need Financing?",
-		"ctaFinancingDesc": "Cover up to 40% of artiste fees upfront",
-		"stats": {
-			"totalStops": "Total Stops",
-			"confirmed": "Confirmed",
-			"inProgress": "In Progress",
-			"rejected": "Rejected"
-		}
-	},
-	"AdminPage": {
-		"title": "Admin Dashboard",
-		"description": "Manage tour projects, review promoter EOIs, and drive decisions across the Pan-African touring circuit.",
-		"createTour": "Create Tour Project",
-		"recentTours": "Recent Tour Projects",
-		"recentEois": "Recent EOIs",
-		"viewAll": "View All",
-		"noTours": "No tour projects yet",
-		"noToursDesc": "Publish a tour project using the form.",
-		"noEois": "No EOIs yet",
-		"stats": {
-			"activeTours": "Active Tour Projects",
-			"eoisReceived": "EOIs Received",
-			"pendingReview": "Pending Review",
-			"approvedStops": "Approved Stops"
-		}
-	},
-	"AdminProfilePage": {
-		"role": "Super Admin",
-		"title": "Account Settings",
-		"description": "Update your personal information and profile details.",
-		"personalInfo": "Personal Information",
-		"fullName": "Full Name",
-		"jobTitle": "Job Title",
-		"email": "Email Address",
-		"phone": "Phone Number",
-		"country": "Country",
-		"city": "City",
-		"publicDetails": "Public Details",
-		"publicDetailsDesc": "This information will be visible to promoters and other stakeholders.",
-		"bio": "Short Bio",
-		"linkedin": "LinkedIn Profile / Website",
-		"saving": "Saving...",
-		"save": "Save Changes"
-	},
-	"RegisterPage": {
-		"title": "Register",
-		"description": "Create your account to manage EOIs, tours, and platform access.",
-		"tagline": "Create your TourStack account",
-		"firstName": "First name",
-		"lastName": "Last name",
-		"email": "Email address",
-		"password": "Password",
-		"confirmPassword": "Confirm password",
-		"firstNamePlaceholder": "Ada",
-		"lastNamePlaceholder": "Mensah",
-		"emailPlaceholder": "you@yourcompany.com",
-		"passwordPlaceholder": "Create a password",
-		"confirmPasswordPlaceholder": "Repeat your password",
-		"createAccount": "Create account",
-		"creatingAccount": "Creating account...",
-		"alreadyHaveAccount": "Already have an account?",
-		"signIn": "Sign in",
-		"errorFailed": "Registration failed",
-		"loading": "Loading session..."
-	},
-	"SideNav": {
-		"dashboard": "Dashboard",
-		"tours": "Tours",
-		"requests": "Requests",
-		"onboarding": "Onboarding",
-		"stakeholders": "Invite Links",
-		"profile": "Profile",
-		"settings": "Settings",
-		"startNewTour": "Start New Tour"
-	},
-	"CreateTourPage": {
-		"management": "Tour Management",
-		"title": "Create New Tour Project",
-		"projectDetails": "Tour Project Details",
-		"artistName": "Artist / Tour Name",
-		"tourName": "Project Title",
-		"feeMin": "Minimum Fee ($)",
-		"feeMax": "Maximum Fee ($)",
-		"availableFrom": "Available From",
-		"availableTo": "Available To",
-		"genre": "Musical Genre",
-		"technicalRequirements": "Technical Requirements",
-		"placeholderArtist": "e.g. Burna Boy",
-		"placeholderTour": "e.g. Love, Damini Tour 2024",
-		"placeholderRequirements": "Describe staging, sound, and lighting needs...",
-		"publishing": "Publishing...",
-		"publish": "Publish Tour Project",
-		"errorFailed": "Failed to create tour project.",
-		"errorUnexpected": "An unexpected error occurred.",
-		"placeholderFeeMin": "50000",
-		"placeholderFeeMax": "150000",
-		"genres": {
-			"afrobeats": "Afrobeats",
-			"afropop": "Afropop",
-			"electronic": "Electronic",
-			"jazzSoul": "Jazz & Soul",
-			"worldFolk": "World / Folk",
-			"hipHop": "Hip-Hop"
-		}
-	},
-	"Footer": {
-		"title": "Tour Stack by Crowd",
-		"tagline": "Empowering the live music industry with modern tools.",
-		"platform": {
-			"heading": "Platform",
-			"discovery": "Discovery",
-			"analytics": "Analytics",
-			"financing": "Financing"
-		},
-		"company": {
-			"heading": "Company",
-			"contact": "Contact",
-			"privacy": "Privacy Policy",
-			"terms": "Terms of Service"
-		},
-		"stayUpdated": {
-			"heading": "Stay Updated",
-			"placeholder": "Email address"
-		},
-		"copyright": "© {year} {brandName} {brandBy}. All rights reserved."
-	},
-	"Common": {
-		"brandName": "Tourstack",
-		"brandBy": "by Ckrowd",
-		"signIn": "Sign In",
-		"signOut": "Sign Out",
-		"profile": "Profile",
-		"settings": "Settings"
-	},
-	"AdminSideNav": {
-		"overview": "Overview",
-		"tours": "Tours",
-		"eoi": "EOIs",
-		"financing": "Financing",
-		"reports": "Reports",
-		"settings": "Settings",
-		"newTour": "New Tour"
-	},
-	"FinancingQuickApply": {
-		"badge": "Quick Apply",
-		"title": "Quick Financing Apply",
-		"description": "Select a product and request financing for your tour stop in seconds.",
-		"fields": {
-			"product": "Select Product",
-			"amount": "Requested Amount ($)",
-			"currency": "Currency"
-		},
-		"products": {
-			"tourStopAdvance": "Tour Stop Advance (up to $30k)",
-			"venueBuildOutCredit": "Venue Build-Out Credit (up to $75k)",
-			"eventInsuranceBundle": "Event Insurance Pack (from 1.2%)",
-			"marketingTicketingFloat": "Marketing & Ticking Advance (up to $15k)"
-		},
-		"actions": {
-			"submitting": "Applying...",
-			"apply": "Apply for Financing"
-		},
-		"success": "Application submitted successfully!",
-		"errors": {
-			"failed": "Application failed. Please try again."
-		},
-		"validation": {
-			"required": "Please fill out this field."
-		}
-	},
-
-	"StakeholderRegistrationPage": {
-		"success": {
-			"title": "Registration submitted",
-			"description": "Your details were submitted successfully.",
-			"returnHome": "Return home"
-		},
-		"header": {
-			"tagline": "Onboarding Invitation",
-			"title": "Stakeholder Registration"
-		},
-		"loadingLink": "Loading link...",
-		"errorUnavailable": "This invitation link is unavailable.",
-		"category": "Category",
-		"label": "Label",
-		"form": {
-			"name": "Name",
-			"email": "Email",
-			"phone": "Phone",
-			"country": "Country",
-			"company": "Company (optional)",
-			"submitting": "Submitting...",
-			"submit": "Submit Registration"
-		},
-		"errorDefault": "Unable to submit registration.",
-		"serviceProvider": {
-			"tagline": "Service Provider Invitation",
-			"title": "Service Provider Registration",
-			"fields": {
-				"contactName": "Contact Name",
-				"companyName": "Company Name",
-				"email": "Business Email",
-				"phone": "Phone",
-				"country": "Country",
-				"serviceType": "Service Type",
-				"yearsInBusiness": "Years in Business (optional)",
-				"description": "Description of Services",
-				"website": "Website (optional)",
-				"certifications": "Certifications / Insurance (optional)"
-			},
-			"serviceTypes": {
-				"catering": "Catering",
-				"security": "Security",
-				"av_tech": "AV / Technology",
-				"transportation": "Transportation",
-				"staging": "Staging & Production",
-				"hospitality": "Hospitality",
-				"other": "Other"
-			}
-		},
-		"workforce": {
-			"tagline": "Workforce Invitation",
-			"title": "Workforce Registration",
-			"fields": {
-				"name": "Full Name",
-				"email": "Email",
-				"phone": "Phone",
-				"country": "Country",
-				"company": "Current Employer (optional)",
-				"role": "Role / Specialty",
-				"yearsExperience": "Years of Experience",
-				"skillsSummary": "Skills Summary",
-				"availability": "Availability",
-				"availabilityPlaceholder": "e.g. June–August 2025",
-				"previousWork": "Previous Tours / Events (optional)"
-			},
-			"roles": {
-				"stage_crew": "Stage Crew",
-				"lighting_tech": "Lighting Technician",
-				"sound_tech": "Sound Technician",
-				"security": "Security",
-				"production_manager": "Production Manager",
-				"driver": "Driver / Transport",
-				"hospitality": "Hospitality",
-				"other": "Other"
-			},
-			"experienceLevels": {
-				"0_1": "Less than 1 year",
-				"1_3": "1–3 years",
-				"3_5": "3–5 years",
-				"5_10": "5–10 years",
-				"10_plus": "10+ years"
-			}
-		},
-		"artmgmt": {
-			"tagline": "Artist Management Invitation",
-			"title": "Artist Management Registration",
-			"fields": {
-				"agencyName": "Agency / Company Name",
-				"contactName": "Primary Contact Name",
-				"email": "Email",
-				"phone": "Phone",
-				"country": "Country",
-				"artistNames": "Artist Name(s)",
-				"genres": "Genre(s)",
-				"genresPlaceholder": "e.g. Pop, Hip-Hop, R&B",
-				"managementType": "Management Type",
-				"bio": "Artist / Roster Bio",
-				"website": "Website / Socials (optional)"
-			},
-			"managementTypes": {
-				"solo_artist": "Solo Artist",
-				"band_group": "Band / Group",
-				"label": "Record Label",
-				"management_agency": "Management Agency"
-			}
-		}
-	},
-	"AdminEOIPage": {
-		"badge": "EOI Management",
-		"title": "EOI Review Queue",
-		"description": "Review, approve, or reject Expressions of Interest submitted by promoters.",
-		"pendingSubmissions": "Pending Submissions",
-		"pendingCount": "Pending",
-		"noEois": "No EOIs yet",
-		"noEoisDesc": "EOI submissions will appear here for review.",
-		"matchScore": "Match Score",
-		"funding": "Funding",
-		"fields": {
-			"date": "Date",
-			"venue": "Venue",
-			"capacity": "Capacity",
-			"budget": "Budget"
-		},
-		"actions": {
-			"approve": "Approve",
-			"revision": "Needs Revision",
-			"reject": "Reject"
-		}
-	},
-	"AdminFinancingPage": {
-		"badge": "Capital Access",
-		"title": "Financing Tracker",
-		"description": "Monitor and manage financing requests from tour promoters.",
-		"requestsTitle": "Financing Requests",
-		"requested": "requested",
-		"reviewDetails": "Review Details",
-		"status": {
-			"pending": "Pending",
-			"approved": "Approved",
-			"declined": "Declined"
-		}
-	},
-	"AdminReportsPage": {
-		"badge": "Analytics",
-		"title": "Tour Reports",
-		"description": "High-level metrics and financial reports for the Pan-African tour circuit.",
-		"exportCsv": "Export CSV",
-		"comingSoon": "Reports Dashboard Coming Soon",
-		"comingSoonDesc": "We are currently aggregating data across your active tour projects. Detailed financial breakdowns, ticket sale projections, and risk analysis will be available here shortly."
-	},
-	"AdminToursPage": {
-		"badge": "Tour Management",
-		"title": "Tour Projects",
-		"description": "Manage your active and upcoming tour projects.",
-		"createTour": "Create Tour Project",
-		"allTours": "All Tour Projects",
-		"noTours": "No tour projects yet",
-		"noToursDesc": "Publish a new tour project to get started."
-	},
-	"AdminSettingsPage": {
-		"badge": "Configuration",
-		"title": "Platform Settings",
-		"description": "Manage global tour constraints, matching logic, and team access.",
-		"saveChanges": "Save Changes",
-		"algorithm": {
-			"title": "Matching Algorithm",
-			"strictBudget": "Strict Budget Alignment",
-			"strictBudgetDesc": "Automatically reject EOIs where the promoter's budget is 20% below the artiste's minimum fee.",
-			"autoApprove": "Auto-Approve 90%+ Matches",
-			"autoApproveDesc": "Bypass manual review for EOIs that score a 90% or higher match confidence."
-		},
-		"team": {
-			"title": "Admin Team",
-			"invite": "Invite Team Member"
-		},
-		"danger": {
-			"title": "Danger Zone",
-			"description": "Actions taken here are destructive and cannot be reversed.",
-			"purge": "Purge Draft Projects"
-		}
-	},
-	"StepForm": {
-		"promoter": {
-			"step1": {
-				"companyName": "Company Name",
-				"companyNamePlaceholder": "e.g. Live Nation Africa",
-				"primaryMarkets": "Primary Markets",
-				"primaryMarketsPlaceholder": "e.g. Lagos, Accra",
-				"expectedBudget": "Expected Tour Budget",
-				"expectedBudgetPlaceholder": "e.g. $50,000"
-			},
-			"step2": {
-				"certifications": "Upload Prior Certifications (Optional)"
-			},
-			"step3": {
-				"directorBvn": "Director BVN / NIN",
-				"directorBvnPlaceholder": "11-digit BVN",
-				"rcNumber": "Company Registration No (RC)",
-				"rcNumberPlaceholder": "e.g. RC 1234567"
-			},
-			"step4": {
-				"startDate": "Coverage Start Date",
-				"terms": "I agree to the SanlamAllianz terms of service and authorize automatic premium deduction from my enterprise account."
-			},
-			"step5": {
-				"acknowledgement": "I acknowledge that Tour Finance facilities are unlocked and agree to submit event budgets for underwriting."
-			}
-		},
-		"workforce": {
-			"step1": {
-				"role": "Primary Role",
-				"roleSelect": "Select Role",
-				"experience": "Years of Experience",
-				"experiencePlaceholder": "e.g. 5"
-			},
-			"step2": {
-				"id": "Upload Government ID",
-				"referenceEmail": "Reference Email",
-				"referenceEmailPlaceholder": "reference@example.com"
-			},
-			"step3": {
-				"training": "Role-Specific Training required for this step."
-			},
-			"step4": {
-				"kinName": "Next of Kin Name",
-				"kinNamePlaceholder": "Full Name",
-				"kinPhone": "Next of Kin Phone",
-				"kinPhonePlaceholder": "Phone Number"
-			},
-			"step5": {
-				"passport": "Passport Number",
-				"passportPlaceholder": "For cross-border deployment",
-				"currency": "Preferred Currency for Payroll",
-				"currencySelect": "Select Currency"
-			}
-		},
-		"vendor": {
-			"step1": {
-				"category": "Business Category",
-				"categorySelect": "Select Category",
-				"capacity": "Capacity / Fleet Size",
-				"capacityPlaceholder": "e.g. 3 Trucks"
-			},
-			"step2": {
-				"registration": "Upload CAC / Business Registration",
-				"tax": "Tax Clearance Certificate"
-			},
-			"step3": {
-				"bio": "Public Profile Description",
-				"bioPlaceholder": "Describe your services...",
-				"logo": "Upload Logo"
-			},
-			"step4": {
-				"value": "Estimated Equipment Value ($)",
-				"valuePlaceholder": "e.g. 150000",
-				"storage": "Primary Storage Location",
-				"storagePlaceholder": "City, Country"
-			},
-			"step5": {
-				"acknowledgement": "I acknowledge Working Capital Access is unlocked."
-			}
-		},
-		"talent": {
-			"step1": {
-				"agency": "Agency Name",
-				"agencyPlaceholder": "e.g. Star Management",
-				"roster": "Artists on Roster",
-				"rosterPlaceholder": "e.g. 5",
-				"territory": "Territory Preferences",
-				"territoryPlaceholder": "e.g. West Africa, EU"
-			},
-			"step2": {
-				"artist": "Artist Name",
-				"artistPlaceholder": "Select Artist...",
-				"rider": "Upload Technical Rider",
-				"feeSchedule": "Upload Fee Schedule"
-			},
-			"step3": {
-				"rate": "Proposed Block Rate ($)",
-				"ratePlaceholder": "e.g. $10,000 per stop",
-				"terms": "I accept the Ckrowd standard terms for performance contracts."
-			},
-			"step4": {
-				"terms": "I acknowledge the non-appearance terms embedded in my contract."
-			},
-			"step5": {
-				"bankName": "Agency Bank Name",
-				"bankNamePlaceholder": "e.g. Access Bank",
-				"accountNumber": "Account Number",
-				"accountNumberPlaceholder": "10 digits",
-				"routingCode": "Routing/Sort Code",
-				"routingCodePlaceholder": "Sort Code"
-			}
-		},
-		"validation": {
-			"required": "This field is required"
-		},
-		"roles": {
-			"sound": "Sound Engineer",
-			"light": "Lighting Tech",
-			"stage": "Stage Manager"
-		},
-		"categories": {
-			"equipment": "Equipment Supply",
-			"logistics": "Logistics",
-			"catering": "Catering"
-		}
-	},
-	"Metadata": {
-		"title": "Tourstack by Ckrowd",
-		"description": "Tourstack by Ckrowd connects artists, promoters, and financiers on a single high-performance stage."
-	}
+  "LandingPage": {
+    "hero": {
+      "imageAlt": "High-energy live concert crowd at night with vibrant stage lights and raised hands",
+      "badge": "Live Music Ecosystem",
+      "title": "Concert & Touring as a <spanTag>Service.</spanTag>",
+      "description": "TourStack by Ckrowd connects concert & festival promoters with artiste management companies. Plan live music with confidence — from discovery to execution.",
+      "ctaPrimary": "Browse Artistes & Tours",
+      "ctaSecondary": "Promoter Dashboard"
+    },
+    "analytics": {
+      "title": "Tour Pipeline Overview",
+      "active": "Active Tour Projects",
+      "review": "EOIs Under Review",
+      "approved": "Approved Tour Stops",
+      "promoters": "Promoters",
+      "markets": "Markets"
+    },
+    "why": {
+      "badge": "Why TourStack",
+      "title": "Built for the Touring Business",
+      "description": "A dedicated platform for the entire touring ecosystem — Promoters, Artiste Management, Service Providers, Banks, Insurance, and Workforce."
+    },
+    "WhyCkrowd": {
+      "centralized": {
+        "icon": "hub",
+        "title": "Centralized Touring Workflow",
+        "desc": "Manage every stage of tour planning in one place — from discovery to execution. No fragmented spreadsheets, no missed messages."
+      },
+      "matching": {
+        "icon": "temp_preferences_custom",
+        "title": "Smart Promoter–Artiste Matching",
+        "desc": "Rule-based matching connects promoters with artistes based on date availability, venue capacity, and budget alignment."
+      },
+      "dataDriven": {
+        "icon": "bar_chart",
+        "title": "Data-Driven Event Planning",
+        "desc": "Generate business summaries with estimated revenue, cost projections, and risk notes — structured for financiers from day one."
+      },
+      "financing": {
+        "icon": "account_balance",
+        "title": "Financing & Insurance Support",
+        "desc": "Track financing requirements, connect with capital partners, and unlock insurance backing to scale ambitious live experiences."
+      }
+    },
+    "promoters": {
+      "badge": "For Promoters",
+      "title": "Join the Pan-African Tour Circuit.",
+      "description": "Become part of a structured, continent-wide touring network. Discover top-tier artistes, submit formal Expressions of Interest, and access financing support to bring ambitious shows to life.",
+      "features": {
+        "stop": "Show interest in being part of a Tour Stop",
+        "discovery": "Discover and submit EOIs for top-tier artistes",
+        "financing": "State financing needs for your concert or festival",
+        "alignment": "Streamline planning and align with other Tour Promoters"
+      },
+      "cta": "Browse Artistes & Tours",
+      "imageAlt": "Music producer working on a sophisticated digital soundboard in an orange-lit studio"
+    },
+    "artists": {
+      "badge": "For Artists & Management",
+      "title": "Expand into New Markets.",
+      "description": "State your touring intent, get matched with serious promoters, and receive structured high-quality booking requests. Reduce friction and grow with confidence across new territories.",
+      "features": {
+        "intent": "State interest to tour and set your availability window",
+        "matching": "Get matched with verified, serious promoters",
+        "eoi": "Receive structured Expressions of Interest",
+        "alignment": "Align on tour dates and expand into new markets"
+      },
+      "cta": "Start Your Touring Journey",
+      "imageAlt": "Solo artist performing with intense emotion on a smoke-filled stage under a single bright spotlight"
+    },
+    "how": {
+      "badge": "Platform Workflow",
+      "title": "From Discovery to Execution",
+      "step": "Step {number}"
+    },
+    "HowItWorks": {
+      "announcement": {
+        "icon": "campaign",
+        "title": "Ckrowd Announces Tour & Artistes",
+        "desc": "Admin creates a Tour Project on TourStack — including artiste roster, fee range, availability dates, and technical requirements."
+      },
+      "submission": {
+        "icon": "send",
+        "title": "Promoter Submits Expression of Interest",
+        "desc": "Promoters browse available artistes and tours, then submit a formal EOI with their venue, date, budget, and funding model."
+      },
+      "matching": {
+        "icon": "manage_search",
+        "title": "Matching & Review",
+        "desc": "TourStack scores each EOI against artiste requirements. Ckrowd team reviews flagged matches and makes informed decisions."
+      },
+      "decision": {
+        "icon": "task_alt",
+        "title": "Report & Decision",
+        "desc": "The system generates a business summary — estimated revenue, costs, and risk notes — structured for financiers. Admin approves, rejects, or requests revision."
+      }
+    },
+    "cta": {
+      "title": "Ready to Take the Stage?",
+      "description": "Join TourStack and become part of the Pan-African touring ecosystem. Whether you're a promoter, artiste management company, or service provider — this is your platform.",
+      "ctaPromoter": "Get Started as a Promoter",
+      "ctaBrowse": "Browse Artistes & Tours",
+      "trustedBy": "Trusted by 500+ promoters across 24 markets."
+    }
+  },
+  "TopNav": {
+    "dashboard": "Dashboard",
+    "discovery": "Discovery",
+    "financing": "Financing",
+    "insurance": "Insurance",
+    "notifications": "Notifications",
+    "openNotifications": "Open notifications",
+    "closeNotifications": "Close notifications",
+    "openProfileMenu": "Open profile menu",
+    "closeProfileMenu": "Close profile menu",
+    "markAllAsRead": "Mark all as read",
+    "notificationsList": [
+      {
+        "title": "EOI Approved",
+        "body": "Aria Velvet — Accra, Ghana",
+        "time": "2h ago"
+      },
+      {
+        "title": "Revision Requested",
+        "body": "Frequency Shift — budget too low",
+        "time": "Yesterday"
+      },
+      {
+        "title": "EOI Submitted",
+        "body": "Vanguard Echo — pending review",
+        "time": "3 days ago"
+      }
+    ]
+  },
+  "LoginPage": {
+    "title": "Sign in",
+    "description": "Use your email and password to access your TourStack account.",
+    "email": "Email Address",
+    "password": "Password",
+    "emailPlaceholder": "you@yourcompany.com",
+    "passwordPlaceholder": "Your password",
+    "signIn": "Sign in",
+    "signingIn": "Signing in...",
+    "noAccount": "Don't have an account?",
+    "register": "Register",
+    "agreeTo": "By signing in you agree to our",
+    "terms": "Terms of Service",
+    "and": "and",
+    "privacy": "Privacy Policy",
+    "errorInvalid": "Invalid email or password",
+    "errorFailed": "Sign in failed",
+    "loading": "Loading session..."
+  },
+  "EOIPage": {
+    "stepper": {
+      "contact": "Contact",
+      "fit": "Fit",
+      "review": "Review"
+    },
+    "hero": {
+      "platform": "TourStack - Expression of Interest",
+      "title": "Apply for a live opportunity.",
+      "description": "Complete the short application below and submit it directly through the package apply endpoint."
+    },
+    "generalEoi": {
+      "name": "General Expression of Interest",
+      "genre": "All Genres",
+      "tourName": "General Application",
+      "markets": "Multiple Territories",
+      "fee_min": "TBD"
+    },
+    "loadError": "Unable to load this opportunity.",
+    "submitError": "Failed to submit application.",
+    "selectedOpportunity": "Selected opportunity",
+    "loadingOpportunity": "Loading opportunity...",
+    "form": {
+      "fullName": {
+        "label": "Full name",
+        "placeholder": "Amina Bello"
+      },
+      "email": {
+        "label": "Email address",
+        "placeholder": "you@company.com"
+      },
+      "company": {
+        "label": "Company or venue",
+        "placeholder": "Venue name or promoter brand"
+      },
+      "city": {
+        "label": "City / market",
+        "placeholder": "Lagos, Nairobi, Accra..."
+      },
+      "audience": {
+        "label": "Expected attendance",
+        "placeholder": "5,000"
+      },
+      "notes": {
+        "label": "Why this opportunity fits your venue",
+        "placeholder": "Tell the team about your venue, audience, and promotion plan."
+      }
+    },
+    "review": {
+      "title": "Review application",
+      "artist": "Artist",
+      "markets": "Markets",
+      "applicant": "Applicant",
+      "email": "Email",
+      "company": "Company / venue",
+      "city": "City / market",
+      "audience": "Expected attendance",
+      "notes": "Notes",
+      "estimatedAudience": "Estimated audience",
+      "disclaimer": "Submitting will send the application to the package endpoint using your current opportunity selection."
+    },
+    "actions": {
+      "back": "Back",
+      "cancel": "Cancel",
+      "submitting": "Submitting...",
+      "submit": "Submit application",
+      "continue": "Continue"
+    },
+    "success": {
+      "title": "EOI submitted.",
+      "description": "Your application for {artist} has been received. The Ckrowd team will review it and respond within 48 hours.",
+      "viewDashboard": "View dashboard",
+      "backToDiscovery": "Back to discovery"
+    }
+  },
+  "OnboardingPage": {
+    "shared": {
+      "optional": "optional"
+    },
+    "categoryStep": {
+      "title": "Select Stakeholder Category",
+      "description": "Choose the category that best describes the stakeholder you are onboarding. The form fields will adapt to your selection.",
+      "categories": {
+        "service": {
+          "label": "Service Provider",
+          "desc": "Venue operators, logistics companies, sound & lighting firms, catering, security, and other event service providers."
+        },
+        "workforce": {
+          "label": "Workforce",
+          "desc": "Stage managers, audio engineers, lighting designers, riggers, photographers, tour managers, and touring crew."
+        },
+        "artmgmt": {
+          "label": "Artist Management Company",
+          "desc": "Companies that represent and manage artists or bands seeking touring opportunities across new markets."
+        }
+      }
+    },
+    "serviceForm": {
+      "companyInfo": {
+        "title": "Company Information",
+        "companyName": {
+          "label": "Company / Organisation Name",
+          "placeholder": "e.g. Lagos Sound Systems Ltd"
+        },
+        "contactName": {
+          "label": "Primary Contact Person",
+          "placeholder": "e.g. Ade Okafor"
+        },
+        "email": {
+          "label": "Email Address",
+          "placeholder": "contact@company.com"
+        },
+        "phone": {
+          "label": "Phone Number",
+          "placeholder": "+234 800 000 0000"
+        },
+        "country": {
+          "label": "Country",
+          "placeholder": "e.g. Nigeria"
+        },
+        "city": {
+          "label": "City",
+          "placeholder": "e.g. Lagos"
+        },
+        "website": {
+          "label": "Website",
+          "placeholder": "https://yourcompany.com"
+        }
+      },
+      "experience": {
+        "title": "Services & Experience",
+        "serviceType": {
+          "label": "Primary Service Type"
+        },
+        "otherService": {
+          "label": "Specify your service",
+          "placeholder": "Describe your service"
+        },
+        "yearsOperation": {
+          "label": "Years in Operation",
+          "options": {
+            "lessThan1": "Less than 1 year",
+            "1to3": "1–3 years",
+            "4to7": "4–7 years",
+            "8plus": "8+ years"
+          }
+        },
+        "pastClients": {
+          "label": "Notable Past Clients / Events",
+          "placeholder": "List any notable artists, promoters, or events you have worked with..."
+        },
+        "certifications": {
+          "label": "Certifications, Licenses, or Affiliations",
+          "placeholder": "e.g. PSNC membership, ISO certification, safety licenses..."
+        }
+      },
+      "declaration": {
+        "title": "Declaration & Consent",
+        "clauses": {
+          "accuracy": "All information provided is accurate and complete to the best of our knowledge.",
+          "consent": "We consent to Tour Stack by Crowd holding and processing our data for partnership and deployment purposes.",
+          "misrepresentation": "We understand that misrepresentation may result in removal from the registry."
+        },
+        "representativeName": {
+          "label": "Authorised Representative Name",
+          "placeholder": "Full name"
+        },
+        "date": {
+          "label": "Date"
+        }
+      },
+      "serviceTypes": {
+        "venue": "Venue / Facilities",
+        "sound": "Sound & Audio",
+        "lighting": "Lighting & Staging",
+        "logistics": "Logistics & Transport",
+        "security": "Security",
+        "catering": "Catering & Hospitality",
+        "ticketing": "Ticketing & Box Office",
+        "marketing": "Marketing & PR",
+        "photography": "Photography / Videography",
+        "medical": "Medical / First Aid",
+        "generator": "Generator / Power",
+        "other": "Other"
+      }
+    },
+    "artMgmtForm": {
+      "companyInfo": {
+        "title": "Company Information",
+        "companyName": {
+          "label": "Company / Management Firm Name",
+          "placeholder": "e.g. Afrobeats Global Management"
+        },
+        "contactName": {
+          "label": "Primary Contact Person",
+          "placeholder": "e.g. Tunde Balogun"
+        },
+        "email": {
+          "label": "Email Address",
+          "placeholder": "contact@mgmt.com"
+        },
+        "phone": {
+          "label": "Phone Number",
+          "placeholder": "+234 800 000 0000"
+        },
+        "country": {
+          "label": "Country of Registration",
+          "placeholder": "e.g. Nigeria"
+        },
+        "city": {
+          "label": "City",
+          "placeholder": "e.g. Lagos"
+        },
+        "website": {
+          "label": "Website",
+          "placeholder": "https://yourmgmt.com"
+        },
+        "instagram": {
+          "label": "Instagram Handle",
+          "placeholder": "@yourmgmt"
+        }
+      },
+      "roster": {
+        "title": "Roster & Experience",
+        "yearsOperation": {
+          "label": "Years in Operation",
+          "options": {
+            "lessThan1": "Less than 1 year",
+            "1to3": "1–3 years",
+            "4to7": "4–7 years",
+            "8plus": "8+ years"
+          }
+        },
+        "rosterSize": {
+          "label": "Roster Size (Number of Acts Represented)",
+          "options": {
+            "1to2": "1–2 acts",
+            "3to5": "3–5 acts",
+            "6to10": "6–10 acts",
+            "11to20": "11–20 acts",
+            "20plus": "20+ acts"
+          }
+        },
+        "genres": {
+          "label": "Primary Genre(s)",
+          "placeholder": "e.g. Afrobeats, Hip-Hop, Afro-Soul, Highlife"
+        },
+        "artists": {
+          "label": "Artists / Acts Represented",
+          "placeholder": "List the main artists or acts you represent..."
+        },
+        "pastCollaborations": {
+          "label": "Past Tour Collaborations or Markets Toured",
+          "placeholder": "e.g. Nigeria, Ghana, UK, USA — collaborations with Coachella, Afronation..."
+        }
+      },
+      "declaration": {
+        "title": "Declaration & Consent",
+        "clauses": {
+          "accuracy": "All information provided is accurate and complete to the best of our knowledge.",
+          "consent": "We consent to Tour Stack by Crowd holding and processing our data for matching and deployment purposes.",
+          "misrepresentation": "We understand that misrepresentation may result in removal from the registry."
+        },
+        "representativeName": {
+          "label": "Authorised Representative Name",
+          "placeholder": "Full name"
+        },
+        "date": {
+          "label": "Date"
+        }
+      }
+    },
+    "directory": {
+      "categories": {
+        "service": "Service Provider",
+        "workforce": "Workforce",
+        "artmgmt": "Artist Mgmt Co"
+      },
+      "filters": {
+        "all": "All",
+        "service": "Service Providers",
+        "workforce": "Workforce",
+        "artmgmt": "Artist Mgmt"
+      },
+      "backToDirectory": "Back to Directory",
+      "details": {
+        "email": "Email",
+        "phone": "Phone",
+        "country": "Country",
+        "submitted": "Submitted"
+      },
+      "noEntries": {
+        "title": "No onboarded stakeholders yet.",
+        "description": "Use the \"Onboard Stakeholder\" tab to add the first entry."
+      },
+      "table": {
+        "name": "Name / Company",
+        "category": "Category",
+        "country": "Country",
+        "submitted": "Submitted",
+        "view": "View"
+      }
+    },
+    "header": {
+      "platform": "Platform Management",
+      "title": "Onboarding",
+      "description": "Register new stakeholders or browse the existing directory."
+    },
+    "tabs": {
+      "onboard": "Onboard Stakeholder",
+      "directory": "Directory"
+    },
+    "workforceNotice": {
+      "title": "Workforce registration is handled separately",
+      "description": "Crew members register via the dedicated Workforce portal which includes the WCS (Workforce Capability Score) system.",
+      "link": "Go to Workforce Registration"
+    },
+    "steps": {
+      "category": "Category",
+      "company": "Company",
+      "services": "Services",
+      "roster": "Roster",
+      "declaration": "Declaration",
+      "details": "Details",
+      "review": "Review",
+      "submit": "Submit"
+    },
+    "actions": {
+      "back": "Back",
+      "continue": "Continue",
+      "submit": "Submit Onboarding"
+    },
+    "success": {
+      "title": "Stakeholder Onboarded!",
+      "description": "The entry has been saved to the directory. You can view it under the Directory tab.",
+      "viewDirectory": "View Directory",
+      "onboardAnother": "Onboard Another"
+    }
+  },
+  "StakeholdersPage": {
+    "header": {
+      "platform": "Onboarding Links",
+      "title": "Invite Stakeholders",
+      "description": "Create and manage secure onboarding links for services, workforce, and artist management partners.",
+      "export": "Export CSV",
+      "exporting": "Exporting…"
+    },
+    "createLink": {
+      "title": "Create New Link",
+      "category": "Category",
+      "label": {
+        "title": "Label",
+        "placeholder": "e.g. June Vendor Wave"
+      },
+      "expires": "Expires",
+      "submit": "Create Link",
+      "creating": "Creating..."
+    },
+    "existingLinks": {
+      "title": "Existing Links",
+      "loading": "Loading links...",
+      "error": "Unable to load links.",
+      "noLinks": "No links created yet.",
+      "untitled": "Untitled link"
+    },
+    "categories": {
+      "service": "Service Provider",
+      "workforce": "Workforce",
+      "artmgmt": "Artist Management"
+    },
+    "status": {
+      "active": "active",
+      "inactive": "inactive"
+    },
+    "actions": {
+      "copy": "Copy",
+      "revoke": "Revoke"
+    }
+  },
+  "WorkforcePage": {
+    "header": {
+      "platform": "CTaaS — Workforce Registry",
+      "title": "Workforce Registration",
+      "description": "Register as a verified CTaaS crew member. Your answers are scored instantly to determine your Workforce Capability Score and tier placement."
+    },
+    "timer": {
+      "completion": "Estimated completion: 3 minutes",
+      "process": "Submitted → Scored → Tiered"
+    },
+    "steps": {
+      "personal": "Personal",
+      "role": "Role",
+      "touring": "Touring",
+      "credentials": "Credentials",
+      "wcs": "WCS Score"
+    },
+    "personal": {
+      "title": "Personal Information",
+      "fullName": {
+        "label": "Full Name",
+        "placeholder": "e.g. Kofi Mensah"
+      },
+      "preferredName": {
+        "label": "Preferred Name / Stage Name",
+        "placeholder": "e.g. DJ Phantom"
+      },
+      "phone": {
+        "label": "Phone Number",
+        "placeholder": "+234 800 000 0000"
+      },
+      "whatsapp": {
+        "label": "WhatsApp Number (if different)",
+        "placeholder": "+233 20 000 0000"
+      },
+      "email": {
+        "label": "Email Address",
+        "placeholder": "yourname@email.com"
+      },
+      "city": {
+        "label": "City / Base Location",
+        "placeholder": "e.g. Lagos"
+      },
+      "country": {
+        "label": "Country",
+        "placeholder": "e.g. Nigeria"
+      },
+      "nationality": {
+        "label": "Nationality",
+        "placeholder": "e.g. Ghanaian"
+      },
+      "nationalId": {
+        "label": "National ID / Passport Number",
+        "placeholder": "Document number only",
+        "hint": "Required for cross-border eligibility — document number only."
+      }
+    },
+    "role": {
+      "title": "Role & Specialisation",
+      "primaryRole": {
+        "label": "Primary Role / Job Title",
+        "hint": "(select all that apply)"
+      },
+      "otherRole": {
+        "label": "Specify Other Role",
+        "placeholder": "Job title"
+      },
+      "yearsExperience": {
+        "label": "Years of Experience in this role",
+        "options": {
+          "lessThan1": "Less than 1 year",
+          "1to3": "1–3 years",
+          "4to7": "4–7 years",
+          "8to12": "8–12 years",
+          "13plus": "13+ years"
+        }
+      },
+      "largestEvent": {
+        "label": "Largest Event / Show Managed (Attendance)",
+        "options": {
+          "under500": "Under 500",
+          "500to2000": "500–2,000",
+          "2001to10000": "2,001–10,000",
+          "10001to50000": "10,001–50,000",
+          "50000plus": "50,000+"
+        }
+      }
+    },
+    "touring": {
+      "title": "Touring & Deployment",
+      "availability": {
+        "label": "Touring Availability",
+        "options": {
+          "move": "Yes, I can move with the tour",
+          "flexible": "Flexible — depends on dates",
+          "local": "Local crew only (single city)"
+        }
+      },
+      "deploy48h": {
+        "label": "Can you deploy within 48 hours notice?",
+        "options": {
+          "yes": "Yes",
+          "no": "No"
+        }
+      },
+      "passport": {
+        "label": "Do you have a valid passport for travel?",
+        "options": {
+          "yes": "Yes — currently valid",
+          "no": "No / Expired"
+        }
+      },
+      "markets": {
+        "label": "Markets Worked (where you have deployed before)",
+        "placeholder": "e.g. Nigeria, Ghana, South Africa, UK..."
+      },
+      "dayRate": {
+        "label": "Standard Individual Day Rate (USD)",
+        "placeholder": "e.g. 150",
+        "hint": "Provide a base figure — actual rates may vary per package."
+      }
+    },
+    "credentials": {
+      "title": "Credentials & Verification",
+      "referee": {
+        "label": "Industry Referee",
+        "name": {
+          "label": "Referee Name",
+          "placeholder": "Contact person"
+        },
+        "company": {
+          "label": "Referee Company",
+          "placeholder": "Production firm or promoter"
+        },
+        "contact": {
+          "label": "Referee Contact (WhatsApp/Email)",
+          "placeholder": "+234..."
+        },
+        "relationship": {
+          "label": "Relationship",
+          "placeholder": "e.g. Production Manager on [Tour Name]"
+        }
+      },
+      "portfolio": {
+        "label": "Portfolio / Showreel / Industry Certificate",
+        "placeholder": "Google Drive link, LinkedIn, or Website..."
+      },
+      "equipment": {
+        "label": "Tools / Equipment You Own (if any)",
+        "placeholder": "e.g. Audio interface, measurement mic, rigging kit..."
+      }
+    },
+    "declaration": {
+      "title": "Declaration",
+      "clauses": {
+        "accuracy": "I declare that the information provided is true and verifiable.",
+        "consent": "I consent to my WCS score and profile being shared with promoters and touring parties.",
+        "misrepresentation": "I understand that misrepresentation of experience results in a permanent ban."
+      },
+      "name": {
+        "label": "Full Legal Name (Electronic Signature)",
+        "placeholder": "Type full name"
+      },
+      "date": {
+        "label": "Date"
+      }
+    },
+    "score": {
+      "wcs": "WCS",
+      "tier": "Tier",
+      "calculating": "Calculating...",
+      "liveScore": "Live Score",
+      "breakdown": {
+        "base": "Base Score — {pts} pts",
+        "bonus": "Bonus Points — {pts} pts",
+        "experience": "Experience Level",
+        "scale": "Event Scale",
+        "availability": "Touring Availability"
+      }
+    },
+    "matrix": {
+      "title": "View Full Tier Assignment Matrix",
+      "tier": "Tier {n}"
+    },
+    "info": {
+      "scoring": {
+        "title": "Instant Scoring",
+        "body": "Your WCS score is calculated in real-time as you complete the form."
+      },
+      "rate": {
+        "title": "Locked Day Rate",
+        "body": "Your declared rate is locked in your crew profile upon certification."
+      },
+      "insurance": {
+        "title": "Insurance Included",
+        "body": "Tier 2+ crew receive group insurance coverage via SanlamAllianz."
+      }
+    },
+    "success": {
+      "title": "Registration Submitted!",
+      "description": "Your WCS score has been calculated. The Ckrowd team will verify your credentials and confirm your tier within 48 hours via WhatsApp or email.",
+      "viewDashboard": "View Dashboard",
+      "browseTours": "Browse Tours",
+      "enquiries": "Enquiries",
+      "ayaPilot": "Aya Nakamura Pilot"
+    },
+    "roles": {
+      "stageManager": "Stage Manager",
+      "productionManager": "Production Manager",
+      "tourManager": "Tour Manager",
+      "fohEngineer": "FOH Engineer",
+      "monitorEngineer": "Monitor Engineer",
+      "lightingDesigner": "Lighting Designer / Operator",
+      "rigger": "Rigger",
+      "backlineTech": "Backline Tech",
+      "pyrotechnics": "Pyrotechnics",
+      "logisticsCoordinator": "Logistics Coordinator",
+      "securityLead": "Security Lead",
+      "merchandiseManager": "Merchandise Manager",
+      "hospitalityManager": "Hospitality / Rider Manager",
+      "videoTech": "Video / LED Tech",
+      "photographer": "Photographer / Videographer",
+      "other": "Other"
+    },
+    "tiers": {
+      "tier1": {
+        "label": "Registered Worker",
+        "range": "0 – 50",
+        "perks": {
+          "database": "Database entry and profile created",
+          "noDeployment": "No tour deployment at this stage",
+          "training": "Training resources and upskilling pathways offered",
+          "assessment": "Eligible for re-assessment after 90 days"
+        }
+      },
+      "tier2": {
+        "label": "Certified Local Crew",
+        "range": "51 – 70",
+        "perks": {
+          "local": "Single-city tour deployment eligibility",
+          "payment": "Access Bank payment onboarding & day rate locked",
+          "insurance": "Group insurance coverage via SanlamAllianz"
+        },
+        "aya": "Eligible as local crew (per city)"
+      },
+      "tier3": {
+        "label": "Certified Touring Professional",
+        "range": "71 – 85",
+        "perks": {
+          "cluster": "Multi-city cluster deployment eligibility",
+          "preferred": "Preferred crew status — first call for regional tours",
+          "terms": "7-day payment terms post-tour completion",
+          "perDiem": "Cross-border per diem advance provided"
+        },
+        "aya": "Eligible for touring party (moves with tour)"
+      },
+      "tier4": {
+        "label": "CTaaS Master Technician",
+        "range": "86 – 100+",
+        "perks": {
+          "panAfrican": "Pan-African tour deployment eligibility",
+          "lead": "Lead role / department head assignment",
+          "terms": "3-day payment terms post-engagement",
+          "insurance": "Equipment and tools insurance coverage included",
+          "mentorship": "Training mentorship role — earns income from crew development"
+        },
+        "aya": "Eligible as department lead"
+      }
+    },
+    "bonus": {
+      "deployment48h": "48-hour deployment availability",
+      "passport": "Valid cross-border travel document",
+      "reference": "Verified reference from a Certified Promoter",
+      "portfolio": "Portfolio, showreel, or industry certificate"
+    },
+    "actions": {
+      "back": "Back",
+      "continue": "Continue",
+      "saveDraft": "Save Draft",
+      "submitting": "Submitting...",
+      "submit": "Submit Registration"
+    },
+    "shared": {
+      "basePoints": "base points",
+      "bonusPointsValue": "+{pts} bonus pts",
+      "bonusPointsUnlocked": "+{pts} bonus points unlocked",
+      "optional": "optional"
+    },
+    "errors": {
+      "failed": "Submission failed. Please try again."
+    }
+  },
+  "ProfilePage": {
+    "promoterPortal": "Promoter Portal",
+    "title": "Profile",
+    "description": "Manage your company information and public profile.",
+    "companyInfo": {
+      "title": "Company Information",
+      "fields": {
+        "companyName": "Company Name",
+        "tradingName": "Trading Name",
+        "contactPerson": "Contact Person",
+        "jobTitle": "Job Title",
+        "email": "Email Address",
+        "phone": "Phone Number",
+        "country": "Country",
+        "city": "City"
+      }
+    },
+    "publicProfile": {
+      "title": "Public Profile",
+      "description": "This information appears on your promoter profile visible to artiste managers.",
+      "fields": {
+        "bio": "Bio",
+        "website": "Website",
+        "instagram": "Social Handle (Instagram)"
+      }
+    },
+    "actions": {
+      "save": "Save Changes",
+      "saving": "Saving..."
+    }
+  },
+  "SettingsPage": {
+    "promoterPortal": "Promoter Portal",
+    "title": "Settings",
+    "description": "Manage your account, venues, and preferences.",
+    "tabs": {
+      "venue": "Venue",
+      "notifications": "Notifications",
+      "billing": "Billing",
+      "security": "Security"
+    },
+    "venueTab": {
+      "myVenues": {
+        "title": "My Venues",
+        "description": "Venues registered under your promoter account.",
+        "statuses": {
+          "verified": "Verified",
+          "pending": "Pending"
+        },
+        "actions": {
+          "edit": "Edit",
+          "addNew": "Add New Venue"
+        }
+      },
+      "venueDetails": {
+        "title": "Venue Details",
+        "description": "Update the primary venue on your account.",
+        "fields": {
+          "name": "Venue Name",
+          "type": "Venue Type",
+          "city": "City",
+          "country": "Country",
+          "seatedCap": "Seated Capacity",
+          "standingCap": "Standing Capacity",
+          "address": "Street Address",
+          "maps": "Google Maps URL"
+        },
+        "actions": {
+          "save": "Save Venue"
+        }
+      }
+    },
+    "notificationsTab": {
+      "email": {
+        "title": "Email Notifications",
+        "toggles": {
+          "eoiUpdates": {
+            "label": "EOI Status Updates",
+            "description": "When your EOI is approved, rejected, or needs revision"
+          },
+          "announcements": {
+            "label": "New Tour Announcements",
+            "description": "When Ckrowd announces a new artiste or tour project"
+          },
+          "financing": {
+            "label": "Financing Decisions",
+            "description": "When your financing application is reviewed"
+          },
+          "reminders": {
+            "label": "Show Reminders",
+            "description": "7-day and 24-hour reminders before your confirmed shows"
+          },
+          "settlement": {
+            "label": "Settlement Notifications",
+            "description": "When a post-show financial settlement is ready"
+          },
+          "platform": {
+            "label": "Platform Updates",
+            "description": "Product announcements and feature releases"
+          }
+        }
+      },
+      "inApp": {
+        "title": "In-App Notifications",
+        "toggles": {
+          "eoi": "EOI Activity",
+          "messages": "Message Alerts",
+          "milestones": "Milestone Reminders",
+          "tips": "Promoter Tips & Insights"
+        }
+      },
+      "digest": {
+        "title": "Digest Frequency",
+        "options": {
+          "realTime": "Real-time",
+          "daily": "Daily Digest",
+          "weekly": "Weekly Summary"
+        }
+      },
+      "actions": {
+        "save": "Save Preferences"
+      },
+      "newsletter": {
+        "title": "Newsletter",
+        "label": "Subscribe to newsletter",
+        "description": "Receive product updates, promoter insights, and tour announcements.",
+        "subscribing": "Subscribing...",
+        "unsubscribing": "Unsubscribing..."
+      }
+    },
+    "billingTab": {
+      "currentPlan": {
+        "title": "Current Plan",
+        "proLabel": "Global Stage Pro",
+        "proDescription": "Unlimited EOIs · Priority review · Financing access",
+        "perMonth": "/ month",
+        "actions": {
+          "change": "Change Plan",
+          "cancel": "Cancel Subscription"
+        }
+      },
+      "paymentMethod": {
+        "title": "Payment Method",
+        "expires": "Expires",
+        "default": "Default",
+        "actions": {
+          "add": "Add Payment Method"
+        }
+      },
+      "history": {
+        "title": "Billing History",
+        "table": {
+          "date": "Date",
+          "description": "Description",
+          "amount": "Amount",
+          "status": "Status"
+        }
+      }
+    },
+    "securityTab": {
+      "password": {
+        "title": "Change Password",
+        "fields": {
+          "current": "Current Password",
+          "new": "New Password",
+          "confirm": "Confirm New Password"
+        },
+        "hint": "Minimum 8 characters with at least one number and symbol.",
+        "actions": {
+          "update": "Update Password"
+        }
+      },
+      "twoFactor": {
+        "title": "Two-Factor Authentication",
+        "description": "Add an extra layer of security to your account.",
+        "authenticator": "Authenticator App",
+        "notConfigured": "Not configured",
+        "actions": {
+          "enable": "Enable",
+          "disable": "Disable"
+        },
+        "configured": "Configured",
+        "setup": {
+          "title": "Set up two-factor authentication",
+          "instruction": "Scan the QR code with your authenticator app, then enter the 6-digit code to confirm.",
+          "codePlaceholder": "Enter 6-digit code",
+          "actions": {
+            "verify": "Verify & Enable",
+            "cancel": "Cancel"
+          }
+        }
+      },
+      "sessions": {
+        "title": "Active Sessions",
+        "description": "Devices currently signed in to your account.",
+        "thisDevice": "This device",
+        "actions": {
+          "revoke": "Revoke",
+          "revokeOthers": "Sign out all other devices"
+        }
+      },
+      "dangerZone": {
+        "title": "Danger Zone",
+        "delete": {
+          "title": "Delete Account",
+          "description": "Permanently removes all your data. This cannot be undone."
+        },
+        "actions": {
+          "delete": "Delete"
+        },
+        "confirm": {
+          "instruction": "Type your email address to confirm. This permanently deletes all your data.",
+          "emailPlaceholder": "Your email address",
+          "actions": {
+            "cancel": "Cancel",
+            "confirm": "Delete my account"
+          }
+        }
+      }
+    }
+  },
+  "ContactPage": {
+    "getInTouch": "Get in Touch",
+    "title": "Contact Us",
+    "description": "Have a question, need support, or want to partner with TourStack by Crowd? Reach out using the details below.",
+    "items": {
+      "general": "General Enquiries",
+      "workforce": "Workforce Registry",
+      "financing": "Financing & Partnerships",
+      "legal": "Legal & Privacy"
+    },
+    "location": {
+      "title": "Ckrowd Africa Technologies",
+      "subtitle": "Pan-African Live Events Platform"
+    }
+  },
+  "ApplyPage": {
+    "promoterOnboarding": "Ckrowd — Promoter Onboarding",
+    "title": "Promoter Intake Form",
+    "description": "Apply to become a verified Ckrowd promoter and unlock access to Pan-African tour stops, artist partnerships, and financing support.",
+    "steps": {
+      "basic": "Basic Info",
+      "experience": "Experience",
+      "gate": "Gate Check",
+      "credibility": "Credibility",
+      "intent": "Intent"
+    },
+    "sections": {
+      "basic": {
+        "title": "Basic Information",
+        "fields": {
+          "fullName": "Full Name",
+          "fullNamePlaceholder": "e.g. Amara Osei",
+          "company": "Company / Brand Name",
+          "companyPlaceholder": "e.g. Osei Live Events",
+          "phone": "Phone Number (WhatsApp preferred)",
+          "phonePlaceholder": "+234 800 000 0000",
+          "email": "Email Address",
+          "emailPlaceholder": "you@example.com",
+          "cityCountry": "City & Country",
+          "cityCountryPlaceholder": "e.g. Accra, Ghana"
+        }
+      },
+      "experience": {
+        "title": "Experience Snapshot",
+        "fields": {
+          "years": "Years of Promoting Experience",
+          "events": "Events Organized in the Last 12 Months",
+          "crowd": "Largest Crowd Successfully Hosted",
+          "artistLevel": "Artist Level Worked With",
+          "artistLevelHint": "(select all that apply)"
+        },
+        "options": {
+          "years": [
+            "0–1 years",
+            "2–3 years",
+            "4–6 years",
+            "7–10 years",
+            "10+ years"
+          ],
+          "events": [
+            "0–2",
+            "3–5",
+            "6–10",
+            "11–20",
+            "20+"
+          ],
+          "crowd": [
+            "Under 1,000",
+            "1,000–3,000",
+            "3,000–7,000",
+            "7,000–15,000",
+            "15,000+"
+          ],
+          "levels": [
+            "Emerging/Local",
+            "Mid-tier National",
+            "Top-tier National",
+            "International"
+          ]
+        }
+      },
+      "gate": {
+        "title": "Gate Check — Aya Pilot Eligibility",
+        "description": "The Aya Pilot is reserved for promoters with demonstrated large-venue experience. This gate check determines your eligibility tier.",
+        "question": "Have you ever executed an event in a 10,000+ capacity venue?",
+        "uploadTitle": "Upload Proof of Large Venue Event",
+        "uploadDesc": "Flyer, ticket link screenshot, video, or media coverage",
+        "uploadLimit": "PNG, JPG, MP4, or PDF — max 20MB",
+        "ayaEligible": "Aya Pilot Tier Unlocked",
+        "ayaEligibleDesc": "Your profile will be flagged for priority review and access to Aya Pilot features, including premium tour allocations and dedicated support.",
+        "standardTier": "Standard Tier",
+        "standardTierDesc": "You'll be reviewed for our standard promoter program. As you build your track record with Ckrowd, you can unlock higher tiers.",
+        "clickToReplace": "Click to replace"
+      },
+      "credibility": {
+        "title": "Credibility Signals",
+        "pastLinks": "Past Event Links (at least one)",
+        "placeholders": {
+          "instagram": "Instagram — https://instagram.com/your_handle",
+          "twitter": "Twitter / X — https://x.com/your_handle",
+          "youtube": "YouTube / TikTok — https://youtube.com/your_channel",
+          "ticketing": "Ticketing Links — https://tickets.example.com/your_event"
+        },
+        "business": "Business Credentials",
+        "fields": {
+          "registered": "Registered Business",
+          "bank": "Active Bank Account",
+          "sponsors": "Existing Brand Sponsors"
+        }
+      },
+      "intent": {
+        "title": "Intent & Budget",
+        "question": "What is your primary intent for using Ckrowd?",
+        "options": [
+          "Artist Discovery",
+          "Tour Stop Management",
+          "Financing / Grants",
+          "Workforce / Crewing",
+          "Sponsorship Support"
+        ],
+        "budget": "Estimated Budget for your next major event (USD)",
+        "budgetPlaceholder": "e.g. 50,000"
+      },
+      "review": {
+        "title": "Review & Submit",
+        "description": "Please review your details before submitting. Incomplete or inaccurate profiles may delay verification."
+      }
+    },
+    "success": {
+      "title": "Application Received!",
+      "description": "Your promoter intake form has been submitted. The Ckrowd team will review your application and respond within 48 hours via email or WhatsApp.",
+      "aya": "Aya Pilot Eligible"
+    },
+    "actions": {
+      "back": "Back",
+      "continue": "Continue",
+      "submit": "Submit Application",
+      "submitting": "Submitting Application...",
+      "dashboard": "View Dashboard",
+      "discovery": "Browse Tours"
+    }
+  },
+  "CrewPage": {
+    "registry": "CTaaS — Workforce Registry",
+    "title": "Crew Registration",
+    "description": "Register as a verified CTaaS crew member. Your answers are scored instantly to determine your Workforce Capability Score and tier placement.",
+    "steps": {
+      "personal": "Personal",
+      "role": "Role",
+      "touring": "Touring",
+      "credentials": "Credentials",
+      "wcs": "WCS Score"
+    },
+    "roles": {
+      "stageManager": "Stage Manager",
+      "productionManager": "Production Manager",
+      "tourManager": "Tour Manager",
+      "fohEngineer": "FOH Engineer",
+      "monitorEngineer": "Monitor Engineer",
+      "lightingDesigner": "Lighting Designer / Operator",
+      "rigger": "Rigger",
+      "backlineTech": "Backline Tech",
+      "pyrotechnics": "Pyrotechnics",
+      "logisticsCoordinator": "Logistics Coordinator",
+      "securityLead": "Security Lead",
+      "merchandiseManager": "Merchandise Manager",
+      "hospitalityManager": "Hospitality / Rider Manager",
+      "videoTech": "Video / LED Tech",
+      "photographer": "Photographer / Videographer",
+      "other": "Other"
+    },
+    "tiers": {
+      "tier1": {
+        "label": "Registered Worker",
+        "range": "0 – 50",
+        "perks": {
+          "database": "Database entry and profile created",
+          "noDeployment": "No tour deployment at this stage",
+          "training": "Training resources and upskilling pathways offered",
+          "assessment": "Eligible for re-assessment after 90 days"
+        }
+      },
+      "tier2": {
+        "label": "Certified Local Crew",
+        "range": "51 – 70",
+        "perks": {
+          "local": "Single-city tour deployment eligibility",
+          "payment": "Access Bank payment onboarding & day rate locked",
+          "insurance": "Group insurance coverage via SanlamAllianz"
+        },
+        "aya": "Eligible as local crew (per city)"
+      },
+      "tier3": {
+        "label": "Certified Touring Professional",
+        "range": "71 – 85",
+        "perks": {
+          "cluster": "Multi-city cluster deployment eligibility",
+          "preferred": "Preferred crew status — first call for regional tours",
+          "terms": "7-day payment terms post-tour completion",
+          "perDiem": "Cross-border per diem advance provided"
+        },
+        "aya": "Eligible for touring party (moves with tour)"
+      },
+      "tier4": {
+        "label": "CTaaS Master Technician",
+        "range": "86 – 100+",
+        "perks": {
+          "panAfrican": "Pan-African tour deployment eligibility",
+          "leadRole": "Lead role / department head assignment",
+          "fastTerms": "3-day payment terms post-engagement",
+          "equipmentInsurance": "Equipment and tools insurance coverage included",
+          "mentorship": "Training mentorship role — earns income from crew development"
+        },
+        "aya": "Eligible as department lead"
+      }
+    },
+    "sections": {
+      "personal": {
+        "title": "Personal Information",
+        "fields": {
+          "fullName": "Full Name",
+          "fullNamePlaceholder": "e.g. Kofi Mensah",
+          "preferredName": "Preferred Name / Stage Name",
+          "preferredNamePlaceholder": "e.g. DJ Phantom",
+          "phone": "Phone Number",
+          "phonePlaceholder": "+234 800 000 0000",
+          "whatsapp": "WhatsApp Number (if different)",
+          "whatsappPlaceholder": "+233 20 000 0000",
+          "email": "Email Address",
+          "emailPlaceholder": "yourname@email.com",
+          "city": "City / Base Location",
+          "cityPlaceholder": "e.g. Lagos",
+          "country": "Country",
+          "countryPlaceholder": "e.g. Nigeria",
+          "nationality": "Nationality",
+          "nationalityPlaceholder": "e.g. Ghanaian",
+          "nationalId": "National ID / Passport Number",
+          "nationalIdPlaceholder": "Document number only",
+          "nationalIdHint": "Required for cross-border eligibility — document number only."
+        }
+      },
+      "role": {
+        "title": "Role & Specialisation",
+        "fields": {
+          "primaryRole": "Primary Role / Job Title",
+          "primaryRoleHint": "(select all that apply)",
+          "otherRole": "If 'Other', please specify"
+        }
+      },
+      "touring": {
+        "title": "Touring & Scale",
+        "fields": {
+          "yearsExp": "Years of Professional Industry Experience",
+          "largestEvent": "Largest Event / Crowd Size Worked",
+          "tourAvailability": "Touring Availability",
+          "deploy48h": "Can you deploy to a tour stop with 48 hours notice?",
+          "passport": "Do you hold a valid cross-border travel document?"
+        },
+        "options": {
+          "years": [
+            "Less than 1 year",
+            "1–3 years",
+            "4–7 years",
+            "8–12 years",
+            "13+ years"
+          ],
+          "scale": [
+            "Under 500",
+            "500–2,000",
+            "2,001–10,000",
+            "10,001–50,000",
+            "50,000+"
+          ],
+          "availability": [
+            "Yes, I can move with the tour",
+            "Flexible — depends on dates",
+            "Local crew only (single city)"
+          ],
+          "deploy48h": [
+            "Yes",
+            "No"
+          ],
+          "passport": [
+            "Yes — currently valid",
+            "No — expired or none"
+          ]
+        }
+      },
+      "credentials": {
+        "title": "Credentials & References",
+        "fields": {
+          "markets": "Which markets have you worked in? (City/Country)",
+          "marketsPlaceholder": "e.g. Accra, Lagos, Nairobi",
+          "dayRate": "Average Professional Day Rate (USD)",
+          "dayRatePlaceholder": "e.g. 150",
+          "refereeName": "Referee Name",
+          "refereeCompany": "Referee Company / Event",
+          "refereeContact": "Referee WhatsApp / Email",
+          "refereeRelationship": "Your Relationship to Referee",
+          "portfolio": "Portfolio / Showreel / Certificate Links",
+          "portfolioPlaceholder": "Links to website, drive, or LinkedIn",
+          "equipment": "What professional tools/equipment do you own?",
+          "equipmentPlaceholder": "List key gear e.g. Console, Camera, Riggings"
+        }
+      },
+      "wcs": {
+        "title": "WCS Score",
+        "baseScore": "Base Score",
+        "bonusScore": "Bonus Score",
+        "totalScore": "Total Score",
+        "maxScore": "Max Score",
+        "bonuses": {
+          "title": "Bonus Factors",
+          "deployment": "48-hour deployment availability",
+          "passport": "Valid cross-border travel document",
+          "reference": "Verified reference from a Certified Promoter",
+          "portfolio": "Portfolio, showreel, or industry certificate"
+        },
+        "declaration": {
+          "title": "Declaration",
+          "text": "I certify that the information provided is true and accurate. I understand that CTaaS verified status is subject to credential verification and can be revoked if false information is provided.",
+          "name": "Full Name for Signature",
+          "date": "Date"
+        }
+      }
+    },
+    "success": {
+      "title": "Registration Submitted!",
+      "description": "Your WCS score has been calculated. The Ckrowd team will verify your credentials and confirm your tier within 48 hours via WhatsApp or email.",
+      "aya": "Aya Nakamura Pilot"
+    },
+    "actions": {
+      "back": "Back",
+      "continue": "Continue",
+      "submit": "Submit Registration",
+      "submitting": "Submitting...",
+      "dashboard": "View Dashboard",
+      "discovery": "Browse Tours"
+    }
+  },
+  "InsurancePage": {
+    "hub": "TourStack · Insurance Hub",
+    "hero": {
+      "title": "Insurance for <spanHighlight>Every Role.</spanHighlight><br></br>Built Into the Pipeline.",
+      "description": "SanlamAllianz-powered coverage embedded in the CTaaS certification pipeline — activating automatically as you onboard.",
+      "startOnboarding": "Start Onboarding",
+      "viewProducts": "View Products"
+    },
+    "productTags": {
+      "event": "EVENT INSURANCE",
+      "highest": "HIGHEST VALUE",
+      "sme": "SME INSURANCE",
+      "group": "GROUP INSURANCE",
+      "specialty": "SPECIALTY LINES",
+      "embedded": "EMBEDDED"
+    },
+    "stats": {
+      "portfolio": "Insurable Portfolio",
+      "markets": "SanlamAllianz Markets",
+      "lines": "Coverage Lines",
+      "roles": "Certified Roles",
+      "values": {
+        "portfolio": "$400M–600M",
+        "markets": "27",
+        "lines": "6",
+        "roles": "4"
+      }
+    },
+    "tabs": {
+      "overview": "Ecosystem Overview",
+      "onboarding": "Onboarding Flow",
+      "products": "Insurance Products",
+      "profile": "My Insurance Profile"
+    },
+    "overview": {
+      "pipelineTitle": "The Certification Pipeline",
+      "stakeholdersTitle": "Stakeholder Profiles",
+      "productsTitle": "Insurance Product Suite",
+      "cta": {
+        "title": "Ready to activate your coverage?",
+        "description": "Complete CTaaS certification and insurance activates automatically.",
+        "button": "Start Onboarding"
+      }
+    },
+    "onboarding": {
+      "selectRole": "Select your role",
+      "partners": "Insurance Partners",
+      "partnersList": [
+        {
+          "name": "SanlamAllianz Nigeria",
+          "sub": "Pan-Africa · All Insurance Lines"
+        },
+        {
+          "name": "Access Bank Plc",
+          "sub": "Pan-Africa · Tour Finance Facility"
+        },
+        {
+          "name": "PAPSS Network",
+          "sub": "Pan-Africa · Payment Rails"
+        }
+      ],
+      "step": "Step {current} of {total}",
+      "activates": {
+        "title": "Insurance Activates at This Step",
+        "description": "SanlamAllianz coverage activates automatically upon certification completion. No separate application required."
+      },
+      "finance": {
+        "title": "Finance Products Unlocked",
+        "description": "Tour finance facilities are now available via Access Bank. Apply directly through the Financing tab."
+      },
+      "actions": {
+        "previous": "Previous",
+        "continue": "Continue → Step {next}",
+        "complete": "Complete — View Coverage"
+      },
+      "progress": "Onboarding Progress",
+      "progressDetail": "{current} of {total} steps completed"
+    },
+    "products": {
+      "apply": "Apply via EOI",
+      "underwriter": {
+        "title": "Insurance Underwriter",
+        "description": "Pan-African insurance leader. 27 markets. All product lines underwritten and managed in-partnership with Ckrowd.",
+        "portfolio": "Insurable Portfolio",
+        "scale": "at 5-year scale",
+        "brand": "SanlamAllianz",
+        "portfolioValue": "$600M"
+      }
+    },
+    "profile": {
+      "certification": "Certification Pathway",
+      "status": {
+        "complete": "COMPLETE",
+        "pending": "PENDING"
+      },
+      "financeTitle": "Available Finance Products",
+      "coverageTitle": "Your Coverage Profile",
+      "tableLabels": {
+        "premium": "Premium",
+        "term": "Term",
+        "amount": "Amount",
+        "cost": "Cost"
+      },
+      "cta": {
+        "title": "Complete certification to activate coverage",
+        "description": "Insurance products are embedded in the pipeline. No separate application required.",
+        "button": "CONTINUE ONBOARDING"
+      },
+      "bankName": "ACCESS BANK"
+    },
+    "faq": {
+      "title": "Frequently Asked Questions",
+      "items": [
+        {
+          "q": "Do I need to be certified before insurance activates?",
+          "a": "Yes. Insurance coverage activates automatically at Step 4 of the CTaaS certification pipeline. No separate insurance application is required."
+        },
+        {
+          "q": "Can I apply for finance before my EOI is approved?",
+          "a": "You can start the process, but finance eligibility is unlocked at Step 5 — after certification and bank onboarding are complete."
+        },
+        {
+          "q": "What happens if the event is cancelled?",
+          "a": "Promoter-initiated cancellation triggers the Event Cancellation policy. Claims are processed within 30 days via SanlamAllianz."
+        },
+        {
+          "q": "Is a bank account in Africa required?",
+          "a": "Yes. Funds and insurance premiums are routed via Access Bank. The enterprise account is opened as part of the onboarding pipeline."
+        }
+      ]
+    },
+    "stakeholders": {
+      "promoter": {
+        "label": "Tour Promoter",
+        "tag": "CERTIFIED GLOBAL PARTNER",
+        "description": "Concert & event organisers running CTaaS-certified tour stops",
+        "products": [
+          "Event Cancellation",
+          "Promoter Business",
+          "Credit Guarantee",
+          "Audience Ticket Protection"
+        ],
+        "steps": [
+          {
+            "label": "Submit EOI",
+            "detail": "Apply for a tour stop via the Discovery page. Complete your Expression of Interest and select your preferred markets."
+          },
+          {
+            "label": "Certification Training",
+            "detail": "Complete CTaaS LMS certification. Pass the Promoter module to unlock certified partner status."
+          },
+          {
+            "label": "Access Bank Onboarding",
+            "detail": "Open an Enterprise Account via the Ckrowd partnership with Access Bank. Required for insurance and finance activation."
+          },
+          {
+            "label": "Insurance Activation",
+            "detail": "SanlamAllianz Business Insurance activates upon certification completion. Coverage includes event cancellation, liability, and credit guarantee."
+          },
+          {
+            "label": "Finance Eligibility",
+            "detail": "Certified Access Bank account becomes Paymaster-eligible. Tour Stop Advance and Venue Build-Out Credit unlocked."
+          }
+        ],
+        "coverage": [
+          {
+            "product": "Event Cancellation & Non-Appearance",
+            "type": "EVENT INSURANCE",
+            "desc": "Artist withdrawal, weather events, force majeure. Protects full event revenue.",
+            "premium": "1.5–3%",
+            "term": "Per Event"
+          },
+          {
+            "product": "Promoter Business Insurance",
+            "type": "SME INSURANCE",
+            "desc": "Public liability, property damage, business interruption for the promoter entity.",
+            "premium": "From $800/yr",
+            "term": "Annual"
+          },
+          {
+            "product": "Credit Guarantee Insurance",
+            "type": "HIGHEST VALUE",
+            "desc": "Underwrites Tour Stop Advance lending facility. Enables Access Bank lending.",
+            "premium": "0.8–1.2%",
+            "term": "Per Facility"
+          },
+          {
+            "product": "Audience Ticket Protection",
+            "type": "EMBEDDED",
+            "desc": "Embedded at checkout — refund guarantee for ticket holders if event is cancelled.",
+            "premium": "1–2% of ticket",
+            "term": "Per Event"
+          }
+        ],
+        "financeProducts": [
+          {
+            "name": "Tour Stop Advance",
+            "amount": "Up to $30,000",
+            "term": "30–90 days",
+            "cost": "3–5% flat"
+          },
+          {
+            "name": "Venue Build-Out Credit",
+            "amount": "Up to $75,000",
+            "term": "6–18 months",
+            "cost": "12–15% p.a."
+          }
+        ]
+      },
+      "workforce": {
+        "label": "Touring Workforce",
+        "tag": "TOURING AGENT",
+        "description": "Sound engineers, lighting crews, stage managers, production staff deployed across tour stops",
+        "products": [
+          "Group Personal Accident",
+          "Employer Liability",
+          "Contractor Coverage"
+        ],
+        "steps": [
+          {
+            "label": "WCS Registration",
+            "detail": "Register as a Workforce Contractor on Ckrowd. Submit skills, experience, and availability."
+          },
+          {
+            "label": "Vetting & Verification",
+            "detail": "Skills assessment, reference check, and identity verification completed by Ckrowd operations."
+          },
+          {
+            "label": "Touring Agent Certification",
+            "detail": "Complete role-specific CTaaS training module. Earn your Touring Agent certification badge."
+          },
+          {
+            "label": "Group Insurance Activation",
+            "detail": "Personal accident, employer liability, and contractor coverage activated via SanlamAllianz group policy."
+          },
+          {
+            "label": "Cross-Border Deployment",
+            "detail": "Access cross-border payroll via PAPSS. Deploy to certified tour stops across 27 markets."
+          }
+        ],
+        "coverage": [
+          {
+            "product": "Group Personal Accident",
+            "type": "GROUP INSURANCE",
+            "desc": "Personal accident and injury coverage for all certified touring workforce members.",
+            "premium": "From $200/yr",
+            "term": "Annual"
+          },
+          {
+            "product": "Employer Liability",
+            "type": "GROUP INSURANCE",
+            "desc": "Employer liability protection covering workplace injuries and claims.",
+            "premium": "From $350/yr",
+            "term": "Annual"
+          },
+          {
+            "product": "Contractor Coverage",
+            "type": "SPECIALTY",
+            "desc": "Professional indemnity and equipment coverage for independent contractors.",
+            "premium": "From $400/yr",
+            "term": "Annual"
+          }
+        ],
+        "financeProducts": [
+          {
+            "name": "Contractor Float",
+            "amount": "Up to $15,000",
+            "term": "60 days",
+            "cost": "2.5% flat"
+          }
+        ]
+      },
+      "vendor": {
+        "label": "SMEs & Vendors",
+        "tag": "ECOSYSTEM PARTNER",
+        "description": "Production companies, equipment suppliers, catering, merchandise, and transport providers",
+        "products": [
+          "Equipment & Cargo",
+          "Business Interruption",
+          "Professional Indemnity"
+        ],
+        "steps": [
+          {
+            "label": "Vendor EOI",
+            "detail": "Submit Expression of Interest to supply services to certified tour stops. Specify your category and capacity."
+          },
+          {
+            "label": "Ckrowd Supplier Vetting",
+            "detail": "Capacity check, business registration verification, and quality assessment conducted by Ckrowd."
+          },
+          {
+            "label": "Approved Vendor Listing",
+            "detail": "Listed in Ckrowd Vendor Marketplace and matched to relevant tour stops based on geography and capacity."
+          },
+          {
+            "label": "Insurance Profile Creation",
+            "detail": "SME business insurance bundle activated via SanlamAllianz. Covers equipment, cargo, and business interruption."
+          },
+          {
+            "label": "Finance Access",
+            "detail": "Working capital pre-event financing unlocked for approved vendors with certified tour stop contracts."
+          }
+        ],
+        "coverage": [
+          {
+            "product": "Aviation & Equipment Insurance",
+            "type": "SPECIALTY LINES",
+            "desc": "Charter aircraft, production equipment, and high-value cargo in transit.",
+            "premium": "Bespoke",
+            "term": "Per Tour"
+          },
+          {
+            "product": "Business Interruption",
+            "type": "SME INSURANCE",
+            "desc": "Revenue protection if supply contracts are disrupted due to event cancellation.",
+            "premium": "From $600/yr",
+            "term": "Annual"
+          },
+          {
+            "product": "Professional Indemnity",
+            "type": "SME INSURANCE",
+            "desc": "Covers service delivery failures and contractual liability claims.",
+            "premium": "From $450/yr",
+            "term": "Annual"
+          }
+        ],
+        "financeProducts": [
+          {
+            "name": "Vendor Working Capital",
+            "amount": "Up to $15,000",
+            "term": "60 days",
+            "cost": "2.5% flat"
+          }
+        ]
+      },
+      "talent": {
+        "label": "Artist Management",
+        "tag": "TALENT SUPPLIER",
+        "description": "Agencies and management companies supplying artists to CTaaS-certified tour stops",
+        "products": [
+          "Artist Non-Appearance",
+          "Tour Liability",
+          "Revenue Protection"
+        ],
+        "steps": [
+          {
+            "label": "Talent Supplier Registration",
+            "detail": "Register your management company. Submit artist roster and territory preferences."
+          },
+          {
+            "label": "Artist LOI Submission",
+            "detail": "Submit Letter of Interest for specific tour stops. Attach artist technical rider and fee schedule."
+          },
+          {
+            "label": "Contract & Block Rate Agreement",
+            "detail": "Negotiate block-rate artist fee agreements with promoters via the Ckrowd platform."
+          },
+          {
+            "label": "Insurance Embed",
+            "detail": "Artist non-appearance and tour liability coverage embedded into performance contracts automatically."
+          },
+          {
+            "label": "Paymaster Integration",
+            "detail": "Artist fees routed via certified Paymaster. Milestone-based release tied to performance completion."
+          }
+        ],
+        "coverage": [
+          {
+            "product": "Artist Non-Appearance",
+            "type": "EVENT INSURANCE",
+            "desc": "Covers artist cancellation due to illness, injury, or force majeure.",
+            "premium": "2–4%",
+            "term": "Per Event"
+          },
+          {
+            "product": "Tour Revenue Protection",
+            "type": "SPECIALTY",
+            "desc": "Revenue guarantee product protecting management fees and artist earnings.",
+            "premium": "1.5–3%",
+            "term": "Per Tour"
+          },
+          {
+            "product": "Production Liability",
+            "type": "EVENT INSURANCE",
+            "desc": "Third-party liability arising from artist performance and production activities.",
+            "premium": "From $500",
+            "term": "Per Event"
+          }
+        ],
+        "financeProducts": [
+          {
+            "name": "Artist Fee Advance",
+            "amount": "Up to $30,000",
+            "term": "30–90 days",
+            "cost": "3–5% flat"
+          }
+        ]
+      }
+    },
+    "ecosystemFlow": [
+      {
+        "label": "Register & EOI",
+        "desc": "Submit Expression of Interest and select your stakeholder type."
+      },
+      {
+        "label": "Vetting",
+        "desc": "Identity, capacity, and business credentials verified."
+      },
+      {
+        "label": "CTaaS Certification",
+        "desc": "Complete role-specific training on the Ckrowd LMS."
+      },
+      {
+        "label": "Bank Onboarding",
+        "desc": "Access Bank enterprise account opened via Ckrowd partnership."
+      },
+      {
+        "label": "Insurance Activation",
+        "desc": "SanlamAllianz product suite activates automatically."
+      },
+      {
+        "label": "Finance Eligibility",
+        "desc": "Tour finance products unlocked for certified accounts."
+      }
+    ],
+    "productSuite": [
+      {
+        "name": "Event Cancellation",
+        "desc": "Protects event revenue against cancellation, non-appearance, and force majeure events."
+      },
+      {
+        "name": "Credit Guarantee",
+        "desc": "Underwrites Tour Stop Advance lending facility. Highest-value product in the portfolio."
+      },
+      {
+        "name": "Promoter Business",
+        "desc": "Public liability, property, and business interruption for promoter and vendor entities."
+      },
+      {
+        "name": "Touring Workforce",
+        "desc": "Group personal accident, employer liability, and contractor coverage for touring crew."
+      },
+      {
+        "name": "Aviation & Equipment",
+        "desc": "Charter aircraft, production equipment, and high-value cargo specialty coverage."
+      },
+      {
+        "name": "Audience Ticket Protection",
+        "desc": "Embedded refund guarantee for ticket holders. Activated at checkout automatically."
+      }
+    ]
+  },
+  "PrivacyPage": {
+    "legal": "Legal",
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated: April 2026",
+    "sections": [
+      {
+        "title": "1. Information We Collect",
+        "content": "TourStack by Crowd collects information you provide when registering an account, submitting an Expression of Interest, or onboarding as a stakeholder. This includes your name, email address, phone number, company details, and venue information."
+      },
+      {
+        "title": "2. How We Use Your Information",
+        "content": "We use your information to facilitate tour bookings, verify stakeholder credentials, process EOI applications, and communicate platform updates. We do not sell your personal data to third parties."
+      },
+      {
+        "title": "3. Data Storage",
+        "content": "Your data is stored securely. For this platform version, certain preferences are stored locally in your browser via localStorage. Server-side data is protected through industry-standard encryption."
+      },
+      {
+        "title": "4. Contact",
+        "content": "For privacy-related enquiries, contact us at {contactLink} or email {email}."
+      }
+    ],
+    "contactLink": "our contact page",
+    "email": "privacy@ckrowd.africa"
+  },
+  "TermsPage": {
+    "legal": "Legal",
+    "title": "Terms of Service",
+    "lastUpdated": "Last updated: April 2026",
+    "sections": [
+      {
+        "title": "1. Acceptance of Terms",
+        "content": "By accessing or using TourStack by Crowd, you agree to be bound by these Terms of Service. If you do not agree, you may not use the platform."
+      },
+      {
+        "title": "2. Platform Use",
+        "content": "TourStack is a B2B platform connecting promoters, service providers, and workforce professionals in the Pan-African live events industry. Use of the platform is restricted to registered businesses and verified individuals."
+      },
+      {
+        "title": "3. Accuracy of Information",
+        "content": "You agree to provide accurate, current, and complete information during registration and throughout your use of the platform. Misrepresentation may result in account suspension or removal."
+      },
+      {
+        "title": "4. Intellectual Property",
+        "content": "All content, branding, and platform design are the property of Ckrowd Africa Technologies. Unauthorised reproduction or distribution is prohibited."
+      },
+      {
+        "title": "5. Contact",
+        "content": "For terms-related enquiries, visit our {contactLink} or email {email}."
+      }
+    ],
+    "contactLink": "contact page",
+    "email": "legal@ckrowd.africa"
+  },
+  "DiscoveryPage": {
+    "hero": {
+      "platform": "TourStack — Artiste & Tour Discovery",
+      "title": "Find Your Next <spanNode>Tour Stop.</spanNode>",
+      "description": "Browse artistes announced by Ckrowd Global Live for the Pan-African touring circuit. Submit an Expression of Interest to host a Tour Stop at your venue."
+    },
+    "trending": {
+      "title": "Trending Now",
+      "description": "Neo-Soul & Jazz acts seeing a 40% EOI surge for Q4 across East & West Africa."
+    },
+    "filters": {
+      "genre": "Genre",
+      "allGenres": "All Genres",
+      "availableWindow": "Available Window",
+      "allWindows": "All Windows",
+      "feeRange": "Fee Range (USD)",
+      "allRanges": "All Ranges",
+      "region": "Region",
+      "allAfrica": "All Africa",
+      "resetFilters": "Reset Filters"
+    },
+    "genres": {
+      "afrobeats": "Afrobeats",
+      "electronic": "Electronic",
+      "indieRock": "Indie Rock",
+      "jazzSoul": "Jazz & Soul",
+      "worldFolk": "World / Folk",
+      "modernClassical": "Modern Classical"
+    },
+    "windows": {
+      "q3_2024": "Q3 2024 (Jul–Sep)",
+      "q4_2024": "Q4 2024 (Oct–Dec)",
+      "q1_2025": "Q1 2025 (Jan–Mar)",
+      "q2_2025": "Q2 2025 (Apr–Jun)"
+    },
+    "feeRanges": {
+      "r1": "$5k – $15k",
+      "r2": "$15k – $50k",
+      "r3": "$50k – $150k",
+      "r4": "$150k+"
+    },
+    "regions": {
+      "westAfrica": "West Africa",
+      "eastAfrica": "East Africa",
+      "southernAfrica": "Southern Africa",
+      "northAfrica": "North Africa"
+    },
+    "activeTourProjects": "Active Tour Projects",
+    "sortBy": {
+      "label": "Sort by:",
+      "newestFirst": "Newest First"
+    },
+    "noResults": {
+      "title": "No results match your filters",
+      "description": "Try adjusting or resetting the filters above."
+    },
+    "trendingLabel": "Trending",
+    "submitEoi": "Submit Expression of Interest",
+    "howItWorks": {
+      "title": "How It Works",
+      "step1": {
+        "title": "Browse Tour Projects",
+        "description": "Ckrowd announces artistes and tours. Browse and filter by genre, date, fee, or region."
+      },
+      "step2": {
+        "title": "Submit Your EOI",
+        "description": "Submit a formal Expression of Interest with your venue, date, budget, and funding plan."
+      },
+      "step3": {
+        "title": "Matching & Review",
+        "description": "Ckrowd scores your EOI against artiste requirements and reviews your application."
+      },
+      "step4": {
+        "title": "Decision & Execution",
+        "description": "You receive Approved, Rejected, or Needs Revision — then proceed to planning."
+      },
+      "startEoi": "Start Your EOI"
+    },
+    "financing": {
+      "title": "Financing Support Available",
+      "description": "Get up to 40% of the artiste fee covered upfront through TourStack's capital partners.",
+      "applyButton": "Apply with EOI"
+    },
+    "platformStats": {
+      "title": "Platform Stats",
+      "markets": "Markets",
+      "promoters": "Promoters",
+      "activeTours": "Active Tours",
+      "avgReview": "Avg Review"
+    }
+  },
+  "FinancingPage": {
+    "hero": {
+      "platform": "TourStack — Financing & Insurance",
+      "title": "Capital for <spanNode>Every Tour Stop.</spanNode>",
+      "description": "TourStack connects promoters across Africa with purpose-built financing products — so cash flow never stands between you and a world-class show.",
+      "applyButton": "Apply via EOI",
+      "exploreProducts": "Explore Products"
+    },
+    "stats": {
+      "disbursed": "Disbursed to Date",
+      "repayment": "Repayment Rate",
+      "decision": "Avg Decision Time",
+      "markets": "Markets Covered"
+    },
+    "myApplications": "My Applications",
+    "noApplications": {
+      "title": "No applications yet",
+      "description": "Browse our financing products below and apply to cover your event costs."
+    },
+    "application": "Application",
+    "statuses": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "declined": "Declined"
+    },
+    "requested": "Requested",
+    "applied": "Applied",
+    "viewDetails": "View details",
+    "financingProducts": "Financing Products",
+    "products": {
+      "p1": {
+        "name": "Tour Stop Advance",
+        "tag": "Most Popular",
+        "description": "Get up to 40% of the agreed artiste fee covered before the event date. Repaid automatically from gate receipts.",
+        "amount": "Up to $30,000",
+        "term": "30–90 days",
+        "rate": "3–5% flat fee",
+        "eligibility": "Approved EOI required"
+      },
+      "p2": {
+        "name": "Venue Build-Out Credit",
+        "tag": "Infrastructure",
+        "description": "Finance staging, sound, lighting, and production upgrades needed to host a qualifying tour stop.",
+        "amount": "Up to $75,000",
+        "term": "6–18 months",
+        "rate": "From 8% p.a.",
+        "eligibility": "Owned or leased venue"
+      },
+      "p3": {
+        "name": "Event Insurance Bundle",
+        "tag": "Risk Cover",
+        "description": "Comprehensive cover for cancellation, adverse weather, public liability, and artiste no-show.",
+        "amount": "Flexible",
+        "term": "Per event",
+        "rate": "From 1.2% of event budget",
+        "eligibility": "Open to all promoters"
+      },
+      "p4": {
+        "name": "Marketing & Ticketing Float",
+        "tag": "Growth",
+        "description": "Unlock working capital to run pre-event marketing and cover ticketing platform fees before revenue lands.",
+        "amount": "Up to $15,000",
+        "term": "60 days",
+        "rate": "2.5% flat fee",
+        "eligibility": "Active TourStack account"
+      }
+    },
+    "tableLabels": {
+      "amount": "Amount",
+      "term": "Term",
+      "cost": "Cost"
+    },
+    "apply": "Apply",
+    "howItWorksTitle": "How It Works",
+    "steps": {
+      "s1": {
+        "title": "Submit EOI",
+        "description": "Apply for a tour stop on the Discovery page. A confirmed EOI unlocks financing eligibility."
+      },
+      "s2": {
+        "title": "Select Product",
+        "description": "Choose the financing product that fits your event budget and timeline."
+      },
+      "s3": {
+        "title": "Upload Documents",
+        "description": "Submit venue contract, projected gate receipts, and ID verification."
+      },
+      "s4": {
+        "title": "Decision in 48h",
+        "description": "Our capital partners review and issue a term sheet within two business days."
+      },
+      "s5": {
+        "title": "Funds Disbursed",
+        "description": "Approved funds land in your account before the event build-out deadline."
+      }
+    },
+    "capitalPartners": "Capital Partners",
+    "partners": {
+      "p1": {
+        "region": "Pan-Africa",
+        "focus": "Event Finance"
+      },
+      "p2": {
+        "region": "West Africa",
+        "focus": "SME & Culture"
+      },
+      "p3": {
+        "region": "East Africa",
+        "focus": "Creative Economy"
+      },
+      "p4": {
+        "region": "Southern Africa",
+        "focus": "Live Entertainment"
+      }
+    },
+    "cta": {
+      "title": "Ready to Unlock Funding?",
+      "description": "Start your EOI and your financing profile in one flow.",
+      "button": "Get Started"
+    },
+    "faqTitle": "Frequently Asked Questions",
+    "faqs": {
+      "f1": {
+        "q": "Do I need a bank account in Africa to qualify?",
+        "a": "Yes. Funds are disbursed to a verified business account in the country of the tour stop. We support accounts in 18 African markets."
+      },
+      "f2": {
+        "q": "Can I apply for financing before my EOI is approved?",
+        "a": "You can start your financing profile at any time, but funds will only be released once your EOI is marked Approved by Ckrowd."
+      },
+      "f3": {
+        "q": "What happens if the event is cancelled?",
+        "a": "Cancellation triggered by the artiste is covered by the Event Insurance Bundle. Promoter-initiated cancellations are subject to the repayment schedule in your term sheet."
+      },
+      "f4": {
+        "q": "Is there a minimum event budget to qualify?",
+        "a": "Tour Stop Advance requires a minimum confirmed artiste fee of $5,000. Other products have their own thresholds as shown above."
+      }
+    }
+  },
+  "DashboardPage": {
+    "promoterPortal": "Promoter Portal",
+    "title": "Your Tour Dashboard",
+    "welcomeBack": "Welcome back, {name}. Track your EOIs and tour process below.",
+    "yourOrganization": "your organization",
+    "touringSeason": "Touring Season",
+    "touringSeasonYears": "2024 / 2025",
+    "eoiProgressTitle": "EOI Progress — {artist}{tour}",
+    "noEoisYet": "No EOIs yet",
+    "noEois": "No EOIs",
+    "myEoiSubmissions": "My EOI Submissions",
+    "newEoi": "New EOI",
+    "financingStatus": "Financing Status",
+    "application": "Application",
+    "financingApproved": "Financing approved",
+    "financingDeclined": "Application declined",
+    "financingAssessment": "Application under assessment",
+    "requested": "Requested",
+    "viewFinancingDetails": "View Financing Details",
+    "noAppsYet": "No applications yet",
+    "noAppsDesc": "Apply for financing to cover your event costs.",
+    "exploreFinancing": "Explore Financing",
+    "tourActivity": "Tour Activity",
+    "noActivity": "No activity yet",
+    "time": {
+      "justNow": "Just now",
+      "hoursAgo": "{count}h ago",
+      "yesterday": "Yesterday",
+      "daysAgo": "{count}d ago"
+    },
+    "stats": {
+      "eoisSubmitted": "EOIs Submitted",
+      "newThisMonth": "+{count} this month",
+      "approved": "Approved",
+      "confirmed": "Confirmed",
+      "financingStatus": "Financing Status",
+      "noApps": "No apps",
+      "nextShow": "Next Show",
+      "noUpcomingShows": "No upcoming shows",
+      "submitEoiPrompt": "Submit an EOI to get started"
+    },
+    "steps": {
+      "eoiSubmitted": "EOI Submitted",
+      "underReview": "Under Review",
+      "matchScore": "Match Score",
+      "decision": "Decision",
+      "confirmed": "Confirmed"
+    },
+    "table": {
+      "artistTour": "Artiste / Tour",
+      "venue": "Venue",
+      "status": "Status",
+      "match": "Match",
+      "noEois": "No EOIs submitted yet",
+      "noEoisDesc": "Browse artistes and submit your first Expression of Interest.",
+      "discoverArtistes": "Discover Artistes"
+    },
+    "activityLabels": {
+      "approved": "EOI Approved — {artist}",
+      "needs_revision": "Revision Requested — {artist}",
+      "rejected": "EOI Rejected — {artist}",
+      "pending": "EOI Submitted — {artist}",
+      "pending_review": "EOI Submitted — {artist}"
+    }
+  },
+  "ToursPage": {
+    "promoterPortal": "Promoter Portal",
+    "title": "My Tours",
+    "description": "Track every tour stop — from EOI submission to show-day settlement.",
+    "newTourStop": "New Tour Stop",
+    "unknownVenue": "Unknown venue",
+    "noStops": "No tour stops yet",
+    "noStopsDesc": "Submit an Expression of Interest to get your first tour stop confirmed.",
+    "submitEoi": "Submit EOI",
+    "financed": "Financed",
+    "ticketsSold": "Tickets Sold",
+    "daysLetter": "d",
+    "untilShow": "until show",
+    "showPassed": "Show passed {days}d ago",
+    "showDay": "Show day!",
+    "reviseEoi": "Revise EOI",
+    "viewDetails": "View Details",
+    "upcomingMilestones": "Upcoming Milestones",
+    "noMilestones": "No upcoming milestones",
+    "venueSummary": "Venue Summary",
+    "noVenues": "No venues yet",
+    "cap": "Cap",
+    "showSingle": "show",
+    "ctaFinancingTitle": "Need Financing?",
+    "ctaFinancingDesc": "Cover up to 40% of artiste fees upfront",
+    "stats": {
+      "totalStops": "Total Stops",
+      "confirmed": "Confirmed",
+      "inProgress": "In Progress",
+      "rejected": "Rejected"
+    }
+  },
+  "AdminPage": {
+    "title": "Admin Dashboard",
+    "description": "Manage tour projects, review promoter EOIs, and drive decisions across the Pan-African touring circuit.",
+    "createTour": "Create Tour Project",
+    "recentTours": "Recent Tour Projects",
+    "recentEois": "Recent EOIs",
+    "viewAll": "View All",
+    "noTours": "No tour projects yet",
+    "noToursDesc": "Publish a tour project using the form.",
+    "noEois": "No EOIs yet",
+    "stats": {
+      "activeTours": "Active Tour Projects",
+      "eoisReceived": "EOIs Received",
+      "pendingReview": "Pending Review",
+      "approvedStops": "Approved Stops"
+    }
+  },
+  "AdminProfilePage": {
+    "role": "Super Admin",
+    "title": "Account Settings",
+    "description": "Update your personal information and profile details.",
+    "personalInfo": "Personal Information",
+    "fullName": "Full Name",
+    "jobTitle": "Job Title",
+    "email": "Email Address",
+    "phone": "Phone Number",
+    "country": "Country",
+    "city": "City",
+    "publicDetails": "Public Details",
+    "publicDetailsDesc": "This information will be visible to promoters and other stakeholders.",
+    "bio": "Short Bio",
+    "linkedin": "LinkedIn Profile / Website",
+    "saving": "Saving...",
+    "save": "Save Changes"
+  },
+  "RegisterPage": {
+    "title": "Register",
+    "description": "Create your account to manage EOIs, tours, and platform access.",
+    "tagline": "Create your TourStack account",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Email address",
+    "password": "Password",
+    "confirmPassword": "Confirm password",
+    "firstNamePlaceholder": "Ada",
+    "lastNamePlaceholder": "Mensah",
+    "emailPlaceholder": "you@yourcompany.com",
+    "passwordPlaceholder": "Create a password",
+    "confirmPasswordPlaceholder": "Repeat your password",
+    "createAccount": "Create account",
+    "creatingAccount": "Creating account...",
+    "alreadyHaveAccount": "Already have an account?",
+    "signIn": "Sign in",
+    "errorFailed": "Registration failed",
+    "loading": "Loading session..."
+  },
+  "SideNav": {
+    "dashboard": "Dashboard",
+    "tours": "Tours",
+    "requests": "Requests",
+    "onboarding": "Onboarding",
+    "stakeholders": "Invite Links",
+    "profile": "Profile",
+    "settings": "Settings",
+    "startNewTour": "Start New Tour"
+  },
+  "CreateTourPage": {
+    "management": "Tour Management",
+    "title": "Create New Tour Project",
+    "projectDetails": "Tour Project Details",
+    "artistName": "Artist / Tour Name",
+    "tourName": "Project Title",
+    "feeMin": "Minimum Fee ($)",
+    "feeMax": "Maximum Fee ($)",
+    "availableFrom": "Available From",
+    "availableTo": "Available To",
+    "genre": "Musical Genre",
+    "technicalRequirements": "Technical Requirements",
+    "placeholderArtist": "e.g. Burna Boy",
+    "placeholderTour": "e.g. Love, Damini Tour 2024",
+    "placeholderRequirements": "Describe staging, sound, and lighting needs...",
+    "publishing": "Publishing...",
+    "publish": "Publish Tour Project",
+    "errorFailed": "Failed to create tour project.",
+    "errorUnexpected": "An unexpected error occurred.",
+    "placeholderFeeMin": "50000",
+    "placeholderFeeMax": "150000",
+    "genres": {
+      "afrobeats": "Afrobeats",
+      "afropop": "Afropop",
+      "electronic": "Electronic",
+      "jazzSoul": "Jazz & Soul",
+      "worldFolk": "World / Folk",
+      "hipHop": "Hip-Hop"
+    }
+  },
+  "Footer": {
+    "title": "Tour Stack by Crowd",
+    "tagline": "Empowering the live music industry with modern tools.",
+    "platform": {
+      "heading": "Platform",
+      "discovery": "Discovery",
+      "analytics": "Analytics",
+      "financing": "Financing"
+    },
+    "company": {
+      "heading": "Company",
+      "contact": "Contact",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service"
+    },
+    "stayUpdated": {
+      "heading": "Stay Updated",
+      "placeholder": "Email address"
+    },
+    "copyright": "© {year} {brandName} {brandBy}. All rights reserved."
+  },
+  "Common": {
+    "brandName": "Tourstack",
+    "brandBy": "by Ckrowd",
+    "signIn": "Sign In",
+    "signOut": "Sign Out",
+    "profile": "Profile",
+    "settings": "Settings"
+  },
+  "AdminSideNav": {
+    "overview": "Overview",
+    "tours": "Tours",
+    "eoi": "EOIs",
+    "financing": "Financing",
+    "reports": "Reports",
+    "settings": "Settings",
+    "newTour": "New Tour"
+  },
+  "FinancingQuickApply": {
+    "badge": "Quick Apply",
+    "title": "Quick Financing Apply",
+    "description": "Select a product and request financing for your tour stop in seconds.",
+    "fields": {
+      "product": "Select Product",
+      "amount": "Requested Amount ($)",
+      "currency": "Currency"
+    },
+    "products": {
+      "tourStopAdvance": "Tour Stop Advance (up to $30k)",
+      "venueBuildOutCredit": "Venue Build-Out Credit (up to $75k)",
+      "eventInsuranceBundle": "Event Insurance Pack (from 1.2%)",
+      "marketingTicketingFloat": "Marketing & Ticking Advance (up to $15k)"
+    },
+    "actions": {
+      "submitting": "Applying...",
+      "apply": "Apply for Financing"
+    },
+    "success": "Application submitted successfully!",
+    "errors": {
+      "failed": "Application failed. Please try again."
+    },
+    "validation": {
+      "required": "Please fill out this field."
+    }
+  },
+  "StakeholderRegistrationPage": {
+    "success": {
+      "title": "Registration submitted",
+      "description": "Your details were submitted successfully.",
+      "returnHome": "Return home"
+    },
+    "header": {
+      "tagline": "Onboarding Invitation",
+      "title": "Stakeholder Registration"
+    },
+    "loadingLink": "Loading link...",
+    "errorUnavailable": "This invitation link is unavailable.",
+    "category": "Category",
+    "label": "Label",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "country": "Country",
+      "company": "Company (optional)",
+      "submitting": "Submitting...",
+      "submit": "Submit Registration"
+    },
+    "errorDefault": "Unable to submit registration.",
+    "serviceProvider": {
+      "tagline": "Service Provider Invitation",
+      "title": "Service Provider Registration",
+      "fields": {
+        "contactName": "Contact Name",
+        "companyName": "Company Name",
+        "email": "Business Email",
+        "phone": "Phone",
+        "country": "Country",
+        "serviceType": "Service Type",
+        "yearsInBusiness": "Years in Business (optional)",
+        "description": "Description of Services",
+        "website": "Website (optional)",
+        "certifications": "Certifications / Insurance (optional)"
+      },
+      "serviceTypes": {
+        "catering": "Catering",
+        "security": "Security",
+        "av_tech": "AV / Technology",
+        "transportation": "Transportation",
+        "staging": "Staging & Production",
+        "hospitality": "Hospitality",
+        "other": "Other"
+      }
+    },
+    "workforce": {
+      "tagline": "Workforce Invitation",
+      "title": "Workforce Registration",
+      "fields": {
+        "name": "Full Name",
+        "email": "Email",
+        "phone": "Phone",
+        "country": "Country",
+        "company": "Current Employer (optional)",
+        "role": "Role / Specialty",
+        "yearsExperience": "Years of Experience",
+        "skillsSummary": "Skills Summary",
+        "availability": "Availability",
+        "availabilityPlaceholder": "e.g. June–August 2025",
+        "previousWork": "Previous Tours / Events (optional)"
+      },
+      "roles": {
+        "stage_crew": "Stage Crew",
+        "lighting_tech": "Lighting Technician",
+        "sound_tech": "Sound Technician",
+        "security": "Security",
+        "production_manager": "Production Manager",
+        "driver": "Driver / Transport",
+        "hospitality": "Hospitality",
+        "other": "Other"
+      },
+      "experienceLevels": {
+        "0_1": "Less than 1 year",
+        "1_3": "1–3 years",
+        "3_5": "3–5 years",
+        "5_10": "5–10 years",
+        "10_plus": "10+ years"
+      }
+    },
+    "artmgmt": {
+      "tagline": "Artist Management Invitation",
+      "title": "Artist Management Registration",
+      "fields": {
+        "agencyName": "Agency / Company Name",
+        "contactName": "Primary Contact Name",
+        "email": "Email",
+        "phone": "Phone",
+        "country": "Country",
+        "artistNames": "Artist Name(s)",
+        "genres": "Genre(s)",
+        "genresPlaceholder": "e.g. Pop, Hip-Hop, R&B",
+        "managementType": "Management Type",
+        "bio": "Artist / Roster Bio",
+        "website": "Website / Socials (optional)"
+      },
+      "managementTypes": {
+        "solo_artist": "Solo Artist",
+        "band_group": "Band / Group",
+        "label": "Record Label",
+        "management_agency": "Management Agency"
+      }
+    }
+  },
+  "AdminEOIPage": {
+    "badge": "EOI Management",
+    "title": "EOI Review Queue",
+    "description": "Review, approve, or reject Expressions of Interest submitted by promoters.",
+    "pendingSubmissions": "Pending Submissions",
+    "pendingCount": "Pending",
+    "noEois": "No EOIs yet",
+    "noEoisDesc": "EOI submissions will appear here for review.",
+    "matchScore": "Match Score",
+    "funding": "Funding",
+    "fields": {
+      "date": "Date",
+      "venue": "Venue",
+      "capacity": "Capacity",
+      "budget": "Budget"
+    },
+    "actions": {
+      "approve": "Approve",
+      "revision": "Needs Revision",
+      "reject": "Reject"
+    }
+  },
+  "AdminFinancingPage": {
+    "badge": "Capital Access",
+    "title": "Financing Tracker",
+    "description": "Monitor and manage financing requests from tour promoters.",
+    "requestsTitle": "Financing Requests",
+    "requested": "requested",
+    "reviewDetails": "Review Details",
+    "status": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "declined": "Declined"
+    }
+  },
+  "AdminReportsPage": {
+    "badge": "Analytics",
+    "title": "Tour Reports",
+    "description": "High-level metrics and financial reports for the Pan-African tour circuit.",
+    "exportCsv": "Export CSV",
+    "comingSoon": "Reports Dashboard Coming Soon",
+    "comingSoonDesc": "We are currently aggregating data across your active tour projects. Detailed financial breakdowns, ticket sale projections, and risk analysis will be available here shortly."
+  },
+  "AdminToursPage": {
+    "badge": "Tour Management",
+    "title": "Tour Projects",
+    "description": "Manage your active and upcoming tour projects.",
+    "createTour": "Create Tour Project",
+    "allTours": "All Tour Projects",
+    "noTours": "No tour projects yet",
+    "noToursDesc": "Publish a new tour project to get started."
+  },
+  "AdminSettingsPage": {
+    "badge": "Configuration",
+    "title": "Platform Settings",
+    "description": "Manage global tour constraints, matching logic, and team access.",
+    "saveChanges": "Save Changes",
+    "algorithm": {
+      "title": "Matching Algorithm",
+      "strictBudget": "Strict Budget Alignment",
+      "strictBudgetDesc": "Automatically reject EOIs where the promoter's budget is 20% below the artiste's minimum fee.",
+      "autoApprove": "Auto-Approve 90%+ Matches",
+      "autoApproveDesc": "Bypass manual review for EOIs that score a 90% or higher match confidence."
+    },
+    "team": {
+      "title": "Admin Team",
+      "invite": "Invite Team Member"
+    },
+    "danger": {
+      "title": "Danger Zone",
+      "description": "Actions taken here are destructive and cannot be reversed.",
+      "purge": "Purge Draft Projects"
+    }
+  },
+  "StepForm": {
+    "promoter": {
+      "step1": {
+        "companyName": "Company Name",
+        "companyNamePlaceholder": "e.g. Live Nation Africa",
+        "primaryMarkets": "Primary Markets",
+        "primaryMarketsPlaceholder": "e.g. Lagos, Accra",
+        "expectedBudget": "Expected Tour Budget",
+        "expectedBudgetPlaceholder": "e.g. $50,000"
+      },
+      "step2": {
+        "certifications": "Upload Prior Certifications (Optional)"
+      },
+      "step3": {
+        "directorBvn": "Director BVN / NIN",
+        "directorBvnPlaceholder": "11-digit BVN",
+        "rcNumber": "Company Registration No (RC)",
+        "rcNumberPlaceholder": "e.g. RC 1234567"
+      },
+      "step4": {
+        "startDate": "Coverage Start Date",
+        "terms": "I agree to the SanlamAllianz terms of service and authorize automatic premium deduction from my enterprise account."
+      },
+      "step5": {
+        "acknowledgement": "I acknowledge that Tour Finance facilities are unlocked and agree to submit event budgets for underwriting."
+      }
+    },
+    "workforce": {
+      "step1": {
+        "role": "Primary Role",
+        "roleSelect": "Select Role",
+        "experience": "Years of Experience",
+        "experiencePlaceholder": "e.g. 5"
+      },
+      "step2": {
+        "id": "Upload Government ID",
+        "referenceEmail": "Reference Email",
+        "referenceEmailPlaceholder": "reference@example.com"
+      },
+      "step3": {
+        "training": "Role-Specific Training required for this step."
+      },
+      "step4": {
+        "kinName": "Next of Kin Name",
+        "kinNamePlaceholder": "Full Name",
+        "kinPhone": "Next of Kin Phone",
+        "kinPhonePlaceholder": "Phone Number"
+      },
+      "step5": {
+        "passport": "Passport Number",
+        "passportPlaceholder": "For cross-border deployment",
+        "currency": "Preferred Currency for Payroll",
+        "currencySelect": "Select Currency"
+      }
+    },
+    "vendor": {
+      "step1": {
+        "category": "Business Category",
+        "categorySelect": "Select Category",
+        "capacity": "Capacity / Fleet Size",
+        "capacityPlaceholder": "e.g. 3 Trucks"
+      },
+      "step2": {
+        "registration": "Upload CAC / Business Registration",
+        "tax": "Tax Clearance Certificate"
+      },
+      "step3": {
+        "bio": "Public Profile Description",
+        "bioPlaceholder": "Describe your services...",
+        "logo": "Upload Logo"
+      },
+      "step4": {
+        "value": "Estimated Equipment Value ($)",
+        "valuePlaceholder": "e.g. 150000",
+        "storage": "Primary Storage Location",
+        "storagePlaceholder": "City, Country"
+      },
+      "step5": {
+        "acknowledgement": "I acknowledge Working Capital Access is unlocked."
+      }
+    },
+    "talent": {
+      "step1": {
+        "agency": "Agency Name",
+        "agencyPlaceholder": "e.g. Star Management",
+        "roster": "Artists on Roster",
+        "rosterPlaceholder": "e.g. 5",
+        "territory": "Territory Preferences",
+        "territoryPlaceholder": "e.g. West Africa, EU"
+      },
+      "step2": {
+        "artist": "Artist Name",
+        "artistPlaceholder": "Select Artist...",
+        "rider": "Upload Technical Rider",
+        "feeSchedule": "Upload Fee Schedule"
+      },
+      "step3": {
+        "rate": "Proposed Block Rate ($)",
+        "ratePlaceholder": "e.g. $10,000 per stop",
+        "terms": "I accept the Ckrowd standard terms for performance contracts."
+      },
+      "step4": {
+        "terms": "I acknowledge the non-appearance terms embedded in my contract."
+      },
+      "step5": {
+        "bankName": "Agency Bank Name",
+        "bankNamePlaceholder": "e.g. Access Bank",
+        "accountNumber": "Account Number",
+        "accountNumberPlaceholder": "10 digits",
+        "routingCode": "Routing/Sort Code",
+        "routingCodePlaceholder": "Sort Code"
+      }
+    },
+    "validation": {
+      "required": "This field is required"
+    },
+    "roles": {
+      "sound": "Sound Engineer",
+      "light": "Lighting Tech",
+      "stage": "Stage Manager"
+    },
+    "categories": {
+      "equipment": "Equipment Supply",
+      "logistics": "Logistics",
+      "catering": "Catering"
+    }
+  },
+  "Metadata": {
+    "title": "Tourstack by Ckrowd",
+    "description": "Tourstack by Ckrowd connects artists, promoters, and financiers on a single high-performance stage."
+  }
 }

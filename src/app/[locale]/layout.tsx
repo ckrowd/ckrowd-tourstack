@@ -1,15 +1,45 @@
 import type {} from "next";
 import { Inter, Manrope } from "next/font/google";
 import "../globals.css";
-import { notFound } from "next/navigation";
+import { headers } from "next/headers";
+import { notFound, redirect } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
 import {
 	getMessages,
 	getTranslations,
 	setRequestLocale,
 } from "next-intl/server";
+import { getSession } from "@/app/actions";
 import QueryProvider from "@/components/QueryProvider";
 import { routing } from "@/i18n/routing";
+
+const PROTECTED_PATHS = [
+	"/dashboard",
+	"/profile",
+	"/settings",
+	"/admin",
+	"/workforce",
+	"/crew",
+	"/tours",
+	"/eoi",
+	"/financing",
+	"/discovery",
+	"/insurance",
+	"/onboarding",
+	"/stakeholders",
+];
+
+function isProtectedPath(pathname: string): boolean {
+	const localePattern = routing.locales.join("|");
+	const stripped = pathname.replace(
+		new RegExp(`^\\/(${localePattern})(\\/|$)`),
+		"/",
+	);
+	const normalized = stripped || "/";
+	return PROTECTED_PATHS.some(
+		(p) => normalized === p || normalized.startsWith(`${p}/`),
+	);
+}
 
 const manrope = Manrope({
 	variable: "--font-manrope",
@@ -115,8 +145,24 @@ export default async function RootLayout({
 		notFound();
 	}
 
-	// Enable static rendering
 	setRequestLocale(locale);
+
+	// Real session-based auth gate — validate against the backend, not a cookie.
+	// Reading headers() makes this layout dynamic; that is intentional for
+	// protected routes, and harmless for public ones since Next.js still statically
+	// renders pages that do not themselves call dynamic APIs.
+	const pathname = (await headers()).get("x-pathname") ?? "/";
+	if (isProtectedPath(pathname)) {
+		const session = await getSession();
+		if (!session) {
+			const localePattern = routing.locales.join("|");
+			const normalizedFrom = pathname.replace(
+				new RegExp(`^\\/(${localePattern})(\\/|$)`),
+				"/",
+			) || "/";
+			redirect(`/${locale}/login?from=${encodeURIComponent(normalizedFrom)}`);
+		}
+	}
 
 	// Providing all messages to the client
 	// side is the easiest way to get started

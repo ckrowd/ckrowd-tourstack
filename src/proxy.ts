@@ -4,50 +4,47 @@ import { type NextRequest, NextResponse } from 'next/server';
 
 const intlMiddleware = createMiddleware(routing);
 
-const PROTECTED_PATHS = [
-  '/dashboard',
-  '/profile',
-  '/settings',
-  '/admin',
-  '/workforce',
-  '/crew',
-  '/tours',
-];
-
-function isProtectedPath(pathname: string): boolean {
-  const localePattern = routing.locales.join('|');
-  const stripped = pathname.replace(new RegExp(`^\\/(${localePattern})(\\/|$)`), '/');
-  const normalized = stripped || '/';
-  return PROTECTED_PATHS.some(
-    (p) => normalized === p || normalized.startsWith(p + '/')
-  );
-}
-
+// Auth gating is NOT done here — cookie presence does not mean the user is
+// logged in. Real session validation happens in the [locale] layout via
+// getSession(), which calls the backend on every protected request.
+//
+// We inject x-pathname so the layout server component can know which route is
+// being accessed, and carry over all intlMiddleware response headers (rewrites,
+// locale cookies) so locale routing is fully preserved.
 export async function proxy(request: NextRequest) {
-  const { pathname } = request.nextUrl;
-
-  // Run next-intl middleware first so locale redirects are handled before auth
   const intlResponse = intlMiddleware(request);
 
-  // Pass through locale redirects (e.g. / -> /en/)
+  // Pass locale redirects through as-is (e.g. / → /en/)
   if (intlResponse.status >= 300 && intlResponse.status < 400) {
     return intlResponse;
   }
 
-  // Redirect unauthenticated users away from protected routes
-  if (isProtectedPath(pathname)) {
-    const sessionToken = request.cookies.get('better-auth.session_token');
-    if (!sessionToken?.value) {
-      const localeMatch = pathname.match(/^\/(en|fr)/);
-      const locale = localeMatch ? localeMatch[1] : routing.defaultLocale;
-      const url = request.nextUrl.clone();
-      url.pathname = `/${locale}/login`;
-      url.searchParams.set('callbackUrl', pathname);
-      return NextResponse.redirect(url);
+  // Inject x-pathname into the request so layout server components can read it
+  const requestHeaders = new Headers(request.headers);
+  requestHeaders.set('x-pathname', request.nextUrl.pathname);
+
+  const response = NextResponse.next({ request: { headers: requestHeaders } });
+
+  // Copy all intlMiddleware response headers (preserves locale rewrites etc.)
+  intlResponse.headers.forEach((value, key) => {
+    if (key.toLowerCase() !== 'set-cookie') {
+      response.headers.set(key, value);
     }
+  });
+
+  // Copy Set-Cookie values individually — getSetCookie() handles multiple
+  // cookies correctly where a single get('set-cookie') would combine them
+  const setCookies =
+    typeof intlResponse.headers.getSetCookie === 'function'
+      ? intlResponse.headers.getSetCookie()
+      : intlResponse.headers.get('set-cookie')
+        ? [intlResponse.headers.get('set-cookie') as string]
+        : [];
+  for (const cookie of setCookies) {
+    response.headers.append('set-cookie', cookie);
   }
 
-  return intlResponse;
+  return response;
 }
 
 export const config = {

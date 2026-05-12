@@ -1,6 +1,7 @@
 "use server";
 
 import { createClient } from "@ckrowd/ckrowd-prisma";
+import { extractResponseCookies } from "@ckrowd/ckrowd-prisma/utils";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -11,40 +12,6 @@ export type Params<T extends (...args: any) => any> = NonNullable<
 export type Payload<T extends (...args: any) => any> = NonNullable<
 	Parameters<T>[0]
 >;
-
-function extractResponseCookies(response: Response) {
-	const cookieStrings =
-		typeof (response.headers as any).getSetCookie === "function"
-			? (response.headers as any).getSetCookie()
-			: (response.headers.get("set-cookie") ?? "")
-					.split(/,(?=[^ ,]+=)/)
-					.filter(Boolean);
-
-	return (cookieStrings as string[]).filter(Boolean).map((raw) => {
-		const parts = raw.split(";").map((s) => s.trim());
-		const [nameValue, ...attrs] = parts;
-		const eq = nameValue.indexOf("=");
-		const name = nameValue.slice(0, eq).trim();
-		const value = nameValue.slice(eq + 1).trim();
-		const options: Record<string, string | boolean | number | Date> = {};
-		for (const attr of attrs) {
-			const attrEq = attr.indexOf("=");
-			const key =
-				attrEq >= 0
-					? attr.slice(0, attrEq).trim().toLowerCase()
-					: attr.trim().toLowerCase();
-			const val = attrEq >= 0 ? attr.slice(attrEq + 1).trim() : "";
-			if (key === "expires") options.expires = new Date(val);
-			else if (key === "max-age") options.maxAge = parseInt(val, 10);
-			else if (key === "domain") options.domain = val;
-			else if (key === "path") options.path = val;
-			else if (key === "secure") options.secure = true;
-			else if (key === "httponly") options.httpOnly = true;
-			else if (key === "samesite") options.sameSite = val.toLowerCase();
-		}
-		return { name, value, options };
-	});
-}
 
 const client = createClient({
 	async onRequest(_path, options) {
@@ -61,7 +28,6 @@ const client = createClient({
 			},
 		};
 	},
-	// @ts-expect-error - fix later
 	async onResponse(response) {
 		const responseCookies = extractResponseCookies(response);
 		if (responseCookies.length > 0) {
@@ -70,6 +36,7 @@ const client = createClient({
 				jar.set(cookie.name, cookie.value, cookie.options);
 			}
 		}
+		return response;
 	},
 });
 
@@ -448,6 +415,75 @@ export async function createAdminTour(
 		await client.tourstack.admin.tours.post(body);
 	return {
 		data: extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+// Active Sessions
+
+export async function revokeSession(
+	body: Payload<typeof client.auth["revoke-session"]["post"]>,
+) {
+	const { error } = await client.auth["revoke-session"].post(body);
+	return { success: !error, error: extractError(error) };
+}
+
+export async function revokeOtherSessions() {
+	const { error } = await client.auth["revoke-other-sessions"].post({});
+	return { success: !error, error: extractError(error) };
+}
+
+// Newsletter
+
+export async function subscribeNewsletter(email: string) {
+	// @ts-expect-error - Eden Treaty mistyps newsletter.subscribe as EdenWS (callable); .post exists at runtime
+	const { data, error } = await client.newsletter.subscribe.post({ email });
+	return { success: !error && data?.success, error: extractError(error) };
+}
+
+export async function unsubscribeNewsletter(email: string) {
+	const { data, error } = await client.newsletter.unsubscribe.post({ email });
+	return { success: !error && data?.success, error: extractError(error) };
+}
+
+// 2FA
+
+export async function setup2FA(): Promise<{
+	success: boolean;
+	data?: { qrCodeUrl: string; secret: string };
+	error: string;
+}> {
+	const { data, error } = await client.auth["two-factor"].enable.post({});
+	return { success: !error && data?.success, data: data?.data, error: extractError(error) };
+}
+
+export async function verify2FA(code: string): Promise<{ success: boolean; error: string }> {
+	const { data, error } = await client.auth["two-factor"].verify.post({ code });
+	return { success: !error && data?.success, error: extractError(error) };
+}
+
+export async function disable2FA(password: string): Promise<{ success: boolean; error: string }> {
+	const { data, error } = await client.auth["two-factor"].disable.post({ password });
+	return { success: !error && data?.success, error: extractError(error) };
+}
+
+// Account Deletion
+
+export async function deleteAccount(): Promise<{ success: boolean; error: string }> {
+	const { data, error } = await client.auth["delete-account"].post({});
+	return { success: !error && data?.success, error: extractError(error) };
+}
+
+// Stakeholders Export
+
+export async function exportStakeholders(format: "json" | "csv" = "csv") {
+	// @ts-expect-error - export route removed from type definitions in v1.1.31; backend to re-register GET /tourstack/onboarding-links/export
+	const { data, error } = await client.tourstack["onboarding-links"].export.get(
+		{ query: { format } },
+	);
+	return {
+		data: extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error),
 	};
