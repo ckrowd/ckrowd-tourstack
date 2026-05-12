@@ -478,7 +478,6 @@ export async function deleteAccount(): Promise<{ success: boolean; error: string
 // Stakeholders Export
 
 export async function exportStakeholders(format: "json" | "csv" = "csv") {
-	// @ts-expect-error - export route removed from type definitions in v1.1.31; backend to re-register GET /tourstack/onboarding-links/export
 	const { data, error } = await client.tourstack["onboarding-links"].export.get(
 		{ query: { format } },
 	);
