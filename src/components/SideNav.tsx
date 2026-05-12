@@ -27,7 +27,6 @@ export default function SideNav() {
 			icon: "confirmation_number",
 			href: "/tours",
 		},
-		{ key: "requests", label: t("requests"), icon: "send", href: "/eoi" },
 		{
 			key: "onboarding",
 			label: t("onboarding"),
@@ -49,9 +48,13 @@ export default function SideNav() {
 		},
 	];
 
-	const activeItem = navItems.find(
-		(item) => pathname === item.href || pathname.startsWith(`${item.href}/`),
-	)?.key;
+	const activeItem =
+		pathname === "/eoi" || pathname.startsWith("/eoi/")
+			? "tours"
+			: navItems.find(
+					(item) =>
+						pathname === item.href || pathname.startsWith(`${item.href}/`),
+				)?.key;
 
 	return (
 		<aside className="hidden lg:flex flex-col gap-2 py-6 h-full w-64 border-r border-slate-200 bg-slate-50 shrink-0">

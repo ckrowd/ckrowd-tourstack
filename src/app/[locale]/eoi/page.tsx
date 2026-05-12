@@ -4,11 +4,15 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Suspense, useState } from "react";
-import { createEOI, getArtist } from "@/app/actions";
+import { createEOI, getArtists } from "@/app/actions";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 import { useSession } from "@/context/AuthContext";
 import { Link } from "@/i18n/routing";
+
+type ArtistItem = NonNullable<
+	Awaited<ReturnType<typeof getArtists>>["data"]
+>[number];
 
 type ApplicationForm = {
 	name: string;
@@ -52,7 +56,7 @@ function Stepper({
 	const progress = (current / (steps.length - 1)) * 100;
 
 	return (
-		<div className="mb-12">
+		<div className="mb-10">
 			<div className="relative flex items-center justify-between">
 				<div className="absolute left-0 top-1/2 z-0 h-0.5 w-full -translate-y-1/2 bg-slate-200" />
 				<div
@@ -62,7 +66,6 @@ function Stepper({
 				{steps.map((step, index) => {
 					const done = index < current;
 					const active = index === current;
-
 					return (
 						<div
 							key={step.label}
@@ -120,19 +123,213 @@ function ReviewRow({
 	) {
 		return null;
 	}
-
 	const display = Array.isArray(value)
 		? value.join(", ")
 		: value === true
 			? "Yes"
 			: value;
-
 	return (
 		<div className="flex items-start gap-4 border-b border-slate-100 py-3 last:border-none">
 			<span className="mt-0.5 w-40 shrink-0 text-xs font-bold uppercase tracking-[0.24em] text-slate-400">
 				{label}
 			</span>
 			<span className="text-sm font-semibold text-slate-900">{display}</span>
+		</div>
+	);
+}
+
+function OpportunitySelector({
+	opportunities,
+	loading,
+	selectedId,
+	onSelect,
+}: {
+	opportunities: ArtistItem[];
+	loading: boolean;
+	selectedId: string | null;
+	onSelect: (id: string) => void;
+}) {
+	const t = useTranslations("EOIPage");
+	const [search, setSearch] = useState("");
+
+	const filtered = search.trim()
+		? opportunities.filter(
+				(a) =>
+					String(a.name ?? "")
+						.toLowerCase()
+						.includes(search.toLowerCase()) ||
+					String(a.tour_name ?? "")
+						.toLowerCase()
+						.includes(search.toLowerCase()),
+			)
+		: opportunities;
+
+	return (
+		<div className="rounded-2xl border border-slate-200 bg-white shadow-sm p-5">
+			<p className="text-[10px] font-bold uppercase tracking-[0.24em] text-slate-500 mb-3">
+				{t("selector.heading")}
+			</p>
+			<div className="relative mb-3">
+				<span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-base">
+					search
+				</span>
+				<input
+					type="text"
+					placeholder={t("selector.searchPlaceholder")}
+					value={search}
+					onChange={(e) => setSearch(e.target.value)}
+					className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-[#FF5A30] focus:ring-2 focus:ring-[#FF5A30]/20 transition"
+				/>
+			</div>
+
+			{loading ? (
+				<p className="text-sm text-slate-500 text-center py-4">
+					{t("selector.loading")}
+				</p>
+			) : filtered.length === 0 ? (
+				<p className="text-sm text-slate-500 text-center py-4">
+					{t("selector.noResults")}
+				</p>
+			) : (
+				<div className="max-h-56 overflow-y-auto space-y-0.5 pr-0.5">
+					{filtered.map((a) => {
+						const id = String(a.id ?? a.name ?? "");
+						const isSelected = id === selectedId;
+						return (
+							<button
+								key={id}
+								type="button"
+								onClick={() => onSelect(id)}
+								className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all ${
+									isSelected
+										? "bg-orange-50 border border-[#FF5A30]/25"
+										: "hover:bg-slate-50 border border-transparent"
+								}`}
+							>
+								<div
+									className={`w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center transition-colors ${
+										isSelected ? "border-[#FF5A30]" : "border-slate-300"
+									}`}
+								>
+									{isSelected && (
+										<div className="w-2 h-2 rounded-full bg-[#FF5A30]" />
+									)}
+								</div>
+								<div className="flex-1 min-w-0">
+									<p
+										className={`text-sm font-bold truncate ${isSelected ? "text-[#FF5A30]" : "text-slate-900"}`}
+									>
+										{String(a.name ?? "")}
+									</p>
+									{a.tour_name && (
+										<p className="text-xs text-slate-500 truncate">
+											{String(a.tour_name)}
+										</p>
+									)}
+								</div>
+								{a.genre && (
+									<span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 shrink-0">
+										{String(a.genre)}
+									</span>
+								)}
+							</button>
+						);
+					})}
+				</div>
+			)}
+		</div>
+	);
+}
+
+function OpportunityPanel({
+	artist,
+	locale,
+}: {
+	artist: ArtistItem;
+	locale: string;
+}) {
+	const t = useTranslations("EOIPage");
+
+	const dateRange =
+		artist.tour_start && artist.tour_end
+			? `${new Date(String(artist.tour_start)).toLocaleDateString(locale, { month: "short", day: "numeric", year: "numeric" })} – ${new Date(String(artist.tour_end)).toLocaleDateString(locale, { month: "short", day: "numeric", year: "numeric" })}`
+			: String(artist.tour_window ?? "");
+
+	const feeRange =
+		artist.fee_min != null && artist.fee_max != null
+			? `$${Math.round(Number(artist.fee_min) / 1000)}k – $${Math.round(Number(artist.fee_max) / 1000)}k USD`
+			: null;
+
+	const markets = Array.isArray(artist.markets)
+		? (artist.markets as string[]).join(", ")
+		: String(artist.markets ?? "");
+
+	return (
+		<div className="rounded-2xl border border-slate-200 bg-white shadow-sm p-5 space-y-4">
+			<div>
+				<p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#FF5A30] mb-1">
+					{t("tourPanel.heading")}
+				</p>
+				<h2 className="text-lg font-(family-name:--font-manrope) font-extrabold text-slate-950 leading-tight">
+					{String(artist.tour_name ?? artist.name ?? "")}
+				</h2>
+				<p className="mt-0.5 text-sm font-semibold text-slate-500">
+					{String(artist.name ?? "")}
+				</p>
+			</div>
+
+			<div className="space-y-2.5">
+				{artist.genre && (
+					<div>
+						<p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+							{t("tourPanel.genre")}
+						</p>
+						<p className="text-sm font-semibold text-slate-800 mt-0.5">
+							{String(artist.genre)}
+						</p>
+					</div>
+				)}
+				{dateRange && (
+					<div>
+						<p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+							{t("tourPanel.dates")}
+						</p>
+						<p className="text-sm font-semibold text-slate-800 mt-0.5">
+							{dateRange}
+						</p>
+					</div>
+				)}
+				{markets && (
+					<div>
+						<p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+							{t("tourPanel.markets")}
+						</p>
+						<p className="text-sm font-semibold text-slate-800 mt-0.5">
+							{markets}
+						</p>
+					</div>
+				)}
+				{feeRange && (
+					<div>
+						<p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+							{t("tourPanel.fee")}
+						</p>
+						<p className="text-sm font-semibold text-slate-800 mt-0.5">
+							{feeRange}
+						</p>
+					</div>
+				)}
+				{artist.region && (
+					<div>
+						<p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+							{t("tourPanel.region")}
+						</p>
+						<p className="text-sm font-semibold text-slate-800 mt-0.5">
+							{String(artist.region)}
+						</p>
+					</div>
+				)}
+			</div>
 		</div>
 	);
 }
@@ -157,47 +354,36 @@ function EOIPageContent() {
 	];
 
 	const searchParams = useSearchParams();
-	const opportunityId =
-		searchParams.get("opportunity") ?? searchParams.get("id");
+	const initialId =
+		searchParams.get("opportunity") ?? searchParams.get("id") ?? null;
+
 	const { data: session } = useSession();
+	const [selectedId, setSelectedId] = useState<string | null>(initialId);
 	const [step, setStep] = useState(0);
 	const [form, setForm] = useState<ApplicationForm>(defaultForm);
 
-	const { data: artistQuery, isLoading: loadingOpportunity } = useQuery({
-		queryKey: ["artist", opportunityId],
-		queryFn: () => getArtist(opportunityId ?? ""),
-		enabled: !!opportunityId,
+	const { data: artistsQuery, isLoading: loadingOpportunities } = useQuery({
+		queryKey: ["artists"],
+		queryFn: getArtists,
 	});
 
-	type ArtistData = NonNullable<Awaited<ReturnType<typeof getArtist>>["data"]>;
+	const opportunities = artistsQuery?.data ?? [];
+	const artist = selectedId
+		? (opportunities.find((a) => String(a.id ?? a.name ?? "") === selectedId) ??
+			null)
+		: null;
 
-	const artist = artistQuery?.success
-		? artistQuery.data
-		: !opportunityId
-			? ({
-					id: "general",
-					name: t("generalEoi.name"),
-					genre: t("generalEoi.genre"),
-					tour_name: t("generalEoi.tourName"),
-					tour_start: new Date(),
-					tour_end: new Date(
-						new Date().setFullYear(new Date().getFullYear() + 1),
-					),
-					markets: t("generalEoi.markets"),
-					fee_min: t("generalEoi.fee_min"),
-				} as unknown as ArtistData)
-			: null;
-
-	const loadError =
-		opportunityId && !artistQuery?.success && !loadingOpportunity
-			? (artistQuery?.error ?? t("loadError"))
-			: null;
+	function handleSelectOpportunity(id: string) {
+		setSelectedId(id);
+		setStep(0);
+		setForm(defaultForm);
+	}
 
 	const submitMutation = useMutation({
 		mutationFn: createEOI,
 	});
 
-	const submitted = submitMutation.isSuccess;
+	const submitted = submitMutation.isSuccess && submitMutation.data?.success;
 	const submitting = submitMutation.isPending;
 	const submitError = submitMutation.error
 		? submitMutation.error instanceof Error
@@ -209,20 +395,14 @@ function EOIPageContent() {
 
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-
 		if (step < STEPS.length - 1) {
 			setStep((current) => current + 1);
 			return;
 		}
-
-		if (!artist) {
-			return;
-		}
-
+		if (!artist) return;
 		const estimatedAudience = form.audience
 			? Number(form.audience.replace(/,/g, ""))
 			: 0;
-
 		submitMutation.mutate({
 			artistId: artist.id,
 			city: form.city,
@@ -238,10 +418,15 @@ function EOIPageContent() {
 		setForm((prev) => ({ ...prev, [field]: value }));
 	}
 
-	const selectedOpportunityTitle = artist?.name ?? t("selectedOpportunity");
 	const estimatedAudience = form.audience
 		? Number(form.audience.replace(/,/g, ""))
 		: 0;
+
+	const markets = artist
+		? Array.isArray(artist.markets)
+			? (artist.markets as string[]).join(", ")
+			: String(artist.markets ?? "")
+		: "";
 
 	if (submitted && artist) {
 		return (
@@ -251,8 +436,8 @@ function EOIPageContent() {
 					<SideNav />
 					<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-12">
 						<div className="flex min-h-[calc(100vh-5rem)] items-center justify-center">
-							<div className="w-full rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-sm md:p-12">
-								<div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
+							<div className="w-full max-w-lg rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-sm md:p-12">
+								<div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 mx-auto">
 									<span
 										className="material-symbols-outlined text-4xl"
 										style={{ fontVariationSettings: "'FILL' 1" }}
@@ -264,7 +449,9 @@ function EOIPageContent() {
 									{t("success.title")}
 								</h1>
 								<p className="mt-4 text-sm leading-6 text-slate-600">
-									{t("success.description", { artist: artist.name })}
+									{t("success.description", {
+										artist: String(artist.name ?? ""),
+									})}
 								</p>
 								<div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
 									<Link
@@ -293,246 +480,256 @@ function EOIPageContent() {
 			<TopNav />
 			<div className="flex pt-16 h-screen">
 				<SideNav />
-				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-12">
+				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10">
 					<div className="w-full">
-						<header className="mb-10">
-							<span className="mb-3 block text-xs font-bold uppercase tracking-[0.3em] text-[#FF5A30]">
+						<header className="mb-8">
+							<span className="mb-2 block text-xs font-bold uppercase tracking-[0.3em] text-[#FF5A30]">
 								{t("hero.platform")}
 							</span>
-							<h1 className="text-4xl font-black tracking-tight text-slate-950 md:text-5xl font-(family-name:--font-manrope)">
+							<h1 className="text-3xl font-black tracking-tight text-slate-950 md:text-4xl font-(family-name:--font-manrope)">
 								{t("hero.title")}
 							</h1>
-							<p className="mt-5 text-lg leading-relaxed text-slate-600">
+							<p className="mt-3 text-base leading-relaxed text-slate-600">
 								{t("hero.description")}
 							</p>
 						</header>
 
-						<Stepper current={step} steps={STEPS} />
+						<div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+							{/* Left: selector + info panel */}
+							<div className="lg:col-span-4 space-y-4">
+								<OpportunitySelector
+									opportunities={opportunities}
+									loading={loadingOpportunities}
+									selectedId={selectedId}
+									onSelect={handleSelectOpportunity}
+								/>
+								{artist && <OpportunityPanel artist={artist} locale={locale} />}
+							</div>
 
-						{loadingOpportunity ? (
-							<div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-								<p className="text-sm font-medium text-slate-600">
-									{t("loadingOpportunity")}
-								</p>
-							</div>
-						) : loadError ? (
-							<div className="rounded-3xl border border-rose-200 bg-rose-50 p-8 text-sm font-medium text-rose-700 shadow-sm">
-								<p>{loadError}</p>
-								<Link
-									href="/discovery"
-									className="mt-4 inline-flex items-center justify-center rounded-full bg-[#FF5A30] px-5 py-3 text-sm font-bold text-white transition hover:opacity-90"
-								>
-									{t("success.backToDiscovery")}
-								</Link>
-							</div>
-						) : artist ? (
-							<div className="w-full">
-								<section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
-									<div className="mb-8">
-										<h2 className="text-2xl font-black tracking-tight text-slate-950 font-(family-name:--font-manrope)">
-											{artist.name}
-										</h2>
-										<p className="mt-2 text-sm font-medium text-slate-500">
-											{artist.genre}
+							{/* Right: form */}
+							<div className="lg:col-span-8">
+								{!artist ? (
+									<div className="rounded-3xl border-2 border-dashed border-slate-200 bg-white/50 p-12 text-center">
+										<span className="material-symbols-outlined text-5xl text-slate-300 block mb-4">
+											confirmation_number
+										</span>
+										<p className="text-base font-bold text-slate-400">
+											{t("selector.selectPrompt")}
 										</p>
 									</div>
+								) : (
+									<section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+										<Stepper current={step} steps={STEPS} />
 
-									<form onSubmit={handleSubmit} className="space-y-8">
-										{step === 0 && (
-											<div className="grid gap-5 sm:grid-cols-2">
-												<div>
-													<Label htmlFor="name">
-														{t("form.fullName.label")}
-													</Label>
-													<input
-														id="name"
-														type="text"
-														autoComplete="name"
-														placeholder={t("form.fullName.placeholder")}
-														value={form.name || session?.user?.name || ""}
-														onChange={(event) =>
-															updateField("name", event.target.value)
-														}
-														required
-														className={inputClass}
-													/>
+										<form onSubmit={handleSubmit} className="space-y-8">
+											{step === 0 && (
+												<div className="grid gap-5 sm:grid-cols-2">
+													<div>
+														<Label htmlFor="name">
+															{t("form.fullName.label")}
+														</Label>
+														<input
+															id="name"
+															type="text"
+															autoComplete="name"
+															placeholder={t("form.fullName.placeholder")}
+															value={form.name || session?.user?.name || ""}
+															onChange={(event) =>
+																updateField("name", event.target.value)
+															}
+															required
+															className={inputClass}
+														/>
+													</div>
+													<div>
+														<Label htmlFor="email">
+															{t("form.email.label")}
+														</Label>
+														<input
+															id="email"
+															type="email"
+															autoComplete="email"
+															placeholder={t("form.email.placeholder")}
+															value={
+																form.email || session?.user?.email || ""
+															}
+															onChange={(event) =>
+																updateField("email", event.target.value)
+															}
+															required
+															className={inputClass}
+														/>
+													</div>
+													<div className="sm:col-span-2">
+														<Label htmlFor="company">
+															{t("form.company.label")}
+														</Label>
+														<input
+															id="company"
+															type="text"
+															placeholder={t("form.company.placeholder")}
+															value={form.company}
+															onChange={(event) =>
+																updateField("company", event.target.value)
+															}
+															className={inputClass}
+														/>
+													</div>
 												</div>
-												<div>
-													<Label htmlFor="email">{t("form.email.label")}</Label>
-													<input
-														id="email"
-														type="email"
-														autoComplete="email"
-														placeholder={t("form.email.placeholder")}
-														value={form.email || session?.user?.email || ""}
-														onChange={(event) =>
-															updateField("email", event.target.value)
-														}
-														required
-														className={inputClass}
-													/>
-												</div>
-												<div className="sm:col-span-2">
-													<Label htmlFor="company">
-														{t("form.company.label")}
-													</Label>
-													<input
-														id="company"
-														type="text"
-														placeholder={t("form.company.placeholder")}
-														value={form.company}
-														onChange={(event) =>
-															updateField("company", event.target.value)
-														}
-														className={inputClass}
-													/>
-												</div>
-											</div>
-										)}
+											)}
 
-										{step === 1 && (
-											<div className="grid gap-5 sm:grid-cols-2">
-												<div>
-													<Label htmlFor="city">{t("form.city.label")}</Label>
-													<input
-														id="city"
-														type="text"
-														placeholder={t("form.city.placeholder")}
-														value={form.city}
-														onChange={(event) =>
-															updateField("city", event.target.value)
-														}
-														className={inputClass}
-													/>
+											{step === 1 && (
+												<div className="grid gap-5 sm:grid-cols-2">
+													<div>
+														<Label htmlFor="city">
+															{t("form.city.label")}
+														</Label>
+														<input
+															id="city"
+															type="text"
+															placeholder={t("form.city.placeholder")}
+															value={form.city}
+															onChange={(event) =>
+																updateField("city", event.target.value)
+															}
+															className={inputClass}
+														/>
+													</div>
+													<div>
+														<Label htmlFor="audience">
+															{t("form.audience.label")}
+														</Label>
+														<input
+															id="audience"
+															type="text"
+															inputMode="numeric"
+															placeholder={t("form.audience.placeholder")}
+															value={form.audience}
+															onChange={(event) =>
+																updateField("audience", event.target.value)
+															}
+															className={inputClass}
+														/>
+													</div>
+													<div className="sm:col-span-2">
+														<Label htmlFor="notes">
+															{t("form.notes.label")}
+														</Label>
+														<textarea
+															id="notes"
+															placeholder={t("form.notes.placeholder")}
+															value={form.notes}
+															onChange={(event) =>
+																updateField("notes", event.target.value)
+															}
+															className={textareaClass}
+														/>
+													</div>
 												</div>
-												<div>
-													<Label htmlFor="audience">
-														{t("form.audience.label")}
-													</Label>
-													<input
-														id="audience"
-														type="text"
-														inputMode="numeric"
-														placeholder={t("form.audience.placeholder")}
-														value={form.audience}
-														onChange={(event) =>
-															updateField("audience", event.target.value)
-														}
-														className={inputClass}
-													/>
-												</div>
-												<div className="sm:col-span-2">
-													<Label htmlFor="notes">{t("form.notes.label")}</Label>
-													<textarea
-														id="notes"
-														placeholder={t("form.notes.placeholder")}
-														value={form.notes}
-														onChange={(event) =>
-															updateField("notes", event.target.value)
-														}
-														className={textareaClass}
-													/>
-												</div>
-											</div>
-										)}
+											)}
 
-										{step === 2 && (
-											<div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
-												<h3 className="text-lg font-black tracking-tight text-slate-950 font-(family-name:--font-manrope)">
-													{t("review.title")}
-												</h3>
-												<div className="mt-4 divide-y divide-slate-100 rounded-2xl bg-white p-4 shadow-sm">
-													<ReviewRow
-														label={t("review.artist")}
-														value={selectedOpportunityTitle}
-													/>
-													<ReviewRow
-														label={t("review.markets")}
-														value={artist.markets ?? undefined}
-													/>
-													<ReviewRow
-														label={t("review.applicant")}
-														value={form.name}
-													/>
-													<ReviewRow
-														label={t("review.email")}
-														value={form.email}
-													/>
-													<ReviewRow
-														label={t("review.company")}
-														value={form.company}
-													/>
-													<ReviewRow
-														label={t("review.city")}
-														value={form.city}
-													/>
-													<ReviewRow
-														label={t("review.audience")}
-														value={form.audience}
-													/>
-													<ReviewRow
-														label={t("review.notes")}
-														value={form.notes}
-													/>
-													<ReviewRow
-														label={t("review.estimatedAudience")}
-														value={
-															estimatedAudience > 0
-																? estimatedAudience.toLocaleString(locale)
-																: undefined
-														}
-													/>
+											{step === 2 && (
+												<div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
+													<h3 className="text-lg font-black tracking-tight text-slate-950 font-(family-name:--font-manrope)">
+														{t("review.title")}
+													</h3>
+													<div className="mt-4 divide-y divide-slate-100 rounded-2xl bg-white p-4 shadow-sm">
+														<ReviewRow
+															label={t("review.artist")}
+															value={String(artist.name ?? "")}
+														/>
+														<ReviewRow
+															label={t("review.tour")}
+															value={String(artist.tour_name ?? "")}
+														/>
+														<ReviewRow
+															label={t("review.markets")}
+															value={markets}
+														/>
+														<ReviewRow
+															label={t("review.applicant")}
+															value={form.name}
+														/>
+														<ReviewRow
+															label={t("review.email")}
+															value={form.email}
+														/>
+														<ReviewRow
+															label={t("review.company")}
+															value={form.company}
+														/>
+														<ReviewRow
+															label={t("review.city")}
+															value={form.city}
+														/>
+														<ReviewRow
+															label={t("review.audience")}
+															value={form.audience}
+														/>
+														<ReviewRow
+															label={t("review.notes")}
+															value={form.notes}
+														/>
+														{estimatedAudience > 0 && (
+															<ReviewRow
+																label={t("review.estimatedAudience")}
+																value={estimatedAudience.toLocaleString(
+																	locale,
+																)}
+															/>
+														)}
+													</div>
+													<p className="mt-4 text-sm leading-6 text-slate-600">
+														{t("review.disclaimer")}
+													</p>
 												</div>
-												<p className="mt-4 text-sm leading-6 text-slate-600">
-													{t("review.disclaimer")}
+											)}
+
+											{submitError && (
+												<p
+													className="text-sm font-medium text-rose-700"
+													role="alert"
+												>
+													{submitError}
 												</p>
-											</div>
-										)}
+											)}
 
-										{submitError && (
-											<p
-												className="text-sm font-medium text-rose-700"
-												role="alert"
-											>
-												{submitError}
-											</p>
-										)}
-
-										<div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-6">
-											<button
-												type="button"
-												onClick={() =>
-													setStep((current) => Math.max(0, current - 1))
-												}
-												disabled={step === 0}
-												className="rounded-full border border-slate-200 px-5 py-3 text-sm font-bold text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
-											>
-												{t("actions.back")}
-											</button>
-											<div className="flex flex-wrap items-center gap-3">
-												<Link
-													href="/discovery"
-													className="rounded-full border border-slate-200 px-5 py-3 text-sm font-bold text-slate-700 transition hover:bg-slate-50"
-												>
-													{t("actions.cancel")}
-												</Link>
+											<div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-6">
 												<button
-													type="submit"
-													disabled={submitting}
-													className="rounded-full bg-[#FF5A30] px-6 py-3 text-sm font-bold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+													type="button"
+													onClick={() =>
+														setStep((current) => Math.max(0, current - 1))
+													}
+													disabled={step === 0}
+													className="rounded-full border border-slate-200 px-5 py-3 text-sm font-bold text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
 												>
-													{submitting
-														? t("actions.submitting")
-														: step === STEPS.length - 1
-															? t("actions.submit")
-															: t("actions.continue")}
+													{t("actions.back")}
 												</button>
+												<div className="flex flex-wrap items-center gap-3">
+													<Link
+														href="/discovery"
+														className="rounded-full border border-slate-200 px-5 py-3 text-sm font-bold text-slate-700 transition hover:bg-slate-50"
+													>
+														{t("actions.cancel")}
+													</Link>
+													<button
+														type="submit"
+														disabled={submitting}
+														className="rounded-full bg-[#FF5A30] px-6 py-3 text-sm font-bold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+													>
+														{submitting
+															? t("actions.submitting")
+															: step === STEPS.length - 1
+																? t("actions.submit")
+																: t("actions.continue")}
+													</button>
+												</div>
 											</div>
-										</div>
-									</form>
-								</section>
+										</form>
+									</section>
+								)}
 							</div>
-						) : null}
+						</div>
 					</div>
 				</main>
 			</div>
