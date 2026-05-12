@@ -1,9 +1,9 @@
 "use client";
 
 import { useMutation, useQuery } from "@tanstack/react-query";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { use, useState } from "react";
-import Image from "next/image";
 import { getOnboardingLink, submitOnboardingLink } from "@/app/actions";
 import { Link } from "@/i18n/routing";
 

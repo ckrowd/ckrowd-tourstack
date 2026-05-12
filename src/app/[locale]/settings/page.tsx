@@ -1,10 +1,10 @@
 "use client";
 
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
 import {
 	deleteAccount,
 	disable2FA,
@@ -118,12 +118,14 @@ function Toggle({
 				aria-checked={on}
 				onClick={handleClick}
 				disabled={disabled}
-				className={`relative w-11 h-6 rounded-full transition-colors shrink-0 disabled:opacity-50 ${on ? "bg-[#FF5A30]" : "bg-surface-container-high"
-					}`}
+				className={`relative w-11 h-6 rounded-full transition-colors shrink-0 disabled:opacity-50 ${
+					on ? "bg-[#FF5A30]" : "bg-surface-container-high"
+				}`}
 			>
 				<span
-					className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform ${on ? "translate-x-5" : "translate-x-0"
-						}`}
+					className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform ${
+						on ? "translate-x-5" : "translate-x-0"
+					}`}
 				/>
 			</button>
 		</div>
@@ -276,7 +278,9 @@ function NotificationsTab() {
 		mutationFn: async (subscribe: boolean) => {
 			const email = sessionQuery.data?.user?.email;
 			if (!email) throw new Error("No email found in session");
-			return subscribe ? subscribeNewsletter(email) : unsubscribeNewsletter(email);
+			return subscribe
+				? subscribeNewsletter(email)
+				: unsubscribeNewsletter(email);
 		},
 		onSuccess: (result, subscribe) => {
 			if (result.success) setIsSubscribed(subscribe);
@@ -363,7 +367,9 @@ function NotificationsTab() {
 				/>
 				{newsletterMutation.isPending && (
 					<p className="text-xs text-on-surface-variant mt-2">
-						{isSubscribed ? t("newsletter.unsubscribing") : t("newsletter.subscribing")}
+						{isSubscribed
+							? t("newsletter.unsubscribing")
+							: t("newsletter.subscribing")}
 					</p>
 				)}
 			</Section>
@@ -633,7 +639,9 @@ function SecurityTab() {
 								disabled={disableMutation.isPending}
 								className="text-sm font-bold text-red-500 border border-red-200 px-4 py-2 rounded-lg hover:bg-red-50 transition-colors disabled:opacity-50"
 							>
-								{disableMutation.isPending ? "…" : t("twoFactor.actions.disable")}
+								{disableMutation.isPending
+									? "…"
+									: t("twoFactor.actions.disable")}
 							</button>
 						) : (
 							<button
@@ -658,7 +666,12 @@ function SecurityTab() {
 
 							{qrCodeUrl ? (
 								<div className="flex justify-center">
-									<Image src={qrCodeUrl} alt="2FA QR Code" width={160} height={160} />
+									<Image
+										src={qrCodeUrl}
+										alt="2FA QR Code"
+										width={160}
+										height={160}
+									/>
 								</div>
 							) : (
 								<div className="w-40 h-40 mx-auto rounded-xl bg-surface-container-high flex items-center justify-center">
@@ -795,7 +808,9 @@ function SecurityTab() {
 							className="w-full bg-white border border-red-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-300"
 						/>
 						{deleteMutation.data && !deleteMutation.data.success && (
-							<p className="text-xs text-red-600">{deleteMutation.data.error}</p>
+							<p className="text-xs text-red-600">
+								{deleteMutation.data.error}
+							</p>
 						)}
 						<div className="flex gap-3">
 							<button
@@ -813,7 +828,7 @@ function SecurityTab() {
 								onClick={() => deleteMutation.mutate()}
 								disabled={
 									confirmEmail.trim().toLowerCase() !==
-									userEmail.trim().toLowerCase() || deleteMutation.isPending
+										userEmail.trim().toLowerCase() || deleteMutation.isPending
 								}
 								className="flex-1 py-2.5 bg-red-600 text-white rounded-xl text-sm font-bold hover:bg-red-700 transition-colors disabled:opacity-50"
 							>
@@ -879,10 +894,11 @@ export default function SettingsPage() {
 								key={tab.key}
 								type="button"
 								onClick={() => setActiveTab(tab.key)}
-								className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all ${activeTab === tab.key
+								className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+									activeTab === tab.key
 										? "bg-[#FF5A30] text-white shadow-sm"
 										: "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low"
-									}`}
+								}`}
 							>
 								<span className="material-symbols-outlined text-sm">
 									{tab.icon}

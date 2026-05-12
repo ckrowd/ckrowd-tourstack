@@ -48,7 +48,11 @@ export default function OnboardingLinksPage() {
 		onSuccess: (result) => {
 			if (!result.success || !result.data) return;
 			const blob = new Blob(
-				[typeof result.data === "string" ? result.data : JSON.stringify(result.data)],
+				[
+					typeof result.data === "string"
+						? result.data
+						: JSON.stringify(result.data),
+				],
 				{ type: "text/csv" },
 			);
 			const url = URL.createObjectURL(blob);
@@ -94,7 +98,9 @@ export default function OnboardingLinksPage() {
 								<span className="material-symbols-outlined text-sm">
 									download
 								</span>
-								{exportMutation.isPending ? t("header.exporting") : t("header.export")}
+								{exportMutation.isPending
+									? t("header.exporting")
+									: t("header.export")}
 							</button>
 						</header>
 

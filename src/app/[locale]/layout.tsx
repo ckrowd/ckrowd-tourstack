@@ -156,10 +156,9 @@ export default async function RootLayout({
 		const session = await getSession();
 		if (!session) {
 			const localePattern = routing.locales.join("|");
-			const normalizedFrom = pathname.replace(
-				new RegExp(`^\\/(${localePattern})(\\/|$)`),
-				"/",
-			) || "/";
+			const normalizedFrom =
+				pathname.replace(new RegExp(`^\\/(${localePattern})(\\/|$)`), "/") ||
+				"/";
 			redirect(`/${locale}/login?from=${encodeURIComponent(normalizedFrom)}`);
 		}
 	}

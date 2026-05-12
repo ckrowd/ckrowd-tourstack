@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { useLogout, useSession } from "@/context/AuthContext";
-import { Link, usePathname, useRouter, routing } from "@/i18n/routing";
+import { Link, routing, usePathname, useRouter } from "@/i18n/routing";
 
 export default function TopNav() {
 	const pathname = usePathname();
@@ -122,7 +122,9 @@ export default function TopNav() {
 								aria-expanded={langOpen}
 							>
 								{locale.toUpperCase()}
-								<span className="material-symbols-outlined text-[14px] leading-none">expand_more</span>
+								<span className="material-symbols-outlined text-[14px] leading-none">
+									expand_more
+								</span>
 							</button>
 							{langOpen && (
 								<>
@@ -132,18 +134,30 @@ export default function TopNav() {
 										onClick={() => setLangOpen(false)}
 										aria-label="Close language menu"
 									/>
-									<div className="absolute right-0 top-9 z-50 w-20 bg-white rounded-xl shadow-lg border border-slate-100 overflow-hidden" role="listbox">
+									<div
+										className="absolute right-0 top-9 z-50 w-20 bg-white rounded-xl shadow-lg border border-slate-100 overflow-hidden"
+										role="listbox"
+									>
 										{(routing.locales as readonly string[]).map((l) => (
 											<button
 												key={l}
 												type="button"
 												role="option"
 												aria-selected={locale === l}
-												onClick={() => { router.replace(pathname, { locale: l as "en" | "fr" }); setLangOpen(false); }}
+												onClick={() => {
+													router.replace(pathname, {
+														locale: l as "en" | "fr",
+													});
+													setLangOpen(false);
+												}}
 												className={`flex items-center justify-between w-full px-3 py-2 text-xs font-bold uppercase hover:bg-slate-50 transition-colors ${locale === l ? "text-[#FF5A30]" : "text-slate-600"}`}
 											>
 												{l.toUpperCase()}
-												{locale === l && <span className="material-symbols-outlined text-[12px] leading-none">check</span>}
+												{locale === l && (
+													<span className="material-symbols-outlined text-[12px] leading-none">
+														check
+													</span>
+												)}
 											</button>
 										))}
 									</div>

@@ -423,7 +423,7 @@ export async function createAdminTour(
 // Active Sessions
 
 export async function revokeSession(
-	body: Payload<typeof client.auth["revoke-session"]["post"]>,
+	body: Payload<(typeof client.auth)["revoke-session"]["post"]>,
 ) {
 	const { error } = await client.auth["revoke-session"].post(body);
 	return { success: !error, error: extractError(error) };
@@ -455,22 +455,35 @@ export async function setup2FA(): Promise<{
 	error: string;
 }> {
 	const { data, error } = await client.auth["two-factor"].enable.post({});
-	return { success: !error && data?.success, data: data?.data, error: extractError(error) };
+	return {
+		success: !error && data?.success,
+		data: extractPayload(data),
+		error: extractError(error),
+	};
 }
 
-export async function verify2FA(code: string): Promise<{ success: boolean; error: string }> {
+export async function verify2FA(
+	code: string,
+): Promise<{ success: boolean; error: string }> {
 	const { data, error } = await client.auth["two-factor"].verify.post({ code });
 	return { success: !error && data?.success, error: extractError(error) };
 }
 
-export async function disable2FA(password: string): Promise<{ success: boolean; error: string }> {
-	const { data, error } = await client.auth["two-factor"].disable.post({ password });
+export async function disable2FA(
+	password: string,
+): Promise<{ success: boolean; error: string }> {
+	const { data, error } = await client.auth["two-factor"].disable.post({
+		password,
+	});
 	return { success: !error && data?.success, error: extractError(error) };
 }
 
 // Account Deletion
 
-export async function deleteAccount(): Promise<{ success: boolean; error: string }> {
+export async function deleteAccount(): Promise<{
+	success: boolean;
+	error: string;
+}> {
 	const { data, error } = await client.auth["delete-account"].post({});
 	return { success: !error && data?.success, error: extractError(error) };
 }
