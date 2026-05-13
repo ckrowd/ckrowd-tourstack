@@ -859,7 +859,9 @@
     },
     "actions": {
       "save": "Enregistrer les modifications",
-      "saving": "Enregistrement..."
+      "saving": "Enregistrement...",
+      "saveSuccess": "Modifications enregistrées",
+      "saveError": "Échec de l'enregistrement des modifications"
     }
   },
   "SettingsPage": {

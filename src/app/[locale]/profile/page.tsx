@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { getTourstackProfile, updateTourstackProfile } from "@/app/actions";
+import { useSession } from "@/context/AuthContext";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 
@@ -72,6 +73,7 @@ function Field({
 export default function ProfilePage() {
 	const t = useTranslations("ProfilePage");
 	const queryClient = useQueryClient();
+	const { data: session } = useSession();
 
 	const { data: profileQuery } = useQuery({
 		queryKey: ["tourstackProfile"],
@@ -100,7 +102,7 @@ export default function ProfilePage() {
 				tradingName: String(d.trading_name ?? ""),
 				contactPerson: String(d.contact_person ?? ""),
 				jobTitle: String(d.job_title ?? ""),
-				email: "",
+				email: session?.user?.email ?? "",
 				phone: String(d.phone ?? ""),
 				country: String(d.country ?? ""),
 				city: String(d.city ?? ""),
@@ -110,19 +112,32 @@ export default function ProfilePage() {
 			};
 		}
 		return null;
-	}, [profileQuery]);
+	}, [profileQuery, session]);
 
 	const [localEdits, setLocalEdits] = useState<Partial<typeof emptyProfile>>(
 		{},
+	);
+	const [saveStatus, setSaveStatus] = useState<"idle" | "success" | "error">(
+		"idle",
 	);
 
 	const profile = { ...emptyProfile, ...serverProfile, ...localEdits };
 
 	const saveMutation = useMutation({
 		mutationFn: updateTourstackProfile,
-		onSuccess: () => {
-			setLocalEdits({});
-			void queryClient.invalidateQueries({ queryKey: ["tourstackProfile"] });
+		onSuccess: (result) => {
+			if (result.success) {
+				setLocalEdits({});
+				setSaveStatus("success");
+				void queryClient.invalidateQueries({ queryKey: ["tourstackProfile"] });
+			} else {
+				setSaveStatus("error");
+			}
+			setTimeout(() => setSaveStatus("idle"), 3000);
+		},
+		onError: () => {
+			setSaveStatus("error");
+			setTimeout(() => setSaveStatus("idle"), 3000);
 		},
 	});
 
@@ -130,6 +145,7 @@ export default function ProfilePage() {
 		setLocalEdits((p) => ({ ...p, [key]: v }));
 
 	const handleSave = () => {
+		setSaveStatus("idle");
 		saveMutation.mutate({
 			companyName: profile.companyName || undefined,
 			tradingName: profile.tradingName || undefined,
@@ -257,7 +273,23 @@ export default function ProfilePage() {
 							</div>
 						</Section>
 
-						<div className="flex justify-end">
+						<div className="flex items-center justify-end gap-4">
+							{saveStatus === "success" && (
+								<span className="flex items-center gap-1.5 text-sm font-semibold text-emerald-600">
+									<span
+										className="material-symbols-outlined text-base"
+										style={{ fontVariationSettings: "'FILL' 1" }}
+									>
+										check_circle
+									</span>
+									{t("actions.saveSuccess")}
+								</span>
+							)}
+							{saveStatus === "error" && (
+								<span className="text-sm font-semibold text-rose-600">
+									{t("actions.saveError")}
+								</span>
+							)}
 							<button
 								type="button"
 								onClick={handleSave}
