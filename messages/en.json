@@ -2224,6 +2224,10 @@
       "confirmed": "Confirmed",
       "inProgress": "In Progress",
       "rejected": "Rejected"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
     }
   },
   "AdminPage": {
@@ -2544,7 +2548,12 @@
     "createTour": "Create Tour Project",
     "allTours": "All Tour Projects",
     "noTours": "No tour projects yet",
-    "noToursDesc": "Publish a new tour project to get started."
+    "noToursDesc": "Publish a new tour project to get started.",
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next",
+      "total": "{count} projects"
+    }
   },
   "AdminSettingsPage": {
     "badge": "Configuration",
