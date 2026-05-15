@@ -1,4 +1,6 @@
+import { redirect } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
+import { getSession } from "@/app/actions";
 import AdminSideNav from "@/components/AdminSideNav";
 import Footer from "@/components/Footer";
 import TopNav from "@/components/TopNav";
@@ -12,6 +14,11 @@ export default async function AdminLayout({
 }) {
 	const { locale } = await params;
 	setRequestLocale(locale);
+
+	const session = await getSession();
+	if (!session) {
+		redirect(`/${locale}/login`);
+	}
 
 	return (
 		<div className="bg-surface text-on-surface">
