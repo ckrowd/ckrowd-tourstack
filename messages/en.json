@@ -859,7 +859,9 @@
     },
     "actions": {
       "save": "Save Changes",
-      "saving": "Saving..."
+      "saving": "Saving...",
+      "saveSuccess": "Changes saved",
+      "saveError": "Failed to save changes"
     }
   },
   "SettingsPage": {
