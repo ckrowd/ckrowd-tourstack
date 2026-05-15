@@ -1054,17 +1054,24 @@
   },
   "ContactPage": {
     "getInTouch": "Get in Touch",
-    "title": "Contact Us",
-    "description": "Have a question, need support, or want to partner with TourStack by Crowd? Reach out using the details below.",
+    "title": "Contact TourStack",
+    "description": "Talk to the Ckrowd team about tour stops, workforce certification, financing, partnerships, legal requests, or platform support. Choose the inbox that best matches your request and we will route it to the right team.",
     "items": {
       "general": "General Enquiries",
       "workforce": "Workforce Registry",
       "financing": "Financing & Partnerships",
       "legal": "Legal & Privacy"
     },
+    "details": {
+      "general": "Platform access, account support, tour discovery, onboarding questions, and general TourStack requests.",
+      "workforce": "Crew registration, CTaaS verification, credential updates, deployment availability, and workforce support.",
+      "financing": "Tour Stop Advance, vendor working capital, insurance-linked finance, banking partnerships, and sponsor enquiries.",
+      "legal": "Terms, privacy, data rights, contract notices, compliance questions, and formal legal correspondence."
+    },
     "location": {
       "title": "Ckrowd Africa Technologies",
-      "subtitle": "Pan-African Live Events Platform"
+      "subtitle": "Pan-African Live Events Platform",
+      "detail": "TourStack supports promoters, artists, vendors, financiers, insurers, and touring professionals across African live-event markets."
     }
   },
   "ApplyPage": {
@@ -1847,22 +1854,38 @@
   "PrivacyPage": {
     "legal": "Legal",
     "title": "Privacy Policy",
-    "lastUpdated": "Last updated: April 2026",
+    "lastUpdated": "Last updated: May 2026",
     "sections": [
       {
         "title": "1. Information We Collect",
-        "content": "TourStack by Crowd collects information you provide when registering an account, submitting an Expression of Interest, or onboarding as a stakeholder. This includes your name, email address, phone number, company details, and venue information."
+        "content": "TourStack by Crowd collects information you provide when you create an account, submit an Expression of Interest, register as a promoter, workforce member, service provider, artist manager, vendor, financier, insurer, or other stakeholder, or communicate with our team. This may include your name, email address, phone or WhatsApp number, country, city, company details, role, credentials, event history, venue information, portfolio links, payment or banking onboarding information, and documents you upload for verification."
       },
       {
         "title": "2. How We Use Your Information",
-        "content": "We use your information to facilitate tour bookings, verify stakeholder credentials, process EOI applications, and communicate platform updates. We do not sell your personal data to third parties."
+        "content": "We use your information to operate TourStack, process applications and EOIs, verify stakeholder credentials, match promoters and partners to tour opportunities, support CTaaS workforce certification, coordinate insurance and finance workflows, provide customer support, improve platform security, and send service updates. We do not sell your personal data."
       },
       {
-        "title": "3. Data Storage",
-        "content": "Your data is stored securely. For this platform version, certain preferences are stored locally in your browser via localStorage. Server-side data is protected through industry-standard encryption."
+        "title": "3. Sharing and Partners",
+        "content": "We may share relevant information with trusted partners where needed to provide the service, including payment providers, banks, insurance partners, tour operators, verified promoters, service providers, compliance reviewers, hosting providers, analytics tools, and professional advisers. These parties are expected to handle information only for the purposes for which it was shared."
       },
       {
-        "title": "4. Contact",
+        "title": "4. Cookies and Local Storage",
+        "content": "TourStack may use cookies, localStorage, and similar technologies to keep you signed in, remember preferences, protect sessions, measure usage, and improve performance. Some features may not work correctly if these technologies are disabled."
+      },
+      {
+        "title": "5. Data Security and Retention",
+        "content": "We use administrative, technical, and organizational safeguards designed to protect personal information against unauthorized access, loss, misuse, or alteration. We retain information for as long as needed to operate the platform, meet legal or contractual obligations, resolve disputes, prevent fraud, and maintain accurate business records."
+      },
+      {
+        "title": "6. International Transfers",
+        "content": "Because TourStack supports cross-border live-event activity, your information may be processed in countries other than the country where you are located. Where required, we take reasonable steps to protect transferred information in line with applicable data protection requirements."
+      },
+      {
+        "title": "7. Your Choices and Rights",
+        "content": "Depending on your location, you may have rights to access, correct, delete, restrict, or object to certain processing of your personal information. You may also request a copy of information associated with your account or ask us to update inaccurate records."
+      },
+      {
+        "title": "8. Contact",
         "content": "For privacy-related enquiries, contact us at {contactLink} or email {email}."
       }
     ],
@@ -1872,26 +1895,46 @@
   "TermsPage": {
     "legal": "Legal",
     "title": "Terms of Service",
-    "lastUpdated": "Last updated: April 2026",
+    "lastUpdated": "Last updated: May 2026",
     "sections": [
       {
         "title": "1. Acceptance of Terms",
-        "content": "By accessing or using TourStack by Crowd, you agree to be bound by these Terms of Service. If you do not agree, you may not use the platform."
+        "content": "By accessing or using TourStack by Crowd, you agree to these Terms of Service and any policies referenced in them. If you are using TourStack on behalf of a company or organization, you confirm that you have authority to bind that organization. If you do not agree, you may not use the platform."
       },
       {
-        "title": "2. Platform Use",
-        "content": "TourStack is a B2B platform connecting promoters, service providers, and workforce professionals in the Pan-African live events industry. Use of the platform is restricted to registered businesses and verified individuals."
+        "title": "2. The TourStack Platform",
+        "content": "TourStack is a B2B platform operated by Ckrowd Africa Technologies for the Pan-African live events ecosystem. The platform supports tour discovery, Expressions of Interest, promoter and venue onboarding, workforce registration, service-provider workflows, artist-management coordination, insurance pathways, financing workflows, and related ecosystem services."
       },
       {
-        "title": "3. Accuracy of Information",
-        "content": "You agree to provide accurate, current, and complete information during registration and throughout your use of the platform. Misrepresentation may result in account suspension or removal."
+        "title": "3. Eligibility and Accounts",
+        "content": "You must provide accurate, current, and complete information when registering, submitting forms, uploading credentials, or representing a business, venue, artist roster, workforce profile, or financing request. You are responsible for keeping your account credentials secure and for activity that occurs under your account."
       },
       {
-        "title": "4. Intellectual Property",
-        "content": "All content, branding, and platform design are the property of Ckrowd Africa Technologies. Unauthorised reproduction or distribution is prohibited."
+        "title": "4. Verification and Platform Decisions",
+        "content": "Ckrowd may review, verify, approve, reject, pause, or remove accounts, EOIs, listings, credentials, financing requests, workforce profiles, or partner submissions where information is incomplete, inaccurate, unverifiable, suspicious, or inconsistent with platform standards. Platform access does not guarantee tour allocation, financing approval, insurance coverage, certification, or commercial engagement."
       },
       {
-        "title": "5. Contact",
+        "title": "5. Acceptable Use",
+        "content": "You agree not to misuse TourStack, interfere with platform security, submit false or misleading information, impersonate another person or entity, upload unlawful or infringing material, scrape or reverse engineer the platform, or use TourStack to facilitate fraud, harassment, discrimination, unsafe events, or unlawful transactions."
+      },
+      {
+        "title": "6. Commercial Relationships",
+        "content": "TourStack may help stakeholders discover opportunities and exchange information, but commercial terms between promoters, artists, vendors, financiers, insurers, venues, and workforce members may be governed by separate agreements. Unless expressly stated in a signed agreement, Ckrowd is not a party to those separate commercial commitments."
+      },
+      {
+        "title": "7. Intellectual Property",
+        "content": "All TourStack branding, platform design, software, content, workflows, scoring logic, and related materials are owned by Ckrowd Africa Technologies or its licensors. You retain ownership of materials you submit, but you grant Ckrowd a limited right to use them to operate, verify, display, route, and improve the platform."
+      },
+      {
+        "title": "8. Availability and Changes",
+        "content": "We may update, suspend, restrict, or discontinue parts of TourStack at any time, including features, forms, eligibility criteria, partner workflows, pricing, and verification processes. We aim to keep the platform reliable, but we do not guarantee uninterrupted or error-free service."
+      },
+      {
+        "title": "9. Limitation of Liability",
+        "content": "To the fullest extent permitted by law, TourStack is provided on an as-is and as-available basis. Ckrowd will not be liable for indirect, incidental, special, consequential, punitive, or loss-of-profit damages arising from platform use, stakeholder decisions, third-party services, event outcomes, or unavailable features."
+      },
+      {
+        "title": "10. Contact",
         "content": "For terms-related enquiries, visit our {contactLink} or email {email}."
       }
     ],

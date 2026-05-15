@@ -4,6 +4,36 @@ import TopNav from "@/components/TopNav";
 
 export default function ContactPage() {
 	const t = useTranslations("ContactPage");
+	const contactItems = [
+		{
+			icon: "mail",
+			title: t("items.general"),
+			description: t("details.general"),
+			value: "hello@ckrowd.africa",
+			href: "mailto:hello@ckrowd.africa",
+		},
+		{
+			icon: "groups",
+			title: t("items.workforce"),
+			description: t("details.workforce"),
+			value: "workforce@ckrowd.africa",
+			href: "mailto:workforce@ckrowd.africa",
+		},
+		{
+			icon: "account_balance",
+			title: t("items.financing"),
+			description: t("details.financing"),
+			value: "finance@ckrowd.africa",
+			href: "mailto:finance@ckrowd.africa",
+		},
+		{
+			icon: "gavel",
+			title: t("items.legal"),
+			description: t("details.legal"),
+			value: "legal@ckrowd.africa",
+			href: "mailto:legal@ckrowd.africa",
+		},
+	];
 
 	return (
 		<div className="bg-surface text-on-surface min-h-screen flex flex-col">
@@ -20,32 +50,7 @@ export default function ContactPage() {
 				</p>
 
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-					{[
-						{
-							icon: "mail",
-							title: t("items.general"),
-							value: "hello@ckrowd.africa",
-							href: "mailto:hello@ckrowd.africa",
-						},
-						{
-							icon: "groups",
-							title: t("items.workforce"),
-							value: "workforce@ckrowd.africa",
-							href: "mailto:workforce@ckrowd.africa",
-						},
-						{
-							icon: "account_balance",
-							title: t("items.financing"),
-							value: "finance@ckrowd.africa",
-							href: "mailto:finance@ckrowd.africa",
-						},
-						{
-							icon: "gavel",
-							title: t("items.legal"),
-							value: "legal@ckrowd.africa",
-							href: "mailto:legal@ckrowd.africa",
-						},
-					].map((item) => (
+					{contactItems.map((item) => (
 						<a
 							key={item.title}
 							href={item.href}
@@ -61,6 +66,9 @@ export default function ContactPage() {
 							</div>
 							<div>
 								<p className="font-bold text-on-surface mb-1">{item.title}</p>
+								<p className="text-on-surface-variant text-sm leading-relaxed mb-3">
+									{item.description}
+								</p>
 								<p className="text-[#FF5A30] font-semibold text-sm group-hover:underline">
 									{item.value}
 								</p>
@@ -81,6 +89,9 @@ export default function ContactPage() {
 					</h2>
 					<p className="text-on-surface-variant text-sm">
 						{t("location.subtitle")}
+					</p>
+					<p className="text-on-surface-variant text-sm mt-3 max-w-xl mx-auto">
+						{t("location.detail")}
 					</p>
 				</div>
 			</main>
