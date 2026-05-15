@@ -196,15 +196,24 @@ export async function createEOI(
 }
 
 // Tours
-export async function getTours(status?: string) {
+export async function getTours(status?: string, page?: number, limit?: number) {
+	const query: { status?: string; page?: string; limit?: string } = {};
+	if (status) query.status = status;
+	if (page != null) query.page = String(page);
+	if (limit != null) query.limit = String(limit);
 	const {
 		data,
 		error,
 		status: responseStatus,
 		headers,
-	} = await client.tourstack.tours.get(status ? { query: { status } } : {});
+	} = await client.tourstack.tours.get({ query });
+	// biome-ignore lint/suspicious/noExplicitAny: pagination is a conditional field not in the extracted payload type
+	const pagination = (data as any)?.pagination as
+		| { page: number; limit: number; total: number; totalPages: number }
+		| undefined;
 	return {
 		data: extractPayload(data, { status: responseStatus, headers }),
+		pagination,
 		success: !error && data?.success,
 		error: extractError(error),
 	};
@@ -397,12 +406,19 @@ export async function getAdminEOIs(status?: string) {
 	};
 }
 
-export async function getAdminTours(status?: string) {
-	const { data, error } = await client.tourstack.admin.tours.get(
-		status ? { query: { status } } : {},
-	);
+export async function getAdminTours(status?: string, page?: number, limit?: number) {
+	const query: { status?: string; page?: string; limit?: string } = {};
+	if (status) query.status = status;
+	if (page != null) query.page = String(page);
+	if (limit != null) query.limit = String(limit);
+	const { data, error } = await client.tourstack.admin.tours.get({ query });
+	// biome-ignore lint/suspicious/noExplicitAny: pagination is a conditional field not in the extracted payload type
+	const pagination = (data as any)?.pagination as
+		| { page: number; limit: number; total: number; totalPages: number }
+		| undefined;
 	return {
 		data: extractPayload(data),
+		pagination,
 		success: !error && data?.success,
 		error: extractError(error),
 	};
