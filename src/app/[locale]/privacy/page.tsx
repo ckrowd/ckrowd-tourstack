@@ -11,6 +11,36 @@ export default async function PrivacyPage({ params }: Props) {
 	const { locale } = await params;
 	setRequestLocale(locale);
 	const t = await getTranslations("PrivacyPage");
+	const email = t("email");
+
+	const renderContent = (content: string) =>
+		content.split(/(\{contactLink\}|\{email\})/g).map((part, i) => {
+			if (part === "{contactLink}") {
+				return (
+					<Link
+						key={i}
+						href="/contact"
+						className="text-[#FF5A30] font-bold hover:underline"
+					>
+						{t("contactLink")}
+					</Link>
+				);
+			}
+
+			if (part === "{email}") {
+				return (
+					<a
+						key={i}
+						href={`mailto:${email}`}
+						className="text-[#FF5A30] font-bold hover:underline"
+					>
+						{email}
+					</a>
+				);
+			}
+
+			return part;
+		});
 
 	return (
 		<div className="bg-surface text-on-surface min-h-screen flex flex-col">
@@ -36,25 +66,7 @@ export default async function PrivacyPage({ params }: Props) {
 										{section.title}
 									</h2>
 									<div className="text-on-surface-variant leading-relaxed space-y-4">
-										<p>
-											{idx === 3
-												? section.content
-														.split("{contactLink}")
-														.map((part, i, arr) => (
-															<span key={i}>
-																{part}
-																{i < arr.length - 1 && (
-																	<Link
-																		href="/contact"
-																		className="text-[#FF5A30] font-bold hover:underline"
-																	>
-																		{t("contactLink")}
-																	</Link>
-																)}
-															</span>
-														))
-												: section.content}
-										</p>
+										<p>{renderContent(section.content)}</p>
 									</div>
 								</section>
 							),
