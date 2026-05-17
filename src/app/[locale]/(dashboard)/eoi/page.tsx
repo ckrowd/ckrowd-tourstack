@@ -364,7 +364,7 @@ function EOIPageContent() {
 
 	const { data: artistsQuery, isLoading: loadingOpportunities } = useQuery({
 		queryKey: ["artists"],
-		queryFn: getArtists,
+		queryFn: () => getArtists(),
 	});
 
 	const opportunities = artistsQuery?.data ?? [];

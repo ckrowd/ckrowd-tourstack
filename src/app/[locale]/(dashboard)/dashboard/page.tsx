@@ -41,6 +41,14 @@ export default async function DashboardPage({ params }: Props) {
 		]);
 
 	const eois = eoisResult.data ?? [];
+	const now = new Date();
+	const newEoisThisMonth = eois.filter((e) => {
+		if (!e.created_at) return false;
+		const d = new Date(String(e.created_at));
+		return (
+			d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth()
+		);
+	}).length;
 	const dashData = dashboardResult.data;
 	const profile = profileResult.data;
 	const companyName = profile?.company_name
@@ -181,7 +189,7 @@ export default async function DashboardPage({ params }: Props) {
 										: eois.length}
 								</span>
 								<span className="text-[#FF5A30] font-bold flex items-center text-sm">
-									{t("stats.newThisMonth", { count: 2 })}
+									{t("stats.newThisMonth", { count: newEoisThisMonth })}
 								</span>
 							</div>
 						</div>

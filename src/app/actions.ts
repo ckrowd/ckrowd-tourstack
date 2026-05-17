@@ -28,7 +28,11 @@ const client = createClient({
 			},
 		};
 	},
-	async onResponse(response) {
+	// Must resolve to a nullish value: Eden Treaty treats any non-null return
+	// from onResponse as the already-parsed `data`, which would skip JSON body
+	// parsing for every request. The cast bridges createClient's over-narrow
+	// `Promise<Response>` type to that real contract.
+	onResponse: (async (response: Response) => {
 		const responseCookies = extractResponseCookies(response);
 		if (responseCookies.length > 0) {
 			const jar = await cookies();
@@ -36,8 +40,7 @@ const client = createClient({
 				jar.set(cookie.name, cookie.value, cookie.options);
 			}
 		}
-		return response;
-	},
+	}) as unknown as (response: Response) => Promise<Response>,
 });
 
 function extractError(err: any): string {
@@ -279,6 +282,80 @@ export async function applyForFinancing(
 	};
 }
 
+export async function getFinancingPartners() {
+	const { data, error } = await client.tourstack.financing.partners.get();
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+// Venues
+
+export async function getTourstackVenues() {
+	const { data, error } = await client.tourstack.venues.get();
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function createTourstackVenue(
+	body: Payload<typeof client.tourstack.venues.post>,
+) {
+	const { data, error } = await client.tourstack.venues.post(body);
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function updateTourstackVenue(
+	id: string,
+	body: Payload<ReturnType<typeof client.tourstack.venues>["patch"]>,
+) {
+	const { data, error } = await client.tourstack.venues({ id }).patch(body);
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function deleteTourstackVenue(id: string) {
+	const { data, error } = await client.tourstack.venues({ id }).delete();
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+// Notification preferences
+
+export async function getTourstackNotifications() {
+	const { data, error } = await client.tourstack.notifications.get();
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function updateTourstackNotifications(
+	body: Payload<typeof client.tourstack.notifications.patch>,
+) {
+	const { data, error } = await client.tourstack.notifications.patch(body);
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
 // Workforce (crew)
 
 export async function getCrewMembers(
@@ -436,6 +513,86 @@ export async function createAdminTour(
 	};
 }
 
+export async function purgeAdminDraftTours() {
+	const { data, error } = await client.tourstack.admin.tours.drafts.delete();
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function getAdminFinancing(status?: string) {
+	const { data, error } = await client.tourstack.admin.financing.get(
+		status ? { query: { status } } : {},
+	);
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function getAdminReport() {
+	const { data, error } = await client.tourstack.admin.reports.get();
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function exportAdminReport() {
+	const { data, error } = await client.tourstack.admin.reports.export.get({
+		query: { format: "csv" },
+	});
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function getAdminSettings() {
+	const { data, error } = await client.tourstack.admin.settings.get();
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function updateAdminSettings(
+	body: Payload<typeof client.tourstack.admin.settings.patch>,
+) {
+	const { data, error } = await client.tourstack.admin.settings.patch(body);
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function getAdminTeam() {
+	const { data, error } = await client.tourstack.admin.team.get();
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function inviteAdminTeamMember(
+	body: Payload<typeof client.tourstack.admin.team.post>,
+) {
+	const { data, error } = await client.tourstack.admin.team.post(body);
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
 // Active Sessions
 
 export async function revokeSession(
@@ -447,6 +604,21 @@ export async function revokeSession(
 
 export async function revokeOtherSessions() {
 	const { error } = await client.auth["revoke-other-sessions"].post({});
+	return { success: !error, error: extractError(error) };
+}
+
+// Email verification
+
+export async function verifyEmail(email: string, otp: string) {
+	const { error } = await client.auth["verify-email"].post({ email, otp });
+	return { success: !error, error: extractError(error) };
+}
+
+export async function resendVerificationOtp(email: string) {
+	const { error } = await client.auth["send-verification-otp"].post({
+		email,
+		type: "email-verification",
+	});
 	return { success: !error, error: extractError(error) };
 }
 
@@ -491,6 +663,19 @@ export async function disable2FA(
 		password,
 	});
 	return { success: !error && data?.success, error: extractError(error) };
+}
+
+// Password
+
+export async function changePassword(
+	currentPassword: string,
+	newPassword: string,
+): Promise<{ success: boolean; error: string }> {
+	const { error } = await client.auth["new-password"].post({
+		currentPassword,
+		newPassword,
+	});
+	return { success: !error, error: extractError(error) };
 }
 
 // Account Deletion

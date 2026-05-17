@@ -3,7 +3,9 @@ import { getSession } from "@/app/actions";
 
 export const dynamic = "force-dynamic";
 
-export default async function DashboardLayout({
+// Already-authenticated users should never see the login form — send them
+// straight to their profile.
+export default async function LoginLayout({
 	children,
 	params,
 }: {
@@ -13,8 +15,8 @@ export default async function DashboardLayout({
 	const { locale } = await params;
 	const session = await getSession();
 
-	if (!session) {
-		redirect(`/${locale}/login`);
+	if (session?.user) {
+		redirect(`/${locale}/profile`);
 	}
 
 	return <>{children}</>;

@@ -1,4 +1,19 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getAdminFinancing } from "@/app/actions";
+
+function statusColor(status: string): string {
+	switch (status) {
+		case "approved":
+		case "disbursed":
+			return "text-emerald-700 bg-emerald-50";
+		case "rejected":
+			return "text-red-700 bg-red-50";
+		case "under_review":
+			return "text-blue-700 bg-blue-50";
+		default:
+			return "text-yellow-600 bg-yellow-50";
+	}
+}
 
 export default async function AdminFinancingPage({
 	params,
@@ -8,6 +23,9 @@ export default async function AdminFinancingPage({
 	const { locale } = await params;
 	setRequestLocale(locale);
 	const t = await getTranslations("AdminFinancingPage");
+
+	const result = await getAdminFinancing();
+	const applications = result.data ?? [];
 
 	return (
 		<>
@@ -34,61 +52,67 @@ export default async function AdminFinancingPage({
 						account_balance
 					</span>
 				</div>
-				<div className="space-y-4">
-					{[
-						{
-							promoter: "Stage One Productions",
-							tour: "Burna Boy — Twice As Tall",
-							amount: "$75,000",
-							status: t("status.pending"),
-							color: "text-yellow-600 bg-yellow-50",
-						},
-						{
-							promoter: "Pulse Nairobi",
-							tour: "Davido — Timeless Tour",
-							amount: "$40,000",
-							status: t("status.approved"),
-							color: "text-emerald-700 bg-emerald-50",
-						},
-						{
-							promoter: "Teranga Concerts",
-							tour: "Asake — Work of Art",
-							amount: "$20,000",
-							status: t("status.declined"),
-							color: "text-red-700 bg-red-50",
-						},
-					].map((f) => (
-						<div
-							key={f.promoter}
-							className="flex items-center justify-between gap-4 p-4 border border-outline-variant/10 rounded-xl hover:bg-surface-container-low transition-colors"
-						>
-							<div>
-								<p className="text-base font-bold text-on-surface">
-									{f.promoter}
-								</p>
-								<p className="text-sm text-on-surface-variant mt-1">
-									{f.tour} —{" "}
-									<span className="font-semibold">
-										{f.amount} {t("requested")}
+
+				{!result.success ? (
+					<p className="text-sm font-medium text-red-600 py-8 text-center">
+						{result.error || t("loadError")}
+					</p>
+				) : applications.length === 0 ? (
+					<div className="py-12 text-center">
+						<span className="material-symbols-outlined text-5xl text-on-surface-variant block mb-4">
+							account_balance
+						</span>
+						<p className="text-on-surface-variant font-medium">{t("empty")}</p>
+					</div>
+				) : (
+					<div className="space-y-4">
+						{applications.map((f) => {
+							const status = String(f.status ?? "pending");
+							const promoter = f.promoter;
+							const promoterName = String(
+								promoter?.company_name ??
+									promoter?.contact_person ??
+									promoter?.user?.name ??
+									promoter?.user?.email ??
+									"—",
+							);
+							const artist = f.tour?.artist;
+							const tourLabel = artist
+								? `${String(artist.name ?? "")}${
+										artist.tour_name ? ` — ${String(artist.tour_name)}` : ""
+									}`
+								: "—";
+							const amount = `${String(f.currency ?? "USD")} ${Number(
+								f.amount_requested ?? 0,
+							).toLocaleString(locale)}`;
+							return (
+								<div
+									key={String(f.id)}
+									className="flex items-center justify-between gap-4 p-4 border border-outline-variant/10 rounded-xl hover:bg-surface-container-low transition-colors"
+								>
+									<div>
+										<p className="text-base font-bold text-on-surface">
+											{promoterName}
+										</p>
+										<p className="text-sm text-on-surface-variant mt-1">
+											{tourLabel} —{" "}
+											<span className="font-semibold">
+												{amount} {t("requested")}
+											</span>
+										</p>
+									</div>
+									<span
+										className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter shrink-0 ${statusColor(
+											status,
+										)}`}
+									>
+										{t(`status.${status}`)}
 									</span>
-								</p>
-							</div>
-							<div className="flex flex-col items-end gap-2">
-								<span
-									className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter ${f.color}`}
-								>
-									{f.status}
-								</span>
-								<button
-									type="button"
-									className="text-xs font-bold text-[#FF5A30] hover:underline"
-								>
-									{t("reviewDetails")}
-								</button>
-							</div>
-						</div>
-					))}
-				</div>
+								</div>
+							);
+						})}
+					</div>
+				)}
 			</div>
 		</>
 	);
