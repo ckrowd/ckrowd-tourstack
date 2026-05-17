@@ -142,9 +142,11 @@ export default function AdminProfilePage() {
 	>({
 		mutationFn: (variables) =>
 			updateTourstackProfile(variables) as Promise<ProfileResponse>,
-		onSuccess: () => {
-			setLocalEdits({});
-			void queryClient.invalidateQueries({ queryKey: ["tourstackProfile"] });
+		onSuccess: (result) => {
+			if (result.success) {
+				setLocalEdits({});
+				void queryClient.invalidateQueries({ queryKey: ["tourstackProfile"] });
+			}
 		},
 	});
 

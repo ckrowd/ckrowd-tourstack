@@ -1,11 +1,12 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { useRegister, useSession } from "@/context/AuthContext";
 import { Link, useRouter } from "@/i18n/routing";
 
 export default function RegisterPage() {
+	const locale = useLocale();
 	const router = useRouter();
 	const { data: session, isLoading } = useSession();
 	const registerMutation = useRegister();
@@ -19,11 +20,15 @@ export default function RegisterPage() {
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [error, setError] = useState<string | null>(null);
 
+	const accountExists =
+		!!error &&
+		/user already exists|USER_ALREADY_EXISTS|already exists/i.test(error);
+
 	useEffect(() => {
 		if (!isLoading && session?.user) {
-			router.replace("/dashboard");
+			window.location.replace(`/${locale}/dashboard`);
 		}
-	}, [session?.user, isLoading, router]);
+	}, [session?.user, isLoading, locale]);
 
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
@@ -35,7 +40,7 @@ export default function RegisterPage() {
 					if (!result.success) {
 						setError(result.error ?? t("errorFailed"));
 					} else {
-						router.replace("/dashboard");
+						router.push(`/verify-email?email=${encodeURIComponent(email)}`);
 					}
 				},
 				onError: () => setError(t("errorFailed")),
@@ -174,11 +179,23 @@ export default function RegisterPage() {
 							</div>
 						</div>
 
-						{error && (
+						{accountExists ? (
+							<div className="flex items-start gap-3 rounded-xl bg-amber-50 border border-amber-200 px-4 py-3" role="alert">
+								<svg className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+									<path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+								</svg>
+								<p className="text-sm text-amber-800 font-medium">
+									{t("errorAlreadyExists")}{" "}
+									<Link href="/login" className="underline font-semibold hover:text-amber-900">
+										{t("signIn")}
+									</Link>
+								</p>
+							</div>
+						) : error ? (
 							<p className="text-sm text-red-600 font-medium" role="alert">
 								{error}
 							</p>
-						)}
+						) : null}
 
 						<button
 							type="submit"

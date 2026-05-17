@@ -115,23 +115,14 @@
     "openProfileMenu": "Open profile menu",
     "closeProfileMenu": "Close profile menu",
     "markAllAsRead": "Mark all as read",
-    "notificationsList": [
-      {
-        "title": "EOI Approved",
-        "body": "Aria Velvet — Accra, Ghana",
-        "time": "2h ago"
-      },
-      {
-        "title": "Revision Requested",
-        "body": "Frequency Shift — budget too low",
-        "time": "Yesterday"
-      },
-      {
-        "title": "EOI Submitted",
-        "body": "Vanguard Echo — pending review",
-        "time": "3 days ago"
-      }
-    ]
+    "notif": {
+      "empty": "No notifications yet",
+      "eoiFallback": "Expression of Interest",
+      "statusApproved": "Your EOI was approved",
+      "statusRejected": "Your EOI was rejected",
+      "statusNeedsRevision": "Your EOI needs revision",
+      "statusPendingReview": "Your EOI is under review"
+    }
   },
   "LoginPage": {
     "title": "Sign in",
@@ -150,7 +141,8 @@
     "privacy": "Privacy Policy",
     "errorInvalid": "Invalid email or password",
     "errorFailed": "Sign in failed",
-    "loading": "Loading session..."
+    "loading": "Loading session...",
+    "verifiedBanner": "Email verified! Sign in to access your account."
   },
   "EOIPage": {
     "stepper": {
@@ -875,21 +867,26 @@
       "security": "Security"
     },
     "venueTab": {
+      "loading": "Loading venues…",
       "myVenues": {
         "title": "My Venues",
         "description": "Venues registered under your promoter account.",
+        "empty": "You haven't added any venues yet.",
         "statuses": {
           "verified": "Verified",
           "pending": "Pending"
         },
         "actions": {
           "edit": "Edit",
-          "addNew": "Add New Venue"
+          "delete": "Delete",
+          "deleting": "Deleting…",
+          "addNew": "Add Another Venue"
         }
       },
       "venueDetails": {
-        "title": "Venue Details",
-        "description": "Update the primary venue on your account.",
+        "createTitle": "Add a Venue",
+        "editTitle": "Edit Venue",
+        "description": "Capacity and location details help match your venue to touring artists.",
         "fields": {
           "name": "Venue Name",
           "type": "Venue Type",
@@ -901,8 +898,12 @@
           "maps": "Google Maps URL"
         },
         "actions": {
-          "save": "Save Venue"
-        }
+          "save": "Save Venue",
+          "saving": "Saving…",
+          "cancel": "Cancel"
+        },
+        "saveSuccess": "Venue saved.",
+        "saveError": "We couldn't save the venue. Please try again."
       }
     },
     "notificationsTab": {
@@ -955,6 +956,9 @@
       "actions": {
         "save": "Save Preferences"
       },
+      "saving": "Saving…",
+      "saveSuccess": "Preferences saved.",
+      "saveError": "We couldn't save your preferences. Please try again.",
       "newsletter": {
         "title": "Newsletter",
         "label": "Subscribe to newsletter",
@@ -964,33 +968,9 @@
       }
     },
     "billingTab": {
-      "currentPlan": {
-        "title": "Current Plan",
-        "proLabel": "Global Stage Pro",
-        "proDescription": "Unlimited EOIs · Priority review · Financing access",
-        "perMonth": "/ month",
-        "actions": {
-          "change": "Change Plan",
-          "cancel": "Cancel Subscription"
-        }
-      },
-      "paymentMethod": {
-        "title": "Payment Method",
-        "expires": "Expires",
-        "default": "Default",
-        "actions": {
-          "add": "Add Payment Method"
-        }
-      },
-      "history": {
-        "title": "Billing History",
-        "table": {
-          "date": "Date",
-          "description": "Description",
-          "amount": "Amount",
-          "status": "Status"
-        }
-      }
+      "title": "Billing & Subscription",
+      "comingSoon": "Billing is coming soon",
+      "comingSoonDesc": "Subscription plans and payment management for TourStack promoters are not available yet. You'll be able to manage your plan and payment methods here once billing launches."
     },
     "securityTab": {
       "password": {
@@ -1003,7 +983,12 @@
         "hint": "Minimum 8 characters with at least one number and symbol.",
         "actions": {
           "update": "Update Password"
-        }
+        },
+        "updating": "Updating…",
+        "success": "Password updated.",
+        "error": "We couldn't update your password. Check your current password and try again.",
+        "tooShort": "New password must be at least 8 characters.",
+        "mismatch": "New passwords do not match."
       },
       "twoFactor": {
         "title": "Two-Factor Authentication",
@@ -1029,6 +1014,8 @@
         "title": "Active Sessions",
         "description": "Devices currently signed in to your account.",
         "thisDevice": "This device",
+        "signingOut": "Signing out…",
+        "revokedAll": "All other sessions have been signed out.",
         "actions": {
           "revoke": "Revoke",
           "revokeOthers": "Sign out all other devices"
@@ -2131,6 +2118,7 @@
       }
     },
     "capitalPartners": "Capital Partners",
+    "noPartners": "No financing partners are available yet.",
     "partners": {
       "p1": {
         "region": "Pan-Africa",
@@ -2329,7 +2317,27 @@
     "alreadyHaveAccount": "Already have an account?",
     "signIn": "Sign in",
     "errorFailed": "Registration failed",
+    "errorAlreadyExists": "An account with this email already exists.",
     "loading": "Loading session..."
+  },
+  "VerifyEmailPage": {
+    "tagline": "Verify your account",
+    "title": "Enter your verification code",
+    "description": "We sent a 6-digit code to {email}. Enter it below to activate your account.",
+    "codeLabel": "Verification code",
+    "codePlaceholder": "000000",
+    "submit": "Verify account",
+    "submitting": "Verifying...",
+    "resendPrompt": "Didn't receive a code?",
+    "resend": "Resend code",
+    "resending": "Sending...",
+    "resendSuccess": "A new code was sent to your email.",
+    "errorFailed": "Invalid or expired code. Please try again.",
+    "successRedirect": "Email verified! You can now sign in.",
+    "verifiedTitle": "Account verified!",
+    "verifiedMessage": "Signing you in...",
+    "noEmail": "No email provided.",
+    "signIn": "Sign in"
   },
   "SideNav": {
     "dashboard": "Dashboard",
@@ -2572,9 +2580,14 @@
     "requestsTitle": "Financing Requests",
     "requested": "requested",
     "reviewDetails": "Review Details",
+    "empty": "No financing requests yet.",
+    "loadError": "Could not load financing requests.",
     "status": {
       "pending": "Pending",
+      "under_review": "Under Review",
       "approved": "Approved",
+      "rejected": "Rejected",
+      "disbursed": "Disbursed",
       "declined": "Declined"
     }
   },
@@ -2582,9 +2595,26 @@
     "badge": "Analytics",
     "title": "Tour Reports",
     "description": "High-level metrics and financial reports for the Pan-African tour circuit.",
+    "loadError": "We couldn't load the reports right now. Please try again later.",
     "exportCsv": "Export CSV",
-    "comingSoon": "Reports Dashboard Coming Soon",
-    "comingSoonDesc": "We are currently aggregating data across your active tour projects. Detailed financial breakdowns, ticket sale projections, and risk analysis will be available here shortly."
+    "exporting": "Exporting…",
+    "exportError": "Export failed. Please try again.",
+    "stats": {
+      "totalEois": "Total EOIs",
+      "approvalRate": "EOI Approval Rate",
+      "totalTours": "Tour Projects",
+      "activeArtists": "Active Artists",
+      "totalDisbursed": "Capital Disbursed",
+      "totalRequested": "Capital Requested",
+      "crewMembers": "Crew Members",
+      "stakeholders": "Stakeholders"
+    },
+    "breakdowns": {
+      "eois": "EOIs by Status",
+      "tours": "Tours by Status",
+      "financing": "Financing by Status"
+    },
+    "noBreakdown": "No data yet"
   },
   "AdminToursPage": {
     "badge": "Tour Management",
@@ -2605,6 +2635,10 @@
     "title": "Platform Settings",
     "description": "Manage global tour constraints, matching logic, and team access.",
     "saveChanges": "Save Changes",
+    "saving": "Saving…",
+    "saved": "Settings saved.",
+    "saveError": "We couldn't save your changes. Please try again.",
+    "loadError": "We couldn't load the platform settings.",
     "algorithm": {
       "title": "Matching Algorithm",
       "strictBudget": "Strict Budget Alignment",
@@ -2614,12 +2648,30 @@
     },
     "team": {
       "title": "Admin Team",
-      "invite": "Invite Team Member"
+      "role": "Admin",
+      "empty": "No administrators found.",
+      "loadError": "We couldn't load the admin team.",
+      "invite": "Invite Team Member",
+      "nameLabel": "Full name",
+      "namePlaceholder": "e.g. Ada Lovelace",
+      "emailLabel": "Email address",
+      "emailPlaceholder": "name@company.com",
+      "sendInvite": "Send Invite",
+      "inviting": "Sending invite…",
+      "cancel": "Cancel",
+      "inviteSuccess": "Invitation sent.",
+      "inviteError": "We couldn't send that invite. Please try again."
     },
     "danger": {
       "title": "Danger Zone",
       "description": "Actions taken here are destructive and cannot be reversed.",
-      "purge": "Purge Draft Projects"
+      "purge": "Purge Draft Projects",
+      "confirmPrompt": "Permanently delete every tour project still in draft? This cannot be undone.",
+      "confirm": "Yes, purge drafts",
+      "cancel": "Cancel",
+      "purging": "Purging…",
+      "purged": "Removed {count} draft project(s).",
+      "purgeError": "We couldn't purge draft projects. Please try again."
     }
   },
   "StepForm": {

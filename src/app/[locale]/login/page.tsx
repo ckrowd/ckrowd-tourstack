@@ -1,17 +1,18 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Suspense, useEffect, useState } from "react";
 import { useLogin, useSession } from "@/context/AuthContext";
-import { Link, useRouter } from "@/i18n/routing";
+import { Link } from "@/i18n/routing";
 
 function LoginPageContent() {
-	const router = useRouter();
+	const locale = useLocale();
 	const searchParams = useSearchParams();
 	const { data: session, isLoading } = useSession();
 	const loginMutation = useLogin();
 	const from = searchParams.get("from") ?? "/dashboard";
+	const verified = searchParams.get("verified") === "true";
 	const t = useTranslations("LoginPage");
 	const tCommon = useTranslations("Common");
 
@@ -21,9 +22,10 @@ function LoginPageContent() {
 
 	useEffect(() => {
 		if (!isLoading && session?.user) {
-			router.replace(from);
+			const localePath = from.startsWith("/") ? from : `/${from}`;
+			window.location.replace(`/${locale}${localePath}`);
 		}
-	}, [session?.user, from, isLoading, router]);
+	}, [session?.user, from, isLoading, locale]);
 
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
@@ -35,7 +37,8 @@ function LoginPageContent() {
 					if (!result.success) {
 						setError(result.error ?? t("errorInvalid"));
 					} else {
-						router.replace(from);
+						const localePath = from.startsWith("/") ? from : `/${from}`;
+						window.location.replace(`/${locale}${localePath}`);
 					}
 				},
 				onError: () => setError(t("errorFailed")),
@@ -73,6 +76,15 @@ function LoginPageContent() {
 						</h1>
 						<p className="text-sm text-slate-500">{t("description")}</p>
 					</div>
+
+					{verified && (
+						<div className="mb-6 flex items-center gap-3 rounded-xl bg-green-50 border border-green-200 px-4 py-3">
+							<svg className="w-5 h-5 text-green-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+								<path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+							</svg>
+							<p className="text-sm text-green-700 font-medium">{t("verifiedBanner")}</p>
+						</div>
+					)}
 
 					<form onSubmit={handleSubmit} className="space-y-5">
 						<div>

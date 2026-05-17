@@ -1,8 +1,10 @@
 "use client";
 
+import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
-import { useLocale, useTranslations } from "next-intl";
+import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
+import { getEOIs } from "@/app/actions";
 import { useLogout, useSession } from "@/context/AuthContext";
 import { Link, routing, usePathname, useRouter } from "@/i18n/routing";
 
@@ -17,24 +19,57 @@ export default function TopNav() {
 	const [langOpen, setLangOpen] = useState(false);
 	const t = useTranslations("TopNav");
 	const tCommon = useTranslations("Common");
+	const format = useFormatter();
 
-	// Since the raw data from JSON might not have all fields (icon, color), I'll map them.
-	const staticNotifs = [
-		{ id: "n1", icon: "task_alt", color: "text-emerald-500" },
-		{ id: "n2", icon: "edit_note", color: "text-[#FF5A30]" },
-		{ id: "n3", icon: "send", color: "text-blue-500" },
-	];
-	const translatedNotifications = (
-		t.raw("notificationsList") as {
-			title: string;
-			body: string;
-			time: string;
-		}[]
-	).map((n, i) => ({
-		...n,
-		...staticNotifs[i],
-		id: staticNotifs[i].id,
-	}));
+	// Notifications are derived from the signed-in promoter's real EOIs.
+	const eoisQuery = useQuery({
+		queryKey: ["eois"],
+		queryFn: () => getEOIs(),
+		enabled: Boolean(session?.user),
+	});
+
+	const statusMeta: Record<
+		string,
+		{ icon: string; color: string; label: string }
+	> = {
+		approved: {
+			icon: "task_alt",
+			color: "text-emerald-500",
+			label: t("notif.statusApproved"),
+		},
+		rejected: {
+			icon: "cancel",
+			color: "text-red-500",
+			label: t("notif.statusRejected"),
+		},
+		needs_revision: {
+			icon: "edit_note",
+			color: "text-[#FF5A30]",
+			label: t("notif.statusNeedsRevision"),
+		},
+		pending_review: {
+			icon: "schedule",
+			color: "text-blue-500",
+			label: t("notif.statusPendingReview"),
+		},
+	};
+
+	const notifications = (eoisQuery.data?.data ?? []).slice(0, 6).map((eoi) => {
+		const status = String(eoi.status ?? "pending_review");
+		const meta = statusMeta[status] ?? {
+			icon: "notifications",
+			color: "text-slate-400",
+			label: status.replace(/_/g, " "),
+		};
+		return {
+			id: String(eoi.id),
+			icon: meta.icon,
+			color: meta.color,
+			title: String(eoi.artist?.name ?? t("notif.eoiFallback")),
+			body: meta.label,
+			date: eoi.created_at ? new Date(String(eoi.created_at)) : null,
+		};
+	});
 
 	const SIDEBAR_ROUTES = [
 		"/dashboard",
@@ -178,7 +213,9 @@ export default function TopNav() {
 									<span className="material-symbols-outlined text-[#494455]">
 										notifications
 									</span>
-									<span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#FF5A30] rounded-full" />
+									{notifications.length > 0 && (
+										<span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#FF5A30] rounded-full" />
+									)}
 								</button>
 							</div>
 						)}
@@ -283,38 +320,48 @@ export default function TopNav() {
 								<span className="material-symbols-outlined text-sm">close</span>
 							</button>
 						</div>
-						<ul className="divide-y divide-slate-50">
-							{translatedNotifications.map((n) => (
-								<li
-									key={n.id}
-									className="flex items-start gap-3 px-5 py-4 hover:bg-slate-50 transition-colors"
-								>
-									<span
-										className={`material-symbols-outlined text-lg mt-0.5 shrink-0 ${n.color}`}
+						{notifications.length === 0 ? (
+							<p className="px-5 py-10 text-center text-sm text-slate-400">
+								{t("notif.empty")}
+							</p>
+						) : (
+							<>
+								<ul className="divide-y divide-slate-50">
+									{notifications.map((n) => (
+										<li
+											key={n.id}
+											className="flex items-start gap-3 px-5 py-4 hover:bg-slate-50 transition-colors"
+										>
+											<span
+												className={`material-symbols-outlined text-lg mt-0.5 shrink-0 ${n.color}`}
+											>
+												{n.icon}
+											</span>
+											<div className="flex-1 min-w-0">
+												<p className="text-sm font-semibold text-slate-900 truncate">
+													{n.title}
+												</p>
+												<p className="text-xs text-slate-500 mt-0.5">{n.body}</p>
+											</div>
+											{n.date && (
+												<span className="text-[10px] text-slate-400 font-medium shrink-0 mt-0.5">
+													{format.relativeTime(n.date)}
+												</span>
+											)}
+										</li>
+									))}
+								</ul>
+								<div className="px-5 py-3 border-t border-slate-100">
+									<button
+										type="button"
+										className="text-xs font-semibold text-[#FF5A30] hover:underline"
+										onClick={() => setNotifOpen(false)}
 									>
-										{n.icon}
-									</span>
-									<div className="flex-1 min-w-0">
-										<p className="text-sm font-semibold text-slate-900">
-											{n.title}
-										</p>
-										<p className="text-xs text-slate-500 mt-0.5">{n.body}</p>
-									</div>
-									<span className="text-[10px] text-slate-400 font-medium shrink-0 mt-0.5">
-										{n.time}
-									</span>
-								</li>
-							))}
-						</ul>
-						<div className="px-5 py-3 border-t border-slate-100">
-							<button
-								type="button"
-								className="text-xs font-semibold text-[#FF5A30] hover:underline"
-								onClick={() => setNotifOpen(false)}
-							>
-								{t("markAllAsRead")}
-							</button>
-						</div>
+										{t("markAllAsRead")}
+									</button>
+								</div>
+							</>
+						)}
 					</div>
 				</>
 			)}

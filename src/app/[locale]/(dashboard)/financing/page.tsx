@@ -1,5 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { getFinancingApplications } from "@/app/actions";
+import { getFinancingApplications, getFinancingPartners } from "@/app/actions";
 import FinancingQuickApply from "@/components/FinancingQuickApply";
 import Footer from "@/components/Footer";
 import TopNav from "@/components/TopNav";
@@ -14,8 +14,12 @@ export default async function FinancingPage({ params }: Props) {
 	setRequestLocale(locale);
 	const t = await getTranslations("FinancingPage");
 
-	const appsResult = await getFinancingApplications();
+	const [appsResult, partnersResult] = await Promise.all([
+		getFinancingApplications(),
+		getFinancingPartners(),
+	]);
 	const applications = appsResult.data ?? [];
+	const partners = partnersResult.data ?? [];
 
 	const products = [
 		{
@@ -89,29 +93,6 @@ export default async function FinancingPage({ params }: Props) {
 			step: "05",
 			title: t("steps.s5.title"),
 			desc: t("steps.s5.description"),
-		},
-	];
-
-	const partners = [
-		{
-			name: "AfriCapital Partners",
-			region: t("partners.p1.region"),
-			focus: t("partners.p1.focus"),
-		},
-		{
-			name: "Lagos Growth Fund",
-			region: t("partners.p2.region"),
-			focus: t("partners.p2.focus"),
-		},
-		{
-			name: "East Africa Ventures",
-			region: t("partners.p3.region"),
-			focus: t("partners.p3.focus"),
-		},
-		{
-			name: "Rand Music Finance",
-			region: t("partners.p4.region"),
-			focus: t("partners.p4.focus"),
 		},
 	];
 
@@ -413,30 +394,39 @@ export default async function FinancingPage({ params }: Props) {
 							{t("capitalPartners")}
 						</h2>
 						<div className="space-y-3">
-							{partners.map((p) => (
-								<div
-									key={p.name}
-									className="bg-surface-container-lowest rounded-xl p-5 flex items-center gap-4 border border-transparent hover:border-outline-variant/20 transition-all shadow-sm"
-								>
-									<div className="w-10 h-10 rounded-full bg-[#FF5A30]/10 flex items-center justify-center shrink-0">
-										<span
-											className="material-symbols-outlined text-[#FF5A30]"
-											style={{ fontVariationSettings: "'FILL' 1" }}
-										>
-											corporate_fare
-										</span>
+							{partners.length === 0 ? (
+								<p className="text-sm text-on-surface-variant bg-surface-container-lowest rounded-xl p-5 shadow-sm">
+									{t("noPartners")}
+								</p>
+							) : (
+								partners.map((p) => (
+									<div
+										key={String(p.id)}
+										className="bg-surface-container-lowest rounded-xl p-5 flex items-center gap-4 border border-transparent hover:border-outline-variant/20 transition-all shadow-sm"
+									>
+										<div className="w-10 h-10 rounded-full bg-[#FF5A30]/10 flex items-center justify-center shrink-0">
+											<span
+												className="material-symbols-outlined text-[#FF5A30]"
+												style={{ fontVariationSettings: "'FILL' 1" }}
+											>
+												corporate_fare
+											</span>
+										</div>
+										<div className="flex-1 min-w-0">
+											<p className="font-bold text-sm text-on-surface truncate">
+												{String(p.name)}
+											</p>
+											<p className="text-xs text-on-surface-variant mt-0.5 capitalize">
+												{p.markets.length > 0
+													? `${p.markets.join(", ")} · `
+													: ""}
+												{String(p.type).replace(/_/g, " ")}
+											</p>
+										</div>
+										<span className="w-2 h-2 rounded-full bg-green-400 shrink-0" />
 									</div>
-									<div className="flex-1 min-w-0">
-										<p className="font-bold text-sm text-on-surface truncate">
-											{p.name}
-										</p>
-										<p className="text-xs text-on-surface-variant mt-0.5">
-											{p.region} · {p.focus}
-										</p>
-									</div>
-									<span className="w-2 h-2 rounded-full bg-green-400 shrink-0" />
-								</div>
-							))}
+								))
+							)}
 						</div>
 
 						{/* CTA card */}

@@ -115,23 +115,14 @@
     "openProfileMenu": "Ouvrir le menu de profil",
     "closeProfileMenu": "Fermer le menu de profil",
     "markAllAsRead": "Tout marquer comme lu",
-    "notificationsList": [
-      {
-        "title": "EOI Approuvé",
-        "body": "Aria Velvet — Accra, Ghana",
-        "time": "Il y a 2h"
-      },
-      {
-        "title": "Révision Demandée",
-        "body": "Frequency Shift — budget trop bas",
-        "time": "Hier"
-      },
-      {
-        "title": "EOI Soumis",
-        "body": "Vanguard Echo — examen en cours",
-        "time": "Il y a 3 jours"
-      }
-    ]
+    "notif": {
+      "empty": "Aucune notification pour le moment",
+      "eoiFallback": "Manifestation d'intérêt",
+      "statusApproved": "Votre EOI a été approuvée",
+      "statusRejected": "Votre EOI a été rejetée",
+      "statusNeedsRevision": "Votre EOI nécessite une révision",
+      "statusPendingReview": "Votre EOI est en cours d'examen"
+    }
   },
   "LoginPage": {
     "title": "Se connecter",
@@ -150,7 +141,8 @@
     "privacy": "Politique de confidentialité",
     "errorInvalid": "E-mail ou mot de passe invalide",
     "errorFailed": "La connexion a échoué",
-    "loading": "Chargement de la session..."
+    "loading": "Chargement de la session...",
+    "verifiedBanner": "E-mail vérifié ! Connectez-vous pour accéder à votre compte."
   },
   "EOIPage": {
     "stepper": {
@@ -875,21 +867,26 @@
       "security": "Sécurité"
     },
     "venueTab": {
+      "loading": "Chargement des lieux…",
       "myVenues": {
         "title": "Mes lieux",
         "description": "Lieux enregistrés sous votre compte de promoteur.",
+        "empty": "Vous n'avez encore ajouté aucun lieu.",
         "statuses": {
           "verified": "Vérifié",
           "pending": "En attente"
         },
         "actions": {
           "edit": "Modifier",
-          "addNew": "Ajouter un nouveau lieu"
+          "delete": "Supprimer",
+          "deleting": "Suppression…",
+          "addNew": "Ajouter un autre lieu"
         }
       },
       "venueDetails": {
-        "title": "Détails du lieu",
-        "description": "Mettez à jour le lieu principal de votre compte.",
+        "createTitle": "Ajouter un lieu",
+        "editTitle": "Modifier le lieu",
+        "description": "Les détails de capacité et de localisation aident à associer votre lieu aux artistes en tournée.",
         "fields": {
           "name": "Nom du lieu",
           "type": "Type de lieu",
@@ -901,8 +898,12 @@
           "maps": "URL Google Maps"
         },
         "actions": {
-          "save": "Enregistrer le lieu"
-        }
+          "save": "Enregistrer le lieu",
+          "saving": "Enregistrement…",
+          "cancel": "Annuler"
+        },
+        "saveSuccess": "Lieu enregistré.",
+        "saveError": "Nous n'avons pas pu enregistrer le lieu. Veuillez réessayer."
       }
     },
     "notificationsTab": {
@@ -955,6 +956,9 @@
       "actions": {
         "save": "Enregistrer les préférences"
       },
+      "saving": "Enregistrement…",
+      "saveSuccess": "Préférences enregistrées.",
+      "saveError": "Nous n'avons pas pu enregistrer vos préférences. Veuillez réessayer.",
       "newsletter": {
         "title": "Newsletter",
         "label": "S'abonner à la newsletter",
@@ -964,33 +968,9 @@
       }
     },
     "billingTab": {
-      "currentPlan": {
-        "title": "Plan actuel",
-        "proLabel": "Global Stage Pro",
-        "proDescription": "EOIs illimités · Examen prioritaire · Accès au financement",
-        "perMonth": "/ mois",
-        "actions": {
-          "change": "Changer de plan",
-          "cancel": "Annuler l'abonnement"
-        }
-      },
-      "paymentMethod": {
-        "title": "Mode de paiement",
-        "expires": "Expire",
-        "default": "Par défaut",
-        "actions": {
-          "add": "Ajouter un mode de paiement"
-        }
-      },
-      "history": {
-        "title": "Historique de facturation",
-        "table": {
-          "date": "Date",
-          "description": "Description",
-          "amount": "Montant",
-          "status": "Statut"
-        }
-      }
+      "title": "Facturation et abonnement",
+      "comingSoon": "La facturation arrive bientôt",
+      "comingSoonDesc": "Les formules d'abonnement et la gestion des paiements pour les promoteurs TourStack ne sont pas encore disponibles. Vous pourrez gérer votre formule et vos moyens de paiement ici dès le lancement de la facturation."
     },
     "securityTab": {
       "password": {
@@ -1003,7 +983,12 @@
         "hint": "Minimum 8 caractères avec au moins un chiffre et un symbole.",
         "actions": {
           "update": "Mettre à jour le mot de passe"
-        }
+        },
+        "updating": "Mise à jour…",
+        "success": "Mot de passe mis à jour.",
+        "error": "Nous n'avons pas pu mettre à jour votre mot de passe. Vérifiez votre mot de passe actuel et réessayez.",
+        "tooShort": "Le nouveau mot de passe doit comporter au moins 8 caractères.",
+        "mismatch": "Les nouveaux mots de passe ne correspondent pas."
       },
       "twoFactor": {
         "title": "Authentification à deux facteurs",
@@ -1029,6 +1014,8 @@
         "title": "Sessions actives",
         "description": "Appareils actuellement connectés à votre compte.",
         "thisDevice": "Cet appareil",
+        "signingOut": "Déconnexion…",
+        "revokedAll": "Toutes les autres sessions ont été déconnectées.",
         "actions": {
           "revoke": "Révoquer",
           "revokeOthers": "Se déconnecter de tous les autres appareils"
@@ -2131,6 +2118,7 @@
       }
     },
     "capitalPartners": "Partenaires financiers",
+    "noPartners": "Aucun partenaire de financement n'est disponible pour le moment.",
     "partners": {
       "p1": {
         "region": "Panafricain",
@@ -2329,7 +2317,27 @@
     "alreadyHaveAccount": "Vous avez déjà un compte ?",
     "signIn": "Se connecter",
     "errorFailed": "L'inscription a échoué",
+    "errorAlreadyExists": "Un compte avec cette adresse e-mail existe déjà.",
     "loading": "Chargement de la session..."
+  },
+  "VerifyEmailPage": {
+    "tagline": "Vérifiez votre compte",
+    "title": "Entrez votre code de vérification",
+    "description": "Nous avons envoyé un code à 6 chiffres à {email}. Saisissez-le ci-dessous pour activer votre compte.",
+    "codeLabel": "Code de vérification",
+    "codePlaceholder": "000000",
+    "submit": "Vérifier le compte",
+    "submitting": "Vérification...",
+    "resendPrompt": "Vous n'avez pas reçu de code ?",
+    "resend": "Renvoyer le code",
+    "resending": "Envoi...",
+    "resendSuccess": "Un nouveau code a été envoyé à votre adresse e-mail.",
+    "errorFailed": "Code invalide ou expiré. Veuillez réessayer.",
+    "successRedirect": "E-mail vérifié ! Vous pouvez maintenant vous connecter.",
+    "verifiedTitle": "Compte vérifié !",
+    "verifiedMessage": "Connexion en cours...",
+    "noEmail": "Aucune adresse e-mail fournie.",
+    "signIn": "Se connecter"
   },
   "SideNav": {
     "dashboard": "Tableau de bord",
@@ -2572,9 +2580,14 @@
     "requestsTitle": "Demandes de financement",
     "requested": "demandé",
     "reviewDetails": "Détails de l'examen",
+    "empty": "Aucune demande de financement pour le moment.",
+    "loadError": "Impossible de charger les demandes de financement.",
     "status": {
       "pending": "En attente",
+      "under_review": "En cours d'examen",
       "approved": "Approuvé",
+      "rejected": "Rejeté",
+      "disbursed": "Décaissé",
       "declined": "Refusé"
     }
   },
@@ -2582,9 +2595,26 @@
     "badge": "Analytique",
     "title": "Rapports de tournée",
     "description": "Mesures de haut niveau et rapports financiers pour le circuit de tournées panafricain.",
+    "loadError": "Nous n'avons pas pu charger les rapports pour le moment. Veuillez réessayer plus tard.",
     "exportCsv": "Exporter en CSV",
-    "comingSoon": "Tableau de bord des rapports bientôt disponible",
-    "comingSoonDesc": "Nous regroupons actuellement les données de vos projets de tournée actifs. Des ventilations financières détaillées, des projections de ventes de billets et des analyses de risques seront disponibles ici sous peu."
+    "exporting": "Exportation…",
+    "exportError": "Échec de l'exportation. Veuillez réessayer.",
+    "stats": {
+      "totalEois": "Total des EOI",
+      "approvalRate": "Taux d'approbation des EOI",
+      "totalTours": "Projets de tournée",
+      "activeArtists": "Artistes actifs",
+      "totalDisbursed": "Capital décaissé",
+      "totalRequested": "Capital demandé",
+      "crewMembers": "Membres d'équipe technique",
+      "stakeholders": "Parties prenantes"
+    },
+    "breakdowns": {
+      "eois": "EOI par statut",
+      "tours": "Tournées par statut",
+      "financing": "Financement par statut"
+    },
+    "noBreakdown": "Aucune donnée pour le moment"
   },
   "AdminToursPage": {
     "badge": "Gestion des tournées",
@@ -2605,21 +2635,43 @@
     "title": "Paramètres de la plateforme",
     "description": "Gérez les contraintes globales des tournées, la logique de correspondance et l'accès de l'équipe.",
     "saveChanges": "Enregistrer les modifications",
+    "saving": "Enregistrement…",
+    "saved": "Paramètres enregistrés.",
+    "saveError": "Nous n'avons pas pu enregistrer vos modifications. Veuillez réessayer.",
+    "loadError": "Nous n'avons pas pu charger les paramètres de la plateforme.",
     "algorithm": {
       "title": "Algorithme de correspondance",
       "strictBudget": "Alignement budgétaire strict",
       "strictBudgetDesc": "Rejeter automatiquement les EOI où le budget du promoteur est de 20 % inférieur aux frais minimums de l'artiste.",
-      "autoApprove": "Approbation automatique des correspondances à 90 %+ ",
+      "autoApprove": "Approbation automatique des correspondances à 90 %+",
       "autoApproveDesc": "Contourner l'examen manuel pour les EOI qui obtiennent une confiance de correspondance de 90 % ou plus."
     },
     "team": {
       "title": "Équipe d'administration",
-      "invite": "Inviter un membre de l'équipe"
+      "role": "Administrateur",
+      "empty": "Aucun administrateur trouvé.",
+      "loadError": "Nous n'avons pas pu charger l'équipe d'administration.",
+      "invite": "Inviter un membre de l'équipe",
+      "nameLabel": "Nom complet",
+      "namePlaceholder": "ex. Ada Lovelace",
+      "emailLabel": "Adresse e-mail",
+      "emailPlaceholder": "nom@entreprise.com",
+      "sendInvite": "Envoyer l'invitation",
+      "inviting": "Envoi de l'invitation…",
+      "cancel": "Annuler",
+      "inviteSuccess": "Invitation envoyée.",
+      "inviteError": "Nous n'avons pas pu envoyer cette invitation. Veuillez réessayer."
     },
     "danger": {
       "title": "Zone de danger",
       "description": "Les actions entreprises ici sont destructrices et ne peuvent pas être inversées.",
-      "purge": "Purger les projets de brouillon"
+      "purge": "Purger les projets de brouillon",
+      "confirmPrompt": "Supprimer définitivement tous les projets de tournée encore en brouillon ? Cette action est irréversible.",
+      "confirm": "Oui, purger les brouillons",
+      "cancel": "Annuler",
+      "purging": "Purge en cours…",
+      "purged": "{count} projet(s) de brouillon supprimé(s).",
+      "purgeError": "Nous n'avons pas pu purger les projets de brouillon. Veuillez réessayer."
     }
   },
   "StepForm": {

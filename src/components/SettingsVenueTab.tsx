@@ -1,0 +1,286 @@
+"use client";
+
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
+import {
+	createTourstackVenue,
+	deleteTourstackVenue,
+	getTourstackVenues,
+	updateTourstackVenue,
+} from "@/app/actions";
+import { Field, Section } from "@/components/SettingsPrimitives";
+
+const EMPTY_FORM = {
+	name: "",
+	venueType: "",
+	city: "",
+	country: "",
+	seatedCapacity: "",
+	standingCapacity: "",
+	streetAddress: "",
+	googleMapsUrl: "",
+};
+
+export default function SettingsVenueTab() {
+	const t = useTranslations("SettingsPage.venueTab");
+	const queryClient = useQueryClient();
+
+	const venuesQuery = useQuery({
+		queryKey: ["tourstackVenues"],
+		queryFn: getTourstackVenues,
+	});
+	const venues = venuesQuery.data?.data ?? [];
+
+	const [form, setForm] = useState(EMPTY_FORM);
+	const [editingId, setEditingId] = useState<string | null>(null);
+
+	const resetForm = () => {
+		setForm(EMPTY_FORM);
+		setEditingId(null);
+	};
+
+	const saveMutation = useMutation({
+		mutationFn: async () => {
+			const payload = {
+				name: form.name.trim(),
+				venueType: form.venueType.trim(),
+				city: form.city.trim(),
+				country: form.country.trim(),
+				streetAddress: form.streetAddress.trim(),
+				seatedCapacity: form.seatedCapacity
+					? Number(form.seatedCapacity)
+					: undefined,
+				standingCapacity: form.standingCapacity
+					? Number(form.standingCapacity)
+					: undefined,
+				googleMapsUrl: form.googleMapsUrl.trim() || undefined,
+			};
+			return editingId
+				? updateTourstackVenue(editingId, payload)
+				: createTourstackVenue(payload);
+		},
+		onSuccess: (result) => {
+			if (result.success) {
+				resetForm();
+				void queryClient.invalidateQueries({ queryKey: ["tourstackVenues"] });
+			}
+		},
+	});
+
+	const deleteMutation = useMutation({
+		mutationFn: deleteTourstackVenue,
+		onSuccess: (result) => {
+			if (result.success) {
+				void queryClient.invalidateQueries({ queryKey: ["tourstackVenues"] });
+			}
+		},
+	});
+
+	const set = (key: keyof typeof EMPTY_FORM) => (v: string) =>
+		setForm((p) => ({ ...p, [key]: v }));
+
+	const startEdit = (venue: (typeof venues)[number]) => {
+		setEditingId(String(venue.id));
+		setForm({
+			name: String(venue.name ?? ""),
+			venueType: String(venue.venue_type ?? ""),
+			city: String(venue.city ?? ""),
+			country: String(venue.country ?? ""),
+			seatedCapacity:
+				venue.seated_capacity != null ? String(venue.seated_capacity) : "",
+			standingCapacity:
+				venue.standing_capacity != null ? String(venue.standing_capacity) : "",
+			streetAddress: String(venue.street_address ?? ""),
+			googleMapsUrl: String(venue.google_maps_url ?? ""),
+		});
+		if (typeof window !== "undefined") {
+			window.scrollTo({ top: 0, behavior: "smooth" });
+		}
+	};
+
+	const canSave =
+		form.name.trim() !== "" &&
+		form.venueType.trim() !== "" &&
+		form.city.trim() !== "" &&
+		form.country.trim() !== "" &&
+		form.streetAddress.trim() !== "";
+
+	const saveFailed =
+		saveMutation.error != null ||
+		(saveMutation.data != null && !saveMutation.data.success);
+
+	return (
+		<div className="space-y-6">
+			<Section
+				title={t("myVenues.title")}
+				description={t("myVenues.description")}
+			>
+				<div className="space-y-3">
+					{venuesQuery.isLoading ? (
+						<p className="text-sm text-on-surface-variant">{t("loading")}</p>
+					) : venues.length === 0 ? (
+						<p className="text-sm text-on-surface-variant">
+							{t("myVenues.empty")}
+						</p>
+					) : (
+						venues.map((v) => (
+							<div
+								key={String(v.id)}
+								className="flex items-center gap-4 p-5 bg-surface-container-low rounded-xl border border-outline-variant/10"
+							>
+								<div className="w-10 h-10 rounded-xl bg-[#FF5A30]/10 flex items-center justify-center shrink-0">
+									<span
+										className="material-symbols-outlined text-[#FF5A30]"
+										style={{ fontVariationSettings: "'FILL' 1" }}
+									>
+										stadium
+									</span>
+								</div>
+								<div className="flex-1 min-w-0">
+									<div className="flex items-center gap-2 flex-wrap">
+										<p className="font-bold text-sm text-on-surface">
+											{String(v.name)}
+										</p>
+										{v.is_verified ? (
+											<span className="text-[10px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">
+												{t("myVenues.statuses.verified")}
+											</span>
+										) : (
+											<span className="text-[10px] font-black uppercase tracking-wider bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full">
+												{t("myVenues.statuses.pending")}
+											</span>
+										)}
+									</div>
+									<p className="text-xs text-on-surface-variant mt-0.5 capitalize">
+										{String(v.city)}, {String(v.country)} ·{" "}
+										{String(v.venue_type)}
+									</p>
+								</div>
+								<div className="flex items-center gap-3 shrink-0">
+									<button
+										type="button"
+										onClick={() => startEdit(v)}
+										className="text-xs font-bold text-on-surface-variant hover:text-[#FF5A30] transition-colors"
+									>
+										{t("myVenues.actions.edit")}
+									</button>
+									<button
+										type="button"
+										onClick={() => deleteMutation.mutate(String(v.id))}
+										disabled={deleteMutation.isPending}
+										className="text-xs font-bold text-red-500 hover:text-red-600 transition-colors disabled:opacity-50"
+									>
+										{deleteMutation.isPending
+											? t("myVenues.actions.deleting")
+											: t("myVenues.actions.delete")}
+									</button>
+								</div>
+							</div>
+						))
+					)}
+				</div>
+				{editingId && (
+					<button
+						type="button"
+						onClick={resetForm}
+						className="w-full py-3 border-2 border-dashed border-outline-variant/40 rounded-xl text-sm font-bold text-on-surface-variant hover:border-[#FF5A30]/40 hover:text-[#FF5A30] transition-all flex items-center justify-center gap-2"
+					>
+						<span className="material-symbols-outlined text-sm">add</span>
+						{t("myVenues.actions.addNew")}
+					</button>
+				)}
+			</Section>
+
+			<Section
+				title={editingId ? t("venueDetails.editTitle") : t("venueDetails.createTitle")}
+				description={t("venueDetails.description")}
+			>
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+					<Field
+						label={t("venueDetails.fields.name")}
+						id="v-name"
+						value={form.name}
+						onChange={set("name")}
+					/>
+					<Field
+						label={t("venueDetails.fields.type")}
+						id="v-type"
+						value={form.venueType}
+						onChange={set("venueType")}
+					/>
+					<Field
+						label={t("venueDetails.fields.city")}
+						id="v-city"
+						value={form.city}
+						onChange={set("city")}
+					/>
+					<Field
+						label={t("venueDetails.fields.country")}
+						id="v-country"
+						value={form.country}
+						onChange={set("country")}
+					/>
+					<Field
+						label={t("venueDetails.fields.seatedCap")}
+						id="v-cap-seated"
+						type="number"
+						value={form.seatedCapacity}
+						onChange={(v) => set("seatedCapacity")(v.replace(/\D/g, ""))}
+					/>
+					<Field
+						label={t("venueDetails.fields.standingCap")}
+						id="v-cap-stand"
+						type="number"
+						value={form.standingCapacity}
+						onChange={(v) => set("standingCapacity")(v.replace(/\D/g, ""))}
+					/>
+					<Field
+						label={t("venueDetails.fields.address")}
+						id="v-address"
+						value={form.streetAddress}
+						onChange={set("streetAddress")}
+					/>
+					<Field
+						label={t("venueDetails.fields.maps")}
+						id="v-maps"
+						type="url"
+						value={form.googleMapsUrl}
+						onChange={set("googleMapsUrl")}
+					/>
+				</div>
+				<div className="flex items-center justify-end gap-4 pt-2">
+					{saveMutation.data?.success && (
+						<span className="text-sm font-semibold text-emerald-600">
+							{t("venueDetails.saveSuccess")}
+						</span>
+					)}
+					{saveFailed && (
+						<span className="text-sm font-semibold text-rose-600">
+							{t("venueDetails.saveError")}
+						</span>
+					)}
+					{editingId && (
+						<button
+							type="button"
+							onClick={resetForm}
+							className="px-6 py-3 border border-outline-variant/40 rounded-xl font-bold text-sm text-on-surface-variant hover:bg-surface-container-low transition-all"
+						>
+							{t("venueDetails.actions.cancel")}
+						</button>
+					)}
+					<button
+						type="button"
+						onClick={() => saveMutation.mutate()}
+						disabled={!canSave || saveMutation.isPending}
+						className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:cursor-not-allowed disabled:opacity-60"
+					>
+						{saveMutation.isPending
+							? t("venueDetails.actions.saving")
+							: t("venueDetails.actions.save")}
+					</button>
+				</div>
+			</Section>
+		</div>
+	);
+}
