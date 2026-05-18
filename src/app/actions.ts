@@ -105,13 +105,39 @@ export async function getSession() {
 	return null;
 }
 
-export async function signIn(email: string, password: string) {
+async function signInWithEmail(email: string, password: string) {
 	const { error } = await client.auth["sign-in"].email.post({
 		email,
 		password,
 	});
 	if (error) return { success: false, error: extractError(error) };
 	return { success: true };
+}
+
+export async function signIn(email: string, password: string) {
+	const result = await signInWithEmail(email, password);
+	if (!result.success) return result;
+
+	const session = await getSession();
+	if (session?.user?.is_super_admin === true) {
+		await signOut();
+		return { success: false, code: "admin_only" as const };
+	}
+
+	return { success: true };
+}
+
+export async function signInAdmin(email: string, password: string) {
+	const result = await signInWithEmail(email, password);
+	if (!result.success) return result;
+
+	const session = await getSession();
+	if (session?.user?.is_super_admin === true) {
+		return { success: true };
+	}
+
+	await signOut();
+	return { success: false, code: "not_admin" as const };
 }
 
 export async function signUp(
@@ -502,6 +528,42 @@ export async function submitOnboardingLink(
 		data: extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error),
+	};
+}
+
+export type StakeholderSubmission = {
+	id: string;
+	category: string;
+	name: string;
+	email: string;
+	phone: string | null;
+	company: string | null;
+	country: string | null;
+	extra_data: Record<string, unknown> | null;
+	submitted_at: string;
+	link: { id: string; token: string; label: string | null } | null;
+};
+
+export async function getStakeholders(): Promise<{
+	data: StakeholderSubmission[];
+	success: boolean;
+	error: string | null;
+}> {
+	const apiUrl = process.env.API_URL ?? "https://gateway.ckrowd.com";
+	const jar = await cookies();
+	const cookieString = jar
+		.getAll()
+		.map((c) => `${c.name}=${c.value}`)
+		.join("; ");
+	const res = await fetch(`${apiUrl}/tourstack/stakeholders`, {
+		headers: { Cookie: cookieString },
+		cache: "no-store",
+	});
+	const body = await res.json().catch(() => null);
+	return {
+		data: res.ok && body?.success ? (body.data ?? []) : [],
+		success: res.ok && Boolean(body?.success),
+		error: body?.error ?? null,
 	};
 }
 

@@ -1,20 +1,17 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
+import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { Suspense, useEffect, useState } from "react";
-import { useLogin, useSession } from "@/context/AuthContext";
+import { useAdminLogin, useSession } from "@/context/AuthContext";
 import { Link } from "@/i18n/routing";
-import { getRegularLoginRedirectPath } from "@/lib/auth";
+import { isAdminSession } from "@/lib/auth";
 
-function LoginPageContent() {
+function AdminLoginPageContent() {
 	const locale = useLocale();
-	const searchParams = useSearchParams();
 	const { data: session, isError, isFetching, isLoading } = useSession();
-	const loginMutation = useLogin();
-	const from = getRegularLoginRedirectPath(searchParams.get("from"));
-	const verified = searchParams.get("verified") === "true";
-	const t = useTranslations("LoginPage");
+	const loginMutation = useAdminLogin();
+	const t = useTranslations("AdminLoginPage");
 	const tCommon = useTranslations("Common");
 
 	const [email, setEmail] = useState("");
@@ -23,10 +20,11 @@ function LoginPageContent() {
 
 	useEffect(() => {
 		if (!isLoading && session?.user) {
-			const localePath = from.startsWith("/") ? from : `/${from}`;
-			window.location.replace(`/${locale}${localePath}`);
+			window.location.replace(
+				isAdminSession(session) ? `/${locale}/admin` : `/${locale}/dashboard`,
+			);
 		}
-	}, [session?.user, from, isLoading, locale]);
+	}, [session, isLoading, locale]);
 
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
@@ -39,13 +37,12 @@ function LoginPageContent() {
 						const code = "code" in result ? result.code : undefined;
 						const message = "error" in result ? result.error : undefined;
 						setError(
-							code === "admin_only"
-								? t("errorAdminOnly")
+							code === "not_admin"
+								? t("errorNotAdmin")
 								: message ?? t("errorInvalid"),
 						);
 					} else {
-						const localePath = from.startsWith("/") ? from : `/${from}`;
-						window.location.replace(`/${locale}${localePath}`);
+						window.location.replace(`/${locale}/admin`);
 					}
 				},
 				onError: () => setError(t("errorFailed")),
@@ -65,44 +62,46 @@ function LoginPageContent() {
 		<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 py-12">
 			<div className="w-full max-w-md">
 				<div className="text-center mb-10">
-					<Link
-						href="/"
-						className="text-3xl font-black tracking-tight text-[#FF5A30] font-(family-name:--font-manrope)"
-					>
-						{tCommon("brandName")} {tCommon("brandBy")}
-					</Link>
-					<p className="mt-2 text-sm text-slate-500 font-medium">
-						{t("description")}
-					</p>
+					<div className="flex items-center justify-center gap-2.5 mb-6">
+						<Image
+							src="/ckrowd-logo.png"
+							alt={t("logoAlt")}
+							width={36}
+							height={36}
+							priority
+						/>
+						<div className="flex flex-col leading-tight text-left">
+							<span className="text-lg font-black tracking-tight text-[#FF5A30] font-(family-name:--font-manrope)">
+								{tCommon("brandName")}
+							</span>
+							<span className="text-[10px] font-semibold text-black font-(family-name:--font-manrope)">
+								{tCommon("brandBy")}
+							</span>
+						</div>
+					</div>
 				</div>
 
 				<div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
 					<div className="mb-8">
-						<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-slate-900 mb-1">
+						<p className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] mb-3">
+							{t("portal")}
+						</p>
+						<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-slate-900 mb-2">
 							{t("title")}
 						</h1>
 						<p className="text-sm text-slate-500">{t("description")}</p>
 					</div>
 
-					{verified && (
-						<div className="mb-6 flex items-center gap-3 rounded-xl bg-green-50 border border-green-200 px-4 py-3">
-							<svg className="w-5 h-5 text-green-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-								<path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-							</svg>
-							<p className="text-sm text-green-700 font-medium">{t("verifiedBanner")}</p>
-						</div>
-					)}
-
 					<form onSubmit={handleSubmit} className="space-y-5">
 						<div>
 							<label
-								htmlFor="email"
+								htmlFor="admin-email"
 								className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
 							>
 								{t("email")}
 							</label>
 							<input
-								id="email"
+								id="admin-email"
 								type="email"
 								autoComplete="email"
 								placeholder={t("emailPlaceholder")}
@@ -115,13 +114,13 @@ function LoginPageContent() {
 
 						<div>
 							<label
-								htmlFor="password"
+								htmlFor="admin-password"
 								className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
 							>
 								{t("password")}
 							</label>
 							<input
-								id="password"
+								id="admin-password"
 								type="password"
 								autoComplete="current-password"
 								placeholder={t("passwordPlaceholder")}
@@ -148,40 +147,22 @@ function LoginPageContent() {
 					</form>
 
 					<p className="text-center text-sm text-slate-500 mt-6">
-						{t("noAccount")}{" "}
+						{t("regularAccount")}{" "}
 						<Link
-							href="/register"
+							href="/login"
 							className="text-[#FF5A30] font-semibold hover:underline"
 						>
-							{t("register")}
+							{t("regularLogin")}
 						</Link>
 					</p>
 				</div>
-
-				<p className="text-center text-xs text-slate-400 mt-6">
-					{t("agreeTo")}{" "}
-					<Link
-						href="/terms"
-						className="hover:text-[#FF5A30] transition-colors"
-					>
-						{t("terms")}
-					</Link>{" "}
-					{t("and")}{" "}
-					<Link
-						href="/privacy"
-						className="hover:text-[#FF5A30] transition-colors"
-					>
-						{t("privacy")}
-					</Link>
-					.
-				</p>
 			</div>
 		</div>
 	);
 }
 
-export default function LoginPage() {
-	const t = useTranslations("LoginPage");
+export default function AdminLoginPage() {
+	const t = useTranslations("AdminLoginPage");
 	return (
 		<Suspense
 			fallback={
@@ -190,7 +171,7 @@ export default function LoginPage() {
 				</div>
 			}
 		>
-			<LoginPageContent />
+			<AdminLoginPageContent />
 		</Suspense>
 	);
 }

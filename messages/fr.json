@@ -142,8 +142,27 @@
     "privacy": "Politique de confidentialité",
     "errorInvalid": "E-mail ou mot de passe invalide",
     "errorFailed": "La connexion a échoué",
+    "errorAdminOnly": "Ce compte utilise la page de connexion administrateur.",
     "loading": "Chargement de la session...",
     "verifiedBanner": "E-mail vérifié ! Connectez-vous pour accéder à votre compte."
+  },
+  "AdminLoginPage": {
+    "logoAlt": "Logo TourStack",
+    "portal": "Portail administrateur",
+    "title": "Connexion administrateur",
+    "description": "Utilisez vos identifiants administrateur pour accéder au centre de contrôle TourStack.",
+    "email": "E-mail administrateur",
+    "password": "Mot de passe",
+    "emailPlaceholder": "admin@ckrowd.com",
+    "passwordPlaceholder": "Votre mot de passe",
+    "signIn": "Se connecter à l'administration",
+    "signingIn": "Connexion en cours...",
+    "regularAccount": "Vous utilisez un compte promoteur ?",
+    "regularLogin": "Aller à la connexion standard",
+    "errorInvalid": "E-mail ou mot de passe invalide",
+    "errorNotAdmin": "Ce compte n'est pas autorisé à accéder au portail administrateur.",
+    "errorFailed": "La connexion administrateur a échoué",
+    "loading": "Vérification de la session administrateur..."
   },
   "EOIPage": {
     "stepper": {
@@ -530,6 +549,17 @@
     "actions": {
       "copy": "Copier",
       "revoke": "Révoquer"
+    },
+    "submissions": {
+      "received": "{count, plural, =1 {# soumission} other {# soumissions}}",
+      "none": "Aucune soumission",
+      "view": "Voir les soumissions",
+      "hide": "Masquer les soumissions",
+      "error": "Impossible de charger les soumissions.",
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "company": "Entreprise",
+      "country": "Pays"
     }
   },
   "WorkforcePage": {
