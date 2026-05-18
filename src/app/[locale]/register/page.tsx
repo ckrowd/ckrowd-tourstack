@@ -48,7 +48,7 @@ export default function RegisterPage() {
 		);
 	}
 
-	if ((isLoading || isFetching || isError) && !session) {
+	if ((isLoading || isFetching) && !session) {
 		return (
 			<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 text-slate-600">
 				{t("loading")}
