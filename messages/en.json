@@ -115,6 +115,7 @@
     "openProfileMenu": "Open profile menu",
     "closeProfileMenu": "Close profile menu",
     "markAllAsRead": "Mark all as read",
+    "checkingSession": "Checking session",
     "notif": {
       "empty": "No notifications yet",
       "eoiFallback": "Expression of Interest",
@@ -2043,8 +2044,11 @@
     "application": "Application",
     "statuses": {
       "pending": "Pending",
+      "under_review": "Under review",
       "approved": "Approved",
-      "declined": "Declined"
+      "rejected": "Rejected",
+      "declined": "Declined",
+      "disbursed": "Disbursed"
     },
     "requested": "Requested",
     "applied": "Applied",
@@ -2186,6 +2190,18 @@
     "exploreFinancing": "Explore Financing",
     "tourActivity": "Tour Activity",
     "noActivity": "No activity yet",
+    "statuses": {
+      "pending": "Pending",
+      "pending_review": "Pending review",
+      "under_review": "Under review",
+      "approved": "Approved",
+      "needs_revision": "Needs revision",
+      "rejected": "Rejected",
+      "declined": "Declined",
+      "confirmed": "Confirmed",
+      "disbursed": "Disbursed",
+      "draft": "Draft"
+    },
     "time": {
       "justNow": "Just now",
       "hoursAgo": "{count}h ago",
@@ -2445,76 +2461,142 @@
     }
   },
   "StakeholderRegistrationPage": {
-    "success": {
-      "title": "Registration submitted",
-      "description": "Your details were submitted successfully.",
-      "returnHome": "Return home"
-    },
     "header": {
       "tagline": "Onboarding Invitation",
       "title": "Stakeholder Registration"
     },
     "loadingLink": "Loading link...",
     "errorUnavailable": "This invitation link is unavailable.",
-    "category": "Category",
-    "label": "Label",
-    "form": {
-      "name": "Name",
-      "email": "Email",
-      "phone": "Phone",
-      "country": "Country",
-      "company": "Company (optional)",
-      "submitting": "Submitting...",
-      "submit": "Submit Registration"
-    },
     "errorDefault": "Unable to submit registration.",
+    "label": "Label",
+    "steps": {
+      "back": "Back",
+      "next": "Continue"
+    },
+    "success": {
+      "title": "Registration submitted",
+      "description": "Your details were submitted successfully.",
+      "returnHome": "Return home"
+    },
+    "declaration": {
+      "title": "Please review and confirm the declarations below before submitting.",
+      "representativeName": "Representative Name",
+      "date": "Date",
+      "clause1": "I confirm that the information provided is accurate and complete to the best of my knowledge.",
+      "clause2": "I authorize Ckrowd to verify the details provided as part of TourStack onboarding.",
+      "clause3": "I have read and agree to the TourStack terms of service and privacy policy.",
+      "submit": "Submit Registration",
+      "submitting": "Submitting..."
+    },
     "serviceProvider": {
       "tagline": "Service Provider Invitation",
       "title": "Service Provider Registration",
-      "fields": {
-        "contactName": "Contact Name",
-        "companyName": "Company Name",
-        "email": "Business Email",
-        "phone": "Phone",
-        "country": "Country",
-        "serviceType": "Service Type",
-        "yearsInBusiness": "Years in Business (optional)",
-        "description": "Description of Services",
-        "website": "Website (optional)",
-        "certifications": "Certifications / Insurance (optional)"
+      "steps": {
+        "step1": "Contact",
+        "step2": "Services",
+        "step3": "Declaration"
       },
       "serviceTypes": {
-        "catering": "Catering",
-        "security": "Security",
-        "av_tech": "AV / Technology",
-        "transportation": "Transportation",
+        "venue_hire": "Venue Hire",
+        "sound_av": "Sound & AV",
+        "lighting": "Lighting",
         "staging": "Staging & Production",
+        "logistics": "Logistics",
+        "security": "Security",
+        "catering": "Catering",
         "hospitality": "Hospitality",
+        "ticketing": "Ticketing",
+        "marketing_pr": "Marketing & PR",
+        "photography_video": "Photography & Video",
+        "medical": "Medical Services",
+        "power_generator": "Power & Generators",
+        "production_management": "Production Management",
+        "transportation": "Transportation",
+        "av_tech": "AV / Technology",
         "other": "Other"
+      },
+      "serviceCoverageOptions": {
+        "local": "Local (single city)",
+        "national": "National",
+        "regional": "Regional (multi-country)",
+        "international": "International"
+      },
+      "yearsOptions": {
+        "under_1": "Under 1 year",
+        "1_3": "1–3 years",
+        "4_7": "4–7 years",
+        "8_plus": "8+ years"
+      },
+      "yesNo": {
+        "yes": "Yes",
+        "no": "No"
+      },
+      "fields": {
+        "contactName": "Contact Name",
+        "contactNamePlaceholder": "Full name",
+        "jobTitle": "Job Title",
+        "jobTitlePlaceholder": "e.g. Operations Lead",
+        "companyName": "Company Name",
+        "companyNamePlaceholder": "Registered business name",
+        "email": "Business Email",
+        "emailPlaceholder": "name@company.com",
+        "phone": "Phone",
+        "phonePlaceholder": "+234 800 000 0000",
+        "whatsapp": "WhatsApp",
+        "whatsappPlaceholder": "+234 800 000 0000",
+        "country": "Country",
+        "countryPlaceholder": "e.g. Nigeria",
+        "city": "City",
+        "cityPlaceholder": "e.g. Lagos",
+        "website": "Website",
+        "websitePlaceholder": "https://",
+        "instagram": "Instagram",
+        "instagramPlaceholder": "@handle",
+        "serviceTypes": "Services Offered",
+        "serviceDescription": "Description of Services",
+        "serviceDescriptionPlaceholder": "Describe the services you provide for live events and tours.",
+        "serviceCoverage": "Coverage Area",
+        "yearsInOperation": "Years in Operation",
+        "largestEventServed": "Largest Event Served (capacity)",
+        "largestEventServedPlaceholder": "e.g. 5000",
+        "notableClients": "Notable Clients",
+        "notableClientsPlaceholder": "Events or clients you have worked with.",
+        "certifications": "Certifications",
+        "certificationsPlaceholder": "e.g. safety or insurance certifications",
+        "businessRegistered": "Is your business registered?",
+        "hasInsurance": "Do you carry liability insurance?"
       }
     },
     "workforce": {
       "tagline": "Workforce Invitation",
       "title": "Workforce Registration",
-      "fields": {
-        "name": "Full Name",
-        "email": "Email",
-        "phone": "Phone",
-        "country": "Country",
-        "company": "Current Employer (optional)",
-        "role": "Role / Specialty",
-        "yearsExperience": "Years of Experience",
-        "skillsSummary": "Skills Summary",
-        "availability": "Availability",
-        "availabilityPlaceholder": "e.g. June–August 2025",
-        "previousWork": "Previous Tours / Events (optional)"
+      "steps": {
+        "step1": "Contact",
+        "step2": "Experience",
+        "step3": "Availability",
+        "step4": "References",
+        "step5": "Declaration"
       },
       "roles": {
+        "stage_manager": "Stage Manager",
+        "production_manager": "Production Manager",
+        "tour_manager": "Tour Manager",
+        "foh_engineer": "FOH Engineer",
+        "monitor_engineer": "Monitor Engineer",
+        "lighting_designer": "Lighting Designer",
+        "rigger": "Rigger",
+        "backline_tech": "Backline Technician",
+        "pyrotechnics": "Pyrotechnics",
+        "logistics_coordinator": "Logistics Coordinator",
+        "security_lead": "Security Lead",
+        "merchandise_manager": "Merchandise Manager",
+        "hospitality_manager": "Hospitality Manager",
+        "video_tech": "Video Technician",
+        "photographer": "Photographer",
         "stage_crew": "Stage Crew",
         "lighting_tech": "Lighting Technician",
         "sound_tech": "Sound Technician",
         "security": "Security",
-        "production_manager": "Production Manager",
         "driver": "Driver / Transport",
         "hospitality": "Hospitality",
         "other": "Other"
@@ -2525,29 +2607,137 @@
         "3_5": "3–5 years",
         "5_10": "5–10 years",
         "10_plus": "10+ years"
+      },
+      "largestEvents": {
+        "under_500": "Under 500",
+        "500_2000": "500–2,000",
+        "2000_10000": "2,000–10,000",
+        "10000_50000": "10,000–50,000",
+        "over_50000": "Over 50,000"
+      },
+      "touringOptions": {
+        "relocate": "Willing to relocate for tours",
+        "flexible": "Flexible — open to travel",
+        "local_only": "Local engagements only"
+      },
+      "yesNo": {
+        "yes": "Yes",
+        "no": "No"
+      },
+      "fields": {
+        "name": "Full Name",
+        "namePlaceholder": "Full legal name",
+        "preferredName": "Preferred Name",
+        "preferredNamePlaceholder": "Name you go by",
+        "email": "Email",
+        "emailPlaceholder": "name@email.com",
+        "phone": "Phone",
+        "phonePlaceholder": "+234 800 000 0000",
+        "whatsapp": "WhatsApp",
+        "whatsappPlaceholder": "+234 800 000 0000",
+        "nationality": "Nationality",
+        "nationalityPlaceholder": "e.g. Nigerian",
+        "country": "Country of Residence",
+        "countryPlaceholder": "e.g. Nigeria",
+        "city": "City",
+        "cityPlaceholder": "e.g. Lagos",
+        "nationalId": "National ID / Passport No.",
+        "nationalIdPlaceholder": "Optional",
+        "primaryRoles": "Primary Roles",
+        "yearsExperience": "Years of Experience",
+        "largestEventWorked": "Largest Event Worked (capacity)",
+        "skillsSummary": "Skills Summary",
+        "skillsSummaryPlaceholder": "Describe your core skills and specialties.",
+        "equipmentOwned": "Equipment Owned",
+        "equipmentOwnedPlaceholder": "List any equipment you bring to engagements.",
+        "touringAvailability": "Touring Availability",
+        "canDeploy48h": "Can you deploy within 48 hours?",
+        "hasPassport": "Do you hold a valid passport?",
+        "dayRate": "Day Rate (USD)",
+        "dayRatePlaceholder": "e.g. 150",
+        "availability": "Availability",
+        "availabilityPlaceholder": "e.g. Available from October",
+        "marketsWorked": "Markets Worked",
+        "marketsWorkedPlaceholder": "Cities or countries you have worked in.",
+        "portfolioLinks": "Portfolio Links",
+        "portfolioLinksPlaceholder": "Links to your work, reels, or profiles.",
+        "refereeName": "Referee Name",
+        "refereeNamePlaceholder": "Full name",
+        "refereeCompany": "Referee Company",
+        "refereeCompanyPlaceholder": "Company or organization",
+        "refereeContact": "Referee Contact",
+        "refereeContactPlaceholder": "Email or phone",
+        "refereeRelationship": "Relationship",
+        "refereeRelationshipPlaceholder": "e.g. Former tour manager",
+        "previousTours": "Previous Tours",
+        "previousToursPlaceholder": "Notable tours or productions you have worked on."
       }
     },
     "artmgmt": {
       "tagline": "Artist Management Invitation",
       "title": "Artist Management Registration",
-      "fields": {
-        "agencyName": "Agency / Company Name",
-        "contactName": "Primary Contact Name",
-        "email": "Email",
-        "phone": "Phone",
-        "country": "Country",
-        "artistNames": "Artist Name(s)",
-        "genres": "Genre(s)",
-        "genresPlaceholder": "e.g. Pop, Hip-Hop, R&B",
-        "managementType": "Management Type",
-        "bio": "Artist / Roster Bio",
-        "website": "Website / Socials (optional)"
+      "steps": {
+        "step1": "Agency",
+        "step2": "Roster",
+        "step3": "Declaration"
       },
-      "managementTypes": {
-        "solo_artist": "Solo Artist",
-        "band_group": "Band / Group",
-        "label": "Record Label",
-        "management_agency": "Management Agency"
+      "yearsOptions": {
+        "under_1": "Under 1 year",
+        "1_3": "1–3 years",
+        "4_7": "4–7 years",
+        "8_plus": "8+ years"
+      },
+      "rosterSizes": {
+        "1_2": "1–2 artists",
+        "3_5": "3–5 artists",
+        "6_10": "6–10 artists",
+        "11_20": "11–20 artists",
+        "20_plus": "20+ artists"
+      },
+      "dealStructures": {
+        "flat_fee": "Flat fee",
+        "percentage_split": "Percentage split",
+        "nda_required": "NDA required",
+        "open_to_negotiation": "Open to negotiation"
+      },
+      "yesNo": {
+        "yes": "Yes",
+        "no": "No"
+      },
+      "fields": {
+        "agencyName": "Agency Name",
+        "agencyNamePlaceholder": "Registered agency name",
+        "contactName": "Contact Name",
+        "contactNamePlaceholder": "Full name",
+        "jobTitle": "Job Title",
+        "jobTitlePlaceholder": "e.g. Talent Manager",
+        "email": "Email",
+        "emailPlaceholder": "name@agency.com",
+        "phone": "Phone",
+        "phonePlaceholder": "+234 800 000 0000",
+        "whatsapp": "WhatsApp",
+        "whatsappPlaceholder": "+234 800 000 0000",
+        "country": "Country",
+        "countryPlaceholder": "e.g. Nigeria",
+        "city": "City",
+        "cityPlaceholder": "e.g. Lagos",
+        "website": "Website",
+        "websitePlaceholder": "https://",
+        "instagram": "Instagram",
+        "instagramPlaceholder": "@handle",
+        "yearsInOperation": "Years in Operation",
+        "rosterSize": "Roster Size",
+        "primaryGenres": "Primary Genres",
+        "genresPlaceholder": "e.g. Afrobeats, Hip-Hop",
+        "artistsRepresented": "Artists Represented",
+        "artistsRepresentedPlaceholder": "List the artists your agency represents.",
+        "marketsOperated": "Markets Operated",
+        "marketsOperatedPlaceholder": "Regions or countries where you operate.",
+        "pastTours": "Past Tours",
+        "pastToursPlaceholder": "Notable tours your agency has delivered.",
+        "dealStructures": "Preferred Deal Structures",
+        "hasLiveBooking": "Do you handle live booking?",
+        "businessRegistered": "Is your agency registered?"
       }
     }
   },

@@ -115,6 +115,7 @@
     "openProfileMenu": "Ouvrir le menu de profil",
     "closeProfileMenu": "Fermer le menu de profil",
     "markAllAsRead": "Tout marquer comme lu",
+    "checkingSession": "Vérification de la session",
     "notif": {
       "empty": "Aucune notification pour le moment",
       "eoiFallback": "Manifestation d'intérêt",
@@ -2043,8 +2044,11 @@
     "application": "Demande",
     "statuses": {
       "pending": "En attente",
+      "under_review": "En cours d'examen",
       "approved": "Approuvée",
-      "declined": "Refusée"
+      "rejected": "Rejetée",
+      "declined": "Refusée",
+      "disbursed": "Décaissée"
     },
     "requested": "Demandé",
     "applied": "Appliqué",
@@ -2186,6 +2190,18 @@
     "exploreFinancing": "Explorer le financement",
     "tourActivity": "Activité de la tournée",
     "noActivity": "Pas encore d'activité",
+    "statuses": {
+      "pending": "En attente",
+      "pending_review": "En attente d'examen",
+      "under_review": "En cours d'examen",
+      "approved": "Approuvé",
+      "needs_revision": "Révision requise",
+      "rejected": "Rejeté",
+      "declined": "Refusé",
+      "confirmed": "Confirmé",
+      "disbursed": "Décaissé",
+      "draft": "Brouillon"
+    },
     "time": {
       "justNow": "À l'instant",
       "hoursAgo": "Il y a {count}h",
@@ -2445,76 +2461,142 @@
     }
   },
   "StakeholderRegistrationPage": {
-    "success": {
-      "title": "Inscription soumise",
-      "description": "Vos coordonnées ont été soumises avec succès.",
-      "returnHome": "Retour à l'accueil"
-    },
     "header": {
       "tagline": "Invitation à l'intégration",
       "title": "Inscription des parties prenantes"
     },
     "loadingLink": "Chargement du lien...",
     "errorUnavailable": "Ce lien d'invitation n'est pas disponible.",
-    "category": "Catégorie",
-    "label": "Étiquette",
-    "form": {
-      "name": "Nom",
-      "email": "E-mail",
-      "phone": "Téléphone",
-      "country": "Pays",
-      "company": "Entreprise (facultatif)",
-      "submitting": "Soumission...",
-      "submit": "Soumettre l'inscription"
-    },
     "errorDefault": "Impossible de soumettre l'inscription.",
+    "label": "Étiquette",
+    "steps": {
+      "back": "Retour",
+      "next": "Continuer"
+    },
+    "success": {
+      "title": "Inscription soumise",
+      "description": "Vos coordonnées ont été soumises avec succès.",
+      "returnHome": "Retour à l'accueil"
+    },
+    "declaration": {
+      "title": "Veuillez examiner et confirmer les déclarations ci-dessous avant de soumettre.",
+      "representativeName": "Nom du représentant",
+      "date": "Date",
+      "clause1": "Je confirme que les informations fournies sont exactes et complètes au mieux de ma connaissance.",
+      "clause2": "J'autorise Ckrowd à vérifier les informations fournies dans le cadre de l'intégration TourStack.",
+      "clause3": "J'ai lu et j'accepte les conditions d'utilisation et la politique de confidentialité de TourStack.",
+      "submit": "Soumettre l'inscription",
+      "submitting": "Soumission..."
+    },
     "serviceProvider": {
       "tagline": "Invitation Prestataire de Services",
       "title": "Inscription Prestataire de Services",
-      "fields": {
-        "contactName": "Nom du contact",
-        "companyName": "Nom de l'entreprise",
-        "email": "E-mail professionnel",
-        "phone": "Téléphone",
-        "country": "Pays",
-        "serviceType": "Type de service",
-        "yearsInBusiness": "Années d'activité (facultatif)",
-        "description": "Description des services",
-        "website": "Site web (facultatif)",
-        "certifications": "Certifications / Assurances (facultatif)"
+      "steps": {
+        "step1": "Contact",
+        "step2": "Services",
+        "step3": "Déclaration"
       },
       "serviceTypes": {
-        "catering": "Restauration",
-        "security": "Sécurité",
-        "av_tech": "AV / Technologie",
-        "transportation": "Transport",
+        "venue_hire": "Location de lieu",
+        "sound_av": "Son & AV",
+        "lighting": "Éclairage",
         "staging": "Scénographie & Production",
+        "logistics": "Logistique",
+        "security": "Sécurité",
+        "catering": "Restauration",
         "hospitality": "Hôtellerie",
+        "ticketing": "Billetterie",
+        "marketing_pr": "Marketing & RP",
+        "photography_video": "Photographie & Vidéo",
+        "medical": "Services médicaux",
+        "power_generator": "Électricité & Groupes électrogènes",
+        "production_management": "Gestion de production",
+        "transportation": "Transport",
+        "av_tech": "AV / Technologie",
         "other": "Autre"
+      },
+      "serviceCoverageOptions": {
+        "local": "Local (une seule ville)",
+        "national": "National",
+        "regional": "Régional (multi-pays)",
+        "international": "International"
+      },
+      "yearsOptions": {
+        "under_1": "Moins d'1 an",
+        "1_3": "1 à 3 ans",
+        "4_7": "4 à 7 ans",
+        "8_plus": "8 ans et plus"
+      },
+      "yesNo": {
+        "yes": "Oui",
+        "no": "Non"
+      },
+      "fields": {
+        "contactName": "Nom du contact",
+        "contactNamePlaceholder": "Nom complet",
+        "jobTitle": "Fonction",
+        "jobTitlePlaceholder": "ex. Responsable des opérations",
+        "companyName": "Nom de l'entreprise",
+        "companyNamePlaceholder": "Nom commercial enregistré",
+        "email": "E-mail professionnel",
+        "emailPlaceholder": "nom@entreprise.com",
+        "phone": "Téléphone",
+        "phonePlaceholder": "+234 800 000 0000",
+        "whatsapp": "WhatsApp",
+        "whatsappPlaceholder": "+234 800 000 0000",
+        "country": "Pays",
+        "countryPlaceholder": "ex. Nigéria",
+        "city": "Ville",
+        "cityPlaceholder": "ex. Lagos",
+        "website": "Site web",
+        "websitePlaceholder": "https://",
+        "instagram": "Instagram",
+        "instagramPlaceholder": "@identifiant",
+        "serviceTypes": "Services proposés",
+        "serviceDescription": "Description des services",
+        "serviceDescriptionPlaceholder": "Décrivez les services que vous proposez pour les événements et tournées.",
+        "serviceCoverage": "Zone de couverture",
+        "yearsInOperation": "Années d'activité",
+        "largestEventServed": "Plus grand événement servi (capacité)",
+        "largestEventServedPlaceholder": "ex. 5000",
+        "notableClients": "Clients notables",
+        "notableClientsPlaceholder": "Événements ou clients avec lesquels vous avez travaillé.",
+        "certifications": "Certifications",
+        "certificationsPlaceholder": "ex. certifications de sécurité ou d'assurance",
+        "businessRegistered": "Votre entreprise est-elle enregistrée ?",
+        "hasInsurance": "Disposez-vous d'une assurance responsabilité civile ?"
       }
     },
     "workforce": {
       "tagline": "Invitation Personnel",
       "title": "Inscription Personnel",
-      "fields": {
-        "name": "Nom complet",
-        "email": "E-mail",
-        "phone": "Téléphone",
-        "country": "Pays",
-        "company": "Employeur actuel (facultatif)",
-        "role": "Rôle / Spécialité",
-        "yearsExperience": "Années d'expérience",
-        "skillsSummary": "Résumé des compétences",
-        "availability": "Disponibilité",
-        "availabilityPlaceholder": "ex. Juin–Août 2025",
-        "previousWork": "Tournées / Événements précédents (facultatif)"
+      "steps": {
+        "step1": "Contact",
+        "step2": "Expérience",
+        "step3": "Disponibilité",
+        "step4": "Références",
+        "step5": "Déclaration"
       },
       "roles": {
+        "stage_manager": "Régisseur de scène",
+        "production_manager": "Directeur de production",
+        "tour_manager": "Tour manager",
+        "foh_engineer": "Ingénieur façade (FOH)",
+        "monitor_engineer": "Ingénieur retours",
+        "lighting_designer": "Concepteur lumière",
+        "rigger": "Accrocheur (rigger)",
+        "backline_tech": "Technicien backline",
+        "pyrotechnics": "Pyrotechnie",
+        "logistics_coordinator": "Coordinateur logistique",
+        "security_lead": "Responsable sécurité",
+        "merchandise_manager": "Responsable merchandising",
+        "hospitality_manager": "Responsable hôtellerie",
+        "video_tech": "Technicien vidéo",
+        "photographer": "Photographe",
         "stage_crew": "Équipe de scène",
         "lighting_tech": "Technicien éclairage",
         "sound_tech": "Technicien son",
         "security": "Sécurité",
-        "production_manager": "Directeur de production",
         "driver": "Chauffeur / Transport",
         "hospitality": "Hôtellerie",
         "other": "Autre"
@@ -2525,29 +2607,137 @@
         "3_5": "3 à 5 ans",
         "5_10": "5 à 10 ans",
         "10_plus": "10 ans et plus"
+      },
+      "largestEvents": {
+        "under_500": "Moins de 500",
+        "500_2000": "500 à 2 000",
+        "2000_10000": "2 000 à 10 000",
+        "10000_50000": "10 000 à 50 000",
+        "over_50000": "Plus de 50 000"
+      },
+      "touringOptions": {
+        "relocate": "Prêt à déménager pour les tournées",
+        "flexible": "Flexible — ouvert aux déplacements",
+        "local_only": "Engagements locaux uniquement"
+      },
+      "yesNo": {
+        "yes": "Oui",
+        "no": "Non"
+      },
+      "fields": {
+        "name": "Nom complet",
+        "namePlaceholder": "Nom légal complet",
+        "preferredName": "Nom d'usage",
+        "preferredNamePlaceholder": "Nom que vous utilisez",
+        "email": "E-mail",
+        "emailPlaceholder": "nom@email.com",
+        "phone": "Téléphone",
+        "phonePlaceholder": "+234 800 000 0000",
+        "whatsapp": "WhatsApp",
+        "whatsappPlaceholder": "+234 800 000 0000",
+        "nationality": "Nationalité",
+        "nationalityPlaceholder": "ex. Nigériane",
+        "country": "Pays de résidence",
+        "countryPlaceholder": "ex. Nigéria",
+        "city": "Ville",
+        "cityPlaceholder": "ex. Lagos",
+        "nationalId": "Pièce d'identité / N° de passeport",
+        "nationalIdPlaceholder": "Facultatif",
+        "primaryRoles": "Rôles principaux",
+        "yearsExperience": "Années d'expérience",
+        "largestEventWorked": "Plus grand événement réalisé (capacité)",
+        "skillsSummary": "Résumé des compétences",
+        "skillsSummaryPlaceholder": "Décrivez vos compétences clés et spécialités.",
+        "equipmentOwned": "Équipement possédé",
+        "equipmentOwnedPlaceholder": "Indiquez l'équipement que vous apportez aux engagements.",
+        "touringAvailability": "Disponibilité pour les tournées",
+        "canDeploy48h": "Pouvez-vous être déployé sous 48 heures ?",
+        "hasPassport": "Possédez-vous un passeport valide ?",
+        "dayRate": "Tarif journalier (USD)",
+        "dayRatePlaceholder": "ex. 150",
+        "availability": "Disponibilité",
+        "availabilityPlaceholder": "ex. Disponible à partir d'octobre",
+        "marketsWorked": "Marchés couverts",
+        "marketsWorkedPlaceholder": "Villes ou pays où vous avez travaillé.",
+        "portfolioLinks": "Liens de portfolio",
+        "portfolioLinksPlaceholder": "Liens vers vos travaux, démos ou profils.",
+        "refereeName": "Nom du référent",
+        "refereeNamePlaceholder": "Nom complet",
+        "refereeCompany": "Entreprise du référent",
+        "refereeCompanyPlaceholder": "Entreprise ou organisation",
+        "refereeContact": "Contact du référent",
+        "refereeContactPlaceholder": "E-mail ou téléphone",
+        "refereeRelationship": "Relation",
+        "refereeRelationshipPlaceholder": "ex. Ancien tour manager",
+        "previousTours": "Tournées précédentes",
+        "previousToursPlaceholder": "Tournées ou productions notables sur lesquelles vous avez travaillé."
       }
     },
     "artmgmt": {
       "tagline": "Invitation Management Artistique",
       "title": "Inscription Management Artistique",
-      "fields": {
-        "agencyName": "Agence / Nom de l'entreprise",
-        "contactName": "Nom du contact principal",
-        "email": "E-mail",
-        "phone": "Téléphone",
-        "country": "Pays",
-        "artistNames": "Nom(s) de l'artiste",
-        "genres": "Genre(s)",
-        "genresPlaceholder": "ex. Pop, Hip-Hop, R&B",
-        "managementType": "Type de management",
-        "bio": "Biographie de l'artiste / du roster",
-        "website": "Site web / Réseaux sociaux (facultatif)"
+      "steps": {
+        "step1": "Agence",
+        "step2": "Roster",
+        "step3": "Déclaration"
       },
-      "managementTypes": {
-        "solo_artist": "Artiste solo",
-        "band_group": "Groupe / Band",
-        "label": "Label discographique",
-        "management_agency": "Agence de management"
+      "yearsOptions": {
+        "under_1": "Moins d'1 an",
+        "1_3": "1 à 3 ans",
+        "4_7": "4 à 7 ans",
+        "8_plus": "8 ans et plus"
+      },
+      "rosterSizes": {
+        "1_2": "1 à 2 artistes",
+        "3_5": "3 à 5 artistes",
+        "6_10": "6 à 10 artistes",
+        "11_20": "11 à 20 artistes",
+        "20_plus": "20 artistes et plus"
+      },
+      "dealStructures": {
+        "flat_fee": "Forfait fixe",
+        "percentage_split": "Partage en pourcentage",
+        "nda_required": "Accord de confidentialité requis",
+        "open_to_negotiation": "Ouvert à la négociation"
+      },
+      "yesNo": {
+        "yes": "Oui",
+        "no": "Non"
+      },
+      "fields": {
+        "agencyName": "Nom de l'agence",
+        "agencyNamePlaceholder": "Nom de l'agence enregistrée",
+        "contactName": "Nom du contact",
+        "contactNamePlaceholder": "Nom complet",
+        "jobTitle": "Fonction",
+        "jobTitlePlaceholder": "ex. Manager de talents",
+        "email": "E-mail",
+        "emailPlaceholder": "nom@agence.com",
+        "phone": "Téléphone",
+        "phonePlaceholder": "+234 800 000 0000",
+        "whatsapp": "WhatsApp",
+        "whatsappPlaceholder": "+234 800 000 0000",
+        "country": "Pays",
+        "countryPlaceholder": "ex. Nigéria",
+        "city": "Ville",
+        "cityPlaceholder": "ex. Lagos",
+        "website": "Site web",
+        "websitePlaceholder": "https://",
+        "instagram": "Instagram",
+        "instagramPlaceholder": "@identifiant",
+        "yearsInOperation": "Années d'activité",
+        "rosterSize": "Taille du roster",
+        "primaryGenres": "Genres principaux",
+        "genresPlaceholder": "ex. Afrobeats, Hip-Hop",
+        "artistsRepresented": "Artistes représentés",
+        "artistsRepresentedPlaceholder": "Listez les artistes que votre agence représente.",
+        "marketsOperated": "Marchés couverts",
+        "marketsOperatedPlaceholder": "Régions ou pays où vous opérez.",
+        "pastTours": "Tournées passées",
+        "pastToursPlaceholder": "Tournées notables réalisées par votre agence.",
+        "dealStructures": "Structures de contrat préférées",
+        "hasLiveBooking": "Gérez-vous le booking de spectacles ?",
+        "businessRegistered": "Votre agence est-elle enregistrée ?"
       }
     }
   },

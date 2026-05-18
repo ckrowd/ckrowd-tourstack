@@ -9,6 +9,7 @@ export function useSession() {
 	return useQuery({
 		queryKey: ["session"],
 		queryFn: getSession,
+		staleTime: 60_000,
 	});
 }
 

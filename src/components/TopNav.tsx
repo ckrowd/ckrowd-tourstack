@@ -12,7 +12,12 @@ export default function TopNav() {
 	const pathname = usePathname();
 	const router = useRouter();
 	const locale = useLocale();
-	const { data: session } = useSession();
+	const {
+		data: session,
+		isError: sessionIsError,
+		isFetching: sessionIsFetching,
+		isLoading: sessionIsLoading,
+	} = useSession();
 	const logoutMutation = useLogout();
 	const [notifOpen, setNotifOpen] = useState(false);
 	const [profileOpen, setProfileOpen] = useState(false);
@@ -104,6 +109,8 @@ export default function TopNav() {
 	const userInitial = session?.user?.email
 		? session.user.email[0].toUpperCase()
 		: "U";
+	const sessionPending =
+		!session?.user && (sessionIsLoading || sessionIsFetching || sessionIsError);
 
 	function handleLogout() {
 		logoutMutation.mutate(undefined, { onSettled: () => router.push("/") });
@@ -279,6 +286,12 @@ export default function TopNav() {
 									</>
 								)}
 							</div>
+						) : sessionPending ? (
+							<div
+								className="ml-2 h-9 w-9 rounded-full bg-slate-100 animate-pulse"
+								aria-label={t("checkingSession")}
+								role="status"
+							/>
 						) : (
 							<Link
 								href="/login"

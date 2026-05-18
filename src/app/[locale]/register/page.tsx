@@ -8,7 +8,7 @@ import { Link, useRouter } from "@/i18n/routing";
 export default function RegisterPage() {
 	const locale = useLocale();
 	const router = useRouter();
-	const { data: session, isLoading } = useSession();
+	const { data: session, isError, isFetching, isLoading } = useSession();
 	const registerMutation = useRegister();
 	const t = useTranslations("RegisterPage");
 	const tCommon = useTranslations("Common");
@@ -48,7 +48,7 @@ export default function RegisterPage() {
 		);
 	}
 
-	if (isLoading && !session) {
+	if ((isLoading || isFetching) && !session) {
 		return (
 			<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 text-slate-600">
 				{t("loading")}
