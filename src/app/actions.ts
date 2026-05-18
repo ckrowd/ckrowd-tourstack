@@ -47,6 +47,21 @@ function extractError(err: any): string {
 	return err?.value?.error ?? err?.value?.message ?? "Something went wrong";
 }
 
+function getErrorStatus(err: any): number | undefined {
+	return err?.status ?? err?.value?.status ?? err?.response?.status;
+}
+
+function isUnauthorizedSessionError(err: any) {
+	return (
+		getErrorStatus(err) === 401 ||
+		/unauthorized/i.test(err?.value?.error ?? err?.value?.message ?? "")
+	);
+}
+
+function wait(ms: number) {
+	return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 function extractPayload<T>(
 	value: T | null | undefined,
 	response?: { status: number; headers?: HeadersInit },
@@ -65,9 +80,29 @@ function extractPayload<T>(
 }
 
 export async function getSession() {
-	const { data, error } = await client.profile.session.get();
-	if (error || !data || !("user" in data)) return null;
-	return data;
+	const retryDelays = [250, 750, 1500];
+
+	for (let attempt = 0; attempt <= retryDelays.length; attempt += 1) {
+		try {
+			const { data, error } = await client.profile.session.get();
+
+			if (!error && data && "user" in data) return data;
+			if (error && isUnauthorizedSessionError(error)) return null;
+			if (!error) return null;
+
+			if (attempt === retryDelays.length) {
+				throw new Error(extractError(error));
+			}
+		} catch (error) {
+			if (attempt === retryDelays.length) {
+				throw error;
+			}
+		}
+
+		await wait(retryDelays[attempt]);
+	}
+
+	return null;
 }
 
 export async function signIn(email: string, password: string) {

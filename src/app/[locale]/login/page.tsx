@@ -9,7 +9,7 @@ import { Link } from "@/i18n/routing";
 function LoginPageContent() {
 	const locale = useLocale();
 	const searchParams = useSearchParams();
-	const { data: session, isLoading } = useSession();
+	const { data: session, isError, isFetching, isLoading } = useSession();
 	const loginMutation = useLogin();
 	const from = searchParams.get("from") ?? "/dashboard";
 	const verified = searchParams.get("verified") === "true";
@@ -46,7 +46,7 @@ function LoginPageContent() {
 		);
 	}
 
-	if (isLoading && !session) {
+	if ((isLoading || isFetching || isError) && !session) {
 		return (
 			<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 text-slate-600">
 				{t("loading")}
