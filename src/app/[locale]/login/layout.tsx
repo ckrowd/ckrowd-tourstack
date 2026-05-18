@@ -1,10 +1,10 @@
 import { redirect } from "next/navigation";
 import { getSession } from "@/app/actions";
+import { isAdminSession } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
-// Already-authenticated users should never see the login form — send them
-// straight to their profile.
+// Already-authenticated users should never see the regular login form.
 export default async function LoginLayout({
 	children,
 	params,
@@ -16,7 +16,7 @@ export default async function LoginLayout({
 	const session = await getSession();
 
 	if (session?.user) {
-		redirect(`/${locale}/profile`);
+		redirect(isAdminSession(session) ? `/${locale}/admin` : `/${locale}/profile`);
 	}
 
 	return <>{children}</>;

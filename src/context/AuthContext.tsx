@@ -1,7 +1,7 @@
 "use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { getSession, signIn, signOut, signUp } from "@/app/actions";
+import { getSession, signIn, signInAdmin, signOut, signUp } from "@/app/actions";
 
 export type Session = Awaited<ReturnType<typeof getSession>>;
 
@@ -9,6 +9,7 @@ export function useSession() {
 	return useQuery({
 		queryKey: ["session"],
 		queryFn: getSession,
+		retry: 2,
 		staleTime: 60_000,
 	});
 }
@@ -21,6 +22,21 @@ export function useLogin() {
 		onSuccess: (result) => {
 			if (result.success) {
 				void queryClient.invalidateQueries({ queryKey: ["session"] });
+			}
+		},
+	});
+}
+
+export function useAdminLogin() {
+	const queryClient = useQueryClient();
+	return useMutation({
+		mutationFn: ({ email, password }: { email: string; password: string }) =>
+			signInAdmin(email, password),
+		onSuccess: (result) => {
+			if (result.success) {
+				void queryClient.invalidateQueries({ queryKey: ["session"] });
+			} else {
+				queryClient.setQueryData(["session"], null);
 			}
 		},
 	});

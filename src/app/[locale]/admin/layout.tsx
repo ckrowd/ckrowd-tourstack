@@ -2,8 +2,10 @@ import { redirect } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { getSession } from "@/app/actions";
 import AdminSideNav from "@/components/AdminSideNav";
-import Footer from "@/components/Footer";
 import TopNav from "@/components/TopNav";
+import { isAdminSession } from "@/lib/auth";
+
+export const dynamic = "force-dynamic";
 
 export default async function AdminLayout({
 	children,
@@ -17,7 +19,10 @@ export default async function AdminLayout({
 
 	const session = await getSession();
 	if (!session) {
-		redirect(`/${locale}/login`);
+		redirect(`/${locale}/admin/login`);
+	}
+	if (!isAdminSession(session)) {
+		redirect(`/${locale}/dashboard`);
 	}
 
 	return (
@@ -29,9 +34,6 @@ export default async function AdminLayout({
 
 				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
 					{children}
-					<div className="mt-16">
-						<Footer />
-					</div>
 				</main>
 			</div>
 		</div>

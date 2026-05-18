@@ -142,8 +142,27 @@
     "privacy": "Privacy Policy",
     "errorInvalid": "Invalid email or password",
     "errorFailed": "Sign in failed",
+    "errorAdminOnly": "This account uses the admin login page.",
     "loading": "Loading session...",
     "verifiedBanner": "Email verified! Sign in to access your account."
+  },
+  "AdminLoginPage": {
+    "logoAlt": "TourStack logo",
+    "portal": "Admin portal",
+    "title": "Admin sign in",
+    "description": "Use your administrator credentials to access the TourStack control room.",
+    "email": "Admin Email",
+    "password": "Password",
+    "emailPlaceholder": "admin@ckrowd.com",
+    "passwordPlaceholder": "Your password",
+    "signIn": "Sign in to admin",
+    "signingIn": "Signing in...",
+    "regularAccount": "Using a promoter account?",
+    "regularLogin": "Go to regular login",
+    "errorInvalid": "Invalid email or password",
+    "errorNotAdmin": "This account is not authorized for the admin portal.",
+    "errorFailed": "Admin sign in failed",
+    "loading": "Checking admin session..."
   },
   "EOIPage": {
     "stepper": {
@@ -530,6 +549,17 @@
     "actions": {
       "copy": "Copy",
       "revoke": "Revoke"
+    },
+    "submissions": {
+      "received": "{count, plural, =1 {# submission} other {# submissions}}",
+      "none": "No submissions yet",
+      "view": "View submissions",
+      "hide": "Hide submissions",
+      "error": "Couldn't load submissions.",
+      "email": "Email",
+      "phone": "Phone",
+      "company": "Company",
+      "country": "Country"
     }
   },
   "WorkforcePage": {

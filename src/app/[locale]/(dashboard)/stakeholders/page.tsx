@@ -1,18 +1,97 @@
 "use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import {
 	createOnboardingLink,
 	exportStakeholders,
 	getOnboardingLinks,
+	getStakeholders,
 	revokeOnboardingLink,
+	type StakeholderSubmission,
 } from "@/app/actions";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 
 const CATEGORIES = ["service", "workforce", "artmgmt"] as const;
+
+// Turns a camelCase / snake_case key or option value into a readable label.
+function humanizeLabel(value: string): string {
+	return value
+		.replace(/_/g, " ")
+		.replace(/([a-z0-9])([A-Z])/g, "$1 $2")
+		.replace(/\s+/g, " ")
+		.trim()
+		.replace(/^./, (c) => c.toUpperCase());
+}
+
+function formatValue(value: unknown): string {
+	if (value == null || value === "") return "—";
+	if (Array.isArray(value)) {
+		return value.length
+			? value.map((v) => humanizeLabel(String(v))).join(", ")
+			: "—";
+	}
+	if (typeof value === "boolean") return value ? "Yes" : "No";
+	if (typeof value === "object") return JSON.stringify(value);
+	return humanizeLabel(String(value));
+}
+
+function SubmissionCard({ submission }: { submission: StakeholderSubmission }) {
+	const t = useTranslations("StakeholdersPage");
+	const format = useFormatter();
+	const extra = submission.extra_data ?? {};
+	const baseRows: [string, string | null][] = [
+		[t("submissions.email"), submission.email],
+		[t("submissions.phone"), submission.phone],
+		[t("submissions.company"), submission.company],
+		[t("submissions.country"), submission.country],
+	];
+
+	return (
+		<div className="rounded-xl border border-outline-variant/15 bg-surface-container-low p-4">
+			<div className="flex items-start justify-between gap-3">
+				<div className="min-w-0">
+					<p className="font-bold text-sm text-on-surface truncate">
+						{submission.name}
+					</p>
+					<p className="text-xs text-on-surface-variant capitalize">
+						{submission.category.replace(/_/g, " ")}
+					</p>
+				</div>
+				<span className="text-[10px] text-on-surface-variant shrink-0">
+					{format.dateTime(new Date(submission.submitted_at), {
+						dateStyle: "medium",
+						timeStyle: "short",
+					})}
+				</span>
+			</div>
+			<dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-2.5 mt-3">
+				{baseRows.map(([label, value]) => (
+					<div key={label} className="min-w-0">
+						<dt className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
+							{label}
+						</dt>
+						<dd className="text-sm text-on-surface break-words">
+							{value ? value : "—"}
+						</dd>
+					</div>
+				))}
+				{Object.entries(extra).map(([key, value]) => (
+					<div key={key} className="min-w-0">
+						<dt className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
+							{humanizeLabel(key)}
+						</dt>
+						<dd className="text-sm text-on-surface break-words">
+							{formatValue(value)}
+						</dd>
+					</div>
+				))}
+			</dl>
+		</div>
+	);
+}
 
 export default function OnboardingLinksPage() {
 	const t = useTranslations("StakeholdersPage");
@@ -21,10 +100,16 @@ export default function OnboardingLinksPage() {
 		useState<(typeof CATEGORIES)[number]>("service");
 	const [label, setLabel] = useState("");
 	const [expiresAt, setExpiresAt] = useState("");
+	const [expandedToken, setExpandedToken] = useState<string | null>(null);
 
 	const linksQuery = useQuery({
 		queryKey: ["onboardingLinks"],
 		queryFn: getOnboardingLinks,
+	});
+
+	const stakeholdersQuery = useQuery({
+		queryKey: ["stakeholders"],
+		queryFn: getStakeholders,
 	});
 
 	const createMutation = useMutation({
@@ -69,6 +154,8 @@ export default function OnboardingLinksPage() {
 	});
 
 	const links = linksQuery.data?.success ? (linksQuery.data.data ?? []) : [];
+	const submissions = stakeholdersQuery.data?.data ?? [];
+	const submissionsLoaded = !stakeholdersQuery.isLoading;
 
 	return (
 		<div className="bg-surface text-on-surface">
@@ -216,58 +303,109 @@ export default function OnboardingLinksPage() {
 								</p>
 							) : (
 								<div className="space-y-3">
-									{links.map((link) => (
-										<div
-											key={String(link.id)}
-											className="rounded-xl bg-surface-container-low p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3"
-										>
-											<div className="min-w-0">
-												<p className="text-sm font-bold text-on-surface">
-													{link.label ?? t("existingLinks.untitled")}
-												</p>
-												<p className="text-xs text-on-surface-variant mt-1 break-all">
-													{typeof window !== "undefined"
-														? `${window.location.origin}/stakeholders/${link.token}`
-														: `/stakeholders/${link.token}`}
-												</p>
-												<p className="text-xs text-on-surface-variant mt-1">
-													{t(
-														`categories.${link.category as (typeof CATEGORIES)[number]}`,
-													)}{" "}
-													·{" "}
-													{link.is_active
-														? t("status.active")
-														: t("status.inactive")}
-												</p>
-											</div>
-											<div className="flex items-center gap-2">
-												<button
-													type="button"
-													onClick={async () => {
-														const shareUrl = `${window.location.origin}/stakeholders/${link.token}`;
-														await navigator.clipboard.writeText(shareUrl);
-													}}
-													className="px-3 py-2 rounded-lg text-xs font-bold border border-outline-variant/30 text-on-surface-variant hover:bg-surface-container-high"
-												>
-													{t("actions.copy")}
-												</button>
-												{link.is_active && (
-													<button
-														type="button"
-														onClick={() =>
-															revokeMutation.mutate(String(link.token))
-														}
-														disabled={revokeMutation.isPending}
-														className="px-3 py-2 rounded-lg text-xs font-bold bg-rose-50 text-rose-700 hover:bg-rose-100 disabled:opacity-60"
-													>
-														{t("actions.revoke")}
-													</button>
+									{links.map((link) => {
+										const token = String(link.token);
+										const linkSubs = submissions.filter(
+											(s) => s.link?.token === token,
+										);
+										const expanded = expandedToken === token;
+										return (
+											<div
+												key={String(link.id)}
+												className="rounded-xl bg-surface-container-low overflow-hidden"
+											>
+												<div className="p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+													<div className="min-w-0">
+														<p className="text-sm font-bold text-on-surface">
+															{link.label ?? t("existingLinks.untitled")}
+														</p>
+														<p className="text-xs text-on-surface-variant mt-1 break-all">
+															{typeof window !== "undefined"
+																? `${window.location.origin}/stakeholders/${link.token}`
+																: `/stakeholders/${link.token}`}
+														</p>
+														<p className="text-xs text-on-surface-variant mt-1">
+															{t(
+																`categories.${link.category as (typeof CATEGORIES)[number]}`,
+															)}{" "}
+															·{" "}
+															{link.is_active
+																? t("status.active")
+																: t("status.inactive")}
+															{submissionsLoaded ? (
+																<>
+																	{" · "}
+																	<span className="font-semibold text-on-surface">
+																		{linkSubs.length > 0
+																			? t("submissions.received", {
+																					count: linkSubs.length,
+																				})
+																			: t("submissions.none")}
+																	</span>
+																</>
+															) : null}
+														</p>
+													</div>
+													<div className="flex items-center gap-2 shrink-0">
+														{linkSubs.length > 0 && (
+															<button
+																type="button"
+																onClick={() =>
+																	setExpandedToken(expanded ? null : token)
+																}
+																className="px-3 py-2 rounded-lg text-xs font-bold border border-[#FF5A30]/30 text-[#FF5A30] hover:bg-[#FF5A30]/5"
+															>
+																{expanded
+																	? t("submissions.hide")
+																	: t("submissions.view")}
+															</button>
+														)}
+														<button
+															type="button"
+															onClick={async () => {
+																const shareUrl = `${window.location.origin}/stakeholders/${link.token}`;
+																await navigator.clipboard.writeText(shareUrl);
+															}}
+															className="px-3 py-2 rounded-lg text-xs font-bold border border-outline-variant/30 text-on-surface-variant hover:bg-surface-container-high"
+														>
+															{t("actions.copy")}
+														</button>
+														{link.is_active && (
+															<button
+																type="button"
+																onClick={() =>
+																	revokeMutation.mutate(String(link.token))
+																}
+																disabled={revokeMutation.isPending}
+																className="px-3 py-2 rounded-lg text-xs font-bold bg-rose-50 text-rose-700 hover:bg-rose-100 disabled:opacity-60"
+															>
+																{t("actions.revoke")}
+															</button>
+														)}
+													</div>
+												</div>
+												{expanded && (
+													<div className="border-t border-outline-variant/10 bg-surface-container-lowest p-4 space-y-3">
+														{linkSubs.map((submission) => (
+															<SubmissionCard
+																key={submission.id}
+																submission={submission}
+															/>
+														))}
+													</div>
 												)}
 											</div>
-										</div>
-									))}
+										);
+									})}
 								</div>
 							)}
+							{!stakeholdersQuery.isLoading &&
+								stakeholdersQuery.data &&
+								!stakeholdersQuery.data.success && (
+									<p className="text-xs text-rose-700 mt-3">
+										{t("submissions.error")}
+									</p>
+								)}
 						</section>
 					</div>
 				</main>

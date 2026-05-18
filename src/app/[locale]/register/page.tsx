@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { useRegister, useSession } from "@/context/AuthContext";
 import { Link, useRouter } from "@/i18n/routing";
+import { isAdminSession } from "@/lib/auth";
 
 export default function RegisterPage() {
 	const locale = useLocale();
@@ -26,9 +27,11 @@ export default function RegisterPage() {
 
 	useEffect(() => {
 		if (!isLoading && session?.user) {
-			window.location.replace(`/${locale}/dashboard`);
+			window.location.replace(
+				isAdminSession(session) ? `/${locale}/admin` : `/${locale}/dashboard`,
+			);
 		}
-	}, [session?.user, isLoading, locale]);
+	}, [session, isLoading, locale]);
 
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
@@ -48,7 +51,7 @@ export default function RegisterPage() {
 		);
 	}
 
-	if ((isLoading || isFetching) && !session) {
+	if ((isLoading || isFetching || isError) && !session) {
 		return (
 			<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 text-slate-600">
 				{t("loading")}
