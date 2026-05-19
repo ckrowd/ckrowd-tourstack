@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import FinancingAdminSideNav from "@/components/FinancingAdminSideNav";
 import TopNav from "@/components/TopNav";
 import { getSession } from "@/app/actions";
-import { isAdminSession } from "@/lib/auth";
+import { adminHomePath, isFinancingAdmin } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -21,8 +21,9 @@ export default async function FinancingAdminLayout({
 	if (!session) {
 		redirect(`/${locale}/financing-admin/login`);
 	}
-	if (!isAdminSession(session)) {
-		redirect(`/${locale}/dashboard`);
+	if (!isFinancingAdmin(session)) {
+		const home = adminHomePath(session);
+		redirect(`/${locale}${home ?? "/dashboard"}`);
 	}
 
 	return (

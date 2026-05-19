@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { Suspense, useEffect, useState } from "react";
 import { useAdminLogin, useSession } from "@/context/AuthContext";
 import { Link, useRouter } from "@/i18n/routing";
-import { isAdminSession } from "@/lib/auth";
+import { adminHomePath, isInsuranceAdmin } from "@/lib/auth";
 
 function InsuranceAdminLoginContent() {
 	const router = useRouter();
@@ -22,7 +22,8 @@ function InsuranceAdminLoginContent() {
 
 	useEffect(() => {
 		if (!isLoading && session?.user) {
-			router.replace(isAdminSession(session) ? from : "/dashboard");
+			const home = adminHomePath(session);
+			router.replace(isInsuranceAdmin(session) ? from : (home ?? "/dashboard"));
 		}
 	}, [session, from, isLoading, router]);
 

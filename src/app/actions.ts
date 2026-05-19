@@ -119,7 +119,10 @@ export async function signIn(email: string, password: string) {
 	if (!result.success) return result;
 
 	const session = await getSession();
-	if (session?.user?.is_super_admin === true) {
+	if (
+		session?.user?.is_super_admin === true ||
+		session?.user?.tourstack_admin_role
+	) {
 		await signOut();
 		return { success: false, code: "admin_only" as const };
 	}
@@ -132,7 +135,7 @@ export async function signInAdmin(email: string, password: string) {
 	if (!result.success) return result;
 
 	const session = await getSession();
-	if (session?.user?.is_super_admin === true) {
+	if (session?.user?.tourstack_admin_role) {
 		return { success: true };
 	}
 
@@ -810,6 +813,17 @@ export async function inviteAdminTeamMember(
 	body: Payload<typeof client.tourstack.admin.team.post>,
 ) {
 	const { data, error } = await client.tourstack.admin.team.post(body);
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function setAdminRole(
+	body: Payload<typeof client.tourstack.admin.team.patch>,
+) {
+	const { data, error } = await client.tourstack.admin.team.patch(body);
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
