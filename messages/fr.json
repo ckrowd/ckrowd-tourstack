@@ -2818,6 +2818,74 @@
       "declined": "Refusé"
     }
   },
+  "InsuranceAdminLoginPage": {
+    "title": "Portail Admin Assurance",
+    "description": "Connectez-vous pour gérer les demandes d'assurance de tournée.",
+    "email": "Adresse e-mail",
+    "emailPlaceholder": "admin@assureur.com",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "Entrez votre mot de passe",
+    "signIn": "Se connecter",
+    "signingIn": "Connexion...",
+    "errorInvalid": "Identifiants invalides",
+    "errorFailed": "Échec de la connexion. Veuillez réessayer.",
+    "loading": "Chargement..."
+  },
+  "InsuranceAdminSideNav": {
+    "overview": "Aperçu",
+    "applications": "Demandes",
+    "claims": "Réclamations",
+    "settings": "Paramètres"
+  },
+  "InsuranceAdminPage": {
+    "badge": "Gestion des assurances",
+    "title": "Tableau de bord Assurance",
+    "description": "Suivre et gérer les demandes d'assurance de tournée et les polices actives.",
+    "stats": {
+      "activeApplications": "Demandes actives",
+      "pendingReview": "En attente de révision",
+      "approvedPolicies": "Polices approuvées",
+      "claimsProcessed": "Réclamations traitées"
+    },
+    "recentApplications": "Demandes récentes",
+    "viewAll": "Voir tout",
+    "noApplications": "Aucune demande pour l'instant",
+    "noApplicationsDesc": "Les demandes d'assurance des promoteurs apparaîtront ici."
+  },
+  "InsuranceAdminApplicationsPage": {
+    "badge": "Demandes",
+    "title": "Demandes d'assurance",
+    "description": "Examiner et traiter les demandes d'assurance des promoteurs de tournée.",
+    "requestsTitle": "Toutes les demandes",
+    "requested": "couverture demandée",
+    "reviewDetails": "Examiner les détails",
+    "status": {
+      "pending": "En attente",
+      "approved": "Approuvé",
+      "declined": "Refusé",
+      "under_review": "En révision"
+    }
+  },
+  "InsuranceAdminClaimsPage": {
+    "badge": "Réclamations",
+    "title": "Réclamations d'assurance",
+    "description": "Traiter et suivre les réclamations déposées contre les polices de tournée actives.",
+    "claimsTitle": "Toutes les réclamations",
+    "policyRef": "Réf. police",
+    "reviewClaim": "Examiner la réclamation",
+    "status": {
+      "open": "Ouverte",
+      "under_review": "En révision",
+      "settled": "Réglée",
+      "rejected": "Rejetée"
+    }
+  },
+  "InsuranceAdminSettingsPage": {
+    "badge": "Configuration",
+    "title": "Paramètres d'assurance",
+    "description": "Configurer les polices, les limites de couverture et les flux d'approbation.",
+    "saveChanges": "Enregistrer"
+  },
   "AdminReportsPage": {
     "badge": "Analytique",
     "title": "Rapports de tournée",

@@ -2818,6 +2818,74 @@
       "declined": "Declined"
     }
   },
+  "InsuranceAdminLoginPage": {
+    "title": "Insurance Admin Portal",
+    "description": "Sign in to manage tour insurance applications and claims.",
+    "email": "Email Address",
+    "emailPlaceholder": "admin@insurer.com",
+    "password": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "signIn": "Sign In",
+    "signingIn": "Signing in...",
+    "errorInvalid": "Invalid credentials",
+    "errorFailed": "Sign in failed. Please try again.",
+    "loading": "Loading..."
+  },
+  "InsuranceAdminSideNav": {
+    "overview": "Overview",
+    "applications": "Applications",
+    "claims": "Claims",
+    "settings": "Settings"
+  },
+  "InsuranceAdminPage": {
+    "badge": "Insurance Management",
+    "title": "Insurance Dashboard",
+    "description": "Monitor and manage tour insurance applications and active policies.",
+    "stats": {
+      "activeApplications": "Active Applications",
+      "pendingReview": "Pending Review",
+      "approvedPolicies": "Approved Policies",
+      "claimsProcessed": "Claims Processed"
+    },
+    "recentApplications": "Recent Applications",
+    "viewAll": "View All",
+    "noApplications": "No applications yet",
+    "noApplicationsDesc": "Insurance applications from tour promoters will appear here."
+  },
+  "InsuranceAdminApplicationsPage": {
+    "badge": "Applications",
+    "title": "Insurance Applications",
+    "description": "Review and process insurance applications from tour promoters.",
+    "requestsTitle": "All Applications",
+    "requested": "coverage requested",
+    "reviewDetails": "Review Details",
+    "status": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "declined": "Declined",
+      "under_review": "Under Review"
+    }
+  },
+  "InsuranceAdminClaimsPage": {
+    "badge": "Claims",
+    "title": "Insurance Claims",
+    "description": "Process and track insurance claims filed against active tour policies.",
+    "claimsTitle": "All Claims",
+    "policyRef": "Policy Ref",
+    "reviewClaim": "Review Claim",
+    "status": {
+      "open": "Open",
+      "under_review": "Under Review",
+      "settled": "Settled",
+      "rejected": "Rejected"
+    }
+  },
+  "InsuranceAdminSettingsPage": {
+    "badge": "Configuration",
+    "title": "Insurance Settings",
+    "description": "Configure insurance policies, coverage limits, and approval workflows.",
+    "saveChanges": "Save Changes"
+  },
   "AdminReportsPage": {
     "badge": "Analytics",
     "title": "Tour Reports",
