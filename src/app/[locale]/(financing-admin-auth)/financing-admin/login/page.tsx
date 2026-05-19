@@ -1,21 +1,18 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { Suspense, useEffect, useState } from "react";
 import { useLogin, useSession } from "@/context/AuthContext";
-import { Link } from "@/i18n/routing";
-import { getRegularLoginRedirectPath } from "@/lib/auth";
+import { Link, useRouter } from "@/i18n/routing";
 
-function LoginPageContent() {
-	const locale = useLocale();
+function FinancingAdminLoginContent() {
+	const router = useRouter();
 	const searchParams = useSearchParams();
-	const { data: session, isFetching, isLoading } = useSession();
+	const { data: session, isLoading } = useSession();
 	const loginMutation = useLogin();
-	const from = getRegularLoginRedirectPath(searchParams.get("from"));
-	const verified = searchParams.get("verified") === "true";
-	const t = useTranslations("LoginPage");
-	const tCommon = useTranslations("Common");
+	const from = searchParams.get("from") ?? "/financing-admin";
+	const t = useTranslations("FinancingAdminLoginPage");
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -23,10 +20,9 @@ function LoginPageContent() {
 
 	useEffect(() => {
 		if (!isLoading && session?.user) {
-			const localePath = from.startsWith("/") ? from : `/${from}`;
-			window.location.replace(`/${locale}${localePath}`);
+			router.replace(from);
 		}
-	}, [session?.user, from, isLoading, locale]);
+	}, [session?.user, from, isLoading, router]);
 
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
@@ -36,24 +32,18 @@ function LoginPageContent() {
 			{
 				onSuccess: (result) => {
 					if (!result.success) {
-						const code = "code" in result ? result.code : undefined;
 						const message = "error" in result ? result.error : undefined;
-						setError(
-							code === "admin_only"
-								? t("errorAdminOnly")
-								: message ?? t("errorInvalid"),
-						);
-					} else {
-						const localePath = from.startsWith("/") ? from : `/${from}`;
-						window.location.replace(`/${locale}${localePath}`);
+						setError(message ?? t("errorInvalid"));
+						return;
 					}
+					router.replace(from);
 				},
 				onError: () => setError(t("errorFailed")),
 			},
 		);
 	}
 
-	if ((isLoading || isFetching) && !session) {
+	if (isLoading && !session) {
 		return (
 			<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 text-slate-600">
 				{t("loading")}
@@ -69,7 +59,7 @@ function LoginPageContent() {
 						href="/"
 						className="text-3xl font-black tracking-tight text-[#FF5A30] font-(family-name:--font-manrope)"
 					>
-						{tCommon("brandName")} {tCommon("brandBy")}
+						{t("brand")} 
 					</Link>
 					<p className="mt-2 text-sm text-slate-500 font-medium">
 						{t("description")}
@@ -78,31 +68,27 @@ function LoginPageContent() {
 
 				<div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
 					<div className="mb-8">
+						<p className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] mb-2">
+							{t("badge")}
+						</p>
 						<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-slate-900 mb-1">
 							{t("title")}
 						</h1>
-						<p className="text-sm text-slate-500">{t("description")}</p>
+						<p className="text-sm text-slate-500">
+							{t("description")}
+						</p>
 					</div>
-
-					{verified && (
-						<div className="mb-6 flex items-center gap-3 rounded-xl bg-green-50 border border-green-200 px-4 py-3">
-							<svg className="w-5 h-5 text-green-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-								<path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-							</svg>
-							<p className="text-sm text-green-700 font-medium">{t("verifiedBanner")}</p>
-						</div>
-					)}
 
 					<form onSubmit={handleSubmit} className="space-y-5">
 						<div>
 							<label
-								htmlFor="email"
+								htmlFor="finance-admin-email"
 								className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
 							>
 								{t("email")}
 							</label>
 							<input
-								id="email"
+								id="finance-admin-email"
 								type="email"
 								autoComplete="email"
 								placeholder={t("emailPlaceholder")}
@@ -115,13 +101,13 @@ function LoginPageContent() {
 
 						<div>
 							<label
-								htmlFor="password"
+								htmlFor="finance-admin-password"
 								className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
 							>
 								{t("password")}
 							</label>
 							<input
-								id="password"
+								id="finance-admin-password"
 								type="password"
 								autoComplete="current-password"
 								placeholder={t("passwordPlaceholder")}
@@ -133,7 +119,7 @@ function LoginPageContent() {
 						</div>
 
 						{error && (
-							<p className="text-sm text-red-600 font-medium" role="alert">
+							<p className="text-sm font-medium text-red-600" role="alert">
 								{error}
 							</p>
 						)}
@@ -146,42 +132,18 @@ function LoginPageContent() {
 							{loginMutation.isPending ? t("signingIn") : t("signIn")}
 						</button>
 					</form>
-
-					<p className="text-center text-sm text-slate-500 mt-6">
-						{t("noAccount")}{" "}
-						<Link
-							href="/register"
-							className="text-[#FF5A30] font-semibold hover:underline"
-						>
-							{t("register")}
-						</Link>
-					</p>
 				</div>
 
 				<p className="text-center text-xs text-slate-400 mt-6">
-					{t("agreeTo")}{" "}
-					<Link
-						href="/terms"
-						className="hover:text-[#FF5A30] transition-colors"
-					>
-						{t("terms")}
-					</Link>{" "}
-					{t("and")}{" "}
-					<Link
-						href="/privacy"
-						className="hover:text-[#FF5A30] transition-colors"
-					>
-						{t("privacy")}
-					</Link>
-					.
+					{t("footer")}
 				</p>
 			</div>
 		</div>
 	);
 }
 
-export default function LoginPage() {
-	const t = useTranslations("LoginPage");
+export default function FinancingAdminLoginPage() {
+	const t = useTranslations("FinancingAdminLoginPage");
 	return (
 		<Suspense
 			fallback={
@@ -190,7 +152,7 @@ export default function LoginPage() {
 				</div>
 			}
 		>
-			<LoginPageContent />
+			<FinancingAdminLoginContent />
 		</Suspense>
 	);
 }

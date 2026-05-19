@@ -9,7 +9,7 @@ import { isAdminSession } from "@/lib/auth";
 
 function AdminLoginPageContent() {
 	const locale = useLocale();
-	const { data: session, isError, isFetching, isLoading } = useSession();
+	const { data: session, isFetching, isLoading } = useSession();
 	const loginMutation = useAdminLogin();
 	const t = useTranslations("AdminLoginPage");
 	const tCommon = useTranslations("Common");

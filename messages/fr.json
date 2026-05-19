@@ -2852,6 +2852,295 @@
     "noApplications": "Aucune demande pour l'instant",
     "noApplicationsDesc": "Les demandes d'assurance des promoteurs apparaîtront ici."
   },
+  "FinancingAdminLoginPage": {
+    "brand": "Admin Financement",
+    "badge": "Opérations de financement",
+    "title": "Connexion à l'admin financement",
+    "description": "Utilisez vos identifiants d'admin financement pour continuer.",
+    "email": "Adresse e-mail",
+    "emailPlaceholder": "finance@entreprise.com",
+    "password": "Mot de passe",
+    "passwordPlaceholder": "Votre mot de passe",
+    "signIn": "Se connecter",
+    "signingIn": "Connexion...",
+    "errorInvalid": "E-mail ou mot de passe invalide",
+    "errorFailed": "Échec de la connexion",
+    "loading": "Chargement de la session...",
+    "footer": "Accès restreint aux opérateurs financiers autorisés."
+  },
+  "FinancingAdminSideNav": {
+    "overview": "Aperçu",
+    "applications": "Demandes",
+    "partners": "Partenaires financiers",
+    "settings": "Paramètres",
+    "reviewQueue": "File de revue"
+  },
+  "FinancingAdminPage": {
+    "badge": "Opérations de financement",
+    "title": "Tableau de revue du capital",
+    "description": "Suivez les demandes de financement, l'avancement de la souscription et les transferts aux partenaires depuis un espace finance dédié.",
+    "reviewQueue": "File de revue",
+    "queue": {
+      "title": "Demandes de financement récentes",
+      "viewAll": "Tout voir",
+      "amountLabel": "Demandé",
+      "loadError": "Impossible de charger les demandes de financement.",
+      "empty": "Aucune demande de financement pour l'instant."
+    },
+    "status": {
+      "pending": "En attente",
+      "under_review": "En cours de revue",
+      "approved": "Approuvé",
+      "rejected": "Rejeté",
+      "disbursed": "Décaissé"
+    },
+    "workflow": {
+      "title": "Flux financier",
+      "items": [
+        {
+          "title": "Réception et vérification des documents",
+          "description": "Capturez le promoteur, la tournée, le produit demandé et l'exhaustivité des documents pour chaque revue.",
+          "icon": "fact_check"
+        },
+        {
+          "title": "Revue de souscription",
+          "description": "Évaluez le risque, attribuez les réviseurs, comparez le budget de l'événement et orientez les demandes vers les voies d'approbation.",
+          "icon": "rule"
+        },
+        {
+          "title": "Partenaire et term sheet",
+          "description": "Attribuez une banque ou un partenaire financier, joignez les term sheets et suivez la disponibilité du décaissement.",
+          "icon": "contract"
+        }
+      ]
+    }
+  },
+  "FinancingAdminApplicationsPage": {
+    "badge": "Revue des demandes",
+    "title": "Demandes de financement",
+    "description": "Examinez les demandes de financement des promoteurs et faites avancer les facilités approuvées vers le term sheet et le décaissement.",
+    "queueTitle": "File de revue",
+    "requestedOn": "Demandé le",
+    "searchPlaceholder": "Rechercher un promoteur ou une tournée",
+    "loading": "Chargement des demandes...",
+    "loadError": "Impossible de charger les demandes de financement.",
+    "empty": "Aucune demande ne correspond à cette vue.",
+    "unassigned": "Non attribué",
+    "documentsCount": "{count, plural, =0 {Aucun document} one {# document} other {# documents}}",
+    "filters": {
+      "all": "Toutes",
+      "pending": "En attente",
+      "under_review": "En cours de revue",
+      "approved": "Approuvées",
+      "rejected": "Rejetées",
+      "disbursed": "Décaissées"
+    },
+    "status": {
+      "pending": "En attente",
+      "under_review": "En cours de revue",
+      "approved": "Approuvé",
+      "rejected": "Rejeté",
+      "disbursed": "Décaissé"
+    },
+    "fields": {
+      "product": "Produit",
+      "documents": "Documents",
+      "partner": "Partenaire"
+    },
+    "actions": {
+      "sync": "Actualiser",
+      "syncing": "Actualisation...",
+      "review": "Réviser",
+      "approve": "Approuver",
+      "reject": "Rejeter"
+    },
+    "reviewChecklist": {
+      "title": "Liste de contrôle de la revue",
+      "items": [
+        "Vérifiez le profil du promoteur, l'immatriculation de l'entreprise et l'historique TourStack.",
+        "Confirmez le budget de l'étape de tournée, la capacité du lieu et les prévisions de billetterie.",
+        "Vérifiez la facilité demandée par rapport aux limites de produit et aux conditions de remboursement.",
+        "Attribuez un partenaire financier et préparez le term sheet après l'approbation."
+      ]
+    },
+    "reviewForm": {
+      "title": "Formulaire de revue",
+      "selectHint": "Sélectionnez une demande dans la file pour enregistrer une décision.",
+      "fields": {
+        "decision": "Décision",
+        "partner": "Partenaire financier",
+        "termSheet": "URL du term sheet",
+        "note": "Note du réviseur"
+      },
+      "placeholders": {
+        "partner": "Attribuez une banque ou un bureau de capital",
+        "termSheet": "https://...",
+        "note": "Ajoutez des notes de souscription, des blocages ou les prochaines étapes"
+      },
+      "success": "Revue enregistrée.",
+      "error": "Impossible d'enregistrer la revue.",
+      "saving": "Enregistrement...",
+      "submit": "Enregistrer la revue"
+    }
+  },
+  "FinancingAdminPartnersPage": {
+    "badge": "Bureau des partenaires",
+    "title": "Partenaires financiers",
+    "description": "Coordonnez les partenaires bancaires, d'assurance et de revue de crédit liés au financement TourStack.",
+    "directoryTitle": "Répertoire des partenaires",
+    "refresh": "Actualiser",
+    "loading": "Chargement des partenaires...",
+    "loadError": "Impossible de charger les partenaires financiers.",
+    "empty": "Aucun partenaire financier pour l'instant.",
+    "capacityLabel": "Capacité disponible",
+    "lanesTitle": "Voies d'attribution",
+    "status": {
+      "active": "Actif",
+      "review": "En revue",
+      "inactive": "Inactif"
+    },
+    "types": {
+      "bank": "Partenaire bancaire",
+      "insurance": "Partenaire d'assurance",
+      "credit_union": "Revue de crédit"
+    },
+    "cards": [
+      {
+        "key": "banks",
+        "title": "Partenaires bancaires",
+        "description": "Suivez l'attribution des partenaires, la propriété des term sheets et les transferts d'approbation.",
+        "icon": "account_balance"
+      },
+      {
+        "key": "insurers",
+        "title": "Partenaires d'assurance",
+        "description": "Examinez les exigences d'assurance liées aux étapes de tournée financées.",
+        "icon": "verified_user"
+      },
+      {
+        "key": "credit",
+        "title": "Revue de crédit",
+        "description": "Maintenez les fiches d'évaluation, les vérifications de documents et les décisions de revue.",
+        "icon": "fact_check"
+      }
+    ],
+    "lanes": [
+      {
+        "title": "Attribution requise",
+        "description": "Demandes approuvées en attente d'un partenaire financier.",
+        "icon": "assignment_ind"
+      },
+      {
+        "title": "Rédaction du term sheet",
+        "description": "Facilités avec un partenaire attribué mais sans term sheet signé.",
+        "icon": "contract"
+      },
+      {
+        "title": "Prêt pour le décaissement",
+        "description": "Approuvé, documenté et prêt à être libéré.",
+        "icon": "payments"
+      }
+    ],
+    "partnerForm": {
+      "title": "Formulaire de partenaire",
+      "fields": {
+        "name": "Nom du partenaire",
+        "type": "Type de partenaire",
+        "markets": "Marchés",
+        "capacity": "Capacité (USD)"
+      },
+      "placeholders": {
+        "name": "ex. Bridge Capital Desk",
+        "markets": "ex. Nigeria, Ghana",
+        "capacity": "ex. 250000"
+      },
+      "success": "Partenaire ajouté.",
+      "error": "Impossible d'ajouter le partenaire.",
+      "saving": "Enregistrement...",
+      "submit": "Enregistrer le partenaire"
+    }
+  },
+  "FinancingAdminSettingsPage": {
+    "badge": "Configuration",
+    "title": "Paramètres de financement",
+    "description": "Gérez les limites d'accès et les seuils opérationnels des flux de financement.",
+    "saveChanges": "Enregistrer les modifications",
+    "policies": {
+      "title": "Politique de revue",
+      "items": [
+        {
+          "key": "role",
+          "title": "Exiger le rôle d'admin financement",
+          "description": "Restreindre cette interface aux opérateurs financiers.",
+          "enabled": true
+        },
+        {
+          "key": "documents",
+          "title": "Bloquer l'approbation tant que les documents sont incomplets",
+          "description": "Les demandes doivent exiger tous les documents obligatoires avant l'approbation.",
+          "enabled": true
+        },
+        {
+          "key": "partner",
+          "title": "Exiger l'attribution d'un partenaire avant le décaissement",
+          "description": "Les facilités approuvées doivent avoir une banque, un assureur ou un propriétaire de capital interne.",
+          "enabled": false
+        }
+      ]
+    },
+    "team": {
+      "title": "Équipe financière",
+      "invite": "Inviter un opérateur financier",
+      "emailPlaceholder": "operateur@entreprise.com",
+      "members": [
+        {
+          "name": "Responsable financier",
+          "email": "finance@ckrowd.com",
+          "role": "Propriétaire"
+        },
+        {
+          "name": "Bureau de souscription",
+          "email": "underwriting@ckrowd.com",
+          "role": "Réviseur"
+        }
+      ]
+    },
+    "thresholds": {
+      "title": "Seuils",
+      "items": [
+        {
+          "label": "Limite de revue automatique",
+          "value": "15 k$",
+          "description": "Les demandes inférieures ou égales à ce montant peuvent entrer dans une voie de revue rapide.",
+          "icon": "bolt"
+        },
+        {
+          "label": "Revue par comité",
+          "value": "50 k$+",
+          "description": "Les demandes supérieures à ce montant doivent exiger une revue senior.",
+          "icon": "groups"
+        },
+        {
+          "label": "Minimum de documents",
+          "value": "6",
+          "description": "Documents requis avant l'approbation et la génération du term sheet.",
+          "icon": "description"
+        }
+      ]
+    },
+    "productForm": {
+      "title": "Formulaire de produit",
+      "fields": {
+        "product": "Nom du produit",
+        "limit": "Limite de facilité"
+      },
+      "placeholders": {
+        "product": "ex. Avance étape de tournée",
+        "limit": "ex. 30 000 $"
+      },
+      "submit": "Enregistrer le produit"
+    }
+  },
   "InsuranceAdminApplicationsPage": {
     "badge": "Demandes",
     "title": "Demandes d'assurance",
