@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { getSession } from "@/app/actions";
-import { isAdminSession } from "@/lib/auth";
+import { adminHomePath } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -17,8 +17,9 @@ export default async function DashboardLayout({
 	if (!session) {
 		redirect(`/${locale}/login`);
 	}
-	if (isAdminSession(session)) {
-		redirect(`/${locale}/admin`);
+	const adminHome = adminHomePath(session);
+	if (adminHome) {
+		redirect(`/${locale}${adminHome}`);
 	}
 
 	return <>{children}</>;

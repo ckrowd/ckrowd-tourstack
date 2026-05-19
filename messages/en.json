@@ -3348,7 +3348,16 @@
       "inviting": "Sending invite…",
       "cancel": "Cancel",
       "inviteSuccess": "Invitation sent.",
-      "inviteError": "We couldn't send that invite. Please try again."
+      "inviteError": "We couldn't send that invite. Please try again.",
+      "description": "Each TourStack admin is scoped to a single portal.",
+      "scopeLabel": "Portal access",
+      "scopes": {
+        "platform": "Platform admin",
+        "insurance": "Insurance admin",
+        "financing": "Financing admin"
+      },
+      "remove": "Remove",
+      "updateError": "We couldn't update that admin's access."
     },
     "danger": {
       "title": "Danger Zone",

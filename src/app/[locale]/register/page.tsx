@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { useRegister, useSession } from "@/context/AuthContext";
 import { Link, useRouter } from "@/i18n/routing";
-import { isAdminSession } from "@/lib/auth";
+import { adminHomePath } from "@/lib/auth";
 
 export default function RegisterPage() {
 	const locale = useLocale();
@@ -27,9 +27,8 @@ export default function RegisterPage() {
 
 	useEffect(() => {
 		if (!isLoading && session?.user) {
-			window.location.replace(
-				isAdminSession(session) ? `/${locale}/admin` : `/${locale}/dashboard`,
-			);
+			const home = adminHomePath(session);
+			window.location.replace(`/${locale}${home ?? "/dashboard"}`);
 		}
 	}, [session, isLoading, locale]);
 
