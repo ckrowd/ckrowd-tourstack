@@ -2829,13 +2829,14 @@
     "signingIn": "Signing in...",
     "errorInvalid": "Invalid credentials",
     "errorFailed": "Sign in failed. Please try again.",
+    "errorNotAdmin": "This account is not authorized for the insurance admin portal.",
     "loading": "Loading..."
   },
   "InsuranceAdminSideNav": {
     "overview": "Overview",
     "applications": "Applications",
     "claims": "Claims",
-    "settings": "Settings"
+    "partners": "Partners"
   },
   "InsuranceAdminPage": {
     "badge": "Insurance Management",
@@ -2850,7 +2851,15 @@
     "recentApplications": "Recent Applications",
     "viewAll": "View All",
     "noApplications": "No applications yet",
-    "noApplicationsDesc": "Insurance applications from tour promoters will appear here."
+    "noApplicationsDesc": "Insurance applications from tour promoters will appear here.",
+    "loadError": "Couldn't load insurance applications.",
+    "status": {
+      "pending": "Pending",
+      "under_review": "Under Review",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "disbursed": "Disbursed"
+    }
   },
   "FinancingAdminLoginPage": {
     "brand": "Financing Admin",
@@ -2865,6 +2874,7 @@
     "signingIn": "Signing in...",
     "errorInvalid": "Invalid email or password",
     "errorFailed": "Sign in failed",
+    "errorNotAdmin": "This account is not authorized for the financing admin portal.",
     "loading": "Loading session...",
     "footer": "Restricted access for authorized financing operators."
   },
@@ -3148,11 +3158,37 @@
     "requestsTitle": "All Applications",
     "requested": "coverage requested",
     "reviewDetails": "Review Details",
+    "closeReview": "Close",
+    "refresh": "Refresh",
+    "refreshing": "Refreshing...",
+    "loading": "Loading applications...",
+    "loadError": "Couldn't load insurance applications.",
+    "empty": "No applications match this view.",
+    "filters": {
+      "all": "All",
+      "pending": "Pending",
+      "under_review": "Under Review",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "disbursed": "Disbursed"
+    },
     "status": {
       "pending": "Pending",
+      "under_review": "Under Review",
       "approved": "Approved",
-      "declined": "Declined",
-      "under_review": "Under Review"
+      "rejected": "Rejected",
+      "disbursed": "Disbursed"
+    },
+    "review": {
+      "decision": "Decision",
+      "partner": "Insurance partner",
+      "partnerPlaceholder": "Assign an underwriter or broker",
+      "note": "Reviewer note",
+      "notePlaceholder": "Add underwriting notes or next steps",
+      "save": "Save Review",
+      "saving": "Saving...",
+      "success": "Review saved.",
+      "error": "Couldn't save the review."
     }
   },
   "InsuranceAdminClaimsPage": {
@@ -3160,20 +3196,88 @@
     "title": "Insurance Claims",
     "description": "Process and track insurance claims filed against active tour policies.",
     "claimsTitle": "All Claims",
-    "policyRef": "Policy Ref",
+    "applicationRef": "Application",
     "reviewClaim": "Review Claim",
+    "closeReview": "Close",
+    "loading": "Loading claims...",
+    "loadError": "Couldn't load insurance claims.",
+    "empty": "No claims match this view.",
+    "filters": {
+      "all": "All",
+      "open": "Open",
+      "under_review": "Under Review",
+      "settled": "Settled",
+      "rejected": "Rejected"
+    },
     "status": {
       "open": "Open",
       "under_review": "Under Review",
       "settled": "Settled",
       "rejected": "Rejected"
+    },
+    "newClaim": {
+      "title": "File a Claim",
+      "cancel": "Cancel",
+      "application": "Insurance application",
+      "selectApplication": "Select an application",
+      "description": "Claim description",
+      "descriptionPlaceholder": "What happened?",
+      "amount": "Amount claimed (USD)",
+      "amountPlaceholder": "e.g. 12000",
+      "notes": "Notes",
+      "notesPlaceholder": "Optional context",
+      "submit": "File Claim",
+      "submitting": "Filing...",
+      "success": "Claim filed.",
+      "error": "Couldn't file the claim.",
+      "noApplications": "No insurance applications available to claim against yet."
+    },
+    "review": {
+      "status": "Status",
+      "settlement": "Settlement amount (USD)",
+      "settlementPlaceholder": "e.g. 9000",
+      "notes": "Notes",
+      "notesPlaceholder": "Add settlement or review notes",
+      "save": "Save",
+      "saving": "Saving...",
+      "success": "Claim updated.",
+      "error": "Couldn't update the claim."
     }
   },
-  "InsuranceAdminSettingsPage": {
-    "badge": "Configuration",
-    "title": "Insurance Settings",
-    "description": "Configure insurance policies, coverage limits, and approval workflows.",
-    "saveChanges": "Save Changes"
+  "InsuranceAdminPartnersPage": {
+    "badge": "Partner Desk",
+    "title": "Insurance Partners",
+    "description": "Manage the underwriters, brokers, and reinsurers backing tour insurance.",
+    "directoryTitle": "Partner directory",
+    "refresh": "Refresh",
+    "loading": "Loading partners...",
+    "loadError": "Couldn't load insurance partners.",
+    "empty": "No insurance partners yet.",
+    "capacityLabel": "Coverage capacity",
+    "status": {
+      "active": "Active",
+      "review": "Review",
+      "inactive": "Inactive"
+    },
+    "types": {
+      "underwriter": "Underwriter",
+      "broker": "Broker",
+      "reinsurer": "Reinsurer"
+    },
+    "partnerForm": {
+      "title": "Add partner",
+      "name": "Partner name",
+      "namePlaceholder": "e.g. EventSure Africa",
+      "type": "Partner type",
+      "markets": "Markets",
+      "marketsPlaceholder": "e.g. Nigeria, Ghana",
+      "capacity": "Capacity (USD)",
+      "capacityPlaceholder": "e.g. 250000",
+      "submit": "Save Partner",
+      "saving": "Saving...",
+      "success": "Partner added.",
+      "error": "Couldn't add the partner."
+    }
   },
   "AdminReportsPage": {
     "badge": "Analytics",

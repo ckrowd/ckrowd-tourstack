@@ -3,14 +3,15 @@
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Suspense, useEffect, useState } from "react";
-import { useLogin, useSession } from "@/context/AuthContext";
+import { useAdminLogin, useSession } from "@/context/AuthContext";
 import { Link, useRouter } from "@/i18n/routing";
+import { isAdminSession } from "@/lib/auth";
 
 function FinancingAdminLoginContent() {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const { data: session, isLoading } = useSession();
-	const loginMutation = useLogin();
+	const loginMutation = useAdminLogin();
 	const from = searchParams.get("from") ?? "/financing-admin";
 	const t = useTranslations("FinancingAdminLoginPage");
 
@@ -20,9 +21,9 @@ function FinancingAdminLoginContent() {
 
 	useEffect(() => {
 		if (!isLoading && session?.user) {
-			router.replace(from);
+			router.replace(isAdminSession(session) ? from : "/dashboard");
 		}
-	}, [session?.user, from, isLoading, router]);
+	}, [session, from, isLoading, router]);
 
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
@@ -32,8 +33,13 @@ function FinancingAdminLoginContent() {
 			{
 				onSuccess: (result) => {
 					if (!result.success) {
+						const code = "code" in result ? result.code : undefined;
 						const message = "error" in result ? result.error : undefined;
-						setError(message ?? t("errorInvalid"));
+						setError(
+							code === "not_admin"
+								? t("errorNotAdmin")
+								: (message ?? t("errorInvalid")),
+						);
 						return;
 					}
 					router.replace(from);

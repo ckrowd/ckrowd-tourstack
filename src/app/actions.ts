@@ -663,6 +663,100 @@ export async function createFinancingPartner(
 	};
 }
 
+// Insurance Admin
+
+export async function getInsuranceApplications(status?: string) {
+	const { data, error } = await client.tourstack["insurance-admin"].get(
+		status ? { query: { status } } : {},
+	);
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function updateInsuranceApplication(
+	id: string,
+	body: Payload<
+		ReturnType<(typeof client.tourstack)["insurance-admin"]>["patch"]
+	>,
+) {
+	const { data, error } = await client.tourstack["insurance-admin"]({
+		id,
+	}).patch(body);
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function getInsuranceClaims(status?: string) {
+	const { data, error } = await client.tourstack[
+		"insurance-admin"
+	].claims.get(status ? { query: { status } } : {});
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function createInsuranceClaim(
+	body: Payload<(typeof client.tourstack)["insurance-admin"]["claims"]["post"]>,
+) {
+	const { data, error } =
+		await client.tourstack["insurance-admin"].claims.post(body);
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function updateInsuranceClaim(
+	id: string,
+	body: Payload<
+		ReturnType<
+			(typeof client.tourstack)["insurance-admin"]["claims"]
+		>["patch"]
+	>,
+) {
+	const { data, error } = await client.tourstack["insurance-admin"].claims({
+		id,
+	}).patch(body);
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function getInsurancePartners() {
+	const { data, error } =
+		await client.tourstack["insurance-admin"].partners.get();
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function createInsurancePartner(
+	body: Payload<
+		(typeof client.tourstack)["insurance-admin"]["partners"]["post"]
+	>,
+) {
+	const { data, error } =
+		await client.tourstack["insurance-admin"].partners.post(body);
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
 export async function getAdminReport() {
 	const { data, error } = await client.tourstack.admin.reports.get();
 	return {

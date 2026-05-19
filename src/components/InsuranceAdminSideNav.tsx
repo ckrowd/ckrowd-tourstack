@@ -27,10 +27,10 @@ export default function InsuranceAdminSideNav() {
 			href: "/insurance-admin/claims",
 		},
 		{
-			key: "settings",
-			label: t("settings"),
-			icon: "settings",
-			href: "/insurance-admin/settings",
+			key: "partners",
+			label: t("partners"),
+			icon: "handshake",
+			href: "/insurance-admin/partners",
 		},
 	];
 

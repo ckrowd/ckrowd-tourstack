@@ -3,6 +3,9 @@ import { setRequestLocale } from "next-intl/server";
 import { getSession } from "@/app/actions";
 import InsuranceAdminSideNav from "@/components/InsuranceAdminSideNav";
 import TopNav from "@/components/TopNav";
+import { isAdminSession } from "@/lib/auth";
+
+export const dynamic = "force-dynamic";
 
 export default async function InsuranceAdminLayout({
 	children,
@@ -17,6 +20,9 @@ export default async function InsuranceAdminLayout({
 	const session = await getSession();
 	if (!session) {
 		redirect(`/${locale}/insurance-admin/login`);
+	}
+	if (!isAdminSession(session)) {
+		redirect(`/${locale}/dashboard`);
 	}
 
 	return (
