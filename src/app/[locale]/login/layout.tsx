@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { getSession } from "@/app/actions";
-import { adminHomePath } from "@/lib/auth";
+import { isAdminSession } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -16,8 +16,7 @@ export default async function LoginLayout({
 	const session = await getSession();
 
 	if (session?.user) {
-		const home = adminHomePath(session);
-		redirect(`/${locale}${home ?? "/profile"}`);
+		redirect(isAdminSession(session) ? `/${locale}/admin` : `/${locale}/profile`);
 	}
 
 	return <>{children}</>;

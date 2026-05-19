@@ -3348,16 +3348,7 @@
       "inviting": "Envoi de l'invitation…",
       "cancel": "Annuler",
       "inviteSuccess": "Invitation envoyée.",
-      "inviteError": "Nous n'avons pas pu envoyer cette invitation. Veuillez réessayer.",
-      "description": "Chaque admin TourStack est limité à un seul portail.",
-      "scopeLabel": "Accès au portail",
-      "scopes": {
-        "platform": "Admin plateforme",
-        "insurance": "Admin assurance",
-        "financing": "Admin financement"
-      },
-      "remove": "Retirer",
-      "updateError": "Nous n'avons pas pu mettre à jour l'accès de cet admin."
+      "inviteError": "Nous n'avons pas pu envoyer cette invitation. Veuillez réessayer."
     },
     "danger": {
       "title": "Zone de danger",

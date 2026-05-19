@@ -3,7 +3,7 @@ import { setRequestLocale } from "next-intl/server";
 import { getSession } from "@/app/actions";
 import AdminSideNav from "@/components/AdminSideNav";
 import TopNav from "@/components/TopNav";
-import { adminHomePath, isPlatformAdmin } from "@/lib/auth";
+import { isAdminSession } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -21,9 +21,8 @@ export default async function AdminLayout({
 	if (!session) {
 		redirect(`/${locale}/admin/login`);
 	}
-	if (!isPlatformAdmin(session)) {
-		const home = adminHomePath(session);
-		redirect(`/${locale}${home ?? "/dashboard"}`);
+	if (!isAdminSession(session)) {
+		redirect(`/${locale}/dashboard`);
 	}
 
 	return (

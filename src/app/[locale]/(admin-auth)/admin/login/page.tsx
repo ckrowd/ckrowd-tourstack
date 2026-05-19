@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { Suspense, useEffect, useState } from "react";
 import { useAdminLogin, useSession } from "@/context/AuthContext";
 import { Link } from "@/i18n/routing";
-import { adminHomePath } from "@/lib/auth";
+import { isAdminSession } from "@/lib/auth";
 
 function AdminLoginPageContent() {
 	const locale = useLocale();
@@ -20,8 +20,9 @@ function AdminLoginPageContent() {
 
 	useEffect(() => {
 		if (!isLoading && session?.user) {
-			const home = adminHomePath(session);
-			window.location.replace(`/${locale}${home ?? "/dashboard"}`);
+			window.location.replace(
+				isAdminSession(session) ? `/${locale}/admin` : `/${locale}/dashboard`,
+			);
 		}
 	}, [session, isLoading, locale]);
 
