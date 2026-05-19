@@ -33,7 +33,8 @@ function InsuranceAdminLoginContent() {
 			{
 				onSuccess: (result) => {
 					if (!result.success) {
-						setError(result.error ?? t("errorInvalid"));
+						const message = "error" in result ? result.error : undefined;
+						setError(message ?? t("errorInvalid"));
 					} else {
 						router.replace(from);
 					}

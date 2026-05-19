@@ -9,7 +9,7 @@ import { isAdminSession } from "@/lib/auth";
 export default function RegisterPage() {
 	const locale = useLocale();
 	const router = useRouter();
-	const { data: session, isError, isFetching, isLoading } = useSession();
+	const { data: session, isFetching, isLoading } = useSession();
 	const registerMutation = useRegister();
 	const t = useTranslations("RegisterPage");
 	const tCommon = useTranslations("Common");

@@ -630,6 +630,39 @@ export async function getAdminFinancing(status?: string) {
 	};
 }
 
+export async function updateFinancingApplication(
+	id: string,
+	body: Payload<ReturnType<typeof client.tourstack.financing>["patch"]>,
+) {
+	const { data, error } = await client.tourstack.financing({ id }).patch(body);
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function getAdminFinancingPartners() {
+	const { data, error } = await client.tourstack.admin.financing.partners.get();
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function createFinancingPartner(
+	body: Payload<typeof client.tourstack.admin.financing.partners.post>,
+) {
+	const { data, error } =
+		await client.tourstack.admin.financing.partners.post(body);
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
 export async function getAdminReport() {
 	const { data, error } = await client.tourstack.admin.reports.get();
 	return {

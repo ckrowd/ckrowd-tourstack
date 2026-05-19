@@ -1,0 +1,181 @@
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getAdminFinancing } from "@/app/actions";
+import { Link } from "@/i18n/routing";
+
+function statusClass(status: string) {
+	switch (status) {
+		case "approved":
+		case "disbursed":
+			return "bg-emerald-100 text-emerald-800";
+		case "rejected":
+			return "bg-red-100 text-red-800";
+		case "under_review":
+			return "bg-blue-100 text-blue-800";
+		default:
+			return "bg-yellow-100 text-yellow-800";
+	}
+}
+
+export default async function FinancingAdminPage({
+	params,
+}: {
+	params: Promise<{ locale: string }>;
+}) {
+	const { locale } = await params;
+	setRequestLocale(locale);
+	const t = await getTranslations("FinancingAdminPage");
+
+	const result = await getAdminFinancing();
+	const applications = (result.data ?? []).slice(0, 6);
+	const workflow = t.raw("workflow.items") as {
+		title: string;
+		description: string;
+		icon: string;
+	}[];
+
+	return (
+		<>
+			<div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-5">
+				<div>
+					<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+						{t("badge")}
+					</span>
+					<h1 className="text-2xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
+						{t("title")}
+					</h1>
+					<p className="text-on-surface-variant text-sm font-medium max-w-3xl">
+						{t("description")}
+					</p>
+				</div>
+				<Link
+					href="/financing-admin/applications"
+					className="flex items-center gap-2 px-4 py-2.5 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) text-sm font-bold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 shrink-0"
+				>
+					<span className="material-symbols-outlined text-base">rate_review</span>
+					{t("reviewQueue")}
+				</Link>
+			</div>
+
+			<div className="grid grid-cols-1 xl:grid-cols-[1.25fr_0.75fr] gap-8">
+				<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+					<div className="flex items-center justify-between mb-5">
+						<h2 className="font-(family-name:--font-manrope) font-bold text-base">
+							{t("queue.title")}
+						</h2>
+						<Link
+							href="/financing-admin/applications"
+							className="text-sm font-bold text-[#FF5A30] hover:underline"
+						>
+							{t("queue.viewAll")}
+						</Link>
+					</div>
+
+					{!result.success ? (
+						<p className="text-sm font-medium text-red-600 py-10 text-center">
+							{result.error || t("queue.loadError")}
+						</p>
+					) : applications.length === 0 ? (
+						<div className="py-12 text-center">
+							<span className="material-symbols-outlined text-5xl text-on-surface-variant block mb-3">
+								request_quote
+							</span>
+							<p className="text-on-surface-variant font-medium text-sm">
+								{t("queue.empty")}
+							</p>
+						</div>
+					) : (
+						<div className="space-y-4">
+							{applications.map((item) => {
+								const f = item as Record<string, unknown>;
+								const status = String(f.status ?? "pending");
+								const promoter = f.promoter as Record<string, unknown> | null;
+								const user = promoter?.user as Record<string, unknown> | null;
+								const promoterName = String(
+									promoter?.company_name ??
+										promoter?.contact_person ??
+										user?.name ??
+										user?.email ??
+										"—",
+								);
+								const tour = f.tour as Record<string, unknown> | null;
+								const artist = tour?.artist as Record<string, unknown> | null;
+								const tourLabel = artist
+									? String(artist.tour_name ?? artist.name ?? "—")
+									: "—";
+								const amount = `${String(f.currency ?? "USD")} ${Number(
+									f.amount_requested ?? 0,
+								).toLocaleString(locale)}`;
+								return (
+									<div
+										key={String(f.id)}
+										className="flex flex-col md:flex-row md:items-center justify-between gap-4 py-4 border-b border-outline-variant/10 last:border-none"
+									>
+										<div className="flex items-start gap-3 min-w-0">
+											<div className="w-11 h-11 rounded-xl bg-surface-container-low flex items-center justify-center shrink-0">
+												<span className="material-symbols-outlined text-on-surface-variant">
+													request_quote
+												</span>
+											</div>
+											<div className="min-w-0">
+												<div className="flex items-center gap-2 flex-wrap mb-1">
+													<span className="text-xs font-black text-[#FF5A30] uppercase tracking-widest">
+														{`#${String(f.id).slice(-6).toUpperCase()}`}
+													</span>
+													<span
+														className={`px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-tighter ${statusClass(status)}`}
+													>
+														{t(`status.${status}`)}
+													</span>
+												</div>
+												<p className="font-(family-name:--font-manrope) font-bold text-on-surface truncate">
+													{promoterName}
+												</p>
+												<p className="text-sm text-on-surface-variant mt-0.5">
+													{tourLabel} · {String(f.product ?? "—")}
+												</p>
+											</div>
+										</div>
+										<div className="md:text-right">
+											<p className="font-(family-name:--font-manrope) font-extrabold text-on-surface">
+												{amount}
+											</p>
+											<p className="text-xs text-on-surface-variant">
+												{t("queue.amountLabel")}
+											</p>
+										</div>
+									</div>
+								);
+							})}
+						</div>
+					)}
+				</div>
+
+				<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+					<h2 className="font-(family-name:--font-manrope) font-bold text-base mb-5">
+						{t("workflow.title")}
+					</h2>
+					<div className="space-y-4">
+						{workflow.map((item) => (
+							<div
+								key={item.title}
+								className="bg-surface-container-low rounded-2xl p-4 flex items-start gap-3"
+							>
+								<span className="material-symbols-outlined text-[#FF5A30] shrink-0">
+									{item.icon}
+								</span>
+								<div>
+									<p className="font-bold text-sm text-on-surface">
+										{item.title}
+									</p>
+									<p className="text-xs text-on-surface-variant mt-1 leading-5">
+										{item.description}
+									</p>
+								</div>
+							</div>
+						))}
+					</div>
+				</div>
+			</div>
+		</>
+	);
+}
