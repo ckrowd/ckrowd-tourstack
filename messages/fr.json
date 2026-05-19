@@ -559,7 +559,9 @@
       "email": "E-mail",
       "phone": "Téléphone",
       "company": "Entreprise",
-      "country": "Pays"
+      "country": "Pays",
+      "close": "Fermer",
+      "submittedOn": "Soumis le"
     }
   },
   "WorkforcePage": {
@@ -2298,6 +2300,11 @@
     "showSingle": "spectacle",
     "ctaFinancingTitle": "Besoin de financement ?",
     "ctaFinancingDesc": "Couvrez jusqu'à 40 % des frais d'artiste à l'avance",
+    "pendingEois": {
+      "title": "Candidatures en cours d'examen",
+      "description": "EOI en attente d'approbation — chacune devient une étape de tournée une fois confirmée.",
+      "submitted": "Soumis le"
+    },
     "stats": {
       "totalStops": "Total des arrêts",
       "confirmed": "Confirmés",

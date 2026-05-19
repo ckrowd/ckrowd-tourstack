@@ -559,7 +559,9 @@
       "email": "Email",
       "phone": "Phone",
       "company": "Company",
-      "country": "Country"
+      "country": "Country",
+      "close": "Close",
+      "submittedOn": "Submitted"
     }
   },
   "WorkforcePage": {
@@ -2298,6 +2300,11 @@
     "showSingle": "show",
     "ctaFinancingTitle": "Need Financing?",
     "ctaFinancingDesc": "Cover up to 40% of artiste fees upfront",
+    "pendingEois": {
+      "title": "Applications in Review",
+      "description": "EOIs awaiting approval — each becomes a tour stop once confirmed.",
+      "submitted": "Submitted"
+    },
     "stats": {
       "totalStops": "Total Stops",
       "confirmed": "Confirmed",
