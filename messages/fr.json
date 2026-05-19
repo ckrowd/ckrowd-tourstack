@@ -2829,13 +2829,14 @@
     "signingIn": "Connexion...",
     "errorInvalid": "Identifiants invalides",
     "errorFailed": "Échec de la connexion. Veuillez réessayer.",
+    "errorNotAdmin": "Ce compte n'est pas autorisé à accéder au portail admin assurance.",
     "loading": "Chargement..."
   },
   "InsuranceAdminSideNav": {
     "overview": "Aperçu",
     "applications": "Demandes",
     "claims": "Réclamations",
-    "settings": "Paramètres"
+    "partners": "Partenaires"
   },
   "InsuranceAdminPage": {
     "badge": "Gestion des assurances",
@@ -2850,7 +2851,15 @@
     "recentApplications": "Demandes récentes",
     "viewAll": "Voir tout",
     "noApplications": "Aucune demande pour l'instant",
-    "noApplicationsDesc": "Les demandes d'assurance des promoteurs apparaîtront ici."
+    "noApplicationsDesc": "Les demandes d'assurance des promoteurs apparaîtront ici.",
+    "loadError": "Impossible de charger les demandes d'assurance.",
+    "status": {
+      "pending": "En attente",
+      "under_review": "En révision",
+      "approved": "Approuvé",
+      "rejected": "Rejeté",
+      "disbursed": "Décaissé"
+    }
   },
   "FinancingAdminLoginPage": {
     "brand": "Admin Financement",
@@ -2865,6 +2874,7 @@
     "signingIn": "Connexion...",
     "errorInvalid": "E-mail ou mot de passe invalide",
     "errorFailed": "Échec de la connexion",
+    "errorNotAdmin": "Ce compte n'est pas autorisé à accéder au portail admin financement.",
     "loading": "Chargement de la session...",
     "footer": "Accès restreint aux opérateurs financiers autorisés."
   },
@@ -3148,11 +3158,37 @@
     "requestsTitle": "Toutes les demandes",
     "requested": "couverture demandée",
     "reviewDetails": "Examiner les détails",
+    "closeReview": "Fermer",
+    "refresh": "Actualiser",
+    "refreshing": "Actualisation...",
+    "loading": "Chargement des demandes...",
+    "loadError": "Impossible de charger les demandes d'assurance.",
+    "empty": "Aucune demande ne correspond à cette vue.",
+    "filters": {
+      "all": "Toutes",
+      "pending": "En attente",
+      "under_review": "En révision",
+      "approved": "Approuvées",
+      "rejected": "Rejetées",
+      "disbursed": "Décaissées"
+    },
     "status": {
       "pending": "En attente",
+      "under_review": "En révision",
       "approved": "Approuvé",
-      "declined": "Refusé",
-      "under_review": "En révision"
+      "rejected": "Rejeté",
+      "disbursed": "Décaissé"
+    },
+    "review": {
+      "decision": "Décision",
+      "partner": "Partenaire d'assurance",
+      "partnerPlaceholder": "Attribuer un assureur ou un courtier",
+      "note": "Note du réviseur",
+      "notePlaceholder": "Ajouter des notes de souscription ou les prochaines étapes",
+      "save": "Enregistrer la revue",
+      "saving": "Enregistrement...",
+      "success": "Revue enregistrée.",
+      "error": "Impossible d'enregistrer la revue."
     }
   },
   "InsuranceAdminClaimsPage": {
@@ -3160,20 +3196,88 @@
     "title": "Réclamations d'assurance",
     "description": "Traiter et suivre les réclamations déposées contre les polices de tournée actives.",
     "claimsTitle": "Toutes les réclamations",
-    "policyRef": "Réf. police",
+    "applicationRef": "Demande",
     "reviewClaim": "Examiner la réclamation",
+    "closeReview": "Fermer",
+    "loading": "Chargement des réclamations...",
+    "loadError": "Impossible de charger les réclamations d'assurance.",
+    "empty": "Aucune réclamation ne correspond à cette vue.",
+    "filters": {
+      "all": "Toutes",
+      "open": "Ouvertes",
+      "under_review": "En révision",
+      "settled": "Réglées",
+      "rejected": "Rejetées"
+    },
     "status": {
       "open": "Ouverte",
       "under_review": "En révision",
       "settled": "Réglée",
       "rejected": "Rejetée"
+    },
+    "newClaim": {
+      "title": "Déposer une réclamation",
+      "cancel": "Annuler",
+      "application": "Demande d'assurance",
+      "selectApplication": "Sélectionner une demande",
+      "description": "Description de la réclamation",
+      "descriptionPlaceholder": "Que s'est-il passé ?",
+      "amount": "Montant réclamé (USD)",
+      "amountPlaceholder": "ex. 12000",
+      "notes": "Notes",
+      "notesPlaceholder": "Contexte facultatif",
+      "submit": "Déposer la réclamation",
+      "submitting": "Dépôt...",
+      "success": "Réclamation déposée.",
+      "error": "Impossible de déposer la réclamation.",
+      "noApplications": "Aucune demande d'assurance disponible pour une réclamation pour l'instant."
+    },
+    "review": {
+      "status": "Statut",
+      "settlement": "Montant du règlement (USD)",
+      "settlementPlaceholder": "ex. 9000",
+      "notes": "Notes",
+      "notesPlaceholder": "Ajouter des notes de règlement ou de revue",
+      "save": "Enregistrer",
+      "saving": "Enregistrement...",
+      "success": "Réclamation mise à jour.",
+      "error": "Impossible de mettre à jour la réclamation."
     }
   },
-  "InsuranceAdminSettingsPage": {
-    "badge": "Configuration",
-    "title": "Paramètres d'assurance",
-    "description": "Configurer les polices, les limites de couverture et les flux d'approbation.",
-    "saveChanges": "Enregistrer"
+  "InsuranceAdminPartnersPage": {
+    "badge": "Bureau des partenaires",
+    "title": "Partenaires d'assurance",
+    "description": "Gérer les assureurs, courtiers et réassureurs qui soutiennent l'assurance de tournée.",
+    "directoryTitle": "Répertoire des partenaires",
+    "refresh": "Actualiser",
+    "loading": "Chargement des partenaires...",
+    "loadError": "Impossible de charger les partenaires d'assurance.",
+    "empty": "Aucun partenaire d'assurance pour l'instant.",
+    "capacityLabel": "Capacité de couverture",
+    "status": {
+      "active": "Actif",
+      "review": "En revue",
+      "inactive": "Inactif"
+    },
+    "types": {
+      "underwriter": "Assureur",
+      "broker": "Courtier",
+      "reinsurer": "Réassureur"
+    },
+    "partnerForm": {
+      "title": "Ajouter un partenaire",
+      "name": "Nom du partenaire",
+      "namePlaceholder": "ex. EventSure Africa",
+      "type": "Type de partenaire",
+      "markets": "Marchés",
+      "marketsPlaceholder": "ex. Nigeria, Ghana",
+      "capacity": "Capacité (USD)",
+      "capacityPlaceholder": "ex. 250000",
+      "submit": "Enregistrer le partenaire",
+      "saving": "Enregistrement...",
+      "success": "Partenaire ajouté.",
+      "error": "Impossible d'ajouter le partenaire."
+    }
   },
   "AdminReportsPage": {
     "badge": "Analytique",
