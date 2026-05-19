@@ -2,7 +2,7 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useFormatter, useTranslations } from "next-intl";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
 	createOnboardingLink,
 	exportStakeholders,
@@ -38,9 +38,66 @@ function formatValue(value: unknown): string {
 	return humanizeLabel(String(value));
 }
 
-function SubmissionCard({ submission }: { submission: StakeholderSubmission }) {
+// One compact, clickable row in the submissions list.
+function SubmissionRow({
+	submission,
+	onOpen,
+}: {
+	submission: StakeholderSubmission;
+	onOpen: () => void;
+}) {
+	const format = useFormatter();
+	return (
+		<button
+			type="button"
+			onClick={onOpen}
+			className="w-full flex items-center justify-between gap-3 rounded-xl border border-outline-variant/15 bg-surface-container-low px-4 py-3 text-left hover:border-[#FF5A30]/40 hover:bg-surface-container transition-colors"
+		>
+			<div className="min-w-0">
+				<p className="text-sm font-bold text-on-surface truncate">
+					{submission.name}
+				</p>
+				<p className="text-xs text-on-surface-variant truncate">
+					{submission.email}
+				</p>
+			</div>
+			<div className="flex items-center gap-3 shrink-0">
+				<span className="text-[10px] text-on-surface-variant">
+					{format.dateTime(new Date(submission.submitted_at), {
+						dateStyle: "medium",
+					})}
+				</span>
+				<span className="material-symbols-outlined text-on-surface-variant text-base">
+					chevron_right
+				</span>
+			</div>
+		</button>
+	);
+}
+
+// Full submission detail shown as a modal dialog.
+function SubmissionModal({
+	submission,
+	onClose,
+}: {
+	submission: StakeholderSubmission;
+	onClose: () => void;
+}) {
 	const t = useTranslations("StakeholdersPage");
 	const format = useFormatter();
+
+	useEffect(() => {
+		const onKey = (e: KeyboardEvent) => {
+			if (e.key === "Escape") onClose();
+		};
+		window.addEventListener("keydown", onKey);
+		document.body.style.overflow = "hidden";
+		return () => {
+			window.removeEventListener("keydown", onKey);
+			document.body.style.overflow = "";
+		};
+	}, [onClose]);
+
 	const extra = submission.extra_data ?? {};
 	const baseRows: [string, string | null][] = [
 		[t("submissions.email"), submission.email],
@@ -50,45 +107,69 @@ function SubmissionCard({ submission }: { submission: StakeholderSubmission }) {
 	];
 
 	return (
-		<div className="rounded-xl border border-outline-variant/15 bg-surface-container-low p-4">
-			<div className="flex items-start justify-between gap-3">
-				<div className="min-w-0">
-					<p className="font-bold text-sm text-on-surface truncate">
-						{submission.name}
-					</p>
-					<p className="text-xs text-on-surface-variant capitalize">
-						{submission.category.replace(/_/g, " ")}
-					</p>
+		<div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+			<button
+				type="button"
+				aria-label={t("submissions.close")}
+				onClick={onClose}
+				className="absolute inset-0 bg-black/40 cursor-default border-none"
+			/>
+			<div
+				role="dialog"
+				aria-modal="true"
+				aria-label={submission.name}
+				className="relative z-10 w-full max-w-lg max-h-[85vh] overflow-y-auto bg-surface-container-lowest rounded-2xl shadow-2xl"
+			>
+				<div className="sticky top-0 flex items-start justify-between gap-3 px-6 py-4 border-b border-outline-variant/15 bg-surface-container-lowest">
+					<div className="min-w-0">
+						<h3 className="font-(family-name:--font-manrope) font-bold text-on-surface truncate">
+							{submission.name}
+						</h3>
+						<p className="text-xs text-on-surface-variant capitalize">
+							{submission.category.replace(/_/g, " ")}
+						</p>
+					</div>
+					<button
+						type="button"
+						onClick={onClose}
+						aria-label={t("submissions.close")}
+						className="text-on-surface-variant hover:text-on-surface transition-colors shrink-0"
+					>
+						<span className="material-symbols-outlined">close</span>
+					</button>
 				</div>
-				<span className="text-[10px] text-on-surface-variant shrink-0">
-					{format.dateTime(new Date(submission.submitted_at), {
-						dateStyle: "medium",
-						timeStyle: "short",
-					})}
-				</span>
+				<div className="px-6 py-5">
+					<p className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-4">
+						{t("submissions.submittedOn")}{" "}
+						{format.dateTime(new Date(submission.submitted_at), {
+							dateStyle: "medium",
+							timeStyle: "short",
+						})}
+					</p>
+					<dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-3">
+						{baseRows.map(([rowLabel, value]) => (
+							<div key={rowLabel} className="min-w-0">
+								<dt className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
+									{rowLabel}
+								</dt>
+								<dd className="text-sm text-on-surface break-words">
+									{value ? value : "—"}
+								</dd>
+							</div>
+						))}
+						{Object.entries(extra).map(([key, value]) => (
+							<div key={key} className="min-w-0">
+								<dt className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
+									{humanizeLabel(key)}
+								</dt>
+								<dd className="text-sm text-on-surface break-words">
+									{formatValue(value)}
+								</dd>
+							</div>
+						))}
+					</dl>
+				</div>
 			</div>
-			<dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-2.5 mt-3">
-				{baseRows.map(([label, value]) => (
-					<div key={label} className="min-w-0">
-						<dt className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
-							{label}
-						</dt>
-						<dd className="text-sm text-on-surface break-words">
-							{value ? value : "—"}
-						</dd>
-					</div>
-				))}
-				{Object.entries(extra).map(([key, value]) => (
-					<div key={key} className="min-w-0">
-						<dt className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
-							{humanizeLabel(key)}
-						</dt>
-						<dd className="text-sm text-on-surface break-words">
-							{formatValue(value)}
-						</dd>
-					</div>
-				))}
-			</dl>
 		</div>
 	);
 }
@@ -101,6 +182,10 @@ export default function OnboardingLinksPage() {
 	const [label, setLabel] = useState("");
 	const [expiresAt, setExpiresAt] = useState("");
 	const [expandedToken, setExpandedToken] = useState<string | null>(null);
+	const [selectedSubmission, setSelectedSubmission] =
+		useState<StakeholderSubmission | null>(null);
+
+	const closeModal = useCallback(() => setSelectedSubmission(null), []);
 
 	const linksQuery = useQuery({
 		queryKey: ["onboardingLinks"],
@@ -385,11 +470,14 @@ export default function OnboardingLinksPage() {
 													</div>
 												</div>
 												{expanded && (
-													<div className="border-t border-outline-variant/10 bg-surface-container-lowest p-4 space-y-3">
+													<div className="border-t border-outline-variant/10 bg-surface-container-lowest p-4 space-y-2">
 														{linkSubs.map((submission) => (
-															<SubmissionCard
+															<SubmissionRow
 																key={submission.id}
 																submission={submission}
+																onOpen={() =>
+																	setSelectedSubmission(submission)
+																}
 															/>
 														))}
 													</div>
@@ -410,6 +498,13 @@ export default function OnboardingLinksPage() {
 					</div>
 				</main>
 			</div>
+
+			{selectedSubmission && (
+				<SubmissionModal
+					submission={selectedSubmission}
+					onClose={closeModal}
+				/>
+			)}
 		</div>
 	);
 }

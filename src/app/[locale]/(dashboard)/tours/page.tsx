@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { getTours, getTourstackDashboard } from "@/app/actions";
+import { getEOIs, getTours, getTourstackDashboard } from "@/app/actions";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 import { Link } from "@/i18n/routing";
@@ -24,11 +24,17 @@ export default async function ToursPage({ params, searchParams }: Props) {
 
 	const currentPage = Math.max(1, Number.parseInt(pageParam ?? "1", 10) || 1);
 
-	const [toursResult, dashboardResult] = await Promise.all([
+	const [toursResult, dashboardResult, eoisResult] = await Promise.all([
 		getTours(status, currentPage, PAGE_SIZE),
 		getTourstackDashboard(),
+		getEOIs(),
 	]);
 	const tours = toursResult.data ?? [];
+	// EOIs still in the pipeline — not yet turned into a tour stop.
+	const pendingEois = (eoisResult.data ?? []).filter((eoi) => {
+		const eoiStatus = String(eoi.status ?? "").toLowerCase();
+		return eoiStatus === "pending_review" || eoiStatus === "needs_revision";
+	});
 	const pagination = toursResult.pagination;
 	const totalPages = pagination?.totalPages ?? 1;
 	const totalStops = pagination?.total ?? tours.length;
@@ -175,8 +181,105 @@ export default async function ToursPage({ params, searchParams }: Props) {
 					</div>
 
 					<div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-						{/* Tour Cards */}
+						{/* Pipeline + Tour Cards */}
 						<div className="lg:col-span-8 space-y-5">
+							{pendingEois.length > 0 && (
+								<section className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+									<div className="mb-4">
+										<h2 className="font-(family-name:--font-manrope) font-bold text-lg text-on-surface">
+											{t("pendingEois.title")}
+										</h2>
+										<p className="text-sm text-on-surface-variant mt-0.5">
+											{t("pendingEois.description")}
+										</p>
+									</div>
+									<div className="space-y-3">
+										{pendingEois.map((eoi) => {
+											const eoiArtist = eoi.artist;
+											const eoiStatus = String(eoi.status ?? "");
+											const isRevision =
+												eoiStatus.toLowerCase() === "needs_revision";
+											return (
+												<div
+													key={String(eoi.id)}
+													className={`bg-surface-container-low rounded-xl p-5 border-l-4 ${
+														isRevision
+															? "border-blue-400"
+															: "border-yellow-400"
+													}`}
+												>
+													<div className="flex items-start justify-between gap-4">
+														<div className="min-w-0">
+															<div className="flex items-center gap-2 flex-wrap">
+																<h3 className="font-(family-name:--font-manrope) font-bold text-on-surface">
+																	{String(eoiArtist?.name ?? "Artist")}
+																</h3>
+																{eoiArtist?.genre != null &&
+																	eoiArtist.genre !== "" && (
+																		<span className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded-full">
+																			{String(eoiArtist.genre)}
+																		</span>
+																	)}
+															</div>
+															{eoiArtist?.tour_name != null &&
+																eoiArtist.tour_name !== "" && (
+																	<p className="text-sm text-on-surface-variant mt-0.5">
+																		{String(eoiArtist.tour_name)}
+																	</p>
+																)}
+														</div>
+														<span
+															className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter shrink-0 ${
+																isRevision
+																	? "bg-blue-100 text-blue-800"
+																	: "bg-yellow-100 text-yellow-800"
+															}`}
+														>
+															{eoiStatus.replace(/_/g, " ")}
+														</span>
+													</div>
+													<div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-sm text-on-surface-variant mt-3">
+														{eoi.city != null && eoi.city !== "" && (
+															<span className="flex items-center gap-1.5">
+																<span className="material-symbols-outlined text-sm">
+																	location_on
+																</span>
+																{String(eoi.city)}
+															</span>
+														)}
+														{eoi.created_at != null && (
+															<span className="flex items-center gap-1.5">
+																<span className="material-symbols-outlined text-sm">
+																	schedule
+																</span>
+																{t("pendingEois.submitted")}{" "}
+																{new Date(
+																	String(eoi.created_at),
+																).toLocaleDateString(locale, {
+																	month: "short",
+																	day: "numeric",
+																	year: "numeric",
+																})}
+															</span>
+														)}
+														{isRevision && (
+															<Link
+																href="/eoi"
+																className="flex items-center gap-1.5 text-[#FF5A30] font-semibold"
+															>
+																<span className="material-symbols-outlined text-sm">
+																	edit
+																</span>
+																{t("reviseEoi")}
+															</Link>
+														)}
+													</div>
+												</div>
+											);
+										})}
+									</div>
+								</section>
+							)}
 							{tours.length === 0 ? (
 								<div className="bg-surface-container-lowest rounded-2xl p-12 text-center shadow-sm">
 									<span className="material-symbols-outlined text-5xl text-on-surface-variant block mb-4">
