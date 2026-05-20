@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getAdminTours } from "@/app/actions";
+import TourActionsMenu from "@/components/TourActionsMenu";
 import { Link } from "@/i18n/routing";
 
 const PAGE_SIZE = 10;
@@ -107,12 +108,7 @@ export default async function AdminToursPage({
 								>
 									{tStatus}
 								</span>
-								<button
-									type="button"
-									className="ml-4 p-2 text-on-surface-variant hover:text-[#FF5A30] hover:bg-[#FF5A30]/10 rounded-lg transition-colors"
-								>
-									<span className="material-symbols-outlined">more_vert</span>
-								</button>
+								<TourActionsMenu tourId={String(tour.id)} />
 							</div>
 						);
 					})}

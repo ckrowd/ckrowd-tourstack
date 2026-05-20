@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getAdminEOIs } from "@/app/actions";
+import EoiActionPanel from "@/components/EoiActionPanel";
 
 function MatchBar({ score }: { score: number }) {
 	const color =
@@ -212,34 +213,8 @@ export default async function AdminEOIPage({
 									)}
 								</div>
 
-								<div className="mt-5 flex flex-wrap md:flex-nowrap items-center gap-3 pt-4 border-t border-outline-variant/10">
-									<button
-										type="button"
-										className="flex-1 py-2.5 bg-emerald-50 text-emerald-700 rounded-xl text-sm font-bold flex items-center justify-center gap-1.5 hover:bg-emerald-100 transition-colors"
-									>
-										<span className="material-symbols-outlined text-sm">
-											check_circle
-										</span>
-										{t("actions.approve")}
-									</button>
-									<button
-										type="button"
-										className="flex-1 py-2.5 bg-blue-50 text-blue-700 rounded-xl text-sm font-bold flex items-center justify-center gap-1.5 hover:bg-blue-100 transition-colors"
-									>
-										<span className="material-symbols-outlined text-sm">
-											edit_note
-										</span>
-										{t("actions.revision")}
-									</button>
-									<button
-										type="button"
-										className="flex-1 py-2.5 bg-red-50 text-red-700 rounded-xl text-sm font-bold flex items-center justify-center gap-1.5 hover:bg-red-100 transition-colors"
-									>
-										<span className="material-symbols-outlined text-sm">
-											cancel
-										</span>
-										{t("actions.reject")}
-									</button>
+								<div className="mt-5">
+									<EoiActionPanel eoiId={String(eoi.id)} />
 								</div>
 							</div>
 						);
