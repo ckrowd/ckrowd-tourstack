@@ -610,6 +610,36 @@ export async function createAdminTour(
 	};
 }
 
+export async function getAdminTour(id: string) {
+	const { data, error } = await client.tourstack.admin.tours({ id }).get();
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function deleteAdminTour(id: string) {
+	const { data, error } = await client.tourstack.admin.tours({ id }).delete();
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function updateAdminEoi(
+	id: string,
+	body: Payload<ReturnType<typeof client.tourstack.eoi>["patch"]>,
+) {
+	const { data, error } = await client.tourstack.eoi({ id }).patch(body);
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
 export async function purgeAdminDraftTours() {
 	const { data, error } = await client.tourstack.admin.tours.drafts.delete();
 	return {

@@ -29,12 +29,6 @@ export default function AdminSideNav() {
 		},
 		{ key: "eoi", label: t("eoi"), icon: "send", href: "/admin/eoi" },
 		{
-			key: "financing",
-			label: t("financing"),
-			icon: "account_balance",
-			href: "/admin/financing",
-		},
-		{
 			key: "reports",
 			label: t("reports"),
 			icon: "bar_chart",

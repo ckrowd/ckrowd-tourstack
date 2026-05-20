@@ -13,6 +13,9 @@ export default function AdminTeamInvite() {
 	const [open, setOpen] = useState(false);
 	const [name, setName] = useState("");
 	const [email, setEmail] = useState("");
+	const [role, setRole] = useState<"platform" | "insurance" | "financing">(
+		"platform",
+	);
 
 	const inviteMutation = useMutation({
 		mutationFn: inviteAdminTeamMember,
@@ -59,7 +62,11 @@ export default function AdminTeamInvite() {
 				const trimmedName = name.trim();
 				const trimmedEmail = email.trim();
 				if (!trimmedName || !trimmedEmail) return;
-				inviteMutation.mutate({ name: trimmedName, email: trimmedEmail });
+				inviteMutation.mutate({
+					name: trimmedName,
+					email: trimmedEmail,
+					role,
+				});
 			}}
 			className="mt-4 space-y-3 border-2 border-dashed border-outline-variant/40 rounded-xl p-4"
 		>
@@ -90,6 +97,23 @@ export default function AdminTeamInvite() {
 					placeholder={t("team.emailPlaceholder")}
 					className={inputClass}
 				/>
+			</div>
+			<div>
+				<label htmlFor="invite-role" className={labelClass}>
+					{t("team.roleLabel")}
+				</label>
+				<select
+					id="invite-role"
+					value={role}
+					onChange={(event) =>
+						setRole(event.target.value as typeof role)
+					}
+					className={inputClass}
+				>
+					<option value="platform">{t("team.rolePlatform")}</option>
+					<option value="insurance">{t("team.roleInsurance")}</option>
+					<option value="financing">{t("team.roleFinancing")}</option>
+				</select>
 			</div>
 			<div className="flex gap-2">
 				<button

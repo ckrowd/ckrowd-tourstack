@@ -17,7 +17,10 @@ export default function CreateTourPage() {
 		setError(null);
 
 		const formData = new FormData(e.currentTarget);
-		const body = {
+		const technicalRequirements = (
+			formData.get("technical_requirements") as string | null
+		)?.trim();
+		const body: Parameters<typeof createAdminTour>[0] = {
 			artist_name: formData.get("artist_name") as string,
 			tour_name: formData.get("tour_name") as string,
 			fee_min: Number(formData.get("fee_min")),
@@ -25,13 +28,13 @@ export default function CreateTourPage() {
 			date_from: formData.get("date_from") as string,
 			date_to: formData.get("date_to") as string,
 			genre: formData.get("genre") as string,
-			technical_requirements: formData.get("technical_requirements") as string,
+			...(technicalRequirements
+				? { technical_requirements: technicalRequirements }
+				: {}),
 		};
 
 		try {
-			const res = await createAdminTour(
-				body as unknown as Parameters<typeof createAdminTour>[0],
-			);
+			const res = await createAdminTour(body);
 
 			if (res.success) {
 				router.push("/admin/tours");
