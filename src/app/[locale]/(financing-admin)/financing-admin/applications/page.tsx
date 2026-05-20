@@ -327,28 +327,32 @@ export default function FinancingAdminApplicationsPage() {
 												</span>
 												{t("actions.review")}
 											</button>
-											<button
-												type="button"
-												onClick={() => quickDecision(f, "approved")}
-												disabled={reviewMutation.isPending}
-												className="flex-1 py-2 bg-emerald-50 text-emerald-700 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 hover:bg-emerald-100 transition-colors disabled:opacity-60"
-											>
-												<span className="material-symbols-outlined text-sm">
-													check_circle
-												</span>
-												{t("actions.approve")}
-											</button>
-											<button
-												type="button"
-												onClick={() => quickDecision(f, "rejected")}
-												disabled={reviewMutation.isPending}
-												className="flex-1 py-2 bg-red-50 text-red-700 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 hover:bg-red-100 transition-colors disabled:opacity-60"
-											>
-												<span className="material-symbols-outlined text-sm">
-													cancel
-												</span>
-												{t("actions.reject")}
-											</button>
+											{status !== "approved" && status !== "disbursed" && (
+												<button
+													type="button"
+													onClick={() => quickDecision(f, "approved")}
+													disabled={reviewMutation.isPending}
+													className="flex-1 py-2 bg-emerald-50 text-emerald-700 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 hover:bg-emerald-100 transition-colors disabled:opacity-60"
+												>
+													<span className="material-symbols-outlined text-sm">
+														check_circle
+													</span>
+													{t("actions.approve")}
+												</button>
+											)}
+											{status !== "rejected" && status !== "disbursed" && (
+												<button
+													type="button"
+													onClick={() => quickDecision(f, "rejected")}
+													disabled={reviewMutation.isPending}
+													className="flex-1 py-2 bg-red-50 text-red-700 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 hover:bg-red-100 transition-colors disabled:opacity-60"
+												>
+													<span className="material-symbols-outlined text-sm">
+														cancel
+													</span>
+													{t("actions.reject")}
+												</button>
+											)}
 										</div>
 									</div>
 								);
