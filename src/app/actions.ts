@@ -1012,3 +1012,104 @@ export async function exportStakeholders(format: "json" | "csv" = "csv") {
 		error: extractError(error),
 	};
 }
+
+// Financing-admin scoped settings / products / team
+
+export async function getFinancingSettings() {
+	const { data, error } =
+		await client.tourstack["financing-admin"].settings.get();
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function updateFinancingSettings(
+	body: Payload<typeof client.tourstack["financing-admin"]["settings"]["patch"]>,
+) {
+	const { data, error } =
+		await client.tourstack["financing-admin"].settings.patch(body);
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function listFinancingProducts() {
+	const { data, error } =
+		await client.tourstack["financing-admin"].products.get();
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function createFinancingProduct(
+	body: Payload<typeof client.tourstack["financing-admin"]["products"]["post"]>,
+) {
+	const { data, error } =
+		await client.tourstack["financing-admin"].products.post(body);
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function deleteFinancingProduct(id: string) {
+	const { data, error } = await client.tourstack["financing-admin"]
+		.products({ id })
+		.delete();
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function getFinancingTeam() {
+	const { data, error } =
+		await client.tourstack["financing-admin"].team.get();
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function inviteFinancingTeamMember(
+	body: Payload<typeof client.tourstack["financing-admin"]["team"]["post"]>,
+) {
+	const { data, error } =
+		await client.tourstack["financing-admin"].team.post(body);
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function resendFinancingInvite(inviteId: string) {
+	const { data, error } = await client.tourstack["financing-admin"].team
+		.invites({ id: inviteId })
+		.resend.post();
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function revokeFinancingInvite(inviteId: string) {
+	const { data, error } = await client.tourstack["financing-admin"].team
+		.invites({ id: inviteId })
+		.delete();
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
