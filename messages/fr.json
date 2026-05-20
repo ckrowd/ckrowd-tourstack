@@ -3166,81 +3166,78 @@
     "badge": "Configuration",
     "title": "Paramètres de financement",
     "description": "Gérez les limites d'accès et les seuils opérationnels des flux de financement.",
-    "saveChanges": "Enregistrer les modifications",
+    "saveChanges": "Enregistrer",
+    "saving": "Enregistrement…",
+    "saved": "Paramètres enregistrés.",
+    "saveError": "Impossible d'enregistrer ces paramètres. Réessayez.",
+    "loadError": "Impossible de charger vos paramètres de financement.",
     "policies": {
       "title": "Politique de revue",
-      "items": [
-        {
-          "key": "role",
-          "title": "Exiger le rôle d'admin financement",
-          "description": "Restreindre cette interface aux opérateurs financiers.",
-          "enabled": true
-        },
-        {
-          "key": "documents",
-          "title": "Bloquer l'approbation tant que les documents sont incomplets",
-          "description": "Les demandes doivent exiger tous les documents obligatoires avant l'approbation.",
-          "enabled": true
-        },
-        {
-          "key": "partner",
-          "title": "Exiger l'attribution d'un partenaire avant le décaissement",
-          "description": "Les facilités approuvées doivent avoir une banque, un assureur ou un propriétaire de capital interne.",
-          "enabled": false
-        }
-      ]
-    },
-    "team": {
-      "title": "Équipe financière",
-      "invite": "Inviter un opérateur financier",
-      "emailPlaceholder": "operateur@entreprise.com",
-      "members": [
-        {
-          "name": "Responsable financier",
-          "email": "finance@ckrowd.com",
-          "role": "Propriétaire"
-        },
-        {
-          "name": "Bureau de souscription",
-          "email": "underwriting@ckrowd.com",
-          "role": "Réviseur"
-        }
-      ]
+      "auto_reject_below_threshold": {
+        "title": "Rejeter automatiquement les demandes faibles",
+        "description": "Rejeter les demandes en dessous de la limite de revue rapide sans triage manuel."
+      },
+      "require_term_sheet_for_approval": {
+        "title": "Exiger un term sheet pour l'approbation",
+        "description": "Bloquer l'approbation tant qu'aucune URL de term sheet partenaire n'est jointe."
+      },
+      "notify_promoter_on_decision": {
+        "title": "Notifier le promoteur après décision",
+        "description": "Envoyer automatiquement un e-mail au promoteur lors d'une approbation ou d'un rejet."
+      }
     },
     "thresholds": {
-      "title": "Seuils",
-      "items": [
-        {
-          "label": "Limite de revue automatique",
-          "value": "15 k$",
-          "description": "Les demandes inférieures ou égales à ce montant peuvent entrer dans une voie de revue rapide.",
-          "icon": "bolt"
-        },
-        {
-          "label": "Revue par comité",
-          "value": "50 k$+",
-          "description": "Les demandes supérieures à ce montant doivent exiger une revue senior.",
-          "icon": "groups"
-        },
-        {
-          "label": "Minimum de documents",
-          "value": "6",
-          "description": "Documents requis avant l'approbation et la génération du term sheet.",
-          "icon": "description"
-        }
-      ]
+      "title": "Seuils (USD)",
+      "auto_review_limit_usd": {
+        "label": "Limite de revue automatique",
+        "description": "Les demandes inférieures ou égales à ce montant entrent dans la voie de revue rapide."
+      },
+      "committee_review_threshold_usd": {
+        "label": "Revue par comité",
+        "description": "Au-dessus de ce montant, la demande est dirigée vers une revue par comité."
+      },
+      "max_application_usd": {
+        "label": "Demande maximale",
+        "description": "Plafond absolu — les demandes au-dessus sont rejetées à la réception."
+      }
     },
-    "productForm": {
-      "title": "Formulaire de produit",
-      "fields": {
-        "product": "Nom du produit",
-        "limit": "Limite de facilité"
-      },
-      "placeholders": {
-        "product": "ex. Avance étape de tournée",
-        "limit": "ex. 30 000 $"
-      },
-      "submit": "Enregistrer le produit"
+    "products": {
+      "title": "Produits de financement",
+      "loading": "Chargement des produits…",
+      "loadError": "Impossible de charger les produits.",
+      "empty": "Aucun produit de financement défini pour le moment.",
+      "maxLabel": "Maximum par demande : {amount}",
+      "remove": "Retirer",
+      "nameLabel": "Nom du produit",
+      "namePlaceholder": "ex. Avance étape de tournée",
+      "maxAmountLabel": "Maximum par demande (USD)",
+      "createSubmit": "Ajouter le produit",
+      "creating": "Ajout…",
+      "createSuccess": "Produit ajouté.",
+      "createError": "Impossible d'ajouter le produit. Réessayez."
+    },
+    "team": {
+      "title": "Équipe financement",
+      "loading": "Chargement de l'équipe…",
+      "loadError": "Impossible de charger l'équipe financement.",
+      "empty": "Aucun admin financement ni invitation en attente.",
+      "activeBadge": "Actif",
+      "invitedBadge": "Invité",
+      "inviteExpires": "Expire le {date}",
+      "invite": "Inviter un opérateur financier",
+      "nameLabel": "Nom complet",
+      "namePlaceholder": "ex. Ada Lovelace",
+      "emailLabel": "Adresse e-mail",
+      "emailPlaceholder": "operateur@entreprise.com",
+      "sendInvite": "Envoyer l'invitation",
+      "inviting": "Envoi de l'invitation…",
+      "cancel": "Annuler",
+      "inviteSuccess": "Invitation envoyée.",
+      "inviteError": "Nous n'avons pas pu envoyer cette invitation. Réessayez.",
+      "resend": "Renvoyer",
+      "resending": "Envoi…",
+      "revoke": "Révoquer",
+      "revoking": "Révocation…"
     }
   },
   "InsuranceAdminApplicationsPage": {

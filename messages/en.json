@@ -3166,81 +3166,78 @@
     "badge": "Configuration",
     "title": "Financing settings",
     "description": "Manage access boundaries and operating thresholds for financing workflows.",
-    "saveChanges": "Save Changes",
+    "saveChanges": "Save changes",
+    "saving": "Saving…",
+    "saved": "Settings saved.",
+    "saveError": "We couldn't save those settings. Try again.",
+    "loadError": "We couldn't load your financing settings.",
     "policies": {
       "title": "Review policy",
-      "items": [
-        {
-          "key": "role",
-          "title": "Require financing admin role",
-          "description": "Restrict this interface to financing operators.",
-          "enabled": true
-        },
-        {
-          "key": "documents",
-          "title": "Block approval until documents are complete",
-          "description": "Applications should require all mandatory documents before approval.",
-          "enabled": true
-        },
-        {
-          "key": "partner",
-          "title": "Require partner assignment before disbursement",
-          "description": "Approved facilities should have a bank, insurer, or internal capital owner.",
-          "enabled": false
-        }
-      ]
-    },
-    "team": {
-      "title": "Finance team",
-      "invite": "Invite Finance Operator",
-      "emailPlaceholder": "operator@company.com",
-      "members": [
-        {
-          "name": "Finance Lead",
-          "email": "finance@ckrowd.com",
-          "role": "Owner"
-        },
-        {
-          "name": "Underwriting Desk",
-          "email": "underwriting@ckrowd.com",
-          "role": "Reviewer"
-        }
-      ]
+      "auto_reject_below_threshold": {
+        "title": "Auto-reject low-amount applications",
+        "description": "Reject applications below the fast-review limit without manual triage."
+      },
+      "require_term_sheet_for_approval": {
+        "title": "Require term sheet for approval",
+        "description": "Block approval until a partner term sheet URL is attached."
+      },
+      "notify_promoter_on_decision": {
+        "title": "Notify promoter on decision",
+        "description": "Email the promoter automatically when an application is approved or rejected."
+      }
     },
     "thresholds": {
-      "title": "Thresholds",
-      "items": [
-        {
-          "label": "Auto review limit",
-          "value": "$15k",
-          "description": "Requests at or below this amount can enter a fast review lane.",
-          "icon": "bolt"
-        },
-        {
-          "label": "Committee review",
-          "value": "$50k+",
-          "description": "Requests above this amount should require senior review.",
-          "icon": "groups"
-        },
-        {
-          "label": "Document minimum",
-          "value": "6",
-          "description": "Required documents before approval and term sheet generation.",
-          "icon": "description"
-        }
-      ]
+      "title": "Thresholds (USD)",
+      "auto_review_limit_usd": {
+        "label": "Auto review limit",
+        "description": "Requests at or below this amount enter the fast review lane."
+      },
+      "committee_review_threshold_usd": {
+        "label": "Committee review",
+        "description": "Above this amount, the application is routed to committee review."
+      },
+      "max_application_usd": {
+        "label": "Maximum application",
+        "description": "Absolute ceiling — applications above this are rejected at intake."
+      }
     },
-    "productForm": {
-      "title": "Product form",
-      "fields": {
-        "product": "Product name",
-        "limit": "Facility limit"
-      },
-      "placeholders": {
-        "product": "e.g. Tour Stop Advance",
-        "limit": "e.g. $30,000"
-      },
-      "submit": "Save Product"
+    "products": {
+      "title": "Financing products",
+      "loading": "Loading products…",
+      "loadError": "Couldn't load products.",
+      "empty": "No financing products defined yet.",
+      "maxLabel": "Max per application: {amount}",
+      "remove": "Remove",
+      "nameLabel": "Product name",
+      "namePlaceholder": "e.g. Tour Stop Advance",
+      "maxAmountLabel": "Max per application (USD)",
+      "createSubmit": "Add product",
+      "creating": "Adding…",
+      "createSuccess": "Product added.",
+      "createError": "Couldn't add the product. Try again."
+    },
+    "team": {
+      "title": "Financing team",
+      "loading": "Loading team…",
+      "loadError": "Couldn't load the financing team.",
+      "empty": "No financing admins or pending invites yet.",
+      "activeBadge": "Active",
+      "invitedBadge": "Invited",
+      "inviteExpires": "Expires {date}",
+      "invite": "Invite Finance Operator",
+      "nameLabel": "Full name",
+      "namePlaceholder": "e.g. Ada Lovelace",
+      "emailLabel": "Email address",
+      "emailPlaceholder": "operator@company.com",
+      "sendInvite": "Send invite",
+      "inviting": "Sending invite…",
+      "cancel": "Cancel",
+      "inviteSuccess": "Invitation sent.",
+      "inviteError": "We couldn't send that invite. Try again.",
+      "resend": "Resend",
+      "resending": "Resending…",
+      "revoke": "Revoke",
+      "revoking": "Revoking…"
     }
   },
   "InsuranceAdminApplicationsPage": {
