@@ -127,17 +127,33 @@ export async function signIn(email: string, password: string) {
 	return { success: true };
 }
 
-export async function signInAdmin(email: string, password: string) {
+export async function signInAdmin(
+	email: string,
+	password: string,
+	requireScope?: "platform" | "insurance" | "financing",
+) {
 	const result = await signInWithEmail(email, password);
 	if (!result.success) return result;
 
 	const session = await getSession();
-	if (session?.user?.is_super_admin === true) {
-		return { success: true };
+	const role = session?.user?.tourstack_admin_role as
+		| "platform"
+		| "insurance"
+		| "financing"
+		| null
+		| undefined;
+
+	if (!role) {
+		await signOut();
+		return { success: false, code: "not_admin" as const };
 	}
 
-	await signOut();
-	return { success: false, code: "not_admin" as const };
+	if (requireScope && role !== requireScope) {
+		await signOut();
+		return { success: false, code: "wrong_scope" as const, scope: role };
+	}
+
+	return { success: true };
 }
 
 export async function signUp(
