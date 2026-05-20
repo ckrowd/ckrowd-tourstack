@@ -863,6 +863,48 @@ export async function inviteAdminTeamMember(
 	};
 }
 
+export async function resendAdminInvite(inviteId: string) {
+	const { data, error } = await client.tourstack.admin.team.invites({
+		id: inviteId,
+	}).resend.post();
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function revokeAdminInvite(inviteId: string) {
+	const { data, error } = await client.tourstack.admin.team.invites({
+		id: inviteId,
+	}).delete();
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function getAdminInvite(token: string) {
+	const { data, error } = await client.tourstack.admin.invites({ token }).get();
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function acceptAdminInvite(token: string) {
+	const { data, error } = await client.tourstack.admin
+		.invites({ token })
+		.accept.post();
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
 // Active Sessions
 
 export async function revokeSession(

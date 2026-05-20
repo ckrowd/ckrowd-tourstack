@@ -3,6 +3,7 @@ import { getAdminSettings, getAdminTeam } from "@/app/actions";
 import AdminDangerZone from "@/components/AdminDangerZone";
 import AdminSettingsForm from "@/components/AdminSettingsForm";
 import AdminTeamInvite from "@/components/AdminTeamInvite";
+import AdminTeamList from "@/components/AdminTeamList";
 
 export default async function AdminSettingsPage({
 	params,
@@ -18,7 +19,9 @@ export default async function AdminSettingsPage({
 		getAdminTeam(),
 	]);
 	const settings = settingsResult.data;
-	const team = teamResult.data ?? [];
+	const team = teamResult.data ?? { active: [], invites: [] };
+	const active = "active" in team ? team.active : [];
+	const invites = "invites" in team ? team.invites : [];
 
 	return (
 		<>
@@ -61,41 +64,7 @@ export default async function AdminSettingsPage({
 							</p>
 						) : (
 							<>
-								{team.length === 0 ? (
-									<p className="text-sm text-on-surface-variant">
-										{t("team.empty")}
-									</p>
-								) : (
-									<div className="space-y-3">
-										{team.map((member) => {
-											const name = String(member.name ?? "");
-											const email = String(member.email ?? "");
-											return (
-												<div
-													key={String(member.id)}
-													className="flex items-center justify-between p-3 border border-outline-variant/10 rounded-xl"
-												>
-													<div className="flex items-center gap-3">
-														<div className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-bold text-sm text-on-surface-variant">
-															{(name || email || "?").charAt(0).toUpperCase()}
-														</div>
-														<div>
-															<p className="text-sm font-bold text-on-surface">
-																{name}
-															</p>
-															<p className="text-xs text-on-surface-variant">
-																{email}
-															</p>
-														</div>
-													</div>
-													<span className="text-xs font-bold text-[#FF5A30] bg-orange-50 px-3 py-1 rounded-full">
-														{t("team.role")}
-													</span>
-												</div>
-											);
-										})}
-									</div>
-								)}
+								<AdminTeamList active={active} invites={invites} />
 								<AdminTeamInvite />
 							</>
 						)}
