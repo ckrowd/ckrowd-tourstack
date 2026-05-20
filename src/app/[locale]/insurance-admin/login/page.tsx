@@ -37,14 +37,14 @@ function InsuranceAdminLoginContent() {
 		event.preventDefault();
 		setError(null);
 		loginMutation.mutate(
-			{ email, password },
+			{ email, password, requireScope: "insurance" },
 			{
 				onSuccess: (result) => {
 					if (!result.success) {
 						const code = "code" in result ? result.code : undefined;
 						const message = "error" in result ? result.error : undefined;
 						setError(
-							code === "not_admin"
+							code === "not_admin" || code === "wrong_scope"
 								? t("errorNotAdmin")
 								: (message ?? t("errorInvalid")),
 						);

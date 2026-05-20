@@ -30,8 +30,15 @@ export function useLogin() {
 export function useAdminLogin() {
 	const queryClient = useQueryClient();
 	return useMutation({
-		mutationFn: ({ email, password }: { email: string; password: string }) =>
-			signInAdmin(email, password),
+		mutationFn: ({
+			email,
+			password,
+			requireScope,
+		}: {
+			email: string;
+			password: string;
+			requireScope?: "platform" | "insurance" | "financing";
+		}) => signInAdmin(email, password, requireScope),
 		onSuccess: (result) => {
 			if (result.success) {
 				void queryClient.invalidateQueries({ queryKey: ["session"] });
