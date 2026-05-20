@@ -2459,7 +2459,9 @@
     "profile": "Profil",
     "settings": "Paramètres",
     "brandName": "Tourstack",
-    "brandBy": "par Ckrowd"
+    "brandBy": "par Ckrowd",
+    "logoAlt": "Logo Ckrowd",
+    "brandLockupLabel": "Tourstack par Ckrowd"
   },
   "AdminSideNav": {
     "overview": "Aperçu",
@@ -2920,6 +2922,7 @@
   "FinancingAdminLoginPage": {
     "brand": "Admin Financement",
     "badge": "Opérations de financement",
+    "portal": "Portail Admin Financement",
     "title": "Connexion à l'admin financement",
     "description": "Utilisez vos identifiants d'admin financement pour continuer.",
     "email": "Adresse e-mail",

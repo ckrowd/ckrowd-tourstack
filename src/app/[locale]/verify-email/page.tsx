@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { resendVerificationOtp, verifyEmail } from "@/app/actions";
+import AuthBrandLockup from "@/components/AuthBrandLockup";
 import { Link, useRouter } from "@/i18n/routing";
 
 function VerifyEmailContent() {
@@ -12,7 +13,6 @@ function VerifyEmailContent() {
 	const searchParams = useSearchParams();
 	const email = searchParams.get("email") ?? "";
 	const t = useTranslations("VerifyEmailPage");
-	const tCommon = useTranslations("Common");
 
 	const [digits, setDigits] = useState(["", "", "", "", "", ""]);
 	const [error, setError] = useState<string | null>(null);
@@ -112,12 +112,9 @@ function VerifyEmailContent() {
 			<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 py-12">
 				<div className="w-full max-w-md">
 					<div className="text-center mb-10">
-						<Link
-							href="/"
-							className="text-3xl font-black tracking-tight text-[#FF5A30] font-(family-name:--font-manrope)"
-						>
-							{tCommon("brandName")} {tCommon("brandBy")}
-						</Link>
+						<div className="flex items-center justify-center">
+							<AuthBrandLockup />
+						</div>
 					</div>
 					<div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8 text-center">
 						<div className="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-5">
@@ -142,12 +139,9 @@ function VerifyEmailContent() {
 		<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 py-12">
 			<div className="w-full max-w-md">
 				<div className="text-center mb-10">
-					<Link
-						href="/"
-						className="text-3xl font-black tracking-tight text-[#FF5A30] font-(family-name:--font-manrope)"
-					>
-						{tCommon("brandName")} {tCommon("brandBy")}
-					</Link>
+					<div className="flex items-center justify-center mb-6">
+						<AuthBrandLockup />
+					</div>
 					<p className="mt-2 text-sm text-slate-500 font-medium">{t("tagline")}</p>
 				</div>
 

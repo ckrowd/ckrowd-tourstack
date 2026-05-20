@@ -214,7 +214,10 @@ export default async function AdminEOIPage({
 								</div>
 
 								<div className="mt-5">
-									<EoiActionPanel eoiId={String(eoi.id)} />
+									<EoiActionPanel
+										eoiId={String(eoi.id)}
+										currentStatus={status}
+									/>
 								</div>
 							</div>
 						);

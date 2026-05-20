@@ -3,6 +3,7 @@
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Suspense, useEffect, useState } from "react";
+import AuthBrandLockup from "@/components/AuthBrandLockup";
 import { useLogin, useSession } from "@/context/AuthContext";
 import { Link } from "@/i18n/routing";
 import { getRegularLoginRedirectPath } from "@/lib/auth";
@@ -15,7 +16,6 @@ function LoginPageContent() {
 	const from = getRegularLoginRedirectPath(searchParams.get("from"));
 	const verified = searchParams.get("verified") === "true";
 	const t = useTranslations("LoginPage");
-	const tCommon = useTranslations("Common");
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -65,12 +65,9 @@ function LoginPageContent() {
 		<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 py-12">
 			<div className="w-full max-w-md">
 				<div className="text-center mb-10">
-					<Link
-						href="/"
-						className="text-3xl font-black tracking-tight text-[#FF5A30] font-(family-name:--font-manrope)"
-					>
-						{tCommon("brandName")} {tCommon("brandBy")}
-					</Link>
+					<div className="flex items-center justify-center mb-6">
+						<AuthBrandLockup />
+					</div>
 					<p className="mt-2 text-sm text-slate-500 font-medium">
 						{t("description")}
 					</p>
