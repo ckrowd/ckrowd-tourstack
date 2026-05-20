@@ -6,7 +6,7 @@ import { Suspense, useEffect, useState } from "react";
 import AuthBrandLockup from "@/components/AuthBrandLockup";
 import { useAdminLogin, useSession } from "@/context/AuthContext";
 import { useRouter } from "@/i18n/routing";
-import { isAdminSession } from "@/lib/auth";
+import { adminHomePath, isInsuranceAdmin } from "@/lib/auth";
 
 function InsuranceAdminLoginContent() {
 	const router = useRouter();
@@ -22,7 +22,14 @@ function InsuranceAdminLoginContent() {
 
 	useEffect(() => {
 		if (!isLoading && session?.user) {
-			router.replace(isAdminSession(session) ? from : "/dashboard");
+			// Already signed in — send insurance admins to their target (or
+			// portal home), anyone else to their own admin home or dashboard.
+			if (isInsuranceAdmin(session)) {
+				router.replace(from);
+			} else {
+				const home = adminHomePath(session);
+				router.replace(home ?? "/dashboard");
+			}
 		}
 	}, [session, from, isLoading, router]);
 

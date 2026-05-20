@@ -5,7 +5,7 @@ import { Suspense, useEffect, useState } from "react";
 import AuthBrandLockup from "@/components/AuthBrandLockup";
 import { useAdminLogin, useSession } from "@/context/AuthContext";
 import { Link } from "@/i18n/routing";
-import { isAdminSession } from "@/lib/auth";
+import { adminHomePath } from "@/lib/auth";
 
 function AdminLoginPageContent() {
 	const locale = useLocale();
@@ -19,9 +19,8 @@ function AdminLoginPageContent() {
 
 	useEffect(() => {
 		if (!isLoading && session?.user) {
-			window.location.replace(
-				isAdminSession(session) ? `/${locale}/admin` : `/${locale}/dashboard`,
-			);
+			const home = adminHomePath(session);
+			window.location.replace(`/${locale}${home ?? "/dashboard"}`);
 		}
 	}, [session, isLoading, locale]);
 
