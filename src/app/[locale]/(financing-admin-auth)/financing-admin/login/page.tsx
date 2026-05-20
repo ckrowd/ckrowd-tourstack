@@ -3,8 +3,9 @@
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { Suspense, useEffect, useState } from "react";
+import AuthBrandLockup from "@/components/AuthBrandLockup";
 import { useAdminLogin, useSession } from "@/context/AuthContext";
-import { Link, useRouter } from "@/i18n/routing";
+import { useRouter } from "@/i18n/routing";
 import { isAdminSession } from "@/lib/auth";
 
 function FinancingAdminLoginContent() {
@@ -61,12 +62,12 @@ function FinancingAdminLoginContent() {
 		<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 py-12">
 			<div className="w-full max-w-md">
 				<div className="text-center mb-10">
-					<Link
-						href="/"
-						className="text-3xl font-black tracking-tight text-[#FF5A30] font-(family-name:--font-manrope)"
-					>
-						{t("brand")} 
-					</Link>
+					<div className="flex items-center justify-center mb-6">
+						<AuthBrandLockup />
+					</div>
+					<p className="mt-2 text-xs font-bold uppercase tracking-widest text-slate-400">
+						{t("portal")}
+					</p>
 					<p className="mt-2 text-sm text-slate-500 font-medium">
 						{t("description")}
 					</p>

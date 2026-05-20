@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { Suspense, useEffect, useState } from "react";
+import AuthBrandLockup from "@/components/AuthBrandLockup";
 import { useAdminLogin, useSession } from "@/context/AuthContext";
 import { Link } from "@/i18n/routing";
 import { isAdminSession } from "@/lib/auth";
@@ -12,7 +12,6 @@ function AdminLoginPageContent() {
 	const { data: session, isFetching, isLoading } = useSession();
 	const loginMutation = useAdminLogin();
 	const t = useTranslations("AdminLoginPage");
-	const tCommon = useTranslations("Common");
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -62,22 +61,8 @@ function AdminLoginPageContent() {
 		<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 py-12">
 			<div className="w-full max-w-md">
 				<div className="text-center mb-10">
-					<div className="flex items-center justify-center gap-2.5 mb-6">
-						<Image
-							src="/ckrowd-logo.png"
-							alt={t("logoAlt")}
-							width={36}
-							height={36}
-							priority
-						/>
-						<div className="flex flex-col leading-tight text-left">
-							<span className="text-lg font-black tracking-tight text-[#FF5A30] font-(family-name:--font-manrope)">
-								{tCommon("brandName")}
-							</span>
-							<span className="text-[10px] font-semibold text-black font-(family-name:--font-manrope)">
-								{tCommon("brandBy")}
-							</span>
-						</div>
+					<div className="flex items-center justify-center mb-6">
+						<AuthBrandLockup />
 					</div>
 				</div>
 

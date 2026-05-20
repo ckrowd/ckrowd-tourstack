@@ -2456,6 +2456,8 @@
   "Common": {
     "brandName": "Tourstack",
     "brandBy": "by Ckrowd",
+    "logoAlt": "Ckrowd logo",
+    "brandLockupLabel": "Tourstack by Ckrowd",
     "signIn": "Sign In",
     "signOut": "Sign Out",
     "profile": "Profile",
@@ -2920,6 +2922,7 @@
   "FinancingAdminLoginPage": {
     "brand": "Financing Admin",
     "badge": "Financing Operations",
+    "portal": "Financing Admin Portal",
     "title": "Sign in to financing admin",
     "description": "Use your financing admin credentials to continue.",
     "email": "Email Address",

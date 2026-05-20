@@ -15,7 +15,22 @@ const ACTION_STATUS: Record<Action, "approved" | "needs_revision" | "rejected"> 
 		reject: "rejected",
 	};
 
-export default function EoiActionPanel({ eoiId }: { eoiId: string }) {
+// An EOI in a given status no longer needs the action that would put it
+// there again. e.g. an "approved" EOI shouldn't show an Approve button;
+// only Revision and Reject remain as ways to move it elsewhere.
+const HIDDEN_FOR_STATUS: Record<string, Action[]> = {
+	approved: ["approve"],
+	needs_revision: ["revision"],
+	rejected: ["reject"],
+};
+
+export default function EoiActionPanel({
+	eoiId,
+	currentStatus,
+}: {
+	eoiId: string;
+	currentStatus: string;
+}) {
 	const t = useTranslations("EoiActionPanel");
 	const router = useRouter();
 	const [open, setOpen] = useState<Action | null>(null);
@@ -60,33 +75,46 @@ export default function EoiActionPanel({ eoiId }: { eoiId: string }) {
 		mutation.mutate(open as Action);
 	}
 
+	const hidden = HIDDEN_FOR_STATUS[currentStatus] ?? [];
+	const showApprove = !hidden.includes("approve");
+	const showRevision = !hidden.includes("revision");
+	const showReject = !hidden.includes("reject");
+
 	return (
 		<>
 			<div className="flex flex-wrap md:flex-nowrap items-center gap-3 pt-4 border-t border-outline-variant/10">
-				<button
-					type="button"
-					onClick={() => startAction("approve")}
-					className="flex-1 py-2.5 bg-emerald-50 text-emerald-700 rounded-xl text-sm font-bold flex items-center justify-center gap-1.5 hover:bg-emerald-100 transition-colors"
-				>
-					<span className="material-symbols-outlined text-sm">check_circle</span>
-					{t("approve")}
-				</button>
-				<button
-					type="button"
-					onClick={() => startAction("revision")}
-					className="flex-1 py-2.5 bg-blue-50 text-blue-700 rounded-xl text-sm font-bold flex items-center justify-center gap-1.5 hover:bg-blue-100 transition-colors"
-				>
-					<span className="material-symbols-outlined text-sm">edit_note</span>
-					{t("revision")}
-				</button>
-				<button
-					type="button"
-					onClick={() => startAction("reject")}
-					className="flex-1 py-2.5 bg-red-50 text-red-700 rounded-xl text-sm font-bold flex items-center justify-center gap-1.5 hover:bg-red-100 transition-colors"
-				>
-					<span className="material-symbols-outlined text-sm">cancel</span>
-					{t("reject")}
-				</button>
+				{showApprove && (
+					<button
+						type="button"
+						onClick={() => startAction("approve")}
+						className="flex-1 py-2.5 bg-emerald-50 text-emerald-700 rounded-xl text-sm font-bold flex items-center justify-center gap-1.5 hover:bg-emerald-100 transition-colors"
+					>
+						<span className="material-symbols-outlined text-sm">
+							check_circle
+						</span>
+						{t("approve")}
+					</button>
+				)}
+				{showRevision && (
+					<button
+						type="button"
+						onClick={() => startAction("revision")}
+						className="flex-1 py-2.5 bg-blue-50 text-blue-700 rounded-xl text-sm font-bold flex items-center justify-center gap-1.5 hover:bg-blue-100 transition-colors"
+					>
+						<span className="material-symbols-outlined text-sm">edit_note</span>
+						{t("revision")}
+					</button>
+				)}
+				{showReject && (
+					<button
+						type="button"
+						onClick={() => startAction("reject")}
+						className="flex-1 py-2.5 bg-red-50 text-red-700 rounded-xl text-sm font-bold flex items-center justify-center gap-1.5 hover:bg-red-100 transition-colors"
+					>
+						<span className="material-symbols-outlined text-sm">cancel</span>
+						{t("reject")}
+					</button>
+				)}
 			</div>
 
 			{open && (
