@@ -76,36 +76,6 @@ export default function TopNav() {
 		};
 	});
 
-	const SIDEBAR_ROUTES = [
-		"/dashboard",
-		"/tours",
-		"/eoi",
-		"/onboarding",
-		"/stakeholders",
-		"/profile",
-		"/settings",
-		"/workforce",
-		"/crew",
-	];
-	const activeLink = SIDEBAR_ROUTES.some(
-		(r) => pathname === r || pathname.startsWith(`${r}/`),
-	)
-		? "platform"
-		: pathname.startsWith("/discovery")
-			? "discovery"
-			: pathname.startsWith("/financing")
-				? "financing"
-				: pathname.startsWith("/insurance")
-					? "insurance"
-					: null;
-
-	const linkClass = (key: string) =>
-		`transition-colors font-(family-name:--font-manrope) font-semibold ${
-			activeLink === key
-				? "text-[#FF5A30] font-bold border-b-2 border-[#FF5A30] pb-1"
-				: "text-slate-500 hover:text-[#FF5A30]"
-		}`;
-
 	const userInitial = session?.user?.email
 		? session.user.email[0].toUpperCase()
 		: "U";
@@ -137,20 +107,6 @@ export default function TopNav() {
 								</span>
 							</div>
 						</Link>
-						<nav className="hidden md:flex items-center gap-6">
-							<Link href="/dashboard" className={linkClass("platform")}>
-								{t("dashboard")}
-							</Link>
-							<Link href="/discovery" className={linkClass("discovery")}>
-								{t("discovery")}
-							</Link>
-							<Link href="/financing" className={linkClass("financing")}>
-								{t("financing")}
-							</Link>
-							<Link href="/insurance" className={linkClass("insurance")}>
-								{t("insurance")}
-							</Link>
-						</nav>
 					</div>
 
 					<div className="flex items-center gap-4">

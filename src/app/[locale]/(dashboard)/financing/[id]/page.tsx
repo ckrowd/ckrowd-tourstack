@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getFinancingApplication } from "@/app/actions";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
+import { Link } from "@/i18n/routing";
 
 export default async function FinancingDetailPage({
 	params,

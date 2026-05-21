@@ -561,7 +561,10 @@
       "company": "Entreprise",
       "country": "Pays",
       "close": "Fermer",
-      "submittedOn": "Soumis le"
+      "submittedOn": "Soumis le",
+      "proofFile": "Pièce justificative",
+      "attachedFile": "Fichier joint",
+      "download": "Télécharger"
     }
   },
   "WorkforcePage": {
@@ -1173,7 +1176,9 @@
         "ayaEligibleDesc": "Votre profil sera marqué pour un examen prioritaire et un accès aux fonctionnalités du pilote Aya, y compris les allocations de tournées premium et un support dédié.",
         "standardTier": "Niveau standard",
         "standardTierDesc": "Vous serez examiné pour notre programme de promoteur standard. Au fur et à mesure que vous construisez votre historique avec Ckrowd, vous pourrez débloquer des niveaux supérieurs.",
-        "clickToReplace": "Cliquez pour remplacer"
+        "clickToReplace": "Cliquez pour remplacer",
+        "uploading": "Téléversement…",
+        "uploaded": "Téléversé — cliquez pour remplacer"
       },
       "credibility": {
         "title": "Signaux de crédibilité",
@@ -1221,6 +1226,10 @@
       "submitting": "Soumission de la demande...",
       "dashboard": "Voir le tableau de bord",
       "discovery": "Parcourir les tournées"
+    },
+    "errors": {
+      "failed": "Échec de la soumission.",
+      "uploadFailed": "Échec du téléversement. Essayez un autre fichier ou vérifiez votre connexion."
     }
   },
   "CrewPage": {
@@ -1466,6 +1475,11 @@
       }
     },
     "onboarding": {
+      "previewNotice": {
+        "title": "Aperçu du parcours d'intégration",
+        "description": "Pour démarrer votre inscription et soumettre vos pièces justificatives, continuez vers le formulaire d'admission sécurisé.",
+        "cta": "Continuer vers l'admission"
+      },
       "selectRole": "Sélectionnez votre rôle",
       "partners": "Partenaires d'assurance",
       "partnersList": [
@@ -2398,6 +2412,9 @@
     "requests": "Demandes",
     "onboarding": "Intégration",
     "stakeholders": "Liens d'invitation",
+    "discovery": "Découverte",
+    "financing": "Financement",
+    "insurance": "Assurance",
     "profile": "Profil",
     "settings": "Paramètres",
     "startNewTour": "Démarrer une tournée"

@@ -561,7 +561,10 @@
       "company": "Company",
       "country": "Country",
       "close": "Close",
-      "submittedOn": "Submitted"
+      "submittedOn": "Submitted",
+      "proofFile": "Proof file",
+      "attachedFile": "Attached file",
+      "download": "Download"
     }
   },
   "WorkforcePage": {
@@ -1173,7 +1176,9 @@
         "ayaEligibleDesc": "Your profile will be flagged for priority review and access to Aya Pilot features, including premium tour allocations and dedicated support.",
         "standardTier": "Standard Tier",
         "standardTierDesc": "You'll be reviewed for our standard promoter program. As you build your track record with Ckrowd, you can unlock higher tiers.",
-        "clickToReplace": "Click to replace"
+        "clickToReplace": "Click to replace",
+        "uploading": "Uploading…",
+        "uploaded": "Uploaded — click to replace"
       },
       "credibility": {
         "title": "Credibility Signals",
@@ -1221,6 +1226,10 @@
       "submitting": "Submitting Application...",
       "dashboard": "View Dashboard",
       "discovery": "Browse Tours"
+    },
+    "errors": {
+      "failed": "Failed to submit application.",
+      "uploadFailed": "Failed to upload file. Try a different file or check your connection."
     }
   },
   "CrewPage": {
@@ -1466,6 +1475,11 @@
       }
     },
     "onboarding": {
+      "previewNotice": {
+        "title": "This is a preview of the onboarding journey",
+        "description": "To start your actual registration and submit verification documents, continue to the secure intake form.",
+        "cta": "Continue to intake"
+      },
       "selectRole": "Select your role",
       "partners": "Insurance Partners",
       "partnersList": [
@@ -2398,6 +2412,9 @@
     "requests": "Requests",
     "onboarding": "Onboarding",
     "stakeholders": "Invite Links",
+    "discovery": "Discovery",
+    "financing": "Financing",
+    "insurance": "Insurance",
     "profile": "Profile",
     "settings": "Settings",
     "startNewTour": "Start New Tour"
