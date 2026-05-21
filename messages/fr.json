@@ -940,6 +940,9 @@
         },
         "saveSuccess": "Lieu enregistré.",
         "saveError": "Nous n'avons pas pu enregistrer le lieu. Veuillez réessayer."
+      },
+      "viewModal": {
+        "close": "Fermer"
       }
     },
     "notificationsTab": {
@@ -2521,6 +2524,61 @@
     "settings": "Paramètres",
     "newTour": "Nouvelle tournée"
   },
+  "FinancingApplyModal": {
+    "title": "Demande de financement",
+    "close": "Fermer",
+    "step": "Étape {current} sur {total}",
+    "step1": {
+      "title": "Demande de financement"
+    },
+    "step2": {
+      "title": "Compte bancaire de décaissement",
+      "description": "En cas d'approbation, les fonds seront versés sur ce compte. Le nom du compte est vérifié via Paystack."
+    },
+    "products": {
+      "tourStopAdvance": "Avance d'étape de tournée (jusqu'à 30k $)",
+      "venueBuildOutCredit": "Crédit d'aménagement de lieu (jusqu'à 75k $)",
+      "eventInsuranceBundle": "Pack d'assurance événement",
+      "marketingTicketingFloat": "Avance marketing & billetterie (jusqu'à 15k $)"
+    },
+    "fields": {
+      "product": "Produit",
+      "amount": "Montant demandé",
+      "currency": "Devise",
+      "purpose": "À quoi sert ce financement ? (facultatif)",
+      "purposePlaceholder": "Brève description de l'utilisation des fonds",
+      "bank": "Banque",
+      "bankSelect": "Sélectionnez une banque",
+      "bankLoading": "Chargement des banques…",
+      "accountNumber": "Numéro de compte",
+      "accountHolder": "Nom du titulaire du compte",
+      "accountHolderPlaceholder": "Nom tel qu'il figure sur le compte"
+    },
+    "verify": {
+      "title": "Vérifier la propriété du compte",
+      "action": "Vérifier",
+      "checking": "Vérification…",
+      "registeredAs": "Nom enregistré sur le compte",
+      "matched": "Le nom correspond au titulaire indiqué.",
+      "mismatch": "Le nom ne correspond pas au titulaire indiqué. Veuillez corriger avant de soumettre."
+    },
+    "actions": {
+      "cancel": "Annuler",
+      "back": "Retour",
+      "next": "Continuer",
+      "submit": "Soumettre la demande",
+      "submitting": "Envoi…"
+    },
+    "errors": {
+      "resolve": "Impossible de vérifier ce compte. Vérifiez le numéro et la banque, puis réessayez.",
+      "submit": "Échec de la soumission. Veuillez réessayer."
+    },
+    "success": {
+      "title": "Demande soumise",
+      "description": "Notre équipe financement examinera votre demande et vous contactera pour la suite.",
+      "done": "Terminé"
+    }
+  },
   "FinancingQuickApply": {
     "badge": "Demande rapide",
     "title": "Demande de financement rapide",
@@ -3064,7 +3122,16 @@
     "fields": {
       "product": "Produit",
       "documents": "Documents",
-      "partner": "Partenaire"
+      "partner": "Partenaire",
+      "banking": "Compte de décaissement"
+    },
+    "banking": {
+      "verified": "Vérifié",
+      "unverified": "Non vérifié",
+      "bank": "Banque",
+      "account": "Compte",
+      "holder": "Titulaire",
+      "purpose": "Objet"
     },
     "actions": {
       "sync": "Actualiser",

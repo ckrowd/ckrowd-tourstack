@@ -1,5 +1,11 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { getFinancingApplications, getFinancingPartners } from "@/app/actions";
+import {
+	getFinancingApplications,
+	getFinancingPartners,
+	getTourstackProfile,
+} from "@/app/actions";
+import FinancingApplyButton from "@/components/FinancingApplyButton";
+import type { ProductId } from "@/components/FinancingApplyModal";
 import FinancingQuickApply from "@/components/FinancingQuickApply";
 import TopNav from "@/components/TopNav";
 import { Link } from "@/i18n/routing";
@@ -13,15 +19,32 @@ export default async function FinancingPage({ params }: Props) {
 	setRequestLocale(locale);
 	const t = await getTranslations("FinancingPage");
 
-	const [appsResult, partnersResult] = await Promise.all([
+	const [appsResult, partnersResult, profileResult] = await Promise.all([
 		getFinancingApplications(),
 		getFinancingPartners(),
+		getTourstackProfile(),
 	]);
 	const applications = appsResult.data ?? [];
 	const partners = partnersResult.data ?? [];
+	const applicantName =
+		profileResult.data?.contact_person ??
+		profileResult.data?.company_name ??
+		undefined;
 
-	const products = [
+	const products: {
+		productId: ProductId;
+		icon: string;
+		name: string;
+		tag: string;
+		tagColor: string;
+		description: string;
+		amount: string;
+		term: string;
+		rate: string;
+		eligibility: string;
+	}[] = [
 		{
+			productId: "Tour Stop Advance",
 			icon: "account_balance",
 			name: t("products.p1.name"),
 			tag: t("products.p1.tag"),
@@ -33,6 +56,7 @@ export default async function FinancingPage({ params }: Props) {
 			eligibility: t("products.p1.eligibility"),
 		},
 		{
+			productId: "Venue Build-Out Credit",
 			icon: "groups",
 			name: t("products.p2.name"),
 			tag: t("products.p2.tag"),
@@ -44,6 +68,7 @@ export default async function FinancingPage({ params }: Props) {
 			eligibility: t("products.p2.eligibility"),
 		},
 		{
+			productId: "Event Insurance Bundle",
 			icon: "shield",
 			name: t("products.p3.name"),
 			tag: t("products.p3.tag"),
@@ -55,6 +80,7 @@ export default async function FinancingPage({ params }: Props) {
 			eligibility: t("products.p3.eligibility"),
 		},
 		{
+			productId: "Marketing & Ticketing Float",
 			icon: "trending_up",
 			name: t("products.p4.name"),
 			tag: t("products.p4.tag"),
@@ -337,15 +363,16 @@ export default async function FinancingPage({ params }: Props) {
 										</span>
 										{p.eligibility}
 									</span>
-									<a
-										href="#quick-apply"
+									<FinancingApplyButton
+										defaultProduct={p.productId}
+										applicantName={applicantName}
 										className="text-[#FF5A30] font-bold text-sm flex items-center gap-1 hover:gap-2 transition-all"
 									>
 										{t("apply")}
 										<span className="material-symbols-outlined text-sm">
 											arrow_forward
 										</span>
-									</a>
+									</FinancingApplyButton>
 								</div>
 							</div>
 						))}

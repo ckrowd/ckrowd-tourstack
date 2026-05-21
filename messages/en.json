@@ -940,6 +940,9 @@
         },
         "saveSuccess": "Venue saved.",
         "saveError": "We couldn't save the venue. Please try again."
+      },
+      "viewModal": {
+        "close": "Close"
       }
     },
     "notificationsTab": {
@@ -2521,6 +2524,61 @@
     "settings": "Settings",
     "newTour": "New Tour"
   },
+  "FinancingApplyModal": {
+    "title": "Apply for Financing",
+    "close": "Close",
+    "step": "Step {current} of {total}",
+    "step1": {
+      "title": "Financing Request"
+    },
+    "step2": {
+      "title": "Disbursement Bank Account",
+      "description": "If approved, funds disburse to this account. Account name is checked against your name via Paystack."
+    },
+    "products": {
+      "tourStopAdvance": "Tour Stop Advance (up to $30k)",
+      "venueBuildOutCredit": "Venue Build-Out Credit (up to $75k)",
+      "eventInsuranceBundle": "Event Insurance Bundle",
+      "marketingTicketingFloat": "Marketing & Ticketing Float (up to $15k)"
+    },
+    "fields": {
+      "product": "Product",
+      "amount": "Amount Requested",
+      "currency": "Currency",
+      "purpose": "What is this for? (optional)",
+      "purposePlaceholder": "Brief description of how you'll use the funds",
+      "bank": "Bank",
+      "bankSelect": "Select a bank",
+      "bankLoading": "Loading banks…",
+      "accountNumber": "Account Number",
+      "accountHolder": "Account Holder Name",
+      "accountHolderPlaceholder": "Name as it appears on the bank account"
+    },
+    "verify": {
+      "title": "Verify account ownership",
+      "action": "Verify",
+      "checking": "Verifying…",
+      "registeredAs": "Registered name on account",
+      "matched": "Name matches the account holder you provided.",
+      "mismatch": "Name doesn't match the account holder you provided. Please correct it before submitting."
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "back": "Back",
+      "next": "Continue",
+      "submit": "Submit application",
+      "submitting": "Submitting…"
+    },
+    "errors": {
+      "resolve": "Could not verify this account. Check the number and bank, then try again.",
+      "submit": "Failed to submit application. Please try again."
+    },
+    "success": {
+      "title": "Application submitted",
+      "description": "Our financing team will review your application and contact you with next steps.",
+      "done": "Done"
+    }
+  },
   "FinancingQuickApply": {
     "badge": "Quick Apply",
     "title": "Quick Financing Apply",
@@ -3064,7 +3122,16 @@
     "fields": {
       "product": "Product",
       "documents": "Documents",
-      "partner": "Partner"
+      "partner": "Partner",
+      "banking": "Disbursement account"
+    },
+    "banking": {
+      "verified": "Verified",
+      "unverified": "Unverified",
+      "bank": "Bank",
+      "account": "Account",
+      "holder": "Account holder",
+      "purpose": "Purpose"
     },
     "actions": {
       "sync": "Refresh",

@@ -10,6 +10,11 @@ import {
 	updateTourstackVenue,
 } from "@/app/actions";
 import { Field, Section } from "@/components/SettingsPrimitives";
+import VenueDetailsModal from "@/components/VenueDetailsModal";
+
+type Venue = NonNullable<
+	Awaited<ReturnType<typeof getTourstackVenues>>["data"]
+>[number];
 
 const EMPTY_FORM = {
 	name: "",
@@ -34,6 +39,7 @@ export default function SettingsVenueTab() {
 
 	const [form, setForm] = useState(EMPTY_FORM);
 	const [editingId, setEditingId] = useState<string | null>(null);
+	const [viewingVenue, setViewingVenue] = useState<Venue | null>(null);
 
 	const resetForm = () => {
 		setForm(EMPTY_FORM);
@@ -125,9 +131,11 @@ export default function SettingsVenueTab() {
 						</p>
 					) : (
 						venues.map((v) => (
-							<div
+							<button
 								key={String(v.id)}
-								className="flex items-center gap-4 p-5 bg-surface-container-low rounded-xl border border-outline-variant/10"
+								type="button"
+								onClick={() => setViewingVenue(v)}
+								className="w-full text-left flex items-center gap-4 p-5 bg-surface-container-low rounded-xl border border-outline-variant/10 hover:border-[#FF5A30]/40 transition-colors"
 							>
 								<div className="w-10 h-10 rounded-xl bg-[#FF5A30]/10 flex items-center justify-center shrink-0">
 									<span
@@ -158,25 +166,52 @@ export default function SettingsVenueTab() {
 									</p>
 								</div>
 								<div className="flex items-center gap-3 shrink-0">
-									<button
-										type="button"
-										onClick={() => startEdit(v)}
-										className="text-xs font-bold text-on-surface-variant hover:text-[#FF5A30] transition-colors"
+									<span
+										onClick={(e) => {
+											e.stopPropagation();
+											startEdit(v);
+										}}
+										onKeyDown={(e) => {
+											if (e.key === "Enter" || e.key === " ") {
+												e.preventDefault();
+												e.stopPropagation();
+												startEdit(v);
+											}
+										}}
+										role="button"
+										tabIndex={0}
+										className="text-xs font-bold text-on-surface-variant hover:text-[#FF5A30] transition-colors cursor-pointer"
 									>
 										{t("myVenues.actions.edit")}
-									</button>
-									<button
-										type="button"
-										onClick={() => deleteMutation.mutate(String(v.id))}
-										disabled={deleteMutation.isPending}
-										className="text-xs font-bold text-red-500 hover:text-red-600 transition-colors disabled:opacity-50"
+									</span>
+									<span
+										onClick={(e) => {
+											e.stopPropagation();
+											if (!deleteMutation.isPending) {
+												deleteMutation.mutate(String(v.id));
+											}
+										}}
+										onKeyDown={(e) => {
+											if (
+												(e.key === "Enter" || e.key === " ") &&
+												!deleteMutation.isPending
+											) {
+												e.preventDefault();
+												e.stopPropagation();
+												deleteMutation.mutate(String(v.id));
+											}
+										}}
+										role="button"
+										tabIndex={0}
+										aria-disabled={deleteMutation.isPending}
+										className={`text-xs font-bold text-red-500 hover:text-red-600 transition-colors cursor-pointer ${deleteMutation.isPending ? "opacity-50 cursor-not-allowed" : ""}`}
 									>
 										{deleteMutation.isPending
 											? t("myVenues.actions.deleting")
 											: t("myVenues.actions.delete")}
-									</button>
+									</span>
 								</div>
-							</div>
+							</button>
 						))
 					)}
 				</div>
@@ -281,6 +316,13 @@ export default function SettingsVenueTab() {
 					</button>
 				</div>
 			</Section>
+
+			{viewingVenue && (
+				<VenueDetailsModal
+					venue={viewingVenue}
+					onClose={() => setViewingVenue(null)}
+				/>
+			)}
 		</div>
 	);
 }
