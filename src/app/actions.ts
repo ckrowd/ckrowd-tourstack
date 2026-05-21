@@ -43,8 +43,18 @@ const client = createClient({
 	}) as unknown as (response: Response) => Promise<Response>,
 });
 
-function extractError(err: any): string {
-	return err?.value?.error ?? err?.value?.message ?? "Something went wrong";
+function extractError(err: any, data?: any): string {
+	// Prefer eden treaty's parsed error body, then fall back to the success-shaped
+	// body's `error` field (backend often returns 200 + { success: false, error })
+	// so the user sees the actual message instead of the generic fallback.
+	return (
+		err?.value?.error ??
+		err?.value?.message ??
+		(data && data.success === false && typeof data.error === "string"
+			? data.error
+			: undefined) ??
+		"Something went wrong"
+	);
 }
 
 function getErrorStatus(err: any): number | undefined {
@@ -188,7 +198,7 @@ export async function getArtists(
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -197,7 +207,7 @@ export async function getArtist(id: string) {
 	return {
 		data: data?.data ? data.data : undefined,
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -208,7 +218,7 @@ export async function getTourstackProfile() {
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -220,7 +230,7 @@ export async function updateTourstackProfile(
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -232,7 +242,7 @@ export async function getTourstackDashboard() {
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -248,7 +258,7 @@ export async function getEOIs(status?: string) {
 	return {
 		data: extractPayload(data, { status: responseStatus, headers }),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -259,7 +269,7 @@ export async function getEOI(id: string) {
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -271,7 +281,7 @@ export async function createEOI(
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -295,7 +305,7 @@ export async function getTours(status?: string, page?: number, limit?: number) {
 		data: extractPayload(data, { status: responseStatus, headers }),
 		pagination,
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -306,7 +316,7 @@ export async function getTour(id: string) {
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -317,7 +327,7 @@ export async function getTourMilestones(id: string) {
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -332,7 +342,7 @@ export async function getFinancingApplications(status?: string) {
 	return {
 		data: extractPayload(data, { status: responseStatus, headers }),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -343,7 +353,7 @@ export async function getFinancingApplication(id: string) {
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -355,7 +365,7 @@ export async function applyForFinancing(
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -364,7 +374,7 @@ export async function getFinancingPartners() {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -375,7 +385,7 @@ export async function getTourstackVenues() {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -386,7 +396,7 @@ export async function createTourstackVenue(
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -398,7 +408,7 @@ export async function updateTourstackVenue(
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -407,7 +417,7 @@ export async function deleteTourstackVenue(id: string) {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -418,7 +428,7 @@ export async function getTourstackNotifications() {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -429,7 +439,7 @@ export async function updateTourstackNotifications(
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -444,7 +454,7 @@ export async function getCrewMembers(
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -455,7 +465,7 @@ export async function getCrewMember(id: string) {
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -467,7 +477,7 @@ export async function registerCrewMember(
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -480,7 +490,7 @@ export async function registerStakeholder(
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -491,7 +501,7 @@ export async function getOnboardingLinks() {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -503,7 +513,7 @@ export async function createOnboardingLink(
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -527,7 +537,7 @@ export async function revokeOnboardingLink(token: string) {
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -543,7 +553,7 @@ export async function submitOnboardingLink(
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -592,7 +602,7 @@ export async function getAdminEOIs(status?: string) {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -610,7 +620,7 @@ export async function getAdminTours(status?: string, page?: number, limit?: numb
 		data: extractPayload(data),
 		pagination,
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -622,7 +632,7 @@ export async function createAdminTour(
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -631,7 +641,7 @@ export async function getAdminTour(id: string) {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -640,7 +650,7 @@ export async function deleteAdminTour(id: string) {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -652,7 +662,7 @@ export async function updateAdminEoi(
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -661,7 +671,7 @@ export async function purgeAdminDraftTours() {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -672,7 +682,7 @@ export async function getAdminFinancing(status?: string) {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -684,7 +694,7 @@ export async function updateFinancingApplication(
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -693,7 +703,7 @@ export async function getAdminFinancingPartners() {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -705,7 +715,7 @@ export async function createFinancingPartner(
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -718,7 +728,7 @@ export async function getInsuranceApplications(status?: string) {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -734,7 +744,7 @@ export async function updateInsuranceApplication(
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -745,7 +755,7 @@ export async function getInsuranceClaims(status?: string) {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -757,7 +767,7 @@ export async function createInsuranceClaim(
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -775,7 +785,7 @@ export async function updateInsuranceClaim(
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -785,7 +795,7 @@ export async function getInsurancePartners() {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -799,7 +809,7 @@ export async function createInsurancePartner(
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -808,7 +818,7 @@ export async function getAdminReport() {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -819,7 +829,7 @@ export async function exportAdminReport() {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -828,7 +838,7 @@ export async function getAdminSettings() {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -839,7 +849,7 @@ export async function updateAdminSettings(
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -848,7 +858,7 @@ export async function getAdminTeam() {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -859,7 +869,7 @@ export async function inviteAdminTeamMember(
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -870,7 +880,7 @@ export async function resendAdminInvite(inviteId: string) {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -881,7 +891,7 @@ export async function revokeAdminInvite(inviteId: string) {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -890,7 +900,7 @@ export async function getAdminInvite(token: string) {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -901,7 +911,7 @@ export async function acceptAdminInvite(token: string) {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -957,7 +967,7 @@ export async function setup2FA(): Promise<{
 	return {
 		success: !error && data?.success,
 		data: extractPayload(data),
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -1009,7 +1019,7 @@ export async function exportStakeholders(format: "json" | "csv" = "csv") {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -1021,7 +1031,7 @@ export async function getFinancingSettings() {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -1033,7 +1043,7 @@ export async function updateFinancingSettings(
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -1043,7 +1053,7 @@ export async function listFinancingProducts() {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -1055,7 +1065,7 @@ export async function createFinancingProduct(
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -1066,7 +1076,7 @@ export async function deleteFinancingProduct(id: string) {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -1076,7 +1086,7 @@ export async function getFinancingTeam() {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -1088,7 +1098,7 @@ export async function inviteFinancingTeamMember(
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -1099,7 +1109,7 @@ export async function resendFinancingInvite(inviteId: string) {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -1110,7 +1120,7 @@ export async function revokeFinancingInvite(inviteId: string) {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -1123,7 +1133,7 @@ export async function uploadFile(
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -1136,7 +1146,7 @@ export async function listBanks(country = "nigeria") {
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
 
@@ -1148,6 +1158,6 @@ export async function resolveBankAccount(
 	return {
 		data: extractPayload(data),
 		success: !error && data?.success,
-		error: extractError(error),
+		error: extractError(error, data),
 	};
 }
