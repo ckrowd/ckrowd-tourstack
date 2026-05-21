@@ -316,6 +316,76 @@ export default function FinancingAdminApplicationsPage() {
 											))}
 										</div>
 
+										{(f.bank_name ??
+											f.account_number ??
+											f.account_name ??
+											f.purpose) != null && (
+											<div className="mt-3 rounded-lg bg-surface-container-lowest p-3">
+												<div className="flex items-center justify-between mb-2 gap-2 flex-wrap">
+													<div className="flex items-center gap-1 text-on-surface-variant">
+														<span className="material-symbols-outlined text-xs">
+															payments
+														</span>
+														<span className="text-[10px] font-bold uppercase tracking-wider">
+															{t("fields.banking")}
+														</span>
+													</div>
+													{f.account_name ? (
+														<span
+															className={`text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full ${f.account_verified ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"}`}
+														>
+															{f.account_verified
+																? t("banking.verified")
+																: t("banking.unverified")}
+														</span>
+													) : null}
+												</div>
+												<div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+													{f.bank_name ? (
+														<div>
+															<p className="text-[10px] uppercase font-bold text-on-surface-variant">
+																{t("banking.bank")}
+															</p>
+															<p className="font-bold text-on-surface truncate">
+																{String(f.bank_name)}
+															</p>
+														</div>
+													) : null}
+													{f.account_number ? (
+														<div>
+															<p className="text-[10px] uppercase font-bold text-on-surface-variant">
+																{t("banking.account")}
+															</p>
+															<p className="font-bold text-on-surface font-mono">
+																****
+																{String(f.account_number).slice(-4)}
+															</p>
+														</div>
+													) : null}
+													{f.account_name ? (
+														<div>
+															<p className="text-[10px] uppercase font-bold text-on-surface-variant">
+																{t("banking.holder")}
+															</p>
+															<p className="font-bold text-on-surface truncate">
+																{String(f.account_name)}
+															</p>
+														</div>
+													) : null}
+												</div>
+												{f.purpose ? (
+													<div className="mt-2 pt-2 border-t border-outline-variant/10">
+														<p className="text-[10px] uppercase font-bold text-on-surface-variant">
+															{t("banking.purpose")}
+														</p>
+														<p className="text-xs text-on-surface mt-0.5">
+															{String(f.purpose)}
+														</p>
+													</div>
+												) : null}
+											</div>
+										)}
+
 										<div className="mt-5 flex flex-wrap md:flex-nowrap items-center gap-3 pt-4 border-t border-outline-variant/10">
 											<button
 												type="button"

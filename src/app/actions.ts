@@ -1126,3 +1126,28 @@ export async function uploadFile(
 		error: extractError(error),
 	};
 }
+
+// Payments / banking
+
+export async function listBanks(country = "nigeria") {
+	const { data, error } = await client.payments.banks.get({
+		query: { country },
+	});
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
+
+export async function resolveBankAccount(
+	body: Payload<(typeof client.payments)["resolve-account"]["post"]>,
+) {
+	const { data, error } =
+		await client.payments["resolve-account"].post(body);
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
