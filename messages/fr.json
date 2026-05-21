@@ -2215,6 +2215,48 @@
       }
     }
   },
+  "FinancingDetailPage": {
+    "tagline": "Demande",
+    "title": "Dossier de financement",
+    "defaultProduct": "Dossier de financement",
+    "actions": {
+      "back": "Retour"
+    },
+    "fields": {
+      "product": "Produit",
+      "requested": "Montant demandé",
+      "submitted": "Soumis le",
+      "tour": "Tournée",
+      "documents": "Pièces justificatives"
+    },
+    "errors": {
+      "load": "Impossible de charger cette demande. Elle a peut-être été supprimée."
+    }
+  },
+  "TourDetailPage": {
+    "tagline": "Tournée",
+    "defaultTitle": "Projet de tournée",
+    "defaultTourName": "Tournée sans nom",
+    "actions": {
+      "back": "Retour aux tournées"
+    },
+    "fields": {
+      "venue": "Lieu",
+      "city": "Ville",
+      "date": "Date",
+      "capacity": "Capacité",
+      "fee": "Cachet",
+      "ticketsSold": "Billets vendus"
+    },
+    "milestones": {
+      "title": "Jalons",
+      "empty": "Aucun jalon enregistré pour cette tournée."
+    },
+    "errors": {
+      "load": "Impossible de charger cette tournée.",
+      "milestones": "Impossible de charger les jalons de cette tournée."
+    }
+  },
   "DashboardPage": {
     "promoterPortal": "Portail des promoteurs",
     "title": "Votre tableau de bord de tournée",
