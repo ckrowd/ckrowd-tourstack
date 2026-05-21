@@ -2,8 +2,8 @@
 
 import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
-import { useRef, useState } from "react";
-import { registerStakeholder } from "@/app/actions";
+import { useId, useRef, useState } from "react";
+import { registerStakeholder, uploadFile } from "@/app/actions";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 import { Link } from "@/i18n/routing";
@@ -169,6 +169,7 @@ type FormData = {
 	artistLevel: string[];
 	hostedLargeVenue: string;
 	proofFileName: string;
+	proofFileId: string;
 	instagram: string;
 	twitter: string;
 	youtube: string;
@@ -192,6 +193,7 @@ const defaultForm: FormData = {
 	artistLevel: [],
 	hostedLargeVenue: "",
 	proofFileName: "",
+	proofFileId: "",
 	instagram: "",
 	twitter: "",
 	youtube: "",
@@ -236,6 +238,7 @@ export default function ApplyPage() {
 	const [step, setStep] = useState(0);
 	const [form, setForm] = useState<FormData>(defaultForm);
 	const fileInputRef = useRef<HTMLInputElement>(null);
+	const uploadSessionId = useId();
 
 	const STEPS = [
 		{ label: t("steps.basic") },
@@ -249,14 +252,41 @@ export default function ApplyPage() {
 		mutationFn: registerStakeholder,
 	});
 
-	const submitted = submitMutation.isSuccess;
+	const uploadMutation = useMutation({
+		mutationFn: uploadFile,
+		onSuccess: (result) => {
+			if (result.success && typeof result.data === "string") {
+				set("proofFileId", result.data);
+			}
+		},
+	});
+
+	function handleProofFile(file: File) {
+		set("proofFileName", file.name);
+		set("proofFileId", "");
+		uploadMutation.mutate({
+			file,
+			path: `apply-proofs/${uploadSessionId.replace(/[:]/g, "_")}-${file.name}`,
+			contentType: file.type || "application/octet-stream",
+		});
+	}
+
+	const uploadError = uploadMutation.error
+		? uploadMutation.error instanceof Error
+			? uploadMutation.error.message
+			: t("errors.uploadFailed")
+		: uploadMutation.data && !uploadMutation.data.success
+			? (uploadMutation.data.error ?? t("errors.uploadFailed"))
+			: null;
+
+	const submitted = !!submitMutation.data?.success;
 	const submitting = submitMutation.isPending;
 	const submitError = submitMutation.error
 		? submitMutation.error instanceof Error
 			? submitMutation.error.message
-			: "Failed to submit application."
+			: t("errors.failed")
 		: submitMutation.data && !submitMutation.data.success
-			? (submitMutation.data.error ?? "Failed to submit application.")
+			? (submitMutation.data.error ?? t("errors.failed"))
 			: null;
 
 	function set<K extends keyof FormData>(field: K, value: FormData[K]) {
@@ -366,6 +396,8 @@ export default function ApplyPage() {
 												largestCrowd: form.largestCrowd,
 												artistLevel: form.artistLevel,
 												hostedLargeVenue: form.hostedLargeVenue,
+												proofFileId: form.proofFileId || undefined,
+												proofFileName: form.proofFileName || undefined,
 												instagram: form.instagram,
 												twitter: form.twitter,
 												youtube: form.youtube,
@@ -623,7 +655,7 @@ export default function ApplyPage() {
 													onDrop={(e) => {
 														e.preventDefault();
 														const file = e.dataTransfer.files[0];
-														if (file) set("proofFileName", file.name);
+														if (file) handleProofFile(file);
 													}}
 												>
 													<input
@@ -633,7 +665,7 @@ export default function ApplyPage() {
 														accept="image/*,video/*,.pdf"
 														onChange={(e) => {
 															const file = e.target.files?.[0];
-															if (file) set("proofFileName", file.name);
+															if (file) handleProofFile(file);
 														}}
 													/>
 													{form.proofFileName ? (
@@ -642,14 +674,22 @@ export default function ApplyPage() {
 																className="material-symbols-outlined text-[#FF5A30] text-3xl"
 																style={{ fontVariationSettings: "'FILL' 1" }}
 															>
-																attach_file
+																{uploadMutation.isPending
+																	? "progress_activity"
+																	: form.proofFileId
+																		? "check_circle"
+																		: "attach_file"}
 															</span>
 															<div className="text-left">
 																<p className="font-bold text-on-surface">
 																	{form.proofFileName}
 																</p>
 																<p className="text-xs text-on-surface-variant">
-																	{t("sections.gate.clickToReplace")}
+																	{uploadMutation.isPending
+																		? t("sections.gate.uploading")
+																		: form.proofFileId
+																			? t("sections.gate.uploaded")
+																			: t("sections.gate.clickToReplace")}
 																</p>
 															</div>
 														</div>
@@ -670,6 +710,11 @@ export default function ApplyPage() {
 														</>
 													)}
 												</div>
+												{uploadError && (
+													<p className="mt-2 text-sm text-rose-700 font-medium">
+														{uploadError}
+													</p>
+												)}
 
 												<div className="flex items-start gap-3 bg-amber-50 rounded-xl p-4 border border-amber-200">
 													<span

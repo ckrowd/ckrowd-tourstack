@@ -39,6 +39,24 @@ export default function SideNav() {
 			icon: "groups",
 			href: "/stakeholders",
 		},
+		{
+			key: "discovery",
+			label: t("discovery"),
+			icon: "explore",
+			href: "/discovery",
+		},
+		{
+			key: "financing",
+			label: t("financing"),
+			icon: "account_balance",
+			href: "/financing",
+		},
+		{
+			key: "insurance",
+			label: t("insurance"),
+			icon: "shield",
+			href: "/insurance",
+		},
 		{ key: "profile", label: t("profile"), icon: "person", href: "/profile" },
 		{
 			key: "settings",

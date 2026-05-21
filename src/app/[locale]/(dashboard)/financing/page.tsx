@@ -1,7 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getFinancingApplications, getFinancingPartners } from "@/app/actions";
 import FinancingQuickApply from "@/components/FinancingQuickApply";
-import Footer from "@/components/Footer";
 import TopNav from "@/components/TopNav";
 import { Link } from "@/i18n/routing";
 
@@ -137,12 +136,12 @@ export default async function FinancingPage({ params }: Props) {
 							{t("hero.description")}
 						</p>
 						<div className="mt-8 flex flex-wrap gap-4">
-							<Link
-								href="/eoi"
+							<a
+								href="#quick-apply"
 								className="bg-[#FF5A30] text-white px-8 py-3.5 rounded-xl font-bold shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all"
 							>
 								{t("hero.applyButton")}
-							</Link>
+							</a>
 							<a
 								href="#products"
 								className="border border-outline-variant px-8 py-3.5 rounded-xl font-bold text-on-surface hover:bg-surface-container-low transition-all"
@@ -194,12 +193,12 @@ export default async function FinancingPage({ params }: Props) {
 							<p className="text-on-surface-variant text-sm max-w-xs mx-auto mb-6">
 								{t("noApplications.description")}
 							</p>
-							<Link
+							<a
 								href="#products"
 								className="inline-flex items-center gap-2 bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-bold text-sm hover:opacity-90 transition-opacity"
 							>
 								{t("hero.exploreProducts")}
-							</Link>
+							</a>
 						</div>
 					) : (
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -338,7 +337,7 @@ export default async function FinancingPage({ params }: Props) {
 										</span>
 										{p.eligibility}
 									</span>
-									<Link
+									<a
 										href="#quick-apply"
 										className="text-[#FF5A30] font-bold text-sm flex items-center gap-1 hover:gap-2 transition-all"
 									>
@@ -346,7 +345,7 @@ export default async function FinancingPage({ params }: Props) {
 										<span className="material-symbols-outlined text-sm">
 											arrow_forward
 										</span>
-									</Link>
+									</a>
 								</div>
 							</div>
 						))}
@@ -438,12 +437,12 @@ export default async function FinancingPage({ params }: Props) {
 								<p className="text-white/90 text-sm mt-2 leading-relaxed">
 									{t("cta.description")}
 								</p>
-								<Link
-									href="/eoi"
+								<a
+									href="#quick-apply"
 									className="mt-5 inline-block bg-white text-[#FF5A30] px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider hover:scale-105 transition-transform"
 								>
 									{t("cta.button")}
-								</Link>
+								</a>
 							</div>
 							<span className="material-symbols-outlined absolute -bottom-4 -right-4 text-white/10 text-[120px] rotate-12">
 								payments
@@ -473,7 +472,6 @@ export default async function FinancingPage({ params }: Props) {
 						))}
 					</div>
 				</section>
-				<Footer />
 			</main>
 		</div>
 	);

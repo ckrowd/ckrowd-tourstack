@@ -105,6 +105,13 @@ function SubmissionModal({
 		[t("submissions.company"), submission.company],
 		[t("submissions.country"), submission.country],
 	];
+	const proofFileId =
+		typeof extra.proofFileId === "string" ? extra.proofFileId : null;
+	const proofFileName =
+		typeof extra.proofFileName === "string"
+			? extra.proofFileName
+			: t("submissions.attachedFile");
+	const hiddenExtraKeys = new Set(["proofFileId", "proofFileName"]);
 
 	return (
 		<div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
@@ -157,17 +164,43 @@ function SubmissionModal({
 								</dd>
 							</div>
 						))}
-						{Object.entries(extra).map(([key, value]) => (
-							<div key={key} className="min-w-0">
-								<dt className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
-									{humanizeLabel(key)}
-								</dt>
-								<dd className="text-sm text-on-surface break-words">
-									{formatValue(value)}
-								</dd>
-							</div>
-						))}
+						{Object.entries(extra)
+							.filter(([key]) => !hiddenExtraKeys.has(key))
+							.map(([key, value]) => (
+								<div key={key} className="min-w-0">
+									<dt className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
+										{humanizeLabel(key)}
+									</dt>
+									<dd className="text-sm text-on-surface break-words">
+										{formatValue(value)}
+									</dd>
+								</div>
+							))}
 					</dl>
+					{proofFileId && (
+						<div className="mt-6 rounded-xl border border-outline-variant/15 bg-surface-container-low px-4 py-3 flex items-center gap-3">
+							<span className="material-symbols-outlined text-[#FF5A30] shrink-0">
+								attach_file
+							</span>
+							<div className="min-w-0 flex-1">
+								<p className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
+									{t("submissions.proofFile")}
+								</p>
+								<p className="text-sm text-on-surface truncate">{proofFileName}</p>
+							</div>
+							<a
+								href={`/api/download/${encodeURIComponent(proofFileId)}`}
+								target="_blank"
+								rel="noopener noreferrer"
+								className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[#FF5A30] text-white text-xs font-bold hover:opacity-90 transition-opacity shrink-0"
+							>
+								<span className="material-symbols-outlined text-sm">
+									download
+								</span>
+								{t("submissions.download")}
+							</a>
+						</div>
+					)}
 				</div>
 			</div>
 		</div>

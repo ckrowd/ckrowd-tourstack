@@ -1,15 +1,15 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import Footer from "@/components/Footer";
 import StepForm from "@/components/StepForm";
 import TopNav from "@/components/TopNav";
-import { Link } from "@/i18n/routing";
+import { Link, useRouter } from "@/i18n/routing";
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
 export default function InsurancePage() {
 	const t = useTranslations("InsurancePage");
+	const router = useRouter();
 	const [activeTab, setActiveTab] = useState("overview");
 	const [activeStakeholder, setActiveStakeholder] = useState("promoter");
 	const [activeStep, setActiveStep] = useState(1);
@@ -233,13 +233,14 @@ export default function InsurancePage() {
 							{t("hero.description")}
 						</p>
 						<div className="mt-8 flex flex-wrap gap-4">
-							<button
-								onClick={() => setActiveTab("onboarding")}
+							<Link
+								href="/apply"
 								className="bg-[#FF5A30] text-white px-8 py-3.5 rounded-xl font-bold shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all"
 							>
 								{t("hero.startOnboarding")}
-							</button>
+							</Link>
 							<button
+								type="button"
 								onClick={() => setActiveTab("products")}
 								className="border border-outline-variant px-8 py-3.5 rounded-xl font-bold text-on-surface hover:bg-surface-container-low transition-all"
 							>
@@ -464,12 +465,12 @@ export default function InsurancePage() {
 									{t("overview.cta.description")}
 								</p>
 							</div>
-							<button
-								onClick={() => setActiveTab("onboarding")}
+							<Link
+								href="/apply"
 								className="relative z-10 bg-white text-[#FF5A30] px-8 py-3 rounded-xl font-bold text-sm hover:scale-105 transition-transform shrink-0"
 							>
 								{t("overview.cta.button")} →
-							</button>
+							</Link>
 							<span className="material-symbols-outlined absolute -bottom-6 -right-6 text-white/10 text-[160px] rotate-12 select-none">
 								shield
 							</span>
@@ -482,6 +483,30 @@ export default function InsurancePage() {
         ══════════════════════════════════════════ */}
 				{activeTab === "onboarding" && (
 					<div className="flex flex-col gap-10">
+						<div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+							<div className="flex items-start gap-3">
+								<span
+									className="material-symbols-outlined text-amber-600 mt-0.5"
+									style={{ fontVariationSettings: "'FILL' 1" }}
+								>
+									info
+								</span>
+								<div>
+									<p className="font-(family-name:--font-manrope) font-bold text-amber-900 text-sm">
+										{t("onboarding.previewNotice.title")}
+									</p>
+									<p className="text-xs text-amber-800 mt-0.5">
+										{t("onboarding.previewNotice.description")}
+									</p>
+								</div>
+							</div>
+							<Link
+								href="/apply"
+								className="bg-[#FF5A30] text-white px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-all shrink-0"
+							>
+								{t("onboarding.previewNotice.cta")}
+							</Link>
+						</div>
 						{/* Role selector */}
 						<div>
 							<p className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-3">
@@ -641,7 +666,7 @@ export default function InsurancePage() {
 														e.preventDefault();
 														if (activeStep < current.steps.length)
 															setActiveStep(activeStep + 1);
-														else setActiveTab("profile");
+														else router.push("/apply");
 													}}
 												>
 													<StepForm
@@ -824,7 +849,7 @@ export default function InsurancePage() {
 											</div>
 										</div>
 										<Link
-											href="/eoi"
+											href="/apply"
 											className="text-[#FF5A30] font-bold text-sm flex items-center gap-1 hover:gap-2 transition-all mt-auto"
 										>
 											{t("products.apply")}
@@ -1070,12 +1095,12 @@ export default function InsurancePage() {
 										<p className="text-white/60 text-sm mb-6">
 											{t("profile.cta.description")}
 										</p>
-										<button
-											onClick={() => setActiveTab("onboarding")}
+										<Link
+											href="/apply"
 											className="bg-[#FF5A30] text-white px-6 py-2.5 rounded-xl font-bold text-sm hover:opacity-90 transition-all"
 										>
 											{t("profile.cta.button")} →
-										</button>
+										</Link>
 									</div>
 									<span className="material-symbols-outlined absolute -bottom-6 -right-6 text-white/5 text-[140px] select-none">
 										shield
@@ -1085,8 +1110,6 @@ export default function InsurancePage() {
 						</div>
 					</div>
 				)}
-
-				<Footer />
 			</main>
 		</div>
 	);

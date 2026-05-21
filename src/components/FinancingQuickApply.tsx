@@ -11,11 +11,11 @@ export default function FinancingQuickApply() {
 	const router = useRouter();
 
 	const FINANCING_PRODUCTS = [
-		{ id: "tourStopAdvance", label: t("products.tourStopAdvance") },
-		{ id: "venueBuildOutCredit", label: t("products.venueBuildOutCredit") },
-		{ id: "eventInsuranceBundle", label: t("products.eventInsuranceBundle") },
+		{ id: "Tour Stop Advance", label: t("products.tourStopAdvance") },
+		{ id: "Venue Build-Out Credit", label: t("products.venueBuildOutCredit") },
+		{ id: "Event Insurance Bundle", label: t("products.eventInsuranceBundle") },
 		{
-			id: "marketingTicketingFloat",
+			id: "Marketing & Ticketing Float",
 			label: t("products.marketingTicketingFloat"),
 		},
 	] as const;

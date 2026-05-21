@@ -1113,3 +1113,16 @@ export async function revokeFinancingInvite(inviteId: string) {
 		error: extractError(error),
 	};
 }
+
+// Storage
+
+export async function uploadFile(
+	body: Payload<typeof client.storage.upload.post>,
+) {
+	const { data, error } = await client.storage.upload.post(body);
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error),
+	};
+}
