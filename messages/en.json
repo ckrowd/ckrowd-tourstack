@@ -2215,6 +2215,48 @@
       }
     }
   },
+  "FinancingDetailPage": {
+    "tagline": "Application",
+    "title": "Financing application",
+    "defaultProduct": "Financing application",
+    "actions": {
+      "back": "Back"
+    },
+    "fields": {
+      "product": "Product",
+      "requested": "Amount requested",
+      "submitted": "Submitted on",
+      "tour": "Tour",
+      "documents": "Supporting documents"
+    },
+    "errors": {
+      "load": "We couldn't load this application. It may have been removed."
+    }
+  },
+  "TourDetailPage": {
+    "tagline": "Tour",
+    "defaultTitle": "Tour project",
+    "defaultTourName": "Untitled tour",
+    "actions": {
+      "back": "Back to tours"
+    },
+    "fields": {
+      "venue": "Venue",
+      "city": "City",
+      "date": "Date",
+      "capacity": "Capacity",
+      "fee": "Fee",
+      "ticketsSold": "Tickets sold"
+    },
+    "milestones": {
+      "title": "Milestones",
+      "empty": "No milestones recorded for this tour yet."
+    },
+    "errors": {
+      "load": "We couldn't load this tour.",
+      "milestones": "We couldn't load milestones for this tour."
+    }
+  },
   "DashboardPage": {
     "promoterPortal": "Promoter Portal",
     "title": "Your Tour Dashboard",
