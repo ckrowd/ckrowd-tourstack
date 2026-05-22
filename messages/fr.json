@@ -457,6 +457,7 @@
         "artmgmt": "Gestion d'artistes"
       },
       "backToDirectory": "Retour au répertoire",
+      "loading": "Chargement du répertoire…",
       "details": {
         "email": "E-mail",
         "phone": "Téléphone",
@@ -2072,10 +2073,13 @@
     }
   },
   "FinancingPage": {
+    "header": {
+      "title": "Financement"
+    },
     "hero": {
       "platform": "TourStack — Financement et Assurance",
       "title": "Du capital pour <spanNode>chaque arrêt de tournée.</spanNode>",
-      "description": "TourStack met en relation les promoteurs à travers l'Afrique avec des produits de financement sur mesure — pour que le flux de trésorerie ne soit plus un obstacle entre vous et un spectacle de classe mondiale.",
+      "description": "Un financement sur mesure pour les promoteurs en Afrique — pour que la trésorerie ne soit plus un obstacle à un grand spectacle.",
       "applyButton": "Postuler via l'EOI",
       "exploreProducts": "Explorer les produits"
     },

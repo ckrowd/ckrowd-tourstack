@@ -1,8 +1,13 @@
 "use client";
 
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useLocale, useTranslations } from "next-intl";
-import { useState } from "react";
-import { registerStakeholder } from "@/app/actions";
+import { useMemo, useState } from "react";
+import {
+	getCrewMembers,
+	getStakeholders,
+	registerStakeholder,
+} from "@/app/actions";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 import { Link } from "@/i18n/routing";
@@ -904,7 +909,13 @@ function Stepper({ steps, current }: { steps: string[]; current: number }) {
 
 /* ─────────────────────── Directory Tab ─────────────────────── */
 
-function DirectoryTab({ entries }: { entries: StakeholderEntry[] }) {
+function DirectoryTab({
+	entries,
+	isLoading,
+}: {
+	entries: StakeholderEntry[];
+	isLoading: boolean;
+}) {
 	const t = useTranslations("OnboardingPage.directory");
 	const locale = useLocale();
 
@@ -1029,7 +1040,14 @@ function DirectoryTab({ entries }: { entries: StakeholderEntry[] }) {
 				))}
 			</div>
 
-			{filtered.length === 0 ? (
+			{isLoading ? (
+				<div className="text-center py-20 bg-surface-container-lowest rounded-2xl border border-outline-variant/10">
+					<span className="w-8 h-8 border-2 border-[#FF5A30]/30 border-t-[#FF5A30] rounded-full animate-spin inline-block mb-4" />
+					<p className="text-on-surface-variant font-medium">
+						{t("loading")}
+					</p>
+				</div>
+			) : filtered.length === 0 ? (
 				<div className="text-center py-20 bg-surface-container-lowest rounded-2xl border border-outline-variant/10">
 					<span className="material-symbols-outlined text-5xl text-on-surface-variant/30 block mb-4">
 						group_add
@@ -1122,20 +1140,9 @@ function DirectoryTab({ entries }: { entries: StakeholderEntry[] }) {
 
 /* ─────────────────────── Main Page ─────────────────────── */
 
-const STORAGE_KEY = "onboardedStakeholders";
-
-function loadStoredEntries(): StakeholderEntry[] {
-	if (typeof window === "undefined") return [];
-	try {
-		const raw = window.localStorage.getItem(STORAGE_KEY);
-		return raw ? (JSON.parse(raw) as StakeholderEntry[]) : [];
-	} catch {
-		return [];
-	}
-}
-
 export default function OnboardingPage() {
 	const t = useTranslations("OnboardingPage");
+	const queryClient = useQueryClient();
 	const [tab, setTab] = useState<"form" | "directory">("form");
 	const [category, setCategory] = useState<Category | "">("");
 	const [step, setStep] = useState(0); // 0 = category selection
@@ -1146,7 +1153,53 @@ export default function OnboardingPage() {
 		useState<ArtmgmtForm>(defaultArtmgmtForm);
 
 	const [submitted, setSubmitted] = useState(false);
-	const [entries, setEntries] = useState<StakeholderEntry[]>(loadStoredEntries);
+
+	// Directory entries come from the backend: stakeholders registered through
+	// this promoter's onboarding links + the global workforce (crew) registry.
+	const { data: stakeholderRes, isLoading: loadingStakeholders } = useQuery({
+		queryKey: ["stakeholders"],
+		queryFn: getStakeholders,
+	});
+	const { data: crewRes, isLoading: loadingCrew } = useQuery({
+		queryKey: ["crew-members"],
+		queryFn: () => getCrewMembers(),
+	});
+
+	const entries: StakeholderEntry[] = useMemo(() => {
+		const toCategory = (c: string): Category =>
+			c === "artmgmt" ? "artmgmt" : c === "workforce" ? "workforce" : "service";
+
+		const stakeholderEntries: StakeholderEntry[] = (
+			stakeholderRes?.data ?? []
+		).map((s) => ({
+			id: s.id,
+			category: toCategory(s.category),
+			name: s.name,
+			email: s.email,
+			phone: s.phone ?? "",
+			company: s.company ?? undefined,
+			country: s.country ?? "",
+			submittedAt: s.submitted_at,
+		}));
+
+		const crewEntries: StakeholderEntry[] = (crewRes?.data ?? []).map((c) => ({
+			id: c.id,
+			category: "workforce" as const,
+			name: c.full_name,
+			email: c.email,
+			phone: c.phone ?? "",
+			company: c.role ?? undefined,
+			country: c.country ?? "",
+			submittedAt: String(c.created_at),
+		}));
+
+		return [...stakeholderEntries, ...crewEntries].sort(
+			(a, b) =>
+				new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime(),
+		);
+	}, [stakeholderRes, crewRes]);
+
+	const directoryLoading = loadingStakeholders || loadingCrew;
 
 	function setServiceField<K extends keyof ServiceForm>(
 		k: K,
@@ -1195,20 +1248,10 @@ export default function OnboardingPage() {
 			setStep((s) => s + 1);
 		} else {
 			// Submit
-			let newEntry: StakeholderEntry | null = null;
-			const id = `${Date.now()}-${Math.random().toString(36).slice(2, 7)}`;
-			const now = new Date().toISOString();
+			let result: Awaited<ReturnType<typeof registerStakeholder>> | null = null;
 
 			if (category === "service") {
-				newEntry = {
-					id,
-					category: "service",
-					...serviceForm,
-					name: serviceForm.contactName,
-					company: serviceForm.companyName,
-					submittedAt: now,
-				};
-				await registerStakeholder({
+				result = await registerStakeholder({
 					category: "service",
 					name: serviceForm.contactName,
 					email: serviceForm.email,
@@ -1226,15 +1269,7 @@ export default function OnboardingPage() {
 					},
 				});
 			} else if (category === "artmgmt") {
-				newEntry = {
-					id,
-					category: "artmgmt",
-					...artmgmtForm,
-					name: artmgmtForm.contactName,
-					company: artmgmtForm.companyName,
-					submittedAt: now,
-				};
-				await registerStakeholder({
+				result = await registerStakeholder({
 					category: "artmgmt",
 					name: artmgmtForm.contactName,
 					email: artmgmtForm.email,
@@ -1254,9 +1289,9 @@ export default function OnboardingPage() {
 				});
 			}
 
-			if (newEntry) {
-				const updated = [...entries, newEntry];
-				setEntries(updated);
+			if (result?.success) {
+				// Refetch the directory so the new submission is reflected.
+				queryClient.invalidateQueries({ queryKey: ["stakeholders"] });
 			}
 			setSubmitted(true);
 		}
@@ -1364,7 +1399,9 @@ export default function OnboardingPage() {
 						</div>
 
 						{/* Directory */}
-						{tab === "directory" && <DirectoryTab entries={entries} />}
+						{tab === "directory" && (
+							<DirectoryTab entries={entries} isLoading={directoryLoading} />
+						)}
 
 						{/* Form */}
 						{tab === "form" && (

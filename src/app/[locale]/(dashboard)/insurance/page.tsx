@@ -1,6 +1,7 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import SideNav from "@/components/SideNav";
 import StepForm from "@/components/StepForm";
 import TopNav from "@/components/TopNav";
 import { Link, useRouter } from "@/i18n/routing";
@@ -214,43 +215,41 @@ export default function InsurancePage() {
 		<div className="bg-surface text-on-surface antialiased min-h-screen">
 			<TopNav />
 
-			<main className="pt-24 pb-20 px-6 md:px-12 max-w-screen-2xl mx-auto flex flex-col gap-12">
-				{/* ── Hero ── */}
-				<header className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-					<div className="lg:col-span-7">
-						<span className="text-[#FF5A30] font-bold uppercase tracking-widest text-xs mb-4 block font-(family-name:--font-manrope)">
-							{t("hub")}
-						</span>
-						<h1 className="font-(family-name:--font-manrope) text-5xl md:text-6xl font-extrabold text-on-surface leading-tight tracking-tighter">
-							{t.rich("hero.title", {
-								spanHighlight: (chunks) => (
-									<span className="text-[#FF5A30]">{chunks}</span>
-								),
-								br: () => <br />,
-							})}
-						</h1>
-						<p className="mt-6 text-on-surface-variant text-lg max-w-xl leading-relaxed">
-							{t("hero.description")}
-						</p>
-						<div className="mt-8 flex flex-wrap gap-4">
-							<Link
-								href="/apply"
-								className="bg-[#FF5A30] text-white px-8 py-3.5 rounded-xl font-bold shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all"
-							>
-								{t("hero.startOnboarding")}
-							</Link>
-							<button
-								type="button"
-								onClick={() => setActiveTab("products")}
-								className="border border-outline-variant px-8 py-3.5 rounded-xl font-bold text-on-surface hover:bg-surface-container-low transition-all"
-							>
-								{t("hero.viewProducts")}
-							</button>
+			<div className="flex pt-16 h-screen">
+				<SideNav />
+
+				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
+					{/* Header */}
+					<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+						<div>
+							<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2 font-(family-name:--font-manrope)">
+								{t("hub")}
+							</span>
+							<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
+								{t.rich("hero.title", {
+									spanHighlight: (chunks) => (
+										<span className="text-[#FF5A30]">{chunks}</span>
+									),
+									br: () => <br />,
+								})}
+							</h1>
+							<p className="text-on-surface-variant font-medium max-w-xl">
+								{t("hero.description")}
+							</p>
 						</div>
+						<Link
+							href="/apply"
+							className="flex items-center gap-2 bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all self-start md:self-auto shrink-0"
+						>
+							<span className="material-symbols-outlined text-sm">
+								how_to_reg
+							</span>
+							{t("hero.startOnboarding")}
+						</Link>
 					</div>
 
 					{/* Stats strip */}
-					<div className="lg:col-span-5 grid grid-cols-2 gap-4">
+					<div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
 						{[
 							{
 								value: t("stats.values.portfolio"),
@@ -273,10 +272,9 @@ export default function InsurancePage() {
 							</div>
 						))}
 					</div>
-				</header>
 
-				{/* ── Tab Bar ── */}
-				<div className="flex gap-0 border-b border-outline-variant/30 -mb-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
+					{/* ── Tab Bar ── */}
+					<div className="flex gap-0 border-b border-outline-variant/30 mb-8 overflow-x-auto whitespace-nowrap scrollbar-hide">
 					{TABS.map((tab) => (
 						<button
 							key={tab.id}
@@ -1110,7 +1108,8 @@ export default function InsurancePage() {
 						</div>
 					</div>
 				)}
-			</main>
+				</main>
+			</div>
 		</div>
 	);
 }

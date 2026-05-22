@@ -457,6 +457,7 @@
         "artmgmt": "Artist Mgmt"
       },
       "backToDirectory": "Back to Directory",
+      "loading": "Loading directory…",
       "details": {
         "email": "Email",
         "phone": "Phone",
@@ -2072,10 +2073,13 @@
     }
   },
   "FinancingPage": {
+    "header": {
+      "title": "Financing"
+    },
     "hero": {
       "platform": "TourStack — Financing & Insurance",
       "title": "Capital for <spanNode>Every Tour Stop.</spanNode>",
-      "description": "TourStack connects promoters across Africa with purpose-built financing products — so cash flow never stands between you and a world-class show.",
+      "description": "Purpose-built financing for promoters across Africa — so cash flow never stands between you and a great show.",
       "applyButton": "Apply via EOI",
       "exploreProducts": "Explore Products"
     },
