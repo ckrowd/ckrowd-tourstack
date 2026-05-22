@@ -505,6 +505,9 @@
       "continue": "Continuer",
       "submit": "Soumettre l'intégration"
     },
+    "errors": {
+      "submitFailed": "Impossible de terminer l'intégration. Veuillez réessayer."
+    },
     "success": {
       "title": "Partie prenante intégrée !",
       "description": "L'entrée a été enregistrée dans le répertoire. Vous pouvez la consulter sous l'onglet Répertoire.",

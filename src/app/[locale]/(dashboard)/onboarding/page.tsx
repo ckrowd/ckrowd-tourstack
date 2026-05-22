@@ -1153,6 +1153,7 @@ export default function OnboardingPage() {
 		useState<ArtmgmtForm>(defaultArtmgmtForm);
 
 	const [submitted, setSubmitted] = useState(false);
+	const [submitError, setSubmitError] = useState<string | null>(null);
 
 	// Directory entries come from the backend: stakeholders registered through
 	// this promoter's onboarding links + the global workforce (crew) registry.
@@ -1289,11 +1290,16 @@ export default function OnboardingPage() {
 				});
 			}
 
+			// Never treat a resolved mutation as success: the backend returns
+			// { success: false } (e.g. a 409 "already registered") inside a 200.
 			if (result?.success) {
 				// Refetch the directory so the new submission is reflected.
 				queryClient.invalidateQueries({ queryKey: ["stakeholders"] });
+				setSubmitError(null);
+				setSubmitted(true);
+			} else {
+				setSubmitError(result?.error ?? t("errors.submitFailed"));
 			}
-			setSubmitted(true);
 		}
 	}
 
@@ -1303,6 +1309,7 @@ export default function OnboardingPage() {
 		setServiceFormState(defaultServiceForm);
 		setArtmgmtFormState(defaultArtmgmtForm);
 		setSubmitted(false);
+		setSubmitError(null);
 	}
 
 	if (submitted) {
@@ -1499,6 +1506,11 @@ export default function OnboardingPage() {
 													</span>
 												</button>
 											</footer>
+											{submitError && (
+												<p className="mt-4 text-sm text-red-600 font-medium text-right">
+													{submitError}
+												</p>
+											)}
 										</form>
 									</>
 								)}

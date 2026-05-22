@@ -505,6 +505,9 @@
       "continue": "Continue",
       "submit": "Submit Onboarding"
     },
+    "errors": {
+      "submitFailed": "Could not complete onboarding. Please try again."
+    },
     "success": {
       "title": "Stakeholder Onboarded!",
       "description": "The entry has been saved to the directory. You can view it under the Directory tab.",
