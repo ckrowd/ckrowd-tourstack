@@ -106,6 +106,61 @@ function RadioGroup({
 	);
 }
 
+/* ─────────────────────── Consent checklist ─────────────────────── */
+
+type ConsentKey = "accuracy" | "consent" | "misrepresentation";
+type ConsentState = Record<ConsentKey, boolean>;
+
+const defaultConsent: ConsentState = {
+	accuracy: false,
+	consent: false,
+	misrepresentation: false,
+};
+
+const CONSENT_KEYS: ConsentKey[] = ["accuracy", "consent", "misrepresentation"];
+
+function ConsentChecklist({
+	labels,
+	consent,
+	onToggle,
+}: {
+	labels: Record<ConsentKey, string>;
+	consent: ConsentState;
+	onToggle: (k: ConsentKey) => void;
+}) {
+	return (
+		<div className="space-y-2">
+			{CONSENT_KEYS.map((key) => {
+				const checked = consent[key];
+				return (
+					<button
+						key={key}
+						type="button"
+						role="checkbox"
+						aria-checked={checked}
+						onClick={() => onToggle(key)}
+						className={`flex items-start gap-3 w-full text-left px-4 py-3 rounded-xl border transition-all text-sm font-medium ${
+							checked
+								? "bg-[#FF5A30]/10 border-[#FF5A30] text-on-surface"
+								: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A30]/40"
+						}`}
+					>
+						<span
+							className={`material-symbols-outlined text-base mt-0.5 shrink-0 ${
+								checked ? "text-[#FF5A30]" : "text-on-surface-variant/50"
+							}`}
+							style={checked ? { fontVariationSettings: "'FILL' 1" } : undefined}
+						>
+							{checked ? "check_box" : "check_box_outline_blank"}
+						</span>
+						{labels[key]}
+					</button>
+				);
+			})}
+		</div>
+	);
+}
+
 /* ─────────────────────── Step 0: Category Selector ─────────────────────── */
 
 function CategoryStep({
@@ -236,10 +291,14 @@ function ServiceProviderForm({
 	form,
 	setField,
 	step,
+	consent,
+	onToggleConsent,
 }: {
 	form: ServiceForm;
 	setField: <K extends keyof ServiceForm>(k: K, v: ServiceForm[K]) => void;
 	step: number;
+	consent: ConsentState;
+	onToggleConsent: (k: ConsentKey) => void;
 }) {
 	const t = useTranslations("OnboardingPage.serviceForm");
 
@@ -479,26 +538,15 @@ function ServiceProviderForm({
 						{t("declaration.title")}
 					</h3>
 				</div>
-				<ul className="space-y-2">
-					{[
-						t("declaration.clauses.accuracy"),
-						t("declaration.clauses.consent"),
-						t("declaration.clauses.misrepresentation"),
-					].map((item) => (
-						<li
-							key={item}
-							className="flex items-start gap-2 text-sm text-on-surface-variant"
-						>
-							<span
-								className="material-symbols-outlined text-[#FF5A30] text-base mt-0.5 shrink-0"
-								style={{ fontVariationSettings: "'FILL' 1" }}
-							>
-								check_box
-							</span>
-							{item}
-						</li>
-					))}
-				</ul>
+				<ConsentChecklist
+					labels={{
+						accuracy: t("declaration.clauses.accuracy"),
+						consent: t("declaration.clauses.consent"),
+						misrepresentation: t("declaration.clauses.misrepresentation"),
+					}}
+					consent={consent}
+					onToggle={onToggleConsent}
+				/>
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 					<div>
 						<Label htmlFor="sp-decl-name">
@@ -575,10 +623,14 @@ function ArtMgmtForm({
 	form,
 	setField,
 	step,
+	consent,
+	onToggleConsent,
 }: {
 	form: ArtmgmtForm;
 	setField: <K extends keyof ArtmgmtForm>(k: K, v: ArtmgmtForm[K]) => void;
 	step: number;
+	consent: ConsentState;
+	onToggleConsent: (k: ConsentKey) => void;
 }) {
 	const t = useTranslations("OnboardingPage.artMgmtForm");
 
@@ -796,26 +848,15 @@ function ArtMgmtForm({
 						{t("declaration.title")}
 					</h3>
 				</div>
-				<ul className="space-y-2">
-					{[
-						t("declaration.clauses.accuracy"),
-						t("declaration.clauses.consent"),
-						t("declaration.clauses.misrepresentation"),
-					].map((item) => (
-						<li
-							key={item}
-							className="flex items-start gap-2 text-sm text-on-surface-variant"
-						>
-							<span
-								className="material-symbols-outlined text-[#FF5A30] text-base mt-0.5 shrink-0"
-								style={{ fontVariationSettings: "'FILL' 1" }}
-							>
-								check_box
-							</span>
-							{item}
-						</li>
-					))}
-				</ul>
+				<ConsentChecklist
+					labels={{
+						accuracy: t("declaration.clauses.accuracy"),
+						consent: t("declaration.clauses.consent"),
+						misrepresentation: t("declaration.clauses.misrepresentation"),
+					}}
+					consent={consent}
+					onToggle={onToggleConsent}
+				/>
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 					<div>
 						<Label htmlFor="am-decl-name">
@@ -1154,12 +1195,17 @@ export default function OnboardingPage() {
 
 	const [submitted, setSubmitted] = useState(false);
 	const [submitError, setSubmitError] = useState<string | null>(null);
+	const [consent, setConsent] = useState<ConsentState>(defaultConsent);
+
+	const toggleConsent = (k: ConsentKey) =>
+		setConsent((prev) => ({ ...prev, [k]: !prev[k] }));
+	const allConsented = CONSENT_KEYS.every((k) => consent[k]);
 
 	// Directory entries come from the backend: stakeholders registered through
 	// this promoter's onboarding links + the global workforce (crew) registry.
 	const { data: stakeholderRes, isLoading: loadingStakeholders } = useQuery({
-		queryKey: ["stakeholders"],
-		queryFn: getStakeholders,
+		queryKey: ["stakeholders", "all"],
+		queryFn: () => getStakeholders("all"),
 	});
 	const { data: crewRes, isLoading: loadingCrew } = useQuery({
 		queryKey: ["crew-members"],
@@ -1248,7 +1294,11 @@ export default function OnboardingPage() {
 		if (step < totalSteps - 1) {
 			setStep((s) => s + 1);
 		} else {
-			// Submit
+			// Submit — require all declaration clauses to be accepted first.
+			if (!allConsented) {
+				setSubmitError(t("errors.consentRequired"));
+				return;
+			}
 			let result: Awaited<ReturnType<typeof registerStakeholder>> | null = null;
 
 			if (category === "service") {
@@ -1294,7 +1344,7 @@ export default function OnboardingPage() {
 			// { success: false } (e.g. a 409 "already registered") inside a 200.
 			if (result?.success) {
 				// Refetch the directory so the new submission is reflected.
-				queryClient.invalidateQueries({ queryKey: ["stakeholders"] });
+				queryClient.invalidateQueries({ queryKey: ["stakeholders", "all"] });
 				setSubmitError(null);
 				setSubmitted(true);
 			} else {
@@ -1310,6 +1360,7 @@ export default function OnboardingPage() {
 		setArtmgmtFormState(defaultArtmgmtForm);
 		setSubmitted(false);
 		setSubmitError(null);
+		setConsent(defaultConsent);
 	}
 
 	if (submitted) {
@@ -1473,6 +1524,8 @@ export default function OnboardingPage() {
 													form={serviceForm}
 													setField={setServiceField}
 													step={step}
+													consent={consent}
+													onToggleConsent={toggleConsent}
 												/>
 											)}
 											{category === "artmgmt" && (
@@ -1480,6 +1533,8 @@ export default function OnboardingPage() {
 													form={artmgmtForm}
 													setField={setArtmgmtField}
 													step={step}
+													consent={consent}
+													onToggleConsent={toggleConsent}
 												/>
 											)}
 
@@ -1496,7 +1551,8 @@ export default function OnboardingPage() {
 												</button>
 												<button
 													type="submit"
-													className="px-10 py-3 bg-linear-to-r from-[#FF5A30] to-[#cc4826] text-white rounded-xl font-bold shadow-xl shadow-[#FF5A30]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2"
+													disabled={step === totalSteps - 1 && !allConsented}
+													className="px-10 py-3 bg-linear-to-r from-[#FF5A30] to-[#cc4826] text-white rounded-xl font-bold shadow-xl shadow-[#FF5A30]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none disabled:hover:scale-100"
 												>
 													{step < totalSteps - 1
 														? t("actions.continue")

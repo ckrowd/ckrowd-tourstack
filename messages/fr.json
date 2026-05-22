@@ -506,7 +506,8 @@
       "submit": "Soumettre l'intégration"
     },
     "errors": {
-      "submitFailed": "Impossible de terminer l'intégration. Veuillez réessayer."
+      "submitFailed": "Impossible de terminer l'intégration. Veuillez réessayer.",
+      "consentRequired": "Veuillez accepter les trois déclarations pour continuer."
     },
     "success": {
       "title": "Partie prenante intégrée !",

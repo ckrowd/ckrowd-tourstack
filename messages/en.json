@@ -506,7 +506,8 @@
       "submit": "Submit Onboarding"
     },
     "errors": {
-      "submitFailed": "Could not complete onboarding. Please try again."
+      "submitFailed": "Could not complete onboarding. Please try again.",
+      "consentRequired": "Please accept all three declarations to continue."
     },
     "success": {
       "title": "Stakeholder Onboarded!",
