@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { getArtists } from "@/app/actions";
-import Footer from "@/components/Footer";
+import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 import { Link } from "@/i18n/routing";
 
@@ -72,26 +72,28 @@ export default function DiscoveryPage() {
 		<div className="bg-surface text-on-surface antialiased">
 			<TopNav />
 
-			<main className="pt-24 pb-20 px-6 md:px-12 max-w-screen-2xl mx-auto flex flex-col gap-12">
-				{/* Hero Header */}
-				<header className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
-					<div className="lg:col-span-8">
-						<span className="text-[#FF5A30] font-bold uppercase tracking-widest text-xs mb-4 block">
-							{t("hero.platform")}
-						</span>
-						<h1 className="font-(family-name:--font-manrope) text-5xl md:text-6xl font-extrabold text-on-surface leading-tight tracking-tighter">
-							{t.rich("hero.title", {
-								spanNode: (chunks) => (
-									<span className="text-[#FF5A30]">{chunks}</span>
-								),
-							})}
-						</h1>
-						<p className="mt-6 text-on-surface-variant text-lg max-w-xl leading-relaxed">
-							{t("hero.description")}
-						</p>
-					</div>
-					<div className="lg:col-span-4 flex justify-start lg:justify-end pb-2">
-						<div className="bg-tertiary-fixed p-6 rounded-xl flex items-start gap-4 shadow-sm max-w-sm">
+			<div className="flex pt-16 h-screen">
+				<SideNav />
+
+				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
+					{/* Header */}
+					<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+						<div>
+							<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+								{t("hero.platform")}
+							</span>
+							<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
+								{t.rich("hero.title", {
+									spanNode: (chunks) => (
+										<span className="text-[#FF5A30]">{chunks}</span>
+									),
+								})}
+							</h1>
+							<p className="text-on-surface-variant font-medium max-w-xl">
+								{t("hero.description")}
+							</p>
+						</div>
+						<div className="shrink-0 bg-tertiary-fixed p-5 rounded-xl flex items-start gap-4 shadow-sm max-w-sm">
 							<span
 								className="material-symbols-outlined text-tertiary text-3xl"
 								style={{ fontVariationSettings: "'FILL' 1" }}
@@ -108,10 +110,9 @@ export default function DiscoveryPage() {
 							</div>
 						</div>
 					</div>
-				</header>
 
 				{/* Filters */}
-				<section className="bg-surface-container-low rounded-2xl p-4 md:p-6 flex flex-wrap items-end gap-4">
+				<section className="bg-surface-container-low rounded-2xl p-4 md:p-6 flex flex-wrap items-end gap-4 mb-10">
 					<div className="flex-1 min-w-45">
 						<label
 							htmlFor="filter-genre"
@@ -248,7 +249,7 @@ export default function DiscoveryPage() {
 
 				<div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
 					{/* Gallery Grid */}
-					<div className="lg:col-span-9">
+					<div className="lg:col-span-8">
 						<div className="flex items-center justify-between mb-8">
 							<h2 className="font-(family-name:--font-manrope) text-2xl font-bold">
 								{t("activeTourProjects")}{" "}
@@ -372,7 +373,7 @@ export default function DiscoveryPage() {
 					</div>
 
 					{/* Sidebar */}
-					<aside className="lg:col-span-3 space-y-8">
+					<aside className="lg:col-span-4 space-y-8">
 						{/* How it Works */}
 						<div className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
 							<h3 className="font-(family-name:--font-manrope) text-xl font-bold mb-6">
@@ -467,12 +468,12 @@ export default function DiscoveryPage() {
 								].map((stat) => (
 									<div
 										key={stat.label}
-										className="bg-surface-container-lowest p-4 rounded-xl text-center border border-[#FF5A30]/5"
+										className="bg-surface-container-lowest p-4 rounded-xl text-center border border-[#FF5A30]/5 flex flex-col items-center justify-center min-h-24"
 									>
-										<p className="text-2xl font-black font-(family-name:--font-manrope) text-[#FF5A30]">
+										<p className="text-2xl font-black font-(family-name:--font-manrope) text-[#FF5A30] leading-none">
 											{stat.value}
 										</p>
-										<p className="text-[10px] uppercase font-bold text-on-surface-variant mt-1">
+										<p className="text-[10px] uppercase font-bold text-on-surface-variant mt-2 leading-tight">
 											{stat.label}
 										</p>
 									</div>
@@ -481,8 +482,8 @@ export default function DiscoveryPage() {
 						</div>
 					</aside>
 				</div>
-				<Footer />
-			</main>
+				</main>
+			</div>
 		</div>
 	);
 }

@@ -7,6 +7,7 @@ import {
 import FinancingApplyButton from "@/components/FinancingApplyButton";
 import type { ProductId } from "@/components/FinancingApplyModal";
 import FinancingQuickApply from "@/components/FinancingQuickApply";
+import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 import { Link } from "@/i18n/routing";
 
@@ -144,64 +145,25 @@ export default async function FinancingPage({ params }: Props) {
 		<div className="bg-surface text-on-surface antialiased">
 			<TopNav />
 
-			<main className="pt-24 pb-20 px-6 md:px-12 max-w-screen-2xl mx-auto flex flex-col gap-16">
-				{/* Hero */}
-				<header className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-					<div className="lg:col-span-7">
-						<span className="text-[#FF5A30] font-bold uppercase tracking-widest text-xs mb-4 block">
+			<div className="flex pt-16 h-screen">
+				<SideNav />
+
+				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
+					{/* Header */}
+					<div className="mb-10">
+						<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
 							{t("hero.platform")}
 						</span>
-						<h1 className="font-(family-name:--font-manrope) text-5xl md:text-6xl font-extrabold text-on-surface leading-tight tracking-tighter">
-							{t.rich("hero.title", {
-								spanNode: (chunks) => (
-									<span className="text-[#FF5A30]">{chunks}</span>
-								),
-							})}
+						<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
+							{t("header.title")}
 						</h1>
-						<p className="mt-6 text-on-surface-variant text-lg max-w-xl leading-relaxed">
+						<p className="text-on-surface-variant font-medium max-w-xl">
 							{t("hero.description")}
 						</p>
-						<div className="mt-8 flex flex-wrap gap-4">
-							<a
-								href="#quick-apply"
-								className="bg-[#FF5A30] text-white px-8 py-3.5 rounded-xl font-bold shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all"
-							>
-								{t("hero.applyButton")}
-							</a>
-							<a
-								href="#products"
-								className="border border-outline-variant px-8 py-3.5 rounded-xl font-bold text-on-surface hover:bg-surface-container-low transition-all"
-							>
-								{t("hero.exploreProducts")}
-							</a>
-						</div>
 					</div>
 
-					{/* Stats strip */}
-					<div className="lg:col-span-5 grid grid-cols-2 gap-4">
-						{[
-							{ value: "$2.4M", label: t("stats.disbursed") },
-							{ value: "94%", label: t("stats.repayment") },
-							{ value: "48h", label: t("stats.decision") },
-							{ value: "18", label: t("stats.markets") },
-						].map((s) => (
-							<div
-								key={s.label}
-								className="bg-surface-container-lowest rounded-2xl p-6 text-center border border-[#FF5A30]/5 shadow-sm"
-							>
-								<p className="text-3xl font-black font-(family-name:--font-manrope) text-[#FF5A30]">
-									{s.value}
-								</p>
-								<p className="text-xs uppercase font-bold text-on-surface-variant mt-1 tracking-wider">
-									{s.label}
-								</p>
-							</div>
-						))}
-					</div>
-				</header>
-
-				{/* My Applications */}
-				<section>
+					{/* My Applications */}
+					<section className="mb-10">
 					<h2 className="font-(family-name:--font-manrope) text-2xl font-bold mb-8">
 						{t("myApplications")}
 					</h2>
@@ -304,7 +266,7 @@ export default async function FinancingPage({ params }: Props) {
 				</section>
 
 				{/* Products */}
-				<section id="products">
+				<section id="products" className="mb-10">
 					<h2 className="font-(family-name:--font-manrope) text-2xl font-bold mb-8">
 						{t("financingProducts")}
 					</h2>
@@ -380,7 +342,7 @@ export default async function FinancingPage({ params }: Props) {
 				</section>
 
 				{/* How it Works + Partners */}
-				<div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+				<div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-14">
 					{/* Steps */}
 					<section className="lg:col-span-7">
 						<h2 className="font-(family-name:--font-manrope) text-2xl font-bold mb-8">
@@ -499,7 +461,8 @@ export default async function FinancingPage({ params }: Props) {
 						))}
 					</div>
 				</section>
-			</main>
+				</main>
+			</div>
 		</div>
 	);
 }
