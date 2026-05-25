@@ -903,6 +903,17 @@ export async function revokeAdminInvite(inviteId: string) {
 	};
 }
 
+export async function setAdminRoles(
+	body: Payload<typeof client.tourstack.admin.team.patch>,
+) {
+	const { data, error } = await client.tourstack.admin.team.patch(body);
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
 export async function getAdminInvite(token: string) {
 	const { data, error } = await client.tourstack.admin.invites({ token }).get();
 	return {
