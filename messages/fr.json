@@ -458,6 +458,16 @@
       },
       "backToDirectory": "Retour au répertoire",
       "loading": "Chargement du répertoire…",
+      "exportCsv": "Exporter CSV",
+      "csvHeaders": {
+        "name": "Nom",
+        "category": "Catégorie",
+        "company": "Entreprise / Rôle",
+        "email": "E-mail",
+        "phone": "Téléphone",
+        "country": "Pays",
+        "submitted": "Soumis le"
+      },
       "details": {
         "email": "E-mail",
         "phone": "Téléphone",

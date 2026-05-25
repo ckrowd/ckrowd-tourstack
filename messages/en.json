@@ -458,6 +458,16 @@
       },
       "backToDirectory": "Back to Directory",
       "loading": "Loading directory…",
+      "exportCsv": "Export CSV",
+      "csvHeaders": {
+        "name": "Name",
+        "category": "Category",
+        "company": "Company / Role",
+        "email": "Email",
+        "phone": "Phone",
+        "country": "Country",
+        "submitted": "Submitted"
+      },
       "details": {
         "email": "Email",
         "phone": "Phone",

@@ -35,6 +35,48 @@ const CATEGORY_ICONS: Record<Category, string> = {
 	artmgmt: "music_note",
 };
 
+/* ─────────────────────── CSV export ─────────────────────── */
+
+// Quote a CSV cell only when it contains a delimiter, quote, or newline.
+function csvCell(value: string): string {
+	const s = value ?? "";
+	return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+}
+
+function downloadDirectoryCsv(
+	rows: StakeholderEntry[],
+	categoryLabels: Record<Category, string>,
+	headers: string[],
+	filename: string,
+) {
+	const body = rows.map((r) =>
+		[
+			r.name,
+			categoryLabels[r.category],
+			r.company ?? "",
+			r.email,
+			r.phone,
+			r.country,
+			new Date(r.submittedAt).toISOString().slice(0, 10),
+		]
+			.map(csvCell)
+			.join(","),
+	);
+	// Prepend a BOM so Excel reads UTF-8 (accented names) correctly.
+	const csv = ["﻿" + headers.map(csvCell).join(","), ...body].join("\r\n");
+	const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+	const url = URL.createObjectURL(blob);
+	const a = document.createElement("a");
+	a.href = url;
+	a.download = filename;
+	document.body.appendChild(a);
+	a.click();
+	setTimeout(() => {
+		URL.revokeObjectURL(url);
+		document.body.removeChild(a);
+	}, 100);
+}
+
 /* ─────────────────────── Shared UI ─────────────────────── */
 
 const inputClass =
@@ -1058,27 +1100,53 @@ function DirectoryTab({
 
 	return (
 		<div>
-			{/* Filter tabs */}
-			<div className="flex gap-2 mb-6 flex-wrap">
-				{FILTER_TABS.map((tab) => (
-					<button
-						key={tab.key}
-						type="button"
-						onClick={() => setFilter(tab.key)}
-						className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
-							filter === tab.key
-								? "bg-[#FF5A30] text-white shadow-md"
-								: "bg-surface-container-highest text-on-surface-variant hover:bg-surface-container-high"
-						}`}
-					>
-						{tab.label}
-						<span className="ml-2 text-xs opacity-70">
-							{tab.key === "all"
-								? entries.length
-								: entries.filter((e) => e.category === tab.key).length}
-						</span>
-					</button>
-				))}
+			{/* Filter tabs + export */}
+			<div className="flex items-center justify-between gap-4 mb-6 flex-wrap">
+				<div className="flex gap-2 flex-wrap">
+					{FILTER_TABS.map((tab) => (
+						<button
+							key={tab.key}
+							type="button"
+							onClick={() => setFilter(tab.key)}
+							className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
+								filter === tab.key
+									? "bg-[#FF5A30] text-white shadow-md"
+									: "bg-surface-container-highest text-on-surface-variant hover:bg-surface-container-high"
+							}`}
+						>
+							{tab.label}
+							<span className="ml-2 text-xs opacity-70">
+								{tab.key === "all"
+									? entries.length
+									: entries.filter((e) => e.category === tab.key).length}
+							</span>
+						</button>
+					))}
+				</div>
+				<button
+					type="button"
+					onClick={() =>
+						downloadDirectoryCsv(
+							filtered,
+							CATEGORY_LABELS,
+							[
+								t("csvHeaders.name"),
+								t("csvHeaders.category"),
+								t("csvHeaders.company"),
+								t("csvHeaders.email"),
+								t("csvHeaders.phone"),
+								t("csvHeaders.country"),
+								t("csvHeaders.submitted"),
+							],
+							`directory-${filter}-${new Date().toISOString().slice(0, 10)}.csv`,
+						)
+					}
+					disabled={filtered.length === 0}
+					className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold bg-surface-container-highest text-on-surface-variant hover:bg-surface-container-high transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+				>
+					<span className="material-symbols-outlined text-sm">download</span>
+					{t("exportCsv")}
+				</button>
 			</div>
 
 			{isLoading ? (
