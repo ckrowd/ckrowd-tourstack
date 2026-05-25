@@ -570,7 +570,7 @@ export type StakeholderSubmission = {
 	link: { id: string; token: string; label: string | null } | null;
 };
 
-export async function getStakeholders(scope?: "all"): Promise<{
+export async function getStakeholders(): Promise<{
 	data: StakeholderSubmission[];
 	success: boolean;
 	error: string | null;
@@ -581,8 +581,7 @@ export async function getStakeholders(scope?: "all"): Promise<{
 		.getAll()
 		.map((c) => `${c.name}=${c.value}`)
 		.join("; ");
-	const url = `${apiUrl}/tourstack/stakeholders${scope === "all" ? "?scope=all" : ""}`;
-	const res = await fetch(url, {
+	const res = await fetch(`${apiUrl}/tourstack/stakeholders`, {
 		headers: { Cookie: cookieString },
 		cache: "no-store",
 	});

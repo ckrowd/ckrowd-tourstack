@@ -227,7 +227,7 @@ export default function OnboardingLinksPage() {
 
 	const stakeholdersQuery = useQuery({
 		queryKey: ["stakeholders"],
-		queryFn: () => getStakeholders(),
+		queryFn: getStakeholders,
 	});
 
 	const createMutation = useMutation({
