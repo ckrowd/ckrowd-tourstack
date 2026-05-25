@@ -3173,7 +3173,9 @@
       "product": "Produit",
       "documents": "Documents",
       "partner": "Partenaire",
-      "banking": "Compte de décaissement"
+      "banking": "Compte de décaissement",
+      "approvedOn": "Approuvé",
+      "note": "Note du réviseur"
     },
     "banking": {
       "verified": "Vérifié",
@@ -3182,6 +3184,25 @@
       "account": "Compte",
       "holder": "Titulaire",
       "purpose": "Objet"
+    },
+    "tour": {
+      "title": "Détails de la tournée",
+      "venue": "Lieu",
+      "date": "Date",
+      "location": "Localisation",
+      "capacity": "Capacité",
+      "ticketsSold": "Billets vendus",
+      "fee": "Cachet de l'artiste",
+      "financingAmount": "Financement lié à la tournée",
+      "artist": "Artiste",
+      "genre": "Genre",
+      "none": "Aucune tournée liée à cette demande."
+    },
+    "docs": {
+      "title": "Documents",
+      "open": "Document {index}",
+      "viewTermSheet": "Voir la feuille de conditions",
+      "none": "Aucun document téléversé."
     },
     "actions": {
       "sync": "Actualiser",
