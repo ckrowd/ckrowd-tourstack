@@ -15,37 +15,53 @@ export const EMPTY_AUTH_STATE: AuthState = {
 	profileComplete: false,
 };
 
-/** TourStack admin portal scopes. Each admin account holds exactly one. */
+/** TourStack admin portal scopes. An account may hold several. */
 export type AdminScope = "platform" | "insurance" | "financing";
 
 type SessionUser = {
 	is_super_admin?: boolean | null;
+	/** Legacy single scope, kept as a fallback during rollout. */
 	tourstack_admin_role?: AdminScope | null;
+	/** Source of truth: every scope the account holds. */
+	tourstack_admin_roles?: AdminScope[] | null;
 };
 
-/** The TourStack admin scope on the session, or null for non-admins. */
-export function getAdminScope(
+// Order used when a single landing portal must be chosen for a multi-role admin.
+const SCOPE_PRECEDENCE: AdminScope[] = ["platform", "financing", "insurance"];
+
+/** Every TourStack admin scope on the session (empty for non-admins). */
+export function getAdminScopes(
 	session: Session | null | undefined,
-): AdminScope | null {
+): AdminScope[] {
 	const user = session?.user as SessionUser | undefined;
-	return user?.tourstack_admin_role ?? null;
+	const set = new Set<AdminScope>(user?.tourstack_admin_roles ?? []);
+	if (user?.tourstack_admin_role) set.add(user.tourstack_admin_role);
+	return SCOPE_PRECEDENCE.filter((s) => set.has(s));
+}
+
+/** True when the session holds the given TourStack admin scope. */
+export function hasAdminScope(
+	session: Session | null | undefined,
+	scope: AdminScope,
+) {
+	return getAdminScopes(session).includes(scope);
 }
 
 /** True when the session belongs to any TourStack admin (any scope). */
 export function isAdminSession(session: Session | null | undefined) {
-	return getAdminScope(session) !== null;
+	return getAdminScopes(session).length > 0;
 }
 
 export function isPlatformAdmin(session: Session | null | undefined) {
-	return getAdminScope(session) === "platform";
+	return hasAdminScope(session, "platform");
 }
 
 export function isInsuranceAdmin(session: Session | null | undefined) {
-	return getAdminScope(session) === "insurance";
+	return hasAdminScope(session, "insurance");
 }
 
 export function isFinancingAdmin(session: Session | null | undefined) {
-	return getAdminScope(session) === "financing";
+	return hasAdminScope(session, "financing");
 }
 
 const ADMIN_SCOPE_HOME: Record<AdminScope, string> = {
@@ -55,13 +71,14 @@ const ADMIN_SCOPE_HOME: Record<AdminScope, string> = {
 };
 
 /**
- * Landing path for the session's admin scope (without locale prefix), or
- * null when the session is not an admin.
+ * Default landing path for an admin session (without locale prefix), or null
+ * when the session is not an admin. For a multi-role admin this is the
+ * highest-precedence portal; the others remain reachable by navigation.
  */
 export function adminHomePath(
 	session: Session | null | undefined,
 ): string | null {
-	const scope = getAdminScope(session);
+	const [scope] = getAdminScopes(session);
 	return scope ? ADMIN_SCOPE_HOME[scope] : null;
 }
 
