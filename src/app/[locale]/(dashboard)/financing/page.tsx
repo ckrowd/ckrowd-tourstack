@@ -6,6 +6,7 @@ import {
 } from "@/app/actions";
 import FinancingApplyButton from "@/components/FinancingApplyButton";
 import type { ProductId } from "@/components/FinancingApplyModal";
+import FinancingFaq from "@/components/FinancingFaq";
 import FinancingQuickApply from "@/components/FinancingQuickApply";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
@@ -150,16 +151,19 @@ export default async function FinancingPage({ params }: Props) {
 
 				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
 					{/* Header */}
-					<div className="mb-10">
-						<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
-							{t("hero.platform")}
-						</span>
-						<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
-							{t("header.title")}
-						</h1>
-						<p className="text-on-surface-variant font-medium max-w-xl">
-							{t("hero.description")}
-						</p>
+					<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+						<div>
+							<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+								{t("hero.platform")}
+							</span>
+							<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
+								{t("header.title")}
+							</h1>
+							<p className="text-on-surface-variant font-medium max-w-xl">
+								{t("hero.description")}
+							</p>
+						</div>
+						<FinancingFaq faqs={faqs} />
 					</div>
 
 					{/* My Applications */}
@@ -440,27 +444,6 @@ export default async function FinancingPage({ params }: Props) {
 					</section>
 				</div>
 
-				{/* FAQ */}
-				<section>
-					<h2 className="font-(family-name:--font-manrope) text-2xl font-bold mb-8">
-						{t("faqTitle")}
-					</h2>
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-						{faqs.map((f) => (
-							<div
-								key={f.q}
-								className="bg-surface-container-lowest rounded-2xl p-7 border border-outline-variant/10 shadow-sm"
-							>
-								<p className="font-(family-name:--font-manrope) font-bold text-on-surface mb-2">
-									{f.q}
-								</p>
-								<p className="text-sm text-on-surface-variant leading-relaxed">
-									{f.a}
-								</p>
-							</div>
-						))}
-					</div>
-				</section>
 				</main>
 			</div>
 		</div>

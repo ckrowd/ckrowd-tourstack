@@ -2204,6 +2204,9 @@
       "button": "Commencer"
     },
     "faqTitle": "Foire aux questions",
+    "faqButton": "FAQ",
+    "faqSubtitle": "Réponses aux questions de financement les plus fréquentes.",
+    "faqClose": "Fermer",
     "faqs": {
       "f1": {
         "q": "Ai-je besoin d'un compte bancaire en Afrique pour être éligible ?",
