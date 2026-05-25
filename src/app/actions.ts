@@ -146,21 +146,29 @@ export async function signInAdmin(
 	if (!result.success) return result;
 
 	const session = await getSession();
-	const role = session?.user?.tourstack_admin_role as
-		| "platform"
-		| "insurance"
-		| "financing"
-		| null
+	const sessionUser = session?.user as
+		| {
+				tourstack_admin_role?: "platform" | "insurance" | "financing" | null;
+				tourstack_admin_roles?: ("platform" | "insurance" | "financing")[] | null;
+		  }
 		| undefined;
+	// Source of truth is the roles array; fall back to the legacy single column.
+	const scopes = new Set(sessionUser?.tourstack_admin_roles ?? []);
+	if (sessionUser?.tourstack_admin_role)
+		scopes.add(sessionUser.tourstack_admin_role);
 
-	if (!role) {
+	if (scopes.size === 0) {
 		await signOut();
 		return { success: false, code: "not_admin" as const };
 	}
 
-	if (requireScope && role !== requireScope) {
+	if (requireScope && !scopes.has(requireScope)) {
 		await signOut();
-		return { success: false, code: "wrong_scope" as const, scope: role };
+		return {
+			success: false,
+			code: "wrong_scope" as const,
+			scope: [...scopes][0],
+		};
 	}
 
 	return { success: true };
