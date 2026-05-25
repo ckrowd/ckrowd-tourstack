@@ -1201,14 +1201,14 @@ export default function OnboardingPage() {
 		setConsent((prev) => ({ ...prev, [k]: !prev[k] }));
 	const allConsented = CONSENT_KEYS.every((k) => consent[k]);
 
-	// Directory entries come from the backend: stakeholders registered through
-	// this promoter's onboarding links + the global workforce (crew) registry.
+	// Directory entries are scoped to this account: stakeholders this promoter
+	// onboarded (directly or via their links) + the crew they onboarded.
 	const { data: stakeholderRes, isLoading: loadingStakeholders } = useQuery({
-		queryKey: ["stakeholders", "all"],
-		queryFn: () => getStakeholders("all"),
+		queryKey: ["stakeholders"],
+		queryFn: getStakeholders,
 	});
 	const { data: crewRes, isLoading: loadingCrew } = useQuery({
-		queryKey: ["crew-members"],
+		queryKey: ["crew-members", "mine"],
 		queryFn: () => getCrewMembers(),
 	});
 
@@ -1344,7 +1344,7 @@ export default function OnboardingPage() {
 			// { success: false } (e.g. a 409 "already registered") inside a 200.
 			if (result?.success) {
 				// Refetch the directory so the new submission is reflected.
-				queryClient.invalidateQueries({ queryKey: ["stakeholders", "all"] });
+				queryClient.invalidateQueries({ queryKey: ["stakeholders"] });
 				setSubmitError(null);
 				setSubmitted(true);
 			} else {
