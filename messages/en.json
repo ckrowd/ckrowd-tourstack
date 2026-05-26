@@ -144,7 +144,37 @@
     "errorFailed": "Sign in failed",
     "errorAdminOnly": "This account uses the admin login page.",
     "loading": "Loading session...",
-    "verifiedBanner": "Email verified! Sign in to access your account."
+    "verifiedBanner": "Email verified! Sign in to access your account.",
+    "forgotPassword": "Forgot password?",
+    "resetBanner": "Password updated. Sign in with your new password."
+  },
+  "ForgotPasswordPage": {
+    "subtitle": "Reset your password",
+    "title": "Forgot password?",
+    "description": "Enter your account email and we'll send you a link to reset your password.",
+    "email": "Email Address",
+    "emailPlaceholder": "you@yourcompany.com",
+    "sendLink": "Send reset link",
+    "sending": "Sending...",
+    "error": "We couldn't send the reset email. Please try again.",
+    "sentTitle": "Check your email",
+    "sentBody": "If an account exists for that address, we've sent a link to reset your password.",
+    "backToLogin": "Back to sign in"
+  },
+  "ResetPasswordPage": {
+    "subtitle": "Choose a new password",
+    "title": "Reset password",
+    "description": "Enter a new password for your account.",
+    "password": "New password",
+    "passwordPlaceholder": "At least 8 characters",
+    "confirm": "Confirm password",
+    "confirmPlaceholder": "Re-enter your new password",
+    "tooShort": "Password must be at least 8 characters.",
+    "mismatch": "Passwords don't match.",
+    "submit": "Update password",
+    "saving": "Updating...",
+    "error": "We couldn't reset your password. The link may have expired — request a new one.",
+    "backToLogin": "Back to sign in"
   },
   "AdminLoginPage": {
     "logoAlt": "TourStack logo",
@@ -162,7 +192,8 @@
     "errorInvalid": "Invalid email or password",
     "errorNotAdmin": "This account is not authorized for the admin portal.",
     "errorFailed": "Admin sign in failed",
-    "loading": "Checking admin session..."
+    "loading": "Checking admin session...",
+    "forgotPassword": "Forgot password?"
   },
   "EOIPage": {
     "stepper": {
@@ -3049,7 +3080,8 @@
     "errorInvalid": "Invalid credentials",
     "errorFailed": "Sign in failed. Please try again.",
     "errorNotAdmin": "This account is not authorized for the insurance admin portal.",
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "forgotPassword": "Forgot password?"
   },
   "InsuranceAdminSideNav": {
     "overview": "Overview",
@@ -3096,7 +3128,8 @@
     "errorFailed": "Sign in failed",
     "errorNotAdmin": "This account is not authorized for the financing admin portal.",
     "loading": "Loading session...",
-    "footer": "Restricted access for authorized financing operators."
+    "footer": "Restricted access for authorized financing operators.",
+    "forgotPassword": "Forgot password?"
   },
   "FinancingAdminSideNav": {
     "overview": "Overview",

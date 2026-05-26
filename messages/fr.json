@@ -144,7 +144,37 @@
     "errorFailed": "La connexion a échoué",
     "errorAdminOnly": "Ce compte utilise la page de connexion administrateur.",
     "loading": "Chargement de la session...",
-    "verifiedBanner": "E-mail vérifié ! Connectez-vous pour accéder à votre compte."
+    "verifiedBanner": "E-mail vérifié ! Connectez-vous pour accéder à votre compte.",
+    "forgotPassword": "Mot de passe oublié ?",
+    "resetBanner": "Mot de passe mis à jour. Connectez-vous avec votre nouveau mot de passe."
+  },
+  "ForgotPasswordPage": {
+    "subtitle": "Réinitialisez votre mot de passe",
+    "title": "Mot de passe oublié ?",
+    "description": "Saisissez l'adresse e-mail de votre compte et nous vous enverrons un lien pour réinitialiser votre mot de passe.",
+    "email": "Adresse e-mail",
+    "emailPlaceholder": "vous@votreentreprise.com",
+    "sendLink": "Envoyer le lien",
+    "sending": "Envoi...",
+    "error": "Nous n'avons pas pu envoyer l'e-mail de réinitialisation. Veuillez réessayer.",
+    "sentTitle": "Vérifiez vos e-mails",
+    "sentBody": "Si un compte existe pour cette adresse, nous avons envoyé un lien pour réinitialiser votre mot de passe.",
+    "backToLogin": "Retour à la connexion"
+  },
+  "ResetPasswordPage": {
+    "subtitle": "Choisissez un nouveau mot de passe",
+    "title": "Réinitialiser le mot de passe",
+    "description": "Saisissez un nouveau mot de passe pour votre compte.",
+    "password": "Nouveau mot de passe",
+    "passwordPlaceholder": "Au moins 8 caractères",
+    "confirm": "Confirmer le mot de passe",
+    "confirmPlaceholder": "Saisissez à nouveau votre nouveau mot de passe",
+    "tooShort": "Le mot de passe doit comporter au moins 8 caractères.",
+    "mismatch": "Les mots de passe ne correspondent pas.",
+    "submit": "Mettre à jour le mot de passe",
+    "saving": "Mise à jour...",
+    "error": "Nous n'avons pas pu réinitialiser votre mot de passe. Le lien a peut-être expiré — demandez-en un nouveau.",
+    "backToLogin": "Retour à la connexion"
   },
   "AdminLoginPage": {
     "logoAlt": "Logo TourStack",
@@ -162,7 +192,8 @@
     "errorInvalid": "E-mail ou mot de passe invalide",
     "errorNotAdmin": "Ce compte n'est pas autorisé à accéder au portail administrateur.",
     "errorFailed": "La connexion administrateur a échoué",
-    "loading": "Vérification de la session administrateur..."
+    "loading": "Vérification de la session administrateur...",
+    "forgotPassword": "Mot de passe oublié ?"
   },
   "EOIPage": {
     "stepper": {
@@ -3049,7 +3080,8 @@
     "errorInvalid": "Identifiants invalides",
     "errorFailed": "Échec de la connexion. Veuillez réessayer.",
     "errorNotAdmin": "Ce compte n'est pas autorisé à accéder au portail admin assurance.",
-    "loading": "Chargement..."
+    "loading": "Chargement...",
+    "forgotPassword": "Mot de passe oublié ?"
   },
   "InsuranceAdminSideNav": {
     "overview": "Aperçu",
@@ -3096,7 +3128,8 @@
     "errorFailed": "Échec de la connexion",
     "errorNotAdmin": "Ce compte n'est pas autorisé à accéder au portail admin financement.",
     "loading": "Chargement de la session...",
-    "footer": "Accès restreint aux opérateurs financiers autorisés."
+    "footer": "Accès restreint aux opérateurs financiers autorisés.",
+    "forgotPassword": "Mot de passe oublié ?"
   },
   "FinancingAdminSideNav": {
     "overview": "Aperçu",

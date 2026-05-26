@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { Suspense, useEffect, useState } from "react";
 import AuthBrandLockup from "@/components/AuthBrandLockup";
 import { useAdminLogin, useSession } from "@/context/AuthContext";
-import { useRouter } from "@/i18n/routing";
+import { Link, useRouter } from "@/i18n/routing";
 import { adminHomePath, isInsuranceAdmin } from "@/lib/auth";
 
 function InsuranceAdminLoginContent() {
@@ -129,6 +129,14 @@ function InsuranceAdminLoginContent() {
 								required
 								className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 focus:border-[#FF5A30] transition-all"
 							/>
+							<div className="flex justify-end mt-2">
+								<Link
+									href="/forgot-password"
+									className="text-xs font-semibold text-[#FF5A30] hover:underline"
+								>
+									{t("forgotPassword")}
+								</Link>
+							</div>
 						</div>
 
 						{error && (
