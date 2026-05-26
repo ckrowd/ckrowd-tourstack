@@ -113,6 +113,14 @@ function AdminLoginPageContent() {
 								required
 								className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 focus:border-[#FF5A30] transition-all"
 							/>
+							<div className="flex justify-end mt-2">
+								<Link
+									href="/forgot-password"
+									className="text-xs font-semibold text-[#FF5A30] hover:underline"
+								>
+									{t("forgotPassword")}
+								</Link>
+							</div>
 						</div>
 
 						{error && (
