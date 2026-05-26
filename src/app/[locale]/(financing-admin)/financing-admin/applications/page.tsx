@@ -5,6 +5,12 @@ import { useFormatter, useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { getAdminFinancing, updateFinancingApplication } from "@/app/actions";
 
+// Fully typed application straight from the server action's response — no
+// hand-written shape, so it tracks any backend change automatically.
+type Application = NonNullable<
+	Awaited<ReturnType<typeof getAdminFinancing>>["data"]
+>[number];
+
 const STATUSES = [
 	"pending",
 	"under_review",
@@ -30,25 +36,28 @@ function statusClass(status: string) {
 	}
 }
 
-type Application = Record<string, unknown>;
-
 function promoterName(f: Application): string {
-	const promoter = f.promoter as Record<string, unknown> | null;
-	const user = promoter?.user as Record<string, unknown> | null;
-	return String(
-		promoter?.company_name ??
-			promoter?.contact_person ??
-			user?.name ??
-			user?.email ??
-			"—",
+	const p = f.promoter;
+	return (
+		p.company_name ?? p.contact_person ?? p.user.name ?? p.user.email ?? "—"
 	);
 }
 
 function tourLabel(f: Application): string {
-	const tour = f.tour as Record<string, unknown> | null;
-	const artist = tour?.artist as Record<string, unknown> | null;
+	const artist = f.tour?.artist;
 	if (!artist) return "—";
-	return String(artist.tour_name ?? artist.name ?? "—");
+	return artist.tour_name ?? artist.name ?? "—";
+}
+
+function Detail({ label, value }: { label: string; value: string }) {
+	return (
+		<div>
+			<p className="text-[10px] uppercase font-bold text-on-surface-variant">
+				{label}
+			</p>
+			<p className="font-bold text-on-surface truncate">{value || "—"}</p>
+		</div>
+	);
 }
 
 export default function FinancingAdminApplicationsPage() {
@@ -385,6 +394,136 @@ export default function FinancingAdminApplicationsPage() {
 												) : null}
 											</div>
 										)}
+
+										{f.tour ? (
+											<div className="mt-3 rounded-lg bg-surface-container-lowest p-3">
+												<div className="flex items-center gap-1 text-on-surface-variant mb-2">
+													<span className="material-symbols-outlined text-xs">
+														tour
+													</span>
+													<span className="text-[10px] font-bold uppercase tracking-wider">
+														{t("tour.title")}
+													</span>
+												</div>
+												<div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+													<Detail
+														label={t("tour.venue")}
+														value={f.tour.venue}
+													/>
+													<Detail
+														label={t("tour.date")}
+														value={format.dateTime(new Date(f.tour.date), {
+															dateStyle: "medium",
+														})}
+													/>
+													<Detail
+														label={t("tour.location")}
+														value={[f.tour.city, f.tour.country]
+															.filter(Boolean)
+															.join(", ")}
+													/>
+													<Detail
+														label={t("tour.artist")}
+														value={f.tour.artist.name}
+													/>
+													<Detail
+														label={t("tour.genre")}
+														value={f.tour.artist.genre}
+													/>
+													<Detail
+														label={t("tour.capacity")}
+														value={
+															f.tour.capacity != null
+																? format.number(f.tour.capacity)
+																: "—"
+														}
+													/>
+													<Detail
+														label={t("tour.ticketsSold")}
+														value={format.number(f.tour.tickets_sold)}
+													/>
+													<Detail
+														label={t("tour.fee")}
+														value={`${f.currency} ${format.number(f.tour.fee_usd)}`}
+													/>
+													{f.tour.financing_amount != null ? (
+														<Detail
+															label={t("tour.financingAmount")}
+															value={`${f.currency} ${format.number(f.tour.financing_amount)}`}
+														/>
+													) : null}
+												</div>
+											</div>
+										) : null}
+
+										<div className="mt-3 rounded-lg bg-surface-container-lowest p-3">
+											<div className="flex items-center gap-1 text-on-surface-variant mb-2">
+												<span className="material-symbols-outlined text-xs">
+													description
+												</span>
+												<span className="text-[10px] font-bold uppercase tracking-wider">
+													{t("docs.title")}
+												</span>
+											</div>
+											{f.documents.length === 0 && !f.term_sheet_url ? (
+												<p className="text-xs text-on-surface-variant">
+													{t("docs.none")}
+												</p>
+											) : (
+												<div className="flex flex-wrap gap-2">
+													{f.documents.map((url, i) => (
+														<a
+															key={`${i}-${url}`}
+															href={url}
+															target="_blank"
+															rel="noopener noreferrer"
+															className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface-container-high text-xs font-bold text-on-surface hover:bg-surface-container-highest transition-colors"
+														>
+															<span className="material-symbols-outlined text-xs">
+																attach_file
+															</span>
+															{t("docs.open", { index: i + 1 })}
+														</a>
+													))}
+													{f.term_sheet_url ? (
+														<a
+															href={f.term_sheet_url}
+															target="_blank"
+															rel="noopener noreferrer"
+															className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#FF5A30]/10 text-xs font-bold text-[#FF5A30] hover:bg-[#FF5A30]/20 transition-colors"
+														>
+															<span className="material-symbols-outlined text-xs">
+																open_in_new
+															</span>
+															{t("docs.viewTermSheet")}
+														</a>
+													) : null}
+												</div>
+											)}
+										</div>
+
+										{f.approved_at || f.note ? (
+											<div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+												{f.approved_at ? (
+													<Detail
+														label={t("fields.approvedOn")}
+														value={format.dateTime(new Date(f.approved_at), {
+															dateStyle: "medium",
+														})}
+													/>
+												) : null}
+												{f.note ? (
+													<div className="sm:col-span-2">
+														<p className="text-[10px] uppercase font-bold text-on-surface-variant">
+															{t("fields.note")}
+														</p>
+														<p className="text-xs text-on-surface mt-0.5 whitespace-pre-line">
+															{f.note}
+														</p>
+													</div>
+												) : null}
+											</div>
+										) : null}
 
 										<div className="mt-5 flex flex-wrap md:flex-nowrap items-center gap-3 pt-4 border-t border-outline-variant/10">
 											<button

@@ -3219,7 +3219,9 @@
       "product": "Product",
       "documents": "Documents",
       "partner": "Partner",
-      "banking": "Disbursement account"
+      "banking": "Disbursement account",
+      "approvedOn": "Approved",
+      "note": "Reviewer note"
     },
     "banking": {
       "verified": "Verified",
@@ -3228,6 +3230,25 @@
       "account": "Account",
       "holder": "Account holder",
       "purpose": "Purpose"
+    },
+    "tour": {
+      "title": "Tour details",
+      "venue": "Venue",
+      "date": "Date",
+      "location": "Location",
+      "capacity": "Capacity",
+      "ticketsSold": "Tickets sold",
+      "fee": "Artist fee",
+      "financingAmount": "Financing tied to tour",
+      "artist": "Artist",
+      "genre": "Genre",
+      "none": "No tour linked to this application."
+    },
+    "docs": {
+      "title": "Documents",
+      "open": "Document {index}",
+      "viewTermSheet": "View term sheet",
+      "none": "No documents uploaded."
     },
     "actions": {
       "sync": "Refresh",
