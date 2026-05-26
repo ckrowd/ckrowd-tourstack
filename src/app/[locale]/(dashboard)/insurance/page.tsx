@@ -1,10 +1,17 @@
 "use client";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import FinancingApplyButton from "@/components/FinancingApplyButton";
 import SideNav from "@/components/SideNav";
 import StepForm from "@/components/StepForm";
 import TopNav from "@/components/TopNav";
 import { Link, useRouter } from "@/i18n/routing";
+
+// Insurance applications are stored as financing applications under this
+// product, which is what the insurance-admin queue lists. Applying for
+// insurance therefore goes through the financing apply modal with this
+// product preselected.
+const INSURANCE_PRODUCT = "Event Insurance Bundle" as const;
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
@@ -237,15 +244,15 @@ export default function InsurancePage() {
 								{t("hero.description")}
 							</p>
 						</div>
-						<Link
-							href="/apply"
+						<FinancingApplyButton
+							defaultProduct={INSURANCE_PRODUCT}
 							className="flex items-center gap-2 bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all self-start md:self-auto shrink-0"
 						>
 							<span className="material-symbols-outlined text-sm">
 								how_to_reg
 							</span>
 							{t("hero.startOnboarding")}
-						</Link>
+						</FinancingApplyButton>
 					</div>
 
 					{/* Stats strip */}
@@ -463,12 +470,12 @@ export default function InsurancePage() {
 									{t("overview.cta.description")}
 								</p>
 							</div>
-							<Link
-								href="/apply"
+							<FinancingApplyButton
+								defaultProduct={INSURANCE_PRODUCT}
 								className="relative z-10 bg-white text-[#FF5A30] px-8 py-3 rounded-xl font-bold text-sm hover:scale-105 transition-transform shrink-0"
 							>
 								{t("overview.cta.button")} →
-							</Link>
+							</FinancingApplyButton>
 							<span className="material-symbols-outlined absolute -bottom-6 -right-6 text-white/10 text-[160px] rotate-12 select-none">
 								shield
 							</span>
@@ -846,15 +853,15 @@ export default function InsurancePage() {
 												})}
 											</div>
 										</div>
-										<Link
-											href="/apply"
+										<FinancingApplyButton
+											defaultProduct={INSURANCE_PRODUCT}
 											className="text-[#FF5A30] font-bold text-sm flex items-center gap-1 hover:gap-2 transition-all mt-auto"
 										>
 											{t("products.apply")}
 											<span className="material-symbols-outlined text-sm">
 												arrow_forward
 											</span>
-										</Link>
+										</FinancingApplyButton>
 									</div>
 								</div>
 							))}
@@ -1093,12 +1100,12 @@ export default function InsurancePage() {
 										<p className="text-white/60 text-sm mb-6">
 											{t("profile.cta.description")}
 										</p>
-										<Link
-											href="/apply"
+										<FinancingApplyButton
+											defaultProduct={INSURANCE_PRODUCT}
 											className="bg-[#FF5A30] text-white px-6 py-2.5 rounded-xl font-bold text-sm hover:opacity-90 transition-all"
 										>
 											{t("profile.cta.button")} →
-										</Link>
+										</FinancingApplyButton>
 									</div>
 									<span className="material-symbols-outlined absolute -bottom-6 -right-6 text-white/5 text-[140px] select-none">
 										shield
