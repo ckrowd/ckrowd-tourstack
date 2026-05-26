@@ -14,23 +14,17 @@ export type Payload<T extends (...args: any) => any> = NonNullable<
 >;
 
 const client = createClient({
-	async onRequest(path, options) {
+	async onRequest(_path, options) {
 		const cookieJar = await cookies();
 		const cookieString = cookieJar
 			.getAll()
 			.map((c) => `${c.name}=${c.value}`)
 			.join("; ");
-		// Tag password-reset requests as TourStack-originated so the backend
-		// builds the reset link against the TourStack host instead of the
-		// default main-app URL. Scoped to reset so sign-in/up behaviour is
-		// unaffected.
-		const isPasswordReset = path.includes("reset-password");
 		return {
 			...options,
 			headers: {
 				...(options.headers as Record<string, string>),
 				Cookie: cookieString,
-				...(isPasswordReset ? { "x-app-origin": "tourstack" } : {}),
 			},
 		};
 	},

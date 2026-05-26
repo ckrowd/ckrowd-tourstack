@@ -12,7 +12,10 @@ export default function ForgotPasswordPage() {
 	const [email, setEmail] = useState("");
 
 	const mutation = useMutation({
-		mutationFn: (value: string) => requestPasswordReset(value),
+		// Pass this app's origin so the reset email links back to TourStack
+		// (the backend builds the link host from this callback).
+		mutationFn: (value: string) =>
+			requestPasswordReset(value, window.location.origin),
 	});
 
 	// Always show the same confirmation once a request resolves, so we never
