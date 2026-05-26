@@ -2204,6 +2204,9 @@
       "button": "Get Started"
     },
     "faqTitle": "Frequently Asked Questions",
+    "faqButton": "FAQ",
+    "faqSubtitle": "Answers to the most common financing questions.",
+    "faqClose": "Close",
     "faqs": {
       "f1": {
         "q": "Do I need a bank account in Africa to qualify?",
