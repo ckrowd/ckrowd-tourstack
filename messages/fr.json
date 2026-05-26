@@ -2284,8 +2284,38 @@
       "product": "Produit",
       "requested": "Montant demandé",
       "submitted": "Soumis le",
+      "approved": "Approuvé le",
       "tour": "Tournée",
-      "documents": "Pièces justificatives"
+      "purpose": "Objet",
+      "partner": "Partenaire financier",
+      "note": "Note du réviseur",
+      "documents": "Pièces justificatives",
+      "unassigned": "Pas encore attribué"
+    },
+    "docs": {
+      "open": "Document {index}",
+      "termSheet": "Voir la feuille de conditions",
+      "none": "Aucun document téléversé pour le moment."
+    },
+    "tour": {
+      "title": "Détails de la tournée",
+      "artist": "Artiste",
+      "genre": "Genre",
+      "name": "Tournée",
+      "venue": "Lieu",
+      "dates": "Dates",
+      "capacity": "Capacité",
+      "ticketsSold": "Billets vendus",
+      "fee": "Cachet de l'artiste",
+      "financingAmount": "Financement lié à la tournée"
+    },
+    "banking": {
+      "title": "Compte de décaissement",
+      "bank": "Banque",
+      "account": "Compte",
+      "holder": "Titulaire du compte",
+      "verified": "Vérifié",
+      "unverified": "Non vérifié"
     },
     "errors": {
       "load": "Impossible de charger cette demande. Elle a peut-être été supprimée."

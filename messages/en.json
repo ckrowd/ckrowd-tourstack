@@ -2284,8 +2284,38 @@
       "product": "Product",
       "requested": "Amount requested",
       "submitted": "Submitted on",
+      "approved": "Approved on",
       "tour": "Tour",
-      "documents": "Supporting documents"
+      "purpose": "Purpose",
+      "partner": "Capital partner",
+      "note": "Reviewer note",
+      "documents": "Supporting documents",
+      "unassigned": "Not assigned yet"
+    },
+    "docs": {
+      "open": "Document {index}",
+      "termSheet": "View term sheet",
+      "none": "No documents uploaded yet."
+    },
+    "tour": {
+      "title": "Tour details",
+      "artist": "Artist",
+      "genre": "Genre",
+      "name": "Tour",
+      "venue": "Venue",
+      "dates": "Dates",
+      "capacity": "Capacity",
+      "ticketsSold": "Tickets sold",
+      "fee": "Artist fee",
+      "financingAmount": "Financing tied to tour"
+    },
+    "banking": {
+      "title": "Disbursement account",
+      "bank": "Bank",
+      "account": "Account",
+      "holder": "Account holder",
+      "verified": "Verified",
+      "unverified": "Unverified"
     },
     "errors": {
       "load": "We couldn't load this application. It may have been removed."
