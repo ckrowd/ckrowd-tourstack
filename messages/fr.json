@@ -125,6 +125,12 @@
       "statusPendingReview": "Votre EOI est en cours d'examen"
     }
   },
+  "Auth": {
+    "continueWithGoogle": "Continuer avec Google",
+    "googleConnecting": "Connexion...",
+    "googleError": "Impossible de démarrer la connexion Google. Veuillez réessayer.",
+    "orDivider": "ou"
+  },
   "LoginPage": {
     "title": "Se connecter",
     "description": "Utilisez votre adresse e-mail et votre mot de passe pour accéder à votre compte TourStack.",

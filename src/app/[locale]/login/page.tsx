@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Suspense, useEffect, useState } from "react";
 import AuthBrandLockup from "@/components/AuthBrandLockup";
+import GoogleSignInButton from "@/components/GoogleSignInButton";
 import { useLogin, useSession } from "@/context/AuthContext";
 import { Link } from "@/i18n/routing";
 import { getRegularLoginRedirectPath } from "@/lib/auth";
@@ -17,6 +18,7 @@ function LoginPageContent() {
 	const verified = searchParams.get("verified") === "true";
 	const reset = searchParams.get("reset") === "true";
 	const t = useTranslations("LoginPage");
+	const tAuth = useTranslations("Auth");
 
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -161,6 +163,16 @@ function LoginPageContent() {
 							{loginMutation.isPending ? t("signingIn") : t("signIn")}
 						</button>
 					</form>
+
+					<div className="flex items-center gap-3 my-6">
+						<span className="h-px flex-1 bg-slate-200" />
+						<span className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+							{tAuth("orDivider")}
+						</span>
+						<span className="h-px flex-1 bg-slate-200" />
+					</div>
+
+					<GoogleSignInButton callbackPath={from} />
 
 					<p className="text-center text-sm text-slate-500 mt-6">
 						{t("noAccount")}{" "}

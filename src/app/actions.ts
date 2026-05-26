@@ -198,6 +198,23 @@ export async function signOut() {
 }
 
 /**
+ * Start a Google OAuth sign-in. Returns the provider consent URL the browser
+ * must be redirected to; `callbackURL` is where the user lands afterwards.
+ */
+export async function signInWithGoogle(callbackURL: string) {
+	const { data, error } = await client.auth["sign-in"].social.post({
+		provider: "google",
+		callbackURL,
+	});
+	if (error) return { success: false as const, error: extractError(error) };
+	const url = (data as { url?: string } | null)?.url;
+	if (!url) {
+		return { success: false as const, error: "Couldn't start Google sign-in." };
+	}
+	return { success: true as const, url };
+}
+
+/**
  * Request a password-reset email. The backend sends a reset link to the
  * address if an account exists; the response is intentionally generic so
  * callers don't leak whether an email is registered.

@@ -3,6 +3,7 @@
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import AuthBrandLockup from "@/components/AuthBrandLockup";
+import GoogleSignInButton from "@/components/GoogleSignInButton";
 import { useRegister, useSession } from "@/context/AuthContext";
 import { Link, useRouter } from "@/i18n/routing";
 import { adminHomePath } from "@/lib/auth";
@@ -13,6 +14,7 @@ export default function RegisterPage() {
 	const { data: session, isFetching, isLoading } = useSession();
 	const registerMutation = useRegister();
 	const t = useTranslations("RegisterPage");
+	const tAuth = useTranslations("Auth");
 
 	const [firstName, setFirstName] = useState("");
 	const [lastName, setLastName] = useState("");
@@ -206,6 +208,16 @@ export default function RegisterPage() {
 								: t("createAccount")}
 						</button>
 					</form>
+
+					<div className="flex items-center gap-3 my-6">
+						<span className="h-px flex-1 bg-slate-200" />
+						<span className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+							{tAuth("orDivider")}
+						</span>
+						<span className="h-px flex-1 bg-slate-200" />
+					</div>
+
+					<GoogleSignInButton callbackPath="/dashboard" />
 
 					<p className="text-center text-sm text-slate-500 mt-6">
 						{t("alreadyHaveAccount")}{" "}
