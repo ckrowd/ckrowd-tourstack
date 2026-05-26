@@ -307,8 +307,11 @@ export default function FinancingApplyModal({
 											? t("fields.bankLoading")
 											: t("fields.bankSelect")}
 									</option>
-									{banks.map((bank) => (
-										<option key={bank.code} value={bank.code}>
+									{banks.map((bank, index) => (
+										<option
+											key={`${bank.code}-${index}`}
+											value={bank.code}
+										>
 											{bank.name}
 										</option>
 									))}
