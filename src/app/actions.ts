@@ -214,6 +214,37 @@ export async function signInWithGoogle(callbackURL: string) {
 	return { success: true as const, url };
 }
 
+/**
+ * Request a password-reset email. The backend sends a reset link to the
+ * address if an account exists; the response is intentionally generic so
+ * callers don't leak whether an email is registered.
+ */
+export async function requestPasswordReset(email: string, callbackURL?: string) {
+	const { error } = await client.auth["reset-password"].post({
+		email,
+		...(callbackURL ? { callbackURL } : {}),
+	});
+	if (error) return { success: false, error: extractError(error) };
+	return { success: true };
+}
+
+/** Complete a password reset using the token from the emailed link. */
+export async function resetPassword(
+	token: string,
+	password: string,
+	confirmPassword: string,
+) {
+	if (password !== confirmPassword)
+		return { success: false, error: "Passwords don't match" };
+	const { error } = await client.auth["change-password"].post({
+		password,
+		confirm_password: confirmPassword,
+		token,
+	});
+	if (error) return { success: false, error: extractError(error) };
+	return { success: true };
+}
+
 export async function getArtists(
 	params?: Params<typeof client.tourstack.discovery.get>,
 ) {

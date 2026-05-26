@@ -16,6 +16,7 @@ function LoginPageContent() {
 	const loginMutation = useLogin();
 	const from = getRegularLoginRedirectPath(searchParams.get("from"));
 	const verified = searchParams.get("verified") === "true";
+	const reset = searchParams.get("reset") === "true";
 	const t = useTranslations("LoginPage");
 	const tAuth = useTranslations("Auth");
 
@@ -92,6 +93,15 @@ function LoginPageContent() {
 						</div>
 					)}
 
+					{reset && (
+						<div className="mb-6 flex items-center gap-3 rounded-xl bg-green-50 border border-green-200 px-4 py-3">
+							<svg className="w-5 h-5 text-green-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+								<path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+							</svg>
+							<p className="text-sm text-green-700 font-medium">{t("resetBanner")}</p>
+						</div>
+					)}
+
 					<form onSubmit={handleSubmit} className="space-y-5">
 						<div>
 							<label
@@ -129,6 +139,14 @@ function LoginPageContent() {
 								required
 								className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 focus:border-[#FF5A30] transition-all"
 							/>
+							<div className="flex justify-end mt-2">
+								<Link
+									href="/forgot-password"
+									className="text-xs font-semibold text-[#FF5A30] hover:underline"
+								>
+									{t("forgotPassword")}
+								</Link>
+							</div>
 						</div>
 
 						{error && (
