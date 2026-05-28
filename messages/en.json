@@ -2650,9 +2650,55 @@
     "overview": "Overview",
     "tours": "Tours",
     "eoi": "EOIs",
+    "directory": "Directory",
     "reports": "Reports",
     "settings": "Settings",
     "newTour": "New Tour"
+  },
+  "AdminDirectoryPage": {
+    "tagline": "Platform Management",
+    "title": "Stakeholder Directory",
+    "description": "Every onboarded stakeholder across the platform, with full submission details and CSV export.",
+    "loading": "Loading directory…",
+    "exportCsv": "Export CSV",
+    "backToDirectory": "Back to Directory",
+    "categories": {
+      "service": "Service Provider",
+      "workforce": "Workforce",
+      "artmgmt": "Artist Mgmt Co"
+    },
+    "filters": {
+      "all": "All",
+      "service": "Service Providers",
+      "workforce": "Workforce",
+      "artmgmt": "Artist Mgmt"
+    },
+    "csvHeaders": {
+      "name": "Name",
+      "category": "Category",
+      "company": "Company / Role",
+      "email": "Email",
+      "phone": "Phone",
+      "country": "Country",
+      "submitted": "Submitted"
+    },
+    "details": {
+      "email": "Email",
+      "phone": "Phone",
+      "country": "Country",
+      "submitted": "Submitted"
+    },
+    "noEntries": {
+      "title": "No onboarded stakeholders yet.",
+      "description": "Once promoters or their links collect submissions, they'll appear here."
+    },
+    "table": {
+      "name": "Name / Company",
+      "category": "Category",
+      "country": "Country",
+      "submitted": "Submitted",
+      "view": "View"
+    }
   },
   "FinancingApplyModal": {
     "title": "Apply for Financing",

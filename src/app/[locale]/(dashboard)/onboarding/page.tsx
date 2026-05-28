@@ -11,6 +11,7 @@ import {
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 import { Link } from "@/i18n/routing";
+import { downloadCsv } from "@/lib/csv";
 
 /* ─────────────────────── Types ─────────────────────── */
 
@@ -34,48 +35,6 @@ const CATEGORY_ICONS: Record<Category, string> = {
 	workforce: "engineering",
 	artmgmt: "music_note",
 };
-
-/* ─────────────────────── CSV export ─────────────────────── */
-
-// Quote a CSV cell only when it contains a delimiter, quote, or newline.
-function csvCell(value: string): string {
-	const s = value ?? "";
-	return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
-}
-
-function downloadDirectoryCsv(
-	rows: StakeholderEntry[],
-	categoryLabels: Record<Category, string>,
-	headers: string[],
-	filename: string,
-) {
-	const body = rows.map((r) =>
-		[
-			r.name,
-			categoryLabels[r.category],
-			r.company ?? "",
-			r.email,
-			r.phone,
-			r.country,
-			new Date(r.submittedAt).toISOString().slice(0, 10),
-		]
-			.map(csvCell)
-			.join(","),
-	);
-	// Prepend a BOM so Excel reads UTF-8 (accented names) correctly.
-	const csv = ["﻿" + headers.map(csvCell).join(","), ...body].join("\r\n");
-	const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-	const url = URL.createObjectURL(blob);
-	const a = document.createElement("a");
-	a.href = url;
-	a.download = filename;
-	document.body.appendChild(a);
-	a.click();
-	setTimeout(() => {
-		URL.revokeObjectURL(url);
-		document.body.removeChild(a);
-	}, 100);
-}
 
 /* ─────────────────────── Shared UI ─────────────────────── */
 
@@ -1126,9 +1085,7 @@ function DirectoryTab({
 				<button
 					type="button"
 					onClick={() =>
-						downloadDirectoryCsv(
-							filtered,
-							CATEGORY_LABELS,
+						downloadCsv(
 							[
 								t("csvHeaders.name"),
 								t("csvHeaders.category"),
@@ -1138,6 +1095,15 @@ function DirectoryTab({
 								t("csvHeaders.country"),
 								t("csvHeaders.submitted"),
 							],
+							filtered.map((r) => [
+								r.name,
+								CATEGORY_LABELS[r.category],
+								r.company ?? "",
+								r.email,
+								r.phone,
+								r.country,
+								new Date(r.submittedAt).toISOString().slice(0, 10),
+							]),
 							`directory-${filter}-${new Date().toISOString().slice(0, 10)}.csv`,
 						)
 					}
@@ -1273,7 +1239,7 @@ export default function OnboardingPage() {
 	// onboarded (directly or via their links) + the crew they onboarded.
 	const { data: stakeholderRes, isLoading: loadingStakeholders } = useQuery({
 		queryKey: ["stakeholders"],
-		queryFn: getStakeholders,
+		queryFn: () => getStakeholders(),
 	});
 	const { data: crewRes, isLoading: loadingCrew } = useQuery({
 		queryKey: ["crew-members", "mine"],
