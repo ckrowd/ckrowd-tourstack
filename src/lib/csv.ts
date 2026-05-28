@@ -16,7 +16,7 @@ export function downloadCsv(
 	filename: string,
 ) {
 	const body = rows.map((row) => row.map(csvCell).join(","));
-	const csv = ["﻿" + headers.map(csvCell).join(","), ...body].join("\r\n");
+	const csv = ["\uFEFF" + headers.map(csvCell).join(","), ...body].join("\r\n");
 	const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
 	const url = URL.createObjectURL(blob);
 	const a = document.createElement("a");
