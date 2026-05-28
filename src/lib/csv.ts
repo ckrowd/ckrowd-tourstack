@@ -2,7 +2,9 @@
 
 // Quote a CSV cell only when it contains a delimiter, quote, or newline.
 export function csvCell(value: string | null | undefined): string {
-	const s = value ?? "";
+	const raw = value ?? "";
+	// Mitigate CSV/Excel formula injection.
+	const s = raw.replace(/^(\s*)([=+\-@])/, "$1'$2");
 	return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
 }
 
