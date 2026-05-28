@@ -18,7 +18,7 @@ function toCategory(c: string): Category {
 	return c === "artmgmt" ? "artmgmt" : c === "workforce" ? "workforce" : "service";
 }
 
-// Flatten extra_data (one level deep) into "Title Cased" key → string pairs so
+// Flatten extra_data (one level deep) into raw key → string pairs so
 // it can be rendered in the detail view and used as CSV columns.
 function flattenExtra(extra: Record<string, unknown> | null | undefined): Record<string, string> {
 	if (!extra || typeof extra !== "object") return {};
