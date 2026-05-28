@@ -29,6 +29,12 @@ export default function AdminSideNav() {
 		},
 		{ key: "eoi", label: t("eoi"), icon: "send", href: "/admin/eoi" },
 		{
+			key: "directory",
+			label: t("directory"),
+			icon: "groups",
+			href: "/admin/directory",
+		},
+		{
 			key: "reports",
 			label: t("reports"),
 			icon: "bar_chart",

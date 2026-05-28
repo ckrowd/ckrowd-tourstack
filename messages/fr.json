@@ -2650,9 +2650,55 @@
     "overview": "Aperçu",
     "tours": "Tournées",
     "eoi": "EOI",
+    "directory": "Répertoire",
     "reports": "Rapports",
     "settings": "Paramètres",
     "newTour": "Nouvelle tournée"
+  },
+  "AdminDirectoryPage": {
+    "tagline": "Gestion de la plateforme",
+    "title": "Répertoire des intervenants",
+    "description": "Tous les intervenants enregistrés sur la plateforme, avec le détail complet des soumissions et l'export CSV.",
+    "loading": "Chargement du répertoire…",
+    "exportCsv": "Exporter en CSV",
+    "backToDirectory": "Retour au répertoire",
+    "categories": {
+      "service": "Prestataire de services",
+      "workforce": "Personnel",
+      "artmgmt": "Gestion d'artistes"
+    },
+    "filters": {
+      "all": "Tous",
+      "service": "Prestataires",
+      "workforce": "Personnel",
+      "artmgmt": "Gestion d'artistes"
+    },
+    "csvHeaders": {
+      "name": "Nom",
+      "category": "Catégorie",
+      "company": "Société / Rôle",
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "country": "Pays",
+      "submitted": "Soumis le"
+    },
+    "details": {
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "country": "Pays",
+      "submitted": "Soumis le"
+    },
+    "noEntries": {
+      "title": "Aucun intervenant enregistré pour le moment.",
+      "description": "Dès que les promoteurs ou leurs liens recueilleront des soumissions, elles apparaîtront ici."
+    },
+    "table": {
+      "name": "Nom / Société",
+      "category": "Catégorie",
+      "country": "Pays",
+      "submitted": "Soumis le",
+      "view": "Voir"
+    }
   },
   "FinancingApplyModal": {
     "title": "Demande de financement",
