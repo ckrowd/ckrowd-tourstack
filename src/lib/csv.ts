@@ -1,5 +1,6 @@
-// CSV helpers shared by directory pages.
+"use client";
 
+// CSV helpers shared by directory pages.
 // Quote a CSV cell only when it contains a delimiter, quote, or newline.
 export function csvCell(value: string | null | undefined): string {
 	const raw = value ?? "";
