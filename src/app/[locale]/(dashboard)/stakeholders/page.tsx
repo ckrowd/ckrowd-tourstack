@@ -1,7 +1,7 @@
 "use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useFormatter, useTranslations } from "next-intl";
+import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { useCallback, useEffect, useState } from "react";
 import {
 	createOnboardingLink,
@@ -209,6 +209,7 @@ function SubmissionModal({
 
 export default function OnboardingLinksPage() {
 	const t = useTranslations("StakeholdersPage");
+	const locale = useLocale();
 	const queryClient = useQueryClient();
 	const [category, setCategory] =
 		useState<(typeof CATEGORIES)[number]>("service");
@@ -217,6 +218,7 @@ export default function OnboardingLinksPage() {
 	const [expandedToken, setExpandedToken] = useState<string | null>(null);
 	const [selectedSubmission, setSelectedSubmission] =
 		useState<StakeholderSubmission | null>(null);
+	const [copied, setCopied] = useState(false);
 
 	const closeModal = useCallback(() => setSelectedSubmission(null), []);
 
@@ -241,6 +243,15 @@ export default function OnboardingLinksPage() {
 
 	const revokeMutation = useMutation({
 		mutationFn: revokeOnboardingLink,
+		onSuccess: () => {
+			void queryClient.invalidateQueries({ queryKey: ["onboardingLinks"] });
+		},
+	});
+
+	const generateEcosystemMutation = useMutation({
+		mutationFn: async (missing: (typeof CATEGORIES)[number][]) => {
+			return Promise.all(missing.map((cat) => createOnboardingLink({ category: cat })));
+		},
 		onSuccess: () => {
 			void queryClient.invalidateQueries({ queryKey: ["onboardingLinks"] });
 		},
@@ -275,6 +286,27 @@ export default function OnboardingLinksPage() {
 	const submissions = stakeholdersQuery.data?.data ?? [];
 	const submissionsLoaded = !stakeholdersQuery.isLoading;
 
+	// ── Invite Ecosystem ──────────────────────────────────────────────────────
+	const serviceToken = links.find((l) => l.category === "service" && l.is_active)?.token;
+	const workforceToken = links.find((l) => l.category === "workforce" && l.is_active)?.token;
+	const artmgmtToken = links.find((l) => l.category === "artmgmt" && l.is_active)?.token;
+
+	const universalUrl =
+		serviceToken && workforceToken && artmgmtToken && typeof window !== "undefined"
+			? `${window.location.origin}/${locale}/join?s=${String(serviceToken)}&w=${String(workforceToken)}&a=${String(artmgmtToken)}`
+			: null;
+
+	const missingCategories = (["service", "workforce", "artmgmt"] as const).filter(
+		(cat) => !links.some((l) => l.category === cat && l.is_active),
+	);
+
+	async function handleCopyUniversalUrl() {
+		if (!universalUrl) return;
+		await navigator.clipboard.writeText(universalUrl);
+		setCopied(true);
+		setTimeout(() => setCopied(false), 2000);
+	}
+
 	return (
 		<div className="bg-surface text-on-surface">
 			<TopNav />
@@ -308,6 +340,65 @@ export default function OnboardingLinksPage() {
 									: t("header.export")}
 							</button>
 						</header>
+
+						{/* ── Invite Ecosystem ──────────────────────────────────────── */}
+						<section className="rounded-2xl overflow-hidden shadow-lg">
+							<div className="bg-gradient-to-r from-[#FF5A30] to-[#cc4826] p-6 text-white">
+								<div className="flex flex-col md:flex-row md:items-start justify-between gap-5">
+									<div className="flex items-start gap-4">
+										<div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
+											<span className="material-symbols-outlined text-white">share</span>
+										</div>
+										<div>
+											<h2 className="font-(family-name:--font-manrope) text-lg font-extrabold mb-1">
+												{t("inviteEcosystem.title")}
+											</h2>
+											<p className="text-sm text-white/80">
+												{t("inviteEcosystem.description")}
+											</p>
+										</div>
+									</div>
+									<div className="shrink-0">
+										{universalUrl ? (
+											<button
+												type="button"
+												onClick={() => { void handleCopyUniversalUrl(); }}
+												className="flex items-center gap-2 px-5 py-2.5 bg-white text-[#FF5A30] rounded-xl text-sm font-bold hover:bg-white/90 transition-colors shadow-sm"
+											>
+												<span className="material-symbols-outlined text-sm">
+													{copied ? "check" : "content_copy"}
+												</span>
+												{copied ? t("inviteEcosystem.copied") : t("inviteEcosystem.copyLink")}
+											</button>
+										) : (
+											<button
+												type="button"
+												disabled={generateEcosystemMutation.isPending || linksQuery.isLoading}
+												onClick={() => generateEcosystemMutation.mutate(missingCategories)}
+												className="flex items-center gap-2 px-5 py-2.5 bg-white text-[#FF5A30] rounded-xl text-sm font-bold hover:bg-white/90 transition-colors shadow-sm disabled:opacity-60"
+											>
+												<span className="material-symbols-outlined text-sm">
+													{generateEcosystemMutation.isPending ? "pending" : "link"}
+												</span>
+												{generateEcosystemMutation.isPending
+													? t("inviteEcosystem.generating")
+													: t("inviteEcosystem.generateAll")}
+											</button>
+										)}
+									</div>
+								</div>
+								{universalUrl && (
+									<div className="mt-4 bg-black/20 rounded-xl px-4 py-3">
+										<p className="text-[10px] font-bold uppercase tracking-widest text-white/60 mb-1">
+											{t("inviteEcosystem.urlLabel")}
+										</p>
+										<p className="text-xs text-white/90 font-mono break-all leading-relaxed">
+											{universalUrl}
+										</p>
+									</div>
+								)}
+							</div>
+						</section>
 
 						<section className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10">
 							<h2 className="font-(family-name:--font-manrope) text-xl font-bold mb-4">

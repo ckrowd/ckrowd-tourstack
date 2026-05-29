@@ -617,6 +617,15 @@
       "proofFile": "Pièce justificative",
       "attachedFile": "Fichier joint",
       "download": "Télécharger"
+    },
+    "inviteEcosystem": {
+      "title": "Inviter votre écosystème",
+      "description": "Un seul lien — les parties prenantes choisissent leur rôle à leur arrivée.",
+      "copyLink": "Copier le lien d'invitation",
+      "copied": "Copié !",
+      "generateAll": "Générer le lien d'invitation",
+      "generating": "Génération…",
+      "urlLabel": "Partagez ce lien avec votre équipe"
     }
   },
   "WorkforcePage": {
@@ -3881,5 +3890,94 @@
   "Metadata": {
     "title": "Tourstack par Ckrowd",
     "description": "Tourstack par Ckrowd connecte les artistes, les promoteurs et les financiers sur une scène unique de haute performance."
+  },
+  "JoinPage": {
+    "nav": {
+      "login": "Se connecter"
+    },
+    "hero": {
+      "badge": "Inscription TourStack",
+      "title": "Dynamisez la musique live en Afrique",
+      "description": "TourStack connecte promoteurs, prestataires, équipes et managers d'artistes — pour accéder au financement, à l'assurance et aux opportunités internationales."
+    },
+    "about": {
+      "title": "Pourquoi rejoindre TourStack ?",
+      "pillars": {
+        "data": {
+          "title": "Créez votre profil",
+          "description": "Un profil vérifié et référençable qui vous met en contact avec promoteurs, financiers et partenaires du continent."
+        },
+        "finance": {
+          "title": "Accédez au financement",
+          "description": "Les membres de l'écosystème inscrit sont éligibles au financement via les partenaires bancaires de TourStack."
+        },
+        "network": {
+          "title": "Réseau panafricain",
+          "description": "Soyez découvert pour des concerts et festivals au-delà de votre pays. Un profil, tous les marchés."
+        }
+      }
+    },
+    "roles": {
+      "title": "Choisissez votre rôle",
+      "subtitle": "Sélectionnez le rôle qui décrit le mieux votre activité dans l'industrie musicale live.",
+      "unavailable": "Indisponible",
+      "noTokensNotice": "Aucun lien d'invitation détecté. Demandez au promoteur qui vous a invité de partager son lien.",
+      "service": {
+        "title": "Prestataire de services",
+        "description": "Entreprises qui fournissent biens et services aux concerts. Inscrivez votre entreprise et soyez découvert.",
+        "examples": [
+          "Sociétés son & audiovisuel",
+          "Fournisseurs de scènes & gréement",
+          "Éclairage & groupes électrogènes",
+          "Logistique & transport",
+          "Sécurité & services médicaux"
+        ],
+        "cta": "S'inscrire comme prestataire"
+      },
+      "workforce": {
+        "title": "Équipe & Personnel",
+        "description": "Professionnels individuels travaillant sur des événements live. Construisez votre profil vérifié.",
+        "examples": [
+          "Directeurs de scène & production",
+          "Ingénieurs FOH & monitoring",
+          "Techniciens lumière & vidéo",
+          "Tour managers & chauffeurs",
+          "Équipes hospitalité & logistique"
+        ],
+        "cta": "S'inscrire comme technicien"
+      },
+      "artmgmt": {
+        "title": "Management artistique",
+        "description": "Managers et sociétés de management qui bookent et tournent des artistes sur le continent africain.",
+        "examples": [
+          "Managers d'artistes solo",
+          "Agences de management",
+          "Sociétés de booking & tournées",
+          "Représentants de labels"
+        ],
+        "cta": "S'inscrire comme manager"
+      }
+    },
+    "benefits": {
+      "title": "Ce que l'inscription débloque",
+      "items": {
+        "profile": {
+          "title": "Profil vérifié",
+          "description": "Un dossier permanent de vos compétences, historique et localisation."
+        },
+        "finance": {
+          "title": "Financement commercial",
+          "description": "Accédez à l'escompte de factures via nos partenaires bancaires."
+        },
+        "insurance": {
+          "title": "Assurance événementielle",
+          "description": "Tarifs d'assurance négociés en masse dans l'écosystème TourStack."
+        },
+        "opportunities": {
+          "title": "Travail panafricain",
+          "description": "Soyez mis en relation avec des concerts au-delà de votre pays."
+        }
+      }
+    }
   }
 }

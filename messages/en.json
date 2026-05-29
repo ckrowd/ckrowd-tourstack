@@ -617,6 +617,15 @@
       "proofFile": "Proof file",
       "attachedFile": "Attached file",
       "download": "Download"
+    },
+    "inviteEcosystem": {
+      "title": "Invite Your Ecosystem",
+      "description": "One link — stakeholders choose their own role when they arrive.",
+      "copyLink": "Copy Invite Link",
+      "copied": "Copied!",
+      "generateAll": "Generate Invite Link",
+      "generating": "Generating…",
+      "urlLabel": "Share this link with your team"
     }
   },
   "WorkforcePage": {
@@ -3881,5 +3890,106 @@
   "Metadata": {
     "title": "Tourstack by Ckrowd",
     "description": "Tourstack by Ckrowd connects artists, promoters, and financiers on a single high-performance stage."
+  },
+  "JoinPage": {
+    "nav": {
+      "login": "Log in"
+    },
+    "hero": {
+      "badge": "TourStack Onboarding",
+      "title": "Power Africa's Live Music Industry",
+      "description": "TourStack connects promoters, service providers, crew, and artist managers across Africa — enabling access to financing, insurance, and cross-border concert opportunities."
+    },
+    "about": {
+      "title": "Why join TourStack?",
+      "pillars": {
+        "data": {
+          "title": "Build your profile",
+          "description": "Create a verified, searchable profile that puts you in front of promoters, financiers, and partners across the continent."
+        },
+        "finance": {
+          "title": "Access financing",
+          "description": "Onboarded ecosystem members are eligible for trade finance and invoice discounting through TourStack's banking partners."
+        },
+        "network": {
+          "title": "Pan-African network",
+          "description": "Get discovered for concerts and festivals beyond your home country. One profile, every market."
+        }
+      }
+    },
+    "roles": {
+      "title": "Choose your path",
+      "subtitle": "Select the role that best describes how you work in the live music industry.",
+      "unavailable": "Not available",
+      "noTokensNotice": "No onboarding link detected. Ask the promoter who invited you to share their invite link.",
+      "service": {
+        "title": "Service Provider",
+        "description": "Companies and enterprises that supply goods or services to concerts and festivals. Register your business and get discovered by promoters across Africa.",
+        "examples": [
+          "Sound & AV companies",
+          "Staging & rigging suppliers",
+          "Lighting & power generators",
+          "Logistics & transportation",
+          "Security & medical services"
+        ],
+        "cta": "Register as Service Provider"
+      },
+      "workforce": {
+        "title": "Crew & Workforce",
+        "description": "Individual professionals who work on live events. Build your verified profile and get hired for tours across Africa.",
+        "examples": [
+          "Stage & production managers",
+          "FOH & monitor engineers",
+          "Lighting & video technicians",
+          "Tour managers & drivers",
+          "Hospitality & logistics crew"
+        ],
+        "cta": "Register as Crew Member"
+      },
+      "artmgmt": {
+        "title": "Artist Management",
+        "description": "Artist managers and management companies who book and tour acts across the African continent.",
+        "examples": [
+          "Solo artist managers",
+          "Artist management agencies",
+          "Booking & touring companies",
+          "Label representatives"
+        ],
+        "cta": "Register as Artist Manager"
+      }
+    },
+    "benefits": {
+      "title": "What onboarding unlocks",
+      "items": {
+        "profile": {
+          "title": "Verified profile",
+          "description": "A permanent, searchable record of your skills, history, and location."
+        },
+        "finance": {
+          "title": "Trade financing",
+          "description": "Access invoice discounting and working capital through our banking partners."
+        },
+        "insurance": {
+          "title": "Event insurance",
+          "description": "Group insurance rates negotiated in bulk across the TourStack ecosystem."
+        },
+        "opportunities": {
+          "title": "Pan-African work",
+          "description": "Get matched with concerts and festivals beyond your home country."
+        }
+      }
+    }
+  },
+  "StakeholdersPageExtra": {
+    "inviteEcosystem": {
+      "title": "Invite Your Ecosystem",
+      "description": "One link — stakeholders choose their own role when they arrive.",
+      "copyLink": "Copy Invite Link",
+      "copied": "Copied!",
+      "generateAll": "Generate Invite Link",
+      "generating": "Generating…",
+      "missingCategories": "Missing links for: {categories}. Click Generate to create them.",
+      "urlLabel": "Share this link with your ecosystem"
+    }
   }
 }
