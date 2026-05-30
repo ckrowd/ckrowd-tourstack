@@ -2966,7 +2966,13 @@
       "tourStopAdvance": "Tour Stop Advance (up to $30k)",
       "venueBuildOutCredit": "Venue Build-Out Credit (up to $75k)",
       "eventInsuranceBundle": "Event Insurance Bundle",
-      "marketingTicketingFloat": "Marketing & Ticketing Float (up to $15k)"
+      "marketingTicketingFloat": "Marketing & Ticketing Float (up to $15k)",
+      "eventCancellation": "Event Cancellation",
+      "creditGuarantee": "Credit Guarantee",
+      "promoterBusiness": "Promoter Business (SME)",
+      "touringWorkforce": "Touring Workforce",
+      "aviationEquipment": "Aviation & Equipment",
+      "audienceTicketProtection": "Audience Ticket Protection"
     },
     "fields": {
       "product": "Product",

@@ -2,16 +2,17 @@
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import FinancingApplyButton from "@/components/FinancingApplyButton";
+import { INSURANCE_PRODUCT_IDS } from "@/components/FinancingApplyModal";
 import SideNav from "@/components/SideNav";
 import StepForm from "@/components/StepForm";
 import TopNav from "@/components/TopNav";
 import { Link, useRouter } from "@/i18n/routing";
 
-// Insurance applications are stored as financing applications under this
-// product, which is what the insurance-admin queue lists. Applying for
-// insurance therefore goes through the financing apply modal with this
-// product preselected.
-const INSURANCE_PRODUCT = "Event Insurance Bundle" as const;
+// Insurance applications are stored as financing applications under one of the
+// six named insurance products, which is what the insurance-admin queue lists.
+// Applying for insurance goes through the financing apply modal scoped to the
+// insurance suite, defaulting to this product.
+const INSURANCE_DEFAULT_PRODUCT = INSURANCE_PRODUCT_IDS[0];
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
@@ -70,6 +71,7 @@ export default function InsurancePage() {
 
 	const INSURANCE_PRODUCTS = [
 		{
+			productId: INSURANCE_PRODUCT_IDS[0],
 			name: t("productSuite.0.name"),
 			tag: t("productTags.event"),
 			icon: "event_busy",
@@ -78,6 +80,7 @@ export default function InsurancePage() {
 			highlight: false,
 		},
 		{
+			productId: INSURANCE_PRODUCT_IDS[1],
 			name: t("productSuite.1.name"),
 			tag: t("productTags.highest"),
 			icon: "account_balance",
@@ -86,6 +89,7 @@ export default function InsurancePage() {
 			highlight: true,
 		},
 		{
+			productId: INSURANCE_PRODUCT_IDS[2],
 			name: t("productSuite.2.name"),
 			tag: t("productTags.sme"),
 			icon: "business",
@@ -94,6 +98,7 @@ export default function InsurancePage() {
 			highlight: false,
 		},
 		{
+			productId: INSURANCE_PRODUCT_IDS[3],
 			name: t("productSuite.3.name"),
 			tag: t("productTags.group"),
 			icon: "groups",
@@ -102,6 +107,7 @@ export default function InsurancePage() {
 			highlight: false,
 		},
 		{
+			productId: INSURANCE_PRODUCT_IDS[4],
 			name: t("productSuite.4.name"),
 			tag: t("productTags.specialty"),
 			icon: "flight",
@@ -110,6 +116,7 @@ export default function InsurancePage() {
 			highlight: false,
 		},
 		{
+			productId: INSURANCE_PRODUCT_IDS[5],
 			name: t("productSuite.5.name"),
 			tag: t("productTags.embedded"),
 			icon: "confirmation_number",
@@ -245,7 +252,8 @@ export default function InsurancePage() {
 							</p>
 						</div>
 						<FinancingApplyButton
-							defaultProduct={INSURANCE_PRODUCT}
+							defaultProduct={INSURANCE_DEFAULT_PRODUCT}
+							products={INSURANCE_PRODUCT_IDS}
 							className="flex items-center gap-2 bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all self-start md:self-auto shrink-0"
 						>
 							<span className="material-symbols-outlined text-sm">
@@ -471,7 +479,8 @@ export default function InsurancePage() {
 								</p>
 							</div>
 							<FinancingApplyButton
-								defaultProduct={INSURANCE_PRODUCT}
+								defaultProduct={INSURANCE_DEFAULT_PRODUCT}
+								products={INSURANCE_PRODUCT_IDS}
 								className="relative z-10 bg-white text-[#FF5A30] px-8 py-3 rounded-xl font-bold text-sm hover:scale-105 transition-transform shrink-0"
 							>
 								{t("overview.cta.button")} →
@@ -854,7 +863,8 @@ export default function InsurancePage() {
 											</div>
 										</div>
 										<FinancingApplyButton
-											defaultProduct={INSURANCE_PRODUCT}
+											defaultProduct={p.productId}
+											products={INSURANCE_PRODUCT_IDS}
 											className="text-[#FF5A30] font-bold text-sm flex items-center gap-1 hover:gap-2 transition-all mt-auto"
 										>
 											{t("products.apply")}
@@ -1101,7 +1111,8 @@ export default function InsurancePage() {
 											{t("profile.cta.description")}
 										</p>
 										<FinancingApplyButton
-											defaultProduct={INSURANCE_PRODUCT}
+											defaultProduct={INSURANCE_DEFAULT_PRODUCT}
+											products={INSURANCE_PRODUCT_IDS}
 											className="bg-[#FF5A30] text-white px-6 py-2.5 rounded-xl font-bold text-sm hover:opacity-90 transition-all"
 										>
 											{t("profile.cta.button")} →
