@@ -42,6 +42,7 @@ export default function AdminDirectoryPage() {
 	const t = useTranslations("AdminDirectoryPage");
 	const locale = useLocale();
 	const [filter, setFilter] = useState<"all" | Category>("all");
+	const [search, setSearch] = useState("");
 	const [selectedId, setSelectedId] = useState<string | null>(null);
 
 	const { data: res, isLoading } = useQuery({
@@ -74,7 +75,25 @@ export default function AdminDirectoryPage() {
 		{ key: "artmgmt", label: t("filters.artmgmt") },
 	];
 
-	const filtered = filter === "all" ? entries : entries.filter((e) => e.category === filter);
+	// Free-text search across the fields a directory query cares about — name,
+	// company, country, town/city and every captured detail (service types,
+	// roles, etc.) — so queries like "speaker suppliers in Abeokuta" resolve.
+	const query = search.trim().toLowerCase();
+	const byCategory = filter === "all" ? entries : entries.filter((e) => e.category === filter);
+	const filtered = query
+		? byCategory.filter((e) => {
+				const haystack = [
+					e.name,
+					e.company,
+					e.country,
+					e.email,
+					...Object.values(e.extra),
+				]
+					.join(" ")
+					.toLowerCase();
+				return haystack.includes(query);
+			})
+		: byCategory;
 	const selected = selectedId ? entries.find((e) => e.id === selectedId) ?? null : null;
 
 	function handleExport() {
@@ -180,6 +199,20 @@ export default function AdminDirectoryPage() {
 				<p className="text-on-surface-variant">{t("description")}</p>
 			</header>
 
+			<div className="relative mb-4 max-w-md">
+				<span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant/60 text-lg pointer-events-none">
+					search
+				</span>
+				<input
+					type="search"
+					value={search}
+					onChange={(e) => setSearch(e.target.value)}
+					placeholder={t("searchPlaceholder")}
+					aria-label={t("searchPlaceholder")}
+					className="w-full rounded-xl bg-surface-container-highest pl-10 pr-4 py-2.5 text-sm border border-outline-variant/30 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+				/>
+			</div>
+
 			<div className="flex items-center justify-between gap-4 mb-6 flex-wrap">
 				<div className="flex gap-2 flex-wrap">
 					{FILTER_TABS.map((tab) => (
@@ -221,13 +254,13 @@ export default function AdminDirectoryPage() {
 			) : filtered.length === 0 ? (
 				<div className="text-center py-20 bg-surface-container-lowest rounded-2xl border border-outline-variant/10">
 					<span className="material-symbols-outlined text-5xl text-on-surface-variant/30 block mb-4">
-						group_add
+						{query ? "search_off" : "group_add"}
 					</span>
 					<p className="text-on-surface-variant font-medium">
-						{t("noEntries.title")}
+						{query ? t("searchNoResults.title") : t("noEntries.title")}
 					</p>
 					<p className="text-sm text-on-surface-variant mt-1">
-						{t("noEntries.description")}
+						{query ? t("searchNoResults.description") : t("noEntries.description")}
 					</p>
 				</div>
 			) : (

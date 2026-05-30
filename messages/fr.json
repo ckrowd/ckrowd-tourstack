@@ -1,4 +1,239 @@
 {
+  "StakeholderTaxonomy": {
+    "departments": {
+      "production_stage": "Production & régie scène",
+      "audio": "Ingénierie son",
+      "lighting_visual": "Lumière & vidéo",
+      "staging_fx": "Scène, construction & effets spéciaux",
+      "creative_performance": "Création & performance",
+      "artist_talent": "Services artiste & talents",
+      "backline": "Backline & instruments",
+      "digital_media": "Numérique, médias & contenu",
+      "ticketing_ops": "Billetterie & opérations",
+      "transport_logistics": "Transport & logistique",
+      "merch_retail": "Merchandising & vente"
+    },
+    "roles": {
+      "production_manager": "Directeur de production",
+      "tour_manager": "Régisseur de tournée",
+      "stage_manager": "Régisseur de scène",
+      "assistant_stage_manager": "Assistant régisseur de scène",
+      "production_coordinator": "Coordinateur de production",
+      "production_assistant": "Assistant de production",
+      "technical_director": "Directeur technique",
+      "show_caller": "Conducteur de spectacle",
+      "advance_person": "Éclaireur de tournée",
+      "tour_accountant": "Comptable de tournée",
+      "tour_publicist": "Attaché de presse de tournée",
+      "venue_liaison": "Agent de liaison salle",
+      "logistics_coordinator": "Coordinateur logistique",
+      "travel_coordinator": "Coordinateur des voyages",
+      "security_director": "Directeur de la sécurité",
+      "personal_security_officer": "Officier de protection rapprochée",
+      "security_team_member": "Agent de sécurité",
+      "runner": "Coursier de production",
+      "interpreter_translator": "Interprète / Traducteur",
+      "foh_engineer": "Ingénieur façade (FOH)",
+      "monitor_engineer": "Ingénieur retours",
+      "systems_engineer": "Ingénieur système / Tech PA",
+      "rf_coordinator": "Coordinateur RF (fréquences)",
+      "playback_technician": "Technicien playback",
+      "audio_systems_technician": "Technicien systèmes audio",
+      "microphone_technician": "Technicien microphones (A2)",
+      "cable_tech": "Technicien câblage",
+      "intercom_comms_tech": "Technicien intercom / communications",
+      "local_audio_crew": "Équipe audio locale",
+      "recording_engineer": "Ingénieur du son (enregistrement)",
+      "audio_crew_chief": "Chef d'équipe audio",
+      "lighting_designer": "Concepteur lumière",
+      "lighting_director": "Directeur / Opérateur lumière",
+      "lighting_programmer": "Programmeur lumière",
+      "head_rigger": "Chef accrocheur (rigging)",
+      "rigger": "Accrocheur (rigger)",
+      "lighting_technician": "Technicien lumière / Électricien",
+      "follow_spot_operator": "Opérateur poursuite",
+      "video_director": "Directeur vidéo",
+      "video_engineer": "Ingénieur vidéo / Tech écrans",
+      "camera_operator": "Cadreur",
+      "led_tech": "Technicien LED",
+      "laser_technician": "Technicien laser",
+      "set_designer": "Scénographe",
+      "scenic_carpenter": "Menuisier / Constructeur de décor",
+      "stage_carpenter": "Machiniste constructeur",
+      "props_master": "Accessoiriste",
+      "stage_crew_loaders": "Machinistes / Manutentionnaires",
+      "forklift_operator": "Cariste / Opérateur d'engins",
+      "automation_operator": "Opérateur automation",
+      "pyrotechnics_technician": "Technicien pyrotechnie",
+      "special_effects_technician": "Technicien effets spéciaux",
+      "musical_director": "Directeur musical",
+      "bandleader": "Chef d'orchestre",
+      "session_musician": "Musicien de session",
+      "backing_vocalist": "Choriste",
+      "dancer": "Danseur",
+      "choreographer": "Chorégraphe",
+      "creative_director": "Directeur créatif",
+      "wardrobe_stylist": "Costumier / Styliste",
+      "wardrobe_assistant": "Habilleur",
+      "hair_stylist": "Coiffeur",
+      "makeup_artist": "Maquilleur",
+      "personal_stylist": "Styliste personnel",
+      "vocal_coach": "Coach vocal",
+      "physical_trainer": "Préparateur physique",
+      "artist_manager": "Manager d'artiste",
+      "tour_booking_agent": "Agent de booking",
+      "personal_assistant": "Assistant personnel de l'artiste",
+      "artist_relations_manager": "Responsable relations artiste",
+      "talent_buyer": "Acheteur de talents",
+      "entertainment_lawyer": "Avocat du spectacle",
+      "visa_immigration_specialist": "Spécialiste visas & immigration",
+      "cultural_liaison": "Agent de liaison culturelle",
+      "tour_medic": "Médecin de tournée",
+      "nutritionist_chef": "Nutritionniste / Chef privé",
+      "backline_tech": "Technicien backline",
+      "guitar_tech": "Technicien guitare",
+      "drum_tech": "Technicien batterie",
+      "keyboard_tech": "Technicien claviers",
+      "bass_tech": "Technicien basse",
+      "piano_tuner": "Accordeur de piano",
+      "tour_photographer": "Photographe de tournée",
+      "videographer": "Vidéaste / Réalisateur",
+      "content_creator": "Créateur de contenu / Community manager",
+      "digital_marketing_manager": "Responsable marketing digital",
+      "livestream_producer": "Producteur livestream",
+      "graphic_designer": "Graphiste",
+      "motion_graphics_designer": "Motion designer",
+      "press_officer": "Attaché de presse / Coordinateur RP",
+      "radio_plugger": "Promoteur radio",
+      "box_office_manager": "Responsable billetterie",
+      "ticketing_platform_operator": "Opérateur plateforme billetterie",
+      "foh_manager": "Responsable accueil public",
+      "gate_access_control": "Contrôle d'accès / Portes",
+      "vip_hospitality_coordinator": "Coordinateur VIP & hospitalité",
+      "crowd_safety_manager": "Responsable sécurité du public",
+      "ushers_floor_staff": "Placeurs / Personnel de salle",
+      "event_cashier": "Caissier événementiel",
+      "tour_bus_driver": "Chauffeur de bus de tournée",
+      "truck_driver": "Chauffeur poids lourd",
+      "flight_coordinator": "Coordinateur des vols",
+      "private_pilot": "Pilote (aviation privée)",
+      "carnet_customs_specialist": "Spécialiste carnet / douanes",
+      "freight_forwarder": "Transitaire",
+      "ground_transport_coordinator": "Coordinateur transport terrestre",
+      "merchandise_manager": "Responsable merchandising",
+      "merch_seller": "Vendeur merchandising",
+      "merchandise_designer": "Designer merchandising",
+      "inventory_manager": "Responsable des stocks"
+    },
+    "vendorCategories": {
+      "av_production": "Audiovisuel & matériel de production",
+      "logistics_freight": "Logistique, transport & fret",
+      "venue_infrastructure": "Lieux & infrastructure",
+      "hospitality_catering": "Hospitalité, traiteur & hébergement",
+      "ticketing_tech": "Billetterie, technologie & numérique",
+      "marketing_media": "Marketing, médias & promotion",
+      "merch_retail_vendor": "Merchandising & vente",
+      "security_safety_medical": "Sécurité, sûreté & médical",
+      "finance_legal_insurance": "Finance, juridique & assurance",
+      "sponsorship_activation": "Sponsoring & activation de marque"
+    },
+    "vendorTypes": {
+      "pa_system_rental": "Location de système son (PA)",
+      "monitor_system_supplier": "Fournisseur systèmes de retours",
+      "mixing_console_supplier": "Fournisseur consoles de mixage",
+      "lighting_rig_supplier": "Fournisseur kit lumière",
+      "led_screen_supplier": "Fournisseur écrans LED / murs vidéo",
+      "truss_rigging_supplier": "Fournisseur structures & rigging",
+      "power_distribution_company": "Société de distribution électrique",
+      "intercom_comms_supplier": "Fournisseur intercom / communications",
+      "staging_deck_supplier": "Fournisseur scènes & podiums",
+      "special_effects_equipment_supplier": "Fournisseur effets spéciaux",
+      "backline_rental_company": "Location de backline",
+      "projection_laser_supplier": "Fournisseur projection & laser",
+      "broadcast_equipment_supplier": "Fournisseur matériel broadcast",
+      "tour_trucking_company": "Société de transport de tournée",
+      "freight_forwarding_customs": "Transit & courtage en douane",
+      "charter_aviation_company": "Société d'aviation charter",
+      "airport_ground_handling": "Assistance aéroportuaire",
+      "ground_transport_coach": "Transport terrestre / autocars",
+      "artist_ground_transport": "Transport artiste (luxe)",
+      "warehouse_staging_facility": "Entrepôt & site de préparation",
+      "forklift_machinery_hire": "Location chariots & engins",
+      "shipping_container_logistics": "Logistique conteneurs maritimes",
+      "courier_document_service": "Service coursier & documents",
+      "fuel_generator_service": "Fournisseur carburant / groupes électrogènes",
+      "carnet_ata_provider": "Fournisseur carnet ATA",
+      "venue_owner_operator": "Propriétaire de salle / stade",
+      "temporary_structure_company": "Société de structures temporaires",
+      "fencing_barrier_supplier": "Fournisseur barrières & clôtures",
+      "portable_toilet_sanitation": "Sanitaires mobiles & assainissement",
+      "power_generation_company": "Société de production électrique",
+      "water_supply_company": "Fournisseur d'eau & citernes",
+      "signage_wayfinding": "Signalétique & orientation",
+      "furniture_equipment_hire": "Location mobilier & équipement",
+      "cleaning_waste_management": "Nettoyage & gestion des déchets",
+      "construction_build_company": "Société de construction",
+      "tour_catering_company": "Traiteur de tournée",
+      "artist_hospitality_rider": "Hospitalité artiste & rider",
+      "hotel_accommodation_partner": "Partenaire hôtelier & hébergement",
+      "vip_hospitality_company": "Hospitalité VIP & expérience",
+      "beverage_distributor": "Distributeur de boissons",
+      "mobile_kitchen_hire": "Location cuisine mobile",
+      "catering_staffing_agency": "Agence de personnel traiteur",
+      "local_restaurant_partner": "Restaurant local / livraison repas",
+      "ice_cold_chain_supplier": "Fournisseur glace & chaîne du froid",
+      "ticketing_platform_provider": "Fournisseur plateforme billetterie",
+      "pos_system_provider": "Fournisseur systèmes de caisse (POS)",
+      "access_control_scanning": "Contrôle d'accès / scan",
+      "rfid_wristband_supplier": "Fournisseur bracelets RFID",
+      "mobile_money_integration": "Partenaire intégration mobile money",
+      "streaming_broadcast_tech": "Partenaire technologie streaming",
+      "cybersecurity_data_protection": "Cybersécurité & protection des données",
+      "website_app_developer": "Développeur site & application",
+      "data_analytics_company": "Société d'analyse de données",
+      "outdoor_advertising": "Affichage extérieur",
+      "radio_station_group": "Station / groupe radio",
+      "television_media_house": "Chaîne TV / maison de médias",
+      "digital_marketing_agency": "Agence de marketing digital",
+      "pr_agency_local": "Agence RP (marché local)",
+      "influencer_marketing_agency": "Agence d'influence",
+      "print_production_company": "Imprimeur",
+      "street_team_agency": "Équipe de rue / promotion terrain",
+      "photography_agency": "Agence photo",
+      "video_production_company": "Société de production vidéo",
+      "streaming_dsp_marketing": "Partenaire marketing streaming (DSP)",
+      "merchandise_manufacturer": "Fabricant de merchandising",
+      "merch_distributor_seller": "Distributeur / vendeur merchandising",
+      "online_merch_store": "Boutique merchandising en ligne",
+      "custom_apparel_embroidery": "Vêtements personnalisés & broderie",
+      "packaging_fulfilment": "Conditionnement & expédition",
+      "popup_retail_infrastructure": "Infrastructure de vente éphémère",
+      "event_security_company": "Société de sécurité événementielle",
+      "close_protection_agency": "Agence de protection rapprochée",
+      "emergency_medical_services": "Services médicaux d'urgence",
+      "fire_safety_company": "Société de sécurité incendie",
+      "crowd_safety_consultancy": "Conseil en sécurité du public",
+      "drug_detection_screening": "Détection / contrôle de substances",
+      "cctv_surveillance_provider": "Fournisseur vidéosurveillance",
+      "ohs_consultant": "Consultant santé & sécurité au travail",
+      "tour_finance_provider": "Fournisseur de financement de tournée",
+      "event_insurance_provider": "Assureur événementiel",
+      "payment_processing_company": "Société de traitement des paiements",
+      "mobile_money_operator": "Opérateur mobile money",
+      "entertainment_law_firm": "Cabinet de droit du spectacle",
+      "tour_accountancy_firm": "Cabinet comptable de tournée",
+      "currency_exchange_fx": "Bureau de change / fournisseur FX",
+      "withholding_tax_specialist": "Spécialiste retenue à la source & royalties",
+      "audit_settlement_services": "Services d'audit & règlement",
+      "sponsorship_agency": "Agence de sponsoring",
+      "brand_activation_company": "Société d'activation de marque",
+      "ambient_guerrilla_agency": "Agence marketing guérilla",
+      "sampling_promotions_agency": "Agence d'échantillonnage & promotion",
+      "sponsor_hospitality_provider": "Prestataire hospitalité sponsors",
+      "digital_activation_agency": "Agence d'activation digitale",
+      "rights_licensing_agency": "Agence droits & licences"
+    }
+  },
   "LandingPage": {
     "hero": {
       "imageAlt": "Foule de concert en direct à haute énergie la nuit avec des lumières de scène vibrantes et des mains levées",
@@ -616,7 +851,18 @@
       "submittedOn": "Soumis le",
       "proofFile": "Pièce justificative",
       "attachedFile": "Fichier joint",
-      "download": "Télécharger"
+      "download": "Télécharger",
+      "title": "Parties prenantes inscrites",
+      "filterAll": "Tous"
+    },
+    "inviteEcosystem": {
+      "title": "Inviter votre écosystème",
+      "description": "Un seul lien — les parties prenantes choisissent leur rôle à leur arrivée.",
+      "copyLink": "Copier le lien d'invitation",
+      "copied": "Copié !",
+      "generateAll": "Générer le lien d'invitation",
+      "generating": "Génération…",
+      "urlLabel": "Partagez ce lien avec votre équipe"
     }
   },
   "WorkforcePage": {
@@ -2659,6 +2905,11 @@
     "tagline": "Gestion de la plateforme",
     "title": "Répertoire des intervenants",
     "description": "Tous les intervenants enregistrés sur la plateforme, avec le détail complet des soumissions et l'export CSV.",
+    "searchPlaceholder": "Rechercher par nom, entreprise, pays ou ville…",
+    "searchNoResults": {
+      "title": "Aucun résultat.",
+      "description": "Essayez un autre nom, ville, pays ou service."
+    },
     "loading": "Chargement du répertoire…",
     "exportCsv": "Exporter en CSV",
     "backToDirectory": "Retour au répertoire",
@@ -2783,6 +3034,33 @@
     }
   },
   "StakeholderRegistrationPage": {
+    "picker": {
+      "searchPlaceholder": "Rechercher…",
+      "selected": "Sélectionné",
+      "noResults": "Aucun résultat — essayez un autre terme."
+    },
+    "valueProps": {
+      "heading": "Ce que ce profil complet débloque",
+      "note": "Un profil complet est la condition pour accéder au financement et à l'assurance TourStack. Cela prend quelques minutes — et vous suit sur tous les marchés.",
+      "items": {
+        "directory": {
+          "title": "Répertoire panafricain",
+          "body": "Devenez un profil vérifié et consultable, repérable par les promoteurs partout en Afrique — par pays, ville, catégorie et service."
+        },
+        "financing": {
+          "title": "Éligibilité au financement",
+          "body": "Les membres éligibles accèdent à un fonds de roulement et à l'escompte de factures jusqu'à 1 000 000 $, adossés à de vrais contrats de promoteurs."
+        },
+        "insurance": {
+          "title": "Accès à l'assurance collective",
+          "body": "Bénéficiez d'assurances événement et main-d'œuvre à des tarifs négociés pour tout l'écosystème — bien meilleurs qu'en solo."
+        },
+        "certification": {
+          "title": "Certification portable",
+          "body": "Obtenez une certification standardisée reconnue sur tous les marchés TourStack à mesure que la plateforme se développe."
+        }
+      }
+    },
     "header": {
       "tagline": "Invitation à l'intégration",
       "title": "Inscription des parties prenantes"
@@ -2860,6 +3138,8 @@
         "jobTitlePlaceholder": "ex. Responsable des opérations",
         "companyName": "Nom de l'entreprise",
         "companyNamePlaceholder": "Nom commercial enregistré",
+        "companyRegNumber": "Numéro d'immatriculation de l'entreprise",
+        "companyRegNumberPlaceholder": "ex. RC 1234567",
         "email": "E-mail professionnel",
         "emailPlaceholder": "nom@entreprise.com",
         "phone": "Téléphone",
@@ -2942,6 +3222,12 @@
         "flexible": "Flexible — ouvert aux déplacements",
         "local_only": "Engagements locaux uniquement"
       },
+      "genders": {
+        "male": "Homme",
+        "female": "Femme",
+        "other": "Autre",
+        "prefer_not": "Préfère ne pas répondre"
+      },
       "yesNo": {
         "yes": "Oui",
         "no": "Non"
@@ -2963,6 +3249,8 @@
         "countryPlaceholder": "ex. Nigéria",
         "city": "Ville",
         "cityPlaceholder": "ex. Lagos",
+        "dateOfBirth": "Date de naissance",
+        "gender": "Genre",
         "nationalId": "Pièce d'identité / N° de passeport",
         "nationalIdPlaceholder": "Facultatif",
         "primaryRoles": "Rôles principaux",
@@ -3029,6 +3317,8 @@
       "fields": {
         "agencyName": "Nom de l'agence",
         "agencyNamePlaceholder": "Nom de l'agence enregistrée",
+        "companyRegNumber": "Numéro d'immatriculation de l'entreprise",
+        "companyRegNumberPlaceholder": "ex. RC 1234567",
         "contactName": "Nom du contact",
         "contactNamePlaceholder": "Nom complet",
         "jobTitle": "Fonction",
@@ -3881,5 +4171,182 @@
   "Metadata": {
     "title": "Tourstack par Ckrowd",
     "description": "Tourstack par Ckrowd connecte les artistes, les promoteurs et les financiers sur une scène unique de haute performance."
+  },
+  "JoinPage": {
+    "nav": {
+      "login": "Se connecter"
+    },
+    "hero": {
+      "badge": "Ecosysteme TourStack",
+      "title": "L'industrie musicale live en Afrique — Propulsee par des gens comme vous",
+      "description": "TourStack agregre l'ecosysteme musical live a travers l'Afrique. Rejoignez le reseau qui connecte promoteurs, prestataires, equipages et managers d'artistes.",
+      "statLabel": "Financement commercial disponible pour les membres eligibles",
+      "statValue": "Jusqu'a 1 000 000 $"
+    },
+    "stats": {
+      "title": "L'Afrique compte 1,4 milliard de fans de musique. Presque personne ne gagne sa vie avec les concerts — pour l'instant.",
+      "subtitle": "La demande est prouvée. Ce qui manque, c'est l'infrastructure pour la financer, l'assurer et l'organiser. C'est ce que vous rejoignez.",
+      "economy": { "value": "25,8 Md$", "label": "Économie de la musique live en Afrique" },
+      "fans": { "value": "1,4 milliard", "label": "Fans de musique africains" },
+      "markets": { "value": "25 marchés", "label": "Déploiement panafricain en cours" },
+      "financing": { "value": "Jusqu'à 1 M$", "label": "Financement commercial pour les membres" }
+    },
+    "model": {
+      "eyebrow": "Comment fonctionne l'écosystème",
+      "title": "Le Concert Touring as a Service",
+      "subtitle": "TourStack réunit sur une seule plateforme chaque personne et chaque dollar nécessaires à une tournée. Quatre étapes transforment l'industrie de la musique live en un écosystème finançable et assurable — chacune s'appuyant sur la précédente.",
+      "pillars": {
+        "certify": { "title": "Soyez certifié", "body": "Inscrivez-vous et complétez votre profil pour obtenir un statut vérifié — le titre professionnel qui débloque tout le reste." },
+        "bank": { "title": "Soyez bancarisé", "body": "Les membres certifiés sont intégrés au système financier formel et deviennent des entreprises traçables et finançables." },
+        "finance": { "title": "Soyez financé", "body": "Accédez à un fonds de roulement et au financement de tournée adossés à des contrats confirmés et à de vraies factures de promoteurs." },
+        "operate": { "title": "Opérez sur TourStack", "body": "Recrutement, paie, contrats et paiements passent par une seule plateforme, sur tous les marchés, en temps réel." }
+      }
+    },
+    "about": {
+      "eyebrow": "Qu'est-ce que TourStack",
+      "title": "La plateforme de business intelligence pour l'industrie musicale live en Afrique",
+      "body": "TourStack est construit par Ckrowd pour agreger chaque professionnel de l'ecosysteme musical live en Afrique. Nous collectons des donnees structurees pour que les promoteurs, banques et assureurs puissent prendre des decisions plus rapides.",
+      "pillars": {
+        "data": {
+          "title": "Un annuaire continental",
+          "body": "Chaque personne et entreprise inscrite devient une entree dans une base de donnees verifiable par pays, ville, categorie et type de service."
+        },
+        "finance": {
+          "title": "Acces au financement commercial",
+          "body": "Les membres inscrits sont eligibles a l'escompte de factures et au fonds de roulement."
+        },
+        "insurance": {
+          "title": "Tarifs d'assurance collectifs",
+          "body": "Nous negocions pour tout l'ecosysteme a la fois. Les membres obtiennent des tarifs qu'ils ne pourraient pas avoir seuls."
+        },
+        "training": {
+          "title": "Formation et certification standardisées",
+          "body": "Obtenez une certification portable qui atteste de vos compétences — reconnue sur tous les marchés TourStack, de sorte qu'un titre obtenu au Ghana est aussi valable en Afrique du Sud."
+        }
+      }
+    },
+    "howItWorks": {
+      "title": "Comment ca fonctionne",
+      "steps": {
+        "register": {
+          "title": "Remplissez votre profil",
+          "body": "Choisissez votre role et completez le formulaire adapte a votre situation."
+        },
+        "verified": {
+          "title": "Integrez l'annuaire",
+          "body": "Votre profil rejoint la base de donnees visible par les promoteurs et partenaires a travers l'Afrique."
+        },
+        "opportunities": {
+          "title": "Debloquez financement et opportunites",
+          "body": "Un profil complet est la condition pour acceder au financement, a l'assurance et aux opportunites de concerts transfrontalieres."
+        }
+      }
+    },
+    "roles": {
+      "eyebrow": "Choisissez votre voie",
+      "title": "Qui etes-vous dans l'industrie musicale live ?",
+      "subtitle": "Selectionnez votre categorie. Chaque voie a un questionnaire different.",
+      "examplesLabel": "Qui est concerne",
+      "benefitsLabel": "Ce que vous debloquez",
+      "unavailable": "Indisponible",
+      "noTokensNotice": "Aucun lien d'invitation detecte. Demandez au promoteur qui vous a invite de partager son lien.",
+      "service": {
+        "title": "Prestataire de services",
+        "tagline": "Entreprises qui fournissent aux concerts",
+        "description": "Si votre entreprise fournit biens, equipements ou services aux concerts et festivals — c'est votre voie. Les prestataires sont des entreprises, pas des individus.",
+        "examples": [
+          "Societes son et audiovisuel",
+          "Fournisseurs de scenes et greement",
+          "Location eclairage et groupes electrogenes",
+          "Logistique, transport et fret",
+          "Securite et gestion de foule",
+          "Restauration et hospitalite",
+          "Ecrans LED et production"
+        ],
+        "benefits": [
+          "Reference dans l'annuaire TourStack",
+          "Eligible a l'escompte de factures avec une facture promoteur",
+          "Acces aux tarifs d'assurance collectifs negocies",
+          "Profil d'entreprise verifie qui renforce la confiance"
+        ],
+        "cta": "S'inscrire comme prestataire"
+      },
+      "workforce": {
+        "title": "Equipe et Personnel",
+        "tagline": "Professionnels individuels qui travaillent sur des evenements live",
+        "description": "Si vous etes un individu qui travaille sur des concerts — technicien, manager ou chauffeur — c'est votre voie. Les membres de l'equipe sont des personnes, pas des entreprises.",
+        "examples": [
+          "Directeurs de scene et production",
+          "Ingenieurs FOH et monitoring",
+          "Techniciens lumiere et video",
+          "Tour managers et road managers",
+          "Chauffeurs et coordinateurs logistique",
+          "Responsables securite",
+          "Equipes hospitalite et backstage"
+        ],
+        "benefits": [
+          "Profil individuel verifie — vos competences et antecedents consignes",
+          "Decouvrable par les promoteurs et societes de production",
+          "Eligible a l'assurance evenementielle individuelle",
+          "Opportunites de travail transfrontalier au fil de l'expansion de TourStack"
+        ],
+        "cta": "S'inscrire comme technicien"
+      },
+      "artmgmt": {
+        "title": "Management artistique",
+        "tagline": "Managers et agences qui bookent et tournent des artistes",
+        "description": "Si vous gerez des artistes ou dirigez une societe de management pour des tournees en Afrique — c'est votre voie.",
+        "examples": [
+          "Managers d'artistes individuels",
+          "Societes de management artistique",
+          "Agences de booking et tournees",
+          "Representants de labels en tournee",
+          "Agents musicaux independants"
+        ],
+        "benefits": [
+          "Profilez vos artistes et votre agence dans l'annuaire TourStack",
+          "Connectez-vous avec des promoteurs sur plusieurs marches africains",
+          "Negociez des contrats de tournee a grande echelle",
+          "Acces aux options de financement pour avances et production"
+        ],
+        "cta": "S'inscrire comme manager"
+      }
+    },
+    "markets": {
+      "eyebrow": "Panafricain par conception",
+      "title": "Un écosystème, vingt-cinq marchés",
+      "body": "TourStack se déploie en Afrique en deux phases. Où que vous vous inscriviez, votre profil vérifié vous suit à mesure que la plateforme atteint de nouveaux pays — le travail que vous faites aujourd'hui se cumule à l'échelle du continent.",
+      "phase1Label": "Phase 1 — Afrique francophone",
+      "phase1": "Abidjan · Dakar · Conakry · Bamako · Douala · Libreville · Brazzaville · Kinshasa",
+      "phase2Label": "Phase 2 — Afrique anglophone et lusophone",
+      "phase2": "Nigéria · Ghana · Kenya · Afrique du Sud · Tanzanie · Angola · Mozambique et plus"
+    },
+    "vision": {
+      "eyebrow": "La vision globale",
+      "title": "Nous construisons l'infrastructure de donnees de l'economie musicale live africaine",
+      "body": "Chaque concert sur le continent africain genere de l'activite economique. TourStack capture ces donnees pour les transformer en intelligence.",
+      "body2": "Les promoteurs planifient mieux. Les banques financent. Les assureurs tarifent le risque. Les sponsors trouvent les bons publics. Plus les membres s'inscrivent, plus la plateforme devient precieuse pour tous.",
+      "stakeholders": {
+        "promoters": {
+          "title": "Promoteurs",
+          "body": "Trouvent des prestataires et equipages verifies pour chaque marche."
+        },
+        "banks": {
+          "title": "Banques et financiers",
+          "body": "Utilisent les donnees pour financer promoteurs et prestataires."
+        },
+        "insurance": {
+          "title": "Assureurs",
+          "body": "Utilisent les profils verifies pour emettre des polices d'assurance groupe."
+        },
+        "sponsors": {
+          "title": "Sponsors et marques",
+          "body": "Utilisent les donnees pour trouver audiences et partenaires."
+        }
+      }
+    },
+    "footer": {
+      "tagline": "TourStack by Ckrowd — construire l'ecosysteme musical live africain"
+    }
   }
 }
