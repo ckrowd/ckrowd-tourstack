@@ -2966,7 +2966,13 @@
       "tourStopAdvance": "Avance d'étape de tournée (jusqu'à 30k $)",
       "venueBuildOutCredit": "Crédit d'aménagement de lieu (jusqu'à 75k $)",
       "eventInsuranceBundle": "Pack d'assurance événement",
-      "marketingTicketingFloat": "Avance marketing & billetterie (jusqu'à 15k $)"
+      "marketingTicketingFloat": "Avance marketing & billetterie (jusqu'à 15k $)",
+      "eventCancellation": "Annulation d'événement",
+      "creditGuarantee": "Garantie de crédit",
+      "promoterBusiness": "Activité du promoteur (PME)",
+      "touringWorkforce": "Personnel de tournée",
+      "aviationEquipment": "Aviation & équipement",
+      "audienceTicketProtection": "Protection des billets du public"
     },
     "fields": {
       "product": "Produit",

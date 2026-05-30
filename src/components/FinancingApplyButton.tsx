@@ -10,11 +10,13 @@ export default function FinancingApplyButton({
 	applicantName,
 	className,
 	children,
+	products,
 }: {
 	defaultProduct: ProductId;
 	applicantName?: string;
 	className?: string;
 	children: React.ReactNode;
+	products?: readonly ProductId[];
 }) {
 	const [open, setOpen] = useState(false);
 	return (
@@ -31,6 +33,7 @@ export default function FinancingApplyButton({
 					defaultProduct={defaultProduct}
 					applicantName={applicantName}
 					onClose={() => setOpen(false)}
+					products={products}
 				/>
 			)}
 		</>

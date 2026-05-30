@@ -9,30 +9,52 @@ import {
 	resolveBankAccount,
 } from "@/app/actions";
 
-const PRODUCT_IDS = [
+// Financing products + the legacy single insurance bundle. Kept as the default
+// dropdown scope so existing financing entry points are unchanged.
+const FINANCING_PRODUCT_IDS = [
 	"Tour Stop Advance",
 	"Venue Build-Out Credit",
 	"Event Insurance Bundle",
 	"Marketing & Ticketing Float",
 ] as const;
 
-type ProductId = (typeof PRODUCT_IDS)[number];
+// The six named insurance products (Access Insurance suite).
+const INSURANCE_PRODUCT_IDS = [
+	"Event Cancellation",
+	"Credit Guarantee",
+	"Promoter Business",
+	"Touring Workforce",
+	"Aviation & Equipment",
+	"Audience Ticket Protection",
+] as const;
+
+type ProductId =
+	| (typeof FINANCING_PRODUCT_IDS)[number]
+	| (typeof INSURANCE_PRODUCT_IDS)[number];
 
 const PRODUCT_KEYS: Record<ProductId, string> = {
 	"Tour Stop Advance": "tourStopAdvance",
 	"Venue Build-Out Credit": "venueBuildOutCredit",
 	"Event Insurance Bundle": "eventInsuranceBundle",
 	"Marketing & Ticketing Float": "marketingTicketingFloat",
+	"Event Cancellation": "eventCancellation",
+	"Credit Guarantee": "creditGuarantee",
+	"Promoter Business": "promoterBusiness",
+	"Touring Workforce": "touringWorkforce",
+	"Aviation & Equipment": "aviationEquipment",
+	"Audience Ticket Protection": "audienceTicketProtection",
 };
 
 export default function FinancingApplyModal({
 	defaultProduct,
 	applicantName,
 	onClose,
+	products = FINANCING_PRODUCT_IDS,
 }: {
 	defaultProduct: ProductId;
 	applicantName?: string;
 	onClose: () => void;
+	products?: readonly ProductId[];
 }) {
 	const t = useTranslations("FinancingApplyModal");
 	const queryClient = useQueryClient();
@@ -132,7 +154,10 @@ export default function FinancingApplyModal({
 	function handleSubmit() {
 		if (!canSubmit) return;
 		applyMutation.mutate({
-			product,
+			// The six insurance products require ckrowd-prisma's financing route to
+			// accept them; until that package version ships, bridge to the client's
+			// product type the same way FinancingQuickApply does.
+			product: product as Parameters<typeof applyForFinancing>[0]["product"],
 			amountRequested: parsedAmount,
 			currency: "USD",
 			purpose: purpose.trim() || undefined,
@@ -235,7 +260,7 @@ export default function FinancingApplyModal({
 									onChange={(e) => setProduct(e.target.value as ProductId)}
 									className={controlClass}
 								>
-									{PRODUCT_IDS.map((p) => (
+									{products.map((p) => (
 										<option key={p} value={p}>
 											{t(`products.${PRODUCT_KEYS[p]}`)}
 										</option>
@@ -447,3 +472,4 @@ export default function FinancingApplyModal({
 }
 
 export type { ProductId };
+export { FINANCING_PRODUCT_IDS, INSURANCE_PRODUCT_IDS };
