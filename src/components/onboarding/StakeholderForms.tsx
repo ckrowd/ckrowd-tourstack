@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { VENDOR_CATEGORIES, WORKFORCE_DEPARTMENTS } from "@/lib/stakeholderTaxonomy";
+import GroupedMultiSelect from "./GroupedMultiSelect";
 
 // ─── Shared types ────────────────────────────────────────────────────────────────
 
@@ -25,23 +27,8 @@ export type StakeholderFormProps = {
 
 // ─── Constants ──────────────────────────────────────────────────────────────────
 
-const SP_SERVICE_TYPES = [
-	"venue_hire", "sound_av", "lighting", "staging", "logistics",
-	"security", "catering", "hospitality", "ticketing", "marketing_pr",
-	"photography_video", "medical", "power_generator", "production_management",
-	"transportation", "av_tech", "other",
-] as const;
-
 const SP_COVERAGE = ["local", "national", "regional", "international"] as const;
 const SP_YEARS = ["under_1", "1_3", "4_7", "8_plus"] as const;
-
-const WF_ROLES = [
-	"stage_manager", "production_manager", "tour_manager", "foh_engineer",
-	"monitor_engineer", "lighting_designer", "rigger", "backline_tech",
-	"pyrotechnics", "logistics_coordinator", "security_lead", "merchandise_manager",
-	"hospitality_manager", "video_tech", "photographer", "stage_crew",
-	"lighting_tech", "sound_tech", "security", "driver", "hospitality", "other",
-] as const;
 
 const WF_LARGEST = ["under_500", "500_2000", "2000_10000", "10000_50000", "over_50000"] as const;
 const WF_EXPERIENCE = ["0_1", "1_3", "3_5", "5_10", "10_plus"] as const;
@@ -242,7 +229,7 @@ export function ServiceProviderForm({ onSubmit, submitError, isPending }: Stakeh
 		t("serviceProvider.steps.step3" as never),
 	];
 
-	const serviceTypeOptions = SP_SERVICE_TYPES.map((v) => ({ value: v, label: t(`serviceProvider.serviceTypes.${v}` as never) }));
+	const tx = useTranslations("StakeholderTaxonomy");
 	const coverageOptions = SP_COVERAGE.map((v) => ({ value: v, label: t(`serviceProvider.serviceCoverageOptions.${v}` as never) }));
 	const yearsOptions = SP_YEARS.map((v) => ({ value: v, label: t(`serviceProvider.yearsOptions.${v}` as never) }));
 	const yesNoOptions = [
@@ -362,10 +349,15 @@ export function ServiceProviderForm({ onSubmit, submitError, isPending }: Stakeh
 				<div className="space-y-5">
 					<div>
 						<p className={labelCls}>{t("serviceProvider.fields.serviceTypes" as never)} *</p>
-						<CheckboxGroup
-							options={serviceTypeOptions}
+						<GroupedMultiSelect
+							groups={VENDOR_CATEGORIES.map((c) => ({ key: c.key, items: c.types }))}
+							groupLabel={(k) => tx(`vendorCategories.${k}` as never)}
+							itemLabel={(k) => tx(`vendorTypes.${k}` as never)}
 							values={form.serviceTypes}
 							onChange={(v) => setForm((p) => ({ ...p, serviceTypes: v }))}
+							searchPlaceholder={t("picker.searchPlaceholder" as never)}
+							selectedLabel={t("picker.selected" as never)}
+							noResultsText={t("picker.noResults" as never)}
 						/>
 					</div>
 					<div>
@@ -506,7 +498,7 @@ export function WorkforceForm({ onSubmit, submitError, isPending }: StakeholderF
 		t("workforce.steps.step5" as never),
 	];
 
-	const roleOptions = WF_ROLES.map((v) => ({ value: v, label: t(`workforce.roles.${v}` as never) }));
+	const tx = useTranslations("StakeholderTaxonomy");
 	const expOptions = WF_EXPERIENCE.map((v) => ({ value: v, label: t(`workforce.experienceLevels.${v}` as never) }));
 	const largestOptions = WF_LARGEST.map((v) => ({ value: v, label: t(`workforce.largestEvents.${v}` as never) }));
 	const touringOptions = WF_TOURING.map((v) => ({ value: v, label: t(`workforce.touringOptions.${v}` as never) }));
@@ -612,10 +604,15 @@ export function WorkforceForm({ onSubmit, submitError, isPending }: StakeholderF
 				<div className="space-y-5">
 					<div>
 						<p className={labelCls}>{t("workforce.fields.primaryRoles" as never)} *</p>
-						<CheckboxGroup
-							options={roleOptions}
+						<GroupedMultiSelect
+							groups={WORKFORCE_DEPARTMENTS.map((d) => ({ key: d.key, items: d.roles }))}
+							groupLabel={(k) => tx(`departments.${k}` as never)}
+							itemLabel={(k) => tx(`roles.${k}` as never)}
 							values={form.primaryRoles}
 							onChange={(v) => setForm((p) => ({ ...p, primaryRoles: v }))}
+							searchPlaceholder={t("picker.searchPlaceholder" as never)}
+							selectedLabel={t("picker.selected" as never)}
+							noResultsText={t("picker.noResults" as never)}
 						/>
 					</div>
 					<div>
