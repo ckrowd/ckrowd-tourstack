@@ -62,20 +62,21 @@ export default async function JoinPage({ params, searchParams }: Props) {
 			<TopNav />
 
 			{/* ── Hero ─────────────────────────────────────────────────────── */}
-			<section className="relative pt-24 pb-20 px-6 overflow-hidden">
-				{/* Background */}
-				<div className="absolute inset-0 bg-gradient-to-br from-[#191c1e] via-[#1a1a2e] to-[#16213e]" />
-				<div className="absolute inset-0 opacity-10">
+			<section className="relative pt-24 pb-20 px-6 md:px-12 overflow-hidden">
+				{/* Background — cinematic image + shared hero gradient, matching the
+				    main landing page's hero treatment. */}
+				<div className="absolute inset-0 z-0">
 					<Image
 						src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzmBZ4sptM2EkEigkgVtZoQswUChDcxcN0l6igDH_EBa2GLtVN7P1I0t88pF31shR8wCgzj8mSaIu9AyJPvDpAhc2Zn1ivhXJDcBLGQ5AzaptLJr7T6fzIAIrhumj7UB4lHs54qvzSr8qd20qkkM4-u_3ZS16w8T0TYa-lLii8xmKgEmUtd-6DNlL26ZgKLmyAsnjE"
 						alt=""
 						fill
 						className="object-cover"
 					/>
+					<div className="absolute inset-0 hero-gradient" />
 				</div>
 
-				<div className="relative max-w-4xl mx-auto text-center text-white">
-					<span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FF5A30]/20 border border-[#FF5A30]/30 text-[#FF5A30] text-xs font-bold uppercase tracking-widest mb-8">
+				<div className="relative z-10 max-w-4xl mx-auto text-center text-white">
+					<span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-xs font-bold uppercase tracking-widest mb-8">
 						<span
 							className="material-symbols-outlined text-sm"
 							style={{ fontVariationSettings: "'FILL' 1" }}
@@ -93,7 +94,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 					</p>
 
 					{/* Key stat */}
-					<div className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-white/10 border border-white/20 backdrop-blur-sm">
+					<div className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl glass-effect bg-white/10 border border-white/20">
 						<span
 							className="material-symbols-outlined text-[#FF5A30] text-2xl"
 							style={{ fontVariationSettings: "'FILL' 1" }}
@@ -113,7 +114,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 			</section>
 
 			{/* ── Proof / market stats ────────────────────────────────────── */}
-			<section className="py-16 px-6 bg-white border-b border-slate-100">
+			<section className="py-24 px-6 md:px-12 bg-white border-b border-slate-100">
 				<div className="max-w-5xl mx-auto">
 					<div className="max-w-3xl mb-10">
 						<h2 className="text-2xl md:text-3xl font-extrabold font-(family-name:--font-manrope) text-[#191c1e] mb-3 leading-tight">
@@ -142,7 +143,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 			</section>
 
 			{/* ── CTaaS model ─────────────────────────────────────────────── */}
-			<section className="py-16 px-6">
+			<section className="py-24 px-6 md:px-12">
 				<div className="max-w-5xl mx-auto">
 					<div className="text-center mb-10">
 						<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-3">
@@ -193,7 +194,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 			</section>
 
 			{/* ── What is TourStack ───────────────────────────────────────── */}
-			<section className="py-16 px-6 bg-white">
+			<section className="py-24 px-6 md:px-12 bg-white">
 				<div className="max-w-5xl mx-auto">
 					<div className="max-w-2xl">
 						<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-3">
@@ -242,7 +243,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 			</section>
 
 			{/* ── How it works ───────────────────────────────────────────── */}
-			<section className="py-16 px-6">
+			<section className="py-24 px-6 md:px-12">
 				<div className="max-w-5xl mx-auto">
 					<h2 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-[#191c1e] mb-10 text-center">
 						{t("howItWorks.title")}
@@ -271,7 +272,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 			</section>
 
 			{/* ── Role cards / slider ─────────────────────────────────────── */}
-			<section className="py-16 px-6 bg-white">
+			<section className="py-24 px-6 md:px-12 bg-white">
 				<div className="max-w-5xl mx-auto">
 					<div className="text-center mb-10">
 						<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-3">
@@ -384,7 +385,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 			</section>
 
 			{/* ── Markets / pan-African rollout ───────────────────────────── */}
-			<section className="py-16 px-6">
+			<section className="py-24 px-6 md:px-12">
 				<div className="max-w-5xl mx-auto">
 					<div className="max-w-2xl mb-8">
 						<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-3">
@@ -424,7 +425,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 			</section>
 
 			{/* ── Why data matters ───────────────────────────────────────── */}
-			<section className="py-16 px-6 bg-[#191c1e] text-white">
+			<section className="py-24 px-6 md:px-12 bg-slate-900 text-white">
 				<div className="max-w-5xl mx-auto">
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 						<div>

@@ -475,7 +475,9 @@ export default function WorkforcePage() {
 		mutationFn: registerCrewMember,
 	});
 
-	const submitted = submitMutation.isSuccess;
+	// Guard on the server's success flag, not just a resolved request — the
+	// backend can return { success: false } inside a 200 response.
+	const submitted = submitMutation.data?.success === true;
 	const submitting = submitMutation.isPending;
 	const submitError = submitMutation.error
 		? submitMutation.error instanceof Error
