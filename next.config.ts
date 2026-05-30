@@ -15,6 +15,25 @@ const nextConfig: NextConfig = {
 			},
 		],
 	},
+	// Baseline security headers on every response. A strict Content-Security-Policy
+	// is intentionally omitted to avoid breaking inline styles / third-party images
+	// and fonts; add it (report-only first) as a dedicated follow-up.
+	async headers() {
+		const securityHeaders = [
+			{ key: "X-Content-Type-Options", value: "nosniff" },
+			{ key: "X-Frame-Options", value: "SAMEORIGIN" },
+			{ key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+			{
+				key: "Permissions-Policy",
+				value: "camera=(), microphone=(), geolocation=(), browsing-topics=()",
+			},
+			{
+				key: "Strict-Transport-Security",
+				value: "max-age=31536000; includeSubDomains",
+			},
+		];
+		return [{ source: "/:path*", headers: securityHeaders }];
+	},
 	async redirects() {
 		return [
 			{
