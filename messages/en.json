@@ -616,7 +616,9 @@
       "submittedOn": "Submitted",
       "proofFile": "Proof file",
       "attachedFile": "Attached file",
-      "download": "Download"
+      "download": "Download",
+      "title": "Registered Stakeholders",
+      "filterAll": "All"
     },
     "inviteEcosystem": {
       "title": "Invite Your Ecosystem",
@@ -2668,6 +2670,11 @@
     "tagline": "Platform Management",
     "title": "Stakeholder Directory",
     "description": "Every onboarded stakeholder across the platform, with full submission details and CSV export.",
+    "searchPlaceholder": "Search by name, company, country or town…",
+    "searchNoResults": {
+      "title": "No matches found.",
+      "description": "Try a different name, town, country or service."
+    },
     "loading": "Loading directory…",
     "exportCsv": "Export CSV",
     "backToDirectory": "Back to Directory",
@@ -2869,6 +2876,8 @@
         "jobTitlePlaceholder": "e.g. Operations Lead",
         "companyName": "Company Name",
         "companyNamePlaceholder": "Registered business name",
+        "companyRegNumber": "Company Registration Number",
+        "companyRegNumberPlaceholder": "e.g. RC 1234567",
         "email": "Business Email",
         "emailPlaceholder": "name@company.com",
         "phone": "Phone",
@@ -2951,6 +2960,12 @@
         "flexible": "Flexible — open to travel",
         "local_only": "Local engagements only"
       },
+      "genders": {
+        "male": "Male",
+        "female": "Female",
+        "other": "Other",
+        "prefer_not": "Prefer not to say"
+      },
       "yesNo": {
         "yes": "Yes",
         "no": "No"
@@ -2972,6 +2987,8 @@
         "countryPlaceholder": "e.g. Nigeria",
         "city": "City",
         "cityPlaceholder": "e.g. Lagos",
+        "dateOfBirth": "Date of Birth",
+        "gender": "Gender",
         "nationalId": "National ID / Passport No.",
         "nationalIdPlaceholder": "Optional",
         "primaryRoles": "Primary Roles",
@@ -3038,6 +3055,8 @@
       "fields": {
         "agencyName": "Agency Name",
         "agencyNamePlaceholder": "Registered agency name",
+        "companyRegNumber": "Company Registration Number",
+        "companyRegNumberPlaceholder": "e.g. RC 1234567",
         "contactName": "Contact Name",
         "contactNamePlaceholder": "Full name",
         "jobTitle": "Job Title",
@@ -3896,88 +3915,144 @@
       "login": "Log in"
     },
     "hero": {
-      "badge": "TourStack Onboarding",
-      "title": "Power Africa's Live Music Industry",
-      "description": "TourStack connects promoters, service providers, crew, and artist managers across Africa — enabling access to financing, insurance, and cross-border concert opportunities."
+      "badge": "TourStack Ecosystem",
+      "title": "Africa's Live Music Industry — Powered by People Like You",
+      "description": "TourStack aggregates the live music ecosystem across Africa. Join the network that connects promoters, service providers, crew, and artist managers for financing, insurance, and cross-border opportunities.",
+      "statLabel": "Available trade financing for eligible members",
+      "statValue": "Up to $1,000,000"
     },
     "about": {
-      "title": "Why join TourStack?",
+      "eyebrow": "What is TourStack",
+      "title": "The business intelligence platform for Africa's live music industry",
+      "body": "TourStack is built by Ckrowd to aggregate every professional in Africa's live music ecosystem — from the staging company in Lagos to the tour manager in Nairobi. We collect structured data so that promoters, banks, and insurance companies can make faster, smarter decisions about who to work with and where to operate.",
       "pillars": {
         "data": {
-          "title": "Build your profile",
-          "description": "Create a verified, searchable profile that puts you in front of promoters, financiers, and partners across the continent."
+          "title": "A continent-wide directory",
+          "body": "Every person and company that registers becomes part of a searchable, verified database — queryable by country, city, category, and service type."
         },
         "finance": {
-          "title": "Access financing",
-          "description": "Onboarded ecosystem members are eligible for trade finance and invoice discounting through TourStack's banking partners."
+          "title": "Access to trade financing",
+          "body": "Onboarded members are eligible for invoice discounting and working capital — backed by real invoices from real promoters."
         },
-        "network": {
-          "title": "Pan-African network",
-          "description": "Get discovered for concerts and festivals beyond your home country. One profile, every market."
+        "insurance": {
+          "title": "Group insurance rates",
+          "body": "Because we negotiate for the entire ecosystem at once, members access event insurance at rates they could not get on their own."
+        }
+      }
+    },
+    "howItWorks": {
+      "title": "How it works",
+      "steps": {
+        "register": {
+          "title": "Fill out your profile",
+          "body": "Choose your role and complete the onboarding form. The questions are tailored to your category — a company or an individual, a manager or a technician."
+        },
+        "verified": {
+          "title": "Get listed in the directory",
+          "body": "Your profile becomes part of the TourStack searchable database — visible to promoters, financiers, and partners across Africa."
+        },
+        "opportunities": {
+          "title": "Unlock financing and opportunities",
+          "body": "A complete profile is the condition for accessing TourStack financing, insurance, and cross-border concert opportunities. Being onboarded is the starting point."
         }
       }
     },
     "roles": {
-      "title": "Choose your path",
-      "subtitle": "Select the role that best describes how you work in the live music industry.",
+      "eyebrow": "Choose your path",
+      "title": "Who are you in the live music industry?",
+      "subtitle": "Select your category below. Each path has a different set of questions — because what we need to know about a sound company is very different from what we need to know about a tour manager.",
+      "examplesLabel": "Who qualifies",
+      "benefitsLabel": "What you unlock",
       "unavailable": "Not available",
-      "noTokensNotice": "No onboarding link detected. Ask the promoter who invited you to share their invite link.",
+      "noTokensNotice": "No onboarding link detected. Ask the promoter who invited you to share their ecosystem invite link.",
       "service": {
         "title": "Service Provider",
-        "description": "Companies and enterprises that supply goods or services to concerts and festivals. Register your business and get discovered by promoters across Africa.",
+        "tagline": "Companies and enterprises that supply to concerts",
+        "description": "If your business supplies goods, equipment, or services to concerts and festivals — this is your path. Service providers are companies and enterprises, not individuals. You will be asked about your business registration, service category, geographic coverage, and past clients.",
         "examples": [
-          "Sound & AV companies",
-          "Staging & rigging suppliers",
-          "Lighting & power generators",
-          "Logistics & transportation",
-          "Security & medical services"
+          "Sound and AV companies",
+          "Staging and rigging suppliers",
+          "Lighting and power generator rentals",
+          "Logistics, transport and freight",
+          "Security and crowd management",
+          "Catering and hospitality services",
+          "LED screens and production equipment"
+        ],
+        "benefits": [
+          "Listed in the TourStack directory — discoverable by promoters across Africa",
+          "Eligible for invoice discounting when you hold a promoter invoice",
+          "Access to group event insurance at negotiated rates",
+          "Verified business profile that builds trust with new clients"
         ],
         "cta": "Register as Service Provider"
       },
       "workforce": {
-        "title": "Crew & Workforce",
-        "description": "Individual professionals who work on live events. Build your verified profile and get hired for tours across Africa.",
+        "title": "Crew and Workforce",
+        "tagline": "Individual professionals who work live events",
+        "description": "If you are an individual who works on concerts and festivals — a technician, manager, driver, or any hands-on role — this is your path. Workforce members are people, not companies. You will be asked about your skills, experience level, touring availability, and past events.",
         "examples": [
-          "Stage & production managers",
-          "FOH & monitor engineers",
-          "Lighting & video technicians",
-          "Tour managers & drivers",
-          "Hospitality & logistics crew"
+          "Stage and production managers",
+          "FOH and monitor engineers",
+          "Lighting and video technicians",
+          "Tour managers and road managers",
+          "Drivers and logistics coordinators",
+          "Security leads and crowd controllers",
+          "Hospitality and backstage crew"
+        ],
+        "benefits": [
+          "Verified individual profile — your work history and skills on record",
+          "Discoverable by promoters and production companies across Africa",
+          "Eligible for individual event insurance through TourStack",
+          "Cross-border work opportunities as TourStack expands to new markets"
         ],
         "cta": "Register as Crew Member"
       },
       "artmgmt": {
         "title": "Artist Management",
-        "description": "Artist managers and management companies who book and tour acts across the African continent.",
+        "tagline": "Managers and agencies who book and tour artists",
+        "description": "If you manage artists or run a management company that books tours across Africa — this is your path. You will be asked about your roster size, the genres you work with, markets you operate in, and your deal structures.",
         "examples": [
-          "Solo artist managers",
-          "Artist management agencies",
-          "Booking & touring companies",
-          "Label representatives"
+          "Individual artist managers",
+          "Artist management companies",
+          "Booking and touring agencies",
+          "Record label touring representatives",
+          "Independent live music agents"
+        ],
+        "benefits": [
+          "Profile your artists and agency in the TourStack directory",
+          "Connect with promoters looking for artists across multiple African markets",
+          "Negotiate touring deals at scale — TourStack negotiates in bulk across countries",
+          "Access financing options for tour advances and production costs"
         ],
         "cta": "Register as Artist Manager"
       }
     },
-    "benefits": {
-      "title": "What onboarding unlocks",
-      "items": {
-        "profile": {
-          "title": "Verified profile",
-          "description": "A permanent, searchable record of your skills, history, and location."
+    "vision": {
+      "eyebrow": "The bigger picture",
+      "title": "Building the data infrastructure for Africa's live music economy",
+      "body": "Every concert on the African continent generates economic activity — from the staging company to the ticketing agent to the hotel booking. TourStack captures that data so it can be turned into intelligence.",
+      "body2": "Promoters use our data to plan better. Banks use it to underwrite financing. Insurance companies use it to price risk. Sponsors use it to find the right audiences. The more ecosystem members onboard, the more powerful the platform becomes — for everyone.",
+      "stakeholders": {
+        "promoters": {
+          "title": "Promoters",
+          "body": "Find vetted service providers and crew for every market in the directory."
         },
-        "finance": {
-          "title": "Trade financing",
-          "description": "Access invoice discounting and working capital through our banking partners."
+        "banks": {
+          "title": "Banks and Financiers",
+          "body": "Use onboarding data to underwrite financing for promoters and vendors."
         },
         "insurance": {
-          "title": "Event insurance",
-          "description": "Group insurance rates negotiated in bulk across the TourStack ecosystem."
+          "title": "Insurance Companies",
+          "body": "Use verified profiles to price and issue group event insurance policies."
         },
-        "opportunities": {
-          "title": "Pan-African work",
-          "description": "Get matched with concerts and festivals beyond your home country."
+        "sponsors": {
+          "title": "Sponsors and Brands",
+          "body": "Use ecosystem data to find audiences and partners in target markets."
         }
       }
+    },
+    "footer": {
+      "tagline": "TourStack by Ckrowd — building Africa's live music ecosystem"
     }
   },
   "StakeholdersPageExtra": {

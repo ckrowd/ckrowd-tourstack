@@ -616,7 +616,9 @@
       "submittedOn": "Soumis le",
       "proofFile": "Pièce justificative",
       "attachedFile": "Fichier joint",
-      "download": "Télécharger"
+      "download": "Télécharger",
+      "title": "Parties prenantes inscrites",
+      "filterAll": "Tous"
     },
     "inviteEcosystem": {
       "title": "Inviter votre écosystème",
@@ -2668,6 +2670,11 @@
     "tagline": "Gestion de la plateforme",
     "title": "Répertoire des intervenants",
     "description": "Tous les intervenants enregistrés sur la plateforme, avec le détail complet des soumissions et l'export CSV.",
+    "searchPlaceholder": "Rechercher par nom, entreprise, pays ou ville…",
+    "searchNoResults": {
+      "title": "Aucun résultat.",
+      "description": "Essayez un autre nom, ville, pays ou service."
+    },
     "loading": "Chargement du répertoire…",
     "exportCsv": "Exporter en CSV",
     "backToDirectory": "Retour au répertoire",
@@ -2869,6 +2876,8 @@
         "jobTitlePlaceholder": "ex. Responsable des opérations",
         "companyName": "Nom de l'entreprise",
         "companyNamePlaceholder": "Nom commercial enregistré",
+        "companyRegNumber": "Numéro d'immatriculation de l'entreprise",
+        "companyRegNumberPlaceholder": "ex. RC 1234567",
         "email": "E-mail professionnel",
         "emailPlaceholder": "nom@entreprise.com",
         "phone": "Téléphone",
@@ -2951,6 +2960,12 @@
         "flexible": "Flexible — ouvert aux déplacements",
         "local_only": "Engagements locaux uniquement"
       },
+      "genders": {
+        "male": "Homme",
+        "female": "Femme",
+        "other": "Autre",
+        "prefer_not": "Préfère ne pas répondre"
+      },
       "yesNo": {
         "yes": "Oui",
         "no": "Non"
@@ -2972,6 +2987,8 @@
         "countryPlaceholder": "ex. Nigéria",
         "city": "Ville",
         "cityPlaceholder": "ex. Lagos",
+        "dateOfBirth": "Date de naissance",
+        "gender": "Genre",
         "nationalId": "Pièce d'identité / N° de passeport",
         "nationalIdPlaceholder": "Facultatif",
         "primaryRoles": "Rôles principaux",
@@ -3038,6 +3055,8 @@
       "fields": {
         "agencyName": "Nom de l'agence",
         "agencyNamePlaceholder": "Nom de l'agence enregistrée",
+        "companyRegNumber": "Numéro d'immatriculation de l'entreprise",
+        "companyRegNumberPlaceholder": "ex. RC 1234567",
         "contactName": "Nom du contact",
         "contactNamePlaceholder": "Nom complet",
         "jobTitle": "Fonction",
@@ -3896,88 +3915,144 @@
       "login": "Se connecter"
     },
     "hero": {
-      "badge": "Inscription TourStack",
-      "title": "Dynamisez la musique live en Afrique",
-      "description": "TourStack connecte promoteurs, prestataires, équipes et managers d'artistes — pour accéder au financement, à l'assurance et aux opportunités internationales."
+      "badge": "Ecosysteme TourStack",
+      "title": "L'industrie musicale live en Afrique — Propulsee par des gens comme vous",
+      "description": "TourStack agregre l'ecosysteme musical live a travers l'Afrique. Rejoignez le reseau qui connecte promoteurs, prestataires, equipages et managers d'artistes.",
+      "statLabel": "Financement commercial disponible pour les membres eligibles",
+      "statValue": "Jusqu'a 1 000 000 $"
     },
     "about": {
-      "title": "Pourquoi rejoindre TourStack ?",
+      "eyebrow": "Qu'est-ce que TourStack",
+      "title": "La plateforme de business intelligence pour l'industrie musicale live en Afrique",
+      "body": "TourStack est construit par Ckrowd pour agreger chaque professionnel de l'ecosysteme musical live en Afrique. Nous collectons des donnees structurees pour que les promoteurs, banques et assureurs puissent prendre des decisions plus rapides.",
       "pillars": {
         "data": {
-          "title": "Créez votre profil",
-          "description": "Un profil vérifié et référençable qui vous met en contact avec promoteurs, financiers et partenaires du continent."
+          "title": "Un annuaire continental",
+          "body": "Chaque personne et entreprise inscrite devient une entree dans une base de donnees verifiable par pays, ville, categorie et type de service."
         },
         "finance": {
-          "title": "Accédez au financement",
-          "description": "Les membres de l'écosystème inscrit sont éligibles au financement via les partenaires bancaires de TourStack."
+          "title": "Acces au financement commercial",
+          "body": "Les membres inscrits sont eligibles a l'escompte de factures et au fonds de roulement."
         },
-        "network": {
-          "title": "Réseau panafricain",
-          "description": "Soyez découvert pour des concerts et festivals au-delà de votre pays. Un profil, tous les marchés."
+        "insurance": {
+          "title": "Tarifs d'assurance collectifs",
+          "body": "Nous negocions pour tout l'ecosysteme a la fois. Les membres obtiennent des tarifs qu'ils ne pourraient pas avoir seuls."
+        }
+      }
+    },
+    "howItWorks": {
+      "title": "Comment ca fonctionne",
+      "steps": {
+        "register": {
+          "title": "Remplissez votre profil",
+          "body": "Choisissez votre role et completez le formulaire adapte a votre situation."
+        },
+        "verified": {
+          "title": "Integrez l'annuaire",
+          "body": "Votre profil rejoint la base de donnees visible par les promoteurs et partenaires a travers l'Afrique."
+        },
+        "opportunities": {
+          "title": "Debloquez financement et opportunites",
+          "body": "Un profil complet est la condition pour acceder au financement, a l'assurance et aux opportunites de concerts transfrontalieres."
         }
       }
     },
     "roles": {
-      "title": "Choisissez votre rôle",
-      "subtitle": "Sélectionnez le rôle qui décrit le mieux votre activité dans l'industrie musicale live.",
+      "eyebrow": "Choisissez votre voie",
+      "title": "Qui etes-vous dans l'industrie musicale live ?",
+      "subtitle": "Selectionnez votre categorie. Chaque voie a un questionnaire different.",
+      "examplesLabel": "Qui est concerne",
+      "benefitsLabel": "Ce que vous debloquez",
       "unavailable": "Indisponible",
-      "noTokensNotice": "Aucun lien d'invitation détecté. Demandez au promoteur qui vous a invité de partager son lien.",
+      "noTokensNotice": "Aucun lien d'invitation detecte. Demandez au promoteur qui vous a invite de partager son lien.",
       "service": {
         "title": "Prestataire de services",
-        "description": "Entreprises qui fournissent biens et services aux concerts. Inscrivez votre entreprise et soyez découvert.",
+        "tagline": "Entreprises qui fournissent aux concerts",
+        "description": "Si votre entreprise fournit biens, equipements ou services aux concerts et festivals — c'est votre voie. Les prestataires sont des entreprises, pas des individus.",
         "examples": [
-          "Sociétés son & audiovisuel",
-          "Fournisseurs de scènes & gréement",
-          "Éclairage & groupes électrogènes",
-          "Logistique & transport",
-          "Sécurité & services médicaux"
+          "Societes son et audiovisuel",
+          "Fournisseurs de scenes et greement",
+          "Location eclairage et groupes electrogenes",
+          "Logistique, transport et fret",
+          "Securite et gestion de foule",
+          "Restauration et hospitalite",
+          "Ecrans LED et production"
+        ],
+        "benefits": [
+          "Reference dans l'annuaire TourStack",
+          "Eligible a l'escompte de factures avec une facture promoteur",
+          "Acces aux tarifs d'assurance collectifs negocies",
+          "Profil d'entreprise verifie qui renforce la confiance"
         ],
         "cta": "S'inscrire comme prestataire"
       },
       "workforce": {
-        "title": "Équipe & Personnel",
-        "description": "Professionnels individuels travaillant sur des événements live. Construisez votre profil vérifié.",
+        "title": "Equipe et Personnel",
+        "tagline": "Professionnels individuels qui travaillent sur des evenements live",
+        "description": "Si vous etes un individu qui travaille sur des concerts — technicien, manager ou chauffeur — c'est votre voie. Les membres de l'equipe sont des personnes, pas des entreprises.",
         "examples": [
-          "Directeurs de scène & production",
-          "Ingénieurs FOH & monitoring",
-          "Techniciens lumière & vidéo",
-          "Tour managers & chauffeurs",
-          "Équipes hospitalité & logistique"
+          "Directeurs de scene et production",
+          "Ingenieurs FOH et monitoring",
+          "Techniciens lumiere et video",
+          "Tour managers et road managers",
+          "Chauffeurs et coordinateurs logistique",
+          "Responsables securite",
+          "Equipes hospitalite et backstage"
+        ],
+        "benefits": [
+          "Profil individuel verifie — vos competences et antecedents consignes",
+          "Decouvrable par les promoteurs et societes de production",
+          "Eligible a l'assurance evenementielle individuelle",
+          "Opportunites de travail transfrontalier au fil de l'expansion de TourStack"
         ],
         "cta": "S'inscrire comme technicien"
       },
       "artmgmt": {
         "title": "Management artistique",
-        "description": "Managers et sociétés de management qui bookent et tournent des artistes sur le continent africain.",
+        "tagline": "Managers et agences qui bookent et tournent des artistes",
+        "description": "Si vous gerez des artistes ou dirigez une societe de management pour des tournees en Afrique — c'est votre voie.",
         "examples": [
-          "Managers d'artistes solo",
-          "Agences de management",
-          "Sociétés de booking & tournées",
-          "Représentants de labels"
+          "Managers d'artistes individuels",
+          "Societes de management artistique",
+          "Agences de booking et tournees",
+          "Representants de labels en tournee",
+          "Agents musicaux independants"
+        ],
+        "benefits": [
+          "Profilez vos artistes et votre agence dans l'annuaire TourStack",
+          "Connectez-vous avec des promoteurs sur plusieurs marches africains",
+          "Negociez des contrats de tournee a grande echelle",
+          "Acces aux options de financement pour avances et production"
         ],
         "cta": "S'inscrire comme manager"
       }
     },
-    "benefits": {
-      "title": "Ce que l'inscription débloque",
-      "items": {
-        "profile": {
-          "title": "Profil vérifié",
-          "description": "Un dossier permanent de vos compétences, historique et localisation."
+    "vision": {
+      "eyebrow": "La vision globale",
+      "title": "Nous construisons l'infrastructure de donnees de l'economie musicale live africaine",
+      "body": "Chaque concert sur le continent africain genere de l'activite economique. TourStack capture ces donnees pour les transformer en intelligence.",
+      "body2": "Les promoteurs planifient mieux. Les banques financent. Les assureurs tarifent le risque. Les sponsors trouvent les bons publics. Plus les membres s'inscrivent, plus la plateforme devient precieuse pour tous.",
+      "stakeholders": {
+        "promoters": {
+          "title": "Promoteurs",
+          "body": "Trouvent des prestataires et equipages verifies pour chaque marche."
         },
-        "finance": {
-          "title": "Financement commercial",
-          "description": "Accédez à l'escompte de factures via nos partenaires bancaires."
+        "banks": {
+          "title": "Banques et financiers",
+          "body": "Utilisent les donnees pour financer promoteurs et prestataires."
         },
         "insurance": {
-          "title": "Assurance événementielle",
-          "description": "Tarifs d'assurance négociés en masse dans l'écosystème TourStack."
+          "title": "Assureurs",
+          "body": "Utilisent les profils verifies pour emettre des polices d'assurance groupe."
         },
-        "opportunities": {
-          "title": "Travail panafricain",
-          "description": "Soyez mis en relation avec des concerts au-delà de votre pays."
+        "sponsors": {
+          "title": "Sponsors et marques",
+          "body": "Utilisent les donnees pour trouver audiences et partenaires."
         }
       }
+    },
+    "footer": {
+      "tagline": "TourStack by Ckrowd — construire l'ecosysteme musical live africain"
     }
   }
 }

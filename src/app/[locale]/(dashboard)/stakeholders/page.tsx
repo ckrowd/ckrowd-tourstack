@@ -8,7 +8,6 @@ import {
 	exportStakeholders,
 	getOnboardingLinks,
 	getStakeholders,
-	revokeOnboardingLink,
 	type StakeholderSubmission,
 } from "@/app/actions";
 import SideNav from "@/components/SideNav";
@@ -16,7 +15,6 @@ import TopNav from "@/components/TopNav";
 
 const CATEGORIES = ["service", "workforce", "artmgmt"] as const;
 
-// Turns a camelCase / snake_case key or option value into a readable label.
 function humanizeLabel(value: string): string {
 	return value
 		.replace(/_/g, " ")
@@ -38,7 +36,6 @@ function formatValue(value: unknown): string {
 	return humanizeLabel(String(value));
 }
 
-// One compact, clickable row in the submissions list.
 function SubmissionRow({
 	submission,
 	onOpen,
@@ -51,14 +48,14 @@ function SubmissionRow({
 		<button
 			type="button"
 			onClick={onOpen}
-			className="w-full flex items-center justify-between gap-3 rounded-xl border border-outline-variant/15 bg-surface-container-low px-4 py-3 text-left hover:border-[#FF5A30]/40 hover:bg-surface-container transition-colors"
+			className="w-full flex items-center justify-between gap-3 px-5 py-4 text-left hover:bg-surface-container-low transition-colors"
 		>
 			<div className="min-w-0">
 				<p className="text-sm font-bold text-on-surface truncate">
 					{submission.name}
 				</p>
 				<p className="text-xs text-on-surface-variant truncate">
-					{submission.email}
+					{submission.email} · <span className="capitalize">{submission.category.replace(/_/g, " ")}</span>
 				</p>
 			</div>
 			<div className="flex items-center gap-3 shrink-0">
@@ -75,7 +72,6 @@ function SubmissionRow({
 	);
 }
 
-// Full submission detail shown as a modal dialog.
 function SubmissionModal({
 	submission,
 	onClose,
@@ -194,9 +190,7 @@ function SubmissionModal({
 								rel="noopener noreferrer"
 								className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[#FF5A30] text-white text-xs font-bold hover:opacity-90 transition-opacity shrink-0"
 							>
-								<span className="material-symbols-outlined text-sm">
-									download
-								</span>
+								<span className="material-symbols-outlined text-sm">download</span>
 								{t("submissions.download")}
 							</a>
 						</div>
@@ -211,11 +205,7 @@ export default function OnboardingLinksPage() {
 	const t = useTranslations("StakeholdersPage");
 	const locale = useLocale();
 	const queryClient = useQueryClient();
-	const [category, setCategory] =
-		useState<(typeof CATEGORIES)[number]>("service");
-	const [label, setLabel] = useState("");
-	const [expiresAt, setExpiresAt] = useState("");
-	const [expandedToken, setExpandedToken] = useState<string | null>(null);
+	const [categoryFilter, setCategoryFilter] = useState<"all" | (typeof CATEGORIES)[number]>("all");
 	const [selectedSubmission, setSelectedSubmission] =
 		useState<StakeholderSubmission | null>(null);
 	const [copied, setCopied] = useState(false);
@@ -230,22 +220,6 @@ export default function OnboardingLinksPage() {
 	const stakeholdersQuery = useQuery({
 		queryKey: ["stakeholders"],
 		queryFn: () => getStakeholders(),
-	});
-
-	const createMutation = useMutation({
-		mutationFn: createOnboardingLink,
-		onSuccess: () => {
-			setLabel("");
-			setExpiresAt("");
-			void queryClient.invalidateQueries({ queryKey: ["onboardingLinks"] });
-		},
-	});
-
-	const revokeMutation = useMutation({
-		mutationFn: revokeOnboardingLink,
-		onSuccess: () => {
-			void queryClient.invalidateQueries({ queryKey: ["onboardingLinks"] });
-		},
 	});
 
 	const generateEcosystemMutation = useMutation({
@@ -284,9 +258,8 @@ export default function OnboardingLinksPage() {
 
 	const links = linksQuery.data?.success ? (linksQuery.data.data ?? []) : [];
 	const submissions = stakeholdersQuery.data?.data ?? [];
-	const submissionsLoaded = !stakeholdersQuery.isLoading;
 
-	// ── Invite Ecosystem ──────────────────────────────────────────────────────
+	// ── Invite link ───────────────────────────────────────────────────────────
 	const serviceToken = links.find((l) => l.category === "service" && l.is_active)?.token;
 	const workforceToken = links.find((l) => l.category === "workforce" && l.is_active)?.token;
 	const artmgmtToken = links.find((l) => l.category === "artmgmt" && l.is_active)?.token;
@@ -307,13 +280,21 @@ export default function OnboardingLinksPage() {
 		setTimeout(() => setCopied(false), 2000);
 	}
 
+	// ── Submissions filter ────────────────────────────────────────────────────
+	const filtered =
+		categoryFilter === "all"
+			? submissions
+			: submissions.filter((s) => s.category === categoryFilter);
+
 	return (
 		<div className="bg-surface text-on-surface">
 			<TopNav />
 			<div className="flex pt-16 h-screen">
 				<SideNav />
 				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
-					<div className="w-full space-y-8">
+					<div className="w-full space-y-10">
+
+						{/* Header */}
 						<header className="flex flex-col md:flex-row md:items-end justify-between gap-4">
 							<div>
 								<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
@@ -332,19 +313,15 @@ export default function OnboardingLinksPage() {
 								disabled={exportMutation.isPending}
 								className="flex items-center gap-2 px-5 py-2.5 bg-surface-container-lowest border border-outline-variant/30 rounded-xl text-sm font-bold text-on-surface hover:bg-surface-container transition-colors disabled:opacity-50 shrink-0"
 							>
-								<span className="material-symbols-outlined text-sm">
-									download
-								</span>
-								{exportMutation.isPending
-									? t("header.exporting")
-									: t("header.export")}
+								<span className="material-symbols-outlined text-sm">download</span>
+								{exportMutation.isPending ? t("header.exporting") : t("header.export")}
 							</button>
 						</header>
 
-						{/* ── Invite Ecosystem ──────────────────────────────────────── */}
-						<section className="rounded-2xl overflow-hidden shadow-lg">
+						{/* ── Invite Ecosystem banner ──────────────────────────────── */}
+						<section className="rounded-2xl overflow-hidden shadow-md">
 							<div className="bg-gradient-to-r from-[#FF5A30] to-[#cc4826] p-6 text-white">
-								<div className="flex flex-col md:flex-row md:items-start justify-between gap-5">
+								<div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
 									<div className="flex items-start gap-4">
 										<div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
 											<span className="material-symbols-outlined text-white">share</span>
@@ -400,224 +377,64 @@ export default function OnboardingLinksPage() {
 							</div>
 						</section>
 
-						<section className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10">
-							<h2 className="font-(family-name:--font-manrope) text-xl font-bold mb-4">
-								{t("createLink.title")}
-							</h2>
-							<form
-								onSubmit={(event) => {
-									event.preventDefault();
-									createMutation.mutate({
-										category,
-										label: label || undefined,
-										expiresAt: expiresAt
-											? new Date(expiresAt).toISOString()
-											: undefined,
-									});
-								}}
-								className="grid grid-cols-1 md:grid-cols-4 gap-3 items-end"
-							>
-								<div>
-									<label
-										htmlFor="onboarding-category"
-										className="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1.5"
-									>
-										{t("createLink.category")}
-									</label>
-									<div className="relative">
-										<select
-											id="onboarding-category"
-											value={category}
-											onChange={(event) =>
-												setCategory(
-													event.target.value as (typeof CATEGORIES)[number],
-												)
-											}
-											className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-lowest px-4 py-3 text-sm font-medium text-on-surface outline-none transition focus:ring-2 focus:ring-[#FF5A30]/20 appearance-none"
-										>
-											{CATEGORIES.map((value) => (
-												<option key={value} value={value}>
-													{t(`categories.${value}`)}
-												</option>
-											))}
-										</select>
-										<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">
-											expand_more
+						{/* ── Submissions ──────────────────────────────────────────── */}
+						<section className="bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/10">
+							<div className="p-6 border-b border-outline-variant/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+								<h2 className="font-(family-name:--font-manrope) text-xl font-bold flex items-center gap-2">
+									{t("submissions.title")}
+									{submissions.length > 0 && (
+										<span className="px-2 py-0.5 text-xs font-bold bg-[#FF5A30] text-white rounded-full">
+											{submissions.length}
 										</span>
-									</div>
+									)}
+								</h2>
+								<div className="flex gap-2 flex-wrap">
+									{(["all", ...CATEGORIES] as const).map((key) => (
+										<button
+											key={key}
+											type="button"
+											onClick={() => setCategoryFilter(key)}
+											className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
+												categoryFilter === key
+													? "bg-[#FF5A30] text-white"
+													: "bg-surface-container-high text-on-surface-variant hover:bg-surface-container"
+											}`}
+										>
+											{key === "all" ? t("submissions.filterAll") : t(`categories.${key}`)}
+											<span className="ml-1 opacity-70">
+												{key === "all"
+													? submissions.length
+													: submissions.filter((s) => s.category === key).length}
+											</span>
+										</button>
+									))}
 								</div>
+							</div>
 
-								<div className="md:col-span-2">
-									<label
-										htmlFor="onboarding-label"
-										className="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1.5"
-									>
-										{t("createLink.label.title")}
-									</label>
-									<input
-										id="onboarding-label"
-										type="text"
-										value={label}
-										onChange={(event) => setLabel(event.target.value)}
-										placeholder={t("createLink.label.placeholder")}
-										className="w-full bg-surface-container-high rounded-xl px-4 py-3 text-sm text-on-surface border border-outline-variant/30 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
-									/>
+							{stakeholdersQuery.isLoading ? (
+								<div className="text-center py-16">
+									<span className="w-8 h-8 border-2 border-[#FF5A30]/30 border-t-[#FF5A30] rounded-full animate-spin inline-block" />
 								</div>
-
-								<div>
-									<label
-										htmlFor="onboarding-expiry"
-										className="block text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-1.5"
-									>
-										{t("createLink.expires")}
-									</label>
-									<input
-										id="onboarding-expiry"
-										type="datetime-local"
-										value={expiresAt}
-										onChange={(event) => setExpiresAt(event.target.value)}
-										className="w-full bg-surface-container-high rounded-xl px-4 py-3 text-sm text-on-surface border border-outline-variant/30 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
-									/>
+							) : filtered.length === 0 ? (
+								<div className="text-center py-16 px-6">
+									<span className="material-symbols-outlined text-5xl text-on-surface-variant/30 block mb-3">
+										group_add
+									</span>
+									<p className="text-sm font-semibold text-on-surface-variant">
+										{t("submissions.none")}
+									</p>
 								</div>
-
-								<div className="md:col-span-4 flex justify-end">
-									<button
-										type="submit"
-										disabled={createMutation.isPending}
-										className="bg-[#FF5A30] text-white px-6 py-3 rounded-xl text-sm font-bold hover:opacity-90 disabled:opacity-60"
-									>
-										{createMutation.isPending
-											? t("createLink.creating")
-											: t("createLink.submit")}
-									</button>
-								</div>
-							</form>
-						</section>
-
-						<section className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10">
-							<h2 className="font-(family-name:--font-manrope) text-xl font-bold mb-4">
-								{t("existingLinks.title")}
-							</h2>
-							{linksQuery.isLoading ? (
-								<p className="text-sm text-on-surface-variant">
-									{t("existingLinks.loading")}
-								</p>
-							) : !linksQuery.data?.success ? (
-								<p className="text-sm text-rose-700">
-									{linksQuery.data?.error ?? t("existingLinks.error")}
-								</p>
-							) : links.length === 0 ? (
-								<p className="text-sm text-on-surface-variant">
-									{t("existingLinks.noLinks")}
-								</p>
 							) : (
-								<div className="space-y-3">
-									{links.map((link) => {
-										const token = String(link.token);
-										const linkSubs = submissions.filter(
-											(s) => s.link?.token === token,
-										);
-										const expanded = expandedToken === token;
-										return (
-											<div
-												key={String(link.id)}
-												className="rounded-xl bg-surface-container-low overflow-hidden"
-											>
-												<div className="p-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-													<div className="min-w-0">
-														<p className="text-sm font-bold text-on-surface">
-															{link.label ?? t("existingLinks.untitled")}
-														</p>
-														<p className="text-xs text-on-surface-variant mt-1 break-all">
-															{typeof window !== "undefined"
-																? `${window.location.origin}/stakeholders/${link.token}`
-																: `/stakeholders/${link.token}`}
-														</p>
-														<p className="text-xs text-on-surface-variant mt-1">
-															{t(
-																`categories.${link.category as (typeof CATEGORIES)[number]}`,
-															)}{" "}
-															·{" "}
-															{link.is_active
-																? t("status.active")
-																: t("status.inactive")}
-															{submissionsLoaded ? (
-																<>
-																	{" · "}
-																	<span className="font-semibold text-on-surface">
-																		{linkSubs.length > 0
-																			? t("submissions.received", {
-																					count: linkSubs.length,
-																				})
-																			: t("submissions.none")}
-																	</span>
-																</>
-															) : null}
-														</p>
-													</div>
-													<div className="flex items-center gap-2 shrink-0">
-														{linkSubs.length > 0 && (
-															<button
-																type="button"
-																onClick={() =>
-																	setExpandedToken(expanded ? null : token)
-																}
-																className="px-3 py-2 rounded-lg text-xs font-bold border border-[#FF5A30]/30 text-[#FF5A30] hover:bg-[#FF5A30]/5"
-															>
-																{expanded
-																	? t("submissions.hide")
-																	: t("submissions.view")}
-															</button>
-														)}
-														<button
-															type="button"
-															onClick={async () => {
-																const shareUrl = `${window.location.origin}/stakeholders/${link.token}`;
-																await navigator.clipboard.writeText(shareUrl);
-															}}
-															className="px-3 py-2 rounded-lg text-xs font-bold border border-outline-variant/30 text-on-surface-variant hover:bg-surface-container-high"
-														>
-															{t("actions.copy")}
-														</button>
-														{link.is_active && (
-															<button
-																type="button"
-																onClick={() =>
-																	revokeMutation.mutate(String(link.token))
-																}
-																disabled={revokeMutation.isPending}
-																className="px-3 py-2 rounded-lg text-xs font-bold bg-rose-50 text-rose-700 hover:bg-rose-100 disabled:opacity-60"
-															>
-																{t("actions.revoke")}
-															</button>
-														)}
-													</div>
-												</div>
-												{expanded && (
-													<div className="border-t border-outline-variant/10 bg-surface-container-lowest p-4 space-y-2">
-														{linkSubs.map((submission) => (
-															<SubmissionRow
-																key={submission.id}
-																submission={submission}
-																onOpen={() =>
-																	setSelectedSubmission(submission)
-																}
-															/>
-														))}
-													</div>
-												)}
-											</div>
-										);
-									})}
+								<div className="divide-y divide-outline-variant/10">
+									{filtered.map((submission) => (
+										<SubmissionRow
+											key={submission.id}
+											submission={submission}
+											onOpen={() => setSelectedSubmission(submission)}
+										/>
+									))}
 								</div>
 							)}
-							{!stakeholdersQuery.isLoading &&
-								stakeholdersQuery.data &&
-								!stakeholdersQuery.data.success && (
-									<p className="text-xs text-rose-700 mt-3">
-										{t("submissions.error")}
-									</p>
-								)}
 						</section>
 					</div>
 				</main>
