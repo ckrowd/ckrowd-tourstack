@@ -10,6 +10,7 @@ import {
 	type StakeholderCategory,
 	type SubmitPayload,
 } from "@/components/onboarding/StakeholderForms";
+import OnboardingValueProps from "@/components/onboarding/OnboardingValueProps";
 import { Link } from "@/i18n/routing";
 
 const VALID: StakeholderCategory[] = ["service", "workforce", "artmgmt"];
@@ -97,6 +98,8 @@ export default function SelfServeOnboardingPage({
 							? t("workforce.title" as never)
 							: t("artmgmt.title" as never)}
 				</h1>
+
+				<OnboardingValueProps />
 
 				<StakeholderForm
 					category={category}

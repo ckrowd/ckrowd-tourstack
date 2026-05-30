@@ -3039,6 +3039,28 @@
       "selected": "Selected",
       "noResults": "No matches — try a different term."
     },
+    "valueProps": {
+      "heading": "What completing this profile unlocks",
+      "note": "A complete profile is the condition for accessing TourStack financing and insurance. It takes a few minutes — and it stays with you across every market.",
+      "items": {
+        "directory": {
+          "title": "Continent-wide directory",
+          "body": "Become a verified, searchable profile discoverable by promoters across Africa — by country, city, category and service."
+        },
+        "financing": {
+          "title": "Trade financing eligibility",
+          "body": "Eligible members access working capital and invoice discounting of up to $1,000,000, backed by real promoter contracts."
+        },
+        "insurance": {
+          "title": "Group insurance access",
+          "body": "Tap event and workforce insurance at rates negotiated for the whole ecosystem — not what you could get alone."
+        },
+        "certification": {
+          "title": "Portable certification",
+          "body": "Earn standardised certification recognised across every TourStack market as the platform expands."
+        }
+      }
+    },
     "header": {
       "tagline": "Onboarding Invitation",
       "title": "Stakeholder Registration"
@@ -4161,6 +4183,25 @@
       "statLabel": "Available trade financing for eligible members",
       "statValue": "Up to $1,000,000"
     },
+    "stats": {
+      "title": "Africa has 1.4 billion music fans. Almost no one earns from concerts — yet.",
+      "subtitle": "The demand is proven. What's missing is the infrastructure to fund, insure and organise it. That is what you are joining.",
+      "economy": { "value": "$25.8B", "label": "Africa's live music economy" },
+      "fans": { "value": "1.4 Billion", "label": "African music fans" },
+      "markets": { "value": "25 Markets", "label": "Pan-African rollout underway" },
+      "financing": { "value": "Up to $1M", "label": "Trade financing for members" }
+    },
+    "model": {
+      "eyebrow": "How the ecosystem works",
+      "title": "Concert Touring as a Service",
+      "subtitle": "TourStack brings every person and every dollar a tour needs onto one platform. Four steps turn the live music industry into a bankable, insurable ecosystem — and each one builds on the last.",
+      "pillars": {
+        "certify": { "title": "Get certified", "body": "Register and complete your profile to earn verified status — the industry credential that unlocks everything else." },
+        "bank": { "title": "Get banked", "body": "Certified members are onboarded into the formal financial system, becoming traceable, fundable businesses." },
+        "finance": { "title": "Get financed", "body": "Access working capital and tour financing against confirmed contracts and real promoter invoices." },
+        "operate": { "title": "Operate on TourStack", "body": "Hiring, payroll, contracts and payments run through one platform, across every market, in real time." }
+      }
+    },
     "about": {
       "eyebrow": "What is TourStack",
       "title": "The business intelligence platform for Africa's live music industry",
@@ -4177,6 +4218,10 @@
         "insurance": {
           "title": "Group insurance rates",
           "body": "Because we negotiate for the entire ecosystem at once, members access event insurance at rates they could not get on their own."
+        },
+        "training": {
+          "title": "Standardised training & certification",
+          "body": "Earn portable certification that proves your competence — recognised across every TourStack market, so a credential earned in Ghana also works in South Africa."
         }
       }
     },
@@ -4266,6 +4311,15 @@
         ],
         "cta": "Register as Artist Manager"
       }
+    },
+    "markets": {
+      "eyebrow": "Pan-African by design",
+      "title": "One ecosystem, twenty-five markets",
+      "body": "TourStack is rolling out across Africa in two phases. Wherever you register, your verified profile travels with you as the platform reaches new countries — so the work you do today compounds across the continent.",
+      "phase1Label": "Phase 1 — Francophone Africa",
+      "phase1": "Abidjan · Dakar · Conakry · Bamako · Douala · Libreville · Brazzaville · Kinshasa",
+      "phase2Label": "Phase 2 — Anglophone & Lusophone Africa",
+      "phase2": "Nigeria · Ghana · Kenya · South Africa · Tanzania · Angola · Mozambique and more"
     },
     "vision": {
       "eyebrow": "The bigger picture",

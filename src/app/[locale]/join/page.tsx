@@ -53,7 +53,9 @@ export default async function JoinPage({ params, searchParams }: Props) {
 	];
 
 	const steps = ["register", "verified", "opportunities"] as const;
-	const pillars = ["data", "finance", "insurance"] as const;
+	const pillars = ["data", "finance", "insurance", "training"] as const;
+	const statItems = ["economy", "fans", "markets", "financing"] as const;
+	const modelPillars = ["certify", "bank", "finance", "operate"] as const;
 
 	return (
 		<div className="bg-[#f7f9fb] text-[#191c1e]">
@@ -110,6 +112,86 @@ export default async function JoinPage({ params, searchParams }: Props) {
 				</div>
 			</section>
 
+			{/* ── Proof / market stats ────────────────────────────────────── */}
+			<section className="py-16 px-6 bg-white border-b border-slate-100">
+				<div className="max-w-5xl mx-auto">
+					<div className="max-w-3xl mb-10">
+						<h2 className="text-2xl md:text-3xl font-extrabold font-(family-name:--font-manrope) text-[#191c1e] mb-3 leading-tight">
+							{t("stats.title")}
+						</h2>
+						<p className="text-base text-slate-600 leading-relaxed">
+							{t("stats.subtitle")}
+						</p>
+					</div>
+					<div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+						{statItems.map((key) => (
+							<div
+								key={key}
+								className="p-6 rounded-2xl bg-slate-50 border border-slate-100"
+							>
+								<p className="text-3xl md:text-4xl font-black text-[#FF5A30] font-(family-name:--font-manrope) mb-2">
+									{t(`stats.${key}.value`)}
+								</p>
+								<p className="text-xs font-semibold text-slate-500 leading-relaxed">
+									{t(`stats.${key}.label`)}
+								</p>
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
+
+			{/* ── CTaaS model ─────────────────────────────────────────────── */}
+			<section className="py-16 px-6">
+				<div className="max-w-5xl mx-auto">
+					<div className="text-center mb-10">
+						<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-3">
+							{t("model.eyebrow")}
+						</span>
+						<h2 className="text-3xl font-extrabold font-(family-name:--font-manrope) text-[#191c1e] mb-3">
+							{t("model.title")}
+						</h2>
+						<p className="text-slate-500 max-w-2xl mx-auto">
+							{t("model.subtitle")}
+						</p>
+					</div>
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+						{modelPillars.map((key, i) => (
+							<div
+								key={key}
+								className="relative p-6 rounded-2xl bg-white border border-slate-100 shadow-sm"
+							>
+								<div className="flex items-center gap-3 mb-3">
+									<div className="w-9 h-9 rounded-xl bg-[#FF5A30]/10 flex items-center justify-center shrink-0">
+										<span
+											className="material-symbols-outlined text-[#FF5A30]"
+											style={{ fontVariationSettings: "'FILL' 1" }}
+										>
+											{key === "certify"
+												? "verified"
+												: key === "bank"
+													? "account_balance"
+													: key === "finance"
+														? "payments"
+														: "hub"}
+										</span>
+									</div>
+									<span className="text-sm font-black text-slate-300 font-(family-name:--font-manrope)">
+										{`0${i + 1}`}
+									</span>
+								</div>
+								<p className="font-extrabold text-[#191c1e] mb-1.5 font-(family-name:--font-manrope)">
+									{t(`model.pillars.${key}.title`)}
+								</p>
+								<p className="text-sm text-slate-500 leading-relaxed">
+									{t(`model.pillars.${key}.body`)}
+								</p>
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
+
 			{/* ── What is TourStack ───────────────────────────────────────── */}
 			<section className="py-16 px-6 bg-white">
 				<div className="max-w-5xl mx-auto">
@@ -125,7 +207,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 						</p>
 					</div>
 
-					<div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
 						{pillars.map((key) => (
 							<div
 								key={key}
@@ -140,7 +222,9 @@ export default async function JoinPage({ params, searchParams }: Props) {
 											? "hub"
 											: key === "finance"
 												? "payments"
-												: "security"}
+												: key === "insurance"
+													? "security"
+													: "school"}
 									</span>
 								</div>
 								<div>
@@ -295,6 +379,46 @@ export default async function JoinPage({ params, searchParams }: Props) {
 								</div>
 							);
 						})}
+					</div>
+				</div>
+			</section>
+
+			{/* ── Markets / pan-African rollout ───────────────────────────── */}
+			<section className="py-16 px-6">
+				<div className="max-w-5xl mx-auto">
+					<div className="max-w-2xl mb-8">
+						<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-3">
+							{t("markets.eyebrow")}
+						</span>
+						<h2 className="text-3xl font-extrabold font-(family-name:--font-manrope) text-[#191c1e] mb-4">
+							{t("markets.title")}
+						</h2>
+						<p className="text-base text-slate-600 leading-relaxed">
+							{t("markets.body")}
+						</p>
+					</div>
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+						{(["phase1", "phase2"] as const).map((p) => (
+							<div
+								key={p}
+								className="p-6 rounded-2xl bg-white border border-slate-100 shadow-sm"
+							>
+								<div className="flex items-center gap-2 mb-3">
+									<span
+										className="material-symbols-outlined text-[#FF5A30]"
+										style={{ fontVariationSettings: "'FILL' 1" }}
+									>
+										public
+									</span>
+									<p className="text-sm font-extrabold text-[#191c1e] font-(family-name:--font-manrope)">
+										{t(`markets.${p}Label`)}
+									</p>
+								</div>
+								<p className="text-sm text-slate-500 leading-relaxed">
+									{t(`markets.${p}`)}
+								</p>
+							</div>
+						))}
 					</div>
 				</div>
 			</section>

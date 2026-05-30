@@ -3039,6 +3039,28 @@
       "selected": "Sélectionné",
       "noResults": "Aucun résultat — essayez un autre terme."
     },
+    "valueProps": {
+      "heading": "Ce que ce profil complet débloque",
+      "note": "Un profil complet est la condition pour accéder au financement et à l'assurance TourStack. Cela prend quelques minutes — et vous suit sur tous les marchés.",
+      "items": {
+        "directory": {
+          "title": "Répertoire panafricain",
+          "body": "Devenez un profil vérifié et consultable, repérable par les promoteurs partout en Afrique — par pays, ville, catégorie et service."
+        },
+        "financing": {
+          "title": "Éligibilité au financement",
+          "body": "Les membres éligibles accèdent à un fonds de roulement et à l'escompte de factures jusqu'à 1 000 000 $, adossés à de vrais contrats de promoteurs."
+        },
+        "insurance": {
+          "title": "Accès à l'assurance collective",
+          "body": "Bénéficiez d'assurances événement et main-d'œuvre à des tarifs négociés pour tout l'écosystème — bien meilleurs qu'en solo."
+        },
+        "certification": {
+          "title": "Certification portable",
+          "body": "Obtenez une certification standardisée reconnue sur tous les marchés TourStack à mesure que la plateforme se développe."
+        }
+      }
+    },
     "header": {
       "tagline": "Invitation à l'intégration",
       "title": "Inscription des parties prenantes"
@@ -4161,6 +4183,25 @@
       "statLabel": "Financement commercial disponible pour les membres eligibles",
       "statValue": "Jusqu'a 1 000 000 $"
     },
+    "stats": {
+      "title": "L'Afrique compte 1,4 milliard de fans de musique. Presque personne ne gagne sa vie avec les concerts — pour l'instant.",
+      "subtitle": "La demande est prouvée. Ce qui manque, c'est l'infrastructure pour la financer, l'assurer et l'organiser. C'est ce que vous rejoignez.",
+      "economy": { "value": "25,8 Md$", "label": "Économie de la musique live en Afrique" },
+      "fans": { "value": "1,4 milliard", "label": "Fans de musique africains" },
+      "markets": { "value": "25 marchés", "label": "Déploiement panafricain en cours" },
+      "financing": { "value": "Jusqu'à 1 M$", "label": "Financement commercial pour les membres" }
+    },
+    "model": {
+      "eyebrow": "Comment fonctionne l'écosystème",
+      "title": "Le Concert Touring as a Service",
+      "subtitle": "TourStack réunit sur une seule plateforme chaque personne et chaque dollar nécessaires à une tournée. Quatre étapes transforment l'industrie de la musique live en un écosystème finançable et assurable — chacune s'appuyant sur la précédente.",
+      "pillars": {
+        "certify": { "title": "Soyez certifié", "body": "Inscrivez-vous et complétez votre profil pour obtenir un statut vérifié — le titre professionnel qui débloque tout le reste." },
+        "bank": { "title": "Soyez bancarisé", "body": "Les membres certifiés sont intégrés au système financier formel et deviennent des entreprises traçables et finançables." },
+        "finance": { "title": "Soyez financé", "body": "Accédez à un fonds de roulement et au financement de tournée adossés à des contrats confirmés et à de vraies factures de promoteurs." },
+        "operate": { "title": "Opérez sur TourStack", "body": "Recrutement, paie, contrats et paiements passent par une seule plateforme, sur tous les marchés, en temps réel." }
+      }
+    },
     "about": {
       "eyebrow": "Qu'est-ce que TourStack",
       "title": "La plateforme de business intelligence pour l'industrie musicale live en Afrique",
@@ -4177,6 +4218,10 @@
         "insurance": {
           "title": "Tarifs d'assurance collectifs",
           "body": "Nous negocions pour tout l'ecosysteme a la fois. Les membres obtiennent des tarifs qu'ils ne pourraient pas avoir seuls."
+        },
+        "training": {
+          "title": "Formation et certification standardisées",
+          "body": "Obtenez une certification portable qui atteste de vos compétences — reconnue sur tous les marchés TourStack, de sorte qu'un titre obtenu au Ghana est aussi valable en Afrique du Sud."
         }
       }
     },
@@ -4266,6 +4311,15 @@
         ],
         "cta": "S'inscrire comme manager"
       }
+    },
+    "markets": {
+      "eyebrow": "Panafricain par conception",
+      "title": "Un écosystème, vingt-cinq marchés",
+      "body": "TourStack se déploie en Afrique en deux phases. Où que vous vous inscriviez, votre profil vérifié vous suit à mesure que la plateforme atteint de nouveaux pays — le travail que vous faites aujourd'hui se cumule à l'échelle du continent.",
+      "phase1Label": "Phase 1 — Afrique francophone",
+      "phase1": "Abidjan · Dakar · Conakry · Bamako · Douala · Libreville · Brazzaville · Kinshasa",
+      "phase2Label": "Phase 2 — Afrique anglophone et lusophone",
+      "phase2": "Nigéria · Ghana · Kenya · Afrique du Sud · Tanzanie · Angola · Mozambique et plus"
     },
     "vision": {
       "eyebrow": "La vision globale",

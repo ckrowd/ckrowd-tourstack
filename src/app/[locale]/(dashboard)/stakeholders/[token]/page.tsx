@@ -10,6 +10,7 @@ import {
 	type StakeholderCategory,
 	type SubmitPayload,
 } from "@/components/onboarding/StakeholderForms";
+import OnboardingValueProps from "@/components/onboarding/OnboardingValueProps";
 import { Link } from "@/i18n/routing";
 
 export default function PublicOnboardingLinkPage({
@@ -111,6 +112,8 @@ export default function PublicOnboardingLinkPage({
 								<span className="font-semibold text-on-surface">{String(link.label)}</span>
 							</p>
 						) : null}
+
+						<OnboardingValueProps />
 
 						<StakeholderForm
 							category={category}
