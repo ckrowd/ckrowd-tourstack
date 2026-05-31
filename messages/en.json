@@ -1,4 +1,19 @@
 {
+  "EcosystemReadiness": {
+    "title": "Complete your ecosystem to unlock financing",
+    "subtitle": "Onboard your service providers and workforce and secure insurance — it is the condition for accessing TourStack financing.",
+    "eligibleTitle": "You are eligible for financing",
+    "eligibleBody": "Your ecosystem is onboarded and insured — you can apply for financing.",
+    "progress": "{done}/{total} complete",
+    "items": {
+      "service": "Service providers onboarded",
+      "workforce": "Workforce onboarded",
+      "artmgmt": "Artist management onboarded",
+      "insurance": "Insurance in place"
+    },
+    "ctaInvite": "Invite your ecosystem",
+    "ctaInsurance": "Get insurance"
+  },
   "StakeholderTaxonomy": {
     "departments": {
       "production_stage": "Production & Stage Management",

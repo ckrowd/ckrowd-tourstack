@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { useLocale, useTranslations } from "next-intl";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { getStakeholders } from "@/app/actions";
 import { downloadCsv } from "@/lib/csv";
 
@@ -43,11 +43,22 @@ export default function AdminDirectoryPage() {
 	const locale = useLocale();
 	const [filter, setFilter] = useState<"all" | Category>("all");
 	const [search, setSearch] = useState("");
+	const [debouncedSearch, setDebouncedSearch] = useState("");
 	const [selectedId, setSelectedId] = useState<string | null>(null);
 
+	// Debounce so we issue one server search per pause, not per keystroke.
+	useEffect(() => {
+		const id = setTimeout(() => setDebouncedSearch(search.trim()), 300);
+		return () => clearTimeout(id);
+	}, [search]);
+
+	// Free-text search (name / company / country / town) runs server-side so it
+	// scales past what the browser can filter; category is a cheap client-side
+	// refinement that keeps the per-tab counts live.
 	const { data: res, isLoading } = useQuery({
-		queryKey: ["stakeholders", "all"],
-		queryFn: () => getStakeholders("all"),
+		queryKey: ["stakeholders", "all", debouncedSearch],
+		queryFn: () =>
+			getStakeholders("all", debouncedSearch ? { q: debouncedSearch } : undefined),
 	});
 
 	const entries = useMemo(() => (res?.data ?? []).map((s) => ({
@@ -75,26 +86,11 @@ export default function AdminDirectoryPage() {
 		{ key: "artmgmt", label: t("filters.artmgmt") },
 	];
 
-	// Free-text search across the fields a directory query cares about — name,
-	// company, country, town/city and every captured detail (service types,
-	// roles, etc.) — so queries like "speaker suppliers in Abeokuta" resolve.
-	const query = search.trim().toLowerCase();
-	const byCategory = filter === "all" ? entries : entries.filter((e) => e.category === filter);
-	const filtered = query
-		? byCategory.filter((e) => {
-				const haystack = [
-					e.name,
-					e.company,
-					e.country,
-					e.email,
-					...Object.values(e.extra),
-				]
-					.join(" ")
-					.toLowerCase();
-				return haystack.includes(query);
-			})
-		: byCategory;
-	const selected = selectedId ? entries.find((e) => e.id === selectedId) ?? null : null;
+	const filtered =
+		filter === "all" ? entries : entries.filter((e) => e.category === filter);
+	const selected = selectedId
+		? (entries.find((e) => e.id === selectedId) ?? null)
+		: null;
 
 	function handleExport() {
 		// Collect the union of extra-data keys across the currently filtered rows
@@ -254,13 +250,15 @@ export default function AdminDirectoryPage() {
 			) : filtered.length === 0 ? (
 				<div className="text-center py-20 bg-surface-container-lowest rounded-2xl border border-outline-variant/10">
 					<span className="material-symbols-outlined text-5xl text-on-surface-variant/30 block mb-4">
-						{query ? "search_off" : "group_add"}
+						{debouncedSearch ? "search_off" : "group_add"}
 					</span>
 					<p className="text-on-surface-variant font-medium">
-						{query ? t("searchNoResults.title") : t("noEntries.title")}
+						{debouncedSearch ? t("searchNoResults.title") : t("noEntries.title")}
 					</p>
 					<p className="text-sm text-on-surface-variant mt-1">
-						{query ? t("searchNoResults.description") : t("noEntries.description")}
+						{debouncedSearch
+							? t("searchNoResults.description")
+							: t("noEntries.description")}
 					</p>
 				</div>
 			) : (

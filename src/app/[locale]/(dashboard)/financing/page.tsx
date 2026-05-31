@@ -2,9 +2,12 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
 	getFinancingApplications,
 	getFinancingPartners,
+	getStakeholders,
 	getTourstackProfile,
 } from "@/app/actions";
+import EcosystemReadiness from "@/components/EcosystemReadiness";
 import FinancingApplyButton from "@/components/FinancingApplyButton";
+import { computeEcosystemReadiness } from "@/lib/eligibility";
 import type { ProductId } from "@/components/FinancingApplyModal";
 import FinancingFaq from "@/components/FinancingFaq";
 import FinancingQuickApply from "@/components/FinancingQuickApply";
@@ -21,13 +24,19 @@ export default async function FinancingPage({ params }: Props) {
 	setRequestLocale(locale);
 	const t = await getTranslations("FinancingPage");
 
-	const [appsResult, partnersResult, profileResult] = await Promise.all([
-		getFinancingApplications(),
-		getFinancingPartners(),
-		getTourstackProfile(),
-	]);
+	const [appsResult, partnersResult, profileResult, stakeholdersResult] =
+		await Promise.all([
+			getFinancingApplications(),
+			getFinancingPartners(),
+			getTourstackProfile(),
+			getStakeholders(),
+		]);
 	const applications = appsResult.data ?? [];
 	const partners = partnersResult.data ?? [];
+	const readiness = computeEcosystemReadiness(
+		stakeholdersResult.data ?? [],
+		applications,
+	);
 	const applicantName =
 		profileResult.data?.contact_person ??
 		profileResult.data?.company_name ??
@@ -164,6 +173,11 @@ export default async function FinancingPage({ params }: Props) {
 							</p>
 						</div>
 						<FinancingFaq faqs={faqs} />
+					</div>
+
+					{/* Ecosystem readiness / financing eligibility */}
+					<div className="mb-10">
+						<EcosystemReadiness readiness={readiness} />
 					</div>
 
 					{/* My Applications */}
