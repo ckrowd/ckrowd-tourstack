@@ -621,12 +621,23 @@ export type StakeholderSubmission = {
 	phone: string | null;
 	company: string | null;
 	country: string | null;
+	city: string | null;
 	extra_data: Record<string, unknown> | null;
 	submitted_at: string;
 	link: { id: string; token: string; label: string | null } | null;
 };
 
-export async function getStakeholders(scope?: "all"): Promise<{
+export type StakeholderFilters = {
+	q?: string;
+	city?: string;
+	country?: string;
+	category?: string;
+};
+
+export async function getStakeholders(
+	scope?: "all",
+	filters?: StakeholderFilters,
+): Promise<{
 	data: StakeholderSubmission[];
 	success: boolean;
 	error: string | null;
@@ -637,8 +648,15 @@ export async function getStakeholders(scope?: "all"): Promise<{
 		.getAll()
 		.map((c) => `${c.name}=${c.value}`)
 		.join("; ");
-	const url = scope
-		? `${apiUrl}/tourstack/stakeholders?scope=${encodeURIComponent(scope)}`
+	const params = new URLSearchParams();
+	if (scope) params.set("scope", scope);
+	if (filters?.q?.trim()) params.set("q", filters.q.trim());
+	if (filters?.city?.trim()) params.set("city", filters.city.trim());
+	if (filters?.country?.trim()) params.set("country", filters.country.trim());
+	if (filters?.category) params.set("category", filters.category);
+	const qs = params.toString();
+	const url = qs
+		? `${apiUrl}/tourstack/stakeholders?${qs}`
 		: `${apiUrl}/tourstack/stakeholders`;
 	const res = await fetch(url, {
 		headers: { Cookie: cookieString },
