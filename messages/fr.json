@@ -1,4 +1,19 @@
 {
+  "EcosystemReadiness": {
+    "title": "Complétez votre écosystème pour débloquer le financement",
+    "subtitle": "Intégrez vos prestataires et votre personnel et souscrivez une assurance — c'est la condition pour accéder au financement TourStack.",
+    "eligibleTitle": "Vous êtes éligible au financement",
+    "eligibleBody": "Votre écosystème est intégré et assuré — vous pouvez demander un financement.",
+    "progress": "{done}/{total} complété",
+    "items": {
+      "service": "Prestataires intégrés",
+      "workforce": "Personnel intégré",
+      "artmgmt": "Management d'artistes intégré",
+      "insurance": "Assurance en place"
+    },
+    "ctaInvite": "Invitez votre écosystème",
+    "ctaInsurance": "Souscrire une assurance"
+  },
   "StakeholderTaxonomy": {
     "departments": {
       "production_stage": "Production & régie scène",

@@ -3,10 +3,13 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
 	getEOIs,
 	getFinancingApplications,
+	getStakeholders,
 	getTourstackDashboard,
 	getTourstackProfile,
 } from "@/app/actions";
+import EcosystemReadiness from "@/components/EcosystemReadiness";
 import SideNav from "@/components/SideNav";
+import { computeEcosystemReadiness } from "@/lib/eligibility";
 import TopNav from "@/components/TopNav";
 import { Link } from "@/i18n/routing";
 
@@ -32,13 +35,24 @@ export default async function DashboardPage({ params }: Props) {
 	setRequestLocale(locale);
 	const t = await getTranslations("DashboardPage");
 
-	const [eoisResult, dashboardResult, profileResult, financingResult] =
-		await Promise.all([
-			getEOIs(),
-			getTourstackDashboard(),
-			getTourstackProfile(),
-			getFinancingApplications(),
-		]);
+	const [
+		eoisResult,
+		dashboardResult,
+		profileResult,
+		financingResult,
+		stakeholdersResult,
+	] = await Promise.all([
+		getEOIs(),
+		getTourstackDashboard(),
+		getTourstackProfile(),
+		getFinancingApplications(),
+		getStakeholders(),
+	]);
+
+	const readiness = computeEcosystemReadiness(
+		stakeholdersResult.data ?? [],
+		financingResult.data ?? [],
+	);
 
 	const eois = eoisResult.data ?? [];
 	const now = new Date();
@@ -175,6 +189,13 @@ export default async function DashboardPage({ params }: Props) {
 							))}
 						</div>
 					</div>
+
+					{/* Ecosystem readiness nudge (hidden once eligible) */}
+					{!readiness.eligible && (
+						<div className="mb-10">
+							<EcosystemReadiness readiness={readiness} compact />
+						</div>
+					)}
 
 					{/* Stats Grid */}
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
