@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import {
+	getNewsletterStatus,
 	getSession,
 	getTourstackNotifications,
 	subscribeNewsletter,
@@ -37,18 +38,26 @@ export default function SettingsNotificationsTab() {
 	const queryClient = useQueryClient();
 
 	const sessionQuery = useQuery({ queryKey: ["session"], queryFn: getSession });
-	const [isSubscribed, setIsSubscribed] = useState(false);
+
+	const email = sessionQuery.data?.user?.email ?? null;
+
+	const newsletterStatusQuery = useQuery({
+		queryKey: ["newsletterStatus", email],
+		queryFn: () => getNewsletterStatus(email!),
+		enabled: Boolean(email),
+	});
+
+	const isSubscribed = newsletterStatusQuery.data?.subscribed ?? false;
 
 	const newsletterMutation = useMutation({
 		mutationFn: async (subscribe: boolean) => {
-			const email = sessionQuery.data?.user?.email;
 			if (!email) throw new Error("No email found in session");
-			return subscribe
-				? subscribeNewsletter(email)
-				: unsubscribeNewsletter(email);
+			return subscribe ? subscribeNewsletter(email) : unsubscribeNewsletter(email);
 		},
-		onSuccess: (result, subscribe) => {
-			if (result.success) setIsSubscribed(subscribe);
+		onSuccess: (result) => {
+			if (result.success) {
+				void newsletterStatusQuery.refetch();
+			}
 		},
 	});
 
@@ -215,7 +224,11 @@ export default function SettingsNotificationsTab() {
 					label={t("newsletter.label")}
 					description={t("newsletter.description")}
 					checked={isSubscribed}
-					disabled={newsletterMutation.isPending || sessionQuery.isLoading}
+					disabled={
+						newsletterMutation.isPending ||
+						newsletterStatusQuery.isLoading ||
+						sessionQuery.isLoading
+					}
 					onChange={(val) => newsletterMutation.mutate(val)}
 				/>
 				{newsletterMutation.isPending && (
