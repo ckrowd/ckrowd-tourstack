@@ -293,9 +293,9 @@ export default function TopNav() {
 							)}
 						</div>
 
-						{/* Notifications — desktop only */}
+						{/* Notifications — all sizes, sits before hamburger */}
 						{session?.user && (
-							<div className="relative hidden lg:block">
+							<div className="relative">
 								<button
 									type="button"
 									aria-label={t("openNotifications")}
