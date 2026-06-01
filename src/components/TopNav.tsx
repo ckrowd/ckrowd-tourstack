@@ -559,9 +559,6 @@ export default function TopNav() {
 										onClick={() => setMobileMenuOpen(false)}
 										className="flex items-center gap-3 px-4 py-3 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm text-slate-600 hover:bg-slate-50 transition-colors"
 									>
-										<span className="material-symbols-outlined text-[#494455]">
-											person
-										</span>
 										<span>{tCommon("profile")}</span>
 										<span className="ml-auto h-7 w-7 rounded-full bg-[#FF5A30] flex items-center justify-center text-white text-xs font-bold">
 											{userInitial}
