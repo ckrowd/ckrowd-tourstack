@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Footer from "@/components/Footer";
+import JoinHeroSlider from "@/components/JoinHeroSlider";
 import TopNav from "@/components/TopNav";
 
 type Props = {
@@ -57,12 +58,27 @@ export default async function JoinPage({ params, searchParams }: Props) {
 	const statItems = ["economy", "fans", "markets", "financing"] as const;
 	const modelPillars = ["certify", "bank", "finance", "operate"] as const;
 
+	// One hero slide per category — a promoter token routes to attributed
+	// onboarding, otherwise the visitor self-onboards independently.
+	const heroSlides = roles.map((r) => ({
+		key: r.key,
+		icon: r.icon,
+		title: t(`roles.${r.key}.title`),
+		tagline: t(`roles.${r.key}.tagline`),
+		cta: t(`roles.${r.key}.cta`),
+		href: r.token
+			? `/${locale}/stakeholders/${r.token}`
+			: `/${locale}/onboard/${r.key}`,
+		examplesLabel: t("roles.examplesLabel"),
+		examples: (t.raw(`roles.${r.key}.examples`) as string[]).slice(0, 6),
+	}));
+
 	return (
 		<div className="bg-[#f7f9fb] text-[#191c1e]">
 			<TopNav />
 
-			{/* ── Hero ─────────────────────────────────────────────────────── */}
-			<section className="relative pt-24 pb-20 px-6 md:px-12 overflow-hidden">
+			{/* ── Hero (full-height category slider) ───────────────────────── */}
+			<section className="relative min-h-[100dvh] flex items-center py-24 overflow-hidden">
 				{/* Background — cinematic image + shared hero gradient, matching the
 				    main landing page's hero treatment. */}
 				<div className="absolute inset-0 z-0">
@@ -71,50 +87,29 @@ export default async function JoinPage({ params, searchParams }: Props) {
 						alt=""
 						fill
 						className="object-cover"
+						priority
 					/>
 					<div className="absolute inset-0 hero-gradient" />
 				</div>
 
-				<div className="relative z-10 max-w-4xl mx-auto text-center text-white">
-					<span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-xs font-bold uppercase tracking-widest mb-8">
-						<span
-							className="material-symbols-outlined text-sm"
-							style={{ fontVariationSettings: "'FILL' 1" }}
-						>
-							bolt
-						</span>
-						{t("hero.badge")}
-					</span>
-
-					<h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight font-(family-name:--font-manrope) leading-[1.1] mb-6">
-						{t("hero.title")}
-					</h1>
-					<p className="text-lg md:text-xl text-white/70 max-w-2xl mx-auto leading-relaxed mb-10">
-						{t("hero.description")}
-					</p>
-
-					{/* Key stat */}
-					<div className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl glass-effect bg-white/10 border border-white/20">
-						<span
-							className="material-symbols-outlined text-[#FF5A30] text-2xl"
-							style={{ fontVariationSettings: "'FILL' 1" }}
-						>
-							account_balance
-						</span>
-						<div className="text-left">
-							<p className="text-xs font-bold uppercase tracking-widest text-white/50 mb-0.5">
-								{t("hero.statLabel")}
-							</p>
-							<p className="text-lg font-extrabold text-white font-(family-name:--font-manrope)">
-								{t("hero.statValue")}
-							</p>
-						</div>
-					</div>
+				<div className="relative z-10 px-6 md:px-12 max-w-7xl mx-auto w-full text-white">
+					{/* The hero IS the slider — a home-style panel per category */}
+					<JoinHeroSlider
+						slides={heroSlides}
+						joinAsLabel={t("hero.joinAs")}
+						readMoreLabel={t("hero.readMore")}
+						readMoreHref="#learn-more"
+						prevLabel={t("hero.sliderPrev")}
+						nextLabel={t("hero.sliderNext")}
+					/>
 				</div>
 			</section>
 
 			{/* ── Proof / market stats ────────────────────────────────────── */}
-			<section className="py-24 px-6 md:px-12 bg-white border-b border-slate-100">
+			<section
+				id="learn-more"
+				className="scroll-mt-20 py-24 px-6 md:px-12 bg-white border-b border-slate-100"
+			>
 				<div className="max-w-5xl mx-auto">
 					<div className="max-w-3xl mb-10">
 						<h2 className="text-2xl md:text-3xl font-extrabold font-(family-name:--font-manrope) text-[#191c1e] mb-3 leading-tight">

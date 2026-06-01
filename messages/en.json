@@ -4202,7 +4202,12 @@
       "title": "Africa's Live Music Industry — Powered by People Like You",
       "description": "TourStack aggregates the live music ecosystem across Africa. Join the network that connects promoters, service providers, crew, and artist managers for financing, insurance, and cross-border opportunities.",
       "statLabel": "Available trade financing for eligible members",
-      "statValue": "Up to $1,000,000"
+      "statValue": "Up to $1,000,000",
+      "joinAs": "Join the platform as",
+      "readMore": "Read more",
+      "signUp": "Sign up",
+      "sliderPrev": "Previous role",
+      "sliderNext": "Next role"
     },
     "stats": {
       "title": "Africa has 1.4 billion music fans. Almost no one earns from concerts — yet.",
