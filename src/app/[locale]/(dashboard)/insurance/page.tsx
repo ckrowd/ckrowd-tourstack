@@ -1017,7 +1017,7 @@ export default function InsurancePage() {
 														{t("profile.bankName")}
 													</span>
 												</div>
-												<div className="grid grid-cols-3 gap-3 pt-3 border-t border-outline-variant/20">
+												<div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 border-t border-outline-variant/20">
 													{(
 														[
 															[t("profile.tableLabels.amount"), fp.amount],
