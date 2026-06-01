@@ -458,10 +458,12 @@ export default function TopNav() {
 									<button
 										key={l}
 										type="button"
-										onClick={() => {
-											router.replace(pathname, { locale: l as "en" | "fr" });
-											setMobileMenuOpen(false);
-										}}
+									onClick={() => {
+										router.replace(pathname, {
+											locale: l as (typeof routing.locales)[number],
+										});
+										setMobileMenuOpen(false);
+									}}
 										className={`flex-1 py-2 rounded-lg text-xs font-bold uppercase transition-colors ${
 											locale === l
 												? "bg-[#FF5A30] text-white"
