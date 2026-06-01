@@ -38,7 +38,18 @@ export default function JoinHeroSlider({
 	const n = slides.length;
 	const [index, setIndex] = useState(0);
 	const [paused, setPaused] = useState(false);
-	const go = useCallback((i: number) => setIndex(((i % n) + n) % n), [n]);
+	const go = useCallback(
+		(i: number) => {
+			if (n === 0) return;
+			setIndex(((i % n) + n) % n);
+		},
+		[n],
+	);
+
+	useEffect(() => {
+		if (n === 0) return;
+		setIndex((p) => (p >= n ? 0 : p));
+	}, [n]);
 
 	useEffect(() => {
 		if (paused || n <= 1) return;
