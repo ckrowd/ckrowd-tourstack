@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Footer from "@/components/Footer";
+import JoinHeroSlider from "@/components/JoinHeroSlider";
 import TopNav from "@/components/TopNav";
 
 type Props = {
@@ -57,116 +58,50 @@ export default async function JoinPage({ params, searchParams }: Props) {
 	const statItems = ["economy", "fans", "markets", "financing"] as const;
 	const modelPillars = ["certify", "bank", "finance", "operate"] as const;
 
+	// One hero slide per category — a promoter token routes to attributed
+	// onboarding, otherwise the visitor self-onboards independently.
+	const heroSlides = roles.map((r) => ({
+		key: r.key,
+		icon: r.icon,
+		title: t(`roles.${r.key}.title`),
+		tagline: t(`roles.${r.key}.tagline`),
+		cta: t(`roles.${r.key}.cta`),
+		href: r.token
+			? `/${locale}/stakeholders/${r.token}`
+			: `/${locale}/onboard/${r.key}`,
+		examplesLabel: t("roles.examplesLabel"),
+		examples: (t.raw(`roles.${r.key}.examples`) as string[]).slice(0, 6),
+	}));
+
 	return (
 		<div className="bg-[#f7f9fb] text-[#191c1e]">
 			<TopNav />
 
-			{/* ── Hero — same layout as landing page ───────────────────────── */}
+			{/* ── Hero (full-height category slider) ───────────────────────── */}
 			<section className="relative min-h-[100dvh] flex items-center py-24 overflow-hidden">
+				{/* Background — cinematic image + shared hero gradient, matching the
+				    main landing page's hero treatment. */}
 				<div className="absolute inset-0 z-0">
 					<Image
-						alt={t("hero.badge")}
+						src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzmBZ4sptM2EkEigkgVtZoQswUChDcxcN0l6igDH_EBa2GLtVN7P1I0t88pF31shR8wCgzj8mSaIu9AyJPvDpAhc2Zn1ivhXJDcBLGQ5AzaptLJr7T6fzIAIrhumj7UB4lHs54qvzSr8qd20qkkM4-u_3ZS16w8T0TYa-lLii8xmKgEmUtd-6QMIxrtRTa2qj4P3QBHJI6nBv1QRVZg0oWkiaWSXSeE06motFRMGPuzO9rrRsgINcAeTbd-6DNlL26ZgKLmyAsnjE"
+						alt=""
 						fill
 						className="object-cover"
-						src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzmBZ4sptM2EkEigkgVtZoQswUChDcxcN0l6igDH_EBa2GLtVN7P1I0t88pF31shR8wCgzj8mSaIu9AyJPvDpAhc2Zn1ivhXJDcBLGQ5AzaptLJr7T6fzIAIrhumj7UB4lHs54qvzSr8qd20qkkM4-u_3ZS16w8T0TYa-lLii8xmKgEmUtd-6DNlL26ZgKLmyAsnjE"
 						priority
 					/>
 					<div className="absolute inset-0 hero-gradient" />
 				</div>
 
-				<div className="relative z-10 px-6 md:px-12 w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-					{/* Left — copy + CTAs */}
-					<div className="space-y-8">
-						<div className="inline-flex items-center gap-2 px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed rounded-full">
-							<span
-								className="material-symbols-outlined text-sm"
-								style={{ fontVariationSettings: "'FILL' 1" }}
-							>
-								group_add
-							</span>
-							<span className="text-xs font-bold tracking-widest uppercase">
-								{t("hero.badge")}
-							</span>
-						</div>
-
-						<h1 className="font-(family-name:--font-manrope) font-extrabold text-5xl md:text-7xl text-white leading-[1.1] tracking-tight">
-							{t("hero.title")}
-						</h1>
-
-						<p className="text-xl text-white/85 max-w-xl leading-relaxed">
-							{t("hero.description")}
-						</p>
-
-						<div className="flex flex-col sm:flex-row flex-wrap gap-4 pt-4">
-							<Link
-								href={`/${locale}/onboard/service`}
-								className="w-full sm:w-auto justify-center px-6 md:px-8 py-3 md:py-4 bg-[#FF5A30] text-white rounded-xl font-bold flex items-center gap-3 shadow-2xl shadow-[#FF5A30]/40 hover:scale-[1.02] transition-transform active:scale-[0.98]"
-							>
-								{t("hero.cta")}
-								<span className="material-symbols-outlined">arrow_forward</span>
-							</Link>
-							<a
-								href="#learn-more"
-								className="w-full sm:w-auto justify-center text-center flex items-center px-6 md:px-8 py-3 md:py-4 glass-effect bg-white/10 text-white border border-white/20 rounded-xl font-bold hover:bg-white/20 transition-all"
-							>
-								{t("hero.readMore")}
-							</a>
-						</div>
-					</div>
-
-					{/* Right — "Who can join" card, mirrors the analytics card on landing */}
-					<div className="hidden lg:block">
-						<div className="glass-effect bg-white/10 p-1 rounded-2xl border border-white/20 shadow-2xl">
-							<div className="bg-white rounded-xl p-6">
-								<div className="flex items-center justify-between mb-6">
-									<h3 className="font-(family-name:--font-manrope) font-bold text-slate-900">
-										{t("hero.joinAs")}
-									</h3>
-									<span
-										className="material-symbols-outlined text-[#FF5A30]"
-										style={{ fontVariationSettings: "'FILL' 1" }}
-									>
-										verified
-									</span>
-								</div>
-								<div className="space-y-4">
-									{roles.map((r) => (
-										<Link
-											key={r.key}
-											href={r.token ? `/${locale}/stakeholders/${r.token}` : `/${locale}/onboard/${r.key}`}
-											className="flex items-center gap-4 py-3 border-b border-slate-100 last:border-0 hover:opacity-80 transition-opacity group"
-										>
-											<span
-												className={`material-symbols-outlined ${r.accentText}`}
-												style={{ fontVariationSettings: "'FILL' 1" }}
-											>
-												{r.icon}
-											</span>
-											<div className="flex-1 min-w-0">
-												<p className="text-sm font-bold text-slate-900">
-													{t(`roles.${r.key}.title`)}
-												</p>
-												<p className="text-xs text-slate-500 truncate">
-													{(t.raw(`roles.${r.key}.examples`) as string[]).slice(0, 2).join(" · ")}
-												</p>
-											</div>
-											<span className="material-symbols-outlined text-slate-300 group-hover:text-[#FF5A30] transition-colors text-sm shrink-0">
-												arrow_forward_ios
-											</span>
-										</Link>
-									))}
-								</div>
-								<div className="mt-5 pt-4 border-t border-slate-100 flex items-center justify-between">
-									<p className="text-xs text-slate-500 font-semibold">
-										{t("hero.statLabel")}
-									</p>
-									<span className="text-sm font-black text-[#FF5A30] font-(family-name:--font-manrope)">
-										{t("hero.statValue")}
-									</span>
-								</div>
-							</div>
-						</div>
-					</div>
+				<div className="relative z-10 px-6 md:px-12 max-w-7xl mx-auto w-full text-white">
+					{/* The hero IS the slider — a home-style panel per category */}
+					<JoinHeroSlider
+						slides={heroSlides}
+						joinAsLabel={t("hero.joinAs")}
+						readMoreLabel={t("hero.readMore")}
+						readMoreHref="#learn-more"
+						prevLabel={t("hero.sliderPrev")}
+						nextLabel={t("hero.sliderNext")}
+					/>
 				</div>
 			</section>
 
