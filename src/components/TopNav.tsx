@@ -428,7 +428,7 @@ export default function TopNav() {
 							>
 								<Image
 									src="/ckrowd-logo.png"
-									alt="Ckrowd logo"
+									alt={tCommon("logoAlt")}
 									width={32}
 									height={32}
 								/>
