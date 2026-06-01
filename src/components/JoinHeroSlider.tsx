@@ -70,11 +70,11 @@ export default function JoinHeroSlider({
 					className="flex transition-transform duration-500 ease-out"
 					style={{ transform: `translateX(-${index * 100}%)` }}
 				>
-					{slides.map((s) => (
+					{slides.map((s, i) => (
 						<div
 							key={s.key}
 							className="w-full shrink-0"
-							aria-hidden={slides[index].key !== s.key}
+							aria-hidden={i !== index}
 						>
 							<div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center text-left">
 								{/* Left — copy + CTA */}
