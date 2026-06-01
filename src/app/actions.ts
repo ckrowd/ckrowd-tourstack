@@ -1034,6 +1034,14 @@ export async function resendVerificationOtp(email: string) {
 
 // Newsletter
 
+export async function getNewsletterStatus(email: string) {
+	const { data, error } = await client.newsletter.status.get({ query: { email } });
+	return {
+		subscribed: data?.success ? Boolean((data as { data?: { subscribed?: boolean } }).data?.subscribed) : false,
+		success: !error && data?.success,
+	};
+}
+
 export async function subscribeNewsletter(email: string) {
 	const { data, error } = await client.newsletter.join.post({ email });
 	return { success: !error && data?.success, error: extractError(error) };
