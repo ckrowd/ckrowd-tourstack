@@ -2,6 +2,7 @@
 
 import { createClient } from "@ckrowd/ckrowd-prisma";
 import { extractResponseCookies } from "@ckrowd/ckrowd-prisma/utils";
+import { getLocale } from "next-intl/server";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -76,7 +77,7 @@ function wait(ms: number) {
 	return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function extractPayload<T>(
+async function extractPayload<T>(
 	value: T | null | undefined,
 	response?: { status: number; headers?: HeadersInit },
 ) {
@@ -87,7 +88,8 @@ function extractPayload<T>(
 			(response?.headers as Headers)?.get("X-Request-Method") ?? "GET",
 		)
 	) {
-		redirect("/login");
+		const locale = await getLocale();
+		redirect(`/${locale}/login`);
 	}
 	return ((value as T extends { data?: infer P } ? { data?: P } : never)
 		?.data || undefined) as T extends { data?: infer P } ? P : undefined;
@@ -257,7 +259,7 @@ export async function getArtists(
 		params ? { query: params } : {},
 	);
 	return {
-		data: extractPayload(data, { status, headers }),
+		data: await extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -277,7 +279,7 @@ export async function getArtist(id: string) {
 export async function getTourstackProfile() {
 	const { data, error, status, headers } = await client.tourstack.profile.get();
 	return {
-		data: extractPayload(data, { status, headers }),
+		data: await extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -289,7 +291,7 @@ export async function updateTourstackProfile(
 	const { data, error, status, headers } =
 		await client.tourstack.profile.patch(body);
 	return {
-		data: extractPayload(data, { status, headers }),
+		data: await extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -301,7 +303,7 @@ export async function getTourstackDashboard() {
 	const { data, error, status, headers } =
 		await client.tourstack.dashboard.get();
 	return {
-		data: extractPayload(data, { status, headers }),
+		data: await extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -317,7 +319,7 @@ export async function getEOIs(status?: string) {
 		headers,
 	} = await client.tourstack.eoi.get(status ? { query: { status } } : {});
 	return {
-		data: extractPayload(data, { status: responseStatus, headers }),
+		data: await extractPayload(data, { status: responseStatus, headers }),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -328,7 +330,7 @@ export async function getEOI(id: string) {
 		.eoi({ id })
 		.get();
 	return {
-		data: extractPayload(data, { status, headers }),
+		data: await extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -340,7 +342,7 @@ export async function createEOI(
 	const { data, error, status, headers } =
 		await client.tourstack.eoi.post(body);
 	return {
-		data: extractPayload(data, { status, headers }),
+		data: await extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -363,7 +365,7 @@ export async function getTours(status?: string, page?: number, limit?: number) {
 		| { page: number; limit: number; total: number; totalPages: number }
 		| undefined;
 	return {
-		data: extractPayload(data, { status: responseStatus, headers }),
+		data: await extractPayload(data, { status: responseStatus, headers }),
 		pagination,
 		success: !error && data?.success,
 		error: extractError(error, data),
@@ -375,7 +377,7 @@ export async function getTour(id: string) {
 		.tours({ id })
 		.get();
 	return {
-		data: extractPayload(data, { status, headers }),
+		data: await extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -386,7 +388,7 @@ export async function getTourMilestones(id: string) {
 		.tours({ id })
 		.milestones.get();
 	return {
-		data: extractPayload(data, { status, headers }),
+		data: await extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -401,7 +403,7 @@ export async function getFinancingApplications(status?: string) {
 		headers,
 	} = await client.tourstack.financing.get(status ? { query: { status } } : {});
 	return {
-		data: extractPayload(data, { status: responseStatus, headers }),
+		data: await extractPayload(data, { status: responseStatus, headers }),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -412,7 +414,7 @@ export async function getFinancingApplication(id: string) {
 		.financing({ id })
 		.get();
 	return {
-		data: extractPayload(data, { status, headers }),
+		data: await extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -424,7 +426,7 @@ export async function applyForFinancing(
 	const { data, error, status, headers } =
 		await client.tourstack.financing.post(body);
 	return {
-		data: extractPayload(data, { status, headers }),
+		data: await extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -433,7 +435,7 @@ export async function applyForFinancing(
 export async function getFinancingPartners() {
 	const { data, error } = await client.tourstack.financing.partners.get();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -444,7 +446,7 @@ export async function getFinancingPartners() {
 export async function getTourstackVenues() {
 	const { data, error } = await client.tourstack.venues.get();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -455,7 +457,7 @@ export async function createTourstackVenue(
 ) {
 	const { data, error } = await client.tourstack.venues.post(body);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -467,7 +469,7 @@ export async function updateTourstackVenue(
 ) {
 	const { data, error } = await client.tourstack.venues({ id }).patch(body);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -476,7 +478,7 @@ export async function updateTourstackVenue(
 export async function deleteTourstackVenue(id: string) {
 	const { data, error } = await client.tourstack.venues({ id }).delete();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -487,7 +489,7 @@ export async function deleteTourstackVenue(id: string) {
 export async function getTourstackNotifications() {
 	const { data, error } = await client.tourstack.notifications.get();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -498,7 +500,7 @@ export async function updateTourstackNotifications(
 ) {
 	const { data, error } = await client.tourstack.notifications.patch(body);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -513,7 +515,7 @@ export async function getCrewMembers(
 		params ? { query: params } : {},
 	);
 	return {
-		data: extractPayload(data, { status, headers }),
+		data: await extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -524,7 +526,7 @@ export async function getCrewMember(id: string) {
 		.workforce({ id })
 		.get();
 	return {
-		data: extractPayload(data, { status, headers }),
+		data: await extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -536,7 +538,7 @@ export async function registerCrewMember(
 	const { data, error, status, headers } =
 		await client.tourstack.workforce.post(body);
 	return {
-		data: extractPayload(data, { status, headers }),
+		data: await extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -549,7 +551,7 @@ export async function registerStakeholder(
 ) {
 	const { data, error } = await client.tourstack.onboarding.post(body);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -564,7 +566,7 @@ export async function registerStakeholderAnonymous(
 ) {
 	const { data, error } = await anonymousClient.tourstack.onboarding.post(body);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -575,7 +577,7 @@ export async function registerStakeholderAnonymous(
 export async function getOnboardingLinks() {
 	const { data, error } = await client.tourstack["onboarding-links"].get();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -587,7 +589,7 @@ export async function createOnboardingLink(
 	const { data, error, status, headers } =
 		await client.tourstack["onboarding-links"].post(body);
 	return {
-		data: extractPayload(data, { status, headers }),
+		data: await extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -611,7 +613,7 @@ export async function revokeOnboardingLink(token: string) {
 		token,
 	}).delete();
 	return {
-		data: extractPayload(data, { status, headers }),
+		data: await extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -627,7 +629,7 @@ export async function submitOnboardingLink(
 		token,
 	}).submit.post(body);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -697,7 +699,7 @@ export async function getAdminEOIs(status?: string) {
 		status ? { query: { status } } : {},
 	);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -714,7 +716,7 @@ export async function getAdminTours(status?: string, page?: number, limit?: numb
 		| { page: number; limit: number; total: number; totalPages: number }
 		| undefined;
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		pagination,
 		success: !error && data?.success,
 		error: extractError(error, data),
@@ -724,7 +726,7 @@ export async function getAdminTours(status?: string, page?: number, limit?: numb
 export async function getAdminArtists() {
 	const { data, error } = await client.tourstack.admin.artists.get();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -761,7 +763,7 @@ export async function createAdminTour(
 	const { data, error, status, headers } =
 		await client.tourstack.admin.tours.post(body as Payload<typeof client.tourstack.admin.tours.post>);
 	return {
-		data: extractPayload(data, { status, headers }),
+		data: await extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -770,7 +772,7 @@ export async function createAdminTour(
 export async function getAdminTour(id: string) {
 	const { data, error } = await client.tourstack.admin.tours({ id }).get();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -779,7 +781,7 @@ export async function getAdminTour(id: string) {
 export async function deleteAdminTour(id: string) {
 	const { data, error } = await client.tourstack.admin.tours({ id }).delete();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -791,7 +793,7 @@ export async function updateAdminEoi(
 ) {
 	const { data, error } = await client.tourstack.eoi({ id }).patch(body);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -800,7 +802,7 @@ export async function updateAdminEoi(
 export async function purgeAdminDraftTours() {
 	const { data, error } = await client.tourstack.admin.tours.drafts.delete();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -811,7 +813,7 @@ export async function getAdminFinancing(status?: string) {
 		status ? { query: { status } } : {},
 	);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -823,7 +825,7 @@ export async function updateFinancingApplication(
 ) {
 	const { data, error } = await client.tourstack.financing({ id }).patch(body);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -832,7 +834,7 @@ export async function updateFinancingApplication(
 export async function getAdminFinancingPartners() {
 	const { data, error } = await client.tourstack.admin.financing.partners.get();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -844,7 +846,7 @@ export async function createFinancingPartner(
 	const { data, error } =
 		await client.tourstack.admin.financing.partners.post(body);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -857,7 +859,7 @@ export async function getInsuranceApplications(status?: string) {
 		status ? { query: { status } } : {},
 	);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -873,7 +875,7 @@ export async function updateInsuranceApplication(
 		id,
 	}).patch(body);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -884,7 +886,7 @@ export async function getInsuranceClaims(status?: string) {
 		"insurance-admin"
 	].claims.get(status ? { query: { status } } : {});
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -896,7 +898,7 @@ export async function createInsuranceClaim(
 	const { data, error } =
 		await client.tourstack["insurance-admin"].claims.post(body);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -914,7 +916,7 @@ export async function updateInsuranceClaim(
 		id,
 	}).patch(body);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -924,7 +926,7 @@ export async function getInsurancePartners() {
 	const { data, error } =
 		await client.tourstack["insurance-admin"].partners.get();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -938,7 +940,7 @@ export async function createInsurancePartner(
 	const { data, error } =
 		await client.tourstack["insurance-admin"].partners.post(body);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -947,7 +949,7 @@ export async function createInsurancePartner(
 export async function getAdminReport() {
 	const { data, error } = await client.tourstack.admin.reports.get();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -958,7 +960,7 @@ export async function exportAdminReport() {
 		query: { format: "csv" },
 	});
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -967,7 +969,7 @@ export async function exportAdminReport() {
 export async function getAdminSettings() {
 	const { data, error } = await client.tourstack.admin.settings.get();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -978,7 +980,7 @@ export async function updateAdminSettings(
 ) {
 	const { data, error } = await client.tourstack.admin.settings.patch(body);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -987,7 +989,7 @@ export async function updateAdminSettings(
 export async function getAdminTeam() {
 	const { data, error } = await client.tourstack.admin.team.get();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -998,7 +1000,7 @@ export async function inviteAdminTeamMember(
 ) {
 	const { data, error } = await client.tourstack.admin.team.post(body);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -1009,7 +1011,7 @@ export async function resendAdminInvite(inviteId: string) {
 		id: inviteId,
 	}).resend.post();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -1020,7 +1022,7 @@ export async function revokeAdminInvite(inviteId: string) {
 		id: inviteId,
 	}).delete();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -1031,7 +1033,7 @@ export async function setAdminRoles(
 ) {
 	const { data, error } = await client.tourstack.admin.team.patch(body);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -1040,7 +1042,7 @@ export async function setAdminRoles(
 export async function getAdminInvite(token: string) {
 	const { data, error } = await client.tourstack.admin.invites({ token }).get();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -1051,7 +1053,7 @@ export async function acceptAdminInvite(token: string) {
 		.invites({ token })
 		.accept.post();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -1108,7 +1110,7 @@ export async function setup2FA(): Promise<{
 	const { data, error } = await client.auth["two-factor"].enable.post({});
 	return {
 		success: !error && data?.success,
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		error: extractError(error, data),
 	};
 }
@@ -1159,7 +1161,7 @@ export async function exportStakeholders(format: "json" | "csv" = "csv") {
 		{ query: { format } },
 	);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -1171,7 +1173,7 @@ export async function getFinancingSettings() {
 	const { data, error } =
 		await client.tourstack["financing-admin"].settings.get();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -1183,7 +1185,7 @@ export async function updateFinancingSettings(
 	const { data, error } =
 		await client.tourstack["financing-admin"].settings.patch(body);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -1193,7 +1195,7 @@ export async function listFinancingProducts() {
 	const { data, error } =
 		await client.tourstack["financing-admin"].products.get();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -1205,7 +1207,7 @@ export async function createFinancingProduct(
 	const { data, error } =
 		await client.tourstack["financing-admin"].products.post(body);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -1216,7 +1218,7 @@ export async function deleteFinancingProduct(id: string) {
 		.products({ id })
 		.delete();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -1226,7 +1228,7 @@ export async function getFinancingTeam() {
 	const { data, error } =
 		await client.tourstack["financing-admin"].team.get();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -1238,7 +1240,7 @@ export async function inviteFinancingTeamMember(
 	const { data, error } =
 		await client.tourstack["financing-admin"].team.post(body);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -1249,7 +1251,7 @@ export async function resendFinancingInvite(inviteId: string) {
 		.invites({ id: inviteId })
 		.resend.post();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -1260,7 +1262,7 @@ export async function revokeFinancingInvite(inviteId: string) {
 		.invites({ id: inviteId })
 		.delete();
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -1273,7 +1275,7 @@ export async function uploadFile(
 ) {
 	const { data, error } = await client.storage.upload.post(body);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -1286,7 +1288,7 @@ export async function listBanks(country = "nigeria") {
 		query: { country },
 	});
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
@@ -1298,7 +1300,7 @@ export async function resolveBankAccount(
 	const { data, error } =
 		await client.payments["resolve-account"].post(body);
 	return {
-		data: extractPayload(data),
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
