@@ -44,7 +44,7 @@ export default async function AdminArtistsPage({
 						{t("allArtists")}
 					</h3>
 					<p className="text-sm text-on-surface-variant">
-						{artists.length} {artists.length === 1 ? "project" : "projects"}
+						{t("projectCount", { count: artists.length })}
 					</p>
 				</div>
 

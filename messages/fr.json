@@ -2946,6 +2946,7 @@
     "description": "Tous les projets de tournée d'artistes publiés sur la plateforme de découverte.",
     "createTour": "Créer un projet de tournée",
     "allArtists": "Tous les projets de tournée",
+    "projectCount": "{count, plural, one {# projet} other {# projets}}",
     "noArtists": "Aucun projet de tournée pour l'instant",
     "noArtistsDesc": "Publiez un nouveau projet de tournée pour commencer.",
     "active": "Actif",

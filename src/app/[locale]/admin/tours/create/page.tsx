@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useRef, useState } from "react";
 import { Link, useRouter } from "@/i18n/routing";
@@ -8,12 +9,64 @@ import { createAdminTour, uploadTourImage } from "../../../../actions";
 
 export default function CreateTourPage() {
 	const router = useRouter();
-	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState<string | null>(null);
+	const t = useTranslations("CreateTourPage");
 	const [imageFile, setImageFile] = useState<File | null>(null);
 	const [imagePreview, setImagePreview] = useState<string>("");
 	const fileInputRef = useRef<HTMLInputElement>(null);
-	const t = useTranslations("CreateTourPage");
+
+	const createMutation = useMutation({
+		mutationFn: async ({
+			formData,
+			file,
+		}: {
+			formData: FormData;
+			file: File | null;
+		}) => {
+			let imageUrl: string | undefined;
+			if (file) {
+				const uploadData = new FormData();
+				uploadData.append("file", file);
+				const uploadResult = await uploadTourImage(uploadData);
+				if (!uploadResult.success) {
+					return {
+						success: false as const,
+						error: uploadResult.error ?? t("errorImageUpload"),
+						data: undefined,
+					};
+				}
+				imageUrl = uploadResult.data;
+			}
+
+			const technicalRequirements = (
+				formData.get("technical_requirements") as string | null
+			)?.trim();
+			const marketsRaw = (formData.get("markets") as string | null)?.trim();
+			const markets = marketsRaw
+				? marketsRaw.split(",").map((m) => m.trim()).filter(Boolean)
+				: [];
+			const bio = (formData.get("bio") as string | null)?.trim();
+
+			return createAdminTour({
+				artist_name: formData.get("artist_name") as string,
+				tour_name: formData.get("tour_name") as string,
+				fee_min: Number(formData.get("fee_min")),
+				fee_max: Number(formData.get("fee_max")),
+				date_from: formData.get("date_from") as string,
+				date_to: formData.get("date_to") as string,
+				genre: formData.get("genre") as string,
+				...(technicalRequirements ? { technical_requirements: technicalRequirements } : {}),
+				region: (formData.get("region") as string) || undefined,
+				markets: markets.length > 0 ? markets : undefined,
+				image_url: imageUrl || undefined,
+				bio: bio || undefined,
+			});
+		},
+		onSuccess: (result) => {
+			if (result.success) {
+				router.push("/admin/artists");
+			}
+		},
+	});
 
 	function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
 		const file = e.target.files?.[0];
@@ -22,64 +75,18 @@ export default function CreateTourPage() {
 		setImagePreview(URL.createObjectURL(file));
 	}
 
-	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+	function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
-		setLoading(true);
-		setError(null);
-
-		const formData = new FormData(e.currentTarget);
-		const technicalRequirements = (
-			formData.get("technical_requirements") as string | null
-		)?.trim();
-		const marketsRaw = (formData.get("markets") as string | null)?.trim();
-		const markets = marketsRaw
-			? marketsRaw.split(",").map((m) => m.trim()).filter(Boolean)
-			: [];
-		const bio = (formData.get("bio") as string | null)?.trim();
-
-		let imageUrl: string | undefined;
-		if (imageFile) {
-			const uploadData = new FormData();
-			uploadData.append("file", imageFile);
-			const uploadResult = await uploadTourImage(uploadData);
-			if (!uploadResult.success) {
-				setError(uploadResult.error || t("errorImageUpload"));
-				setLoading(false);
-				return;
-			}
-			imageUrl = uploadResult.data;
-		}
-
-		const body: Parameters<typeof createAdminTour>[0] = {
-			artist_name: formData.get("artist_name") as string,
-			tour_name: formData.get("tour_name") as string,
-			fee_min: Number(formData.get("fee_min")),
-			fee_max: Number(formData.get("fee_max")),
-			date_from: formData.get("date_from") as string,
-			date_to: formData.get("date_to") as string,
-			genre: formData.get("genre") as string,
-			...(technicalRequirements ? { technical_requirements: technicalRequirements } : {}),
-			region: (formData.get("region") as string) || undefined,
-			markets: markets.length > 0 ? markets : undefined,
-			image_url: imageUrl || undefined,
-			bio: bio || undefined,
-		};
-
-		try {
-			const res = await createAdminTour(body);
-
-			if (res.success) {
-				router.push("/admin/artists");
-			} else {
-				setError(res.error || t("errorFailed"));
-			}
-		} catch (err) {
-			const error = err as Error;
-			setError(error.message || t("errorUnexpected"));
-		} finally {
-			setLoading(false);
-		}
+		createMutation.mutate({ formData: new FormData(e.currentTarget), file: imageFile });
 	}
+
+	const errorMessage = createMutation.error
+		? createMutation.error instanceof Error
+			? createMutation.error.message
+			: t("errorUnexpected")
+		: createMutation.data && !createMutation.data.success
+			? (createMutation.data.error ?? t("errorFailed"))
+			: null;
 
 	return (
 		<>
@@ -112,10 +119,10 @@ export default function CreateTourPage() {
 					</h3>
 				</div>
 
-				{error && (
+				{errorMessage && (
 					<div className="mb-6 p-4 bg-red-50 border border-red-100 rounded-xl text-red-700 text-sm font-semibold flex items-center gap-2">
 						<span className="material-symbols-outlined">error</span>
-						{error}
+						{errorMessage}
 					</div>
 				)}
 
@@ -385,10 +392,10 @@ export default function CreateTourPage() {
 					<div className="pt-4 flex justify-end">
 						<button
 							type="submit"
-							disabled={loading}
+							disabled={createMutation.isPending}
 							className="px-8 py-4 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-bold shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
 						>
-							{loading ? t("publishing") : t("publish")}
+							{createMutation.isPending ? t("publishing") : t("publish")}
 						</button>
 					</div>
 				</form>
