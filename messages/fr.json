@@ -3130,6 +3130,9 @@
       "back": "Retour",
       "next": "Continuer"
     },
+    "validation": {
+      "requiredFields": "Veuillez compléter tous les champs obligatoires (*) avant de continuer."
+    },
     "success": {
       "title": "Inscription soumise",
       "description": "Vos coordonnées ont été soumises avec succès.",

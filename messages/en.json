@@ -3130,6 +3130,9 @@
       "back": "Back",
       "next": "Continue"
     },
+    "validation": {
+      "requiredFields": "Please complete all required fields (*) before continuing."
+    },
     "success": {
       "title": "Registration submitted",
       "description": "Your details were submitted successfully.",
