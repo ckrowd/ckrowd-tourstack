@@ -355,6 +355,8 @@
     }
   },
   "TopNav": {
+    "home": "Accueil",
+    "join": "Rejoindre",
     "dashboard": "Tableau de bord",
     "discovery": "Découverte",
     "financing": "Financement",
@@ -821,6 +823,8 @@
     }
   },
   "StakeholdersPage": {
+    "yes": "Oui",
+    "no": "Non",
     "header": {
       "platform": "Liens d'intégration",
       "title": "Inviter des parties prenantes",

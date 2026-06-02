@@ -84,7 +84,7 @@ export default function Footer() {
 					</div>
 					<div className="flex gap-4 mt-2">
 						<a
-							href="https://twitter.com"
+							href="https://x.com"
 							target="_blank"
 							rel="noopener noreferrer"
 							aria-label="Twitter / X"

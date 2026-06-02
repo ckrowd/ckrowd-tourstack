@@ -355,6 +355,8 @@
     }
   },
   "TopNav": {
+    "home": "Home",
+    "join": "Join",
     "dashboard": "Dashboard",
     "discovery": "Discovery",
     "financing": "Financing",
@@ -821,6 +823,8 @@
     }
   },
   "StakeholdersPage": {
+    "yes": "Yes",
+    "no": "No",
     "header": {
       "platform": "Onboarding Links",
       "title": "Invite Stakeholders",

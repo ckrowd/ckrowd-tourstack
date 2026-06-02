@@ -24,14 +24,14 @@ function humanizeLabel(value: string): string {
 		.replace(/^./, (c) => c.toUpperCase());
 }
 
-function formatValue(value: unknown): string {
+function formatValue(value: unknown, formatBoolean?: (v: boolean) => string): string {
 	if (value == null || value === "") return "—";
 	if (Array.isArray(value)) {
 		return value.length
 			? value.map((v) => humanizeLabel(String(v))).join(", ")
 			: "—";
 	}
-	if (typeof value === "boolean") return value ? "Yes" : "No";
+	if (typeof value === "boolean") return formatBoolean ? formatBoolean(value) : String(value);
 	if (typeof value === "object") return JSON.stringify(value);
 	return humanizeLabel(String(value));
 }
@@ -168,7 +168,7 @@ function SubmissionModal({
 										{humanizeLabel(key)}
 									</dt>
 									<dd className="text-sm text-on-surface break-words">
-										{formatValue(value)}
+										{formatValue(value, (v) => v ? t("yes") : t("no"))}
 									</dd>
 								</div>
 							))}

@@ -20,7 +20,7 @@ export default function ForgotPasswordPage() {
 
 	// Always show the same confirmation once a request resolves, so we never
 	// reveal whether an address is registered.
-	const submitted = mutation.isSuccess;
+	const submitted = mutation.data?.success ?? false;
 
 	return (
 		<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 py-12">

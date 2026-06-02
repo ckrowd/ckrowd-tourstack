@@ -515,7 +515,7 @@ export default function TopNav() {
 											className={`flex items-center gap-3 px-5 py-3 mx-2 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm transition-all ${pathname === "/" ? "bg-orange-50 text-[#FF5A30]" : "text-slate-600 hover:bg-slate-50"}`}
 										>
 											<span className="material-symbols-outlined">home</span>
-											<span>Home</span>
+											<span>{t("home")}</span>
 										</Link>
 										<Link
 											href="/join"
@@ -523,7 +523,7 @@ export default function TopNav() {
 											className={`flex items-center gap-3 px-5 py-3 mx-2 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm transition-all ${pathname === "/join" ? "bg-orange-50 text-[#FF5A30]" : "text-slate-600 hover:bg-slate-50"}`}
 										>
 											<span className="material-symbols-outlined">group_add</span>
-											<span>Join</span>
+											<span>{t("join")}</span>
 										</Link>
 									</>
 								)}
