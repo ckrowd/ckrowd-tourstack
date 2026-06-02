@@ -110,13 +110,15 @@ function RadioGroup({
 	options,
 	value,
 	onChange,
+	error = false,
 }: {
 	options: { value: string; label: string }[];
 	value: string;
 	onChange: (v: string) => void;
+	error?: boolean;
 }) {
 	return (
-		<div className="flex flex-wrap gap-2">
+		<div className={`flex flex-wrap gap-2 ${error ? "rounded-xl ring-2 ring-rose-400/70 p-2" : ""}`}>
 			{options.map((opt) => (
 				<button
 					key={opt.value}
@@ -196,6 +198,15 @@ function StepNav({
 	);
 }
 
+function ValidationBanner({ message }: { message: string }) {
+	return (
+		<p className="mt-4 flex items-center gap-2 text-sm text-rose-700 font-medium">
+			<span className="material-symbols-outlined text-sm shrink-0">error</span>
+			{message}
+		</p>
+	);
+}
+
 // ─── Service Provider Form ───────────────────────────────────────────────────────
 
 export function ServiceProviderForm({ onSubmit, submitError, isPending }: StakeholderFormProps) {
@@ -214,6 +225,10 @@ export function ServiceProviderForm({ onSubmit, submitError, isPending }: Stakeh
 		representativeName: "", declarationDate: new Date().toISOString().slice(0, 10),
 		clause1: false, clause2: false, clause3: false,
 	});
+
+	const [failedFields, setFailedFields] = useState<Set<string>>(new Set());
+	const clearFailed = (key: string) =>
+		setFailedFields((s) => { const n = new Set(s); n.delete(key); return n; });
 
 	const f =
 		(k: keyof typeof form) =>
@@ -239,7 +254,20 @@ export function ServiceProviderForm({ onSubmit, submitError, isPending }: Stakeh
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		if (step < 2) { setStep((s) => s + 1); return; }
+		if (step < 2) {
+			const failed = new Set<string>();
+			if (step === 1) {
+				if (form.serviceTypes.length === 0) failed.add("serviceTypes");
+				if (!form.serviceCoverage) failed.add("serviceCoverage");
+				if (!form.yearsInOperation) failed.add("yearsInOperation");
+				if (!form.businessRegistered) failed.add("businessRegistered");
+				if (!form.hasInsurance) failed.add("hasInsurance");
+			}
+			if (failed.size > 0) { setFailedFields(failed); return; }
+			setFailedFields(new Set());
+			setStep((s) => s + 1);
+			return;
+		}
 		onSubmit({
 			name: form.contactName,
 			email: form.email,
@@ -349,16 +377,18 @@ export function ServiceProviderForm({ onSubmit, submitError, isPending }: Stakeh
 				<div className="space-y-5">
 					<div>
 						<p className={labelCls}>{t("serviceProvider.fields.serviceTypes" as never)} *</p>
-						<GroupedMultiSelect
-							groups={VENDOR_CATEGORIES.map((c) => ({ key: c.key, items: c.types }))}
-							groupLabel={(k) => tx(`vendorCategories.${k}` as never)}
-							itemLabel={(k) => tx(`vendorTypes.${k}` as never)}
-							values={form.serviceTypes}
-							onChange={(v) => setForm((p) => ({ ...p, serviceTypes: v }))}
-							searchPlaceholder={t("picker.searchPlaceholder" as never)}
-							selectedLabel={t("picker.selected" as never)}
-							noResultsText={t("picker.noResults" as never)}
-						/>
+						<div className={failedFields.has("serviceTypes") ? "rounded-xl ring-2 ring-rose-400/70 p-2" : ""}>
+							<GroupedMultiSelect
+								groups={VENDOR_CATEGORIES.map((c) => ({ key: c.key, items: c.types }))}
+								groupLabel={(k) => tx(`vendorCategories.${k}` as never)}
+								itemLabel={(k) => tx(`vendorTypes.${k}` as never)}
+								values={form.serviceTypes}
+								onChange={(v) => { setForm((p) => ({ ...p, serviceTypes: v })); clearFailed("serviceTypes"); }}
+								searchPlaceholder={t("picker.searchPlaceholder" as never)}
+								selectedLabel={t("picker.selected" as never)}
+								noResultsText={t("picker.noResults" as never)}
+							/>
+						</div>
 					</div>
 					<div>
 						<label className={labelCls} htmlFor="sp-description">
@@ -368,11 +398,21 @@ export function ServiceProviderForm({ onSubmit, submitError, isPending }: Stakeh
 					</div>
 					<div>
 						<p className={labelCls}>{t("serviceProvider.fields.serviceCoverage" as never)} *</p>
-						<RadioGroup options={coverageOptions} value={form.serviceCoverage} onChange={(v) => setForm((p) => ({ ...p, serviceCoverage: v }))} />
+						<RadioGroup
+							options={coverageOptions}
+							value={form.serviceCoverage}
+							error={failedFields.has("serviceCoverage")}
+							onChange={(v) => { setForm((p) => ({ ...p, serviceCoverage: v })); clearFailed("serviceCoverage"); }}
+						/>
 					</div>
 					<div>
 						<p className={labelCls}>{t("serviceProvider.fields.yearsInOperation" as never)} *</p>
-						<RadioGroup options={yearsOptions} value={form.yearsInOperation} onChange={(v) => setForm((p) => ({ ...p, yearsInOperation: v }))} />
+						<RadioGroup
+							options={yearsOptions}
+							value={form.yearsInOperation}
+							error={failedFields.has("yearsInOperation")}
+							onChange={(v) => { setForm((p) => ({ ...p, yearsInOperation: v })); clearFailed("yearsInOperation"); }}
+						/>
 					</div>
 					<div>
 						<label className={labelCls} htmlFor="sp-largest-event">
@@ -394,11 +434,21 @@ export function ServiceProviderForm({ onSubmit, submitError, isPending }: Stakeh
 					</div>
 					<div>
 						<p className={labelCls}>{t("serviceProvider.fields.businessRegistered" as never)} *</p>
-						<RadioGroup options={yesNoOptions} value={form.businessRegistered} onChange={(v) => setForm((p) => ({ ...p, businessRegistered: v }))} />
+						<RadioGroup
+							options={yesNoOptions}
+							value={form.businessRegistered}
+							error={failedFields.has("businessRegistered")}
+							onChange={(v) => { setForm((p) => ({ ...p, businessRegistered: v })); clearFailed("businessRegistered"); }}
+						/>
 					</div>
 					<div>
 						<p className={labelCls}>{t("serviceProvider.fields.hasInsurance" as never)} *</p>
-						<RadioGroup options={yesNoOptions} value={form.hasInsurance} onChange={(v) => setForm((p) => ({ ...p, hasInsurance: v }))} />
+						<RadioGroup
+							options={yesNoOptions}
+							value={form.hasInsurance}
+							error={failedFields.has("hasInsurance")}
+							onChange={(v) => { setForm((p) => ({ ...p, hasInsurance: v })); clearFailed("hasInsurance"); }}
+						/>
 					</div>
 				</div>
 			)}
@@ -448,9 +498,13 @@ export function ServiceProviderForm({ onSubmit, submitError, isPending }: Stakeh
 				</div>
 			)}
 
+			{failedFields.size > 0 && (
+				<ValidationBanner message={t("validation.requiredFields" as never)} />
+			)}
+
 			<StepNav
 				step={step}
-				onBack={() => setStep((s) => s - 1)}
+				onBack={() => { setStep((s) => s - 1); setFailedFields(new Set()); }}
 				isLastStep={step === 2}
 				isPending={isPending}
 				submitLabel={t("declaration.submit" as never)}
@@ -484,6 +538,10 @@ export function WorkforceForm({ onSubmit, submitError, isPending }: StakeholderF
 		clause1: false, clause2: false, clause3: false,
 	});
 
+	const [failedFields, setFailedFields] = useState<Set<string>>(new Set());
+	const clearFailed = (key: string) =>
+		setFailedFields((s) => { const n = new Set(s); n.delete(key); return n; });
+
 	const f =
 		(k: keyof typeof form) =>
 		(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
@@ -510,7 +568,32 @@ export function WorkforceForm({ onSubmit, submitError, isPending }: StakeholderF
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		if (step < 4) { setStep((s) => s + 1); return; }
+		if (step < 4) {
+			const failed = new Set<string>();
+			if (step === 0) {
+				if (!form.gender) failed.add("gender");
+			}
+			if (step === 1) {
+				if (form.primaryRoles.length === 0) failed.add("primaryRoles");
+				if (!form.yearsExperience) failed.add("yearsExperience");
+				if (!form.largestEventWorked) failed.add("largestEventWorked");
+			}
+			if (step === 2) {
+				if (!form.touringAvailability) failed.add("touringAvailability");
+				if (!form.canDeploy48h) failed.add("canDeploy48h");
+				if (!form.hasPassport) failed.add("hasPassport");
+			}
+			if (step === 3) {
+				if (!form.refereeName.trim()) failed.add("refereeName");
+				if (!form.refereeCompany.trim()) failed.add("refereeCompany");
+				if (!form.refereeContact.trim()) failed.add("refereeContact");
+				if (!form.refereeRelationship.trim()) failed.add("refereeRelationship");
+			}
+			if (failed.size > 0) { setFailedFields(failed); return; }
+			setFailedFields(new Set());
+			setStep((s) => s + 1);
+			return;
+		}
 		onSubmit({
 			name: form.fullName,
 			email: form.email,
@@ -536,10 +619,10 @@ export function WorkforceForm({ onSubmit, submitError, isPending }: StakeholderF
 				availability: form.availability,
 				marketsWorked: form.marketsWorked || undefined,
 				portfolioLinks: form.portfolioLinks || undefined,
-				refereeName: form.refereeName || undefined,
-				refereeCompany: form.refereeCompany || undefined,
-				refereeContact: form.refereeContact || undefined,
-				refereeRelationship: form.refereeRelationship || undefined,
+				refereeName: form.refereeName,
+				refereeCompany: form.refereeCompany,
+				refereeContact: form.refereeContact,
+				refereeRelationship: form.refereeRelationship,
 				previousTours: form.previousTours || undefined,
 				representativeName: form.representativeName,
 				declarationDate: form.declarationDate,
@@ -579,7 +662,12 @@ export function WorkforceForm({ onSubmit, submitError, isPending }: StakeholderF
 					</div>
 					<div className="md:col-span-2">
 						<p className={labelCls}>{t("workforce.fields.gender" as never)} *</p>
-						<RadioGroup options={genderOptions} value={form.gender} onChange={(v) => setForm((p) => ({ ...p, gender: v }))} />
+						<RadioGroup
+							options={genderOptions}
+							value={form.gender}
+							error={failedFields.has("gender")}
+							onChange={(v) => { setForm((p) => ({ ...p, gender: v })); clearFailed("gender"); }}
+						/>
 					</div>
 					<div>
 						<label className={labelCls} htmlFor="wf-nationality">{t("workforce.fields.nationality" as never)} *</label>
@@ -604,24 +692,36 @@ export function WorkforceForm({ onSubmit, submitError, isPending }: StakeholderF
 				<div className="space-y-5">
 					<div>
 						<p className={labelCls}>{t("workforce.fields.primaryRoles" as never)} *</p>
-						<GroupedMultiSelect
-							groups={WORKFORCE_DEPARTMENTS.map((d) => ({ key: d.key, items: d.roles }))}
-							groupLabel={(k) => tx(`departments.${k}` as never)}
-							itemLabel={(k) => tx(`roles.${k}` as never)}
-							values={form.primaryRoles}
-							onChange={(v) => setForm((p) => ({ ...p, primaryRoles: v }))}
-							searchPlaceholder={t("picker.searchPlaceholder" as never)}
-							selectedLabel={t("picker.selected" as never)}
-							noResultsText={t("picker.noResults" as never)}
-						/>
+						<div className={failedFields.has("primaryRoles") ? "rounded-xl ring-2 ring-rose-400/70 p-2" : ""}>
+							<GroupedMultiSelect
+								groups={WORKFORCE_DEPARTMENTS.map((d) => ({ key: d.key, items: d.roles }))}
+								groupLabel={(k) => tx(`departments.${k}` as never)}
+								itemLabel={(k) => tx(`roles.${k}` as never)}
+								values={form.primaryRoles}
+								onChange={(v) => { setForm((p) => ({ ...p, primaryRoles: v })); clearFailed("primaryRoles"); }}
+								searchPlaceholder={t("picker.searchPlaceholder" as never)}
+								selectedLabel={t("picker.selected" as never)}
+								noResultsText={t("picker.noResults" as never)}
+							/>
+						</div>
 					</div>
 					<div>
 						<p className={labelCls}>{t("workforce.fields.yearsExperience" as never)} *</p>
-						<RadioGroup options={expOptions} value={form.yearsExperience} onChange={(v) => setForm((p) => ({ ...p, yearsExperience: v }))} />
+						<RadioGroup
+							options={expOptions}
+							value={form.yearsExperience}
+							error={failedFields.has("yearsExperience")}
+							onChange={(v) => { setForm((p) => ({ ...p, yearsExperience: v })); clearFailed("yearsExperience"); }}
+						/>
 					</div>
 					<div>
 						<p className={labelCls}>{t("workforce.fields.largestEventWorked" as never)} *</p>
-						<RadioGroup options={largestOptions} value={form.largestEventWorked} onChange={(v) => setForm((p) => ({ ...p, largestEventWorked: v }))} />
+						<RadioGroup
+							options={largestOptions}
+							value={form.largestEventWorked}
+							error={failedFields.has("largestEventWorked")}
+							onChange={(v) => { setForm((p) => ({ ...p, largestEventWorked: v })); clearFailed("largestEventWorked"); }}
+						/>
 					</div>
 					<div>
 						<label className={labelCls} htmlFor="wf-skills">{t("workforce.fields.skillsSummary" as never)} *</label>
@@ -638,15 +738,30 @@ export function WorkforceForm({ onSubmit, submitError, isPending }: StakeholderF
 				<div className="space-y-5">
 					<div>
 						<p className={labelCls}>{t("workforce.fields.touringAvailability" as never)} *</p>
-						<RadioGroup options={touringOptions} value={form.touringAvailability} onChange={(v) => setForm((p) => ({ ...p, touringAvailability: v }))} />
+						<RadioGroup
+							options={touringOptions}
+							value={form.touringAvailability}
+							error={failedFields.has("touringAvailability")}
+							onChange={(v) => { setForm((p) => ({ ...p, touringAvailability: v })); clearFailed("touringAvailability"); }}
+						/>
 					</div>
 					<div>
 						<p className={labelCls}>{t("workforce.fields.canDeploy48h" as never)} *</p>
-						<RadioGroup options={yesNoOptions} value={form.canDeploy48h} onChange={(v) => setForm((p) => ({ ...p, canDeploy48h: v }))} />
+						<RadioGroup
+							options={yesNoOptions}
+							value={form.canDeploy48h}
+							error={failedFields.has("canDeploy48h")}
+							onChange={(v) => { setForm((p) => ({ ...p, canDeploy48h: v })); clearFailed("canDeploy48h"); }}
+						/>
 					</div>
 					<div>
 						<p className={labelCls}>{t("workforce.fields.hasPassport" as never)} *</p>
-						<RadioGroup options={yesNoOptions} value={form.hasPassport} onChange={(v) => setForm((p) => ({ ...p, hasPassport: v }))} />
+						<RadioGroup
+							options={yesNoOptions}
+							value={form.hasPassport}
+							error={failedFields.has("hasPassport")}
+							onChange={(v) => { setForm((p) => ({ ...p, hasPassport: v })); clearFailed("hasPassport"); }}
+						/>
 					</div>
 					<div>
 						<label className={labelCls} htmlFor="wf-day-rate">{t("workforce.fields.dayRate" as never)} *</label>
@@ -671,20 +786,60 @@ export function WorkforceForm({ onSubmit, submitError, isPending }: StakeholderF
 					</div>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 						<div>
-							<label className={labelCls} htmlFor="wf-ref-name">{t("workforce.fields.refereeName" as never)}</label>
-							<input id="wf-ref-name" type="text" value={form.refereeName} onChange={f("refereeName")} placeholder={t("workforce.fields.refereeNamePlaceholder" as never)} className={inputCls} />
+							<label className={labelCls} htmlFor="wf-ref-name">
+								{t("workforce.fields.refereeName" as never)} *
+							</label>
+							<input
+								id="wf-ref-name"
+								type="text"
+								required
+								value={form.refereeName}
+								onChange={(e) => { f("refereeName")(e); clearFailed("refereeName"); }}
+								placeholder={t("workforce.fields.refereeNamePlaceholder" as never)}
+								className={`${inputCls} ${failedFields.has("refereeName") ? "ring-2 ring-rose-400/70" : ""}`}
+							/>
 						</div>
 						<div>
-							<label className={labelCls} htmlFor="wf-ref-company">{t("workforce.fields.refereeCompany" as never)}</label>
-							<input id="wf-ref-company" type="text" value={form.refereeCompany} onChange={f("refereeCompany")} placeholder={t("workforce.fields.refereeCompanyPlaceholder" as never)} className={inputCls} />
+							<label className={labelCls} htmlFor="wf-ref-company">
+								{t("workforce.fields.refereeCompany" as never)} *
+							</label>
+							<input
+								id="wf-ref-company"
+								type="text"
+								required
+								value={form.refereeCompany}
+								onChange={(e) => { f("refereeCompany")(e); clearFailed("refereeCompany"); }}
+								placeholder={t("workforce.fields.refereeCompanyPlaceholder" as never)}
+								className={`${inputCls} ${failedFields.has("refereeCompany") ? "ring-2 ring-rose-400/70" : ""}`}
+							/>
 						</div>
 						<div>
-							<label className={labelCls} htmlFor="wf-ref-contact">{t("workforce.fields.refereeContact" as never)}</label>
-							<input id="wf-ref-contact" type="text" value={form.refereeContact} onChange={f("refereeContact")} placeholder={t("workforce.fields.refereeContactPlaceholder" as never)} className={inputCls} />
+							<label className={labelCls} htmlFor="wf-ref-contact">
+								{t("workforce.fields.refereeContact" as never)} *
+							</label>
+							<input
+								id="wf-ref-contact"
+								type="text"
+								required
+								value={form.refereeContact}
+								onChange={(e) => { f("refereeContact")(e); clearFailed("refereeContact"); }}
+								placeholder={t("workforce.fields.refereeContactPlaceholder" as never)}
+								className={`${inputCls} ${failedFields.has("refereeContact") ? "ring-2 ring-rose-400/70" : ""}`}
+							/>
 						</div>
 						<div>
-							<label className={labelCls} htmlFor="wf-ref-rel">{t("workforce.fields.refereeRelationship" as never)}</label>
-							<input id="wf-ref-rel" type="text" value={form.refereeRelationship} onChange={f("refereeRelationship")} placeholder={t("workforce.fields.refereeRelationshipPlaceholder" as never)} className={inputCls} />
+							<label className={labelCls} htmlFor="wf-ref-rel">
+								{t("workforce.fields.refereeRelationship" as never)} *
+							</label>
+							<input
+								id="wf-ref-rel"
+								type="text"
+								required
+								value={form.refereeRelationship}
+								onChange={(e) => { f("refereeRelationship")(e); clearFailed("refereeRelationship"); }}
+								placeholder={t("workforce.fields.refereeRelationshipPlaceholder" as never)}
+								className={`${inputCls} ${failedFields.has("refereeRelationship") ? "ring-2 ring-rose-400/70" : ""}`}
+							/>
 						</div>
 					</div>
 					<div>
@@ -723,9 +878,13 @@ export function WorkforceForm({ onSubmit, submitError, isPending }: StakeholderF
 				</div>
 			)}
 
+			{failedFields.size > 0 && (
+				<ValidationBanner message={t("validation.requiredFields" as never)} />
+			)}
+
 			<StepNav
 				step={step}
-				onBack={() => setStep((s) => s - 1)}
+				onBack={() => { setStep((s) => s - 1); setFailedFields(new Set()); }}
 				isLastStep={step === 4}
 				isPending={isPending}
 				submitLabel={t("declaration.submit" as never)}
@@ -753,6 +912,10 @@ export function ArtistMgmtForm({ onSubmit, submitError, isPending }: Stakeholder
 		clause1: false, clause2: false, clause3: false,
 	});
 
+	const [failedFields, setFailedFields] = useState<Set<string>>(new Set());
+	const clearFailed = (key: string) =>
+		setFailedFields((s) => { const n = new Set(s); n.delete(key); return n; });
+
 	const f =
 		(k: keyof typeof form) =>
 		(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
@@ -777,7 +940,19 @@ export function ArtistMgmtForm({ onSubmit, submitError, isPending }: Stakeholder
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
-		if (step < 2) { setStep((s) => s + 1); return; }
+		if (step < 2) {
+			const failed = new Set<string>();
+			if (step === 1) {
+				if (!form.yearsInOperation) failed.add("yearsInOperation");
+				if (!form.rosterSize) failed.add("rosterSize");
+				if (!form.hasLiveBooking) failed.add("hasLiveBooking");
+				if (!form.businessRegistered) failed.add("businessRegistered");
+			}
+			if (failed.size > 0) { setFailedFields(failed); return; }
+			setFailedFields(new Set());
+			setStep((s) => s + 1);
+			return;
+		}
 		onSubmit({
 			name: form.contactName,
 			email: form.email,
@@ -863,11 +1038,21 @@ export function ArtistMgmtForm({ onSubmit, submitError, isPending }: Stakeholder
 				<div className="space-y-5">
 					<div>
 						<p className={labelCls}>{t("artmgmt.fields.yearsInOperation" as never)} *</p>
-						<RadioGroup options={yearsOptions} value={form.yearsInOperation} onChange={(v) => setForm((p) => ({ ...p, yearsInOperation: v }))} />
+						<RadioGroup
+							options={yearsOptions}
+							value={form.yearsInOperation}
+							error={failedFields.has("yearsInOperation")}
+							onChange={(v) => { setForm((p) => ({ ...p, yearsInOperation: v })); clearFailed("yearsInOperation"); }}
+						/>
 					</div>
 					<div>
 						<p className={labelCls}>{t("artmgmt.fields.rosterSize" as never)} *</p>
-						<RadioGroup options={rosterOptions} value={form.rosterSize} onChange={(v) => setForm((p) => ({ ...p, rosterSize: v }))} />
+						<RadioGroup
+							options={rosterOptions}
+							value={form.rosterSize}
+							error={failedFields.has("rosterSize")}
+							onChange={(v) => { setForm((p) => ({ ...p, rosterSize: v })); clearFailed("rosterSize"); }}
+						/>
 					</div>
 					<div>
 						<label className={labelCls} htmlFor="am-genres">{t("artmgmt.fields.primaryGenres" as never)} *</label>
@@ -895,11 +1080,21 @@ export function ArtistMgmtForm({ onSubmit, submitError, isPending }: Stakeholder
 					</div>
 					<div>
 						<p className={labelCls}>{t("artmgmt.fields.hasLiveBooking" as never)} *</p>
-						<RadioGroup options={yesNoOptions} value={form.hasLiveBooking} onChange={(v) => setForm((p) => ({ ...p, hasLiveBooking: v }))} />
+						<RadioGroup
+							options={yesNoOptions}
+							value={form.hasLiveBooking}
+							error={failedFields.has("hasLiveBooking")}
+							onChange={(v) => { setForm((p) => ({ ...p, hasLiveBooking: v })); clearFailed("hasLiveBooking"); }}
+						/>
 					</div>
 					<div>
 						<p className={labelCls}>{t("artmgmt.fields.businessRegistered" as never)} *</p>
-						<RadioGroup options={yesNoOptions} value={form.businessRegistered} onChange={(v) => setForm((p) => ({ ...p, businessRegistered: v }))} />
+						<RadioGroup
+							options={yesNoOptions}
+							value={form.businessRegistered}
+							error={failedFields.has("businessRegistered")}
+							onChange={(v) => { setForm((p) => ({ ...p, businessRegistered: v })); clearFailed("businessRegistered"); }}
+						/>
 					</div>
 				</div>
 			)}
@@ -933,9 +1128,13 @@ export function ArtistMgmtForm({ onSubmit, submitError, isPending }: Stakeholder
 				</div>
 			)}
 
+			{failedFields.size > 0 && (
+				<ValidationBanner message={t("validation.requiredFields" as never)} />
+			)}
+
 			<StepNav
 				step={step}
-				onBack={() => setStep((s) => s - 1)}
+				onBack={() => { setStep((s) => s - 1); setFailedFields(new Set()); }}
 				isLastStep={step === 2}
 				isPending={isPending}
 				submitLabel={t("declaration.submit" as never)}
