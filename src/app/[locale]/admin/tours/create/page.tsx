@@ -1,15 +1,26 @@
 "use client";
 
+import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link, useRouter } from "@/i18n/routing";
-import { createAdminTour } from "../../../../actions";
+import { createAdminTour, uploadTourImage } from "../../../../actions";
 
 export default function CreateTourPage() {
 	const router = useRouter();
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
+	const [imageFile, setImageFile] = useState<File | null>(null);
+	const [imagePreview, setImagePreview] = useState<string>("");
+	const fileInputRef = useRef<HTMLInputElement>(null);
 	const t = useTranslations("CreateTourPage");
+
+	function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+		const file = e.target.files?.[0];
+		if (!file) return;
+		setImageFile(file);
+		setImagePreview(URL.createObjectURL(file));
+	}
 
 	async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
 		e.preventDefault();
@@ -20,6 +31,25 @@ export default function CreateTourPage() {
 		const technicalRequirements = (
 			formData.get("technical_requirements") as string | null
 		)?.trim();
+		const marketsRaw = (formData.get("markets") as string | null)?.trim();
+		const markets = marketsRaw
+			? marketsRaw.split(",").map((m) => m.trim()).filter(Boolean)
+			: [];
+		const bio = (formData.get("bio") as string | null)?.trim();
+
+		let imageUrl: string | undefined;
+		if (imageFile) {
+			const uploadData = new FormData();
+			uploadData.append("file", imageFile);
+			const uploadResult = await uploadTourImage(uploadData);
+			if (!uploadResult.success) {
+				setError(uploadResult.error || t("errorImageUpload"));
+				setLoading(false);
+				return;
+			}
+			imageUrl = uploadResult.data;
+		}
+
 		const body: Parameters<typeof createAdminTour>[0] = {
 			artist_name: formData.get("artist_name") as string,
 			tour_name: formData.get("tour_name") as string,
@@ -28,16 +58,18 @@ export default function CreateTourPage() {
 			date_from: formData.get("date_from") as string,
 			date_to: formData.get("date_to") as string,
 			genre: formData.get("genre") as string,
-			...(technicalRequirements
-				? { technical_requirements: technicalRequirements }
-				: {}),
+			...(technicalRequirements ? { technical_requirements: technicalRequirements } : {}),
+			region: (formData.get("region") as string) || undefined,
+			markets: markets.length > 0 ? markets : undefined,
+			image_url: imageUrl || undefined,
+			bio: bio || undefined,
 		};
 
 		try {
 			const res = await createAdminTour(body);
 
 			if (res.success) {
-				router.push("/admin/tours");
+				router.push("/admin/artists");
 			} else {
 				setError(res.error || t("errorFailed"));
 			}
@@ -53,7 +85,7 @@ export default function CreateTourPage() {
 		<>
 			<div className="mb-10 flex items-center gap-4">
 				<Link
-					href="/admin/tours"
+					href="/admin/artists"
 					className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center hover:bg-surface-container-high transition-colors"
 				>
 					<span className="material-symbols-outlined text-on-surface-variant">
@@ -218,6 +250,120 @@ export default function CreateTourPage() {
 								expand_more
 							</span>
 						</div>
+					</div>
+
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+						<div>
+							<label
+								htmlFor="region"
+								className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider"
+							>
+								{t("region")}
+							</label>
+							<div className="relative">
+								<select
+									id="region"
+									name="region"
+									required
+									className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm font-medium text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none appearance-none"
+								>
+									<option value="West Africa">{t("regions.westAfrica")}</option>
+									<option value="East Africa">{t("regions.eastAfrica")}</option>
+									<option value="Southern Africa">{t("regions.southernAfrica")}</option>
+									<option value="North Africa">{t("regions.northAfrica")}</option>
+									<option value="Central Africa">{t("regions.centralAfrica")}</option>
+								</select>
+								<span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">
+									expand_more
+								</span>
+							</div>
+						</div>
+						<div>
+							<label
+								htmlFor="markets"
+								className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider"
+							>
+								{t("tourCities")}
+							</label>
+							<input
+								id="markets"
+								name="markets"
+								type="text"
+								placeholder={t("placeholderTourCities")}
+								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none"
+							/>
+						</div>
+					</div>
+
+					<div>
+						<label
+							htmlFor="image_upload"
+							className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider"
+						>
+							{t("tourImage")}
+						</label>
+						<div
+							role="button"
+							tabIndex={0}
+							className="relative w-full rounded-xl border-2 border-dashed border-outline-variant/40 bg-surface-container-high overflow-hidden cursor-pointer hover:border-[#FF5A30]/50 transition-colors"
+							style={{ minHeight: "140px" }}
+							onClick={() => fileInputRef.current?.click()}
+							onKeyDown={(e) => e.key === "Enter" && fileInputRef.current?.click()}
+						>
+							{imagePreview ? (
+								<div className="relative w-full h-40">
+									<Image
+										src={imagePreview}
+										alt="Tour image preview"
+										fill
+										className="object-cover"
+										unoptimized
+									/>
+									<button
+										type="button"
+										onClick={(e) => {
+											e.stopPropagation();
+											setImageFile(null);
+											setImagePreview("");
+											if (fileInputRef.current) fileInputRef.current.value = "";
+										}}
+										className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black/80 transition-colors"
+									>
+										<span className="material-symbols-outlined text-sm">close</span>
+									</button>
+								</div>
+							) : (
+								<div className="flex flex-col items-center justify-center py-10 gap-2 text-on-surface-variant">
+									<span className="material-symbols-outlined text-4xl">add_photo_alternate</span>
+									<p className="text-sm font-medium">{t("uploadImageHint")}</p>
+									<p className="text-xs opacity-60">{t("uploadImageTypes")}</p>
+								</div>
+							)}
+						</div>
+						<input
+							ref={fileInputRef}
+							id="image_upload"
+							type="file"
+							accept="image/jpeg,image/png,image/webp,image/gif"
+							className="sr-only"
+							onChange={handleFileChange}
+						/>
+					</div>
+
+					<div>
+						<label
+							htmlFor="bio"
+							className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider"
+						>
+							{t("bio")}
+						</label>
+						<textarea
+							id="bio"
+							name="bio"
+							rows={3}
+							placeholder={t("placeholderBio")}
+							className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none resize-none"
+						/>
 					</div>
 
 					<div>

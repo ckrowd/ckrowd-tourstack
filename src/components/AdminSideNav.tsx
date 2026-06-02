@@ -22,6 +22,12 @@ export default function AdminSideNav() {
 			href: "/admin",
 		},
 		{
+			key: "artists",
+			label: t("artists"),
+			icon: "album",
+			href: "/admin/artists",
+		},
+		{
 			key: "tours",
 			label: t("tours"),
 			icon: "confirmation_number",

@@ -343,6 +343,8 @@ const defaultForm: ApplicationForm = {
 	notes: "",
 };
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 function EOIPageContent() {
 	const t = useTranslations("EOIPage");
 	const locale = useLocale();
@@ -361,6 +363,7 @@ function EOIPageContent() {
 	const [selectedId, setSelectedId] = useState<string | null>(initialId);
 	const [step, setStep] = useState(0);
 	const [form, setForm] = useState<ApplicationForm>(defaultForm);
+	const [fieldErrors, setFieldErrors] = useState<Partial<Record<keyof ApplicationForm, string>>>({});
 
 	const { data: artistsQuery, isLoading: loadingOpportunities } = useQuery({
 		queryKey: ["artists"],
@@ -377,6 +380,7 @@ function EOIPageContent() {
 		setSelectedId(id);
 		setStep(0);
 		setForm(defaultForm);
+		setFieldErrors({});
 	}
 
 	const submitMutation = useMutation({
@@ -393,9 +397,26 @@ function EOIPageContent() {
 			? (submitMutation.data.error ?? t("submitError"))
 			: null;
 
+	function validateStep(currentStep: number): boolean {
+		const errors: Partial<Record<keyof ApplicationForm, string>> = {};
+		if (currentStep === 0) {
+			const name = (form.name || session?.user?.name || "").trim();
+			const email = (form.email || session?.user?.email || "").trim();
+			if (!name) errors.name = t("validation.nameRequired");
+			if (!email) errors.email = t("validation.emailRequired");
+			else if (!EMAIL_RE.test(email)) errors.email = t("validation.emailInvalid");
+		}
+		if (currentStep === 1) {
+			if (!form.city.trim()) errors.city = t("validation.cityRequired");
+		}
+		setFieldErrors(errors);
+		return Object.keys(errors).length === 0;
+	}
+
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		if (step < STEPS.length - 1) {
+			if (!validateStep(step)) return;
 			setStep((current) => current + 1);
 			return;
 		}
@@ -416,6 +437,13 @@ function EOIPageContent() {
 		value: ApplicationForm[K],
 	) {
 		setForm((prev) => ({ ...prev, [field]: value }));
+		if (fieldErrors[field]) {
+			setFieldErrors((prev) => {
+				const next = { ...prev };
+				delete next[field];
+				return next;
+			});
+		}
 	}
 
 	const estimatedAudience = form.audience
@@ -526,7 +554,8 @@ function EOIPageContent() {
 												<div className="grid gap-5 sm:grid-cols-2">
 													<div>
 														<Label htmlFor="name">
-															{t("form.fullName.label")}
+															{t("form.fullName.label")}{" "}
+															<span className="text-rose-500">*</span>
 														</Label>
 														<input
 															id="name"
@@ -538,12 +567,19 @@ function EOIPageContent() {
 																updateField("name", event.target.value)
 															}
 															required
-															className={inputClass}
+															aria-invalid={!!fieldErrors.name}
+															className={`${inputClass} ${fieldErrors.name ? "border-rose-400 focus:border-rose-400 focus:ring-rose-400/20" : ""}`}
 														/>
+														{fieldErrors.name && (
+															<p className="mt-1.5 text-xs text-rose-600 font-medium">
+																{fieldErrors.name}
+															</p>
+														)}
 													</div>
 													<div>
 														<Label htmlFor="email">
-															{t("form.email.label")}
+															{t("form.email.label")}{" "}
+															<span className="text-rose-500">*</span>
 														</Label>
 														<input
 															id="email"
@@ -557,8 +593,14 @@ function EOIPageContent() {
 																updateField("email", event.target.value)
 															}
 															required
-															className={inputClass}
+															aria-invalid={!!fieldErrors.email}
+															className={`${inputClass} ${fieldErrors.email ? "border-rose-400 focus:border-rose-400 focus:ring-rose-400/20" : ""}`}
 														/>
+														{fieldErrors.email && (
+															<p className="mt-1.5 text-xs text-rose-600 font-medium">
+																{fieldErrors.email}
+															</p>
+														)}
 													</div>
 													<div className="sm:col-span-2">
 														<Label htmlFor="company">
@@ -582,7 +624,8 @@ function EOIPageContent() {
 												<div className="grid gap-5 sm:grid-cols-2">
 													<div>
 														<Label htmlFor="city">
-															{t("form.city.label")}
+															{t("form.city.label")}{" "}
+															<span className="text-rose-500">*</span>
 														</Label>
 														<input
 															id="city"
@@ -592,8 +635,15 @@ function EOIPageContent() {
 															onChange={(event) =>
 																updateField("city", event.target.value)
 															}
-															className={inputClass}
+															required
+															aria-invalid={!!fieldErrors.city}
+															className={`${inputClass} ${fieldErrors.city ? "border-rose-400 focus:border-rose-400 focus:ring-rose-400/20" : ""}`}
 														/>
+														{fieldErrors.city && (
+															<p className="mt-1.5 text-xs text-rose-600 font-medium">
+																{fieldErrors.city}
+															</p>
+														)}
 													</div>
 													<div>
 														<Label htmlFor="audience">

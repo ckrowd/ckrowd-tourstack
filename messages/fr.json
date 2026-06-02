@@ -527,6 +527,13 @@
       "submit": "Soumettre la candidature",
       "continue": "Continuer"
     },
+    "validation": {
+      "nameRequired": "Veuillez entrer votre nom complet.",
+      "emailRequired": "Veuillez entrer votre adresse e-mail.",
+      "emailInvalid": "Veuillez entrer une adresse e-mail valide.",
+      "cityRequired": "Veuillez entrer la ville ou le marché pour cet arrêt de tournée.",
+      "selectOpportunity": "Veuillez d'abord sélectionner une opportunité de tournée."
+    },
     "success": {
       "title": "EOI soumise.",
       "description": "Votre candidature pour {artist} a été reçue. L'équipe Ckrowd l'examinera et vous répondra sous 48 heures.",
@@ -2824,14 +2831,23 @@
     "availableFrom": "Disponible à partir du",
     "availableTo": "Disponible jusqu'au",
     "genre": "Genre musical",
+    "region": "Région",
+    "tourCities": "Villes / Marchés de tournée",
+    "tourImage": "Image de tournée",
+    "bio": "Biographie de l'artiste",
     "technicalRequirements": "Exigences techniques",
     "placeholderArtist": "ex: Burna Boy",
     "placeholderTour": "ex: Love, Damini Tour 2024",
     "placeholderRequirements": "Décrivez les besoins en mise en scène, son et éclairage...",
+    "placeholderTourCities": "ex: Lagos, Accra, Nairobi",
+    "placeholderBio": "Une courte biographie de l'artiste...",
+    "uploadImageHint": "Cliquez pour télécharger une image",
+    "uploadImageTypes": "JPG, PNG, WebP ou GIF",
     "publishing": "Publication...",
     "publish": "Publier le projet de tournée",
     "errorFailed": "Échec de la création du projet de tournée.",
     "errorUnexpected": "Une erreur inattendue s'est produite.",
+    "errorImageUpload": "Échec du téléchargement de l'image.",
     "placeholderFeeMin": "50000",
     "placeholderFeeMax": "150000",
     "genres": {
@@ -2841,6 +2857,13 @@
       "jazzSoul": "Jazz et Soul",
       "worldFolk": "Musique du monde / Folk",
       "hipHop": "Hip-Hop"
+    },
+    "regions": {
+      "westAfrica": "Afrique de l'Ouest",
+      "eastAfrica": "Afrique de l'Est",
+      "southernAfrica": "Afrique australe",
+      "northAfrica": "Afrique du Nord",
+      "centralAfrica": "Afrique centrale"
     }
   },
   "Footer": {
@@ -2909,12 +2932,25 @@
   },
   "AdminSideNav": {
     "overview": "Aperçu",
-    "tours": "Tournées",
+    "artists": "Projets de tournée",
+    "tours": "Arrêts de tournée",
     "eoi": "EOI",
     "directory": "Répertoire",
     "reports": "Rapports",
     "settings": "Paramètres",
     "newTour": "Nouvelle tournée"
+  },
+  "AdminArtistsPage": {
+    "badge": "Gestion des tournées",
+    "title": "Projets de tournée",
+    "description": "Tous les projets de tournée d'artistes publiés sur la plateforme de découverte.",
+    "createTour": "Créer un projet de tournée",
+    "allArtists": "Tous les projets de tournée",
+    "noArtists": "Aucun projet de tournée pour l'instant",
+    "noArtistsDesc": "Publiez un nouveau projet de tournée pour commencer.",
+    "active": "Actif",
+    "inactive": "Inactif",
+    "viewOnDiscovery": "Voir sur la découverte"
   },
   "AdminDirectoryPage": {
     "tagline": "Gestion de la plateforme",

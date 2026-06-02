@@ -550,6 +550,31 @@ export async function registerStakeholder(
 	};
 }
 
+// Self-serve registration that intentionally omits the session cookie so the
+// stakeholder is stored as unassociated (admin-only directory) regardless of
+// whether the submitter happens to be logged in. Token-based submissions via
+// /stakeholders/[token] use submitOnboardingLink instead, which ties to a link.
+export async function registerStakeholderAnonymous(
+	body: Payload<typeof client.tourstack.onboarding.post>,
+) {
+	const apiUrl = process.env.API_URL ?? "https://gateway.ckrowd.com";
+	const res = await fetch(`${apiUrl}/tourstack/onboarding`, {
+		method: "POST",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(body),
+	});
+	const json = (await res.json().catch(() => null)) as {
+		success?: boolean;
+		data?: unknown;
+		error?: string;
+	} | null;
+	return {
+		data: json?.data,
+		success: res.ok && json?.success === true,
+		error: json?.error ?? (res.ok ? null : "Failed to submit registration"),
+	};
+}
+
 // Onboarding links
 
 export async function getOnboardingLinks() {
@@ -701,11 +726,45 @@ export async function getAdminTours(status?: string, page?: number, limit?: numb
 	};
 }
 
+export async function getAdminArtists() {
+	const { data, error } = await client.tourstack.admin.artists.get();
+	return {
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+export async function uploadTourImage(formData: FormData) {
+	const file = formData.get("file");
+	if (!file || typeof file === "string") {
+		return { success: false as const, error: "No file provided" };
+	}
+	const ext = (file as File).name.split(".").pop()?.toLowerCase() ?? "jpg";
+	const path = `ts-artist-${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+	const { data, error } = await client.storage.upload.post({
+		file: file as File,
+		path,
+		contentType: (file as File).type || "image/jpeg",
+		upsert: false,
+	});
+	if (error || !data?.success) {
+		return { success: false as const, error: extractError(error, data) };
+	}
+	const publicUrl = `${process.env.API_URL}/storage/${path}`;
+	return { success: true as const, data: publicUrl };
+}
+
 export async function createAdminTour(
-	body: Payload<typeof client.tourstack.admin.tours.post>,
+	body: Payload<typeof client.tourstack.admin.tours.post> & {
+		region?: string;
+		markets?: string[];
+		image_url?: string;
+		bio?: string;
+	},
 ) {
 	const { data, error, status, headers } =
-		await client.tourstack.admin.tours.post(body);
+		await client.tourstack.admin.tours.post(body as Payload<typeof client.tourstack.admin.tours.post>);
 	return {
 		data: extractPayload(data, { status, headers }),
 		success: !error && data?.success,
