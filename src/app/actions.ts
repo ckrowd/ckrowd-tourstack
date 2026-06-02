@@ -206,9 +206,10 @@ export async function signOut() {
  * must be redirected to; `callbackURL` is where the user lands afterwards.
  */
 export async function signInWithGoogle(callbackURL: string) {
-	const { data, error } = await client.auth["sign-in"].social.post({
+	const { data, error } = await (client.auth["sign-in"].social.post as any)({
 		provider: "google",
 		callbackURL,
+		redirect: false,
 	});
 	if (error) return { success: false as const, error: extractError(error) };
 	const url = (data as { url?: string } | null)?.url;
