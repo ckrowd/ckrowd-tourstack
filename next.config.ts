@@ -13,6 +13,11 @@ const nextConfig: NextConfig = {
 				protocol: "https",
 				hostname: "lh3.googleusercontent.com",
 			},
+			{
+				protocol: "https",
+				hostname: "gateway.ckrowd.com",
+				pathname: "/storage/**",
+			},
 		],
 	},
 	// Baseline security headers on every response. A strict Content-Security-Policy

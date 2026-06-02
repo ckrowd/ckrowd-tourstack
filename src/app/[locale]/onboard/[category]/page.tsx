@@ -3,7 +3,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { use } from "react";
-import { registerStakeholder } from "@/app/actions";
+import { registerStakeholderAnonymous } from "@/app/actions";
 import {
 	BrandHeader,
 	StakeholderForm,
@@ -29,7 +29,7 @@ export default function SelfServeOnboardingPage({
 
 	const submitMutation = useMutation({
 		mutationFn: (body: SubmitPayload) =>
-			registerStakeholder({ ...body, category: category as StakeholderCategory }),
+			registerStakeholderAnonymous({ ...body, category: category as StakeholderCategory }),
 	});
 
 	const submitError = submitMutation.error

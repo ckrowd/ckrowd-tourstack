@@ -527,6 +527,13 @@
       "submit": "Submit application",
       "continue": "Continue"
     },
+    "validation": {
+      "nameRequired": "Please enter your full name.",
+      "emailRequired": "Please enter your email address.",
+      "emailInvalid": "Please enter a valid email address.",
+      "cityRequired": "Please enter the city or market for this tour stop.",
+      "selectOpportunity": "Please select a tour opportunity first."
+    },
     "success": {
       "title": "EOI submitted.",
       "description": "Your application for {artist} has been received. The Ckrowd team will review it and respond within 48 hours.",
@@ -2824,14 +2831,23 @@
     "availableFrom": "Available From",
     "availableTo": "Available To",
     "genre": "Musical Genre",
+    "region": "Region",
+    "tourCities": "Tour Cities / Markets",
+    "tourImage": "Tour Image",
+    "bio": "Artist Bio",
     "technicalRequirements": "Technical Requirements",
     "placeholderArtist": "e.g. Burna Boy",
     "placeholderTour": "e.g. Love, Damini Tour 2024",
     "placeholderRequirements": "Describe staging, sound, and lighting needs...",
+    "placeholderTourCities": "e.g. Lagos, Accra, Nairobi",
+    "placeholderBio": "A short bio about the artist...",
+    "uploadImageHint": "Click to upload tour image",
+    "uploadImageTypes": "JPG, PNG, WebP or GIF",
     "publishing": "Publishing...",
     "publish": "Publish Tour Project",
     "errorFailed": "Failed to create tour project.",
     "errorUnexpected": "An unexpected error occurred.",
+    "errorImageUpload": "Failed to upload tour image.",
     "placeholderFeeMin": "50000",
     "placeholderFeeMax": "150000",
     "genres": {
@@ -2841,6 +2857,13 @@
       "jazzSoul": "Jazz & Soul",
       "worldFolk": "World / Folk",
       "hipHop": "Hip-Hop"
+    },
+    "regions": {
+      "westAfrica": "West Africa",
+      "eastAfrica": "East Africa",
+      "southernAfrica": "Southern Africa",
+      "northAfrica": "North Africa",
+      "centralAfrica": "Central Africa"
     }
   },
   "Footer": {
@@ -2909,12 +2932,25 @@
   },
   "AdminSideNav": {
     "overview": "Overview",
-    "tours": "Tours",
+    "artists": "Tour Projects",
+    "tours": "Tour Stops",
     "eoi": "EOIs",
     "directory": "Directory",
     "reports": "Reports",
     "settings": "Settings",
     "newTour": "New Tour"
+  },
+  "AdminArtistsPage": {
+    "badge": "Tour Management",
+    "title": "Tour Projects",
+    "description": "All artist tour projects published on the discovery platform.",
+    "createTour": "Create Tour Project",
+    "allArtists": "All Tour Projects",
+    "noArtists": "No tour projects yet",
+    "noArtistsDesc": "Publish a new tour project to get started.",
+    "active": "Active",
+    "inactive": "Inactive",
+    "viewOnDiscovery": "View on Discovery"
   },
   "AdminDirectoryPage": {
     "tagline": "Platform Management",
