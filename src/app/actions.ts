@@ -43,6 +43,10 @@ const client = createClient({
 	}) as unknown as (response: Response) => Promise<Response>,
 });
 
+// Cookie-free client for self-serve registrations that must be stored as
+// unassociated (no session forwarded → promoter_id stays null on the server).
+const anonymousClient = createClient();
+
 function extractError(err: any, data?: any): string {
 	// Prefer eden treaty's parsed error body, then fall back to the success-shaped
 	// body's `error` field (backend often returns 200 + { success: false, error })
@@ -557,21 +561,11 @@ export async function registerStakeholder(
 export async function registerStakeholderAnonymous(
 	body: Payload<typeof client.tourstack.onboarding.post>,
 ) {
-	const apiUrl = process.env.API_URL ?? "https://gateway.ckrowd.com";
-	const res = await fetch(`${apiUrl}/tourstack/onboarding`, {
-		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(body),
-	});
-	const json = (await res.json().catch(() => null)) as {
-		success?: boolean;
-		data?: unknown;
-		error?: string;
-	} | null;
+	const { data, error } = await anonymousClient.tourstack.onboarding.post(body);
 	return {
-		data: json?.data,
-		success: res.ok && json?.success === true,
-		error: json?.error ?? (res.ok ? null : "Failed to submit registration"),
+		data: extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error, data),
 	};
 }
 

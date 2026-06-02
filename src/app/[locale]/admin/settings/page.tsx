@@ -1,5 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getAdminSettings, getAdminTeam } from "@/app/actions";
+
+export const dynamic = "force-dynamic";
 import AdminDangerZone from "@/components/AdminDangerZone";
 import AdminSettingsForm from "@/components/AdminSettingsForm";
 import AdminTeamInvite from "@/components/AdminTeamInvite";

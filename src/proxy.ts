@@ -5,6 +5,13 @@ import { routing } from "./i18n/routing";
 const intlMiddleware = createMiddleware(routing);
 
 export async function proxy(request: NextRequest) {
+	// Server action POSTs (Next-Action header) must reach the Next.js server
+	// without any locale redirect. Running intlMiddleware on them can cause a
+	// 404 because next-intl is designed for navigation requests, not mutations.
+	if (request.headers.has("Next-Action")) {
+		return NextResponse.next();
+	}
+
 	const intlResponse = intlMiddleware(request);
 
 	// Pass locale redirects through as-is (e.g. / → /en/)

@@ -2946,6 +2946,7 @@
     "description": "All artist tour projects published on the discovery platform.",
     "createTour": "Create Tour Project",
     "allArtists": "All Tour Projects",
+    "projectCount": "{count, plural, one {# project} other {# projects}}",
     "noArtists": "No tour projects yet",
     "noArtistsDesc": "Publish a new tour project to get started.",
     "active": "Active",
