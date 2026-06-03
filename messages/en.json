@@ -2892,6 +2892,31 @@
     },
     "copyright": "© {year} {brandName} {brandBy}. All rights reserved."
   },
+  "Tour": {
+    "replayButton": "Platform Tour",
+    "progress": "{current} of {total}",
+    "next": "Next →",
+    "prev": "← Back",
+    "done": "Got it!",
+    "promoter": {
+      "step0": { "title": "👋 Welcome to TourStack!", "description": "Your all-in-one platform for connecting with global artist tours across Africa. This quick tour will show you where everything is — takes less than 2 minutes." },
+      "step1": { "title": "🔍 Discover Tour Opportunities", "description": "Browse live artist tours available for hosting. Filter by genre, region, and fee range to find the perfect match for your market." },
+      "step2": { "title": "🎫 My Tour Stops", "description": "Track every Expression of Interest you've submitted. See status updates, revision requests, and confirmed bookings all in one place." },
+      "step3": { "title": "💰 Financing", "description": "Need funding to bring an artist to your city? Apply for tour finance from our partner banks — tour advances, venue build-out credit, and more." },
+      "step4": { "title": "🛡️ Insurance", "description": "Protect your events with tailored insurance products — event cancellation, credit guarantees, audience ticket protection, and more." },
+      "step5": { "title": "🚀 Ready to Get Started?", "description": "Click here to browse available artists and submit your first Expression of Interest. It only takes a few minutes!" },
+      "step6": { "title": "✅ You're All Set!", "description": "You now know your way around TourStack. Click 'Platform Tour' at the bottom of the sidebar anytime to replay this guide. Good luck!" }
+    },
+    "admin": {
+      "step0": { "title": "👋 Welcome to TourStack Admin!", "description": "This is your command centre for managing the TourStack platform. Let's walk through the key sections." },
+      "step1": { "title": "📥 EOI Submissions", "description": "Review and process Expression of Interest submissions from promoters. Approve, request revisions, reject, or convert to a confirmed tour stop." },
+      "step2": { "title": "🎫 Tour Stops", "description": "View and manage all confirmed and pending tour stops. Each stop is linked to the promoter's EOI and can be edited or deleted." },
+      "step3": { "title": "🎵 Artists", "description": "Manage the artist catalog that promoters browse on the Discovery page. Add new artists, update tour details, fee ranges, and availability windows." },
+      "step4": { "title": "📊 Reports", "description": "Track platform performance — EOI volumes, conversion rates, financing uptake, and revenue analytics." },
+      "step5": { "title": "➕ Create Tour Project", "description": "Publish a new artist tour project to attract promoter applications. Fill in the artist, fee range, tour window, and region." },
+      "step6": { "title": "✅ You're All Set!", "description": "You know your way around the admin portal. Click 'Platform Tour' at the bottom of the sidebar anytime to replay this guide." }
+    }
+  },
   "Common": {
     "brandName": "Tourstack",
     "brandBy": "by Ckrowd",
