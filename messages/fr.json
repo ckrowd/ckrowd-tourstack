@@ -3493,8 +3493,32 @@
     "deleting": "Suppression…",
     "errorGeneric": "Impossible de supprimer la tournée. Réessayez."
   },
+  "EditTourPage": {
+    "badge": "Modifier l'arrêt de tournée",
+    "untitled": "Sans titre",
+    "loading": "Chargement…",
+    "notFound": "Arrêt de tournée introuvable.",
+    "errorFailed": "Échec de la mise à jour.",
+    "save": "Enregistrer",
+    "saving": "Enregistrement…",
+    "cancel": "Annuler",
+    "yes": "Oui",
+    "no": "Non",
+    "fields": {
+      "venue": "Lieu",
+      "city": "Ville",
+      "country": "Pays",
+      "date": "Date du spectacle",
+      "feeUsd": "Cachet artiste (USD)",
+      "capacity": "Capacité",
+      "status": "Statut",
+      "financing": "Financé",
+      "financingAmount": "Montant du financement (USD)"
+    }
+  },
   "AdminTourDetailPage": {
     "badge": "Détail de la tournée",
+    "edit": "Modifier",
     "untitledArtist": "Artiste sans titre",
     "stopSummary": "Récapitulatif de l'étape",
     "promoterSection": "Promoteur",

@@ -52,26 +52,33 @@ export default async function AdminTourDetailPage({ params }: Props) {
 
 	return (
 		<>
-			<div className="mb-8 flex items-center gap-4">
+			<div className="mb-8 flex items-center gap-3 flex-wrap">
 				<Link
 					href="/admin/tours"
-					className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center hover:bg-surface-container-high transition-colors"
+					className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center hover:bg-surface-container-high transition-colors shrink-0"
 				>
 					<span className="material-symbols-outlined text-on-surface-variant">
 						arrow_back
 					</span>
 				</Link>
-				<div>
+				<div className="flex-1 min-w-0">
 					<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-1">
 						{t("badge")}
 					</span>
-					<h1 className="text-3xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface">
+					<h1 className="text-3xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface truncate">
 						{tour.artist?.name ?? t("untitledArtist")}
 					</h1>
 					<p className="text-on-surface-variant text-sm mt-1">
 						{tour.artist?.tour_name ?? ""}
 					</p>
 				</div>
+				<Link
+					href={`/admin/tours/${tour.id}/edit`}
+					className="flex items-center gap-2 px-4 py-2 bg-surface-container rounded-xl text-sm font-bold text-on-surface hover:bg-surface-container-high transition-colors shrink-0"
+				>
+					<span className="material-symbols-outlined text-sm">edit</span>
+					{t("edit")}
+				</Link>
 			</div>
 
 			<div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

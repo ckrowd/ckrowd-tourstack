@@ -787,6 +787,28 @@ export async function deleteAdminTour(id: string) {
 	};
 }
 
+export async function updateAdminTour(
+	id: string,
+	body: {
+		venue?: string;
+		city?: string;
+		country?: string | null;
+		date?: string;
+		capacity?: number | null;
+		feeUsd?: number;
+		status?: string;
+		financing?: boolean;
+		financingAmount?: number | null;
+	},
+) {
+	const { data, error, status: httpStatus, headers } = await (client.tourstack.admin.tours({ id }) as any).patch(body);
+	return {
+		data: await extractPayload(data, { status: httpStatus, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
 export async function createTourFromEoi(
 	body: Payload<typeof client.tourstack.admin.tours["from-eoi"]["post"]>,
 ) {
