@@ -1,10 +1,9 @@
 "use client";
 
+import "driver.js/dist/driver.css";
 import type { DriveStep } from "driver.js";
 import { useCallback, useEffect } from "react";
 import { useTranslations } from "next-intl";
-
-// CSS is injected lazily with the driver import to avoid SSR issues.
 
 type TourId = "promoter" | "admin";
 
@@ -145,13 +144,7 @@ export default function TourGuide({ tourId }: { tourId: TourId }) {
 	const t = useTranslations("Tour");
 
 	const startTour = useCallback(async () => {
-		const [{ driver }, driverCss] = await Promise.all([
-			import("driver.js"),
-			// @ts-expect-error – CSS module import; Next handles this correctly
-			import("driver.js/dist/driver.css"),
-		]);
-		// satisfy the import (prevents tree-shaking of the side-effect import)
-		void driverCss;
+		const { driver } = await import("driver.js");
 
 		const steps =
 			tourId === "promoter" ? buildPromoterSteps(t) : buildAdminSteps(t);
