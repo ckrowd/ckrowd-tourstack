@@ -18,14 +18,18 @@ const FINANCING_PRODUCT_IDS = [
 	"Marketing & Ticketing Float",
 ] as const;
 
-// The six named insurance products (Access Insurance suite).
+// The ten named insurance products (Access Insurance suite).
 const INSURANCE_PRODUCT_IDS = [
-	"Event Cancellation",
-	"Credit Guarantee",
-	"Promoter Business",
-	"Touring Workforce",
-	"Aviation & Equipment",
-	"Audience Ticket Protection",
+	"Event Cancellation and Disruption Protection",
+	"Public Liability and Audience Safety Coverage",
+	"Touring and Artist Risk Management",
+	"Workforce and Contractor Protection",
+	"Production Equipment and Asset Insurance",
+	"Venue and Infrastructure Coverage",
+	"Ticket Protection and Consumer Assurance Solutions",
+	"Sponsor and Brand Activation Risk Solutions",
+	"Compliance and Risk Assessment Services",
+	"Data-Driven Insurance Products",
 ] as const;
 
 type ProductId =
@@ -37,12 +41,16 @@ const PRODUCT_KEYS: Record<ProductId, string> = {
 	"Venue Build-Out Credit": "venueBuildOutCredit",
 	"Event Insurance Bundle": "eventInsuranceBundle",
 	"Marketing & Ticketing Float": "marketingTicketingFloat",
-	"Event Cancellation": "eventCancellation",
-	"Credit Guarantee": "creditGuarantee",
-	"Promoter Business": "promoterBusiness",
-	"Touring Workforce": "touringWorkforce",
-	"Aviation & Equipment": "aviationEquipment",
-	"Audience Ticket Protection": "audienceTicketProtection",
+	"Event Cancellation and Disruption Protection": "eventCancellationDisruption",
+	"Public Liability and Audience Safety Coverage": "publicLiabilityAudience",
+	"Touring and Artist Risk Management": "touringArtistRisk",
+	"Workforce and Contractor Protection": "workforceContractor",
+	"Production Equipment and Asset Insurance": "productionEquipment",
+	"Venue and Infrastructure Coverage": "venueInfrastructure",
+	"Ticket Protection and Consumer Assurance Solutions": "ticketProtection",
+	"Sponsor and Brand Activation Risk Solutions": "sponsorBrandRisk",
+	"Compliance and Risk Assessment Services": "complianceRisk",
+	"Data-Driven Insurance Products": "dataDrivenInsurance",
 };
 
 export default function FinancingApplyModal({

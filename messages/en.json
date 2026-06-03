@@ -1766,12 +1766,16 @@
       "viewProducts": "View Products"
     },
     "productTags": {
-      "event": "EVENT INSURANCE",
-      "highest": "HIGHEST VALUE",
-      "sme": "SME INSURANCE",
-      "group": "GROUP INSURANCE",
-      "specialty": "SPECIALTY LINES",
-      "embedded": "EMBEDDED"
+      "eventCancel": "EVENT CANCELLATION",
+      "liability": "PUBLIC LIABILITY",
+      "touring": "TOURING RISK",
+      "workforce": "WORKFORCE",
+      "equipment": "EQUIPMENT",
+      "venue": "VENUE",
+      "ticket": "TICKET PROTECTION",
+      "sponsor": "SPONSOR RISK",
+      "compliance": "COMPLIANCE",
+      "data": "DATA & AI"
     },
     "stats": {
       "portfolio": "Insurable Portfolio",
@@ -1899,10 +1903,10 @@
         "tag": "CERTIFIED GLOBAL PARTNER",
         "description": "Concert & event organisers running CTaaS-certified tour stops",
         "products": [
-          "Event Cancellation",
-          "Promoter Business",
-          "Credit Guarantee",
-          "Audience Ticket Protection"
+          "Event Cancellation and Disruption Protection",
+          "Public Liability and Audience Safety Coverage",
+          "Ticket Protection and Consumer Assurance Solutions",
+          "Sponsor and Brand Activation Risk Solutions"
         ],
         "steps": [
           {
@@ -1976,9 +1980,9 @@
         "tag": "TOURING AGENT",
         "description": "Sound engineers, lighting crews, stage managers, production staff deployed across tour stops",
         "products": [
-          "Group Personal Accident",
-          "Employer Liability",
-          "Contractor Coverage"
+          "Workforce and Contractor Protection",
+          "Production Equipment and Asset Insurance",
+          "Compliance and Risk Assessment Services"
         ],
         "steps": [
           {
@@ -2039,9 +2043,9 @@
         "tag": "ECOSYSTEM PARTNER",
         "description": "Production companies, equipment suppliers, catering, merchandise, and transport providers",
         "products": [
-          "Equipment & Cargo",
-          "Business Interruption",
-          "Professional Indemnity"
+          "Production Equipment and Asset Insurance",
+          "Venue and Infrastructure Coverage",
+          "Compliance and Risk Assessment Services"
         ],
         "steps": [
           {
@@ -2102,9 +2106,9 @@
         "tag": "TALENT SUPPLIER",
         "description": "Agencies and management companies supplying artists to CTaaS-certified tour stops",
         "products": [
-          "Artist Non-Appearance",
-          "Tour Liability",
-          "Revenue Protection"
+          "Touring and Artist Risk Management",
+          "Event Cancellation and Disruption Protection",
+          "Ticket Protection and Consumer Assurance Solutions"
         ],
         "steps": [
           {
@@ -2189,28 +2193,44 @@
     ],
     "productSuite": [
       {
-        "name": "Event Cancellation",
-        "desc": "Protects event revenue against cancellation, non-appearance, and force majeure events."
+        "name": "Event Cancellation and Disruption Protection",
+        "desc": "Covers revenue losses from event cancellation, postponement, and disruption from non-appearance, weather, force majeure, or public safety incidents."
       },
       {
-        "name": "Credit Guarantee",
-        "desc": "Underwrites Tour Stop Advance lending facility. Highest-value product in the portfolio."
+        "name": "Public Liability and Audience Safety Coverage",
+        "desc": "Protects promoters against claims arising from bodily injury, property damage, or personal accident involving audience members and third parties at events."
       },
       {
-        "name": "Promoter Business",
-        "desc": "Public liability, property, and business interruption for promoter and vendor entities."
+        "name": "Touring and Artist Risk Management",
+        "desc": "Comprehensive coverage for touring artists — non-appearance, cancellation due to illness or injury, equipment loss, and reputational risk during a live tour."
       },
       {
-        "name": "Touring Workforce",
-        "desc": "Group personal accident, employer liability, and contractor coverage for touring crew."
+        "name": "Workforce and Contractor Protection",
+        "desc": "Group personal accident, employer liability, and contractor cover for touring crew, stage staff, security personnel, and all event-related workers."
       },
       {
-        "name": "Aviation & Equipment",
-        "desc": "Charter aircraft, production equipment, and high-value cargo specialty coverage."
+        "name": "Production Equipment and Asset Insurance",
+        "desc": "All-risks cover for lighting rigs, sound systems, staging, instruments, and high-value production assets — in transit, in storage, and on-site."
       },
       {
-        "name": "Audience Ticket Protection",
-        "desc": "Embedded refund guarantee for ticket holders. Activated at checkout automatically."
+        "name": "Venue and Infrastructure Coverage",
+        "desc": "Property damage, business interruption, and structural liability for permanent and temporary venues, stages, and event infrastructure."
+      },
+      {
+        "name": "Ticket Protection and Consumer Assurance Solutions",
+        "desc": "Embedded refund guarantee for ticket holders activated at checkout — covering cancellation, postponement, and inability to attend."
+      },
+      {
+        "name": "Sponsor and Brand Activation Risk Solutions",
+        "desc": "Protects sponsor investment in brand activations, experiential events, and naming-rights deals against cancellation, disruption, or audience safety incidents."
+      },
+      {
+        "name": "Compliance and Risk Assessment Services",
+        "desc": "Pre-event risk assessments, regulatory compliance checks, and certification support to ensure events meet local safety, licensing, and insurance requirements."
+      },
+      {
+        "name": "Data-Driven Insurance Products",
+        "desc": "Parametric and index-linked insurance products priced dynamically using real-time event data — attendance forecasts, weather indices, and artist tour performance metrics."
       }
     ]
   },
@@ -2894,55 +2914,154 @@
   },
   "PageTour": {
     "discovery": {
-      "step0": { "title": "🗺️ Tour Opportunities", "description": "This is where you discover live artist tours looking for promoters. Every card is a real booking opportunity." },
-      "step1": { "title": "🎛️ Filter Tours", "description": "Narrow down by genre, availability window, fee range, or region to find tours that fit your market." },
-      "step2": { "title": "🎵 Browse Artist Cards", "description": "Each card shows the artist, tour name, dates, fee range, and target markets. Click any card or 'Submit EOI' to apply." },
-      "step3": { "title": "📋 How It Works", "description": "Follow these 4 steps — browse, express interest, get matched, and confirm your tour stop." },
-      "step4": { "title": "✅ Ready to Apply?", "description": "Click 'Submit Expression of Interest' on any artist to start your application. It takes under 3 minutes." }
+      "step0": {
+        "title": "🗺️ Tour Opportunities",
+        "description": "This is where you discover live artist tours looking for promoters. Every card is a real booking opportunity."
+      },
+      "step1": {
+        "title": "🎛️ Filter Tours",
+        "description": "Narrow down by genre, availability window, fee range, or region to find tours that fit your market."
+      },
+      "step2": {
+        "title": "🎵 Browse Artist Cards",
+        "description": "Each card shows the artist, tour name, dates, fee range, and target markets. Click any card or 'Submit EOI' to apply."
+      },
+      "step3": {
+        "title": "📋 How It Works",
+        "description": "Follow these 4 steps — browse, express interest, get matched, and confirm your tour stop."
+      },
+      "step4": {
+        "title": "✅ Ready to Apply?",
+        "description": "Click 'Submit Expression of Interest' on any artist to start your application. It takes under 3 minutes."
+      }
     },
     "tours": {
-      "step0": { "title": "🎫 My Tour Stops", "description": "This is your personal booking pipeline — all your applications and confirmed shows in one view." },
-      "step1": { "title": "📊 Your Pipeline Stats", "description": "These four numbers show your total stops, confirmed shows, applications in progress, and rejections." },
-      "step2": { "title": "⏳ Pending Applications", "description": "EOIs awaiting admin review appear here. You'll get an email notification when the status changes." },
-      "step3": { "title": "📋 Your Tour Cards", "description": "Each card shows the artist, venue, date, status, and fee. Click 'View Details' for the full breakdown and milestones." }
+      "step0": {
+        "title": "🎫 My Tour Stops",
+        "description": "This is your personal booking pipeline — all your applications and confirmed shows in one view."
+      },
+      "step1": {
+        "title": "📊 Your Pipeline Stats",
+        "description": "These four numbers show your total stops, confirmed shows, applications in progress, and rejections."
+      },
+      "step2": {
+        "title": "⏳ Pending Applications",
+        "description": "EOIs awaiting admin review appear here. You'll get an email notification when the status changes."
+      },
+      "step3": {
+        "title": "📋 Your Tour Cards",
+        "description": "Each card shows the artist, venue, date, status, and fee. Click 'View Details' for the full breakdown and milestones."
+      }
     },
     "eoi": {
-      "step0": { "title": "📝 Submit an EOI", "description": "An Expression of Interest lets you apply to host an artist at your venue. It's a 3-step process." },
-      "step1": { "title": "1️⃣ Pick an Artist", "description": "Browse the list of available tours on the left and select one to apply for. You can search by name." },
-      "step2": { "title": "2️⃣ Complete the Form", "description": "Enter your company info, city, expected audience size, and any notes for the booking team." },
-      "step3": { "title": "3️⃣ Review & Submit", "description": "On the final step, review all your details before submitting. You'll receive a confirmation email straight away." }
+      "step0": {
+        "title": "📝 Submit an EOI",
+        "description": "An Expression of Interest lets you apply to host an artist at your venue. It's a 3-step process."
+      },
+      "step1": {
+        "title": "1️⃣ Pick an Artist",
+        "description": "Browse the list of available tours on the left and select one to apply for. You can search by name."
+      },
+      "step2": {
+        "title": "2️⃣ Complete the Form",
+        "description": "Enter your company info, city, expected audience size, and any notes for the booking team."
+      },
+      "step3": {
+        "title": "3️⃣ Review & Submit",
+        "description": "On the final step, review all your details before submitting. You'll receive a confirmation email straight away."
+      }
     },
     "financing": {
-      "step0": { "title": "💰 Tour Financing", "description": "TourStack financing helps promoters cover upfront costs — artist deposits, venue build-out, marketing, and more." },
-      "step1": { "title": "⚡ Quick Apply", "description": "Start here to check your eligibility and see which products you qualify for in real time." },
-      "step2": { "title": "🏦 Financing Products", "description": "Choose from multiple products offered by our partner banks. Each shows the amount, term, and cost at a glance." }
+      "step0": {
+        "title": "💰 Tour Financing",
+        "description": "TourStack financing helps promoters cover upfront costs — artist deposits, venue build-out, marketing, and more."
+      },
+      "step1": {
+        "title": "⚡ Quick Apply",
+        "description": "Start here to check your eligibility and see which products you qualify for in real time."
+      },
+      "step2": {
+        "title": "🏦 Financing Products",
+        "description": "Choose from multiple products offered by our partner banks. Each shows the amount, term, and cost at a glance."
+      }
     },
     "insurance": {
-      "step0": { "title": "🛡️ Event Insurance", "description": "Protect your events with insurance products tailored for live music — from cancellation cover to audience ticket protection." },
-      "step1": { "title": "📦 Insurance Products", "description": "Browse available products. Each card shows coverage type, amount, and how to apply." },
-      "step2": { "title": "✅ Apply in Minutes", "description": "Select a product and apply directly through the Financing tab. Your cover is linked to your tour stop." }
+      "step0": {
+        "title": "🛡️ Event Insurance",
+        "description": "Protect your events with insurance products tailored for live music — from cancellation cover to audience ticket protection."
+      },
+      "step1": {
+        "title": "📦 Insurance Products",
+        "description": "Browse available products. Each card shows coverage type, amount, and how to apply."
+      },
+      "step2": {
+        "title": "✅ Apply in Minutes",
+        "description": "Select a product and apply directly through the Financing tab. Your cover is linked to your tour stop."
+      }
     },
     "dashboard": {
-      "step0": { "title": "🏠 Your Dashboard", "description": "Welcome to your TourStack dashboard — your personalised overview of tour activity, EOIs, and milestones." },
-      "step1": { "title": "📊 Stats", "description": "Your key numbers at a glance — active tours, pending EOIs, and upcoming milestones." },
-      "step2": { "title": "📋 Pending EOIs", "description": "EOIs you've submitted that are still awaiting admin review or need revision." },
-      "step3": { "title": "🚀 Next Steps", "description": "Use the sidebar to navigate to Discovery to find new opportunities, or check your Tour Stops for updates." }
+      "step0": {
+        "title": "🏠 Your Dashboard",
+        "description": "Welcome to your TourStack dashboard — your personalised overview of tour activity, EOIs, and milestones."
+      },
+      "step1": {
+        "title": "📊 Stats",
+        "description": "Your key numbers at a glance — active tours, pending EOIs, and upcoming milestones."
+      },
+      "step2": {
+        "title": "📋 Pending EOIs",
+        "description": "EOIs you've submitted that are still awaiting admin review or need revision."
+      },
+      "step3": {
+        "title": "🚀 Next Steps",
+        "description": "Use the sidebar to navigate to Discovery to find new opportunities, or check your Tour Stops for updates."
+      }
     },
     "admin-dashboard": {
-      "step0": { "title": "🎛️ Admin Overview", "description": "Your command centre — a live snapshot of platform activity, tour stops, and promoter applications." },
-      "step1": { "title": "📊 Platform Stats", "description": "Click any stat card to jump directly to the relevant management section." },
-      "step2": { "title": "🎫 Recent Tour Stops", "description": "The latest confirmed and pending tour stops. Click 'View detail' to manage any stop." },
-      "step3": { "title": "📥 Recent EOIs", "description": "The latest promoter submissions. Head to EOI Management to review and process them." }
+      "step0": {
+        "title": "🎛️ Admin Overview",
+        "description": "Your command centre — a live snapshot of platform activity, tour stops, and promoter applications."
+      },
+      "step1": {
+        "title": "📊 Platform Stats",
+        "description": "Click any stat card to jump directly to the relevant management section."
+      },
+      "step2": {
+        "title": "🎫 Recent Tour Stops",
+        "description": "The latest confirmed and pending tour stops. Click 'View detail' to manage any stop."
+      },
+      "step3": {
+        "title": "📥 Recent EOIs",
+        "description": "The latest promoter submissions. Head to EOI Management to review and process them."
+      }
     },
     "admin-eoi": {
-      "step0": { "title": "📥 EOI Management", "description": "All Expression of Interest submissions from promoters across the platform, newest first." },
-      "step1": { "title": "📋 Review Each Submission", "description": "Each card shows the promoter, artist, venue, estimated capacity, budget, and match score." },
-      "step2": { "title": "⚡ Take Action", "description": "Use the action buttons to Approve, Request Revision, Reject, or directly Create a Tour Stop from any EOI." }
+      "step0": {
+        "title": "📥 EOI Management",
+        "description": "All Expression of Interest submissions from promoters across the platform, newest first."
+      },
+      "step1": {
+        "title": "📋 Review Each Submission",
+        "description": "Each card shows the promoter, artist, venue, estimated capacity, budget, and match score."
+      },
+      "step2": {
+        "title": "⚡ Take Action",
+        "description": "Use the action buttons to Approve, Request Revision, Reject, or directly Create a Tour Stop from any EOI."
+      }
     },
     "admin-tours": {
-      "step0": { "title": "🎫 Tour Stop Management", "description": "All confirmed and in-progress tour stops on the platform." },
-      "step1": { "title": "📋 Tour Stop List", "description": "Each row shows the artist, status, and a menu to view details, edit, or delete the stop." },
-      "step2": { "title": "➕ Create New", "description": "Use the 'Create Tour' button to add a new artist tour project to the Discovery catalog." }
+      "step0": {
+        "title": "🎫 Tour Stop Management",
+        "description": "All confirmed and in-progress tour stops on the platform."
+      },
+      "step1": {
+        "title": "📋 Tour Stop List",
+        "description": "Each row shows the artist, status, and a menu to view details, edit, or delete the stop."
+      },
+      "step2": {
+        "title": "➕ Create New",
+        "description": "Use the 'Create Tour' button to add a new artist tour project to the Discovery catalog."
+      }
     }
   },
   "Tour": {
@@ -2952,22 +3071,64 @@
     "prev": "← Back",
     "done": "Got it!",
     "promoter": {
-      "step0": { "title": "👋 Welcome to TourStack!", "description": "Your all-in-one platform for connecting with global artist tours across Africa. This quick tour will show you where everything is — takes less than 2 minutes." },
-      "step1": { "title": "🔍 Discover Tour Opportunities", "description": "Browse live artist tours available for hosting. Filter by genre, region, and fee range to find the perfect match for your market." },
-      "step2": { "title": "🎫 My Tour Stops", "description": "Track every Expression of Interest you've submitted. See status updates, revision requests, and confirmed bookings all in one place." },
-      "step3": { "title": "💰 Financing", "description": "Need funding to bring an artist to your city? Apply for tour finance from our partner banks — tour advances, venue build-out credit, and more." },
-      "step4": { "title": "🛡️ Insurance", "description": "Protect your events with tailored insurance products — event cancellation, credit guarantees, audience ticket protection, and more." },
-      "step5": { "title": "🚀 Ready to Get Started?", "description": "Click here to browse available artists and submit your first Expression of Interest. It only takes a few minutes!" },
-      "step6": { "title": "✅ You're All Set!", "description": "You now know your way around TourStack. Click 'Platform Tour' at the bottom of the sidebar anytime to replay this guide. Good luck!" }
+      "step0": {
+        "title": "👋 Welcome to TourStack!",
+        "description": "Your all-in-one platform for connecting with global artist tours across Africa. This quick tour will show you where everything is — takes less than 2 minutes."
+      },
+      "step1": {
+        "title": "🔍 Discover Tour Opportunities",
+        "description": "Browse live artist tours available for hosting. Filter by genre, region, and fee range to find the perfect match for your market."
+      },
+      "step2": {
+        "title": "🎫 My Tour Stops",
+        "description": "Track every Expression of Interest you've submitted. See status updates, revision requests, and confirmed bookings all in one place."
+      },
+      "step3": {
+        "title": "💰 Financing",
+        "description": "Need funding to bring an artist to your city? Apply for tour finance from our partner banks — tour advances, venue build-out credit, and more."
+      },
+      "step4": {
+        "title": "🛡️ Insurance",
+        "description": "Protect your events with tailored insurance products — event cancellation, credit guarantees, audience ticket protection, and more."
+      },
+      "step5": {
+        "title": "🚀 Ready to Get Started?",
+        "description": "Click here to browse available artists and submit your first Expression of Interest. It only takes a few minutes!"
+      },
+      "step6": {
+        "title": "✅ You're All Set!",
+        "description": "You now know your way around TourStack. Click 'Platform Tour' at the bottom of the sidebar anytime to replay this guide. Good luck!"
+      }
     },
     "admin": {
-      "step0": { "title": "👋 Welcome to TourStack Admin!", "description": "This is your command centre for managing the TourStack platform. Let's walk through the key sections." },
-      "step1": { "title": "📥 EOI Submissions", "description": "Review and process Expression of Interest submissions from promoters. Approve, request revisions, reject, or convert to a confirmed tour stop." },
-      "step2": { "title": "🎫 Tour Stops", "description": "View and manage all confirmed and pending tour stops. Each stop is linked to the promoter's EOI and can be edited or deleted." },
-      "step3": { "title": "🎵 Artists", "description": "Manage the artist catalog that promoters browse on the Discovery page. Add new artists, update tour details, fee ranges, and availability windows." },
-      "step4": { "title": "📊 Reports", "description": "Track platform performance — EOI volumes, conversion rates, financing uptake, and revenue analytics." },
-      "step5": { "title": "➕ Create Tour Project", "description": "Publish a new artist tour project to attract promoter applications. Fill in the artist, fee range, tour window, and region." },
-      "step6": { "title": "✅ You're All Set!", "description": "You know your way around the admin portal. Click 'Platform Tour' at the bottom of the sidebar anytime to replay this guide." }
+      "step0": {
+        "title": "👋 Welcome to TourStack Admin!",
+        "description": "This is your command centre for managing the TourStack platform. Let's walk through the key sections."
+      },
+      "step1": {
+        "title": "📥 EOI Submissions",
+        "description": "Review and process Expression of Interest submissions from promoters. Approve, request revisions, reject, or convert to a confirmed tour stop."
+      },
+      "step2": {
+        "title": "🎫 Tour Stops",
+        "description": "View and manage all confirmed and pending tour stops. Each stop is linked to the promoter's EOI and can be edited or deleted."
+      },
+      "step3": {
+        "title": "🎵 Artists",
+        "description": "Manage the artist catalog that promoters browse on the Discovery page. Add new artists, update tour details, fee ranges, and availability windows."
+      },
+      "step4": {
+        "title": "📊 Reports",
+        "description": "Track platform performance — EOI volumes, conversion rates, financing uptake, and revenue analytics."
+      },
+      "step5": {
+        "title": "➕ Create Tour Project",
+        "description": "Publish a new artist tour project to attract promoter applications. Fill in the artist, fee range, tour window, and region."
+      },
+      "step6": {
+        "title": "✅ You're All Set!",
+        "description": "You know your way around the admin portal. Click 'Platform Tour' at the bottom of the sidebar anytime to replay this guide."
+      }
     }
   },
   "Common": {
@@ -3102,12 +3263,16 @@
       "venueBuildOutCredit": "Venue Build-Out Credit (up to $75k)",
       "eventInsuranceBundle": "Event Insurance Bundle",
       "marketingTicketingFloat": "Marketing & Ticketing Float (up to $15k)",
-      "eventCancellation": "Event Cancellation",
-      "creditGuarantee": "Credit Guarantee",
-      "promoterBusiness": "Promoter Business (SME)",
-      "touringWorkforce": "Touring Workforce",
-      "aviationEquipment": "Aviation & Equipment",
-      "audienceTicketProtection": "Audience Ticket Protection"
+      "eventCancellationDisruption": "Event Cancellation and Disruption Protection",
+      "publicLiabilityAudience": "Public Liability and Audience Safety Coverage",
+      "touringArtistRisk": "Touring and Artist Risk Management",
+      "workforceContractor": "Workforce and Contractor Protection",
+      "productionEquipment": "Production Equipment and Asset Insurance",
+      "venueInfrastructure": "Venue and Infrastructure Coverage",
+      "ticketProtection": "Ticket Protection and Consumer Assurance Solutions",
+      "sponsorBrandRisk": "Sponsor and Brand Activation Risk Solutions",
+      "complianceRisk": "Compliance and Risk Assessment Services",
+      "dataDrivenInsurance": "Data-Driven Insurance Products"
     },
     "fields": {
       "product": "Product",
@@ -4378,20 +4543,44 @@
     "stats": {
       "title": "Africa has 1.4 billion music fans. Almost no one earns from concerts — yet.",
       "subtitle": "The demand is proven. What's missing is the infrastructure to fund, insure and organise it. That is what you are joining.",
-      "economy": { "value": "$25.8B", "label": "Africa's live music economy" },
-      "fans": { "value": "1.4 Billion", "label": "African music fans" },
-      "markets": { "value": "25 Markets", "label": "Pan-African rollout underway" },
-      "financing": { "value": "Up to $1M", "label": "Trade financing for members" }
+      "economy": {
+        "value": "$25.8B",
+        "label": "Africa's live music economy"
+      },
+      "fans": {
+        "value": "1.4 Billion",
+        "label": "African music fans"
+      },
+      "markets": {
+        "value": "25 Markets",
+        "label": "Pan-African rollout underway"
+      },
+      "financing": {
+        "value": "Up to $1M",
+        "label": "Trade financing for members"
+      }
     },
     "model": {
       "eyebrow": "How the ecosystem works",
       "title": "Concert Touring as a Service",
       "subtitle": "TourStack brings every person and every dollar a tour needs onto one platform. Four steps turn the live music industry into a bankable, insurable ecosystem — and each one builds on the last.",
       "pillars": {
-        "certify": { "title": "Get certified", "body": "Register and complete your profile to earn verified status — the industry credential that unlocks everything else." },
-        "bank": { "title": "Get banked", "body": "Certified members are onboarded into the formal financial system, becoming traceable, fundable businesses." },
-        "finance": { "title": "Get financed", "body": "Access working capital and tour financing against confirmed contracts and real promoter invoices." },
-        "operate": { "title": "Operate on TourStack", "body": "Hiring, payroll, contracts and payments run through one platform, across every market, in real time." }
+        "certify": {
+          "title": "Get certified",
+          "body": "Register and complete your profile to earn verified status — the industry credential that unlocks everything else."
+        },
+        "bank": {
+          "title": "Get banked",
+          "body": "Certified members are onboarded into the formal financial system, becoming traceable, fundable businesses."
+        },
+        "finance": {
+          "title": "Get financed",
+          "body": "Access working capital and tour financing against confirmed contracts and real promoter invoices."
+        },
+        "operate": {
+          "title": "Operate on TourStack",
+          "body": "Hiring, payroll, contracts and payments run through one platform, across every market, in real time."
+        }
       }
     },
     "about": {
