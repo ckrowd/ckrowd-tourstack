@@ -4,41 +4,59 @@ import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { updateAdminEoi } from "@/app/actions";
+import { createTourFromEoi, updateAdminEoi } from "@/app/actions";
 
-type Action = "approve" | "revision" | "reject";
+type Action = "approve" | "revision" | "reject" | "create_stop";
 
-const ACTION_STATUS: Record<Action, "approved" | "needs_revision" | "rejected"> =
-	{
-		approve: "approved",
-		revision: "needs_revision",
-		reject: "rejected",
-	};
+const ACTION_STATUS: Record<
+	Exclude<Action, "create_stop">,
+	"approved" | "needs_revision" | "rejected"
+> = {
+	approve: "approved",
+	revision: "needs_revision",
+	reject: "rejected",
+};
 
-// An EOI in a given status no longer needs the action that would put it
-// there again. e.g. an "approved" EOI shouldn't show an Approve button;
-// only Revision and Reject remain as ways to move it elsewhere.
-const HIDDEN_FOR_STATUS: Record<string, Action[]> = {
+const HIDDEN_FOR_STATUS: Record<string, Exclude<Action, "create_stop">[]> = {
 	approved: ["approve"],
 	needs_revision: ["revision"],
 	rejected: ["reject"],
 };
 
+type TourStopForm = {
+	venue: string;
+	city: string;
+	date: string;
+	feeUsd: string;
+	capacity: string;
+	country: string;
+};
+
 export default function EoiActionPanel({
 	eoiId,
 	currentStatus,
+	eoiCity = "",
 }: {
 	eoiId: string;
 	currentStatus: string;
+	eoiCity?: string;
 }) {
 	const t = useTranslations("EoiActionPanel");
 	const router = useRouter();
 	const [open, setOpen] = useState<Action | null>(null);
 	const [notes, setNotes] = useState("");
 	const [error, setError] = useState<string | null>(null);
+	const [stopForm, setStopForm] = useState<TourStopForm>({
+		venue: "",
+		city: eoiCity,
+		date: "",
+		feeUsd: "",
+		capacity: "",
+		country: "",
+	});
 
-	const mutation = useMutation({
-		mutationFn: async (action: Action) => {
+	const statusMutation = useMutation({
+		mutationFn: async (action: Exclude<Action, "create_stop">) => {
 			const body: Parameters<typeof updateAdminEoi>[1] = {
 				status: ACTION_STATUS[action],
 			};
@@ -61,24 +79,63 @@ export default function EoiActionPanel({
 		},
 	});
 
+	const stopMutation = useMutation({
+		mutationFn: () =>
+			createTourFromEoi({
+				eoiId,
+				venue: stopForm.venue.trim(),
+				city: stopForm.city.trim(),
+				date: stopForm.date,
+				feeUsd: Number(stopForm.feeUsd),
+				capacity: stopForm.capacity ? Number(stopForm.capacity) : undefined,
+				country: stopForm.country.trim() || undefined,
+			}),
+		onSuccess: (result) => {
+			if (!result.success) {
+				setError(result.error || t("errorGeneric"));
+				return;
+			}
+			setOpen(null);
+			setError(null);
+			router.refresh();
+		},
+		onError: (err) => {
+			setError(err instanceof Error ? err.message : t("errorGeneric"));
+		},
+	});
+
 	function startAction(action: Action) {
 		setOpen(action);
 		setNotes("");
 		setError(null);
+		if (action === "create_stop") {
+			setStopForm({ venue: "", city: eoiCity, date: "", feeUsd: "", capacity: "", country: "" });
+		}
 	}
 
-	function submit() {
-		if (open === "revision" && notes.trim().length === 0) {
+	function submitStatus() {
+		const action = open as Exclude<Action, "create_stop">;
+		if (action === "revision" && notes.trim().length === 0) {
 			setError(t("revisionNotesRequired"));
 			return;
 		}
-		mutation.mutate(open as Action);
+		statusMutation.mutate(action);
+	}
+
+	function submitStop() {
+		if (!stopForm.venue.trim()) { setError(t("venueRequired")); return; }
+		if (!stopForm.city.trim()) { setError(t("cityRequired")); return; }
+		if (!stopForm.date) { setError(t("dateRequired")); return; }
+		if (!stopForm.feeUsd || Number(stopForm.feeUsd) <= 0) { setError(t("feeRequired")); return; }
+		stopMutation.mutate();
 	}
 
 	const hidden = HIDDEN_FOR_STATUS[currentStatus] ?? [];
 	const showApprove = !hidden.includes("approve");
 	const showRevision = !hidden.includes("revision");
 	const showReject = !hidden.includes("reject");
+	const showCreateStop = currentStatus !== "rejected";
+	const isPending = statusMutation.isPending || stopMutation.isPending;
 
 	return (
 		<>
@@ -89,9 +146,7 @@ export default function EoiActionPanel({
 						onClick={() => startAction("approve")}
 						className="flex-1 py-2.5 bg-emerald-50 text-emerald-700 rounded-xl text-sm font-bold flex items-center justify-center gap-1.5 hover:bg-emerald-100 transition-colors"
 					>
-						<span className="material-symbols-outlined text-sm">
-							check_circle
-						</span>
+						<span className="material-symbols-outlined text-sm">check_circle</span>
 						{t("approve")}
 					</button>
 				)}
@@ -115,9 +170,19 @@ export default function EoiActionPanel({
 						{t("reject")}
 					</button>
 				)}
+				{showCreateStop && (
+					<button
+						type="button"
+						onClick={() => startAction("create_stop")}
+						className="flex-1 py-2.5 bg-[#FF5A30]/10 text-[#FF5A30] rounded-xl text-sm font-bold flex items-center justify-center gap-1.5 hover:bg-[#FF5A30]/20 transition-colors"
+					>
+						<span className="material-symbols-outlined text-sm">add_location_alt</span>
+						{t("createStop")}
+					</button>
+				)}
 			</div>
 
-			{open && (
+			{open && open !== "create_stop" && (
 				<div
 					className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4"
 					role="dialog"
@@ -136,9 +201,7 @@ export default function EoiActionPanel({
 						</p>
 
 						<label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1">
-							{open === "revision"
-								? t("revisionNotesLabel")
-								: t("optionalNotesLabel")}
+							{open === "revision" ? t("revisionNotesLabel") : t("optionalNotesLabel")}
 						</label>
 						<textarea
 							value={notes}
@@ -146,32 +209,25 @@ export default function EoiActionPanel({
 							rows={3}
 							className="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-sm text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/40"
 							placeholder={
-								open === "revision"
-									? t("revisionNotesPlaceholder")
-									: t("optionalNotesPlaceholder")
+								open === "revision" ? t("revisionNotesPlaceholder") : t("optionalNotesPlaceholder")
 							}
 						/>
 
-						{error && (
-							<p className="mt-2 text-sm text-red-600 font-semibold">{error}</p>
-						)}
+						{error && <p className="mt-2 text-sm text-red-600 font-semibold">{error}</p>}
 
 						<div className="flex justify-end gap-2 mt-5">
 							<button
 								type="button"
-								onClick={() => {
-									setOpen(null);
-									setError(null);
-								}}
-								disabled={mutation.isPending}
+								onClick={() => { setOpen(null); setError(null); }}
+								disabled={isPending}
 								className="px-4 py-2 rounded-lg text-sm font-semibold text-on-surface-variant hover:bg-surface-container-low disabled:opacity-50"
 							>
 								{t("cancel")}
 							</button>
 							<button
 								type="button"
-								onClick={submit}
-								disabled={mutation.isPending}
+								onClick={submitStatus}
+								disabled={isPending}
 								className={`px-4 py-2 rounded-lg text-sm font-bold text-white disabled:opacity-60 ${
 									open === "approve"
 										? "bg-emerald-600 hover:bg-emerald-700"
@@ -180,7 +236,125 @@ export default function EoiActionPanel({
 											: "bg-red-600 hover:bg-red-700"
 								}`}
 							>
-								{mutation.isPending ? t("submitting") : t(`${open}Confirm`)}
+								{isPending ? t("submitting") : t(`${open}Confirm`)}
+							</button>
+						</div>
+					</div>
+				</div>
+			)}
+
+			{open === "create_stop" && (
+				<div
+					className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4"
+					role="dialog"
+					aria-modal="true"
+					aria-labelledby={`eoi-stop-${eoiId}-title`}
+				>
+					<div className="bg-surface rounded-2xl shadow-xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto">
+						<h3
+							id={`eoi-stop-${eoiId}-title`}
+							className="text-lg font-bold text-on-surface mb-1"
+						>
+							{t("createStopTitle")}
+						</h3>
+						<p className="text-sm text-on-surface-variant mb-5">
+							{t("createStopDescription")}
+						</p>
+
+						<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+							<div className="sm:col-span-2">
+								<label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1">
+									{t("venue")} *
+								</label>
+								<input
+									type="text"
+									value={stopForm.venue}
+									onChange={(e) => setStopForm((f) => ({ ...f, venue: e.target.value }))}
+									className="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-sm focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/40"
+									placeholder={t("venuePlaceholder")}
+								/>
+							</div>
+							<div>
+								<label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1">
+									{t("city")} *
+								</label>
+								<input
+									type="text"
+									value={stopForm.city}
+									onChange={(e) => setStopForm((f) => ({ ...f, city: e.target.value }))}
+									className="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-sm focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/40"
+									placeholder={t("cityPlaceholder")}
+								/>
+							</div>
+							<div>
+								<label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1">
+									{t("country")}
+								</label>
+								<input
+									type="text"
+									value={stopForm.country}
+									onChange={(e) => setStopForm((f) => ({ ...f, country: e.target.value }))}
+									className="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-sm focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/40"
+									placeholder={t("countryPlaceholder")}
+								/>
+							</div>
+							<div>
+								<label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1">
+									{t("date")} *
+								</label>
+								<input
+									type="date"
+									value={stopForm.date}
+									onChange={(e) => setStopForm((f) => ({ ...f, date: e.target.value }))}
+									className="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-sm focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/40"
+								/>
+							</div>
+							<div>
+								<label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1">
+									{t("feeUsd")} *
+								</label>
+								<input
+									type="number"
+									min="1"
+									value={stopForm.feeUsd}
+									onChange={(e) => setStopForm((f) => ({ ...f, feeUsd: e.target.value }))}
+									className="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-sm focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/40"
+									placeholder="e.g. 25000"
+								/>
+							</div>
+							<div className="sm:col-span-2">
+								<label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1">
+									{t("capacity")}
+								</label>
+								<input
+									type="number"
+									min="1"
+									value={stopForm.capacity}
+									onChange={(e) => setStopForm((f) => ({ ...f, capacity: e.target.value }))}
+									className="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-sm focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/40"
+									placeholder={t("capacityPlaceholder")}
+								/>
+							</div>
+						</div>
+
+						{error && <p className="mt-3 text-sm text-red-600 font-semibold">{error}</p>}
+
+						<div className="flex justify-end gap-2 mt-6">
+							<button
+								type="button"
+								onClick={() => { setOpen(null); setError(null); }}
+								disabled={isPending}
+								className="px-4 py-2 rounded-lg text-sm font-semibold text-on-surface-variant hover:bg-surface-container-low disabled:opacity-50"
+							>
+								{t("cancel")}
+							</button>
+							<button
+								type="button"
+								onClick={submitStop}
+								disabled={isPending}
+								className="px-4 py-2 rounded-lg text-sm font-bold text-white bg-[#FF5A30] hover:opacity-90 disabled:opacity-60"
+							>
+								{isPending ? t("creating") : t("createStopConfirm")}
 							</button>
 						</div>
 					</div>

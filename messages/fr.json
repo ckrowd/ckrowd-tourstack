@@ -2391,6 +2391,7 @@
       "title": "Statistiques de la plateforme",
       "markets": "Marchés",
       "promoters": "Promoteurs",
+      "opportunities": "Opportunités",
       "activeTours": "Tournées actives",
       "avgReview": "Examen moyen"
     }
@@ -3460,7 +3461,26 @@
     "revisionNotesRequired": "Les notes de révision sont obligatoires.",
     "cancel": "Annuler",
     "submitting": "Envoi…",
-    "errorGeneric": "Impossible de mettre à jour l'EOI. Réessayez."
+    "creating": "Création…",
+    "errorGeneric": "Impossible de mettre à jour l'EOI. Réessayez.",
+    "createStop": "Créer un arrêt de tournée",
+    "createStopTitle": "Créer un arrêt de tournée",
+    "createStopDescription": "Convertissez cette EOI en un arrêt de tournée confirmé. L'EOI sera marquée comme approuvée.",
+    "createStopConfirm": "Créer l'arrêt",
+    "venue": "Salle",
+    "venuePlaceholder": "ex: Stade National d'Abidjan",
+    "city": "Ville",
+    "cityPlaceholder": "ex: Abidjan",
+    "country": "Pays",
+    "countryPlaceholder": "ex: Côte d'Ivoire",
+    "date": "Date du spectacle",
+    "feeUsd": "Cachet artiste (USD)",
+    "capacity": "Capacité de la salle",
+    "capacityPlaceholder": "ex: 5000",
+    "venueRequired": "La salle est obligatoire.",
+    "cityRequired": "La ville est obligatoire.",
+    "dateRequired": "La date du spectacle est obligatoire.",
+    "feeRequired": "Le cachet artiste est obligatoire."
   },
   "TourActionsMenu": {
     "openMenu": "Ouvrir le menu d'actions",
