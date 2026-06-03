@@ -130,8 +130,9 @@ export default function DiscoveryPage() {
 					</div>
 
 					{/* Filters */}
-					<section data-tour="discovery-filters" className="bg-surface-container-low rounded-2xl p-4 md:p-6 flex flex-wrap items-end gap-4 mb-10">
-						<div className="flex-1 min-w-45">
+					<section data-tour="discovery-filters" className="bg-surface-container-low rounded-2xl p-4 md:p-6 mb-10">
+						<div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-wrap lg:items-end gap-3 md:gap-4">
+						<div className="w-full lg:flex-1 lg:min-w-45">
 							<label
 								htmlFor="filter-genre"
 								className="block text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5 ml-1"
@@ -161,7 +162,7 @@ export default function DiscoveryPage() {
 							</div>
 						</div>
 
-						<div className="flex-1 min-w-45">
+						<div className="w-full lg:flex-1 lg:min-w-45">
 							<label
 								htmlFor="filter-window"
 								className="block text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5 ml-1"
@@ -186,7 +187,7 @@ export default function DiscoveryPage() {
 							</div>
 						</div>
 
-						<div className="flex-1 min-w-45">
+						<div className="w-full lg:flex-1 lg:min-w-45">
 							<label
 								htmlFor="filter-fee"
 								className="block text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5 ml-1"
@@ -213,7 +214,7 @@ export default function DiscoveryPage() {
 							</div>
 						</div>
 
-						<div className="flex-1 min-w-45">
+						<div className="w-full lg:flex-1 lg:min-w-45">
 							<label
 								htmlFor="filter-region"
 								className="block text-[10px] font-bold text-on-surface-variant uppercase tracking-widest mb-1.5 ml-1"
@@ -241,19 +242,22 @@ export default function DiscoveryPage() {
 							</div>
 						</div>
 
-						<button
-							type="button"
-							onClick={() => {
-								setGenre("All Genres");
-								setWindow("All Windows");
-								setFeeRange("All Ranges");
-								setRegion("All Africa");
-							}}
-							className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-bold text-sm flex items-center gap-2 hover:opacity-90 transition-all shadow-lg shadow-[#FF5A30]/20 self-end"
-						>
-							<span className="material-symbols-outlined text-sm">tune</span>
-							{t("filters.resetFilters")}
-						</button>
+						<div className="w-full sm:col-span-2 lg:w-auto lg:self-end">
+							<button
+								type="button"
+								onClick={() => {
+									setGenre("All Genres");
+									setWindow("All Windows");
+									setFeeRange("All Ranges");
+									setRegion("All Africa");
+								}}
+								className="w-full lg:w-auto bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-lg shadow-[#FF5A30]/20"
+							>
+								<span className="material-symbols-outlined text-sm">tune</span>
+								{t("filters.resetFilters")}
+							</button>
+						</div>
+						</div>
 					</section>
 
 					<div className="grid grid-cols-1 lg:grid-cols-12 gap-10">

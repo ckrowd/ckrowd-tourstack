@@ -145,7 +145,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 					</div>
 
 					{/* Summary strip */}
-					<div data-tour="tours-stats" className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+					<div data-tour="tours-stats" className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-10">
 						{[
 							{
 								label: t("stats.totalStops"),
@@ -170,12 +170,12 @@ export default async function ToursPage({ params, searchParams }: Props) {
 						].map((s) => (
 							<div
 								key={s.label}
-								className={`bg-surface-container-lowest rounded-xl p-5 shadow-sm border-l-4 ${s.color}`}
+								className={`bg-surface-container-lowest rounded-xl p-4 md:p-5 shadow-sm border-l-4 ${s.color}`}
 							>
-								<p className="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+								<p className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
 									{s.label}
 								</p>
-								<p className="text-3xl font-black font-(family-name:--font-manrope) text-on-surface">
+								<p className="text-2xl md:text-3xl font-black font-(family-name:--font-manrope) text-on-surface">
 									{s.value}
 								</p>
 							</div>

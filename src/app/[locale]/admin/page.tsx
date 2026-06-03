@@ -59,7 +59,7 @@ export default async function AdminPage({ params }: Props) {
 			</div>
 
 			{/* Stats */}
-			<div data-tour="admin-stats" className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+			<div data-tour="admin-stats" className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5 mb-10">
 				{[
 					{
 						label: t("stats.activeTours"),
@@ -93,17 +93,17 @@ export default async function AdminPage({ params }: Props) {
 					<Link
 						href={s.href}
 						key={s.label}
-						className={`bg-surface-container-lowest p-5 rounded-xl shadow-sm flex flex-col gap-3 border-l-4 ${s.accent} hover:shadow-md transition-shadow`}
+						className={`bg-surface-container-lowest p-4 md:p-5 rounded-xl shadow-sm flex flex-col gap-2 md:gap-3 border-l-4 ${s.accent} hover:shadow-md transition-shadow`}
 					>
 						<div className="flex items-center justify-between">
-							<p className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">
+							<p className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-on-surface-variant">
 								{s.label}
 							</p>
-							<span className="material-symbols-outlined text-on-surface-variant text-base">
+							<span className="material-symbols-outlined text-on-surface-variant text-sm md:text-base">
 								{s.icon}
 							</span>
 						</div>
-						<span className="text-4xl font-(family-name:--font-manrope) font-extrabold text-on-surface">
+						<span className="text-3xl md:text-4xl font-(family-name:--font-manrope) font-extrabold text-on-surface">
 							{s.value}
 						</span>
 					</Link>

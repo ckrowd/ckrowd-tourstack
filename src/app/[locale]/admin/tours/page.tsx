@@ -91,13 +91,13 @@ export default async function AdminToursPage({
 						return (
 							<div
 								key={String(tour.id)}
-								className="flex items-center justify-between gap-4 py-4 border-b border-outline-variant/10 last:border-none"
+								className="flex items-center justify-between gap-3 py-3 md:py-4 border-b border-outline-variant/10 last:border-none"
 							>
 								<div className="flex-1 min-w-0">
-									<p className="text-base font-bold text-on-surface truncate">
+									<p className="text-sm md:text-base font-bold text-on-surface truncate">
 										{String(tArtist?.name ?? tArtist?.tour_name ?? "Tour")}
 									</p>
-									<p className="text-sm text-on-surface-variant mt-1">
+									<p className="text-xs text-on-surface-variant mt-0.5 truncate">
 										{String(tArtist?.genre ?? "")}
 									</p>
 								</div>

@@ -145,50 +145,52 @@ export default async function DashboardPage({ params }: Props) {
 					</div>
 
 					{/* Tour Progress Tracker */}
-					<div className="bg-surface-container-lowest rounded-xl p-6 shadow-sm mb-10">
-						<div className="flex items-center justify-between mb-4">
-							<h2 className="font-(family-name:--font-manrope) font-bold text-base">
+					<div className="bg-surface-container-lowest rounded-xl p-4 md:p-6 shadow-sm mb-10">
+						<div className="flex items-center justify-between mb-4 gap-2">
+							<h2 className="font-(family-name:--font-manrope) font-bold text-sm md:text-base truncate">
 								{progressTitle}
 							</h2>
 							<span
-								className={`px-3 py-1 rounded-full text-[10px] font-black tracking-tight ${progressStatusColor}`}
+								className={`px-2 md:px-3 py-1 rounded-full text-[10px] font-black tracking-tight shrink-0 ${progressStatusColor}`}
 							>
 								{progressStatusLabel}
 							</span>
 						</div>
-						<div className="flex items-center justify-between relative mt-6">
-							<div className="absolute top-5 left-0 w-full h-0.5 bg-surface-variant z-0" />
-							<div
-								className={`absolute top-5 left-0 h-0.5 bg-[#FF5A30] z-0 transition-all duration-500 ${progressWidthClass}`}
-							/>
-							{tourSteps.map((s) => (
+						<div className="overflow-x-auto -mx-1 px-1">
+							<div className="flex items-center justify-between relative mt-6 min-w-[320px]">
+								<div className="absolute top-4 left-0 w-full h-0.5 bg-surface-variant z-0" />
 								<div
-									key={s.n}
-									className="relative z-10 flex flex-col items-center gap-2"
-								>
+									className={`absolute top-4 left-0 h-0.5 bg-[#FF5A30] z-0 transition-all duration-500 ${progressWidthClass}`}
+								/>
+								{tourSteps.map((s) => (
 									<div
-										className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm ring-4 ring-surface-container-lowest transition-all ${
-											s.done
-												? "bg-[#FF5A30] text-white"
-												: "bg-surface-variant text-on-surface-variant"
-										}`}
+										key={s.n}
+										className="relative z-10 flex flex-col items-center gap-1.5"
 									>
-										{s.done ? (
-											<span
-												className="material-symbols-outlined text-sm"
-												style={{ fontVariationSettings: "'FILL' 1" }}
-											>
-												check
-											</span>
-										) : (
-											s.n
-										)}
+										<div
+											className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-bold text-xs md:text-sm ring-4 ring-surface-container-lowest transition-all ${
+												s.done
+													? "bg-[#FF5A30] text-white"
+													: "bg-surface-variant text-on-surface-variant"
+											}`}
+										>
+											{s.done ? (
+												<span
+													className="material-symbols-outlined text-xs md:text-sm"
+													style={{ fontVariationSettings: "'FILL' 1" }}
+												>
+													check
+												</span>
+											) : (
+												s.n
+											)}
+										</div>
+										<span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wide text-center w-14 leading-tight text-on-surface-variant">
+											{s.label}
+										</span>
 									</div>
-									<span className="text-[10px] font-bold uppercase tracking-wider text-center max-w-16 leading-tight text-on-surface-variant">
-										{s.label}
-									</span>
-								</div>
-							))}
+								))}
+							</div>
 						</div>
 					</div>
 
@@ -200,50 +202,50 @@ export default async function DashboardPage({ params }: Props) {
 					)}
 
 					{/* Stats Grid */}
-					<div data-tour="dashboard-stats" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
-						<div className="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-[#FF5A30]">
-							<p className="text-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-4">
+					<div data-tour="dashboard-stats" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-10">
+						<div className="bg-surface-container-lowest p-4 md:p-6 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-[#FF5A30]">
+							<p className="text-xs md:text-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-3 md:mb-4">
 								{t("stats.eoisSubmitted")}
 							</p>
 							<div className="flex items-end justify-between">
-								<span className="text-4xl font-(family-name:--font-manrope) font-extrabold text-on-surface">
+								<span className="text-3xl md:text-4xl font-(family-name:--font-manrope) font-extrabold text-on-surface">
 									{typeof dashData?.stats?.totalEOIs === "number"
 										? dashData.stats.totalEOIs
 										: eois.length}
 								</span>
-								<span className="text-[#FF5A30] font-bold flex items-center text-sm">
+								<span className="text-[#FF5A30] font-bold flex items-center text-xs md:text-sm">
 									{t("stats.newThisMonth", { count: newEoisThisMonth })}
 								</span>
 							</div>
 						</div>
 
-						<div className="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-secondary">
-							<p className="text-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-4">
+						<div className="bg-surface-container-lowest p-4 md:p-6 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-secondary">
+							<p className="text-xs md:text-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-3 md:mb-4">
 								{t("stats.approved")}
 							</p>
 							<div className="flex items-end justify-between">
-								<span className="text-4xl font-(family-name:--font-manrope) font-extrabold text-on-surface">
+								<span className="text-3xl md:text-4xl font-(family-name:--font-manrope) font-extrabold text-on-surface">
 									{typeof dashData?.stats?.approvedEOIs === "number"
 										? dashData.stats.approvedEOIs
 										: 0}
 								</span>
-								<span className="text-emerald-600 font-bold text-sm">
+								<span className="text-emerald-600 font-bold text-xs md:text-sm">
 									{t("stats.confirmed")}
 								</span>
 							</div>
 						</div>
 
-						<div className="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-tertiary-container">
-							<p className="text-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-4">
+						<div className="bg-surface-container-lowest p-4 md:p-6 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-tertiary-container">
+							<p className="text-xs md:text-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-3 md:mb-4">
 								{t("stats.financingStatus")}
 							</p>
 							<div className="flex items-end justify-between">
-								<span className="text-4xl font-(family-name:--font-manrope) font-extrabold text-on-surface">
+								<span className="text-3xl md:text-4xl font-(family-name:--font-manrope) font-extrabold text-on-surface">
 									{latestFinancing
 										? `$${Math.round(Number(latestFinancing.amount_requested) / 1000)}K`
 										: "—"}
 								</span>
-								<span className="text-tertiary-container font-bold text-sm capitalize">
+								<span className="text-tertiary-container font-bold text-xs md:text-sm capitalize">
 									{latestFinancing
 										? t(
 												`statuses.${String(latestFinancing.status ?? "pending")}`,
@@ -253,7 +255,7 @@ export default async function DashboardPage({ params }: Props) {
 							</div>
 						</div>
 
-						<div className="relative overflow-hidden bg-[#FF5A30] p-6 rounded-xl shadow-sm flex flex-col justify-between">
+						<div className="relative overflow-hidden bg-[#FF5A30] p-4 md:p-6 rounded-xl shadow-sm flex flex-col justify-between">
 							<div className="absolute top-0 right-0 p-2 opacity-20">
 								<span
 									className="material-symbols-outlined text-8xl"
@@ -316,16 +318,16 @@ export default async function DashboardPage({ params }: Props) {
 								<table className="w-full text-left border-collapse">
 									<thead>
 										<tr className="bg-surface-container-high">
-											<th className="px-5 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant">
+											<th className="px-3 md:px-5 py-3 md:py-4 text-[10px] md:text-xs font-bold uppercase tracking-widest text-on-surface-variant">
 												{t("table.artistTour")}
 											</th>
-											<th className="px-5 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant hidden md:table-cell">
+											<th className="px-3 md:px-5 py-3 md:py-4 text-[10px] md:text-xs font-bold uppercase tracking-widest text-on-surface-variant hidden md:table-cell">
 												{t("table.venue")}
 											</th>
-											<th className="px-5 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant">
+											<th className="px-3 md:px-5 py-3 md:py-4 text-[10px] md:text-xs font-bold uppercase tracking-widest text-on-surface-variant">
 												{t("table.status")}
 											</th>
-											<th className="px-5 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant text-right">
+											<th className="px-3 md:px-5 py-3 md:py-4 text-[10px] md:text-xs font-bold uppercase tracking-widest text-on-surface-variant text-right hidden sm:table-cell">
 												{t("table.match")}
 											</th>
 										</tr>

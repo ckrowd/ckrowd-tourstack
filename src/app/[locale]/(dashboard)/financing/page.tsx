@@ -290,11 +290,11 @@ export default async function FinancingPage({ params }: Props) {
 					<h2 className="font-(family-name:--font-manrope) text-2xl font-bold mb-8">
 						{t("financingProducts")}
 					</h2>
-					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+					<div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
 						{products.map((p) => (
 							<div
 								key={p.name}
-								className="bg-surface-container-lowest rounded-2xl p-8 border border-transparent hover:border-outline-variant/20 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col gap-5"
+								className="bg-surface-container-lowest rounded-2xl p-5 md:p-8 border border-transparent hover:border-outline-variant/20 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col gap-4 md:gap-5"
 							>
 								<div className="flex items-start justify-between gap-4">
 									<div className="w-12 h-12 rounded-xl bg-[#FF5A30]/10 flex items-center justify-center shrink-0">
@@ -368,13 +368,13 @@ export default async function FinancingPage({ params }: Props) {
 						<h2 className="font-(family-name:--font-manrope) text-2xl font-bold mb-8">
 							{t("howItWorksTitle")}
 						</h2>
-						<div className="relative pl-8">
-							<div className="absolute left-[14px] top-2 bottom-2 w-px bg-outline-variant/40" />
-							<div className="space-y-8">
+						<div className="relative pl-6 md:pl-8">
+							<div className="absolute left-[11px] md:left-[14px] top-2 bottom-2 w-px bg-outline-variant/40" />
+							<div className="space-y-6 md:space-y-8">
 								{steps.map((s, i) => (
-									<div key={s.step} className="relative flex gap-6">
+									<div key={s.step} className="relative flex gap-4 md:gap-6">
 										<div
-											className={`absolute -left-8 w-7 h-7 rounded-full flex items-center justify-center text-xs font-black shrink-0 border-2 ${
+											className={`absolute -left-6 md:-left-8 w-6 h-6 md:w-7 md:h-7 rounded-full flex items-center justify-center text-[10px] md:text-xs font-black shrink-0 border-2 ${
 												i === 0
 													? "bg-[#FF5A30] text-white border-[#FF5A30]"
 													: "bg-surface text-[#FF5A30] border-[#FF5A30]/40"
