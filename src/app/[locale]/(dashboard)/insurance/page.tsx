@@ -1009,11 +1009,11 @@ export default function InsurancePage() {
 												key={i}
 												className="border border-outline-variant/20 rounded-xl p-5"
 											>
-												<div className="flex items-center justify-between mb-4">
+												<div className="flex items-start sm:items-center justify-between gap-2 mb-4 flex-wrap">
 													<p className="font-(family-name:--font-manrope) font-bold">
 														{fp.name}
 													</p>
-													<span className="text-[9px] font-black uppercase tracking-widest bg-surface-container text-on-surface-variant px-2.5 py-1 rounded-full">
+													<span className="text-[9px] font-black uppercase tracking-widest bg-surface-container text-on-surface-variant px-2.5 py-1 rounded-full whitespace-nowrap shrink-0">
 														{t("profile.bankName")}
 													</span>
 												</div>

@@ -130,7 +130,7 @@ function ReviewRow({
 			: value;
 	return (
 		<div className="flex items-start gap-4 border-b border-slate-100 py-3 last:border-none">
-			<span className="mt-0.5 w-40 shrink-0 text-xs font-bold uppercase tracking-[0.24em] text-slate-400">
+			<span className="mt-0.5 w-28 sm:w-40 shrink-0 text-xs font-bold uppercase tracking-[0.24em] text-slate-400">
 				{label}
 			</span>
 			<span className="text-sm font-semibold text-slate-900">{display}</span>

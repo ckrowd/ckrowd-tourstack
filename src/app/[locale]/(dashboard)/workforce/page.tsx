@@ -1510,7 +1510,7 @@ export default function WorkforcePage() {
 								)}
 
 								{/* Navigation */}
-								<footer className="flex items-center justify-between pt-8 mt-10 border-t border-outline-variant/10">
+								<footer className="flex flex-wrap items-center justify-between gap-3 pt-8 mt-10 border-t border-outline-variant/10">
 									{step === 0 ? (
 										<Link
 											href="/dashboard"
@@ -1536,7 +1536,7 @@ export default function WorkforcePage() {
 									<div className="flex gap-4">
 										<button
 											type="button"
-											className="px-8 py-3 bg-secondary-container text-on-secondary-container rounded-xl font-bold hover:opacity-90 transition-opacity"
+											className="px-8 py-3 bg-secondary-container text-on-secondary-container rounded-xl font-bold hover:opacity-90 transition-opacity whitespace-nowrap"
 										>
 											{t("actions.saveDraft")}
 										</button>

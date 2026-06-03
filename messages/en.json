@@ -3493,8 +3493,32 @@
     "deleting": "Deleting…",
     "errorGeneric": "Could not delete the tour. Try again."
   },
+  "EditTourPage": {
+    "badge": "Edit Tour Stop",
+    "untitled": "Untitled",
+    "loading": "Loading tour…",
+    "notFound": "Tour stop not found.",
+    "errorFailed": "Failed to update tour stop.",
+    "save": "Save changes",
+    "saving": "Saving…",
+    "cancel": "Cancel",
+    "yes": "Yes",
+    "no": "No",
+    "fields": {
+      "venue": "Venue",
+      "city": "City",
+      "country": "Country",
+      "date": "Show Date",
+      "feeUsd": "Artist Fee (USD)",
+      "capacity": "Capacity",
+      "status": "Status",
+      "financing": "Financed",
+      "financingAmount": "Financing Amount (USD)"
+    }
+  },
   "AdminTourDetailPage": {
     "badge": "Tour Detail",
+    "edit": "Edit",
     "untitledArtist": "Untitled artist",
     "stopSummary": "Stop summary",
     "promoterSection": "Promoter",
