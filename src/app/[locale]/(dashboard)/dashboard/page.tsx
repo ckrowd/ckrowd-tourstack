@@ -12,6 +12,7 @@ import SideNav from "@/components/SideNav";
 import { computeEcosystemReadiness } from "@/lib/eligibility";
 import TopNav from "@/components/TopNav";
 import { Link } from "@/i18n/routing";
+import PageTour from "@/components/PageTour";
 
 function formatTimeAgo(
 	date: Date,
@@ -119,6 +120,7 @@ export default async function DashboardPage({ params }: Props) {
 				<SideNav />
 
 				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
+					<PageTour pageId="dashboard" />
 					{/* Header */}
 					<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 						<div>
@@ -198,7 +200,7 @@ export default async function DashboardPage({ params }: Props) {
 					)}
 
 					{/* Stats Grid */}
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+					<div data-tour="dashboard-stats" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
 						<div className="bg-surface-container-lowest p-6 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-[#FF5A30]">
 							<p className="text-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-4">
 								{t("stats.eoisSubmitted")}
@@ -296,7 +298,7 @@ export default async function DashboardPage({ params }: Props) {
 					</div>
 
 					<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-						<div className="lg:col-span-2 space-y-6">
+						<div data-tour="dashboard-eois" className="lg:col-span-2 space-y-6">
 							<div className="flex items-center justify-between">
 								<h2 className="text-2xl font-(family-name:--font-manrope) font-bold text-on-surface">
 									{t("myEoiSubmissions")}

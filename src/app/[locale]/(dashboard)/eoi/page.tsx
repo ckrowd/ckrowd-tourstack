@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Suspense, useState } from "react";
 import { createEOI, getArtists } from "@/app/actions";
+import PageTour from "@/components/PageTour";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 import { useSession } from "@/context/AuthContext";
@@ -506,6 +507,7 @@ function EOIPageContent() {
 	return (
 		<div className="bg-surface text-on-surface">
 			<TopNav />
+			<PageTour pageId="eoi" />
 			<div className="flex pt-16 h-screen">
 				<SideNav />
 				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10">
@@ -524,7 +526,7 @@ function EOIPageContent() {
 
 						<div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 							{/* Left: selector + info panel */}
-							<div className="lg:col-span-4 space-y-4">
+							<div data-tour="eoi-selector" className="lg:col-span-4 space-y-4">
 								<OpportunitySelector
 									opportunities={opportunities}
 									loading={loadingOpportunities}
@@ -535,7 +537,7 @@ function EOIPageContent() {
 							</div>
 
 							{/* Right: form */}
-							<div className="lg:col-span-8">
+							<div data-tour="eoi-form" className="lg:col-span-8">
 								{!artist ? (
 									<div className="rounded-3xl border-2 border-dashed border-slate-200 bg-white/50 p-12 text-center">
 										<span className="material-symbols-outlined text-5xl text-slate-300 block mb-4">

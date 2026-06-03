@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getAdminTours } from "@/app/actions";
 import TourActionsMenu from "@/components/TourActionsMenu";
 import { Link } from "@/i18n/routing";
+import PageTour from "@/components/PageTour";
 
 const PAGE_SIZE = 10;
 
@@ -36,6 +37,7 @@ export default async function AdminToursPage({
 
 	return (
 		<>
+			<PageTour pageId="admin-tours" />
 			<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 				<div>
 					<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
@@ -57,7 +59,7 @@ export default async function AdminToursPage({
 				</Link>
 			</div>
 
-			<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+			<div data-tour="admin-tours-list" className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
 				<div className="flex items-center justify-between mb-5">
 					<h3 className="font-(family-name:--font-manrope) font-bold text-lg">
 						{t("allTours")}

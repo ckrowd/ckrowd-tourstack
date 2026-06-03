@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { getArtists } from "@/app/actions";
+import PageTour from "@/components/PageTour";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 import { Link } from "@/i18n/routing";
@@ -87,6 +88,7 @@ export default function DiscoveryPage() {
 	return (
 		<div className="bg-surface text-on-surface antialiased">
 			<TopNav />
+			<PageTour pageId="discovery" />
 
 			<div className="flex pt-16 h-screen">
 				<SideNav />
@@ -128,7 +130,7 @@ export default function DiscoveryPage() {
 					</div>
 
 					{/* Filters */}
-					<section className="bg-surface-container-low rounded-2xl p-4 md:p-6 flex flex-wrap items-end gap-4 mb-10">
+					<section data-tour="discovery-filters" className="bg-surface-container-low rounded-2xl p-4 md:p-6 flex flex-wrap items-end gap-4 mb-10">
 						<div className="flex-1 min-w-45">
 							<label
 								htmlFor="filter-genre"
@@ -256,7 +258,7 @@ export default function DiscoveryPage() {
 
 					<div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
 						{/* Gallery Grid */}
-						<div className="lg:col-span-8">
+						<div data-tour="discovery-grid" className="lg:col-span-8">
 							<div className="flex items-center justify-between mb-8">
 								<h2 className="font-(family-name:--font-manrope) text-2xl font-bold">
 									{t("activeTourProjects")}{" "}
@@ -382,7 +384,7 @@ export default function DiscoveryPage() {
 						{/* Sidebar */}
 						<aside className="lg:col-span-4 space-y-8">
 							{/* How it Works */}
-							<div className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
+							<div data-tour="discovery-how-it-works" className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
 								<h3 className="font-(family-name:--font-manrope) text-xl font-bold mb-6">
 									{t("howItWorks.title")}
 								</h3>

@@ -14,6 +14,7 @@ import FinancingQuickApply from "@/components/FinancingQuickApply";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 import { Link } from "@/i18n/routing";
+import PageTour from "@/components/PageTour";
 
 type Props = {
 	params: Promise<{ locale: string }>;
@@ -159,6 +160,7 @@ export default async function FinancingPage({ params }: Props) {
 				<SideNav />
 
 				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
+					<PageTour pageId="financing" />
 					{/* Header */}
 					<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 						<div>
@@ -185,7 +187,7 @@ export default async function FinancingPage({ params }: Props) {
 					<h2 className="font-(family-name:--font-manrope) text-2xl font-bold mb-8">
 						{t("myApplications")}
 					</h2>
-					<div id="quick-apply" className="mb-8">
+					<div id="quick-apply" data-tour="financing-apply" className="mb-8">
 						<FinancingQuickApply />
 					</div>
 					{applications.length === 0 ? (
@@ -284,7 +286,7 @@ export default async function FinancingPage({ params }: Props) {
 				</section>
 
 				{/* Products */}
-				<section id="products" className="mb-10">
+				<section id="products" data-tour="financing-products" className="mb-10">
 					<h2 className="font-(family-name:--font-manrope) text-2xl font-bold mb-8">
 						{t("financingProducts")}
 					</h2>

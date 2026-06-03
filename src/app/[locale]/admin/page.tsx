@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getAdminEOIs, getAdminTours } from "@/app/actions";
+import PageTour from "@/components/PageTour";
 import { Link } from "@/i18n/routing";
 
 type Props = {
@@ -34,6 +35,7 @@ export default async function AdminPage({ params }: Props) {
 
 	return (
 		<>
+			<PageTour pageId="admin-dashboard" />
 			{/* Header */}
 			<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 				<div>
@@ -57,7 +59,7 @@ export default async function AdminPage({ params }: Props) {
 			</div>
 
 			{/* Stats */}
-			<div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+			<div data-tour="admin-stats" className="grid grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
 				{[
 					{
 						label: t("stats.activeTours"),
@@ -110,7 +112,7 @@ export default async function AdminPage({ params }: Props) {
 
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 				{/* Recent Tours Summary */}
-				<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+				<div data-tour="admin-recent-tours" className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
 					<div className="flex items-center justify-between mb-5">
 						<h3 className="font-(family-name:--font-manrope) font-bold text-lg">
 							{t("recentTours")}
@@ -168,7 +170,7 @@ export default async function AdminPage({ params }: Props) {
 				</div>
 
 				{/* Recent EOIs Summary */}
-				<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+				<div data-tour="admin-recent-eois" className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
 					<div className="flex items-center justify-between mb-5">
 						<h3 className="font-(family-name:--font-manrope) font-bold text-lg">
 							{t("recentEois")}
