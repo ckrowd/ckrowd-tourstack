@@ -40,9 +40,9 @@ export default function DiscoveryPage() {
 	// Compute unique market count from all artists for the platform stats widget
 	const allMarkets = new Set<string>();
 	for (const a of artists) {
-		const m = a.markets;
+		const m: unknown = a.markets;
 		if (Array.isArray(m)) {
-			for (const v of m as string[]) if (v) allMarkets.add(v);
+			for (const v of m as string[]) if (v) allMarkets.add(String(v));
 		} else if (typeof m === "string" && m) {
 			for (const v of m.split(",")) if (v.trim()) allMarkets.add(v.trim());
 		}
