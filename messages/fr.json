@@ -2892,6 +2892,31 @@
     },
     "copyright": "© {year} {brandName} {brandBy}. Tous droits réservés."
   },
+  "Tour": {
+    "replayButton": "Visite de la plateforme",
+    "progress": "{current} sur {total}",
+    "next": "Suivant →",
+    "prev": "← Retour",
+    "done": "Compris !",
+    "promoter": {
+      "step0": { "title": "👋 Bienvenue sur TourStack !", "description": "Votre plateforme tout-en-un pour vous connecter aux tournées d'artistes en Afrique. Cette visite rapide vous montrera les fonctionnalités essentielles — moins de 2 minutes." },
+      "step1": { "title": "🔍 Découvrir les tournées", "description": "Parcourez les tournées d'artistes disponibles à l'accueil. Filtrez par genre, région et fourchette de cachet pour trouver le projet idéal." },
+      "step2": { "title": "🎫 Mes arrêts de tournée", "description": "Suivez toutes vos manifestations d'intérêt soumises. Consultez les mises à jour, demandes de révision et réservations confirmées au même endroit." },
+      "step3": { "title": "💰 Financement", "description": "Besoin de fonds pour accueillir un artiste ? Demandez un financement auprès de nos banques partenaires — avances, crédits aménagement, et plus." },
+      "step4": { "title": "🛡️ Assurance", "description": "Protégez vos événements avec des produits d'assurance adaptés — annulation d'événement, garantie de crédit, protection des billets, et plus." },
+      "step5": { "title": "🚀 Prêt à démarrer ?", "description": "Cliquez ici pour parcourir les artistes disponibles et soumettre votre première manifestation d'intérêt. Cela ne prend que quelques minutes !" },
+      "step6": { "title": "✅ Vous êtes prêt !", "description": "Vous connaissez maintenant TourStack. Cliquez sur 'Visite de la plateforme' en bas de la barre latérale pour rejouer ce guide. Bonne chance !" }
+    },
+    "admin": {
+      "step0": { "title": "👋 Bienvenue dans TourStack Admin !", "description": "Voici votre centre de commande pour gérer la plateforme TourStack. Découvrons les sections clés." },
+      "step1": { "title": "📥 Soumissions EOI", "description": "Examinez et traitez les manifestations d'intérêt des promoteurs. Approuvez, demandez des révisions, rejetez ou convertissez en arrêt de tournée confirmé." },
+      "step2": { "title": "🎫 Arrêts de tournée", "description": "Gérez tous les arrêts confirmés et en attente. Chaque arrêt est lié à l'EOI du promoteur et peut être modifié ou supprimé." },
+      "step3": { "title": "🎵 Artistes", "description": "Gérez le catalogue d'artistes que les promoteurs parcourent sur la page Découverte. Ajoutez de nouveaux artistes, mettez à jour les détails et les fourchettes de cachet." },
+      "step4": { "title": "📊 Rapports", "description": "Suivez les performances de la plateforme — volumes d'EOI, taux de conversion, adoption du financement et analyses de revenus." },
+      "step5": { "title": "➕ Créer un projet de tournée", "description": "Publiez un nouveau projet de tournée pour attirer des candidatures de promoteurs. Renseignez l'artiste, la fourchette de cachet, la fenêtre et la région." },
+      "step6": { "title": "✅ Vous êtes prêt !", "description": "Vous connaissez le portail admin. Cliquez sur 'Visite de la plateforme' en bas de la barre latérale pour rejouer ce guide." }
+    }
+  },
   "Common": {
     "signIn": "Se connecter",
     "signOut": "Se déconnecter",

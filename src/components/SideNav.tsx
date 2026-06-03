@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import TourGuide from "@/components/TourGuide";
 import { Link, usePathname } from "@/i18n/routing";
 
 export default function SideNav() {
@@ -12,6 +13,7 @@ export default function SideNav() {
 		label: string;
 		icon: string;
 		href: string;
+		tourAttr?: string;
 	}
 
 	const navItems: NavItem[] = [
@@ -20,49 +22,63 @@ export default function SideNav() {
 			label: t("dashboard"),
 			icon: "dashboard",
 			href: "/dashboard",
+			tourAttr: "nav-dashboard",
 		},
 		{
 			key: "tours",
 			label: t("tours"),
 			icon: "confirmation_number",
 			href: "/tours",
+			tourAttr: "nav-tours",
 		},
 		{
 			key: "onboarding",
 			label: t("onboarding"),
 			icon: "how_to_reg",
 			href: "/onboarding",
+			tourAttr: "nav-onboarding",
 		},
 		{
 			key: "stakeholders",
 			label: t("stakeholders"),
 			icon: "groups",
 			href: "/stakeholders",
+			tourAttr: "nav-stakeholders",
 		},
 		{
 			key: "discovery",
 			label: t("discovery"),
 			icon: "explore",
 			href: "/discovery",
+			tourAttr: "nav-discovery",
 		},
 		{
 			key: "financing",
 			label: t("financing"),
 			icon: "account_balance",
 			href: "/financing",
+			tourAttr: "nav-financing",
 		},
 		{
 			key: "insurance",
 			label: t("insurance"),
 			icon: "shield",
 			href: "/insurance",
+			tourAttr: "nav-insurance",
 		},
-		{ key: "profile", label: t("profile"), icon: "person", href: "/profile" },
+		{
+			key: "profile",
+			label: t("profile"),
+			icon: "person",
+			href: "/profile",
+			tourAttr: "nav-profile",
+		},
 		{
 			key: "settings",
 			label: t("settings"),
 			icon: "settings",
 			href: "/settings",
+			tourAttr: "nav-settings",
 		},
 	];
 
@@ -81,6 +97,7 @@ export default function SideNav() {
 					<Link
 						key={item.key}
 						href={item.href}
+						data-tour={item.tourAttr}
 						className={`flex items-center gap-3 px-4 py-3 rounded-xl mx-2 transition-all duration-200 font-(family-name:--font-manrope) font-semibold text-sm ${
 							activeItem === item.key
 								? "bg-orange-50 text-[#FF5A30]"
@@ -93,13 +110,15 @@ export default function SideNav() {
 				))}
 			</nav>
 
-			<div className="px-4 mt-auto">
+			<div className="px-4 mt-auto space-y-2">
 				<Link
 					href="/eoi"
+					data-tour="nav-cta"
 					className="block w-full py-4 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 text-center"
 				>
 					{t("startNewTour")}
 				</Link>
+				<TourGuide tourId="promoter" />
 			</div>
 		</aside>
 	);
