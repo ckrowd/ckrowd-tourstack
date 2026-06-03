@@ -2892,6 +2892,59 @@
     },
     "copyright": "© {year} {brandName} {brandBy}. All rights reserved."
   },
+  "PageTour": {
+    "discovery": {
+      "step0": { "title": "🗺️ Tour Opportunities", "description": "This is where you discover live artist tours looking for promoters. Every card is a real booking opportunity." },
+      "step1": { "title": "🎛️ Filter Tours", "description": "Narrow down by genre, availability window, fee range, or region to find tours that fit your market." },
+      "step2": { "title": "🎵 Browse Artist Cards", "description": "Each card shows the artist, tour name, dates, fee range, and target markets. Click any card or 'Submit EOI' to apply." },
+      "step3": { "title": "📋 How It Works", "description": "Follow these 4 steps — browse, express interest, get matched, and confirm your tour stop." },
+      "step4": { "title": "✅ Ready to Apply?", "description": "Click 'Submit Expression of Interest' on any artist to start your application. It takes under 3 minutes." }
+    },
+    "tours": {
+      "step0": { "title": "🎫 My Tour Stops", "description": "This is your personal booking pipeline — all your applications and confirmed shows in one view." },
+      "step1": { "title": "📊 Your Pipeline Stats", "description": "These four numbers show your total stops, confirmed shows, applications in progress, and rejections." },
+      "step2": { "title": "⏳ Pending Applications", "description": "EOIs awaiting admin review appear here. You'll get an email notification when the status changes." },
+      "step3": { "title": "📋 Your Tour Cards", "description": "Each card shows the artist, venue, date, status, and fee. Click 'View Details' for the full breakdown and milestones." }
+    },
+    "eoi": {
+      "step0": { "title": "📝 Submit an EOI", "description": "An Expression of Interest lets you apply to host an artist at your venue. It's a 3-step process." },
+      "step1": { "title": "1️⃣ Pick an Artist", "description": "Browse the list of available tours on the left and select one to apply for. You can search by name." },
+      "step2": { "title": "2️⃣ Complete the Form", "description": "Enter your company info, city, expected audience size, and any notes for the booking team." },
+      "step3": { "title": "3️⃣ Review & Submit", "description": "On the final step, review all your details before submitting. You'll receive a confirmation email straight away." }
+    },
+    "financing": {
+      "step0": { "title": "💰 Tour Financing", "description": "TourStack financing helps promoters cover upfront costs — artist deposits, venue build-out, marketing, and more." },
+      "step1": { "title": "⚡ Quick Apply", "description": "Start here to check your eligibility and see which products you qualify for in real time." },
+      "step2": { "title": "🏦 Financing Products", "description": "Choose from multiple products offered by our partner banks. Each shows the amount, term, and cost at a glance." }
+    },
+    "insurance": {
+      "step0": { "title": "🛡️ Event Insurance", "description": "Protect your events with insurance products tailored for live music — from cancellation cover to audience ticket protection." },
+      "step1": { "title": "📦 Insurance Products", "description": "Browse available products. Each card shows coverage type, amount, and how to apply." },
+      "step2": { "title": "✅ Apply in Minutes", "description": "Select a product and apply directly through the Financing tab. Your cover is linked to your tour stop." }
+    },
+    "dashboard": {
+      "step0": { "title": "🏠 Your Dashboard", "description": "Welcome to your TourStack dashboard — your personalised overview of tour activity, EOIs, and milestones." },
+      "step1": { "title": "📊 Stats", "description": "Your key numbers at a glance — active tours, pending EOIs, and upcoming milestones." },
+      "step2": { "title": "📋 Pending EOIs", "description": "EOIs you've submitted that are still awaiting admin review or need revision." },
+      "step3": { "title": "🚀 Next Steps", "description": "Use the sidebar to navigate to Discovery to find new opportunities, or check your Tour Stops for updates." }
+    },
+    "admin-dashboard": {
+      "step0": { "title": "🎛️ Admin Overview", "description": "Your command centre — a live snapshot of platform activity, tour stops, and promoter applications." },
+      "step1": { "title": "📊 Platform Stats", "description": "Click any stat card to jump directly to the relevant management section." },
+      "step2": { "title": "🎫 Recent Tour Stops", "description": "The latest confirmed and pending tour stops. Click 'View detail' to manage any stop." },
+      "step3": { "title": "📥 Recent EOIs", "description": "The latest promoter submissions. Head to EOI Management to review and process them." }
+    },
+    "admin-eoi": {
+      "step0": { "title": "📥 EOI Management", "description": "All Expression of Interest submissions from promoters across the platform, newest first." },
+      "step1": { "title": "📋 Review Each Submission", "description": "Each card shows the promoter, artist, venue, estimated capacity, budget, and match score." },
+      "step2": { "title": "⚡ Take Action", "description": "Use the action buttons to Approve, Request Revision, Reject, or directly Create a Tour Stop from any EOI." }
+    },
+    "admin-tours": {
+      "step0": { "title": "🎫 Tour Stop Management", "description": "All confirmed and in-progress tour stops on the platform." },
+      "step1": { "title": "📋 Tour Stop List", "description": "Each row shows the artist, status, and a menu to view details, edit, or delete the stop." },
+      "step2": { "title": "➕ Create New", "description": "Use the 'Create Tour' button to add a new artist tour project to the Discovery catalog." }
+    }
+  },
   "Tour": {
     "replayButton": "Platform Tour",
     "progress": "{current} of {total}",

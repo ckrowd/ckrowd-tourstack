@@ -2892,6 +2892,59 @@
     },
     "copyright": "© {year} {brandName} {brandBy}. Tous droits réservés."
   },
+  "PageTour": {
+    "discovery": {
+      "step0": { "title": "🗺️ Opportunités de tournée", "description": "Ici vous découvrez les tournées d'artistes qui cherchent des promoteurs. Chaque carte est une vraie opportunité de réservation." },
+      "step1": { "title": "🎛️ Filtrer les tournées", "description": "Affinez par genre, fenêtre de disponibilité, fourchette de cachet ou région pour trouver les tournées adaptées à votre marché." },
+      "step2": { "title": "🎵 Parcourir les cartes artistes", "description": "Chaque carte montre l'artiste, le nom de la tournée, les dates, la fourchette de cachet et les marchés cibles." },
+      "step3": { "title": "📋 Comment ça marche", "description": "Suivez ces 4 étapes — parcourir, exprimer votre intérêt, être mis en relation, et confirmer votre arrêt de tournée." },
+      "step4": { "title": "✅ Prêt à postuler ?", "description": "Cliquez sur 'Soumettre une manifestation d'intérêt' sur n'importe quel artiste. Ça prend moins de 3 minutes." }
+    },
+    "tours": {
+      "step0": { "title": "🎫 Mes arrêts de tournée", "description": "Votre pipeline de réservation personnel — toutes vos candidatures et spectacles confirmés en un seul endroit." },
+      "step1": { "title": "📊 Statistiques de votre pipeline", "description": "Ces quatre chiffres montrent vos arrêts totaux, spectacles confirmés, candidatures en cours et rejets." },
+      "step2": { "title": "⏳ Candidatures en attente", "description": "Les EOI en attente de révision admin apparaissent ici. Vous recevrez un e-mail lorsque le statut changera." },
+      "step3": { "title": "📋 Vos cartes de tournée", "description": "Chaque carte montre l'artiste, le lieu, la date, le statut et le cachet. Cliquez sur 'Voir les détails' pour tout voir." }
+    },
+    "eoi": {
+      "step0": { "title": "📝 Soumettre une EOI", "description": "Une Manifestation d'Intérêt vous permet de postuler pour accueillir un artiste dans votre salle. C'est un processus en 3 étapes." },
+      "step1": { "title": "1️⃣ Choisir un artiste", "description": "Parcourez la liste des tournées disponibles à gauche et sélectionnez-en une. Vous pouvez rechercher par nom." },
+      "step2": { "title": "2️⃣ Compléter le formulaire", "description": "Saisissez vos coordonnées, la ville, l'audience attendue et toutes notes pour l'équipe de réservation." },
+      "step3": { "title": "3️⃣ Réviser et soumettre", "description": "À la dernière étape, vérifiez tous vos détails avant de soumettre. Vous recevrez un e-mail de confirmation immédiatement." }
+    },
+    "financing": {
+      "step0": { "title": "💰 Financement de tournée", "description": "Le financement TourStack aide les promoteurs à couvrir les coûts initiaux — dépôts artistes, aménagement de salle, marketing, etc." },
+      "step1": { "title": "⚡ Candidature rapide", "description": "Commencez ici pour vérifier votre éligibilité et voir quels produits vous pouvez obtenir en temps réel." },
+      "step2": { "title": "🏦 Produits de financement", "description": "Choisissez parmi plusieurs produits proposés par nos banques partenaires. Chacun montre le montant, la durée et le coût." }
+    },
+    "insurance": {
+      "step0": { "title": "🛡️ Assurance événementielle", "description": "Protégez vos événements avec des produits d'assurance adaptés à la musique live — annulation, garantie de crédit, protection des billets." },
+      "step1": { "title": "📦 Produits d'assurance", "description": "Parcourez les produits disponibles. Chaque carte montre le type de couverture, le montant et comment postuler." },
+      "step2": { "title": "✅ Postulez en quelques minutes", "description": "Sélectionnez un produit et postulez directement via l'onglet Financement. Votre couverture est liée à votre arrêt de tournée." }
+    },
+    "dashboard": {
+      "step0": { "title": "🏠 Votre tableau de bord", "description": "Bienvenue sur votre tableau de bord TourStack — un aperçu personnalisé de votre activité de tournée, EOIs et jalons." },
+      "step1": { "title": "📊 Statistiques", "description": "Vos chiffres clés en un coup d'œil — tournées actives, EOIs en attente et jalons à venir." },
+      "step2": { "title": "📋 EOIs en attente", "description": "EOIs que vous avez soumises en attente de révision admin ou nécessitant une révision." },
+      "step3": { "title": "🚀 Prochaines étapes", "description": "Utilisez la barre latérale pour naviguer vers Découverte pour de nouvelles opportunités, ou vérifiez vos Arrêts de tournée." }
+    },
+    "admin-dashboard": {
+      "step0": { "title": "🎛️ Vue d'ensemble admin", "description": "Votre centre de commande — un aperçu en direct de l'activité de la plateforme, des arrêts et des candidatures de promoteurs." },
+      "step1": { "title": "📊 Statistiques de la plateforme", "description": "Cliquez sur n'importe quelle carte de statistique pour accéder directement à la section de gestion correspondante." },
+      "step2": { "title": "🎫 Arrêts de tournée récents", "description": "Les derniers arrêts confirmés et en attente. Cliquez sur 'Voir le détail' pour gérer n'importe quel arrêt." },
+      "step3": { "title": "📥 EOIs récentes", "description": "Les dernières soumissions de promoteurs. Rendez-vous dans Gestion des EOIs pour les examiner et les traiter." }
+    },
+    "admin-eoi": {
+      "step0": { "title": "📥 Gestion des EOIs", "description": "Toutes les soumissions de Manifestation d'Intérêt des promoteurs sur la plateforme, les plus récentes en premier." },
+      "step1": { "title": "📋 Examiner chaque soumission", "description": "Chaque carte montre le promoteur, l'artiste, le lieu, la capacité estimée, le budget et le score de correspondance." },
+      "step2": { "title": "⚡ Prendre une décision", "description": "Utilisez les boutons d'action pour Approuver, Demander une révision, Rejeter, ou Créer un arrêt de tournée directement." }
+    },
+    "admin-tours": {
+      "step0": { "title": "🎫 Gestion des arrêts de tournée", "description": "Tous les arrêts de tournée confirmés et en cours sur la plateforme." },
+      "step1": { "title": "📋 Liste des arrêts", "description": "Chaque ligne montre l'artiste, le statut et un menu pour voir les détails, modifier ou supprimer l'arrêt." },
+      "step2": { "title": "➕ Créer un nouveau", "description": "Utilisez le bouton 'Créer une tournée' pour ajouter un nouveau projet de tournée artiste au catalogue Découverte." }
+    }
+  },
   "Tour": {
     "replayButton": "Visite de la plateforme",
     "progress": "{current} sur {total}",

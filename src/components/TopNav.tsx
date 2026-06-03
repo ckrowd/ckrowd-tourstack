@@ -313,6 +313,21 @@ export default function TopNav() {
 							</div>
 						)}
 
+						{/* Guide button — triggers per-page tour */}
+						{session?.user && (
+							<button
+								type="button"
+								aria-label="Start page guide"
+								onClick={() => window.dispatchEvent(new CustomEvent("ts:start-tour"))}
+								className="p-2 hover:bg-slate-50/50 rounded-lg transition-all active:scale-95 hidden lg:flex items-center justify-center"
+								title="Page guide"
+							>
+								<span className="material-symbols-outlined text-[#FF5A30] text-[20px]">
+									travel_explore
+								</span>
+							</button>
+						)}
+
 						{/* Avatar / session — visible on all sizes */}
 						{session?.user ? (
 							<div className="relative hidden lg:block">

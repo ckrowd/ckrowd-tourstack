@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getAdminEOIs } from "@/app/actions";
 import EoiActionPanel from "@/components/EoiActionPanel";
+import PageTour from "@/components/PageTour";
 
 function MatchBar({ score }: { score: number }) {
 	const color =
@@ -43,6 +44,7 @@ export default async function AdminEOIPage({
 
 	return (
 		<>
+			<PageTour pageId="admin-eoi" />
 			<div className="mb-10">
 				<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
 					{t("badge")}
@@ -55,7 +57,7 @@ export default async function AdminEOIPage({
 				</p>
 			</div>
 
-			<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+			<div data-tour="admin-eoi-list" className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
 				<div className="flex items-center justify-between mb-6">
 					<h2 className="text-xl font-(family-name:--font-manrope) font-bold">
 						{t("pendingSubmissions")}

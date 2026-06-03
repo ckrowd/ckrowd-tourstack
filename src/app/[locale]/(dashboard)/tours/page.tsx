@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getEOIs, getTours, getTourstackDashboard } from "@/app/actions";
+import PageTour from "@/components/PageTour";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 import { Link } from "@/i18n/routing";
@@ -115,6 +116,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 	return (
 		<div className="bg-surface text-on-surface">
 			<TopNav />
+			<PageTour pageId="tours" />
 
 			<div className="flex pt-16 h-screen">
 				<SideNav />
@@ -143,7 +145,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 					</div>
 
 					{/* Summary strip */}
-					<div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+					<div data-tour="tours-stats" className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
 						{[
 							{
 								label: t("stats.totalStops"),
@@ -184,7 +186,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 						{/* Pipeline + Tour Cards */}
 						<div className="lg:col-span-8 space-y-5">
 							{pendingEois.length > 0 && (
-								<section className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+								<section data-tour="tours-pipeline" className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
 									<div className="mb-4">
 										<h2 className="font-(family-name:--font-manrope) font-bold text-lg text-on-surface">
 											{t("pendingEois.title")}
@@ -281,7 +283,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 								</section>
 							)}
 							{tours.length === 0 ? (
-								<div className="bg-surface-container-lowest rounded-2xl p-12 text-center shadow-sm">
+								<div data-tour="tours-list" className="bg-surface-container-lowest rounded-2xl p-12 text-center shadow-sm">
 									<span className="material-symbols-outlined text-5xl text-on-surface-variant block mb-4">
 										confirmation_number
 									</span>
