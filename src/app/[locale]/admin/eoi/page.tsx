@@ -57,7 +57,7 @@ export default async function AdminEOIPage({
 				</p>
 			</div>
 
-			<div data-tour="admin-eoi-list" className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+			<div data-tour="admin-eoi-list" className="bg-surface-container-lowest rounded-2xl p-4 md:p-6 shadow-sm">
 				<div className="flex items-center justify-between mb-6">
 					<h2 className="text-xl font-(family-name:--font-manrope) font-bold">
 						{t("pendingSubmissions")}
@@ -102,7 +102,7 @@ export default async function AdminEOIPage({
 						return (
 							<div
 								key={String(eoi.id)}
-								className="bg-surface-container-low rounded-2xl p-6 border border-outline-variant/10"
+								className="bg-surface-container-low rounded-2xl p-4 md:p-6 border border-outline-variant/10"
 							>
 								<div className="flex items-start gap-4">
 									<div className="w-12 h-12 rounded-xl overflow-hidden shrink-0 bg-surface-container-high flex items-center justify-center">
@@ -139,7 +139,7 @@ export default async function AdminEOIPage({
 									</div>
 								</div>
 
-								<div className="mt-4 grid grid-cols-2 lg:grid-cols-4 gap-3">
+								<div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-2 md:gap-3">
 									{[
 										{
 											icon: "event",

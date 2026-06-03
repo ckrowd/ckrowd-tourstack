@@ -266,7 +266,7 @@ export default function InsurancePage() {
 					</div>
 
 					{/* Stats strip */}
-					<div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+					<div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-10">
 						{[
 							{
 								value: t("stats.values.portfolio"),
@@ -278,12 +278,12 @@ export default function InsurancePage() {
 						].map((s) => (
 							<div
 								key={s.label}
-								className="bg-surface-container-lowest rounded-2xl p-6 text-center border border-[#FF5A30]/5 shadow-sm"
+								className="bg-surface-container-lowest rounded-2xl p-4 md:p-6 text-center border border-[#FF5A30]/5 shadow-sm"
 							>
-								<p className="text-2xl font-black font-(family-name:--font-manrope) text-[#FF5A30]">
+								<p className="text-xl md:text-2xl font-black font-(family-name:--font-manrope) text-[#FF5A30]">
 									{s.value}
 								</p>
-								<p className="text-xs uppercase font-bold text-on-surface-variant mt-1 tracking-wider">
+								<p className="text-[10px] md:text-xs uppercase font-bold text-on-surface-variant mt-1 tracking-wider">
 									{s.label}
 								</p>
 							</div>
@@ -296,7 +296,7 @@ export default function InsurancePage() {
 						<button
 							key={tab.id}
 							onClick={() => setActiveTab(tab.id)}
-							className={`px-6 py-3 text-sm font-semibold font-(family-name:--font-manrope) border-b-2 transition-colors -mb-px shrink-0 ${
+							className={`px-3 md:px-6 py-3 text-sm font-semibold font-(family-name:--font-manrope) border-b-2 transition-colors -mb-px shrink-0 ${
 								activeTab === tab.id
 									? "border-[#FF5A30] text-[#FF5A30]"
 									: "border-transparent text-on-surface-variant hover:text-on-surface"
@@ -317,11 +317,11 @@ export default function InsurancePage() {
 							<h2 className="font-(family-name:--font-manrope) text-2xl font-bold mb-8">
 								{t("overview.pipelineTitle")}
 							</h2>
-							<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+							<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-3">
 								{ECOSYSTEM_FLOW.map((step, i) => (
 									<div
 										key={i}
-										className="bg-surface-container-lowest rounded-2xl p-5 border border-outline-variant/10 shadow-sm flex flex-col gap-3 relative"
+										className="bg-surface-container-lowest rounded-2xl p-3 md:p-5 border border-outline-variant/10 shadow-sm flex flex-col gap-2 md:gap-3 relative"
 									>
 										<div className="w-10 h-10 rounded-xl bg-[#FF5A30]/10 flex items-center justify-center">
 											<span

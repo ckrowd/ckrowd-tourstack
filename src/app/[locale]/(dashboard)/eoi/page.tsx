@@ -73,7 +73,7 @@ function Stepper({
 							className="relative z-10 flex flex-col items-center"
 						>
 							<div
-								className={`flex h-10 w-10 items-center justify-center rounded-full ring-4 ring-[#f6f4ef] font-bold ${
+								className={`flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-full ring-4 ring-[#f6f4ef] font-bold text-sm ${
 									done || active
 										? "bg-[#FF5A30] text-white"
 										: "bg-slate-200 text-slate-500"
@@ -91,7 +91,7 @@ function Stepper({
 								)}
 							</div>
 							<span
-								className={`mt-2 text-[10px] font-bold uppercase tracking-[0.28em] ${
+								className={`mt-1.5 text-[9px] md:text-[10px] font-bold uppercase tracking-wider hidden sm:block ${
 									active
 										? "text-[#FF5A30]"
 										: done
