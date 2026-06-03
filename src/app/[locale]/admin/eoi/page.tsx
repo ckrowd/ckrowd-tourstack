@@ -217,6 +217,7 @@ export default async function AdminEOIPage({
 									<EoiActionPanel
 										eoiId={String(eoi.id)}
 										currentStatus={status}
+										eoiCity={String(eoi.city ?? "")}
 									/>
 								</div>
 							</div>

@@ -2391,6 +2391,7 @@
       "title": "Platform Stats",
       "markets": "Markets",
       "promoters": "Promoters",
+      "opportunities": "Opportunities",
       "activeTours": "Active Tours",
       "avgReview": "Avg Review"
     }
@@ -3460,7 +3461,26 @@
     "revisionNotesRequired": "Revision notes are required.",
     "cancel": "Cancel",
     "submitting": "Submitting…",
-    "errorGeneric": "Could not update the EOI. Try again."
+    "creating": "Creating…",
+    "errorGeneric": "Could not update the EOI. Try again.",
+    "createStop": "Create Tour Stop",
+    "createStopTitle": "Create Tour Stop",
+    "createStopDescription": "Convert this EOI into a confirmed tour stop. The EOI will be marked as approved.",
+    "createStopConfirm": "Create Stop",
+    "venue": "Venue",
+    "venuePlaceholder": "e.g. Accra Sports Stadium",
+    "city": "City",
+    "cityPlaceholder": "e.g. Accra",
+    "country": "Country",
+    "countryPlaceholder": "e.g. Ghana",
+    "date": "Show Date",
+    "feeUsd": "Artist Fee (USD)",
+    "capacity": "Venue Capacity",
+    "capacityPlaceholder": "e.g. 5000",
+    "venueRequired": "Venue is required.",
+    "cityRequired": "City is required.",
+    "dateRequired": "Show date is required.",
+    "feeRequired": "Artist fee is required."
   },
   "TourActionsMenu": {
     "openMenu": "Open actions menu",

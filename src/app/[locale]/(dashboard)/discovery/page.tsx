@@ -32,6 +32,22 @@ export default function DiscoveryPage() {
 
 	const artists = artistsQuery?.data ?? [];
 
+	// Derive unique tour_window values from live data so filter stays current
+	const tourWindows = Array.from(
+		new Set(artists.map((a) => String(a.tour_window ?? "")).filter(Boolean)),
+	).sort();
+
+	// Compute unique market count from all artists for the platform stats widget
+	const allMarkets = new Set<string>();
+	for (const a of artists) {
+		const m = a.markets;
+		if (Array.isArray(m)) {
+			for (const v of m as string[]) if (v) allMarkets.add(v);
+		} else if (typeof m === "string" && m) {
+			for (const v of m.split(",")) if (v.trim()) allMarkets.add(v.trim());
+		}
+	}
+
 	const filtered = artists.filter((a) => {
 		const aGenre = String(a.genre ?? "");
 		if (
@@ -158,18 +174,9 @@ export default function DiscoveryPage() {
 									className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A30]/20 appearance-none outline-none"
 								>
 									<option value="All Windows">{t("filters.allWindows")}</option>
-									<option value="Q3 2024 (Jul–Sep)">
-										{t("windows.q3_2024")}
-									</option>
-									<option value="Q4 2024 (Oct–Dec)">
-										{t("windows.q4_2024")}
-									</option>
-									<option value="Q1 2025 (Jan–Mar)">
-										{t("windows.q1_2025")}
-									</option>
-									<option value="Q2 2025 (Apr–Jun)">
-										{t("windows.q2_2025")}
-									</option>
+									{tourWindows.map((w) => (
+										<option key={w} value={w}>{w}</option>
+									))}
 								</select>
 								<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">
 									calendar_today
@@ -458,8 +465,14 @@ export default function DiscoveryPage() {
 								</h3>
 								<div className="grid grid-cols-2 gap-4">
 									{[
-										{ value: "24", label: t("platformStats.markets") },
-										{ value: "500+", label: t("platformStats.promoters") },
+										{
+											value: allMarkets.size > 0 ? String(allMarkets.size) : "—",
+											label: t("platformStats.markets"),
+										},
+										{
+											value: String(artists.length),
+											label: t("platformStats.opportunities"),
+										},
 										{
 											value: `${filtered.length}`,
 											label: t("platformStats.activeTours"),
