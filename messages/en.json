@@ -3741,7 +3741,22 @@
     "cancel": "Cancel",
     "confirmDelete": "Delete",
     "deleting": "Deleting…",
-    "errorGeneric": "Could not delete the tour. Try again."
+    "errorGeneric": "Could not delete the tour. Try again.",
+    "edit": "Edit",
+    "editTitle": "Edit Tour Stop",
+    "editError": "Could not save changes. Try again.",
+    "save": "Save changes",
+    "saving": "Saving…",
+    "editFields": {
+      "status": "Status",
+      "venue": "Venue",
+      "venuePlaceholder": "e.g. Eko Hotel",
+      "city": "City",
+      "cityPlaceholder": "e.g. Lagos",
+      "date": "Show Date",
+      "capacity": "Capacity",
+      "feeUsd": "Artist Fee (USD)"
+    }
   },
   "EditTourPage": {
     "badge": "Edit Tour Stop",
