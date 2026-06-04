@@ -310,7 +310,7 @@ export default function InsurancePage() {
 							<FinancingApplyButton
 								defaultProduct={INSURANCE_DEFAULT_PRODUCT}
 								products={INSURANCE_PRODUCT_IDS}
-								className="flex items-center justify-center gap-2 bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all w-full"
+								className="flex items-center gap-2 bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all self-start"
 							>
 								<span className="material-symbols-outlined text-sm">how_to_reg</span>
 								{t("hero.startOnboarding")}
