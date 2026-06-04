@@ -88,6 +88,20 @@ export default async function AdminToursPage({
 					{tourProjects.map((tour) => {
 						const tArtist = tour.artist;
 						const tStatus = String(tour.status ?? "draft").toLowerCase();
+						const statusStyle: Record<string, string> = {
+							confirmed:      "bg-emerald-100 text-emerald-700",
+							under_review:   "bg-blue-100 text-blue-700",
+							needs_revision: "bg-amber-100 text-amber-700",
+							rejected:       "bg-red-100 text-red-700",
+							draft:          "bg-slate-100 text-slate-500",
+						};
+						const statusLabel: Record<string, string> = {
+							confirmed:      "Active",
+							under_review:   "Under Review",
+							needs_revision: "Needs Revision",
+							rejected:       "Rejected",
+							draft:          "Draft",
+						};
 						return (
 							<div
 								key={String(tour.id)}
@@ -99,18 +113,23 @@ export default async function AdminToursPage({
 									</p>
 									<p className="text-xs text-on-surface-variant mt-0.5 truncate">
 										{String(tArtist?.genre ?? "")}
+										{tour.city ? ` · ${String(tour.city)}` : ""}
 									</p>
 								</div>
 								<span
-									className={`shrink-0 px-3 py-1 rounded-full text-xs font-black uppercase tracking-tighter ${
-										tStatus === "active"
-											? "bg-emerald-100 text-emerald-700"
-											: "bg-slate-100 text-slate-500"
-									}`}
+									className={`shrink-0 px-3 py-1 rounded-full text-xs font-black uppercase tracking-tighter ${statusStyle[tStatus] ?? "bg-slate-100 text-slate-500"}`}
 								>
-									{tStatus}
+									{statusLabel[tStatus] ?? tStatus.replace(/_/g, " ")}
 								</span>
-								<TourActionsMenu tourId={String(tour.id)} />
+								<TourActionsMenu
+									tourId={String(tour.id)}
+									initialStatus={tStatus}
+									initialVenue={String(tour.venue ?? "")}
+									initialCity={String(tour.city ?? "")}
+									initialDate={tour.date ? String(tour.date) : ""}
+									initialCapacity={tour.capacity ?? null}
+									initialFeeUsd={typeof tour.fee_usd === "number" ? tour.fee_usd : undefined}
+								/>
 							</div>
 						);
 					})}

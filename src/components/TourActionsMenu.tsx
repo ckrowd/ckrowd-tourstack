@@ -4,16 +4,73 @@ import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { deleteAdminTour } from "@/app/actions";
+import { deleteAdminTour, updateAdminTour } from "@/app/actions";
 import { Link } from "@/i18n/routing";
 
-export default function TourActionsMenu({ tourId }: { tourId: string }) {
+const TOUR_STATUSES = [
+	"under_review",
+	"confirmed",
+	"needs_revision",
+	"rejected",
+	"draft",
+] as const;
+
+type TourStatus = (typeof TOUR_STATUSES)[number];
+
+type EditForm = {
+	status: TourStatus;
+	venue: string;
+	city: string;
+	date: string;
+	capacity: string;
+	feeUsd: string;
+};
+
+function statusLabel(s: string): string {
+	return (
+		{
+			under_review: "Under Review",
+			confirmed: "Confirmed",
+			needs_revision: "Needs Revision",
+			rejected: "Rejected",
+			draft: "Draft",
+		}[s] ?? s.replace(/_/g, " ")
+	);
+}
+
+export default function TourActionsMenu({
+	tourId,
+	initialStatus,
+	initialVenue,
+	initialCity,
+	initialDate,
+	initialCapacity,
+	initialFeeUsd,
+}: {
+	tourId: string;
+	initialStatus?: string;
+	initialVenue?: string;
+	initialCity?: string;
+	initialDate?: string;
+	initialCapacity?: number | null;
+	initialFeeUsd?: number;
+}) {
 	const t = useTranslations("TourActionsMenu");
 	const router = useRouter();
 	const [open, setOpen] = useState(false);
+	const [editing, setEditing] = useState(false);
 	const [confirmingDelete, setConfirmingDelete] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 	const menuRef = useRef<HTMLDivElement>(null);
+
+	const [form, setForm] = useState<EditForm>({
+		status: (initialStatus as TourStatus) ?? "under_review",
+		venue: initialVenue ?? "",
+		city: initialCity ?? "",
+		date: initialDate ? initialDate.slice(0, 10) : "",
+		capacity: initialCapacity != null ? String(initialCapacity) : "",
+		feeUsd: initialFeeUsd != null ? String(initialFeeUsd) : "",
+	});
 
 	useEffect(() => {
 		if (!open) return;
@@ -26,7 +83,7 @@ export default function TourActionsMenu({ tourId }: { tourId: string }) {
 		return () => document.removeEventListener("mousedown", onClickOutside);
 	}, [open]);
 
-	const mutation = useMutation({
+	const deleteMutation = useMutation({
 		mutationFn: () => deleteAdminTour(tourId),
 		onSuccess: (result) => {
 			if (!result.success) {
@@ -42,6 +99,33 @@ export default function TourActionsMenu({ tourId }: { tourId: string }) {
 		},
 	});
 
+	const editMutation = useMutation({
+		mutationFn: () =>
+			updateAdminTour(tourId, {
+				status: form.status,
+				venue: form.venue || undefined,
+				city: form.city || undefined,
+				date: form.date || undefined,
+				capacity: form.capacity !== "" ? Number(form.capacity) : null,
+				feeUsd: form.feeUsd !== "" ? Number(form.feeUsd) : undefined,
+			}),
+		onSuccess: (result) => {
+			if (!result.success) {
+				setError(result.error || t("editError"));
+				return;
+			}
+			setEditing(false);
+			setError(null);
+			router.refresh();
+		},
+		onError: (err) => {
+			setError(err instanceof Error ? err.message : t("editError"));
+		},
+	});
+
+	const inputClass =
+		"w-full rounded-xl border border-outline-variant/30 bg-surface px-3 py-2 text-sm text-on-surface outline-none focus:border-[#FF5A30] focus:ring-2 focus:ring-[#FF5A30]/20 transition";
+
 	return (
 		<div className="relative" ref={menuRef}>
 			<button
@@ -50,7 +134,7 @@ export default function TourActionsMenu({ tourId }: { tourId: string }) {
 				aria-expanded={open}
 				aria-label={t("openMenu")}
 				onClick={() => setOpen((v) => !v)}
-				className="ml-4 p-2 text-on-surface-variant hover:text-[#FF5A30] hover:bg-[#FF5A30]/10 rounded-lg transition-colors"
+				className="ml-2 p-2 text-on-surface-variant hover:text-[#FF5A30] hover:bg-[#FF5A30]/10 rounded-lg transition-colors"
 			>
 				<span className="material-symbols-outlined">more_vert</span>
 			</button>
@@ -66,11 +150,22 @@ export default function TourActionsMenu({ tourId }: { tourId: string }) {
 						onClick={() => setOpen(false)}
 						className="flex items-center gap-2 px-3 py-2 text-sm text-on-surface hover:bg-surface-container-low"
 					>
-						<span className="material-symbols-outlined text-base">
-							open_in_new
-						</span>
+						<span className="material-symbols-outlined text-base">open_in_new</span>
 						{t("viewDetail")}
 					</Link>
+					<button
+						type="button"
+						role="menuitem"
+						onClick={() => {
+							setOpen(false);
+							setError(null);
+							setEditing(true);
+						}}
+						className="w-full flex items-center gap-2 px-3 py-2 text-sm text-on-surface hover:bg-surface-container-low"
+					>
+						<span className="material-symbols-outlined text-base">edit</span>
+						{t("edit")}
+					</button>
 					<button
 						type="button"
 						role="menuitem"
@@ -87,6 +182,143 @@ export default function TourActionsMenu({ tourId }: { tourId: string }) {
 				</div>
 			)}
 
+			{/* ── Edit modal ─────────────────────────────────────────── */}
+			{editing && (
+				<div
+					className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4"
+					role="dialog"
+					aria-modal="true"
+					aria-label={t("editTitle")}
+				>
+					<div className="bg-surface rounded-2xl shadow-xl max-w-md w-full p-6 space-y-4 max-h-[90vh] overflow-y-auto no-scrollbar">
+						<div className="flex items-center justify-between">
+							<h3 className="text-lg font-bold text-on-surface font-(family-name:--font-manrope)">
+								{t("editTitle")}
+							</h3>
+							<button
+								type="button"
+								onClick={() => { setEditing(false); setError(null); }}
+								className="w-8 h-8 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors"
+								aria-label={t("cancel")}
+							>
+								<span className="material-symbols-outlined text-sm">close</span>
+							</button>
+						</div>
+
+						{/* Status */}
+						<div>
+							<label className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5">
+								{t("editFields.status")}
+							</label>
+							<select
+								value={form.status}
+								onChange={(e) => setForm((f) => ({ ...f, status: e.target.value as TourStatus }))}
+								className={inputClass}
+							>
+								{TOUR_STATUSES.map((s) => (
+									<option key={s} value={s}>{statusLabel(s)}</option>
+								))}
+							</select>
+						</div>
+
+						{/* Venue */}
+						<div>
+							<label className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5">
+								{t("editFields.venue")}
+							</label>
+							<input
+								type="text"
+								value={form.venue}
+								onChange={(e) => setForm((f) => ({ ...f, venue: e.target.value }))}
+								className={inputClass}
+								placeholder={t("editFields.venuePlaceholder")}
+							/>
+						</div>
+
+						{/* City */}
+						<div>
+							<label className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5">
+								{t("editFields.city")}
+							</label>
+							<input
+								type="text"
+								value={form.city}
+								onChange={(e) => setForm((f) => ({ ...f, city: e.target.value }))}
+								className={inputClass}
+								placeholder={t("editFields.cityPlaceholder")}
+							/>
+						</div>
+
+						{/* Date */}
+						<div>
+							<label className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5">
+								{t("editFields.date")}
+							</label>
+							<input
+								type="date"
+								value={form.date}
+								onChange={(e) => setForm((f) => ({ ...f, date: e.target.value }))}
+								className={inputClass}
+							/>
+						</div>
+
+						{/* Capacity + Fee side by side */}
+						<div className="grid grid-cols-2 gap-3">
+							<div>
+								<label className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5">
+									{t("editFields.capacity")}
+								</label>
+								<input
+									type="number"
+									min={0}
+									value={form.capacity}
+									onChange={(e) => setForm((f) => ({ ...f, capacity: e.target.value }))}
+									className={inputClass}
+									placeholder="e.g. 5000"
+								/>
+							</div>
+							<div>
+								<label className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5">
+									{t("editFields.feeUsd")}
+								</label>
+								<input
+									type="number"
+									min={0}
+									value={form.feeUsd}
+									onChange={(e) => setForm((f) => ({ ...f, feeUsd: e.target.value }))}
+									className={inputClass}
+									placeholder="e.g. 25000"
+								/>
+							</div>
+						</div>
+
+						{error && (
+							<p className="text-sm text-red-600 font-semibold">{error}</p>
+						)}
+
+						<div className="flex justify-end gap-2 pt-1">
+							<button
+								type="button"
+								onClick={() => { setEditing(false); setError(null); }}
+								disabled={editMutation.isPending}
+								className="px-4 py-2 rounded-lg text-sm font-semibold text-on-surface-variant hover:bg-surface-container-low disabled:opacity-50"
+							>
+								{t("cancel")}
+							</button>
+							<button
+								type="button"
+								onClick={() => editMutation.mutate()}
+								disabled={editMutation.isPending}
+								className="px-5 py-2 rounded-lg text-sm font-bold bg-[#FF5A30] text-white hover:opacity-90 disabled:opacity-60 transition-opacity"
+							>
+								{editMutation.isPending ? t("saving") : t("save")}
+							</button>
+						</div>
+					</div>
+				</div>
+			)}
+
+			{/* ── Delete confirm ─────────────────────────────────────── */}
 			{confirmingDelete && (
 				<div
 					className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4"
@@ -104,30 +336,25 @@ export default function TourActionsMenu({ tourId }: { tourId: string }) {
 						<p className="text-sm text-on-surface-variant mb-4">
 							{t("deleteDescription")}
 						</p>
-
 						{error && (
 							<p className="mb-3 text-sm text-red-600 font-semibold">{error}</p>
 						)}
-
 						<div className="flex justify-end gap-2">
 							<button
 								type="button"
-								onClick={() => {
-									setConfirmingDelete(false);
-									setError(null);
-								}}
-								disabled={mutation.isPending}
+								onClick={() => { setConfirmingDelete(false); setError(null); }}
+								disabled={deleteMutation.isPending}
 								className="px-4 py-2 rounded-lg text-sm font-semibold text-on-surface-variant hover:bg-surface-container-low disabled:opacity-50"
 							>
 								{t("cancel")}
 							</button>
 							<button
 								type="button"
-								onClick={() => mutation.mutate()}
-								disabled={mutation.isPending}
+								onClick={() => deleteMutation.mutate()}
+								disabled={deleteMutation.isPending}
 								className="px-4 py-2 rounded-lg text-sm font-bold bg-red-600 text-white hover:bg-red-700 disabled:opacity-60"
 							>
-								{mutation.isPending ? t("deleting") : t("confirmDelete")}
+								{deleteMutation.isPending ? t("deleting") : t("confirmDelete")}
 							</button>
 						</div>
 					</div>

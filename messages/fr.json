@@ -3741,7 +3741,22 @@
     "cancel": "Annuler",
     "confirmDelete": "Supprimer",
     "deleting": "Suppression…",
-    "errorGeneric": "Impossible de supprimer la tournée. Réessayez."
+    "errorGeneric": "Impossible de supprimer la tournée. Réessayez.",
+    "edit": "Modifier",
+    "editTitle": "Modifier l'arrêt de tournée",
+    "editError": "Impossible d'enregistrer les modifications. Réessayez.",
+    "save": "Enregistrer",
+    "saving": "Enregistrement…",
+    "editFields": {
+      "status": "Statut",
+      "venue": "Salle",
+      "venuePlaceholder": "ex. Eko Hotel",
+      "city": "Ville",
+      "cityPlaceholder": "ex. Lagos",
+      "date": "Date du spectacle",
+      "capacity": "Capacité",
+      "feeUsd": "Cachet artiste (USD)"
+    }
   },
   "EditTourPage": {
     "badge": "Modifier l'arrêt de tournée",
