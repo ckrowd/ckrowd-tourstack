@@ -8,6 +8,8 @@ import StepForm from "@/components/StepForm";
 import TopNav from "@/components/TopNav";
 import { Link, useRouter } from "@/i18n/routing";
 import PageTour from "@/components/PageTour";
+import HowItWorksModal from "@/components/HowItWorksModal";
+import Image from "next/image";
 
 // Insurance applications are stored as financing applications under one of the
 // six named insurance products, which is what the insurance-admin queue lists.
@@ -23,6 +25,8 @@ export default function InsurancePage() {
 	const [activeTab, setActiveTab] = useState("overview");
 	const [activeStakeholder, setActiveStakeholder] = useState("promoter");
 	const [activeStep, setActiveStep] = useState(1);
+	const [faqOpen, setFaqOpen] = useState(false);
+	const [faqExpanded, setFaqExpanded] = useState<number | null>(0);
 
 	const TABS = [
 		{ id: "overview", label: t("tabs.overview") },
@@ -289,42 +293,91 @@ export default function InsurancePage() {
 								{t("hero.description")}
 							</p>
 						</div>
-						<FinancingApplyButton
-							defaultProduct={INSURANCE_DEFAULT_PRODUCT}
-							products={INSURANCE_PRODUCT_IDS}
-							className="flex items-center gap-2 bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all self-start md:self-auto shrink-0"
-						>
-							<span className="material-symbols-outlined text-sm">
-								how_to_reg
-							</span>
-							{t("hero.startOnboarding")}
-						</FinancingApplyButton>
+						<div className="flex items-center gap-2 flex-wrap self-start md:self-auto">
+							<HowItWorksModal
+								title={t("howItWorksTitle")}
+								subtitle={t("howItWorksSubtitle")}
+								steps={ECOSYSTEM_FLOW.map((s) => ({ step: s.step, title: s.label, desc: s.desc }))}
+								buttonLabel={t("howItWorksButton")}
+							/>
+							<button
+								type="button"
+								onClick={() => setFaqOpen(true)}
+								className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-bold hover:bg-surface-container-high transition-colors"
+							>
+								<span className="material-symbols-outlined text-base text-[#FF5A30]">help</span>
+								<span className="hidden sm:inline">{t("faqButton")}</span>
+							</button>
+							<FinancingApplyButton
+								defaultProduct={INSURANCE_DEFAULT_PRODUCT}
+								products={INSURANCE_PRODUCT_IDS}
+								className="flex items-center gap-2 bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all shrink-0"
+							>
+								<span className="material-symbols-outlined text-sm">
+									how_to_reg
+								</span>
+								{t("hero.startOnboarding")}
+							</FinancingApplyButton>
+						</div>
 					</div>
 
-					{/* Stats strip */}
-					<div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-10">
-						{[
-							{
-								value: t("stats.values.portfolio"),
-								label: t("stats.portfolio"),
-							},
-							{ value: t("stats.values.markets"), label: t("stats.markets") },
-							{ value: t("stats.values.lines"), label: t("stats.lines") },
-							{ value: t("stats.values.roles"), label: t("stats.roles") },
-						].map((s) => (
-							<div
-								key={s.label}
-								className="bg-surface-container-lowest rounded-2xl p-4 md:p-6 text-center border border-[#FF5A30]/5 shadow-sm"
-							>
-								<p className="text-xl md:text-2xl font-black font-(family-name:--font-manrope) text-[#FF5A30]">
-									{s.value}
-								</p>
-								<p className="text-[10px] md:text-xs uppercase font-bold text-on-surface-variant mt-1 tracking-wider">
-									{s.label}
-								</p>
+					{/* FAQ modal */}
+					{faqOpen && (
+						<div
+							className="fixed inset-0 z-50 flex items-center justify-center p-4"
+							role="dialog"
+							aria-modal="true"
+						>
+							<button
+								type="button"
+								aria-label={t("faqClose")}
+								onClick={() => setFaqOpen(false)}
+								className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+							/>
+							<div className="relative w-full max-w-lg max-h-[80vh] overflow-y-auto bg-surface-container-lowest rounded-2xl shadow-2xl no-scrollbar">
+								<div className="sticky top-0 flex items-start justify-between gap-4 bg-surface-container-lowest p-6 border-b border-outline-variant/10">
+									<h2 className="font-(family-name:--font-manrope) text-xl font-bold text-on-surface">
+										{t("faq.title")}
+									</h2>
+									<button
+										type="button"
+										onClick={() => setFaqOpen(false)}
+										aria-label={t("faqClose")}
+										className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors"
+									>
+										<span className="material-symbols-outlined">close</span>
+									</button>
+								</div>
+								<div className="p-6 space-y-2">
+									{(t.raw("faq.items") as { q: string; a: string }[]).map((f, i) => {
+										const isExpanded = faqExpanded === i;
+										return (
+											<div key={f.q} className="rounded-xl border border-outline-variant/10 overflow-hidden">
+												<button
+													type="button"
+													aria-expanded={isExpanded}
+													onClick={() => setFaqExpanded(isExpanded ? null : i)}
+													className="w-full flex items-center justify-between gap-3 text-left p-4 hover:bg-surface-container-low transition-colors"
+												>
+													<span className="font-(family-name:--font-manrope) font-bold text-sm text-on-surface">
+														{f.q}
+													</span>
+													<span className={`material-symbols-outlined text-on-surface-variant shrink-0 transition-transform ${isExpanded ? "rotate-180" : ""}`}>
+														expand_more
+													</span>
+												</button>
+												{isExpanded && (
+													<p className="px-4 pb-4 text-sm text-on-surface-variant leading-relaxed">
+														{f.a}
+													</p>
+												)}
+											</div>
+										);
+									})}
+								</div>
 							</div>
-						))}
-					</div>
+						</div>
+					)}
 
 					{/* ── Tab Bar ── */}
 					<div className="flex gap-0 border-b border-outline-variant/30 mb-8 overflow-x-auto whitespace-nowrap scrollbar-hide">
@@ -348,44 +401,6 @@ export default function InsurancePage() {
         ══════════════════════════════════════════ */}
 				{activeTab === "overview" && (
 					<div className="flex flex-col gap-16">
-						{/* Pipeline flow */}
-						<section>
-							<h2 className="font-(family-name:--font-manrope) text-2xl font-bold mb-8">
-								{t("overview.pipelineTitle")}
-							</h2>
-							<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 md:gap-3">
-								{ECOSYSTEM_FLOW.map((step, i) => (
-									<div
-										key={i}
-										className="bg-surface-container-lowest rounded-2xl p-3 md:p-5 border border-outline-variant/10 shadow-sm flex flex-col gap-2 md:gap-3 relative"
-									>
-										<div className="w-10 h-10 rounded-xl bg-[#FF5A30]/10 flex items-center justify-center">
-											<span
-												className="material-symbols-outlined text-[#FF5A30] text-xl"
-												style={{ fontVariationSettings: "'FILL' 1" }}
-											>
-												{step.icon}
-											</span>
-										</div>
-										<span className="text-[10px] font-black tracking-widest text-[#FF5A30] uppercase">
-											{step.step}
-										</span>
-										<p className="font-(family-name:--font-manrope) font-bold text-sm">
-											{step.label}
-										</p>
-										<p className="text-xs text-on-surface-variant leading-relaxed">
-											{step.desc}
-										</p>
-										{i < ECOSYSTEM_FLOW.length - 1 && (
-											<span className="material-symbols-outlined absolute -right-2 top-1/2 -translate-y-1/2 text-outline-variant text-base hidden lg:block">
-												chevron_right
-											</span>
-										)}
-									</div>
-								))}
-							</div>
-						</section>
-
 						{/* Stakeholder cards */}
 						<section>
 							<h2 className="font-(family-name:--font-manrope) text-2xl font-bold mb-8">
@@ -921,9 +936,14 @@ export default function InsurancePage() {
 								<span className="text-[10px] font-black uppercase tracking-widest text-[#FF5A30] block mb-2">
 									{t("products.underwriter.title")}
 								</span>
-								<h3 className="font-(family-name:--font-manrope) text-2xl font-bold text-white mb-2">
-									{t("products.underwriter.brand")}
-								</h3>
+								<div className="flex items-center gap-3 mb-2">
+									<div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shrink-0 overflow-hidden">
+										<Image src="/sanlam-allianz.png" alt="SanlamAllianz" width={40} height={40} className="object-contain w-full h-full p-0.5" />
+									</div>
+									<h3 className="font-(family-name:--font-manrope) text-2xl font-bold text-white">
+										{t("products.underwriter.brand")}
+									</h3>
+								</div>
 								<p className="text-white/60 text-sm max-w-md">
 									{t("products.underwriter.description")}
 								</p>
@@ -1051,9 +1071,14 @@ export default function InsurancePage() {
 													<p className="font-(family-name:--font-manrope) font-bold">
 														{fp.name}
 													</p>
-													<span className="text-[9px] font-black uppercase tracking-widest bg-surface-container text-on-surface-variant px-2.5 py-1 rounded-full whitespace-nowrap shrink-0">
-														{t("profile.bankName")}
-													</span>
+													<div className="flex items-center gap-1.5 bg-surface-container px-2.5 py-1 rounded-full shrink-0">
+														<div className="w-4 h-4 rounded bg-white overflow-hidden flex items-center justify-center">
+															<Image src="/access-bank.png" alt="Access Bank" width={16} height={16} className="object-contain w-full h-full" />
+														</div>
+														<span className="text-[9px] font-black uppercase tracking-widest text-on-surface-variant whitespace-nowrap">
+															{t("profile.bankName")}
+														</span>
+													</div>
 												</div>
 												<div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 border-t border-outline-variant/20">
 													{(

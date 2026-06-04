@@ -2233,7 +2233,12 @@
         "name": "Produits d'assurance pilotés par les données",
         "desc": "Produits d'assurance paramétriques et indexés dont les prix sont fixés dynamiquement via des données d'événements en temps réel — prévisions de fréquentation, indices météo et métriques de performance des tournées."
       }
-    ]
+    ],
+    "howItWorksButton": "Comment ça marche",
+    "howItWorksTitle": "Comment fonctionne l'assurance",
+    "howItWorksSubtitle": "Le pipeline de certification CTaaS et d'activation de l'assurance",
+    "faqButton": "FAQ",
+    "faqClose": "Fermer"
   },
   "PrivacyPage": {
     "legal": "Juridique",
@@ -2565,7 +2570,8 @@
         "q": "Y a-t-il un budget d'événement minimum pour être éligible ?",
         "a": "L'avance sur arrêt de tournée nécessite des frais d'artiste confirmés d'au moins 5 000 $. Les autres produits ont leurs propres seuils comme indiqué ci-dessus."
       }
-    }
+    },
+    "howItWorksButton": "Comment ça marche"
   },
   "FinancingDetailPage": {
     "tagline": "Demande",

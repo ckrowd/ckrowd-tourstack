@@ -11,10 +11,27 @@ import { computeEcosystemReadiness } from "@/lib/eligibility";
 import type { ProductId } from "@/components/FinancingApplyModal";
 import FinancingFaq from "@/components/FinancingFaq";
 import FinancingQuickApply from "@/components/FinancingQuickApply";
+import HowItWorksModal from "@/components/HowItWorksModal";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 import { Link } from "@/i18n/routing";
 import PageTour from "@/components/PageTour";
+import Image from "next/image";
+
+const PARTNER_LOGOS: Record<string, string> = {
+	"access bank": "/access-bank.png",
+	"sanlam": "/sanlam-allianz.png",
+	"allianz": "/sanlam-allianz.png",
+	"sanlamallianz": "/sanlam-allianz.png",
+};
+
+function getPartnerLogo(name: string): string | null {
+	const key = name.toLowerCase().replace(/\s+/g, " ").trim();
+	for (const [pattern, logo] of Object.entries(PARTNER_LOGOS)) {
+		if (key.includes(pattern)) return logo;
+	}
+	return null;
+}
 
 type Props = {
 	params: Promise<{ locale: string }>;
@@ -174,7 +191,14 @@ export default async function FinancingPage({ params }: Props) {
 								{t("hero.description")}
 							</p>
 						</div>
+						<div className="flex items-center gap-2 flex-wrap">
+						<HowItWorksModal
+							title={t("howItWorksTitle")}
+							steps={steps.map((s) => ({ step: s.step, title: s.title, desc: s.desc }))}
+							buttonLabel={t("howItWorksButton")}
+						/>
 						<FinancingFaq faqs={faqs} />
+					</div>
 					</div>
 
 					{/* Ecosystem readiness / financing eligibility */}
@@ -361,64 +385,41 @@ export default async function FinancingPage({ params }: Props) {
 					</div>
 				</section>
 
-				{/* How it Works + Partners */}
-				<div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-14">
-					{/* Steps */}
-					<section className="lg:col-span-7">
-						<h2 className="font-(family-name:--font-manrope) text-2xl font-bold mb-8">
-							{t("howItWorksTitle")}
-						</h2>
-						<div className="relative pl-6 md:pl-8">
-							<div className="absolute left-[11px] md:left-[14px] top-2 bottom-2 w-px bg-outline-variant/40" />
-							<div className="space-y-6 md:space-y-8">
-								{steps.map((s, i) => (
-									<div key={s.step} className="relative flex gap-4 md:gap-6">
-										<div
-											className={`absolute -left-6 md:-left-8 w-6 h-6 md:w-7 md:h-7 rounded-full flex items-center justify-center text-[10px] md:text-xs font-black shrink-0 border-2 ${
-												i === 0
-													? "bg-[#FF5A30] text-white border-[#FF5A30]"
-													: "bg-surface text-[#FF5A30] border-[#FF5A30]/40"
-											}`}
-										>
-											{s.step}
-										</div>
-										<div>
-											<p className="font-(family-name:--font-manrope) font-bold text-on-surface">
-												{s.title}
-											</p>
-											<p className="text-sm text-on-surface-variant mt-1 leading-relaxed">
-												{s.desc}
-											</p>
-										</div>
-									</div>
-								))}
-							</div>
-						</div>
-					</section>
-
-					{/* Capital Partners */}
-					<section className="lg:col-span-5 space-y-6">
-						<h2 className="font-(family-name:--font-manrope) text-2xl font-bold">
-							{t("capitalPartners")}
-						</h2>
-						<div className="space-y-3">
-							{partners.length === 0 ? (
-								<p className="text-sm text-on-surface-variant bg-surface-container-lowest rounded-xl p-5 shadow-sm">
-									{t("noPartners")}
-								</p>
-							) : (
-								partners.map((p) => (
+				{/* Capital Partners */}
+				<section className="mb-14 space-y-6">
+					<h2 className="font-(family-name:--font-manrope) text-2xl font-bold">
+						{t("capitalPartners")}
+					</h2>
+					<div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+						{partners.length === 0 ? (
+							<p className="text-sm text-on-surface-variant bg-surface-container-lowest rounded-xl p-5 shadow-sm col-span-full">
+								{t("noPartners")}
+							</p>
+						) : (
+							partners.map((p) => {
+								const logo = getPartnerLogo(String(p.name));
+								return (
 									<div
 										key={String(p.id)}
-										className="bg-surface-container-lowest rounded-xl p-5 flex items-center gap-4 border border-transparent hover:border-outline-variant/20 transition-all shadow-sm"
+										className="bg-surface-container-lowest rounded-xl p-4 flex items-center gap-4 border border-transparent hover:border-outline-variant/20 transition-all shadow-sm"
 									>
-										<div className="w-10 h-10 rounded-full bg-[#FF5A30]/10 flex items-center justify-center shrink-0">
-											<span
-												className="material-symbols-outlined text-[#FF5A30]"
-												style={{ fontVariationSettings: "'FILL' 1" }}
-											>
-												corporate_fare
-											</span>
+										<div className="w-12 h-12 rounded-xl bg-white border border-outline-variant/10 flex items-center justify-center shrink-0 overflow-hidden">
+											{logo ? (
+												<Image
+													src={logo}
+													alt={String(p.name)}
+													width={48}
+													height={48}
+													className="object-contain w-full h-full p-1"
+												/>
+											) : (
+												<span
+													className="material-symbols-outlined text-[#FF5A30]"
+													style={{ fontVariationSettings: "'FILL' 1" }}
+												>
+													corporate_fare
+												</span>
+											)}
 										</div>
 										<div className="flex-1 min-w-0">
 											<p className="font-bold text-sm text-on-surface truncate">
@@ -433,32 +434,32 @@ export default async function FinancingPage({ params }: Props) {
 										</div>
 										<span className="w-2 h-2 rounded-full bg-green-400 shrink-0" />
 									</div>
-								))
-							)}
-						</div>
+								);
+							})
+						)}
+					</div>
 
-						{/* CTA card */}
-						<div className="bg-linear-to-br from-[#FF5A30] to-[#cc4826] rounded-2xl p-8 text-white relative overflow-hidden">
-							<div className="relative z-10">
-								<h4 className="font-(family-name:--font-manrope) text-lg font-bold leading-tight">
-									{t("cta.title")}
-								</h4>
-								<p className="text-white/90 text-sm mt-2 leading-relaxed">
-									{t("cta.description")}
-								</p>
-								<a
-									href="#quick-apply"
-									className="mt-5 inline-block bg-white text-[#FF5A30] px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider hover:scale-105 transition-transform"
-								>
-									{t("cta.button")}
-								</a>
-							</div>
-							<span className="material-symbols-outlined absolute -bottom-4 -right-4 text-white/10 text-[120px] rotate-12">
-								payments
-							</span>
+					{/* CTA card */}
+					<div className="bg-linear-to-br from-[#FF5A30] to-[#cc4826] rounded-2xl p-8 text-white relative overflow-hidden">
+						<div className="relative z-10">
+							<h4 className="font-(family-name:--font-manrope) text-lg font-bold leading-tight">
+								{t("cta.title")}
+							</h4>
+							<p className="text-white/90 text-sm mt-2 leading-relaxed">
+								{t("cta.description")}
+							</p>
+							<a
+								href="#quick-apply"
+								className="mt-5 inline-block bg-white text-[#FF5A30] px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider hover:scale-105 transition-transform"
+							>
+								{t("cta.button")}
+							</a>
 						</div>
-					</section>
-				</div>
+						<span className="material-symbols-outlined absolute -bottom-4 -right-4 text-white/10 text-[120px] rotate-12">
+							payments
+						</span>
+					</div>
+				</section>
 
 				</main>
 			</div>

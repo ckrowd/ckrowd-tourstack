@@ -2233,7 +2233,12 @@
         "name": "Data-Driven Insurance Products",
         "desc": "Parametric and index-linked insurance products priced dynamically using real-time event data — attendance forecasts, weather indices, and artist tour performance metrics."
       }
-    ]
+    ],
+    "howItWorksButton": "How it Works",
+    "howItWorksTitle": "How Insurance Works",
+    "howItWorksSubtitle": "The CTaaS certification and insurance activation pipeline",
+    "faqButton": "FAQ",
+    "faqClose": "Close"
   },
   "PrivacyPage": {
     "legal": "Legal",
@@ -2565,7 +2570,8 @@
         "q": "Is there a minimum event budget to qualify?",
         "a": "Tour Stop Advance requires a minimum confirmed artiste fee of $5,000. Other products have their own thresholds as shown above."
       }
-    }
+    },
+    "howItWorksButton": "How it Works"
   },
   "FinancingDetailPage": {
     "tagline": "Application",
