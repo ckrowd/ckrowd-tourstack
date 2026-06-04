@@ -288,33 +288,21 @@ export default function InsurancePage() {
 								{t("hero.description")}
 							</p>
 						</div>
-						<div className="flex flex-col gap-2 self-start md:self-auto">
-							{/* Row 1: utility buttons — same style as financing page */}
-							<div className="flex items-center gap-2">
-								<HowItWorksModal
-									title={t("howItWorksTitle")}
-									subtitle={t("howItWorksSubtitle")}
-									steps={ECOSYSTEM_FLOW.map((s) => ({ step: s.step, title: s.label, desc: s.desc }))}
-									buttonLabel={t("howItWorksButton")}
-								/>
-								<button
-									type="button"
-									onClick={() => setFaqOpen(true)}
-									className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-bold hover:bg-surface-container-high transition-colors"
-								>
-									<span className="material-symbols-outlined text-base text-[#FF5A30]">help</span>
-									{t("faqButton")}
-								</button>
-							</div>
-							{/* Row 2: primary CTA */}
-							<FinancingApplyButton
-								defaultProduct={INSURANCE_DEFAULT_PRODUCT}
-								products={INSURANCE_PRODUCT_IDS}
-								className="flex items-center gap-2 bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all self-start"
+						<div className="flex items-center gap-2 self-start md:self-auto">
+							<HowItWorksModal
+								title={t("howItWorksTitle")}
+								subtitle={t("howItWorksSubtitle")}
+								steps={ECOSYSTEM_FLOW.map((s) => ({ step: s.step, title: s.label, desc: s.desc }))}
+								buttonLabel={t("howItWorksButton")}
+							/>
+							<button
+								type="button"
+								onClick={() => setFaqOpen(true)}
+								className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-bold hover:bg-surface-container-high transition-colors"
 							>
-								<span className="material-symbols-outlined text-sm">how_to_reg</span>
-								{t("hero.startOnboarding")}
-							</FinancingApplyButton>
+								<span className="material-symbols-outlined text-base text-[#FF5A30]">help</span>
+								{t("faqButton")}
+							</button>
 						</div>
 					</div>
 
@@ -375,6 +363,18 @@ export default function InsurancePage() {
 							</div>
 						</div>
 					)}
+
+					{/* CTA — above tab bar */}
+					<div className="mb-6">
+						<FinancingApplyButton
+							defaultProduct={INSURANCE_DEFAULT_PRODUCT}
+							products={INSURANCE_PRODUCT_IDS}
+							className="flex items-center gap-2 bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all"
+						>
+							<span className="material-symbols-outlined text-sm">how_to_reg</span>
+							{t("hero.startOnboarding")}
+						</FinancingApplyButton>
+					</div>
 
 					{/* ── Tab Bar ── */}
 					<div className="flex gap-0 border-b border-outline-variant/30 mb-8 overflow-x-auto whitespace-nowrap scrollbar-hide">
