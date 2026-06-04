@@ -288,31 +288,29 @@ export default function InsurancePage() {
 								{t("hero.description")}
 							</p>
 						</div>
-						<div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 self-start md:self-auto w-full sm:w-auto">
-							{/* Utility button group */}
-							<div className="flex items-center rounded-xl border border-outline-variant/20 overflow-hidden shadow-sm shrink-0">
+						<div className="flex flex-col gap-2 self-start md:self-auto">
+							{/* Row 1: utility buttons — same style as financing page */}
+							<div className="flex items-center gap-2">
 								<HowItWorksModal
 									title={t("howItWorksTitle")}
 									subtitle={t("howItWorksSubtitle")}
 									steps={ECOSYSTEM_FLOW.map((s) => ({ step: s.step, title: s.label, desc: s.desc }))}
 									buttonLabel={t("howItWorksButton")}
-									grouped
 								/>
-								<div className="w-px h-8 bg-outline-variant/20 shrink-0" />
 								<button
 									type="button"
 									onClick={() => setFaqOpen(true)}
-									className="inline-flex items-center gap-2 px-4 py-2.5 bg-surface-container-lowest text-on-surface text-sm font-semibold hover:bg-surface-container-low transition-colors"
+									className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-bold hover:bg-surface-container-high transition-colors"
 								>
-									<span className="material-symbols-outlined text-base text-[#FF5A30]" style={{ fontSize: "18px" }}>help</span>
-									<span>{t("faqButton")}</span>
+									<span className="material-symbols-outlined text-base text-[#FF5A30]">help</span>
+									{t("faqButton")}
 								</button>
 							</div>
-							{/* Primary CTA */}
+							{/* Row 2: primary CTA */}
 							<FinancingApplyButton
 								defaultProduct={INSURANCE_DEFAULT_PRODUCT}
 								products={INSURANCE_PRODUCT_IDS}
-								className="flex items-center justify-center gap-2 bg-[#FF5A30] text-white px-6 py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all shrink-0"
+								className="flex items-center justify-center gap-2 bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all w-full"
 							>
 								<span className="material-symbols-outlined text-sm">how_to_reg</span>
 								{t("hero.startOnboarding")}
