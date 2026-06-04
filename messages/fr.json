@@ -1766,12 +1766,16 @@
       "viewProducts": "Voir les produits"
     },
     "productTags": {
-      "event": "ASSURANCE ÉVÉNEMENT",
-      "highest": "VALEUR MAXIMALE",
-      "sme": "ASSURANCE PME",
-      "group": "ASSURANCE GROUPE",
-      "specialty": "LIGNES SPÉCIALISÉES",
-      "embedded": "INTÉGRÉ"
+      "eventCancel": "ANNULATION D'ÉVÉNEMENT",
+      "liability": "RESPONSABILITÉ CIVILE",
+      "touring": "RISQUE TOURNÉE",
+      "workforce": "MAIN-D'ŒUVRE",
+      "equipment": "ÉQUIPEMENT",
+      "venue": "LIEU",
+      "ticket": "PROTECTION BILLETS",
+      "sponsor": "RISQUE SPONSOR",
+      "compliance": "CONFORMITÉ",
+      "data": "DONNÉES & IA"
     },
     "stats": {
       "portfolio": "Portefeuille assurable",
@@ -1899,10 +1903,10 @@
         "tag": "PARTENAIRE MONDIAL CERTIFIÉ",
         "description": "Organisateurs de concerts et d'événements gérant des étapes de tournée certifiées CTaaS",
         "products": [
-          "Annulation d'événement",
-          "Entreprise de promoteur",
-          "Garantie de crédit",
-          "Protection des billets du public"
+          "Protection contre l'annulation et la perturbation d'événements",
+          "Responsabilité civile et couverture de la sécurité du public",
+          "Protection des billets et solutions d'assurance consommateurs",
+          "Solutions de risques pour sponsors et activations de marque"
         ],
         "steps": [
           {
@@ -1976,9 +1980,9 @@
         "tag": "AGENT DE TOURNÉE",
         "description": "Ingénieurs du son, équipes d'éclairage, régisseurs, personnel de production déployé sur les étapes de tournée",
         "products": [
-          "Accident individuel de groupe",
-          "Responsabilité civile employeur",
-          "Couverture de sous-traitant"
+          "Protection de la main-d'œuvre et des sous-traitants",
+          "Assurance équipement de production et actifs",
+          "Services de conformité et d'évaluation des risques"
         ],
         "steps": [
           {
@@ -2039,9 +2043,9 @@
         "tag": "PARTENAIRE DE L'ÉCOSYSTÈME",
         "description": "Entreprises de production, fournisseurs d'équipement, restauration, marchandise et prestataires de transport",
         "products": [
-          "Équipement et fret",
-          "Perte d'exploitation",
-          "Indemnité professionnelle"
+          "Assurance équipement de production et actifs",
+          "Couverture des lieux et infrastructures",
+          "Services de conformité et d'évaluation des risques"
         ],
         "steps": [
           {
@@ -2102,9 +2106,9 @@
         "tag": "FOURNISSEUR DE TALENTS",
         "description": "Agences et sociétés de gestion fournissant des artistes aux étapes de tournée certifiées CTaaS",
         "products": [
-          "Non-comparution de l'artiste",
-          "Responsabilité civile de tournée",
-          "Protection des revenus"
+          "Gestion des risques pour les tournées et les artistes",
+          "Protection contre l'annulation et la perturbation d'événements",
+          "Protection des billets et solutions d'assurance consommateurs"
         ],
         "steps": [
           {
@@ -2189,28 +2193,44 @@
     ],
     "productSuite": [
       {
-        "name": "Annulation d'événement",
-        "desc": "Protège les revenus de l'événement contre l'annulation, la non-comparution et les cas de force majeure."
+        "name": "Protection contre l'annulation et la perturbation d'événements",
+        "desc": "Couvre les pertes de revenus liées à l'annulation, au report et à la perturbation d'événements due à la non-comparution, la météo, la force majeure ou des incidents de sécurité publique."
       },
       {
-        "name": "Garantie de crédit",
-        "desc": "Garantit la facilité de prêt d'avance pour étape de tournée. Produit de la plus haute valeur du portefeuille."
+        "name": "Responsabilité civile et couverture de la sécurité du public",
+        "desc": "Protège les promoteurs contre les réclamations liées aux blessures corporelles, aux dommages matériels ou aux accidents personnels impliquant le public et des tiers lors d'événements."
       },
       {
-        "name": "Entreprise de promoteur",
-        "desc": "Responsabilité civile, biens et perte d'exploitation pour les entités de promoteur et de fournisseur."
+        "name": "Gestion des risques pour les tournées et les artistes",
+        "desc": "Couverture complète pour les artistes en tournée — non-comparution, annulation pour maladie ou blessure, perte d'équipement et risque de réputation lors d'une tournée."
       },
       {
-        "name": "Main-d'œuvre de tournée",
-        "desc": "Accident individuel de groupe, responsabilité employeur et couverture de sous-traitant pour l'équipe de tournée."
+        "name": "Protection de la main-d'œuvre et des sous-traitants",
+        "desc": "Accident personnel de groupe, responsabilité employeur et couverture sous-traitant pour l'équipe de tournée, le personnel de scène, la sécurité et tous les travailleurs événementiels."
       },
       {
-        "name": "Aviation et équipement",
-        "desc": "Couverture spécialisée pour les avions affrétés, l'équipement de production et le fret de haute valeur."
+        "name": "Assurance équipement de production et actifs",
+        "desc": "Couverture tous risques pour les grils d'éclairage, systèmes sonores, scènes, instruments et actifs de production de grande valeur — en transit, en stockage et sur site."
       },
       {
-        "name": "Protection des billets du public",
-        "desc": "Garantie de remboursement intégrée pour les détenteurs de billets. Activée automatiquement au moment du paiement."
+        "name": "Couverture des lieux et infrastructures",
+        "desc": "Dommages matériels, perte d'exploitation et responsabilité structurelle pour les lieux permanents et temporaires, les scènes et l'infrastructure événementielle."
+      },
+      {
+        "name": "Protection des billets et solutions d'assurance consommateurs",
+        "desc": "Garantie de remboursement intégrée pour les détenteurs de billets, activée à la caisse — couvrant l'annulation, le report et l'incapacité à assister."
+      },
+      {
+        "name": "Solutions de risques pour sponsors et activations de marque",
+        "desc": "Protège l'investissement des sponsors dans les activations de marque, événements expérientiels et accords de droits de dénomination contre l'annulation, la perturbation ou les incidents de sécurité."
+      },
+      {
+        "name": "Services de conformité et d'évaluation des risques",
+        "desc": "Évaluations des risques avant événement, vérifications de conformité réglementaire et soutien à la certification pour que les événements respectent les exigences locales en matière de sécurité et de licence."
+      },
+      {
+        "name": "Produits d'assurance pilotés par les données",
+        "desc": "Produits d'assurance paramétriques et indexés dont les prix sont fixés dynamiquement via des données d'événements en temps réel — prévisions de fréquentation, indices météo et métriques de performance des tournées."
       }
     ]
   },
@@ -2894,55 +2914,154 @@
   },
   "PageTour": {
     "discovery": {
-      "step0": { "title": "🗺️ Opportunités de tournée", "description": "Ici vous découvrez les tournées d'artistes qui cherchent des promoteurs. Chaque carte est une vraie opportunité de réservation." },
-      "step1": { "title": "🎛️ Filtrer les tournées", "description": "Affinez par genre, fenêtre de disponibilité, fourchette de cachet ou région pour trouver les tournées adaptées à votre marché." },
-      "step2": { "title": "🎵 Parcourir les cartes artistes", "description": "Chaque carte montre l'artiste, le nom de la tournée, les dates, la fourchette de cachet et les marchés cibles." },
-      "step3": { "title": "📋 Comment ça marche", "description": "Suivez ces 4 étapes — parcourir, exprimer votre intérêt, être mis en relation, et confirmer votre arrêt de tournée." },
-      "step4": { "title": "✅ Prêt à postuler ?", "description": "Cliquez sur 'Soumettre une manifestation d'intérêt' sur n'importe quel artiste. Ça prend moins de 3 minutes." }
+      "step0": {
+        "title": "🗺️ Opportunités de tournée",
+        "description": "Ici vous découvrez les tournées d'artistes qui cherchent des promoteurs. Chaque carte est une vraie opportunité de réservation."
+      },
+      "step1": {
+        "title": "🎛️ Filtrer les tournées",
+        "description": "Affinez par genre, fenêtre de disponibilité, fourchette de cachet ou région pour trouver les tournées adaptées à votre marché."
+      },
+      "step2": {
+        "title": "🎵 Parcourir les cartes artistes",
+        "description": "Chaque carte montre l'artiste, le nom de la tournée, les dates, la fourchette de cachet et les marchés cibles."
+      },
+      "step3": {
+        "title": "📋 Comment ça marche",
+        "description": "Suivez ces 4 étapes — parcourir, exprimer votre intérêt, être mis en relation, et confirmer votre arrêt de tournée."
+      },
+      "step4": {
+        "title": "✅ Prêt à postuler ?",
+        "description": "Cliquez sur 'Soumettre une manifestation d'intérêt' sur n'importe quel artiste. Ça prend moins de 3 minutes."
+      }
     },
     "tours": {
-      "step0": { "title": "🎫 Mes arrêts de tournée", "description": "Votre pipeline de réservation personnel — toutes vos candidatures et spectacles confirmés en un seul endroit." },
-      "step1": { "title": "📊 Statistiques de votre pipeline", "description": "Ces quatre chiffres montrent vos arrêts totaux, spectacles confirmés, candidatures en cours et rejets." },
-      "step2": { "title": "⏳ Candidatures en attente", "description": "Les EOI en attente de révision admin apparaissent ici. Vous recevrez un e-mail lorsque le statut changera." },
-      "step3": { "title": "📋 Vos cartes de tournée", "description": "Chaque carte montre l'artiste, le lieu, la date, le statut et le cachet. Cliquez sur 'Voir les détails' pour tout voir." }
+      "step0": {
+        "title": "🎫 Mes arrêts de tournée",
+        "description": "Votre pipeline de réservation personnel — toutes vos candidatures et spectacles confirmés en un seul endroit."
+      },
+      "step1": {
+        "title": "📊 Statistiques de votre pipeline",
+        "description": "Ces quatre chiffres montrent vos arrêts totaux, spectacles confirmés, candidatures en cours et rejets."
+      },
+      "step2": {
+        "title": "⏳ Candidatures en attente",
+        "description": "Les EOI en attente de révision admin apparaissent ici. Vous recevrez un e-mail lorsque le statut changera."
+      },
+      "step3": {
+        "title": "📋 Vos cartes de tournée",
+        "description": "Chaque carte montre l'artiste, le lieu, la date, le statut et le cachet. Cliquez sur 'Voir les détails' pour tout voir."
+      }
     },
     "eoi": {
-      "step0": { "title": "📝 Soumettre une EOI", "description": "Une Manifestation d'Intérêt vous permet de postuler pour accueillir un artiste dans votre salle. C'est un processus en 3 étapes." },
-      "step1": { "title": "1️⃣ Choisir un artiste", "description": "Parcourez la liste des tournées disponibles à gauche et sélectionnez-en une. Vous pouvez rechercher par nom." },
-      "step2": { "title": "2️⃣ Compléter le formulaire", "description": "Saisissez vos coordonnées, la ville, l'audience attendue et toutes notes pour l'équipe de réservation." },
-      "step3": { "title": "3️⃣ Réviser et soumettre", "description": "À la dernière étape, vérifiez tous vos détails avant de soumettre. Vous recevrez un e-mail de confirmation immédiatement." }
+      "step0": {
+        "title": "📝 Soumettre une EOI",
+        "description": "Une Manifestation d'Intérêt vous permet de postuler pour accueillir un artiste dans votre salle. C'est un processus en 3 étapes."
+      },
+      "step1": {
+        "title": "1️⃣ Choisir un artiste",
+        "description": "Parcourez la liste des tournées disponibles à gauche et sélectionnez-en une. Vous pouvez rechercher par nom."
+      },
+      "step2": {
+        "title": "2️⃣ Compléter le formulaire",
+        "description": "Saisissez vos coordonnées, la ville, l'audience attendue et toutes notes pour l'équipe de réservation."
+      },
+      "step3": {
+        "title": "3️⃣ Réviser et soumettre",
+        "description": "À la dernière étape, vérifiez tous vos détails avant de soumettre. Vous recevrez un e-mail de confirmation immédiatement."
+      }
     },
     "financing": {
-      "step0": { "title": "💰 Financement de tournée", "description": "Le financement TourStack aide les promoteurs à couvrir les coûts initiaux — dépôts artistes, aménagement de salle, marketing, etc." },
-      "step1": { "title": "⚡ Candidature rapide", "description": "Commencez ici pour vérifier votre éligibilité et voir quels produits vous pouvez obtenir en temps réel." },
-      "step2": { "title": "🏦 Produits de financement", "description": "Choisissez parmi plusieurs produits proposés par nos banques partenaires. Chacun montre le montant, la durée et le coût." }
+      "step0": {
+        "title": "💰 Financement de tournée",
+        "description": "Le financement TourStack aide les promoteurs à couvrir les coûts initiaux — dépôts artistes, aménagement de salle, marketing, etc."
+      },
+      "step1": {
+        "title": "⚡ Candidature rapide",
+        "description": "Commencez ici pour vérifier votre éligibilité et voir quels produits vous pouvez obtenir en temps réel."
+      },
+      "step2": {
+        "title": "🏦 Produits de financement",
+        "description": "Choisissez parmi plusieurs produits proposés par nos banques partenaires. Chacun montre le montant, la durée et le coût."
+      }
     },
     "insurance": {
-      "step0": { "title": "🛡️ Assurance événementielle", "description": "Protégez vos événements avec des produits d'assurance adaptés à la musique live — annulation, garantie de crédit, protection des billets." },
-      "step1": { "title": "📦 Produits d'assurance", "description": "Parcourez les produits disponibles. Chaque carte montre le type de couverture, le montant et comment postuler." },
-      "step2": { "title": "✅ Postulez en quelques minutes", "description": "Sélectionnez un produit et postulez directement via l'onglet Financement. Votre couverture est liée à votre arrêt de tournée." }
+      "step0": {
+        "title": "🛡️ Assurance événementielle",
+        "description": "Protégez vos événements avec des produits d'assurance adaptés à la musique live — annulation, garantie de crédit, protection des billets."
+      },
+      "step1": {
+        "title": "📦 Produits d'assurance",
+        "description": "Parcourez les produits disponibles. Chaque carte montre le type de couverture, le montant et comment postuler."
+      },
+      "step2": {
+        "title": "✅ Postulez en quelques minutes",
+        "description": "Sélectionnez un produit et postulez directement via l'onglet Financement. Votre couverture est liée à votre arrêt de tournée."
+      }
     },
     "dashboard": {
-      "step0": { "title": "🏠 Votre tableau de bord", "description": "Bienvenue sur votre tableau de bord TourStack — un aperçu personnalisé de votre activité de tournée, EOIs et jalons." },
-      "step1": { "title": "📊 Statistiques", "description": "Vos chiffres clés en un coup d'œil — tournées actives, EOIs en attente et jalons à venir." },
-      "step2": { "title": "📋 EOIs en attente", "description": "EOIs que vous avez soumises en attente de révision admin ou nécessitant une révision." },
-      "step3": { "title": "🚀 Prochaines étapes", "description": "Utilisez la barre latérale pour naviguer vers Découverte pour de nouvelles opportunités, ou vérifiez vos Arrêts de tournée." }
+      "step0": {
+        "title": "🏠 Votre tableau de bord",
+        "description": "Bienvenue sur votre tableau de bord TourStack — un aperçu personnalisé de votre activité de tournée, EOIs et jalons."
+      },
+      "step1": {
+        "title": "📊 Statistiques",
+        "description": "Vos chiffres clés en un coup d'œil — tournées actives, EOIs en attente et jalons à venir."
+      },
+      "step2": {
+        "title": "📋 EOIs en attente",
+        "description": "EOIs que vous avez soumises en attente de révision admin ou nécessitant une révision."
+      },
+      "step3": {
+        "title": "🚀 Prochaines étapes",
+        "description": "Utilisez la barre latérale pour naviguer vers Découverte pour de nouvelles opportunités, ou vérifiez vos Arrêts de tournée."
+      }
     },
     "admin-dashboard": {
-      "step0": { "title": "🎛️ Vue d'ensemble admin", "description": "Votre centre de commande — un aperçu en direct de l'activité de la plateforme, des arrêts et des candidatures de promoteurs." },
-      "step1": { "title": "📊 Statistiques de la plateforme", "description": "Cliquez sur n'importe quelle carte de statistique pour accéder directement à la section de gestion correspondante." },
-      "step2": { "title": "🎫 Arrêts de tournée récents", "description": "Les derniers arrêts confirmés et en attente. Cliquez sur 'Voir le détail' pour gérer n'importe quel arrêt." },
-      "step3": { "title": "📥 EOIs récentes", "description": "Les dernières soumissions de promoteurs. Rendez-vous dans Gestion des EOIs pour les examiner et les traiter." }
+      "step0": {
+        "title": "🎛️ Vue d'ensemble admin",
+        "description": "Votre centre de commande — un aperçu en direct de l'activité de la plateforme, des arrêts et des candidatures de promoteurs."
+      },
+      "step1": {
+        "title": "📊 Statistiques de la plateforme",
+        "description": "Cliquez sur n'importe quelle carte de statistique pour accéder directement à la section de gestion correspondante."
+      },
+      "step2": {
+        "title": "🎫 Arrêts de tournée récents",
+        "description": "Les derniers arrêts confirmés et en attente. Cliquez sur 'Voir le détail' pour gérer n'importe quel arrêt."
+      },
+      "step3": {
+        "title": "📥 EOIs récentes",
+        "description": "Les dernières soumissions de promoteurs. Rendez-vous dans Gestion des EOIs pour les examiner et les traiter."
+      }
     },
     "admin-eoi": {
-      "step0": { "title": "📥 Gestion des EOIs", "description": "Toutes les soumissions de Manifestation d'Intérêt des promoteurs sur la plateforme, les plus récentes en premier." },
-      "step1": { "title": "📋 Examiner chaque soumission", "description": "Chaque carte montre le promoteur, l'artiste, le lieu, la capacité estimée, le budget et le score de correspondance." },
-      "step2": { "title": "⚡ Prendre une décision", "description": "Utilisez les boutons d'action pour Approuver, Demander une révision, Rejeter, ou Créer un arrêt de tournée directement." }
+      "step0": {
+        "title": "📥 Gestion des EOIs",
+        "description": "Toutes les soumissions de Manifestation d'Intérêt des promoteurs sur la plateforme, les plus récentes en premier."
+      },
+      "step1": {
+        "title": "📋 Examiner chaque soumission",
+        "description": "Chaque carte montre le promoteur, l'artiste, le lieu, la capacité estimée, le budget et le score de correspondance."
+      },
+      "step2": {
+        "title": "⚡ Prendre une décision",
+        "description": "Utilisez les boutons d'action pour Approuver, Demander une révision, Rejeter, ou Créer un arrêt de tournée directement."
+      }
     },
     "admin-tours": {
-      "step0": { "title": "🎫 Gestion des arrêts de tournée", "description": "Tous les arrêts de tournée confirmés et en cours sur la plateforme." },
-      "step1": { "title": "📋 Liste des arrêts", "description": "Chaque ligne montre l'artiste, le statut et un menu pour voir les détails, modifier ou supprimer l'arrêt." },
-      "step2": { "title": "➕ Créer un nouveau", "description": "Utilisez le bouton 'Créer une tournée' pour ajouter un nouveau projet de tournée artiste au catalogue Découverte." }
+      "step0": {
+        "title": "🎫 Gestion des arrêts de tournée",
+        "description": "Tous les arrêts de tournée confirmés et en cours sur la plateforme."
+      },
+      "step1": {
+        "title": "📋 Liste des arrêts",
+        "description": "Chaque ligne montre l'artiste, le statut et un menu pour voir les détails, modifier ou supprimer l'arrêt."
+      },
+      "step2": {
+        "title": "➕ Créer un nouveau",
+        "description": "Utilisez le bouton 'Créer une tournée' pour ajouter un nouveau projet de tournée artiste au catalogue Découverte."
+      }
     }
   },
   "Tour": {
@@ -2952,22 +3071,64 @@
     "prev": "← Retour",
     "done": "Compris !",
     "promoter": {
-      "step0": { "title": "👋 Bienvenue sur TourStack !", "description": "Votre plateforme tout-en-un pour vous connecter aux tournées d'artistes en Afrique. Cette visite rapide vous montrera les fonctionnalités essentielles — moins de 2 minutes." },
-      "step1": { "title": "🔍 Découvrir les tournées", "description": "Parcourez les tournées d'artistes disponibles à l'accueil. Filtrez par genre, région et fourchette de cachet pour trouver le projet idéal." },
-      "step2": { "title": "🎫 Mes arrêts de tournée", "description": "Suivez toutes vos manifestations d'intérêt soumises. Consultez les mises à jour, demandes de révision et réservations confirmées au même endroit." },
-      "step3": { "title": "💰 Financement", "description": "Besoin de fonds pour accueillir un artiste ? Demandez un financement auprès de nos banques partenaires — avances, crédits aménagement, et plus." },
-      "step4": { "title": "🛡️ Assurance", "description": "Protégez vos événements avec des produits d'assurance adaptés — annulation d'événement, garantie de crédit, protection des billets, et plus." },
-      "step5": { "title": "🚀 Prêt à démarrer ?", "description": "Cliquez ici pour parcourir les artistes disponibles et soumettre votre première manifestation d'intérêt. Cela ne prend que quelques minutes !" },
-      "step6": { "title": "✅ Vous êtes prêt !", "description": "Vous connaissez maintenant TourStack. Cliquez sur 'Visite de la plateforme' en bas de la barre latérale pour rejouer ce guide. Bonne chance !" }
+      "step0": {
+        "title": "👋 Bienvenue sur TourStack !",
+        "description": "Votre plateforme tout-en-un pour vous connecter aux tournées d'artistes en Afrique. Cette visite rapide vous montrera les fonctionnalités essentielles — moins de 2 minutes."
+      },
+      "step1": {
+        "title": "🔍 Découvrir les tournées",
+        "description": "Parcourez les tournées d'artistes disponibles à l'accueil. Filtrez par genre, région et fourchette de cachet pour trouver le projet idéal."
+      },
+      "step2": {
+        "title": "🎫 Mes arrêts de tournée",
+        "description": "Suivez toutes vos manifestations d'intérêt soumises. Consultez les mises à jour, demandes de révision et réservations confirmées au même endroit."
+      },
+      "step3": {
+        "title": "💰 Financement",
+        "description": "Besoin de fonds pour accueillir un artiste ? Demandez un financement auprès de nos banques partenaires — avances, crédits aménagement, et plus."
+      },
+      "step4": {
+        "title": "🛡️ Assurance",
+        "description": "Protégez vos événements avec des produits d'assurance adaptés — annulation d'événement, garantie de crédit, protection des billets, et plus."
+      },
+      "step5": {
+        "title": "🚀 Prêt à démarrer ?",
+        "description": "Cliquez ici pour parcourir les artistes disponibles et soumettre votre première manifestation d'intérêt. Cela ne prend que quelques minutes !"
+      },
+      "step6": {
+        "title": "✅ Vous êtes prêt !",
+        "description": "Vous connaissez maintenant TourStack. Cliquez sur 'Visite de la plateforme' en bas de la barre latérale pour rejouer ce guide. Bonne chance !"
+      }
     },
     "admin": {
-      "step0": { "title": "👋 Bienvenue dans TourStack Admin !", "description": "Voici votre centre de commande pour gérer la plateforme TourStack. Découvrons les sections clés." },
-      "step1": { "title": "📥 Soumissions EOI", "description": "Examinez et traitez les manifestations d'intérêt des promoteurs. Approuvez, demandez des révisions, rejetez ou convertissez en arrêt de tournée confirmé." },
-      "step2": { "title": "🎫 Arrêts de tournée", "description": "Gérez tous les arrêts confirmés et en attente. Chaque arrêt est lié à l'EOI du promoteur et peut être modifié ou supprimé." },
-      "step3": { "title": "🎵 Artistes", "description": "Gérez le catalogue d'artistes que les promoteurs parcourent sur la page Découverte. Ajoutez de nouveaux artistes, mettez à jour les détails et les fourchettes de cachet." },
-      "step4": { "title": "📊 Rapports", "description": "Suivez les performances de la plateforme — volumes d'EOI, taux de conversion, adoption du financement et analyses de revenus." },
-      "step5": { "title": "➕ Créer un projet de tournée", "description": "Publiez un nouveau projet de tournée pour attirer des candidatures de promoteurs. Renseignez l'artiste, la fourchette de cachet, la fenêtre et la région." },
-      "step6": { "title": "✅ Vous êtes prêt !", "description": "Vous connaissez le portail admin. Cliquez sur 'Visite de la plateforme' en bas de la barre latérale pour rejouer ce guide." }
+      "step0": {
+        "title": "👋 Bienvenue dans TourStack Admin !",
+        "description": "Voici votre centre de commande pour gérer la plateforme TourStack. Découvrons les sections clés."
+      },
+      "step1": {
+        "title": "📥 Soumissions EOI",
+        "description": "Examinez et traitez les manifestations d'intérêt des promoteurs. Approuvez, demandez des révisions, rejetez ou convertissez en arrêt de tournée confirmé."
+      },
+      "step2": {
+        "title": "🎫 Arrêts de tournée",
+        "description": "Gérez tous les arrêts confirmés et en attente. Chaque arrêt est lié à l'EOI du promoteur et peut être modifié ou supprimé."
+      },
+      "step3": {
+        "title": "🎵 Artistes",
+        "description": "Gérez le catalogue d'artistes que les promoteurs parcourent sur la page Découverte. Ajoutez de nouveaux artistes, mettez à jour les détails et les fourchettes de cachet."
+      },
+      "step4": {
+        "title": "📊 Rapports",
+        "description": "Suivez les performances de la plateforme — volumes d'EOI, taux de conversion, adoption du financement et analyses de revenus."
+      },
+      "step5": {
+        "title": "➕ Créer un projet de tournée",
+        "description": "Publiez un nouveau projet de tournée pour attirer des candidatures de promoteurs. Renseignez l'artiste, la fourchette de cachet, la fenêtre et la région."
+      },
+      "step6": {
+        "title": "✅ Vous êtes prêt !",
+        "description": "Vous connaissez le portail admin. Cliquez sur 'Visite de la plateforme' en bas de la barre latérale pour rejouer ce guide."
+      }
     }
   },
   "Common": {
@@ -3102,12 +3263,16 @@
       "venueBuildOutCredit": "Crédit d'aménagement de lieu (jusqu'à 75k $)",
       "eventInsuranceBundle": "Pack d'assurance événement",
       "marketingTicketingFloat": "Avance marketing & billetterie (jusqu'à 15k $)",
-      "eventCancellation": "Annulation d'événement",
-      "creditGuarantee": "Garantie de crédit",
-      "promoterBusiness": "Activité du promoteur (PME)",
-      "touringWorkforce": "Personnel de tournée",
-      "aviationEquipment": "Aviation & équipement",
-      "audienceTicketProtection": "Protection des billets du public"
+      "eventCancellationDisruption": "Protection contre l'annulation et la perturbation d'événements",
+      "publicLiabilityAudience": "Responsabilité civile et couverture de la sécurité du public",
+      "touringArtistRisk": "Gestion des risques pour les tournées et les artistes",
+      "workforceContractor": "Protection de la main-d'œuvre et des sous-traitants",
+      "productionEquipment": "Assurance équipement de production et actifs",
+      "venueInfrastructure": "Couverture des lieux et infrastructures",
+      "ticketProtection": "Protection des billets et solutions d'assurance consommateurs",
+      "sponsorBrandRisk": "Solutions de risques pour sponsors et activations de marque",
+      "complianceRisk": "Services de conformité et d'évaluation des risques",
+      "dataDrivenInsurance": "Produits d'assurance pilotés par les données"
     },
     "fields": {
       "product": "Produit",
@@ -4378,20 +4543,44 @@
     "stats": {
       "title": "L'Afrique compte 1,4 milliard de fans de musique. Presque personne ne gagne sa vie avec les concerts — pour l'instant.",
       "subtitle": "La demande est prouvée. Ce qui manque, c'est l'infrastructure pour la financer, l'assurer et l'organiser. C'est ce que vous rejoignez.",
-      "economy": { "value": "25,8 Md$", "label": "Économie de la musique live en Afrique" },
-      "fans": { "value": "1,4 milliard", "label": "Fans de musique africains" },
-      "markets": { "value": "25 marchés", "label": "Déploiement panafricain en cours" },
-      "financing": { "value": "Jusqu'à 1 M$", "label": "Financement commercial pour les membres" }
+      "economy": {
+        "value": "25,8 Md$",
+        "label": "Économie de la musique live en Afrique"
+      },
+      "fans": {
+        "value": "1,4 milliard",
+        "label": "Fans de musique africains"
+      },
+      "markets": {
+        "value": "25 marchés",
+        "label": "Déploiement panafricain en cours"
+      },
+      "financing": {
+        "value": "Jusqu'à 1 M$",
+        "label": "Financement commercial pour les membres"
+      }
     },
     "model": {
       "eyebrow": "Comment fonctionne l'écosystème",
       "title": "Le Concert Touring as a Service",
       "subtitle": "TourStack réunit sur une seule plateforme chaque personne et chaque dollar nécessaires à une tournée. Quatre étapes transforment l'industrie de la musique live en un écosystème finançable et assurable — chacune s'appuyant sur la précédente.",
       "pillars": {
-        "certify": { "title": "Soyez certifié", "body": "Inscrivez-vous et complétez votre profil pour obtenir un statut vérifié — le titre professionnel qui débloque tout le reste." },
-        "bank": { "title": "Soyez bancarisé", "body": "Les membres certifiés sont intégrés au système financier formel et deviennent des entreprises traçables et finançables." },
-        "finance": { "title": "Soyez financé", "body": "Accédez à un fonds de roulement et au financement de tournée adossés à des contrats confirmés et à de vraies factures de promoteurs." },
-        "operate": { "title": "Opérez sur TourStack", "body": "Recrutement, paie, contrats et paiements passent par une seule plateforme, sur tous les marchés, en temps réel." }
+        "certify": {
+          "title": "Soyez certifié",
+          "body": "Inscrivez-vous et complétez votre profil pour obtenir un statut vérifié — le titre professionnel qui débloque tout le reste."
+        },
+        "bank": {
+          "title": "Soyez bancarisé",
+          "body": "Les membres certifiés sont intégrés au système financier formel et deviennent des entreprises traçables et finançables."
+        },
+        "finance": {
+          "title": "Soyez financé",
+          "body": "Accédez à un fonds de roulement et au financement de tournée adossés à des contrats confirmés et à de vraies factures de promoteurs."
+        },
+        "operate": {
+          "title": "Opérez sur TourStack",
+          "body": "Recrutement, paie, contrats et paiements passent par une seule plateforme, sur tous les marchés, en temps réel."
+        }
       }
     },
     "about": {
