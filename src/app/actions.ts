@@ -732,6 +732,44 @@ export async function getAdminArtists() {
 	};
 }
 
+export async function updateAdminArtist(
+	id: string,
+	body: {
+		name?: string;
+		genre?: string;
+		tourName?: string;
+		tourStart?: string;
+		tourEnd?: string;
+		feeMin?: number;
+		feeMax?: number;
+		markets?: string[];
+		region?: string;
+		tourWindow?: string;
+		isTrending?: boolean;
+		isActive?: boolean;
+		bio?: string | null;
+	},
+) {
+	const { data, error } = await (client.tourstack.admin.artists as any)({
+		id,
+	}).patch(body);
+	return {
+		data: await extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+export async function deleteAdminArtist(id: string) {
+	const { data, error } = await (client.tourstack.admin.artists as any)({
+		id,
+	}).delete();
+	return {
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
 export async function uploadTourImage(formData: FormData) {
 	const file = formData.get("file");
 	if (!file || typeof file === "string") {

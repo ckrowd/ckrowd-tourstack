@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getAdminArtists } from "@/app/actions";
+import ArtistActionsMenu from "@/components/ArtistActionsMenu";
 import { Link } from "@/i18n/routing";
 
 export default async function AdminArtistsPage({
@@ -86,7 +87,7 @@ export default async function AdminArtistsPage({
 												</span>
 											</div>
 										)}
-										<div className="absolute top-3 right-3">
+										<div className="absolute top-3 left-3">
 											<span
 												className={`px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter ${
 													isActive
@@ -96,6 +97,24 @@ export default async function AdminArtistsPage({
 											>
 												{isActive ? t("active") : t("inactive")}
 											</span>
+										</div>
+										<div className="absolute top-2 right-2">
+											<ArtistActionsMenu
+												artistId={String(artist.id)}
+												initial={{
+													name: String(artist.name ?? ""),
+													genre: String(artist.genre ?? ""),
+													tourName: String(artist.tour_name ?? ""),
+													tourStart: artist.tour_start ? String(artist.tour_start) : undefined,
+													tourEnd: artist.tour_end ? String(artist.tour_end) : undefined,
+													feeMin: artist.fee_min != null ? Number(artist.fee_min) : null,
+													feeMax: artist.fee_max != null ? Number(artist.fee_max) : null,
+													region: String(artist.region ?? ""),
+													markets: Array.isArray(artist.markets) ? (artist.markets as string[]) : [],
+													isActive,
+													isTrending: Boolean(artist.is_trending),
+												}}
+											/>
 										</div>
 									</div>
 

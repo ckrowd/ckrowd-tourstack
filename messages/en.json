@@ -4763,5 +4763,34 @@
       "missingCategories": "Missing links for: {categories}. Click Generate to create them.",
       "urlLabel": "Share this link with your ecosystem"
     }
+  },
+  "ArtistActionsMenu": {
+    "openMenu": "Open actions menu",
+    "edit": "Edit",
+    "editTitle": "Edit Artist",
+    "editError": "Could not save changes. Try again.",
+    "save": "Save changes",
+    "saving": "Saving…",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "deleteTitle": "Delete this artist?",
+    "deleteDescription": "This permanently removes the artist and all associated data. It cannot be undone.",
+    "confirmDelete": "Delete",
+    "deleting": "Deleting…",
+    "errorGeneric": "Something went wrong. Try again.",
+    "fields": {
+      "active": "Active",
+      "trending": "Trending",
+      "name": "Artist Name",
+      "genre": "Genre",
+      "tourName": "Tour Name",
+      "tourStart": "Tour Start",
+      "tourEnd": "Tour End",
+      "feeMin": "Min Fee (USD)",
+      "feeMax": "Max Fee (USD)",
+      "region": "Region",
+      "markets": "Markets",
+      "marketsHint": "Comma-separated city names, e.g. Lagos, Accra, Nairobi"
+    }
   }
 }
