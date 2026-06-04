@@ -4751,5 +4751,34 @@
     "footer": {
       "tagline": "TourStack by Ckrowd — construire l'ecosysteme musical live africain"
     }
+  },
+  "ArtistActionsMenu": {
+    "openMenu": "Ouvrir le menu",
+    "edit": "Modifier",
+    "editTitle": "Modifier l'artiste",
+    "editError": "Impossible d'enregistrer les modifications. Réessayez.",
+    "save": "Enregistrer",
+    "saving": "Enregistrement…",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "deleteTitle": "Supprimer cet artiste ?",
+    "deleteDescription": "Cela supprime définitivement l'artiste et toutes les données associées.",
+    "confirmDelete": "Supprimer",
+    "deleting": "Suppression…",
+    "errorGeneric": "Une erreur s'est produite. Réessayez.",
+    "fields": {
+      "active": "Actif",
+      "trending": "Tendance",
+      "name": "Nom de l'artiste",
+      "genre": "Genre",
+      "tourName": "Nom de la tournée",
+      "tourStart": "Début de tournée",
+      "tourEnd": "Fin de tournée",
+      "feeMin": "Cachet min (USD)",
+      "feeMax": "Cachet max (USD)",
+      "region": "Région",
+      "markets": "Marchés",
+      "marketsHint": "Villes séparées par des virgules, ex. Lagos, Accra, Nairobi"
+    }
   }
 }
