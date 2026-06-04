@@ -1351,7 +1351,8 @@
         "success": "Password updated.",
         "error": "We couldn't update your password. Check your current password and try again.",
         "tooShort": "New password must be at least 8 characters.",
-        "mismatch": "New passwords do not match."
+        "mismatch": "New passwords do not match.",
+        "emailSent": "A confirmation email has been sent to your address."
       },
       "twoFactor": {
         "title": "Two-Factor Authentication",
