@@ -9,11 +9,13 @@ export default function HowItWorksModal({
 	subtitle,
 	steps,
 	buttonLabel,
+	grouped = false,
 }: {
 	title: string;
 	subtitle?: string;
 	steps: Step[];
 	buttonLabel: string;
+	grouped?: boolean;
 }) {
 	const [open, setOpen] = useState(false);
 	const titleId = useId();
@@ -37,13 +39,17 @@ export default function HowItWorksModal({
 			<button
 				type="button"
 				onClick={() => setOpen(true)}
-				className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-bold hover:bg-surface-container-high transition-colors"
+				className={`inline-flex items-center gap-2 px-4 py-2.5 text-on-surface text-sm font-semibold transition-colors ${
+					grouped
+						? "bg-surface-container-lowest hover:bg-surface-container-low"
+						: "rounded-xl bg-surface-container-highest hover:bg-surface-container-high"
+				}`}
 				aria-label={buttonLabel}
 			>
-				<span className="material-symbols-outlined text-base text-[#FF5A30]">
+				<span className="material-symbols-outlined text-[#FF5A30]" style={{ fontSize: "18px" }}>
 					info
 				</span>
-				<span className="hidden sm:inline">{buttonLabel}</span>
+				<span>{buttonLabel}</span>
 			</button>
 
 			{open && (

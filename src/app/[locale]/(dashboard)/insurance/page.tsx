@@ -188,11 +188,6 @@ export default function InsurancePage() {
 		cost: string;
 	}
 
-	interface FAQ {
-		q: string;
-		a: string;
-	}
-
 	const STAKEHOLDERS = [
 		{
 			id: "promoter",
@@ -293,29 +288,33 @@ export default function InsurancePage() {
 								{t("hero.description")}
 							</p>
 						</div>
-						<div className="flex items-center gap-2 flex-wrap self-start md:self-auto">
-							<HowItWorksModal
-								title={t("howItWorksTitle")}
-								subtitle={t("howItWorksSubtitle")}
-								steps={ECOSYSTEM_FLOW.map((s) => ({ step: s.step, title: s.label, desc: s.desc }))}
-								buttonLabel={t("howItWorksButton")}
-							/>
-							<button
-								type="button"
-								onClick={() => setFaqOpen(true)}
-								className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-bold hover:bg-surface-container-high transition-colors"
-							>
-								<span className="material-symbols-outlined text-base text-[#FF5A30]">help</span>
-								<span className="hidden sm:inline">{t("faqButton")}</span>
-							</button>
+						<div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 self-start md:self-auto w-full sm:w-auto">
+							{/* Utility button group */}
+							<div className="flex items-center rounded-xl border border-outline-variant/20 overflow-hidden shadow-sm shrink-0">
+								<HowItWorksModal
+									title={t("howItWorksTitle")}
+									subtitle={t("howItWorksSubtitle")}
+									steps={ECOSYSTEM_FLOW.map((s) => ({ step: s.step, title: s.label, desc: s.desc }))}
+									buttonLabel={t("howItWorksButton")}
+									grouped
+								/>
+								<div className="w-px h-8 bg-outline-variant/20 shrink-0" />
+								<button
+									type="button"
+									onClick={() => setFaqOpen(true)}
+									className="inline-flex items-center gap-2 px-4 py-2.5 bg-surface-container-lowest text-on-surface text-sm font-semibold hover:bg-surface-container-low transition-colors"
+								>
+									<span className="material-symbols-outlined text-base text-[#FF5A30]" style={{ fontSize: "18px" }}>help</span>
+									<span>{t("faqButton")}</span>
+								</button>
+							</div>
+							{/* Primary CTA */}
 							<FinancingApplyButton
 								defaultProduct={INSURANCE_DEFAULT_PRODUCT}
 								products={INSURANCE_PRODUCT_IDS}
-								className="flex items-center gap-2 bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all shrink-0"
+								className="flex items-center justify-center gap-2 bg-[#FF5A30] text-white px-6 py-2.5 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all shrink-0"
 							>
-								<span className="material-symbols-outlined text-sm">
-									how_to_reg
-								</span>
+								<span className="material-symbols-outlined text-sm">how_to_reg</span>
 								{t("hero.startOnboarding")}
 							</FinancingApplyButton>
 						</div>
@@ -836,27 +835,6 @@ export default function InsurancePage() {
 							</div>
 						</div>
 
-						{/* FAQ */}
-						<section>
-							<h2 className="font-(family-name:--font-manrope) text-2xl font-bold mb-6">
-								{t("faq.title")}
-							</h2>
-							<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-								{(t.raw("faq.items") as FAQ[]).map((faq, i) => (
-									<div
-										key={i}
-										className="bg-surface-container-lowest rounded-2xl p-7 border border-outline-variant/10 shadow-sm"
-									>
-										<p className="font-(family-name:--font-manrope) font-bold text-on-surface mb-2">
-											{faq.q}
-										</p>
-										<p className="text-sm text-on-surface-variant leading-relaxed">
-											{faq.a}
-										</p>
-									</div>
-								))}
-							</div>
-						</section>
 					</div>
 				)}
 
