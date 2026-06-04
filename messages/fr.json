@@ -1351,7 +1351,8 @@
         "success": "Mot de passe mis à jour.",
         "error": "Nous n'avons pas pu mettre à jour votre mot de passe. Vérifiez votre mot de passe actuel et réessayez.",
         "tooShort": "Le nouveau mot de passe doit comporter au moins 8 caractères.",
-        "mismatch": "Les nouveaux mots de passe ne correspondent pas."
+        "mismatch": "Les nouveaux mots de passe ne correspondent pas.",
+        "emailSent": "Un email de confirmation a été envoyé à votre adresse."
       },
       "twoFactor": {
         "title": "Authentification à deux facteurs",

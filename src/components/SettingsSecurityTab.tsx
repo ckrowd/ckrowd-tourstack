@@ -141,9 +141,22 @@ export default function SettingsSecurityTab() {
 					/>
 				</div>
 				{passwordMutation.data?.success && (
-					<p className="text-sm font-semibold text-emerald-600">
-						{t("password.success")}
-					</p>
+					<div className="flex items-start gap-3 rounded-xl bg-emerald-50 border border-emerald-200 px-4 py-3">
+						<span
+							className="material-symbols-outlined text-emerald-600 text-base mt-0.5 shrink-0"
+							style={{ fontVariationSettings: "'FILL' 1" }}
+						>
+							mark_email_read
+						</span>
+						<div>
+							<p className="text-sm font-bold text-emerald-800">
+								{t("password.success")}
+							</p>
+							<p className="text-xs text-emerald-700 mt-0.5">
+								{t("password.emailSent")}
+							</p>
+						</div>
+					</div>
 				)}
 				{passwordErrorMessage && (
 					<p className="text-sm font-semibold text-rose-600">
