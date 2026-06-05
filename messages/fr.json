@@ -3073,7 +3073,7 @@
   },
   "Tour": {
     "replayButton": "Visite de la plateforme",
-    "progress": "{current} sur {total}",
+    "progressSeparator": "sur",
     "next": "Suivant →",
     "prev": "← Retour",
     "done": "Compris !",

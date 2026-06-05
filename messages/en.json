@@ -3073,7 +3073,7 @@
   },
   "Tour": {
     "replayButton": "Platform Tour",
-    "progress": "{current} of {total}",
+    "progressSeparator": "of",
     "next": "Next →",
     "prev": "← Back",
     "done": "Got it!",

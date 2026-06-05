@@ -4,6 +4,7 @@ import type { DriveStep } from "driver.js";
 import { useCallback, useEffect, useMemo } from "react";
 import { useTranslations } from "next-intl";
 import { applyTourStyles } from "@/lib/tour-styles";
+import { useSession } from "@/context/AuthContext";
 
 export type PageTourId =
 	| "discovery"
@@ -77,18 +78,39 @@ function buildSteps(
 	}
 }
 
+/** Returns a per-account storage key so different users on the same device
+ * each track their own page-tour completion state. */
+function makeStorageKey(pageId: PageTourId, userId: string | undefined): string {
+	const base = `ts_page_tour_${pageId}_v1`;
+	return userId ? `${base}_${userId}` : base;
+}
+
 export default function PageTour({ pageId }: { pageId: PageTourId }) {
 	const t = useTranslations("PageTour");
-	const storageKey = `ts_page_tour_${pageId}_v1`;
+	const tTour = useTranslations("Tour");
+	const { data: session } = useSession();
+	const userId = session?.user?.id as string | undefined;
+
 	const steps = useMemo(() => buildSteps(pageId, t), [pageId, t]);
+
+	// Build the driver.js progress template in code — ICU/next-intl cannot
+	// safely hold {{x}} or {x} placeholders for driver.js, so we only translate
+	// the connector word and compose the template string here.
+	const progressTemplate = `{{current}} ${tTour("progressSeparator")} {{total}}`;
 
 	const startTour = useCallback(async () => {
 		const { driver } = await import("driver.js");
+		const storageKey = makeStorageKey(pageId, userId);
+
 		const driverObj = driver({
 			showProgress: true,
 			allowClose: true,
 			overlayOpacity: 0.5,
 			smoothScroll: true,
+			progressText: progressTemplate,
+			nextBtnText: tTour("next"),
+			prevBtnText: tTour("prev"),
+			doneBtnText: tTour("done"),
 			steps,
 			onPopoverRender: (popover) =>
 				applyTourStyles(popover as unknown as Record<string, Element>),
@@ -98,15 +120,19 @@ export default function PageTour({ pageId }: { pageId: PageTourId }) {
 			},
 		});
 		driverObj.drive();
-	}, [steps, storageKey]);
+	}, [steps, pageId, userId, progressTemplate, tTour]);
 
-	// Auto-play on first visit to this page
+	// Auto-play on first visit — but only after session is resolved so the
+	// per-account key can be checked correctly.
 	useEffect(() => {
+		// session === undefined means still loading; skip until resolved.
+		if (session === undefined) return;
+		const storageKey = makeStorageKey(pageId, userId);
 		const seen = localStorage.getItem(storageKey);
 		if (seen) return;
 		const timeout = setTimeout(startTour, 1400);
 		return () => clearTimeout(timeout);
-	}, [storageKey, startTour]);
+	}, [pageId, startTour, session, userId]);
 
 	// Listen for guide button click dispatched by TopNav
 	useEffect(() => {

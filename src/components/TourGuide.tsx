@@ -5,13 +5,21 @@ import type { DriveStep } from "driver.js";
 import { useCallback, useEffect } from "react";
 import { useTranslations } from "next-intl";
 import { applyTourStyles } from "@/lib/tour-styles";
+import { useSession } from "@/context/AuthContext";
 
 type TourId = "promoter" | "admin";
 
-const STORAGE_KEY: Record<TourId, string> = {
+const STORAGE_KEY_BASE: Record<TourId, string> = {
 	promoter: "ts_tour_promoter_v1",
 	admin: "ts_tour_admin_v1",
 };
+
+/** Returns a per-account storage key so different users on the same device
+ * each track their own tour completion state. */
+function storageKey(tourId: TourId, userId: string | undefined): string {
+	const base = STORAGE_KEY_BASE[tourId];
+	return userId ? `${base}_${userId}` : base;
+}
 
 function buildPromoterSteps(t: ReturnType<typeof useTranslations<"Tour">>): DriveStep[] {
 	return [
@@ -69,36 +77,48 @@ function buildAdminSteps(t: ReturnType<typeof useTranslations<"Tour">>): DriveSt
 
 export default function TourGuide({ tourId }: { tourId: TourId }) {
 	const t = useTranslations("Tour");
+	const { data: session } = useSession();
+	const userId = session?.user?.id as string | undefined;
+
+	// Build the driver.js progress template in code — ICU/next-intl cannot
+	// safely hold {{x}} or {x} placeholders for driver.js, so we only translate
+	// the connector word and compose the template string here.
+	const progressTemplate = `{{current}} ${t("progressSeparator")} {{total}}`;
 
 	const startTour = useCallback(async () => {
 		const { driver } = await import("driver.js");
 		const steps = tourId === "promoter" ? buildPromoterSteps(t) : buildAdminSteps(t);
+		const key = storageKey(tourId, userId);
 
 		const driverObj = driver({
 			showProgress: true,
 			allowClose: true,
 			overlayOpacity: 0.55,
 			smoothScroll: true,
-			progressText: t("progress"),
+			progressText: progressTemplate,
 			nextBtnText: t("next"),
 			prevBtnText: t("prev"),
 			doneBtnText: t("done"),
 			steps,
 			onPopoverRender: (popover) => applyTourStyles(popover as unknown as Record<string, Element>),
 			onDestroyStarted: () => {
-				localStorage.setItem(STORAGE_KEY[tourId], "1");
+				localStorage.setItem(key, "1");
 				driverObj.destroy();
 			},
 		});
 		driverObj.drive();
-	}, [tourId, t]);
+	}, [tourId, t, userId, progressTemplate]);
 
 	useEffect(() => {
-		const seen = localStorage.getItem(STORAGE_KEY[tourId]);
+		// Wait until the session is resolved before deciding whether to auto-start.
+		// session === undefined means still loading; null means logged out.
+		if (session === undefined) return;
+		const key = storageKey(tourId, userId);
+		const seen = localStorage.getItem(key);
 		if (seen) return;
 		const timeout = setTimeout(startTour, 1200);
 		return () => clearTimeout(timeout);
-	}, [tourId, startTour]);
+	}, [tourId, startTour, session, userId]);
 
 	return (
 		<button
