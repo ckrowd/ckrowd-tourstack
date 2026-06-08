@@ -3,7 +3,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
-import { signInWithGoogle } from "@/app/actions";
 
 /**
  * "Continue with Google" button. Asks the backend for the OAuth consent URL
@@ -20,12 +19,27 @@ export default function GoogleSignInButton({
 	const [error, setError] = useState<string | null>(null);
 
 	const mutation = useMutation({
-		mutationFn: () => {
+		mutationFn: async () => {
 			const origin = window.location.origin;
-			const path = callbackPath.startsWith("/")
-				? callbackPath
-				: `/${callbackPath}`;
-			return signInWithGoogle(`${origin}/${locale}${path}`);
+			const path = callbackPath.startsWith("/") ? callbackPath : `/${callbackPath}`;
+			const callbackURL = `${origin}/${locale}${path}`;
+
+			// Use the API route instead of a server action so that Set-Cookie
+			// headers from the backend (with Domain=.ckrowd.com) are forwarded
+			// directly to the browser. Server actions go through Next.js's cookie
+			// jar which strips the domain, preventing the state cookie from
+			// reaching gateway.ckrowd.com on the OAuth callback.
+			const res = await fetch("/api/auth/google", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({ provider: "google", callbackURL, redirect: false }),
+			});
+
+			const data = await res.json();
+			if (!res.ok || !data?.url) {
+				return { success: false as const, error: data?.error ?? t("googleError") };
+			}
+			return { success: true as const, url: data.url as string };
 		},
 		onSuccess: (result) => {
 			if (result.success) {
