@@ -96,9 +96,16 @@ export default function DiscoveryPage() {
 
 				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
 					{/* Header */}
-					{/* Backend orders artists by is_trending desc, so artists[0] is the top trending tour */}
 					{(() => {
-						const topTrending = artists[0];
+						// Pick the artist with the most EOI submissions; fall back to first result.
+						const topByEoi = artists
+							.filter((a) => ((a as unknown as { _count?: { eois: number } })._count?.eois ?? 0) > 0)
+							.sort(
+								(a, b) =>
+									((b as unknown as { _count?: { eois: number } })._count?.eois ?? 0) -
+									((a as unknown as { _count?: { eois: number } })._count?.eois ?? 0),
+							)[0];
+						const topTrending = topByEoi ?? artists[0];
 						return (
 							<div className="mb-10 flex flex-col md:flex-row md:items-start justify-between gap-6">
 								<div>
