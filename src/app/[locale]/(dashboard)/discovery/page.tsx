@@ -96,29 +96,9 @@ export default function DiscoveryPage() {
 
 				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
 					{/* Header */}
+					{/* Backend orders artists by is_trending desc, so artists[0] is the top trending tour */}
 					{(() => {
-						// Compute top genre from live artist data
-						const genreMap: Record<string, string> = {
-							afrobeats: "Afrobeats", afro: "Afrobeats",
-							jazz: "Jazz & Soul", soul: "Jazz & Soul", "neo-soul": "Jazz & Soul",
-							electronic: "Electronic", "tech-house": "Electronic",
-							"indie rock": "Indie Rock",
-							classical: "Modern Classical",
-							world: "World / Folk", folk: "World / Folk",
-						};
-						const genreCounts: Record<string, number> = {};
-						const windowCounts: Record<string, number> = {};
-						for (const a of artists) {
-							const raw = String(a.genre ?? "").toLowerCase().trim();
-							const display = Object.entries(genreMap).find(([k]) => raw.includes(k))?.[1]
-								?? (raw ? raw.charAt(0).toUpperCase() + raw.slice(1) : null);
-							if (display) genreCounts[display] = (genreCounts[display] ?? 0) + 1;
-							const w = String(a.tour_window ?? "").trim();
-							if (w) windowCounts[w] = (windowCounts[w] ?? 0) + 1;
-						}
-						const topGenre = Object.entries(genreCounts).sort((a, b) => b[1] - a[1])[0];
-						const topWindow = Object.entries(windowCounts).sort((a, b) => b[1] - a[1])[0];
-
+						const topTrending = artists[0];
 						return (
 							<div className="mb-10 flex flex-col md:flex-row md:items-start justify-between gap-6">
 								<div>
@@ -161,11 +141,11 @@ export default function DiscoveryPage() {
 												{t("trending.title")}
 											</p>
 											<p className="text-on-tertiary-fixed-variant text-sm mt-1 leading-relaxed">
-												{topGenre && topWindow
+												{topTrending
 													? t("trending.dynamicDesc", {
-														genre: topGenre[0],
-														count: topGenre[1],
-														window: topWindow[0],
+														tourName: String(topTrending.tour_name ?? topTrending.name),
+														artist: String(topTrending.name),
+														window: String(topTrending.tour_window ?? ""),
 													})
 													: t("trending.fallbackDesc")}
 											</p>

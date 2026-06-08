@@ -2346,7 +2346,7 @@
     },
     "trending": {
       "title": "Tendances actuelles",
-      "dynamicDesc": "{genre} mène avec {count} projet{count, plural, one {} other {s}} de tournée actif{count, plural, one {} other {s}} pour {window}.",
+      "dynamicDesc": "« {tourName} » par {artist} — {window}.",
       "fallbackDesc": "Parcourez les projets de tournée actifs sur le circuit panafricain."
     },
     "filters": {

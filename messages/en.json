@@ -2346,7 +2346,7 @@
     },
     "trending": {
       "title": "Trending Now",
-      "dynamicDesc": "{genre} leads with {count} active tour {count, plural, one {project} other {projects}} for {window}.",
+      "dynamicDesc": "\"{tourName}\" by {artist} — {window}.",
       "fallbackDesc": "Browse active tour projects across the Pan-African circuit."
     },
     "filters": {
