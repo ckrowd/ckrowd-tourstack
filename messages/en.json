@@ -367,6 +367,7 @@
     "openProfileMenu": "Open profile menu",
     "closeProfileMenu": "Close profile menu",
     "markAllAsRead": "Mark all as read",
+    "viewAllNotifications": "View all notifications",
     "checkingSession": "Checking session",
     "notif": {
       "empty": "No notifications yet",
@@ -376,6 +377,13 @@
       "statusNeedsRevision": "Your EOI needs revision",
       "statusPendingReview": "Your EOI is under review"
     }
+  },
+  "NotificationsPage": {
+    "title": "Notifications",
+    "subtitle": "Your recent EOI status updates",
+    "empty": "No notifications yet",
+    "emptyHint": "Your EOI status updates will appear here.",
+    "backToDashboard": "Back to dashboard"
   },
   "Auth": {
     "continueWithGoogle": "Continue with Google",
@@ -2406,7 +2414,8 @@
         "title": "Decision & Execution",
         "description": "You receive Approved, Rejected, or Needs Revision — then proceed to planning."
       },
-      "startEoi": "Start Your EOI"
+      "startEoi": "Start Your EOI",
+      "button": "How It Works"
     },
     "financing": {
       "title": "Financing Support Available",
