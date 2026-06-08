@@ -2346,7 +2346,8 @@
     },
     "trending": {
       "title": "Trending Now",
-      "description": "Neo-Soul & Jazz acts seeing a 40% EOI surge for Q4 across East & West Africa."
+      "dynamicDesc": "{genre} leads with {count} active tour {count, plural, one {project} other {projects}} for {window}.",
+      "fallbackDesc": "Browse active tour projects across the Pan-African circuit."
     },
     "filters": {
       "genre": "Genre",

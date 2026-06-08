@@ -2346,7 +2346,8 @@
     },
     "trending": {
       "title": "Tendances actuelles",
-      "description": "Les artistes Neo-Soul et Jazz voient une augmentation de 40 % des EOI pour le T4 en Afrique de l'Est et de l'Ouest."
+      "dynamicDesc": "{genre} mène avec {count} projet{count, plural, one {} other {s}} de tournée actif{count, plural, one {} other {s}} pour {window}.",
+      "fallbackDesc": "Parcourez les projets de tournée actifs sur le circuit panafricain."
     },
     "filters": {
       "genre": "Genre",

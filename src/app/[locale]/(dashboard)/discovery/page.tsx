@@ -96,51 +96,85 @@ export default function DiscoveryPage() {
 
 				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
 					{/* Header */}
-					<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
-						<div>
-							<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
-								{t("hero.platform")}
-							</span>
-							<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
-								{t.rich("hero.title", {
-									spanNode: (chunks) => (
-										<span className="text-[#FF5A30]">{chunks}</span>
-									),
-								})}
-							</h1>
-							<p className="text-on-surface-variant font-medium max-w-xl">
-								{t("hero.description")}
-							</p>
-							<div data-tour="discovery-how-it-works" className="mt-4">
-								<HowItWorksModal
-									title={t("howItWorks.title")}
-									buttonLabel={t("howItWorks.button")}
-									steps={[
-										{ step: "01", title: t("howItWorks.step1.title"), desc: t("howItWorks.step1.description") },
-										{ step: "02", title: t("howItWorks.step2.title"), desc: t("howItWorks.step2.description") },
-										{ step: "03", title: t("howItWorks.step3.title"), desc: t("howItWorks.step3.description") },
-										{ step: "04", title: t("howItWorks.step4.title"), desc: t("howItWorks.step4.description") },
-									]}
-								/>
+					{(() => {
+						// Compute top genre from live artist data
+						const genreMap: Record<string, string> = {
+							afrobeats: "Afrobeats", afro: "Afrobeats",
+							jazz: "Jazz & Soul", soul: "Jazz & Soul", "neo-soul": "Jazz & Soul",
+							electronic: "Electronic", "tech-house": "Electronic",
+							"indie rock": "Indie Rock",
+							classical: "Modern Classical",
+							world: "World / Folk", folk: "World / Folk",
+						};
+						const genreCounts: Record<string, number> = {};
+						const windowCounts: Record<string, number> = {};
+						for (const a of artists) {
+							const raw = String(a.genre ?? "").toLowerCase().trim();
+							const display = Object.entries(genreMap).find(([k]) => raw.includes(k))?.[1]
+								?? (raw ? raw.charAt(0).toUpperCase() + raw.slice(1) : null);
+							if (display) genreCounts[display] = (genreCounts[display] ?? 0) + 1;
+							const w = String(a.tour_window ?? "").trim();
+							if (w) windowCounts[w] = (windowCounts[w] ?? 0) + 1;
+						}
+						const topGenre = Object.entries(genreCounts).sort((a, b) => b[1] - a[1])[0];
+						const topWindow = Object.entries(windowCounts).sort((a, b) => b[1] - a[1])[0];
+
+						return (
+							<div className="mb-10 flex flex-col md:flex-row md:items-start justify-between gap-6">
+								<div>
+									<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+										{t("hero.platform")}
+									</span>
+									<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
+										{t.rich("hero.title", {
+											spanNode: (chunks) => (
+												<span className="text-[#FF5A30]">{chunks}</span>
+											),
+										})}
+									</h1>
+									<p className="text-on-surface-variant font-medium max-w-xl">
+										{t("hero.description")}
+									</p>
+								</div>
+								<div className="shrink-0 flex flex-col gap-4 max-w-sm w-full md:w-auto">
+									<div data-tour="discovery-how-it-works">
+										<HowItWorksModal
+											title={t("howItWorks.title")}
+											buttonLabel={t("howItWorks.button")}
+											steps={[
+												{ step: "01", title: t("howItWorks.step1.title"), desc: t("howItWorks.step1.description") },
+												{ step: "02", title: t("howItWorks.step2.title"), desc: t("howItWorks.step2.description") },
+												{ step: "03", title: t("howItWorks.step3.title"), desc: t("howItWorks.step3.description") },
+												{ step: "04", title: t("howItWorks.step4.title"), desc: t("howItWorks.step4.description") },
+											]}
+										/>
+									</div>
+									<div className="bg-tertiary-fixed p-5 rounded-xl flex items-start gap-4 shadow-sm">
+										<span
+											className="material-symbols-outlined text-tertiary text-3xl"
+											style={{ fontVariationSettings: "'FILL' 1" }}
+										>
+											bolt
+										</span>
+										<div>
+											<p className="font-(family-name:--font-manrope) font-bold text-on-tertiary-fixed leading-tight">
+												{t("trending.title")}
+											</p>
+											<p className="text-on-tertiary-fixed-variant text-sm mt-1 leading-relaxed">
+												{topGenre && topWindow
+													? t("trending.dynamicDesc", {
+														genre: topGenre[0],
+														count: topGenre[1],
+														window: topWindow[0],
+													})
+													: t("trending.fallbackDesc")}
+											</p>
+										</div>
+									</div>
+								</div>
 							</div>
-						</div>
-						<div className="shrink-0 bg-tertiary-fixed p-5 rounded-xl flex items-start gap-4 shadow-sm max-w-sm">
-							<span
-								className="material-symbols-outlined text-tertiary text-3xl"
-								style={{ fontVariationSettings: "'FILL' 1" }}
-							>
-								bolt
-							</span>
-							<div>
-								<p className="font-(family-name:--font-manrope) font-bold text-on-tertiary-fixed leading-tight">
-									{t("trending.title")}
-								</p>
-								<p className="text-on-tertiary-fixed-variant text-sm mt-1 leading-relaxed">
-									{t("trending.description")}
-								</p>
-							</div>
-						</div>
-					</div>
+						);
+					})()}
 
 					{/* Filters */}
 					<section data-tour="discovery-filters" className="bg-surface-container-low rounded-2xl p-4 md:p-6 mb-10">
