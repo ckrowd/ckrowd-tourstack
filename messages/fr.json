@@ -367,6 +367,7 @@
     "openProfileMenu": "Ouvrir le menu de profil",
     "closeProfileMenu": "Fermer le menu de profil",
     "markAllAsRead": "Tout marquer comme lu",
+    "viewAllNotifications": "Voir toutes les notifications",
     "checkingSession": "Vérification de la session",
     "notif": {
       "empty": "Aucune notification pour le moment",
@@ -376,6 +377,13 @@
       "statusNeedsRevision": "Votre EOI nécessite une révision",
       "statusPendingReview": "Votre EOI est en cours d'examen"
     }
+  },
+  "NotificationsPage": {
+    "title": "Notifications",
+    "subtitle": "Vos mises à jour récentes de statut EOI",
+    "empty": "Aucune notification pour le moment",
+    "emptyHint": "Vos mises à jour de statut EOI apparaîtront ici.",
+    "backToDashboard": "Retour au tableau de bord"
   },
   "Auth": {
     "continueWithGoogle": "Continuer avec Google",
@@ -2406,7 +2414,8 @@
         "title": "Décision et exécution",
         "description": "Vous recevez un statut Approuvé, Refusé ou Nécessite une révision — puis vous passez à la planification."
       },
-      "startEoi": "Commencer votre EOI"
+      "startEoi": "Commencer votre EOI",
+      "button": "Comment ça marche"
     },
     "financing": {
       "title": "Soutien au financement disponible",

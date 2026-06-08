@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
 import { getArtists } from "@/app/actions";
+import HowItWorksModal from "@/components/HowItWorksModal";
 import PageTour from "@/components/PageTour";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
@@ -110,6 +111,18 @@ export default function DiscoveryPage() {
 							<p className="text-on-surface-variant font-medium max-w-xl">
 								{t("hero.description")}
 							</p>
+							<div data-tour="discovery-how-it-works" className="mt-4">
+								<HowItWorksModal
+									title={t("howItWorks.title")}
+									buttonLabel={t("howItWorks.button")}
+									steps={[
+										{ step: "01", title: t("howItWorks.step1.title"), desc: t("howItWorks.step1.description") },
+										{ step: "02", title: t("howItWorks.step2.title"), desc: t("howItWorks.step2.description") },
+										{ step: "03", title: t("howItWorks.step3.title"), desc: t("howItWorks.step3.description") },
+										{ step: "04", title: t("howItWorks.step4.title"), desc: t("howItWorks.step4.description") },
+									]}
+								/>
+							</div>
 						</div>
 						<div className="shrink-0 bg-tertiary-fixed p-5 rounded-xl flex items-start gap-4 shadow-sm max-w-sm">
 							<span
@@ -387,62 +400,6 @@ export default function DiscoveryPage() {
 
 						{/* Sidebar */}
 						<aside className="lg:col-span-4 space-y-8">
-							{/* How it Works */}
-							<div data-tour="discovery-how-it-works" className="bg-white rounded-2xl p-8 border border-slate-100 shadow-sm">
-								<h3 className="font-(family-name:--font-manrope) text-xl font-bold mb-6">
-									{t("howItWorks.title")}
-								</h3>
-								<div className="space-y-7">
-									{[
-										{
-											step: "01",
-											title: t("howItWorks.step1.title"),
-											desc: t("howItWorks.step1.description"),
-										},
-										{
-											step: "02",
-											title: t("howItWorks.step2.title"),
-											desc: t("howItWorks.step2.description"),
-										},
-										{
-											step: "03",
-											title: t("howItWorks.step3.title"),
-											desc: t("howItWorks.step3.description"),
-										},
-										{
-											step: "04",
-											title: t("howItWorks.step4.title"),
-											desc: t("howItWorks.step4.description"),
-										},
-									].map((item) => (
-										<div key={item.step} className="flex gap-4">
-											<div className="shrink-0 w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-[#FF5A30] font-black text-xs">
-												{item.step}
-											</div>
-											<div>
-												<p className="font-bold text-sm text-on-surface">
-													{item.title}
-												</p>
-												<p className="text-xs text-on-surface-variant mt-1 leading-relaxed">
-													{item.desc}
-												</p>
-											</div>
-										</div>
-									))}
-								</div>
-								<div className="mt-8 pt-6 border-t border-slate-100">
-									<Link
-										href="/eoi"
-										className="w-full text-[#FF5A30] font-bold text-sm flex items-center justify-center gap-2 py-2 hover:bg-primary-fixed/30 rounded-lg transition-colors"
-									>
-										{t("howItWorks.startEoi")}{" "}
-										<span className="material-symbols-outlined text-sm">
-											arrow_forward
-										</span>
-									</Link>
-								</div>
-							</div>
-
 							{/* Financing Banner */}
 							<div className="bg-linear-to-br from-[#FF5A30] to-[#cc4826] rounded-2xl p-8 text-white relative overflow-hidden group">
 								<div className="relative z-10">

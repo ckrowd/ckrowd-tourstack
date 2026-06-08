@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { getEOIs } from "@/app/actions";
 import { useLogout, useSession } from "@/context/AuthContext";
 import { Link, routing, usePathname, useRouter } from "@/i18n/routing";
@@ -38,6 +38,19 @@ export default function TopNav() {
 		enabled: Boolean(session?.user),
 	});
 
+	// Track which notifications the user has read via a localStorage timestamp.
+	const STORAGE_KEY = "ckrowd_notif_read_at";
+	const [readAt, setReadAt] = useState<number>(() => {
+		if (typeof window === "undefined") return 0;
+		return Number(localStorage.getItem(STORAGE_KEY) ?? 0);
+	});
+	const markAllRead = useCallback(() => {
+		const now = Date.now();
+		localStorage.setItem(STORAGE_KEY, String(now));
+		setReadAt(now);
+		setNotifOpen(false);
+	}, []);
+
 	const statusMeta: Record<
 		string,
 		{ icon: string; color: string; label: string }
@@ -64,22 +77,27 @@ export default function TopNav() {
 		},
 	};
 
-	const notifications = (eoisQuery.data?.data ?? []).slice(0, 6).map((eoi) => {
+	const allNotifications = (eoisQuery.data?.data ?? []).map((eoi) => {
 		const status = String(eoi.status ?? "pending_review");
 		const meta = statusMeta[status] ?? {
 			icon: "notifications",
 			color: "text-slate-400",
 			label: status.replace(/_/g, " "),
 		};
+		const date = eoi.created_at ? new Date(String(eoi.created_at)) : null;
 		return {
 			id: String(eoi.id),
 			icon: meta.icon,
 			color: meta.color,
 			title: String(eoi.artist?.name ?? t("notif.eoiFallback")),
 			body: meta.label,
-			date: eoi.created_at ? new Date(String(eoi.created_at)) : null,
+			date,
+			unread: date ? date.getTime() > readAt : false,
 		};
 	});
+
+	const notifications = allNotifications.slice(0, 6);
+	const hasUnread = allNotifications.some((n) => n.unread);
 
 	const userInitial = session?.user?.email
 		? session.user.email[0].toUpperCase()
@@ -306,7 +324,7 @@ export default function TopNav() {
 									<span className="material-symbols-outlined text-[#494455]">
 										notifications
 									</span>
-									{notifications.length > 0 && (
+									{hasUnread && (
 										<span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#FF5A30] rounded-full" />
 									)}
 								</button>
@@ -656,7 +674,7 @@ export default function TopNav() {
 									{notifications.map((n) => (
 										<li
 											key={n.id}
-											className="flex items-start gap-3 px-5 py-4 hover:bg-slate-50 transition-colors"
+											className={`flex items-start gap-3 px-5 py-4 hover:bg-slate-50 transition-colors ${n.unread ? "bg-orange-50/40" : ""}`}
 										>
 											<span
 												className={`material-symbols-outlined text-lg mt-0.5 shrink-0 ${n.color}`}
@@ -677,14 +695,21 @@ export default function TopNav() {
 										</li>
 									))}
 								</ul>
-								<div className="px-5 py-3 border-t border-slate-100">
+								<div className="px-5 py-3 border-t border-slate-100 flex items-center justify-between gap-4">
 									<button
 										type="button"
 										className="text-xs font-semibold text-[#FF5A30] hover:underline"
-										onClick={() => setNotifOpen(false)}
+										onClick={markAllRead}
 									>
 										{t("markAllAsRead")}
 									</button>
+									<Link
+										href="/notifications"
+										className="text-xs font-semibold text-slate-500 hover:text-[#FF5A30] transition-colors"
+										onClick={() => setNotifOpen(false)}
+									>
+										{t("viewAllNotifications")}
+									</Link>
 								</div>
 							</>
 						)}
