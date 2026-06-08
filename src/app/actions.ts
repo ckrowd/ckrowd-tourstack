@@ -3,7 +3,7 @@
 import { createClient } from "@ckrowd/ckrowd-prisma";
 import { extractResponseCookies } from "@ckrowd/ckrowd-prisma/utils";
 import { getLocale } from "next-intl/server";
-import { cookies } from "next/headers";
+import { cookies, headers as nextHeaders } from "next/headers";
 import { redirect } from "next/navigation";
 
 export type Params<T extends (...args: any) => any> = NonNullable<
@@ -21,11 +21,25 @@ const client = createClient({
 			.getAll()
 			.map((c) => `${c.name}=${c.value}`)
 			.join("; ");
+
+		// Forward the real client IP and browser user-agent so the backend
+		// can use them for login notifications. The server action runs on
+		// Netlify, so the backend would otherwise see Netlify's US IP.
+		const incoming = await nextHeaders();
+		const clientIp =
+			incoming.get("cf-connecting-ip") ??
+			incoming.get("x-real-ip") ??
+			incoming.get("x-forwarded-for")?.split(",")[0]?.trim() ??
+			null;
+		const userAgent = incoming.get("user-agent") ?? null;
+
 		return {
 			...options,
 			headers: {
 				...(options.headers as Record<string, string>),
 				Cookie: cookieString,
+				...(clientIp ? { "x-client-real-ip": clientIp } : {}),
+				...(userAgent ? { "user-agent": userAgent } : {}),
 			},
 		};
 	},
