@@ -6,6 +6,17 @@ import { useTranslations } from "next-intl";
 import { applyTourStyles } from "@/lib/tour-styles";
 import { useSession } from "@/context/AuthContext";
 
+const NEW_ACCOUNT_WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+function isNewAccount(user: unknown): boolean {
+	const u = user as Record<string, unknown> | null | undefined;
+	if (!u) return false;
+	const raw = (u.created_at ?? u.createdAt) as string | Date | null | undefined;
+	if (!raw) return false;
+	const ts = raw instanceof Date ? raw.getTime() : new Date(raw as string).getTime();
+	return !Number.isNaN(ts) && Date.now() - ts < NEW_ACCOUNT_WINDOW_MS;
+}
+
 export type PageTourId =
 	| "discovery"
 	| "tours"
@@ -127,6 +138,9 @@ export default function PageTour({ pageId }: { pageId: PageTourId }) {
 	useEffect(() => {
 		// session === undefined means still loading; skip until resolved.
 		if (session === undefined) return;
+		// Only auto-play for accounts created in the last 24 hours so the tour
+		// never repeats on a new device for existing users.
+		if (!isNewAccount(session?.user)) return;
 		const storageKey = makeStorageKey(pageId, userId);
 		const seen = localStorage.getItem(storageKey);
 		if (seen) return;
