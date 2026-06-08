@@ -49,11 +49,35 @@ const client = createClient({
 	// `Promise<Response>` type to that real contract.
 	onResponse: (async (response: Response) => {
 		const responseCookies = extractResponseCookies(response);
-		if (responseCookies.length > 0) {
-			const jar = await cookies();
-			for (const cookie of responseCookies) {
-				jar.set(cookie.name, cookie.value, cookie.options);
+		if (responseCookies.length === 0) return;
+
+		// extractResponseCookies strips the `domain` attribute, but the backend
+		// sets auth cookies with Domain=.ckrowd.com so the OAuth state cookie is
+		// accessible from gateway.ckrowd.com during the callback. Without the
+		// domain, the state cookie stays on tourstack.ckrowd.com and the callback
+		// on gateway.ckrowd.com never sees it → state_mismatch.
+		// Recover the domain from the raw Set-Cookie headers.
+		const rawHeaders: string[] =
+			typeof (response.headers as unknown as { getSetCookie?: () => string[] }).getSetCookie ===
+			"function"
+				? (response.headers as unknown as { getSetCookie: () => string[] }).getSetCookie()
+				: [];
+		const domainByName = new Map<string, string>();
+		for (const raw of rawHeaders) {
+			const nameMatch = raw.match(/^([^=]+)=/);
+			const domainMatch = raw.match(/;\s*[Dd]omain=([^;]+)/);
+			if (nameMatch?.[1] && domainMatch?.[1]) {
+				domainByName.set(nameMatch[1].trim(), domainMatch[1].trim());
 			}
+		}
+
+		const jar = await cookies();
+		for (const cookie of responseCookies) {
+			const domain = domainByName.get(cookie.name);
+			jar.set(cookie.name, cookie.value, {
+				...cookie.options,
+				...(domain ? { domain } : {}),
+			});
 		}
 	}) as unknown as (response: Response) => Promise<Response>,
 });
