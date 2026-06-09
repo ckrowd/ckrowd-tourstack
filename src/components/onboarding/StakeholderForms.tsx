@@ -217,7 +217,7 @@ export function ServiceProviderForm({ onSubmit, submitError, isPending }: Stakeh
 		contactName: "", jobTitle: "", companyName: "", companyRegNumber: "", email: "",
 		phone: "", whatsapp: "", country: "", city: "", website: "", instagram: "",
 		// Step 1
-		serviceTypes: [] as string[], serviceDescription: "",
+		serviceTypes: [] as string[], otherServiceType: "", serviceDescription: "",
 		serviceCoverage: "", yearsInOperation: "",
 		largestEventServed: "", notableClients: "", certifications: "",
 		businessRegistered: "", hasInsurance: "",
@@ -258,6 +258,7 @@ export function ServiceProviderForm({ onSubmit, submitError, isPending }: Stakeh
 			const failed = new Set<string>();
 			if (step === 1) {
 				if (form.serviceTypes.length === 0) failed.add("serviceTypes");
+				if (form.serviceTypes.includes("other") && !form.otherServiceType.trim()) failed.add("otherServiceType");
 				if (!form.serviceCoverage) failed.add("serviceCoverage");
 				if (!form.yearsInOperation) failed.add("yearsInOperation");
 				if (!form.businessRegistered) failed.add("businessRegistered");
@@ -282,6 +283,7 @@ export function ServiceProviderForm({ onSubmit, submitError, isPending }: Stakeh
 				website: form.website || undefined,
 				instagram: form.instagram || undefined,
 				serviceTypes: form.serviceTypes,
+				otherServiceType: form.otherServiceType.trim() || undefined,
 				serviceDescription: form.serviceDescription,
 				serviceCoverage: form.serviceCoverage,
 				yearsInOperation: form.yearsInOperation,
@@ -382,12 +384,40 @@ export function ServiceProviderForm({ onSubmit, submitError, isPending }: Stakeh
 								groups={VENDOR_CATEGORIES.map((c) => ({ key: c.key, items: c.types }))}
 								groupLabel={(k) => tx(`vendorCategories.${k}` as never)}
 								itemLabel={(k) => tx(`vendorTypes.${k}` as never)}
-								values={form.serviceTypes}
-								onChange={(v) => { setForm((p) => ({ ...p, serviceTypes: v })); clearFailed("serviceTypes"); }}
+								values={form.serviceTypes.filter(v => v !== "other")}
+								onChange={(v) => { setForm((p) => ({ ...p, serviceTypes: p.serviceTypes.includes("other") ? [...v, "other"] : v })); clearFailed("serviceTypes"); }}
 								searchPlaceholder={t("picker.searchPlaceholder" as never)}
 								selectedLabel={t("picker.selected" as never)}
 								noResultsText={t("picker.noResults" as never)}
 							/>
+							<div className="mt-3 flex flex-col gap-3">
+								<button
+									type="button"
+									onClick={() => {
+										setForm((p) => ({
+											...p,
+											serviceTypes: p.serviceTypes.includes("other")
+												? p.serviceTypes.filter(v => v !== "other")
+												: [...p.serviceTypes, "other"],
+											otherServiceType: p.serviceTypes.includes("other") ? "" : p.otherServiceType,
+										}));
+										clearFailed("serviceTypes");
+										clearFailed("otherServiceType");
+									}}
+									className={`${chipBase} self-start ${form.serviceTypes.includes("other") ? chipActive : chipInactive}`}
+								>
+									{t("picker.other" as never)}
+								</button>
+								{form.serviceTypes.includes("other") && (
+									<input
+										type="text"
+										value={form.otherServiceType}
+										onChange={(e) => { setForm((p) => ({ ...p, otherServiceType: e.target.value })); clearFailed("otherServiceType"); }}
+										placeholder={t("picker.otherServicePlaceholder" as never)}
+										className={`${inputCls} ${failedFields.has("otherServiceType") ? "ring-2 ring-rose-400/70" : ""}`}
+									/>
+								)}
+							</div>
 						</div>
 					</div>
 					<div>
@@ -525,7 +555,7 @@ export function WorkforceForm({ onSubmit, submitError, isPending }: StakeholderF
 		whatsapp: "", country: "", city: "", nationality: "", nationalId: "",
 		dateOfBirth: "", gender: "",
 		// Step 1
-		primaryRoles: [] as string[], yearsExperience: "",
+		primaryRoles: [] as string[], otherPrimaryRole: "", yearsExperience: "",
 		largestEventWorked: "", skillsSummary: "", equipmentOwned: "",
 		// Step 2
 		touringAvailability: "", canDeploy48h: "", hasPassport: "",
@@ -575,6 +605,7 @@ export function WorkforceForm({ onSubmit, submitError, isPending }: StakeholderF
 			}
 			if (step === 1) {
 				if (form.primaryRoles.length === 0) failed.add("primaryRoles");
+				if (form.primaryRoles.includes("other") && !form.otherPrimaryRole.trim()) failed.add("otherPrimaryRole");
 				if (!form.yearsExperience) failed.add("yearsExperience");
 				if (!form.largestEventWorked) failed.add("largestEventWorked");
 			}
@@ -608,6 +639,7 @@ export function WorkforceForm({ onSubmit, submitError, isPending }: StakeholderF
 				dateOfBirth: form.dateOfBirth || undefined,
 				gender: form.gender || undefined,
 				primaryRoles: form.primaryRoles,
+				otherPrimaryRole: form.otherPrimaryRole.trim() || undefined,
 				yearsExperience: form.yearsExperience,
 				largestEventWorked: form.largestEventWorked,
 				skillsSummary: form.skillsSummary,
@@ -697,12 +729,40 @@ export function WorkforceForm({ onSubmit, submitError, isPending }: StakeholderF
 								groups={WORKFORCE_DEPARTMENTS.map((d) => ({ key: d.key, items: d.roles }))}
 								groupLabel={(k) => tx(`departments.${k}` as never)}
 								itemLabel={(k) => tx(`roles.${k}` as never)}
-								values={form.primaryRoles}
-								onChange={(v) => { setForm((p) => ({ ...p, primaryRoles: v })); clearFailed("primaryRoles"); }}
+								values={form.primaryRoles.filter(v => v !== "other")}
+								onChange={(v) => { setForm((p) => ({ ...p, primaryRoles: p.primaryRoles.includes("other") ? [...v, "other"] : v })); clearFailed("primaryRoles"); }}
 								searchPlaceholder={t("picker.searchPlaceholder" as never)}
 								selectedLabel={t("picker.selected" as never)}
 								noResultsText={t("picker.noResults" as never)}
 							/>
+							<div className="mt-3 flex flex-col gap-3">
+								<button
+									type="button"
+									onClick={() => {
+										setForm((p) => ({
+											...p,
+											primaryRoles: p.primaryRoles.includes("other")
+												? p.primaryRoles.filter(v => v !== "other")
+												: [...p.primaryRoles, "other"],
+											otherPrimaryRole: p.primaryRoles.includes("other") ? "" : p.otherPrimaryRole,
+										}));
+										clearFailed("primaryRoles");
+										clearFailed("otherPrimaryRole");
+									}}
+									className={`${chipBase} self-start ${form.primaryRoles.includes("other") ? chipActive : chipInactive}`}
+								>
+									{t("picker.other" as never)}
+								</button>
+								{form.primaryRoles.includes("other") && (
+									<input
+										type="text"
+										value={form.otherPrimaryRole}
+										onChange={(e) => { setForm((p) => ({ ...p, otherPrimaryRole: e.target.value })); clearFailed("otherPrimaryRole"); }}
+										placeholder={t("picker.otherRolePlaceholder" as never)}
+										className={`${inputCls} ${failedFields.has("otherPrimaryRole") ? "ring-2 ring-rose-400/70" : ""}`}
+									/>
+								)}
+							</div>
 						</div>
 					</div>
 					<div>

@@ -3362,7 +3362,10 @@
     "picker": {
       "searchPlaceholder": "Rechercher…",
       "selected": "Sélectionné",
-      "noResults": "Aucun résultat — essayez un autre terme."
+      "noResults": "Aucun résultat — essayez un autre terme.",
+      "other": "Autres",
+      "otherServicePlaceholder": "Décrivez votre service ou profession…",
+      "otherRolePlaceholder": "Décrivez votre rôle ou profession…"
     },
     "valueProps": {
       "heading": "Ce que ce profil complet débloque",
