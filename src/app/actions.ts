@@ -290,6 +290,115 @@ export async function resetPassword(
 	return { success: true };
 }
 
+// Artmgmt portal sign-in: regular email/password + profile role check
+export async function signInArtmgmt(email: string, password: string) {
+	const result = await signInWithEmail(email, password);
+	if (!result.success) return result;
+
+	const profile = await getTourstackProfile();
+	if (!profile.success || (profile.data as any)?.role !== "artist_mgmt") {
+		await signOut();
+		return { success: false, code: "not_artmgmt" as const };
+	}
+
+	return { success: true };
+}
+
+// Artist Management (artmgmt)
+
+// biome-ignore-start lint/suspicious/noExplicitAny: artmgmt/submissions routes not yet in published pkg
+export async function getArtmgmtProfile() {
+	const { data, error, status, headers } = await (client as any).tourstack.artmgmt.get();
+	return {
+		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+export async function getRosterArtists() {
+	const { data, error, status, headers } =
+		await (client as any).tourstack.artmgmt.artists.get();
+	return {
+		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+export async function getRosterArtist(id: string) {
+	const { data, error, status, headers } = await (client as any).tourstack.artmgmt
+		.artists({ id })
+		.get();
+	return {
+		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+// biome-ignore-end lint/suspicious/noExplicitAny
+
+export async function createRosterArtist(body: {
+	name: string;
+	genre: string;
+	nationality?: string;
+	bio?: string;
+	socialLinks?: {
+		instagram?: string;
+		spotify?: string;
+		youtube?: string;
+		twitter?: string;
+	};
+	imageUrl?: string;
+	isActive?: boolean;
+}) {
+	// biome-ignore lint/suspicious/noExplicitAny: artmgmt routes not yet in published pkg
+	const { data, error, status, headers } = await (client as any).tourstack.artmgmt.artists.post(body);
+	return {
+		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+export async function updateRosterArtist(
+	id: string,
+	body: {
+		name?: string;
+		genre?: string;
+		nationality?: string | null;
+		bio?: string | null;
+		socialLinks?: {
+			instagram?: string;
+			spotify?: string;
+			youtube?: string;
+			twitter?: string;
+		};
+		imageUrl?: string | null;
+		isActive?: boolean;
+	},
+) {
+	// biome-ignore lint/suspicious/noExplicitAny: artmgmt routes not yet in published pkg
+	const { data, error, status, headers } = await (client as any).tourstack.artmgmt.artists({ id }).patch(body);
+	return {
+		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+export async function deleteRosterArtist(id: string) {
+	// biome-ignore lint/suspicious/noExplicitAny: artmgmt routes not yet in published pkg
+	const { data, error, status, headers } = await (client as any).tourstack.artmgmt
+		.artists({ id })
+		.delete();
+	return {
+		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
 export async function getArtists(
 	params?: Params<typeof client.tourstack.discovery.get>,
 ) {
