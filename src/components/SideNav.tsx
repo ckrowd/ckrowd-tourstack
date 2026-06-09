@@ -70,7 +70,7 @@ export default function SideNav() {
 			key: "artmgmt",
 			label: t("artmgmt"),
 			icon: "star",
-			href: "/artmgmt",
+			href: "/artist-management",
 		},
 		{
 			key: "profile",

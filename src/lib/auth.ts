@@ -106,3 +106,8 @@ export function getRegularLoginRedirectPath(path: string | null | undefined) {
 	const normalized = normalizeInternalPath(path);
 	return isAdminPath(normalized) ? "/dashboard" : normalized;
 }
+
+/** True when the TourstackProfile for this session has role === artist_mgmt. */
+export function isArtmgmtProfile(profile: { role?: string | null } | null | undefined) {
+	return profile?.role === "artist_mgmt";
+}
