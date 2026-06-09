@@ -379,11 +379,26 @@ export async function createEOI(
 ) {
 	const { data, error, status, headers } =
 		await client.tourstack.eoi.post(body);
-	return {
+	const result = {
 		data: await extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
+	if (result.success) {
+		const b = body as Record<string, unknown>;
+		// biome-ignore lint/suspicious/noExplicitAny: submissions routes not yet in published pkg
+		void (client as any).tourstack.submissions.post({
+			category: "eoi",
+			title: `EOI Submission — ${String(b.artistName ?? b.artist_id ?? "Tour")}`,
+			formData: {
+				artist_id: b.artistId ?? b.artist_id,
+				city: b.city,
+				capacity: b.capacity,
+				funding_type: b.fundingType ?? b.funding_type,
+			},
+		});
+	}
+	return result;
 }
 
 // Tours
@@ -463,11 +478,27 @@ export async function applyForFinancing(
 ) {
 	const { data, error, status, headers } =
 		await client.tourstack.financing.post(body);
-	return {
+	const result = {
 		data: await extractPayload(data, { status, headers }),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
+	if (result.success) {
+		// Fire-and-forget: create a submission record for the admin directory
+		const formSnapshot: Record<string, unknown> = {
+			product: (body as Record<string, unknown>).product,
+			amount_requested: (body as Record<string, unknown>).amountRequested,
+			currency: (body as Record<string, unknown>).currency,
+			purpose: (body as Record<string, unknown>).purpose,
+		};
+		// biome-ignore lint/suspicious/noExplicitAny: submissions routes not yet in published pkg
+		void (client as any).tourstack.submissions.post({
+			category: "financing",
+			title: `Financing Application — ${String(formSnapshot.product ?? "Unknown Product")}`,
+			formData: formSnapshot,
+		});
+	}
+	return result;
 }
 
 export async function getFinancingPartners() {
@@ -577,6 +608,130 @@ export async function registerCrewMember(
 		await client.tourstack.workforce.post(body);
 	return {
 		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+// Artist Management (artmgmt)
+
+// biome-ignore-start lint/suspicious/noExplicitAny: artmgmt/submissions routes not yet in published pkg
+export async function getArtmgmtProfile() {
+	const { data, error, status, headers } = await (client as any).tourstack.artmgmt.get();
+	return {
+		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+export async function getRosterArtists() {
+	const { data, error, status, headers } =
+		await (client as any).tourstack.artmgmt.artists.get();
+	return {
+		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+export async function getRosterArtist(id: string) {
+	const { data, error, status, headers } = await (client as any).tourstack.artmgmt
+		.artists({ id })
+		.get();
+	return {
+		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+// biome-ignore-end lint/suspicious/noExplicitAny
+
+export async function createRosterArtist(body: {
+	name: string;
+	genre: string;
+	nationality?: string;
+	bio?: string;
+	socialLinks?: {
+		instagram?: string;
+		spotify?: string;
+		youtube?: string;
+		twitter?: string;
+	};
+	imageUrl?: string;
+	isActive?: boolean;
+}) {
+	// biome-ignore lint/suspicious/noExplicitAny: artmgmt routes not yet in published pkg
+	const { data, error, status, headers } = await (client as any).tourstack.artmgmt.artists.post(body);
+	return {
+		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+export async function updateRosterArtist(
+	id: string,
+	body: {
+		name?: string;
+		genre?: string;
+		nationality?: string | null;
+		bio?: string | null;
+		socialLinks?: {
+			instagram?: string;
+			spotify?: string;
+			youtube?: string;
+			twitter?: string;
+		};
+		imageUrl?: string | null;
+		isActive?: boolean;
+	},
+) {
+	// biome-ignore lint/suspicious/noExplicitAny: artmgmt routes not yet in published pkg
+	const { data, error, status, headers } = await (client as any).tourstack.artmgmt.artists({ id }).patch(body);
+	return {
+		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+export async function deleteRosterArtist(id: string) {
+	// biome-ignore lint/suspicious/noExplicitAny: artmgmt routes not yet in published pkg
+	const { data, error, status, headers } = await (client as any).tourstack.artmgmt
+		.artists({ id })
+		.delete();
+	return {
+		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+// PDF Submissions
+
+export async function createSubmission(body: {
+	category: "financing" | "insurance" | "eoi";
+	title: string;
+	fileKey?: string;
+	formData?: Record<string, unknown>;
+}) {
+	// biome-ignore lint/suspicious/noExplicitAny: submissions routes not yet in published pkg
+	const { data, error, status, headers } = await (client as any).tourstack.submissions.post(body);
+	return {
+		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+export async function getAdminSubmissions(category?: string) {
+	// biome-ignore lint/suspicious/noExplicitAny: submissions routes not yet in published pkg
+	const { data, error } = await (client as any).tourstack.submissions.get(
+		category ? { query: { category } } : {},
+	);
+	return {
+		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
