@@ -82,19 +82,21 @@ export default function EoiActionPanel({
 		},
 	});
 
+	const [forwardError, setForwardError] = useState<string | null>(null);
+
 	const forwardMutation = useMutation({
 		mutationFn: (target: "finance" | "insurance") => forwardEoi(eoiId, target),
 		onSuccess: (result) => {
 			if (!result.success) {
-				setError(result.error || t("errorGeneric"));
+				setForwardError(result.error || t("errorGeneric"));
 				return;
 			}
 			setSendDropdownOpen(false);
-			setError(null);
+			setForwardError(null);
 			router.refresh();
 		},
 		onError: (err) => {
-			setError(err instanceof Error ? err.message : t("errorGeneric"));
+			setForwardError(err instanceof Error ? err.message : t("errorGeneric"));
 		},
 	});
 
@@ -210,7 +212,7 @@ export default function EoiActionPanel({
 					<div className="relative flex-1">
 						<button
 							type="button"
-							onClick={() => setSendDropdownOpen((v) => !v)}
+							onClick={() => { setSendDropdownOpen((v) => !v); setForwardError(null); }}
 							disabled={isPending}
 							className="w-full py-2.5 bg-purple-50 text-purple-700 rounded-xl text-sm font-bold flex items-center justify-center gap-1.5 hover:bg-purple-100 transition-colors disabled:opacity-60"
 						>
@@ -228,6 +230,7 @@ export default function EoiActionPanel({
 								>
 									<span className="material-symbols-outlined text-sm">account_balance</span>
 									{t("sendToFinance")}
+									{forwardMutation.isPending && <span className="material-symbols-outlined text-xs animate-spin ml-auto">progress_activity</span>}
 								</button>
 								<button
 									type="button"
@@ -237,7 +240,13 @@ export default function EoiActionPanel({
 								>
 									<span className="material-symbols-outlined text-sm">shield</span>
 									{t("sendToInsurance")}
+									{forwardMutation.isPending && <span className="material-symbols-outlined text-xs animate-spin ml-auto">progress_activity</span>}
 								</button>
+								{forwardError && (
+									<p className="px-4 py-2 text-xs text-red-600 font-semibold border-t border-red-50 bg-red-50">
+										{forwardError}
+									</p>
+								)}
 							</div>
 						)}
 					</div>
