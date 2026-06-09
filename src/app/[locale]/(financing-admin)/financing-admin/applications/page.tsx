@@ -3,7 +3,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useFormatter, useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
-import { getAdminFinancing, updateFinancingApplication } from "@/app/actions";
+import { getAdminFinancing, getFinancingEois, updateFinancingApplication } from "@/app/actions";
 
 // Fully typed application straight from the server action's response — no
 // hand-written shape, so it tracks any backend change automatically.
@@ -76,6 +76,11 @@ export default function FinancingAdminApplicationsPage() {
 	const query = useQuery({
 		queryKey: ["adminFinancing"],
 		queryFn: () => getAdminFinancing(),
+	});
+
+	const eoisQuery = useQuery({
+		queryKey: ["financingEois"],
+		queryFn: getFinancingEois,
 	});
 
 	const reviewMutation = useMutation({
@@ -686,6 +691,62 @@ export default function FinancingAdminApplicationsPage() {
 						</div>
 					</div>
 				</div>
+			</div>
+
+			{/* Forwarded EOIs */}
+			<div className="mt-10">
+				<h2 className="text-lg font-black font-(family-name:--font-manrope) text-on-surface mb-4">
+					{t("eois.title")}
+				</h2>
+				{eoisQuery.isLoading ? (
+					<p className="text-sm text-on-surface-variant">{t("loading")}</p>
+				) : !eoisQuery.data?.success || (eoisQuery.data?.data as unknown[])?.length === 0 ? (
+					<div className="bg-surface-container-lowest rounded-2xl p-10 text-center shadow-sm">
+						<span className="material-symbols-outlined text-4xl text-on-surface-variant block mb-3">inbox</span>
+						<p className="text-sm text-on-surface-variant font-medium">{t("eois.empty")}</p>
+					</div>
+				) : (
+					<div className="space-y-4">
+						{(eoisQuery.data?.data as Record<string, unknown>[]).map((eoi) => {
+							const storageId = eoi.pdf_storage_id != null ? String(eoi.pdf_storage_id) : null;
+							const promoter = eoi.promoter as Record<string, unknown> | null;
+							const artist = eoi.artist as Record<string, unknown> | null;
+							const forwardedAt = eoi.forwarded_at != null
+								? format.dateTime(new Date(String(eoi.forwarded_at)), { dateStyle: "medium" })
+								: "—";
+							return (
+								<div key={String(eoi.id)} className="bg-surface-container-lowest rounded-2xl p-5 border border-outline-variant/10 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+									<div>
+										<p className="text-xs font-black text-[#FF5A30] uppercase tracking-widest mb-0.5">
+											{`EOI-${String(eoi.id).slice(-6).toUpperCase()}`}
+										</p>
+										<p className="font-(family-name:--font-manrope) font-bold text-on-surface">
+											{String(artist?.name ?? "—")}
+											<span className="text-on-surface-variant font-normal text-sm ml-1">— {String(artist?.tour_name ?? "")}</span>
+										</p>
+										<p className="text-sm text-on-surface-variant mt-0.5">
+											{String(promoter?.company_name ?? promoter?.contact_person ?? "—")} · {String(eoi.city ?? "—")}
+										</p>
+										<p className="text-xs text-on-surface-variant mt-1">
+											{t("eois.forwardedOn")} {forwardedAt}
+										</p>
+									</div>
+									{storageId && (
+										<a
+											href={`/api/download/${encodeURIComponent(storageId)}`}
+											target="_blank"
+											rel="noopener noreferrer"
+											className="shrink-0 flex items-center gap-2 px-4 py-2.5 bg-purple-50 text-purple-700 rounded-xl text-sm font-bold hover:bg-purple-100 transition-colors"
+										>
+											<span className="material-symbols-outlined text-sm">download</span>
+											{t("eois.downloadPdf")}
+										</a>
+									)}
+								</div>
+							);
+						})}
+					</div>
+				)}
 			</div>
 		</>
 	);

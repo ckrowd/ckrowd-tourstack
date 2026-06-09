@@ -3742,7 +3742,13 @@
     "venueRequired": "La salle est obligatoire.",
     "cityRequired": "La ville est obligatoire.",
     "dateRequired": "La date du spectacle est obligatoire.",
-    "feeRequired": "Le cachet artiste est obligatoire."
+    "feeRequired": "Le cachet artiste est obligatoire.",
+    "send": "Envoyer",
+    "sendToFinance": "Envoyer aux finances",
+    "sendToInsurance": "Envoyer à l'assurance",
+    "finance": "Finances",
+    "insurance": "Assurance",
+    "forwardedTo": "Transmis à {target}"
   },
   "TourActionsMenu": {
     "openMenu": "Ouvrir le menu d'actions",
@@ -4042,6 +4048,12 @@
       "error": "Impossible d'enregistrer la revue.",
       "saving": "Enregistrement...",
       "submit": "Enregistrer la revue"
+    },
+    "eois": {
+      "title": "EOI transmises",
+      "empty": "Aucune EOI n'a encore été transmise aux finances.",
+      "forwardedOn": "Transmis le",
+      "downloadPdf": "Télécharger le PDF"
     }
   },
   "FinancingAdminPartnersPage": {
@@ -4237,6 +4249,13 @@
       "saving": "Enregistrement...",
       "success": "Revue enregistrée.",
       "error": "Impossible d'enregistrer la revue."
+    },
+    "eois": {
+      "title": "EOI transmises",
+      "empty": "Aucune EOI n'a encore été transmise à l'assurance.",
+      "forwardedOn": "Transmis le",
+      "downloadPdf": "Télécharger le PDF",
+      "loading": "Chargement des EOI..."
     }
   },
   "InsuranceAdminClaimsPage": {
