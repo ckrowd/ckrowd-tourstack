@@ -93,6 +93,7 @@ export default function TopNav() {
 			body: meta.label,
 			date,
 			unread: date ? date.getTime() > readAt : false,
+			href: (status === "needs_revision" ? "/eoi" : "/tours") as "/eoi" | "/tours",
 		};
 	});
 
@@ -672,26 +673,29 @@ export default function TopNav() {
 							<>
 								<ul className="divide-y divide-slate-50">
 									{notifications.map((n) => (
-										<li
-											key={n.id}
-											className={`flex items-start gap-3 px-5 py-4 hover:bg-slate-50 transition-colors ${n.unread ? "bg-orange-50/40" : ""}`}
-										>
-											<span
-												className={`material-symbols-outlined text-lg mt-0.5 shrink-0 ${n.color}`}
+										<li key={n.id}>
+											<Link
+												href={n.href}
+												onClick={() => setNotifOpen(false)}
+												className={`flex items-start gap-3 px-5 py-4 hover:bg-slate-50 transition-colors ${n.unread ? "bg-orange-50/40" : ""}`}
 											>
-												{n.icon}
-											</span>
-											<div className="flex-1 min-w-0">
-												<p className="text-sm font-semibold text-slate-900 truncate">
-													{n.title}
-												</p>
-												<p className="text-xs text-slate-500 mt-0.5">{n.body}</p>
-											</div>
-											{n.date && (
-												<span className="text-[10px] text-slate-400 font-medium shrink-0 mt-0.5">
-													{format.relativeTime(n.date)}
+												<span
+													className={`material-symbols-outlined text-lg mt-0.5 shrink-0 ${n.color}`}
+												>
+													{n.icon}
 												</span>
-											)}
+												<div className="flex-1 min-w-0">
+													<p className="text-sm font-semibold text-slate-900 truncate">
+														{n.title}
+													</p>
+													<p className="text-xs text-slate-500 mt-0.5">{n.body}</p>
+												</div>
+												{n.date && (
+													<span className="text-[10px] text-slate-400 font-medium shrink-0 mt-0.5">
+														{format.relativeTime(n.date)}
+													</span>
+												)}
+											</Link>
 										</li>
 									))}
 								</ul>

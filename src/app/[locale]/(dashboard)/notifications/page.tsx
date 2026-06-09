@@ -37,6 +37,7 @@ export default function NotificationsPage() {
 			title: String(eoi.artist?.name ?? tNav("notif.eoiFallback")),
 			body: tNav(meta.labelKey as Parameters<typeof tNav>[0]),
 			date: eoi.created_at ? new Date(String(eoi.created_at)) : null,
+			href: (status === "needs_revision" ? "/eoi" : "/tours") as "/eoi" | "/tours",
 		};
 	});
 
@@ -78,22 +79,24 @@ export default function NotificationsPage() {
 						<div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden max-w-2xl">
 							<ul className="divide-y divide-slate-50">
 								{notifications.map((n) => (
-									<li
-										key={n.id}
-										className="flex items-start gap-4 px-6 py-5 hover:bg-slate-50 transition-colors"
-									>
-										<span className={`material-symbols-outlined text-xl mt-0.5 shrink-0 ${n.color}`}>
-											{n.icon}
-										</span>
-										<div className="flex-1 min-w-0">
-											<p className="text-sm font-semibold text-slate-900">{n.title}</p>
-											<p className="text-xs text-slate-500 mt-0.5">{n.body}</p>
-										</div>
-										{n.date && (
-											<span className="text-[11px] text-slate-400 font-medium shrink-0 mt-0.5 whitespace-nowrap">
-												{format.relativeTime(n.date)}
+									<li key={n.id}>
+										<Link
+											href={n.href}
+											className="flex items-start gap-4 px-6 py-5 hover:bg-slate-50 transition-colors"
+										>
+											<span className={`material-symbols-outlined text-xl mt-0.5 shrink-0 ${n.color}`}>
+												{n.icon}
 											</span>
-										)}
+											<div className="flex-1 min-w-0">
+												<p className="text-sm font-semibold text-slate-900">{n.title}</p>
+												<p className="text-xs text-slate-500 mt-0.5">{n.body}</p>
+											</div>
+											{n.date && (
+												<span className="text-[11px] text-slate-400 font-medium shrink-0 mt-0.5 whitespace-nowrap">
+													{format.relativeTime(n.date)}
+												</span>
+											)}
+										</Link>
 									</li>
 								))}
 							</ul>
