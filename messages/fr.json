@@ -2858,6 +2858,7 @@
     "discovery": "Découverte",
     "financing": "Financement",
     "insurance": "Assurance",
+    "artmgmt": "Mes artistes",
     "profile": "Profil",
     "settings": "Paramètres",
     "startNewTour": "Démarrer une tournée"
@@ -3197,6 +3198,7 @@
     "tours": "Arrêts de tournée",
     "eoi": "EOI",
     "directory": "Répertoire",
+    "submissions": "Soumissions",
     "reports": "Rapports",
     "settings": "Paramètres",
     "newTour": "Nouvelle tournée"
@@ -4815,19 +4817,21 @@
     "footer": "Portail Gestion Artistique — Propulsé par CKROWD"
   },
   "ArtmgmtPage": {
-    "badge": "Roster Artistique",
-    "title": "Vos Artistes",
-    "subtitle": "Profilez et gérez les artistes de votre roster",
+    "badge": "Gestion d'artistes",
+    "title": "Mon roster d'artistes",
+    "subtitle": "Gérez et profilez les artistes que vous représentez.",
     "addArtist": "Ajouter un artiste",
     "noArtists": "Aucun artiste pour l'instant",
-    "noArtistsHint": "Ajoutez votre premier artiste pour commencer",
+    "noArtistsHint": "Ajoutez votre premier artiste pour commencer.",
     "active": "Actif",
     "inactive": "Inactif",
+    "genre": "Genre",
+    "nationality": "Nationalité",
     "editArtist": "Modifier",
     "deleteArtist": "Supprimer",
     "deleteSuccess": "Artiste supprimé",
-    "deleteError": "Échec de la suppression",
-    "confirmDelete": "Êtes-vous sûr de vouloir supprimer cet artiste ?",
+    "deleteError": "Échec de la suppression de l'artiste",
+    "confirmDelete": "Supprimer cet artiste ?",
     "form": {
       "addTitle": "Ajouter un artiste",
       "editTitle": "Modifier l'artiste",
@@ -4836,7 +4840,7 @@
       "genre": "Genre",
       "genrePlaceholder": "ex. Afrobeats",
       "nationality": "Nationalité",
-      "nationalityPlaceholder": "ex. Nigériane",
+      "nationalityPlaceholder": "ex. Nigérian(e)",
       "bio": "Bio",
       "bioPlaceholder": "Courte biographie...",
       "instagram": "Pseudo Instagram",
@@ -4880,5 +4884,22 @@
     "passwordError": "Échec de la mise à jour du mot de passe",
     "passwordMismatch": "Les mots de passe ne correspondent pas",
     "passwordTooShort": "Le mot de passe doit contenir au moins 8 caractères"
+  },
+  "AdminSubmissionsPage": {
+    "badge": "Admin Plateforme",
+    "title": "Soumissions de formulaires",
+    "subtitle": "Toutes les soumissions PDF des utilisateurs, classées par type.",
+    "all": "Tout",
+    "financing": "Financement",
+    "insurance": "Assurance",
+    "eoi": "EOI",
+    "empty": "Aucune soumission pour l'instant",
+    "emptyHint": "Les soumissions apparaîtront ici au fur et à mesure que les utilisateurs remplissent des formulaires.",
+    "category": "Catégorie",
+    "submissionTitle": "Titre",
+    "submittedBy": "Soumis par",
+    "submittedAt": "Soumis le",
+    "download": "Télécharger le PDF",
+    "viewData": "Voir les données"
   }
 }

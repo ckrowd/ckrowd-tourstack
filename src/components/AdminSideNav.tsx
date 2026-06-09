@@ -53,6 +53,13 @@ export default function AdminSideNav() {
 			tourAttr: "admin-nav-directory",
 		},
 		{
+			key: "submissions",
+			label: t("submissions"),
+			icon: "folder_open",
+			href: "/admin/submissions",
+			tourAttr: "admin-nav-submissions",
+		},
+		{
 			key: "reports",
 			label: t("reports"),
 			icon: "bar_chart",

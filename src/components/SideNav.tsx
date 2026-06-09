@@ -67,6 +67,12 @@ export default function SideNav() {
 			tourAttr: "nav-insurance",
 		},
 		{
+			key: "artmgmt",
+			label: t("artmgmt"),
+			icon: "star",
+			href: "/artist-management",
+		},
+		{
 			key: "profile",
 			label: t("profile"),
 			icon: "person",
