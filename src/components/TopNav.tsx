@@ -48,7 +48,7 @@ export default function TopNav() {
 		const now = Date.now();
 		localStorage.setItem(STORAGE_KEY, String(now));
 		setReadAt(now);
-		setNotifOpen(false);
+		// Keep panel open so the user sees the unread indicators clear immediately
 	}, []);
 
 	const statusMeta: Record<
@@ -99,6 +99,7 @@ export default function TopNav() {
 
 	const notifications = allNotifications.slice(0, 6);
 	const hasUnread = allNotifications.some((n) => n.unread);
+	const unreadCount = allNotifications.filter((n) => n.unread).length;
 
 	const userInitial = session?.user?.email
 		? session.user.email[0].toUpperCase()
@@ -580,9 +581,9 @@ export default function TopNav() {
 											notifications
 										</span>
 										<span>{t("notifications")}</span>
-										{notifications.length > 0 && (
-											<span className="ml-auto w-5 h-5 rounded-full bg-[#FF5A30] text-white text-[10px] flex items-center justify-center font-bold">
-												{notifications.length}
+										{hasUnread && (
+											<span className="ml-auto min-w-5 h-5 px-1 rounded-full bg-[#FF5A30] text-white text-[10px] flex items-center justify-center font-bold">
+												{unreadCount}
 											</span>
 										)}
 									</button>
@@ -653,9 +654,16 @@ export default function TopNav() {
 						aria-label={t("notifications")}
 					>
 						<div className="flex items-center justify-between px-5 py-4 border-b border-slate-100">
-							<h3 className="font-(family-name:--font-manrope) font-bold text-sm text-slate-900">
-								{t("notifications")}
-							</h3>
+							<div className="flex items-center gap-2">
+								<h3 className="font-(family-name:--font-manrope) font-bold text-sm text-slate-900">
+									{t("notifications")}
+								</h3>
+								{hasUnread && (
+									<span className="min-w-[18px] h-[18px] px-1 rounded-full bg-[#FF5A30] text-white text-[10px] flex items-center justify-center font-bold">
+										{unreadCount}
+									</span>
+								)}
+							</div>
 							<button
 								type="button"
 								onClick={() => setNotifOpen(false)}
@@ -677,7 +685,7 @@ export default function TopNav() {
 											<Link
 												href={n.href}
 												onClick={() => setNotifOpen(false)}
-												className={`flex items-start gap-3 px-5 py-4 hover:bg-slate-50 transition-colors ${n.unread ? "bg-orange-50/40" : ""}`}
+												className={`flex items-start gap-3 px-5 py-4 transition-colors ${n.unread ? "bg-orange-50 hover:bg-orange-100/60" : "hover:bg-slate-50"}`}
 											>
 												<span
 													className={`material-symbols-outlined text-lg mt-0.5 shrink-0 ${n.color}`}
@@ -685,16 +693,21 @@ export default function TopNav() {
 													{n.icon}
 												</span>
 												<div className="flex-1 min-w-0">
-													<p className="text-sm font-semibold text-slate-900 truncate">
+													<p className={`text-sm text-slate-900 truncate ${n.unread ? "font-bold" : "font-semibold"}`}>
 														{n.title}
 													</p>
 													<p className="text-xs text-slate-500 mt-0.5">{n.body}</p>
 												</div>
-												{n.date && (
-													<span className="text-[10px] text-slate-400 font-medium shrink-0 mt-0.5">
-														{format.relativeTime(n.date)}
-													</span>
-												)}
+												<div className="flex flex-col items-end gap-1.5 shrink-0">
+													{n.date && (
+														<span className="text-[10px] text-slate-400 font-medium mt-0.5">
+															{format.relativeTime(n.date)}
+														</span>
+													)}
+													{n.unread && (
+														<span className="w-2 h-2 rounded-full bg-[#FF5A30]" />
+													)}
+												</div>
 											</Link>
 										</li>
 									))}
