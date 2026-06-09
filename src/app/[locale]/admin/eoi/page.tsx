@@ -220,6 +220,7 @@ export default async function AdminEOIPage({
 										eoiId={String(eoi.id)}
 										currentStatus={status}
 										eoiCity={String(eoi.city ?? "")}
+										forwardedTo={eoi.forwarded_to != null ? String(eoi.forwarded_to) : null}
 									/>
 								</div>
 							</div>

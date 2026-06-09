@@ -1339,6 +1339,33 @@ export async function acceptAdminInvite(token: string) {
 	};
 }
 
+export async function forwardEoi(eoiId: string, target: "finance" | "insurance") {
+	const { data, error } = await (client.tourstack.admin.eois as any)({ id: eoiId }).forward.post({ target });
+	return {
+		data: await extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+export async function getFinancingEois() {
+	const { data, error } = await (client.tourstack["financing-admin"] as any).eois.get();
+	return {
+		data: await extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+export async function getInsuranceEois() {
+	const { data, error } = await (client.tourstack["insurance-admin"] as any).eois.get();
+	return {
+		data: await extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
 // Active Sessions
 
 export async function revokeSession(

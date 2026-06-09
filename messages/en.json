@@ -3742,7 +3742,13 @@
     "venueRequired": "Venue is required.",
     "cityRequired": "City is required.",
     "dateRequired": "Show date is required.",
-    "feeRequired": "Artist fee is required."
+    "feeRequired": "Artist fee is required.",
+    "send": "Send",
+    "sendToFinance": "Send to Finance",
+    "sendToInsurance": "Send to Insurance",
+    "finance": "Finance",
+    "insurance": "Insurance",
+    "forwardedTo": "Forwarded to {target}"
   },
   "TourActionsMenu": {
     "openMenu": "Open actions menu",
@@ -4042,6 +4048,12 @@
       "error": "Couldn't save the review.",
       "saving": "Saving...",
       "submit": "Save Review"
+    },
+    "eois": {
+      "title": "Forwarded EOIs",
+      "empty": "No EOIs have been forwarded to finance yet.",
+      "forwardedOn": "Forwarded",
+      "downloadPdf": "Download PDF"
     }
   },
   "FinancingAdminPartnersPage": {
@@ -4237,6 +4249,13 @@
       "saving": "Saving...",
       "success": "Review saved.",
       "error": "Couldn't save the review."
+    },
+    "eois": {
+      "title": "Forwarded EOIs",
+      "empty": "No EOIs have been forwarded to insurance yet.",
+      "forwardedOn": "Forwarded",
+      "downloadPdf": "Download PDF",
+      "loading": "Loading EOIs..."
     }
   },
   "InsuranceAdminClaimsPage": {
