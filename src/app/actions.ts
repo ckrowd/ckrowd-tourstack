@@ -72,11 +72,15 @@ const client = createClient({
 		}
 
 		const jar = await cookies();
+		const isDev = process.env.NODE_ENV === "development";
 		for (const cookie of responseCookies) {
 			const domain = domainByName.get(cookie.name);
 			jar.set(cookie.name, cookie.value, {
 				...cookie.options,
-				...(domain ? { domain } : {}),
+				// On localhost the .ckrowd.com domain causes browsers to reject the
+				// cookie (domain mismatch). Strip both domain and secure flag locally.
+				...(isDev ? { domain: undefined, secure: false } : {}),
+				...(!isDev && domain ? { domain } : {}),
 			});
 		}
 	}) as unknown as (response: Response) => Promise<Response>,
