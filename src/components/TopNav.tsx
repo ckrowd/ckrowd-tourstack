@@ -3,7 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
-import { useCallback, useState } from "react";
+import { useCallback, useSyncExternalStore, useState } from "react";
 import { getEOIs } from "@/app/actions";
 import { useLogout, useSession } from "@/context/AuthContext";
 import { Link, routing, usePathname, useRouter } from "@/i18n/routing";
@@ -40,16 +40,22 @@ export default function TopNav() {
 	});
 
 	// Track which notifications the user has read via a localStorage timestamp.
+	// useSyncExternalStore avoids the server/client hydration mismatch that
+	// a lazy-initialiser useState would cause (server has no localStorage).
 	const STORAGE_KEY = "ckrowd_notif_read_at";
-	const [readAt, setReadAt] = useState<number>(() => {
-		if (typeof window === "undefined") return 0;
-		return Number(localStorage.getItem(STORAGE_KEY) ?? 0);
-	});
+	const readAt = useSyncExternalStore(
+		(cb) => {
+			window.addEventListener("storage", cb);
+			return () => window.removeEventListener("storage", cb);
+		},
+		() => Number(localStorage.getItem(STORAGE_KEY) ?? 0),
+		() => 0,
+	);
 	const markAllRead = useCallback(() => {
 		const now = Date.now();
 		localStorage.setItem(STORAGE_KEY, String(now));
-		setReadAt(now);
-		// Keep panel open so the user sees the unread indicators clear immediately
+		// Dispatch storage event so useSyncExternalStore re-reads in this tab.
+		window.dispatchEvent(new StorageEvent("storage", { key: STORAGE_KEY }));
 	}, []);
 
 	const statusMeta: Record<
