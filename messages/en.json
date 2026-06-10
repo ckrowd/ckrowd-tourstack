@@ -4845,6 +4845,20 @@
 		"artists": "Artists",
 		"profile": "Profile"
 	},
+	"ArtmgmtSearch": {
+		"dialogLabel": "Search your artist roster",
+		"close": "Close search",
+		"openSearch": "Search roster",
+		"placeholder": "Search artists...",
+		"clear": "Clear search",
+		"typeToSearch": "Type to search your roster",
+		"hint": "Search by name, genre, or nationality",
+		"noResults": "No artists matching \"{term}\"",
+		"artistsLabel": "Artists",
+		"active": "Active",
+		"inactive": "Inactive",
+		"keyClose": "to close"
+	},
 	"ArtmgmtLoginPage": {
 		"portal": "Artist Management Portal",
 		"badge": "Artmgmt Login",
@@ -4870,6 +4884,11 @@
 		"addArtist": "Add Artist",
 		"noArtists": "No artists yet",
 		"noArtistsHint": "Add your first artist to get started.",
+		"stats": {
+			"total": "Total Artists",
+			"active": "Active",
+			"inactive": "Inactive"
+		},
 		"active": "Active",
 		"inactive": "Inactive",
 		"genre": "Genre",
