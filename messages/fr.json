@@ -354,6 +354,19 @@
       "trustedBy": "Fait confiance par plus de 500 promoteurs sur 24 marchés."
     }
   },
+  "GlobalSearch": {
+    "placeholder": "Rechercher tournées, artistes, salles...",
+    "openSearch": "Ouvrir la recherche",
+    "close": "Fermer la recherche",
+    "clear": "Effacer la recherche",
+    "dialogLabel": "Recherche globale",
+    "typeToSearch": "Commencez à taper pour rechercher",
+    "hint": "Recherchez parmi les tournées, EOI, financements et salles",
+    "noResults": "Aucun résultat pour \"{term}\"",
+    "keyNavigate": "Naviguer",
+    "keySelect": "Sélectionner",
+    "keyClose": "Fermer"
+  },
   "TopNav": {
     "home": "Accueil",
     "join": "Rejoindre",

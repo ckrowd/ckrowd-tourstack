@@ -677,6 +677,120 @@ export async function deleteTourstackVenue(id: string) {
 	};
 }
 
+// Global search
+
+export type SearchResult = {
+	id: string;
+	title: string;
+	subtitle: string;
+	href: string;
+	category: "tour" | "eoi" | "financing" | "venue";
+	icon: string;
+};
+
+export async function searchDashboard(q: string): Promise<SearchResult[]> {
+	const term = q.toLowerCase().trim();
+	if (term.length < 2) return [];
+
+	const str = (v: unknown) => String(v ?? "");
+	const hit = (s: string) => s.toLowerCase().includes(term);
+
+	const [toursRes, eoisRes, financingRes, venuesRes] = await Promise.allSettled([
+		getTours(),
+		getEOIs(),
+		getFinancingApplications(),
+		getTourstackVenues(),
+	]);
+
+	const results: SearchResult[] = [];
+
+	if (toursRes.status === "fulfilled") {
+		const tours = (toursRes.value.data ?? []) as Record<string, unknown>[];
+		for (const tour of tours) {
+			const artist = (tour.artist as Record<string, unknown> | null) ?? {};
+			const name = str(tour.name);
+			const artistName = str(artist.name);
+			const city = str(tour.city);
+			const venue = str(tour.venue);
+			if ([name, artistName, city, venue].some(hit)) {
+				results.push({
+					id: str(tour.id),
+					title: name || artistName,
+					subtitle: [artistName, city].filter(Boolean).join(" · "),
+					href: `/tours/${str(tour.id)}`,
+					category: "tour",
+					icon: "confirmation_number",
+				});
+			}
+		}
+	}
+
+	if (eoisRes.status === "fulfilled") {
+		const eois = (eoisRes.value.data ?? []) as Record<string, unknown>[];
+		for (const eoi of eois) {
+			const artist = (eoi.artist as Record<string, unknown> | null) ?? {};
+			const artistName = str(artist.name);
+			const tourName = str(artist.tour_name);
+			const city = str(eoi.city);
+			const venue = str(eoi.venue);
+			if ([artistName, tourName, city, venue].some(hit)) {
+				results.push({
+					id: str(eoi.id),
+					title: artistName || tourName,
+					subtitle: [tourName, city].filter(Boolean).join(" · "),
+					href: "/eoi",
+					category: "eoi",
+					icon: "description",
+				});
+			}
+		}
+	}
+
+	if (financingRes.status === "fulfilled") {
+		const apps = (financingRes.value.data ?? []) as Record<string, unknown>[];
+		for (const app of apps) {
+			const tour = (app.tour as Record<string, unknown> | null) ?? {};
+			const artist = (tour.artist as Record<string, unknown> | null) ?? {};
+			const artistName = str(artist.name);
+			const product = str(app.product);
+			const partner = str(app.partner_name);
+			const currency = str(app.currency) || "USD";
+			const amount = Number(app.amount_requested ?? 0).toLocaleString();
+			if ([artistName, product, partner].some(hit)) {
+				results.push({
+					id: str(app.id),
+					title: artistName || product,
+					subtitle: `${product} · ${currency} ${amount}`,
+					href: `/financing/${str(app.id)}`,
+					category: "financing",
+					icon: "account_balance",
+				});
+			}
+		}
+	}
+
+	if (venuesRes.status === "fulfilled") {
+		const venues = (venuesRes.value.data ?? []) as Record<string, unknown>[];
+		for (const venue of venues) {
+			const name = str(venue.name);
+			const city = str(venue.city);
+			const country = str(venue.country);
+			if ([name, city, country].some(hit)) {
+				results.push({
+					id: str(venue.id),
+					title: name,
+					subtitle: [city, country].filter(Boolean).join(", "),
+					href: "/settings",
+					category: "venue",
+					icon: "location_on",
+				});
+			}
+		}
+	}
+
+	return results;
+}
+
 // Notification preferences
 
 export async function getTourstackNotifications() {

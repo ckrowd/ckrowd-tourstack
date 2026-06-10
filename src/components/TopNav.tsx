@@ -7,6 +7,7 @@ import { useCallback, useState } from "react";
 import { getEOIs } from "@/app/actions";
 import { useLogout, useSession } from "@/context/AuthContext";
 import { Link, routing, usePathname, useRouter } from "@/i18n/routing";
+import GlobalSearch from "@/components/GlobalSearch";
 
 export default function TopNav() {
 	const pathname = usePathname();
@@ -260,6 +261,9 @@ export default function TopNav() {
 					</div>
 
 					<div className="flex items-center gap-3">
+						{/* Global search — authenticated users only */}
+						{session?.user && <GlobalSearch />}
+
 						{/* Locale Switcher — desktop only (accessible via drawer on mobile) */}
 						<div className="relative hidden lg:block">
 							<button

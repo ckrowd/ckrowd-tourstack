@@ -354,6 +354,19 @@
       "trustedBy": "Trusted by 500+ promoters across 24 markets."
     }
   },
+  "GlobalSearch": {
+    "placeholder": "Search tours, artists, venues...",
+    "openSearch": "Open search",
+    "close": "Close search",
+    "clear": "Clear search",
+    "dialogLabel": "Global search",
+    "typeToSearch": "Start typing to search",
+    "hint": "Search across tours, EOIs, financing and venues",
+    "noResults": "No results for \"{term}\"",
+    "keyNavigate": "Navigate",
+    "keySelect": "Select",
+    "keyClose": "Close"
+  },
   "TopNav": {
     "home": "Home",
     "join": "Join",
