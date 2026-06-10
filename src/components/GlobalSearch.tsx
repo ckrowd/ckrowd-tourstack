@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { type SearchResult, searchDashboard } from "@/app/actions";
 import { Link } from "@/i18n/routing";
 
@@ -262,7 +263,10 @@ export default function GlobalSearch() {
 				<span className="material-symbols-outlined text-[#494455]">search</span>
 			</button>
 
-			{open && <SearchModal onClose={() => setOpen(false)} />}
+			{open && createPortal(
+				<SearchModal onClose={() => setOpen(false)} />,
+				document.body,
+			)}
 		</>
 	);
 }
