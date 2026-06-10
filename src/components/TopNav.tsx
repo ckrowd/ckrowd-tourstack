@@ -7,6 +7,7 @@ import { useCallback, useSyncExternalStore, useState } from "react";
 import { getEOIs } from "@/app/actions";
 import { useLogout, useSession } from "@/context/AuthContext";
 import { Link, routing, usePathname, useRouter } from "@/i18n/routing";
+import ArtmgmtSearch from "@/components/ArtmgmtSearch";
 import GlobalSearch from "@/components/GlobalSearch";
 
 export default function TopNav() {
@@ -287,8 +288,8 @@ export default function TopNav() {
 					</div>
 
 					<div className="flex items-center gap-3">
-						{/* Global search — promoter/admin portals only */}
-						{session?.user && !isArtmgmtPortal && <GlobalSearch />}
+						{/* Search — artmgmt searches roster; other portals use global search */}
+						{session?.user && (isArtmgmtPortal ? <ArtmgmtSearch /> : <GlobalSearch />)}
 
 						{/* Locale Switcher — desktop only (accessible via drawer on mobile) */}
 						<div className="relative hidden lg:block">
@@ -343,8 +344,8 @@ export default function TopNav() {
 							)}
 						</div>
 
-						{/* Notifications — promoter/admin portals only */}
-						{session?.user && !isArtmgmtPortal && (
+						{/* Notifications */}
+						{session?.user && (
 							<div className="relative">
 								<button
 									type="button"
@@ -363,8 +364,8 @@ export default function TopNav() {
 							</div>
 						)}
 
-						{/* Guide button — promoter/admin portals only */}
-						{session?.user && !isArtmgmtPortal && (
+						{/* Guide button */}
+						{session?.user && (
 							<button
 								type="button"
 								aria-label="Start page guide"
@@ -600,27 +601,25 @@ export default function TopNav() {
 						<div className="border-t border-slate-100 px-3 py-3 space-y-0.5 shrink-0">
 							{session?.user ? (
 								<>
-									{/* Notifications — promoter/admin portals only */}
-									{!isArtmgmtPortal && (
-										<button
-											type="button"
-											onClick={() => {
-												setMobileMenuOpen(false);
-												setNotifOpen(true);
-											}}
-											className="flex items-center gap-3 w-full px-4 py-3 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm text-slate-600 hover:bg-slate-50 transition-colors"
-										>
-											<span className="material-symbols-outlined text-[#494455]">
-												notifications
+									{/* Notifications */}
+									<button
+										type="button"
+										onClick={() => {
+											setMobileMenuOpen(false);
+											setNotifOpen(true);
+										}}
+										className="flex items-center gap-3 w-full px-4 py-3 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm text-slate-600 hover:bg-slate-50 transition-colors"
+									>
+										<span className="material-symbols-outlined text-[#494455]">
+											notifications
+										</span>
+										<span>{t("notifications")}</span>
+										{hasUnread && (
+											<span className="ml-auto min-w-5 h-5 px-1 rounded-full bg-[#FF5A30] text-white text-[10px] flex items-center justify-center font-bold">
+												{unreadCount}
 											</span>
-											<span>{t("notifications")}</span>
-											{hasUnread && (
-												<span className="ml-auto min-w-5 h-5 px-1 rounded-full bg-[#FF5A30] text-white text-[10px] flex items-center justify-center font-bold">
-													{unreadCount}
-												</span>
-											)}
-										</button>
-									)}
+										)}
+									</button>
 
 									{/* Profile */}
 									<Link

@@ -4833,6 +4833,20 @@
 		"artists": "Artistes",
 		"profile": "Profil"
 	},
+	"ArtmgmtSearch": {
+		"dialogLabel": "Rechercher dans votre roster",
+		"close": "Fermer la recherche",
+		"openSearch": "Rechercher dans le roster",
+		"placeholder": "Rechercher des artistes...",
+		"clear": "Effacer",
+		"typeToSearch": "Tapez pour chercher dans votre roster",
+		"hint": "Recherche par nom, genre ou nationalité",
+		"noResults": "Aucun artiste correspondant à \"{term}\"",
+		"artistsLabel": "Artistes",
+		"active": "Actif",
+		"inactive": "Inactif",
+		"keyClose": "pour fermer"
+	},
 	"ArtmgmtLoginPage": {
 		"portal": "Portail Gestion Artistique",
 		"badge": "Connexion Artmgmt",
