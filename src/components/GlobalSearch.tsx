@@ -102,7 +102,7 @@ function SearchModal({ onClose }: { onClose: () => void }) {
 			/>
 
 			{/* Card */}
-			<div className="relative w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[80vh]">
+			<div className="relative z-10 w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[80vh]">
 				{/* Input row */}
 				<div className="flex items-center gap-3 px-4 py-4 border-b border-slate-100">
 					<span
