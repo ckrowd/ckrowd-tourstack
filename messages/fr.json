@@ -4907,6 +4907,21 @@
     "passwordMismatch": "Les mots de passe ne correspondent pas",
     "passwordTooShort": "Le mot de passe doit contenir au moins 8 caractères"
   },
+  "ArtmgmtPasswordGate": {
+    "title": "Définissez votre nouveau mot de passe",
+    "description": "Pour votre sécurité, vous devez définir un nouveau mot de passe avant d'accéder à votre tableau de bord. Utilisez le mot de passe temporaire de votre e-mail de bienvenue.",
+    "currentPasswordLabel": "Mot de passe temporaire",
+    "currentPasswordPlaceholder": "Entrez votre mot de passe temporaire",
+    "newPasswordLabel": "Nouveau mot de passe",
+    "newPasswordPlaceholder": "Entrez un nouveau mot de passe (min. 8 caractères)",
+    "confirmPasswordLabel": "Confirmer le nouveau mot de passe",
+    "confirmPasswordPlaceholder": "Re-saisissez votre nouveau mot de passe",
+    "submit": "Définir le mot de passe et continuer",
+    "saving": "Enregistrement...",
+    "mismatch": "Les mots de passe ne correspondent pas",
+    "tooShort": "Le mot de passe doit contenir au moins 8 caractères",
+    "error": "Échec de la mise à jour du mot de passe. Veuillez vérifier votre mot de passe temporaire et réessayer."
+  },
   "AdminSubmissionsPage": {
     "badge": "Admin Plateforme",
     "title": "Soumissions de formulaires",

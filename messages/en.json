@@ -4919,6 +4919,21 @@
     "passwordMismatch": "Passwords do not match",
     "passwordTooShort": "Password must be at least 8 characters"
   },
+  "ArtmgmtPasswordGate": {
+    "title": "Set Your New Password",
+    "description": "For your security, you must set a new password before accessing your dashboard. Use the temporary password from your welcome email.",
+    "currentPasswordLabel": "Temporary Password",
+    "currentPasswordPlaceholder": "Enter your temporary password",
+    "newPasswordLabel": "New Password",
+    "newPasswordPlaceholder": "Enter a new password (min. 8 characters)",
+    "confirmPasswordLabel": "Confirm New Password",
+    "confirmPasswordPlaceholder": "Re-enter your new password",
+    "submit": "Set Password & Continue",
+    "saving": "Saving...",
+    "mismatch": "Passwords do not match",
+    "tooShort": "Password must be at least 8 characters",
+    "error": "Failed to update password. Please check your temporary password and try again."
+  },
   "AdminSubmissionsPage": {
     "badge": "Platform Admin",
     "title": "Form Submissions",

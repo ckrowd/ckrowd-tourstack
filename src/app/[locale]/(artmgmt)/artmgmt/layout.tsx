@@ -1,8 +1,9 @@
 import { setRequestLocale } from "next-intl/server";
 import { redirect } from "next/navigation";
+import ArtmgmtPasswordGate from "@/components/ArtmgmtPasswordGate";
 import ArtmgmtSideNav from "@/components/ArtmgmtSideNav";
 import TopNav from "@/components/TopNav";
-import { getSession, getTourstackProfile } from "@/app/actions";
+import { getArtmgmtProfile, getSession, getTourstackProfile } from "@/app/actions";
 import { isArtmgmtProfile } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
@@ -27,15 +28,22 @@ export default async function ArtmgmtLayout({
 		redirect(`/${locale}/artmgmt/login`);
 	}
 
+	const artmgmtProfile = await getArtmgmtProfile();
+	const forcePasswordChange =
+		(artmgmtProfile.data as { force_password_change?: boolean } | null)
+			?.force_password_change === true;
+
 	return (
-		<div className="bg-surface text-on-surface">
-			<TopNav />
-			<div className="flex pt-16 h-screen">
-				<ArtmgmtSideNav />
-				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
-					{children}
-				</main>
+		<ArtmgmtPasswordGate forcePasswordChange={forcePasswordChange}>
+			<div className="bg-surface text-on-surface">
+				<TopNav />
+				<div className="flex pt-16 h-screen">
+					<ArtmgmtSideNav />
+					<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
+						{children}
+					</main>
+				</div>
 			</div>
-		</div>
+		</ArtmgmtPasswordGate>
 	);
 }
