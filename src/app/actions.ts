@@ -72,11 +72,15 @@ const client = createClient({
 		}
 
 		const jar = await cookies();
+		const isDev = process.env.NODE_ENV === "development";
 		for (const cookie of responseCookies) {
 			const domain = domainByName.get(cookie.name);
 			jar.set(cookie.name, cookie.value, {
 				...cookie.options,
-				...(domain ? { domain } : {}),
+				// On localhost the .ckrowd.com domain causes browsers to reject the
+				// cookie (domain mismatch). Strip both domain and secure flag locally.
+				...(isDev ? { domain: undefined, secure: false } : {}),
+				...(!isDev && domain ? { domain } : {}),
 			});
 		}
 	}) as unknown as (response: Response) => Promise<Response>,
@@ -1340,12 +1344,39 @@ export async function acceptAdminInvite(token: string) {
 }
 
 export async function forwardEoi(eoiId: string, target: "finance" | "insurance") {
-	const { data, error } = await (client.tourstack.admin.eois as any)({ id: eoiId }).forward.post({ target });
-	return {
-		data: await extractPayload(data),
-		success: !error && data?.success,
-		error: extractError(error, data),
-	};
+	try {
+		const cookieJar = await cookies();
+		const cookieString = cookieJar
+			.getAll()
+			.map((c) => `${c.name}=${c.value}`)
+			.join("; ");
+		const res = await fetch(
+			`${process.env.API_URL}/tourstack/admin/eois/${eoiId}/forward`,
+			{
+				method: "POST",
+				headers: { "Content-Type": "application/json", Cookie: cookieString },
+				body: JSON.stringify({ target }),
+			},
+		);
+		let json: { success: boolean; error?: string; data?: unknown } | null = null;
+		try {
+			json = await res.json();
+		} catch {
+			const text = await res.text().catch(() => "(unreadable)");
+			return { data: null, success: false, error: `HTTP ${res.status}: ${text.slice(0, 120)}` };
+		}
+		return {
+			data: json?.data ?? null,
+			success: json?.success === true,
+			error: json?.error ?? (res.ok ? null : `HTTP ${res.status}`),
+		};
+	} catch (err) {
+		return {
+			data: null,
+			success: false,
+			error: `[threw] ${err instanceof Error ? err.message : String(err)}`,
+		};
+	}
 }
 
 export async function getFinancingEois() {

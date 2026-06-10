@@ -359,17 +359,17 @@ export default function InsuranceAdminApplicationsPage() {
 				) : (
 					<div className="space-y-4">
 						{(eoisQuery.data?.data as Record<string, unknown>[]).map((eoi) => {
-							const storageId = eoi.pdf_storage_id != null ? String(eoi.pdf_storage_id) : null;
+							const eoiId = String(eoi.id);
 							const promoter = eoi.promoter as Record<string, unknown> | null;
 							const artist = eoi.artist as Record<string, unknown> | null;
 							const forwardedAt = eoi.forwarded_at != null
 								? format.dateTime(new Date(String(eoi.forwarded_at)), { dateStyle: "medium" })
 								: "—";
 							return (
-								<div key={String(eoi.id)} className="bg-surface-container-lowest rounded-2xl p-5 border border-outline-variant/10 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+								<div key={eoiId} className="bg-surface-container-lowest rounded-2xl p-5 border border-outline-variant/10 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 									<div>
 										<p className="text-xs font-black text-[#FF5A30] uppercase tracking-widest mb-0.5">
-											{`EOI-${String(eoi.id).slice(-6).toUpperCase()}`}
+											{`EOI-${eoiId.slice(-6).toUpperCase()}`}
 										</p>
 										<p className="font-(family-name:--font-manrope) font-bold text-on-surface">
 											{String(artist?.name ?? "—")}
@@ -382,17 +382,15 @@ export default function InsuranceAdminApplicationsPage() {
 											{t("eois.forwardedOn")} {forwardedAt}
 										</p>
 									</div>
-									{storageId && (
-										<a
-											href={`/api/download/${encodeURIComponent(storageId)}`}
-											target="_blank"
-											rel="noopener noreferrer"
-											className="shrink-0 flex items-center gap-2 px-4 py-2.5 bg-purple-50 text-purple-700 rounded-xl text-sm font-bold hover:bg-purple-100 transition-colors"
-										>
-											<span className="material-symbols-outlined text-sm">download</span>
-											{t("eois.downloadPdf")}
-										</a>
-									)}
+									<a
+										href={`/api/eoi-pdf/${encodeURIComponent(eoiId)}?portal=insurance`}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="shrink-0 flex items-center gap-2 px-4 py-2.5 bg-purple-50 text-purple-700 rounded-xl text-sm font-bold hover:bg-purple-100 transition-colors"
+									>
+										<span className="material-symbols-outlined text-sm">download</span>
+										{t("eois.downloadPdf")}
+									</a>
 								</div>
 							);
 						})}
