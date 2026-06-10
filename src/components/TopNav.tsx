@@ -11,6 +11,8 @@ import GlobalSearch from "@/components/GlobalSearch";
 
 export default function TopNav() {
 	const pathname = usePathname();
+	const isArtmgmtPortal =
+		pathname.startsWith("/artmgmt") && !pathname.includes("/artmgmt/login");
 	const router = useRouter();
 	const locale = useLocale();
 	const {
@@ -30,13 +32,14 @@ export default function TopNav() {
 	const tAdminSideNav = useTranslations("AdminSideNav");
 	const tFinancingAdminSideNav = useTranslations("FinancingAdminSideNav");
 	const tInsuranceAdminSideNav = useTranslations("InsuranceAdminSideNav");
+	const tArtmgmtSideNav = useTranslations("ArtmgmtSideNav");
 	const format = useFormatter();
 
 	// Notifications are derived from the signed-in promoter's real EOIs.
 	const eoisQuery = useQuery({
 		queryKey: ["eois"],
 		queryFn: () => getEOIs(),
-		enabled: Boolean(session?.user),
+		enabled: Boolean(session?.user) && !isArtmgmtPortal,
 	});
 
 	// Track which notifications the user has read via a localStorage timestamp.
@@ -225,18 +228,35 @@ export default function TopNav() {
 		},
 	];
 
+	const artmgmtNavItems = [
+		{ label: tArtmgmtSideNav("artists"), icon: "star", href: "/artmgmt" },
+		{
+			label: tArtmgmtSideNav("profile"),
+			icon: "manage_accounts",
+			href: "/artmgmt/profile",
+		},
+	];
+
 	const mobileNavItems = isAdminPortal
 		? adminNavItems
 		: isFinancingAdminPortal
 			? financingAdminNavItems
 			: isInsuranceAdminPortal
 				? insuranceAdminNavItems
-				: session?.user
-					? dashboardNavItems
-					: [];
+				: isArtmgmtPortal
+					? artmgmtNavItems
+					: session?.user
+						? dashboardNavItems
+						: [];
 
 	function isNavActive(href: string) {
-		if (href === "/admin" || href === "/financing-admin" || href === "/insurance-admin" || href === "/dashboard") {
+		if (
+			href === "/admin" ||
+			href === "/financing-admin" ||
+			href === "/insurance-admin" ||
+			href === "/dashboard" ||
+			href === "/artmgmt"
+		) {
 			return pathname === href;
 		}
 		return pathname === href || pathname.startsWith(`${href}/`);
@@ -267,8 +287,8 @@ export default function TopNav() {
 					</div>
 
 					<div className="flex items-center gap-3">
-						{/* Global search — authenticated users only */}
-						{session?.user && <GlobalSearch />}
+						{/* Global search — promoter/admin portals only */}
+						{session?.user && !isArtmgmtPortal && <GlobalSearch />}
 
 						{/* Locale Switcher — desktop only (accessible via drawer on mobile) */}
 						<div className="relative hidden lg:block">
@@ -323,8 +343,8 @@ export default function TopNav() {
 							)}
 						</div>
 
-						{/* Notifications — all sizes, sits before hamburger */}
-						{session?.user && (
+						{/* Notifications — promoter/admin portals only */}
+						{session?.user && !isArtmgmtPortal && (
 							<div className="relative">
 								<button
 									type="button"
@@ -343,8 +363,8 @@ export default function TopNav() {
 							</div>
 						)}
 
-						{/* Guide button — triggers per-page tour */}
-						{session?.user && (
+						{/* Guide button — promoter/admin portals only */}
+						{session?.user && !isArtmgmtPortal && (
 							<button
 								type="button"
 								aria-label="Start page guide"
@@ -381,7 +401,7 @@ export default function TopNav() {
 										/>
 										<div className="absolute right-0 top-10 z-50 w-44 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden">
 											<Link
-												href="/profile"
+												href={isArtmgmtPortal ? "/artmgmt/profile" : "/profile"}
 												onClick={() => setProfileOpen(false)}
 												className="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors font-(family-name:--font-manrope)"
 											>
@@ -390,16 +410,18 @@ export default function TopNav() {
 												</span>
 												{tCommon("profile")}
 											</Link>
-											<Link
-												href="/settings"
-												onClick={() => setProfileOpen(false)}
-												className="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors font-(family-name:--font-manrope)"
-											>
-												<span className="material-symbols-outlined text-base text-[#494455]">
-													settings
-												</span>
-												{tCommon("settings")}
-											</Link>
+											{!isArtmgmtPortal && (
+												<Link
+													href="/settings"
+													onClick={() => setProfileOpen(false)}
+													className="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors font-(family-name:--font-manrope)"
+												>
+													<span className="material-symbols-outlined text-base text-[#494455]">
+														settings
+													</span>
+													{tCommon("settings")}
+												</Link>
+											)}
 											<button
 												type="button"
 												onClick={() => {
@@ -578,46 +600,53 @@ export default function TopNav() {
 						<div className="border-t border-slate-100 px-3 py-3 space-y-0.5 shrink-0">
 							{session?.user ? (
 								<>
-									{/* Notifications */}
-									<button
-										type="button"
-										onClick={() => {
-											setMobileMenuOpen(false);
-											setNotifOpen(true);
-										}}
-										className="flex items-center gap-3 w-full px-4 py-3 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm text-slate-600 hover:bg-slate-50 transition-colors"
-									>
-										<span className="material-symbols-outlined text-[#494455]">
-											notifications
-										</span>
-										<span>{t("notifications")}</span>
-										{hasUnread && (
-											<span className="ml-auto min-w-5 h-5 px-1 rounded-full bg-[#FF5A30] text-white text-[10px] flex items-center justify-center font-bold">
-												{unreadCount}
+									{/* Notifications — promoter/admin portals only */}
+									{!isArtmgmtPortal && (
+										<button
+											type="button"
+											onClick={() => {
+												setMobileMenuOpen(false);
+												setNotifOpen(true);
+											}}
+											className="flex items-center gap-3 w-full px-4 py-3 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm text-slate-600 hover:bg-slate-50 transition-colors"
+										>
+											<span className="material-symbols-outlined text-[#494455]">
+												notifications
 											</span>
-										)}
-									</button>
+											<span>{t("notifications")}</span>
+											{hasUnread && (
+												<span className="ml-auto min-w-5 h-5 px-1 rounded-full bg-[#FF5A30] text-white text-[10px] flex items-center justify-center font-bold">
+													{unreadCount}
+												</span>
+											)}
+										</button>
+									)}
 
 									{/* Profile */}
 									<Link
-										href="/profile"
-										onClick={() => setMobileMenuOpen(false)}
-										className="flex items-center px-4 py-3 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm text-slate-600 hover:bg-slate-50 transition-colors"
-									>
-										{tCommon("profile")}
-									</Link>
-
-									{/* Settings */}
-									<Link
-										href="/settings"
+										href={isArtmgmtPortal ? "/artmgmt/profile" : "/profile"}
 										onClick={() => setMobileMenuOpen(false)}
 										className="flex items-center gap-3 px-4 py-3 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm text-slate-600 hover:bg-slate-50 transition-colors"
 									>
 										<span className="material-symbols-outlined text-[#494455]">
-											settings
+											person
 										</span>
-										<span>{tCommon("settings")}</span>
+										<span>{tCommon("profile")}</span>
 									</Link>
+
+									{/* Settings — promoter/admin portals only */}
+									{!isArtmgmtPortal && (
+										<Link
+											href="/settings"
+											onClick={() => setMobileMenuOpen(false)}
+											className="flex items-center gap-3 px-4 py-3 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm text-slate-600 hover:bg-slate-50 transition-colors"
+										>
+											<span className="material-symbols-outlined text-[#494455]">
+												settings
+											</span>
+											<span>{tCommon("settings")}</span>
+										</Link>
+									)}
 
 									{/* Sign out */}
 									<button

@@ -174,10 +174,14 @@ export default function ArtmgmtPage() {
 	const inputCls =
 		"w-full px-3 py-2 text-sm rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/40 placeholder:text-slate-400";
 
+	const totalArtists = artists.length;
+	const activeArtists = artists.filter((a) => Boolean(a.is_active)).length;
+	const inactiveArtists = totalArtists - activeArtists;
+
 	return (
 		<div>
 			{/* Header */}
-			<div className="mb-8 flex items-start justify-between gap-4 flex-wrap">
+			<div className="mb-6 flex items-start justify-between gap-4 flex-wrap">
 				<div>
 					<span className="inline-block px-3 py-1 rounded-full bg-[#FF5A30]/10 text-[#FF5A30] text-xs font-bold uppercase tracking-wider mb-3">
 						{t("badge")}
@@ -196,6 +200,59 @@ export default function ArtmgmtPage() {
 					{t("addArtist")}
 				</button>
 			</div>
+
+			{/* Stats row */}
+			{!isLoading && (
+				<div className="grid grid-cols-3 gap-4 mb-8">
+					<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex items-center gap-4">
+						<div className="w-11 h-11 rounded-xl bg-[#FF5A30]/10 flex items-center justify-center shrink-0">
+							<span className="material-symbols-outlined text-[#FF5A30] text-xl">
+								groups
+							</span>
+						</div>
+						<div>
+							<p className="text-2xl font-black text-slate-900 leading-none">
+								{totalArtists}
+							</p>
+							<p className="text-xs text-slate-500 font-semibold mt-0.5">
+								{t("stats.total")}
+							</p>
+						</div>
+					</div>
+
+					<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex items-center gap-4">
+						<div className="w-11 h-11 rounded-xl bg-emerald-50 flex items-center justify-center shrink-0">
+							<span className="material-symbols-outlined text-emerald-600 text-xl">
+								verified
+							</span>
+						</div>
+						<div>
+							<p className="text-2xl font-black text-slate-900 leading-none">
+								{activeArtists}
+							</p>
+							<p className="text-xs text-slate-500 font-semibold mt-0.5">
+								{t("stats.active")}
+							</p>
+						</div>
+					</div>
+
+					<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex items-center gap-4">
+						<div className="w-11 h-11 rounded-xl bg-slate-100 flex items-center justify-center shrink-0">
+							<span className="material-symbols-outlined text-slate-400 text-xl">
+								pause_circle
+							</span>
+						</div>
+						<div>
+							<p className="text-2xl font-black text-slate-900 leading-none">
+								{inactiveArtists}
+							</p>
+							<p className="text-xs text-slate-500 font-semibold mt-0.5">
+								{t("stats.inactive")}
+							</p>
+						</div>
+					</div>
+				</div>
+			)}
 
 			{/* Toast */}
 			{toast && (

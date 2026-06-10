@@ -4858,6 +4858,11 @@
 		"addArtist": "Ajouter un artiste",
 		"noArtists": "Aucun artiste pour l'instant",
 		"noArtistsHint": "Ajoutez votre premier artiste pour commencer.",
+		"stats": {
+			"total": "Total artistes",
+			"active": "Actifs",
+			"inactive": "Inactifs"
+		},
 		"active": "Actif",
 		"inactive": "Inactif",
 		"genre": "Genre",
