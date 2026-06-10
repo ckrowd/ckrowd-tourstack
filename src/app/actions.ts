@@ -340,6 +340,17 @@ export async function getRosterArtist(id: string) {
 		error: extractError(error, data),
 	};
 }
+
+export async function clearForcePasswordChange() {
+	const { data, error, status, headers } = await (client as any).tourstack.artmgmt[
+		"acknowledge-password"
+	].patch();
+	return {
+		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
 // biome-ignore-end lint/suspicious/noExplicitAny
 
 export async function createRosterArtist(body: {
