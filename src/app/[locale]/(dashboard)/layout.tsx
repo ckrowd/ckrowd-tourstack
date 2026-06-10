@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
-import { getSession } from "@/app/actions";
-import { adminHomePath } from "@/lib/auth";
+import { getSession, getTourstackProfile } from "@/app/actions";
+import { adminHomePath, isArtmgmtProfile } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -20,6 +20,11 @@ export default async function DashboardLayout({
 	const home = adminHomePath(session);
 	if (home) {
 		redirect(`/${locale}${home}`);
+	}
+
+	const profile = await getTourstackProfile();
+	if (isArtmgmtProfile(profile.data as { role?: string | null } | null)) {
+		redirect(`/${locale}/artmgmt`);
 	}
 
 	return <>{children}</>;
