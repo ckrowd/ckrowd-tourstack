@@ -10,6 +10,7 @@ import {
 	updateTourstackVenue,
 } from "@/app/actions";
 import { Field, Section } from "@/components/SettingsPrimitives";
+import Loader from "@/components/Loader";
 import VenueDetailsModal from "@/components/VenueDetailsModal";
 
 type Venue = NonNullable<
@@ -124,7 +125,7 @@ export default function SettingsVenueTab() {
 			>
 				<div className="space-y-3">
 					{venuesQuery.isLoading ? (
-						<p className="text-sm text-on-surface-variant">{t("loading")}</p>
+						<Loader size={36} />
 					) : venues.length === 0 ? (
 						<p className="text-sm text-on-surface-variant">
 							{t("myVenues.empty")}

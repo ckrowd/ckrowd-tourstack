@@ -8,6 +8,7 @@ import {
 	deleteFinancingProduct,
 	listFinancingProducts,
 } from "@/app/actions";
+import Loader from "@/components/Loader";
 
 type Product = {
 	id: string;
@@ -75,7 +76,7 @@ export default function FinancingProductsPanel() {
 			</h3>
 
 			{query.isLoading ? (
-				<p className="text-sm text-on-surface-variant py-4">{t("loading")}</p>
+				<Loader size={36} />
 			) : !query.data?.success ? (
 				<p className="text-sm text-red-600 py-4">
 					{query.data?.error || t("loadError")}

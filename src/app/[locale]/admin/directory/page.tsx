@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useMemo, useState } from "react";
 import { getStakeholders } from "@/app/actions";
 import { downloadCsv } from "@/lib/csv";
+import Loader from "@/components/Loader";
 
 type Category = "service" | "workforce" | "artmgmt";
 
@@ -243,9 +244,8 @@ export default function AdminDirectoryPage() {
 			</div>
 
 			{isLoading ? (
-				<div className="text-center py-20 bg-surface-container-lowest rounded-2xl border border-outline-variant/10">
-					<span className="w-8 h-8 border-2 border-[#FF5A30]/30 border-t-[#FF5A30] rounded-full animate-spin inline-block mb-4" />
-					<p className="text-on-surface-variant font-medium">{t("loading")}</p>
+				<div className="bg-surface-container-lowest rounded-2xl border border-outline-variant/10">
+					<Loader />
 				</div>
 			) : filtered.length === 0 ? (
 				<div className="text-center py-20 bg-surface-container-lowest rounded-2xl border border-outline-variant/10">

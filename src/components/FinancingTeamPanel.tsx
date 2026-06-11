@@ -9,6 +9,7 @@ import {
 	resendFinancingInvite,
 	revokeFinancingInvite,
 } from "@/app/actions";
+import Loader from "@/components/Loader";
 
 type ActiveMember = {
 	id: string;
@@ -85,7 +86,7 @@ export default function FinancingTeamPanel() {
 			</h3>
 
 			{query.isLoading ? (
-				<p className="text-sm text-on-surface-variant py-4">{t("loading")}</p>
+				<Loader size={36} />
 			) : !query.data?.success ? (
 				<p className="text-sm text-red-600 py-4">{t("loadError")}</p>
 			) : team.active.length === 0 && team.invites.length === 0 ? (

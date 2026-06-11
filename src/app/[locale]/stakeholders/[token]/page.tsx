@@ -4,6 +4,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { use } from "react";
 import { getOnboardingLink, submitOnboardingLink } from "@/app/actions";
+import Loader from "@/components/Loader";
 import {
 	BrandHeader,
 	StakeholderForm,
@@ -69,15 +70,7 @@ export default function PublicOnboardingLinkPage({
 			<div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-sm p-6 md:p-8">
 				<BrandHeader />
 				{linkQuery.isLoading ? (
-					<>
-						<p className="text-xs font-bold uppercase tracking-widest text-[#FF5A30]">
-							{t("header.tagline")}
-						</p>
-						<h1 className="text-3xl font-(family-name:--font-manrope) font-extrabold text-on-surface mt-2">
-							{t("header.title")}
-						</h1>
-						<p className="text-sm text-on-surface-variant mt-6">{t("loadingLink")}</p>
-					</>
+					<Loader />
 				) : !linkQuery.data?.success || !link || !category ? (
 					<>
 						<p className="text-xs font-bold uppercase tracking-widest text-[#FF5A30]">

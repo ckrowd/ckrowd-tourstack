@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useFormatter, useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { getAdminFinancing, getFinancingEois, updateFinancingApplication } from "@/app/actions";
+import Loader from "@/components/Loader";
 
 // Fully typed application straight from the server action's response — no
 // hand-written shape, so it tracks any backend change automatically.
@@ -215,9 +216,7 @@ export default function FinancingAdminApplicationsPage() {
 					</div>
 
 					{query.isLoading ? (
-						<p className="text-sm text-on-surface-variant py-10 text-center">
-							{t("loading")}
-						</p>
+						<Loader />
 					) : !query.data?.success ? (
 						<p className="text-sm font-medium text-red-600 py-10 text-center">
 							{query.data?.error || t("loadError")}
@@ -699,7 +698,7 @@ export default function FinancingAdminApplicationsPage() {
 					{t("eois.title")}
 				</h2>
 				{eoisQuery.isLoading ? (
-					<p className="text-sm text-on-surface-variant">{t("loading")}</p>
+					<Loader size={36} />
 				) : !eoisQuery.data?.success || (eoisQuery.data?.data as unknown[])?.length === 0 ? (
 					<div className="bg-surface-container-lowest rounded-2xl p-10 text-center shadow-sm">
 						<span className="material-symbols-outlined text-4xl text-on-surface-variant block mb-3">inbox</span>

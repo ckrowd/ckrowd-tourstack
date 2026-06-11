@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/routing";
 import { Link } from "@/i18n/routing";
 import { getAdminTour, updateAdminTour } from "@/app/actions";
+import Loader from "@/components/Loader";
 import { use } from "react";
 
 const TOUR_STATUSES = [
@@ -82,11 +83,7 @@ export default function EditTourPage({
 		: "";
 
 	if (isLoading) {
-		return (
-			<div className="flex items-center justify-center py-24 text-on-surface-variant">
-				{t("loading")}
-			</div>
-		);
+		return <Loader />;
 	}
 
 	if (!tour) {

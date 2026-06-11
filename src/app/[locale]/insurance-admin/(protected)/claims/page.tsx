@@ -3,6 +3,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useFormatter, useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
+import Loader from "@/components/Loader";
 import {
 	createInsuranceClaim,
 	getInsuranceApplications,
@@ -328,9 +329,7 @@ export default function InsuranceAdminClaimsPage() {
 				</div>
 
 				{claimsQuery.isLoading ? (
-					<p className="text-sm text-on-surface-variant py-10 text-center">
-						{t("loading")}
-					</p>
+					<Loader />
 				) : !claimsQuery.data?.success ? (
 					<p className="text-sm font-medium text-red-600 py-10 text-center">
 						{claimsQuery.data?.error || t("loadError")}
