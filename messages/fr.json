@@ -4857,13 +4857,47 @@
 	"ArtmgmtSubmissionsPage": {
 		"badge": "Soumissions",
 		"title": "Soumissions aux Tournées",
-		"subtitle": "Suivez les soumissions de vos artistes aux opportunités de tournée.",
-		"comingSoon": {
-			"title": "Bientôt disponible",
-			"description": "Le suivi des soumissions pour votre roster est en développement. Voici ce qui est prévu :",
-			"feature1": "Voir toutes les opportunités auxquelles vos artistes ont soumis",
-			"feature2": "Suivre le statut des soumissions et les réponses des promoteurs",
-			"feature3": "Gérer les réservations et les dates de tournée confirmées"
+		"subtitle": "Suivez et gérez vos soumissions de pitch aux opportunités de tournée.",
+		"newPitch": "Nouveau Pitch",
+		"noPitches": "Aucun pitch pour l'instant",
+		"noPitchesHint": "Cliquez sur « Nouveau Pitch » pour commencer à suivre une soumission pour l'un de vos artistes.",
+		"contact": "Contact",
+		"edit": "Modifier",
+		"delete": "Supprimer",
+		"confirmDelete": "Êtes-vous sûr de vouloir supprimer ce pitch ? Cette action est irréversible.",
+		"markAccepted": "Marquer Accepté",
+		"markRejected": "Marquer Rejeté",
+		"markPending": "Remettre en attente",
+		"createSuccess": "Pitch créé avec succès.",
+		"createError": "Échec de la création du pitch.",
+		"updateSuccess": "Pitch mis à jour avec succès.",
+		"updateError": "Échec de la mise à jour du pitch.",
+		"deleteSuccess": "Pitch supprimé.",
+		"deleteError": "Échec de la suppression du pitch.",
+		"stats": {
+			"pending": "En attente",
+			"accepted": "Acceptés",
+			"rejected": "Rejetés"
+		},
+		"status": {
+			"pending": "En attente",
+			"accepted": "Accepté",
+			"rejected": "Rejeté"
+		},
+		"form": {
+			"addTitle": "Nouveau Pitch",
+			"editTitle": "Modifier le Pitch",
+			"artist": "Artiste du Roster",
+			"artistPlaceholder": "Sélectionner un artiste…",
+			"tourName": "Nom de la Tournée / Opportunité",
+			"tourNamePlaceholder": "ex. Summer Beats Festival 2026",
+			"promoterContact": "Contact Promoteur",
+			"promoterContactPlaceholder": "ex. john@promoteur.com",
+			"notes": "Notes",
+			"notesPlaceholder": "Contexte supplémentaire…",
+			"save": "Enregistrer",
+			"saving": "Enregistrement…",
+			"cancel": "Annuler"
 		}
 	},
 	"ArtmgmtSearch": {

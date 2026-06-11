@@ -233,11 +233,6 @@ export default function TopNav() {
 		{ label: tArtmgmtSideNav("artists"), icon: "star", href: "/artmgmt" },
 		{ label: tArtmgmtSideNav("submissions"), icon: "send", href: "/artmgmt/submissions" },
 		{ label: tArtmgmtSideNav("reports"), icon: "bar_chart", href: "/artmgmt/reports" },
-		{
-			label: tArtmgmtSideNav("profile"),
-			icon: "manage_accounts",
-			href: "/artmgmt/profile",
-		},
 	];
 
 	const mobileNavItems = isAdminPortal

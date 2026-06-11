@@ -414,6 +414,63 @@ export async function deleteRosterArtist(id: string) {
 	};
 }
 
+export async function getArtistPitches() {
+	// biome-ignore lint/suspicious/noExplicitAny: artmgmt pitches route not yet in published pkg
+	const { data, error, status, headers } = await (client as any).tourstack.artmgmt.pitches.get();
+	return {
+		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+export async function createArtistPitch(body: {
+	rosterArtistId: string;
+	tourName: string;
+	promoterContact?: string;
+	notes?: string;
+}) {
+	// biome-ignore lint/suspicious/noExplicitAny: artmgmt pitches route not yet in published pkg
+	const { data, error, status, headers } = await (client as any).tourstack.artmgmt.pitches.post(body);
+	return {
+		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+export async function updateArtistPitch(
+	id: string,
+	body: {
+		tourName?: string;
+		promoterContact?: string | null;
+		notes?: string | null;
+		status?: "pending" | "accepted" | "rejected";
+	},
+) {
+	// biome-ignore lint/suspicious/noExplicitAny: artmgmt pitches route not yet in published pkg
+	const { data, error, status, headers } = await (client as any).tourstack.artmgmt
+		.pitches({ id })
+		.patch(body);
+	return {
+		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+export async function deleteArtistPitch(id: string) {
+	// biome-ignore lint/suspicious/noExplicitAny: artmgmt pitches route not yet in published pkg
+	const { data, error, status, headers } = await (client as any).tourstack.artmgmt
+		.pitches({ id })
+		.delete();
+	return {
+		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
 export async function getArtists(
 	params?: Params<typeof client.tourstack.discovery.get>,
 ) {
