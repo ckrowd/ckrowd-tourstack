@@ -203,7 +203,7 @@ export default function ArtmgmtPage() {
 
 			{/* Stats row */}
 			{!isLoading && (
-				<div className="grid grid-cols-3 gap-4 mb-8">
+				<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
 					<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex items-center gap-4">
 						<div className="w-11 h-11 rounded-xl bg-[#FF5A30]/10 flex items-center justify-center shrink-0">
 							<span className="material-symbols-outlined text-[#FF5A30] text-xl">

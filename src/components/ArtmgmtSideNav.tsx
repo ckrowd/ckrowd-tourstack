@@ -6,6 +6,8 @@ export default async function ArtmgmtSideNav() {
 
 	const navItems = [
 		{ key: "artists", label: t("artists"), icon: "star", href: "/artmgmt" },
+		{ key: "submissions", label: t("submissions"), icon: "send", href: "/artmgmt/submissions" },
+		{ key: "reports", label: t("reports"), icon: "bar_chart", href: "/artmgmt/reports" },
 		{ key: "profile", label: t("profile"), icon: "manage_accounts", href: "/artmgmt/profile" },
 	];
 
