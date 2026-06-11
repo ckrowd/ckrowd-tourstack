@@ -20,7 +20,6 @@ type PendingInvite = {
 	id: string;
 	name: string;
 	email: string;
-	expires_at: string | Date;
 };
 
 export default function FinancingTeamPanel() {
@@ -118,7 +117,6 @@ export default function FinancingTeamPanel() {
 					})}
 
 					{team.invites.map((invite) => {
-						const expires = new Date(invite.expires_at).toLocaleDateString();
 						const busyResend =
 							resendMutation.isPending &&
 							resendMutation.variables === invite.id;
@@ -140,9 +138,6 @@ export default function FinancingTeamPanel() {
 										</p>
 										<p className="text-xs text-on-surface-variant">
 											{invite.email}
-										</p>
-										<p className="text-[10px] text-on-surface-variant/80 mt-0.5">
-											{t("inviteExpires", { date: expires })}
 										</p>
 									</div>
 								</div>
