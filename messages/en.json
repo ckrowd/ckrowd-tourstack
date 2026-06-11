@@ -4869,13 +4869,47 @@
 	"ArtmgmtSubmissionsPage": {
 		"badge": "Submissions",
 		"title": "Tour Submissions",
-		"subtitle": "Track your artists' submissions to tour opportunities.",
-		"comingSoon": {
-			"title": "Coming Soon",
-			"description": "Submission tracking for your roster is on the roadmap. Here's what's planned:",
-			"feature1": "View all tour opportunities your artists have submitted to",
-			"feature2": "Track submission status and promoter responses",
-			"feature3": "Manage bookings and confirmed tour dates"
+		"subtitle": "Track and manage your pitch submissions to tour opportunities.",
+		"newPitch": "New Pitch",
+		"noPitches": "No pitches yet",
+		"noPitchesHint": "Click \"New Pitch\" to start tracking a submission for one of your roster artists.",
+		"contact": "Contact",
+		"edit": "Edit",
+		"delete": "Delete",
+		"confirmDelete": "Are you sure you want to delete this pitch? This action cannot be undone.",
+		"markAccepted": "Mark Accepted",
+		"markRejected": "Mark Rejected",
+		"markPending": "Reset to Pending",
+		"createSuccess": "Pitch created successfully.",
+		"createError": "Failed to create pitch.",
+		"updateSuccess": "Pitch updated successfully.",
+		"updateError": "Failed to update pitch.",
+		"deleteSuccess": "Pitch deleted.",
+		"deleteError": "Failed to delete pitch.",
+		"stats": {
+			"pending": "Pending",
+			"accepted": "Accepted",
+			"rejected": "Rejected"
+		},
+		"status": {
+			"pending": "Pending",
+			"accepted": "Accepted",
+			"rejected": "Rejected"
+		},
+		"form": {
+			"addTitle": "New Pitch",
+			"editTitle": "Edit Pitch",
+			"artist": "Roster Artist",
+			"artistPlaceholder": "Select an artist…",
+			"tourName": "Tour / Opportunity Name",
+			"tourNamePlaceholder": "e.g. Summer Beats Festival 2026",
+			"promoterContact": "Promoter Contact",
+			"promoterContactPlaceholder": "e.g. john@promoter.com",
+			"notes": "Notes",
+			"notesPlaceholder": "Any additional context…",
+			"save": "Save",
+			"saving": "Saving…",
+			"cancel": "Cancel"
 		}
 	},
 	"ArtmgmtSearch": {
