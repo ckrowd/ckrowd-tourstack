@@ -3,6 +3,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { useCallback, useEffect, useState } from "react";
+import Loader from "@/components/Loader";
 import {
 	createOnboardingLink,
 	exportStakeholders,
@@ -405,9 +406,7 @@ export default function StakeholdersClient() {
 						</div>
 
 						{stakeholdersQuery.isLoading ? (
-							<div className="text-center py-16">
-								<span className="w-8 h-8 border-2 border-[#FF5A30]/30 border-t-[#FF5A30] rounded-full animate-spin inline-block" />
-							</div>
+							<Loader />
 						) : filtered.length === 0 ? (
 							<div className="text-center py-16 px-6">
 								<span className="material-symbols-outlined text-5xl text-on-surface-variant/30 block mb-3">

@@ -3,6 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useFormatter, useTranslations } from "next-intl";
 import { getEOIs } from "@/app/actions";
+import Loader from "@/components/Loader";
 import { useSession } from "@/context/AuthContext";
 import { Link } from "@/i18n/routing";
 
@@ -56,11 +57,7 @@ export default function NotificationsClient() {
 			</div>
 
 			{eoisQuery.isLoading ? (
-				<div className="flex items-center justify-center py-24">
-					<span className="material-symbols-outlined animate-spin text-3xl text-[#FF5A30]">
-						progress_activity
-					</span>
-				</div>
+				<Loader />
 			) : notifications.length === 0 ? (
 				<div className="flex flex-col items-center justify-center py-24 text-on-surface-variant text-center">
 					<span className="material-symbols-outlined text-5xl mb-4 text-slate-300">

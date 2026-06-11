@@ -1,5 +1,5 @@
 import type {} from "next";
-import { Inter, Manrope } from "next/font/google";
+import { Inter, Rubik } from "next/font/google";
 import "../globals.css";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
@@ -11,16 +11,18 @@ import {
 import QueryProvider from "@/components/QueryProvider";
 import { routing } from "@/i18n/routing";
 
-const manrope = Manrope({
+// Rubik replaces Manrope as the display/heading font — same CSS variable kept
+// for backwards compatibility with all existing font-(family-name:--font-manrope) usages.
+const rubik = Rubik({
 	variable: "--font-manrope",
 	subsets: ["latin"],
-	weight: ["400", "600", "700", "800"],
+	weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
 const inter = Inter({
 	variable: "--font-inter",
 	subsets: ["latin"],
-	weight: ["400", "500", "600"],
+	weight: ["400", "500", "600", "700", "800", "900"],
 });
 
 export async function generateMetadata({
@@ -122,7 +124,7 @@ export default async function RootLayout({
 	const messages = await getMessages();
 
 	return (
-		<html lang={locale} className={`${manrope.variable} ${inter.variable}`}>
+		<html lang={locale} className={`${rubik.variable} ${inter.variable}`}>
 			<body className="min-h-full antialiased" suppressHydrationWarning>
 				<NextIntlClientProvider locale={locale} messages={messages}>
 					<QueryProvider>{children}</QueryProvider>

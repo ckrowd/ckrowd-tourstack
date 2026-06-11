@@ -3,6 +3,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { getRosterArtists } from "@/app/actions";
+import Loader from "@/components/Loader";
 
 type RosterArtist = {
 	id: unknown;
@@ -93,9 +94,7 @@ export default function ArtmgmtReportsPage() {
 	if (isLoading) {
 		return (
 			<div className="flex items-center justify-center py-32">
-				<span className="material-symbols-outlined animate-spin text-3xl text-[#FF5A30]">
-					progress_activity
-				</span>
+				<Loader />
 			</div>
 		);
 	}

@@ -3,6 +3,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
+import Loader from "@/components/Loader";
 import {
 	createArtistPitch,
 	deleteArtistPitch,
@@ -243,11 +244,7 @@ export default function ArtmgmtSubmissionsPage() {
 
 			{/* Pitch list */}
 			{isLoading ? (
-				<div className="flex items-center justify-center py-24">
-					<span className="material-symbols-outlined animate-spin text-3xl text-[#FF5A30]">
-						progress_activity
-					</span>
-				</div>
+				<Loader />
 			) : pitches.length === 0 ? (
 				<div className="flex flex-col items-center justify-center py-24 text-center">
 					<span className="material-symbols-outlined text-5xl mb-4 text-slate-300">send</span>
