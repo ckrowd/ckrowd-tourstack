@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { createFinancingPartner, getAdminFinancingPartners } from "@/app/actions";
+import Loader from "@/components/Loader";
 
 const PARTNER_TYPES = ["bank", "insurance", "credit_union"] as const;
 type PartnerType = (typeof PARTNER_TYPES)[number];
@@ -145,9 +146,7 @@ export default function FinancingAdminPartnersPage() {
 					</div>
 
 					{query.isLoading ? (
-						<p className="text-sm text-on-surface-variant py-10 text-center">
-							{t("loading")}
-						</p>
+						<Loader />
 					) : !query.data?.success ? (
 						<p className="text-sm font-medium text-red-600 py-10 text-center">
 							{query.data?.error || t("loadError")}

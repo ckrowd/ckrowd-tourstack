@@ -3,6 +3,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import Loader from "@/components/Loader";
 import {
 	createInsurancePartner,
 	getInsurancePartners,
@@ -115,9 +116,7 @@ export default function InsuranceAdminPartnersPage() {
 					</div>
 
 					{query.isLoading ? (
-						<p className="text-sm text-on-surface-variant py-10 text-center">
-							{t("loading")}
-						</p>
+						<Loader />
 					) : !query.data?.success ? (
 						<p className="text-sm font-medium text-red-600 py-10 text-center">
 							{query.data?.error || t("loadError")}

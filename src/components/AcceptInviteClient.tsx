@@ -4,6 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { acceptAdminInvite, signOut } from "@/app/actions";
+import Loader from "@/components/Loader";
 import AuthBrandLockup from "@/components/AuthBrandLockup";
 import { useSession } from "@/context/AuthContext";
 import { Link, useRouter } from "@/i18n/routing";
@@ -117,7 +118,7 @@ export default function AcceptInviteClient({
 	if (isLoading && !session) {
 		return (
 			<Shell>
-				<p className="text-sm text-on-surface-variant">{t("loadingSession")}</p>
+				<Loader size={36} />
 			</Shell>
 		);
 	}
