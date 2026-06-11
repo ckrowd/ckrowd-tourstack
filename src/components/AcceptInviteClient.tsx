@@ -17,11 +17,10 @@ const SCOPE_HOME: Record<AdminScope, string> = {
 };
 
 type Invite = {
-	status: "active" | "expired" | "accepted" | "revoked" | "not_found";
+	status: "active" | "accepted" | "revoked" | "not_found";
 	email: string;
 	name: string;
 	role: AdminScope;
-	expiresAt: string;
 	invitedBy: { name: string | null; email: string | null } | null;
 	userExists: boolean;
 };
@@ -80,17 +79,6 @@ export default function AcceptInviteClient({
 					{t("revokedTitle")}
 				</h1>
 				<p className="text-sm text-on-surface-variant">{t("revokedDesc")}</p>
-			</Shell>
-		);
-	}
-
-	if (invite.status === "expired") {
-		return (
-			<Shell>
-				<h1 className="text-xl font-bold text-on-surface mb-2">
-					{t("expiredTitle")}
-				</h1>
-				<p className="text-sm text-on-surface-variant">{t("expiredDesc")}</p>
 			</Shell>
 		);
 	}
