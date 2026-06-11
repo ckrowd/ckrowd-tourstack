@@ -20,10 +20,6 @@ export default async function AcceptInvitePage({ params }: Props) {
 				email: data.email,
 				name: data.name,
 				role: data.role,
-				expiresAt:
-					data.expiresAt instanceof Date
-						? data.expiresAt.toISOString()
-						: String(data.expiresAt),
 				invitedBy: data.invitedBy
 					? {
 							name: data.invitedBy.name ?? null,

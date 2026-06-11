@@ -28,7 +28,6 @@ type PendingInvite = {
 	name: string;
 	email: string;
 	role: AdminScope;
-	expires_at: string | Date;
 };
 
 /** Effective scopes for a member: the roles array plus the legacy column. */
@@ -233,7 +232,6 @@ export default function AdminTeamList({
 			})}
 
 			{invites.map((invite) => {
-				const expires = new Date(invite.expires_at).toLocaleDateString();
 				const busy = busyInviteId === invite.id;
 				return (
 					<div
@@ -250,9 +248,6 @@ export default function AdminTeamList({
 								</p>
 								<p className="text-xs text-on-surface-variant">
 									{invite.email}
-								</p>
-								<p className="text-[10px] text-on-surface-variant/80 mt-0.5">
-									{t("inviteExpires", { date: expires })}
 								</p>
 							</div>
 						</div>
