@@ -4831,7 +4831,40 @@
 	"ArtmgmtSideNav": {
 		"portalLabel": "Gestion Artistique",
 		"artists": "Artistes",
+		"submissions": "Soumissions",
+		"reports": "Rapports",
 		"profile": "Profil"
+	},
+	"ArtmgmtReportsPage": {
+		"badge": "Analytique",
+		"title": "Rapports du Roster",
+		"subtitle": "Aperçus dérivés de votre roster d'artistes.",
+		"noData": "Pas encore de données — ajoutez des artistes pour voir les rapports.",
+		"stats": {
+			"total": "Total Artistes",
+			"genres": "Genres",
+			"nationalities": "Nationalités"
+		},
+		"genres": { "title": "Répartition par Genre" },
+		"nationalities": { "title": "Répartition par Nationalité" },
+		"status": {
+			"title": "Actifs vs Inactifs",
+			"active": "Actifs",
+			"inactive": "Inactifs"
+		},
+		"growth": { "title": "Ajouts Mensuels" }
+	},
+	"ArtmgmtSubmissionsPage": {
+		"badge": "Soumissions",
+		"title": "Soumissions aux Tournées",
+		"subtitle": "Suivez les soumissions de vos artistes aux opportunités de tournée.",
+		"comingSoon": {
+			"title": "Bientôt disponible",
+			"description": "Le suivi des soumissions pour votre roster est en développement. Voici ce qui est prévu :",
+			"feature1": "Voir toutes les opportunités auxquelles vos artistes ont soumis",
+			"feature2": "Suivre le statut des soumissions et les réponses des promoteurs",
+			"feature3": "Gérer les réservations et les dates de tournée confirmées"
+		}
 	},
 	"ArtmgmtSearch": {
 		"dialogLabel": "Rechercher dans votre roster",

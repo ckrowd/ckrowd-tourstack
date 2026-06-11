@@ -4843,7 +4843,40 @@
 	"ArtmgmtSideNav": {
 		"portalLabel": "Artist Management",
 		"artists": "Artists",
+		"submissions": "Submissions",
+		"reports": "Reports",
 		"profile": "Profile"
+	},
+	"ArtmgmtReportsPage": {
+		"badge": "Analytics",
+		"title": "Roster Reports",
+		"subtitle": "Insights derived from your artist roster.",
+		"noData": "No data yet — add artists to see reports.",
+		"stats": {
+			"total": "Total Artists",
+			"genres": "Genres",
+			"nationalities": "Nationalities"
+		},
+		"genres": { "title": "Genre Breakdown" },
+		"nationalities": { "title": "Nationality Breakdown" },
+		"status": {
+			"title": "Active vs Inactive",
+			"active": "Active",
+			"inactive": "Inactive"
+		},
+		"growth": { "title": "Monthly Additions" }
+	},
+	"ArtmgmtSubmissionsPage": {
+		"badge": "Submissions",
+		"title": "Tour Submissions",
+		"subtitle": "Track your artists' submissions to tour opportunities.",
+		"comingSoon": {
+			"title": "Coming Soon",
+			"description": "Submission tracking for your roster is on the roadmap. Here's what's planned:",
+			"feature1": "View all tour opportunities your artists have submitted to",
+			"feature2": "Track submission status and promoter responses",
+			"feature3": "Manage bookings and confirmed tour dates"
+		}
 	},
 	"ArtmgmtSearch": {
 		"dialogLabel": "Search your artist roster",
