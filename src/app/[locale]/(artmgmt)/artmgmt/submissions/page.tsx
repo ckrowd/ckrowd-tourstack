@@ -284,12 +284,12 @@ export default function ArtmgmtSubmissionsPage() {
 											</span>
 											{String(pitch.tour_name)}
 										</p>
-										{pitch.promoter_contact && (
+										{pitch.promoter_contact != null && (
 											<p className="text-xs text-slate-400 mt-0.5">
 												{t("contact")}: {String(pitch.promoter_contact)}
 											</p>
 										)}
-										{pitch.notes && (
+										{pitch.notes != null && (
 											<p className="text-xs text-slate-500 mt-1 line-clamp-2">{String(pitch.notes)}</p>
 										)}
 									</div>
@@ -304,7 +304,7 @@ export default function ArtmgmtSubmissionsPage() {
 											</span>
 											{t(`status.${status}`)}
 										</span>
-										{pitch.created_at && (
+										{pitch.created_at != null && (
 											<span className="text-[10px] text-slate-400">
 												{format.relativeTime(new Date(String(pitch.created_at)))}
 											</span>
