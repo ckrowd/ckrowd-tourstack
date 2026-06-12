@@ -156,8 +156,8 @@ export default async function DashboardPage({ params }: Props) {
 								{progressStatusLabel}
 							</span>
 						</div>
-						<div className="overflow-x-auto -mx-1 px-1">
-							<div className="flex items-center justify-between relative mt-6 min-w-[320px]">
+						<div>
+							<div className="flex items-center justify-between relative mt-6">
 								<div className="absolute top-4 left-0 w-full h-0.5 bg-surface-variant z-0" />
 								<div
 									className={`absolute top-4 left-0 h-0.5 bg-[#FF5A30] z-0 transition-all duration-500 ${progressWidthClass}`}
