@@ -1254,6 +1254,10 @@
 			"saving": "Enregistrement...",
 			"saveSuccess": "Modifications enregistrées",
 			"saveError": "Échec de l'enregistrement des modifications"
+		},
+		"setupBanner": {
+			"title": "Bienvenue — complétez votre profil pour commencer",
+			"description": "Renseignez le nom de votre entreprise, vos coordonnées, votre pays et votre ville ci-dessous. Ces informations sont requises avant d'accéder au reste de la plateforme."
 		}
 	},
 	"SettingsPage": {
@@ -2762,6 +2766,16 @@
 			"rejected": "EOI refusée — {artist}",
 			"pending": "EOI soumise — {artist}",
 			"pending_review": "EOI soumise — {artist}"
+		},
+		"financePrompt": {
+			"title": "Vous avez demandé un soutien au financement",
+			"description": "L'une de vos EOI a demandé un financement. Postulez maintenant et nous vous mettrons en contact avec un partenaire financier.",
+			"cta": "Demander un financement"
+		},
+		"insurancePrompt": {
+			"title": "Vous avez demandé un soutien en assurance",
+			"description": "L'une de vos EOI a demandé une assurance. Choisissez un forfait et soumettez votre demande.",
+			"cta": "Demander une assurance"
 		}
 	},
 	"ToursPage": {
@@ -2892,7 +2906,8 @@
 		"insurance": "Assurance",
 		"profile": "Profil",
 		"settings": "Paramètres",
-		"startNewTour": "Démarrer une tournée"
+		"startNewTour": "Démarrer une tournée",
+		"profileRequired": "Complétez d'abord votre profil"
 	},
 	"CreateTourPage": {
 		"management": "Gestion des tournées",
@@ -5056,5 +5071,86 @@
 		"submittedAt": "Soumis le",
 		"download": "Télécharger le PDF",
 		"viewData": "Voir les données"
+	},
+	"FinancingApplyPage": {
+		"promoterPortal": "Portail du promoteur",
+		"title": "Financement",
+		"description": "Postulez pour un financement afin de couvrir les coûts de votre tournée. Notre équipe examinera votre demande et vous mettra en contact avec le bon partenaire.",
+		"applyTitle": "Nouvelle demande",
+		"fields": {
+			"tour": "Sélectionner une tournée",
+			"tourNone": "Aucune tournée spécifique",
+			"unknownArtist": "Artiste inconnu",
+			"package": "Choisir un forfait de financement",
+			"amount": "Montant demandé (USD)"
+		},
+		"packages": {
+			"tourStopAdvance": "Avance sur arrêt de tournée",
+			"venueBuildOutCredit": "Crédit d'aménagement de salle",
+			"marketingTicketingFloat": "Fonds marketing et billetterie",
+			"creditGuarantee": "Garantie de crédit",
+			"promoterBusiness": "Entreprise promoteur"
+		},
+		"actions": {
+			"submit": "Soumettre la demande",
+			"submitting": "Envoi en cours…"
+		},
+		"success": "Demande soumise. Nous allons examiner et vous recontacter.",
+		"errors": {
+			"failed": "Échec de la soumission. Veuillez réessayer."
+		},
+		"myApplications": "Mes demandes",
+		"noApplications": "Aucune demande de financement pour l'instant.",
+		"application": "Demande",
+		"requested": "Montant demandé",
+		"appliedOn": "Déposé le",
+		"viewDetails": "Voir les détails",
+		"statuses": {
+			"pending": "En attente",
+			"pending_review": "En cours d'examen",
+			"approved": "Approuvé",
+			"declined": "Refusé",
+			"disbursed": "Décaissé"
+		}
+	},
+	"InsuranceApplyPage": {
+		"promoterPortal": "Portail du promoteur",
+		"title": "Assurance",
+		"description": "Choisissez une couverture d'assurance pour votre tournée. Notre équipe préparera une proposition et la soumettra à l'assureur en votre nom.",
+		"applyTitle": "Nouvelle demande",
+		"fields": {
+			"tour": "Sélectionner une tournée",
+			"tourNone": "Aucune tournée spécifique",
+			"unknownArtist": "Artiste inconnu",
+			"package": "Choisir un forfait d'assurance",
+			"sumInsured": "Valeur estimée / Montant assuré (USD)"
+		},
+		"packages": {
+			"eventCancellation": "Annulation d'événement",
+			"eventInsuranceBundle": "Pack assurance événementielle",
+			"touringWorkforce": "Personnel de tournée",
+			"aviationEquipment": "Aviation et équipement",
+			"audienceTicketProtection": "Protection billets du public"
+		},
+		"actions": {
+			"submit": "Soumettre la demande",
+			"submitting": "Envoi en cours…"
+		},
+		"success": "Demande soumise. Nous préparerons votre proposition et vous contacterons prochainement.",
+		"errors": {
+			"failed": "Échec de la soumission. Veuillez réessayer."
+		},
+		"myApplications": "Mes demandes",
+		"noApplications": "Aucune demande d'assurance pour l'instant.",
+		"application": "Demande",
+		"sumInsured": "Montant assuré",
+		"appliedOn": "Déposé le",
+		"statuses": {
+			"pending": "En attente",
+			"pending_review": "En cours d'examen",
+			"approved": "Approuvé",
+			"declined": "Refusé",
+			"disbursed": "Actif"
+		}
 	}
 }

@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { getSession, getTourstackProfile } from "@/app/actions";
 import { adminHomePath, isArtmgmtProfile } from "@/lib/auth";
+import ProfileSetupGate from "@/components/ProfileSetupGate";
 
 export const dynamic = "force-dynamic";
 
@@ -27,5 +28,10 @@ export default async function DashboardLayout({
 		redirect(`/${locale}/artmgmt`);
 	}
 
-	return <>{children}</>;
+	return (
+		<>
+			<ProfileSetupGate />
+			{children}
+		</>
+	);
 }
