@@ -1,27 +1,12 @@
 "use client";
 
-import "driver.js/dist/driver.css";
 import type { DriveStep } from "driver.js";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { useTranslations } from "next-intl";
 import { applyTourStyles } from "@/lib/tour-styles";
 import { useSession } from "@/context/AuthContext";
 
 type TourId = "promoter" | "admin";
-
-const NEW_ACCOUNT_WINDOW_MS = 24 * 60 * 60 * 1000; // 24 hours
-
-/** Returns true only if the account was created within the last 24 hours.
- * Tours auto-play once per new account; existing accounts never see the
- * tour automatically (even on a fresh device). */
-function isNewAccount(user: unknown): boolean {
-	const u = user as Record<string, unknown> | null | undefined;
-	if (!u) return false;
-	const raw = (u.created_at ?? u.createdAt) as string | Date | null | undefined;
-	if (!raw) return false;
-	const ts = raw instanceof Date ? raw.getTime() : new Date(raw as string).getTime();
-	return !Number.isNaN(ts) && Date.now() - ts < NEW_ACCOUNT_WINDOW_MS;
-}
 
 const STORAGE_KEY_BASE: Record<TourId, string> = {
 	promoter: "ts_tour_promoter_v1",
@@ -122,20 +107,6 @@ export default function TourGuide({ tourId }: { tourId: TourId }) {
 		});
 		driverObj.drive();
 	}, [tourId, t, userId, progressTemplate]);
-
-	useEffect(() => {
-		// Wait until the session is resolved before deciding whether to auto-start.
-		// session === undefined means still loading; null means logged out.
-		if (session === undefined) return;
-		// Only auto-play for accounts created in the last 24 hours so the tour
-		// never repeats on a new device for existing users.
-		if (!isNewAccount(session?.user)) return;
-		const key = storageKey(tourId, userId);
-		const seen = localStorage.getItem(key);
-		if (seen) return;
-		const timeout = setTimeout(startTour, 1200);
-		return () => clearTimeout(timeout);
-	}, [tourId, startTour, session, userId]);
 
 	return (
 		<button
