@@ -478,6 +478,7 @@
 		"stepper": {
 			"contact": "Contact",
 			"fit": "Adéquation",
+			"support": "Support",
 			"review": "Récapitulatif"
 		},
 		"hero": {
@@ -512,10 +513,6 @@
 				"label": "Adresse e-mail",
 				"placeholder": "vous@entreprise.com"
 			},
-			"company": {
-				"label": "Entreprise ou salle",
-				"placeholder": "Nom de la salle ou marque de promotion"
-			},
 			"city": {
 				"label": "Ville / marché",
 				"placeholder": "Lagos, Nairobi, Accra..."
@@ -527,7 +524,27 @@
 			"notes": {
 				"label": "Pourquoi cette opportunité correspond à votre salle",
 				"placeholder": "Parlez à l'équipe de votre salle, de votre public et de votre plan de promotion."
-			}
+			},
+			"venues": {
+				"sectionLabel": "Salles",
+				"addFirst": "+ Ajouter une salle",
+				"addAnother": "+ Ajouter une autre salle",
+				"placeholder": "Nom de la salle",
+				"venueLabel": "Salle {n}",
+				"noVenueHint": "Aucune salle ajoutée"
+			},
+			"finance": {
+				"label": "Financement de l'événement",
+				"question": "Avez-vous besoin d'un financement pour cet événement ?",
+				"description": "Nous vous mettrons en relation avec un partenaire financier adapté."
+			},
+			"insurance": {
+				"label": "Assurance événement",
+				"question": "Avez-vous besoin d'une assurance pour cet événement ?",
+				"description": "Nous vous mettrons en relation avec un assureur."
+			},
+			"yes": "Oui",
+			"no": "Non"
 		},
 		"review": {
 			"title": "Vérifier la candidature",
@@ -536,10 +553,12 @@
 			"markets": "Marchés",
 			"applicant": "Candidat",
 			"email": "E-mail",
-			"company": "Entreprise / salle",
+			"venues": "Salles",
 			"city": "Ville / marché",
 			"audience": "Fréquentation attendue",
 			"notes": "Notes",
+			"finance": "Financement",
+			"insurance": "Assurance",
 			"estimatedAudience": "Public estimé",
 			"disclaimer": "En soumettant, vous confirmez que les informations ci-dessus sont exactes et acceptez d'être contacté par l'équipe Ckrowd."
 		},

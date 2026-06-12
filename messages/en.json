@@ -478,6 +478,7 @@
 		"stepper": {
 			"contact": "Contact",
 			"fit": "Fit",
+			"support": "Support",
 			"review": "Review"
 		},
 		"hero": {
@@ -512,10 +513,6 @@
 				"label": "Email address",
 				"placeholder": "you@company.com"
 			},
-			"company": {
-				"label": "Company or venue",
-				"placeholder": "Venue name or promoter brand"
-			},
 			"city": {
 				"label": "City / market",
 				"placeholder": "Lagos, Nairobi, Accra..."
@@ -527,7 +524,27 @@
 			"notes": {
 				"label": "Why this opportunity fits your venue",
 				"placeholder": "Tell the team about your venue, audience, and promotion plan."
-			}
+			},
+			"venues": {
+				"sectionLabel": "Venues",
+				"addFirst": "+ Add venue",
+				"addAnother": "+ Add another venue",
+				"placeholder": "Venue name",
+				"venueLabel": "Venue {n}",
+				"noVenueHint": "No venues added yet"
+			},
+			"finance": {
+				"label": "Event Financing",
+				"question": "Do you need finance to cover this event?",
+				"description": "We'll connect you with a suitable financing partner."
+			},
+			"insurance": {
+				"label": "Event Insurance",
+				"question": "Do you need insurance for this event?",
+				"description": "We'll connect you with an insurance provider."
+			},
+			"yes": "Yes",
+			"no": "No"
 		},
 		"review": {
 			"title": "Review application",
@@ -536,10 +553,12 @@
 			"markets": "Markets",
 			"applicant": "Applicant",
 			"email": "Email",
-			"company": "Company / venue",
+			"venues": "Venues",
 			"city": "City / market",
 			"audience": "Expected attendance",
 			"notes": "Notes",
+			"finance": "Financing",
+			"insurance": "Insurance",
 			"estimatedAudience": "Estimated audience",
 			"disclaimer": "By submitting, you confirm that the details above are accurate and agree to be contacted by the Ckrowd team."
 		},
