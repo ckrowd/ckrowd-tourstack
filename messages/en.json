@@ -1254,6 +1254,10 @@
 			"saving": "Saving...",
 			"saveSuccess": "Changes saved",
 			"saveError": "Failed to save changes"
+		},
+		"setupBanner": {
+			"title": "Welcome — complete your profile to get started",
+			"description": "Fill in your company name, contact details, country, and city below. These are required before you can access the rest of the platform."
 		}
 	},
 	"SettingsPage": {
@@ -2762,6 +2766,16 @@
 			"rejected": "EOI Rejected — {artist}",
 			"pending": "EOI Submitted — {artist}",
 			"pending_review": "EOI Submitted — {artist}"
+		},
+		"financePrompt": {
+			"title": "You requested financing support",
+			"description": "One of your EOIs requested financing. Apply now and we will connect you with a financing partner.",
+			"cta": "Apply for Financing"
+		},
+		"insurancePrompt": {
+			"title": "You requested insurance support",
+			"description": "One of your EOIs requested insurance. Choose a package and submit your application.",
+			"cta": "Apply for Insurance"
 		}
 	},
 	"ToursPage": {
@@ -2892,7 +2906,8 @@
 		"insurance": "Insurance",
 		"profile": "Profile",
 		"settings": "Settings",
-		"startNewTour": "Start New Tour"
+		"startNewTour": "Start New Tour",
+		"profileRequired": "Complete your profile first"
 	},
 	"CreateTourPage": {
 		"management": "Tour Management",
@@ -5068,5 +5083,86 @@
 		"submittedAt": "Submitted",
 		"download": "Download PDF",
 		"viewData": "View Data"
+	},
+	"FinancingApplyPage": {
+		"promoterPortal": "Promoter Portal",
+		"title": "Financing",
+		"description": "Apply for financing to cover your tour costs. Our team will review your application and connect you with the right partner.",
+		"applyTitle": "New Application",
+		"fields": {
+			"tour": "Select Tour",
+			"tourNone": "No specific tour",
+			"unknownArtist": "Unknown Artist",
+			"package": "Choose Financing Package",
+			"amount": "Amount Requested (USD)"
+		},
+		"packages": {
+			"tourStopAdvance": "Tour Stop Advance",
+			"venueBuildOutCredit": "Venue Build-Out Credit",
+			"marketingTicketingFloat": "Marketing & Ticketing Float",
+			"creditGuarantee": "Credit Guarantee",
+			"promoterBusiness": "Promoter Business"
+		},
+		"actions": {
+			"submit": "Submit Application",
+			"submitting": "Submitting…"
+		},
+		"success": "Application submitted. We will review and get back to you.",
+		"errors": {
+			"failed": "Submission failed. Please try again."
+		},
+		"myApplications": "My Applications",
+		"noApplications": "No financing applications yet.",
+		"application": "Application",
+		"requested": "Requested",
+		"appliedOn": "Applied",
+		"viewDetails": "View Details",
+		"statuses": {
+			"pending": "Pending",
+			"pending_review": "Under Review",
+			"approved": "Approved",
+			"declined": "Declined",
+			"disbursed": "Disbursed"
+		}
+	},
+	"InsuranceApplyPage": {
+		"promoterPortal": "Promoter Portal",
+		"title": "Insurance",
+		"description": "Choose an insurance package for your tour. Our admin team will prepare a proposal and send it to the insurer on your behalf.",
+		"applyTitle": "New Application",
+		"fields": {
+			"tour": "Select Tour",
+			"tourNone": "No specific tour",
+			"unknownArtist": "Unknown Artist",
+			"package": "Choose Insurance Package",
+			"sumInsured": "Estimated Value / Sum Insured (USD)"
+		},
+		"packages": {
+			"eventCancellation": "Event Cancellation",
+			"eventInsuranceBundle": "Event Insurance Bundle",
+			"touringWorkforce": "Touring Workforce",
+			"aviationEquipment": "Aviation & Equipment",
+			"audienceTicketProtection": "Audience Ticket Protection"
+		},
+		"actions": {
+			"submit": "Submit Application",
+			"submitting": "Submitting…"
+		},
+		"success": "Application submitted. We will prepare your proposal and reach out shortly.",
+		"errors": {
+			"failed": "Submission failed. Please try again."
+		},
+		"myApplications": "My Applications",
+		"noApplications": "No insurance applications yet.",
+		"application": "Application",
+		"sumInsured": "Sum Insured",
+		"appliedOn": "Applied",
+		"statuses": {
+			"pending": "Pending",
+			"pending_review": "Under Review",
+			"approved": "Approved",
+			"declined": "Declined",
+			"disbursed": "Active"
+		}
 	}
 }

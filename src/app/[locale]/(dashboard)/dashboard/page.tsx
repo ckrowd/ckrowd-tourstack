@@ -69,7 +69,12 @@ export default async function DashboardPage({ params }: Props) {
 	const companyName = profile?.company_name
 		? String(profile.company_name)
 		: t("yourOrganization");
+	const INSURANCE_PRODUCT_IDS = ["Event Cancellation", "Event Insurance Bundle", "Touring Workforce", "Aviation & Equipment", "Audience Ticket Protection"];
 	const financingApps = financingResult.data ?? [];
+	const hasFinancingRequest = eois.some((e) => String(e.funding_type ?? "") === "required");
+	const hasInsuranceRequest = eois.some((e) => String(e.notes ?? "").includes("Insurance support requested"));
+	const hasFinancingApp = financingApps.some((a) => !INSURANCE_PRODUCT_IDS.includes(String(a.product ?? "")));
+	const hasInsuranceApp = financingApps.some((a) => INSURANCE_PRODUCT_IDS.includes(String(a.product ?? "")));
 	const latestFinancing = financingApps[0];
 	const recentEOIs = dashData?.recentEOIs ?? [];
 	const nextMilestone = dashData?.upcomingMilestones?.[0];
@@ -144,6 +149,59 @@ export default async function DashboardPage({ params }: Props) {
 						</div>
 					</div>
 
+					{/* Finance / insurance action prompts */}
+					{(hasFinancingRequest && !hasFinancingApp) && (
+						<div className="mb-6 bg-amber-50 border border-amber-200 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+							<div className="flex items-start gap-3">
+								<span
+									className="material-symbols-outlined text-amber-600 mt-0.5 shrink-0"
+									style={{ fontVariationSettings: "'FILL' 1" }}
+								>
+									payments
+								</span>
+								<div>
+									<p className="font-(family-name:--font-manrope) font-bold text-amber-900 text-sm">
+										{t("financePrompt.title")}
+									</p>
+									<p className="text-xs text-amber-800 mt-0.5">
+										{t("financePrompt.description")}
+									</p>
+								</div>
+							</div>
+							<Link
+								href="/financing"
+								className="bg-[#FF5A30] text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:opacity-90 transition-all shrink-0"
+							>
+								{t("financePrompt.cta")}
+							</Link>
+						</div>
+					)}
+					{(hasInsuranceRequest && !hasInsuranceApp) && (
+						<div className="mb-6 bg-blue-50 border border-blue-200 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+							<div className="flex items-start gap-3">
+								<span
+									className="material-symbols-outlined text-blue-600 mt-0.5 shrink-0"
+									style={{ fontVariationSettings: "'FILL' 1" }}
+								>
+									shield
+								</span>
+								<div>
+									<p className="font-(family-name:--font-manrope) font-bold text-blue-900 text-sm">
+										{t("insurancePrompt.title")}
+									</p>
+									<p className="text-xs text-blue-800 mt-0.5">
+										{t("insurancePrompt.description")}
+									</p>
+								</div>
+							</div>
+							<Link
+								href="/insurance"
+								className="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:opacity-90 transition-all shrink-0"
+							>
+								{t("insurancePrompt.cta")}
+							</Link>
+						</div>
+					)}
 					{/* Tour Progress Tracker */}
 					<div className="bg-surface-container-lowest rounded-xl p-4 md:p-6 shadow-sm mb-10">
 						<div className="flex items-center justify-between mb-4 gap-2">

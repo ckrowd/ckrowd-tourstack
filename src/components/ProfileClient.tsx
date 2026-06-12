@@ -72,6 +72,9 @@ export default function ProfileClient() {
 	const t = useTranslations("ProfilePage");
 	const queryClient = useQueryClient();
 	const { data: session } = useSession();
+	const [isSetup] = useState(
+		() => typeof window !== "undefined" && new URLSearchParams(window.location.search).get("setup") === "1",
+	);
 
 	const { data: profileQuery } = useQuery({
 		queryKey: ["tourstackProfile"],
@@ -160,6 +163,24 @@ export default function ProfileClient() {
 
 	return (
 		<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
+			{isSetup && (
+				<div className="mb-6 bg-[#FF5A30]/10 border border-[#FF5A30]/20 rounded-2xl p-5 flex items-start gap-4">
+					<span
+						className="material-symbols-outlined text-[#FF5A30] mt-0.5 shrink-0"
+						style={{ fontVariationSettings: "'FILL' 1" }}
+					>
+						person_add
+					</span>
+					<div>
+						<p className="font-(family-name:--font-manrope) font-bold text-[#FF5A30] text-sm">
+							{t("setupBanner.title")}
+						</p>
+						<p className="text-sm text-on-surface-variant mt-1">
+							{t("setupBanner.description")}
+						</p>
+					</div>
+				</div>
+			)}
 			{/* Header */}
 			<div className="mb-8">
 				<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
