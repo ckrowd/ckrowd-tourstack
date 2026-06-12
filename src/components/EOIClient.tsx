@@ -16,9 +16,11 @@ type ArtistItem = NonNullable<
 type ApplicationForm = {
 	name: string;
 	email: string;
-	company: string;
 	city: string;
 	audience: string;
+	venues: string[];
+	needsFinance: boolean;
+	needsInsurance: boolean;
 	notes: string;
 };
 
@@ -336,9 +338,11 @@ function OpportunityPanel({
 const defaultForm: ApplicationForm = {
 	name: "",
 	email: "",
-	company: "",
 	city: "",
 	audience: "",
+	venues: [],
+	needsFinance: false,
+	needsInsurance: false,
 	notes: "",
 };
 
@@ -351,6 +355,7 @@ function EOIPageContent() {
 	const STEPS = [
 		{ label: t("stepper.contact") },
 		{ label: t("stepper.fit") },
+		{ label: t("stepper.support") },
 		{ label: t("stepper.review") },
 	];
 
@@ -408,6 +413,7 @@ function EOIPageContent() {
 		if (currentStep === 1) {
 			if (!form.city.trim()) errors.city = t("validation.cityRequired");
 		}
+		// step 2 (support) has no required fields
 		setFieldErrors(errors);
 		return Object.keys(errors).length === 0;
 	}
@@ -423,11 +429,17 @@ function EOIPageContent() {
 		const estimatedAudience = form.audience
 			? Number(form.audience.replace(/,/g, ""))
 			: 0;
+		const filledVenues = form.venues.map((v) => v.trim()).filter(Boolean);
+		const noteParts: string[] = [];
+		if (form.notes.trim()) noteParts.push(form.notes.trim());
+		if (form.needsInsurance) noteParts.push("Insurance support requested.");
 		submitMutation.mutate({
 			artistId: artist.id,
 			city: form.city,
+			venue: filledVenues.length > 0 ? filledVenues.join(", ") : undefined,
 			capacity: estimatedAudience > 0 ? estimatedAudience : undefined,
-			notes: form.notes || undefined,
+			fundingType: form.needsFinance ? "required" : undefined,
+			notes: noteParts.length > 0 ? noteParts.join("\n\n") : undefined,
 		});
 	}
 
@@ -592,22 +604,7 @@ function EOIPageContent() {
 													</p>
 												)}
 											</div>
-											<div className="sm:col-span-2">
-												<Label htmlFor="company">
-													{t("form.company.label")}
-												</Label>
-												<input
-													id="company"
-													type="text"
-													placeholder={t("form.company.placeholder")}
-													value={form.company}
-													onChange={(event) =>
-														updateField("company", event.target.value)
-													}
-													className={inputClass}
-												/>
-											</div>
-										</div>
+												</div>
 									)}
 
 									{step === 1 && (
@@ -665,10 +662,156 @@ function EOIPageContent() {
 													className={textareaClass}
 												/>
 											</div>
+
+											{/* Venues section */}
+											<div className="sm:col-span-2">
+												<Label htmlFor="venue-section">
+													{t("form.venues.sectionLabel")}
+												</Label>
+												<div id="venue-section" className="space-y-2">
+													{form.venues.map((venue, index) => (
+														<div key={index} className="flex items-center gap-2">
+															<div className="flex-1">
+																<input
+																	type="text"
+																	aria-label={t("form.venues.venueLabel", { n: String(index + 1) })}
+																	placeholder={t("form.venues.placeholder")}
+																	value={venue}
+																	onChange={(event) => {
+																		const updated = [...form.venues];
+																		updated[index] = event.target.value;
+																		updateField("venues", updated);
+																	}}
+																	className={inputClass}
+																/>
+															</div>
+															<button
+																type="button"
+																onClick={() => {
+																	const updated = form.venues.filter((_, i) => i !== index);
+																	updateField("venues", updated);
+																}}
+																className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-200 text-slate-400 transition hover:border-rose-300 hover:text-rose-500"
+																aria-label="Remove venue"
+															>
+																<span className="material-symbols-outlined text-base">close</span>
+															</button>
+														</div>
+													))}
+													{form.venues.length === 0 && (
+														<p className="text-xs text-slate-400 mb-1">{t("form.venues.noVenueHint")}</p>
+													)}
+													{form.venues.length < 5 && (
+														<button
+															type="button"
+															onClick={() => updateField("venues", [...form.venues, ""])}
+															className="text-xs font-bold text-[#FF5A30] hover:underline"
+														>
+															{form.venues.length === 0
+																? t("form.venues.addFirst")
+																: t("form.venues.addAnother")}
+														</button>
+													)}
+												</div>
+											</div>
 										</div>
 									)}
 
 									{step === 2 && (
+										<div className="space-y-5">
+											{/* Finance card */}
+											<div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+												<div className="flex items-start justify-between gap-4">
+													<div className="flex-1">
+														<p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-500 mb-1">
+															{t("form.finance.label")}
+														</p>
+														<p className="text-sm font-semibold text-slate-900">
+															{t("form.finance.question")}
+														</p>
+														<p className="mt-1 text-xs text-slate-500">
+															{t("form.finance.description")}
+														</p>
+													</div>
+													<div className="flex shrink-0 rounded-xl border border-slate-200 overflow-hidden text-sm font-bold">
+														<button
+															type="button"
+															role="switch"
+															aria-checked={!form.needsFinance}
+															onClick={() => updateField("needsFinance", false)}
+															className={`px-4 py-2 transition ${!form.needsFinance ? "bg-slate-900 text-white" : "bg-white text-slate-500 hover:bg-slate-50"}`}
+														>
+															{t("form.no")}
+														</button>
+														<button
+															type="button"
+															role="switch"
+															aria-checked={form.needsFinance}
+															onClick={() => updateField("needsFinance", true)}
+															className={`px-4 py-2 transition ${form.needsFinance ? "bg-[#FF5A30] text-white" : "bg-white text-slate-500 hover:bg-slate-50"}`}
+														>
+															{t("form.yes")}
+														</button>
+													</div>
+												</div>
+												{form.needsFinance && (
+													<div className="mt-3 flex items-center gap-2 rounded-xl bg-orange-50 border border-orange-200 px-3 py-2">
+														<span className="material-symbols-outlined text-sm text-[#FF5A30]" style={{ fontVariationSettings: "'FILL' 1" }}>info</span>
+														<p className="text-xs font-medium text-orange-700">
+															We&apos;ll connect you with a financing partner after your EOI is reviewed.
+														</p>
+													</div>
+												)}
+											</div>
+
+											{/* Insurance card */}
+											<div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+												<div className="flex items-start justify-between gap-4">
+													<div className="flex-1">
+														<p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-500 mb-1">
+															{t("form.insurance.label")}
+														</p>
+														<p className="text-sm font-semibold text-slate-900">
+															{t("form.insurance.question")}
+														</p>
+														<p className="mt-1 text-xs text-slate-500">
+															{t("form.insurance.description")}
+														</p>
+													</div>
+													<div className="flex shrink-0 rounded-xl border border-slate-200 overflow-hidden text-sm font-bold">
+														<button
+															type="button"
+															role="switch"
+															aria-checked={!form.needsInsurance}
+															onClick={() => updateField("needsInsurance", false)}
+															className={`px-4 py-2 transition ${!form.needsInsurance ? "bg-slate-900 text-white" : "bg-white text-slate-500 hover:bg-slate-50"}`}
+														>
+															{t("form.no")}
+														</button>
+														<button
+															type="button"
+															role="switch"
+															aria-checked={form.needsInsurance}
+															onClick={() => updateField("needsInsurance", true)}
+															className={`px-4 py-2 transition ${form.needsInsurance ? "bg-[#FF5A30] text-white" : "bg-white text-slate-500 hover:bg-slate-50"}`}
+														>
+															{t("form.yes")}
+														</button>
+													</div>
+												</div>
+												{form.needsInsurance && (
+													<div className="mt-3 flex items-center gap-2 rounded-xl bg-orange-50 border border-orange-200 px-3 py-2">
+														<span className="material-symbols-outlined text-sm text-[#FF5A30]" style={{ fontVariationSettings: "'FILL' 1" }}>info</span>
+														<p className="text-xs font-medium text-orange-700">
+															We&apos;ll connect you with an insurance provider after your EOI is reviewed.
+														</p>
+													</div>
+												)}
+											</div>
+										</div>
+									)}
+
+									{step === 3 && (
 										<div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
 											<h3 className="text-lg font-black tracking-tight text-slate-950 font-(family-name:--font-manrope)">
 												{t("review.title")}
@@ -695,16 +838,24 @@ function EOIPageContent() {
 													value={form.email}
 												/>
 												<ReviewRow
-													label={t("review.company")}
-													value={form.company}
-												/>
-												<ReviewRow
 													label={t("review.city")}
 													value={form.city}
 												/>
 												<ReviewRow
 													label={t("review.audience")}
 													value={form.audience}
+												/>
+												<ReviewRow
+													label={t("review.venues")}
+													value={form.venues.filter(Boolean).join(", ")}
+												/>
+												<ReviewRow
+													label={t("review.finance")}
+													value={form.needsFinance}
+												/>
+												<ReviewRow
+													label={t("review.insurance")}
+													value={form.needsInsurance}
 												/>
 												<ReviewRow
 													label={t("review.notes")}
