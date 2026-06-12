@@ -252,7 +252,7 @@ export default async function LandingPage({
 						/>
 					</div>
 
-					<div className="relative h-96 lg:h-auto lg:order-last">
+					<div className="relative h-96 lg:h-auto">
 						<Image
 							alt={t("artists.imageAlt")}
 							fill
