@@ -3114,7 +3114,10 @@
     "countryPlaceholder": "ex. Nigéria",
     "cityPlaceholder": "ex. Lagos",
     "bioPlaceholder": "Rédigez une courte biographie visible par les promoteurs et les parties prenantes.",
-    "linkedinPlaceholder": "https://linkedin.com/in/votre-profil"
+    "linkedinPlaceholder": "https://linkedin.com/in/votre-profil",
+    "profilePhoto": "Photo de profil",
+    "uploadPhoto": "Télécharger une photo",
+    "uploadingPhoto": "Téléchargement..."
   },
   "RegisterPage": {
     "title": "S'inscrire",
@@ -5412,7 +5415,10 @@
     "passwordSuccess": "Mot de passe mis à jour avec succès",
     "passwordError": "Échec de la mise à jour du mot de passe",
     "passwordMismatch": "Les mots de passe ne correspondent pas",
-    "passwordTooShort": "Le mot de passe doit contenir au moins 8 caractères"
+    "passwordTooShort": "Le mot de passe doit contenir au moins 8 caractères",
+    "profilePhoto": "Photo de profil",
+    "uploadPhoto": "Télécharger une photo",
+    "uploadingPhoto": "Téléchargement..."
   },
   "ArtmgmtPasswordGate": {
     "title": "Définissez votre nouveau mot de passe",

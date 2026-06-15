@@ -1,10 +1,10 @@
 "use client";
 
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
-import { useCallback, useRef, useSyncExternalStore, useState } from "react";
-import { getEOIs, getTourstackProfile, updateTourstackProfile } from "@/app/actions";
+import { useCallback, useSyncExternalStore, useState } from "react";
+import { getEOIs, getTourstackProfile } from "@/app/actions";
 import { useLogout, useSession } from "@/context/AuthContext";
 import { Link, routing, usePathname, useRouter } from "@/i18n/routing";
 import ArtmgmtSearch from "@/components/ArtmgmtSearch";
@@ -57,29 +57,6 @@ export default function TopNav() {
 		}
 		return null;
 	})();
-
-	const photoInputRef = useRef<HTMLInputElement>(null);
-	const queryClient = useQueryClient();
-	const photoMutation = useMutation({
-		mutationFn: (logoUrl: string) => updateTourstackProfile({ logoUrl }),
-		onSuccess: (result) => {
-			if (result.success) {
-				void queryClient.invalidateQueries({ queryKey: ["tourstackProfile"] });
-			}
-		},
-	});
-
-	const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const file = e.target.files?.[0];
-		if (!file) return;
-		const reader = new FileReader();
-		reader.onload = (ev) => {
-			const dataUrl = ev.target?.result as string;
-			photoMutation.mutate(dataUrl);
-		};
-		reader.readAsDataURL(file);
-		e.target.value = "";
-	};
 
 	// Track which notifications the user has read via a localStorage timestamp.
 	// useSyncExternalStore avoids the server/client hydration mismatch that
@@ -440,26 +417,7 @@ export default function TopNav() {
 											className="fixed inset-0 z-40 w-full h-full cursor-default bg-transparent border-none"
 											onClick={() => setProfileOpen(false)}
 										/>
-										<input
-											ref={photoInputRef}
-											type="file"
-											accept="image/*"
-											className="sr-only"
-											onChange={handlePhotoChange}
-										/>
-										<div className="absolute right-0 top-10 z-50 w-52 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden">
-											<button
-												type="button"
-												onClick={() => { setProfileOpen(false); photoInputRef.current?.click(); }}
-												disabled={photoMutation.isPending}
-												className="flex items-center gap-3 w-full px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors font-(family-name:--font-manrope) disabled:opacity-60"
-											>
-												<span className="material-symbols-outlined text-base text-[#FF5A30]">
-													photo_camera
-												</span>
-												{photoMutation.isPending ? t("uploadingPhoto") : t("changePhoto")}
-											</button>
-											<div className="border-t border-slate-100" />
+										<div className="absolute right-0 top-10 z-50 w-44 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden">
 											<Link
 												href={isArtmgmtPortal ? "/artmgmt/profile" : "/profile"}
 												onClick={() => setProfileOpen(false)}

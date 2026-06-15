@@ -2,8 +2,8 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
-import { changePassword, getTourstackProfile } from "@/app/actions";
+import { useRef, useState } from "react";
+import { changePassword, getTourstackProfile, updateTourstackProfile } from "@/app/actions";
 
 export default function ArtmgmtProfilePage() {
 	const t = useTranslations("ArtmgmtProfilePage");
@@ -19,11 +19,36 @@ export default function ArtmgmtProfilePage() {
 		setTimeout(() => setToast(null), 3500);
 	}
 
+	const fileInputRef = useRef<HTMLInputElement>(null);
+
 	const { data: profile } = useQuery({
-		queryKey: ["tourstack-profile"],
+		queryKey: ["tourstackProfile"],
 		queryFn: getTourstackProfile,
-		select: (r) => r.data as { company_name?: string; contact_person?: string; user?: { email?: string; name?: string } } | undefined,
+		select: (r) => r.data as { company_name?: string; contact_person?: string; logo_url?: string | null; user?: { email?: string; name?: string } } | undefined,
 	});
+
+	const photoMutation = useMutation({
+		mutationFn: (logoUrl: string) => updateTourstackProfile({ logoUrl }),
+		onSuccess: (result) => {
+			if (result.success) {
+				void qc.invalidateQueries({ queryKey: ["tourstackProfile"] });
+			}
+		},
+	});
+
+	const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const file = e.target.files?.[0];
+		if (!file) return;
+		const reader = new FileReader();
+		reader.onload = (ev) => {
+			photoMutation.mutate(ev.target?.result as string);
+		};
+		reader.readAsDataURL(file);
+		e.target.value = "";
+	};
+
+	const logoUrl = profile?.logo_url ?? null;
+	const initials = (profile?.company_name ?? profile?.contact_person ?? "?").slice(0, 2).toUpperCase();
 
 	const passwordMutation = useMutation({
 		mutationFn: ({
@@ -83,6 +108,48 @@ export default function ArtmgmtProfilePage() {
 					{toast.msg}
 				</div>
 			)}
+
+			{/* Profile photo */}
+			<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 mb-6">
+				<h2 className="font-semibold text-slate-900 mb-4">{t("profilePhoto")}</h2>
+				<div className="flex items-center gap-5">
+					<button
+						type="button"
+						onClick={() => fileInputRef.current?.click()}
+						className="relative w-20 h-20 rounded-2xl overflow-hidden bg-slate-100 border-2 border-dashed border-slate-300 hover:border-[#FF5A30]/60 transition-colors flex items-center justify-center shrink-0 group"
+					>
+						{logoUrl ? (
+							// eslint-disable-next-line @next/next/no-img-element
+							<img src={logoUrl} alt="" className="w-full h-full object-cover" />
+						) : (
+							<span className="text-xl font-semibold text-slate-400 group-hover:text-[#FF5A30] transition-colors">
+								{initials}
+							</span>
+						)}
+						<div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+							<span className="material-symbols-outlined text-white text-xl">photo_camera</span>
+						</div>
+					</button>
+					<div>
+						<button
+							type="button"
+							onClick={() => fileInputRef.current?.click()}
+							disabled={photoMutation.isPending}
+							className="inline-flex items-center gap-2 px-4 py-2 border border-slate-200 rounded-xl text-sm font-semibold text-slate-700 hover:border-[#FF5A30]/50 hover:text-[#FF5A30] transition-all disabled:opacity-60"
+						>
+							<span className="material-symbols-outlined text-base">upload</span>
+							{photoMutation.isPending ? t("uploadingPhoto") : t("uploadPhoto")}
+						</button>
+					</div>
+				</div>
+				<input
+					ref={fileInputRef}
+					type="file"
+					accept="image/*"
+					className="sr-only"
+					onChange={handlePhotoChange}
+				/>
+			</div>
 
 			{/* Account info */}
 			<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 mb-6">
