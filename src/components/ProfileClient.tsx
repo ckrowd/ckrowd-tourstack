@@ -38,6 +38,7 @@ function Field({
 	type = "text",
 	hint,
 	required,
+	showError,
 	placeholder,
 }: {
 	label: string;
@@ -47,8 +48,10 @@ function Field({
 	type?: string;
 	hint?: string;
 	required?: boolean;
+	showError?: boolean;
 	placeholder?: string;
 }) {
+	const hasError = required && showError && !value?.trim();
 	return (
 		<div>
 			<label
@@ -65,9 +68,15 @@ function Field({
 				placeholder={placeholder}
 				onChange={onChange ? (e) => onChange(e.target.value) : undefined}
 				readOnly={!onChange}
-				className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30"
+				className={`w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 ${hasError ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
 			/>
-			{hint && <p className="text-xs text-on-surface-variant mt-1.5">{hint}</p>}
+			{hasError && (
+				<p className="text-xs text-rose-600 font-medium mt-1 flex items-center gap-1">
+					<span className="material-symbols-outlined text-sm">error</span>
+					Required
+				</p>
+			)}
+			{hint && !hasError && <p className="text-xs text-on-surface-variant mt-1.5">{hint}</p>}
 		</div>
 	);
 }
@@ -79,6 +88,7 @@ function SelectField({
 	onChange,
 	options,
 	required,
+	showError,
 }: {
 	label: string;
 	id: string;
@@ -86,7 +96,9 @@ function SelectField({
 	onChange: (v: string) => void;
 	options: { value: string; label: string }[];
 	required?: boolean;
+	showError?: boolean;
 }) {
+	const hasError = required && showError && !value;
 	return (
 		<div>
 			<label
@@ -101,7 +113,7 @@ function SelectField({
 					id={id}
 					value={value}
 					onChange={(e) => onChange(e.target.value)}
-					className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 appearance-none"
+					className={`w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 appearance-none ${hasError ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
 				>
 					{options.map((opt) => (
 						<option key={opt.value} value={opt.value}>
@@ -113,6 +125,12 @@ function SelectField({
 					expand_more
 				</span>
 			</div>
+			{hasError && (
+				<p className="text-xs text-rose-600 font-medium mt-1 flex items-center gap-1">
+					<span className="material-symbols-outlined text-sm">error</span>
+					Required
+				</p>
+			)}
 		</div>
 	);
 }
@@ -244,6 +262,17 @@ export default function ProfileClient() {
 	const [edits, setEdits] = useState<Partial<ProfileData>>({});
 	const [saveStatus, setSaveStatus] = useState<"idle" | "success" | "error">("idle");
 	const [logoError, setLogoError] = useState(false);
+	const [showValidation, setShowValidation] = useState(false);
+
+	const REQUIRED_KEYS: (keyof ProfileData)[] = [
+		"companyName", "companyType", "registrationNumber", "taxId",
+		"incorporationDate", "incorporationCountry",
+		"primaryAddress", "country", "city", "phone", "bio",
+		"contactPerson", "jobTitle", "contactEmail",
+		"yearsInBusiness", "companySize", "averageEventsYear",
+		"marketsRegions", "genresSpecialties",
+		"bankName", "bankAccountHolder", "currencyPreference",
+	];
 
 	const profile: ProfileData = { ...EMPTY, ...serverProfile, ...edits };
 
@@ -281,12 +310,15 @@ export default function ProfileClient() {
 	});
 
 	const handleSave = () => {
-		if (!profile.logoUrl) {
-			setLogoError(true);
+		const missingRequired = REQUIRED_KEYS.some((k) => !profile[k]?.trim?.() && !profile[k]);
+		if (!profile.logoUrl || missingRequired) {
+			setLogoError(!profile.logoUrl);
+			setShowValidation(true);
 			window.scrollTo({ top: 0, behavior: "smooth" });
 			return;
 		}
 		setLogoError(false);
+		setShowValidation(false);
 		setSaveStatus("idle");
 		saveMutation.mutate({
 			companyName: profile.companyName || undefined,
@@ -448,6 +480,7 @@ export default function ProfileClient() {
 							value={profile.companyName}
 							onChange={set("companyName")}
 							required
+							showError={showValidation}
 						/>
 						<Field
 							label={t("companyInfo.fields.tradingName")}
@@ -462,18 +495,23 @@ export default function ProfileClient() {
 							onChange={set("companyType")}
 							options={companyTypeOptions}
 							required
+							showError={showValidation}
 						/>
 						<Field
 							label={t("companyInfo.fields.registrationNumber")}
 							id="reg-number"
 							value={profile.registrationNumber}
 							onChange={set("registrationNumber")}
+							required
+							showError={showValidation}
 						/>
 						<Field
 							label={t("companyInfo.fields.taxId")}
 							id="tax-id"
 							value={profile.taxId}
 							onChange={set("taxId")}
+							required
+							showError={showValidation}
 						/>
 						<Field
 							label={t("companyInfo.fields.incorporationDate")}
@@ -481,12 +519,16 @@ export default function ProfileClient() {
 							type="date"
 							value={profile.incorporationDate}
 							onChange={set("incorporationDate")}
+							required
+							showError={showValidation}
 						/>
 						<Field
 							label={t("companyInfo.fields.incorporationCountry")}
 							id="inc-country"
 							value={profile.incorporationCountry}
 							onChange={set("incorporationCountry")}
+							required
+							showError={showValidation}
 						/>
 					</div>
 				</Section>
@@ -501,6 +543,7 @@ export default function ProfileClient() {
 								value={profile.primaryAddress}
 								onChange={set("primaryAddress")}
 								required
+								showError={showValidation}
 							/>
 						</div>
 						<Field
@@ -509,6 +552,7 @@ export default function ProfileClient() {
 							value={profile.country}
 							onChange={set("country")}
 							required
+							showError={showValidation}
 						/>
 						<Field
 							label={t("publicInfo.fields.city")}
@@ -516,6 +560,7 @@ export default function ProfileClient() {
 							value={profile.city}
 							onChange={set("city")}
 							required
+							showError={showValidation}
 						/>
 						<Field
 							label={t("publicInfo.fields.phone")}
@@ -524,6 +569,7 @@ export default function ProfileClient() {
 							value={profile.phone}
 							onChange={(v) => set("phone")(v.replace(/\D/g, ""))}
 							required
+							showError={showValidation}
 						/>
 						<Field
 							label={t("publicInfo.fields.website")}
@@ -546,8 +592,14 @@ export default function ProfileClient() {
 							rows={4}
 							value={profile.bio}
 							onChange={(e) => set("bio")(e.target.value)}
-							className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 resize-none"
+							className={`w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 resize-none ${showValidation && !profile.bio.trim() ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
 						/>
+						{showValidation && !profile.bio.trim() && (
+							<p className="text-xs text-rose-600 font-medium mt-1 flex items-center gap-1">
+								<span className="material-symbols-outlined text-sm">error</span>
+								Required
+							</p>
+						)}
 					</div>
 					<div>
 						<p className="text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-3">
@@ -598,6 +650,7 @@ export default function ProfileClient() {
 							value={profile.contactPerson}
 							onChange={set("contactPerson")}
 							required
+							showError={showValidation}
 						/>
 						<Field
 							label={t("keyPersonnel.fields.jobTitle")}
@@ -605,6 +658,7 @@ export default function ProfileClient() {
 							value={profile.jobTitle}
 							onChange={set("jobTitle")}
 							required
+							showError={showValidation}
 						/>
 						<Field
 							label={t("keyPersonnel.fields.contactEmail")}
@@ -614,6 +668,7 @@ export default function ProfileClient() {
 							onChange={set("contactEmail")}
 							placeholder={session?.user?.email ?? ""}
 							required
+							showError={showValidation}
 						/>
 						<Field
 							label={t("keyPersonnel.fields.phone")}
@@ -634,6 +689,8 @@ export default function ProfileClient() {
 							type="number"
 							value={profile.yearsInBusiness}
 							onChange={(v) => set("yearsInBusiness")(v.replace(/\D/g, ""))}
+							required
+							showError={showValidation}
 						/>
 						<SelectField
 							label={t("businessDetails.fields.companySize")}
@@ -641,6 +698,8 @@ export default function ProfileClient() {
 							value={profile.companySize}
 							onChange={set("companySize")}
 							options={companySizeOptions}
+							required
+							showError={showValidation}
 						/>
 						<Field
 							label={t("businessDetails.fields.averageEventsYear")}
@@ -648,6 +707,8 @@ export default function ProfileClient() {
 							type="number"
 							value={profile.averageEventsYear}
 							onChange={(v) => set("averageEventsYear")(v.replace(/\D/g, ""))}
+							required
+							showError={showValidation}
 						/>
 					</div>
 					<Field
@@ -656,6 +717,8 @@ export default function ProfileClient() {
 						value={profile.marketsRegions}
 						onChange={set("marketsRegions")}
 						placeholder={t("businessDetails.fields.marketsRegionsPlaceholder")}
+						required
+						showError={showValidation}
 					/>
 					<Field
 						label={t("businessDetails.fields.genresSpecialties")}
@@ -663,6 +726,8 @@ export default function ProfileClient() {
 						value={profile.genresSpecialties}
 						onChange={set("genresSpecialties")}
 						placeholder={t("businessDetails.fields.genresSpecialtiesPlaceholder")}
+						required
+						showError={showValidation}
 					/>
 				</Section>
 
@@ -674,12 +739,16 @@ export default function ProfileClient() {
 							id="bank-name"
 							value={profile.bankName}
 							onChange={set("bankName")}
+							required
+							showError={showValidation}
 						/>
 						<Field
 							label={t("banking.fields.bankAccountHolder")}
 							id="bank-holder"
 							value={profile.bankAccountHolder}
 							onChange={set("bankAccountHolder")}
+							required
+							showError={showValidation}
 						/>
 						<Field
 							label={t("banking.fields.bankAccountNumber")}
@@ -699,11 +768,19 @@ export default function ProfileClient() {
 							value={profile.currencyPreference}
 							onChange={set("currencyPreference")}
 							placeholder={t("banking.fields.currencyPlaceholder")}
+							required
+							showError={showValidation}
 						/>
 					</div>
 				</Section>
 
 				<div className="flex items-center justify-end gap-4">
+					{showValidation && REQUIRED_KEYS.some((k) => !profile[k]?.trim?.() && !profile[k]) && (
+						<span className="flex items-center gap-1.5 text-sm font-semibold text-rose-600">
+							<span className="material-symbols-outlined text-base" style={{ fontVariationSettings: "'FILL' 1" }}>error</span>
+							{t("actions.requiredFields")}
+						</span>
+					)}
 					{saveStatus === "success" && (
 						<span className="flex items-center gap-1.5 text-sm font-semibold text-emerald-600">
 							<span
