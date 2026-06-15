@@ -3331,7 +3331,9 @@
     "submissions": "Submissions",
     "reports": "Reports",
     "settings": "Settings",
-    "newTour": "New Tour"
+    "newTour": "New Tour",
+    "financing": "Financing",
+    "insurance": "Insurance"
   },
   "AdminArtistsPage": {
     "badge": "Tour Management",
@@ -3959,20 +3961,86 @@
   },
   "AdminFinancingPage": {
     "badge": "Capital Access",
-    "title": "Financing Tracker",
-    "description": "Monitor and manage financing requests from tour promoters.",
-    "requestsTitle": "Financing Requests",
-    "requested": "requested",
-    "reviewDetails": "Review Details",
+    "title": "Financing Applications",
+    "description": "Review all financing requests from promoters. Approve only when the tour stop is confirmed, then forward to the Financing Admin for disbursement.",
+    "sync": "Sync",
+    "syncing": "Syncing...",
+    "queueTitle": "All Financing Requests",
     "empty": "No financing requests yet.",
     "loadError": "Could not load financing requests.",
+    "searchPlaceholder": "Search promoter or tour...",
+    "requestedOn": "Submitted",
+    "unassigned": "Unassigned",
+    "noTour": "No Tour",
+    "forwardingNotice": "Only applications with a confirmed tour stop can be forwarded to the Financing Admin. Check the tour status badge on each card.",
+    "approvalBlocked": "Tour stop not yet confirmed. Cannot forward until the tour is confirmed.",
+    "noTourBlocked": "No confirmed tour linked. This application cannot be forwarded until a tour stop is confirmed.",
+    "documentsCount": "{count, plural, =0 {No documents} one {# document} other {# documents}}",
+    "filters": {
+      "all": "All",
+      "pending": "Pending",
+      "under_review": "Under Review",
+      "approved": "Forwarded",
+      "rejected": "Rejected",
+      "disbursed": "Disbursed"
+    },
     "status": {
       "pending": "Pending",
       "under_review": "Under Review",
-      "approved": "Approved",
+      "approved": "Forwarded to Finance",
       "rejected": "Rejected",
-      "disbursed": "Disbursed",
-      "declined": "Declined"
+      "disbursed": "Disbursed"
+    },
+    "tourStatus": {
+      "confirmed": "Tour Confirmed",
+      "active": "Tour Active",
+      "under_review": "Tour Under Review",
+      "pending": "Tour Pending",
+      "cancelled": "Tour Cancelled",
+      "unknown": "Status Unknown"
+    },
+    "tour": {
+      "title": "Tour Details",
+      "venue": "Venue",
+      "date": "Date",
+      "location": "Location",
+      "artist": "Artist",
+      "genre": "Genre",
+      "capacity": "Capacity"
+    },
+    "actions": {
+      "review": "Review",
+      "forward": "Forward to Finance",
+      "reject": "Reject"
+    },
+    "reviewForm": {
+      "title": "Review Application",
+      "selectHint": "Select an application to review.",
+      "fields": {
+        "decision": "Decision",
+        "partner": "Financing partner",
+        "termSheet": "Term sheet URL",
+        "note": "Reviewer note"
+      },
+      "placeholders": {
+        "partner": "Assign a capital partner",
+        "termSheet": "https://...",
+        "note": "Add notes or next steps"
+      },
+      "success": "Review saved.",
+      "error": "Could not save the review.",
+      "saving": "Saving...",
+      "submit": "Save Review"
+    },
+    "reviewChecklist": {
+      "title": "Approval Checklist",
+      "items": [
+        "Verify the tour stop has been confirmed by the admin team.",
+        "Review all uploaded financial documents from the promoter.",
+        "Confirm financing amount and product type match the tour profile.",
+        "Check promoter banking details before forwarding.",
+        "Assign a financing partner if available."
+      ]
     }
   },
   "InsuranceAdminLoginPage": {
@@ -4089,27 +4157,24 @@
   "FinancingAdminApplicationsPage": {
     "badge": "Application Review",
     "title": "Financing applications",
-    "description": "Review promoter financing requests and move approved facilities toward term sheet and disbursement.",
+    "description": "Process disbursements for financing applications forwarded by the Platform Admin. You can only act on applications that have been approved and forwarded.",
     "queueTitle": "Review queue",
     "requestedOn": "Requested",
     "searchPlaceholder": "Search promoter or tour",
     "loading": "Loading applications...",
     "loadError": "Couldn't load financing applications.",
-    "empty": "No applications match this view.",
+    "empty": "No forwarded applications yet. The Platform Admin must approve and forward applications before they appear here.",
     "unassigned": "Unassigned",
     "documentsCount": "{count, plural, =0 {No documents} one {# document} other {# documents}}",
     "filters": {
-      "all": "All",
-      "pending": "Pending",
-      "under_review": "Under Review",
-      "approved": "Approved",
-      "rejected": "Rejected",
+      "all": "Forwarded & Disbursed",
+      "approved": "Forwarded",
       "disbursed": "Disbursed"
     },
     "status": {
       "pending": "Pending",
       "under_review": "Under Review",
-      "approved": "Approved",
+      "approved": "Forwarded by Platform Admin",
       "rejected": "Rejected",
       "disbursed": "Disbursed"
     },
@@ -4152,23 +4217,23 @@
       "sync": "Refresh",
       "syncing": "Refreshing...",
       "review": "Review",
-      "approve": "Approve",
-      "reject": "Reject"
+      "disburse": "Mark Disbursed"
     },
     "reviewChecklist": {
-      "title": "Review checklist",
+      "title": "Disbursement Checklist",
       "items": [
-        "Verify promoter profile, company registration, and TourStack history.",
-        "Confirm tour stop budget, venue capacity, and ticket forecast.",
-        "Check requested facility against product limits and repayment terms.",
-        "Assign capital partner and prepare term sheet after approval."
+        "Confirm the Platform Admin has approved and forwarded this application.",
+        "Verify disbursement account details are accurate.",
+        "Confirm term sheet is signed and on file.",
+        "Ensure the financing partner has cleared the facility.",
+        "Record the disbursement reference after processing."
       ]
     },
     "reviewForm": {
       "title": "Review form",
       "selectHint": "Select an application from the queue to record a decision.",
       "fields": {
-        "decision": "Decision",
+        "decision": "Action",
         "partner": "Capital partner",
         "termSheet": "Term sheet URL",
         "note": "Reviewer note"
@@ -4348,7 +4413,7 @@
   "InsuranceAdminApplicationsPage": {
     "badge": "Applications",
     "title": "Insurance Applications",
-    "description": "Review and process insurance applications from tour promoters.",
+    "description": "Process final approvals and disbursements for insurance applications forwarded by the Platform Admin.",
     "requestsTitle": "All Applications",
     "requested": "coverage requested",
     "reviewDetails": "Review Details",
@@ -4357,19 +4422,16 @@
     "refreshing": "Refreshing...",
     "loading": "Loading applications...",
     "loadError": "Couldn't load insurance applications.",
-    "empty": "No applications match this view.",
+    "empty": "No forwarded applications yet. The Platform Admin must approve and forward applications before they appear here.",
     "filters": {
-      "all": "All",
-      "pending": "Pending",
-      "under_review": "Under Review",
-      "approved": "Approved",
-      "rejected": "Rejected",
+      "all": "Forwarded & Disbursed",
+      "approved": "Forwarded",
       "disbursed": "Disbursed"
     },
     "status": {
       "pending": "Pending",
       "under_review": "Under Review",
-      "approved": "Approved",
+      "approved": "Forwarded by Platform Admin",
       "rejected": "Rejected",
       "disbursed": "Disbursed"
     },
@@ -4379,8 +4441,8 @@
       "partnerPlaceholder": "Assign an underwriter or broker",
       "note": "Reviewer note",
       "notePlaceholder": "Add underwriting notes or next steps",
-      "save": "Save Review",
-      "saving": "Saving...",
+      "save": "Mark Disbursed",
+      "saving": "Processing...",
       "success": "Review saved.",
       "error": "Couldn't save the review."
     },
@@ -5386,5 +5448,82 @@
         "desc": "Parametric and index-linked insurance products priced dynamically using real-time event data including attendance forecasts and weather indices."
       }
     ]
+  },
+  "AdminInsurancePage": {
+    "badge": "Risk & Coverage",
+    "title": "Insurance Applications",
+    "description": "Review all insurance requests from promoters. Approve only when the tour stop is confirmed, then forward to the Insurance Admin for final processing.",
+    "sync": "Sync",
+    "syncing": "Syncing...",
+    "requestsTitle": "All Insurance Requests",
+    "empty": "No insurance requests yet.",
+    "loadError": "Could not load insurance applications.",
+    "searchPlaceholder": "Search promoter or tour...",
+    "requestedOn": "Submitted",
+    "requested": "coverage requested",
+    "noTour": "No Tour",
+    "forwardingNotice": "Only applications with a confirmed tour stop can be forwarded to the Insurance Admin. Check the tour status badge on each card.",
+    "approvalBlocked": "Tour stop not yet confirmed. Cannot forward until the tour is confirmed.",
+    "noTourBlocked": "No confirmed tour linked. This application cannot be forwarded until a tour stop is confirmed.",
+    "filters": {
+      "all": "All",
+      "pending": "Pending",
+      "under_review": "Under Review",
+      "approved": "Forwarded",
+      "rejected": "Rejected",
+      "disbursed": "Disbursed"
+    },
+    "status": {
+      "pending": "Pending",
+      "under_review": "Under Review",
+      "approved": "Forwarded to Insurance",
+      "rejected": "Rejected",
+      "disbursed": "Disbursed"
+    },
+    "tourStatus": {
+      "confirmed": "Tour Confirmed",
+      "active": "Tour Active",
+      "under_review": "Tour Under Review",
+      "pending": "Tour Pending",
+      "cancelled": "Tour Cancelled",
+      "unknown": "Status Unknown"
+    },
+    "tour": {
+      "title": "Tour Details",
+      "venue": "Venue",
+      "date": "Date",
+      "location": "Location",
+      "artist": "Artist",
+      "genre": "Genre",
+      "capacity": "Capacity"
+    },
+    "actions": {
+      "review": "Review",
+      "forward": "Forward to Insurance",
+      "reject": "Reject"
+    },
+    "reviewForm": {
+      "title": "Review Application",
+      "selectHint": "Select an application to review.",
+      "decision": "Decision",
+      "partner": "Insurance partner",
+      "partnerPlaceholder": "Assign an underwriter or broker",
+      "note": "Reviewer note",
+      "notePlaceholder": "Add underwriting notes or next steps",
+      "save": "Save Review",
+      "saving": "Saving...",
+      "success": "Review saved.",
+      "error": "Could not save the review."
+    },
+    "reviewChecklist": {
+      "title": "Approval Checklist",
+      "items": [
+        "Verify the tour stop has been confirmed by the admin team.",
+        "Review all uploaded documents from the promoter.",
+        "Confirm the declared coverage amount is appropriate for the event.",
+        "Check event venue and date are finalized.",
+        "Assign an insurance partner before forwarding."
+      ]
+    }
   }
 }
