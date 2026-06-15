@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
@@ -155,7 +155,7 @@ function VerifyEmailContent() {
 
 					<form onSubmit={handleSubmit} className="space-y-6">
 						<div>
-							<label className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-3">
+							<label className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">
 								{t("codeLabel")}
 							</label>
 							<div className="flex gap-2 justify-between">
@@ -171,7 +171,7 @@ function VerifyEmailContent() {
 										onKeyDown={(e) => handleKeyDown(i, e)}
 										onPaste={handlePaste}
 										disabled={verifyMutation.isPending}
-										className="w-12 h-14 text-center text-xl font-bold bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 focus:border-[#FF5A30] transition-all disabled:opacity-60"
+										className="w-12 h-14 text-center text-xl font-semibold bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 focus:border-[#FF5A30] transition-all disabled:opacity-60"
 									/>
 								))}
 							</div>
@@ -190,7 +190,7 @@ function VerifyEmailContent() {
 						<button
 							type="submit"
 							disabled={verifyMutation.isPending || digits.join("").length < 6}
-							className="w-full py-3 bg-[#FF5A30] text-white font-bold rounded-xl shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60"
+							className="w-full py-3 bg-[#FF5A30] text-white font-semibold rounded-xl shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60"
 						>
 							{verifyMutation.isPending ? t("submitting") : t("submit")}
 						</button>

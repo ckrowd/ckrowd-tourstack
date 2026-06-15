@@ -125,7 +125,7 @@ export default function ArtmgmtPasswordGate({
 						<button
 							type="submit"
 							disabled={mutation.isPending}
-							className="w-full py-3 bg-[#FF5A30] text-white rounded-xl font-bold text-sm hover:bg-[#e04e27] disabled:opacity-60 transition-colors mt-2"
+							className="w-full py-3 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm hover:bg-[#e04e27] disabled:opacity-60 transition-colors mt-2"
 						>
 							{mutation.isPending ? t("saving") : t("submit")}
 						</button>

@@ -92,7 +92,7 @@ export default function VenueDetailsModal({
 				<div className="sticky top-0 flex items-start justify-between gap-3 px-6 py-4 border-b border-outline-variant/15 bg-surface-container-lowest">
 					<div className="min-w-0 flex-1">
 						<div className="flex items-center gap-2 flex-wrap">
-							<h3 className="font-(family-name:--font-manrope) font-bold text-on-surface truncate">
+							<h3 className="font-(family-name:--font-manrope) font-semibold text-on-surface truncate">
 								{String(venue.name ?? "")}
 							</h3>
 							{venue.is_verified ? (
@@ -123,7 +123,7 @@ export default function VenueDetailsModal({
 					<dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
 						{rows.map(([label, value]) => (
 							<div key={label} className="min-w-0">
-								<dt className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
+								<dt className="text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant">
 									{label}
 								</dt>
 								<dd className="text-sm text-on-surface break-words mt-1">
@@ -134,7 +134,7 @@ export default function VenueDetailsModal({
 					</dl>
 					{notes && (
 						<div className="mt-5 pt-5 border-t border-outline-variant/15">
-							<p className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+							<p className="text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 								{t("venueDetails.fields.notes")}
 							</p>
 							<p className="text-sm text-on-surface whitespace-pre-wrap leading-relaxed">

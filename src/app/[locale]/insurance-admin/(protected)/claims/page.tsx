@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useFormatter, useTranslations } from "next-intl";
@@ -170,7 +170,7 @@ export default function InsuranceAdminClaimsPage() {
 		<>
 			<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 				<div>
-					<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
 						{t("badge")}
 					</span>
 					<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -183,7 +183,7 @@ export default function InsuranceAdminClaimsPage() {
 				<button
 					type="button"
 					onClick={() => setShowForm((v) => !v)}
-					className="flex items-center gap-2 px-4 py-2.5 bg-[#FF5A30] text-white rounded-xl text-sm font-bold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 shrink-0"
+					className="flex items-center gap-2 px-4 py-2.5 bg-[#FF5A30] text-white rounded-xl text-sm font-semibold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 shrink-0"
 				>
 					<span className="material-symbols-outlined text-base">
 						{showForm ? "close" : "add"}
@@ -197,7 +197,7 @@ export default function InsuranceAdminClaimsPage() {
 					onSubmit={handleCreate}
 					className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm mb-6 grid grid-cols-1 sm:grid-cols-2 gap-4"
 				>
-					<h3 className="sm:col-span-2 font-(family-name:--font-manrope) font-bold text-base">
+					<h3 className="sm:col-span-2 font-(family-name:--font-manrope) font-semibold text-base">
 						{t("newClaim.title")}
 					</h3>
 					{applications.length === 0 ? (
@@ -207,7 +207,7 @@ export default function InsuranceAdminClaimsPage() {
 					) : (
 						<>
 							<label className="block sm:col-span-2">
-								<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+								<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 									{t("newClaim.application")}
 								</span>
 								<select
@@ -228,7 +228,7 @@ export default function InsuranceAdminClaimsPage() {
 								</select>
 							</label>
 							<label className="block sm:col-span-2">
-								<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+								<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 									{t("newClaim.description")}
 								</span>
 								<input
@@ -241,7 +241,7 @@ export default function InsuranceAdminClaimsPage() {
 								/>
 							</label>
 							<label className="block">
-								<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+								<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 									{t("newClaim.amount")}
 								</span>
 								<input
@@ -255,7 +255,7 @@ export default function InsuranceAdminClaimsPage() {
 								/>
 							</label>
 							<label className="block">
-								<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+								<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 									{t("newClaim.notes")}
 								</span>
 								<input
@@ -288,7 +288,7 @@ export default function InsuranceAdminClaimsPage() {
 								<button
 									type="submit"
 									disabled={createMutation.isPending}
-									className="px-5 py-2.5 bg-[#FF5A30] text-white rounded-xl font-bold text-sm hover:opacity-90 transition-opacity disabled:opacity-60"
+									className="px-5 py-2.5 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-60"
 								>
 									{createMutation.isPending
 										? t("newClaim.submitting")
@@ -320,7 +320,7 @@ export default function InsuranceAdminClaimsPage() {
 
 			<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
 				<div className="flex items-center justify-between mb-5">
-					<h3 className="font-(family-name:--font-manrope) font-bold text-lg">
+					<h3 className="font-(family-name:--font-manrope) font-semibold text-lg">
 						{t("claimsTitle")}
 					</h3>
 					<span className="material-symbols-outlined text-[#FF5A30]">
@@ -372,7 +372,7 @@ export default function InsuranceAdminClaimsPage() {
 								>
 									<div className="flex items-center justify-between gap-4 p-4">
 										<div className="min-w-0">
-											<p className="text-base font-bold text-on-surface truncate">
+											<p className="text-base font-semibold text-on-surface truncate">
 												{promoterName(claim)}
 											</p>
 											<p className="text-sm text-on-surface-variant mt-1 truncate">
@@ -400,7 +400,7 @@ export default function InsuranceAdminClaimsPage() {
 											<button
 												type="button"
 												onClick={() => toggleReview(claim)}
-												className="text-xs font-bold text-[#FF5A30] hover:underline"
+												className="text-xs font-semibold text-[#FF5A30] hover:underline"
 											>
 												{expanded ? t("closeReview") : t("reviewClaim")}
 											</button>
@@ -416,7 +416,7 @@ export default function InsuranceAdminClaimsPage() {
 											className="border-t border-outline-variant/10 p-4 grid grid-cols-1 sm:grid-cols-2 gap-4"
 										>
 											<label className="block">
-												<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+												<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 													{t("review.status")}
 												</span>
 												<select
@@ -436,7 +436,7 @@ export default function InsuranceAdminClaimsPage() {
 												</select>
 											</label>
 											<label className="block">
-												<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+												<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 													{t("review.settlement")}
 												</span>
 												<input
@@ -451,7 +451,7 @@ export default function InsuranceAdminClaimsPage() {
 												/>
 											</label>
 											<label className="block sm:col-span-2">
-												<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+												<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 													{t("review.notes")}
 												</span>
 												<textarea
@@ -487,7 +487,7 @@ export default function InsuranceAdminClaimsPage() {
 												<button
 													type="submit"
 													disabled={reviewMutation.isPending}
-													className="px-5 py-2.5 bg-[#FF5A30] text-white rounded-xl font-bold text-sm hover:opacity-90 transition-opacity disabled:opacity-60"
+													className="px-5 py-2.5 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-60"
 												>
 													{reviewMutation.isPending
 														? t("review.saving")

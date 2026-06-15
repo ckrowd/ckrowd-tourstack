@@ -1,4 +1,4 @@
-import { getTranslations, setRequestLocale } from "next-intl/server";
+﻿import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getAdminEOIs } from "@/app/actions";
 import EoiActionPanel from "@/components/EoiActionPanel";
 import PageTour from "@/components/PageTour";
@@ -46,7 +46,7 @@ export default async function AdminEOIPage({
 		<>
 			<PageTour pageId="admin-eoi" />
 			<div className="mb-10">
-				<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
 					{t("badge")}
 				</span>
 				<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -59,7 +59,7 @@ export default async function AdminEOIPage({
 
 			<div data-tour="admin-eoi-list" className="bg-surface-container-lowest rounded-2xl p-4 md:p-6 shadow-sm">
 				<div className="flex items-center justify-between mb-6">
-					<h2 className="text-xl font-(family-name:--font-manrope) font-bold">
+					<h2 className="text-xl font-(family-name:--font-manrope) font-semibold">
 						{t("pendingSubmissions")}
 					</h2>
 					<span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-black">
@@ -73,7 +73,7 @@ export default async function AdminEOIPage({
 							<span className="material-symbols-outlined text-5xl text-on-surface-variant block mb-4">
 								inbox
 							</span>
-							<p className="font-(family-name:--font-manrope) font-bold text-on-surface text-lg mb-2">
+							<p className="font-(family-name:--font-manrope) font-semibold text-on-surface text-lg mb-2">
 								{t("noEois")}
 							</p>
 							<p className="text-on-surface-variant text-sm">
@@ -123,7 +123,7 @@ export default async function AdminEOIPage({
 												{status.replace(/_/g, " ")}
 											</span>
 										</div>
-										<h3 className="font-(family-name:--font-manrope) font-bold text-on-surface text-lg">
+										<h3 className="font-(family-name:--font-manrope) font-semibold text-on-surface text-lg">
 											{String(eoiArtist?.name ?? "Artist")}
 											<span className="text-on-surface-variant font-normal text-sm ml-1">
 												— {String(eoiArtist?.tour_name ?? "")}
@@ -172,11 +172,11 @@ export default async function AdminEOIPage({
 												<span className="material-symbols-outlined text-xs">
 													{d.icon}
 												</span>
-												<span className="text-[10px] font-bold uppercase tracking-wider">
+												<span className="text-[10px] font-semibold uppercase tracking-wider">
 													{d.label}
 												</span>
 											</div>
-											<p className="text-sm font-bold text-on-surface">
+											<p className="text-sm font-semibold text-on-surface">
 												{d.value}
 											</p>
 										</div>
@@ -185,7 +185,7 @@ export default async function AdminEOIPage({
 
 								<div className="mt-4 space-y-2">
 									<div className="flex items-center gap-3">
-										<span className="text-xs font-bold text-on-surface-variant w-20 shrink-0">
+										<span className="text-xs font-semibold text-on-surface-variant w-20 shrink-0">
 											{t("matchScore")}
 										</span>
 										<div className="flex-1">

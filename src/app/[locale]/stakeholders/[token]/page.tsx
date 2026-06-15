@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
@@ -56,7 +56,7 @@ export default function PublicOnboardingLinkPage({
 					<p className="text-sm text-on-surface-variant mt-2">{t("success.description")}</p>
 					<Link
 						href="/"
-						className="inline-flex items-center justify-center mt-6 px-5 py-3 rounded-xl bg-[#FF5A30] text-white text-sm font-bold hover:opacity-90"
+						className="inline-flex items-center justify-center mt-6 px-5 py-3 rounded-xl bg-[#FF5A30] text-white text-sm font-semibold hover:opacity-90"
 					>
 						{t("success.returnHome")}
 					</Link>
@@ -73,7 +73,7 @@ export default function PublicOnboardingLinkPage({
 					<Loader />
 				) : !linkQuery.data?.success || !link || !category ? (
 					<>
-						<p className="text-xs font-bold uppercase tracking-widest text-[#FF5A30]">
+						<p className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30]">
 							{t("header.tagline")}
 						</p>
 						<h1 className="text-3xl font-(family-name:--font-manrope) font-extrabold text-on-surface mt-2">
@@ -85,7 +85,7 @@ export default function PublicOnboardingLinkPage({
 					</>
 				) : (
 					<>
-						<p className="text-xs font-bold uppercase tracking-widest text-[#FF5A30]">
+						<p className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30]">
 							{category === "service"
 								? t("serviceProvider.tagline" as never)
 								: category === "workforce"

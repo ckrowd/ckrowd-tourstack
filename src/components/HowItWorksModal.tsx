@@ -70,7 +70,7 @@ export default function HowItWorksModal({
 							<div>
 								<h2
 									id={titleId}
-									className="font-(family-name:--font-manrope) text-xl font-bold text-on-surface"
+									className="font-(family-name:--font-manrope) text-xl font-semibold text-on-surface"
 								>
 									{title}
 								</h2>
@@ -103,7 +103,7 @@ export default function HowItWorksModal({
 												{s.step}
 											</div>
 											<div>
-												<p className="font-(family-name:--font-manrope) font-bold text-on-surface text-sm">
+												<p className="font-(family-name:--font-manrope) font-semibold text-on-surface text-sm">
 													{s.title}
 												</p>
 												<p className="text-xs text-on-surface-variant mt-1 leading-relaxed">

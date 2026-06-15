@@ -374,7 +374,7 @@ export default function ProfileClient() {
 				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
 					{t("promoterPortal")}
 				</span>
-				<h1 className="text-3xl font-bold font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
+				<h1 className="text-3xl font-semibold font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
 					{t("title")}
 				</h1>
 				<p className="text-on-surface-variant">{t("description")}</p>
@@ -405,7 +405,7 @@ export default function ProfileClient() {
 									className="w-full h-full object-cover"
 								/>
 							) : (
-								<span className="text-2xl font-bold text-on-surface-variant group-hover:text-[#FF5A30] transition-colors">
+								<span className="text-2xl font-semibold text-on-surface-variant group-hover:text-[#FF5A30] transition-colors">
 									{initials}
 								</span>
 							)}

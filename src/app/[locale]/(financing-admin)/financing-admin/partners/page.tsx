@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
@@ -98,7 +98,7 @@ export default function FinancingAdminPartnersPage() {
 		<>
 			<div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-5">
 				<div>
-					<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
 						{t("badge")}
 					</span>
 					<h1 className="text-2xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -119,7 +119,7 @@ export default function FinancingAdminPartnersPage() {
 						<span className="material-symbols-outlined text-3xl text-[#FF5A30] block mb-5">
 							{card.icon}
 						</span>
-						<h2 className="font-(family-name:--font-manrope) font-bold text-base text-on-surface">
+						<h2 className="font-(family-name:--font-manrope) font-semibold text-base text-on-surface">
 							{card.title}
 						</h2>
 						<p className="text-sm text-on-surface-variant mt-2 leading-6">
@@ -132,14 +132,14 @@ export default function FinancingAdminPartnersPage() {
 			<div className="grid grid-cols-1 xl:grid-cols-[1fr_0.85fr] gap-8">
 				<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
 					<div className="flex items-center justify-between mb-5">
-						<h2 className="font-(family-name:--font-manrope) font-bold text-base">
+						<h2 className="font-(family-name:--font-manrope) font-semibold text-base">
 							{t("directoryTitle")}
 						</h2>
 						<button
 							type="button"
 							onClick={() => query.refetch()}
 							disabled={query.isFetching}
-							className="text-sm font-bold text-[#FF5A30] hover:underline disabled:opacity-60"
+							className="text-sm font-semibold text-[#FF5A30] hover:underline disabled:opacity-60"
 						>
 							{t("refresh")}
 						</button>
@@ -181,7 +181,7 @@ export default function FinancingAdminPartnersPage() {
 											</div>
 											<div>
 												<div className="flex items-center gap-2 flex-wrap">
-													<p className="font-(family-name:--font-manrope) font-bold text-on-surface">
+													<p className="font-(family-name:--font-manrope) font-semibold text-on-surface">
 														{String(partner.name ?? "—")}
 													</p>
 													<span
@@ -218,12 +218,12 @@ export default function FinancingAdminPartnersPage() {
 						onSubmit={handleSubmit}
 						className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10"
 					>
-						<h2 className="font-(family-name:--font-manrope) font-bold text-base mb-4 pb-4 border-b border-outline-variant/20">
+						<h2 className="font-(family-name:--font-manrope) font-semibold text-base mb-4 pb-4 border-b border-outline-variant/20">
 							{t("partnerForm.title")}
 						</h2>
 						<div className="space-y-4">
 							<label className="block">
-								<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+								<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 									{t("partnerForm.fields.name")}
 								</span>
 								<input
@@ -236,7 +236,7 @@ export default function FinancingAdminPartnersPage() {
 								/>
 							</label>
 							<label className="block">
-								<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+								<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 									{t("partnerForm.fields.type")}
 								</span>
 								<select
@@ -254,7 +254,7 @@ export default function FinancingAdminPartnersPage() {
 								</select>
 							</label>
 							<label className="block">
-								<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+								<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 									{t("partnerForm.fields.markets")}
 								</span>
 								<input
@@ -266,7 +266,7 @@ export default function FinancingAdminPartnersPage() {
 								/>
 							</label>
 							<label className="block">
-								<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+								<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 									{t("partnerForm.fields.capacity")}
 								</span>
 								<input
@@ -295,7 +295,7 @@ export default function FinancingAdminPartnersPage() {
 							<button
 								type="submit"
 								disabled={createMutation.isPending}
-								className="w-full py-3 bg-[#FF5A30] text-white rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-opacity disabled:opacity-60"
+								className="w-full py-3 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-opacity disabled:opacity-60"
 							>
 								{createMutation.isPending
 									? t("partnerForm.saving")
@@ -305,7 +305,7 @@ export default function FinancingAdminPartnersPage() {
 					</form>
 
 					<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
-						<h2 className="font-(family-name:--font-manrope) font-bold text-base mb-5">
+						<h2 className="font-(family-name:--font-manrope) font-semibold text-base mb-5">
 							{t("lanesTitle")}
 						</h2>
 						<div className="space-y-4">
@@ -318,7 +318,7 @@ export default function FinancingAdminPartnersPage() {
 										{lane.icon}
 									</span>
 									<div className="flex-1">
-										<p className="font-bold text-sm text-on-surface">
+										<p className="font-semibold text-sm text-on-surface">
 											{lane.title}
 										</p>
 										<p className="text-xs text-on-surface-variant mt-1 leading-5">

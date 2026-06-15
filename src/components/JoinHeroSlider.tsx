@@ -82,7 +82,7 @@ export default function JoinHeroSlider({
 										>
 											{s.icon}
 										</span>
-										<span className="text-xs font-bold tracking-widest uppercase">
+										<span className="text-xs font-semibold tracking-widest uppercase">
 											{joinAsLabel}
 										</span>
 									</div>
@@ -98,14 +98,14 @@ export default function JoinHeroSlider({
 									<div className="flex flex-col sm:flex-row gap-4 pt-2">
 										<Link
 											href={s.href}
-											className="justify-center inline-flex items-center gap-3 px-6 md:px-8 py-3 md:py-4 bg-[#FF5A30] text-white rounded-xl font-bold shadow-2xl shadow-[#FF5A30]/40 hover:scale-[1.02] active:scale-[0.98] transition-transform"
+											className="justify-center inline-flex items-center gap-3 px-6 md:px-8 py-3 md:py-4 bg-[#FF5A30] text-white rounded-xl font-semibold shadow-2xl shadow-[#FF5A30]/40 hover:scale-[1.02] active:scale-[0.98] transition-transform"
 										>
 											{s.cta}
 											<span className="material-symbols-outlined">arrow_forward</span>
 										</Link>
 										<a
 											href={readMoreHref}
-											className="justify-center inline-flex items-center px-6 md:px-8 py-3 md:py-4 glass-effect bg-white/10 text-white border border-white/20 rounded-xl font-bold hover:bg-white/20 transition-all"
+											className="justify-center inline-flex items-center px-6 md:px-8 py-3 md:py-4 glass-effect bg-white/10 text-white border border-white/20 rounded-xl font-semibold hover:bg-white/20 transition-all"
 										>
 											{readMoreLabel}
 										</a>
@@ -117,7 +117,7 @@ export default function JoinHeroSlider({
 									<div className="glass-effect bg-white/10 p-1 rounded-2xl border border-white/20 shadow-2xl">
 										<div className="bg-white rounded-xl p-6">
 											<div className="flex items-center justify-between mb-5">
-												<h3 className="font-(family-name:--font-manrope) font-bold text-slate-900">
+												<h3 className="font-(family-name:--font-manrope) font-semibold text-slate-900">
 													{s.examplesLabel}
 												</h3>
 												<span

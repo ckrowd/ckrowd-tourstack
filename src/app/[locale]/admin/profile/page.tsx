@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
@@ -36,7 +36,7 @@ function Section({
 	return (
 		<div className="bg-surface-container-lowest rounded-2xl p-8 shadow-sm space-y-6">
 			<div className="border-b border-outline-variant/20 pb-4">
-				<h3 className="font-(family-name:--font-manrope) font-bold text-lg text-on-surface">
+				<h3 className="font-(family-name:--font-manrope) font-semibold text-lg text-on-surface">
 					{title}
 				</h3>
 				{description && (
@@ -69,7 +69,7 @@ function Field({
 		<div>
 			<label
 				htmlFor={id}
-				className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5"
+				className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1.5"
 			>
 				{label}
 			</label>
@@ -171,7 +171,7 @@ export default function AdminProfilePage() {
 	return (
 		<>
 			<div className="mb-8">
-				<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
 					{t("role")}
 				</span>
 				<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -234,7 +234,7 @@ export default function AdminProfilePage() {
 						<div>
 							<label
 								htmlFor="bio"
-								className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5"
+								className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1.5"
 							>
 								{t("bio")}
 							</label>
@@ -261,7 +261,7 @@ export default function AdminProfilePage() {
 						type="button"
 						onClick={handleSave}
 						disabled={saveMutation.isPending}
-						className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:opacity-60"
+						className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:opacity-60"
 					>
 						{saveMutation.isPending ? t("saving") : t("save")}
 					</button>

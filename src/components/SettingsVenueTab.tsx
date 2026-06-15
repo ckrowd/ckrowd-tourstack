@@ -158,7 +158,7 @@ export default function SettingsVenueTab() {
 								</div>
 								<div className="flex-1 min-w-0">
 									<div className="flex items-center gap-2 flex-wrap">
-										<p className="font-bold text-sm text-on-surface">
+										<p className="font-semibold text-sm text-on-surface">
 											{String(v.name)}
 										</p>
 										{v.is_verified ? (
@@ -191,7 +191,7 @@ export default function SettingsVenueTab() {
 										}}
 										role="button"
 										tabIndex={0}
-										className="text-xs font-bold text-on-surface-variant hover:text-[#FF5A30] transition-colors cursor-pointer"
+										className="text-xs font-semibold text-on-surface-variant hover:text-[#FF5A30] transition-colors cursor-pointer"
 									>
 										{t("myVenues.actions.edit")}
 									</span>
@@ -215,7 +215,7 @@ export default function SettingsVenueTab() {
 										role="button"
 										tabIndex={0}
 										aria-disabled={deleteMutation.isPending}
-										className={`text-xs font-bold text-red-500 hover:text-red-600 transition-colors cursor-pointer ${deleteMutation.isPending ? "opacity-50 cursor-not-allowed" : ""}`}
+										className={`text-xs font-semibold text-red-500 hover:text-red-600 transition-colors cursor-pointer ${deleteMutation.isPending ? "opacity-50 cursor-not-allowed" : ""}`}
 									>
 										{deleteMutation.isPending
 											? t("myVenues.actions.deleting")
@@ -230,7 +230,7 @@ export default function SettingsVenueTab() {
 					<button
 						type="button"
 						onClick={resetForm}
-						className="w-full py-3 border-2 border-dashed border-outline-variant/40 rounded-xl text-sm font-bold text-on-surface-variant hover:border-[#FF5A30]/40 hover:text-[#FF5A30] transition-all flex items-center justify-center gap-2"
+						className="w-full py-3 border-2 border-dashed border-outline-variant/40 rounded-xl text-sm font-semibold text-on-surface-variant hover:border-[#FF5A30]/40 hover:text-[#FF5A30] transition-all flex items-center justify-center gap-2"
 					>
 						<span className="material-symbols-outlined text-sm">add</span>
 						{t("myVenues.actions.addNew")}
@@ -305,7 +305,7 @@ export default function SettingsVenueTab() {
 				<div className="mt-5">
 					<label
 						htmlFor="v-notes"
-						className="mb-2 block text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant"
+						className="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-on-surface-variant"
 					>
 						{t("venueDetails.fields.notes")}
 					</label>
@@ -333,7 +333,7 @@ export default function SettingsVenueTab() {
 						<button
 							type="button"
 							onClick={resetForm}
-							className="px-6 py-3 border border-outline-variant/40 rounded-xl font-bold text-sm text-on-surface-variant hover:bg-surface-container-low transition-all"
+							className="px-6 py-3 border border-outline-variant/40 rounded-xl font-semibold text-sm text-on-surface-variant hover:bg-surface-container-low transition-all"
 						>
 							{t("venueDetails.actions.cancel")}
 						</button>
@@ -342,7 +342,7 @@ export default function SettingsVenueTab() {
 						type="button"
 						onClick={() => saveMutation.mutate()}
 						disabled={!canSave || saveMutation.isPending}
-						className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:cursor-not-allowed disabled:opacity-60"
+						className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:cursor-not-allowed disabled:opacity-60"
 					>
 						{saveMutation.isPending
 							? t("venueDetails.actions.saving")

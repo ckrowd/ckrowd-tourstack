@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useFormatter, useTranslations } from "next-intl";
@@ -53,10 +53,10 @@ function tourLabel(f: Application): string {
 function Detail({ label, value }: { label: string; value: string }) {
 	return (
 		<div>
-			<p className="text-[10px] uppercase font-bold text-on-surface-variant">
+			<p className="text-[10px] uppercase font-semibold text-on-surface-variant">
 				{label}
 			</p>
-			<p className="font-bold text-on-surface truncate">{value || "—"}</p>
+			<p className="font-semibold text-on-surface truncate">{value || "—"}</p>
 		</div>
 	);
 }
@@ -152,7 +152,7 @@ export default function FinancingAdminApplicationsPage() {
 		<>
 			<div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-5">
 				<div>
-					<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
 						{t("badge")}
 					</span>
 					<h1 className="text-2xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -166,7 +166,7 @@ export default function FinancingAdminApplicationsPage() {
 					type="button"
 					onClick={() => query.refetch()}
 					disabled={query.isFetching}
-					className="flex items-center gap-2 px-3 py-2 bg-surface-container-high text-on-surface rounded-xl font-(family-name:--font-manrope) text-xs font-bold hover:bg-surface-container-highest transition-colors disabled:opacity-60"
+					className="flex items-center gap-2 px-3 py-2 bg-surface-container-high text-on-surface rounded-xl font-(family-name:--font-manrope) text-xs font-semibold hover:bg-surface-container-highest transition-colors disabled:opacity-60"
 				>
 					<span className="material-symbols-outlined text-sm">sync</span>
 					{query.isFetching ? t("actions.syncing") : t("actions.sync")}
@@ -210,7 +210,7 @@ export default function FinancingAdminApplicationsPage() {
 			<div className="grid grid-cols-1 xl:grid-cols-[1.35fr_0.65fr] gap-8">
 				<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
 					<div className="flex items-center justify-between mb-6">
-						<h2 className="text-base font-(family-name:--font-manrope) font-bold">
+						<h2 className="text-base font-(family-name:--font-manrope) font-semibold">
 							{t("queueTitle")}
 						</h2>
 					</div>
@@ -274,7 +274,7 @@ export default function FinancingAdminApplicationsPage() {
 															{t(`status.${status}`)}
 														</span>
 													</div>
-													<h3 className="font-(family-name:--font-manrope) font-bold text-on-surface text-base">
+													<h3 className="font-(family-name:--font-manrope) font-semibold text-on-surface text-base">
 														{promoterName(f)}
 													</h3>
 													<p className="text-sm text-on-surface-variant mt-0.5">
@@ -318,11 +318,11 @@ export default function FinancingAdminApplicationsPage() {
 														<span className="material-symbols-outlined text-xs">
 															{detail.icon}
 														</span>
-														<span className="text-[10px] font-bold uppercase tracking-wider">
+														<span className="text-[10px] font-semibold uppercase tracking-wider">
 															{detail.label}
 														</span>
 													</div>
-													<p className="text-sm font-bold text-on-surface truncate">
+													<p className="text-sm font-semibold text-on-surface truncate">
 														{detail.value}
 													</p>
 												</div>
@@ -339,7 +339,7 @@ export default function FinancingAdminApplicationsPage() {
 														<span className="material-symbols-outlined text-xs">
 															payments
 														</span>
-														<span className="text-[10px] font-bold uppercase tracking-wider">
+														<span className="text-[10px] font-semibold uppercase tracking-wider">
 															{t("fields.banking")}
 														</span>
 													</div>
@@ -356,20 +356,20 @@ export default function FinancingAdminApplicationsPage() {
 												<div className="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
 													{f.bank_name ? (
 														<div>
-															<p className="text-[10px] uppercase font-bold text-on-surface-variant">
+															<p className="text-[10px] uppercase font-semibold text-on-surface-variant">
 																{t("banking.bank")}
 															</p>
-															<p className="font-bold text-on-surface truncate">
+															<p className="font-semibold text-on-surface truncate">
 																{String(f.bank_name)}
 															</p>
 														</div>
 													) : null}
 													{f.account_number ? (
 														<div>
-															<p className="text-[10px] uppercase font-bold text-on-surface-variant">
+															<p className="text-[10px] uppercase font-semibold text-on-surface-variant">
 																{t("banking.account")}
 															</p>
-															<p className="font-bold text-on-surface font-mono">
+															<p className="font-semibold text-on-surface font-mono">
 																****
 																{String(f.account_number).slice(-4)}
 															</p>
@@ -377,10 +377,10 @@ export default function FinancingAdminApplicationsPage() {
 													) : null}
 													{f.account_name ? (
 														<div>
-															<p className="text-[10px] uppercase font-bold text-on-surface-variant">
+															<p className="text-[10px] uppercase font-semibold text-on-surface-variant">
 																{t("banking.holder")}
 															</p>
-															<p className="font-bold text-on-surface truncate">
+															<p className="font-semibold text-on-surface truncate">
 																{String(f.account_name)}
 															</p>
 														</div>
@@ -388,7 +388,7 @@ export default function FinancingAdminApplicationsPage() {
 												</div>
 												{f.purpose ? (
 													<div className="mt-2 pt-2 border-t border-outline-variant/10">
-														<p className="text-[10px] uppercase font-bold text-on-surface-variant">
+														<p className="text-[10px] uppercase font-semibold text-on-surface-variant">
 															{t("banking.purpose")}
 														</p>
 														<p className="text-xs text-on-surface mt-0.5">
@@ -405,7 +405,7 @@ export default function FinancingAdminApplicationsPage() {
 													<span className="material-symbols-outlined text-xs">
 														tour
 													</span>
-													<span className="text-[10px] font-bold uppercase tracking-wider">
+													<span className="text-[10px] font-semibold uppercase tracking-wider">
 														{t("tour.title")}
 													</span>
 												</div>
@@ -465,7 +465,7 @@ export default function FinancingAdminApplicationsPage() {
 												<span className="material-symbols-outlined text-xs">
 													description
 												</span>
-												<span className="text-[10px] font-bold uppercase tracking-wider">
+												<span className="text-[10px] font-semibold uppercase tracking-wider">
 													{t("docs.title")}
 												</span>
 											</div>
@@ -481,7 +481,7 @@ export default function FinancingAdminApplicationsPage() {
 															href={url}
 															target="_blank"
 															rel="noopener noreferrer"
-															className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface-container-high text-xs font-bold text-on-surface hover:bg-surface-container-highest transition-colors"
+															className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface-container-high text-xs font-semibold text-on-surface hover:bg-surface-container-highest transition-colors"
 														>
 															<span className="material-symbols-outlined text-xs">
 																attach_file
@@ -494,7 +494,7 @@ export default function FinancingAdminApplicationsPage() {
 															href={f.term_sheet_url}
 															target="_blank"
 															rel="noopener noreferrer"
-															className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#FF5A30]/10 text-xs font-bold text-[#FF5A30] hover:bg-[#FF5A30]/20 transition-colors"
+															className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#FF5A30]/10 text-xs font-semibold text-[#FF5A30] hover:bg-[#FF5A30]/20 transition-colors"
 														>
 															<span className="material-symbols-outlined text-xs">
 																open_in_new
@@ -518,7 +518,7 @@ export default function FinancingAdminApplicationsPage() {
 												) : null}
 												{f.note ? (
 													<div className="sm:col-span-2">
-														<p className="text-[10px] uppercase font-bold text-on-surface-variant">
+														<p className="text-[10px] uppercase font-semibold text-on-surface-variant">
 															{t("fields.note")}
 														</p>
 														<p className="text-xs text-on-surface mt-0.5 whitespace-pre-line">
@@ -533,7 +533,7 @@ export default function FinancingAdminApplicationsPage() {
 											<button
 												type="button"
 												onClick={() => selectForReview(f)}
-												className="flex-1 py-2 bg-surface-container-lowest text-on-surface rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 hover:bg-surface-container-high transition-colors"
+												className="flex-1 py-2 bg-surface-container-lowest text-on-surface rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 hover:bg-surface-container-high transition-colors"
 											>
 												<span className="material-symbols-outlined text-sm">
 													rate_review
@@ -545,7 +545,7 @@ export default function FinancingAdminApplicationsPage() {
 													type="button"
 													onClick={() => quickDecision(f, "approved")}
 													disabled={reviewMutation.isPending}
-													className="flex-1 py-2 bg-emerald-50 text-emerald-700 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 hover:bg-emerald-100 transition-colors disabled:opacity-60"
+													className="flex-1 py-2 bg-emerald-50 text-emerald-700 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 hover:bg-emerald-100 transition-colors disabled:opacity-60"
 												>
 													<span className="material-symbols-outlined text-sm">
 														check_circle
@@ -558,7 +558,7 @@ export default function FinancingAdminApplicationsPage() {
 													type="button"
 													onClick={() => quickDecision(f, "rejected")}
 													disabled={reviewMutation.isPending}
-													className="flex-1 py-2 bg-red-50 text-red-700 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 hover:bg-red-100 transition-colors disabled:opacity-60"
+													className="flex-1 py-2 bg-red-50 text-red-700 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 hover:bg-red-100 transition-colors disabled:opacity-60"
 												>
 													<span className="material-symbols-outlined text-sm">
 														cancel
@@ -576,7 +576,7 @@ export default function FinancingAdminApplicationsPage() {
 
 				<div className="space-y-6">
 					<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10">
-						<h3 className="font-(family-name:--font-manrope) font-bold text-base mb-4 pb-4 border-b border-outline-variant/20">
+						<h3 className="font-(family-name:--font-manrope) font-semibold text-base mb-4 pb-4 border-b border-outline-variant/20">
 							{t("reviewForm.title")}
 						</h3>
 						{!selectedId ? (
@@ -592,7 +592,7 @@ export default function FinancingAdminApplicationsPage() {
 								className="space-y-4"
 							>
 								<label className="block">
-									<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+									<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 										{t("reviewForm.fields.decision")}
 									</span>
 									<select
@@ -610,7 +610,7 @@ export default function FinancingAdminApplicationsPage() {
 									</select>
 								</label>
 								<label className="block">
-									<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+									<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 										{t("reviewForm.fields.partner")}
 									</span>
 									<input
@@ -622,7 +622,7 @@ export default function FinancingAdminApplicationsPage() {
 									/>
 								</label>
 								<label className="block">
-									<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+									<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 										{t("reviewForm.fields.termSheet")}
 									</span>
 									<input
@@ -634,7 +634,7 @@ export default function FinancingAdminApplicationsPage() {
 									/>
 								</label>
 								<label className="block">
-									<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+									<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 										{t("reviewForm.fields.note")}
 									</span>
 									<textarea
@@ -661,7 +661,7 @@ export default function FinancingAdminApplicationsPage() {
 								<button
 									type="submit"
 									disabled={reviewMutation.isPending}
-									className="w-full py-3 bg-[#FF5A30] text-white rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-opacity disabled:opacity-60"
+									className="w-full py-3 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-opacity disabled:opacity-60"
 								>
 									{reviewMutation.isPending
 										? t("reviewForm.saving")
@@ -672,7 +672,7 @@ export default function FinancingAdminApplicationsPage() {
 					</div>
 
 					<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10">
-						<h3 className="font-(family-name:--font-manrope) font-bold text-base mb-4 pb-4 border-b border-outline-variant/20">
+						<h3 className="font-(family-name:--font-manrope) font-semibold text-base mb-4 pb-4 border-b border-outline-variant/20">
 							{t("reviewChecklist.title")}
 						</h3>
 						<div className="space-y-3">
@@ -719,7 +719,7 @@ export default function FinancingAdminApplicationsPage() {
 										<p className="text-xs font-black text-[#FF5A30] uppercase tracking-widest mb-0.5">
 											{`EOI-${eoiId.slice(-6).toUpperCase()}`}
 										</p>
-										<p className="font-(family-name:--font-manrope) font-bold text-on-surface">
+										<p className="font-(family-name:--font-manrope) font-semibold text-on-surface">
 											{String(artist?.name ?? "—")}
 											<span className="text-on-surface-variant font-normal text-sm ml-1">— {String(artist?.tour_name ?? "")}</span>
 										</p>
@@ -734,7 +734,7 @@ export default function FinancingAdminApplicationsPage() {
 										href={`/api/eoi-pdf/${encodeURIComponent(eoiId)}?portal=finance`}
 										target="_blank"
 										rel="noopener noreferrer"
-										className="shrink-0 flex items-center gap-2 px-4 py-2.5 bg-purple-50 text-purple-700 rounded-xl text-sm font-bold hover:bg-purple-100 transition-colors"
+										className="shrink-0 flex items-center gap-2 px-4 py-2.5 bg-purple-50 text-purple-700 rounded-xl text-sm font-semibold hover:bg-purple-100 transition-colors"
 									>
 										<span className="material-symbols-outlined text-sm">download</span>
 										{t("eois.downloadPdf")}

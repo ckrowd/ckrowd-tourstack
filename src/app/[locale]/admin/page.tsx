@@ -1,4 +1,4 @@
-import { getTranslations, setRequestLocale } from "next-intl/server";
+﻿import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getAdminEOIs, getAdminTours } from "@/app/actions";
 import PageTour from "@/components/PageTour";
 import { Link } from "@/i18n/routing";
@@ -39,7 +39,7 @@ export default async function AdminPage({ params }: Props) {
 			{/* Header */}
 			<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 				<div>
-					<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
 						Ckrowd Global Live
 					</span>
 					<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -51,7 +51,7 @@ export default async function AdminPage({ params }: Props) {
 				</div>
 				<Link
 					href="/admin/tours/create"
-					className="flex items-center gap-2 px-6 py-3 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-bold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 shrink-0"
+					className="flex items-center gap-2 px-6 py-3 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-semibold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 shrink-0"
 				>
 					<span className="material-symbols-outlined">add</span>
 					{t("createTour")}
@@ -96,7 +96,7 @@ export default async function AdminPage({ params }: Props) {
 						className={`bg-surface-container-lowest p-4 md:p-5 rounded-xl shadow-sm flex flex-col gap-2 md:gap-3 border-l-4 ${s.accent} hover:shadow-md transition-shadow`}
 					>
 						<div className="flex items-center justify-between">
-							<p className="text-[10px] md:text-xs font-bold uppercase tracking-wider text-on-surface-variant">
+							<p className="text-[10px] md:text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
 								{s.label}
 							</p>
 							<span className="material-symbols-outlined text-on-surface-variant text-sm md:text-base">
@@ -114,12 +114,12 @@ export default async function AdminPage({ params }: Props) {
 				{/* Recent Tours Summary */}
 				<div data-tour="admin-recent-tours" className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
 					<div className="flex items-center justify-between mb-5">
-						<h3 className="font-(family-name:--font-manrope) font-bold text-lg">
+						<h3 className="font-(family-name:--font-manrope) font-semibold text-lg">
 							{t("recentTours")}
 						</h3>
 						<Link
 							href="/admin/tours"
-							className="text-sm font-bold text-[#FF5A30] hover:underline"
+							className="text-sm font-semibold text-[#FF5A30] hover:underline"
 						>
 							{t("viewAll")}
 						</Link>
@@ -130,7 +130,7 @@ export default async function AdminPage({ params }: Props) {
 								<span className="material-symbols-outlined text-4xl text-on-surface-variant block mb-3">
 									confirmation_number
 								</span>
-								<p className="font-(family-name:--font-manrope) font-bold text-on-surface mb-1">
+								<p className="font-(family-name:--font-manrope) font-semibold text-on-surface mb-1">
 									{t("noTours")}
 								</p>
 								<p className="text-on-surface-variant text-sm">
@@ -146,7 +146,7 @@ export default async function AdminPage({ params }: Props) {
 									className="flex items-center justify-between gap-4 py-3 border-b border-outline-variant/10 last:border-none"
 								>
 									<div className="flex-1 min-w-0">
-										<p className="text-sm font-bold text-on-surface truncate">
+										<p className="text-sm font-semibold text-on-surface truncate">
 											{String(tArtist?.name ?? tArtist?.tour_name ?? "Tour")}
 										</p>
 										<p className="text-xs text-on-surface-variant mt-0.5">
@@ -172,12 +172,12 @@ export default async function AdminPage({ params }: Props) {
 				{/* Recent EOIs Summary */}
 				<div data-tour="admin-recent-eois" className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
 					<div className="flex items-center justify-between mb-5">
-						<h3 className="font-(family-name:--font-manrope) font-bold text-lg">
+						<h3 className="font-(family-name:--font-manrope) font-semibold text-lg">
 							{t("recentEois")}
 						</h3>
 						<Link
 							href="/admin/eoi"
-							className="text-sm font-bold text-[#FF5A30] hover:underline"
+							className="text-sm font-semibold text-[#FF5A30] hover:underline"
 						>
 							{t("viewAll")}
 						</Link>
@@ -188,7 +188,7 @@ export default async function AdminPage({ params }: Props) {
 								<span className="material-symbols-outlined text-4xl text-on-surface-variant block mb-3">
 									send
 								</span>
-								<p className="font-(family-name:--font-manrope) font-bold text-on-surface mb-1">
+								<p className="font-(family-name:--font-manrope) font-semibold text-on-surface mb-1">
 									{t("noEois")}
 								</p>
 							</div>
@@ -210,7 +210,7 @@ export default async function AdminPage({ params }: Props) {
 									className="flex items-center justify-between gap-4 py-3 border-b border-outline-variant/10 last:border-none"
 								>
 									<div className="flex-1 min-w-0">
-										<p className="text-sm font-bold text-on-surface truncate">
+										<p className="text-sm font-semibold text-on-surface truncate">
 											{String(eoiArtist?.name ?? "Artist")}
 										</p>
 										<p className="text-xs text-on-surface-variant mt-0.5">

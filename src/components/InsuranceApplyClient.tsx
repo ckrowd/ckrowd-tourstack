@@ -48,16 +48,16 @@ export default function InsuranceApplyClient({ tours, applications, locale }: Pr
 			: null;
 
 	const selectClass = "w-full rounded-xl border border-outline-variant/20 bg-surface-container-lowest px-4 py-3 text-sm font-medium text-on-surface outline-none transition focus:ring-2 focus:ring-[#FF5A30]/20 appearance-none";
-	const labelClass = "mb-2 block text-xs font-bold uppercase tracking-[0.22em] text-on-surface-variant";
+	const labelClass = "mb-2 block text-xs font-semibold uppercase tracking-[0.22em] text-on-surface-variant";
 
 	return (
 		<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
 			{/* Header */}
 			<div className="mb-8">
-				<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
 					{t("promoterPortal")}
 				</span>
-				<h1 className="text-3xl font-bold font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
+				<h1 className="text-3xl font-semibold font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
 					{t("title")}
 				</h1>
 				<p className="text-on-surface-variant font-medium max-w-xl">
@@ -92,7 +92,7 @@ export default function InsuranceApplyClient({ tours, applications, locale }: Pr
 
 			{/* Apply form */}
 			<div className="bg-surface-container-lowest rounded-2xl p-8 shadow-sm mb-10">
-				<h2 className="font-(family-name:--font-manrope) font-bold text-xl text-on-surface mb-6">
+				<h2 className="font-(family-name:--font-manrope) font-semibold text-xl text-on-surface mb-6">
 					{t("applyTitle")}
 				</h2>
 				<form
@@ -183,7 +183,7 @@ export default function InsuranceApplyClient({ tours, applications, locale }: Pr
 							{t("fields.sumInsured")}
 						</label>
 						<div className="flex items-center gap-2">
-							<span className="text-sm font-bold text-on-surface-variant w-10 shrink-0 text-center">
+							<span className="text-sm font-semibold text-on-surface-variant w-10 shrink-0 text-center">
 								USD
 							</span>
 							<input
@@ -209,7 +209,7 @@ export default function InsuranceApplyClient({ tours, applications, locale }: Pr
 					<button
 						type="submit"
 						disabled={applyMutation.isPending}
-						className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:opacity-60"
+						className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:opacity-60"
 					>
 						{applyMutation.isPending ? t("actions.submitting") : t("actions.submit")}
 					</button>
@@ -218,7 +218,7 @@ export default function InsuranceApplyClient({ tours, applications, locale }: Pr
 
 			{/* Applications list */}
 			<div>
-				<h2 className="font-(family-name:--font-manrope) text-xl font-bold text-on-surface mb-5">
+				<h2 className="font-(family-name:--font-manrope) text-xl font-semibold text-on-surface mb-5">
 					{t("myApplications")}
 				</h2>
 				{applications.length === 0 ? (
@@ -226,7 +226,7 @@ export default function InsuranceApplyClient({ tours, applications, locale }: Pr
 						<span className="material-symbols-outlined text-4xl text-on-surface-variant block mb-3">
 							shield
 						</span>
-						<p className="text-sm font-bold text-on-surface-variant">
+						<p className="text-sm font-semibold text-on-surface-variant">
 							{t("noApplications")}
 						</p>
 					</div>
@@ -247,7 +247,7 @@ export default function InsuranceApplyClient({ tours, applications, locale }: Pr
 								>
 									<div className="flex items-start justify-between gap-4 mb-4">
 										<div>
-											<p className="font-(family-name:--font-manrope) font-bold text-on-surface">
+											<p className="font-(family-name:--font-manrope) font-semibold text-on-surface">
 												{String(app.product ?? t("application"))}
 											</p>
 											<p className="text-sm text-on-surface-variant mt-0.5">
@@ -260,19 +260,19 @@ export default function InsuranceApplyClient({ tours, applications, locale }: Pr
 									</div>
 									<div className="grid grid-cols-2 gap-3">
 										<div className="p-3 bg-surface-container-low rounded-lg">
-											<p className="text-[10px] uppercase font-bold text-on-surface-variant mb-1">
+											<p className="text-[10px] uppercase font-semibold text-on-surface-variant mb-1">
 												{t("sumInsured")}
 											</p>
-											<p className="font-bold text-on-surface">
+											<p className="font-semibold text-on-surface">
 												{String(app.currency ?? "USD")}{" "}
 												{Number(app.amount_requested).toLocaleString(locale)}
 											</p>
 										</div>
 										<div className="p-3 bg-surface-container-low rounded-lg">
-											<p className="text-[10px] uppercase font-bold text-on-surface-variant mb-1">
+											<p className="text-[10px] uppercase font-semibold text-on-surface-variant mb-1">
 												{t("appliedOn")}
 											</p>
-											<p className="font-bold text-on-surface">
+											<p className="font-semibold text-on-surface">
 												{app.created_at
 													? new Date(String(app.created_at)).toLocaleDateString(locale, { month: "short", day: "numeric", year: "numeric" })
 													: "—"}

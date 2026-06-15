@@ -293,7 +293,7 @@ export default function TopNav() {
 							<button
 								type="button"
 								onClick={() => setLangOpen((v) => !v)}
-								className="flex items-center gap-0.5 text-xs font-bold px-2 py-1 rounded-md border border-slate-200 hover:bg-slate-50 transition-colors uppercase"
+								className="flex items-center gap-0.5 text-xs font-semibold px-2 py-1 rounded-md border border-slate-200 hover:bg-slate-50 transition-colors uppercase"
 								aria-haspopup="listbox"
 								aria-expanded={langOpen}
 							>
@@ -326,7 +326,7 @@ export default function TopNav() {
 													});
 													setLangOpen(false);
 												}}
-												className={`flex items-center justify-between w-full px-3 py-2 text-xs font-bold uppercase hover:bg-slate-50 transition-colors ${locale === l ? "text-[#FF5A30]" : "text-slate-600"}`}
+												className={`flex items-center justify-between w-full px-3 py-2 text-xs font-semibold uppercase hover:bg-slate-50 transition-colors ${locale === l ? "text-[#FF5A30]" : "text-slate-600"}`}
 											>
 												{l.toUpperCase()}
 												{locale === l && (
@@ -384,7 +384,7 @@ export default function TopNav() {
 									aria-label={t("openProfileMenu")}
 									aria-expanded={profileOpen}
 									onClick={() => setProfileOpen((v) => !v)}
-									className="h-8 w-8 rounded-full bg-[#FF5A30] flex items-center justify-center text-white text-xs font-bold select-none hover:opacity-90 transition-opacity active:scale-95"
+									className="h-8 w-8 rounded-full bg-[#FF5A30] flex items-center justify-center text-white text-xs font-semibold select-none hover:opacity-90 transition-opacity active:scale-95"
 								>
 									{userInitial}
 								</button>
@@ -446,7 +446,7 @@ export default function TopNav() {
 						) : (
 							<Link
 								href="/login"
-								className="hidden lg:inline-flex px-4 py-2 bg-[#FF5A30] text-white text-sm font-bold rounded-xl hover:opacity-90 transition-opacity"
+								className="hidden lg:inline-flex px-4 py-2 bg-[#FF5A30] text-white text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity"
 							>
 								{tCommon("signIn")}
 							</Link>
@@ -529,7 +529,7 @@ export default function TopNav() {
 										});
 										setMobileMenuOpen(false);
 									}}
-										className={`flex-1 py-2 rounded-lg text-xs font-bold uppercase transition-colors ${
+										className={`flex-1 py-2 rounded-lg text-xs font-semibold uppercase transition-colors ${
 											locale === l
 												? "bg-[#FF5A30] text-white"
 												: "bg-slate-100 text-slate-600 hover:bg-slate-200"
@@ -612,7 +612,7 @@ export default function TopNav() {
 										</span>
 										<span>{t("notifications")}</span>
 										{hasUnread && (
-											<span className="ml-auto min-w-5 h-5 px-1 rounded-full bg-[#FF5A30] text-white text-[10px] flex items-center justify-center font-bold">
+											<span className="ml-auto min-w-5 h-5 px-1 rounded-full bg-[#FF5A30] text-white text-[10px] flex items-center justify-center font-semibold">
 												{unreadCount}
 											</span>
 										)}
@@ -661,7 +661,7 @@ export default function TopNav() {
 								<Link
 									href="/login"
 									onClick={() => setMobileMenuOpen(false)}
-									className="flex items-center justify-center gap-2 w-full py-3 bg-[#FF5A30] text-white rounded-xl font-bold text-sm font-(family-name:--font-manrope) hover:opacity-90 transition-opacity"
+									className="flex items-center justify-center gap-2 w-full py-3 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm font-(family-name:--font-manrope) hover:opacity-90 transition-opacity"
 								>
 									<span className="material-symbols-outlined text-sm">
 										login
@@ -690,11 +690,11 @@ export default function TopNav() {
 					>
 						<div className="flex items-center justify-between px-5 py-4 border-b border-slate-100">
 							<div className="flex items-center gap-2">
-								<h3 className="font-(family-name:--font-manrope) font-bold text-sm text-slate-900">
+								<h3 className="font-(family-name:--font-manrope) font-semibold text-sm text-slate-900">
 									{t("notifications")}
 								</h3>
 								{hasUnread && (
-									<span className="min-w-[18px] h-[18px] px-1 rounded-full bg-[#FF5A30] text-white text-[10px] flex items-center justify-center font-bold">
+									<span className="min-w-[18px] h-[18px] px-1 rounded-full bg-[#FF5A30] text-white text-[10px] flex items-center justify-center font-semibold">
 										{unreadCount}
 									</span>
 								)}
@@ -728,7 +728,7 @@ export default function TopNav() {
 													{n.icon}
 												</span>
 												<div className="flex-1 min-w-0">
-													<p className={`text-sm text-slate-900 truncate ${n.unread ? "font-bold" : "font-semibold"}`}>
+													<p className={`text-sm text-slate-900 truncate ${n.unread ? "font-semibold" : "font-semibold"}`}>
 														{n.title}
 													</p>
 													<p className="text-xs text-slate-500 mt-0.5">{n.body}</p>

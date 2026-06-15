@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useFormatter, useTranslations } from "next-intl";
@@ -182,7 +182,7 @@ export default function ArtmgmtSubmissionsPage() {
 			{/* Header */}
 			<div className="mb-6 flex items-start justify-between gap-4 flex-wrap">
 				<div>
-					<span className="inline-block px-3 py-1 rounded-full bg-[#FF5A30]/10 text-[#FF5A30] text-xs font-bold uppercase tracking-wider mb-3">
+					<span className="inline-block px-3 py-1 rounded-full bg-[#FF5A30]/10 text-[#FF5A30] text-xs font-semibold uppercase tracking-wider mb-3">
 						{t("badge")}
 					</span>
 					<h1 className="font-(family-name:--font-manrope) text-3xl font-black text-on-surface">
@@ -193,7 +193,7 @@ export default function ArtmgmtSubmissionsPage() {
 				<button
 					type="button"
 					onClick={openAdd}
-					className="flex items-center gap-2 px-5 py-2.5 bg-[#FF5A30] text-white rounded-xl font-bold text-sm hover:bg-[#e04e27] transition-colors shadow-md shadow-[#FF5A30]/20"
+					className="flex items-center gap-2 px-5 py-2.5 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm hover:bg-[#e04e27] transition-colors shadow-md shadow-[#FF5A30]/20"
 				>
 					<span className="material-symbols-outlined text-sm">add</span>
 					{t("newPitch")}
@@ -248,7 +248,7 @@ export default function ArtmgmtSubmissionsPage() {
 			) : pitches.length === 0 ? (
 				<div className="flex flex-col items-center justify-center py-24 text-center">
 					<span className="material-symbols-outlined text-5xl mb-4 text-slate-300">send</span>
-					<p className="font-bold text-lg text-on-surface">{t("noPitches")}</p>
+					<p className="font-semibold text-lg text-on-surface">{t("noPitches")}</p>
 					<p className="text-sm text-on-surface-variant mt-1">{t("noPitchesHint")}</p>
 				</div>
 			) : (
@@ -269,7 +269,7 @@ export default function ArtmgmtSubmissionsPage() {
 									{/* Main info */}
 									<div className="flex-1 min-w-0">
 										<div className="flex items-center gap-2 flex-wrap">
-											<p className="font-bold text-slate-900">
+											<p className="font-semibold text-slate-900">
 												{String(pitch.roster_artist.name)}
 											</p>
 											<span className="text-slate-300">·</span>
@@ -294,7 +294,7 @@ export default function ArtmgmtSubmissionsPage() {
 									{/* Status badge + date */}
 									<div className="flex flex-col items-end gap-2 shrink-0">
 										<span
-											className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-bold ${STATUS_STYLES[status] ?? STATUS_STYLES.pending}`}
+											className={`flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold ${STATUS_STYLES[status] ?? STATUS_STYLES.pending}`}
 										>
 											<span className="material-symbols-outlined text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>
 												{STATUS_ICONS[status] ?? STATUS_ICONS.pending}
@@ -442,14 +442,14 @@ export default function ArtmgmtSubmissionsPage() {
 								<button
 									type="submit"
 									disabled={isBusy}
-									className="flex-1 py-3 bg-[#FF5A30] text-white rounded-xl font-bold text-sm hover:bg-[#e04e27] disabled:opacity-60 transition-colors"
+									className="flex-1 py-3 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm hover:bg-[#e04e27] disabled:opacity-60 transition-colors"
 								>
 									{isBusy ? t("form.saving") : t("form.save")}
 								</button>
 								<button
 									type="button"
 									onClick={closeForm}
-									className="flex-1 py-3 bg-slate-100 text-slate-700 rounded-xl font-bold text-sm hover:bg-slate-200 transition-colors"
+									className="flex-1 py-3 bg-slate-100 text-slate-700 rounded-xl font-semibold text-sm hover:bg-slate-200 transition-colors"
 								>
 									{t("form.cancel")}
 								</button>
@@ -466,7 +466,7 @@ export default function ArtmgmtSubmissionsPage() {
 						<span className="material-symbols-outlined text-rose-500 text-4xl mb-3 block">
 							delete_forever
 						</span>
-						<p className="font-bold text-slate-900 mb-4">{t("confirmDelete")}</p>
+						<p className="font-semibold text-slate-900 mb-4">{t("confirmDelete")}</p>
 						<div className="flex gap-3">
 							<button
 								type="button"
@@ -474,14 +474,14 @@ export default function ArtmgmtSubmissionsPage() {
 									deleteMutation.mutate(confirmDeleteId);
 									setConfirmDeleteId(null);
 								}}
-								className="flex-1 py-3 bg-rose-500 text-white rounded-xl font-bold text-sm hover:bg-rose-600 transition-colors"
+								className="flex-1 py-3 bg-rose-500 text-white rounded-xl font-semibold text-sm hover:bg-rose-600 transition-colors"
 							>
 								{t("delete")}
 							</button>
 							<button
 								type="button"
 								onClick={() => setConfirmDeleteId(null)}
-								className="flex-1 py-3 bg-slate-100 text-slate-700 rounded-xl font-bold text-sm hover:bg-slate-200 transition-colors"
+								className="flex-1 py-3 bg-slate-100 text-slate-700 rounded-xl font-semibold text-sm hover:bg-slate-200 transition-colors"
 							>
 								{t("form.cancel")}
 							</button>

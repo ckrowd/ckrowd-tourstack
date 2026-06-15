@@ -40,7 +40,7 @@ function Label({
 	return (
 		<label
 			htmlFor={htmlFor}
-			className="mb-2 block text-xs font-bold uppercase tracking-[0.24em] text-slate-500"
+			className="mb-2 block text-xs font-semibold uppercase tracking-[0.24em] text-slate-500"
 		>
 			{children}
 		</label>
@@ -73,7 +73,7 @@ function Stepper({
 							className="relative z-10 flex flex-col items-center"
 						>
 							<div
-								className={`flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-full ring-4 ring-[#f6f4ef] font-bold text-sm ${
+								className={`flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-full ring-4 ring-[#f6f4ef] font-semibold text-sm ${
 									done || active
 										? "bg-[#FF5A30] text-white"
 										: "bg-slate-200 text-slate-500"
@@ -91,7 +91,7 @@ function Stepper({
 								)}
 							</div>
 							<span
-								className={`mt-1.5 text-[9px] md:text-[10px] font-bold uppercase tracking-wider hidden sm:block ${
+								className={`mt-1.5 text-[9px] md:text-[10px] font-semibold uppercase tracking-wider hidden sm:block ${
 									active
 										? "text-[#FF5A30]"
 										: done
@@ -131,7 +131,7 @@ function ReviewRow({
 			: value;
 	return (
 		<div className="flex items-start gap-4 border-b border-slate-100 py-3 last:border-none">
-			<span className="mt-0.5 w-28 sm:w-40 shrink-0 text-xs font-bold uppercase tracking-[0.24em] text-slate-400">
+			<span className="mt-0.5 w-28 sm:w-40 shrink-0 text-xs font-semibold uppercase tracking-[0.24em] text-slate-400">
 				{label}
 			</span>
 			<span className="text-sm font-semibold text-slate-900">{display}</span>
@@ -167,7 +167,7 @@ function OpportunitySelector({
 
 	return (
 		<div className="rounded-2xl border border-slate-200 bg-white shadow-sm p-5">
-			<p className="text-[10px] font-bold uppercase tracking-[0.24em] text-slate-500 mb-3">
+			<p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-slate-500 mb-3">
 				{t("selector.heading")}
 			</p>
 			<div className="relative mb-3">
@@ -218,7 +218,7 @@ function OpportunitySelector({
 								</div>
 								<div className="flex-1 min-w-0">
 									<p
-										className={`text-sm font-bold truncate ${isSelected ? "text-[#FF5A30]" : "text-slate-900"}`}
+										className={`text-sm font-semibold truncate ${isSelected ? "text-[#FF5A30]" : "text-slate-900"}`}
 									>
 										{String(a.name ?? "")}
 									</p>
@@ -229,7 +229,7 @@ function OpportunitySelector({
 									)}
 								</div>
 								{a.genre && (
-									<span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 shrink-0">
+									<span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 shrink-0">
 										{String(a.genre)}
 									</span>
 								)}
@@ -268,10 +268,10 @@ function OpportunityPanel({
 	return (
 		<div className="rounded-2xl border border-slate-200 bg-white shadow-sm p-5 space-y-4">
 			<div>
-				<p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#FF5A30] mb-1">
+				<p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#FF5A30] mb-1">
 					{t("tourPanel.heading")}
 				</p>
-				<h2 className="text-lg font-(family-name:--font-manrope) font-bold text-slate-950 leading-tight">
+				<h2 className="text-lg font-(family-name:--font-manrope) font-semibold text-slate-950 leading-tight">
 					{String(artist.tour_name ?? artist.name ?? "")}
 				</h2>
 				<p className="mt-0.5 text-sm font-semibold text-slate-500">
@@ -282,7 +282,7 @@ function OpportunityPanel({
 			<div className="space-y-2.5">
 				{artist.genre && (
 					<div>
-						<p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+						<p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
 							{t("tourPanel.genre")}
 						</p>
 						<p className="text-sm font-semibold text-slate-800 mt-0.5">
@@ -292,7 +292,7 @@ function OpportunityPanel({
 				)}
 				{dateRange && (
 					<div>
-						<p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+						<p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
 							{t("tourPanel.dates")}
 						</p>
 						<p className="text-sm font-semibold text-slate-800 mt-0.5">
@@ -302,7 +302,7 @@ function OpportunityPanel({
 				)}
 				{markets && (
 					<div>
-						<p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+						<p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
 							{t("tourPanel.markets")}
 						</p>
 						<p className="text-sm font-semibold text-slate-800 mt-0.5">
@@ -312,7 +312,7 @@ function OpportunityPanel({
 				)}
 				{feeRange && (
 					<div>
-						<p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+						<p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
 							{t("tourPanel.fee")}
 						</p>
 						<p className="text-sm font-semibold text-slate-800 mt-0.5">
@@ -322,7 +322,7 @@ function OpportunityPanel({
 				)}
 				{artist.region && (
 					<div>
-						<p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+						<p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">
 							{t("tourPanel.region")}
 						</p>
 						<p className="text-sm font-semibold text-slate-800 mt-0.5">
@@ -480,7 +480,7 @@ function EOIPageContent() {
 								check_circle
 							</span>
 						</div>
-						<h1 className="text-3xl font-bold tracking-tight text-slate-950 font-(family-name:--font-manrope)">
+						<h1 className="text-3xl font-semibold tracking-tight text-slate-950 font-(family-name:--font-manrope)">
 							{t("success.title")}
 						</h1>
 						<p className="mt-4 text-sm leading-6 text-slate-600">
@@ -491,13 +491,13 @@ function EOIPageContent() {
 						<div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
 							<Link
 								href="/dashboard"
-								className="inline-flex items-center justify-center rounded-full bg-[#FF5A30] px-6 py-3 text-sm font-bold text-white transition hover:opacity-90"
+								className="inline-flex items-center justify-center rounded-full bg-[#FF5A30] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90"
 							>
 								{t("success.viewDashboard")}
 							</Link>
 							<Link
 								href="/discovery"
-								className="inline-flex items-center justify-center rounded-full border border-slate-200 px-6 py-3 text-sm font-bold text-slate-700 transition hover:bg-slate-50"
+								className="inline-flex items-center justify-center rounded-full border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
 							>
 								{t("success.backToDiscovery")}
 							</Link>
@@ -513,10 +513,10 @@ function EOIPageContent() {
 			<PageTour pageId="eoi" />
 			<div className="w-full">
 				<header className="mb-8">
-					<span className="mb-2 block text-xs font-bold uppercase tracking-[0.3em] text-[#FF5A30]">
+					<span className="mb-2 block text-xs font-semibold uppercase tracking-[0.3em] text-[#FF5A30]">
 						{t("hero.platform")}
 					</span>
-					<h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-4xl font-(family-name:--font-manrope)">
+					<h1 className="text-3xl font-semibold tracking-tight text-slate-950 md:text-4xl font-(family-name:--font-manrope)">
 						{t("hero.title")}
 					</h1>
 					<p className="mt-3 text-base leading-relaxed text-slate-600">
@@ -543,7 +543,7 @@ function EOIPageContent() {
 								<span className="material-symbols-outlined text-5xl text-slate-300 block mb-4">
 									confirmation_number
 								</span>
-								<p className="text-base font-bold text-slate-400">
+								<p className="text-base font-semibold text-slate-400">
 									{t("selector.selectPrompt")}
 								</p>
 							</div>
@@ -705,7 +705,7 @@ function EOIPageContent() {
 														<button
 															type="button"
 															onClick={() => updateField("venues", [...form.venues, ""])}
-															className="text-xs font-bold text-[#FF5A30] hover:underline"
+															className="text-xs font-semibold text-[#FF5A30] hover:underline"
 														>
 															{form.venues.length === 0
 																? t("form.venues.addFirst")
@@ -723,7 +723,7 @@ function EOIPageContent() {
 											<div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
 												<div className="flex items-start justify-between gap-4">
 													<div className="flex-1">
-														<p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-500 mb-1">
+														<p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500 mb-1">
 															{t("form.finance.label")}
 														</p>
 														<p className="text-sm font-semibold text-slate-900">
@@ -733,7 +733,7 @@ function EOIPageContent() {
 															{t("form.finance.description")}
 														</p>
 													</div>
-													<div className="flex shrink-0 rounded-xl border border-slate-200 overflow-hidden text-sm font-bold">
+													<div className="flex shrink-0 rounded-xl border border-slate-200 overflow-hidden text-sm font-semibold">
 														<button
 															type="button"
 															role="switch"
@@ -768,7 +768,7 @@ function EOIPageContent() {
 											<div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
 												<div className="flex items-start justify-between gap-4">
 													<div className="flex-1">
-														<p className="text-xs font-bold uppercase tracking-[0.24em] text-slate-500 mb-1">
+														<p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500 mb-1">
 															{t("form.insurance.label")}
 														</p>
 														<p className="text-sm font-semibold text-slate-900">
@@ -778,7 +778,7 @@ function EOIPageContent() {
 															{t("form.insurance.description")}
 														</p>
 													</div>
-													<div className="flex shrink-0 rounded-xl border border-slate-200 overflow-hidden text-sm font-bold">
+													<div className="flex shrink-0 rounded-xl border border-slate-200 overflow-hidden text-sm font-semibold">
 														<button
 															type="button"
 															role="switch"
@@ -813,7 +813,7 @@ function EOIPageContent() {
 
 									{step === 3 && (
 										<div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
-											<h3 className="text-lg font-bold tracking-tight text-slate-950 font-(family-name:--font-manrope)">
+											<h3 className="text-lg font-semibold tracking-tight text-slate-950 font-(family-name:--font-manrope)">
 												{t("review.title")}
 											</h3>
 											<div className="mt-4 divide-y divide-slate-100 rounded-2xl bg-white p-4 shadow-sm">
@@ -892,21 +892,21 @@ function EOIPageContent() {
 												setStep((current) => Math.max(0, current - 1))
 											}
 											disabled={step === 0}
-											className="rounded-full border border-slate-200 px-5 py-3 text-sm font-bold text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
+											className="rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50"
 										>
 											{t("actions.back")}
 										</button>
 										<div className="flex flex-wrap items-center gap-3">
 											<Link
 												href="/discovery"
-												className="rounded-full border border-slate-200 px-5 py-3 text-sm font-bold text-slate-700 transition hover:bg-slate-50"
+												className="rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
 											>
 												{t("actions.cancel")}
 											</Link>
 											<button
 												type="submit"
 												disabled={submitting}
-												className="rounded-full bg-[#FF5A30] px-6 py-3 text-sm font-bold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+												className="rounded-full bg-[#FF5A30] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
 											>
 												{submitting
 													? t("actions.submitting")

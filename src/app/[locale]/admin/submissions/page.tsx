@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useQuery } from "@tanstack/react-query";
 import { useFormatter, useTranslations } from "next-intl";
@@ -73,7 +73,7 @@ export default function AdminSubmissionsPage() {
 		<div>
 			{/* Header */}
 			<div className="mb-8">
-				<span className="inline-block px-3 py-1 rounded-full bg-[#FF5A30]/10 text-[#FF5A30] text-xs font-bold uppercase tracking-wider mb-3">
+				<span className="inline-block px-3 py-1 rounded-full bg-[#FF5A30]/10 text-[#FF5A30] text-xs font-semibold uppercase tracking-wider mb-3">
 					{t("badge")}
 				</span>
 				<h1 className="font-(family-name:--font-manrope) text-3xl font-black text-on-surface">
@@ -108,7 +108,7 @@ export default function AdminSubmissionsPage() {
 					<span className="material-symbols-outlined text-5xl mb-4 text-slate-300">
 						folder_open
 					</span>
-					<p className="font-bold text-lg">{t("empty")}</p>
+					<p className="font-semibold text-lg">{t("empty")}</p>
 					<p className="text-sm mt-1">{t("emptyHint")}</p>
 				</div>
 			) : (

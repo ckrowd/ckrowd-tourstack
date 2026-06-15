@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
 	getEOIs,
@@ -129,7 +129,7 @@ export default async function DashboardPage({ params }: Props) {
 					{/* Header */}
 					<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 						<div>
-							<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
 								{t("promoterPortal")}
 							</span>
 							<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -143,7 +143,7 @@ export default async function DashboardPage({ params }: Props) {
 							<span className="material-symbols-outlined text-tertiary-container ml-2">
 								calendar_month
 							</span>
-							<span className="font-(family-name:--font-manrope) font-bold text-sm pr-4">
+							<span className="font-(family-name:--font-manrope) font-semibold text-sm pr-4">
 								{t("touringSeason")}: {t("touringSeasonYears")}
 							</span>
 						</div>
@@ -160,7 +160,7 @@ export default async function DashboardPage({ params }: Props) {
 									payments
 								</span>
 								<div>
-									<p className="font-(family-name:--font-manrope) font-bold text-amber-900 text-sm">
+									<p className="font-(family-name:--font-manrope) font-semibold text-amber-900 text-sm">
 										{t("financePrompt.title")}
 									</p>
 									<p className="text-xs text-amber-800 mt-0.5">
@@ -170,7 +170,7 @@ export default async function DashboardPage({ params }: Props) {
 							</div>
 							<Link
 								href="/financing"
-								className="bg-[#FF5A30] text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:opacity-90 transition-all shrink-0"
+								className="bg-[#FF5A30] text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-all shrink-0"
 							>
 								{t("financePrompt.cta")}
 							</Link>
@@ -186,7 +186,7 @@ export default async function DashboardPage({ params }: Props) {
 									shield
 								</span>
 								<div>
-									<p className="font-(family-name:--font-manrope) font-bold text-blue-900 text-sm">
+									<p className="font-(family-name:--font-manrope) font-semibold text-blue-900 text-sm">
 										{t("insurancePrompt.title")}
 									</p>
 									<p className="text-xs text-blue-800 mt-0.5">
@@ -196,7 +196,7 @@ export default async function DashboardPage({ params }: Props) {
 							</div>
 							<Link
 								href="/insurance"
-								className="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-bold hover:opacity-90 transition-all shrink-0"
+								className="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-all shrink-0"
 							>
 								{t("insurancePrompt.cta")}
 							</Link>
@@ -205,7 +205,7 @@ export default async function DashboardPage({ params }: Props) {
 					{/* Tour Progress Tracker */}
 					<div className="bg-surface-container-lowest rounded-xl p-4 md:p-6 shadow-sm mb-10">
 						<div className="flex items-center justify-between mb-4 gap-2">
-							<h2 className="font-(family-name:--font-manrope) font-bold text-sm md:text-base truncate">
+							<h2 className="font-(family-name:--font-manrope) font-semibold text-sm md:text-base truncate">
 								{progressTitle}
 							</h2>
 							<span
@@ -226,7 +226,7 @@ export default async function DashboardPage({ params }: Props) {
 										className="relative z-10 flex flex-col items-center gap-1.5"
 									>
 										<div
-											className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-bold text-xs md:text-sm ring-4 ring-surface-container-lowest transition-all ${
+											className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-semibold text-xs md:text-sm ring-4 ring-surface-container-lowest transition-all ${
 												s.done
 													? "bg-[#FF5A30] text-white"
 													: "bg-surface-variant text-on-surface-variant"
@@ -243,7 +243,7 @@ export default async function DashboardPage({ params }: Props) {
 												s.n
 											)}
 										</div>
-										<span className="text-[9px] md:text-[10px] font-bold uppercase tracking-wide text-center w-14 leading-tight text-on-surface-variant">
+										<span className="text-[9px] md:text-[10px] font-semibold uppercase tracking-wide text-center w-14 leading-tight text-on-surface-variant">
 											{s.label}
 										</span>
 									</div>
@@ -271,7 +271,7 @@ export default async function DashboardPage({ params }: Props) {
 										? dashData.stats.totalEOIs
 										: eois.length}
 								</span>
-								<span className="text-[#FF5A30] font-bold flex items-center text-xs md:text-sm">
+								<span className="text-[#FF5A30] font-semibold flex items-center text-xs md:text-sm">
 									{t("stats.newThisMonth", { count: newEoisThisMonth })}
 								</span>
 							</div>
@@ -287,7 +287,7 @@ export default async function DashboardPage({ params }: Props) {
 										? dashData.stats.approvedEOIs
 										: 0}
 								</span>
-								<span className="text-emerald-600 font-bold text-xs md:text-sm">
+								<span className="text-emerald-600 font-semibold text-xs md:text-sm">
 									{t("stats.confirmed")}
 								</span>
 							</div>
@@ -303,7 +303,7 @@ export default async function DashboardPage({ params }: Props) {
 										? `$${Math.round(Number(latestFinancing.amount_requested) / 1000)}K`
 										: "—"}
 								</span>
-								<span className="text-tertiary-container font-bold text-xs md:text-sm capitalize">
+								<span className="text-tertiary-container font-semibold text-xs md:text-sm capitalize">
 									{latestFinancing
 										? t(
 												`statuses.${String(latestFinancing.status ?? "pending")}`,
@@ -360,12 +360,12 @@ export default async function DashboardPage({ params }: Props) {
 					<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 						<div data-tour="dashboard-eois" className="lg:col-span-2 space-y-6">
 							<div className="flex items-center justify-between">
-								<h2 className="text-2xl font-(family-name:--font-manrope) font-bold text-on-surface">
+								<h2 className="text-2xl font-(family-name:--font-manrope) font-semibold text-on-surface">
 									{t("myEoiSubmissions")}
 								</h2>
 								<Link
 									href="/eoi"
-									className="text-sm font-bold text-[#FF5A30] flex items-center gap-1 hover:underline"
+									className="text-sm font-semibold text-[#FF5A30] flex items-center gap-1 hover:underline"
 								>
 									{t("newEoi")}{" "}
 									<span className="material-symbols-outlined text-sm">add</span>
@@ -376,16 +376,16 @@ export default async function DashboardPage({ params }: Props) {
 								<table className="w-full text-left border-collapse">
 									<thead>
 										<tr className="bg-surface-container-high">
-											<th className="px-3 md:px-5 py-3 md:py-4 text-[10px] md:text-xs font-bold uppercase tracking-widest text-on-surface-variant">
+											<th className="px-3 md:px-5 py-3 md:py-4 text-[10px] md:text-xs font-semibold uppercase tracking-widest text-on-surface-variant">
 												{t("table.artistTour")}
 											</th>
-											<th className="px-3 md:px-5 py-3 md:py-4 text-[10px] md:text-xs font-bold uppercase tracking-widest text-on-surface-variant hidden md:table-cell">
+											<th className="px-3 md:px-5 py-3 md:py-4 text-[10px] md:text-xs font-semibold uppercase tracking-widest text-on-surface-variant hidden md:table-cell">
 												{t("table.venue")}
 											</th>
-											<th className="px-3 md:px-5 py-3 md:py-4 text-[10px] md:text-xs font-bold uppercase tracking-widest text-on-surface-variant">
+											<th className="px-3 md:px-5 py-3 md:py-4 text-[10px] md:text-xs font-semibold uppercase tracking-widest text-on-surface-variant">
 												{t("table.status")}
 											</th>
-											<th className="px-3 md:px-5 py-3 md:py-4 text-[10px] md:text-xs font-bold uppercase tracking-widest text-on-surface-variant text-right hidden sm:table-cell">
+											<th className="px-3 md:px-5 py-3 md:py-4 text-[10px] md:text-xs font-semibold uppercase tracking-widest text-on-surface-variant text-right hidden sm:table-cell">
 												{t("table.match")}
 											</th>
 										</tr>
@@ -397,7 +397,7 @@ export default async function DashboardPage({ params }: Props) {
 													<span className="material-symbols-outlined text-4xl text-on-surface-variant block mb-3">
 														confirmation_number
 													</span>
-													<p className="font-(family-name:--font-manrope) font-bold text-on-surface-variant text-sm">
+													<p className="font-(family-name:--font-manrope) font-semibold text-on-surface-variant text-sm">
 														{t("table.noEois")}
 													</p>
 													<p className="text-xs text-on-surface-variant mt-1">
@@ -405,7 +405,7 @@ export default async function DashboardPage({ params }: Props) {
 													</p>
 													<Link
 														href="/discovery"
-														className="inline-flex items-center gap-1 mt-4 text-sm font-bold text-[#FF5A30] hover:underline"
+														className="inline-flex items-center gap-1 mt-4 text-sm font-semibold text-[#FF5A30] hover:underline"
 													>
 														<span className="material-symbols-outlined text-sm">
 															search
@@ -448,7 +448,7 @@ export default async function DashboardPage({ params }: Props) {
 																	)}
 																</div>
 																<div>
-																	<span className="block font-(family-name:--font-manrope) font-bold text-on-surface text-sm">
+																	<span className="block font-(family-name:--font-manrope) font-semibold text-on-surface text-sm">
 																		{String(reqArtist?.name ?? "Artist")}
 																	</span>
 																	<span className="block text-xs text-on-surface-variant">
@@ -490,7 +490,7 @@ export default async function DashboardPage({ params }: Props) {
 							{/* Financing Widget */}
 							<div className="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
 								<div className="flex items-center justify-between mb-6">
-									<h3 className="font-(family-name:--font-manrope) font-bold text-lg">
+									<h3 className="font-(family-name:--font-manrope) font-semibold text-lg">
 										{t("financingStatus")}
 									</h3>
 									<span className="material-symbols-outlined text-[#FF5A30]">
@@ -504,7 +504,7 @@ export default async function DashboardPage({ params }: Props) {
 												<span className="text-on-surface-variant font-medium">
 													{String(latestFinancing.product ?? t("application"))}
 												</span>
-												<span className="font-bold text-[#FF5A30] capitalize">
+												<span className="font-semibold text-[#FF5A30] capitalize">
 													{t(
 														`statuses.${String(latestFinancing.status ?? "pending")}`,
 													)}
@@ -533,7 +533,7 @@ export default async function DashboardPage({ params }: Props) {
 										</div>
 										<div className="grid grid-cols-2 gap-4">
 											<div className="p-4 bg-surface-container-low rounded-lg">
-												<p className="text-[10px] uppercase font-bold text-on-surface-variant mb-1">
+												<p className="text-[10px] uppercase font-semibold text-on-surface-variant mb-1">
 													{t("requested")}
 												</p>
 												<p className="text-xl font-(family-name:--font-manrope) font-extrabold text-on-surface">
@@ -544,7 +544,7 @@ export default async function DashboardPage({ params }: Props) {
 												</p>
 											</div>
 											<div className="p-4 bg-surface-container-low rounded-lg">
-												<p className="text-[10px] uppercase font-bold text-on-surface-variant mb-1">
+												<p className="text-[10px] uppercase font-semibold text-on-surface-variant mb-1">
 													{t("table.status")}
 												</p>
 												<p className="text-xl font-(family-name:--font-manrope) font-extrabold text-tertiary-container capitalize">
@@ -556,7 +556,7 @@ export default async function DashboardPage({ params }: Props) {
 										</div>
 										<Link
 											href="/financing"
-											className="block w-full py-3 bg-orange-50 text-[#FF5A30] font-(family-name:--font-manrope) font-bold text-sm rounded-lg hover:brightness-95 transition-all text-center"
+											className="block w-full py-3 bg-orange-50 text-[#FF5A30] font-(family-name:--font-manrope) font-semibold text-sm rounded-lg hover:brightness-95 transition-all text-center"
 										>
 											{t("viewFinancingDetails")}
 										</Link>
@@ -566,7 +566,7 @@ export default async function DashboardPage({ params }: Props) {
 										<span className="material-symbols-outlined text-3xl text-on-surface-variant block mb-2">
 											account_balance
 										</span>
-										<p className="text-sm font-bold text-on-surface-variant">
+										<p className="text-sm font-semibold text-on-surface-variant">
 											{t("noAppsYet")}
 										</p>
 										<p className="text-xs text-on-surface-variant mt-1">
@@ -574,7 +574,7 @@ export default async function DashboardPage({ params }: Props) {
 										</p>
 										<Link
 											href="/financing"
-											className="inline-flex items-center gap-1 mt-4 text-sm font-bold text-[#FF5A30] hover:underline"
+											className="inline-flex items-center gap-1 mt-4 text-sm font-semibold text-[#FF5A30] hover:underline"
 										>
 											{t("exploreFinancing")}
 											<span className="material-symbols-outlined text-sm">
@@ -587,7 +587,7 @@ export default async function DashboardPage({ params }: Props) {
 
 							{/* Activity Feed */}
 							<div className="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
-								<h3 className="font-(family-name:--font-manrope) font-bold text-lg mb-6">
+								<h3 className="font-(family-name:--font-manrope) font-semibold text-lg mb-6">
 									{t("tourActivity")}
 								</h3>
 								{recentEOIs.length === 0 ? (
@@ -637,7 +637,7 @@ export default async function DashboardPage({ params }: Props) {
 														/>
 													</div>
 													<div>
-														<p className="text-sm font-bold text-on-surface">
+														<p className="text-sm font-semibold text-on-surface">
 															{activityLabel}
 														</p>
 														<p className="text-xs text-on-surface-variant">

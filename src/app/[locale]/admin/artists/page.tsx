@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getAdminArtists } from "@/app/actions";
 import ArtistActionsMenu from "@/components/ArtistActionsMenu";
@@ -20,7 +20,7 @@ export default async function AdminArtistsPage({
 		<>
 			<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 				<div>
-					<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
 						{t("badge")}
 					</span>
 					<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -32,7 +32,7 @@ export default async function AdminArtistsPage({
 				</div>
 				<Link
 					href="/admin/tours/create"
-					className="flex items-center gap-2 px-6 py-3 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-bold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 shrink-0"
+					className="flex items-center gap-2 px-6 py-3 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-semibold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 shrink-0"
 				>
 					<span className="material-symbols-outlined">add</span>
 					{t("createTour")}
@@ -41,7 +41,7 @@ export default async function AdminArtistsPage({
 
 			<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
 				<div className="flex items-center justify-between mb-5">
-					<h3 className="font-(family-name:--font-manrope) font-bold text-lg">
+					<h3 className="font-(family-name:--font-manrope) font-semibold text-lg">
 						{t("allArtists")}
 					</h3>
 					<p className="text-sm text-on-surface-variant">
@@ -54,7 +54,7 @@ export default async function AdminArtistsPage({
 						<span className="material-symbols-outlined text-5xl text-on-surface-variant block mb-4">
 							album
 						</span>
-						<p className="font-(family-name:--font-manrope) font-bold text-on-surface text-lg mb-2">
+						<p className="font-(family-name:--font-manrope) font-semibold text-on-surface text-lg mb-2">
 							{t("noArtists")}
 						</p>
 						<p className="text-on-surface-variant text-sm">{t("noArtistsDesc")}</p>

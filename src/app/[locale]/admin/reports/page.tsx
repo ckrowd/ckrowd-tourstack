@@ -1,4 +1,4 @@
-import { getTranslations, setRequestLocale } from "next-intl/server";
+﻿import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getAdminReport } from "@/app/actions";
 import AdminReportExport from "@/components/AdminReportExport";
 
@@ -48,7 +48,7 @@ export default async function AdminReportsPage({
 		<>
 			<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 				<div>
-					<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
 						{t("badge")}
 					</span>
 					<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -79,7 +79,7 @@ export default async function AdminReportsPage({
 								<p className="text-3xl font-black font-(family-name:--font-manrope) text-on-surface">
 									{s.value}
 								</p>
-								<p className="text-xs uppercase font-bold text-on-surface-variant mt-2 tracking-wider">
+								<p className="text-xs uppercase font-semibold text-on-surface-variant mt-2 tracking-wider">
 									{s.label}
 								</p>
 							</div>
@@ -94,7 +94,7 @@ export default async function AdminReportsPage({
 									key={b.title}
 									className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10"
 								>
-									<h2 className="font-(family-name:--font-manrope) font-bold text-on-surface mb-4 pb-4 border-b border-outline-variant/20">
+									<h2 className="font-(family-name:--font-manrope) font-semibold text-on-surface mb-4 pb-4 border-b border-outline-variant/20">
 										{b.title}
 									</h2>
 									{rows.length === 0 ? (
@@ -111,7 +111,7 @@ export default async function AdminReportsPage({
 													<span className="text-sm text-on-surface-variant capitalize">
 														{status.replace(/_/g, " ")}
 													</span>
-													<span className="text-sm font-bold text-on-surface">
+													<span className="text-sm font-semibold text-on-surface">
 														{Number(count).toLocaleString(locale)}
 													</span>
 												</li>

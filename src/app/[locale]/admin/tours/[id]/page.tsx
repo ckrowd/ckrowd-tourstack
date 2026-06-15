@@ -1,4 +1,4 @@
-import { getTranslations, setRequestLocale } from "next-intl/server";
+﻿import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { getAdminTour } from "@/app/actions";
 import { Link } from "@/i18n/routing";
@@ -62,7 +62,7 @@ export default async function AdminTourDetailPage({ params }: Props) {
 					</span>
 				</Link>
 				<div className="flex-1 min-w-0">
-					<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-1">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-1">
 						{t("badge")}
 					</span>
 					<h1 className="text-3xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface truncate">
@@ -74,7 +74,7 @@ export default async function AdminTourDetailPage({ params }: Props) {
 				</div>
 				<Link
 					href={`/admin/tours/${tour.id}/edit`}
-					className="flex items-center gap-2 px-4 py-2 bg-surface-container rounded-xl text-sm font-bold text-on-surface hover:bg-surface-container-high transition-colors shrink-0"
+					className="flex items-center gap-2 px-4 py-2 bg-surface-container rounded-xl text-sm font-semibold text-on-surface hover:bg-surface-container-high transition-colors shrink-0"
 				>
 					<span className="material-symbols-outlined text-sm">edit</span>
 					{t("edit")}
@@ -83,7 +83,7 @@ export default async function AdminTourDetailPage({ params }: Props) {
 
 			<div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 				<div className="lg:col-span-2 bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
-					<h2 className="text-lg font-bold font-(family-name:--font-manrope) mb-5">
+					<h2 className="text-lg font-semibold font-(family-name:--font-manrope) mb-5">
 						{t("stopSummary")}
 					</h2>
 					<dl className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
@@ -121,7 +121,7 @@ export default async function AdminTourDetailPage({ params }: Props) {
 				</div>
 
 				<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
-					<h2 className="text-lg font-bold font-(family-name:--font-manrope) mb-5">
+					<h2 className="text-lg font-semibold font-(family-name:--font-manrope) mb-5">
 						{t("promoterSection")}
 					</h2>
 					{tour.eoi ? (
@@ -163,7 +163,7 @@ export default async function AdminTourDetailPage({ params }: Props) {
 function Field({ label, value }: { label: string; value: string }) {
 	return (
 		<div>
-			<dt className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">
+			<dt className="text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant mb-1">
 				{label}
 			</dt>
 			<dd className="text-sm font-semibold text-on-surface">{value}</dd>

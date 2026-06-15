@@ -32,7 +32,7 @@ export default function AdminDangerZone() {
 
 	return (
 		<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10">
-			<h3 className="font-(family-name:--font-manrope) font-bold text-lg mb-4 pb-4 border-b border-outline-variant/20 text-red-600">
+			<h3 className="font-(family-name:--font-manrope) font-semibold text-lg mb-4 pb-4 border-b border-outline-variant/20 text-red-600">
 				{t("danger.title")}
 			</h3>
 			<p className="text-sm text-on-surface-variant mb-4">
@@ -49,7 +49,7 @@ export default function AdminDangerZone() {
 							type="button"
 							onClick={() => purgeMutation.mutate()}
 							disabled={purgeMutation.isPending}
-							className="w-full py-3 bg-red-600 text-white rounded-xl font-bold text-sm hover:bg-red-700 transition-colors disabled:cursor-not-allowed disabled:opacity-60"
+							className="w-full py-3 bg-red-600 text-white rounded-xl font-semibold text-sm hover:bg-red-700 transition-colors disabled:cursor-not-allowed disabled:opacity-60"
 						>
 							{purgeMutation.isPending
 								? t("danger.purging")
@@ -59,7 +59,7 @@ export default function AdminDangerZone() {
 							type="button"
 							onClick={() => setConfirming(false)}
 							disabled={purgeMutation.isPending}
-							className="w-full py-3 border border-outline-variant/30 rounded-xl font-bold text-sm text-on-surface-variant hover:bg-surface-container-low transition-colors disabled:opacity-60"
+							className="w-full py-3 border border-outline-variant/30 rounded-xl font-semibold text-sm text-on-surface-variant hover:bg-surface-container-low transition-colors disabled:opacity-60"
 						>
 							{t("danger.cancel")}
 						</button>
@@ -69,7 +69,7 @@ export default function AdminDangerZone() {
 				<button
 					type="button"
 					onClick={() => setConfirming(true)}
-					className="w-full py-3 bg-red-50 text-red-600 rounded-xl font-bold text-sm border border-red-200 hover:bg-red-100 transition-colors"
+					className="w-full py-3 bg-red-50 text-red-600 rounded-xl font-semibold text-sm border border-red-200 hover:bg-red-100 transition-colors"
 				>
 					{t("danger.purge")}
 				</button>

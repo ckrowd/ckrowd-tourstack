@@ -35,7 +35,7 @@ export default function SettingsClient() {
 		<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
 			{/* Header */}
 			<div className="mb-8">
-				<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
 					{t("promoterPortal")}
 				</span>
 				<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">

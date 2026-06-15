@@ -81,7 +81,7 @@ export default function FinancingTeamPanel() {
 
 	return (
 		<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10">
-			<h3 className="font-(family-name:--font-manrope) font-bold text-base mb-4 pb-4 border-b border-outline-variant/20">
+			<h3 className="font-(family-name:--font-manrope) font-semibold text-base mb-4 pb-4 border-b border-outline-variant/20">
 				{t("title")}
 			</h3>
 
@@ -102,15 +102,15 @@ export default function FinancingTeamPanel() {
 								className="flex items-center justify-between p-3 border border-outline-variant/10 rounded-xl"
 							>
 								<div className="flex items-center gap-3">
-									<div className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-bold text-sm text-on-surface-variant">
+									<div className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-semibold text-sm text-on-surface-variant">
 										{(name || email || "?").charAt(0).toUpperCase()}
 									</div>
 									<div>
-										<p className="text-sm font-bold text-on-surface">{name}</p>
+										<p className="text-sm font-semibold text-on-surface">{name}</p>
 										<p className="text-xs text-on-surface-variant">{email}</p>
 									</div>
 								</div>
-								<span className="text-xs font-bold text-[#FF5A30] bg-orange-50 px-3 py-1 rounded-full">
+								<span className="text-xs font-semibold text-[#FF5A30] bg-orange-50 px-3 py-1 rounded-full">
 									{t("activeBadge")}
 								</span>
 							</div>
@@ -130,11 +130,11 @@ export default function FinancingTeamPanel() {
 								className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 border border-amber-200 bg-amber-50/40 rounded-xl"
 							>
 								<div className="flex items-center gap-3">
-									<div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center font-bold text-sm text-amber-700">
+									<div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center font-semibold text-sm text-amber-700">
 										{(invite.name || invite.email).charAt(0).toUpperCase()}
 									</div>
 									<div>
-										<p className="text-sm font-bold text-on-surface">
+										<p className="text-sm font-semibold text-on-surface">
 											{invite.name}
 										</p>
 										<p className="text-xs text-on-surface-variant">
@@ -143,7 +143,7 @@ export default function FinancingTeamPanel() {
 									</div>
 								</div>
 								<div className="flex items-center gap-2 flex-wrap">
-									<span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 bg-amber-100 px-2 py-1 rounded-full">
+									<span className="text-[10px] font-semibold uppercase tracking-wider text-amber-700 bg-amber-100 px-2 py-1 rounded-full">
 										{t("invitedBadge")}
 									</span>
 									<button
@@ -173,7 +173,7 @@ export default function FinancingTeamPanel() {
 				<button
 					type="button"
 					onClick={() => setOpen(true)}
-					className="mt-4 w-full py-3 border-2 border-dashed border-outline-variant/40 rounded-xl text-sm font-bold text-on-surface-variant hover:border-[#FF5A30]/40 hover:text-[#FF5A30] transition-all flex items-center justify-center gap-2"
+					className="mt-4 w-full py-3 border-2 border-dashed border-outline-variant/40 rounded-xl text-sm font-semibold text-on-surface-variant hover:border-[#FF5A30]/40 hover:text-[#FF5A30] transition-all flex items-center justify-center gap-2"
 				>
 					<span className="material-symbols-outlined text-sm">person_add</span>
 					{t("invite")}
@@ -195,7 +195,7 @@ export default function FinancingTeamPanel() {
 					<div>
 						<label
 							htmlFor="finance-invite-name"
-							className="mb-1.5 block text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant"
+							className="mb-1.5 block text-xs font-semibold uppercase tracking-[0.18em] text-on-surface-variant"
 						>
 							{t("nameLabel")}
 						</label>
@@ -212,7 +212,7 @@ export default function FinancingTeamPanel() {
 					<div>
 						<label
 							htmlFor="finance-invite-email"
-							className="mb-1.5 block text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant"
+							className="mb-1.5 block text-xs font-semibold uppercase tracking-[0.18em] text-on-surface-variant"
 						>
 							{t("emailLabel")}
 						</label>
@@ -230,7 +230,7 @@ export default function FinancingTeamPanel() {
 						<button
 							type="submit"
 							disabled={inviteMutation.isPending}
-							className="flex-1 py-2.5 bg-[#FF5A30] text-white rounded-xl font-bold text-sm hover:opacity-90 disabled:opacity-60"
+							className="flex-1 py-2.5 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm hover:opacity-90 disabled:opacity-60"
 						>
 							{inviteMutation.isPending ? t("inviting") : t("sendInvite")}
 						</button>
@@ -238,7 +238,7 @@ export default function FinancingTeamPanel() {
 							type="button"
 							onClick={() => setOpen(false)}
 							disabled={inviteMutation.isPending}
-							className="px-4 py-2.5 border border-outline-variant/30 rounded-xl font-bold text-sm text-on-surface-variant hover:bg-surface-container-low disabled:opacity-60"
+							className="px-4 py-2.5 border border-outline-variant/30 rounded-xl font-semibold text-sm text-on-surface-variant hover:bg-surface-container-low disabled:opacity-60"
 						>
 							{t("cancel")}
 						</button>

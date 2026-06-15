@@ -63,7 +63,7 @@ export default function NotificationsClient() {
 					<span className="material-symbols-outlined text-5xl mb-4 text-slate-300">
 						notifications_off
 					</span>
-					<p className="font-bold text-lg">{t("empty")}</p>
+					<p className="font-semibold text-lg">{t("empty")}</p>
 					<p className="text-sm mt-1">{t("emptyHint")}</p>
 				</div>
 			) : (

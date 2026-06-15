@@ -5,7 +5,7 @@ import { useMemo, useState } from "react";
 type Group = { key: string; items: readonly string[] };
 
 const chipBase =
-	"px-3 py-1.5 rounded-xl text-xs font-bold border transition-all cursor-pointer";
+	"px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer";
 const chipActive = "bg-[#FF5A30] text-white border-[#FF5A30]";
 const chipInactive =
 	"border-outline-variant/30 text-on-surface-variant hover:border-[#FF5A30]/40";
@@ -63,7 +63,7 @@ export default function GroupedMultiSelect({
 			{/* Selected summary */}
 			{values.length > 0 && (
 				<div className="px-3 pt-3">
-					<p className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+					<p className="text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 						{selectedLabel} ({values.length})
 					</p>
 					<div className="flex flex-wrap gap-1.5">
@@ -108,7 +108,7 @@ export default function GroupedMultiSelect({
 				) : (
 					filtered.map((g) => (
 						<div key={g.key}>
-							<p className="text-[10px] font-bold uppercase tracking-widest text-[#FF5A30] mb-2 sticky top-0 bg-surface-container-high py-1">
+							<p className="text-[10px] font-semibold uppercase tracking-widest text-[#FF5A30] mb-2 sticky top-0 bg-surface-container-high py-1">
 								{groupLabel(g.key)}
 							</p>
 							<div className="flex flex-wrap gap-1.5">

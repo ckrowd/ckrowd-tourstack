@@ -14,7 +14,7 @@ export function Section({
 	return (
 		<div className="bg-surface-container-lowest rounded-2xl p-8 shadow-sm space-y-6">
 			<div className="border-b border-outline-variant/20 pb-4">
-				<h3 className="font-(family-name:--font-manrope) font-bold text-lg text-on-surface">
+				<h3 className="font-(family-name:--font-manrope) font-semibold text-lg text-on-surface">
 					{title}
 				</h3>
 				{description && (
@@ -47,7 +47,7 @@ export function Field({
 		<div>
 			<label
 				htmlFor={id}
-				className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5"
+				className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1.5"
 			>
 				{label}
 			</label>

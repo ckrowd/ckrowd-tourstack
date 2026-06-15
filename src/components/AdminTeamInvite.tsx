@@ -42,7 +42,7 @@ export default function AdminTeamInvite() {
 			<button
 				type="button"
 				onClick={() => setOpen(true)}
-				className="w-full py-3 border-2 border-dashed border-outline-variant/40 rounded-xl text-sm font-bold text-on-surface-variant hover:border-[#FF5A30]/40 hover:text-[#FF5A30] transition-all flex items-center justify-center gap-2 mt-4"
+				className="w-full py-3 border-2 border-dashed border-outline-variant/40 rounded-xl text-sm font-semibold text-on-surface-variant hover:border-[#FF5A30]/40 hover:text-[#FF5A30] transition-all flex items-center justify-center gap-2 mt-4"
 			>
 				<span className="material-symbols-outlined text-sm">person_add</span>
 				{t("team.invite")}
@@ -51,7 +51,7 @@ export default function AdminTeamInvite() {
 	}
 
 	const labelClass =
-		"mb-1.5 block text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant";
+		"mb-1.5 block text-xs font-semibold uppercase tracking-[0.18em] text-on-surface-variant";
 	const inputClass =
 		"w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-4 py-2.5 text-sm font-medium text-on-surface outline-none transition focus:ring-2 focus:ring-[#FF5A30]/20";
 
@@ -119,7 +119,7 @@ export default function AdminTeamInvite() {
 				<button
 					type="submit"
 					disabled={inviteMutation.isPending}
-					className="flex-1 py-2.5 bg-[#FF5A30] text-white rounded-xl font-bold text-sm hover:opacity-90 transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
+					className="flex-1 py-2.5 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
 				>
 					{inviteMutation.isPending ? t("team.inviting") : t("team.sendInvite")}
 				</button>
@@ -127,7 +127,7 @@ export default function AdminTeamInvite() {
 					type="button"
 					onClick={() => setOpen(false)}
 					disabled={inviteMutation.isPending}
-					className="px-4 py-2.5 border border-outline-variant/30 rounded-xl font-bold text-sm text-on-surface-variant hover:bg-surface-container-low transition-colors disabled:opacity-60"
+					className="px-4 py-2.5 border border-outline-variant/30 rounded-xl font-semibold text-sm text-on-surface-variant hover:bg-surface-container-low transition-colors disabled:opacity-60"
 				>
 					{t("team.cancel")}
 				</button>

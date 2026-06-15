@@ -1,4 +1,4 @@
-import { getTranslations, setRequestLocale } from "next-intl/server";
+﻿import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getAdminTours } from "@/app/actions";
 import TourActionsMenu from "@/components/TourActionsMenu";
 import { Link } from "@/i18n/routing";
@@ -40,7 +40,7 @@ export default async function AdminToursPage({
 			<PageTour pageId="admin-tours" />
 			<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 				<div>
-					<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
 						{t("badge")}
 					</span>
 					<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -52,7 +52,7 @@ export default async function AdminToursPage({
 				</div>
 				<Link
 					href="/admin/tours/create"
-					className="flex items-center gap-2 px-6 py-3 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-bold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 shrink-0"
+					className="flex items-center gap-2 px-6 py-3 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-semibold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 shrink-0"
 				>
 					<span className="material-symbols-outlined">add</span>
 					{t("createTour")}
@@ -61,7 +61,7 @@ export default async function AdminToursPage({
 
 			<div data-tour="admin-tours-list" className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
 				<div className="flex items-center justify-between mb-5">
-					<h3 className="font-(family-name:--font-manrope) font-bold text-lg">
+					<h3 className="font-(family-name:--font-manrope) font-semibold text-lg">
 						{t("allTours")}
 					</h3>
 					{pagination && (
@@ -77,7 +77,7 @@ export default async function AdminToursPage({
 							<span className="material-symbols-outlined text-5xl text-on-surface-variant block mb-4">
 								confirmation_number
 							</span>
-							<p className="font-(family-name:--font-manrope) font-bold text-on-surface text-lg mb-2">
+							<p className="font-(family-name:--font-manrope) font-semibold text-on-surface text-lg mb-2">
 								{t("noTours")}
 							</p>
 							<p className="text-on-surface-variant text-sm">
@@ -108,7 +108,7 @@ export default async function AdminToursPage({
 								className="flex items-center justify-between gap-3 py-3 md:py-4 border-b border-outline-variant/10 last:border-none"
 							>
 								<div className="flex-1 min-w-0">
-									<p className="text-sm md:text-base font-bold text-on-surface truncate">
+									<p className="text-sm md:text-base font-semibold text-on-surface truncate">
 										{String(tArtist?.name ?? tArtist?.tour_name ?? "Tour")}
 									</p>
 									<p className="text-xs text-on-surface-variant mt-0.5 truncate">
@@ -163,7 +163,7 @@ export default async function AdminToursPage({
 										)}
 										<Link
 											href={pageHref(p)}
-											className={`w-9 h-9 flex items-center justify-center rounded-lg text-sm font-bold transition-colors ${
+											className={`w-9 h-9 flex items-center justify-center rounded-lg text-sm font-semibold transition-colors ${
 												p === currentPage
 													? "bg-[#FF5A30] text-white shadow-sm"
 													: "text-on-surface-variant hover:bg-surface-container-low"

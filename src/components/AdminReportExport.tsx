@@ -41,7 +41,7 @@ export default function AdminReportExport() {
 				type="button"
 				onClick={() => exportMutation.mutate()}
 				disabled={exportMutation.isPending}
-				className="flex items-center gap-2 px-6 py-3 bg-surface-container-high text-on-surface rounded-xl font-(family-name:--font-manrope) font-bold hover:bg-surface-container-highest transition-colors disabled:cursor-not-allowed disabled:opacity-60"
+				className="flex items-center gap-2 px-6 py-3 bg-surface-container-high text-on-surface rounded-xl font-(family-name:--font-manrope) font-semibold hover:bg-surface-container-highest transition-colors disabled:cursor-not-allowed disabled:opacity-60"
 			>
 				<span className="material-symbols-outlined text-sm">download</span>
 				{exportMutation.isPending ? t("exporting") : t("exportCsv")}

@@ -121,7 +121,7 @@ export default function ArtistActionsMenu({
 	const inputClass =
 		"w-full rounded-xl border border-outline-variant/30 bg-surface px-3 py-2 text-sm text-on-surface outline-none focus:border-[#FF5A30] focus:ring-2 focus:ring-[#FF5A30]/20 transition";
 	const labelClass =
-		"block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5";
+		"block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1.5";
 
 	return (
 		<div className="relative" ref={menuRef}>
@@ -180,7 +180,7 @@ export default function ArtistActionsMenu({
 				>
 					<div className="bg-surface rounded-2xl shadow-xl max-w-lg w-full p-6 space-y-4 max-h-[90vh] overflow-y-auto no-scrollbar">
 						<div className="flex items-center justify-between">
-							<h3 className="text-lg font-bold text-on-surface font-(family-name:--font-manrope)">
+							<h3 className="text-lg font-semibold text-on-surface font-(family-name:--font-manrope)">
 								{t("editTitle")}
 							</h3>
 							<button
@@ -207,7 +207,7 @@ export default function ArtistActionsMenu({
 									role="switch"
 									aria-checked={form[key]}
 									onClick={() => setForm((f) => ({ ...f, [key]: !f[key] }))}
-									className={`flex-1 flex items-center justify-between px-4 py-2.5 rounded-xl border-2 text-sm font-bold transition-all ${
+									className={`flex-1 flex items-center justify-between px-4 py-2.5 rounded-xl border-2 text-sm font-semibold transition-all ${
 										form[key]
 											? "border-[#FF5A30] bg-[#FF5A30]/5 text-[#FF5A30]"
 											: "border-outline-variant/30 text-on-surface-variant"
@@ -291,7 +291,7 @@ export default function ArtistActionsMenu({
 								type="button"
 								onClick={() => editMutation.mutate()}
 								disabled={editMutation.isPending}
-								className="px-5 py-2 rounded-lg text-sm font-bold bg-[#FF5A30] text-white hover:opacity-90 disabled:opacity-60 transition-opacity"
+								className="px-5 py-2 rounded-lg text-sm font-semibold bg-[#FF5A30] text-white hover:opacity-90 disabled:opacity-60 transition-opacity"
 							>
 								{editMutation.isPending ? t("saving") : t("save")}
 							</button>
@@ -308,7 +308,7 @@ export default function ArtistActionsMenu({
 					aria-modal="true"
 				>
 					<div className="bg-surface rounded-2xl shadow-xl max-w-md w-full p-6">
-						<h3 className="text-lg font-bold text-on-surface mb-2">
+						<h3 className="text-lg font-semibold text-on-surface mb-2">
 							{t("deleteTitle")}
 						</h3>
 						<p className="text-sm text-on-surface-variant mb-4">
@@ -328,7 +328,7 @@ export default function ArtistActionsMenu({
 								type="button"
 								onClick={() => deleteMutation.mutate()}
 								disabled={deleteMutation.isPending}
-								className="px-4 py-2 rounded-lg text-sm font-bold bg-red-600 text-white hover:bg-red-700 disabled:opacity-60"
+								className="px-4 py-2 rounded-lg text-sm font-semibold bg-red-600 text-white hover:bg-red-700 disabled:opacity-60"
 							>
 								{deleteMutation.isPending ? t("deleting") : t("confirmDelete")}
 							</button>

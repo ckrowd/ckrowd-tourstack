@@ -149,7 +149,7 @@ export default function SettingsSecurityTab() {
 							mark_email_read
 						</span>
 						<div>
-							<p className="text-sm font-bold text-emerald-800">
+							<p className="text-sm font-semibold text-emerald-800">
 								{t("password.success")}
 							</p>
 							<p className="text-xs text-emerald-700 mt-0.5">
@@ -173,7 +173,7 @@ export default function SettingsSecurityTab() {
 							!newPw ||
 							!confirmPw
 						}
-						className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:cursor-not-allowed disabled:opacity-60"
+						className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:cursor-not-allowed disabled:opacity-60"
 					>
 						{passwordMutation.isPending
 							? t("password.updating")
@@ -210,7 +210,7 @@ export default function SettingsSecurityTab() {
 								type="button"
 								onClick={() => disableMutation.mutate()}
 								disabled={disableMutation.isPending}
-								className="text-sm font-bold text-red-500 border border-red-200 px-4 py-2 rounded-lg hover:bg-red-50 transition-colors disabled:opacity-50"
+								className="text-sm font-semibold text-red-500 border border-red-200 px-4 py-2 rounded-lg hover:bg-red-50 transition-colors disabled:opacity-50"
 							>
 								{disableMutation.isPending
 									? "…"
@@ -221,7 +221,7 @@ export default function SettingsSecurityTab() {
 								type="button"
 								onClick={() => setupMutation.mutate()}
 								disabled={setupMutation.isPending || showSetup}
-								className="text-sm font-bold text-[#FF5A30] border border-[#FF5A30]/30 px-4 py-2 rounded-lg hover:bg-[#FF5A30]/5 transition-colors disabled:opacity-50"
+								className="text-sm font-semibold text-[#FF5A30] border border-[#FF5A30]/30 px-4 py-2 rounded-lg hover:bg-[#FF5A30]/5 transition-colors disabled:opacity-50"
 							>
 								{setupMutation.isPending ? "…" : t("twoFactor.actions.enable")}
 							</button>
@@ -284,7 +284,7 @@ export default function SettingsSecurityTab() {
 										setTotpCode("");
 										setQrCodeUrl(null);
 									}}
-									className="flex-1 py-2.5 border border-outline-variant/30 rounded-xl text-sm font-bold text-on-surface-variant hover:bg-surface-container transition-colors"
+									className="flex-1 py-2.5 border border-outline-variant/30 rounded-xl text-sm font-semibold text-on-surface-variant hover:bg-surface-container transition-colors"
 								>
 									{t("twoFactor.setup.actions.cancel")}
 								</button>
@@ -292,7 +292,7 @@ export default function SettingsSecurityTab() {
 									type="button"
 									onClick={() => verifyMutation.mutate()}
 									disabled={totpCode.length < 6 || verifyMutation.isPending}
-									className="flex-1 py-2.5 bg-[#FF5A30] text-white rounded-xl text-sm font-bold hover:opacity-90 transition-all disabled:opacity-50"
+									className="flex-1 py-2.5 bg-[#FF5A30] text-white rounded-xl text-sm font-semibold hover:opacity-90 transition-all disabled:opacity-50"
 								>
 									{verifyMutation.isPending
 										? "…"
@@ -332,7 +332,7 @@ export default function SettingsSecurityTab() {
 						type="button"
 						onClick={() => revokeOthersMutation.mutate()}
 						disabled={revokeOthersMutation.isPending}
-						className="w-full py-3 border border-red-200 rounded-xl text-sm font-bold text-red-500 hover:bg-red-50 transition-all disabled:opacity-50"
+						className="w-full py-3 border border-red-200 rounded-xl text-sm font-semibold text-red-500 hover:bg-red-50 transition-all disabled:opacity-50"
 					>
 						{revokeOthersMutation.isPending
 							? t("sessions.signingOut")
@@ -350,7 +350,7 @@ export default function SettingsSecurityTab() {
 				{!showDeleteConfirm ? (
 					<div className="flex items-center justify-between p-5 bg-red-50 rounded-xl border border-red-100">
 						<div>
-							<p className="font-bold text-sm text-red-800">
+							<p className="font-semibold text-sm text-red-800">
 								{t("dangerZone.delete.title")}
 							</p>
 							<p className="text-xs text-red-600 mt-0.5">
@@ -360,14 +360,14 @@ export default function SettingsSecurityTab() {
 						<button
 							type="button"
 							onClick={() => setShowDeleteConfirm(true)}
-							className="text-sm font-bold text-red-600 border border-red-300 px-4 py-2 rounded-lg hover:bg-red-100 transition-colors"
+							className="text-sm font-semibold text-red-600 border border-red-300 px-4 py-2 rounded-lg hover:bg-red-100 transition-colors"
 						>
 							{t("dangerZone.actions.delete")}
 						</button>
 					</div>
 				) : (
 					<div className="rounded-xl border border-red-200 bg-red-50 p-5 space-y-4">
-						<p className="text-sm font-bold text-red-800">
+						<p className="text-sm font-semibold text-red-800">
 							{t("dangerZone.delete.title")}
 						</p>
 						<p className="text-xs text-red-600">
@@ -390,7 +390,7 @@ export default function SettingsSecurityTab() {
 									setShowDeleteConfirm(false);
 									setConfirmEmail("");
 								}}
-								className="flex-1 py-2.5 border border-outline-variant/30 rounded-xl text-sm font-bold text-on-surface-variant hover:bg-surface-container transition-colors"
+								className="flex-1 py-2.5 border border-outline-variant/30 rounded-xl text-sm font-semibold text-on-surface-variant hover:bg-surface-container transition-colors"
 							>
 								{t("dangerZone.confirm.actions.cancel")}
 							</button>
@@ -401,7 +401,7 @@ export default function SettingsSecurityTab() {
 									confirmEmail.trim().toLowerCase() !==
 										userEmail.trim().toLowerCase() || deleteMutation.isPending
 								}
-								className="flex-1 py-2.5 bg-red-600 text-white rounded-xl text-sm font-bold hover:bg-red-700 transition-colors disabled:opacity-50"
+								className="flex-1 py-2.5 bg-red-600 text-white rounded-xl text-sm font-semibold hover:bg-red-700 transition-colors disabled:opacity-50"
 							>
 								{deleteMutation.isPending
 									? "…"

@@ -1,4 +1,4 @@
-import { getTranslations, setRequestLocale } from "next-intl/server";
+﻿import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getAdminSettings, getAdminTeam } from "@/app/actions";
 
 export const dynamic = "force-dynamic";
@@ -28,7 +28,7 @@ export default async function AdminSettingsPage({
 	return (
 		<>
 			<div className="mb-10">
-				<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
 					{t("badge")}
 				</span>
 				<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -57,7 +57,7 @@ export default async function AdminSettingsPage({
 					)}
 
 					<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10">
-						<h3 className="font-(family-name:--font-manrope) font-bold text-lg mb-4 pb-4 border-b border-outline-variant/20">
+						<h3 className="font-(family-name:--font-manrope) font-semibold text-lg mb-4 pb-4 border-b border-outline-variant/20">
 							{t("team.title")}
 						</h3>
 						{!teamResult.success ? (

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useQuery } from "@tanstack/react-query";
 import { useLocale, useTranslations } from "next-intl";
@@ -149,7 +149,7 @@ export default function AdminDirectoryPage() {
 							</span>
 						</div>
 						<div>
-							<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-1">
+							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-1">
 								{CATEGORY_LABELS[selected.category]}
 							</span>
 							<h2 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-on-surface">
@@ -187,7 +187,7 @@ export default function AdminDirectoryPage() {
 	return (
 		<div className="w-full">
 			<header className="mb-8">
-				<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-3">
+				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-3">
 					{t("tagline")}
 				</span>
 				<h1 className="text-4xl font-extrabold tracking-tight text-on-surface mb-2 font-(family-name:--font-manrope)">
@@ -266,16 +266,16 @@ export default function AdminDirectoryPage() {
 					<table className="w-full text-left border-collapse">
 						<thead>
 							<tr className="bg-surface-container-high">
-								<th className="px-5 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant">
+								<th className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-on-surface-variant">
 									{t("table.name")}
 								</th>
-								<th className="px-5 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant hidden md:table-cell">
+								<th className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-on-surface-variant hidden md:table-cell">
 									{t("table.category")}
 								</th>
-								<th className="px-5 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant hidden lg:table-cell">
+								<th className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-on-surface-variant hidden lg:table-cell">
 									{t("table.country")}
 								</th>
-								<th className="px-5 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant hidden md:table-cell">
+								<th className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-on-surface-variant hidden md:table-cell">
 									{t("table.submitted")}
 								</th>
 								<th className="px-5 py-4" />
@@ -295,7 +295,7 @@ export default function AdminDirectoryPage() {
 												</span>
 											</div>
 											<div>
-												<span className="block font-(family-name:--font-manrope) font-bold text-on-surface text-sm">
+												<span className="block font-(family-name:--font-manrope) font-semibold text-on-surface text-sm">
 													{entry.name}
 												</span>
 												{entry.company && (
@@ -307,7 +307,7 @@ export default function AdminDirectoryPage() {
 										</div>
 									</td>
 									<td className="px-5 py-4 hidden md:table-cell">
-										<span className="px-2 py-1 bg-[#FF5A30]/10 text-[#FF5A30] text-xs font-bold rounded-lg">
+										<span className="px-2 py-1 bg-[#FF5A30]/10 text-[#FF5A30] text-xs font-semibold rounded-lg">
 											{CATEGORY_LABELS[entry.category]}
 										</span>
 									</td>
@@ -325,7 +325,7 @@ export default function AdminDirectoryPage() {
 										<button
 											type="button"
 											onClick={() => setSelectedId(entry.id)}
-											className="text-xs font-bold text-[#FF5A30] hover:underline"
+											className="text-xs font-semibold text-[#FF5A30] hover:underline"
 										>
 											{t("table.view")}
 										</button>
@@ -343,7 +343,7 @@ export default function AdminDirectoryPage() {
 function Field({ label, value }: { label: string; value: string }) {
 	return (
 		<div>
-			<p className="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1">
+			<p className="text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1">
 				{label}
 			</p>
 			<p className="text-sm text-on-surface font-medium break-words">

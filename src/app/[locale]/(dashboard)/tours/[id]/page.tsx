@@ -1,4 +1,4 @@
-import { getTranslations, setRequestLocale } from "next-intl/server";
+﻿import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getTour, getTourMilestones } from "@/app/actions";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
@@ -39,7 +39,7 @@ export default async function TourDetailPage({
 					<div className="w-full space-y-8">
 						<div className="flex flex-wrap items-center justify-between gap-3">
 							<div>
-								<p className="text-xs font-bold uppercase tracking-widest text-[#FF5A30]">
+								<p className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30]">
 									{t("tagline")}
 								</p>
 								<h1 className="text-3xl font-(family-name:--font-manrope) font-extrabold text-on-surface mt-1">
@@ -50,7 +50,7 @@ export default async function TourDetailPage({
 							</div>
 							<Link
 								href="/tours"
-								className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-outline-variant/30 text-sm font-bold text-on-surface-variant hover:bg-surface-container-low"
+								className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-outline-variant/30 text-sm font-semibold text-on-surface-variant hover:bg-surface-container-low"
 							>
 								<span className="material-symbols-outlined text-sm">
 									arrow_back
@@ -68,7 +68,7 @@ export default async function TourDetailPage({
 								<section className="lg:col-span-8 bg-surface-container-lowest rounded-2xl p-6 shadow-sm space-y-5">
 									<div className="flex items-start justify-between gap-3">
 										<div>
-											<h2 className="text-xl font-(family-name:--font-manrope) font-bold">
+											<h2 className="text-xl font-(family-name:--font-manrope) font-semibold">
 												{String(
 													tour.tour_name ??
 														tour.artist?.tour_name ??
@@ -88,26 +88,26 @@ export default async function TourDetailPage({
 
 									<div className="grid grid-cols-2 md:grid-cols-3 gap-3">
 										<div className="bg-surface-container-low rounded-xl p-3">
-											<p className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">
+											<p className="text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant">
 												{t("fields.city")}
 											</p>
-											<p className="text-sm font-bold mt-1">
+											<p className="text-sm font-semibold mt-1">
 												{String(tour.city ?? "-")}
 											</p>
 										</div>
 										<div className="bg-surface-container-low rounded-xl p-3">
-											<p className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">
+											<p className="text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant">
 												{t("fields.venue")}
 											</p>
-											<p className="text-sm font-bold mt-1">
+											<p className="text-sm font-semibold mt-1">
 												{String(tour.venue ?? "-")}
 											</p>
 										</div>
 										<div className="bg-surface-container-low rounded-xl p-3">
-											<p className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">
+											<p className="text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant">
 												{t("fields.date")}
 											</p>
-											<p className="text-sm font-bold mt-1">
+											<p className="text-sm font-semibold mt-1">
 												{tour.date
 													? new Date(tour.date).toLocaleDateString(locale, {
 															month: "short",
@@ -118,30 +118,30 @@ export default async function TourDetailPage({
 											</p>
 										</div>
 										<div className="bg-surface-container-low rounded-xl p-3">
-											<p className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">
+											<p className="text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant">
 												{t("fields.fee")}
 											</p>
-											<p className="text-sm font-bold mt-1">
+											<p className="text-sm font-semibold mt-1">
 												{tour.fee_usd != null
 													? `$${Number(tour.fee_usd).toLocaleString()}`
 													: "-"}
 											</p>
 										</div>
 										<div className="bg-surface-container-low rounded-xl p-3">
-											<p className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">
+											<p className="text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant">
 												{t("fields.capacity")}
 											</p>
-											<p className="text-sm font-bold mt-1">
+											<p className="text-sm font-semibold mt-1">
 												{tour.capacity != null
 													? Number(tour.capacity).toLocaleString()
 													: "-"}
 											</p>
 										</div>
 										<div className="bg-surface-container-low rounded-xl p-3">
-											<p className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">
+											<p className="text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant">
 												{t("fields.ticketsSold")}
 											</p>
-											<p className="text-sm font-bold mt-1">
+											<p className="text-sm font-semibold mt-1">
 												{tour.tickets_sold != null
 													? Number(tour.tickets_sold).toLocaleString()
 													: "-"}
@@ -151,7 +151,7 @@ export default async function TourDetailPage({
 								</section>
 
 								<section className="lg:col-span-4 bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
-									<h3 className="text-base font-(family-name:--font-manrope) font-bold mb-4">
+									<h3 className="text-base font-(family-name:--font-manrope) font-semibold mb-4">
 										{t("milestones.title")}
 									</h3>
 									{!milestonesResult.success ? (
@@ -169,10 +169,10 @@ export default async function TourDetailPage({
 													key={String(m.id)}
 													className="rounded-xl bg-surface-container-low p-3"
 												>
-													<p className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">
+													<p className="text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
 														{String(m.type ?? "milestone")}
 													</p>
-													<p className="text-sm font-bold mt-1">
+													<p className="text-sm font-semibold mt-1">
 														{String(m.label ?? "")}
 													</p>
 													<p className="text-xs text-on-surface-variant mt-1">

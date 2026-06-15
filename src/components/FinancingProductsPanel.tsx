@@ -71,7 +71,7 @@ export default function FinancingProductsPanel() {
 
 	return (
 		<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10">
-			<h3 className="font-(family-name:--font-manrope) font-bold text-base mb-4 pb-4 border-b border-outline-variant/20">
+			<h3 className="font-(family-name:--font-manrope) font-semibold text-base mb-4 pb-4 border-b border-outline-variant/20">
 				{t("title")}
 			</h3>
 
@@ -91,7 +91,7 @@ export default function FinancingProductsPanel() {
 							className="flex items-center justify-between p-3 bg-surface-container-low rounded-xl"
 						>
 							<div>
-								<p className="text-sm font-bold text-on-surface">{p.name}</p>
+								<p className="text-sm font-semibold text-on-surface">{p.name}</p>
 								<p className="text-xs text-on-surface-variant">
 									{t("maxLabel", {
 										amount: `$${p.max_amount_usd.toLocaleString()}`,
@@ -115,7 +115,7 @@ export default function FinancingProductsPanel() {
 
 			<form onSubmit={submit} className="space-y-3 pt-4 border-t border-outline-variant/20">
 				<label className="block">
-					<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+					<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 						{t("nameLabel")}
 					</span>
 					<input
@@ -128,7 +128,7 @@ export default function FinancingProductsPanel() {
 					/>
 				</label>
 				<label className="block">
-					<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+					<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 						{t("maxAmountLabel")}
 					</span>
 					<input
@@ -154,7 +154,7 @@ export default function FinancingProductsPanel() {
 				<button
 					type="submit"
 					disabled={createMutation.isPending}
-					className="w-full py-3 bg-[#FF5A30] text-white rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 disabled:opacity-60"
+					className="w-full py-3 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 disabled:opacity-60"
 				>
 					{createMutation.isPending ? t("creating") : t("createSubmit")}
 				</button>

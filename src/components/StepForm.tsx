@@ -14,7 +14,7 @@ export default function StepForm({
 	const inputClass =
 		"w-full px-4 py-3 bg-surface border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm";
 	const labelClass =
-		"block text-[10px] font-bold text-on-surface-variant uppercase tracking-wider mb-1.5";
+		"block text-[10px] font-semibold text-on-surface-variant uppercase tracking-wider mb-1.5";
 	const fileClass =
 		"block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:font-semibold file:bg-[#FF5A30]/10 file:text-[#FF5A30] hover:file:bg-[#FF5A30]/20 transition-all cursor-pointer";
 

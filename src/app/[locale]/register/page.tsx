@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
@@ -85,7 +85,7 @@ export default function RegisterPage() {
 							<div>
 								<label
 									htmlFor="first-name"
-									className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
+									className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
 								>
 									{t("firstName")}
 								</label>
@@ -104,7 +104,7 @@ export default function RegisterPage() {
 							<div>
 								<label
 									htmlFor="last-name"
-									className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
+									className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
 								>
 									{t("lastName")}
 								</label>
@@ -124,7 +124,7 @@ export default function RegisterPage() {
 						<div>
 							<label
 								htmlFor="email"
-								className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
+								className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
 							>
 								{t("email")}
 							</label>
@@ -144,7 +144,7 @@ export default function RegisterPage() {
 							<div>
 								<label
 									htmlFor="password"
-									className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
+									className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
 								>
 									{t("password")}
 								</label>
@@ -163,7 +163,7 @@ export default function RegisterPage() {
 							<div>
 								<label
 									htmlFor="confirm-password"
-									className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
+									className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
 								>
 									{t("confirmPassword")}
 								</label>
@@ -201,7 +201,7 @@ export default function RegisterPage() {
 						<button
 							type="submit"
 							disabled={registerMutation.isPending}
-							className="w-full py-3 bg-[#FF5A30] text-white font-bold rounded-xl shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60"
+							className="w-full py-3 bg-[#FF5A30] text-white font-semibold rounded-xl shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60"
 						>
 							{registerMutation.isPending
 								? t("creatingAccount")

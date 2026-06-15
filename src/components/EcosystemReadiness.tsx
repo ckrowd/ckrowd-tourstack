@@ -61,7 +61,7 @@ export default function EcosystemReadiness({
 						>
 							{completionPct}%
 						</p>
-						<p className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
+						<p className="text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant">
 							{t("progress", { done: completedCount, total: checklist.length })}
 						</p>
 					</div>
@@ -98,7 +98,7 @@ export default function EcosystemReadiness({
 								{t(`items.${item.key}`)}
 							</span>
 							{item.key !== "insurance" && item.count > 0 && (
-								<span className="ml-auto text-xs font-bold text-on-surface-variant">
+								<span className="ml-auto text-xs font-semibold text-on-surface-variant">
 									{item.count}
 								</span>
 							)}
@@ -110,7 +110,7 @@ export default function EcosystemReadiness({
 					<div className="mt-5 flex flex-col sm:flex-row gap-2.5">
 						<Link
 							href="/stakeholders"
-							className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#FF5A30] text-white text-sm font-bold hover:opacity-90 transition-opacity"
+							className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#FF5A30] text-white text-sm font-semibold hover:opacity-90 transition-opacity"
 						>
 							<span className="material-symbols-outlined text-sm">share</span>
 							{t("ctaInvite")}
@@ -118,7 +118,7 @@ export default function EcosystemReadiness({
 						{!readiness.hasInsurance && (
 							<Link
 								href="/insurance"
-								className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-outline-variant/30 text-sm font-bold text-on-surface hover:bg-surface-container-high transition-colors"
+								className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-outline-variant/30 text-sm font-semibold text-on-surface hover:bg-surface-container-high transition-colors"
 							>
 								<span className="material-symbols-outlined text-sm">security</span>
 								{t("ctaInsurance")}

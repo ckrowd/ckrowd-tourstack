@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
@@ -72,7 +72,7 @@ export default function ResetPasswordPage({
 						<div>
 							<label
 								htmlFor="password"
-								className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
+								className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
 							>
 								{t("password")}
 							</label>
@@ -95,7 +95,7 @@ export default function ResetPasswordPage({
 						<div>
 							<label
 								htmlFor="confirm"
-								className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
+								className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
 							>
 								{t("confirm")}
 							</label>
@@ -123,7 +123,7 @@ export default function ResetPasswordPage({
 						<button
 							type="submit"
 							disabled={!canSubmit}
-							className="w-full py-3 bg-[#FF5A30] text-white font-bold rounded-xl shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
+							className="w-full py-3 bg-[#FF5A30] text-white font-semibold rounded-xl shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
 						>
 							{mutation.isPending ? t("saving") : t("submit")}
 						</button>

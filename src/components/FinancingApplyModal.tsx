@@ -199,7 +199,7 @@ export default function FinancingApplyModal({
 							check_circle
 						</span>
 					</div>
-					<h3 className="text-xl font-bold font-(family-name:--font-manrope) text-on-surface">
+					<h3 className="text-xl font-semibold font-(family-name:--font-manrope) text-on-surface">
 						{t("success.title")}
 					</h3>
 					<p className="mt-2 text-sm text-on-surface-variant">
@@ -208,7 +208,7 @@ export default function FinancingApplyModal({
 					<button
 						type="button"
 						onClick={onClose}
-						className="mt-6 inline-flex items-center justify-center rounded-xl bg-[#FF5A30] px-6 py-3 text-sm font-bold text-white hover:opacity-90 transition-opacity"
+						className="mt-6 inline-flex items-center justify-center rounded-xl bg-[#FF5A30] px-6 py-3 text-sm font-semibold text-white hover:opacity-90 transition-opacity"
 					>
 						{t("success.done")}
 					</button>
@@ -218,7 +218,7 @@ export default function FinancingApplyModal({
 	}
 
 	const labelClass =
-		"mb-2 block text-xs font-bold uppercase tracking-[0.24em] text-on-surface-variant";
+		"mb-2 block text-xs font-semibold uppercase tracking-[0.24em] text-on-surface-variant";
 	const controlClass =
 		"w-full rounded-xl border border-outline-variant/20 bg-surface-container-lowest px-4 py-3 text-sm font-medium text-on-surface outline-none transition focus:ring-2 focus:ring-[#FF5A30]/20";
 
@@ -241,7 +241,7 @@ export default function FinancingApplyModal({
 						<p className="text-[10px] font-black uppercase tracking-widest text-[#FF5A30]">
 							{t("step", { current: step + 1, total: 2 })}
 						</p>
-						<h3 className="font-(family-name:--font-manrope) font-bold text-on-surface text-lg">
+						<h3 className="font-(family-name:--font-manrope) font-semibold text-on-surface text-lg">
 							{step === 0 ? t("step1.title") : t("step2.title")}
 						</h3>
 					</div>
@@ -386,14 +386,14 @@ export default function FinancingApplyModal({
 
 							<div className="flex flex-col gap-3 rounded-xl border border-outline-variant/15 bg-surface-container-low p-4">
 								<div className="flex items-center justify-between gap-3">
-									<p className="text-sm font-bold text-on-surface">
+									<p className="text-sm font-semibold text-on-surface">
 										{t("verify.title")}
 									</p>
 									<button
 										type="button"
 										onClick={handleResolve}
 										disabled={!canResolve}
-										className="rounded-lg bg-[#FF5A30] text-white text-xs font-bold px-4 py-2 hover:opacity-90 transition-opacity disabled:cursor-not-allowed disabled:opacity-50"
+										className="rounded-lg bg-[#FF5A30] text-white text-xs font-semibold px-4 py-2 hover:opacity-90 transition-opacity disabled:cursor-not-allowed disabled:opacity-50"
 									>
 										{resolveMutation.isPending
 											? t("verify.checking")
@@ -414,7 +414,7 @@ export default function FinancingApplyModal({
 											{nameMatches ? "verified" : "warning"}
 										</span>
 										<div className="min-w-0 flex-1">
-											<p className="text-xs font-bold text-on-surface">
+											<p className="text-xs font-semibold text-on-surface">
 												{t("verify.registeredAs")}
 											</p>
 											<p className="text-sm text-on-surface truncate">
@@ -448,7 +448,7 @@ export default function FinancingApplyModal({
 					<button
 						type="button"
 						onClick={() => (step === 0 ? onClose() : setStep(0))}
-						className="rounded-xl border border-outline-variant/40 px-5 py-2.5 text-sm font-bold text-on-surface-variant hover:bg-surface-container-low transition-colors"
+						className="rounded-xl border border-outline-variant/40 px-5 py-2.5 text-sm font-semibold text-on-surface-variant hover:bg-surface-container-low transition-colors"
 					>
 						{step === 0 ? t("actions.cancel") : t("actions.back")}
 					</button>
@@ -457,7 +457,7 @@ export default function FinancingApplyModal({
 							type="button"
 							onClick={() => setStep(1)}
 							disabled={!amountValid}
-							className="rounded-xl bg-[#FF5A30] px-6 py-2.5 text-sm font-bold text-white hover:opacity-90 transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
+							className="rounded-xl bg-[#FF5A30] px-6 py-2.5 text-sm font-semibold text-white hover:opacity-90 transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
 						>
 							{t("actions.next")}
 						</button>
@@ -466,7 +466,7 @@ export default function FinancingApplyModal({
 							type="button"
 							onClick={handleSubmit}
 							disabled={!canSubmit}
-							className="rounded-xl bg-[#FF5A30] px-6 py-2.5 text-sm font-bold text-white hover:opacity-90 transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
+							className="rounded-xl bg-[#FF5A30] px-6 py-2.5 text-sm font-semibold text-white hover:opacity-90 transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
 						>
 							{applyMutation.isPending
 								? t("actions.submitting")

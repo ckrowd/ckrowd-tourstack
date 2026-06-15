@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Image from "next/image";
 import { useMutation } from "@tanstack/react-query";
@@ -100,7 +100,7 @@ export default function CreateTourPage() {
 					</span>
 				</Link>
 				<div>
-					<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-1">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-1">
 						{t("management")}
 					</span>
 					<h1 className="text-3xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface">
@@ -114,7 +114,7 @@ export default function CreateTourPage() {
 					<span className="material-symbols-outlined text-[#FF5A30]">
 						add_circle
 					</span>
-					<h3 className="font-(family-name:--font-manrope) font-bold text-lg">
+					<h3 className="font-(family-name:--font-manrope) font-semibold text-lg">
 						{t("projectDetails")}
 					</h3>
 				</div>
@@ -131,7 +131,7 @@ export default function CreateTourPage() {
 						<div>
 							<label
 								htmlFor="artist_name"
-								className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider"
+								className="block text-xs font-semibold text-on-surface-variant mb-1.5 uppercase tracking-wider"
 							>
 								{t("artistName")}
 							</label>
@@ -147,7 +147,7 @@ export default function CreateTourPage() {
 						<div>
 							<label
 								htmlFor="tour_name"
-								className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider"
+								className="block text-xs font-semibold text-on-surface-variant mb-1.5 uppercase tracking-wider"
 							>
 								{t("tourName")}
 							</label>
@@ -166,7 +166,7 @@ export default function CreateTourPage() {
 						<div>
 							<label
 								htmlFor="fee_min"
-								className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider"
+								className="block text-xs font-semibold text-on-surface-variant mb-1.5 uppercase tracking-wider"
 							>
 								{t("feeMin")}
 							</label>
@@ -183,7 +183,7 @@ export default function CreateTourPage() {
 						<div>
 							<label
 								htmlFor="fee_max"
-								className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider"
+								className="block text-xs font-semibold text-on-surface-variant mb-1.5 uppercase tracking-wider"
 							>
 								{t("feeMax")}
 							</label>
@@ -203,7 +203,7 @@ export default function CreateTourPage() {
 						<div>
 							<label
 								htmlFor="date_from"
-								className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider"
+								className="block text-xs font-semibold text-on-surface-variant mb-1.5 uppercase tracking-wider"
 							>
 								{t("availableFrom")}
 							</label>
@@ -218,7 +218,7 @@ export default function CreateTourPage() {
 						<div>
 							<label
 								htmlFor="date_to"
-								className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider"
+								className="block text-xs font-semibold text-on-surface-variant mb-1.5 uppercase tracking-wider"
 							>
 								{t("availableTo")}
 							</label>
@@ -235,7 +235,7 @@ export default function CreateTourPage() {
 					<div>
 						<label
 							htmlFor="genre"
-							className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider"
+							className="block text-xs font-semibold text-on-surface-variant mb-1.5 uppercase tracking-wider"
 						>
 							{t("genre")}
 						</label>
@@ -263,7 +263,7 @@ export default function CreateTourPage() {
 						<div>
 							<label
 								htmlFor="region"
-								className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider"
+								className="block text-xs font-semibold text-on-surface-variant mb-1.5 uppercase tracking-wider"
 							>
 								{t("region")}
 							</label>
@@ -288,7 +288,7 @@ export default function CreateTourPage() {
 						<div>
 							<label
 								htmlFor="markets"
-								className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider"
+								className="block text-xs font-semibold text-on-surface-variant mb-1.5 uppercase tracking-wider"
 							>
 								{t("tourCities")}
 							</label>
@@ -305,7 +305,7 @@ export default function CreateTourPage() {
 					<div>
 						<label
 							htmlFor="image_upload"
-							className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider"
+							className="block text-xs font-semibold text-on-surface-variant mb-1.5 uppercase tracking-wider"
 						>
 							{t("tourImage")}
 						</label>
@@ -360,7 +360,7 @@ export default function CreateTourPage() {
 					<div>
 						<label
 							htmlFor="bio"
-							className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider"
+							className="block text-xs font-semibold text-on-surface-variant mb-1.5 uppercase tracking-wider"
 						>
 							{t("bio")}
 						</label>
@@ -376,7 +376,7 @@ export default function CreateTourPage() {
 					<div>
 						<label
 							htmlFor="technical_requirements"
-							className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider"
+							className="block text-xs font-semibold text-on-surface-variant mb-1.5 uppercase tracking-wider"
 						>
 							{t("technicalRequirements")}
 						</label>
@@ -393,7 +393,7 @@ export default function CreateTourPage() {
 						<button
 							type="submit"
 							disabled={createMutation.isPending}
-							className="px-8 py-4 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-bold shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+							className="px-8 py-4 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-semibold shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
 						>
 							{createMutation.isPending ? t("publishing") : t("publish")}
 						</button>

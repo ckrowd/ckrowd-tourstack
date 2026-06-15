@@ -85,14 +85,14 @@ export default function SideNavClient({ navItems, startNewTourLabel }: Props) {
 					<Link
 						href="/eoi"
 						data-tour="nav-cta"
-						className="block w-full py-4 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 text-center"
+						className="block w-full py-4 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 text-center"
 					>
 						{startNewTourLabel}
 					</Link>
 				) : (
 					<div
 						title={t("profileRequired")}
-						className="block w-full py-4 bg-slate-200 text-slate-400 rounded-xl font-(family-name:--font-manrope) font-bold text-sm text-center cursor-not-allowed select-none"
+						className="block w-full py-4 bg-slate-200 text-slate-400 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm text-center cursor-not-allowed select-none"
 					>
 						{startNewTourLabel}
 					</div>
