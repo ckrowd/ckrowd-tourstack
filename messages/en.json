@@ -5183,6 +5183,8 @@
       "tour": "Select Tour",
       "tourNone": "No specific tour",
       "tourHint": "Tours appear here after your EOI is approved and a tour stop is confirmed.",
+      "tourGroupConfirmed": "Confirmed Tours",
+      "tourGroupApplications": "Tour Applications (Pending)",
       "unknownArtist": "Unknown Artist",
       "package": "Choose Financing Package",
       "amount": "Amount Requested (USD)"
@@ -5291,6 +5293,8 @@
       "tour": "Select Tour",
       "tourNone": "No specific tour",
       "tourHint": "Tours appear here after your EOI is approved and a tour stop is confirmed.",
+      "tourGroupConfirmed": "Confirmed Tours",
+      "tourGroupApplications": "Tour Applications (Pending)",
       "unknownArtist": "Unknown Artist",
       "package": "Choose Insurance Package",
       "sumInsured": "Estimated Value / Sum Insured (USD)"
