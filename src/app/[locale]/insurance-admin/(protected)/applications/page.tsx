@@ -2,9 +2,8 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useFormatter, useTranslations } from "next-intl";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import {
-	getInsuranceApplications,
 	getInsuranceEois,
 	updateInsuranceApplication,
 } from "@/app/actions";
@@ -18,56 +17,20 @@ interface AdminProfile {
 	adminSignature: string | null;
 }
 
-// Insurance admin can only see forwarded (approved) and disbursed applications.
-// Platform admin handles approval; insurance admin handles disbursement only.
-const FILTERS = ["all", "approved", "disbursed"] as const;
-
-type Application = Record<string, unknown>;
-
-function statusClass(status: string) {
-	switch (status) {
-		case "approved":
-			return "text-emerald-700 bg-emerald-50";
-		case "disbursed":
-			return "text-purple-700 bg-purple-50";
-		default:
-			return "text-yellow-600 bg-yellow-50";
-	}
-}
-
-function promoterName(a: Application): string {
-	const promoter = a.promoter as Record<string, unknown> | null;
-	const user = promoter?.user as Record<string, unknown> | null;
-	return String(
-		promoter?.company_name ??
-			promoter?.contact_person ??
-			user?.name ??
-			user?.email ??
-			"—",
-	);
-}
-
-function tourLabel(a: Application): string {
-	const tour = a.tour as Record<string, unknown> | null;
-	const artist = tour?.artist as Record<string, unknown> | null;
-	if (!artist) return "—";
-	return String(artist.tour_name ?? artist.name ?? "—");
-}
-
 export default function InsuranceAdminApplicationsPage() {
 	const t = useTranslations("InsuranceAdminApplicationsPage");
 	const format = useFormatter();
 	const queryClient = useQueryClient();
 
-	const [filter, setFilter] = useState<(typeof FILTERS)[number]>("all");
 	const [selectedId, setSelectedId] = useState<string | null>(null);
 	const [partnerName, setPartnerName] = useState("");
 	const [note, setNote] = useState("");
+	const [contactPerson, setContactPerson] = useState("");
 	const [adminProfile] = useState<AdminProfile>(() => {
 		if (typeof window === "undefined") return { orgName: "", contactPerson: "", role: "", adminSignature: null };
 		try {
 			const raw = localStorage.getItem("ins_admin_profile");
-			if (raw) return JSON.parse(raw) as AdminProfile;
+			if (raw) return { ...{ orgName: "", contactPerson: "", role: "", adminSignature: null }, ...(JSON.parse(raw) as Partial<AdminProfile>) };
 		} catch {}
 		return { orgName: "", contactPerson: "", role: "", adminSignature: null };
 	});
@@ -75,13 +38,7 @@ export default function InsuranceAdminApplicationsPage() {
 		if (typeof window === "undefined") return null;
 		return localStorage.getItem("platform_admin_ceo_signature");
 	});
-	const [contactPerson, setContactPerson] = useState(() => adminProfile.contactPerson ?? "");
 	const [pdfViewerEoiId, setPdfViewerEoiId] = useState<string | null>(null);
-
-	const query = useQuery({
-		queryKey: ["insuranceApplications"],
-		queryFn: () => getInsuranceApplications(),
-	});
 
 	const eoisQuery = useQuery({
 		queryKey: ["insuranceEois"],
@@ -95,35 +52,21 @@ export default function InsuranceAdminApplicationsPage() {
 		}) => updateInsuranceApplication(vars.id, vars.body),
 		onSuccess: (result) => {
 			if (result.success) {
-				void queryClient.invalidateQueries({
-					queryKey: ["insuranceApplications"],
-				});
+				void queryClient.invalidateQueries({ queryKey: ["insuranceEois"] });
 			}
 		},
 	});
 
-	const applications = useMemo(() => {
-		const list = (
-			query.data?.success ? (query.data.data ?? []) : []
-		) as Application[];
-		// Only show applications forwarded by the platform admin (approved) or already disbursed
-		const forwarded = list.filter((a) => {
-			const s = String(a.status ?? "pending");
-			return s === "approved" || s === "disbursed";
-		});
-		if (filter === "all") return forwarded;
-		return forwarded.filter((a) => String(a.status ?? "pending") === filter);
-	}, [query.data, filter]);
-
-	function toggleReview(a: Application) {
-		const id = String(a.id);
+	function toggleReview(eoi: Record<string, unknown>) {
+		const id = String(eoi.id);
 		if (selectedId === id) {
 			setSelectedId(null);
 			return;
 		}
 		setSelectedId(id);
-		setPartnerName(String(a.partner_name ?? ""));
-		setNote(String(a.note ?? ""));
+		setPartnerName(String(eoi.partner_name ?? adminProfile.orgName ?? ""));
+		setNote(String(eoi.note ?? ""));
+		setContactPerson(adminProfile.contactPerson ?? "");
 		reviewMutation.reset();
 	}
 
@@ -139,21 +82,15 @@ export default function InsuranceAdminApplicationsPage() {
 		});
 	}
 
-	function quickDisburse(a: Application) {
-		reviewMutation.mutate({
-			id: String(a.id),
-			body: { status: "disbursed" },
-		});
-	}
-
 	const reviewDone = reviewMutation.data?.success === true;
-	const reviewFailed =
-		reviewMutation.isSuccess && reviewMutation.data?.success === false;
+	const reviewFailed = reviewMutation.isSuccess && reviewMutation.data?.success === false;
 
 	const orgName = adminProfile.orgName || adminProfile.contactPerson;
 	const orgInitials = orgName
 		? orgName.split(" ").map((w) => w[0]).join("").toUpperCase().slice(0, 2)
 		: null;
+
+	const eois = (eoisQuery.data?.data as Record<string, unknown>[] | null) ?? [];
 
 	return (
 		<>
@@ -192,245 +129,47 @@ export default function InsuranceAdminApplicationsPage() {
 				</div>
 				<button
 					type="button"
-					onClick={() => query.refetch()}
-					disabled={query.isFetching}
+					onClick={() => eoisQuery.refetch()}
+					disabled={eoisQuery.isFetching}
 					className="flex items-center gap-2 px-4 py-2.5 bg-surface-container-high text-on-surface rounded-xl text-sm font-semibold hover:bg-surface-container-highest transition-colors disabled:opacity-60 shrink-0"
 				>
 					<span className="material-symbols-outlined text-sm">sync</span>
-					{query.isFetching ? t("refreshing") : t("refresh")}
+					{eoisQuery.isFetching ? t("refreshing") : t("refresh")}
 				</button>
 			</div>
 
-			<div className="flex flex-wrap gap-2 mb-6">
-				{FILTERS.map((key) => (
-					<button
-						key={key}
-						type="button"
-						aria-pressed={filter === key}
-						onClick={() => setFilter(key)}
-						className={`px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-colors ${
-							filter === key
-								? "bg-[#FF5A30] text-white"
-								: "bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high"
-						}`}
-					>
-						{t(`filters.${key}`)}
-					</button>
-				))}
-			</div>
-
-			<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
-				<div className="flex items-center justify-between mb-5">
-					<h3 className="font-(family-name:--font-manrope) font-semibold text-lg">
-						{t("requestsTitle")}
-					</h3>
-					<span className="material-symbols-outlined text-[#FF5A30]">
-						shield
+			{eoisQuery.isLoading ? (
+				<Loader />
+			) : !eoisQuery.data?.success ? (
+				<p className="text-sm font-medium text-red-600 py-10 text-center">
+					{eoisQuery.data?.error || t("loadError")}
+				</p>
+			) : eois.length === 0 ? (
+				<div className="bg-surface-container-lowest rounded-2xl p-12 text-center shadow-sm">
+					<span className="material-symbols-outlined text-5xl text-on-surface-variant block mb-3">
+						inbox
 					</span>
+					<p className="text-on-surface-variant font-medium text-sm">{t("eois.empty")}</p>
 				</div>
-
-				{query.isLoading ? (
-					<Loader />
-				) : !query.data?.success ? (
-					<p className="text-sm font-medium text-red-600 py-10 text-center">
-						{query.data?.error || t("loadError")}
-					</p>
-				) : applications.length === 0 ? (
-					<div className="py-12 text-center">
-						<span className="material-symbols-outlined text-5xl text-on-surface-variant block mb-3">
-							shield
-						</span>
-						<p className="text-on-surface-variant font-medium text-sm">
-							{t("empty")}
-						</p>
-					</div>
-				) : (
-					<div className="space-y-4">
-						{applications.map((app) => {
-							const id = String(app.id);
-							const status = String(app.status ?? "pending");
-							const coverage = `${String(app.currency ?? "USD")} ${Number(
-								app.amount_requested ?? 0,
-							).toLocaleString()}`;
-							const created = app.created_at
-								? format.dateTime(new Date(String(app.created_at)), {
-										dateStyle: "medium",
-									})
+			) : (
+				<div className="space-y-4">
+					{eois.map((eoi) => {
+						const eoiId = String(eoi.id);
+						const promoter = eoi.promoter as Record<string, unknown> | null;
+						const artist = eoi.artist as Record<string, unknown> | null;
+						const forwardedAt =
+							eoi.forwarded_at != null
+								? format.dateTime(new Date(String(eoi.forwarded_at)), { dateStyle: "medium" })
 								: "—";
-							const expanded = selectedId === id;
-							return (
-								<div
-									key={id}
-									className={`border rounded-xl transition-colors ${
-										expanded
-											? "border-[#FF5A30]/60"
-											: "border-outline-variant/10"
-									}`}
-								>
-									<div className="flex items-center justify-between gap-4 p-4">
-										<div className="min-w-0">
-											<p className="text-base font-semibold text-on-surface truncate">
-												{promoterName(app)}
-											</p>
-											<p className="text-sm text-on-surface-variant mt-1">
-												{tourLabel(app)} —{" "}
-												<span className="font-semibold">
-													{coverage} {t("requested")}
-												</span>
-											</p>
-											<p className="text-xs text-on-surface-variant mt-0.5">
-												{created}
-											</p>
-										</div>
-										<div className="flex flex-col items-end gap-2 shrink-0">
-											<span
-												className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter ${statusClass(status)}`}
-											>
-												{t(`status.${status}`)}
-											</span>
-											<div className="flex items-center gap-2">
-												{status !== "disbursed" && (
-													<button
-														type="button"
-														onClick={() => quickDisburse(app)}
-														disabled={reviewMutation.isPending}
-														className="text-xs font-semibold text-emerald-700 hover:underline disabled:opacity-60"
-													>
-														{t("review.save")}
-													</button>
-												)}
-												<button
-													type="button"
-													onClick={() => toggleReview(app)}
-													className="text-xs font-semibold text-[#FF5A30] hover:underline"
-												>
-													{expanded ? t("closeReview") : t("reviewDetails")}
-												</button>
-											</div>
-										</div>
-									</div>
-
-									{expanded && (
-										<form
-											onSubmit={(event) => {
-												event.preventDefault();
-												submitDisburse();
-											}}
-											className="border-t border-outline-variant/10 p-4 grid grid-cols-1 sm:grid-cols-2 gap-4"
-										>
-											<label className="block">
-												<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
-													{t("review.contactPerson")}
-												</span>
-												<input
-													type="text"
-													value={contactPerson}
-													onChange={(event) =>
-														setContactPerson(event.target.value)
-													}
-													placeholder={t("review.contactPersonPlaceholder")}
-													className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
-												/>
-											</label>
-											<label className="block">
-												<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
-													{t("review.partner")}
-												</span>
-												<input
-													type="text"
-													value={partnerName}
-													onChange={(event) =>
-														setPartnerName(event.target.value)
-													}
-													placeholder={t("review.partnerPlaceholder")}
-													className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
-												/>
-											</label>
-											<label className="block sm:col-span-2">
-												<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
-													{t("review.note")}
-												</span>
-												<textarea
-													rows={3}
-													value={note}
-													onChange={(event) => setNote(event.target.value)}
-													placeholder={t("review.notePlaceholder")}
-													className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
-												/>
-											</label>
-											<div className="sm:col-span-2 flex items-center justify-between gap-3">
-												<div>
-													{reviewDone && (
-														<p
-															className="text-sm font-medium text-emerald-700"
-															role="status"
-														>
-															{t("review.success")}
-														</p>
-													)}
-													{(reviewFailed || reviewMutation.isError) && (
-														<p
-															className="text-sm font-medium text-red-600"
-															role="alert"
-														>
-															{reviewMutation.data?.error ||
-																t("review.error")}
-														</p>
-													)}
-												</div>
-												<button
-													type="submit"
-													disabled={reviewMutation.isPending}
-													className="px-5 py-2.5 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-60"
-												>
-													{reviewMutation.isPending
-														? t("review.saving")
-														: t("review.save")}
-												</button>
-											</div>
-										</form>
-									)}
-								</div>
-							);
-						})}
-					</div>
-				)}
-			</div>
-
-			{/* Forwarded EOIs */}
-			<div className="mt-10">
-				<h2 className="text-lg font-black font-(family-name:--font-manrope) text-on-surface mb-4">
-					{t("eois.title")}
-				</h2>
-				{eoisQuery.isLoading ? (
-					<p className="text-sm text-on-surface-variant">{t("eois.loading")}</p>
-				) : !eoisQuery.data?.success ||
-				  (eoisQuery.data?.data as unknown[])?.length === 0 ? (
-					<div className="bg-surface-container-lowest rounded-2xl p-10 text-center shadow-sm">
-						<span className="material-symbols-outlined text-4xl text-on-surface-variant block mb-3">
-							inbox
-						</span>
-						<p className="text-sm text-on-surface-variant font-medium">
-							{t("eois.empty")}
-						</p>
-					</div>
-				) : (
-					<div className="space-y-4">
-						{(eoisQuery.data?.data as Record<string, unknown>[]).map((eoi) => {
-							const eoiId = String(eoi.id);
-							const promoter = eoi.promoter as Record<string, unknown> | null;
-							const artist = eoi.artist as Record<string, unknown> | null;
-							const forwardedAt =
-								eoi.forwarded_at != null
-									? format.dateTime(new Date(String(eoi.forwarded_at)), {
-											dateStyle: "medium",
-										})
-									: "—";
-							return (
-								<div
-									key={eoiId}
-									className="bg-surface-container-lowest rounded-2xl p-5 border border-outline-variant/10 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-								>
+						const expanded = selectedId === eoiId;
+						return (
+							<div
+								key={eoiId}
+								className={`bg-surface-container-lowest rounded-2xl border shadow-sm transition-colors ${
+									expanded ? "border-[#FF5A30]/60" : "border-outline-variant/10"
+								}`}
+							>
+								<div className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 									<div>
 										<p className="text-xs font-black text-[#FF5A30] uppercase tracking-widest mb-0.5">
 											{`EOI-${eoiId.slice(-6).toUpperCase()}`}
@@ -442,12 +181,9 @@ export default function InsuranceAdminApplicationsPage() {
 											</span>
 										</p>
 										<p className="text-sm text-on-surface-variant mt-0.5">
-											{String(
-												promoter?.company_name ??
-													promoter?.contact_person ??
-													"—",
-											)}{" "}
-											· {String(eoi.city ?? "—")}
+											{String(promoter?.company_name ?? promoter?.contact_person ?? "—")}
+											{" · "}
+											{String(eoi.city ?? "—")}
 										</p>
 										<p className="text-xs text-on-surface-variant mt-1">
 											{t("eois.forwardedOn")} {forwardedAt}
@@ -459,9 +195,7 @@ export default function InsuranceAdminApplicationsPage() {
 											onClick={() => setPdfViewerEoiId(eoiId)}
 											className="flex items-center gap-2 px-4 py-2.5 bg-[#FF5A30]/10 text-[#FF5A30] rounded-xl text-sm font-semibold hover:bg-[#FF5A30]/20 transition-colors"
 										>
-											<span className="material-symbols-outlined text-sm">
-												draw
-											</span>
+											<span className="material-symbols-outlined text-sm">draw</span>
 											{t("eois.previewSign")}
 										</button>
 										<a
@@ -470,18 +204,94 @@ export default function InsuranceAdminApplicationsPage() {
 											rel="noopener noreferrer"
 											className="flex items-center gap-2 px-4 py-2.5 bg-purple-50 text-purple-700 rounded-xl text-sm font-semibold hover:bg-purple-100 transition-colors"
 										>
-											<span className="material-symbols-outlined text-sm">
-												download
-											</span>
+											<span className="material-symbols-outlined text-sm">download</span>
 											{t("eois.downloadPdf")}
 										</a>
+										<button
+											type="button"
+											onClick={() => toggleReview(eoi)}
+											className="flex items-center gap-2 px-4 py-2.5 bg-surface-container-high text-on-surface rounded-xl text-sm font-semibold hover:bg-surface-container-highest transition-colors"
+										>
+											<span className="material-symbols-outlined text-sm">
+												{expanded ? "expand_less" : "rate_review"}
+											</span>
+											{expanded ? t("eois.closeReview") : t("eois.review")}
+										</button>
 									</div>
 								</div>
-							);
-						})}
-					</div>
-				)}
-			</div>
+
+								{expanded && (
+									<form
+										onSubmit={(e) => {
+											e.preventDefault();
+											submitDisburse();
+										}}
+										className="border-t border-outline-variant/10 p-5 grid grid-cols-1 sm:grid-cols-2 gap-4"
+									>
+										<label className="block">
+											<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
+												{t("review.contactPerson")}
+											</span>
+											<input
+												type="text"
+												value={contactPerson}
+												onChange={(e) => setContactPerson(e.target.value)}
+												placeholder={t("review.contactPersonPlaceholder")}
+												className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+											/>
+										</label>
+										<label className="block">
+											<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
+												{t("review.partner")}
+											</span>
+											<input
+												type="text"
+												value={partnerName}
+												onChange={(e) => setPartnerName(e.target.value)}
+												placeholder={t("review.partnerPlaceholder")}
+												className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+											/>
+										</label>
+										<label className="block sm:col-span-2">
+											<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
+												{t("review.note")}
+											</span>
+											<textarea
+												rows={3}
+												value={note}
+												onChange={(e) => setNote(e.target.value)}
+												placeholder={t("review.notePlaceholder")}
+												className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+											/>
+										</label>
+										<div className="sm:col-span-2 flex items-center justify-between gap-3">
+											<div>
+												{reviewDone && (
+													<p className="text-sm font-medium text-emerald-700" role="status">
+														{t("review.success")}
+													</p>
+												)}
+												{(reviewFailed || reviewMutation.isError) && (
+													<p className="text-sm font-medium text-red-600" role="alert">
+														{reviewMutation.data?.error || t("review.error")}
+													</p>
+												)}
+											</div>
+											<button
+												type="submit"
+												disabled={reviewMutation.isPending}
+												className="px-6 py-2.5 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-opacity disabled:opacity-60"
+											>
+												{reviewMutation.isPending ? t("review.saving") : t("review.save")}
+											</button>
+										</div>
+									</form>
+								)}
+							</div>
+						);
+					})}
+				</div>
+			)}
 		</>
 	);
 }
