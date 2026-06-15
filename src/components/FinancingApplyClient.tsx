@@ -4,6 +4,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { applyForFinancing } from "@/app/actions";
+import FinancingFaq from "@/components/FinancingFaq";
+import HowItWorksModal from "@/components/HowItWorksModal";
 import { Link } from "@/i18n/routing";
 
 type Tour = { id: string; name?: string | null; city?: string | null; artist?: { name?: string | null } | null };
@@ -35,7 +37,12 @@ interface Props {
 
 export default function FinancingApplyClient({ tours, applications, locale }: Props) {
 	const t = useTranslations("FinancingApplyPage");
+	const tFin = useTranslations("FinancingPage");
 	const queryClient = useQueryClient();
+
+	const financingFaqs = Object.values(
+		tFin.raw("faqs") as Record<string, { q: string; a: string }>,
+	);
 
 	const [tourId, setTourId] = useState<string>("");
 	const [product, setProduct] = useState<Parameters<typeof applyForFinancing>[0]["product"]>(FINANCING_PRODUCTS[0].id);
@@ -64,16 +71,32 @@ export default function FinancingApplyClient({ tours, applications, locale }: Pr
 	return (
 		<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
 			{/* Header */}
-			<div className="mb-8">
-				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
-					{t("promoterPortal")}
-				</span>
-				<h1 className="text-3xl font-semibold font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
-					{t("title")}
-				</h1>
-				<p className="text-on-surface-variant font-medium max-w-xl">
-					{t("description")}
-				</p>
+			<div className="mb-8 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+				<div>
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+						{t("promoterPortal")}
+					</span>
+					<h1 className="text-3xl font-semibold font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
+						{t("title")}
+					</h1>
+					<p className="text-on-surface-variant font-medium max-w-xl">
+						{t("description")}
+					</p>
+				</div>
+				<div className="flex items-center gap-2 shrink-0">
+					<HowItWorksModal
+						title={tFin("howItWorksTitle")}
+						buttonLabel={tFin("howItWorksButton")}
+						steps={[
+							{ step: "01", title: tFin("steps.s1.title"), desc: tFin("steps.s1.description") },
+							{ step: "02", title: tFin("steps.s2.title"), desc: tFin("steps.s2.description") },
+							{ step: "03", title: tFin("steps.s3.title"), desc: tFin("steps.s3.description") },
+							{ step: "04", title: tFin("steps.s4.title"), desc: tFin("steps.s4.description") },
+							{ step: "05", title: tFin("steps.s5.title"), desc: tFin("steps.s5.description") },
+						]}
+					/>
+					<FinancingFaq faqs={financingFaqs} />
+				</div>
 			</div>
 
 			{/* Product showcase */}

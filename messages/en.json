@@ -382,6 +382,8 @@
     "markAllAsRead": "Mark all as read",
     "viewAllNotifications": "View all notifications",
     "checkingSession": "Checking session",
+    "changePhoto": "Change Photo",
+    "uploadingPhoto": "Uploading…",
     "notif": {
       "empty": "No notifications yet",
       "eoiFallback": "Expression of Interest",
@@ -2537,6 +2539,16 @@
       "opportunities": "Opportunities",
       "activeTours": "Active Tours",
       "avgReview": "Avg Review"
+    },
+    "myTours": {
+      "title": "Your Active Tours",
+      "noTours": "No confirmed tours yet. Submit an EOI to get started.",
+      "statusLabel": "Status",
+      "statusConfirmed": "Confirmed",
+      "statusUnderReview": "Under Review",
+      "statusNeedsRevision": "Needs Revision",
+      "statusRejected": "Rejected",
+      "statusDraft": "Draft"
     }
   },
   "FinancingPage": {
