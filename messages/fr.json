@@ -1327,7 +1327,8 @@
       "save": "Enregistrer",
       "saving": "Enregistrement...",
       "saveSuccess": "Modifications enregistrees",
-      "saveError": "Echec de l enregistrement"
+      "saveError": "Echec de l enregistrement",
+      "requiredFields": "Veuillez remplir tous les champs obligatoires"
     }
   },
   "SettingsPage": {

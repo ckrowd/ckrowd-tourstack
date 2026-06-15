@@ -1327,7 +1327,8 @@
       "save": "Save Changes",
       "saving": "Saving...",
       "saveSuccess": "Changes saved",
-      "saveError": "Failed to save changes"
+      "saveError": "Failed to save changes",
+      "requiredFields": "Please fill in all required fields"
     }
   },
   "SettingsPage": {
