@@ -271,7 +271,7 @@ function OpportunityPanel({
 				<p className="text-[10px] font-bold uppercase tracking-[0.28em] text-[#FF5A30] mb-1">
 					{t("tourPanel.heading")}
 				</p>
-				<h2 className="text-lg font-(family-name:--font-manrope) font-extrabold text-slate-950 leading-tight">
+				<h2 className="text-lg font-(family-name:--font-manrope) font-bold text-slate-950 leading-tight">
 					{String(artist.tour_name ?? artist.name ?? "")}
 				</h2>
 				<p className="mt-0.5 text-sm font-semibold text-slate-500">
@@ -480,7 +480,7 @@ function EOIPageContent() {
 								check_circle
 							</span>
 						</div>
-						<h1 className="text-3xl font-black tracking-tight text-slate-950 font-(family-name:--font-manrope)">
+						<h1 className="text-3xl font-bold tracking-tight text-slate-950 font-(family-name:--font-manrope)">
 							{t("success.title")}
 						</h1>
 						<p className="mt-4 text-sm leading-6 text-slate-600">
@@ -516,7 +516,7 @@ function EOIPageContent() {
 					<span className="mb-2 block text-xs font-bold uppercase tracking-[0.3em] text-[#FF5A30]">
 						{t("hero.platform")}
 					</span>
-					<h1 className="text-3xl font-black tracking-tight text-slate-950 md:text-4xl font-(family-name:--font-manrope)">
+					<h1 className="text-3xl font-bold tracking-tight text-slate-950 md:text-4xl font-(family-name:--font-manrope)">
 						{t("hero.title")}
 					</h1>
 					<p className="mt-3 text-base leading-relaxed text-slate-600">
@@ -813,7 +813,7 @@ function EOIPageContent() {
 
 									{step === 3 && (
 										<div className="rounded-3xl border border-slate-200 bg-slate-50 p-6">
-											<h3 className="text-lg font-black tracking-tight text-slate-950 font-(family-name:--font-manrope)">
+											<h3 className="text-lg font-bold tracking-tight text-slate-950 font-(family-name:--font-manrope)">
 												{t("review.title")}
 											</h3>
 											<div className="mt-4 divide-y divide-slate-100 rounded-2xl bg-white p-4 shadow-sm">

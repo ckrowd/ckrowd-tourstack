@@ -101,7 +101,7 @@ export default function DiscoveryClient() {
 							<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
 								{t("hero.platform")}
 							</span>
-							<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
+							<h1 className="text-3xl font-bold font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
 								{t.rich("hero.title", {
 									spanNode: (chunks) => (
 										<span className="text-[#FF5A30]">{chunks}</span>
@@ -344,7 +344,7 @@ export default function DiscoveryClient() {
 										</div>
 										{!!artist.is_trending && (
 											<div className="absolute top-4 right-4">
-												<span className="bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shadow-sm">
+												<span className="bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-widest shadow-sm">
 													{t("trendingLabel")}
 												</span>
 											</div>
@@ -357,7 +357,7 @@ export default function DiscoveryClient() {
 									</div>
 
 									<div className="p-5">
-										<h3 className="font-(family-name:--font-manrope) text-xl font-extrabold group-hover:text-[#FF5A30] transition-colors">
+										<h3 className="font-(family-name:--font-manrope) text-xl font-bold group-hover:text-[#FF5A30] transition-colors">
 											{String(artist.name ?? "")}
 										</h3>
 										<div className="mt-3 space-y-2">
@@ -455,7 +455,7 @@ export default function DiscoveryClient() {
 									key={stat.label}
 									className="bg-surface-container-lowest p-4 rounded-xl text-center border border-[#FF5A30]/5 flex flex-col items-center justify-center min-h-24"
 								>
-									<p className="text-2xl font-black font-(family-name:--font-manrope) text-[#FF5A30] leading-none">
+									<p className="text-2xl font-bold font-(family-name:--font-manrope) text-[#FF5A30] leading-none">
 										{stat.value}
 									</p>
 									<p className="text-[10px] uppercase font-bold text-on-surface-variant mt-2 leading-tight">

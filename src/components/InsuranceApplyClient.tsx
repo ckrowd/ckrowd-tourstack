@@ -57,12 +57,37 @@ export default function InsuranceApplyClient({ tours, applications, locale }: Pr
 				<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
 					{t("promoterPortal")}
 				</span>
-				<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
+				<h1 className="text-3xl font-bold font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
 					{t("title")}
 				</h1>
 				<p className="text-on-surface-variant font-medium max-w-xl">
 					{t("description")}
 				</p>
+			</div>
+
+			{/* Product showcase */}
+			<div className="mb-10">
+				<h2 className="font-(family-name:--font-manrope) font-semibold text-xl text-on-surface mb-5">
+					{t("productsTitle")}
+				</h2>
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+					{(t.raw("productSuite") as { name: string; tag: string; desc: string }[]).map((product) => (
+						<div
+							key={product.name}
+							className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10 flex flex-col gap-3"
+						>
+							<span className="text-[10px] font-semibold uppercase tracking-wider text-[#FF5A30] bg-[#FF5A30]/10 px-2 py-0.5 rounded-full self-start">
+								{product.tag}
+							</span>
+							<p className="font-(family-name:--font-manrope) font-semibold text-on-surface text-sm">
+								{product.name}
+							</p>
+							<p className="text-xs text-on-surface-variant leading-relaxed flex-1">
+								{product.desc}
+							</p>
+						</div>
+					))}
+				</div>
 			</div>
 
 			{/* Apply form */}
@@ -108,6 +133,12 @@ export default function InsuranceApplyClient({ tours, applications, locale }: Pr
 								expand_more
 							</span>
 						</div>
+						{tours.length === 0 && (
+							<p className="mt-2 flex items-center gap-1.5 text-xs text-on-surface-variant/70">
+								<span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>info</span>
+								{t("fields.tourHint")}
+							</p>
+						)}
 					</div>
 
 					{/* Choose package */}
@@ -115,28 +146,33 @@ export default function InsuranceApplyClient({ tours, applications, locale }: Pr
 						<p className={labelClass}>{t("fields.package")}</p>
 						<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
 							{INSURANCE_PRODUCTS.map((p) => (
-								<button
-									key={p.id}
-									type="button"
-									role="radio"
-									aria-checked={product === p.id}
-									onClick={() => setProduct(p.id)}
-									className={`flex items-center gap-3 p-4 rounded-xl border-2 text-left transition-all ${
-										product === p.id
-											? "border-[#FF5A30] bg-[#FF5A30]/5"
-											: "border-outline-variant/20 hover:border-outline-variant/50"
-									}`}
-								>
-									<span
-										className={`material-symbols-outlined text-xl shrink-0 ${product === p.id ? "text-[#FF5A30]" : "text-on-surface-variant"}`}
-										style={{ fontVariationSettings: "'FILL' 1" }}
+								<div key={p.id} className="relative group">
+									<button
+										type="button"
+										role="radio"
+										aria-checked={product === p.id}
+										onClick={() => setProduct(p.id)}
+										className={`w-full flex items-center gap-3 p-4 rounded-xl border-2 text-left transition-all ${
+											product === p.id
+												? "border-[#FF5A30] bg-[#FF5A30]/5"
+												: "border-outline-variant/20 hover:border-outline-variant/50"
+										}`}
 									>
-										{p.icon}
-									</span>
-									<span className={`text-sm font-semibold font-(family-name:--font-manrope) ${product === p.id ? "text-[#FF5A30]" : "text-on-surface"}`}>
-										{t(`packages.${p.labelKey}`)}
-									</span>
-								</button>
+										<span
+											className={`material-symbols-outlined text-xl shrink-0 ${product === p.id ? "text-[#FF5A30]" : "text-on-surface-variant"}`}
+											style={{ fontVariationSettings: "'FILL' 1" }}
+										>
+											{p.icon}
+										</span>
+										<span className={`text-sm font-semibold font-(family-name:--font-manrope) ${product === p.id ? "text-[#FF5A30]" : "text-on-surface"}`}>
+											{t(`packages.${p.labelKey}`)}
+										</span>
+									</button>
+									<div className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 rounded-xl bg-gray-900 px-3 py-2.5 text-center text-xs leading-relaxed text-white opacity-0 shadow-xl transition-opacity group-hover:opacity-100 z-50">
+										{t(`packageDescriptions.${p.labelKey}`)}
+										<div className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-gray-900" />
+									</div>
+								</div>
 							))}
 						</div>
 					</div>
@@ -218,7 +254,7 @@ export default function InsuranceApplyClient({ tours, applications, locale }: Pr
 												{String(app.tour?.artist?.name ?? "")}
 											</p>
 										</div>
-										<span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter shrink-0 ${statusColor}`}>
+										<span className={`px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-tight shrink-0 ${statusColor}`}>
 											{t(`statuses.${status}`)}
 										</span>
 									</div>

@@ -17,6 +17,8 @@ type Venue = NonNullable<
 	Awaited<ReturnType<typeof getTourstackVenues>>["data"]
 >[number];
 
+type VenueWithExtras = Venue & { expected_attendance?: number | null; notes?: string | null };
+
 const EMPTY_FORM = {
 	name: "",
 	venueType: "",
@@ -24,8 +26,10 @@ const EMPTY_FORM = {
 	country: "",
 	seatedCapacity: "",
 	standingCapacity: "",
+	expectedAttendance: "",
 	streetAddress: "",
 	googleMapsUrl: "",
+	notes: "",
 };
 
 export default function SettingsVenueTab() {
@@ -61,7 +65,11 @@ export default function SettingsVenueTab() {
 				standingCapacity: form.standingCapacity
 					? Number(form.standingCapacity)
 					: undefined,
+				expectedAttendance: form.expectedAttendance
+					? Number(form.expectedAttendance)
+					: undefined,
 				googleMapsUrl: form.googleMapsUrl.trim() || undefined,
+				notes: form.notes.trim() || undefined,
 			};
 			return editingId
 				? updateTourstackVenue(editingId, payload)
@@ -98,8 +106,10 @@ export default function SettingsVenueTab() {
 				venue.seated_capacity != null ? String(venue.seated_capacity) : "",
 			standingCapacity:
 				venue.standing_capacity != null ? String(venue.standing_capacity) : "",
+			expectedAttendance: (venue as VenueWithExtras).expected_attendance != null ? String((venue as VenueWithExtras).expected_attendance) : "",
 			streetAddress: String(venue.street_address ?? ""),
 			googleMapsUrl: String(venue.google_maps_url ?? ""),
+			notes: String((venue as VenueWithExtras).notes ?? ""),
 		});
 		if (typeof window !== "undefined") {
 			window.scrollTo({ top: 0, behavior: "smooth" });
@@ -152,11 +162,11 @@ export default function SettingsVenueTab() {
 											{String(v.name)}
 										</p>
 										{v.is_verified ? (
-											<span className="text-[10px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">
+											<span className="text-[10px] font-semibold uppercase tracking-wider bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">
 												{t("myVenues.statuses.verified")}
 											</span>
 										) : (
-											<span className="text-[10px] font-black uppercase tracking-wider bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full">
+											<span className="text-[10px] font-semibold uppercase tracking-wider bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full">
 												{t("myVenues.statuses.pending")}
 											</span>
 										)}
@@ -272,6 +282,13 @@ export default function SettingsVenueTab() {
 						onChange={(v) => set("standingCapacity")(v.replace(/\D/g, ""))}
 					/>
 					<Field
+						label={t("venueDetails.fields.expectedAttendance")}
+						id="v-expected-attendance"
+						type="number"
+						value={form.expectedAttendance}
+						onChange={(v) => set("expectedAttendance")(v.replace(/\D/g, ""))}
+					/>
+					<Field
 						label={t("venueDetails.fields.address")}
 						id="v-address"
 						value={form.streetAddress}
@@ -283,6 +300,22 @@ export default function SettingsVenueTab() {
 						type="url"
 						value={form.googleMapsUrl}
 						onChange={set("googleMapsUrl")}
+					/>
+				</div>
+				<div className="mt-5">
+					<label
+						htmlFor="v-notes"
+						className="mb-2 block text-xs font-bold uppercase tracking-[0.18em] text-on-surface-variant"
+					>
+						{t("venueDetails.fields.notes")}
+					</label>
+					<textarea
+						id="v-notes"
+						rows={4}
+						value={form.notes}
+						onChange={(e) => set("notes")(e.target.value)}
+						placeholder={t("venueDetails.fields.notesPlaceholder")}
+						className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-lowest px-4 py-3 text-sm font-medium text-on-surface outline-none transition focus:ring-2 focus:ring-[#FF5A30]/20 resize-none"
 					/>
 				</div>
 				<div className="flex items-center justify-end gap-4 pt-2">

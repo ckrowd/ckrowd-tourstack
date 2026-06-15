@@ -29,6 +29,9 @@ export default function VenueDetailsModal({
 		};
 	}, [onClose]);
 
+	type VenueWithExtras = Venue & { expected_attendance?: number | null; notes?: string | null };
+	const v = venue as VenueWithExtras;
+
 	const rows: [string, React.ReactNode][] = [
 		[t("venueDetails.fields.name"), String(venue.name ?? "—")],
 		[t("venueDetails.fields.type"), String(venue.venue_type ?? "—")],
@@ -44,6 +47,12 @@ export default function VenueDetailsModal({
 			t("venueDetails.fields.standingCap"),
 			venue.standing_capacity != null
 				? Number(venue.standing_capacity).toLocaleString()
+				: "—",
+		],
+		[
+			t("venueDetails.fields.expectedAttendance"),
+			v.expected_attendance != null
+				? Number(v.expected_attendance).toLocaleString()
 				: "—",
 		],
 		[t("venueDetails.fields.address"), String(venue.street_address ?? "—")],
@@ -63,6 +72,8 @@ export default function VenueDetailsModal({
 			),
 		],
 	];
+
+	const notes = v.notes ? String(v.notes) : null;
 
 	return (
 		<div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
@@ -85,11 +96,11 @@ export default function VenueDetailsModal({
 								{String(venue.name ?? "")}
 							</h3>
 							{venue.is_verified ? (
-								<span className="text-[10px] font-black uppercase tracking-wider bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">
+								<span className="text-[10px] font-semibold uppercase tracking-wider bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded-full">
 									{t("myVenues.statuses.verified")}
 								</span>
 							) : (
-								<span className="text-[10px] font-black uppercase tracking-wider bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full">
+								<span className="text-[10px] font-semibold uppercase tracking-wider bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full">
 									{t("myVenues.statuses.pending")}
 								</span>
 							)}
@@ -121,6 +132,16 @@ export default function VenueDetailsModal({
 							</div>
 						))}
 					</dl>
+					{notes && (
+						<div className="mt-5 pt-5 border-t border-outline-variant/15">
+							<p className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+								{t("venueDetails.fields.notes")}
+							</p>
+							<p className="text-sm text-on-surface whitespace-pre-wrap leading-relaxed">
+								{notes}
+							</p>
+						</div>
+					)}
 				</div>
 			</div>
 		</div>

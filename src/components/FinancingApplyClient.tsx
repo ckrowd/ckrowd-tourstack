@@ -12,10 +12,20 @@ type Application = { id: string; product?: string | null; amount_requested?: num
 const FINANCING_PRODUCTS: { id: Parameters<typeof applyForFinancing>[0]["product"]; labelKey: string }[] = [
 	{ id: "Tour Stop Advance", labelKey: "tourStopAdvance" },
 	{ id: "Venue Build-Out Credit", labelKey: "venueBuildOutCredit" },
+	{ id: "Event Insurance Bundle", labelKey: "eventInsuranceBundle" },
 	{ id: "Marketing & Ticketing Float", labelKey: "marketingTicketingFloat" },
 	{ id: "Credit Guarantee", labelKey: "creditGuarantee" },
 	{ id: "Promoter Business", labelKey: "promoterBusiness" },
 ];
+
+const PRODUCT_CARD_KEYS = [
+	"tourStopAdvance",
+	"venueBuildOutCredit",
+	"eventInsuranceBundle",
+	"marketingTicketingFloat",
+	"creditGuarantee",
+	"promoterBusiness",
+] as const;
 
 interface Props {
 	tours: Tour[];
@@ -58,12 +68,51 @@ export default function FinancingApplyClient({ tours, applications, locale }: Pr
 				<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
 					{t("promoterPortal")}
 				</span>
-				<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
+				<h1 className="text-3xl font-bold font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
 					{t("title")}
 				</h1>
 				<p className="text-on-surface-variant font-medium max-w-xl">
 					{t("description")}
 				</p>
+			</div>
+
+			{/* Product showcase */}
+			<div className="mb-10">
+				<h2 className="font-(family-name:--font-manrope) font-semibold text-xl text-on-surface mb-5">
+					{t("productsTitle")}
+				</h2>
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+					{PRODUCT_CARD_KEYS.map((key) => (
+						<div
+							key={key}
+							className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10 flex flex-col gap-3"
+						>
+							<div className="flex items-start justify-between gap-2">
+								<span className="text-xs font-semibold uppercase tracking-wider text-[#FF5A30] bg-[#FF5A30]/10 px-2 py-0.5 rounded-full">
+									{t(`productCards.${key}.tag`)}
+								</span>
+							</div>
+							<p className="font-(family-name:--font-manrope) font-semibold text-on-surface text-base">
+								{t(`packages.${key}`)}
+							</p>
+							<p className="text-sm text-on-surface-variant leading-relaxed flex-1">
+								{t(`productCards.${key}.description`)}
+							</p>
+							<dl className="grid grid-cols-2 gap-2 pt-3 border-t border-outline-variant/15">
+								{(["amount", "term", "rate", "eligibility"] as const).map((stat) => (
+									<div key={stat}>
+										<dt className="text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant">
+											{t(`productCardLabels.${stat}`)}
+										</dt>
+										<dd className="text-xs font-semibold text-on-surface mt-0.5">
+											{t(`productCards.${key}.${stat}`)}
+										</dd>
+									</div>
+								))}
+							</dl>
+						</div>
+					))}
+				</div>
 			</div>
 
 			{/* Apply form */}
@@ -109,6 +158,12 @@ export default function FinancingApplyClient({ tours, applications, locale }: Pr
 								expand_more
 							</span>
 						</div>
+						{tours.length === 0 && (
+							<p className="mt-2 flex items-center gap-1.5 text-xs text-on-surface-variant/70">
+								<span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>info</span>
+								{t("fields.tourHint")}
+							</p>
+						)}
 					</div>
 
 					{/* Choose package */}
@@ -116,28 +171,33 @@ export default function FinancingApplyClient({ tours, applications, locale }: Pr
 						<p className={labelClass}>{t("fields.package")}</p>
 						<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
 							{FINANCING_PRODUCTS.map((p) => (
-								<button
-									key={p.id}
-									type="button"
-									role="radio"
-									aria-checked={product === p.id}
-									onClick={() => setProduct(p.id)}
-									className={`flex items-center gap-3 p-4 rounded-xl border-2 text-left transition-all ${
-										product === p.id
-											? "border-[#FF5A30] bg-[#FF5A30]/5"
-											: "border-outline-variant/20 hover:border-outline-variant/50"
-									}`}
-								>
-									<span
-										className={`material-symbols-outlined text-xl shrink-0 ${product === p.id ? "text-[#FF5A30]" : "text-on-surface-variant"}`}
-										style={{ fontVariationSettings: "'FILL' 1" }}
+								<div key={p.id} className="relative group">
+									<button
+										type="button"
+										role="radio"
+										aria-checked={product === p.id}
+										onClick={() => setProduct(p.id)}
+										className={`w-full flex items-center gap-3 p-4 rounded-xl border-2 text-left transition-all ${
+											product === p.id
+												? "border-[#FF5A30] bg-[#FF5A30]/5"
+												: "border-outline-variant/20 hover:border-outline-variant/50"
+										}`}
 									>
-										account_balance
-									</span>
-									<span className={`text-sm font-semibold font-(family-name:--font-manrope) ${product === p.id ? "text-[#FF5A30]" : "text-on-surface"}`}>
-										{t(`packages.${p.labelKey}`)}
-									</span>
-								</button>
+										<span
+											className={`material-symbols-outlined text-xl shrink-0 ${product === p.id ? "text-[#FF5A30]" : "text-on-surface-variant"}`}
+											style={{ fontVariationSettings: "'FILL' 1" }}
+										>
+											account_balance
+										</span>
+										<span className={`text-sm font-semibold font-(family-name:--font-manrope) ${product === p.id ? "text-[#FF5A30]" : "text-on-surface"}`}>
+											{t(`packages.${p.labelKey}`)}
+										</span>
+									</button>
+									<div className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 rounded-xl bg-gray-900 px-3 py-2.5 text-center text-xs leading-relaxed text-white opacity-0 shadow-xl transition-opacity group-hover:opacity-100 z-50">
+										{t(`packageDescriptions.${p.labelKey}`)}
+										<div className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-gray-900" />
+									</div>
+								</div>
 							))}
 						</div>
 					</div>
@@ -219,7 +279,7 @@ export default function FinancingApplyClient({ tours, applications, locale }: Pr
 												{String(app.tour?.artist?.name ?? "")}
 											</p>
 										</div>
-										<span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter shrink-0 ${statusColor}`}>
+										<span className={`px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-tight shrink-0 ${statusColor}`}>
 											{t(`statuses.${status}`)}
 										</span>
 									</div>
