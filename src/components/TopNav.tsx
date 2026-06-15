@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { useCallback, useSyncExternalStore, useState } from "react";
-import { getEOIs } from "@/app/actions";
+import { getEOIs, getTourstackProfile } from "@/app/actions";
 import { useLogout, useSession } from "@/context/AuthContext";
 import { Link, routing, usePathname, useRouter } from "@/i18n/routing";
 import ArtmgmtSearch from "@/components/ArtmgmtSearch";
@@ -42,6 +42,21 @@ export default function TopNav() {
 		queryFn: () => getEOIs(),
 		enabled: Boolean(session?.user) && !isArtmgmtPortal,
 	});
+
+	const { data: profileResult } = useQuery({
+		queryKey: ["tourstackProfile"],
+		queryFn: getTourstackProfile,
+		staleTime: 60_000,
+		enabled: Boolean(session?.user),
+	});
+
+	const profileLogoUrl = (() => {
+		if (profileResult?.success && profileResult.data) {
+			const d = profileResult.data as Record<string, unknown>;
+			return typeof d.logo_url === "string" && d.logo_url ? d.logo_url : null;
+		}
+		return null;
+	})();
 
 	// Track which notifications the user has read via a localStorage timestamp.
 	// useSyncExternalStore avoids the server/client hydration mismatch that
@@ -384,9 +399,14 @@ export default function TopNav() {
 									aria-label={t("openProfileMenu")}
 									aria-expanded={profileOpen}
 									onClick={() => setProfileOpen((v) => !v)}
-									className="h-8 w-8 rounded-full bg-[#FF5A30] flex items-center justify-center text-white text-xs font-semibold select-none hover:opacity-90 transition-opacity active:scale-95"
+									className="h-8 w-8 rounded-full bg-[#FF5A30] overflow-hidden flex items-center justify-center text-white text-xs font-semibold select-none hover:opacity-90 transition-opacity active:scale-95"
 								>
-									{userInitial}
+									{profileLogoUrl ? (
+										// eslint-disable-next-line @next/next/no-img-element -- may be a base64 data URL; next/image does not support data: URIs
+										<img src={profileLogoUrl} alt="" className="w-full h-full object-cover" />
+									) : (
+										userInitial
+									)}
 								</button>
 
 								{profileOpen && (
