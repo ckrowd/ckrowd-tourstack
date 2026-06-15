@@ -81,13 +81,13 @@ export default function FinancingSettingsForm({
 			className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10"
 		>
 			<div className="flex items-center justify-between mb-4 pb-4 border-b border-outline-variant/20">
-				<h3 className="font-(family-name:--font-manrope) font-bold text-base">
+				<h3 className="font-(family-name:--font-manrope) font-semibold text-base">
 					{t("policies.title")}
 				</h3>
 				<button
 					type="submit"
 					disabled={!dirty || mutation.isPending}
-					className="px-4 py-2 rounded-lg text-sm font-bold bg-[#FF5A30] text-white shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 disabled:opacity-50"
+					className="px-4 py-2 rounded-lg text-sm font-semibold bg-[#FF5A30] text-white shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 disabled:opacity-50"
 				>
 					{mutation.isPending ? t("saving") : t("saveChanges")}
 				</button>
@@ -102,7 +102,7 @@ export default function FinancingSettingsForm({
 						<div>
 							<p
 								id={`finance-policy-${key}`}
-								className="font-bold text-sm text-on-surface"
+								className="font-semibold text-sm text-on-surface"
 							>
 								{t(`policies.${key}.title`)}
 							</p>
@@ -126,7 +126,7 @@ export default function FinancingSettingsForm({
 				))}
 			</div>
 
-			<h3 className="font-(family-name:--font-manrope) font-bold text-base mt-6 mb-4 pb-4 border-b border-outline-variant/20">
+			<h3 className="font-(family-name:--font-manrope) font-semibold text-base mt-6 mb-4 pb-4 border-b border-outline-variant/20">
 				{t("thresholds.title")}
 			</h3>
 			<div className="space-y-3">
@@ -145,7 +145,7 @@ export default function FinancingSettingsForm({
 								min={0}
 								value={draft[key]}
 								onChange={(e) => setThreshold(key, e.target.value)}
-								className="w-32 rounded-lg border border-outline-variant/20 bg-surface-container-lowest px-2 py-1 text-sm font-bold text-on-surface text-right focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+								className="w-32 rounded-lg border border-outline-variant/20 bg-surface-container-lowest px-2 py-1 text-sm font-semibold text-on-surface text-right focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
 							/>
 						</div>
 						<p className="text-xs text-on-surface-variant leading-5">

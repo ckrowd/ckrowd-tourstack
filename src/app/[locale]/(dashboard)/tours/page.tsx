@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getEOIs, getTours, getTourstackDashboard } from "@/app/actions";
 import PageTour from "@/components/PageTour";
@@ -125,7 +125,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 					{/* Header */}
 					<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 						<div>
-							<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
 								{t("promoterPortal")}
 							</span>
 							<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -137,7 +137,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 						</div>
 						<Link
 							href="/eoi"
-							className="flex items-center gap-2 bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all self-start md:self-auto"
+							className="flex items-center gap-2 bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all self-start md:self-auto"
 						>
 							<span className="material-symbols-outlined text-sm">add</span>
 							{t("newTourStop")}
@@ -172,7 +172,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 								key={s.label}
 								className={`bg-surface-container-lowest rounded-xl p-4 md:p-5 shadow-sm border-l-4 ${s.color}`}
 							>
-								<p className="text-[10px] md:text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+								<p className="text-[10px] md:text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 									{s.label}
 								</p>
 								<p className="text-2xl md:text-3xl font-black font-(family-name:--font-manrope) text-on-surface">
@@ -188,7 +188,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 							{pendingEois.length > 0 && (
 								<section data-tour="tours-pipeline" className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
 									<div className="mb-4">
-										<h2 className="font-(family-name:--font-manrope) font-bold text-lg text-on-surface">
+										<h2 className="font-(family-name:--font-manrope) font-semibold text-lg text-on-surface">
 											{t("pendingEois.title")}
 										</h2>
 										<p className="text-sm text-on-surface-variant mt-0.5">
@@ -213,12 +213,12 @@ export default async function ToursPage({ params, searchParams }: Props) {
 													<div className="flex items-start justify-between gap-4">
 														<div className="min-w-0">
 															<div className="flex items-center gap-2 flex-wrap">
-																<h3 className="font-(family-name:--font-manrope) font-bold text-on-surface">
+																<h3 className="font-(family-name:--font-manrope) font-semibold text-on-surface">
 																	{String(eoiArtist?.name ?? "Artist")}
 																</h3>
 																{eoiArtist?.genre != null &&
 																	eoiArtist.genre !== "" && (
-																		<span className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded-full">
+																		<span className="text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded-full">
 																			{String(eoiArtist.genre)}
 																		</span>
 																	)}
@@ -287,7 +287,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 									<span className="material-symbols-outlined text-5xl text-on-surface-variant block mb-4">
 										confirmation_number
 									</span>
-									<h3 className="font-(family-name:--font-manrope) font-bold text-on-surface text-lg mb-2">
+									<h3 className="font-(family-name:--font-manrope) font-semibold text-on-surface text-lg mb-2">
 										{t("noStops")}
 									</h3>
 									<p className="text-on-surface-variant text-sm max-w-xs mx-auto mb-6">
@@ -295,7 +295,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 									</p>
 									<Link
 										href="/eoi"
-										className="inline-flex items-center gap-2 bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-bold text-sm hover:opacity-90 transition-opacity"
+										className="inline-flex items-center gap-2 bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity"
 									>
 										<span className="material-symbols-outlined text-sm">
 											add
@@ -365,7 +365,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 																	</h3>
 																	{tourArtist?.genre != null &&
 																		tourArtist.genre !== "" && (
-																			<span className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded-full">
+																			<span className="text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded-full">
 																				{String(tourArtist.genre)}
 																			</span>
 																		)}
@@ -429,7 +429,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 															<div className="mt-1">
 																<div className="flex justify-between text-xs text-on-surface-variant mb-1">
 																	<span>{t("ticketsSold")}</span>
-																	<span className="font-bold text-on-surface">
+																	<span className="font-semibold text-on-surface">
 																		{ticketsSold.toLocaleString(locale)} /{" "}
 																		{capacity.toLocaleString(locale)}
 																	</span>
@@ -447,7 +447,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 															{daysAway != null ? (
 																daysAway > 0 ? (
 																	<span className="text-xs text-on-surface-variant">
-																		<span className="font-bold text-on-surface">
+																		<span className="font-semibold text-on-surface">
 																			{daysAway}
 																			{t("daysLetter")}
 																		</span>{" "}
@@ -460,7 +460,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 																		})}
 																	</span>
 																) : (
-																	<span className="text-xs font-bold text-[#FF5A30]">
+																	<span className="text-xs font-semibold text-[#FF5A30]">
 																		{t("showDay")}
 																	</span>
 																)
@@ -473,14 +473,14 @@ export default async function ToursPage({ params, searchParams }: Props) {
 																	statusLower === "needs revision") && (
 																	<Link
 																		href="/eoi"
-																		className="text-xs font-bold text-[#FF5A30] border border-[#FF5A30]/30 px-3 py-1.5 rounded-lg hover:bg-[#FF5A30]/5 transition-colors"
+																		className="text-xs font-semibold text-[#FF5A30] border border-[#FF5A30]/30 px-3 py-1.5 rounded-lg hover:bg-[#FF5A30]/5 transition-colors"
 																	>
 																		{t("reviseEoi")}
 																	</Link>
 																)}
 																<Link
 																	href={`/tours/${String(tour.id)}`}
-																	className="text-xs font-bold text-on-surface-variant border border-outline-variant/30 px-3 py-1.5 rounded-lg hover:bg-surface-container-low transition-colors"
+																	className="text-xs font-semibold text-on-surface-variant border border-outline-variant/30 px-3 py-1.5 rounded-lg hover:bg-surface-container-low transition-colors"
 																>
 																	{t("viewDetails")}
 																</Link>
@@ -520,7 +520,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 															)}
 															<Link
 																href={pageHref(p)}
-																className={`w-9 h-9 flex items-center justify-center rounded-lg text-sm font-bold transition-colors ${
+																className={`w-9 h-9 flex items-center justify-center rounded-lg text-sm font-semibold transition-colors ${
 																	p === currentPage
 																		? "bg-[#FF5A30] text-white shadow-sm"
 																		: "text-on-surface-variant hover:bg-surface-container-lowest"
@@ -554,7 +554,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 						{/* Sidebar: Milestones */}
 						<aside className="lg:col-span-4 space-y-6">
 							<div className="bg-surface-container-lowest rounded-2xl p-7 shadow-sm">
-								<h3 className="font-(family-name:--font-manrope) font-bold text-base mb-6">
+								<h3 className="font-(family-name:--font-manrope) font-semibold text-base mb-6">
 									{t("upcomingMilestones")}
 								</h3>
 								<div className="space-y-4">
@@ -579,7 +579,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 												</span>
 											</div>
 											<div>
-												<p className="text-sm font-bold text-on-surface leading-snug">
+												<p className="text-sm font-semibold text-on-surface leading-snug">
 													{m.label}
 												</p>
 												<p className="text-xs text-on-surface-variant mt-0.5">
@@ -593,7 +593,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 
 							{/* Venue snapshot */}
 							<div className="bg-surface-container-lowest rounded-2xl p-7 shadow-sm">
-								<h3 className="font-(family-name:--font-manrope) font-bold text-base mb-5">
+								<h3 className="font-(family-name:--font-manrope) font-semibold text-base mb-5">
 									{t("venueSummary")}
 								</h3>
 								<div className="space-y-3">
@@ -638,7 +638,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 									account_balance_wallet
 								</span>
 								<div>
-									<p className="font-(family-name:--font-manrope) font-bold text-sm">
+									<p className="font-(family-name:--font-manrope) font-semibold text-sm">
 										{t("ctaFinancingTitle")}
 									</p>
 									<p className="text-xs text-orange-100 mt-0.5">

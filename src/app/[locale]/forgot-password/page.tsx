@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
@@ -75,7 +75,7 @@ export default function ForgotPasswordPage() {
 								<div>
 									<label
 										htmlFor="email"
-										className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
+										className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
 									>
 										{t("email")}
 									</label>
@@ -100,7 +100,7 @@ export default function ForgotPasswordPage() {
 								<button
 									type="submit"
 									disabled={mutation.isPending}
-									className="w-full py-3 bg-[#FF5A30] text-white font-bold rounded-xl shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60"
+									className="w-full py-3 bg-[#FF5A30] text-white font-semibold rounded-xl shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60"
 								>
 									{mutation.isPending ? t("sending") : t("sendLink")}
 								</button>

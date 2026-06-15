@@ -1,4 +1,4 @@
-import { getTranslations, setRequestLocale } from "next-intl/server";
+﻿import { getTranslations, setRequestLocale } from "next-intl/server";
 import Footer from "@/components/Footer";
 import TopNav from "@/components/TopNav";
 import { Link } from "@/i18n/routing";
@@ -20,7 +20,7 @@ export default async function PrivacyPage({ params }: Props) {
 					<Link
 						key={i}
 						href="/contact"
-						className="text-[#FF5A30] font-bold hover:underline"
+						className="text-[#FF5A30] font-semibold hover:underline"
 					>
 						{t("contactLink")}
 					</Link>
@@ -32,7 +32,7 @@ export default async function PrivacyPage({ params }: Props) {
 					<a
 						key={i}
 						href={`mailto:${email}`}
-						className="text-[#FF5A30] font-bold hover:underline"
+						className="text-[#FF5A30] font-semibold hover:underline"
 					>
 						{email}
 					</a>
@@ -48,7 +48,7 @@ export default async function PrivacyPage({ params }: Props) {
 
 			<main className="flex-1 pt-32 pb-20 px-6">
 				<div className="max-w-3xl mx-auto">
-					<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
 						{t("legal")}
 					</span>
 					<h1 className="text-5xl font-black font-(family-name:--font-manrope) tracking-tight mb-4">
@@ -62,7 +62,7 @@ export default async function PrivacyPage({ params }: Props) {
 						{(t.raw("sections") as { title: string; content: string }[]).map(
 							(section, idx) => (
 								<section key={idx}>
-									<h2 className="text-xl font-bold font-(family-name:--font-manrope) mb-4">
+									<h2 className="text-xl font-semibold font-(family-name:--font-manrope) mb-4">
 										{section.title}
 									</h2>
 									<div className="text-on-surface-variant leading-relaxed space-y-4">

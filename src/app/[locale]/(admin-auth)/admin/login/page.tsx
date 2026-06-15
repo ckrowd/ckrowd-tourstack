@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useLocale, useTranslations } from "next-intl";
 import { Suspense, useEffect, useState } from "react";
@@ -67,7 +67,7 @@ function AdminLoginPageContent() {
 
 				<div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
 					<div className="mb-8">
-						<p className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] mb-3">
+						<p className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] mb-3">
 							{t("portal")}
 						</p>
 						<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-slate-900 mb-2">
@@ -80,7 +80,7 @@ function AdminLoginPageContent() {
 						<div>
 							<label
 								htmlFor="admin-email"
-								className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
+								className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
 							>
 								{t("email")}
 							</label>
@@ -99,7 +99,7 @@ function AdminLoginPageContent() {
 						<div>
 							<label
 								htmlFor="admin-password"
-								className="block text-xs font-bold uppercase tracking-widest text-slate-500 mb-2"
+								className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
 							>
 								{t("password")}
 							</label>
@@ -132,7 +132,7 @@ function AdminLoginPageContent() {
 						<button
 							type="submit"
 							disabled={loginMutation.isPending}
-							className="w-full py-3 bg-[#FF5A30] text-white font-bold rounded-xl shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60"
+							className="w-full py-3 bg-[#FF5A30] text-white font-semibold rounded-xl shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60"
 						>
 							{loginMutation.isPending ? t("signingIn") : t("signIn")}
 						</button>

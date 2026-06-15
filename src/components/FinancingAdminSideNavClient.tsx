@@ -43,7 +43,7 @@ export default function FinancingAdminSideNavClient({
 			<div className="px-4 mt-auto">
 				<Link
 					href="/financing-admin/applications"
-					className="block w-full py-4 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 text-center flex items-center justify-center gap-2"
+					className="block w-full py-4 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 text-center flex items-center justify-center gap-2"
 				>
 					<span className="material-symbols-outlined text-sm">rate_review</span>
 					{reviewQueueLabel}

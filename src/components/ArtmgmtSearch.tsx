@@ -148,7 +148,7 @@ function ArtmgmtSearchModal({ onClose }: { onClose: () => void }) {
 										</p>
 									</div>
 									<span
-										className={`shrink-0 text-[10px] font-bold px-2 py-0.5 rounded-full ${artist.is_active ? "bg-emerald-50 text-emerald-700" : "bg-slate-100 text-slate-500"}`}
+										className={`shrink-0 text-[10px] font-semibold px-2 py-0.5 rounded-full ${artist.is_active ? "bg-emerald-50 text-emerald-700" : "bg-slate-100 text-slate-500"}`}
 									>
 										{artist.is_active ? t("active") : t("inactive")}
 									</span>

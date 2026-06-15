@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
@@ -106,7 +106,7 @@ export default function EditTourPage({
 					</span>
 				</Link>
 				<div>
-					<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-1">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-1">
 						{t("badge")}
 					</span>
 					<h1 className="text-3xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface">
@@ -129,7 +129,7 @@ export default function EditTourPage({
 				<form onSubmit={handleSubmit} className="space-y-6">
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<div>
-							<label htmlFor="venue" className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider">
+							<label htmlFor="venue" className="block text-xs font-semibold text-on-surface-variant mb-1.5 uppercase tracking-wider">
 								{t("fields.venue")}
 							</label>
 							<input
@@ -142,7 +142,7 @@ export default function EditTourPage({
 							/>
 						</div>
 						<div>
-							<label htmlFor="city" className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider">
+							<label htmlFor="city" className="block text-xs font-semibold text-on-surface-variant mb-1.5 uppercase tracking-wider">
 								{t("fields.city")}
 							</label>
 							<input
@@ -158,7 +158,7 @@ export default function EditTourPage({
 
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<div>
-							<label htmlFor="country" className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider">
+							<label htmlFor="country" className="block text-xs font-semibold text-on-surface-variant mb-1.5 uppercase tracking-wider">
 								{t("fields.country")}
 							</label>
 							<input
@@ -170,7 +170,7 @@ export default function EditTourPage({
 							/>
 						</div>
 						<div>
-							<label htmlFor="date" className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider">
+							<label htmlFor="date" className="block text-xs font-semibold text-on-surface-variant mb-1.5 uppercase tracking-wider">
 								{t("fields.date")}
 							</label>
 							<input
@@ -186,7 +186,7 @@ export default function EditTourPage({
 
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<div>
-							<label htmlFor="fee_usd" className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider">
+							<label htmlFor="fee_usd" className="block text-xs font-semibold text-on-surface-variant mb-1.5 uppercase tracking-wider">
 								{t("fields.feeUsd")}
 							</label>
 							<input
@@ -200,7 +200,7 @@ export default function EditTourPage({
 							/>
 						</div>
 						<div>
-							<label htmlFor="capacity" className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider">
+							<label htmlFor="capacity" className="block text-xs font-semibold text-on-surface-variant mb-1.5 uppercase tracking-wider">
 								{t("fields.capacity")}
 							</label>
 							<input
@@ -216,7 +216,7 @@ export default function EditTourPage({
 
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<div>
-							<label htmlFor="status" className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider">
+							<label htmlFor="status" className="block text-xs font-semibold text-on-surface-variant mb-1.5 uppercase tracking-wider">
 								{t("fields.status")}
 							</label>
 							<div className="relative">
@@ -238,7 +238,7 @@ export default function EditTourPage({
 							</div>
 						</div>
 						<div>
-							<label htmlFor="financing" className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider">
+							<label htmlFor="financing" className="block text-xs font-semibold text-on-surface-variant mb-1.5 uppercase tracking-wider">
 								{t("fields.financing")}
 							</label>
 							<div className="relative">
@@ -259,7 +259,7 @@ export default function EditTourPage({
 					</div>
 
 					<div>
-						<label htmlFor="financing_amount" className="block text-xs font-bold text-on-surface-variant mb-1.5 uppercase tracking-wider">
+						<label htmlFor="financing_amount" className="block text-xs font-semibold text-on-surface-variant mb-1.5 uppercase tracking-wider">
 							{t("fields.financingAmount")}
 						</label>
 						<input
@@ -275,14 +275,14 @@ export default function EditTourPage({
 					<div className="pt-4 flex justify-end gap-3">
 						<Link
 							href={`/admin/tours/${id}`}
-							className="px-6 py-3 border border-outline-variant/30 text-on-surface-variant rounded-xl font-bold text-sm hover:bg-surface-container-low transition-colors"
+							className="px-6 py-3 border border-outline-variant/30 text-on-surface-variant rounded-xl font-semibold text-sm hover:bg-surface-container-low transition-colors"
 						>
 							{t("cancel")}
 						</Link>
 						<button
 							type="submit"
 							disabled={mutation.isPending}
-							className="px-8 py-3 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-bold shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-opacity disabled:opacity-50"
+							className="px-8 py-3 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-semibold shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-opacity disabled:opacity-50"
 						>
 							{mutation.isPending ? t("saving") : t("save")}
 						</button>

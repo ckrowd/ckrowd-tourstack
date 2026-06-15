@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
@@ -53,7 +53,7 @@ function BarRow({
 					style={{ width: `${pct}%` }}
 				/>
 			</div>
-			<span className="text-xs font-bold text-slate-700 w-5 text-right">
+			<span className="text-xs font-semibold text-slate-700 w-5 text-right">
 				{count}
 			</span>
 		</div>
@@ -102,7 +102,7 @@ export default function ArtmgmtReportsPage() {
 	return (
 		<div>
 			<div className="mb-6">
-				<span className="inline-block px-3 py-1 rounded-full bg-[#FF5A30]/10 text-[#FF5A30] text-xs font-bold uppercase tracking-wider mb-3">
+				<span className="inline-block px-3 py-1 rounded-full bg-[#FF5A30]/10 text-[#FF5A30] text-xs font-semibold uppercase tracking-wider mb-3">
 					{t("badge")}
 				</span>
 				<h1 className="font-(family-name:--font-manrope) text-3xl font-black text-on-surface">
@@ -162,7 +162,7 @@ export default function ArtmgmtReportsPage() {
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
 				{/* Genre breakdown */}
 				<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
-					<h2 className="font-bold text-slate-900 mb-4 flex items-center gap-2">
+					<h2 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
 						<span className="material-symbols-outlined text-[#FF5A30] text-lg">
 							music_note
 						</span>
@@ -187,7 +187,7 @@ export default function ArtmgmtReportsPage() {
 
 				{/* Nationality breakdown */}
 				<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
-					<h2 className="font-bold text-slate-900 mb-4 flex items-center gap-2">
+					<h2 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
 						<span className="material-symbols-outlined text-emerald-600 text-lg">
 							public
 						</span>
@@ -214,7 +214,7 @@ export default function ArtmgmtReportsPage() {
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 				{/* Active vs inactive */}
 				<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
-					<h2 className="font-bold text-slate-900 mb-4 flex items-center gap-2">
+					<h2 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
 						<span className="material-symbols-outlined text-violet-600 text-lg">
 							donut_large
 						</span>
@@ -226,7 +226,7 @@ export default function ArtmgmtReportsPage() {
 						<div className="space-y-4">
 							<div className="flex items-center justify-between text-sm mb-1">
 								<span className="font-semibold text-slate-700">{t("status.active")}</span>
-								<span className="font-bold text-slate-900">
+								<span className="font-semibold text-slate-900">
 									{activeCount}{" "}
 									<span className="text-slate-400 font-normal">({activePct}%)</span>
 								</span>
@@ -253,7 +253,7 @@ export default function ArtmgmtReportsPage() {
 
 				{/* Monthly growth */}
 				<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
-					<h2 className="font-bold text-slate-900 mb-4 flex items-center gap-2">
+					<h2 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
 						<span className="material-symbols-outlined text-blue-500 text-lg">
 							trending_up
 						</span>

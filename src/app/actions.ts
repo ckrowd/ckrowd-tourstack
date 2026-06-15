@@ -504,11 +504,36 @@ export async function getTourstackProfile() {
 	};
 }
 
+type ProfileExtras = {
+	companyType?: string;
+	registrationNumber?: string;
+	taxId?: string;
+	incorporationDate?: string;
+	incorporationCountry?: string;
+	logoUrl?: string;
+	primaryAddress?: string;
+	xHandle?: string;
+	facebookHandle?: string;
+	tiktokHandle?: string;
+	contactEmail?: string;
+	yearsInBusiness?: number;
+	companySize?: string;
+	marketsRegions?: string;
+	genresSpecialties?: string;
+	averageEventsYear?: number;
+	bankName?: string;
+	bankAccountHolder?: string;
+	bankAccountNumber?: string;
+	bankSwiftBic?: string;
+	currencyPreference?: string;
+};
+
 export async function updateTourstackProfile(
-	body: Payload<typeof client.tourstack.profile.patch>,
+	body: Payload<typeof client.tourstack.profile.patch> & ProfileExtras,
 ) {
+	// biome-ignore lint/suspicious/noExplicitAny: new profile fields added in backend — remove cast after package update
 	const { data, error, status, headers } =
-		await client.tourstack.profile.patch(body);
+		await client.tourstack.profile.patch(body as any);
 	return {
 		data: await extractPayload(data, { status, headers }),
 		success: !error && data?.success,
@@ -702,10 +727,13 @@ export async function getTourstackVenues() {
 	};
 }
 
+type VenueExtras = { expectedAttendance?: number; notes?: string };
+
 export async function createTourstackVenue(
-	body: Payload<typeof client.tourstack.venues.post>,
+	body: Payload<typeof client.tourstack.venues.post> & VenueExtras,
 ) {
-	const { data, error } = await client.tourstack.venues.post(body);
+	// biome-ignore lint/suspicious/noExplicitAny: expectedAttendance/notes added in backend — remove cast after package update
+	const { data, error } = await client.tourstack.venues.post(body as any);
 	return {
 		data: await extractPayload(data),
 		success: !error && data?.success,
@@ -715,9 +743,10 @@ export async function createTourstackVenue(
 
 export async function updateTourstackVenue(
 	id: string,
-	body: Payload<ReturnType<typeof client.tourstack.venues>["patch"]>,
+	body: Payload<ReturnType<typeof client.tourstack.venues>["patch"]> & VenueExtras,
 ) {
-	const { data, error } = await client.tourstack.venues({ id }).patch(body);
+	// biome-ignore lint/suspicious/noExplicitAny: expectedAttendance/notes added in backend — remove cast after package update
+	const { data, error } = await client.tourstack.venues({ id }).patch(body as any);
 	return {
 		data: await extractPayload(data),
 		success: !error && data?.success,

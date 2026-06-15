@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
@@ -66,7 +66,7 @@ export default function ArtmgmtProfilePage() {
 		<div className="max-w-2xl">
 			{/* Header */}
 			<div className="mb-8">
-				<span className="inline-block px-3 py-1 rounded-full bg-[#FF5A30]/10 text-[#FF5A30] text-xs font-bold uppercase tracking-wider mb-3">
+				<span className="inline-block px-3 py-1 rounded-full bg-[#FF5A30]/10 text-[#FF5A30] text-xs font-semibold uppercase tracking-wider mb-3">
 					{t("badge")}
 				</span>
 				<h1 className="font-(family-name:--font-manrope) text-3xl font-black text-on-surface">
@@ -86,7 +86,7 @@ export default function ArtmgmtProfilePage() {
 
 			{/* Account info */}
 			<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 mb-6">
-				<h2 className="font-bold text-slate-900 mb-4">{t("accountInfo")}</h2>
+				<h2 className="font-semibold text-slate-900 mb-4">{t("accountInfo")}</h2>
 				<div className="space-y-3">
 					{profile?.user?.name && (
 						<div>
@@ -125,7 +125,7 @@ export default function ArtmgmtProfilePage() {
 
 			{/* Change password */}
 			<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
-				<h2 className="font-bold text-slate-900 mb-1">{t("changePassword")}</h2>
+				<h2 className="font-semibold text-slate-900 mb-1">{t("changePassword")}</h2>
 				<p className="text-xs text-slate-500 mb-5">{t("changePasswordHint")}</p>
 
 				<form onSubmit={handlePasswordSubmit} className="space-y-4">
@@ -177,7 +177,7 @@ export default function ArtmgmtProfilePage() {
 					<button
 						type="submit"
 						disabled={passwordMutation.isPending}
-						className="w-full py-3 bg-[#FF5A30] text-white rounded-xl font-bold text-sm hover:bg-[#e04e27] disabled:opacity-60 transition-colors mt-2"
+						className="w-full py-3 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm hover:bg-[#e04e27] disabled:opacity-60 transition-colors mt-2"
 					>
 						{passwordMutation.isPending ? t("saving") : t("savePassword")}
 					</button>

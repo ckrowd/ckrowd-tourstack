@@ -136,11 +136,11 @@ export default function AdminTeamList({
 					>
 						<div className="flex items-center justify-between gap-3">
 							<div className="flex items-center gap-3">
-								<div className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-bold text-sm text-on-surface-variant">
+								<div className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center font-semibold text-sm text-on-surface-variant">
 									{(name || email || "?").charAt(0).toUpperCase()}
 								</div>
 								<div>
-									<p className="text-sm font-bold text-on-surface">{name}</p>
+									<p className="text-sm font-semibold text-on-surface">{name}</p>
 									<p className="text-xs text-on-surface-variant">{email}</p>
 								</div>
 							</div>
@@ -149,13 +149,13 @@ export default function AdminTeamList({
 									scopes.map((s) => (
 										<span
 											key={s}
-											className="text-xs font-bold text-[#FF5A30] bg-orange-50 px-3 py-1 rounded-full"
+											className="text-xs font-semibold text-[#FF5A30] bg-orange-50 px-3 py-1 rounded-full"
 										>
 											{scopeLabel(s)}
 										</span>
 									))
 								) : (
-									<span className="text-xs font-bold text-on-surface-variant bg-surface-container px-3 py-1 rounded-full">
+									<span className="text-xs font-semibold text-on-surface-variant bg-surface-container px-3 py-1 rounded-full">
 										{t("noRoles")}
 									</span>
 								)}
@@ -239,11 +239,11 @@ export default function AdminTeamList({
 						className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 border border-amber-200 bg-amber-50/40 rounded-xl"
 					>
 						<div className="flex items-center gap-3">
-							<div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center font-bold text-sm text-amber-700">
+							<div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center font-semibold text-sm text-amber-700">
 								{(invite.name || invite.email).charAt(0).toUpperCase()}
 							</div>
 							<div>
-								<p className="text-sm font-bold text-on-surface">
+								<p className="text-sm font-semibold text-on-surface">
 									{invite.name}
 								</p>
 								<p className="text-xs text-on-surface-variant">
@@ -252,10 +252,10 @@ export default function AdminTeamList({
 							</div>
 						</div>
 						<div className="flex items-center gap-2 flex-wrap">
-							<span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 bg-amber-100 px-2 py-1 rounded-full">
+							<span className="text-[10px] font-semibold uppercase tracking-wider text-amber-700 bg-amber-100 px-2 py-1 rounded-full">
 								{t("invitedBadge")}
 							</span>
-							<span className="text-xs font-bold text-[#FF5A30] bg-orange-50 px-3 py-1 rounded-full">
+							<span className="text-xs font-semibold text-[#FF5A30] bg-orange-50 px-3 py-1 rounded-full">
 								{scopeLabel(invite.role)}
 							</span>
 							<button

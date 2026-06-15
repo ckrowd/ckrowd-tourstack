@@ -240,7 +240,7 @@ export default function SettingsNotificationsTab() {
 					type="button"
 					onClick={() => prefs && saveMutation.mutate(prefs)}
 					disabled={!prefs || saveMutation.isPending}
-					className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:cursor-not-allowed disabled:opacity-60"
+					className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:cursor-not-allowed disabled:opacity-60"
 				>
 					{saveMutation.isPending ? t("saving") : t("actions.save")}
 				</button>

@@ -192,7 +192,7 @@ export default function TourActionsMenu({
 				>
 					<div className="bg-surface rounded-2xl shadow-xl max-w-md w-full p-6 space-y-4 max-h-[90vh] overflow-y-auto no-scrollbar">
 						<div className="flex items-center justify-between">
-							<h3 className="text-lg font-bold text-on-surface font-(family-name:--font-manrope)">
+							<h3 className="text-lg font-semibold text-on-surface font-(family-name:--font-manrope)">
 								{t("editTitle")}
 							</h3>
 							<button
@@ -207,7 +207,7 @@ export default function TourActionsMenu({
 
 						{/* Status */}
 						<div>
-							<label className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5">
+							<label className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1.5">
 								{t("editFields.status")}
 							</label>
 							<select
@@ -223,7 +223,7 @@ export default function TourActionsMenu({
 
 						{/* Venue */}
 						<div>
-							<label className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5">
+							<label className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1.5">
 								{t("editFields.venue")}
 							</label>
 							<input
@@ -237,7 +237,7 @@ export default function TourActionsMenu({
 
 						{/* City */}
 						<div>
-							<label className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5">
+							<label className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1.5">
 								{t("editFields.city")}
 							</label>
 							<input
@@ -251,7 +251,7 @@ export default function TourActionsMenu({
 
 						{/* Date */}
 						<div>
-							<label className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5">
+							<label className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1.5">
 								{t("editFields.date")}
 							</label>
 							<input
@@ -265,7 +265,7 @@ export default function TourActionsMenu({
 						{/* Capacity + Fee side by side */}
 						<div className="grid grid-cols-2 gap-3">
 							<div>
-								<label className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5">
+								<label className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1.5">
 									{t("editFields.capacity")}
 								</label>
 								<input
@@ -278,7 +278,7 @@ export default function TourActionsMenu({
 								/>
 							</div>
 							<div>
-								<label className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1.5">
+								<label className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1.5">
 									{t("editFields.feeUsd")}
 								</label>
 								<input
@@ -309,7 +309,7 @@ export default function TourActionsMenu({
 								type="button"
 								onClick={() => editMutation.mutate()}
 								disabled={editMutation.isPending}
-								className="px-5 py-2 rounded-lg text-sm font-bold bg-[#FF5A30] text-white hover:opacity-90 disabled:opacity-60 transition-opacity"
+								className="px-5 py-2 rounded-lg text-sm font-semibold bg-[#FF5A30] text-white hover:opacity-90 disabled:opacity-60 transition-opacity"
 							>
 								{editMutation.isPending ? t("saving") : t("save")}
 							</button>
@@ -329,7 +329,7 @@ export default function TourActionsMenu({
 					<div className="bg-surface rounded-2xl shadow-xl max-w-md w-full p-6">
 						<h3
 							id={`tour-delete-${tourId}-title`}
-							className="text-lg font-bold text-on-surface mb-2"
+							className="text-lg font-semibold text-on-surface mb-2"
 						>
 							{t("deleteTitle")}
 						</h3>
@@ -352,7 +352,7 @@ export default function TourActionsMenu({
 								type="button"
 								onClick={() => deleteMutation.mutate()}
 								disabled={deleteMutation.isPending}
-								className="px-4 py-2 rounded-lg text-sm font-bold bg-red-600 text-white hover:bg-red-700 disabled:opacity-60"
+								className="px-4 py-2 rounded-lg text-sm font-semibold bg-red-600 text-white hover:bg-red-700 disabled:opacity-60"
 							>
 								{deleteMutation.isPending ? t("deleting") : t("confirmDelete")}
 							</button>

@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
@@ -88,7 +88,7 @@ export default function InsuranceAdminPartnersPage() {
 	return (
 		<>
 			<div className="mb-10">
-				<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
 					{t("badge")}
 				</span>
 				<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -102,14 +102,14 @@ export default function InsuranceAdminPartnersPage() {
 			<div className="grid grid-cols-1 lg:grid-cols-[1fr_0.8fr] gap-8">
 				<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
 					<div className="flex items-center justify-between mb-5">
-						<h3 className="font-(family-name:--font-manrope) font-bold text-lg">
+						<h3 className="font-(family-name:--font-manrope) font-semibold text-lg">
 							{t("directoryTitle")}
 						</h3>
 						<button
 							type="button"
 							onClick={() => query.refetch()}
 							disabled={query.isFetching}
-							className="text-sm font-bold text-[#FF5A30] hover:underline disabled:opacity-60"
+							className="text-sm font-semibold text-[#FF5A30] hover:underline disabled:opacity-60"
 						>
 							{t("refresh")}
 						</button>
@@ -151,7 +151,7 @@ export default function InsuranceAdminPartnersPage() {
 											</div>
 											<div className="min-w-0">
 												<div className="flex items-center gap-2 flex-wrap">
-													<p className="font-(family-name:--font-manrope) font-bold text-on-surface">
+													<p className="font-(family-name:--font-manrope) font-semibold text-on-surface">
 														{String(partner.name ?? "—")}
 													</p>
 													<span
@@ -187,12 +187,12 @@ export default function InsuranceAdminPartnersPage() {
 					onSubmit={handleSubmit}
 					className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm h-fit"
 				>
-					<h3 className="font-(family-name:--font-manrope) font-bold text-base mb-4 pb-4 border-b border-outline-variant/20">
+					<h3 className="font-(family-name:--font-manrope) font-semibold text-base mb-4 pb-4 border-b border-outline-variant/20">
 						{t("partnerForm.title")}
 					</h3>
 					<div className="space-y-4">
 						<label className="block">
-							<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+							<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 								{t("partnerForm.name")}
 							</span>
 							<input
@@ -205,7 +205,7 @@ export default function InsuranceAdminPartnersPage() {
 							/>
 						</label>
 						<label className="block">
-							<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+							<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 								{t("partnerForm.type")}
 							</span>
 							<select
@@ -223,7 +223,7 @@ export default function InsuranceAdminPartnersPage() {
 							</select>
 						</label>
 						<label className="block">
-							<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+							<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 								{t("partnerForm.markets")}
 							</span>
 							<input
@@ -235,7 +235,7 @@ export default function InsuranceAdminPartnersPage() {
 							/>
 						</label>
 						<label className="block">
-							<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+							<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 								{t("partnerForm.capacity")}
 							</span>
 							<input
@@ -261,7 +261,7 @@ export default function InsuranceAdminPartnersPage() {
 						<button
 							type="submit"
 							disabled={createMutation.isPending}
-							className="w-full py-3 bg-[#FF5A30] text-white rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-opacity disabled:opacity-60"
+							className="w-full py-3 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-opacity disabled:opacity-60"
 						>
 							{createMutation.isPending
 								? t("partnerForm.saving")

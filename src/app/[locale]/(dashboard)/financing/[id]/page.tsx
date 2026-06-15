@@ -1,4 +1,4 @@
-import { getTranslations, setRequestLocale } from "next-intl/server";
+﻿import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getFinancingApplication } from "@/app/actions";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
@@ -7,10 +7,10 @@ import { Link } from "@/i18n/routing";
 function Stat({ label, value }: { label: string; value: string }) {
 	return (
 		<div className="bg-surface-container-low rounded-xl p-3">
-			<p className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">
+			<p className="text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant">
 				{label}
 			</p>
-			<p className="text-sm font-bold mt-1 text-on-surface break-words">
+			<p className="text-sm font-semibold mt-1 text-on-surface break-words">
 				{value || "—"}
 			</p>
 		</div>
@@ -38,7 +38,7 @@ export default async function FinancingDetailPage({
 					<div className="w-full space-y-6">
 						<div className="flex items-center justify-between gap-3">
 							<div>
-								<p className="text-xs font-bold uppercase tracking-widest text-[#FF5A30]">
+								<p className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30]">
 									{t("tagline")}
 								</p>
 								<h1 className="text-3xl font-(family-name:--font-manrope) font-extrabold mt-1">
@@ -47,7 +47,7 @@ export default async function FinancingDetailPage({
 							</div>
 							<Link
 								href="/financing"
-								className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-outline-variant/30 text-sm font-bold text-on-surface-variant hover:bg-surface-container-low"
+								className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-outline-variant/30 text-sm font-semibold text-on-surface-variant hover:bg-surface-container-low"
 							>
 								<span className="material-symbols-outlined text-sm">
 									arrow_back
@@ -82,7 +82,7 @@ export default async function FinancingDetailPage({
 													<p className="text-sm text-on-surface-variant">
 														{t("fields.product")}
 													</p>
-													<p className="text-xl font-(family-name:--font-manrope) font-bold text-on-surface">
+													<p className="text-xl font-(family-name:--font-manrope) font-semibold text-on-surface">
 														{app.product || t("defaultProduct")}
 													</p>
 												</div>
@@ -115,7 +115,7 @@ export default async function FinancingDetailPage({
 
 											{app.purpose ? (
 												<div>
-													<p className="text-[10px] font-bold uppercase tracking-wider text-on-surface-variant mb-1">
+													<p className="text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant mb-1">
 														{t("fields.purpose")}
 													</p>
 													<p className="text-sm text-on-surface whitespace-pre-line">
@@ -128,7 +128,7 @@ export default async function FinancingDetailPage({
 										{/* Tour details */}
 										{tour ? (
 											<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
-												<p className="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-4">
+												<p className="text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-4">
 													{t("tour.title")}
 												</p>
 												<div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -178,7 +178,7 @@ export default async function FinancingDetailPage({
 										{hasBanking ? (
 											<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
 												<div className="flex items-center justify-between gap-3 mb-4">
-													<p className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">
+													<p className="text-xs font-semibold uppercase tracking-widest text-on-surface-variant">
 														{t("banking.title")}
 													</p>
 													{app.account_name ? (
@@ -216,7 +216,7 @@ export default async function FinancingDetailPage({
 
 										{/* Documents + term sheet */}
 										<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
-											<p className="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-3">
+											<p className="text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-3">
 												{t("fields.documents")}
 											</p>
 											{app.documents.length === 0 && !app.term_sheet_url ? (
@@ -231,7 +231,7 @@ export default async function FinancingDetailPage({
 															href={doc}
 															target="_blank"
 															rel="noopener noreferrer"
-															className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface-container-high text-xs font-bold text-on-surface hover:bg-surface-container-highest transition-colors"
+															className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface-container-high text-xs font-semibold text-on-surface hover:bg-surface-container-highest transition-colors"
 														>
 															<span className="material-symbols-outlined text-xs">
 																attach_file
@@ -244,7 +244,7 @@ export default async function FinancingDetailPage({
 															href={app.term_sheet_url}
 															target="_blank"
 															rel="noopener noreferrer"
-															className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#FF5A30]/10 text-xs font-bold text-[#FF5A30] hover:bg-[#FF5A30]/20 transition-colors"
+															className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#FF5A30]/10 text-xs font-semibold text-[#FF5A30] hover:bg-[#FF5A30]/20 transition-colors"
 														>
 															<span className="material-symbols-outlined text-xs">
 																open_in_new
@@ -259,7 +259,7 @@ export default async function FinancingDetailPage({
 										{/* Reviewer note */}
 										{app.note ? (
 											<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
-												<p className="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+												<p className="text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 													{t("fields.note")}
 												</p>
 												<p className="text-sm text-on-surface whitespace-pre-line">

@@ -264,7 +264,7 @@ export default function InsuranceClient() {
 			{/* Header */}
 			<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 				<div>
-					<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2 font-(family-name:--font-manrope)">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2 font-(family-name:--font-manrope)">
 						{t("hub")}
 					</span>
 					<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -289,7 +289,7 @@ export default function InsuranceClient() {
 					<button
 						type="button"
 						onClick={() => setFaqOpen(true)}
-						className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-bold hover:bg-surface-container-high transition-colors"
+						className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-semibold hover:bg-surface-container-high transition-colors"
 					>
 						<span className="material-symbols-outlined text-base text-[#FF5A30]">help</span>
 						{t("faqButton")}
@@ -312,7 +312,7 @@ export default function InsuranceClient() {
 					/>
 					<div className="relative w-full max-w-lg max-h-[80vh] overflow-y-auto bg-surface-container-lowest rounded-2xl shadow-2xl no-scrollbar">
 						<div className="sticky top-0 flex items-start justify-between gap-4 bg-surface-container-lowest p-6 border-b border-outline-variant/10">
-							<h2 className="font-(family-name:--font-manrope) text-xl font-bold text-on-surface">
+							<h2 className="font-(family-name:--font-manrope) text-xl font-semibold text-on-surface">
 								{t("faq.title")}
 							</h2>
 							<button
@@ -335,7 +335,7 @@ export default function InsuranceClient() {
 											onClick={() => setFaqExpanded(isExpanded ? null : i)}
 											className="w-full flex items-center justify-between gap-3 text-left p-4 hover:bg-surface-container-low transition-colors"
 										>
-											<span className="font-(family-name:--font-manrope) font-bold text-sm text-on-surface">
+											<span className="font-(family-name:--font-manrope) font-semibold text-sm text-on-surface">
 												{f.q}
 											</span>
 											<span className={`material-symbols-outlined text-on-surface-variant shrink-0 transition-transform ${isExpanded ? "rotate-180" : ""}`}>
@@ -360,7 +360,7 @@ export default function InsuranceClient() {
 				<FinancingApplyButton
 					defaultProduct={INSURANCE_DEFAULT_PRODUCT}
 					products={INSURANCE_PRODUCT_IDS}
-					className="flex items-center gap-2 bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all"
+					className="flex items-center gap-2 bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all"
 				>
 					<span className="material-symbols-outlined text-sm">how_to_reg</span>
 					{t("hero.startOnboarding")}
@@ -391,7 +391,7 @@ export default function InsuranceClient() {
 			<div className="flex flex-col gap-16">
 				{/* Stakeholder cards */}
 				<section>
-					<h2 className="font-(family-name:--font-manrope) text-2xl font-bold mb-8">
+					<h2 className="font-(family-name:--font-manrope) text-2xl font-semibold mb-8">
 						{t("overview.stakeholdersTitle")}
 					</h2>
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -416,7 +416,7 @@ export default function InsuranceClient() {
 									<span className="text-[9px] font-black tracking-widest text-white/70 uppercase block mb-1">
 										{s.tag}
 									</span>
-									<p className="font-(family-name:--font-manrope) font-bold text-lg text-white">
+									<p className="font-(family-name:--font-manrope) font-semibold text-lg text-white">
 										{s.label}
 									</p>
 								</div>
@@ -425,7 +425,7 @@ export default function InsuranceClient() {
 										{s.description}
 									</p>
 									<div>
-										<p className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+										<p className="text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 											{t("profile.coverageTitle")}
 										</p>
 										<div className="flex flex-col gap-1.5">
@@ -439,7 +439,7 @@ export default function InsuranceClient() {
 											))}
 										</div>
 									</div>
-									<div className="mt-auto flex items-center gap-1 text-[#FF5A30] text-xs font-bold">
+									<div className="mt-auto flex items-center gap-1 text-[#FF5A30] text-xs font-semibold">
 										{t("tabs.profile")}
 										<span className="material-symbols-outlined text-sm">
 											arrow_forward
@@ -453,7 +453,7 @@ export default function InsuranceClient() {
 
 				{/* Insurance products grid */}
 				<section data-tour="insurance-products">
-					<h2 className="font-(family-name:--font-manrope) text-2xl font-bold mb-8">
+					<h2 className="font-(family-name:--font-manrope) text-2xl font-semibold mb-8">
 						{t("overview.productsTitle")}
 					</h2>
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -497,7 +497,7 @@ export default function InsuranceClient() {
 										return (
 											<span
 												key={w}
-												className={`text-[10px] font-bold px-2.5 py-1 rounded-full ${p.highlight ? "bg-white/20 text-white" : "bg-surface-container text-on-surface-variant"}`}
+												className={`text-[10px] font-semibold px-2.5 py-1 rounded-full ${p.highlight ? "bg-white/20 text-white" : "bg-surface-container text-on-surface-variant"}`}
 											>
 												{sh?.label}
 											</span>
@@ -512,7 +512,7 @@ export default function InsuranceClient() {
 				{/* CTA */}
 				<div className="bg-linear-to-br from-[#FF5A30] to-[#cc4826] rounded-2xl p-10 flex flex-col md:flex-row items-center justify-between gap-6 relative overflow-hidden">
 					<div className="relative z-10">
-						<h3 className="font-(family-name:--font-manrope) text-2xl font-bold text-white mb-2">
+						<h3 className="font-(family-name:--font-manrope) text-2xl font-semibold text-white mb-2">
 							{t("overview.cta.title")}
 						</h3>
 						<p className="text-white/80 text-sm">
@@ -522,7 +522,7 @@ export default function InsuranceClient() {
 					<FinancingApplyButton
 						defaultProduct={INSURANCE_DEFAULT_PRODUCT}
 						products={INSURANCE_PRODUCT_IDS}
-						className="relative z-10 bg-white text-[#FF5A30] px-8 py-3 rounded-xl font-bold text-sm hover:scale-105 transition-transform shrink-0"
+						className="relative z-10 bg-white text-[#FF5A30] px-8 py-3 rounded-xl font-semibold text-sm hover:scale-105 transition-transform shrink-0"
 					>
 						{t("overview.cta.button")} →
 					</FinancingApplyButton>
@@ -547,7 +547,7 @@ export default function InsuranceClient() {
 							info
 						</span>
 						<div>
-							<p className="font-(family-name:--font-manrope) font-bold text-amber-900 text-sm">
+							<p className="font-(family-name:--font-manrope) font-semibold text-amber-900 text-sm">
 								{t("onboarding.previewNotice.title")}
 							</p>
 							<p className="text-xs text-amber-800 mt-0.5">
@@ -557,14 +557,14 @@ export default function InsuranceClient() {
 					</div>
 					<Link
 						href="/apply"
-						className="bg-[#FF5A30] text-white px-5 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider hover:opacity-90 transition-all shrink-0"
+						className="bg-[#FF5A30] text-white px-5 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider hover:opacity-90 transition-all shrink-0"
 					>
 						{t("onboarding.previewNotice.cta")}
 					</Link>
 				</div>
 				{/* Role selector */}
 				<div>
-					<p className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-3">
+					<p className="text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant mb-3">
 						{t("onboarding.selectRole")}
 					</p>
 					<div className="flex flex-wrap gap-3">
@@ -575,7 +575,7 @@ export default function InsuranceClient() {
 									setActiveStakeholder(s.id);
 									setActiveStep(1);
 								}}
-								className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 text-sm font-bold transition-all font-(family-name:--font-manrope) ${
+								className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 text-sm font-semibold transition-all font-(family-name:--font-manrope) ${
 									activeStakeholder === s.id
 										? "border-[#FF5A30] bg-[#FF5A30] text-white"
 										: "border-outline-variant text-on-surface-variant hover:border-[#FF5A30]/40"
@@ -601,7 +601,7 @@ export default function InsuranceClient() {
 								<span className="text-[9px] font-black tracking-widest text-white/70 uppercase block mb-1">
 									{current.tag}
 								</span>
-								<p className="font-(family-name:--font-manrope) font-bold text-white">
+								<p className="font-(family-name:--font-manrope) font-semibold text-white">
 									{current.label} — {t("tabs.onboarding")}
 								</p>
 							</div>
@@ -632,7 +632,7 @@ export default function InsuranceClient() {
 										</div>
 										<div className="pl-6">
 											<p
-												className={`text-sm font-bold font-(family-name:--font-manrope) ${activeStep === step.id ? "text-[#FF5A30]" : "text-on-surface"}`}
+												className={`text-sm font-semibold font-(family-name:--font-manrope) ${activeStep === step.id ? "text-[#FF5A30]" : "text-on-surface"}`}
 											>
 												{step.label}
 											</p>
@@ -651,7 +651,7 @@ export default function InsuranceClient() {
 						{/* Partners */}
 						<div className="bg-surface-container-lowest rounded-2xl border border-outline-variant/10 shadow-sm overflow-hidden">
 							<div className="px-5 py-4 border-b border-outline-variant/10">
-								<p className="font-(family-name:--font-manrope) font-bold text-sm">
+								<p className="font-(family-name:--font-manrope) font-semibold text-sm">
 									{t("onboarding.partners")}
 								</p>
 							</div>
@@ -674,7 +674,7 @@ export default function InsuranceClient() {
 										</span>
 									</div>
 									<div className="flex-1 min-w-0">
-										<p className="text-sm font-bold text-on-surface">
+										<p className="text-sm font-semibold text-on-surface">
 											{p.name}
 										</p>
 										<p className="text-xs text-on-surface-variant">
@@ -738,7 +738,7 @@ export default function InsuranceClient() {
 														shield
 													</span>
 													<div>
-														<p className="font-(family-name:--font-manrope) font-bold text-green-800 text-sm mb-1">
+														<p className="font-(family-name:--font-manrope) font-semibold text-green-800 text-sm mb-1">
 															{t("onboarding.activates.title")}
 														</p>
 														<p className="text-xs text-green-700 leading-relaxed">
@@ -757,7 +757,7 @@ export default function InsuranceClient() {
 														payments
 													</span>
 													<div>
-														<p className="font-(family-name:--font-manrope) font-bold text-amber-800 text-sm mb-1">
+														<p className="font-(family-name:--font-manrope) font-semibold text-amber-800 text-sm mb-1">
 															{t("onboarding.finance.title")}
 														</p>
 														<p className="text-xs text-amber-700 leading-relaxed">
@@ -772,7 +772,7 @@ export default function InsuranceClient() {
 													<button
 														type="button"
 														onClick={() => setActiveStep(activeStep - 1)}
-														className="px-6 py-2.5 rounded-xl border border-outline-variant text-sm font-bold text-on-surface hover:bg-surface-container-low transition-all"
+														className="px-6 py-2.5 rounded-xl border border-outline-variant text-sm font-semibold text-on-surface hover:bg-surface-container-low transition-all"
 													>
 														← {t("onboarding.actions.previous")}
 													</button>
@@ -780,7 +780,7 @@ export default function InsuranceClient() {
 												{activeStep < current.steps.length && (
 													<button
 														type="submit"
-														className="px-6 py-2.5 rounded-xl bg-[#FF5A30] text-white text-sm font-bold hover:opacity-90 transition-all shadow-lg shadow-[#FF5A30]/20"
+														className="px-6 py-2.5 rounded-xl bg-[#FF5A30] text-white text-sm font-semibold hover:opacity-90 transition-all shadow-lg shadow-[#FF5A30]/20"
 													>
 														{t("onboarding.actions.continue", {
 															next: activeStep + 1,
@@ -790,7 +790,7 @@ export default function InsuranceClient() {
 												{activeStep === current.steps.length && (
 													<button
 														type="submit"
-														className="px-6 py-2.5 rounded-xl bg-green-600 text-white text-sm font-bold hover:opacity-90 transition-all"
+														className="px-6 py-2.5 rounded-xl bg-green-600 text-white text-sm font-semibold hover:opacity-90 transition-all"
 													>
 														✓ {t("onboarding.actions.complete")}
 													</button>
@@ -801,7 +801,7 @@ export default function InsuranceClient() {
 
 									{/* Progress bar */}
 									<div className="bg-surface-container-lowest rounded-2xl p-5 border border-outline-variant/10 shadow-sm">
-										<p className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-3">
+										<p className="text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant mb-3">
 											{t("onboarding.progress")}
 										</p>
 										<div className="flex gap-1.5 mb-2">
@@ -865,7 +865,7 @@ export default function InsuranceClient() {
 									{p.desc}
 								</p>
 								<div>
-									<p className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+									<p className="text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 										{t("onboarding.selectRole")}
 									</p>
 									<div className="flex gap-2 flex-wrap">
@@ -874,7 +874,7 @@ export default function InsuranceClient() {
 											return (
 												<span
 													key={w}
-													className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-[#FF5A30]/10 text-[#FF5A30]"
+													className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-[#FF5A30]/10 text-[#FF5A30]"
 												>
 													{sh?.label}
 												</span>
@@ -885,7 +885,7 @@ export default function InsuranceClient() {
 								<FinancingApplyButton
 									defaultProduct={p.productId}
 									products={INSURANCE_PRODUCT_IDS}
-									className="text-[#FF5A30] font-bold text-sm flex items-center gap-1 hover:gap-2 transition-all mt-auto"
+									className="text-[#FF5A30] font-semibold text-sm flex items-center gap-1 hover:gap-2 transition-all mt-auto"
 								>
 									{t("products.apply")}
 									<span className="material-symbols-outlined text-sm">
@@ -907,7 +907,7 @@ export default function InsuranceClient() {
 							<div className="w-10 h-10 rounded-lg bg-white flex items-center justify-center shrink-0 overflow-hidden">
 								<Image src="/sanlam-allianz.png" alt="SanlamAllianz" width={40} height={40} className="object-contain w-full h-full p-0.5" />
 							</div>
-							<h3 className="font-(family-name:--font-manrope) text-2xl font-bold text-white">
+							<h3 className="font-(family-name:--font-manrope) text-2xl font-semibold text-white">
 								{t("products.underwriter.brand")}
 							</h3>
 						</div>
@@ -916,7 +916,7 @@ export default function InsuranceClient() {
 						</p>
 					</div>
 					<div className="relative z-10 text-right shrink-0">
-						<p className="text-[10px] font-bold uppercase tracking-widest text-white/40 mb-1">
+						<p className="text-[10px] font-semibold uppercase tracking-widest text-white/40 mb-1">
 							{t("products.underwriter.portfolio")}
 						</p>
 						<p className="font-(family-name:--font-manrope) text-5xl font-black text-[#FF5A30] leading-none">
@@ -944,7 +944,7 @@ export default function InsuranceClient() {
 						<button
 							key={s.id}
 							onClick={() => setActiveStakeholder(s.id)}
-							className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 text-sm font-bold transition-all font-(family-name:--font-manrope) ${
+							className={`flex items-center gap-2 px-4 py-2.5 rounded-xl border-2 text-sm font-semibold transition-all font-(family-name:--font-manrope) ${
 								activeStakeholder === s.id
 									? "border-[#FF5A30] bg-[#FF5A30] text-white"
 									: "border-outline-variant text-on-surface-variant hover:border-[#FF5A30]/40"
@@ -979,7 +979,7 @@ export default function InsuranceClient() {
 
 						{/* Certification pathway */}
 						<div className="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/10 shadow-sm">
-							<h3 className="font-(family-name:--font-manrope) font-bold mb-5">
+							<h3 className="font-(family-name:--font-manrope) font-semibold mb-5">
 								{t("profile.certification")}
 							</h3>
 							<div className="relative pl-8 flex flex-col gap-0">
@@ -1003,7 +1003,7 @@ export default function InsuranceClient() {
 										</div>
 										<div className="flex-1 pl-6">
 											<div className="flex items-center justify-between gap-2">
-												<p className="text-sm font-bold font-(family-name:--font-manrope)">
+												<p className="text-sm font-semibold font-(family-name:--font-manrope)">
 													{step.label}
 												</p>
 												<span
@@ -1025,7 +1025,7 @@ export default function InsuranceClient() {
 
 						{/* Finance products */}
 						<div className="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/10 shadow-sm">
-							<h3 className="font-(family-name:--font-manrope) font-bold mb-5">
+							<h3 className="font-(family-name:--font-manrope) font-semibold mb-5">
 								{t("profile.financeTitle")}
 							</h3>
 							<div className="flex flex-col gap-4">
@@ -1035,7 +1035,7 @@ export default function InsuranceClient() {
 										className="border border-outline-variant/20 rounded-xl p-5"
 									>
 										<div className="flex items-start sm:items-center justify-between gap-2 mb-4 flex-wrap">
-											<p className="font-(family-name:--font-manrope) font-bold">
+											<p className="font-(family-name:--font-manrope) font-semibold">
 												{fp.name}
 											</p>
 											<div className="flex items-center gap-1.5 bg-surface-container px-2.5 py-1 rounded-full shrink-0">
@@ -1056,10 +1056,10 @@ export default function InsuranceClient() {
 												] as [string, string][]
 											).map(([label, val]: [string, string]) => (
 												<div key={label}>
-													<p className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
+													<p className="text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant">
 														{label}
 													</p>
-													<p className="text-sm font-bold text-on-surface mt-0.5">
+													<p className="text-sm font-semibold text-on-surface mt-0.5">
 														{val}
 													</p>
 												</div>
@@ -1067,7 +1067,7 @@ export default function InsuranceClient() {
 										</div>
 										<Link
 											href="/financing"
-											className="mt-4 flex items-center gap-1 text-[#FF5A30] text-xs font-bold hover:gap-2 transition-all"
+											className="mt-4 flex items-center gap-1 text-[#FF5A30] text-xs font-semibold hover:gap-2 transition-all"
 										>
 											{t("onboarding.finance.description")}
 											<span className="material-symbols-outlined text-sm">
@@ -1084,7 +1084,7 @@ export default function InsuranceClient() {
 					<div className="lg:col-span-7 flex flex-col gap-5">
 						{/* Coverage detail */}
 						<div className="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/10 shadow-sm">
-							<p className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant mb-6">
+							<p className="text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant mb-6">
 								{t("profile.coverageTitle")}
 							</p>
 							<div className="flex flex-col gap-6">
@@ -1094,7 +1094,7 @@ export default function InsuranceClient() {
 										className={`pl-4 border-l-4 ${i === 0 ? "border-[#FF5A30]" : "border-outline-variant/30"}`}
 									>
 										<div className="flex items-start justify-between gap-4 mb-2">
-											<h4 className="font-(family-name:--font-manrope) font-bold">
+											<h4 className="font-(family-name:--font-manrope) font-semibold">
 												{c.product}
 											</h4>
 											<span
@@ -1114,10 +1114,10 @@ export default function InsuranceClient() {
 												] as [string, string][]
 											).map(([label, val]: [string, string]) => (
 												<div key={label}>
-													<p className="text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">
+													<p className="text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant">
 														{label}
 													</p>
-													<p className="text-sm font-bold text-on-surface mt-0.5">
+													<p className="text-sm font-semibold text-on-surface mt-0.5">
 														{val}
 													</p>
 												</div>
@@ -1134,7 +1134,7 @@ export default function InsuranceClient() {
 								<span className="text-[10px] font-black uppercase tracking-widest text-[#FF5A30] block mb-2">
 									{t("profile.status.pending")}
 								</span>
-								<h3 className="font-(family-name:--font-manrope) text-xl font-bold text-white mb-2">
+								<h3 className="font-(family-name:--font-manrope) text-xl font-semibold text-white mb-2">
 									{t("profile.cta.title")}
 								</h3>
 								<p className="text-white/60 text-sm mb-6">
@@ -1143,7 +1143,7 @@ export default function InsuranceClient() {
 								<FinancingApplyButton
 									defaultProduct={INSURANCE_DEFAULT_PRODUCT}
 									products={INSURANCE_PRODUCT_IDS}
-									className="bg-[#FF5A30] text-white px-6 py-2.5 rounded-xl font-bold text-sm hover:opacity-90 transition-all"
+									className="bg-[#FF5A30] text-white px-6 py-2.5 rounded-xl font-semibold text-sm hover:opacity-90 transition-all"
 								>
 									{t("profile.cta.button")} →
 								</FinancingApplyButton>

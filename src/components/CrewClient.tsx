@@ -343,7 +343,7 @@ function Stepper({
 							className="relative z-10 flex flex-col items-center"
 						>
 							<div
-								className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ring-4 ring-surface-container-low ${
+								className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ring-4 ring-surface-container-low ${
 									done || active
 										? "bg-[#FF5A30] text-white"
 										: "bg-surface-variant text-on-surface-variant"
@@ -361,7 +361,7 @@ function Stepper({
 								)}
 							</div>
 							<span
-								className={`mt-2 text-[10px] font-bold uppercase tracking-wider text-center  leading-tight ${
+								className={`mt-2 text-[10px] font-semibold uppercase tracking-wider text-center  leading-tight ${
 									active
 										? "text-[#FF5A30]"
 										: done
@@ -424,7 +424,7 @@ function ScoreGauge({
 					</div>
 				</div>
 				<div
-					className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold ${tier.bg} ${tier.text}`}
+					className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold ${tier.bg} ${tier.text}`}
 				>
 					<span
 						className="material-symbols-outlined text-sm"
@@ -525,7 +525,7 @@ export default function CrewClient() {
 											? "badge"
 											: "person"}
 							</span>
-							<h4 className={`text-sm font-bold ${tier.text}`}>
+							<h4 className={`text-sm font-semibold ${tier.text}`}>
 								Tier {tier.tier} — {tier.label}
 							</h4>
 						</div>
@@ -553,7 +553,7 @@ export default function CrewClient() {
 								>
 									star
 								</span>
-								<span className={`text-xs font-bold ${tier.text}`}>
+								<span className={`text-xs font-semibold ${tier.text}`}>
 									{t("success.aya")}: {tier.aya}
 								</span>
 							</div>
@@ -563,13 +563,13 @@ export default function CrewClient() {
 					<div className="flex flex-col sm:flex-row gap-4 justify-center">
 						<Link
 							href="/dashboard"
-							className="px-8 py-3 bg-[#FF5A30] text-white rounded-xl font-bold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform"
+							className="px-8 py-3 bg-[#FF5A30] text-white rounded-xl font-semibold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform"
 						>
 							{t("actions.dashboard")}
 						</Link>
 						<Link
 							href="/discovery"
-							className="px-8 py-3 bg-surface-container-lowest text-on-surface rounded-xl font-bold border border-outline-variant/20 hover:bg-surface-container-low transition-colors"
+							className="px-8 py-3 bg-surface-container-lowest text-on-surface rounded-xl font-semibold border border-outline-variant/20 hover:bg-surface-container-low transition-colors"
 						>
 							{t("actions.discovery")}
 						</Link>
@@ -586,7 +586,7 @@ export default function CrewClient() {
 				<header className="mb-10">
 					<div className="flex items-start justify-between gap-4">
 						<div>
-							<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-3">
+							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-3">
 								{t("registry")}
 							</span>
 							<h1 className="text-4xl font-extrabold tracking-tight text-on-surface mb-2">
@@ -603,12 +603,12 @@ export default function CrewClient() {
 									{wcs.total}
 								</span>
 								<span
-									className={`text-[10px] font-bold uppercase tracking-wider ${tier.text} opacity-70`}
+									className={`text-[10px] font-semibold uppercase tracking-wider ${tier.text} opacity-70`}
 								>
 									WCS Score
 								</span>
 								<span
-									className={`text-[10px] font-bold ${tier.text} mt-0.5`}
+									className={`text-[10px] font-semibold ${tier.text} mt-0.5`}
 								>
 									Tier {tier.tier}
 								</span>
@@ -657,7 +657,7 @@ export default function CrewClient() {
 									<span className="material-symbols-outlined text-[#FF5A30]">
 										person
 									</span>
-									<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
+									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 										{t("sections.personal.title")}
 									</h3>
 								</div>
@@ -818,7 +818,7 @@ export default function CrewClient() {
 									<span className="material-symbols-outlined text-[#FF5A30]">
 										engineering
 									</span>
-									<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
+									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 										{t("sections.role.title")}
 									</h3>
 								</div>
@@ -898,7 +898,7 @@ export default function CrewClient() {
 									<span className="material-symbols-outlined text-[#FF5A30]">
 										travel_explore
 									</span>
-									<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
+									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 										{t("sections.touring.title")}
 									</h3>
 								</div>
@@ -970,7 +970,7 @@ export default function CrewClient() {
 									<span className="material-symbols-outlined text-[#FF5A30]">
 										verified
 									</span>
-									<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
+									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 										{t("sections.credentials.title")}
 									</h3>
 								</div>
@@ -1040,7 +1040,7 @@ export default function CrewClient() {
 								</div>
 
 								<div className="pt-6 border-t border-outline-variant/10">
-									<p className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] mb-4">
+									<p className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] mb-4">
 										Industry Reference
 									</p>
 									<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1112,7 +1112,7 @@ export default function CrewClient() {
 									<span className="material-symbols-outlined text-[#FF5A30]">
 										analytics
 									</span>
-									<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
+									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 										{t("sections.wcs.title")}
 									</h3>
 								</div>
@@ -1128,7 +1128,7 @@ export default function CrewClient() {
 
 									<div className="space-y-6">
 										<div className="bg-surface-container-low rounded-2xl p-6 border border-outline-variant/10">
-											<h4 className="font-bold text-sm text-on-surface mb-4">
+											<h4 className="font-semibold text-sm text-on-surface mb-4">
 												Score Breakdown
 											</h4>
 											<div className="space-y-3">
@@ -1136,7 +1136,7 @@ export default function CrewClient() {
 													<span className="text-on-surface-variant">
 														Base Score
 													</span>
-													<span className="font-bold">
+													<span className="font-semibold">
 														{wcs.base} / 100
 													</span>
 												</div>
@@ -1144,13 +1144,13 @@ export default function CrewClient() {
 													<span className="text-on-surface-variant">
 														Bonus Score
 													</span>
-													<span className="font-bold text-emerald-600">
+													<span className="font-semibold text-emerald-600">
 														+{wcs.bonus}
 													</span>
 												</div>
 												<div className="h-px bg-outline-variant/10 my-2" />
 												<div className="flex justify-between text-base">
-													<span className="font-bold">Total WCS Score</span>
+													<span className="font-semibold">Total WCS Score</span>
 													<span className="font-black text-[#FF5A30]">
 														{wcs.total}
 													</span>
@@ -1159,14 +1159,14 @@ export default function CrewClient() {
 										</div>
 
 										<div className="space-y-3">
-											<p className="text-xs font-bold uppercase tracking-widest text-on-surface-variant">
+											<p className="text-xs font-semibold uppercase tracking-widest text-on-surface-variant">
 												{t("sections.wcs.bonuses.title")}
 											</p>
 											<div className="grid grid-cols-1 gap-2">
 												{wcs.bonusItems.map((item) => (
 													<div
 														key={item.label}
-														className={`flex items-center justify-between p-3 rounded-xl border text-xs font-bold ${
+														className={`flex items-center justify-between p-3 rounded-xl border text-xs font-semibold ${
 															item.earned
 																? "bg-emerald-50 border-emerald-200 text-emerald-800"
 																: "bg-surface-container-low border-outline-variant/10 text-on-surface-variant opacity-60"
@@ -1189,7 +1189,7 @@ export default function CrewClient() {
 
 								<div className="pt-8 border-t border-outline-variant/10 space-y-6">
 									<div className="bg-surface-container-low rounded-2xl p-6 border border-outline-variant/10">
-										<h4 className="font-bold text-on-surface mb-2">
+										<h4 className="font-semibold text-on-surface mb-2">
 											{t("sections.wcs.declaration.title")}
 										</h4>
 										<p className="text-sm text-on-surface-variant leading-relaxed">
@@ -1238,7 +1238,7 @@ export default function CrewClient() {
 							<button
 								type="button"
 								onClick={() => setStep((s) => s - 1)}
-								className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-all ${
+								className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all ${
 									step === 0
 										? "opacity-0 pointer-events-none"
 										: "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low"
@@ -1253,7 +1253,7 @@ export default function CrewClient() {
 							<button
 								type="submit"
 								disabled={submitting}
-								className="flex items-center gap-2 px-10 py-4 bg-[#FF5A30] text-white rounded-xl font-bold shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:opacity-50"
+								className="flex items-center gap-2 px-10 py-4 bg-[#FF5A30] text-white rounded-xl font-semibold shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:opacity-50"
 							>
 								{submitting ? (
 									<>
@@ -1273,7 +1273,7 @@ export default function CrewClient() {
 							</button>
 						</div>
 						{submitError && (
-							<p className="mt-4 text-center text-sm font-bold text-red-500">
+							<p className="mt-4 text-center text-sm font-semibold text-red-500">
 								{submitError}
 							</p>
 						)}

@@ -1,5 +1,5 @@
 import type {} from "next";
-import { Inter, Rubik } from "next/font/google";
+import localFont from "next/font/local";
 import "../globals.css";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
@@ -11,18 +11,18 @@ import {
 import QueryProvider from "@/components/QueryProvider";
 import { routing } from "@/i18n/routing";
 
-// Rubik replaces Manrope as the display/heading font — same CSS variable kept
-// for backwards compatibility with all existing font-(family-name:--font-manrope) usages.
-const rubik = Rubik({
+const rubik = localFont({
+	src: "../../../public/fonts/inter-variable.woff2",
 	variable: "--font-manrope",
-	subsets: ["latin"],
-	weight: ["300", "400", "500", "600", "700", "800", "900"],
+	display: "swap",
+	weight: "100 900",
 });
 
-const inter = Inter({
+const inter = localFont({
+	src: "../../../public/fonts/inter-variable.woff2",
 	variable: "--font-inter",
-	subsets: ["latin"],
-	weight: ["400", "500", "600", "700", "800", "900"],
+	display: "swap",
+	weight: "100 900",
 });
 
 export async function generateMetadata({

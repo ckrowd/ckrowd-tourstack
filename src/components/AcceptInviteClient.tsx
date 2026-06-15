@@ -65,7 +65,7 @@ export default function AcceptInviteClient({
 	if (!invite || invite.status === "not_found") {
 		return (
 			<Shell>
-				<h1 className="text-xl font-bold text-on-surface mb-2">
+				<h1 className="text-xl font-semibold text-on-surface mb-2">
 					{t("notFoundTitle")}
 				</h1>
 				<p className="text-sm text-on-surface-variant">{t("notFoundDesc")}</p>
@@ -76,7 +76,7 @@ export default function AcceptInviteClient({
 	if (invite.status === "revoked") {
 		return (
 			<Shell>
-				<h1 className="text-xl font-bold text-on-surface mb-2">
+				<h1 className="text-xl font-semibold text-on-surface mb-2">
 					{t("revokedTitle")}
 				</h1>
 				<p className="text-sm text-on-surface-variant">{t("revokedDesc")}</p>
@@ -87,7 +87,7 @@ export default function AcceptInviteClient({
 	if (invite.status === "expired") {
 		return (
 			<Shell>
-				<h1 className="text-xl font-bold text-on-surface mb-2">
+				<h1 className="text-xl font-semibold text-on-surface mb-2">
 					{t("expiredTitle")}
 				</h1>
 				<p className="text-sm text-on-surface-variant">{t("expiredDesc")}</p>
@@ -98,14 +98,14 @@ export default function AcceptInviteClient({
 	if (invite.status === "accepted") {
 		return (
 			<Shell>
-				<h1 className="text-xl font-bold text-on-surface mb-2">
+				<h1 className="text-xl font-semibold text-on-surface mb-2">
 					{t("acceptedTitle")}
 				</h1>
 				<p className="text-sm text-on-surface-variant">{t("acceptedDesc")}</p>
 				<div className="mt-5 flex justify-end">
 					<Link
 						href="/login"
-						className="px-4 py-2 rounded-lg text-sm font-bold bg-[#FF5A30] text-white hover:opacity-90"
+						className="px-4 py-2 rounded-lg text-sm font-semibold bg-[#FF5A30] text-white hover:opacity-90"
 					>
 						{t("goToSignIn")}
 					</Link>
@@ -133,7 +133,7 @@ export default function AcceptInviteClient({
 		const registerHref = `/register?from=${next}`;
 		return (
 			<Shell>
-				<h1 className="text-xl font-bold text-on-surface mb-1">
+				<h1 className="text-xl font-semibold text-on-surface mb-1">
 					{t("invitedTitle")}
 				</h1>
 				<p className="text-sm text-on-surface-variant mb-4">
@@ -151,14 +151,14 @@ export default function AcceptInviteClient({
 					{invite.userExists ? (
 						<Link
 							href={signInHref}
-							className="block w-full text-center px-4 py-2.5 rounded-lg text-sm font-bold bg-[#FF5A30] text-white hover:opacity-90"
+							className="block w-full text-center px-4 py-2.5 rounded-lg text-sm font-semibold bg-[#FF5A30] text-white hover:opacity-90"
 						>
 							{t("signInToAccept")}
 						</Link>
 					) : (
 						<Link
 							href={registerHref}
-							className="block w-full text-center px-4 py-2.5 rounded-lg text-sm font-bold bg-[#FF5A30] text-white hover:opacity-90"
+							className="block w-full text-center px-4 py-2.5 rounded-lg text-sm font-semibold bg-[#FF5A30] text-white hover:opacity-90"
 						>
 							{t("createAccountToAccept")}
 						</Link>
@@ -175,7 +175,7 @@ export default function AcceptInviteClient({
 	if (session.user.email?.toLowerCase() !== invite.email.toLowerCase()) {
 		return (
 			<Shell>
-				<h1 className="text-xl font-bold text-on-surface mb-1">
+				<h1 className="text-xl font-semibold text-on-surface mb-1">
 					{t("wrongAccountTitle")}
 				</h1>
 				<p className="text-sm text-on-surface-variant mb-4">
@@ -189,7 +189,7 @@ export default function AcceptInviteClient({
 						await signOut();
 						router.refresh();
 					}}
-					className="w-full px-4 py-2.5 rounded-lg text-sm font-bold border border-outline-variant/30 hover:bg-surface-container-low"
+					className="w-full px-4 py-2.5 rounded-lg text-sm font-semibold border border-outline-variant/30 hover:bg-surface-container-low"
 				>
 					{signingOut ? t("signingOut") : t("signOutToSwitch")}
 				</button>
@@ -207,7 +207,7 @@ export default function AcceptInviteClient({
 
 	return (
 		<Shell>
-			<h1 className="text-xl font-bold text-on-surface mb-1">
+			<h1 className="text-xl font-semibold text-on-surface mb-1">
 				{t("readyTitle")}
 			</h1>
 			<p className="text-sm text-on-surface-variant mb-4">
@@ -227,7 +227,7 @@ export default function AcceptInviteClient({
 				type="button"
 				disabled={acceptMutation.isPending}
 				onClick={() => acceptMutation.mutate()}
-				className="w-full px-4 py-2.5 rounded-lg text-sm font-bold bg-[#FF5A30] text-white hover:opacity-90 disabled:opacity-60"
+				className="w-full px-4 py-2.5 rounded-lg text-sm font-semibold bg-[#FF5A30] text-white hover:opacity-90 disabled:opacity-60"
 			>
 				{acceptMutation.isPending ? t("accepting") : t("acceptInvitation")}
 			</button>
@@ -255,7 +255,7 @@ function Shell({ children }: { children: React.ReactNode }) {
 function Row({ label, value }: { label: string; value: string }) {
 	return (
 		<div className="flex justify-between gap-3">
-			<dt className="text-xs font-bold uppercase tracking-wider text-on-surface-variant">
+			<dt className="text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
 				{label}
 			</dt>
 			<dd className="text-sm font-semibold text-on-surface text-right">

@@ -33,7 +33,7 @@ export default function OnboardingValueProps() {
 							</span>
 						</div>
 						<div>
-							<p className="text-xs font-bold text-on-surface">
+							<p className="text-xs font-semibold text-on-surface">
 								{t(`valueProps.items.${item.key}.title` as never)}
 							</p>
 							<p className="text-xs text-on-surface-variant leading-relaxed">

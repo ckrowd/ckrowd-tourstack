@@ -172,7 +172,7 @@ export default function EoiActionPanel({
 					<button
 						type="button"
 						onClick={() => startAction("approve")}
-						className="flex-1 py-2.5 bg-emerald-50 text-emerald-700 rounded-xl text-sm font-bold flex items-center justify-center gap-1.5 hover:bg-emerald-100 transition-colors"
+						className="flex-1 py-2.5 bg-emerald-50 text-emerald-700 rounded-xl text-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-emerald-100 transition-colors"
 					>
 						<span className="material-symbols-outlined text-sm">check_circle</span>
 						{t("approve")}
@@ -182,7 +182,7 @@ export default function EoiActionPanel({
 					<button
 						type="button"
 						onClick={() => startAction("revision")}
-						className="flex-1 py-2.5 bg-blue-50 text-blue-700 rounded-xl text-sm font-bold flex items-center justify-center gap-1.5 hover:bg-blue-100 transition-colors"
+						className="flex-1 py-2.5 bg-blue-50 text-blue-700 rounded-xl text-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-blue-100 transition-colors"
 					>
 						<span className="material-symbols-outlined text-sm">edit_note</span>
 						{t("revision")}
@@ -192,7 +192,7 @@ export default function EoiActionPanel({
 					<button
 						type="button"
 						onClick={() => startAction("reject")}
-						className="flex-1 py-2.5 bg-red-50 text-red-700 rounded-xl text-sm font-bold flex items-center justify-center gap-1.5 hover:bg-red-100 transition-colors"
+						className="flex-1 py-2.5 bg-red-50 text-red-700 rounded-xl text-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-red-100 transition-colors"
 					>
 						<span className="material-symbols-outlined text-sm">cancel</span>
 						{t("reject")}
@@ -202,7 +202,7 @@ export default function EoiActionPanel({
 					<button
 						type="button"
 						onClick={() => startAction("create_stop")}
-						className="flex-1 py-2.5 bg-[#FF5A30]/10 text-[#FF5A30] rounded-xl text-sm font-bold flex items-center justify-center gap-1.5 hover:bg-[#FF5A30]/20 transition-colors"
+						className="flex-1 py-2.5 bg-[#FF5A30]/10 text-[#FF5A30] rounded-xl text-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-[#FF5A30]/20 transition-colors"
 					>
 						<span className="material-symbols-outlined text-sm">add_location_alt</span>
 						{t("createStop")}
@@ -214,7 +214,7 @@ export default function EoiActionPanel({
 							type="button"
 							onClick={() => { setSendDropdownOpen((v) => !v); setForwardError(null); }}
 							disabled={isPending}
-							className="w-full py-2.5 bg-purple-50 text-purple-700 rounded-xl text-sm font-bold flex items-center justify-center gap-1.5 hover:bg-purple-100 transition-colors disabled:opacity-60"
+							className="w-full py-2.5 bg-purple-50 text-purple-700 rounded-xl text-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-purple-100 transition-colors disabled:opacity-60"
 						>
 							<span className="material-symbols-outlined text-sm">send</span>
 							{t("send")}
@@ -263,7 +263,7 @@ export default function EoiActionPanel({
 					<div className="bg-surface rounded-2xl shadow-xl max-w-md w-full p-6">
 						<h3
 							id={`eoi-action-${eoiId}-title`}
-							className="text-lg font-bold text-on-surface mb-2"
+							className="text-lg font-semibold text-on-surface mb-2"
 						>
 							{t(`${open}Title`)}
 						</h3>
@@ -271,7 +271,7 @@ export default function EoiActionPanel({
 							{t(`${open}Description`)}
 						</p>
 
-						<label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1">
+						<label className="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1">
 							{open === "revision" ? t("revisionNotesLabel") : t("optionalNotesLabel")}
 						</label>
 						<textarea
@@ -299,7 +299,7 @@ export default function EoiActionPanel({
 								type="button"
 								onClick={submitStatus}
 								disabled={isPending}
-								className={`px-4 py-2 rounded-lg text-sm font-bold text-white disabled:opacity-60 ${
+								className={`px-4 py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-60 ${
 									open === "approve"
 										? "bg-emerald-600 hover:bg-emerald-700"
 										: open === "revision"
@@ -324,7 +324,7 @@ export default function EoiActionPanel({
 					<div className="bg-surface rounded-2xl shadow-xl max-w-lg w-full p-6 max-h-[90vh] overflow-y-auto">
 						<h3
 							id={`eoi-stop-${eoiId}-title`}
-							className="text-lg font-bold text-on-surface mb-1"
+							className="text-lg font-semibold text-on-surface mb-1"
 						>
 							{t("createStopTitle")}
 						</h3>
@@ -334,7 +334,7 @@ export default function EoiActionPanel({
 
 						<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 							<div className="sm:col-span-2">
-								<label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1">
+								<label className="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1">
 									{t("venue")} *
 								</label>
 								<input
@@ -346,7 +346,7 @@ export default function EoiActionPanel({
 								/>
 							</div>
 							<div>
-								<label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1">
+								<label className="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1">
 									{t("city")} *
 								</label>
 								<input
@@ -358,7 +358,7 @@ export default function EoiActionPanel({
 								/>
 							</div>
 							<div>
-								<label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1">
+								<label className="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1">
 									{t("country")}
 								</label>
 								<input
@@ -370,7 +370,7 @@ export default function EoiActionPanel({
 								/>
 							</div>
 							<div>
-								<label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1">
+								<label className="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1">
 									{t("date")} *
 								</label>
 								<input
@@ -381,7 +381,7 @@ export default function EoiActionPanel({
 								/>
 							</div>
 							<div>
-								<label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1">
+								<label className="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1">
 									{t("feeUsd")} *
 								</label>
 								<input
@@ -394,7 +394,7 @@ export default function EoiActionPanel({
 								/>
 							</div>
 							<div className="sm:col-span-2">
-								<label className="block text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-1">
+								<label className="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1">
 									{t("capacity")}
 								</label>
 								<input
@@ -423,7 +423,7 @@ export default function EoiActionPanel({
 								type="button"
 								onClick={submitStop}
 								disabled={isPending}
-								className="px-4 py-2 rounded-lg text-sm font-bold text-white bg-[#FF5A30] hover:opacity-90 disabled:opacity-60"
+								className="px-4 py-2 rounded-lg text-sm font-semibold text-white bg-[#FF5A30] hover:opacity-90 disabled:opacity-60"
 							>
 								{isPending ? t("creating") : t("createStopConfirm")}
 							</button>

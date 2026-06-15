@@ -35,7 +35,7 @@ export default function FinancingQuickApply() {
 	});
 
 	const labelClass =
-		"mb-2 block text-xs font-bold uppercase tracking-[0.24em] text-on-surface-variant";
+		"mb-2 block text-xs font-semibold uppercase tracking-[0.24em] text-on-surface-variant";
 	const controlClass =
 		"w-full rounded-xl border border-outline-variant/20 bg-surface-container-lowest px-4 py-3 text-sm font-medium text-on-surface outline-none transition focus:ring-2 focus:ring-[#FF5A30]/20 appearance-none";
 	const selectClass =
@@ -53,10 +53,10 @@ export default function FinancingQuickApply() {
 		<section className="rounded-3xl border border-outline-variant/10 bg-surface-container-lowest p-8 shadow-sm md:p-10">
 			<div className="mb-6 flex items-start justify-between gap-4">
 				<div>
-					<p className="text-xs font-bold uppercase tracking-[0.3em] text-[#FF5A30]">
+					<p className="text-xs font-semibold uppercase tracking-[0.3em] text-[#FF5A30]">
 						{t("badge")}
 					</p>
-					<h2 className="mt-1 font-(family-name:--font-manrope) text-2xl font-bold text-on-surface">
+					<h2 className="mt-1 font-(family-name:--font-manrope) text-2xl font-semibold text-on-surface">
 						{t("title")}
 					</h2>
 					<p className="mt-2 max-w-2xl text-sm leading-relaxed text-on-surface-variant">
@@ -149,7 +149,7 @@ export default function FinancingQuickApply() {
 					<button
 						type="submit"
 						disabled={applyMutation.isPending}
-						className={`inline-flex w-full items-center justify-center rounded-xl bg-[#FF5A30] p-3 text-sm font-bold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 md:self-end`}
+						className={`inline-flex w-full items-center justify-center rounded-xl bg-[#FF5A30] p-3 text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60 md:self-end`}
 					>
 						{applyMutation.isPending
 							? t("actions.submitting")

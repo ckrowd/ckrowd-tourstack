@@ -26,7 +26,7 @@ export default function ArtmgmtSideNavClient({ navItems, portalLabel }: Props) {
 	return (
 		<aside className="hidden lg:flex flex-col gap-2 py-6 h-full w-64 border-r border-slate-200 bg-slate-50 shrink-0">
 			<div className="px-4 mb-4">
-				<p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+				<p className="text-[10px] font-semibold uppercase tracking-widest text-slate-400">
 					{portalLabel}
 				</p>
 			</div>

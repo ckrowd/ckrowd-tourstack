@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Footer from "@/components/Footer";
@@ -141,7 +141,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 			<section className="py-24 px-6 md:px-12">
 				<div className="max-w-5xl mx-auto">
 					<div className="text-center mb-10">
-						<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-3">
+						<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-3">
 							{t("model.eyebrow")}
 						</span>
 						<h2 className="text-3xl font-extrabold font-(family-name:--font-manrope) text-[#191c1e] mb-3">
@@ -192,7 +192,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 			<section className="py-24 px-6 md:px-12 bg-white">
 				<div className="max-w-5xl mx-auto">
 					<div className="max-w-2xl">
-						<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-3">
+						<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-3">
 							{t("about.eyebrow")}
 						</span>
 						<h2 className="text-3xl font-extrabold font-(family-name:--font-manrope) text-[#191c1e] mb-4">
@@ -270,7 +270,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 			<section className="py-24 px-6 md:px-12 bg-white">
 				<div className="max-w-5xl mx-auto">
 					<div className="text-center mb-10">
-						<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-3">
+						<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-3">
 							{t("roles.eyebrow")}
 						</span>
 						<h2 className="text-3xl font-extrabold font-(family-name:--font-manrope) text-[#191c1e] mb-3">
@@ -327,7 +327,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 
 										{/* Who qualifies */}
 										<div className={`rounded-xl ${role.accentBg} p-4`}>
-											<p className={`text-[10px] font-bold uppercase tracking-widest ${role.accentText} mb-2.5`}>
+											<p className={`text-[10px] font-semibold uppercase tracking-widest ${role.accentText} mb-2.5`}>
 												{t("roles.examplesLabel")}
 											</p>
 											<ul className="space-y-1.5">
@@ -347,7 +347,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 
 										{/* What you unlock */}
 										<div>
-											<p className={`text-[10px] font-bold uppercase tracking-widest ${role.accentText} mb-2.5`}>
+											<p className={`text-[10px] font-semibold uppercase tracking-widest ${role.accentText} mb-2.5`}>
 												{t("roles.benefitsLabel")}
 											</p>
 											<ul className="space-y-1.5">
@@ -383,7 +383,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 			<section className="py-24 px-6 md:px-12">
 				<div className="max-w-5xl mx-auto">
 					<div className="max-w-2xl mb-8">
-						<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-3">
+						<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-3">
 							{t("markets.eyebrow")}
 						</span>
 						<h2 className="text-3xl font-extrabold font-(family-name:--font-manrope) text-[#191c1e] mb-4">
@@ -424,7 +424,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 				<div className="max-w-5xl mx-auto">
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 						<div>
-							<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-3">
+							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-3">
 								{t("vision.eyebrow")}
 							</span>
 							<h2 className="text-3xl font-extrabold font-(family-name:--font-manrope) mb-5 leading-tight">
@@ -455,7 +455,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 													? "shield"
 													: "handshake"}
 									</span>
-									<p className="text-sm font-bold text-white font-(family-name:--font-manrope) mb-1">
+									<p className="text-sm font-semibold text-white font-(family-name:--font-manrope) mb-1">
 										{t(`vision.stakeholders.${key}.title`)}
 									</p>
 									<p className="text-xs text-white/50 leading-relaxed">

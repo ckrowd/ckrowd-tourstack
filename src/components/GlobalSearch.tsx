@@ -191,7 +191,7 @@ function SearchModal({ onClose }: { onClose: () => void }) {
 											)}
 										</div>
 										<span
-											className={`shrink-0 text-[10px] font-bold px-2 py-0.5 rounded-full ${CATEGORY_COLORS[result.category as SearchResult["category"]]}`}
+											className={`shrink-0 text-[10px] font-semibold px-2 py-0.5 rounded-full ${CATEGORY_COLORS[result.category as SearchResult["category"]]}`}
 										>
 											{CATEGORY_LABELS[result.category as SearchResult["category"]]}
 										</span>

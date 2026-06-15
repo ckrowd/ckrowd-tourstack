@@ -202,7 +202,7 @@ function CategoryStep({
 				<span className="material-symbols-outlined text-[#FF5A30]">
 					category
 				</span>
-				<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
+				<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 					{t("title")}
 				</h3>
 			</div>
@@ -232,7 +232,7 @@ function CategoryStep({
 							</div>
 							<div>
 								<p
-									className={`font-bold text-base font-(family-name:--font-manrope) mb-1 ${
+									className={`font-semibold text-base font-(family-name:--font-manrope) mb-1 ${
 										selected ? "text-[#FF5A30]" : "text-on-surface"
 									}`}
 								>
@@ -323,7 +323,7 @@ function ServiceProviderForm({
 					<span className="material-symbols-outlined text-[#FF5A30]">
 						business
 					</span>
-					<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
+					<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 						{t("companyInfo.title")}
 					</h3>
 				</div>
@@ -431,7 +431,7 @@ function ServiceProviderForm({
 					<span className="material-symbols-outlined text-[#FF5A30]">
 						build
 					</span>
-					<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
+					<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 						{t("experience.title")}
 					</h3>
 				</div>
@@ -533,7 +533,7 @@ function ServiceProviderForm({
 					<span className="material-symbols-outlined text-[#FF5A30]">
 						gavel
 					</span>
-					<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
+					<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 						{t("declaration.title")}
 					</h3>
 				</div>
@@ -640,7 +640,7 @@ function ArtMgmtForm({
 					<span className="material-symbols-outlined text-[#FF5A30]">
 						business
 					</span>
-					<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
+					<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 						{t("companyInfo.title")}
 					</h3>
 				</div>
@@ -761,7 +761,7 @@ function ArtMgmtForm({
 					<span className="material-symbols-outlined text-[#FF5A30]">
 						music_note
 					</span>
-					<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
+					<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 						{t("roster.title")}
 					</h3>
 				</div>
@@ -843,7 +843,7 @@ function ArtMgmtForm({
 					<span className="material-symbols-outlined text-[#FF5A30]">
 						gavel
 					</span>
-					<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
+					<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 						{t("declaration.title")}
 					</h3>
 				</div>
@@ -911,7 +911,7 @@ function Stepper({ steps, current }: { steps: string[]; current: number }) {
 							className="relative z-10 flex flex-col items-center"
 						>
 							<div
-								className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ring-4 ring-surface-container-low ${
+								className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ring-4 ring-surface-container-low ${
 									done || active
 										? "bg-[#FF5A30] text-white"
 										: "bg-surface-variant text-on-surface-variant"
@@ -929,7 +929,7 @@ function Stepper({ steps, current }: { steps: string[]; current: number }) {
 								)}
 							</div>
 							<span
-								className={`mt-2 text-[10px] font-bold uppercase tracking-wider text-center leading-tight ${
+								className={`mt-2 text-[10px] font-semibold uppercase tracking-wider text-center leading-tight ${
 									active
 										? "text-[#FF5A30]"
 										: done
@@ -998,7 +998,7 @@ function DirectoryTab({
 							</span>
 						</div>
 						<div>
-							<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-1">
+							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-1">
 								{CATEGORY_LABELS[selected.category]}
 							</span>
 							<h2 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-on-surface">
@@ -1014,7 +1014,7 @@ function DirectoryTab({
 
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 						<div>
-							<p className="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1">
+							<p className="text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1">
 								{t("details.email")}
 							</p>
 							<p className="text-sm text-on-surface font-medium">
@@ -1022,7 +1022,7 @@ function DirectoryTab({
 							</p>
 						</div>
 						<div>
-							<p className="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1">
+							<p className="text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1">
 								{t("details.phone")}
 							</p>
 							<p className="text-sm text-on-surface font-medium">
@@ -1030,7 +1030,7 @@ function DirectoryTab({
 							</p>
 						</div>
 						<div>
-							<p className="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1">
+							<p className="text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1">
 								{t("details.country")}
 							</p>
 							<p className="text-sm text-on-surface font-medium">
@@ -1038,7 +1038,7 @@ function DirectoryTab({
 							</p>
 						</div>
 						<div>
-							<p className="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-1">
+							<p className="text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1">
 								{t("details.submitted")}
 							</p>
 							<p className="text-sm text-on-surface font-medium">
@@ -1134,16 +1134,16 @@ function DirectoryTab({
 					<table className="w-full text-left border-collapse">
 						<thead>
 							<tr className="bg-surface-container-high">
-								<th className="px-5 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant">
+								<th className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-on-surface-variant">
 									{t("table.name")}
 								</th>
-								<th className="px-5 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant hidden md:table-cell">
+								<th className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-on-surface-variant hidden md:table-cell">
 									{t("table.category")}
 								</th>
-								<th className="px-5 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant hidden lg:table-cell">
+								<th className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-on-surface-variant hidden lg:table-cell">
 									{t("table.country")}
 								</th>
-								<th className="px-5 py-4 text-xs font-bold uppercase tracking-widest text-on-surface-variant hidden md:table-cell">
+								<th className="px-5 py-4 text-xs font-semibold uppercase tracking-widest text-on-surface-variant hidden md:table-cell">
 									{t("table.submitted")}
 								</th>
 								<th className="px-5 py-4" />
@@ -1163,7 +1163,7 @@ function DirectoryTab({
 												</span>
 											</div>
 											<div>
-												<span className="block font-(family-name:--font-manrope) font-bold text-on-surface text-sm">
+												<span className="block font-(family-name:--font-manrope) font-semibold text-on-surface text-sm">
 													{entry.name}
 												</span>
 												{entry.company && (
@@ -1175,7 +1175,7 @@ function DirectoryTab({
 										</div>
 									</td>
 									<td className="px-5 py-4 hidden md:table-cell">
-										<span className="px-2 py-1 bg-[#FF5A30]/10 text-[#FF5A30] text-xs font-bold rounded-lg">
+										<span className="px-2 py-1 bg-[#FF5A30]/10 text-[#FF5A30] text-xs font-semibold rounded-lg">
 											{CATEGORY_LABELS[entry.category]}
 										</span>
 									</td>
@@ -1193,7 +1193,7 @@ function DirectoryTab({
 										<button
 											type="button"
 											onClick={() => setSelected(entry)}
-											className="text-xs font-bold text-[#FF5A30] hover:underline"
+											className="text-xs font-semibold text-[#FF5A30] hover:underline"
 										>
 											{t("table.view")}
 										</button>
@@ -1411,14 +1411,14 @@ export default function OnboardingForm() {
 								resetForm();
 								setTab("directory");
 							}}
-							className="px-8 py-3 bg-[#FF5A30] text-white rounded-xl font-bold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform"
+							className="px-8 py-3 bg-[#FF5A30] text-white rounded-xl font-semibold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform"
 						>
 							{t("success.viewDirectory")}
 						</button>
 						<button
 							type="button"
 							onClick={resetForm}
-							className="px-8 py-3 bg-surface-container-lowest text-on-surface rounded-xl font-bold border border-outline-variant/20 hover:bg-surface-container-low transition-colors"
+							className="px-8 py-3 bg-surface-container-lowest text-on-surface rounded-xl font-semibold border border-outline-variant/20 hover:bg-surface-container-low transition-colors"
 						>
 							{t("success.onboardAnother")}
 						</button>
@@ -1433,7 +1433,7 @@ export default function OnboardingForm() {
 			<div className="w-full">
 				{/* Header */}
 				<header className="mb-8">
-					<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-3">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-3">
 						{t("header.platform")}
 					</span>
 					<h1 className="text-4xl font-extrabold tracking-tight text-on-surface mb-2 font-(family-name:--font-manrope)">
@@ -1451,7 +1451,7 @@ export default function OnboardingForm() {
 							key={t_key}
 							type="button"
 							onClick={() => setTab(t_key)}
-							className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${
+							className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all ${
 								tab === t_key
 									? "bg-white text-on-surface shadow-sm"
 									: "text-on-surface-variant hover:text-on-surface"
@@ -1459,7 +1459,7 @@ export default function OnboardingForm() {
 						>
 							{t_key === "form" ? t("tabs.onboard") : t("tabs.directory")}
 							{t_key === "directory" && entries.length > 0 && (
-								<span className="ml-2 px-1.5 py-0.5 bg-[#FF5A30] text-white text-[10px] font-bold rounded-full">
+								<span className="ml-2 px-1.5 py-0.5 bg-[#FF5A30] text-white text-[10px] font-semibold rounded-full">
 									{entries.length}
 								</span>
 							)}
@@ -1496,7 +1496,7 @@ export default function OnboardingForm() {
 											</p>
 											<Link
 												href="/workforce"
-												className="mt-2 inline-flex items-center gap-1 text-xs font-bold text-blue-700 hover:underline"
+												className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-blue-700 hover:underline"
 											>
 												{t("workforceNotice.link")}
 												<span className="material-symbols-outlined text-xs">
@@ -1512,7 +1512,7 @@ export default function OnboardingForm() {
 										type="button"
 										disabled={!category || category === "workforce"}
 										onClick={() => setStep(1)}
-										className="px-10 py-3 bg-linear-to-r from-[#FF5A30] to-[#cc4826] text-white rounded-xl font-bold shadow-xl shadow-[#FF5A30]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none"
+										className="px-10 py-3 bg-linear-to-r from-[#FF5A30] to-[#cc4826] text-white rounded-xl font-semibold shadow-xl shadow-[#FF5A30]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none"
 									>
 										{t("actions.continue")}
 										<span className="material-symbols-outlined">
@@ -1551,7 +1551,7 @@ export default function OnboardingForm() {
 										<button
 											type="button"
 											onClick={() => setStep((s) => Math.max(0, s - 1))}
-											className="px-8 py-3 text-on-surface-variant font-bold hover:text-on-surface transition-colors flex items-center gap-2"
+											className="px-8 py-3 text-on-surface-variant font-semibold hover:text-on-surface transition-colors flex items-center gap-2"
 										>
 											<span className="material-symbols-outlined">
 												arrow_back
@@ -1561,7 +1561,7 @@ export default function OnboardingForm() {
 										<button
 											type="submit"
 											disabled={step === totalSteps - 1 && !allConsented}
-											className="px-10 py-3 bg-linear-to-r from-[#FF5A30] to-[#cc4826] text-white rounded-xl font-bold shadow-xl shadow-[#FF5A30]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none disabled:hover:scale-100"
+											className="px-10 py-3 bg-linear-to-r from-[#FF5A30] to-[#cc4826] text-white rounded-xl font-semibold shadow-xl shadow-[#FF5A30]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none disabled:hover:scale-100"
 										>
 											{step < totalSteps - 1
 												? t("actions.continue")

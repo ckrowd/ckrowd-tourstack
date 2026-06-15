@@ -1,4 +1,4 @@
-import { useTranslations } from "next-intl";
+﻿import { useTranslations } from "next-intl";
 import Footer from "@/components/Footer";
 import TopNav from "@/components/TopNav";
 
@@ -39,7 +39,7 @@ export default function ContactPage() {
 		<div className="bg-surface text-on-surface min-h-screen flex flex-col">
 			<TopNav />
 			<main className="flex-1 pt-28 pb-20 px-6 md:px-12 max-w-4xl mx-auto w-full">
-				<span className="text-[#FF5A30] font-bold uppercase tracking-widest text-xs mb-4 block">
+				<span className="text-[#FF5A30] font-semibold uppercase tracking-widest text-xs mb-4 block">
 					{t("getInTouch")}
 				</span>
 				<h1 className="font-(family-name:--font-manrope) text-4xl font-extrabold tracking-tight text-on-surface mb-4">
@@ -65,7 +65,7 @@ export default function ContactPage() {
 								</span>
 							</div>
 							<div>
-								<p className="font-bold text-on-surface mb-1">{item.title}</p>
+								<p className="font-semibold text-on-surface mb-1">{item.title}</p>
 								<p className="text-on-surface-variant text-sm leading-relaxed mb-3">
 									{item.description}
 								</p>
@@ -84,7 +84,7 @@ export default function ContactPage() {
 					>
 						location_on
 					</span>
-					<h2 className="font-(family-name:--font-manrope) font-bold text-lg text-on-surface mb-1">
+					<h2 className="font-(family-name:--font-manrope) font-semibold text-lg text-on-surface mb-1">
 						{t("location.title")}
 					</h2>
 					<p className="text-on-surface-variant text-sm">

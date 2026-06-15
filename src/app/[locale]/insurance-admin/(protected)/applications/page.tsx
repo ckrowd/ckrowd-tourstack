@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useFormatter, useTranslations } from "next-intl";
@@ -134,7 +134,7 @@ export default function InsuranceAdminApplicationsPage() {
 		<>
 			<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 				<div>
-					<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
 						{t("badge")}
 					</span>
 					<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -148,7 +148,7 @@ export default function InsuranceAdminApplicationsPage() {
 					type="button"
 					onClick={() => query.refetch()}
 					disabled={query.isFetching}
-					className="flex items-center gap-2 px-4 py-2.5 bg-surface-container-high text-on-surface rounded-xl text-sm font-bold hover:bg-surface-container-highest transition-colors disabled:opacity-60 shrink-0"
+					className="flex items-center gap-2 px-4 py-2.5 bg-surface-container-high text-on-surface rounded-xl text-sm font-semibold hover:bg-surface-container-highest transition-colors disabled:opacity-60 shrink-0"
 				>
 					<span className="material-symbols-outlined text-sm">sync</span>
 					{query.isFetching ? t("refreshing") : t("refresh")}
@@ -175,7 +175,7 @@ export default function InsuranceAdminApplicationsPage() {
 
 			<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
 				<div className="flex items-center justify-between mb-5">
-					<h3 className="font-(family-name:--font-manrope) font-bold text-lg">
+					<h3 className="font-(family-name:--font-manrope) font-semibold text-lg">
 						{t("requestsTitle")}
 					</h3>
 					<span className="material-symbols-outlined text-[#FF5A30]">
@@ -223,7 +223,7 @@ export default function InsuranceAdminApplicationsPage() {
 								>
 									<div className="flex items-center justify-between gap-4 p-4">
 										<div className="min-w-0">
-											<p className="text-base font-bold text-on-surface truncate">
+											<p className="text-base font-semibold text-on-surface truncate">
 												{promoterName(app)}
 											</p>
 											<p className="text-sm text-on-surface-variant mt-1">
@@ -245,7 +245,7 @@ export default function InsuranceAdminApplicationsPage() {
 											<button
 												type="button"
 												onClick={() => toggleReview(app)}
-												className="text-xs font-bold text-[#FF5A30] hover:underline"
+												className="text-xs font-semibold text-[#FF5A30] hover:underline"
 											>
 												{expanded ? t("closeReview") : t("reviewDetails")}
 											</button>
@@ -261,7 +261,7 @@ export default function InsuranceAdminApplicationsPage() {
 											className="border-t border-outline-variant/10 p-4 grid grid-cols-1 sm:grid-cols-2 gap-4"
 										>
 											<label className="block">
-												<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+												<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 													{t("review.decision")}
 												</span>
 												<select
@@ -279,7 +279,7 @@ export default function InsuranceAdminApplicationsPage() {
 												</select>
 											</label>
 											<label className="block">
-												<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+												<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 													{t("review.partner")}
 												</span>
 												<input
@@ -293,7 +293,7 @@ export default function InsuranceAdminApplicationsPage() {
 												/>
 											</label>
 											<label className="block sm:col-span-2">
-												<span className="block text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-2">
+												<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 													{t("review.note")}
 												</span>
 												<textarea
@@ -327,7 +327,7 @@ export default function InsuranceAdminApplicationsPage() {
 												<button
 													type="submit"
 													disabled={reviewMutation.isPending}
-													className="px-5 py-2.5 bg-[#FF5A30] text-white rounded-xl font-bold text-sm hover:opacity-90 transition-opacity disabled:opacity-60"
+													className="px-5 py-2.5 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-60"
 												>
 													{reviewMutation.isPending
 														? t("review.saving")
@@ -370,7 +370,7 @@ export default function InsuranceAdminApplicationsPage() {
 										<p className="text-xs font-black text-[#FF5A30] uppercase tracking-widest mb-0.5">
 											{`EOI-${eoiId.slice(-6).toUpperCase()}`}
 										</p>
-										<p className="font-(family-name:--font-manrope) font-bold text-on-surface">
+										<p className="font-(family-name:--font-manrope) font-semibold text-on-surface">
 											{String(artist?.name ?? "—")}
 											<span className="text-on-surface-variant font-normal text-sm ml-1">— {String(artist?.tour_name ?? "")}</span>
 										</p>
@@ -385,7 +385,7 @@ export default function InsuranceAdminApplicationsPage() {
 										href={`/api/eoi-pdf/${encodeURIComponent(eoiId)}?portal=insurance`}
 										target="_blank"
 										rel="noopener noreferrer"
-										className="shrink-0 flex items-center gap-2 px-4 py-2.5 bg-purple-50 text-purple-700 rounded-xl text-sm font-bold hover:bg-purple-100 transition-colors"
+										className="shrink-0 flex items-center gap-2 px-4 py-2.5 bg-purple-50 text-purple-700 rounded-xl text-sm font-semibold hover:bg-purple-100 transition-colors"
 									>
 										<span className="material-symbols-outlined text-sm">download</span>
 										{t("eois.downloadPdf")}

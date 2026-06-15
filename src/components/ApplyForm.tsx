@@ -119,7 +119,7 @@ function Stepper({
 							className="relative z-10 flex flex-col items-center"
 						>
 							<div
-								className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ring-4 ring-surface-container-low ${
+								className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ring-4 ring-surface-container-low ${
 									done || active
 										? "bg-[#FF5A30] text-white"
 										: "bg-surface-variant text-on-surface-variant"
@@ -137,7 +137,7 @@ function Stepper({
 								)}
 							</div>
 							<span
-								className={`mt-2 text-[10px] font-bold uppercase tracking-wider text-center  leading-tight ${
+								className={`mt-2 text-[10px] font-semibold uppercase tracking-wider text-center  leading-tight ${
 									active
 										? "text-[#FF5A30]"
 										: done
@@ -223,7 +223,7 @@ function ReviewRow({
 	else display = value;
 	return (
 		<div className="flex items-start gap-4 py-3 border-b border-outline-variant/10 last:border-none">
-			<span className="text-xs font-bold uppercase tracking-wider text-on-surface-variant w-44 shrink-0 mt-0.5">
+			<span className="text-xs font-semibold uppercase tracking-wider text-on-surface-variant w-44 shrink-0 mt-0.5">
 				{label}
 			</span>
 			<span className="text-sm font-semibold text-on-surface">{display}</span>
@@ -309,7 +309,7 @@ export default function ApplyForm() {
 						{t("success.title")}
 					</h1>
 					{isAyaEligible && (
-						<div className="mb-4 inline-flex items-center gap-2 bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-bold">
+						<div className="mb-4 inline-flex items-center gap-2 bg-amber-100 text-amber-800 px-4 py-2 rounded-full text-sm font-semibold">
 							<span
 								className="material-symbols-outlined text-sm"
 								style={{ fontVariationSettings: "'FILL' 1" }}
@@ -325,13 +325,13 @@ export default function ApplyForm() {
 					<div className="flex flex-col sm:flex-row gap-4 justify-center">
 						<Link
 							href="/dashboard"
-							className="px-8 py-3 bg-[#FF5A30] text-white rounded-xl font-bold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform"
+							className="px-8 py-3 bg-[#FF5A30] text-white rounded-xl font-semibold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform"
 						>
 							{t("actions.dashboard")}
 						</Link>
 						<Link
 							href="/discovery"
-							className="px-8 py-3 bg-surface-container-lowest text-on-surface rounded-xl font-bold border border-outline-variant/20 hover:bg-surface-container-low transition-colors"
+							className="px-8 py-3 bg-surface-container-lowest text-on-surface rounded-xl font-semibold border border-outline-variant/20 hover:bg-surface-container-low transition-colors"
 						>
 							{t("actions.discovery")}
 						</Link>
@@ -345,7 +345,7 @@ export default function ApplyForm() {
 		<div className="p-6 md:p-12 w-full">
 			{/* Header */}
 			<header className="mb-10">
-				<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-3">
+				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-3">
 					{t("promoterOnboarding")}
 				</span>
 				<h1 className="text-4xl font-extrabold tracking-tight text-on-surface mb-2">
@@ -404,7 +404,7 @@ export default function ApplyForm() {
 								<span className="material-symbols-outlined text-[#FF5A30]">
 									person
 								</span>
-								<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
+								<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 									{t("sections.basic.title")}
 								</h3>
 							</div>
@@ -501,7 +501,7 @@ export default function ApplyForm() {
 								<span className="material-symbols-outlined text-[#FF5A30]">
 									workspace_premium
 								</span>
-								<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
+								<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 									{t("sections.experience.title")}
 								</h3>
 							</div>
@@ -611,7 +611,7 @@ export default function ApplyForm() {
 								<span className="material-symbols-outlined text-[#FF5A30]">
 									lock_open
 								</span>
-								<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
+								<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 									{t("sections.gate.title")}
 								</h3>
 							</div>
@@ -666,7 +666,7 @@ export default function ApplyForm() {
 															: "attach_file"}
 												</span>
 												<div className="text-left">
-													<p className="font-bold text-on-surface">
+													<p className="font-semibold text-on-surface">
 														{form.proofFileName}
 													</p>
 													<p className="text-xs text-on-surface-variant">
@@ -683,7 +683,7 @@ export default function ApplyForm() {
 												<span className="material-symbols-outlined text-[#FF5A30] text-4xl mb-3 block">
 													cloud_upload
 												</span>
-												<p className="font-bold text-on-surface mb-1">
+												<p className="font-semibold text-on-surface mb-1">
 													{t("sections.gate.uploadTitle")}
 												</p>
 												<p className="text-sm text-on-surface-variant">
@@ -709,7 +709,7 @@ export default function ApplyForm() {
 											star
 										</span>
 										<div>
-											<p className="text-sm font-bold text-amber-800">
+											<p className="text-sm font-semibold text-amber-800">
 												{t("sections.gate.ayaEligible")}
 											</p>
 											<p className="text-xs text-amber-700 mt-0.5">
@@ -726,7 +726,7 @@ export default function ApplyForm() {
 										info
 									</span>
 									<div>
-										<p className="text-sm font-bold text-on-surface">
+										<p className="text-sm font-semibold text-on-surface">
 											{t("sections.gate.standardTier")}
 										</p>
 										<p className="text-xs text-on-surface-variant mt-0.5">
@@ -745,13 +745,13 @@ export default function ApplyForm() {
 								<span className="material-symbols-outlined text-[#FF5A30]">
 									verified_user
 								</span>
-								<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
+								<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 									{t("sections.credibility.title")}
 								</h3>
 							</div>
 
 							<section>
-								<p className="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-4">
+								<p className="text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-4">
 									{t("sections.credibility.pastLinks")}
 								</p>
 								<div className="space-y-4">
@@ -807,7 +807,7 @@ export default function ApplyForm() {
 							</section>
 
 							<section>
-								<p className="text-xs font-bold uppercase tracking-widest text-on-surface-variant mb-4">
+								<p className="text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-4">
 									{t("sections.credibility.business")}
 								</p>
 								<div className="space-y-3">
@@ -863,7 +863,7 @@ export default function ApplyForm() {
 								<span className="material-symbols-outlined text-[#FF5A30]">
 									rocket_launch
 								</span>
-								<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
+								<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 									{t("sections.intent.title")}
 								</h3>
 							</div>
@@ -901,7 +901,7 @@ export default function ApplyForm() {
 
 							<div className="pt-8 border-t border-outline-variant/10">
 								<div className="bg-surface-container-low rounded-2xl p-6 border border-outline-variant/10 mb-6">
-									<h4 className="font-bold text-on-surface mb-2">
+									<h4 className="font-semibold text-on-surface mb-2">
 										{t("sections.review.title")}
 									</h4>
 									<p className="text-sm text-on-surface-variant">
@@ -944,7 +944,7 @@ export default function ApplyForm() {
 						<button
 							type="button"
 							onClick={() => setStep((s) => s - 1)}
-							className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold text-sm transition-all ${
+							className={`flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm transition-all ${
 								step === 0
 									? "opacity-0 pointer-events-none"
 									: "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low"
@@ -959,7 +959,7 @@ export default function ApplyForm() {
 						<button
 							type="submit"
 							disabled={submitting}
-							className="flex items-center gap-2 px-10 py-4 bg-[#FF5A30] text-white rounded-xl font-bold shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:opacity-50"
+							className="flex items-center gap-2 px-10 py-4 bg-[#FF5A30] text-white rounded-xl font-semibold shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:opacity-50"
 						>
 							{submitting ? (
 								<>
@@ -979,7 +979,7 @@ export default function ApplyForm() {
 						</button>
 					</div>
 					{submitError && (
-						<p className="mt-4 text-center text-sm font-bold text-red-500">
+						<p className="mt-4 text-center text-sm font-semibold text-red-500">
 							{submitError}
 						</p>
 					)}

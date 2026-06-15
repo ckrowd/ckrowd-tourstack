@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Footer from "@/components/Footer";
 import TopNav from "@/components/TopNav";
@@ -55,7 +55,7 @@ export default async function LandingPage({
 							>
 								public
 							</span>
-							<span className="text-xs font-bold tracking-widest uppercase">
+							<span className="text-xs font-semibold tracking-widest uppercase">
 								{t("hero.badge")}
 							</span>
 						</div>
@@ -75,14 +75,14 @@ export default async function LandingPage({
 						<div className="flex flex-col sm:flex-row flex-wrap gap-4 pt-4">
 							<Link
 								href="/login"
-								className="w-full sm:w-auto justify-center px-6 md:px-8 py-3 md:py-4 bg-[#FF5A30] text-white rounded-xl font-bold flex items-center gap-3 shadow-2xl shadow-[#FF5A30]/40 hover:scale-[1.02] transition-transform active:scale-[0.98]"
+								className="w-full sm:w-auto justify-center px-6 md:px-8 py-3 md:py-4 bg-[#FF5A30] text-white rounded-xl font-semibold flex items-center gap-3 shadow-2xl shadow-[#FF5A30]/40 hover:scale-[1.02] transition-transform active:scale-[0.98]"
 							>
 								{t("hero.ctaPrimary")}
 								<span className="material-symbols-outlined">arrow_forward</span>
 							</Link>
 							<Link
 								href="/login"
-								className="w-full sm:w-auto justify-center text-center flex items-center px-6 md:px-8 py-3 md:py-4 glass-effect bg-white/10 text-white border border-white/20 rounded-xl font-bold hover:bg-white/20 transition-all"
+								className="w-full sm:w-auto justify-center text-center flex items-center px-6 md:px-8 py-3 md:py-4 glass-effect bg-white/10 text-white border border-white/20 rounded-xl font-semibold hover:bg-white/20 transition-all"
 							>
 								{t("hero.ctaSecondary")}
 							</Link>
@@ -94,7 +94,7 @@ export default async function LandingPage({
 						<div className="glass-effect bg-white/10 p-1 rounded-2xl border border-white/20 shadow-2xl">
 							<div className="bg-white rounded-xl p-6">
 								<div className="flex items-center justify-between mb-6">
-									<h3 className="font-(family-name:--font-manrope) font-bold text-slate-900">
+									<h3 className="font-(family-name:--font-manrope) font-semibold text-slate-900">
 										{t("analytics.title")}
 									</h3>
 									<span className="material-symbols-outlined text-[#FF5A30]">
@@ -164,7 +164,7 @@ export default async function LandingPage({
 			<section className="py-24 px-6 md:px-12 bg-white">
 				<div className="max-w-7xl mx-auto">
 					<div className="mb-16 text-center">
-						<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-4">
+						<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-4">
 							{t("why.badge")}
 						</span>
 						<h2 className="font-(family-name:--font-manrope) font-extrabold text-4xl md:text-5xl text-slate-900 mb-6 tracking-tight">
@@ -187,7 +187,7 @@ export default async function LandingPage({
 										{tWhy(`${key}.icon`)}
 									</span>
 								</div>
-								<h3 className="font-(family-name:--font-manrope) font-bold text-lg text-slate-900 mb-3">
+								<h3 className="font-(family-name:--font-manrope) font-semibold text-lg text-slate-900 mb-3">
 									{tWhy(`${key}.title`)}
 								</h3>
 								<p className="text-slate-600 leading-relaxed text-sm">
@@ -210,7 +210,7 @@ export default async function LandingPage({
 							</span>
 						</div>
 						<div className="max-w-md relative z-10">
-							<h4 className="text-sm font-bold uppercase tracking-widest text-[#FF5A30] mb-4">
+							<h4 className="text-sm font-semibold uppercase tracking-widest text-[#FF5A30] mb-4">
 								{t("promoters.badge")}
 							</h4>
 							<h3 className="font-(family-name:--font-manrope) font-extrabold text-4xl text-slate-900 mb-6">
@@ -233,7 +233,7 @@ export default async function LandingPage({
 							</ul>
 							<Link
 								href="/discovery"
-								className="inline-flex items-center gap-2 font-bold text-[#FF5A30] group"
+								className="inline-flex items-center gap-2 font-semibold text-[#FF5A30] group"
 							>
 								{t("promoters.cta")}
 								<span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">
@@ -269,7 +269,7 @@ export default async function LandingPage({
 							</span>
 						</div>
 						<div className="max-w-md relative z-10">
-							<h4 className="text-sm font-bold uppercase tracking-widest text-[#FF5A30] mb-4">
+							<h4 className="text-sm font-semibold uppercase tracking-widest text-[#FF5A30] mb-4">
 								{t("artists.badge")}
 							</h4>
 							<h3 className="font-(family-name:--font-manrope) font-extrabold text-4xl text-slate-900 mb-6">
@@ -292,7 +292,7 @@ export default async function LandingPage({
 							</ul>
 							<Link
 								href="/discovery"
-								className="inline-flex items-center gap-2 font-bold text-[#FF5A30] group"
+								className="inline-flex items-center gap-2 font-semibold text-[#FF5A30] group"
 							>
 								{t("artists.cta")}
 								<span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">
@@ -308,7 +308,7 @@ export default async function LandingPage({
 			<section className="py-24 px-6 md:px-12 bg-white">
 				<div className="max-w-5xl mx-auto">
 					<div className="text-center mb-16">
-						<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-4">
+						<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-4">
 							{t("how.badge")}
 						</span>
 						<h2 className="font-(family-name:--font-manrope) font-extrabold text-4xl text-slate-900 tracking-tight">
@@ -335,7 +335,7 @@ export default async function LandingPage({
 												{t("how.step", { number: index + 1 })}
 											</span>
 										</div>
-										<h4 className="font-(family-name:--font-manrope) font-bold text-xl text-slate-900 mb-2">
+										<h4 className="font-(family-name:--font-manrope) font-semibold text-xl text-slate-900 mb-2">
 											{tHow(`${key}.title`)}
 										</h4>
 										<p className="text-slate-600 leading-relaxed">
@@ -361,13 +361,13 @@ export default async function LandingPage({
 					<div className="flex flex-col sm:flex-row gap-4 justify-center">
 						<Link
 							href="/login"
-							className="px-10 py-5 bg-[#FF5A30] text-white rounded-xl font-bold text-lg shadow-xl shadow-[#FF5A30]/20 hover:shadow-2xl hover:scale-[1.02] transition-all"
+							className="px-10 py-5 bg-[#FF5A30] text-white rounded-xl font-semibold text-lg shadow-xl shadow-[#FF5A30]/20 hover:shadow-2xl hover:scale-[1.02] transition-all"
 						>
 							{t("cta.ctaPromoter")}
 						</Link>
 						<Link
 							href="/discovery"
-							className="px-10 py-5 bg-slate-900 text-white rounded-xl font-bold text-lg hover:bg-slate-800 transition-all"
+							className="px-10 py-5 bg-slate-900 text-white rounded-xl font-semibold text-lg hover:bg-slate-800 transition-all"
 						>
 							{t("cta.ctaBrowse")}
 						</Link>

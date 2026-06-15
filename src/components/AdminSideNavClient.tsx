@@ -42,7 +42,7 @@ export default function AdminSideNavClient({ navItems, newTourLabel }: Props) {
 				<Link
 					href="/admin/tours/create"
 					data-tour="admin-nav-cta"
-					className="block w-full py-4 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 text-center flex items-center justify-center gap-2"
+					className="block w-full py-4 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 text-center flex items-center justify-center gap-2"
 				>
 					<span className="material-symbols-outlined text-sm">add</span>
 					{newTourLabel}

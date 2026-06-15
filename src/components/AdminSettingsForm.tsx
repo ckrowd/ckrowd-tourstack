@@ -29,7 +29,7 @@ function Toggle({
 	return (
 		<div className="flex items-center justify-between gap-4 p-4 bg-surface-container-low rounded-xl">
 			<div>
-				<p id={`${id}-label`} className="font-bold text-sm text-on-surface">
+				<p id={`${id}-label`} className="font-semibold text-sm text-on-surface">
 					{label}
 				</p>
 				<p id={`${id}-desc`} className="text-xs text-on-surface-variant mt-1">
@@ -90,7 +90,7 @@ export default function AdminSettingsForm({ initial }: Props) {
 	return (
 		<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10">
 			<div className="flex items-center justify-between gap-4 mb-4 pb-4 border-b border-outline-variant/20">
-				<h3 className="font-(family-name:--font-manrope) font-bold text-lg">
+				<h3 className="font-(family-name:--font-manrope) font-semibold text-lg">
 					{t("algorithm.title")}
 				</h3>
 				<button
@@ -102,7 +102,7 @@ export default function AdminSettingsForm({ initial }: Props) {
 						})
 					}
 					disabled={!dirty || saveMutation.isPending}
-					className="flex items-center gap-2 px-5 py-2.5 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-bold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-opacity disabled:cursor-not-allowed disabled:opacity-50"
+					className="flex items-center gap-2 px-5 py-2.5 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-opacity disabled:cursor-not-allowed disabled:opacity-50"
 				>
 					{saveMutation.isPending ? t("saving") : t("saveChanges")}
 				</button>

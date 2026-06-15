@@ -339,7 +339,7 @@ function Stepper({
 							className="relative z-10 flex flex-col items-center"
 						>
 							<div
-								className={`w-10 h-10 rounded-full flex items-center justify-center font-bold ring-4 ring-surface-container-low ${
+								className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ring-4 ring-surface-container-low ${
 									done || active
 										? "bg-[#FF5A30] text-white"
 										: "bg-surface-variant text-on-surface-variant"
@@ -357,7 +357,7 @@ function Stepper({
 								)}
 							</div>
 							<span
-								className={`mt-2 text-[10px] font-bold uppercase tracking-wider text-center leading-tight ${
+								className={`mt-2 text-[10px] font-semibold uppercase tracking-wider text-center leading-tight ${
 									active
 										? "text-[#FF5A30]"
 										: done
@@ -419,7 +419,7 @@ function ScoreGauge({
 					</div>
 				</div>
 				<div
-					className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold ${tier.bg} ${tier.text}`}
+					className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold ${tier.bg} ${tier.text}`}
 				>
 					<span
 						className="material-symbols-outlined text-sm"
@@ -514,7 +514,7 @@ export default function WorkforceClient() {
 											? "badge"
 											: "person"}
 							</span>
-							<h4 className={`text-sm font-bold ${tier.text}`}>
+							<h4 className={`text-sm font-semibold ${tier.text}`}>
 								{t("score.tier")} {tier.tier} — {tier.label}
 							</h4>
 						</div>
@@ -542,7 +542,7 @@ export default function WorkforceClient() {
 								>
 									star
 								</span>
-								<span className={`text-xs font-bold ${tier.text}`}>
+								<span className={`text-xs font-semibold ${tier.text}`}>
 									{t("success.ayaPilot")}: {tier.aya}
 								</span>
 							</div>
@@ -552,13 +552,13 @@ export default function WorkforceClient() {
 					<div className="flex flex-col sm:flex-row gap-4 justify-center">
 						<Link
 							href="/dashboard"
-							className="px-8 py-3 bg-[#FF5A30] text-white rounded-xl font-bold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform"
+							className="px-8 py-3 bg-[#FF5A30] text-white rounded-xl font-semibold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform"
 						>
 							{t("success.viewDashboard")}
 						</Link>
 						<Link
 							href="/discovery"
-							className="px-8 py-3 bg-surface-container-lowest text-on-surface rounded-xl font-bold border border-outline-variant/20 hover:bg-surface-container-low transition-colors"
+							className="px-8 py-3 bg-surface-container-lowest text-on-surface rounded-xl font-semibold border border-outline-variant/20 hover:bg-surface-container-low transition-colors"
 						>
 							{t("success.browseTours")}
 						</Link>
@@ -579,7 +579,7 @@ export default function WorkforceClient() {
 				<header className="mb-10">
 					<div className="flex items-start justify-between gap-4">
 						<div>
-							<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-3">
+							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-3">
 								{t("header.platform")}
 							</span>
 							<h1 className="text-4xl font-extrabold tracking-tight text-on-surface mb-2">
@@ -597,12 +597,12 @@ export default function WorkforceClient() {
 									{wcs.total}
 								</span>
 								<span
-									className={`text-[10px] font-bold uppercase tracking-wider ${tier.text} opacity-70`}
+									className={`text-[10px] font-semibold uppercase tracking-wider ${tier.text} opacity-70`}
 								>
 									{t("score.wcs")}
 								</span>
 								<span
-									className={`text-[10px] font-bold ${tier.text} mt-0.5`}
+									className={`text-[10px] font-semibold ${tier.text} mt-0.5`}
 								>
 									{t("score.tier")} {tier.tier}
 								</span>
@@ -652,7 +652,7 @@ export default function WorkforceClient() {
 									<span className="material-symbols-outlined text-[#FF5A30]">
 										person
 									</span>
-									<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
+									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 										{t("personal.title")}
 									</h3>
 								</div>
@@ -793,7 +793,7 @@ export default function WorkforceClient() {
 									<span className="material-symbols-outlined text-[#FF5A30]">
 										engineering
 									</span>
-									<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
+									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 										{t("role.title")}
 									</h3>
 								</div>
@@ -931,7 +931,7 @@ export default function WorkforceClient() {
 									<span className="material-symbols-outlined text-[#FF5A30]">
 										travel_explore
 									</span>
-									<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
+									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 										{t("touring.title")}
 									</h3>
 								</div>
@@ -965,7 +965,7 @@ export default function WorkforceClient() {
 								<div>
 									<div className="flex items-start justify-between gap-4 mb-2">
 										<Label>{t("touring.deploy48h.label")}</Label>
-										<span className="text-xs font-bold text-[#FF5A30] bg-[#FF5A30]/10 px-2 py-1 rounded-full shrink-0">
+										<span className="text-xs font-semibold text-[#FF5A30] bg-[#FF5A30]/10 px-2 py-1 rounded-full shrink-0">
 											+{t("shared.bonusPointsValue", { pts: 10 })}
 										</span>
 									</div>
@@ -982,7 +982,7 @@ export default function WorkforceClient() {
 								<div>
 									<div className="flex items-start justify-between gap-4 mb-2">
 										<Label optional>{t("touring.passport.label")}</Label>
-										<span className="text-xs font-bold text-[#FF5A30] bg-[#FF5A30]/10 px-2 py-1 rounded-full shrink-0">
+										<span className="text-xs font-semibold text-[#FF5A30] bg-[#FF5A30]/10 px-2 py-1 rounded-full shrink-0">
 											+{t("shared.bonusPointsValue", { pts: 10 })}
 										</span>
 									</div>
@@ -1038,7 +1038,7 @@ export default function WorkforceClient() {
 									<span className="material-symbols-outlined text-[#FF5A30]">
 										verified_user
 									</span>
-									<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
+									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 										{t("credentials.title")}
 									</h3>
 								</div>
@@ -1047,14 +1047,14 @@ export default function WorkforceClient() {
 								<section className="bg-surface-container-low rounded-2xl p-6 border border-outline-variant/10">
 									<div className="flex items-start justify-between gap-4 mb-4">
 										<div>
-											<h4 className="font-bold text-on-surface mb-1 font-(family-name:--font-manrope)">
+											<h4 className="font-semibold text-on-surface mb-1 font-(family-name:--font-manrope)">
 												{t("credentials.referee.label")}
 											</h4>
 											<p className="text-sm text-on-surface-variant">
 												{t("credentials.referee.hint")}
 											</p>
 										</div>
-										<span className="shrink-0 text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1.5 rounded-full">
+										<span className="shrink-0 text-xs font-semibold text-amber-700 bg-amber-100 px-3 py-1.5 rounded-full">
 											+{t("shared.bonusPointsValue", { pts: 15 })}
 										</span>
 									</div>
@@ -1115,7 +1115,7 @@ export default function WorkforceClient() {
 										</div>
 									</div>
 									{form.refereeName.trim() && (
-										<div className="mt-4 flex items-center gap-2 text-xs text-amber-700 font-bold">
+										<div className="mt-4 flex items-center gap-2 text-xs text-amber-700 font-semibold">
 											<span
 												className="material-symbols-outlined text-sm"
 												style={{ fontVariationSettings: "'FILL' 1" }}
@@ -1131,14 +1131,14 @@ export default function WorkforceClient() {
 								<section className="bg-surface-container-low rounded-2xl p-6 border border-outline-variant/10">
 									<div className="flex items-start justify-between gap-4 mb-4">
 										<div>
-											<h4 className="font-bold text-on-surface mb-1 font-(family-name:--font-manrope)">
+											<h4 className="font-semibold text-on-surface mb-1 font-(family-name:--font-manrope)">
 												{t("credentials.portfolio.label")}
 											</h4>
 											<p className="text-sm text-on-surface-variant">
 												{t("credentials.portfolio.hint")}
 											</p>
 										</div>
-										<span className="shrink-0 text-xs font-bold text-amber-700 bg-amber-100 px-3 py-1.5 rounded-full">
+										<span className="shrink-0 text-xs font-semibold text-amber-700 bg-amber-100 px-3 py-1.5 rounded-full">
 											+{t("shared.bonusPointsValue", { pts: 10 })}
 										</span>
 									</div>
@@ -1156,7 +1156,7 @@ export default function WorkforceClient() {
 										/>
 									</div>
 									{form.portfolioLinks.trim() && (
-										<div className="mt-4 flex items-center gap-2 text-xs text-amber-700 font-bold">
+										<div className="mt-4 flex items-center gap-2 text-xs text-amber-700 font-semibold">
 											<span
 												className="material-symbols-outlined text-sm"
 												style={{ fontVariationSettings: "'FILL' 1" }}
@@ -1192,7 +1192,7 @@ export default function WorkforceClient() {
 									<span className="material-symbols-outlined text-[#FF5A30]">
 										analytics
 									</span>
-									<h3 className="text-xl font-bold font-(family-name:--font-manrope)">
+									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 										{t("score.liveScore")}
 									</h3>
 								</div>
@@ -1206,7 +1206,7 @@ export default function WorkforceClient() {
 								<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 									{/* Base */}
 									<div className="bg-surface-container-low rounded-2xl p-5 border border-outline-variant/10">
-										<h4 className="text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-4">
+										<h4 className="text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-4">
 											{t("score.breakdown.base", { pts: wcs.base })}
 										</h4>
 										<div className="space-y-3">
@@ -1232,7 +1232,7 @@ export default function WorkforceClient() {
 														<span className="text-on-surface-variant font-medium">
 															{item.label}
 														</span>
-														<span className="font-bold text-on-surface">
+														<span className="font-semibold text-on-surface">
 															{item.pts} / {item.max}
 														</span>
 													</div>
@@ -1251,7 +1251,7 @@ export default function WorkforceClient() {
 
 									{/* Bonus */}
 									<div className="bg-surface-container-low rounded-2xl p-5 border border-outline-variant/10">
-										<h4 className="text-xs font-bold uppercase tracking-wider text-on-surface-variant mb-4">
+										<h4 className="text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-4">
 											{t("score.breakdown.bonus", { pts: wcs.bonus })}
 										</h4>
 										<div className="space-y-3">
@@ -1276,7 +1276,7 @@ export default function WorkforceClient() {
 														</p>
 													</div>
 													<span
-														className={`text-xs font-bold shrink-0 ${b.earned ? "text-amber-600" : "text-slate-300"}`}
+														className={`text-xs font-semibold shrink-0 ${b.earned ? "text-amber-600" : "text-slate-300"}`}
 													>
 														+{b.pts}
 													</span>
@@ -1305,7 +1305,7 @@ export default function WorkforceClient() {
 										</span>
 										<div>
 											<p
-												className={`text-xs font-bold uppercase tracking-wider ${tier.text} opacity-70`}
+												className={`text-xs font-semibold uppercase tracking-wider ${tier.text} opacity-70`}
 											>
 												{t("score.tier")} {tier.tier} · {t("score.wcs")}{" "}
 												{tier.range}
@@ -1335,7 +1335,7 @@ export default function WorkforceClient() {
 									</ul>
 									{tier.aya && (
 										<div
-											className={`flex items-center gap-2 pt-4 border-t border-current/20 text-sm font-bold ${tier.text}`}
+											className={`flex items-center gap-2 pt-4 border-t border-current/20 text-sm font-semibold ${tier.text}`}
 										>
 											<span
 												className="material-symbols-outlined text-sm"
@@ -1350,7 +1350,7 @@ export default function WorkforceClient() {
 
 								{/* All 4 tiers reference */}
 								<details className="bg-surface-container-low rounded-2xl border border-outline-variant/10 overflow-hidden">
-									<summary className="px-6 py-4 cursor-pointer text-sm font-bold text-on-surface flex items-center justify-between">
+									<summary className="px-6 py-4 cursor-pointer text-sm font-semibold text-on-surface flex items-center justify-between">
 										<span>{t("matrix.title")}</span>
 										<span className="material-symbols-outlined text-on-surface-variant">
 											expand_more
@@ -1364,7 +1364,7 @@ export default function WorkforceClient() {
 											>
 												<div className="flex items-center justify-between mb-2">
 													<span
-														className={`text-xs font-bold uppercase ${t_config.text}`}
+														className={`text-xs font-semibold uppercase ${t_config.text}`}
 													>
 														{t("matrix.tier", { n: t_config.tier })}
 													</span>
@@ -1375,7 +1375,7 @@ export default function WorkforceClient() {
 													</span>
 												</div>
 												<p
-													className={`text-sm font-bold ${t_config.text} mb-1`}
+													className={`text-sm font-semibold ${t_config.text} mb-1`}
 												>
 													{t_config.label}
 												</p>
@@ -1397,7 +1397,7 @@ export default function WorkforceClient() {
 										<span className="material-symbols-outlined text-[#FF5A30]">
 											gavel
 										</span>
-										<h4 className="font-bold text-on-surface font-(family-name:--font-manrope)">
+										<h4 className="font-semibold text-on-surface font-(family-name:--font-manrope)">
 											{t("declaration.title")}
 										</h4>
 									</div>
@@ -1475,7 +1475,7 @@ export default function WorkforceClient() {
 							{step === 0 ? (
 								<Link
 									href="/dashboard"
-									className="px-8 py-3 text-on-surface-variant font-bold hover:text-on-surface transition-colors flex items-center gap-2"
+									className="px-8 py-3 text-on-surface-variant font-semibold hover:text-on-surface transition-colors flex items-center gap-2"
 								>
 									<span className="material-symbols-outlined">
 										arrow_back
@@ -1486,7 +1486,7 @@ export default function WorkforceClient() {
 								<button
 									type="button"
 									onClick={() => setStep((s) => s - 1)}
-									className="px-8 py-3 text-on-surface-variant font-bold hover:text-on-surface transition-colors flex items-center gap-2"
+									className="px-8 py-3 text-on-surface-variant font-semibold hover:text-on-surface transition-colors flex items-center gap-2"
 								>
 									<span className="material-symbols-outlined">
 										arrow_back
@@ -1497,14 +1497,14 @@ export default function WorkforceClient() {
 							<div className="flex gap-4">
 								<button
 									type="button"
-									className="px-8 py-3 bg-secondary-container text-on-secondary-container rounded-xl font-bold hover:opacity-90 transition-opacity whitespace-nowrap"
+									className="px-8 py-3 bg-secondary-container text-on-secondary-container rounded-xl font-semibold hover:opacity-90 transition-opacity whitespace-nowrap"
 								>
 									{t("actions.saveDraft")}
 								</button>
 								<button
 									type="submit"
 									disabled={submitting}
-									className="px-10 py-3 bg-linear-to-r from-[#FF5A30] to-[#cc4826] text-white rounded-xl font-bold shadow-xl shadow-[#FF5A30]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+									className="px-10 py-3 bg-linear-to-r from-[#FF5A30] to-[#cc4826] text-white rounded-xl font-semibold shadow-xl shadow-[#FF5A30]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
 								>
 									{submitting
 										? t("actions.submitting")
@@ -1554,7 +1554,7 @@ export default function WorkforceClient() {
 									</span>
 								</div>
 								<div>
-									<h5 className="font-bold text-on-surface text-sm mb-0.5">
+									<h5 className="font-semibold text-on-surface text-sm mb-0.5">
 										{item.title}
 									</h5>
 									<p className="text-xs text-on-surface-variant leading-relaxed">

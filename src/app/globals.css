@@ -74,10 +74,10 @@
   --color-error-container: #ffdad6;
   --color-on-error-container: #93000a;
 
-  /* Font families */
-  --font-headline: "Manrope", sans-serif;
-  --font-body: "Inter", sans-serif;
-  --font-label: "Inter", sans-serif;
+  /* Font families — Inter is the single typeface across the platform */
+  --font-headline: var(--font-manrope), "Inter", sans-serif;
+  --font-body: var(--font-inter), "Inter", sans-serif;
+  --font-label: var(--font-inter), "Inter", sans-serif;
 
   /* Border radius */
   --radius-DEFAULT: 0.25rem;
@@ -148,6 +148,11 @@ h6 {
 	font-family: var(--font-headline);
 }
 
+/* Display-scale headings get tight tracking — matches autonoms.ai Inter heading style */
+h1 { letter-spacing: -0.04em; line-height: 1.1; font-weight: 600; }
+h2 { letter-spacing: -0.03em; line-height: 1.15; font-weight: 600; }
+h3 { letter-spacing: -0.02em; line-height: 1.2; font-weight: 600; }
+
 /* ── Driver.js tour guide overrides ────────────────────────────────────── */
 
 .driver-popover {
@@ -166,7 +171,7 @@ h6 {
 	background: linear-gradient(135deg, #ff5a30, #cc4826);
 	color: #ffffff;
 	font-size: 15px;
-	font-weight: 800;
+	font-weight: 600;
 	letter-spacing: -0.01em;
 	padding: 18px 22px 14px;
 	margin: 0;
@@ -237,7 +242,7 @@ h6 {
 	border-radius: 10px;
 	padding: 9px 22px;
 	font-size: 12px;
-	font-weight: 800;
+	font-weight: 600;
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
 	cursor: pointer;

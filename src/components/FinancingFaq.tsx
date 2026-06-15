@@ -35,7 +35,7 @@ export default function FinancingFaq({ faqs }: { faqs: Faq[] }) {
 			<button
 				type="button"
 				onClick={() => setOpen(true)}
-				className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-bold hover:bg-surface-container-high transition-colors"
+				className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-semibold hover:bg-surface-container-high transition-colors"
 			>
 				<span className="material-symbols-outlined text-base text-[#FF5A30]">
 					help
@@ -64,7 +64,7 @@ export default function FinancingFaq({ faqs }: { faqs: Faq[] }) {
 							<div>
 								<h2
 									id={titleId}
-									className="font-(family-name:--font-manrope) text-xl font-bold text-on-surface"
+									className="font-(family-name:--font-manrope) text-xl font-semibold text-on-surface"
 								>
 									{t("faqTitle")}
 								</h2>
@@ -96,7 +96,7 @@ export default function FinancingFaq({ faqs }: { faqs: Faq[] }) {
 											onClick={() => setExpanded(isOpen ? null : i)}
 											className="w-full flex items-center justify-between gap-3 text-left p-4 hover:bg-surface-container-low transition-colors"
 										>
-											<span className="font-(family-name:--font-manrope) font-bold text-sm text-on-surface">
+											<span className="font-(family-name:--font-manrope) font-semibold text-sm text-on-surface">
 												{f.q}
 											</span>
 											<span

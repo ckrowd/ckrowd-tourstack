@@ -1,4 +1,4 @@
-import { getTranslations, setRequestLocale } from "next-intl/server";
+﻿import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getFinancingSettings } from "@/app/actions";
 import FinancingProductsPanel from "@/components/FinancingProductsPanel";
 import FinancingSettingsForm from "@/components/FinancingSettingsForm";
@@ -47,7 +47,7 @@ export default async function FinancingAdminSettingsPage({
 	return (
 		<>
 			<div className="mb-8">
-				<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
 					{t("badge")}
 				</span>
 				<h1 className="text-2xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">

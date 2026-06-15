@@ -1,4 +1,4 @@
-import { getTranslations, setRequestLocale } from "next-intl/server";
+﻿import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getAdminFinancing } from "@/app/actions";
 import { Link } from "@/i18n/routing";
 
@@ -37,7 +37,7 @@ export default async function FinancingAdminPage({
 		<>
 			<div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-5">
 				<div>
-					<span className="text-xs font-bold uppercase tracking-widest text-[#FF5A30] block mb-2">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
 						{t("badge")}
 					</span>
 					<h1 className="text-2xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -49,7 +49,7 @@ export default async function FinancingAdminPage({
 				</div>
 				<Link
 					href="/financing-admin/applications"
-					className="flex items-center gap-2 px-4 py-2.5 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) text-sm font-bold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 shrink-0"
+					className="flex items-center gap-2 px-4 py-2.5 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) text-sm font-semibold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 shrink-0"
 				>
 					<span className="material-symbols-outlined text-base">rate_review</span>
 					{t("reviewQueue")}
@@ -59,12 +59,12 @@ export default async function FinancingAdminPage({
 			<div className="grid grid-cols-1 xl:grid-cols-[1.25fr_0.75fr] gap-8">
 				<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
 					<div className="flex items-center justify-between mb-5">
-						<h2 className="font-(family-name:--font-manrope) font-bold text-base">
+						<h2 className="font-(family-name:--font-manrope) font-semibold text-base">
 							{t("queue.title")}
 						</h2>
 						<Link
 							href="/financing-admin/applications"
-							className="text-sm font-bold text-[#FF5A30] hover:underline"
+							className="text-sm font-semibold text-[#FF5A30] hover:underline"
 						>
 							{t("queue.viewAll")}
 						</Link>
@@ -127,7 +127,7 @@ export default async function FinancingAdminPage({
 														{t(`status.${status}`)}
 													</span>
 												</div>
-												<p className="font-(family-name:--font-manrope) font-bold text-on-surface truncate">
+												<p className="font-(family-name:--font-manrope) font-semibold text-on-surface truncate">
 													{promoterName}
 												</p>
 												<p className="text-sm text-on-surface-variant mt-0.5">
@@ -151,7 +151,7 @@ export default async function FinancingAdminPage({
 				</div>
 
 				<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
-					<h2 className="font-(family-name:--font-manrope) font-bold text-base mb-5">
+					<h2 className="font-(family-name:--font-manrope) font-semibold text-base mb-5">
 						{t("workflow.title")}
 					</h2>
 					<div className="space-y-4">
@@ -164,7 +164,7 @@ export default async function FinancingAdminPage({
 									{item.icon}
 								</span>
 								<div>
-									<p className="font-bold text-sm text-on-surface">
+									<p className="font-semibold text-sm text-on-surface">
 										{item.title}
 									</p>
 									<p className="text-xs text-on-surface-variant mt-1 leading-5">
