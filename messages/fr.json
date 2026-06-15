@@ -2936,7 +2936,13 @@
     "bio": "Courte biographie",
     "linkedin": "Profil LinkedIn / Site Web",
     "saving": "Enregistrement...",
-    "save": "Enregistrer les modifications"
+    "save": "Enregistrer les modifications",
+    "ceoSignatureTitle": "Signature PDG",
+    "ceoSignatureDesc": "La signature de Kayode Adebayo est intégrée à chaque document approuvé et décaissé.",
+    "ceoSigLabel": "Signature PDG (Kayode Adebayo)",
+    "ceoSigHint": "Dessinez ou téléversez la signature du PDG — co-signe chaque PDF de décaissement.",
+    "ceoSigSaved": "Signature PDG enregistrée",
+    "saveCeoSig": "Enregistrer la signature PDG"
   },
   "RegisterPage": {
     "title": "S'inscrire",
@@ -4063,7 +4069,8 @@
     "applications": "Demandes",
     "claims": "Réclamations",
     "partners": "Partenaires",
-    "portalLabel": "Admin Assurance"
+    "portalLabel": "Admin Assurance",
+    "profile": "Profil"
   },
   "InsuranceAdminPage": {
     "badge": "Gestion des assurances",
@@ -4112,7 +4119,8 @@
     "applications": "Demandes",
     "partners": "Partenaires financiers",
     "settings": "Paramètres",
-    "reviewQueue": "File de revue"
+    "reviewQueue": "File de revue",
+    "profile": "Profil"
   },
   "FinancingAdminPage": {
     "badge": "Opérations de financement",
@@ -4246,13 +4254,17 @@
       "success": "Revue enregistrée.",
       "error": "Impossible d'enregistrer la revue.",
       "saving": "Enregistrement...",
-      "submit": "Enregistrer la revue"
+      "submit": "Enregistrer la revue",
+      "contactPerson": "Personne de contact",
+      "contactPersonPlaceholder": "Votre nom"
     },
     "eois": {
       "title": "EOI transmises",
       "empty": "Aucune EOI n'a encore été transmise aux finances.",
       "forwardedOn": "Transmis le",
-      "downloadPdf": "Télécharger le PDF"
+      "downloadPdf": "Télécharger le PDF",
+      "previewSign": "Aperçu & Signer",
+      "downloadSigned": "Télécharger signé"
     }
   },
   "FinancingAdminPartnersPage": {
@@ -4444,14 +4456,18 @@
       "save": "Marquer comme décaissé",
       "saving": "Traitement...",
       "success": "Revue enregistrée.",
-      "error": "Impossible d'enregistrer la revue."
+      "error": "Impossible d'enregistrer la revue.",
+      "contactPerson": "Personne de contact",
+      "contactPersonPlaceholder": "Votre nom"
     },
     "eois": {
       "title": "EOI transmises",
       "empty": "Aucune EOI n'a encore été transmise à l'assurance.",
       "forwardedOn": "Transmis le",
       "downloadPdf": "Télécharger le PDF",
-      "loading": "Chargement des EOI..."
+      "loading": "Chargement des EOI...",
+      "previewSign": "Aperçu & Signer",
+      "downloadSigned": "Télécharger signé"
     }
   },
   "InsuranceAdminClaimsPage": {
@@ -5332,7 +5348,10 @@
       "term": "Duree",
       "rate": "Taux",
       "eligibility": "Eligibilite"
-    }
+    },
+    "productsButton": "Produits",
+    "productsModalTitle": "Nos Produits de Financement",
+    "partnersLabel": "Partenaires de financement"
   },
   "InsuranceApplyPage": {
     "promoterPortal": "Portail du promoteur",
@@ -5435,7 +5454,10 @@
         "tag": "DATA & IA",
         "desc": "Produits d assurance parametriques et indices lies aux donnees en temps reel : previsions de frequentation, indices meteorologiques et metriques de performance artistique."
       }
-    ]
+    ],
+    "productsButton": "Produits",
+    "productsModalTitle": "Nos Produits d'Assurance",
+    "partnersLabel": "Partenaires d'assurance"
   },
   "AdminInsurancePage": {
     "badge": "Risques & Couverture",
@@ -5513,5 +5535,82 @@
         "Assigner un partenaire assurance avant le transfert."
       ]
     }
+  },
+  "FinancingAdminProfilePage": {
+    "badge": "Admin Financement",
+    "title": "Votre Profil",
+    "description": "Gérez votre identité, vos coordonnées et vos signatures d'approbation.",
+    "saved": "Profil enregistré",
+    "saveError": "Échec de l'enregistrement",
+    "save": "Enregistrer",
+    "sections": {
+      "identity": "Identité",
+      "contact": "Coordonnées",
+      "signatures": "Signatures"
+    },
+    "fields": {
+      "orgName": "Organisation / Banque",
+      "orgNamePlaceholder": "ex. Access Bank Plc",
+      "contactPerson": "Personne de contact",
+      "contactPersonPlaceholder": "Nom complet",
+      "role": "Rôle / Titre",
+      "rolePlaceholder": "ex. Responsable financement",
+      "email": "Email",
+      "emailPlaceholder": "contact@banque.com",
+      "phone": "Téléphone",
+      "phonePlaceholder": "+234 ...",
+      "logo": "Logo de l'organisation",
+      "logoHint": "PNG ou JPEG, max 2 Mo",
+      "logoChange": "Changer le logo",
+      "adminSig": "Votre signature",
+      "adminSigHint": "Dessinez ou téléversez votre signature."
+    }
+  },
+  "InsuranceAdminProfilePage": {
+    "badge": "Admin Assurance",
+    "title": "Votre Profil",
+    "description": "Gérez votre identité, vos coordonnées et vos signatures d'approbation.",
+    "saved": "Profil enregistré",
+    "saveError": "Échec de l'enregistrement",
+    "save": "Enregistrer",
+    "sections": {
+      "identity": "Identité",
+      "contact": "Coordonnées",
+      "signatures": "Signatures"
+    },
+    "fields": {
+      "orgName": "Organisation / Assureur",
+      "orgNamePlaceholder": "ex. Leadway Assurance",
+      "contactPerson": "Personne de contact",
+      "contactPersonPlaceholder": "Nom complet",
+      "role": "Rôle / Titre",
+      "rolePlaceholder": "ex. Responsable assurance événementielle",
+      "email": "Email",
+      "emailPlaceholder": "contact@assureur.com",
+      "phone": "Téléphone",
+      "phonePlaceholder": "+234 ...",
+      "logo": "Logo de l'organisation",
+      "logoHint": "PNG ou JPEG, max 2 Mo",
+      "logoChange": "Changer le logo",
+      "adminSig": "Votre signature",
+      "adminSigHint": "Dessinez ou téléversez votre signature."
+    }
+  },
+  "SignaturePad": {
+    "draw": "Dessiner",
+    "upload": "Téléverser",
+    "clear": "Effacer",
+    "save": "Enregistrer la signature",
+    "uploadHint": "Cliquez ou déposez un PNG/JPEG ici",
+    "preview": "Aperçu de la signature"
+  },
+  "EoiPdfViewer": {
+    "loading": "Chargement du document...",
+    "error": "Impossible de charger le PDF",
+    "preview": "Aperçu du document",
+    "download": "Télécharger le PDF signé",
+    "signing": "Application des signatures...",
+    "noSignature": "Aucune signature — configurez votre Profil d'abord.",
+    "close": "Fermer"
   }
 }

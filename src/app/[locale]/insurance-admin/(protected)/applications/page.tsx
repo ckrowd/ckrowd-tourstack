@@ -8,7 +8,15 @@ import {
 	getInsuranceEois,
 	updateInsuranceApplication,
 } from "@/app/actions";
+import EoiPdfViewer from "@/components/EoiPdfViewer";
 import Loader from "@/components/Loader";
+
+interface AdminProfile {
+	orgName: string;
+	contactPerson: string;
+	role: string;
+	adminSignature: string | null;
+}
 
 // Insurance admin can only see forwarded (approved) and disbursed applications.
 // Platform admin handles approval; insurance admin handles disbursement only.
@@ -55,6 +63,20 @@ export default function InsuranceAdminApplicationsPage() {
 	const [selectedId, setSelectedId] = useState<string | null>(null);
 	const [partnerName, setPartnerName] = useState("");
 	const [note, setNote] = useState("");
+	const [adminProfile] = useState<AdminProfile>(() => {
+		if (typeof window === "undefined") return { orgName: "", contactPerson: "", role: "", adminSignature: null };
+		try {
+			const raw = localStorage.getItem("ins_admin_profile");
+			if (raw) return JSON.parse(raw) as AdminProfile;
+		} catch {}
+		return { orgName: "", contactPerson: "", role: "", adminSignature: null };
+	});
+	const [ceoSig] = useState<string | null>(() => {
+		if (typeof window === "undefined") return null;
+		return localStorage.getItem("platform_admin_ceo_signature");
+	});
+	const [contactPerson, setContactPerson] = useState(() => adminProfile.contactPerson ?? "");
+	const [pdfViewerEoiId, setPdfViewerEoiId] = useState<string | null>(null);
 
 	const query = useQuery({
 		queryKey: ["insuranceApplications"],
@@ -128,8 +150,23 @@ export default function InsuranceAdminApplicationsPage() {
 	const reviewFailed =
 		reviewMutation.isSuccess && reviewMutation.data?.success === false;
 
+	const orgName = adminProfile.orgName || adminProfile.contactPerson;
+	const orgInitials = orgName
+		? orgName.split(" ").map((w) => w[0]).join("").toUpperCase().slice(0, 2)
+		: null;
+
 	return (
 		<>
+			{pdfViewerEoiId && (
+				<EoiPdfViewer
+					eoiId={pdfViewerEoiId}
+					portal="insurance"
+					adminSignature={adminProfile.adminSignature}
+					ceoSignature={ceoSig}
+					onClose={() => setPdfViewerEoiId(null)}
+				/>
+			)}
+
 			<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 				<div>
 					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
@@ -141,6 +178,17 @@ export default function InsuranceAdminApplicationsPage() {
 					<p className="text-on-surface-variant font-medium">
 						{t("description")}
 					</p>
+					{orgInitials && (
+						<div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-surface-container-high">
+							<div className="w-6 h-6 rounded-lg bg-[#FF5A30]/15 flex items-center justify-center">
+								<span className="text-[9px] font-black text-[#FF5A30]">{orgInitials}</span>
+							</div>
+							<span className="text-xs font-semibold text-on-surface">{orgName}</span>
+							{adminProfile.role && (
+								<span className="text-[10px] text-on-surface-variant">· {adminProfile.role}</span>
+							)}
+						</div>
+					)}
 				</div>
 				<button
 					type="button"
@@ -272,6 +320,20 @@ export default function InsuranceAdminApplicationsPage() {
 										>
 											<label className="block">
 												<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
+													{t("review.contactPerson")}
+												</span>
+												<input
+													type="text"
+													value={contactPerson}
+													onChange={(event) =>
+														setContactPerson(event.target.value)
+													}
+													placeholder={t("review.contactPersonPlaceholder")}
+													className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+												/>
+											</label>
+											<label className="block">
+												<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 													{t("review.partner")}
 												</span>
 												<input
@@ -391,17 +453,29 @@ export default function InsuranceAdminApplicationsPage() {
 											{t("eois.forwardedOn")} {forwardedAt}
 										</p>
 									</div>
-									<a
-										href={`/api/eoi-pdf/${encodeURIComponent(eoiId)}?portal=insurance`}
-										target="_blank"
-										rel="noopener noreferrer"
-										className="shrink-0 flex items-center gap-2 px-4 py-2.5 bg-purple-50 text-purple-700 rounded-xl text-sm font-semibold hover:bg-purple-100 transition-colors"
-									>
-										<span className="material-symbols-outlined text-sm">
-											download
-										</span>
-										{t("eois.downloadPdf")}
-									</a>
+									<div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 shrink-0">
+										<button
+											type="button"
+											onClick={() => setPdfViewerEoiId(eoiId)}
+											className="flex items-center gap-2 px-4 py-2.5 bg-[#FF5A30]/10 text-[#FF5A30] rounded-xl text-sm font-semibold hover:bg-[#FF5A30]/20 transition-colors"
+										>
+											<span className="material-symbols-outlined text-sm">
+												draw
+											</span>
+											{t("eois.previewSign")}
+										</button>
+										<a
+											href={`/api/eoi-pdf/${encodeURIComponent(eoiId)}?portal=insurance`}
+											target="_blank"
+											rel="noopener noreferrer"
+											className="flex items-center gap-2 px-4 py-2.5 bg-purple-50 text-purple-700 rounded-xl text-sm font-semibold hover:bg-purple-100 transition-colors"
+										>
+											<span className="material-symbols-outlined text-sm">
+												download
+											</span>
+											{t("eois.downloadPdf")}
+										</a>
+									</div>
 								</div>
 							);
 						})}

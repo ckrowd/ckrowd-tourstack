@@ -29,6 +29,12 @@ export default async function InsuranceAdminSideNav() {
 			icon: "handshake",
 			href: "/insurance-admin/partners",
 		},
+		{
+			key: "profile",
+			label: t("profile"),
+			icon: "badge",
+			href: "/insurance-admin/profile",
+		},
 	];
 
 	return (

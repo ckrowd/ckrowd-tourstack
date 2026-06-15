@@ -2936,7 +2936,13 @@
     "bio": "Short Bio",
     "linkedin": "LinkedIn Profile / Website",
     "saving": "Saving...",
-    "save": "Save Changes"
+    "save": "Save Changes",
+    "ceoSignatureTitle": "CEO Signature",
+    "ceoSignatureDesc": "Kayode Adebayo's signature is embedded on every approved and disbursed document.",
+    "ceoSigLabel": "CEO Signature (Kayode Adebayo)",
+    "ceoSigHint": "Draw or upload the CEO signature — co-signs every disbursement PDF.",
+    "ceoSigSaved": "CEO signature saved",
+    "saveCeoSig": "Save CEO Signature"
   },
   "RegisterPage": {
     "title": "Register",
@@ -4063,7 +4069,8 @@
     "applications": "Applications",
     "claims": "Claims",
     "partners": "Partners",
-    "portalLabel": "Insurance Admin"
+    "portalLabel": "Insurance Admin",
+    "profile": "Profile"
   },
   "InsuranceAdminPage": {
     "badge": "Insurance Management",
@@ -4112,7 +4119,8 @@
     "applications": "Applications",
     "partners": "Capital Partners",
     "settings": "Settings",
-    "reviewQueue": "Review Queue"
+    "reviewQueue": "Review Queue",
+    "profile": "Profile"
   },
   "FinancingAdminPage": {
     "badge": "Financing Operations",
@@ -4246,13 +4254,17 @@
       "success": "Review saved.",
       "error": "Couldn't save the review.",
       "saving": "Saving...",
-      "submit": "Save Review"
+      "submit": "Save Review",
+      "contactPerson": "Contact Person",
+      "contactPersonPlaceholder": "Your name"
     },
     "eois": {
       "title": "Forwarded EOIs",
       "empty": "No EOIs have been forwarded to finance yet.",
       "forwardedOn": "Forwarded",
-      "downloadPdf": "Download PDF"
+      "downloadPdf": "Download PDF",
+      "previewSign": "Preview & Sign",
+      "downloadSigned": "Download Signed"
     }
   },
   "FinancingAdminPartnersPage": {
@@ -4444,14 +4456,18 @@
       "save": "Mark Disbursed",
       "saving": "Processing...",
       "success": "Review saved.",
-      "error": "Couldn't save the review."
+      "error": "Couldn't save the review.",
+      "contactPerson": "Contact Person",
+      "contactPersonPlaceholder": "Your name"
     },
     "eois": {
       "title": "Forwarded EOIs",
       "empty": "No EOIs have been forwarded to insurance yet.",
       "forwardedOn": "Forwarded",
       "downloadPdf": "Download PDF",
-      "loading": "Loading EOIs..."
+      "loading": "Loading EOIs...",
+      "previewSign": "Preview & Sign",
+      "downloadSigned": "Download Signed"
     }
   },
   "InsuranceAdminClaimsPage": {
@@ -5344,7 +5360,10 @@
       "term": "Term",
       "rate": "Rate",
       "eligibility": "Eligibility"
-    }
+    },
+    "productsButton": "Products",
+    "productsModalTitle": "Our Financing Products",
+    "partnersLabel": "Financing Partners"
   },
   "InsuranceApplyPage": {
     "promoterPortal": "Promoter Portal",
@@ -5447,7 +5466,10 @@
         "tag": "DATA & AI",
         "desc": "Parametric and index-linked insurance products priced dynamically using real-time event data including attendance forecasts and weather indices."
       }
-    ]
+    ],
+    "productsButton": "Products",
+    "productsModalTitle": "Our Insurance Products",
+    "partnersLabel": "Insurance Partners"
   },
   "AdminInsurancePage": {
     "badge": "Risk & Coverage",
@@ -5525,5 +5547,82 @@
         "Assign an insurance partner before forwarding."
       ]
     }
+  },
+  "FinancingAdminProfilePage": {
+    "badge": "Financing Admin",
+    "title": "Your Profile",
+    "description": "Manage your organization identity, contact details, and approval signatures.",
+    "saved": "Profile saved",
+    "saveError": "Failed to save profile",
+    "save": "Save Profile",
+    "sections": {
+      "identity": "Organization Identity",
+      "contact": "Contact Details",
+      "signatures": "Approval Signatures"
+    },
+    "fields": {
+      "orgName": "Organization / Bank Name",
+      "orgNamePlaceholder": "e.g. Access Bank Plc",
+      "contactPerson": "Contact Person",
+      "contactPersonPlaceholder": "Full name",
+      "role": "Role / Title",
+      "rolePlaceholder": "e.g. Head of Trade Finance",
+      "email": "Email",
+      "emailPlaceholder": "contact@bank.com",
+      "phone": "Phone",
+      "phonePlaceholder": "+234 ...",
+      "logo": "Organization Logo",
+      "logoHint": "Upload a logo (PNG or JPEG, max 2 MB)",
+      "logoChange": "Change logo",
+      "adminSig": "Your Signature",
+      "adminSigHint": "Draw or upload your signature — embedded on every approval."
+    }
+  },
+  "InsuranceAdminProfilePage": {
+    "badge": "Insurance Admin",
+    "title": "Your Profile",
+    "description": "Manage your organization identity, contact details, and approval signatures.",
+    "saved": "Profile saved",
+    "saveError": "Failed to save profile",
+    "save": "Save Profile",
+    "sections": {
+      "identity": "Organization Identity",
+      "contact": "Contact Details",
+      "signatures": "Approval Signatures"
+    },
+    "fields": {
+      "orgName": "Organization / Insurer Name",
+      "orgNamePlaceholder": "e.g. Leadway Assurance",
+      "contactPerson": "Contact Person",
+      "contactPersonPlaceholder": "Full name",
+      "role": "Role / Title",
+      "rolePlaceholder": "e.g. Head of Event Insurance",
+      "email": "Email",
+      "emailPlaceholder": "contact@insurer.com",
+      "phone": "Phone",
+      "phonePlaceholder": "+234 ...",
+      "logo": "Organization Logo",
+      "logoHint": "Upload a logo (PNG or JPEG, max 2 MB)",
+      "logoChange": "Change logo",
+      "adminSig": "Your Signature",
+      "adminSigHint": "Draw or upload your signature — embedded on every approval."
+    }
+  },
+  "SignaturePad": {
+    "draw": "Draw",
+    "upload": "Upload",
+    "clear": "Clear",
+    "save": "Save Signature",
+    "uploadHint": "Click or drag a PNG/JPEG here",
+    "preview": "Signature preview"
+  },
+  "EoiPdfViewer": {
+    "loading": "Loading document...",
+    "error": "Failed to load PDF",
+    "preview": "Document Preview",
+    "download": "Download Signed PDF",
+    "signing": "Applying signatures...",
+    "noSignature": "No signature set — configure in your Profile first.",
+    "close": "Close"
   }
 }
