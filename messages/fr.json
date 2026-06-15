@@ -382,6 +382,8 @@
     "markAllAsRead": "Tout marquer comme lu",
     "viewAllNotifications": "Voir toutes les notifications",
     "checkingSession": "Vérification de la session",
+    "changePhoto": "Changer la photo",
+    "uploadingPhoto": "Téléversement…",
     "notif": {
       "empty": "Aucune notification pour le moment",
       "eoiFallback": "Manifestation d'intérêt",
@@ -2537,6 +2539,16 @@
       "opportunities": "Opportunités",
       "activeTours": "Tournées actives",
       "avgReview": "Examen moyen"
+    },
+    "myTours": {
+      "title": "Vos tournées actives",
+      "noTours": "Aucune tournée confirmée pour l'instant. Soumettez un EOI pour commencer.",
+      "statusLabel": "Statut",
+      "statusConfirmed": "Confirmée",
+      "statusUnderReview": "En cours d'examen",
+      "statusNeedsRevision": "Révision requise",
+      "statusRejected": "Rejetée",
+      "statusDraft": "Brouillon"
     }
   },
   "FinancingPage": {

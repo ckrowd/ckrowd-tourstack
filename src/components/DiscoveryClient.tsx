@@ -9,7 +9,16 @@ import HowItWorksModal from "@/components/HowItWorksModal";
 import PageTour from "@/components/PageTour";
 import { Link } from "@/i18n/routing";
 
-export default function DiscoveryClient() {
+type MyTour = {
+	id: string;
+	tour_name?: string | null;
+	city?: string;
+	status?: string;
+	date?: string | Date;
+	artist?: { name?: string | null } | null;
+};
+
+export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }) {
 	const t = useTranslations("DiscoveryPage");
 	const locale = useLocale();
 
@@ -409,6 +418,50 @@ export default function DiscoveryClient() {
 
 				{/* Sidebar */}
 				<aside className="lg:col-span-4 space-y-8">
+					{/* My Active Tours */}
+					<div className="bg-surface-container-lowest rounded-2xl border border-outline-variant/10 shadow-sm overflow-hidden">
+						<div className="px-6 py-4 border-b border-outline-variant/10">
+							<h3 className="font-(family-name:--font-manrope) font-semibold text-sm text-on-surface">
+								{t("myTours.title")}
+							</h3>
+						</div>
+						{myTours.length === 0 ? (
+							<p className="px-6 py-5 text-xs text-on-surface-variant">{t("myTours.noTours")}</p>
+						) : (
+							<div className="divide-y divide-outline-variant/10">
+								{myTours.map((tour) => {
+									const statusKey = tour.status === "confirmed" ? "statusConfirmed"
+										: tour.status === "under_review" ? "statusUnderReview"
+										: tour.status === "needs_revision" ? "statusNeedsRevision"
+										: tour.status === "rejected" ? "statusRejected"
+										: "statusDraft";
+									const statusColor = tour.status === "confirmed"
+										? "bg-emerald-100 text-emerald-800"
+										: tour.status === "rejected"
+											? "bg-red-100 text-red-800"
+											: "bg-yellow-100 text-yellow-800";
+									return (
+										<div key={tour.id} className="px-6 py-4 flex flex-col gap-1">
+											<div className="flex items-start justify-between gap-2">
+												<p className="font-(family-name:--font-manrope) font-semibold text-sm text-on-surface leading-tight">
+													{tour.artist?.name ?? "—"}
+												</p>
+												<span className={`shrink-0 px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase ${statusColor}`}>
+													{t(`myTours.${statusKey}`)}
+												</span>
+											</div>
+											{(tour.tour_name || tour.city) && (
+												<p className="text-xs text-on-surface-variant">
+													{[tour.tour_name, tour.city].filter(Boolean).join(" · ")}
+												</p>
+											)}
+										</div>
+									);
+								})}
+							</div>
+						)}
+					</div>
+
 					{/* Financing Banner */}
 					<div className="bg-linear-to-br from-[#FF5A30] to-[#cc4826] rounded-2xl p-8 text-white relative overflow-hidden group">
 						<div className="relative z-10">

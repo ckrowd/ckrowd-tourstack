@@ -2,8 +2,9 @@
 
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { applyForFinancing } from "@/app/actions";
+import HowItWorksModal from "@/components/HowItWorksModal";
 
 type Tour = { id: string; name?: string | null; city?: string | null; artist?: { name?: string | null } | null };
 type Application = { id: string; product?: string | null; amount_requested?: number | null; currency?: string | null; status?: string | null; created_at?: Date | string | null; tour?: { artist?: { name?: string | null } | null } | null };
@@ -24,11 +25,15 @@ interface Props {
 
 export default function InsuranceApplyClient({ tours, applications, locale }: Props) {
 	const t = useTranslations("InsuranceApplyPage");
+	const tIns = useTranslations("InsurancePage");
 	const queryClient = useQueryClient();
+	const faqTitleId = useId();
 
 	const [tourId, setTourId] = useState<string>("");
 	const [product, setProduct] = useState<Parameters<typeof applyForFinancing>[0]["product"]>(INSURANCE_PRODUCTS[0].id);
 	const [amount, setAmount] = useState("");
+	const [faqOpen, setFaqOpen] = useState(false);
+	const [faqExpanded, setFaqExpanded] = useState<number | null>(0);
 
 	const applyMutation = useMutation({
 		mutationFn: applyForFinancing,
@@ -52,17 +57,94 @@ export default function InsuranceApplyClient({ tours, applications, locale }: Pr
 
 	return (
 		<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
+			{/* FAQ modal */}
+			{faqOpen && (
+				<div
+					className="fixed inset-0 z-50 flex items-center justify-center p-4"
+					role="dialog"
+					aria-modal="true"
+					aria-labelledby={faqTitleId}
+				>
+					<button
+						type="button"
+						aria-label={tIns("faqClose")}
+						onClick={() => setFaqOpen(false)}
+						className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+					/>
+					<div className="relative w-full max-w-lg max-h-[80vh] overflow-y-auto bg-surface-container-lowest rounded-2xl shadow-2xl no-scrollbar">
+						<div className="sticky top-0 flex items-start justify-between gap-4 bg-surface-container-lowest p-6 border-b border-outline-variant/10">
+							<h2 id={faqTitleId} className="font-(family-name:--font-manrope) text-xl font-semibold text-on-surface">
+								{tIns("faq.title")}
+							</h2>
+							<button
+								type="button"
+								onClick={() => setFaqOpen(false)}
+								aria-label={tIns("faqClose")}
+								className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors"
+							>
+								<span className="material-symbols-outlined">close</span>
+							</button>
+						</div>
+						<div className="p-6 space-y-2">
+							{(tIns.raw("faq.items") as { q: string; a: string }[]).map((f, i) => {
+								const isExpanded = faqExpanded === i;
+								return (
+									<div key={f.q} className="rounded-xl border border-outline-variant/10 overflow-hidden">
+										<button
+											type="button"
+											aria-expanded={isExpanded}
+											onClick={() => setFaqExpanded(isExpanded ? null : i)}
+											className="w-full flex items-center justify-between gap-3 text-left p-4 hover:bg-surface-container-low transition-colors"
+										>
+											<span className="font-(family-name:--font-manrope) font-semibold text-sm text-on-surface">{f.q}</span>
+											<span className={`material-symbols-outlined text-on-surface-variant shrink-0 transition-transform ${isExpanded ? "rotate-180" : ""}`}>
+												expand_more
+											</span>
+										</button>
+										{isExpanded && (
+											<p className="px-4 pb-4 text-sm text-on-surface-variant leading-relaxed">{f.a}</p>
+										)}
+									</div>
+								);
+							})}
+						</div>
+					</div>
+				</div>
+			)}
+
 			{/* Header */}
-			<div className="mb-8">
-				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
-					{t("promoterPortal")}
-				</span>
-				<h1 className="text-3xl font-semibold font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
-					{t("title")}
-				</h1>
-				<p className="text-on-surface-variant font-medium max-w-xl">
-					{t("description")}
-				</p>
+			<div className="mb-8 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+				<div>
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+						{t("promoterPortal")}
+					</span>
+					<h1 className="text-3xl font-semibold font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
+						{t("title")}
+					</h1>
+					<p className="text-on-surface-variant font-medium max-w-xl">
+						{t("description")}
+					</p>
+				</div>
+				<div className="flex items-center gap-2 shrink-0">
+					<HowItWorksModal
+						title={tIns("howItWorksTitle")}
+						subtitle={tIns("howItWorksSubtitle")}
+						buttonLabel={tIns("howItWorksButton")}
+						steps={(tIns.raw("ecosystemFlow") as { label: string; desc: string }[]).map((s, i) => ({
+							step: String(i + 1).padStart(2, "0"),
+							title: s.label,
+							desc: s.desc,
+						}))}
+					/>
+					<button
+						type="button"
+						onClick={() => setFaqOpen(true)}
+						className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-semibold hover:bg-surface-container-high transition-colors"
+					>
+						<span className="material-symbols-outlined text-base text-[#FF5A30]">help</span>
+						{tIns("faqButton")}
+					</button>
+				</div>
 			</div>
 
 			{/* Product showcase */}

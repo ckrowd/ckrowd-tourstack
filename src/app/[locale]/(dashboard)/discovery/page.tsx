@@ -1,4 +1,5 @@
 import { setRequestLocale } from "next-intl/server";
+import { getTours } from "@/app/actions";
 import DiscoveryClient from "@/components/DiscoveryClient";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
@@ -13,12 +14,22 @@ export default async function DiscoveryPage({
 	const { locale } = await params;
 	setRequestLocale(locale);
 
+	const toursResult = await getTours();
+	const myTours = (toursResult.data ?? []) as {
+		id: string;
+		tour_name?: string | null;
+		city?: string;
+		status?: string;
+		date?: string | Date;
+		artist?: { name?: string | null } | null;
+	}[];
+
 	return (
 		<div className="bg-surface text-on-surface antialiased">
 			<TopNav />
 			<div className="flex pt-16 h-screen">
 				<SideNav />
-				<DiscoveryClient />
+				<DiscoveryClient myTours={myTours} />
 			</div>
 		</div>
 	);
