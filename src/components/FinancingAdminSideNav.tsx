@@ -24,6 +24,12 @@ export default async function FinancingAdminSideNav() {
 			href: "/financing-admin/partners",
 		},
 		{
+			key: "profile",
+			label: t("profile"),
+			icon: "badge",
+			href: "/financing-admin/profile",
+		},
+		{
 			key: "settings",
 			label: t("settings"),
 			icon: "tune",

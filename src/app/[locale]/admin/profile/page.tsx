@@ -4,6 +4,9 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { getTourstackProfile, updateTourstackProfile } from "../../../actions";
+import SignaturePad from "@/components/SignaturePad";
+
+const CEO_SIG_KEY = "platform_admin_ceo_signature";
 
 type ProfileData = {
 	company_name?: string | null;
@@ -89,6 +92,21 @@ function Field({
 export default function AdminProfilePage() {
 	const queryClient = useQueryClient();
 	const t = useTranslations("AdminProfilePage");
+
+	const [ceoSignature, setCeoSignature] = useState<string | null>(() => {
+		if (typeof window === "undefined") return null;
+		return localStorage.getItem(CEO_SIG_KEY);
+	});
+	const [ceoSigSaved, setCeoSigSaved] = useState(false);
+
+	function saveCeoSignature() {
+		if (ceoSignature) {
+			localStorage.setItem(CEO_SIG_KEY, ceoSignature);
+		} else {
+			localStorage.removeItem(CEO_SIG_KEY);
+		}
+		setCeoSigSaved(true);
+	}
 
 	const { data: profileQuery } = useQuery<ProfileResponse, Error>({
 		queryKey: ["tourstackProfile"],
@@ -253,6 +271,31 @@ export default function AdminProfilePage() {
 							value={profile.websiteUrl}
 							onChange={set("websiteUrl")}
 						/>
+					</div>
+				</Section>
+
+				{/* CEO Signature */}
+				<Section title={t("ceoSignatureTitle")} description={t("ceoSignatureDesc")}>
+					<SignaturePad
+						value={ceoSignature}
+						onChange={(v) => { setCeoSignature(v); setCeoSigSaved(false); }}
+						label={t("ceoSigLabel")}
+						hint={t("ceoSigHint")}
+					/>
+					<div className="flex items-center gap-4 pt-2">
+						<button
+							type="button"
+							onClick={saveCeoSignature}
+							className="px-6 py-2.5 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all"
+						>
+							{t("saveCeoSig")}
+						</button>
+						{ceoSigSaved && (
+							<p className="text-sm font-medium text-emerald-700 flex items-center gap-1.5">
+								<span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+								{t("ceoSigSaved")}
+							</p>
+						)}
 					</div>
 				</Section>
 

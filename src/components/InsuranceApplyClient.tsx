@@ -17,10 +17,20 @@ const INSURANCE_PRODUCTS: { id: Parameters<typeof applyForFinancing>[0]["product
 	{ id: "Audience Ticket Protection", labelKey: "audienceTicketProtection", icon: "confirmation_number" },
 ];
 
+
 interface Props {
 	tours: Tour[];
 	applications: Application[];
 	locale: string;
+}
+
+function insStatusColor(status: string) {
+	switch (status) {
+		case "approved": return "bg-emerald-100 text-emerald-800";
+		case "declined": return "bg-red-100 text-red-800";
+		case "disbursed": return "bg-purple-100 text-purple-800";
+		default: return "bg-yellow-100 text-yellow-800";
+	}
 }
 
 export default function InsuranceApplyClient({ tours, applications, locale }: Props) {
@@ -28,12 +38,14 @@ export default function InsuranceApplyClient({ tours, applications, locale }: Pr
 	const tIns = useTranslations("InsurancePage");
 	const queryClient = useQueryClient();
 	const faqTitleId = useId();
+	const modalTitleId = useId();
 
 	const [tourId, setTourId] = useState<string>("");
 	const [product, setProduct] = useState<Parameters<typeof applyForFinancing>[0]["product"]>(INSURANCE_PRODUCTS[0].id);
 	const [amount, setAmount] = useState("");
 	const [faqOpen, setFaqOpen] = useState(false);
 	const [faqExpanded, setFaqExpanded] = useState<number | null>(0);
+	const [productsOpen, setProductsOpen] = useState(false);
 
 	const applyMutation = useMutation({
 		mutationFn: applyForFinancing,
@@ -57,6 +69,56 @@ export default function InsuranceApplyClient({ tours, applications, locale }: Pr
 
 	return (
 		<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
+			{/* Products modal */}
+			{productsOpen && (
+				<div
+					className="fixed inset-0 z-50 flex items-center justify-center p-4"
+					role="dialog"
+					aria-modal="true"
+					aria-labelledby={modalTitleId}
+				>
+					<button
+						type="button"
+						aria-label="Close"
+						onClick={() => setProductsOpen(false)}
+						className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+					/>
+					<div className="relative w-full max-w-3xl max-h-[85vh] overflow-y-auto bg-surface-container-low rounded-2xl shadow-2xl no-scrollbar">
+						<div className="sticky top-0 flex items-center justify-between gap-4 bg-surface-container-low p-6 border-b border-outline-variant/10">
+							<h2 id={modalTitleId} className="font-(family-name:--font-manrope) text-xl font-semibold text-on-surface">
+								{t("productsModalTitle")}
+							</h2>
+							<button
+								type="button"
+								onClick={() => setProductsOpen(false)}
+								aria-label="Close"
+								className="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors"
+							>
+								<span className="material-symbols-outlined">close</span>
+							</button>
+						</div>
+						<div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+							{(t.raw("productSuite") as { name: string; tag: string; desc: string }[]).map((suite) => (
+								<div
+									key={suite.name}
+									className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10 flex flex-col gap-3"
+								>
+									<span className="text-[10px] font-semibold uppercase tracking-wider text-[#FF5A30] bg-[#FF5A30]/10 px-2 py-0.5 rounded-full self-start">
+										{suite.tag}
+									</span>
+									<p className="font-(family-name:--font-manrope) font-semibold text-on-surface text-sm">
+										{suite.name}
+									</p>
+									<p className="text-xs text-on-surface-variant leading-relaxed flex-1">
+										{suite.desc}
+									</p>
+								</div>
+							))}
+						</div>
+					</div>
+				</div>
+			)}
+
 			{/* FAQ modal */}
 			{faqOpen && (
 				<div
@@ -126,6 +188,14 @@ export default function InsuranceApplyClient({ tours, applications, locale }: Pr
 					</p>
 				</div>
 				<div className="flex items-center gap-2 shrink-0">
+					<button
+						type="button"
+						onClick={() => setProductsOpen(true)}
+						className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-semibold hover:bg-surface-container-high transition-colors"
+					>
+						<span className="material-symbols-outlined text-base text-[#FF5A30]">category</span>
+						{t("productsButton")}
+					</button>
 					<HowItWorksModal
 						title={tIns("howItWorksTitle")}
 						subtitle={tIns("howItWorksSubtitle")}
@@ -147,28 +217,15 @@ export default function InsuranceApplyClient({ tours, applications, locale }: Pr
 				</div>
 			</div>
 
-			{/* Product showcase */}
-			<div className="mb-10">
-				<h2 className="font-(family-name:--font-manrope) font-semibold text-xl text-on-surface mb-5">
-					{t("productsTitle")}
-				</h2>
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-					{(t.raw("productSuite") as { name: string; tag: string; desc: string }[]).map((product) => (
-						<div
-							key={product.name}
-							className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10 flex flex-col gap-3"
-						>
-							<span className="text-[10px] font-semibold uppercase tracking-wider text-[#FF5A30] bg-[#FF5A30]/10 px-2 py-0.5 rounded-full self-start">
-								{product.tag}
-							</span>
-							<p className="font-(family-name:--font-manrope) font-semibold text-on-surface text-sm">
-								{product.name}
-							</p>
-							<p className="text-xs text-on-surface-variant leading-relaxed flex-1">
-								{product.desc}
-							</p>
-						</div>
-					))}
+			{/* Insurance partner */}
+			<div className="mb-8">
+				<p className="text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant mb-3">
+					{t("partnersLabel")}
+				</p>
+				<div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-outline-variant/15 bg-surface-container-lowest w-fit">
+					{/* eslint-disable-next-line @next/next/no-img-element */}
+					<img src="/sanlam-allianz.png" alt="Sanlam Allianz" className="h-7 w-auto object-contain" />
+					<span className="text-xs font-semibold text-on-surface">Sanlam Allianz</span>
 				</div>
 			</div>
 
@@ -251,33 +308,27 @@ export default function InsuranceApplyClient({ tours, applications, locale }: Pr
 						<p className={labelClass}>{t("fields.package")}</p>
 						<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
 							{INSURANCE_PRODUCTS.map((p) => (
-								<div key={p.id} className="relative group">
-									<button
-										type="button"
-										role="radio"
-										aria-checked={product === p.id}
-										onClick={() => setProduct(p.id)}
-										className={`w-full flex items-center gap-3 p-4 rounded-xl border-2 text-left transition-all ${
-											product === p.id
-												? "border-[#FF5A30] bg-[#FF5A30]/5"
-												: "border-outline-variant/20 hover:border-outline-variant/50"
-										}`}
+								<button
+									key={p.id}
+									type="button"
+									role="radio"
+									aria-checked={product === p.id}
+									onClick={() => setProduct(p.id)}
+									className={`w-full flex items-center gap-3 p-4 rounded-xl border-2 text-left transition-all ${
+										product === p.id
+											? "border-[#FF5A30] bg-[#FF5A30]/5"
+											: "border-outline-variant/20 hover:border-outline-variant/50"
+									}`}
+								>
+									<span
+										className={`material-symbols-outlined text-xl shrink-0 ${product === p.id ? "text-[#FF5A30]" : "text-on-surface-variant"}`}
 									>
-										<span
-											className={`material-symbols-outlined text-xl shrink-0 ${product === p.id ? "text-[#FF5A30]" : "text-on-surface-variant"}`}
-											style={{ fontVariationSettings: "'FILL' 1" }}
-										>
-											{p.icon}
-										</span>
-										<span className={`text-sm font-semibold font-(family-name:--font-manrope) ${product === p.id ? "text-[#FF5A30]" : "text-on-surface"}`}>
-											{t(`packages.${p.labelKey}`)}
-										</span>
-									</button>
-									<div className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-64 rounded-xl bg-gray-900 px-3 py-2.5 text-center text-xs leading-relaxed text-white opacity-0 shadow-xl transition-opacity group-hover:opacity-100 z-50">
-										{t(`packageDescriptions.${p.labelKey}`)}
-										<div className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-gray-900" />
-									</div>
-								</div>
+										{p.icon}
+									</span>
+									<span className={`text-sm font-semibold font-(family-name:--font-manrope) ${product === p.id ? "text-[#FF5A30]" : "text-on-surface"}`}>
+										{t(`packages.${p.labelKey}`)}
+									</span>
+								</button>
 							))}
 						</div>
 					</div>
@@ -339,12 +390,7 @@ export default function InsuranceApplyClient({ tours, applications, locale }: Pr
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 						{applications.map((app) => {
 							const status = String(app.status ?? "pending");
-							const statusColor =
-								status === "approved"
-									? "bg-emerald-100 text-emerald-800"
-									: status === "declined"
-										? "bg-red-100 text-red-800"
-										: "bg-yellow-100 text-yellow-800";
+							const color = insStatusColor(status);
 							return (
 								<div
 									key={String(app.id)}
@@ -359,7 +405,7 @@ export default function InsuranceApplyClient({ tours, applications, locale }: Pr
 												{String(app.tour?.artist?.name ?? "")}
 											</p>
 										</div>
-										<span className={`px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-tight shrink-0 ${statusColor}`}>
+										<span className={`px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-tight shrink-0 ${color}`}>
 											{t(`statuses.${status}`)}
 										</span>
 									</div>

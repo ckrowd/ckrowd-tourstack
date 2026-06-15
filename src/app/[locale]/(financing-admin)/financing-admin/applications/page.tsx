@@ -8,7 +8,15 @@ import {
 	getFinancingEois,
 	updateFinancingApplication,
 } from "@/app/actions";
+import EoiPdfViewer from "@/components/EoiPdfViewer";
 import Loader from "@/components/Loader";
+
+interface AdminProfile {
+	orgName: string;
+	contactPerson: string;
+	role: string;
+	adminSignature: string | null;
+}
 
 type Application = NonNullable<
 	Awaited<ReturnType<typeof getAdminFinancing>>["data"]
@@ -64,6 +72,20 @@ export default function FinancingAdminApplicationsPage() {
 	const [partnerName, setPartnerName] = useState("");
 	const [termSheetUrl, setTermSheetUrl] = useState("");
 	const [note, setNote] = useState("");
+	const [adminProfile] = useState<AdminProfile>(() => {
+		if (typeof window === "undefined") return { orgName: "", contactPerson: "", role: "", adminSignature: null };
+		try {
+			const raw = localStorage.getItem("fin_admin_profile");
+			if (raw) return JSON.parse(raw) as AdminProfile;
+		} catch {}
+		return { orgName: "", contactPerson: "", role: "", adminSignature: null };
+	});
+	const [ceoSig] = useState<string | null>(() => {
+		if (typeof window === "undefined") return null;
+		return localStorage.getItem("platform_admin_ceo_signature");
+	});
+	const [contactPerson, setContactPerson] = useState(() => adminProfile.contactPerson ?? "");
+	const [pdfViewerEoiId, setPdfViewerEoiId] = useState<string | null>(null);
 
 	const query = useQuery({
 		queryKey: ["adminFinancing"],
@@ -113,7 +135,7 @@ export default function FinancingAdminApplicationsPage() {
 	function selectForReview(f: Application) {
 		const id = String(f.id);
 		setSelectedId(id);
-		setPartnerName(String(f.partner_name ?? ""));
+		setPartnerName(String(f.partner_name ?? adminProfile.orgName ?? ""));
 		setTermSheetUrl(String(f.term_sheet_url ?? ""));
 		setNote(String(f.note ?? ""));
 		reviewMutation.reset();
@@ -132,6 +154,13 @@ export default function FinancingAdminApplicationsPage() {
 		});
 	}
 
+	function orgBadge() {
+		const name = adminProfile.orgName || adminProfile.contactPerson;
+		if (!name) return null;
+		const initials = name.split(" ").map((w) => w[0]).join("").toUpperCase().slice(0, 2);
+		return { initials, name };
+	}
+
 	function quickDisburse(f: Application) {
 		reviewMutation.mutate({
 			id: String(f.id),
@@ -143,8 +172,20 @@ export default function FinancingAdminApplicationsPage() {
 	const reviewFailed =
 		reviewMutation.isSuccess && reviewMutation.data?.success === false;
 
+	const badge = orgBadge();
+
 	return (
 		<>
+			{pdfViewerEoiId && (
+				<EoiPdfViewer
+					eoiId={pdfViewerEoiId}
+					portal="finance"
+					adminSignature={adminProfile.adminSignature}
+					ceoSignature={ceoSig}
+					onClose={() => setPdfViewerEoiId(null)}
+				/>
+			)}
+
 			<div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-5">
 				<div>
 					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
@@ -156,6 +197,17 @@ export default function FinancingAdminApplicationsPage() {
 					<p className="text-on-surface-variant text-sm font-medium max-w-3xl">
 						{t("description")}
 					</p>
+					{badge && (
+						<div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-surface-container-high">
+							<div className="w-6 h-6 rounded-lg bg-[#FF5A30]/15 flex items-center justify-center">
+								<span className="text-[9px] font-black text-[#FF5A30]">{badge.initials}</span>
+							</div>
+							<span className="text-xs font-semibold text-on-surface">{badge.name}</span>
+							{adminProfile.role && (
+								<span className="text-[10px] text-on-surface-variant">· {adminProfile.role}</span>
+							)}
+						</div>
+					)}
 				</div>
 				<button
 					type="button"
@@ -513,6 +565,18 @@ export default function FinancingAdminApplicationsPage() {
 							>
 								<label className="block">
 									<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
+										{t("reviewForm.contactPerson")}
+									</span>
+									<input
+										type="text"
+										value={contactPerson}
+										onChange={(event) => setContactPerson(event.target.value)}
+										placeholder={t("reviewForm.contactPersonPlaceholder")}
+										className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+									/>
+								</label>
+								<label className="block">
+									<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 										{t("reviewForm.fields.partner")}
 									</span>
 									<input
@@ -653,17 +717,29 @@ export default function FinancingAdminApplicationsPage() {
 											{t("eois.forwardedOn")} {forwardedAt}
 										</p>
 									</div>
-									<a
-										href={`/api/eoi-pdf/${encodeURIComponent(eoiId)}?portal=finance`}
-										target="_blank"
-										rel="noopener noreferrer"
-										className="shrink-0 flex items-center gap-2 px-4 py-2.5 bg-purple-50 text-purple-700 rounded-xl text-sm font-semibold hover:bg-purple-100 transition-colors"
-									>
-										<span className="material-symbols-outlined text-sm">
-											download
-										</span>
-										{t("eois.downloadPdf")}
-									</a>
+									<div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 shrink-0">
+										<button
+											type="button"
+											onClick={() => setPdfViewerEoiId(eoiId)}
+											className="flex items-center gap-2 px-4 py-2.5 bg-[#FF5A30]/10 text-[#FF5A30] rounded-xl text-sm font-semibold hover:bg-[#FF5A30]/20 transition-colors"
+										>
+											<span className="material-symbols-outlined text-sm">
+												draw
+											</span>
+											{t("eois.previewSign")}
+										</button>
+										<a
+											href={`/api/eoi-pdf/${encodeURIComponent(eoiId)}?portal=finance`}
+											target="_blank"
+											rel="noopener noreferrer"
+											className="flex items-center gap-2 px-4 py-2.5 bg-purple-50 text-purple-700 rounded-xl text-sm font-semibold hover:bg-purple-100 transition-colors"
+										>
+											<span className="material-symbols-outlined text-sm">
+												download
+											</span>
+											{t("eois.downloadPdf")}
+										</a>
+									</div>
 								</div>
 							);
 						})}
