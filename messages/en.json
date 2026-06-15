@@ -4264,7 +4264,9 @@
       "forwardedOn": "Forwarded",
       "downloadPdf": "Download PDF",
       "previewSign": "Preview & Sign",
-      "downloadSigned": "Download Signed"
+      "downloadSigned": "Download Signed",
+      "review": "Review",
+      "closeReview": "Close"
     }
   },
   "FinancingAdminPartnersPage": {
@@ -4467,7 +4469,9 @@
       "downloadPdf": "Download PDF",
       "loading": "Loading EOIs...",
       "previewSign": "Preview & Sign",
-      "downloadSigned": "Download Signed"
+      "downloadSigned": "Download Signed",
+      "review": "Review",
+      "closeReview": "Close"
     }
   },
   "InsuranceAdminClaimsPage": {

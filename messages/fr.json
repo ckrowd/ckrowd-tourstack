@@ -4264,7 +4264,9 @@
       "forwardedOn": "Transmis le",
       "downloadPdf": "Télécharger le PDF",
       "previewSign": "Aperçu & Signer",
-      "downloadSigned": "Télécharger signé"
+      "downloadSigned": "Télécharger signé",
+      "review": "Réviser",
+      "closeReview": "Fermer"
     }
   },
   "FinancingAdminPartnersPage": {
@@ -4467,7 +4469,9 @@
       "downloadPdf": "Télécharger le PDF",
       "loading": "Chargement des EOI...",
       "previewSign": "Aperçu & Signer",
-      "downloadSigned": "Télécharger signé"
+      "downloadSigned": "Télécharger signé",
+      "review": "Réviser",
+      "closeReview": "Fermer"
     }
   },
   "InsuranceAdminClaimsPage": {
