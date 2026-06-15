@@ -270,8 +270,8 @@ export default function ProfileClient() {
 		"primaryAddress", "country", "city", "phone", "bio",
 		"contactPerson", "jobTitle", "contactEmail",
 		"yearsInBusiness", "companySize", "averageEventsYear",
-		"genresSpecialties",
-		"bankName", "bankAccountHolder", "currencyPreference",
+		"marketsRegions", "genresSpecialties",
+		"bankName", "bankAccountHolder", "bankAccountNumber", "bankSwiftBic", "currencyPreference",
 	];
 
 	const profile: ProfileData = { ...EMPTY, ...serverProfile, ...edits };
@@ -776,6 +776,8 @@ export default function ProfileClient() {
 							value={profile.bankAccountNumber}
 							onChange={set("bankAccountNumber")}
 							placeholder={t("banking.fields.bankAccountNumberPlaceholder")}
+							required
+							showError={showValidation}
 						/>
 						<Field
 							label={t("banking.fields.bankSwiftBic")}
@@ -783,6 +785,8 @@ export default function ProfileClient() {
 							value={profile.bankSwiftBic}
 							onChange={set("bankSwiftBic")}
 							placeholder={t("banking.fields.bankSwiftBicPlaceholder")}
+							required
+							showError={showValidation}
 						/>
 						<Field
 							label={t("banking.fields.currencyPreference")}

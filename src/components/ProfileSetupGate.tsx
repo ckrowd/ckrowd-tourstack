@@ -15,7 +15,7 @@ function isProfileComplete(data: unknown): boolean {
 		"primary_address", "country", "city", "phone", "bio",
 		"contact_person", "job_title", "contact_email",
 		"company_size", "markets_regions", "genres_specialties",
-		"bank_name", "bank_account_holder", "currency_preference",
+		"bank_name", "bank_account_holder", "bank_account_number", "bank_swift_bic", "currency_preference",
 		"logo_url",
 	];
 	if (requiredStrings.some((k) => !d[k])) return false;
