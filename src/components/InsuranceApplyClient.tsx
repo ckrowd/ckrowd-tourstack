@@ -182,11 +182,12 @@ export default function InsuranceApplyClient({ tours, applications, locale }: Pr
 						e.preventDefault();
 						const parsedAmount = Number(amount);
 						if (!Number.isFinite(parsedAmount) || parsedAmount <= 0) return;
+						const resolvedTourId = tourId && !tourId.startsWith("eoi:") ? tourId : undefined;
 						applyMutation.mutate({
 							product,
 							amountRequested: parsedAmount,
 							currency: "USD",
-							...(tourId ? { tourId } : {}),
+							...(resolvedTourId ? { tourId: resolvedTourId } : {}),
 						});
 					}}
 					className="space-y-6"
@@ -204,12 +205,34 @@ export default function InsuranceApplyClient({ tours, applications, locale }: Pr
 								className={selectClass}
 							>
 								<option value="">{t("fields.tourNone")}</option>
-								{tours.map((tour) => (
-									<option key={tour.id} value={tour.id}>
-										{tour.artist?.name ?? t("fields.unknownArtist")}
-										{tour.city ? ` — ${tour.city}` : ""}
-									</option>
-								))}
+								{(() => {
+									const confirmed = tours.filter((t) => !t.id.startsWith("eoi:"));
+									const eois = tours.filter((t) => t.id.startsWith("eoi:"));
+									return (
+										<>
+											{confirmed.length > 0 && (
+												<optgroup label={t("fields.tourGroupConfirmed")}>
+													{confirmed.map((tour) => (
+														<option key={tour.id} value={tour.id}>
+															{tour.artist?.name ?? t("fields.unknownArtist")}
+															{tour.city ? ` — ${tour.city}` : ""}
+														</option>
+													))}
+												</optgroup>
+											)}
+											{eois.length > 0 && (
+												<optgroup label={t("fields.tourGroupApplications")}>
+													{eois.map((tour) => (
+														<option key={tour.id} value={tour.id}>
+															{tour.artist?.name ?? t("fields.unknownArtist")}
+															{tour.city ? ` — ${tour.city}` : ""}
+														</option>
+													))}
+												</optgroup>
+											)}
+										</>
+									);
+								})()}
 							</select>
 							<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">
 								expand_more

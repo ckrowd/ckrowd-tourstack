@@ -5171,6 +5171,8 @@
       "tour": "Sélectionner une tournée",
       "tourNone": "Aucune tournée spécifique",
       "tourHint": "Les tournées apparaissent ici après l'approbation de votre EOI et la confirmation d'un arrêt de tournée.",
+      "tourGroupConfirmed": "Tournées confirmées",
+      "tourGroupApplications": "Demandes de tournée (en attente)",
       "unknownArtist": "Artiste inconnu",
       "package": "Choisir un forfait de financement",
       "amount": "Montant demandé (USD)"
@@ -5279,6 +5281,8 @@
       "tour": "Sélectionner une tournée",
       "tourNone": "Aucune tournée spécifique",
       "tourHint": "Les tournées apparaissent ici après l'approbation de votre EOI et la confirmation d'un arrêt de tournée.",
+      "tourGroupConfirmed": "Tournées confirmées",
+      "tourGroupApplications": "Demandes de tournée (en attente)",
       "unknownArtist": "Artiste inconnu",
       "package": "Choisir un forfait d'assurance",
       "sumInsured": "Valeur estimée / Montant assuré (USD)"

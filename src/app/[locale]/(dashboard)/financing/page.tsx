@@ -1,5 +1,5 @@
 import { setRequestLocale } from "next-intl/server";
-import { getFinancingApplications, getTours } from "@/app/actions";
+import { getEOIs, getFinancingApplications, getTours } from "@/app/actions";
 import FinancingApplyClient from "@/components/FinancingApplyClient";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
@@ -19,16 +19,27 @@ type Props = {
 	params: Promise<{ locale: string }>;
 };
 
+type TourEntry = { id: string; name?: string | null; city?: string | null; artist?: { name?: string | null } | null };
+
 export default async function FinancingPage({ params }: Props) {
 	const { locale } = await params;
 	setRequestLocale(locale);
 
-	const [toursResult, appsResult] = await Promise.all([
+	const [toursResult, eoisResult, appsResult] = await Promise.all([
 		getTours(),
+		getEOIs(),
 		getFinancingApplications(),
 	]);
 
-	const tours = (toursResult.data ?? []) as { id: string; name?: string | null; city?: string | null; artist?: { name?: string | null } | null }[];
+	const confirmedTours = (toursResult.data ?? []) as TourEntry[];
+	const rawEois = (eoisResult.data ?? []) as { id: string; city: string; artist: { name: string } | null }[];
+	const eoiEntries: TourEntry[] = rawEois.map((e) => ({
+		id: `eoi:${e.id}`,
+		city: e.city,
+		artist: e.artist ?? null,
+	}));
+	const tours = [...confirmedTours, ...eoiEntries];
+
 	const allApps = (appsResult.data ?? []) as { id: string; product?: string | null; amount_requested?: number | null; currency?: string | null; status?: string | null; created_at?: Date | string | null; tour?: { artist?: { name?: string | null } | null } | null }[];
 	const applications = allApps.filter((a) => !INSURANCE_PRODUCT_IDS.includes(String(a.product ?? "")));
 
