@@ -434,7 +434,7 @@ export default function ProfileClient() {
 						ref={fileInputRef}
 						type="file"
 						accept="image/*"
-						className="hidden"
+						className="sr-only"
 						onChange={handleLogoUpload}
 					/>
 				</div>
