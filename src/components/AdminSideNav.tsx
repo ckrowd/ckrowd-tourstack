@@ -34,6 +34,20 @@ export default async function AdminSideNav() {
 			tourAttr: "admin-nav-eoi",
 		},
 		{
+			key: "financing",
+			label: t("financing"),
+			icon: "account_balance_wallet",
+			href: "/admin/financing",
+			tourAttr: "admin-nav-financing",
+		},
+		{
+			key: "insurance",
+			label: t("insurance"),
+			icon: "shield",
+			href: "/admin/insurance",
+			tourAttr: "admin-nav-insurance",
+		},
+		{
 			key: "directory",
 			label: t("directory"),
 			icon: "groups",

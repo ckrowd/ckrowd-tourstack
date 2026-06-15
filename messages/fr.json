@@ -3331,7 +3331,9 @@
     "submissions": "Soumissions",
     "reports": "Rapports",
     "settings": "Paramètres",
-    "newTour": "Nouvelle tournée"
+    "newTour": "Nouvelle tournée",
+    "financing": "Financement",
+    "insurance": "Assurance"
   },
   "AdminArtistsPage": {
     "badge": "Gestion des tournées",
@@ -3959,20 +3961,86 @@
   },
   "AdminFinancingPage": {
     "badge": "Accès au capital",
-    "title": "Suivi du financement",
-    "description": "Surveiller et gérer les demandes de financement des promoteurs de tournées.",
-    "requestsTitle": "Demandes de financement",
-    "requested": "demandé",
-    "reviewDetails": "Détails de l'examen",
+    "title": "Demandes de financement",
+    "description": "Examinez toutes les demandes de financement des promoteurs. Approuvez uniquement quand le tour est confirmé, puis transférez à l'Admin Financement pour le décaissement.",
+    "sync": "Actualiser",
+    "syncing": "Actualisation...",
+    "queueTitle": "Toutes les demandes",
     "empty": "Aucune demande de financement pour le moment.",
     "loadError": "Impossible de charger les demandes de financement.",
+    "searchPlaceholder": "Rechercher promoteur ou tour...",
+    "requestedOn": "Soumis le",
+    "unassigned": "Non assigné",
+    "noTour": "Pas de tour",
+    "forwardingNotice": "Seules les demandes avec un tour stop confirmé peuvent être transférées à l'Admin Financement. Vérifiez le badge de statut du tour sur chaque carte.",
+    "approvalBlocked": "Tour stop non encore confirmé. Impossible de transférer avant confirmation du tour.",
+    "noTourBlocked": "Aucun tour confirmé lié. Cette demande ne peut pas être transférée avant la confirmation d'un tour stop.",
+    "documentsCount": "{count, plural, =0 {Aucun document} one {# document} other {# documents}}",
+    "filters": {
+      "all": "Tous",
+      "pending": "En attente",
+      "under_review": "En cours",
+      "approved": "Transféré",
+      "rejected": "Rejeté",
+      "disbursed": "Décaissé"
+    },
     "status": {
       "pending": "En attente",
-      "under_review": "En cours d'examen",
-      "approved": "Approuvé",
+      "under_review": "En cours",
+      "approved": "Transféré au financement",
       "rejected": "Rejeté",
-      "disbursed": "Décaissé",
-      "declined": "Refusé"
+      "disbursed": "Décaissé"
+    },
+    "tourStatus": {
+      "confirmed": "Tour confirmé",
+      "active": "Tour actif",
+      "under_review": "Tour en cours",
+      "pending": "Tour en attente",
+      "cancelled": "Tour annulé",
+      "unknown": "Statut inconnu"
+    },
+    "tour": {
+      "title": "Détails du tour",
+      "venue": "Lieu",
+      "date": "Date",
+      "location": "Localisation",
+      "artist": "Artiste",
+      "genre": "Genre",
+      "capacity": "Capacité"
+    },
+    "actions": {
+      "review": "Examiner",
+      "forward": "Transférer au financement",
+      "reject": "Rejeter"
+    },
+    "reviewForm": {
+      "title": "Examen de la demande",
+      "selectHint": "Sélectionnez une demande à examiner.",
+      "fields": {
+        "decision": "Décision",
+        "partner": "Partenaire de financement",
+        "termSheet": "URL term sheet",
+        "note": "Note du réviseur"
+      },
+      "placeholders": {
+        "partner": "Assigner un partenaire",
+        "termSheet": "https://...",
+        "note": "Ajouter des notes ou prochaines étapes"
+      },
+      "success": "Examen enregistré.",
+      "error": "Impossible d'enregistrer l'examen.",
+      "saving": "Enregistrement...",
+      "submit": "Enregistrer l'examen"
+    },
+    "reviewChecklist": {
+      "title": "Liste de contrôle d'approbation",
+      "items": [
+        "Vérifier que le tour stop a été confirmé par l'équipe admin.",
+        "Examiner tous les documents financiers téléchargés par le promoteur.",
+        "Confirmer que le montant et le type de produit correspondent au profil du tour.",
+        "Vérifier les coordonnées bancaires du promoteur avant le transfert.",
+        "Assigner un partenaire de financement si disponible."
+      ]
     }
   },
   "InsuranceAdminLoginPage": {
@@ -4089,27 +4157,24 @@
   "FinancingAdminApplicationsPage": {
     "badge": "Revue des demandes",
     "title": "Demandes de financement",
-    "description": "Examinez les demandes de financement des promoteurs et faites avancer les facilités approuvées vers le term sheet et le décaissement.",
+    "description": "Traitez les décaissements pour les demandes de financement transférées par l'Admin Plateforme.",
     "queueTitle": "File de revue",
     "requestedOn": "Demandé le",
     "searchPlaceholder": "Rechercher un promoteur ou une tournée",
     "loading": "Chargement des demandes...",
     "loadError": "Impossible de charger les demandes de financement.",
-    "empty": "Aucune demande ne correspond à cette vue.",
+    "empty": "Aucune demande transférée pour le moment. L'Admin Plateforme doit approuver et transférer les demandes avant qu'elles apparaissent ici.",
     "unassigned": "Non attribué",
     "documentsCount": "{count, plural, =0 {Aucun document} one {# document} other {# documents}}",
     "filters": {
-      "all": "Toutes",
-      "pending": "En attente",
-      "under_review": "En cours de revue",
-      "approved": "Approuvées",
-      "rejected": "Rejetées",
-      "disbursed": "Décaissées"
+      "all": "Transférées & Décaissées",
+      "approved": "Transféré",
+      "disbursed": "Décaissé"
     },
     "status": {
       "pending": "En attente",
       "under_review": "En cours de revue",
-      "approved": "Approuvé",
+      "approved": "Transféré par l'Admin Plateforme",
       "rejected": "Rejeté",
       "disbursed": "Décaissé"
     },
@@ -4152,23 +4217,23 @@
       "sync": "Actualiser",
       "syncing": "Actualisation...",
       "review": "Réviser",
-      "approve": "Approuver",
-      "reject": "Rejeter"
+      "disburse": "Marquer comme décaissé"
     },
     "reviewChecklist": {
-      "title": "Liste de contrôle de la revue",
+      "title": "Liste de contrôle de décaissement",
       "items": [
-        "Vérifiez le profil du promoteur, l'immatriculation de l'entreprise et l'historique TourStack.",
-        "Confirmez le budget de l'étape de tournée, la capacité du lieu et les prévisions de billetterie.",
-        "Vérifiez la facilité demandée par rapport aux limites de produit et aux conditions de remboursement.",
-        "Attribuez un partenaire financier et préparez le term sheet après l'approbation."
+        "Confirmer que l'Admin Plateforme a approuvé et transféré cette demande.",
+        "Vérifier l'exactitude des coordonnées de décaissement.",
+        "Confirmer que le term sheet est signé et archivé.",
+        "S'assurer que le partenaire financier a libéré la facilité.",
+        "Enregistrer la référence du décaissement après traitement."
       ]
     },
     "reviewForm": {
       "title": "Formulaire de revue",
       "selectHint": "Sélectionnez une demande dans la file pour enregistrer une décision.",
       "fields": {
-        "decision": "Décision",
+        "decision": "Action",
         "partner": "Partenaire financier",
         "termSheet": "URL du term sheet",
         "note": "Note du réviseur"
@@ -4348,7 +4413,7 @@
   "InsuranceAdminApplicationsPage": {
     "badge": "Demandes",
     "title": "Demandes d'assurance",
-    "description": "Examiner et traiter les demandes d'assurance des promoteurs de tournée.",
+    "description": "Traitez les approbations finales et les décaissements pour les demandes d'assurance transférées par l'Admin Plateforme.",
     "requestsTitle": "Toutes les demandes",
     "requested": "couverture demandée",
     "reviewDetails": "Examiner les détails",
@@ -4357,19 +4422,16 @@
     "refreshing": "Actualisation...",
     "loading": "Chargement des demandes...",
     "loadError": "Impossible de charger les demandes d'assurance.",
-    "empty": "Aucune demande ne correspond à cette vue.",
+    "empty": "Aucune demande transférée pour le moment. L'Admin Plateforme doit approuver et transférer les demandes avant qu'elles apparaissent ici.",
     "filters": {
-      "all": "Toutes",
-      "pending": "En attente",
-      "under_review": "En révision",
-      "approved": "Approuvées",
-      "rejected": "Rejetées",
-      "disbursed": "Décaissées"
+      "all": "Transférées & Décaissées",
+      "approved": "Transféré",
+      "disbursed": "Décaissé"
     },
     "status": {
       "pending": "En attente",
       "under_review": "En révision",
-      "approved": "Approuvé",
+      "approved": "Transféré par l'Admin Plateforme",
       "rejected": "Rejeté",
       "disbursed": "Décaissé"
     },
@@ -4379,8 +4441,8 @@
       "partnerPlaceholder": "Attribuer un assureur ou un courtier",
       "note": "Note du réviseur",
       "notePlaceholder": "Ajouter des notes de souscription ou les prochaines étapes",
-      "save": "Enregistrer la revue",
-      "saving": "Enregistrement...",
+      "save": "Marquer comme décaissé",
+      "saving": "Traitement...",
       "success": "Revue enregistrée.",
       "error": "Impossible d'enregistrer la revue."
     },
@@ -5374,5 +5436,82 @@
         "desc": "Produits d assurance parametriques et indices lies aux donnees en temps reel : previsions de frequentation, indices meteorologiques et metriques de performance artistique."
       }
     ]
+  },
+  "AdminInsurancePage": {
+    "badge": "Risques & Couverture",
+    "title": "Demandes d'assurance",
+    "description": "Examinez toutes les demandes d'assurance des promoteurs. Approuvez uniquement quand le tour est confirmé, puis transférez à l'Admin Assurance.",
+    "sync": "Actualiser",
+    "syncing": "Actualisation...",
+    "requestsTitle": "Toutes les demandes d'assurance",
+    "empty": "Aucune demande d'assurance pour le moment.",
+    "loadError": "Impossible de charger les demandes d'assurance.",
+    "searchPlaceholder": "Rechercher promoteur ou tour...",
+    "requestedOn": "Soumis le",
+    "requested": "couverture demandée",
+    "noTour": "Pas de tour",
+    "forwardingNotice": "Seules les demandes avec un tour stop confirmé peuvent être transférées à l'Admin Assurance.",
+    "approvalBlocked": "Tour stop non encore confirmé. Impossible de transférer avant confirmation du tour.",
+    "noTourBlocked": "Aucun tour confirmé lié. Cette demande ne peut pas être transférée avant confirmation.",
+    "filters": {
+      "all": "Tous",
+      "pending": "En attente",
+      "under_review": "En cours",
+      "approved": "Transféré",
+      "rejected": "Rejeté",
+      "disbursed": "Décaissé"
+    },
+    "status": {
+      "pending": "En attente",
+      "under_review": "En cours",
+      "approved": "Transféré à l'assurance",
+      "rejected": "Rejeté",
+      "disbursed": "Décaissé"
+    },
+    "tourStatus": {
+      "confirmed": "Tour confirmé",
+      "active": "Tour actif",
+      "under_review": "Tour en cours",
+      "pending": "Tour en attente",
+      "cancelled": "Tour annulé",
+      "unknown": "Statut inconnu"
+    },
+    "tour": {
+      "title": "Détails du tour",
+      "venue": "Lieu",
+      "date": "Date",
+      "location": "Localisation",
+      "artist": "Artiste",
+      "genre": "Genre",
+      "capacity": "Capacité"
+    },
+    "actions": {
+      "review": "Examiner",
+      "forward": "Transférer à l'assurance",
+      "reject": "Rejeter"
+    },
+    "reviewForm": {
+      "title": "Examen de la demande",
+      "selectHint": "Sélectionnez une demande à examiner.",
+      "decision": "Décision",
+      "partner": "Partenaire assurance",
+      "partnerPlaceholder": "Assigner un souscripteur ou courtier",
+      "note": "Note du réviseur",
+      "notePlaceholder": "Ajouter des notes de souscription",
+      "save": "Enregistrer l'examen",
+      "saving": "Enregistrement...",
+      "success": "Examen enregistré.",
+      "error": "Impossible d'enregistrer l'examen."
+    },
+    "reviewChecklist": {
+      "title": "Liste de contrôle d'approbation",
+      "items": [
+        "Vérifier que le tour stop a été confirmé par l'équipe admin.",
+        "Examiner tous les documents téléchargés par le promoteur.",
+        "Confirmer que le montant de couverture est approprié pour l'événement.",
+        "Vérifier que le lieu et la date de l'événement sont finalisés.",
+        "Assigner un partenaire assurance avant le transfert."
+      ]
+    }
   }
 }
