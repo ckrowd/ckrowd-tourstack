@@ -1192,6 +1192,34 @@ export async function deleteAdminArtist(id: string) {
 	};
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: admin roster-artists endpoint pending backend implementation
+export async function getAdminRosterArtists() {
+	const { data, error } = await (client as any).tourstack.admin["roster-artists"].get();
+	return {
+		data: await extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: admin roster-artists endpoint pending backend implementation
+export async function approveRosterArtist(id: string) {
+	const { data, error } = await (client as any).tourstack.admin["roster-artists"]({ id }).patch({ status: "approved" });
+	return {
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: admin roster-artists endpoint pending backend implementation
+export async function rejectRosterArtist(id: string) {
+	const { data, error } = await (client as any).tourstack.admin["roster-artists"]({ id }).patch({ status: "rejected" });
+	return {
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
 export async function uploadTourImage(formData: FormData) {
 	const file = formData.get("file");
 	if (!file || typeof file === "string") {

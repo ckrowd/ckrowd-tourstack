@@ -21,6 +21,7 @@ type RosterArtist = {
 	social_links?: unknown;
 	image_url?: unknown;
 	is_active?: unknown;
+	status?: unknown;
 	created_at?: unknown;
 };
 
@@ -312,11 +313,28 @@ export default function ArtmgmtPage() {
 											</p>
 										)}
 									</div>
-									<span
-										className={`px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase ${artist.is_active ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-500"}`}
-									>
-										{artist.is_active ? t("active") : t("inactive")}
-									</span>
+									<div className="flex flex-col items-end gap-1 shrink-0">
+										<span
+											className={`px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase ${artist.is_active ? "bg-emerald-100 text-emerald-700" : "bg-slate-100 text-slate-500"}`}
+										>
+											{artist.is_active ? t("active") : t("inactive")}
+										</span>
+										<span
+											className={`px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase ${
+												artist.status === "approved"
+													? "bg-emerald-100 text-emerald-700"
+													: artist.status === "rejected"
+														? "bg-red-100 text-red-600"
+														: "bg-amber-100 text-amber-700"
+											}`}
+										>
+											{artist.status === "approved"
+												? t("statusApproved")
+												: artist.status === "rejected"
+													? t("statusRejected")
+													: t("statusPending")}
+										</span>
+									</div>
 								</div>
 
 								{Boolean(artist.bio) && (
