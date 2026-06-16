@@ -37,11 +37,15 @@ export default function EoiActionPanel({
 	currentStatus,
 	eoiCity = "",
 	forwardedTo = null,
+	forwardedToFinance = false,
+	forwardedToInsurance = false,
 }: {
 	eoiId: string;
 	currentStatus: string;
 	eoiCity?: string;
 	forwardedTo?: string | null;
+	forwardedToFinance?: boolean;
+	forwardedToInsurance?: boolean;
 }) {
 	const t = useTranslations("EoiActionPanel");
 	const router = useRouter();
@@ -85,7 +89,7 @@ export default function EoiActionPanel({
 	const [forwardError, setForwardError] = useState<string | null>(null);
 
 	const forwardMutation = useMutation({
-		mutationFn: (target: "finance" | "insurance") => forwardEoi(eoiId, target),
+		mutationFn: (target: "finance" | "insurance" | "both") => forwardEoi(eoiId, target),
 		onSuccess: (result) => {
 			if (!result.success) {
 				setForwardError(result.error || t("errorGeneric"));
@@ -156,15 +160,25 @@ export default function EoiActionPanel({
 	const showRevision = !hidden.includes("revision");
 	const showReject = !hidden.includes("reject");
 	const showCreateStop = currentStatus !== "rejected";
-	const showSend = currentStatus === "approved" && !forwardedTo;
+	const showSend = currentStatus === "approved" && (!forwardedToFinance || !forwardedToInsurance);
 	const isPending = statusMutation.isPending || stopMutation.isPending || forwardMutation.isPending;
 
 	return (
 		<>
-			{forwardedTo && (
-				<div className="flex items-center gap-2 px-3 py-1.5 bg-purple-50 rounded-lg text-xs text-purple-700 font-semibold mt-2">
-					<span className="material-symbols-outlined text-xs text-purple-500">send</span>
-					{t("forwardedTo", { target: forwardedTo === "finance" ? t("finance") : t("insurance") })}
+			{(forwardedToFinance || forwardedToInsurance) && (
+				<div className="flex flex-wrap gap-2 mt-2">
+					{forwardedToFinance && (
+						<div className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 rounded-lg text-xs text-blue-700 font-semibold">
+							<span className="material-symbols-outlined text-xs text-blue-500">account_balance</span>
+							{t("forwardedTo", { target: t("finance") })}
+						</div>
+					)}
+					{forwardedToInsurance && (
+						<div className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 rounded-lg text-xs text-emerald-700 font-semibold">
+							<span className="material-symbols-outlined text-xs text-emerald-500">verified_user</span>
+							{t("forwardedTo", { target: t("insurance") })}
+						</div>
+					)}
 				</div>
 			)}
 			<div className="flex flex-wrap md:flex-nowrap items-center gap-3 pt-4 border-t border-outline-variant/10">
@@ -222,26 +236,42 @@ export default function EoiActionPanel({
 						</button>
 						{sendDropdownOpen && (
 							<div className="absolute left-0 bottom-full mb-1 w-full bg-white rounded-xl shadow-lg border border-slate-100 overflow-hidden z-20">
-								<button
-									type="button"
-									onClick={() => forwardMutation.mutate("finance")}
-									disabled={forwardMutation.isPending}
-									className="w-full px-4 py-3 text-left text-sm font-semibold text-slate-700 hover:bg-purple-50 flex items-center gap-2 disabled:opacity-50"
-								>
-									<span className="material-symbols-outlined text-sm">account_balance</span>
-									{t("sendToFinance")}
-									{forwardMutation.isPending && <span className="material-symbols-outlined text-xs animate-spin ml-auto">progress_activity</span>}
-								</button>
-								<button
-									type="button"
-									onClick={() => forwardMutation.mutate("insurance")}
-									disabled={forwardMutation.isPending}
-									className="w-full px-4 py-3 text-left text-sm font-semibold text-slate-700 hover:bg-purple-50 flex items-center gap-2 disabled:opacity-50"
-								>
-									<span className="material-symbols-outlined text-sm">shield</span>
-									{t("sendToInsurance")}
-									{forwardMutation.isPending && <span className="material-symbols-outlined text-xs animate-spin ml-auto">progress_activity</span>}
-								</button>
+								{!forwardedToFinance && (
+									<button
+										type="button"
+										onClick={() => forwardMutation.mutate("finance")}
+										disabled={forwardMutation.isPending}
+										className="w-full px-4 py-3 text-left text-sm font-semibold text-slate-700 hover:bg-blue-50 flex items-center gap-2 disabled:opacity-50"
+									>
+										<span className="material-symbols-outlined text-sm">account_balance</span>
+										{t("sendToFinance")}
+										{forwardMutation.isPending && <span className="material-symbols-outlined text-xs animate-spin ml-auto">progress_activity</span>}
+									</button>
+								)}
+								{!forwardedToInsurance && (
+									<button
+										type="button"
+										onClick={() => forwardMutation.mutate("insurance")}
+										disabled={forwardMutation.isPending}
+										className="w-full px-4 py-3 text-left text-sm font-semibold text-slate-700 hover:bg-emerald-50 flex items-center gap-2 disabled:opacity-50"
+									>
+										<span className="material-symbols-outlined text-sm">shield</span>
+										{t("sendToInsurance")}
+										{forwardMutation.isPending && <span className="material-symbols-outlined text-xs animate-spin ml-auto">progress_activity</span>}
+									</button>
+								)}
+								{!forwardedToFinance && !forwardedToInsurance && (
+									<button
+										type="button"
+										onClick={() => forwardMutation.mutate("both")}
+										disabled={forwardMutation.isPending}
+										className="w-full px-4 py-3 text-left text-sm font-semibold text-slate-700 hover:bg-purple-50 flex items-center gap-2 disabled:opacity-50"
+									>
+										<span className="material-symbols-outlined text-sm">send</span>
+										{t("sendToBoth")}
+										{forwardMutation.isPending && <span className="material-symbols-outlined text-xs animate-spin ml-auto">progress_activity</span>}
+									</button>
+								)}
 								{forwardError && (
 									<p className="px-4 py-2 text-xs text-red-600 font-semibold border-t border-red-50 bg-red-50">
 										{forwardError}

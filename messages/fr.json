@@ -543,7 +543,8 @@
       "insurance": {
         "label": "Assurance événement",
         "question": "Avez-vous besoin d'une assurance pour cet événement ?",
-        "description": "Nous vous mettrons en relation avec un assureur."
+        "description": "Nous vous mettrons en relation avec un assureur.",
+        "alwaysIncluded": "L'assurance événement est incluse dans chaque soumission d'EOI. Nous vous mettrons en relation avec Sanlam Allianz après examen."
       },
       "yes": "Oui",
       "no": "Non"
@@ -1285,9 +1286,12 @@
       "description": "Contact principal pour la gestion artistique et les negociations de tournees.",
       "fields": {
         "contactPerson": "Nom du Contact",
-        "jobTitle": "Titre",
+        "contactPersonPlaceholder": "ex. Jane Smith",
+        "jobTitle": "Rôle",
+        "jobTitlePlaceholder": "ex. Directeur de tournée, PDG",
         "contactEmail": "Email du Contact",
-        "phone": "Telephone du Contact"
+        "phone": "Telephone du Contact",
+        "phonePlaceholder": "+225 07 00 00 00 00"
       }
     },
     "businessDetails": {
@@ -1295,12 +1299,14 @@
       "description": "Aide les artistes et leurs equipes a comprendre votre historique et portee.",
       "fields": {
         "yearsInBusiness": "Annees d Activite",
+        "yearsInBusinessPlaceholder": "ex. 5",
         "companySize": "Taille de l Entreprise",
         "marketsRegions": "Marches / Regions Couverts",
         "marketsRegionsPlaceholder": "ex. Lagos, Accra, Nairobi, Johannesburg",
         "genresSpecialties": "Genres / Specialites",
         "genresSpecialtiesPlaceholder": "ex. Afrobeats, Amapiano, Gospel, Highlife",
-        "averageEventsYear": "Nombre Moyen d Evenements par An"
+        "averageEventsYear": "Nombre Moyen d Evenements par An",
+        "averageEventsYearPlaceholder": "ex. 12"
       },
       "companySizes": {
         "placeholder": "Selectionnez la taille",
@@ -1316,9 +1322,13 @@
       "description": "Utilise pour les versements de financement et le traitement des paiements. Toutes les donnees sont securisees.",
       "fields": {
         "bankName": "Nom de la Banque",
+        "bankNamePlaceholder": "ex. Access Bank",
         "bankAccountHolder": "Titulaire du Compte",
+        "bankAccountHolderPlaceholder": "ex. Ckrowd Music Ltd",
         "bankAccountNumber": "Numero de Compte / IBAN",
+        "bankAccountNumberPlaceholder": "Numéro à 10 chiffres",
         "bankSwiftBic": "Code SWIFT / BIC",
+        "bankSwiftBicPlaceholder": "ex. ACCESSNGLA",
         "currencyPreference": "Devise Preferee",
         "currencyPlaceholder": "ex. USD, EUR, XOF, NGN"
       }
@@ -3832,6 +3842,12 @@
     "noEoisDesc": "Les soumissions d'EOI apparaîtront ici pour examen.",
     "matchScore": "Score de correspondance",
     "funding": "Financement",
+    "finance": "Finance",
+    "insurance": "Assurance",
+    "financeRequested": "Financement demandé",
+    "insuranceRequested": "Assurance demandée",
+    "promoterContact": "Contact promoteur",
+    "notes": "Notes",
     "fields": {
       "date": "Date",
       "venue": "Lieu",
@@ -3887,6 +3903,7 @@
     "send": "Envoyer",
     "sendToFinance": "Envoyer aux finances",
     "sendToInsurance": "Envoyer à l'assurance",
+    "sendToBoth": "Envoyer aux finances et à l'assurance",
     "finance": "Finances",
     "insurance": "Assurance",
     "forwardedTo": "Transmis à {target}"
@@ -4632,6 +4649,8 @@
       "roleInsurance": "Admin assurance",
       "roleFinancing": "Admin financement",
       "noRoles": "Aucune portée",
+      "leadAdmin": "Admin principal",
+      "setAsLead": "Définir comme principal",
       "editRoles": "Modifier les portées",
       "editRolesHint": "Sélectionnez chaque portée que cet administrateur doit détenir. Tout effacer retire son accès administrateur.",
       "saveRoles": "Enregistrer",

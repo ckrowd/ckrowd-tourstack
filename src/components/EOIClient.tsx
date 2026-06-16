@@ -342,7 +342,7 @@ const defaultForm: ApplicationForm = {
 	audience: "",
 	venues: [],
 	needsFinance: false,
-	needsInsurance: false,
+	needsInsurance: true,
 	notes: "",
 };
 
@@ -764,49 +764,19 @@ function EOIPageContent() {
 												)}
 											</div>
 
-											{/* Insurance card */}
-											<div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
-												<div className="flex items-start justify-between gap-4">
+											{/* Insurance card — always included, not optional */}
+											<div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
+												<div className="flex items-start gap-3">
+													<span className="material-symbols-outlined text-emerald-600 mt-0.5" style={{ fontVariationSettings: "'FILL' 1" }}>verified_user</span>
 													<div className="flex-1">
-														<p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500 mb-1">
+														<p className="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-700 mb-1">
 															{t("form.insurance.label")}
 														</p>
 														<p className="text-sm font-semibold text-slate-900">
-															{t("form.insurance.question")}
+															{t("form.insurance.alwaysIncluded")}
 														</p>
-														<p className="mt-1 text-xs text-slate-500">
-															{t("form.insurance.description")}
-														</p>
-													</div>
-													<div className="flex shrink-0 rounded-xl border border-slate-200 overflow-hidden text-sm font-semibold">
-														<button
-															type="button"
-															role="switch"
-															aria-checked={!form.needsInsurance}
-															onClick={() => updateField("needsInsurance", false)}
-															className={`px-4 py-2 transition ${!form.needsInsurance ? "bg-slate-900 text-white" : "bg-white text-slate-500 hover:bg-slate-50"}`}
-														>
-															{t("form.no")}
-														</button>
-														<button
-															type="button"
-															role="switch"
-															aria-checked={form.needsInsurance}
-															onClick={() => updateField("needsInsurance", true)}
-															className={`px-4 py-2 transition ${form.needsInsurance ? "bg-[#FF5A30] text-white" : "bg-white text-slate-500 hover:bg-slate-50"}`}
-														>
-															{t("form.yes")}
-														</button>
 													</div>
 												</div>
-												{form.needsInsurance && (
-													<div className="mt-3 flex items-center gap-2 rounded-xl bg-orange-50 border border-orange-200 px-3 py-2">
-														<span className="material-symbols-outlined text-sm text-[#FF5A30]" style={{ fontVariationSettings: "'FILL' 1" }}>info</span>
-														<p className="text-xs font-medium text-orange-700">
-															We&apos;ll connect you with an insurance provider after your EOI is reviewed.
-														</p>
-													</div>
-												)}
 											</div>
 										</div>
 									)}

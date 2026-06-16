@@ -8,6 +8,7 @@ import {
 	resendAdminInvite,
 	revokeAdminInvite,
 	setAdminRoles,
+	setLeadAdmin,
 } from "@/app/actions";
 
 type AdminScope = "platform" | "insurance" | "financing";
@@ -21,6 +22,7 @@ type ActiveMember = {
 	email: string | null;
 	tourstack_admin_role: AdminScope | null;
 	tourstack_admin_roles?: AdminScope[] | null;
+	is_lead_tourstack_admin?: boolean | null;
 };
 
 type PendingInvite = {
@@ -79,6 +81,19 @@ export default function AdminTeamList({
 		},
 		onError: () => setError(t("inviteError")),
 		onSettled: () => setBusyInviteId(null),
+	});
+
+	const leadMutation = useMutation({
+		mutationFn: (userId: string) => setLeadAdmin(userId),
+		onSuccess: (result) => {
+			if (!result.success) {
+				setError(result.error || t("rolesUpdateError"));
+				return;
+			}
+			setError(null);
+			router.refresh();
+		},
+		onError: () => setError(t("rolesUpdateError")),
 	});
 
 	const rolesMutation = useMutation({
@@ -145,6 +160,11 @@ export default function AdminTeamList({
 								</div>
 							</div>
 							<div className="flex items-center gap-2 flex-wrap justify-end">
+								{member.is_lead_tourstack_admin && (
+									<span className="text-[10px] font-black uppercase tracking-wider text-amber-700 bg-amber-100 px-2.5 py-1 rounded-full">
+										{t("leadAdmin")}
+									</span>
+								)}
 								{scopes.length > 0 ? (
 									scopes.map((s) => (
 										<span
@@ -166,6 +186,16 @@ export default function AdminTeamList({
 										className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-outline-variant/30 hover:bg-surface-container-low"
 									>
 										{t("editRoles")}
+									</button>
+								)}
+								{!member.is_lead_tourstack_admin && !isEditing && scopes.length > 0 && (
+									<button
+										type="button"
+										onClick={() => leadMutation.mutate(member.id)}
+										disabled={leadMutation.isPending}
+										className="text-xs font-semibold px-3 py-1.5 rounded-lg border border-amber-300 text-amber-700 hover:bg-amber-50 disabled:opacity-60"
+									>
+										{t("setAsLead")}
 									</button>
 								)}
 							</div>

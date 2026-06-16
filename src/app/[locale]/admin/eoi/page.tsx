@@ -192,19 +192,64 @@ export default async function AdminEOIPage({
 											<MatchBar score={matchScore} />
 										</div>
 									</div>
-									{eoi.funding_type != null && (
-										<div className="flex items-center gap-2 text-xs text-on-surface-variant">
-											<span className="material-symbols-outlined text-xs">
-												account_balance
+
+									{/* Finance / insurance badges */}
+									<div className="flex flex-wrap gap-2 pt-1">
+										{String(eoi.funding_type ?? "") === "required" && (
+											<span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-blue-100 text-blue-800 text-[10px] font-black uppercase tracking-wider">
+												<span className="material-symbols-outlined text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>account_balance</span>
+												{t("financeRequested")}
 											</span>
-											<span>
-												{t("funding")}:{" "}
-												<span className="font-semibold text-on-surface">
-													{String(eoi.funding_type)}
-												</span>
+										)}
+										{String(eoi.notes ?? "").includes("Insurance support requested") && (
+											<span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase tracking-wider">
+												<span className="material-symbols-outlined text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>verified_user</span>
+												{t("insuranceRequested")}
+											</span>
+										)}
+									</div>
+
+									{/* Finance / insurance sign-off status */}
+								{((eoi as Record<string, unknown>).finance_status != null ||
+									(eoi as Record<string, unknown>).insurance_status != null) && (
+									<div className="flex flex-wrap gap-2">
+										{(eoi as Record<string, unknown>).finance_status != null && (
+											<span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${String((eoi as Record<string, unknown>).finance_status) === "disbursed" ? "bg-emerald-100 text-emerald-800" : "bg-blue-50 text-blue-700"}`}>
+												<span className="material-symbols-outlined text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>account_balance</span>
+												{t("finance")}: {String((eoi as Record<string, unknown>).finance_status)}
+											</span>
+										)}
+										{(eoi as Record<string, unknown>).insurance_status != null && (
+											<span className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-black uppercase tracking-wider ${String((eoi as Record<string, unknown>).insurance_status) === "disbursed" ? "bg-emerald-100 text-emerald-800" : "bg-purple-50 text-purple-700"}`}>
+												<span className="material-symbols-outlined text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>verified_user</span>
+												{t("insurance")}: {String((eoi as Record<string, unknown>).insurance_status)}
+											</span>
+										)}
+									</div>
+								)}
+
+								{/* Promoter contact */}
+									{(eoiPromoter?.contact_person != null || (eoiPromoter as Record<string, unknown>)?.phone != null) && (
+										<div className="flex items-center gap-2 text-xs text-on-surface-variant">
+											<span className="material-symbols-outlined text-xs">person</span>
+											<span className="font-semibold text-on-surface-variant">{t("promoterContact")}:</span>
+											<span className="font-semibold text-on-surface">
+												{String(eoiPromoter?.contact_person ?? "")}
+												{(eoiPromoter as Record<string, unknown>)?.phone != null && (
+													<> · {String((eoiPromoter as Record<string, unknown>).phone)}</>
+												)}
 											</span>
 										</div>
 									)}
+
+									{/* Notes */}
+									{eoi.notes != null && String(eoi.notes).trim() !== "" && (
+										<div className="mt-1 px-3 py-2 bg-surface-container rounded-lg">
+											<p className="text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant mb-1">{t("notes")}</p>
+											<p className="text-xs text-on-surface whitespace-pre-line">{String(eoi.notes)}</p>
+										</div>
+									)}
+
 									{eoi.flag_note != null && (
 										<div className="flex items-center gap-2 px-3 py-1.5 bg-red-50 rounded-lg text-xs text-red-700 font-semibold">
 											<span className="material-symbols-outlined text-xs text-red-500">
@@ -221,6 +266,8 @@ export default async function AdminEOIPage({
 										currentStatus={status}
 										eoiCity={String(eoi.city ?? "")}
 										forwardedTo={(eoi as Record<string, unknown>).forwarded_to != null ? String((eoi as Record<string, unknown>).forwarded_to) : null}
+										forwardedToFinance={Boolean((eoi as Record<string, unknown>).forwarded_to_finance)}
+										forwardedToInsurance={Boolean((eoi as Record<string, unknown>).forwarded_to_insurance)}
 									/>
 								</div>
 							</div>

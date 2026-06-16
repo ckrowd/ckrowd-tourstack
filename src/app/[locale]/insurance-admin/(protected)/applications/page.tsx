@@ -5,7 +5,7 @@ import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import {
 	getInsuranceEois,
-	updateInsuranceApplication,
+	updateInsuranceEoi,
 } from "@/app/actions";
 import EoiPdfViewer from "@/components/EoiPdfViewer";
 import Loader from "@/components/Loader";
@@ -46,10 +46,8 @@ export default function InsuranceAdminApplicationsPage() {
 	});
 
 	const reviewMutation = useMutation({
-		mutationFn: (vars: {
-			id: string;
-			body: Parameters<typeof updateInsuranceApplication>[1];
-		}) => updateInsuranceApplication(vars.id, vars.body),
+		mutationFn: (vars: { id: string; body: Parameters<typeof updateInsuranceEoi>[1] }) =>
+			updateInsuranceEoi(vars.id, vars.body),
 		onSuccess: (result) => {
 			if (result.success) {
 				void queryClient.invalidateQueries({ queryKey: ["insuranceEois"] });
@@ -75,8 +73,8 @@ export default function InsuranceAdminApplicationsPage() {
 		reviewMutation.mutate({
 			id: selectedId,
 			body: {
-				status: "disbursed",
-				partnerName: partnerName.trim() || undefined,
+				insurance_status: "disbursed",
+				partner_name: partnerName.trim() || undefined,
 				note: note.trim() || undefined,
 			},
 		});

@@ -1554,7 +1554,7 @@ export async function acceptAdminInvite(token: string) {
 	};
 }
 
-export async function forwardEoi(eoiId: string, target: "finance" | "insurance") {
+export async function forwardEoi(eoiId: string, target: "finance" | "insurance" | "both") {
 	try {
 		const cookieJar = await cookies();
 		const cookieString = cookieJar
@@ -1606,6 +1606,51 @@ export async function getInsuranceEois() {
 		success: !error && data?.success,
 		error: extractError(error, data),
 	};
+}
+
+export async function updateFinancingEoi(
+	id: string,
+	body: { finance_status?: string; partner_name?: string; term_sheet_url?: string; note?: string },
+) {
+	const { data, error } = await (client.tourstack["financing-admin"] as any).eois({ id }).patch(body);
+	return {
+		data: await extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+export async function updateInsuranceEoi(
+	id: string,
+	body: { insurance_status?: string; partner_name?: string; note?: string },
+) {
+	const { data, error } = await (client.tourstack["insurance-admin"] as any).eois({ id }).patch(body);
+	return {
+		data: await extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+export async function setLeadAdmin(userId: string) {
+	try {
+		const cookieJar = await cookies();
+		const cookieString = cookieJar.getAll().map((c) => `${c.name}=${c.value}`).join("; ");
+		const res = await fetch(`${process.env.API_URL}/tourstack/admin/team/lead`, {
+			method: "PATCH",
+			headers: { "Content-Type": "application/json", Cookie: cookieString },
+			body: JSON.stringify({ userId }),
+		});
+		const json: { success: boolean; error?: string; data?: unknown } | null =
+			await res.json().catch(() => null);
+		return {
+			data: json?.data ?? null,
+			success: json?.success === true,
+			error: json?.error ?? (res.ok ? null : `HTTP ${res.status}`),
+		};
+	} catch (err) {
+		return { data: null, success: false, error: `[threw] ${err instanceof Error ? err.message : String(err)}` };
+	}
 }
 
 // Active Sessions
