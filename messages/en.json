@@ -543,7 +543,8 @@
       "insurance": {
         "label": "Event Insurance",
         "question": "Do you need insurance for this event?",
-        "description": "We'll connect you with an insurance provider."
+        "description": "We'll connect you with an insurance provider.",
+        "alwaysIncluded": "Event insurance is included with every EOI. We'll connect you with Sanlam Allianz after your submission is reviewed."
       },
       "yes": "Yes",
       "no": "No"
@@ -1285,9 +1286,12 @@
       "description": "Primary contact for artist management and tour negotiations.",
       "fields": {
         "contactPerson": "Contact Name",
-        "jobTitle": "Title",
+        "contactPersonPlaceholder": "e.g. Jane Smith",
+        "jobTitle": "Role",
+        "jobTitlePlaceholder": "e.g. Tour Manager, CEO",
         "contactEmail": "Contact Email",
-        "phone": "Contact Phone"
+        "phone": "Contact Phone",
+        "phonePlaceholder": "+234 800 000 0000"
       }
     },
     "businessDetails": {
@@ -1295,12 +1299,14 @@
       "description": "Helps artists and their teams understand your track record and reach.",
       "fields": {
         "yearsInBusiness": "Years in Business",
+        "yearsInBusinessPlaceholder": "e.g. 5",
         "companySize": "Company Size",
         "marketsRegions": "Markets / Regions Covered",
         "marketsRegionsPlaceholder": "e.g. Lagos, Accra, Nairobi, Johannesburg",
         "genresSpecialties": "Genres / Specialties",
         "genresSpecialtiesPlaceholder": "e.g. Afrobeats, Amapiano, Gospel, Highlife",
-        "averageEventsYear": "Average Events Per Year"
+        "averageEventsYear": "Average Events Per Year",
+        "averageEventsYearPlaceholder": "e.g. 12"
       },
       "companySizes": {
         "placeholder": "Select company size",
@@ -1316,9 +1322,13 @@
       "description": "Used for financing disbursements and payment processing. All data is stored securely.",
       "fields": {
         "bankName": "Bank Name",
+        "bankNamePlaceholder": "e.g. Access Bank",
         "bankAccountHolder": "Account Holder Name",
+        "bankAccountHolderPlaceholder": "e.g. Ckrowd Music Ltd",
         "bankAccountNumber": "Account Number / IBAN",
+        "bankAccountNumberPlaceholder": "10-digit account number",
         "bankSwiftBic": "SWIFT / BIC Code",
+        "bankSwiftBicPlaceholder": "e.g. ACCESSNGLA",
         "currencyPreference": "Currency Preference",
         "currencyPlaceholder": "e.g. USD, EUR, NGN, GHS"
       }
@@ -3832,6 +3842,12 @@
     "noEoisDesc": "EOI submissions will appear here for review.",
     "matchScore": "Match Score",
     "funding": "Funding",
+    "finance": "Finance",
+    "insurance": "Insurance",
+    "financeRequested": "Finance requested",
+    "insuranceRequested": "Insurance requested",
+    "promoterContact": "Promoter contact",
+    "notes": "Notes",
     "fields": {
       "date": "Date",
       "venue": "Venue",
@@ -3887,6 +3903,7 @@
     "send": "Send",
     "sendToFinance": "Send to Finance",
     "sendToInsurance": "Send to Insurance",
+    "sendToBoth": "Send to Finance & Insurance",
     "finance": "Finance",
     "insurance": "Insurance",
     "forwardedTo": "Forwarded to {target}"
@@ -4632,6 +4649,8 @@
       "roleInsurance": "Insurance admin",
       "roleFinancing": "Financing admin",
       "noRoles": "No scopes",
+      "leadAdmin": "Lead Admin",
+      "setAsLead": "Set as Lead",
       "editRoles": "Edit scopes",
       "editRolesHint": "Select every scope this admin should hold. Clearing all removes their admin access.",
       "saveRoles": "Save",

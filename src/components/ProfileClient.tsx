@@ -649,6 +649,7 @@ export default function ProfileClient() {
 							id="contact-name"
 							value={profile.contactPerson}
 							onChange={set("contactPerson")}
+							placeholder={t("keyPersonnel.fields.contactPersonPlaceholder")}
 							required
 							showError={showValidation}
 						/>
@@ -657,6 +658,7 @@ export default function ProfileClient() {
 							id="job-title"
 							value={profile.jobTitle}
 							onChange={set("jobTitle")}
+							placeholder={t("keyPersonnel.fields.jobTitlePlaceholder")}
 							required
 							showError={showValidation}
 						/>
@@ -676,6 +678,7 @@ export default function ProfileClient() {
 							type="tel"
 							value={profile.phone}
 							onChange={(v) => set("phone")(v.replace(/\D/g, ""))}
+							placeholder={t("keyPersonnel.fields.phonePlaceholder")}
 						/>
 					</div>
 				</Section>
@@ -689,6 +692,7 @@ export default function ProfileClient() {
 							type="number"
 							value={profile.yearsInBusiness}
 							onChange={(v) => set("yearsInBusiness")(v.replace(/\D/g, ""))}
+							placeholder={t("businessDetails.fields.yearsInBusinessPlaceholder")}
 							required
 							showError={showValidation}
 						/>
@@ -707,6 +711,7 @@ export default function ProfileClient() {
 							type="number"
 							value={profile.averageEventsYear}
 							onChange={(v) => set("averageEventsYear")(v.replace(/\D/g, ""))}
+							placeholder={t("businessDetails.fields.averageEventsYearPlaceholder")}
 							required
 							showError={showValidation}
 						/>
@@ -739,6 +744,7 @@ export default function ProfileClient() {
 							id="bank-name"
 							value={profile.bankName}
 							onChange={set("bankName")}
+							placeholder={t("banking.fields.bankNamePlaceholder")}
 							required
 							showError={showValidation}
 						/>
@@ -747,6 +753,7 @@ export default function ProfileClient() {
 							id="bank-holder"
 							value={profile.bankAccountHolder}
 							onChange={set("bankAccountHolder")}
+							placeholder={t("banking.fields.bankAccountHolderPlaceholder")}
 							required
 							showError={showValidation}
 						/>
@@ -755,12 +762,14 @@ export default function ProfileClient() {
 							id="bank-account"
 							value={profile.bankAccountNumber}
 							onChange={set("bankAccountNumber")}
+							placeholder={t("banking.fields.bankAccountNumberPlaceholder")}
 						/>
 						<Field
 							label={t("banking.fields.bankSwiftBic")}
 							id="swift-bic"
 							value={profile.bankSwiftBic}
 							onChange={set("bankSwiftBic")}
+							placeholder={t("banking.fields.bankSwiftBicPlaceholder")}
 						/>
 						<Field
 							label={t("banking.fields.currencyPreference")}

@@ -5,7 +5,7 @@ import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import {
 	getFinancingEois,
-	updateFinancingApplication,
+	updateFinancingEoi,
 } from "@/app/actions";
 import EoiPdfViewer from "@/components/EoiPdfViewer";
 import Loader from "@/components/Loader";
@@ -47,10 +47,8 @@ export default function FinancingAdminApplicationsPage() {
 	});
 
 	const reviewMutation = useMutation({
-		mutationFn: (vars: {
-			id: string;
-			body: Parameters<typeof updateFinancingApplication>[1];
-		}) => updateFinancingApplication(vars.id, vars.body),
+		mutationFn: (vars: { id: string; body: Parameters<typeof updateFinancingEoi>[1] }) =>
+			updateFinancingEoi(vars.id, vars.body),
 		onSuccess: (result) => {
 			if (result.success) {
 				void queryClient.invalidateQueries({ queryKey: ["financingEois"] });
@@ -77,9 +75,9 @@ export default function FinancingAdminApplicationsPage() {
 		reviewMutation.mutate({
 			id: selectedId,
 			body: {
-				status: "disbursed",
-				partnerName: partnerName.trim() || undefined,
-				termSheetUrl: termSheetUrl.trim() || undefined,
+				finance_status: "disbursed",
+				partner_name: partnerName.trim() || undefined,
+				term_sheet_url: termSheetUrl.trim() || undefined,
 				note: note.trim() || undefined,
 			},
 		});
