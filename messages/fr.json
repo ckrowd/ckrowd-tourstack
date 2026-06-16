@@ -610,7 +610,18 @@
         "bankName": { "label": "Nom de la banque", "placeholder": "ex. Zenith Bank" },
         "bankAccountHolder": { "label": "Nom du titulaire du compte", "placeholder": "ex. Afrobeats Promotions Ltd" },
         "bankAccountNumber": { "label": "Numéro de compte", "placeholder": "Numéro de compte à 10 chiffres" },
-        "bvnOrRc": { "label": "BVN / Numéro RC de l'entreprise", "placeholder": "BVN ou numéro RC" }
+        "bvnOrRc": { "label": "BVN / Numéro RC de l'entreprise", "placeholder": "BVN ou numéro RC" },
+        "insuranceSection": "Assurance événementielle",
+        "hasInsurance": "Disposez-vous d'une assurance événementielle pour cette tournée ?",
+        "insuranceProvider": { "label": "Assureur", "placeholder": "ex. AXA, Allianz, Coronation Insurance" },
+        "insuranceType": {
+          "label": "Type d'assurance",
+          "cancellation": "Annulation d'événement",
+          "liability": "Responsabilité civile générale",
+          "comprehensive": "Couverture événementielle complète",
+          "workforce": "Main-d'œuvre en tournée"
+        },
+        "insuranceAcknowledgmentText": "Je reconnais que l'assurance événementielle est une condition d'accès au financement TourStack et doit être en place avant le décaissement des fonds."
       },
       "step7": {
         "title": "Documents & déclaration",
@@ -688,6 +699,7 @@
       "bankNameRequired": "Le nom de la banque est requis.",
       "bankHolderRequired": "Le nom du titulaire du compte est requis.",
       "bankNumberRequired": "Le numéro de compte est requis.",
+      "insuranceAcknowledgedRequired": "Vous devez confirmer l'obligation d'assurance pour continuer.",
       "authorizedRepRequired": "Le nom du représentant autorisé est requis.",
       "authorizedTitleRequired": "Le titre est requis.",
       "declarationRequired": "Veuillez lire et confirmer la déclaration."
@@ -4057,7 +4069,13 @@
     "sendToBoth": "Envoyer aux finances et à l'assurance",
     "finance": "Finances",
     "insurance": "Assurance",
-    "forwardedTo": "Transmis à {target}"
+    "forwardedTo": "Transmis à {target}",
+    "signOff": "Validation de la plateforme",
+    "signedOff": "Validé par la plateforme",
+    "signOffTitle": "Confirmer la validation de la plateforme ?",
+    "signOffDescription": "Finalise cette EOI au niveau de la plateforme. Toutes les parties ont été notifiées et la demande est prête pour le décaissement.",
+    "signOffConfirm": "Confirmer la validation",
+    "signOffError": "Impossible de finaliser la validation. Réessayez."
   },
   "TourActionsMenu": {
     "openMenu": "Ouvrir le menu d'actions",
@@ -4595,7 +4613,9 @@
       "resend": "Renvoyer",
       "resending": "Envoi…",
       "revoke": "Révoquer",
-      "revoking": "Révocation…"
+      "revoking": "Révocation…",
+      "memberCount": "{count} sur {max} membres",
+      "maxAdmins": "Capacité maximale de l'équipe atteinte (1 responsable + 3 supplémentaires)."
     }
   },
   "InsuranceAdminApplicationsPage": {

@@ -70,6 +70,10 @@ type EOIForm = {
 	// Step 6 — Risk, Financing & Banking
 	hasCancellationHistory: boolean;
 	securityPlan: string;
+	hasInsurance: boolean;
+	insuranceProvider: string;
+	insuranceType: string;
+	insuranceAcknowledged: boolean;
 	needsFinancing: boolean;
 	financingAmount: string;
 	financingPurpose: string[];
@@ -103,6 +107,7 @@ const DEFAULT_FORM: EOIForm = {
 	productionCosts: "", marketingCosts: "", operationsCosts: "", totalBudget: "",
 	ticketingRevenue: "", sponsorshipRevenue: "", otherRevenue: "", totalRevenue: "",
 	netProfit: "", hasCancellationHistory: false, securityPlan: "",
+	hasInsurance: false, insuranceProvider: "", insuranceType: "", insuranceAcknowledged: false,
 	needsFinancing: false, financingAmount: "", financingPurpose: [],
 	financingStructure: "", bankName: "", bankAccountHolder: "", bankAccountNumber: "",
 	bvnOrRc: "", hasCACDocuments: false, hasFinancialStatements: false,
@@ -157,6 +162,10 @@ function buildNotes(form: EOIForm): string {
 
 	const riskLines = [`Cancellation History: ${form.hasCancellationHistory ? "Yes" : "No"}`];
 	if (form.securityPlan) riskLines.push(`Security Plan: ${form.securityPlan}`);
+	riskLines.push(`Event Insurance: ${form.hasInsurance ? "Yes" : "No"}`);
+	if (form.hasInsurance && form.insuranceProvider) riskLines.push(`Insurance Provider: ${form.insuranceProvider}`);
+	if (form.hasInsurance && form.insuranceType) riskLines.push(`Insurance Type: ${form.insuranceType}`);
+	riskLines.push(`Insurance Acknowledged: ${form.insuranceAcknowledged ? "Yes" : "No"}`);
 	sections.push(`RISK & INSURANCE\n${riskLines.join("\n")}`);
 
 	if (form.needsFinancing) {
@@ -479,6 +488,7 @@ function EOIPageContent() {
 			if (!form.bankName.trim()) e.bankName = t("validation.bankNameRequired");
 			if (!form.bankAccountHolder.trim()) e.bankAccountHolder = t("validation.bankHolderRequired");
 			if (!form.bankAccountNumber.trim()) e.bankAccountNumber = t("validation.bankNumberRequired");
+			if (!form.insuranceAcknowledged) e.insuranceAcknowledged = t("validation.insuranceAcknowledgedRequired");
 		}
 		if (s === 6) {
 			if (!form.authorizedRepName.trim()) e.authorizedRepName = t("validation.authorizedRepRequired");
@@ -882,6 +892,43 @@ function EOIPageContent() {
 											<div className="sm:col-span-2">
 												<FLabel htmlFor="s6-sec">{t("form.step6.securityPlan.label")}</FLabel>
 												<textarea id="s6-sec" placeholder={t("form.step6.securityPlan.placeholder")} value={form.securityPlan} onChange={e => set("securityPlan", e.target.value)} className={sc} />
+											</div>
+
+											<SectionHeading>{t("form.step6.insuranceSection")}</SectionHeading>
+											<div className="sm:col-span-2">
+												<div className="flex items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4">
+													<p className="text-sm font-semibold text-slate-900">{t("form.step6.hasInsurance")}</p>
+													<ToggleGroup value={form.hasInsurance} onChange={v => set("hasInsurance", v)} options={[t("form.no"), t("form.yes")]} />
+												</div>
+											</div>
+											<div className={`sm:col-span-2 grid sm:grid-cols-2 gap-5 transition-all ${form.hasInsurance ? "" : "opacity-40 pointer-events-none select-none"}`} aria-hidden={!form.hasInsurance}>
+												<div>
+													<FLabel htmlFor="s6-ins-prov">{t("form.step6.insuranceProvider.label")}</FLabel>
+													<input id="s6-ins-prov" type="text" tabIndex={form.hasInsurance ? 0 : -1} placeholder={t("form.step6.insuranceProvider.placeholder")} value={form.insuranceProvider} onChange={e => set("insuranceProvider", e.target.value)} className={ic} />
+												</div>
+												<div>
+													<FLabel htmlFor="s6-ins-type">{t("form.step6.insuranceType.label")}</FLabel>
+													<div className="relative">
+														<select id="s6-ins-type" tabIndex={form.hasInsurance ? 0 : -1} value={form.insuranceType} onChange={e => set("insuranceType", e.target.value)} className={`${ic} appearance-none pr-9`}>
+															<option value="">—</option>
+															<option value="cancellation">{t("form.step6.insuranceType.cancellation")}</option>
+															<option value="liability">{t("form.step6.insuranceType.liability")}</option>
+															<option value="comprehensive">{t("form.step6.insuranceType.comprehensive")}</option>
+															<option value="workforce">{t("form.step6.insuranceType.workforce")}</option>
+														</select>
+														<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-lg">expand_more</span>
+													</div>
+												</div>
+											</div>
+											<div className="sm:col-span-2">
+												<label className={`flex items-start gap-3 cursor-pointer rounded-2xl border px-5 py-4 ${errors.insuranceAcknowledged ? "border-rose-300 bg-rose-50" : "border-amber-200 bg-amber-50/40"}`}>
+													<input type="checkbox" className="sr-only" checked={form.insuranceAcknowledged} onChange={e => { set("insuranceAcknowledged", e.target.checked); if (errors.insuranceAcknowledged) setErrors(p => { const n = { ...p }; delete n.insuranceAcknowledged; return n; }); }} />
+													<div className={`w-5 h-5 rounded border-2 shrink-0 mt-0.5 flex items-center justify-center ${form.insuranceAcknowledged ? "bg-amber-500 border-amber-500" : errors.insuranceAcknowledged ? "border-rose-400" : "border-amber-400"}`}>
+														{form.insuranceAcknowledged && <span className="material-symbols-outlined text-white text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>}
+													</div>
+													<span className="text-sm font-semibold text-slate-800">{t("form.step6.insuranceAcknowledgmentText")}</span>
+												</label>
+												<FError msg={errors.insuranceAcknowledged} />
 											</div>
 
 											<SectionHeading>{t("form.step6.financingSection")}</SectionHeading>

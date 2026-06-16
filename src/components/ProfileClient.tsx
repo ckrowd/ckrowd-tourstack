@@ -270,7 +270,7 @@ export default function ProfileClient() {
 		"primaryAddress", "country", "city", "phone", "bio",
 		"contactPerson", "jobTitle", "contactEmail",
 		"yearsInBusiness", "companySize", "averageEventsYear",
-		"marketsRegions", "genresSpecialties",
+		"genresSpecialties",
 		"bankName", "bankAccountHolder", "currencyPreference",
 	];
 
@@ -310,8 +310,10 @@ export default function ProfileClient() {
 	});
 
 	const handleSave = () => {
+		const needsMarkets = profile.companyType === "promoter" || profile.companyType === "artistManagement";
 		const missingRequired = REQUIRED_KEYS.some((k) => !profile[k]?.trim?.() && !profile[k]);
-		if (!profile.logoUrl || missingRequired) {
+		const missingMarkets = needsMarkets && !profile.marketsRegions?.trim();
+		if (!profile.logoUrl || missingRequired || missingMarkets) {
 			setLogoError(!profile.logoUrl);
 			setShowValidation(true);
 			window.scrollTo({ top: 0, behavior: "smooth" });
@@ -733,7 +735,7 @@ export default function ProfileClient() {
 						value={profile.marketsRegions}
 						onChange={set("marketsRegions")}
 						placeholder={t("businessDetails.fields.marketsRegionsPlaceholder")}
-						required
+						required={profile.companyType === "promoter" || profile.companyType === "artistManagement"}
 						showError={showValidation}
 					/>
 					<Field

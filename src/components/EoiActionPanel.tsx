@@ -38,12 +38,14 @@ export default function EoiActionPanel({
 	eoiCity = "",
 	forwardedToFinance = false,
 	forwardedToInsurance = false,
+	signedOff = false,
 }: {
 	eoiId: string;
 	currentStatus: string;
 	eoiCity?: string;
 	forwardedToFinance?: boolean;
 	forwardedToInsurance?: boolean;
+	signedOff?: boolean;
 }) {
 	const t = useTranslations("EoiActionPanel");
 	const router = useRouter();
@@ -99,6 +101,26 @@ export default function EoiActionPanel({
 		},
 		onError: (err) => {
 			setForwardError(err instanceof Error ? err.message : t("errorGeneric"));
+		},
+	});
+
+	const [signOffError, setSignOffError] = useState<string | null>(null);
+	const [signOffOpen, setSignOffOpen] = useState(false);
+
+	const signOffMutation = useMutation({
+		mutationFn: () =>
+			updateAdminEoi(eoiId, { status: "approved", flagNote: "signed_off" }),
+		onSuccess: (result) => {
+			if (!result.success) {
+				setSignOffError(result.error || t("signOffError"));
+				return;
+			}
+			setSignOffOpen(false);
+			setSignOffError(null);
+			router.refresh();
+		},
+		onError: (err) => {
+			setSignOffError(err instanceof Error ? err.message : t("signOffError"));
 		},
 	});
 
@@ -159,11 +181,12 @@ export default function EoiActionPanel({
 	const showReject = !hidden.includes("reject");
 	const showCreateStop = currentStatus !== "rejected";
 	const showSend = currentStatus === "approved" && (!forwardedToFinance || !forwardedToInsurance);
-	const isPending = statusMutation.isPending || stopMutation.isPending || forwardMutation.isPending;
+	const showSignOff = !signedOff && currentStatus === "approved" && (forwardedToFinance || forwardedToInsurance);
+	const isPending = statusMutation.isPending || stopMutation.isPending || forwardMutation.isPending || signOffMutation.isPending;
 
 	return (
 		<>
-			{(forwardedToFinance || forwardedToInsurance) && (
+			{(forwardedToFinance || forwardedToInsurance || signedOff) && (
 				<div className="flex flex-wrap gap-2 mt-2">
 					{forwardedToFinance && (
 						<div className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 rounded-lg text-xs text-blue-700 font-semibold">
@@ -175,6 +198,12 @@ export default function EoiActionPanel({
 						<div className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 rounded-lg text-xs text-emerald-700 font-semibold">
 							<span className="material-symbols-outlined text-xs text-emerald-500">verified_user</span>
 							{t("forwardedTo", { target: t("insurance") })}
+						</div>
+					)}
+					{signedOff && (
+						<div className="flex items-center gap-1.5 px-3 py-1.5 bg-teal-50 rounded-lg text-xs text-teal-700 font-semibold">
+							<span className="material-symbols-outlined text-xs text-teal-500">task_alt</span>
+							{t("signedOff")}
 						</div>
 					)}
 				</div>
@@ -279,7 +308,58 @@ export default function EoiActionPanel({
 						)}
 					</div>
 				)}
+				{showSignOff && (
+					<button
+						type="button"
+						onClick={() => { setSignOffOpen(true); setSignOffError(null); }}
+						disabled={isPending}
+						className="flex-1 py-2.5 bg-teal-50 text-teal-700 rounded-xl text-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-teal-100 transition-colors disabled:opacity-60"
+					>
+						<span className="material-symbols-outlined text-sm">task_alt</span>
+						{t("signOff")}
+					</button>
+				)}
 			</div>
+
+			{signOffOpen && (
+				<div
+					className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4"
+					role="dialog"
+					aria-modal="true"
+					aria-labelledby={`eoi-signoff-${eoiId}-title`}
+				>
+					<div className="bg-surface rounded-2xl shadow-xl max-w-md w-full p-6">
+						<h3
+							id={`eoi-signoff-${eoiId}-title`}
+							className="text-lg font-semibold text-on-surface mb-2"
+						>
+							{t("signOffTitle")}
+						</h3>
+						<p className="text-sm text-on-surface-variant mb-5">
+							{t("signOffDescription")}
+						</p>
+						{signOffError && <p className="mb-4 text-sm text-red-600 font-semibold">{signOffError}</p>}
+						<div className="flex justify-end gap-2">
+							<button
+								type="button"
+								onClick={() => { setSignOffOpen(false); setSignOffError(null); }}
+								disabled={signOffMutation.isPending}
+								className="px-4 py-2 rounded-lg text-sm font-semibold text-on-surface-variant hover:bg-surface-container-low disabled:opacity-50"
+							>
+								{t("cancel")}
+							</button>
+							<button
+								type="button"
+								onClick={() => signOffMutation.mutate()}
+								disabled={signOffMutation.isPending}
+								className="px-4 py-2 rounded-lg text-sm font-semibold text-white bg-teal-600 hover:bg-teal-700 disabled:opacity-60"
+							>
+								{signOffMutation.isPending ? t("submitting") : t("signOffConfirm")}
+							</button>
+						</div>
+					</div>
+				</div>
+			)}
 
 			{open && open !== "create_stop" && (
 				<div
