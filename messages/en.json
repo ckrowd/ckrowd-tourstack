@@ -3114,7 +3114,10 @@
     "ceoSigLabel": "CEO Signature (Kayode Adebayo)",
     "ceoSigHint": "Draw or upload the CEO signature — co-signs every disbursement PDF.",
     "ceoSigSaved": "CEO signature saved",
-    "saveCeoSig": "Save CEO Signature"
+    "saveCeoSig": "Save CEO Signature",
+    "profilePhoto": "Profile Photo",
+    "uploadPhoto": "Upload Photo",
+    "uploadingPhoto": "Uploading..."
   },
   "RegisterPage": {
     "title": "Register",
@@ -5424,7 +5427,10 @@
     "passwordSuccess": "Password updated successfully",
     "passwordError": "Failed to update password",
     "passwordMismatch": "Passwords do not match",
-    "passwordTooShort": "Password must be at least 8 characters"
+    "passwordTooShort": "Password must be at least 8 characters",
+    "profilePhoto": "Profile Photo",
+    "uploadPhoto": "Upload Photo",
+    "uploadingPhoto": "Uploading..."
   },
   "ArtmgmtPasswordGate": {
     "title": "Set Your New Password",

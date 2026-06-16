@@ -9,7 +9,19 @@ import { useRouter } from "@/i18n/routing";
 function isProfileComplete(data: unknown): boolean {
 	if (!data || typeof data !== "object") return false;
 	const d = data as Record<string, unknown>;
-	return !!(d.company_name && d.contact_person && d.phone && d.country && d.city);
+	const requiredStrings = [
+		"company_name", "company_type", "registration_number", "tax_id",
+		"incorporation_date", "incorporation_country",
+		"primary_address", "country", "city", "phone", "bio",
+		"contact_person", "job_title", "contact_email",
+		"company_size", "markets_regions", "genres_specialties",
+		"bank_name", "bank_account_holder", "bank_account_number", "bank_swift_bic", "currency_preference",
+		"logo_url",
+	];
+	if (requiredStrings.some((k) => !d[k])) return false;
+	if (d.years_in_business == null) return false;
+	if (d.average_events_year == null) return false;
+	return true;
 }
 
 export { isProfileComplete };

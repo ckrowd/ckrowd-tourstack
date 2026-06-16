@@ -2,7 +2,7 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { getTourstackProfile, updateTourstackProfile } from "../../../actions";
 import SignaturePad from "@/components/SignaturePad";
 
@@ -19,6 +19,7 @@ type ProfileData = {
 	bio?: string | null;
 	website_url?: string | null;
 	instagram_handle?: string | null;
+	logo_url?: string | null;
 };
 
 type ProfileResponse = {
@@ -95,6 +96,7 @@ function Field({
 export default function AdminProfilePage() {
 	const queryClient = useQueryClient();
 	const t = useTranslations("AdminProfilePage");
+	const fileInputRef = useRef<HTMLInputElement>(null);
 
 	const [ceoSignature, setCeoSignature] = useState<string | null>(() => {
 		if (typeof window === "undefined") return null;
@@ -115,6 +117,29 @@ export default function AdminProfilePage() {
 		queryKey: ["tourstackProfile"],
 		queryFn: () => getTourstackProfile() as Promise<ProfileResponse>,
 	});
+
+	const photoMutation = useMutation<ProfileResponse, Error, Parameters<typeof updateTourstackProfile>[0]>({
+		mutationFn: (variables) => updateTourstackProfile(variables) as Promise<ProfileResponse>,
+		onSuccess: (result) => {
+			if (result.success) {
+				void queryClient.invalidateQueries({ queryKey: ["tourstackProfile"] });
+			}
+		},
+	});
+
+	const handlePhotoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const file = e.target.files?.[0];
+		if (!file) return;
+		const reader = new FileReader();
+		reader.onload = (ev) => {
+			photoMutation.mutate({ logoUrl: ev.target?.result as string });
+		};
+		reader.readAsDataURL(file);
+		e.target.value = "";
+	};
+
+	const logoUrl = profileQuery?.success && profileQuery.data?.logo_url ? profileQuery.data.logo_url : null;
+	const initials = (profileQuery?.data?.contact_person ?? profileQuery?.data?.company_name ?? "?").slice(0, 2).toUpperCase();
 
 	const emptyProfile = {
 		companyName: "",
@@ -204,6 +229,47 @@ export default function AdminProfilePage() {
 			</div>
 
 			<div className="space-y-6">
+				{/* Profile photo */}
+				<Section title={t("profilePhoto")}>
+					<div className="flex items-center gap-5">
+						<button
+							type="button"
+							onClick={() => fileInputRef.current?.click()}
+							className="relative w-20 h-20 rounded-2xl overflow-hidden bg-surface-container-low border-2 border-dashed border-outline-variant/40 hover:border-[#FF5A30]/60 transition-colors flex items-center justify-center shrink-0 group"
+						>
+							{logoUrl ? (
+								// eslint-disable-next-line @next/next/no-img-element
+								<img src={logoUrl} alt="" className="w-full h-full object-cover" />
+							) : (
+								<span className="text-xl font-semibold text-on-surface-variant group-hover:text-[#FF5A30] transition-colors">
+									{initials}
+								</span>
+							)}
+							<div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+								<span className="material-symbols-outlined text-white text-xl">photo_camera</span>
+							</div>
+						</button>
+						<div>
+							<button
+								type="button"
+								onClick={() => fileInputRef.current?.click()}
+								disabled={photoMutation.isPending}
+								className="inline-flex items-center gap-2 px-4 py-2.5 border border-outline-variant/40 rounded-xl text-sm font-semibold text-on-surface hover:border-[#FF5A30]/50 hover:text-[#FF5A30] transition-all disabled:opacity-60"
+							>
+								<span className="material-symbols-outlined text-base">upload</span>
+								{photoMutation.isPending ? t("uploadingPhoto") : t("uploadPhoto")}
+							</button>
+						</div>
+					</div>
+					<input
+						ref={fileInputRef}
+						type="file"
+						accept="image/*"
+						className="sr-only"
+						onChange={handlePhotoChange}
+					/>
+				</Section>
+
 				<Section title={t("personalInfo")}>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 						<Field
