@@ -1,16 +1,11 @@
-﻿import { getTranslations, setRequestLocale } from "next-intl/server";
-import { getAdminFinancing } from "@/app/actions";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getFinancingEois } from "@/app/actions";
 import { Link } from "@/i18n/routing";
 
 function statusClass(status: string) {
 	switch (status) {
-		case "approved":
 		case "disbursed":
 			return "bg-emerald-100 text-emerald-800";
-		case "rejected":
-			return "bg-red-100 text-red-800";
-		case "under_review":
-			return "bg-blue-100 text-blue-800";
 		default:
 			return "bg-yellow-100 text-yellow-800";
 	}
@@ -25,8 +20,8 @@ export default async function FinancingAdminPage({
 	setRequestLocale(locale);
 	const t = await getTranslations("FinancingAdminPage");
 
-	const result = await getAdminFinancing();
-	const applications = (result.data ?? []).slice(0, 6);
+	const result = await getFinancingEois();
+	const eois = ((result.data as Record<string, unknown>[] | null) ?? []).slice(0, 6);
 	const workflow = t.raw("workflow.items") as {
 		title: string;
 		description: string;
@@ -74,7 +69,7 @@ export default async function FinancingAdminPage({
 						<p className="text-sm font-medium text-red-600 py-10 text-center">
 							{result.error || t("queue.loadError")}
 						</p>
-					) : applications.length === 0 ? (
+					) : eois.length === 0 ? (
 						<div className="py-12 text-center">
 							<span className="material-symbols-outlined text-5xl text-on-surface-variant block mb-3">
 								request_quote
@@ -85,10 +80,9 @@ export default async function FinancingAdminPage({
 						</div>
 					) : (
 						<div className="space-y-4">
-							{applications.map((item) => {
-								const f = item as Record<string, unknown>;
-								const status = String(f.status ?? "pending");
-								const promoter = f.promoter as Record<string, unknown> | null;
+							{eois.map((eoi) => {
+								const financeStatus = String(eoi.finance_status ?? "pending");
+								const promoter = eoi.promoter as Record<string, unknown> | null;
 								const user = promoter?.user as Record<string, unknown> | null;
 								const promoterName = String(
 									promoter?.company_name ??
@@ -97,17 +91,12 @@ export default async function FinancingAdminPage({
 										user?.email ??
 										"—",
 								);
-								const tour = f.tour as Record<string, unknown> | null;
-								const artist = tour?.artist as Record<string, unknown> | null;
-								const tourLabel = artist
-									? String(artist.tour_name ?? artist.name ?? "—")
-									: "—";
-								const amount = `${String(f.currency ?? "USD")} ${Number(
-									f.amount_requested ?? 0,
-								).toLocaleString(locale)}`;
+								const artist = eoi.artist as Record<string, unknown> | null;
+								const artistName = artist ? String(artist.name ?? "—") : "—";
+								const tourName = artist ? String(artist.tour_name ?? "") : "";
 								return (
 									<div
-										key={String(f.id)}
+										key={String(eoi.id)}
 										className="flex flex-col md:flex-row md:items-center justify-between gap-4 py-4 border-b border-outline-variant/10 last:border-none"
 									>
 										<div className="flex items-start gap-3 min-w-0">
@@ -119,29 +108,27 @@ export default async function FinancingAdminPage({
 											<div className="min-w-0">
 												<div className="flex items-center gap-2 flex-wrap mb-1">
 													<span className="text-xs font-black text-[#FF5A30] uppercase tracking-widest">
-														{`#${String(f.id).slice(-6).toUpperCase()}`}
+														{`#${String(eoi.id).slice(-6).toUpperCase()}`}
 													</span>
 													<span
-														className={`px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-tighter ${statusClass(status)}`}
+														className={`px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-tighter ${statusClass(financeStatus)}`}
 													>
-														{t(`status.${status}`)}
+														{t(`status.${financeStatus}`)}
 													</span>
 												</div>
 												<p className="font-(family-name:--font-manrope) font-semibold text-on-surface truncate">
 													{promoterName}
 												</p>
 												<p className="text-sm text-on-surface-variant mt-0.5">
-													{tourLabel} · {String(f.product ?? "—")}
+													{artistName}
+													{tourName ? ` · ${tourName}` : ""}
 												</p>
+												{eoi.city != null && (
+													<p className="text-xs text-on-surface-variant mt-0.5">
+														{String(eoi.city)}
+													</p>
+												)}
 											</div>
-										</div>
-										<div className="md:text-right">
-											<p className="font-(family-name:--font-manrope) font-extrabold text-on-surface">
-												{amount}
-											</p>
-											<p className="text-xs text-on-surface-variant">
-												{t("queue.amountLabel")}
-											</p>
 										</div>
 									</div>
 								);

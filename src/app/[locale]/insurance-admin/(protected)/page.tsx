@@ -1,5 +1,5 @@
-﻿import { getTranslations, setRequestLocale } from "next-intl/server";
-import { getInsuranceApplications, getInsuranceClaims } from "@/app/actions";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getInsuranceEois, getInsuranceClaims } from "@/app/actions";
 import { Link } from "@/i18n/routing";
 
 type Props = {
@@ -8,13 +8,8 @@ type Props = {
 
 function statusClass(status: string) {
 	switch (status) {
-		case "approved":
 		case "disbursed":
 			return "bg-emerald-100 text-emerald-700";
-		case "rejected":
-			return "bg-red-100 text-red-700";
-		case "under_review":
-			return "bg-blue-100 text-blue-700";
 		default:
 			return "bg-yellow-100 text-yellow-700";
 	}
@@ -25,34 +20,34 @@ export default async function InsuranceAdminPage({ params }: Props) {
 	setRequestLocale(locale);
 	const t = await getTranslations("InsuranceAdminPage");
 
-	const [appsResult, claimsResult] = await Promise.all([
-		getInsuranceApplications(),
+	const [eoisResult, claimsResult] = await Promise.all([
+		getInsuranceEois(),
 		getInsuranceClaims(),
 	]);
-	const applications = (appsResult.data ?? []) as Record<string, unknown>[];
+	const eois = (eoisResult.data as Record<string, unknown>[] | null) ?? [];
 	const claims = (claimsResult.data ?? []) as Record<string, unknown>[];
 
-	const countBy = (predicate: (s: string) => boolean) =>
-		applications.filter((a) => predicate(String(a.status ?? "pending"))).length;
+	const countBy = (predicate: (s: string | null) => boolean) =>
+		eois.filter((e) => predicate(e.insurance_status != null ? String(e.insurance_status) : null)).length;
 
 	const stats = [
 		{
 			label: t("stats.activeApplications"),
-			value: applications.length,
+			value: eois.length,
 			icon: "description",
 			accent: "border-[#FF5A30]",
 			href: "/insurance-admin/applications",
 		},
 		{
 			label: t("stats.pendingReview"),
-			value: countBy((s) => s === "pending" || s === "under_review"),
+			value: countBy((s) => s === null || s === "pending"),
 			icon: "pending",
 			accent: "border-yellow-400",
 			href: "/insurance-admin/applications",
 		},
 		{
 			label: t("stats.approvedPolicies"),
-			value: countBy((s) => s === "approved" || s === "disbursed"),
+			value: countBy((s) => s === "disbursed"),
 			icon: "task_alt",
 			accent: "border-emerald-500",
 			href: "/insurance-admin/applications",
@@ -66,7 +61,7 @@ export default async function InsuranceAdminPage({ params }: Props) {
 		},
 	];
 
-	const recentApplications = applications.slice(0, 5);
+	const recentEois = eois.slice(0, 5);
 
 	return (
 		<>
@@ -120,11 +115,11 @@ export default async function InsuranceAdminPage({ params }: Props) {
 				</div>
 
 				<div className="space-y-4">
-					{!appsResult.success ? (
+					{!eoisResult.success ? (
 						<p className="text-sm font-medium text-red-600 py-6 text-center">
-							{appsResult.error || t("loadError")}
+							{eoisResult.error || t("loadError")}
 						</p>
-					) : recentApplications.length === 0 ? (
+					) : recentEois.length === 0 ? (
 						<div className="bg-surface-container-low rounded-2xl p-8 text-center">
 							<span className="material-symbols-outlined text-4xl text-on-surface-variant block mb-3">
 								shield
@@ -137,8 +132,8 @@ export default async function InsuranceAdminPage({ params }: Props) {
 							</p>
 						</div>
 					) : (
-						recentApplications.map((app) => {
-							const promoter = app.promoter as Record<string, unknown> | null;
+						recentEois.map((eoi) => {
+							const promoter = eoi.promoter as Record<string, unknown> | null;
 							const user = promoter?.user as Record<string, unknown> | null;
 							const promoterName = String(
 								promoter?.company_name ??
@@ -147,18 +142,13 @@ export default async function InsuranceAdminPage({ params }: Props) {
 									user?.email ??
 									"—",
 							);
-							const tour = app.tour as Record<string, unknown> | null;
-							const artist = tour?.artist as Record<string, unknown> | null;
-							const tourLabel = artist
-								? String(artist.tour_name ?? artist.name ?? "—")
-								: "—";
-							const status = String(app.status ?? "pending");
-							const coverage = `${String(app.currency ?? "USD")} ${Number(
-								app.amount_requested ?? 0,
-							).toLocaleString(locale)}`;
+							const artist = eoi.artist as Record<string, unknown> | null;
+							const artistName = artist ? String(artist.name ?? "—") : "—";
+							const tourName = artist ? String(artist.tour_name ?? "") : "";
+							const insuranceStatus = String(eoi.insurance_status ?? "pending");
 							return (
 								<div
-									key={String(app.id)}
+									key={String(eoi.id)}
 									className="flex items-center justify-between gap-4 py-3 border-b border-outline-variant/10 last:border-none"
 								>
 									<div className="flex-1 min-w-0">
@@ -166,14 +156,15 @@ export default async function InsuranceAdminPage({ params }: Props) {
 											{promoterName}
 										</p>
 										<p className="text-xs text-on-surface-variant mt-0.5">
-											{tourLabel} —{" "}
-											<span className="font-semibold">{coverage}</span>
+											{artistName}
+											{tourName ? ` — ${tourName}` : ""}
+											{eoi.city != null ? ` · ${String(eoi.city)}` : ""}
 										</p>
 									</div>
 									<span
-										className={`shrink-0 px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-tighter ${statusClass(status)}`}
+										className={`shrink-0 px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-tighter ${statusClass(insuranceStatus)}`}
 									>
-										{t(`status.${status}`)}
+										{t(`status.${insuranceStatus}`)}
 									</span>
 								</div>
 							);
