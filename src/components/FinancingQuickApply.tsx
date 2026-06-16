@@ -117,6 +117,7 @@ export default function FinancingQuickApply() {
 						type="number"
 						min={1}
 						required
+						placeholder={t("fields.amountPlaceholder")}
 						onInvalid={(e) =>
 							(e.target as HTMLInputElement).setCustomValidity(
 								t("validation.required"),

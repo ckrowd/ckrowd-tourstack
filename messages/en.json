@@ -1804,7 +1804,8 @@
         "fields": {
           "primaryRole": "Primary Role / Job Title",
           "primaryRoleHint": "(select all that apply)",
-          "otherRole": "If 'Other', please specify"
+          "otherRole": "If 'Other', please specify",
+          "otherRolePlaceholder": "e.g. Production Coordinator"
         }
       },
       "touring": {
@@ -1854,9 +1855,13 @@
           "dayRate": "Average Professional Day Rate (USD)",
           "dayRatePlaceholder": "e.g. 150",
           "refereeName": "Referee Name",
+          "refereeNamePlaceholder": "Full name",
           "refereeCompany": "Referee Company / Event",
+          "refereeCompanyPlaceholder": "e.g. Afronation, Live Nation",
           "refereeContact": "Referee WhatsApp / Email",
+          "refereeContactPlaceholder": "WhatsApp number or email",
           "refereeRelationship": "Your Relationship to Referee",
+          "refereeRelationshipPlaceholder": "e.g. Former Tour Manager",
           "portfolio": "Portfolio / Showreel / Certificate Links",
           "portfolioPlaceholder": "Links to website, drive, or LinkedIn",
           "equipment": "What professional tools/equipment do you own?",
@@ -1880,6 +1885,7 @@
           "title": "Declaration",
           "text": "I certify that the information provided is true and accurate. I understand that CTaaS verified status is subject to credential verification and can be revoked if false information is provided.",
           "name": "Full Name for Signature",
+          "namePlaceholder": "Full legal name",
           "date": "Date"
         }
       }
@@ -3506,6 +3512,7 @@
     "fields": {
       "product": "Select Product",
       "amount": "Requested Amount ($)",
+      "amountPlaceholder": "e.g. 50000",
       "currency": "Currency"
     },
     "products": {
