@@ -248,24 +248,28 @@ export default function SettingsVenueTab() {
 						id="v-name"
 						value={form.name}
 						onChange={set("name")}
+						placeholder={t("venueDetails.fields.namePlaceholder")}
 					/>
 					<Field
 						label={t("venueDetails.fields.type")}
 						id="v-type"
 						value={form.venueType}
 						onChange={set("venueType")}
+						placeholder={t("venueDetails.fields.typePlaceholder")}
 					/>
 					<Field
 						label={t("venueDetails.fields.city")}
 						id="v-city"
 						value={form.city}
 						onChange={set("city")}
+						placeholder={t("venueDetails.fields.cityPlaceholder")}
 					/>
 					<Field
 						label={t("venueDetails.fields.country")}
 						id="v-country"
 						value={form.country}
 						onChange={set("country")}
+						placeholder={t("venueDetails.fields.countryPlaceholder")}
 					/>
 					<Field
 						label={t("venueDetails.fields.seatedCap")}
@@ -273,6 +277,7 @@ export default function SettingsVenueTab() {
 						type="number"
 						value={form.seatedCapacity}
 						onChange={(v) => set("seatedCapacity")(v.replace(/\D/g, ""))}
+						placeholder={t("venueDetails.fields.seatedCapPlaceholder")}
 					/>
 					<Field
 						label={t("venueDetails.fields.standingCap")}
@@ -280,6 +285,7 @@ export default function SettingsVenueTab() {
 						type="number"
 						value={form.standingCapacity}
 						onChange={(v) => set("standingCapacity")(v.replace(/\D/g, ""))}
+						placeholder={t("venueDetails.fields.standingCapPlaceholder")}
 					/>
 					<Field
 						label={t("venueDetails.fields.expectedAttendance")}
@@ -287,12 +293,14 @@ export default function SettingsVenueTab() {
 						type="number"
 						value={form.expectedAttendance}
 						onChange={(v) => set("expectedAttendance")(v.replace(/\D/g, ""))}
+						placeholder={t("venueDetails.fields.expectedAttendancePlaceholder")}
 					/>
 					<Field
 						label={t("venueDetails.fields.address")}
 						id="v-address"
 						value={form.streetAddress}
 						onChange={set("streetAddress")}
+						placeholder={t("venueDetails.fields.addressPlaceholder")}
 					/>
 					<Field
 						label={t("venueDetails.fields.maps")}
@@ -300,6 +308,7 @@ export default function SettingsVenueTab() {
 						type="url"
 						value={form.googleMapsUrl}
 						onChange={set("googleMapsUrl")}
+						placeholder={t("venueDetails.fields.mapsPlaceholder")}
 					/>
 				</div>
 				<div className="mt-5">

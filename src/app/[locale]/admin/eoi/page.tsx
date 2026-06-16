@@ -265,7 +265,6 @@ export default async function AdminEOIPage({
 										eoiId={String(eoi.id)}
 										currentStatus={status}
 										eoiCity={String(eoi.city ?? "")}
-										forwardedTo={(eoi as Record<string, unknown>).forwarded_to != null ? String((eoi as Record<string, unknown>).forwarded_to) : null}
 										forwardedToFinance={Boolean((eoi as Record<string, unknown>).forwarded_to_finance)}
 										forwardedToInsurance={Boolean((eoi as Record<string, unknown>).forwarded_to_insurance)}
 									/>

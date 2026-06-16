@@ -34,6 +34,7 @@ export function Field({
 	onChange,
 	type = "text",
 	hint,
+	placeholder,
 }: {
 	label: string;
 	id: string;
@@ -42,6 +43,7 @@ export function Field({
 	onChange?: (v: string) => void;
 	type?: string;
 	hint?: string;
+	placeholder?: string;
 }) {
 	return (
 		<div>
@@ -54,6 +56,7 @@ export function Field({
 			<input
 				id={id}
 				type={type}
+				placeholder={placeholder}
 				{...(onChange
 					? { value: value ?? "", onChange: (e) => onChange(e.target.value) }
 					: { defaultValue })}

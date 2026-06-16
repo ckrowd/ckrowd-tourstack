@@ -123,6 +123,7 @@ export default function SettingsSecurityTab() {
 						type="password"
 						value={currentPw}
 						onChange={setCurrentPw}
+						placeholder={t("password.fields.currentPlaceholder")}
 					/>
 					<Field
 						label={t("password.fields.new")}
@@ -131,6 +132,7 @@ export default function SettingsSecurityTab() {
 						hint={t("password.hint")}
 						value={newPw}
 						onChange={setNewPw}
+						placeholder={t("password.fields.newPlaceholder")}
 					/>
 					<Field
 						label={t("password.fields.confirm")}
@@ -138,6 +140,7 @@ export default function SettingsSecurityTab() {
 						type="password"
 						value={confirmPw}
 						onChange={setConfirmPw}
+						placeholder={t("password.fields.confirmPlaceholder")}
 					/>
 				</div>
 				{passwordMutation.data?.success && (
