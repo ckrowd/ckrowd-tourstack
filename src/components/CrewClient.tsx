@@ -882,6 +882,7 @@ export default function CrewClient() {
 										<input
 											id="other-role"
 											type="text"
+											placeholder={t("sections.role.fields.otherRolePlaceholder")}
 											className={inputClass}
 											value={form.otherRole}
 											onChange={(e) => set("otherRole", e.target.value)}
@@ -1051,6 +1052,7 @@ export default function CrewClient() {
 											<input
 												id="ref-name"
 												type="text"
+												placeholder={t("sections.credentials.fields.refereeNamePlaceholder")}
 												className={inputClass}
 												value={form.refereeName}
 												onChange={(e) => set("refereeName", e.target.value)}
@@ -1063,6 +1065,7 @@ export default function CrewClient() {
 											<input
 												id="ref-company"
 												type="text"
+												placeholder={t("sections.credentials.fields.refereeCompanyPlaceholder")}
 												className={inputClass}
 												value={form.refereeCompany}
 												onChange={(e) =>
@@ -1077,6 +1080,7 @@ export default function CrewClient() {
 											<input
 												id="ref-contact"
 												type="text"
+												placeholder={t("sections.credentials.fields.refereeContactPlaceholder")}
 												className={inputClass}
 												value={form.refereeContact}
 												onChange={(e) =>
@@ -1093,6 +1097,7 @@ export default function CrewClient() {
 											<input
 												id="ref-rel"
 												type="text"
+												placeholder={t("sections.credentials.fields.refereeRelationshipPlaceholder")}
 												className={inputClass}
 												value={form.refereeRelationship}
 												onChange={(e) =>
@@ -1205,6 +1210,7 @@ export default function CrewClient() {
 											<input
 												id="sig-name"
 												type="text"
+												placeholder={form.fullName || t("sections.wcs.declaration.namePlaceholder")}
 												className={inputClass}
 												required
 												value={form.declarationName}
