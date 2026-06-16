@@ -382,7 +382,7 @@ export default function ProfileClient() {
 		: session?.user?.email?.slice(0, 2).toUpperCase() ?? "?";
 
 	return (
-		<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
+		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
 			{isSetup && (
 				<div className="mb-6 bg-[#FF5A30]/10 border border-[#FF5A30]/20 rounded-2xl p-5 flex items-start gap-4">
 					<span
@@ -479,6 +479,7 @@ export default function ProfileClient() {
 							id="company-name"
 							value={profile.companyName}
 							onChange={set("companyName")}
+							placeholder={t("companyInfo.fields.companyNamePlaceholder")}
 							required
 							showError={showValidation}
 						/>
@@ -487,6 +488,7 @@ export default function ProfileClient() {
 							id="trading-name"
 							value={profile.tradingName}
 							onChange={set("tradingName")}
+							placeholder={t("companyInfo.fields.tradingNamePlaceholder")}
 						/>
 						<SelectField
 							label={t("companyInfo.fields.companyType")}
@@ -502,6 +504,7 @@ export default function ProfileClient() {
 							id="reg-number"
 							value={profile.registrationNumber}
 							onChange={set("registrationNumber")}
+							placeholder={t("companyInfo.fields.registrationNumberPlaceholder")}
 							required
 							showError={showValidation}
 						/>
@@ -510,6 +513,7 @@ export default function ProfileClient() {
 							id="tax-id"
 							value={profile.taxId}
 							onChange={set("taxId")}
+							placeholder={t("companyInfo.fields.taxIdPlaceholder")}
 							required
 							showError={showValidation}
 						/>
@@ -527,6 +531,7 @@ export default function ProfileClient() {
 							id="inc-country"
 							value={profile.incorporationCountry}
 							onChange={set("incorporationCountry")}
+							placeholder={t("companyInfo.fields.incorporationCountryPlaceholder")}
 							required
 							showError={showValidation}
 						/>
@@ -542,6 +547,7 @@ export default function ProfileClient() {
 								id="primary-address"
 								value={profile.primaryAddress}
 								onChange={set("primaryAddress")}
+								placeholder={t("publicInfo.fields.primaryAddressPlaceholder")}
 								required
 								showError={showValidation}
 							/>
@@ -551,6 +557,7 @@ export default function ProfileClient() {
 							id="country"
 							value={profile.country}
 							onChange={set("country")}
+							placeholder={t("publicInfo.fields.countryPlaceholder")}
 							required
 							showError={showValidation}
 						/>
@@ -559,6 +566,7 @@ export default function ProfileClient() {
 							id="city"
 							value={profile.city}
 							onChange={set("city")}
+							placeholder={t("publicInfo.fields.cityPlaceholder")}
 							required
 							showError={showValidation}
 						/>
@@ -568,6 +576,7 @@ export default function ProfileClient() {
 							type="tel"
 							value={profile.phone}
 							onChange={(v) => set("phone")(v.replace(/\D/g, ""))}
+							placeholder={t("publicInfo.fields.phonePlaceholder")}
 							required
 							showError={showValidation}
 						/>
@@ -577,6 +586,7 @@ export default function ProfileClient() {
 							type="url"
 							value={profile.websiteUrl}
 							onChange={set("websiteUrl")}
+							placeholder={t("publicInfo.fields.websitePlaceholder")}
 						/>
 					</div>
 					<div>
@@ -591,6 +601,7 @@ export default function ProfileClient() {
 							id="bio"
 							rows={4}
 							value={profile.bio}
+							placeholder={t("publicInfo.fields.bioPlaceholder")}
 							onChange={(e) => set("bio")(e.target.value)}
 							className={`w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 resize-none ${showValidation && !profile.bio.trim() ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
 						/>

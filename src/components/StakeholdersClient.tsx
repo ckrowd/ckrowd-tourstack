@@ -285,7 +285,7 @@ export default function StakeholdersClient() {
 
 	return (
 		<>
-			<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
+			<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
 				<div className="w-full space-y-10">
 
 					{/* Header */}

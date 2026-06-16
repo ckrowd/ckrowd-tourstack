@@ -259,7 +259,7 @@ export default function InsuranceClient() {
 	const current = STAKEHOLDERS.find((s) => s.id === activeStakeholder)!;
 
 	return (
-		<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
+		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
 			<PageTour pageId="insurance" />
 			{/* Header */}
 			<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">

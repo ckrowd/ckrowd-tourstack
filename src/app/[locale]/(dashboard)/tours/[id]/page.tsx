@@ -33,9 +33,9 @@ export default async function TourDetailPage({
 	return (
 		<div className="bg-surface text-on-surface">
 			<TopNav />
-			<div className="flex pt-16 h-screen">
+			<div className="flex pt-16">
 				<SideNav />
-				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
+				<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
 					<div className="w-full space-y-8">
 						<div className="flex flex-wrap items-center justify-between gap-3">
 							<div>

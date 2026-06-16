@@ -118,10 +118,10 @@ export default async function ToursPage({ params, searchParams }: Props) {
 			<TopNav />
 			<PageTour pageId="tours" />
 
-			<div className="flex pt-16 h-screen">
+			<div className="flex pt-16">
 				<SideNav />
 
-				<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
+				<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
 					{/* Header */}
 					<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 						<div>

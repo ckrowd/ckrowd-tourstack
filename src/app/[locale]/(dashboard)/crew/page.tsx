@@ -16,7 +16,7 @@ export default async function CrewPage({
 	return (
 		<div className="bg-surface text-on-surface">
 			<TopNav />
-			<div className="flex pt-16 h-screen">
+			<div className="flex pt-16">
 				<SideNav />
 				<CrewClient />
 			</div>

@@ -41,7 +41,7 @@ export default function SideNavClient({ navItems, startNewTourLabel }: Props) {
 				)?.key;
 
 	return (
-		<aside className="hidden lg:flex flex-col gap-2 py-6 h-full w-64 border-r border-slate-200 bg-slate-50 shrink-0">
+		<aside className="hidden lg:flex flex-col gap-2 py-6 fixed top-16 left-0 bottom-0 w-64 border-r border-slate-200 bg-slate-50 z-40 overflow-y-auto no-scrollbar">
 			<nav className="flex-1 space-y-1 mt-2">
 				{navItems.map((item) => {
 					const isProfileItem = item.key === "profile";

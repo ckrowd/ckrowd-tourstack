@@ -486,7 +486,7 @@ export default function WorkforceClient() {
 
 	if (submitted) {
 		return (
-			<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-12 flex items-center justify-center">
+			<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-12 flex items-center justify-center">
 				<div className="text-center">
 					<ScoreGauge score={wcs.total} tierConfig={TIER_CONFIG} />
 					<div className="mt-8 mb-4">
@@ -573,7 +573,7 @@ export default function WorkforceClient() {
 	}
 
 	return (
-		<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-12">
+		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-12">
 			<div className="w-full">
 				{/* Header */}
 				<header className="mb-10">

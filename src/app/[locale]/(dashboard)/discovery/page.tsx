@@ -27,7 +27,7 @@ export default async function DiscoveryPage({
 	return (
 		<div className="bg-surface text-on-surface antialiased">
 			<TopNav />
-			<div className="flex pt-16 h-screen">
+			<div className="flex pt-16">
 				<SideNav />
 				<DiscoveryClient myTours={myTours} />
 			</div>
