@@ -21,7 +21,7 @@ export default function InsuranceAdminSideNavClient({
 		})?.key ?? "overview";
 
 	return (
-		<aside className="hidden lg:flex flex-col gap-2 py-6 h-full w-64 border-r border-slate-200 bg-slate-50 shrink-0">
+		<aside className="hidden lg:flex flex-col gap-2 py-6 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto w-64 border-r border-slate-200 bg-slate-50 shrink-0">
 			<div className="px-4 mb-4">
 				<span className="text-[10px] font-black uppercase tracking-widest text-[#FF5A30]">
 					{portalLabel}

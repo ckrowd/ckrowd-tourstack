@@ -19,7 +19,7 @@ export default function AdminSideNavClient({ navItems, newTourLabel }: Props) {
 		})?.key ?? "overview";
 
 	return (
-		<aside className="hidden lg:flex flex-col gap-2 py-6 h-full w-64 border-r border-slate-200 bg-slate-50 shrink-0">
+		<aside className="hidden lg:flex flex-col gap-2 py-6 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto w-64 border-r border-slate-200 bg-slate-50 shrink-0">
 			<nav className="flex-1 space-y-1 mt-2">
 				{navItems.map((item) => (
 					<Link
