@@ -250,7 +250,7 @@ export default async function AdminEOIPage({
 										</div>
 									)}
 
-									{eoi.flag_note != null && (
+									{eoi.flag_note != null && String(eoi.flag_note) !== "signed_off" && (
 										<div className="flex items-center gap-2 px-3 py-1.5 bg-red-50 rounded-lg text-xs text-red-700 font-semibold">
 											<span className="material-symbols-outlined text-xs text-red-500">
 												flag
@@ -267,6 +267,7 @@ export default async function AdminEOIPage({
 										eoiCity={String(eoi.city ?? "")}
 										forwardedToFinance={Boolean((eoi as Record<string, unknown>).forwarded_to_finance)}
 										forwardedToInsurance={Boolean((eoi as Record<string, unknown>).forwarded_to_insurance)}
+										signedOff={String(eoi.flag_note ?? "") === "signed_off"}
 									/>
 								</div>
 							</div>

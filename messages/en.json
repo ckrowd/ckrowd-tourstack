@@ -610,7 +610,18 @@
         "bankName": { "label": "Bank Name", "placeholder": "e.g. Zenith Bank" },
         "bankAccountHolder": { "label": "Account Holder Name", "placeholder": "e.g. Afrobeats Promotions Ltd" },
         "bankAccountNumber": { "label": "Account Number", "placeholder": "10-digit account number" },
-        "bvnOrRc": { "label": "BVN / Company RC Number", "placeholder": "BVN or RC number" }
+        "bvnOrRc": { "label": "BVN / Company RC Number", "placeholder": "BVN or RC number" },
+        "insuranceSection": "Event Insurance",
+        "hasInsurance": "Do you have event insurance coverage for this tour?",
+        "insuranceProvider": { "label": "Insurance Provider", "placeholder": "e.g. AXA, Allianz, Coronation Insurance" },
+        "insuranceType": {
+          "label": "Insurance Type",
+          "cancellation": "Event Cancellation",
+          "liability": "General Liability",
+          "comprehensive": "Comprehensive Event Cover",
+          "workforce": "Touring Workforce"
+        },
+        "insuranceAcknowledgmentText": "I acknowledge that event insurance is a condition for accessing TourStack financing and must be in place before funds are disbursed."
       },
       "step7": {
         "title": "Documents & Declaration",
@@ -688,6 +699,7 @@
       "bankNameRequired": "Bank name is required.",
       "bankHolderRequired": "Account holder name is required.",
       "bankNumberRequired": "Account number is required.",
+      "insuranceAcknowledgedRequired": "You must acknowledge the insurance requirement to proceed.",
       "authorizedRepRequired": "Authorised representative name is required.",
       "authorizedTitleRequired": "Title is required.",
       "declarationRequired": "Please read and confirm the declaration."
@@ -4057,7 +4069,13 @@
     "sendToBoth": "Send to Finance & Insurance",
     "finance": "Finance",
     "insurance": "Insurance",
-    "forwardedTo": "Forwarded to {target}"
+    "forwardedTo": "Forwarded to {target}",
+    "signOff": "Platform Sign-Off",
+    "signedOff": "Platform Signed Off",
+    "signOffTitle": "Confirm Platform Sign-Off?",
+    "signOffDescription": "Finalises this EOI at the platform level. All parties have been notified and the application is ready for disbursement.",
+    "signOffConfirm": "Confirm Sign-Off",
+    "signOffError": "Could not complete sign-off. Try again."
   },
   "TourActionsMenu": {
     "openMenu": "Open actions menu",
@@ -4595,7 +4613,9 @@
       "resend": "Resend",
       "resending": "Resending…",
       "revoke": "Revoke",
-      "revoking": "Revoking…"
+      "revoking": "Revoking…",
+      "memberCount": "{count} of {max} members",
+      "maxAdmins": "Team capacity reached (1 lead + 3 additional)."
     }
   },
   "InsuranceAdminApplicationsPage": {

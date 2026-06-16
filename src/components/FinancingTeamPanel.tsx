@@ -65,10 +65,13 @@ export default function FinancingTeamPanel() {
 		},
 	});
 
+	const MAX_ADMINS = 4;
 	const team =
 		query.data?.success && query.data.data
 			? (query.data.data as { active: ActiveMember[]; invites: PendingInvite[] })
 			: { active: [], invites: [] };
+	const totalCount = team.active.length + team.invites.length;
+	const atCapacity = totalCount >= MAX_ADMINS;
 
 	const inviteError =
 		inviteMutation.error
@@ -81,9 +84,16 @@ export default function FinancingTeamPanel() {
 
 	return (
 		<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10">
-			<h3 className="font-(family-name:--font-manrope) font-semibold text-base mb-4 pb-4 border-b border-outline-variant/20">
-				{t("title")}
-			</h3>
+			<div className="flex items-center justify-between mb-4 pb-4 border-b border-outline-variant/20">
+				<h3 className="font-(family-name:--font-manrope) font-semibold text-base">
+					{t("title")}
+				</h3>
+				{query.data?.success && (
+					<span className={`text-xs font-semibold px-2.5 py-1 rounded-full ${atCapacity ? "bg-red-50 text-red-700" : "bg-surface-container text-on-surface-variant"}`}>
+						{t("memberCount", { count: totalCount, max: MAX_ADMINS })}
+					</span>
+				)}
+			</div>
 
 			{query.isLoading ? (
 				<Loader size={36} />
@@ -170,6 +180,11 @@ export default function FinancingTeamPanel() {
 			)}
 
 			{!open ? (
+				atCapacity ? (
+					<p className="mt-4 w-full py-3 rounded-xl text-sm font-semibold text-center text-on-surface-variant bg-surface-container">
+						{t("maxAdmins")}
+					</p>
+				) : (
 				<button
 					type="button"
 					onClick={() => setOpen(true)}
@@ -178,6 +193,7 @@ export default function FinancingTeamPanel() {
 					<span className="material-symbols-outlined text-sm">person_add</span>
 					{t("invite")}
 				</button>
+				)
 			) : (
 				<form
 					onSubmit={(event) => {
