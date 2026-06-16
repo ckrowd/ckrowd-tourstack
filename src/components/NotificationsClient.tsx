@@ -41,7 +41,7 @@ export default function NotificationsClient() {
 	});
 
 	return (
-		<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
+		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
 			<div className="mb-8">
 				<Link
 					href="/dashboard"

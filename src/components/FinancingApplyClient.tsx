@@ -4,9 +4,11 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useId, useState } from "react";
 import { applyForFinancing } from "@/app/actions";
+import EcosystemReadiness from "@/components/EcosystemReadiness";
 import FinancingFaq from "@/components/FinancingFaq";
 import HowItWorksModal from "@/components/HowItWorksModal";
 import { Link } from "@/i18n/routing";
+import type { EcosystemReadiness as Readiness } from "@/lib/eligibility";
 
 type Tour = { id: string; name?: string | null; city?: string | null; artist?: { name?: string | null } | null };
 type Application = { id: string; product?: string | null; amount_requested?: number | null; currency?: string | null; status?: string | null; created_at?: Date | string | null; tour?: { artist?: { name?: string | null } | null } | null };
@@ -43,9 +45,10 @@ interface Props {
 	tours: Tour[];
 	applications: Application[];
 	locale: string;
+	readiness?: Readiness;
 }
 
-export default function FinancingApplyClient({ tours, applications, locale }: Props) {
+export default function FinancingApplyClient({ tours, applications, locale, readiness }: Props) {
 	const t = useTranslations("FinancingApplyPage");
 	const tFin = useTranslations("FinancingPage");
 	const queryClient = useQueryClient();
@@ -81,7 +84,7 @@ export default function FinancingApplyClient({ tours, applications, locale }: Pr
 	const labelClass = "mb-2 block text-xs font-semibold uppercase tracking-[0.22em] text-on-surface-variant";
 
 	return (
-		<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
+		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
 			{/* Products modal */}
 			{productsOpen && (
 				<div
@@ -181,6 +184,13 @@ export default function FinancingApplyClient({ tours, applications, locale }: Pr
 				</div>
 			</div>
 
+			{/* Ecosystem readiness gate */}
+			{readiness && !readiness.eligible && (
+				<div className="mb-8">
+					<EcosystemReadiness readiness={readiness} />
+				</div>
+			)}
+
 			{/* Financing partner */}
 			<div className="mb-8">
 				<p className="text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant mb-3">
@@ -201,6 +211,7 @@ export default function FinancingApplyClient({ tours, applications, locale }: Pr
 				<form
 					onSubmit={(e) => {
 						e.preventDefault();
+						if (readiness && !readiness.eligible) return;
 						const parsedAmount = Number(amount);
 						if (!Number.isFinite(parsedAmount) || parsedAmount <= 0) return;
 						const resolvedTourId = tourId && !tourId.startsWith("eoi:") ? tourId : undefined;
@@ -328,8 +339,8 @@ export default function FinancingApplyClient({ tours, applications, locale }: Pr
 
 					<button
 						type="submit"
-						disabled={applyMutation.isPending}
-						className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:opacity-60"
+						disabled={applyMutation.isPending || (readiness != null && !readiness.eligible)}
+						className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
 					>
 						{applyMutation.isPending ? t("actions.submitting") : t("actions.submit")}
 					</button>

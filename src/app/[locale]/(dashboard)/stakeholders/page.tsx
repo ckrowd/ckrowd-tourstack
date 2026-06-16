@@ -16,7 +16,7 @@ export default async function StakeholdersPage({
 	return (
 		<div className="bg-surface text-on-surface">
 			<TopNav />
-			<div className="flex pt-16 h-screen">
+			<div className="flex pt-16">
 				<SideNav />
 				<StakeholdersClient />
 			</div>

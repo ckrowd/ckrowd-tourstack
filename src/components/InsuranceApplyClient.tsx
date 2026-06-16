@@ -68,7 +68,7 @@ export default function InsuranceApplyClient({ tours, applications, locale }: Pr
 	const labelClass = "mb-2 block text-xs font-semibold uppercase tracking-[0.22em] text-on-surface-variant";
 
 	return (
-		<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10 no-scrollbar">
+		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
 			{/* Products modal */}
 			{productsOpen && (
 				<div

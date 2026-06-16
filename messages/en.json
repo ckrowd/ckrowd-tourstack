@@ -478,15 +478,18 @@
   },
   "EOIPage": {
     "stepper": {
-      "contact": "Contact",
-      "fit": "Fit",
-      "support": "Support",
-      "review": "Review"
+      "promoter": "Promoter",
+      "experience": "Experience",
+      "tour": "Tour",
+      "venue": "Venue",
+      "budget": "Budget",
+      "financing": "Financing",
+      "declaration": "Declaration"
     },
     "hero": {
-      "platform": "TourStack - Expression of Interest",
+      "platform": "TourStack — Expression of Interest",
       "title": "Apply for this tour.",
-      "description": "Review the tour details on the left and complete the application below."
+      "description": "Select a tour opportunity and complete the application. Your profile details are pre-filled where available."
     },
     "tourPanel": {
       "heading": "About this opportunity",
@@ -501,83 +504,193 @@
       "searchPlaceholder": "Search by artist or tour name...",
       "loading": "Loading opportunities...",
       "noResults": "No matching opportunities found",
-      "selectPrompt": "Select a tour opportunity from the list to start your application"
+      "selectPrompt": "Select a tour opportunity from the list to begin your application"
     },
     "loadError": "Unable to load this opportunity.",
-    "submitError": "Failed to submit application.",
+    "submitError": "Failed to submit application. Please try again.",
     "loadingOpportunity": "Loading opportunity...",
+    "autoFilledNote": "Fields marked with a profile icon are pre-filled from your profile. You can update them here.",
     "form": {
-      "fullName": {
-        "label": "Full name",
-        "placeholder": "Amina Bello"
-      },
-      "email": {
-        "label": "Email address",
-        "placeholder": "you@company.com"
-      },
-      "city": {
-        "label": "City / market",
-        "placeholder": "Lagos, Nairobi, Accra..."
-      },
-      "audience": {
-        "label": "Expected attendance",
-        "placeholder": "5,000"
-      },
-      "notes": {
-        "label": "Why this opportunity fits your venue",
-        "placeholder": "Tell the team about your venue, audience, and promotion plan."
-      },
-      "venues": {
-        "sectionLabel": "Venues",
-        "addFirst": "+ Add venue",
-        "addAnother": "+ Add another venue",
-        "placeholder": "Venue name",
-        "venueLabel": "Venue {n}",
-        "noVenueHint": "No venues added yet"
-      },
-      "finance": {
-        "label": "Event Financing",
-        "question": "Do you need finance to cover this event?",
-        "description": "We'll connect you with a suitable financing partner."
-      },
-      "insurance": {
-        "label": "Event Insurance",
-        "question": "Do you need insurance for this event?",
-        "description": "We'll connect you with an insurance provider.",
-        "alwaysIncluded": "Event insurance is included with every EOI. We'll connect you with Sanlam Allianz after your submission is reviewed."
-      },
       "yes": "Yes",
-      "no": "No"
+      "no": "No",
+      "step1": {
+        "title": "Promoter Information",
+        "companySection": "Company Details",
+        "contactSection": "Primary Contact",
+        "socialSection": "Online Presence",
+        "companyName": { "label": "Company / Organisation Name", "placeholder": "e.g. Afrobeats Promotions Ltd" },
+        "tradingName": { "label": "Trading / DBA Name", "placeholder": "e.g. Afro Events" },
+        "companyType": { "label": "Company Type", "placeholder": "e.g. Promoter, Agency" },
+        "registrationNumber": { "label": "Registration / RC Number", "placeholder": "e.g. RC-123456" },
+        "taxId": { "label": "Tax ID / TIN", "placeholder": "e.g. 1234567-0001" },
+        "primaryAddress": { "label": "Primary Business Address", "placeholder": "Street, City, Country" },
+        "country": { "label": "Country of Operation", "placeholder": "e.g. Nigeria" },
+        "contactPerson": { "label": "Full Name", "placeholder": "e.g. Amina Bello" },
+        "jobTitle": { "label": "Job Title / Role", "placeholder": "e.g. Managing Director" },
+        "contactEmail": { "label": "Contact Email", "placeholder": "you@company.com" },
+        "phone": { "label": "Phone Number", "placeholder": "+234 800 000 0000" },
+        "websiteUrl": { "label": "Website", "placeholder": "https://yourcompany.com" },
+        "instagram": { "label": "Instagram", "placeholder": "@handle" },
+        "xHandle": { "label": "X / Twitter", "placeholder": "@handle" },
+        "facebook": { "label": "Facebook", "placeholder": "facebook.com/yourpage" },
+        "tiktok": { "label": "TikTok", "placeholder": "@handle" }
+      },
+      "step2": {
+        "title": "Promoter Experience",
+        "yearsInBusiness": { "label": "Years in Business", "placeholder": "e.g. 5" },
+        "concertsOrganized": { "label": "Total Concerts Organised", "placeholder": "e.g. 20" },
+        "largestConcertCapacity": { "label": "Largest Concert Capacity (attendees)", "placeholder": "e.g. 10,000" },
+        "averageEventsYear": { "label": "Average Events per Year", "placeholder": "e.g. 4" },
+        "genresSpecialties": { "label": "Genres / Specialties", "placeholder": "e.g. Afrobeats, Amapiano, R&B" },
+        "marketsRegions": { "label": "Markets / Regions Served", "placeholder": "e.g. West Africa, UK, USA" }
+      },
+      "step3": {
+        "title": "Tour Details & Artist Info",
+        "tourSection": "Tour Information",
+        "artistSection": "Artist Details",
+        "tourName": { "label": "Tour Name", "placeholder": "e.g. Afro Nation Lagos 2026" },
+        "tourManager": { "label": "Tour Manager Name", "placeholder": "Full name" },
+        "tourManagerEmail": { "label": "Tour Manager Email", "placeholder": "manager@tourco.com" },
+        "tourManagerPhone": { "label": "Tour Manager Phone", "placeholder": "+44 7000 000 000" },
+        "proposedCities": { "label": "Proposed Cities / Tour Stops", "placeholder": "e.g. Lagos, Accra, Nairobi" },
+        "preferredDates": { "label": "Preferred Tour Dates", "placeholder": "e.g. Oct 2026 – Dec 2026" },
+        "artistConfirmed": { "label": "Is the artist confirmed for this tour?", "confirmed": "Confirmed", "pending": "Pending" },
+        "spotifyListeners": { "label": "Monthly Spotify Listeners", "placeholder": "e.g. 2,500,000" },
+        "youtubeSubscribers": { "label": "YouTube Subscribers", "placeholder": "e.g. 500,000" },
+        "artistInstagram": { "label": "Artist Instagram Followers", "placeholder": "e.g. 1,200,000" }
+      },
+      "step4": {
+        "title": "Venue & Ticketing",
+        "venueSection": "Venue Information",
+        "ticketingSection": "Ticketing",
+        "venueName": { "label": "Venue Name", "placeholder": "e.g. Eko Convention Centre" },
+        "venueCity": { "label": "Venue City / Market", "placeholder": "e.g. Lagos" },
+        "venueCapacity": { "label": "Venue Capacity", "placeholder": "e.g. 8,000" },
+        "venueType": { "label": "Venue Type", "indoor": "Indoor", "outdoor": "Outdoor", "hybrid": "Hybrid" },
+        "venueStatus": { "label": "Venue Status", "confirmed": "Confirmed", "shortlisted": "Shortlisted", "pending": "Pending Approval" },
+        "venueRentalCost": { "label": "Estimated Rental Cost (USD)", "placeholder": "e.g. 50,000" },
+        "ticketingPartner": { "label": "Ticketing Partner", "placeholder": "e.g. Eventbrite, Flutterwave" },
+        "expectedTicketSales": { "label": "Expected Ticket Sales", "placeholder": "e.g. 6,000" },
+        "expectedOccupancy": { "label": "Expected Occupancy (%)", "placeholder": "e.g. 75" }
+      },
+      "step5": {
+        "title": "Tour Budget & Revenue",
+        "budgetSection": "Tour Budget",
+        "revenueSection": "Revenue Forecast",
+        "budgetHint": "Estimates are acceptable at this stage. All amounts in USD.",
+        "artistFee": { "label": "Artist Fee / Guarantee", "placeholder": "e.g. 200,000" },
+        "productionCosts": { "label": "Production & Technical Costs", "placeholder": "e.g. 80,000" },
+        "marketingCosts": { "label": "Marketing & Promotion", "placeholder": "e.g. 40,000" },
+        "operationsCosts": { "label": "Operations & Logistics", "placeholder": "e.g. 30,000" },
+        "totalBudget": { "label": "Total Budget (USD)", "placeholder": "e.g. 350,000" },
+        "ticketingRevenue": { "label": "Ticketing Revenue", "placeholder": "e.g. 240,000" },
+        "sponsorshipRevenue": { "label": "Sponsorship Revenue", "placeholder": "e.g. 50,000" },
+        "otherRevenue": { "label": "Other Revenue", "placeholder": "e.g. 10,000" },
+        "totalRevenue": { "label": "Total Projected Revenue", "placeholder": "e.g. 300,000" },
+        "netProfit": { "label": "Projected Net Profit / Loss", "placeholder": "e.g. -50,000" }
+      },
+      "step6": {
+        "title": "Risk, Financing & Banking",
+        "riskSection": "Risk & Insurance",
+        "financingSection": "Financing Information",
+        "bankingSection": "Banking Information",
+        "hasCancellationHistory": "Have you had a concert cancellation in the past 3 years?",
+        "securityPlan": { "label": "Security & Crowd Management Plan", "placeholder": "Briefly describe your security and crowd management approach..." },
+        "needsFinancing": "Do you require tour financing?",
+        "financingAmount": { "label": "Amount Required (USD)", "placeholder": "e.g. 150,000" },
+        "financingPurpose": {
+          "label": "Purpose of Financing",
+          "artistFee": "Artist Fee",
+          "production": "Production & Technical",
+          "marketing": "Marketing & Promotion",
+          "operations": "Operations",
+          "other": "Other"
+        },
+        "financingStructure": { "label": "Preferred Financing Structure", "loan": "Short-term Loan", "revShare": "Revenue Share", "equity": "Equity Investment", "advance": "Advance Against Revenue" },
+        "bankName": { "label": "Bank Name", "placeholder": "e.g. Zenith Bank" },
+        "bankAccountHolder": { "label": "Account Holder Name", "placeholder": "e.g. Afrobeats Promotions Ltd" },
+        "bankAccountNumber": { "label": "Account Number", "placeholder": "10-digit account number" },
+        "bvnOrRc": { "label": "BVN / Company RC Number", "placeholder": "BVN or RC number" }
+      },
+      "step7": {
+        "title": "Documents & Declaration",
+        "documentsSection": "Required Documents",
+        "declarationSection": "Declaration",
+        "documentsNote": "Confirm which documents you have available. You will be asked to upload them after your EOI is shortlisted.",
+        "hasCACDocuments": "CAC Certificate / Business Registration Document",
+        "hasFinancialStatements": "Financial Statements for the last 2 years",
+        "hasTourDocs": "Tour itinerary or artist agreement (if available)",
+        "authorizedRepName": { "label": "Authorised Representative Name", "placeholder": "Full legal name" },
+        "authorizedRepTitle": { "label": "Title", "placeholder": "e.g. CEO, Managing Director" },
+        "additionalNotes": { "label": "Additional Notes (optional)", "placeholder": "Any other information relevant to your application..." },
+        "declarationText": "By submitting this Expression of Interest, I confirm that all information provided is accurate and complete. I authorise Ckrowd to use this information to assess financing and insurance requirements for this tour.",
+        "reviewSection": "Application Summary"
+      }
     },
     "review": {
-      "title": "Review application",
+      "title": "Application Summary",
       "tour": "Tour",
       "artist": "Artist",
       "markets": "Markets",
-      "applicant": "Applicant",
+      "company": "Company",
+      "contact": "Contact",
       "email": "Email",
-      "venues": "Venues",
-      "city": "City / market",
-      "audience": "Expected attendance",
-      "notes": "Notes",
-      "finance": "Financing",
+      "phone": "Phone",
+      "venues": "Venue",
+      "city": "City",
+      "capacity": "Capacity",
+      "budget": "Total Budget",
+      "financing": "Financing",
       "insurance": "Insurance",
-      "estimatedAudience": "Estimated audience",
-      "disclaimer": "By submitting, you confirm that the details above are accurate and agree to be contacted by the Ckrowd team."
+      "disclaimer": "By submitting, you confirm all details above are accurate and you authorise Ckrowd to process your application."
     },
     "actions": {
       "back": "Back",
       "cancel": "Cancel",
       "submitting": "Submitting...",
-      "submit": "Submit application",
-      "continue": "Continue"
+      "submit": "Submit Application",
+      "continue": "Next",
+      "stepOf": "Step {current} of {total}"
     },
     "validation": {
       "nameRequired": "Please enter your full name.",
       "emailRequired": "Please enter your email address.",
       "emailInvalid": "Please enter a valid email address.",
       "cityRequired": "Please enter the city or market for this tour stop.",
-      "selectOpportunity": "Please select a tour opportunity first."
+      "selectOpportunity": "Please select a tour opportunity first.",
+      "companyNameRequired": "Company name is required.",
+      "contactPersonRequired": "Contact person name is required.",
+      "contactEmailRequired": "Contact email is required.",
+      "phoneRequired": "Phone number is required.",
+      "yearsRequired": "Years in business is required.",
+      "concertsRequired": "Total concerts organised is required.",
+      "capacityRequired": "Largest concert capacity is required.",
+      "averageEventsRequired": "Average events per year is required.",
+      "genresRequired": "Genres / specialties is required.",
+      "marketsRequired": "Markets / regions is required.",
+      "tourNameRequired": "Tour name is required.",
+      "tourManagerRequired": "Tour manager name is required.",
+      "proposedCitiesRequired": "Proposed cities / tour stops is required.",
+      "preferredDatesRequired": "Preferred tour dates is required.",
+      "venueNameRequired": "Venue name is required.",
+      "venueCityRequired": "Venue city is required.",
+      "venueCapacityRequired": "Venue capacity is required.",
+      "venueTypeRequired": "Venue type is required.",
+      "venueStatusRequired": "Venue status is required.",
+      "ticketingPartnerRequired": "Ticketing partner is required.",
+      "expectedSalesRequired": "Expected ticket sales is required.",
+      "occupancyRequired": "Expected occupancy is required.",
+      "artistFeeRequired": "Artist fee is required.",
+      "productionCostsRequired": "Production costs is required.",
+      "marketingCostsRequired": "Marketing costs is required.",
+      "operationsCostsRequired": "Operations costs is required.",
+      "totalBudgetRequired": "Total budget is required.",
+      "bankNameRequired": "Bank name is required.",
+      "bankHolderRequired": "Account holder name is required.",
+      "bankNumberRequired": "Account number is required.",
+      "authorizedRepRequired": "Authorised representative name is required.",
+      "authorizedTitleRequired": "Title is required.",
+      "declarationRequired": "Please read and confirm the declaration."
     },
     "success": {
       "title": "EOI submitted.",
@@ -1244,12 +1357,17 @@
       "description": "Legal registration and identification details.",
       "fields": {
         "companyName": "Legal Company Name",
+        "companyNamePlaceholder": "e.g. Afrobeats Promotions Ltd",
         "tradingName": "Trading / DBA Name",
+        "tradingNamePlaceholder": "e.g. Afro Events",
         "companyType": "Company Type",
         "registrationNumber": "Business Registration Number",
+        "registrationNumberPlaceholder": "e.g. RC-123456",
         "taxId": "Tax ID / EIN / VAT",
+        "taxIdPlaceholder": "e.g. 1234567-0001",
         "incorporationDate": "Date of Incorporation",
-        "incorporationCountry": "Country of Incorporation"
+        "incorporationCountry": "Country of Incorporation",
+        "incorporationCountryPlaceholder": "e.g. Nigeria"
       },
       "companyTypes": {
         "placeholder": "Select company type",
@@ -1269,11 +1387,17 @@
       "description": "Visible to artist managers browsing the platform.",
       "fields": {
         "primaryAddress": "Primary Business Address",
+        "primaryAddressPlaceholder": "Street, City, Country",
         "country": "Country / Region of Operation",
+        "countryPlaceholder": "e.g. Nigeria",
         "city": "City",
+        "cityPlaceholder": "e.g. Lagos",
         "phone": "Phone Number",
+        "phonePlaceholder": "+234 800 000 0000",
         "website": "Website",
+        "websitePlaceholder": "https://yourcompany.com",
         "bio": "Bio",
+        "bioPlaceholder": "Tell artist managers about your company, track record, and the markets you operate in...",
         "instagram": "Instagram Handle",
         "x": "X (Twitter) Handle",
         "facebook": "Facebook Page / Handle",

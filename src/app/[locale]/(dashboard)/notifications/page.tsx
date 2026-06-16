@@ -16,7 +16,7 @@ export default async function NotificationsPage({
 	return (
 		<div className="bg-surface text-on-surface antialiased">
 			<TopNav />
-			<div className="flex pt-16 h-screen">
+			<div className="flex pt-16">
 				<SideNav />
 				<NotificationsClient />
 			</div>

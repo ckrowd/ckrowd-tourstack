@@ -1388,7 +1388,7 @@ export default function OnboardingForm() {
 
 	if (submitted) {
 		return (
-			<main className="flex-1 flex items-center justify-center bg-surface-container-low p-8">
+			<main className="flex-1 lg:ml-64 flex items-center justify-center bg-surface p-8">
 				<div className="text-center">
 					<div className="w-20 h-20 rounded-full bg-emerald-100 flex items-center justify-center mb-6 mx-auto">
 						<span
@@ -1429,7 +1429,7 @@ export default function OnboardingForm() {
 	}
 
 	return (
-		<main className="flex-1 overflow-y-auto bg-surface-container-low p-6 md:p-10">
+		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
 			<div className="w-full">
 				{/* Header */}
 				<header className="mb-8">

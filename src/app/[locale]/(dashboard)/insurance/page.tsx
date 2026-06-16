@@ -46,7 +46,7 @@ export default async function InsurancePage({ params }: Props) {
 	return (
 		<div className="bg-surface text-on-surface antialiased">
 			<TopNav />
-			<div className="flex pt-16 h-screen">
+			<div className="flex pt-16">
 				<SideNav />
 				<PageTour pageId="insurance" />
 				<InsuranceApplyClient
