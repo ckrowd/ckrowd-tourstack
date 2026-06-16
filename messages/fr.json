@@ -1374,14 +1374,23 @@
         "description": "Les détails de capacité et de localisation aident à associer votre lieu aux artistes en tournée.",
         "fields": {
           "name": "Nom du lieu",
+          "namePlaceholder": "ex. Eko Hotel & Suites",
           "type": "Type de lieu",
+          "typePlaceholder": "ex. Arène, Stade, Club",
           "city": "Ville / Marché",
+          "cityPlaceholder": "ex. Lagos",
           "country": "Pays",
+          "countryPlaceholder": "ex. Nigéria",
           "seatedCap": "Capacité assise",
+          "seatedCapPlaceholder": "ex. 5000",
           "standingCap": "Capacité debout",
+          "standingCapPlaceholder": "ex. 8000",
           "expectedAttendance": "Fréquentation attendue",
+          "expectedAttendancePlaceholder": "ex. 4500",
           "address": "Adresse",
+          "addressPlaceholder": "ex. 1415 rue Adeola Odeku",
           "maps": "URL Google Maps",
+          "mapsPlaceholder": "https://maps.google.com/...",
           "notes": "Pourquoi cette opportunité convient à votre lieu",
           "notesPlaceholder": "Parlez aux artistes en tournée de votre public, votre plan de promotion et pourquoi votre lieu est le bon choix."
         },
@@ -1469,7 +1478,10 @@
         "fields": {
           "current": "Mot de passe actuel",
           "new": "Nouveau mot de passe",
-          "confirm": "Confirmer le nouveau mot de passe"
+          "confirm": "Confirmer le nouveau mot de passe",
+          "currentPlaceholder": "Saisissez votre mot de passe actuel",
+          "newPlaceholder": "8 caractères minimum",
+          "confirmPlaceholder": "Répétez le nouveau mot de passe"
         },
         "hint": "Minimum 8 caractères avec au moins un chiffre et un symbole.",
         "actions": {
@@ -2952,7 +2964,15 @@
     "ceoSigLabel": "Signature PDG (Kayode Adebayo)",
     "ceoSigHint": "Dessinez ou téléversez la signature du PDG — co-signe chaque PDF de décaissement.",
     "ceoSigSaved": "Signature PDG enregistrée",
-    "saveCeoSig": "Enregistrer la signature PDG"
+    "saveCeoSig": "Enregistrer la signature PDG",
+    "fullNamePlaceholder": "ex. Kayode Adebayo",
+    "jobTitlePlaceholder": "ex. Directeur Général",
+    "emailPlaceholder": "vous@entreprise.com",
+    "phonePlaceholder": "+234 000 000 0000",
+    "countryPlaceholder": "ex. Nigéria",
+    "cityPlaceholder": "ex. Lagos",
+    "bioPlaceholder": "Rédigez une courte biographie visible par les promoteurs et les parties prenantes.",
+    "linkedinPlaceholder": "https://linkedin.com/in/votre-profil"
   },
   "RegisterPage": {
     "title": "S'inscrire",
@@ -3947,14 +3967,20 @@
     "no": "Non",
     "fields": {
       "venue": "Lieu",
+      "venuePlaceholder": "ex. Eko Hotel",
       "city": "Ville",
+      "cityPlaceholder": "ex. Lagos",
       "country": "Pays",
+      "countryPlaceholder": "ex. Nigéria",
       "date": "Date du spectacle",
       "feeUsd": "Cachet artiste (USD)",
+      "feeUsdPlaceholder": "ex. 25000",
       "capacity": "Capacité",
+      "capacityPlaceholder": "ex. 5000",
       "status": "Statut",
       "financing": "Financé",
-      "financingAmount": "Montant du financement (USD)"
+      "financingAmount": "Montant du financement (USD)",
+      "financingAmountPlaceholder": "ex. 50000"
     }
   },
   "AdminTourDetailPage": {
@@ -5036,13 +5062,19 @@
       "active": "Actif",
       "trending": "Tendance",
       "name": "Nom de l'artiste",
+      "namePlaceholder": "ex. Burna Boy",
       "genre": "Genre",
+      "genrePlaceholder": "ex. Afrobeats",
       "tourName": "Nom de la tournée",
+      "tourNamePlaceholder": "ex. African Giant Tour 2025",
       "tourStart": "Début de tournée",
       "tourEnd": "Fin de tournée",
       "feeMin": "Cachet min (USD)",
+      "feeMinPlaceholder": "ex. 10000",
       "feeMax": "Cachet max (USD)",
+      "feeMaxPlaceholder": "ex. 50000",
       "region": "Région",
+      "regionPlaceholder": "ex. Afrique de l'Ouest",
       "markets": "Marchés",
       "marketsHint": "Villes séparées par des virgules, ex. Lagos, Accra, Nairobi"
     }

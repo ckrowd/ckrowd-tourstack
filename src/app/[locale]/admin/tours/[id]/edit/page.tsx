@@ -138,6 +138,7 @@ export default function EditTourPage({
 								type="text"
 								required
 								defaultValue={tour.venue}
+								placeholder={t("fields.venuePlaceholder")}
 								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none"
 							/>
 						</div>
@@ -151,6 +152,7 @@ export default function EditTourPage({
 								type="text"
 								required
 								defaultValue={tour.city}
+								placeholder={t("fields.cityPlaceholder")}
 								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none"
 							/>
 						</div>
@@ -166,6 +168,7 @@ export default function EditTourPage({
 								name="country"
 								type="text"
 								defaultValue={tour.country ?? ""}
+								placeholder={t("fields.countryPlaceholder")}
 								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none"
 							/>
 						</div>
@@ -196,6 +199,7 @@ export default function EditTourPage({
 								min="0"
 								required
 								defaultValue={tour.fee_usd}
+								placeholder={t("fields.feeUsdPlaceholder")}
 								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none"
 							/>
 						</div>
@@ -209,6 +213,7 @@ export default function EditTourPage({
 								type="number"
 								min="0"
 								defaultValue={tour.capacity ?? ""}
+								placeholder={t("fields.capacityPlaceholder")}
 								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none"
 							/>
 						</div>
@@ -268,6 +273,7 @@ export default function EditTourPage({
 							type="number"
 							min="0"
 							defaultValue={tour.financing_amount ?? ""}
+							placeholder={t("fields.financingAmountPlaceholder")}
 							className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none"
 						/>
 					</div>

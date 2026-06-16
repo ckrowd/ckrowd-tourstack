@@ -36,14 +36,12 @@ export default function EoiActionPanel({
 	eoiId,
 	currentStatus,
 	eoiCity = "",
-	forwardedTo = null,
 	forwardedToFinance = false,
 	forwardedToInsurance = false,
 }: {
 	eoiId: string;
 	currentStatus: string;
 	eoiCity?: string;
-	forwardedTo?: string | null;
 	forwardedToFinance?: boolean;
 	forwardedToInsurance?: boolean;
 }) {

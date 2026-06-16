@@ -225,18 +225,18 @@ export default function ArtistActionsMenu({
 						<div className="grid grid-cols-2 gap-3">
 							<div>
 								<label className={labelClass}>{t("fields.name")}</label>
-								<input type="text" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} className={inputClass} />
+								<input type="text" value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} className={inputClass} placeholder={t("fields.namePlaceholder")} />
 							</div>
 							<div>
 								<label className={labelClass}>{t("fields.genre")}</label>
-								<input type="text" value={form.genre} onChange={(e) => setForm((f) => ({ ...f, genre: e.target.value }))} className={inputClass} />
+								<input type="text" value={form.genre} onChange={(e) => setForm((f) => ({ ...f, genre: e.target.value }))} className={inputClass} placeholder={t("fields.genrePlaceholder")} />
 							</div>
 						</div>
 
 						{/* Tour Name */}
 						<div>
 							<label className={labelClass}>{t("fields.tourName")}</label>
-							<input type="text" value={form.tourName} onChange={(e) => setForm((f) => ({ ...f, tourName: e.target.value }))} className={inputClass} />
+							<input type="text" value={form.tourName} onChange={(e) => setForm((f) => ({ ...f, tourName: e.target.value }))} className={inputClass} placeholder={t("fields.tourNamePlaceholder")} />
 						</div>
 
 						{/* Tour Start + End */}
@@ -255,18 +255,18 @@ export default function ArtistActionsMenu({
 						<div className="grid grid-cols-2 gap-3">
 							<div>
 								<label className={labelClass}>{t("fields.feeMin")}</label>
-								<input type="number" min={0} value={form.feeMin} onChange={(e) => setForm((f) => ({ ...f, feeMin: e.target.value }))} className={inputClass} placeholder="e.g. 10000" />
+								<input type="number" min={0} value={form.feeMin} onChange={(e) => setForm((f) => ({ ...f, feeMin: e.target.value }))} className={inputClass} placeholder={t("fields.feeMinPlaceholder")} />
 							</div>
 							<div>
 								<label className={labelClass}>{t("fields.feeMax")}</label>
-								<input type="number" min={0} value={form.feeMax} onChange={(e) => setForm((f) => ({ ...f, feeMax: e.target.value }))} className={inputClass} placeholder="e.g. 50000" />
+								<input type="number" min={0} value={form.feeMax} onChange={(e) => setForm((f) => ({ ...f, feeMax: e.target.value }))} className={inputClass} placeholder={t("fields.feeMaxPlaceholder")} />
 							</div>
 						</div>
 
 						{/* Region */}
 						<div>
 							<label className={labelClass}>{t("fields.region")}</label>
-							<input type="text" value={form.region} onChange={(e) => setForm((f) => ({ ...f, region: e.target.value }))} className={inputClass} placeholder="e.g. West Africa" />
+							<input type="text" value={form.region} onChange={(e) => setForm((f) => ({ ...f, region: e.target.value }))} className={inputClass} placeholder={t("fields.regionPlaceholder")} />
 						</div>
 
 						{/* Markets */}

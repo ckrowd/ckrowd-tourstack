@@ -59,6 +59,7 @@ function Field({
 	onChange,
 	type = "text",
 	hint,
+	placeholder,
 }: {
 	label: string;
 	id: string;
@@ -67,6 +68,7 @@ function Field({
 	onChange?: (v: string) => void;
 	type?: string;
 	hint?: string;
+	placeholder?: string;
 }) {
 	return (
 		<div>
@@ -79,6 +81,7 @@ function Field({
 			<input
 				id={id}
 				type={type}
+				placeholder={placeholder}
 				{...(onChange
 					? { value: value ?? "", onChange: (e) => onChange(e.target.value) }
 					: { defaultValue })}
@@ -208,12 +211,14 @@ export default function AdminProfilePage() {
 							id="contact-name"
 							value={profile.contactPerson}
 							onChange={set("contactPerson")}
+							placeholder={t("fullNamePlaceholder")}
 						/>
 						<Field
 							label={t("jobTitle")}
 							id="job-title"
 							value={profile.jobTitle}
 							onChange={set("jobTitle")}
+							placeholder={t("jobTitlePlaceholder")}
 						/>
 						<Field
 							label={t("email")}
@@ -221,6 +226,7 @@ export default function AdminProfilePage() {
 							type="email"
 							value={profile.email}
 							onChange={set("email")}
+							placeholder={t("emailPlaceholder")}
 						/>
 						<Field
 							label={t("phone")}
@@ -228,18 +234,21 @@ export default function AdminProfilePage() {
 							type="tel"
 							value={profile.phone}
 							onChange={(v) => set("phone")(v.replace(/\D/g, ""))}
+							placeholder={t("phonePlaceholder")}
 						/>
 						<Field
 							label={t("country")}
 							id="country"
 							value={profile.country}
 							onChange={set("country")}
+							placeholder={t("countryPlaceholder")}
 						/>
 						<Field
 							label={t("city")}
 							id="city"
 							value={profile.city}
 							onChange={set("city")}
+							placeholder={t("cityPlaceholder")}
 						/>
 					</div>
 				</Section>
@@ -261,6 +270,7 @@ export default function AdminProfilePage() {
 								rows={4}
 								value={profile.bio}
 								onChange={(e) => set("bio")(e.target.value)}
+								placeholder={t("bioPlaceholder")}
 								className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 resize-none"
 							/>
 						</div>
@@ -270,6 +280,7 @@ export default function AdminProfilePage() {
 							type="url"
 							value={profile.websiteUrl}
 							onChange={set("websiteUrl")}
+							placeholder={t("linkedinPlaceholder")}
 						/>
 					</div>
 				</Section>
