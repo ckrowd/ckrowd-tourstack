@@ -607,6 +607,60 @@ export async function createEOI(
 	return result;
 }
 
+// EOI Documents
+
+export async function getEOIDocuments(eoiId: string) {
+	// biome-ignore lint/suspicious/noExplicitAny: eoi documents route not yet in published pkg
+	const { data, error, status, headers } = await (client as any).tourstack.eoi.documents.get({ query: { eoiId } });
+	return {
+		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+export async function uploadEOIDocument(formData: FormData) {
+	const file = formData.get("file");
+	const eoiId = formData.get("eoiId");
+	const documentType = formData.get("documentType");
+	if (!file || typeof file === "string" || typeof eoiId !== "string" || typeof documentType !== "string") {
+		return { success: false as const, error: "Missing required fields" };
+	}
+	const ext = (file as File).name.split(".").pop()?.toLowerCase() ?? "bin";
+	const path = `eoi-docs/${eoiId}/${documentType}-${Date.now()}.${ext}`;
+	const { data: uploadData, error: uploadError } = await client.storage.upload.post({
+		file: file as File,
+		path,
+		contentType: (file as File).type || "application/octet-stream",
+	});
+	if (uploadError || !uploadData?.success) {
+		return { success: false as const, error: "File upload failed" };
+	}
+	const storageId = (uploadData as { data: string }).data;
+	// biome-ignore lint/suspicious/noExplicitAny: eoi documents route not yet in published pkg
+	const { data, error, status, headers } = await (client as any).tourstack.eoi.documents.post({
+		eoiId,
+		documentType,
+		storageId,
+		fileName: (file as File).name,
+	});
+	return {
+		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+export async function getAdminEOIDocuments(eoiId: string) {
+	// biome-ignore lint/suspicious/noExplicitAny: admin eoi-documents route not yet in published pkg
+	const { data, error, status, headers } = await (client as any).tourstack.admin["eoi-documents"].get({ query: { eoiId } });
+	return {
+		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
 // Tours
 export async function getTours(status?: string, page?: number, limit?: number) {
 	const query: { status?: string; page?: string; limit?: string } = {};

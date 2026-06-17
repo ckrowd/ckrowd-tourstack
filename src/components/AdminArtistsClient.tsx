@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useFormatter, useTranslations } from "next-intl";
 import Image from "next/image";
@@ -234,7 +235,7 @@ export default function AdminArtistsClient() {
 						</div>
 					) : (
 						<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
-							{filtered.map((artist) => {
+							{filtered.map((artist): React.ReactNode => {
 								const links = (artist.social_links ?? {}) as SocialLinks;
 								const status = String(artist.status ?? "pending");
 								const isPending = !artist.status || artist.status === "pending";
@@ -248,7 +249,7 @@ export default function AdminArtistsClient() {
 									>
 										{/* Photo header */}
 										<div className="h-32 relative bg-surface-container-high shrink-0">
-											{artist.image_url ? (
+											{Boolean(artist.image_url) ? (
 												<Image
 													src={String(artist.image_url)}
 													alt={String(artist.name ?? "")}
@@ -283,7 +284,7 @@ export default function AdminArtistsClient() {
 												</p>
 												<div className="flex items-center gap-2 mt-0.5 flex-wrap">
 													<span className="text-xs text-on-surface-variant">{String(artist.genre ?? "")}</span>
-													{artist.nationality && (
+													{Boolean(artist.nationality) && (
 														<>
 															<span className="text-outline-variant">·</span>
 															<span className="text-xs text-on-surface-variant">{String(artist.nationality)}</span>
@@ -293,7 +294,7 @@ export default function AdminArtistsClient() {
 											</div>
 
 											{/* Bio */}
-											{artist.bio && (
+											{Boolean(artist.bio) && (
 												<p className="text-xs text-on-surface-variant line-clamp-2">
 													{String(artist.bio)}
 												</p>
@@ -349,7 +350,7 @@ export default function AdminArtistsClient() {
 														{artist.manager_name ? String(artist.manager_name) : "—"}
 													</p>
 												</div>
-												{artist.created_at && (
+												{Boolean(artist.created_at) && (
 													<p className="text-[10px] text-on-surface-variant ml-auto shrink-0">
 														{format.relativeTime(new Date(String(artist.created_at)))}
 													</p>
@@ -424,7 +425,7 @@ export default function AdminArtistsClient() {
 										className="bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant/10 hover:shadow-md transition-shadow"
 									>
 										<div className="h-36 relative bg-surface-container-high">
-											{artist.image_url ? (
+											{Boolean(artist.image_url) ? (
 												<Image
 													src={String(artist.image_url)}
 													alt={String(artist.name ?? "")}

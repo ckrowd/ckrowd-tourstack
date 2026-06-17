@@ -627,7 +627,7 @@
         "title": "Documents & Declaration",
         "documentsSection": "Required Documents",
         "declarationSection": "Declaration",
-        "documentsNote": "Confirm which documents you have available. You will be asked to upload them after your EOI is shortlisted.",
+        "documentsNote": "Confirm which documents you have available. You will be asked to upload them after your EOI is approved.",
         "hasCACDocuments": "CAC Certificate / Business Registration Document",
         "hasFinancialStatements": "Financial Statements for the last 2 years",
         "hasTourDocs": "Tour itinerary or artist agreement (if available)",
@@ -3024,7 +3024,31 @@
       "title": "You requested insurance support",
       "description": "One of your EOIs requested insurance. Choose a package and submit your application.",
       "cta": "Apply for Insurance"
+    },
+    "docsPrompt": {
+      "title": "Your EOI has been approved — upload your documents",
+      "description": "Please upload the required documents: CAC/Business Registration, Financial Statements, and Tour Itinerary or Artist Agreement.",
+      "cta": "Upload Documents"
     }
+  },
+  "EOIDocumentsPage": {
+    "title": "Upload Required Documents",
+    "description": "Please upload the documents below for your approved EOI. These will be reviewed by the Ckrowd team.",
+    "uploadedDocs": "Uploaded Documents",
+    "noDocsYet": "No documents uploaded yet.",
+    "uploadBtn": "Upload",
+    "uploading": "Uploading...",
+    "uploadSuccess": "Document uploaded successfully.",
+    "uploadError": "Failed to upload document. Please try again.",
+    "docTypes": {
+      "cac": "CAC Certificate / Business Registration Document",
+      "financial_statements": "Financial Statements (last 2 years)",
+      "tour_itinerary": "Tour Itinerary or Artist Agreement",
+      "other": "Other Supporting Document"
+    },
+    "uploadedOn": "Uploaded",
+    "download": "Download",
+    "backToDashboard": "Back to Dashboard"
   },
   "ToursPage": {
     "promoterPortal": "Promoter Portal",
