@@ -9,19 +9,16 @@ import { useRouter } from "@/i18n/routing";
 function isProfileComplete(data: unknown): boolean {
 	if (!data || typeof data !== "object") return false;
 	const d = data as Record<string, unknown>;
-	const requiredStrings = [
-		"company_name", "company_type", "registration_number", "tax_id",
-		"incorporation_date", "incorporation_country",
-		"primary_address", "country", "city", "phone", "bio",
-		"contact_person", "job_title", "contact_email",
-		"company_size", "markets_regions", "genres_specialties",
-		"bank_name", "bank_account_holder", "bank_account_number", "bank_swift_bic", "currency_preference",
-		"logo_url",
+	// Only check the core fields that are guaranteed to be set once the user
+	// has gone through the profile setup form at least once. Additional fields
+	// (logo, banking, etc.) are still required by the form itself but should
+	// not cause repeated dashboard redirects for returning users.
+	const coreFields = [
+		"company_name", "company_type",
+		"contact_person", "contact_email", "phone",
+		"country", "city",
 	];
-	if (requiredStrings.some((k) => !d[k])) return false;
-	if (d.years_in_business == null) return false;
-	if (d.average_events_year == null) return false;
-	return true;
+	return coreFields.every((k) => !!d[k]);
 }
 
 export { isProfileComplete };

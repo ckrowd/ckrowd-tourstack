@@ -1,6 +1,7 @@
 ﻿import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getAdminEOIs } from "@/app/actions";
 import EoiActionPanel from "@/components/EoiActionPanel";
+import EoiDocumentsPanel from "@/components/EoiDocumentsPanel";
 import PageTour from "@/components/PageTour";
 
 function MatchBar({ score }: { score: number }) {
@@ -270,6 +271,14 @@ export default async function AdminEOIPage({
 										signedOff={String(eoi.flag_note ?? "") === "signed_off"}
 									/>
 								</div>
+								{status === "approved" && (
+									<div className="mt-4 border-t border-slate-100 pt-4">
+										<p className="text-[10px] font-black uppercase tracking-widest text-on-surface-variant mb-2">
+											Uploaded Documents
+										</p>
+										<EoiDocumentsPanel eoiId={String(eoi.id)} />
+									</div>
+								)}
 							</div>
 						);
 					})}

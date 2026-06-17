@@ -202,6 +202,33 @@ export default async function DashboardPage({ params }: Props) {
 							</Link>
 						</div>
 					)}
+					{/* Document upload prompt for approved EOIs */}
+					{eois.some((e) => String(e.status) === "approved") && (
+						<div className="mb-6 bg-emerald-50 border border-emerald-200 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+							<div className="flex items-start gap-3">
+								<span
+									className="material-symbols-outlined text-emerald-600 mt-0.5 shrink-0"
+									style={{ fontVariationSettings: "'FILL' 1" }}
+								>
+									upload_file
+								</span>
+								<div>
+									<p className="font-(family-name:--font-manrope) font-semibold text-emerald-900 text-sm">
+										{t("docsPrompt.title")}
+									</p>
+									<p className="text-xs text-emerald-800 mt-0.5">
+										{t("docsPrompt.description")}
+									</p>
+								</div>
+							</div>
+							<Link
+								href={`/eoi/documents?eoiId=${String(eois.find((e) => String(e.status) === "approved")?.id ?? "")}`}
+								className="bg-emerald-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-all shrink-0"
+							>
+								{t("docsPrompt.cta")}
+							</Link>
+						</div>
+					)}
 					{/* Tour Progress Tracker */}
 					<div className="bg-surface-container-lowest rounded-xl p-4 md:p-6 shadow-sm mb-10">
 						<div className="flex items-center justify-between mb-4 gap-2">

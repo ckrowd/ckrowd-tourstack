@@ -515,12 +515,13 @@ function EOIPageContent() {
 		}
 		if (!validateStep(step)) return;
 		if (!artist) return;
+		const safeNum = (s: string) => { const n = Number(s.replace(/,/g, "")); return Number.isFinite(n) ? n : undefined; };
 		submitMutation.mutate({
 			artistId: artist.id,
 			city: form.venueCity || form.proposedCities.split(",")[0]?.trim() || "",
 			venue: form.venueName || undefined,
-			capacity: form.venueCapacity ? Number(form.venueCapacity.replace(/,/g, "")) : undefined,
-			budget: form.totalBudget ? Number(form.totalBudget.replace(/,/g, "")) : undefined,
+			capacity: form.venueCapacity ? safeNum(form.venueCapacity) : undefined,
+			budget: form.totalBudget ? safeNum(form.totalBudget) : undefined,
 			audience: form.expectedTicketSales || undefined,
 			fundingType: form.needsFinancing ? (form.financingStructure || "required") : undefined,
 			notes: buildNotes(form),
@@ -667,22 +668,22 @@ function EOIPageContent() {
 										<div className="grid gap-5 sm:grid-cols-2">
 											<div>
 												<FLabel htmlFor="s2-years" required>{t("form.step2.yearsInBusiness.label")}</FLabel>
-												<input id="s2-years" type="number" inputMode="numeric" placeholder={t("form.step2.yearsInBusiness.placeholder")} value={form.yearsInBusiness} onChange={e => set("yearsInBusiness", e.target.value)} className={`${ic} ${errors.yearsInBusiness ? icErr : ""}`} aria-invalid={!!errors.yearsInBusiness} />
+												<input id="s2-years" type="text" inputMode="numeric" placeholder={t("form.step2.yearsInBusiness.placeholder")} value={form.yearsInBusiness} onChange={e => set("yearsInBusiness", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.yearsInBusiness ? icErr : ""}`} aria-invalid={!!errors.yearsInBusiness} />
 												<FError msg={errors.yearsInBusiness} />
 											</div>
 											<div>
 												<FLabel htmlFor="s2-concerts" required>{t("form.step2.concertsOrganized.label")}</FLabel>
-												<input id="s2-concerts" type="number" inputMode="numeric" placeholder={t("form.step2.concertsOrganized.placeholder")} value={form.concertsOrganized} onChange={e => set("concertsOrganized", e.target.value)} className={`${ic} ${errors.concertsOrganized ? icErr : ""}`} aria-invalid={!!errors.concertsOrganized} />
+												<input id="s2-concerts" type="text" inputMode="numeric" placeholder={t("form.step2.concertsOrganized.placeholder")} value={form.concertsOrganized} onChange={e => set("concertsOrganized", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.concertsOrganized ? icErr : ""}`} aria-invalid={!!errors.concertsOrganized} />
 												<FError msg={errors.concertsOrganized} />
 											</div>
 											<div>
 												<FLabel htmlFor="s2-largest" required>{t("form.step2.largestConcertCapacity.label")}</FLabel>
-												<input id="s2-largest" type="text" inputMode="numeric" placeholder={t("form.step2.largestConcertCapacity.placeholder")} value={form.largestConcertCapacity} onChange={e => set("largestConcertCapacity", e.target.value)} className={`${ic} ${errors.largestConcertCapacity ? icErr : ""}`} aria-invalid={!!errors.largestConcertCapacity} />
+												<input id="s2-largest" type="text" inputMode="numeric" placeholder={t("form.step2.largestConcertCapacity.placeholder")} value={form.largestConcertCapacity} onChange={e => set("largestConcertCapacity", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.largestConcertCapacity ? icErr : ""}`} aria-invalid={!!errors.largestConcertCapacity} />
 												<FError msg={errors.largestConcertCapacity} />
 											</div>
 											<div>
 												<FLabel htmlFor="s2-avg" required>{t("form.step2.averageEventsYear.label")}</FLabel>
-												<input id="s2-avg" type="number" inputMode="numeric" placeholder={t("form.step2.averageEventsYear.placeholder")} value={form.averageEventsYear} onChange={e => set("averageEventsYear", e.target.value)} className={`${ic} ${errors.averageEventsYear ? icErr : ""}`} aria-invalid={!!errors.averageEventsYear} />
+												<input id="s2-avg" type="text" inputMode="numeric" placeholder={t("form.step2.averageEventsYear.placeholder")} value={form.averageEventsYear} onChange={e => set("averageEventsYear", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.averageEventsYear ? icErr : ""}`} aria-invalid={!!errors.averageEventsYear} />
 												<FError msg={errors.averageEventsYear} />
 											</div>
 											<div className="sm:col-span-2">
@@ -740,15 +741,15 @@ function EOIPageContent() {
 											<SectionHeading>{t("form.step3.artistSection")}</SectionHeading>
 											<div>
 												<FLabel htmlFor="s3-spotify">{t("form.step3.spotifyListeners.label")}</FLabel>
-												<input id="s3-spotify" type="text" inputMode="numeric" placeholder={t("form.step3.spotifyListeners.placeholder")} value={form.spotifyListeners} onChange={e => set("spotifyListeners", e.target.value)} className={ic} />
+												<input id="s3-spotify" type="text" inputMode="numeric" placeholder={t("form.step3.spotifyListeners.placeholder")} value={form.spotifyListeners} onChange={e => set("spotifyListeners", e.target.value.replace(/\D/g, ""))} className={ic} />
 											</div>
 											<div>
 												<FLabel htmlFor="s3-yt">{t("form.step3.youtubeSubscribers.label")}</FLabel>
-												<input id="s3-yt" type="text" inputMode="numeric" placeholder={t("form.step3.youtubeSubscribers.placeholder")} value={form.youtubeSubscribers} onChange={e => set("youtubeSubscribers", e.target.value)} className={ic} />
+												<input id="s3-yt" type="text" inputMode="numeric" placeholder={t("form.step3.youtubeSubscribers.placeholder")} value={form.youtubeSubscribers} onChange={e => set("youtubeSubscribers", e.target.value.replace(/\D/g, ""))} className={ic} />
 											</div>
 											<div>
 												<FLabel htmlFor="s3-aig">{t("form.step3.artistInstagram.label")}</FLabel>
-												<input id="s3-aig" type="text" inputMode="numeric" placeholder={t("form.step3.artistInstagram.placeholder")} value={form.artistInstagram} onChange={e => set("artistInstagram", e.target.value)} className={ic} />
+												<input id="s3-aig" type="text" inputMode="numeric" placeholder={t("form.step3.artistInstagram.placeholder")} value={form.artistInstagram} onChange={e => set("artistInstagram", e.target.value.replace(/\D/g, ""))} className={ic} />
 											</div>
 										</div>
 									)}
@@ -769,12 +770,12 @@ function EOIPageContent() {
 											</div>
 											<div>
 												<FLabel htmlFor="s4-vcap" required>{t("form.step4.venueCapacity.label")}</FLabel>
-												<input id="s4-vcap" type="text" inputMode="numeric" placeholder={t("form.step4.venueCapacity.placeholder")} value={form.venueCapacity} onChange={e => set("venueCapacity", e.target.value)} className={`${ic} ${errors.venueCapacity ? icErr : ""}`} aria-invalid={!!errors.venueCapacity} />
+												<input id="s4-vcap" type="text" inputMode="numeric" placeholder={t("form.step4.venueCapacity.placeholder")} value={form.venueCapacity} onChange={e => set("venueCapacity", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.venueCapacity ? icErr : ""}`} aria-invalid={!!errors.venueCapacity} />
 												<FError msg={errors.venueCapacity} />
 											</div>
 											<div>
 												<FLabel htmlFor="s4-vrent">{t("form.step4.venueRentalCost.label")}</FLabel>
-												<input id="s4-vrent" type="text" inputMode="numeric" placeholder={t("form.step4.venueRentalCost.placeholder")} value={form.venueRentalCost} onChange={e => set("venueRentalCost", e.target.value)} className={ic} />
+												<input id="s4-vrent" type="text" inputMode="numeric" placeholder={t("form.step4.venueRentalCost.placeholder")} value={form.venueRentalCost} onChange={e => set("venueRentalCost", e.target.value.replace(/\D/g, ""))} className={ic} />
 											</div>
 											<div>
 												<FLabel htmlFor="s4-vtype" required>{t("form.step4.venueType.label")}</FLabel>
@@ -811,12 +812,12 @@ function EOIPageContent() {
 											</div>
 											<div>
 												<FLabel htmlFor="s4-tsales" required>{t("form.step4.expectedTicketSales.label")}</FLabel>
-												<input id="s4-tsales" type="text" inputMode="numeric" placeholder={t("form.step4.expectedTicketSales.placeholder")} value={form.expectedTicketSales} onChange={e => set("expectedTicketSales", e.target.value)} className={`${ic} ${errors.expectedTicketSales ? icErr : ""}`} aria-invalid={!!errors.expectedTicketSales} />
+												<input id="s4-tsales" type="text" inputMode="numeric" placeholder={t("form.step4.expectedTicketSales.placeholder")} value={form.expectedTicketSales} onChange={e => set("expectedTicketSales", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.expectedTicketSales ? icErr : ""}`} aria-invalid={!!errors.expectedTicketSales} />
 												<FError msg={errors.expectedTicketSales} />
 											</div>
 											<div>
 												<FLabel htmlFor="s4-occ" required>{t("form.step4.expectedOccupancy.label")}</FLabel>
-												<input id="s4-occ" type="text" inputMode="numeric" placeholder={t("form.step4.expectedOccupancy.placeholder")} value={form.expectedOccupancy} onChange={e => set("expectedOccupancy", e.target.value)} className={`${ic} ${errors.expectedOccupancy ? icErr : ""}`} aria-invalid={!!errors.expectedOccupancy} />
+												<input id="s4-occ" type="text" inputMode="numeric" placeholder={t("form.step4.expectedOccupancy.placeholder")} value={form.expectedOccupancy} onChange={e => set("expectedOccupancy", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.expectedOccupancy ? icErr : ""}`} aria-invalid={!!errors.expectedOccupancy} />
 												<FError msg={errors.expectedOccupancy} />
 											</div>
 										</div>
@@ -831,50 +832,50 @@ function EOIPageContent() {
 											</div>
 											<div>
 												<FLabel htmlFor="s5-afee" required>{t("form.step5.artistFee.label")}</FLabel>
-												<input id="s5-afee" type="text" inputMode="numeric" placeholder={t("form.step5.artistFee.placeholder")} value={form.artistFee} onChange={e => set("artistFee", e.target.value)} className={`${ic} ${errors.artistFee ? icErr : ""}`} aria-invalid={!!errors.artistFee} />
+												<input id="s5-afee" type="text" inputMode="numeric" placeholder={t("form.step5.artistFee.placeholder")} value={form.artistFee} onChange={e => set("artistFee", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.artistFee ? icErr : ""}`} aria-invalid={!!errors.artistFee} />
 												<FError msg={errors.artistFee} />
 											</div>
 											<div>
 												<FLabel htmlFor="s5-prod" required>{t("form.step5.productionCosts.label")}</FLabel>
-												<input id="s5-prod" type="text" inputMode="numeric" placeholder={t("form.step5.productionCosts.placeholder")} value={form.productionCosts} onChange={e => set("productionCosts", e.target.value)} className={`${ic} ${errors.productionCosts ? icErr : ""}`} aria-invalid={!!errors.productionCosts} />
+												<input id="s5-prod" type="text" inputMode="numeric" placeholder={t("form.step5.productionCosts.placeholder")} value={form.productionCosts} onChange={e => set("productionCosts", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.productionCosts ? icErr : ""}`} aria-invalid={!!errors.productionCosts} />
 												<FError msg={errors.productionCosts} />
 											</div>
 											<div>
 												<FLabel htmlFor="s5-mkt" required>{t("form.step5.marketingCosts.label")}</FLabel>
-												<input id="s5-mkt" type="text" inputMode="numeric" placeholder={t("form.step5.marketingCosts.placeholder")} value={form.marketingCosts} onChange={e => set("marketingCosts", e.target.value)} className={`${ic} ${errors.marketingCosts ? icErr : ""}`} aria-invalid={!!errors.marketingCosts} />
+												<input id="s5-mkt" type="text" inputMode="numeric" placeholder={t("form.step5.marketingCosts.placeholder")} value={form.marketingCosts} onChange={e => set("marketingCosts", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.marketingCosts ? icErr : ""}`} aria-invalid={!!errors.marketingCosts} />
 												<FError msg={errors.marketingCosts} />
 											</div>
 											<div>
 												<FLabel htmlFor="s5-ops" required>{t("form.step5.operationsCosts.label")}</FLabel>
-												<input id="s5-ops" type="text" inputMode="numeric" placeholder={t("form.step5.operationsCosts.placeholder")} value={form.operationsCosts} onChange={e => set("operationsCosts", e.target.value)} className={`${ic} ${errors.operationsCosts ? icErr : ""}`} aria-invalid={!!errors.operationsCosts} />
+												<input id="s5-ops" type="text" inputMode="numeric" placeholder={t("form.step5.operationsCosts.placeholder")} value={form.operationsCosts} onChange={e => set("operationsCosts", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.operationsCosts ? icErr : ""}`} aria-invalid={!!errors.operationsCosts} />
 												<FError msg={errors.operationsCosts} />
 											</div>
 											<div className="sm:col-span-2">
 												<FLabel htmlFor="s5-total" required>{t("form.step5.totalBudget.label")}</FLabel>
-												<input id="s5-total" type="text" inputMode="numeric" placeholder={t("form.step5.totalBudget.placeholder")} value={form.totalBudget} onChange={e => set("totalBudget", e.target.value)} className={`${ic} ${errors.totalBudget ? icErr : ""}`} aria-invalid={!!errors.totalBudget} />
+												<input id="s5-total" type="text" inputMode="numeric" placeholder={t("form.step5.totalBudget.placeholder")} value={form.totalBudget} onChange={e => set("totalBudget", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.totalBudget ? icErr : ""}`} aria-invalid={!!errors.totalBudget} />
 												<FError msg={errors.totalBudget} />
 											</div>
 
 											<SectionHeading>{t("form.step5.revenueSection")}</SectionHeading>
 											<div>
 												<FLabel htmlFor="s5-trev">{t("form.step5.ticketingRevenue.label")}</FLabel>
-												<input id="s5-trev" type="text" inputMode="numeric" placeholder={t("form.step5.ticketingRevenue.placeholder")} value={form.ticketingRevenue} onChange={e => set("ticketingRevenue", e.target.value)} className={ic} />
+												<input id="s5-trev" type="text" inputMode="numeric" placeholder={t("form.step5.ticketingRevenue.placeholder")} value={form.ticketingRevenue} onChange={e => set("ticketingRevenue", e.target.value.replace(/\D/g, ""))} className={ic} />
 											</div>
 											<div>
 												<FLabel htmlFor="s5-srev">{t("form.step5.sponsorshipRevenue.label")}</FLabel>
-												<input id="s5-srev" type="text" inputMode="numeric" placeholder={t("form.step5.sponsorshipRevenue.placeholder")} value={form.sponsorshipRevenue} onChange={e => set("sponsorshipRevenue", e.target.value)} className={ic} />
+												<input id="s5-srev" type="text" inputMode="numeric" placeholder={t("form.step5.sponsorshipRevenue.placeholder")} value={form.sponsorshipRevenue} onChange={e => set("sponsorshipRevenue", e.target.value.replace(/\D/g, ""))} className={ic} />
 											</div>
 											<div>
 												<FLabel htmlFor="s5-orev">{t("form.step5.otherRevenue.label")}</FLabel>
-												<input id="s5-orev" type="text" inputMode="numeric" placeholder={t("form.step5.otherRevenue.placeholder")} value={form.otherRevenue} onChange={e => set("otherRevenue", e.target.value)} className={ic} />
+												<input id="s5-orev" type="text" inputMode="numeric" placeholder={t("form.step5.otherRevenue.placeholder")} value={form.otherRevenue} onChange={e => set("otherRevenue", e.target.value.replace(/\D/g, ""))} className={ic} />
 											</div>
 											<div>
 												<FLabel htmlFor="s5-trev2">{t("form.step5.totalRevenue.label")}</FLabel>
-												<input id="s5-trev2" type="text" inputMode="numeric" placeholder={t("form.step5.totalRevenue.placeholder")} value={form.totalRevenue} onChange={e => set("totalRevenue", e.target.value)} className={ic} />
+												<input id="s5-trev2" type="text" inputMode="numeric" placeholder={t("form.step5.totalRevenue.placeholder")} value={form.totalRevenue} onChange={e => set("totalRevenue", e.target.value.replace(/\D/g, ""))} className={ic} />
 											</div>
 											<div className="sm:col-span-2">
 												<FLabel htmlFor="s5-net">{t("form.step5.netProfit.label")}</FLabel>
-												<input id="s5-net" type="text" inputMode="numeric" placeholder={t("form.step5.netProfit.placeholder")} value={form.netProfit} onChange={e => set("netProfit", e.target.value)} className={ic} />
+												<input id="s5-net" type="text" inputMode="numeric" placeholder={t("form.step5.netProfit.placeholder")} value={form.netProfit} onChange={e => set("netProfit", e.target.value.replace(/\D/g, ""))} className={ic} />
 											</div>
 										</div>
 									)}
@@ -941,7 +942,7 @@ function EOIPageContent() {
 											<div className={`sm:col-span-2 grid sm:grid-cols-2 gap-5 transition-all ${form.needsFinancing ? "" : "opacity-40 pointer-events-none select-none"}`} aria-hidden={!form.needsFinancing}>
 												<div>
 													<FLabel htmlFor="s6-famount">{t("form.step6.financingAmount.label")}</FLabel>
-													<input id="s6-famount" type="text" inputMode="numeric" tabIndex={form.needsFinancing ? 0 : -1} placeholder={t("form.step6.financingAmount.placeholder")} value={form.financingAmount} onChange={e => set("financingAmount", e.target.value)} className={ic} />
+													<input id="s6-famount" type="text" inputMode="numeric" tabIndex={form.needsFinancing ? 0 : -1} placeholder={t("form.step6.financingAmount.placeholder")} value={form.financingAmount} onChange={e => set("financingAmount", e.target.value.replace(/\D/g, ""))} className={ic} />
 												</div>
 												<div>
 													<FLabel htmlFor="s6-fstruct">{t("form.step6.financingStructure.label")}</FLabel>
@@ -985,12 +986,12 @@ function EOIPageContent() {
 											</div>
 											<div>
 												<FLabel htmlFor="s6-bnum" required>{t("form.step6.bankAccountNumber.label")}</FLabel>
-												<input id="s6-bnum" type="text" inputMode="numeric" placeholder={t("form.step6.bankAccountNumber.placeholder")} value={form.bankAccountNumber} onChange={e => set("bankAccountNumber", e.target.value)} className={`${ic} ${errors.bankAccountNumber ? icErr : ""}`} aria-invalid={!!errors.bankAccountNumber} />
+												<input id="s6-bnum" type="text" inputMode="numeric" placeholder={t("form.step6.bankAccountNumber.placeholder")} value={form.bankAccountNumber} onChange={e => set("bankAccountNumber", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.bankAccountNumber ? icErr : ""}`} aria-invalid={!!errors.bankAccountNumber} />
 												<FError msg={errors.bankAccountNumber} />
 											</div>
 											<div>
 												<FLabel htmlFor="s6-bvn">{t("form.step6.bvnOrRc.label")}</FLabel>
-												<input id="s6-bvn" type="text" placeholder={t("form.step6.bvnOrRc.placeholder")} value={form.bvnOrRc} onChange={e => set("bvnOrRc", e.target.value)} className={ic} />
+												<input id="s6-bvn" type="text" placeholder={t("form.step6.bvnOrRc.placeholder")} value={form.bvnOrRc} onChange={e => set("bvnOrRc", e.target.value.replace(/\D/g, ""))} className={ic} />
 											</div>
 										</div>
 									)}

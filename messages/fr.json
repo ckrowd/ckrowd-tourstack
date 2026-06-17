@@ -627,7 +627,7 @@
         "title": "Documents & déclaration",
         "documentsSection": "Documents requis",
         "declarationSection": "Déclaration",
-        "documentsNote": "Confirmez les documents dont vous disposez. Il vous sera demandé de les télécharger après présélection de votre EOI.",
+        "documentsNote": "Confirmez les documents dont vous disposez. Il vous sera demandé de les télécharger après approbation de votre EOI.",
         "hasCACDocuments": "Certificat CAC / Document d'immatriculation de l'entreprise",
         "hasFinancialStatements": "États financiers des 2 dernières années",
         "hasTourDocs": "Itinéraire de tournée ou accord avec l'artiste (si disponible)",
@@ -3024,7 +3024,31 @@
       "title": "Vous avez demandé un soutien en assurance",
       "description": "L'une de vos EOI a demandé une assurance. Choisissez un forfait et soumettez votre demande.",
       "cta": "Demander une assurance"
+    },
+    "docsPrompt": {
+      "title": "Votre EOI a été approuvée — téléchargez vos documents",
+      "description": "Veuillez télécharger les documents requis : CAC/Immatriculation, États financiers et Itinéraire de tournée ou accord avec l'artiste.",
+      "cta": "Télécharger les documents"
     }
+  },
+  "EOIDocumentsPage": {
+    "title": "Télécharger les documents requis",
+    "description": "Veuillez télécharger les documents ci-dessous pour votre EOI approuvée. Ils seront examinés par l'équipe Ckrowd.",
+    "uploadedDocs": "Documents téléchargés",
+    "noDocsYet": "Aucun document téléchargé pour l'instant.",
+    "uploadBtn": "Télécharger",
+    "uploading": "Téléchargement...",
+    "uploadSuccess": "Document téléchargé avec succès.",
+    "uploadError": "Échec du téléchargement. Veuillez réessayer.",
+    "docTypes": {
+      "cac": "Certificat CAC / Document d'immatriculation",
+      "financial_statements": "États financiers (2 dernières années)",
+      "tour_itinerary": "Itinéraire de tournée ou accord avec l'artiste",
+      "other": "Autre document justificatif"
+    },
+    "uploadedOn": "Téléchargé le",
+    "download": "Télécharger",
+    "backToDashboard": "Retour au tableau de bord"
   },
   "ToursPage": {
     "promoterPortal": "Portail des promoteurs",
