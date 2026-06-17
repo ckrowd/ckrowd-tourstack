@@ -107,7 +107,7 @@ const DEFAULT_FORM: EOIForm = {
 	productionCosts: "", marketingCosts: "", operationsCosts: "", totalBudget: "",
 	ticketingRevenue: "", sponsorshipRevenue: "", otherRevenue: "", totalRevenue: "",
 	netProfit: "", hasCancellationHistory: false, securityPlan: "",
-	hasInsurance: false, insuranceProvider: "", insuranceType: "", insuranceAcknowledged: false,
+	hasInsurance: true, insuranceProvider: "", insuranceType: "", insuranceAcknowledged: false,
 	needsFinancing: false, financingAmount: "", financingPurpose: [],
 	financingStructure: "", bankName: "", bankAccountHolder: "", bankAccountNumber: "",
 	bvnOrRc: "", hasCACDocuments: false, hasFinancialStatements: false,
@@ -897,20 +897,23 @@ function EOIPageContent() {
 
 											<SectionHeading>{t("form.step6.insuranceSection")}</SectionHeading>
 											<div className="sm:col-span-2">
-												<div className="flex items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4">
+												<div className="flex items-center justify-between gap-4 rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4">
 													<p className="text-sm font-semibold text-slate-900">{t("form.step6.hasInsurance")}</p>
-													<ToggleGroup value={form.hasInsurance} onChange={v => set("hasInsurance", v)} options={[t("form.no"), t("form.yes")]} />
+													<span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-3 py-1 text-xs font-bold text-white">
+														<span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+														{t("form.yes")}
+													</span>
 												</div>
 											</div>
-											<div className={`sm:col-span-2 grid sm:grid-cols-2 gap-5 transition-all ${form.hasInsurance ? "" : "opacity-40 pointer-events-none select-none"}`} aria-hidden={!form.hasInsurance}>
+											<div className="sm:col-span-2 grid sm:grid-cols-2 gap-5">
 												<div>
 													<FLabel htmlFor="s6-ins-prov">{t("form.step6.insuranceProvider.label")}</FLabel>
-													<input id="s6-ins-prov" type="text" tabIndex={form.hasInsurance ? 0 : -1} placeholder={t("form.step6.insuranceProvider.placeholder")} value={form.insuranceProvider} onChange={e => set("insuranceProvider", e.target.value)} className={ic} />
+													<input id="s6-ins-prov" type="text" placeholder={t("form.step6.insuranceProvider.placeholder")} value={form.insuranceProvider} onChange={e => set("insuranceProvider", e.target.value)} className={ic} />
 												</div>
 												<div>
 													<FLabel htmlFor="s6-ins-type">{t("form.step6.insuranceType.label")}</FLabel>
 													<div className="relative">
-														<select id="s6-ins-type" tabIndex={form.hasInsurance ? 0 : -1} value={form.insuranceType} onChange={e => set("insuranceType", e.target.value)} className={`${ic} appearance-none pr-9`}>
+														<select id="s6-ins-type" value={form.insuranceType} onChange={e => set("insuranceType", e.target.value)} className={`${ic} appearance-none pr-9`}>
 															<option value="">—</option>
 															<option value="cancellation">{t("form.step6.insuranceType.cancellation")}</option>
 															<option value="liability">{t("form.step6.insuranceType.liability")}</option>
