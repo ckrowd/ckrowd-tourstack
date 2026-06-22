@@ -3196,7 +3196,8 @@
     "profile": "Profil",
     "settings": "Paramètres",
     "startNewTour": "Démarrer une tournée",
-    "profileRequired": "Complétez d'abord votre profil"
+    "profileRequired": "Complétez d'abord votre profil",
+    "aiTools": "Intelligence tournée"
   },
   "CreateTourPage": {
     "management": "Gestion des tournées",
@@ -5876,5 +5877,29 @@
     "signing": "Application des signatures...",
     "noSignature": "Aucune signature — configurez votre Profil d'abord.",
     "close": "Fermer"
+  },
+  "AIToolsPage": {
+    "title": "Intelligence tournée",
+    "description": "Outils alimentés par l'IA pour optimiser votre stratégie de tournée, de la sélection des salles au marketing.",
+    "tabs": {
+      "score": {
+        "description": "Obtenez un score de succès généré par l'IA pour votre tournée basé sur le profil de l'artiste, la salle, les conditions du marché, etc."
+      },
+      "forecast": {
+        "description": "Prédisez les ventes de billets, les revenus et la tarification optimale pour votre tournée."
+      },
+      "sponsors": {
+        "description": "Découvrez les meilleurs partenariats pour votre tournée selon le genre, le public et le marché."
+      },
+      "venues": {
+        "description": "Trouvez les salles idéales pour votre tournée dans n'importe quelle ville, filtrées par capacité, budget et genre."
+      },
+      "route": {
+        "description": "Optimisez votre itinéraire de tournée pour minimiser les coûts de déplacement et maximiser la portée."
+      },
+      "marketing": {
+        "description": "Générez du contenu prêt à publier pour les réseaux sociaux, des communiqués de presse et un calendrier promotionnel de 30 jours."
+      }
+    }
   }
 }

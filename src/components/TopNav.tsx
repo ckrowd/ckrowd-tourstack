@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
-import { useFormatter, useLocale, useTranslations } from "next-intl";
+import { useFormatter, useLocale, useNow, useTranslations } from "next-intl";
 import { useCallback, useSyncExternalStore, useState } from "react";
 import { getEOIs, getTourstackProfile } from "@/app/actions";
 import { useLogout, useSession } from "@/context/AuthContext";
@@ -35,6 +35,7 @@ export default function TopNav() {
 	const tInsuranceAdminSideNav = useTranslations("InsuranceAdminSideNav");
 	const tArtmgmtSideNav = useTranslations("ArtmgmtSideNav");
 	const format = useFormatter();
+	const now = useNow();
 
 	// Notifications are derived from the signed-in promoter's real EOIs.
 	const eoisQuery = useQuery({
@@ -756,7 +757,7 @@ export default function TopNav() {
 												<div className="flex flex-col items-end gap-1.5 shrink-0">
 													{n.date && (
 														<span className="text-[10px] text-slate-400 font-medium mt-0.5">
-															{format.relativeTime(n.date)}
+															{format.relativeTime(n.date, { now })}
 														</span>
 													)}
 													{n.unread && (

@@ -3196,7 +3196,8 @@
     "profile": "Profile",
     "settings": "Settings",
     "startNewTour": "Start New Tour",
-    "profileRequired": "Complete your profile first"
+    "profileRequired": "Complete your profile first",
+    "aiTools": "Tour Intelligence"
   },
   "CreateTourPage": {
     "management": "Tour Management",
@@ -5888,5 +5889,29 @@
     "signing": "Applying signatures...",
     "noSignature": "No signature set — configure in your Profile first.",
     "close": "Close"
+  },
+  "AIToolsPage": {
+    "title": "Tour Intelligence",
+    "description": "AI-powered tools to optimize your tour strategy, from venue selection to marketing.",
+    "tabs": {
+      "score": {
+        "description": "Get an AI-generated success score for your tour based on artist profile, venue, market conditions, and more."
+      },
+      "forecast": {
+        "description": "Predict ticket sales, revenue, and optimal pricing for your tour using real market data."
+      },
+      "sponsors": {
+        "description": "Discover the best sponsorship matches for your tour based on genre, audience, and market."
+      },
+      "venues": {
+        "description": "Find the ideal venues for your tour in any city, filtered by capacity, budget, and genre."
+      },
+      "route": {
+        "description": "Optimize your tour route to minimize travel costs and maximize audience reach across cities."
+      },
+      "marketing": {
+        "description": "Generate ready-to-post social media content, press releases, and a 30-day promotional calendar."
+      }
+    }
   }
 }
