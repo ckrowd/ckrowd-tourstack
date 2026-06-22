@@ -2,10 +2,19 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 
+// Must match SIG constants in ckrowd-prisma/server/services/eoi-pdf.service.ts
+const SIG = {
+	imgY:    88,   // bottom edge of the signature image area
+	imgMaxH: 65,   // max signature image height
+	nameY:   68,   // signatory name text y
+} as const;
+
 interface Props {
   eoiId: string;
   portal: "finance" | "insurance";
   adminSignature: string | null;
+  adminName: string | null;      // name of the person who signed (right side)
+  adminOrgName: string | null;   // their organisation name (right side)
   ceoSignature: string | null;
   onClose: () => void;
 }
@@ -13,8 +22,10 @@ interface Props {
 async function buildSignedPdfUrl(
   eoiId: string,
   portal: string,
-  adminSig: string | null,
   ceoSig: string | null,
+  adminSig: string | null,
+  adminName: string | null,
+  adminOrgName: string | null,
 ): Promise<string> {
   const { PDFDocument, rgb } = await import("pdf-lib");
 
@@ -28,91 +39,70 @@ async function buildSignedPdfUrl(
   const lastPage = pages[pages.length - 1];
   const { width } = lastPage.getSize();
 
-  // Signature area at bottom of last page
-  const sigAreaY = 80;
-  const sigWidth = 180;
-  const sigHeight = 60;
+  const ML = 56;
+  const sigColW = width / 2 - ML - 20;
 
-  // Draw signature boxes
-  lastPage.drawRectangle({
-    x: 40,
-    y: sigAreaY - 10,
-    width: sigWidth + 20,
-    height: sigHeight + 30,
-    borderColor: rgb(0.8, 0.8, 0.8),
-    borderWidth: 0.5,
-    opacity: 0,
-  });
-
-  lastPage.drawRectangle({
-    x: width / 2 + 20,
-    y: sigAreaY - 10,
-    width: sigWidth + 20,
-    height: sigHeight + 30,
-    borderColor: rgb(0.8, 0.8, 0.8),
-    borderWidth: 0.5,
-    opacity: 0,
-  });
-
-  // Helper: embed a dataUrl image and draw it
-  async function embedSig(dataUrl: string, x: number, y: number) {
+  // Embed a signature image naturally — no box, just the image sitting above the underline
+  async function embedSig(dataUrl: string, x: number) {
     try {
-      const isJpeg =
-        dataUrl.startsWith("data:image/jpeg") ||
-        dataUrl.startsWith("data:image/jpg");
+      const isJpeg = dataUrl.startsWith("data:image/jpeg") || dataUrl.startsWith("data:image/jpg");
       const base64 = dataUrl.split(",")[1];
+      if (!base64) return;
       const bytes = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
-      const img = isJpeg
-        ? await pdfDoc.embedJpg(bytes)
-        : await pdfDoc.embedPng(bytes);
+      const img = isJpeg ? await pdfDoc.embedJpg(bytes) : await pdfDoc.embedPng(bytes);
       const dims = img.scale(1);
-      const scale = Math.min(sigWidth / dims.width, sigHeight / dims.height);
+      // Scale to fit within sigColW × imgMaxH, preserving aspect ratio
+      const scale = Math.min(sigColW / dims.width, SIG.imgMaxH / dims.height);
+      const dw = dims.width * scale;
+      const dh = dims.height * scale;
+      // Place image so its BOTTOM edge aligns with SIG.imgY
       lastPage.drawImage(img, {
         x,
-        y,
-        width: dims.width * scale,
-        height: dims.height * scale,
+        y: SIG.imgY,
+        width: dw,
+        height: dh,
       });
     } catch {
-      // If embedding fails, draw a placeholder line
+      // If embedding fails, draw a faint handwriting-style squiggle line
       lastPage.drawLine({
-        start: { x, y: y + sigHeight / 2 },
-        end: { x: x + sigWidth, y: y + sigHeight / 2 },
-        color: rgb(0.4, 0.4, 0.4),
-        thickness: 1,
+        start: { x, y: SIG.imgY + 20 },
+        end:   { x: x + 80, y: SIG.imgY + 30 },
+        color: rgb(0.3, 0.3, 0.3),
+        thickness: 1.2,
       });
     }
   }
 
-  if (adminSig) await embedSig(adminSig, 50, sigAreaY);
-  if (ceoSig) await embedSig(ceoSig, width / 2 + 30, sigAreaY);
+  // LEFT: CEO signature
+  if (ceoSig) await embedSig(ceoSig, ML);
 
-  // Label text using basic font
-  const font = await pdfDoc.embedFont("Helvetica" as Parameters<typeof pdfDoc.embedFont>[0]);
+  // RIGHT: Finance / Insurance admin signature
+  if (adminSig) await embedSig(adminSig, width / 2);
 
-  lastPage.drawText("Authorised Signatory", {
-    x: 50,
-    y: sigAreaY - 18,
-    size: 7,
-    font,
-    color: rgb(0.5, 0.5, 0.5),
-  });
+  // RIGHT: Add signatory name below the underline (comes from localStorage, not backend)
+  if (adminName || adminOrgName) {
+    const font = await pdfDoc.embedFont("Helvetica-Bold" as Parameters<typeof pdfDoc.embedFont>[0]);
+    const regFont = await pdfDoc.embedFont("Helvetica" as Parameters<typeof pdfDoc.embedFont>[0]);
 
-  lastPage.drawText("CEO, CKROWD (Kayode Adebayo)", {
-    x: width / 2 + 30,
-    y: sigAreaY - 18,
-    size: 7,
-    font,
-    color: rgb(0.5, 0.5, 0.5),
-  });
-
-  // Horizontal divider above sig area
-  lastPage.drawLine({
-    start: { x: 40, y: sigAreaY + sigHeight + 25 },
-    end: { x: width - 40, y: sigAreaY + sigHeight + 25 },
-    color: rgb(0.85, 0.85, 0.85),
-    thickness: 0.5,
-  });
+    if (adminName) {
+      lastPage.drawText(adminName, {
+        x: width / 2,
+        y: SIG.nameY,
+        size: 8,
+        font,
+        color: rgb(0.08, 0.08, 0.08),
+      });
+    }
+    if (adminOrgName) {
+      lastPage.drawText(adminOrgName, {
+        x: width / 2,
+        y: SIG.nameY - 13,
+        size: 7.5,
+        font: regFont,
+        color: rgb(0.33, 0.33, 0.33),
+      });
+    }
+  }
 
   const signedBytes = await pdfDoc.save();
   const blob = new Blob([new Uint8Array(signedBytes)], { type: "application/pdf" });
@@ -123,6 +113,8 @@ export default function EoiPdfViewer({
   eoiId,
   portal,
   adminSignature,
+  adminName,
+  adminOrgName,
   ceoSignature,
   onClose,
 }: Props) {
@@ -132,21 +124,26 @@ export default function EoiPdfViewer({
   const [error, setError] = useState<string | null>(null);
   const blobRef = useRef<string | null>(null);
 
-  // Capture props in refs so effect only runs once per mount (component unmounts on close)
-  const eoiIdRef = useRef(eoiId);
-  const portalRef = useRef(portal);
-  const adminSigRef = useRef(adminSignature);
-  const ceoSigRef = useRef(ceoSignature);
+  const eoiIdRef      = useRef(eoiId);
+  const portalRef     = useRef(portal);
+  const ceoSigRef     = useRef(ceoSignature);
+  const adminSigRef   = useRef(adminSignature);
+  const adminNameRef  = useRef(adminName);
+  const adminOrgRef   = useRef(adminOrgName);
 
   useEffect(() => {
     let cancelled = false;
 
-    buildSignedPdfUrl(eoiIdRef.current, portalRef.current, adminSigRef.current, ceoSigRef.current)
+    buildSignedPdfUrl(
+      eoiIdRef.current,
+      portalRef.current,
+      ceoSigRef.current,
+      adminSigRef.current,
+      adminNameRef.current,
+      adminOrgRef.current,
+    )
       .then((url) => {
-        if (cancelled) {
-          URL.revokeObjectURL(url);
-          return;
-        }
+        if (cancelled) { URL.revokeObjectURL(url); return; }
         if (blobRef.current) URL.revokeObjectURL(blobRef.current);
         blobRef.current = url;
         setBlobUrl(url);
@@ -159,16 +156,11 @@ export default function EoiPdfViewer({
         }
       });
 
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
   }, []);
 
-  // Clean up blob on unmount
   useEffect(() => {
-    return () => {
-      if (blobRef.current) URL.revokeObjectURL(blobRef.current);
-    };
+    return () => { if (blobRef.current) URL.revokeObjectURL(blobRef.current); };
   }, []);
 
   function downloadSigned() {
@@ -178,9 +170,7 @@ export default function EoiPdfViewer({
     a.download = `EOI-${eoiId.slice(-6).toUpperCase()}-signed.pdf`;
     document.body.appendChild(a);
     a.click();
-    setTimeout(() => {
-      document.body.removeChild(a);
-    }, 100);
+    setTimeout(() => { URL.revokeObjectURL(blobUrl); document.body.removeChild(a); }, 100);
   }
 
   return (
@@ -197,15 +187,19 @@ export default function EoiPdfViewer({
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
       />
       <div className="relative flex flex-col w-full max-w-4xl h-[90vh] bg-surface-container-lowest rounded-2xl shadow-2xl overflow-hidden">
-        {/* Header */}
         <div className="flex items-center justify-between gap-4 px-6 py-4 border-b border-outline-variant/10 shrink-0">
           <h2 id={titleId} className="font-(family-name:--font-manrope) font-semibold text-lg text-on-surface">
             Document Preview
           </h2>
           <div className="flex items-center gap-2">
+            {!ceoSignature && (
+              <span className="text-xs text-amber-700 bg-amber-50 px-3 py-1.5 rounded-lg font-medium">
+                CEO signature not set — configure in Admin Profile.
+              </span>
+            )}
             {!adminSignature && (
               <span className="text-xs text-amber-700 bg-amber-50 px-3 py-1.5 rounded-lg font-medium">
-                No signature set — configure in your Profile first.
+                Your signature is not set — configure in your Profile first.
               </span>
             )}
             {blobUrl && (
@@ -229,13 +223,10 @@ export default function EoiPdfViewer({
           </div>
         </div>
 
-        {/* Content */}
         <div className="flex-1 overflow-hidden">
           {loading ? (
             <div className="h-full flex flex-col items-center justify-center gap-3 text-on-surface-variant">
-              <span className="material-symbols-outlined text-4xl animate-spin">
-                progress_activity
-              </span>
+              <span className="material-symbols-outlined text-4xl animate-spin">progress_activity</span>
               <p className="text-sm font-medium">Applying signatures…</p>
             </div>
           ) : error ? (
@@ -244,11 +235,7 @@ export default function EoiPdfViewer({
               <p className="text-sm font-medium">{error}</p>
             </div>
           ) : blobUrl ? (
-            <iframe
-              src={blobUrl}
-              title="Signed EOI PDF"
-              className="w-full h-full border-none"
-            />
+            <iframe src={blobUrl} title="Signed EOI PDF" className="w-full h-full border-none" />
           ) : null}
         </div>
       </div>

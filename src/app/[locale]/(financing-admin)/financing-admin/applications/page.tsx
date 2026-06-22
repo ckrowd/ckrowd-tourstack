@@ -100,6 +100,8 @@ export default function FinancingAdminApplicationsPage() {
 					eoiId={pdfViewerEoiId}
 					portal="finance"
 					adminSignature={adminProfile.adminSignature}
+					adminName={adminProfile.contactPerson || null}
+					adminOrgName={adminProfile.orgName || null}
 					ceoSignature={ceoSig}
 					onClose={() => setPdfViewerEoiId(null)}
 				/>
