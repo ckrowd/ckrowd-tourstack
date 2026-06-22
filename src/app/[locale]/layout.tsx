@@ -25,6 +25,13 @@ const inter = localFont({
 	weight: "100 900",
 });
 
+const materialSymbols = localFont({
+	src: "../../../public/fonts/material-symbols-outlined-400.ttf",
+	variable: "--font-material-symbols",
+	display: "block",
+	weight: "400",
+});
+
 export async function generateMetadata({
 	params,
 }: {
@@ -124,7 +131,7 @@ export default async function RootLayout({
 	const messages = await getMessages();
 
 	return (
-		<html lang={locale} className={`${rubik.variable} ${inter.variable}`}>
+		<html lang={locale} className={`${rubik.variable} ${inter.variable} ${materialSymbols.variable}`}>
 			<body className="min-h-full antialiased" suppressHydrationWarning>
 				<NextIntlClientProvider locale={locale} messages={messages}>
 					<QueryProvider>{children}</QueryProvider>

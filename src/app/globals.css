@@ -4,13 +4,6 @@
   --font-sans: var(--font-inter), system-ui, sans-serif;
 }
 
-@font-face {
-	font-family: "Material Symbols Outlined";
-	font-style: normal;
-	font-weight: 400;
-	font-display: block;
-	src: url("/fonts/material-symbols-outlined-400.ttf") format("truetype");
-}
 
 @theme {
   /* Primary brand color - Energetic Orange */
@@ -88,7 +81,7 @@
 
 /* Material Symbols baseline */
 .material-symbols-outlined {
-	font-family: "Material Symbols Outlined";
+	font-family: var(--font-material-symbols);
 	font-weight: normal;
 	font-style: normal;
 	font-size: 24px;
