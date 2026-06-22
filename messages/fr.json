@@ -3002,7 +3002,6 @@
     "steps": {
       "eoiSubmitted": "EOI soumise",
       "underReview": "En cours d'examen",
-      "matchScore": "Score de correspondance",
       "decision": "Décision",
       "confirmed": "Confirmé"
     },
@@ -3010,10 +3009,13 @@
       "artistTour": "Artiste / Tournée",
       "venue": "Lieu",
       "status": "Statut",
-      "match": "Correspondance",
       "noEois": "Pas encore d'EOI soumises",
       "noEoisDesc": "Parcourez les artistes et soumettez votre première manifestation d'intérêt.",
       "discoverArtistes": "Découvrir les artistes"
+    },
+    "tourIntelligence": {
+      "title": "Tour Intelligence",
+      "description": "Analyses IA pour vos étapes de tournée — score, prévisions et optimisation."
     },
     "activityLabels": {
       "approved": "EOI approuvée — {artist}",

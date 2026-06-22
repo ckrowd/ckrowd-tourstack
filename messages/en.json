@@ -3002,7 +3002,6 @@
     "steps": {
       "eoiSubmitted": "EOI Submitted",
       "underReview": "Under Review",
-      "matchScore": "Match Score",
       "decision": "Decision",
       "confirmed": "Confirmed"
     },
@@ -3010,10 +3009,13 @@
       "artistTour": "Artiste / Tour",
       "venue": "Venue",
       "status": "Status",
-      "match": "Match",
       "noEois": "No EOIs submitted yet",
       "noEoisDesc": "Browse artistes and submit your first Expression of Interest.",
       "discoverArtistes": "Discover Artistes"
+    },
+    "tourIntelligence": {
+      "title": "Tour Intelligence",
+      "description": "AI-powered insights for your tour stops — score, forecast, and optimise."
     },
     "activityLabels": {
       "approved": "EOI Approved — {artist}",

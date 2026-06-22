@@ -1,4 +1,4 @@
-"use server";
+﻿"use server";
 
 import { createClient } from "@ckrowd/ckrowd-prisma";
 import { extractResponseCookies } from "@ckrowd/ckrowd-prisma/utils";
@@ -2274,39 +2274,5 @@ export async function chatWithAI(
 	return {
 		success: true as const,
 		data: { content, model: json.model as string, usage: json.usage },
-	};
-}
-
-// biome-ignore lint/suspicious/noExplicitAny: tour report routes not yet in published pkg
-export async function getTourReport(tourId: string) {
-	const { data, error, status, headers } = await (client as any).tourstack.tours({ id: tourId })
-		.report.get();
-	return {
-		data: await extractPayload(data, { status, headers }),
-		success: !error && data?.success,
-		error: extractError(error, data),
-	};
-}
-
-// biome-ignore lint/suspicious/noExplicitAny: tour report routes not yet in published pkg
-export async function submitTourReport(
-	tourId: string,
-	body: {
-		actualAttendance?: number;
-		actualTicketRevenue?: number;
-		actualSponsorshipRevenue?: number;
-		actualMerchRevenue?: number;
-		actualTotalCosts?: number;
-		actualNetProfit?: number;
-		sellOutPct?: number;
-		promoterNotes?: string;
-	},
-) {
-	const { data, error, status, headers } = await (client as any).tourstack.tours({ id: tourId })
-		.report.post(body);
-	return {
-		data: await extractPayload(data, { status, headers }),
-		success: !error && data?.success,
-		error: extractError(error, data),
 	};
 }
