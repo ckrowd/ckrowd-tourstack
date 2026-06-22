@@ -1,5 +1,6 @@
 ﻿import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getAdminEOIs } from "@/app/actions";
+import AITourScorePanel from "@/components/AITourScorePanel";
 import EoiActionPanel from "@/components/EoiActionPanel";
 import EoiDocumentsPanel from "@/components/EoiDocumentsPanel";
 import PageTour from "@/components/PageTour";
@@ -279,6 +280,12 @@ export default async function AdminEOIPage({
 										<EoiDocumentsPanel eoiId={String(eoi.id)} />
 									</div>
 								)}
+								<div className="mt-4 border-t border-slate-100 pt-4">
+									<p className="text-[10px] font-black uppercase tracking-widest text-on-surface-variant mb-3">
+										AI Tour Success Score™
+									</p>
+									<AITourScorePanel eoiId={String(eoi.id)} />
+								</div>
 							</div>
 						);
 					})}

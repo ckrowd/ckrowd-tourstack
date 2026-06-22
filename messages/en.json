@@ -2934,6 +2934,13 @@
       "title": "Milestones",
       "empty": "No milestones recorded for this tour yet."
     },
+    "aiScore": {
+      "title": "AI Tour Success Score™"
+    },
+    "report": {
+      "title": "Post-Event Report",
+      "description": "Share how the show went to help improve AI predictions for future tours."
+    },
     "errors": {
       "load": "We couldn't load this tour.",
       "milestones": "We couldn't load milestones for this tour."
@@ -3089,6 +3096,47 @@
     "pagination": {
       "previous": "Previous",
       "next": "Next"
+    }
+  },
+  "AITourScore": {
+    "title": "AI Tour Success Score™",
+    "generate": "Generate Score",
+    "generating": "Analyzing…",
+    "regenerate": "Regenerate",
+    "noScore": "No score generated yet.",
+    "generatedAt": "Generated",
+    "error": "Failed to generate score. Please try again.",
+    "breakdown": {
+      "title": "Score Breakdown",
+      "artistDemand": "Artist Demand",
+      "budgetHealth": "Budget Health",
+      "marketFit": "Market Fit",
+      "promoterTrackRecord": "Promoter Track Record"
+    },
+    "risks": {
+      "title": "Key Risks"
+    },
+    "recommendations": {
+      "title": "Recommendations"
+    }
+  },
+  "TourReport": {
+    "title": "Post-Event Report",
+    "description": "Share how the show went to improve future AI predictions.",
+    "submit": "Submit Report",
+    "submitting": "Submitting…",
+    "success": "Report submitted successfully. Thank you!",
+    "error": "Failed to submit report. Please try again.",
+    "submittedOn": "Submitted on",
+    "fields": {
+      "actualAttendance": "Actual Attendance",
+      "actualTicketRevenue": "Ticket Revenue (₦)",
+      "actualSponsorshipRevenue": "Sponsorship Revenue (₦)",
+      "actualMerchRevenue": "Merchandise Revenue (₦)",
+      "actualTotalCosts": "Total Costs (₦)",
+      "actualNetProfit": "Net Profit (₦)",
+      "sellOutPct": "Sell-out %",
+      "promoterNotes": "Notes / Lessons Learned"
     }
   },
   "AdminPage": {

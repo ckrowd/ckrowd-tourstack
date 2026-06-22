@@ -2934,6 +2934,13 @@
       "title": "Jalons",
       "empty": "Aucun jalon enregistré pour cette tournée."
     },
+    "aiScore": {
+      "title": "Score de succès IA™"
+    },
+    "report": {
+      "title": "Rapport post-événement",
+      "description": "Partagez comment le spectacle s'est déroulé pour améliorer les prédictions IA futures."
+    },
     "errors": {
       "load": "Impossible de charger cette tournée.",
       "milestones": "Impossible de charger les jalons de cette tournée."
@@ -3089,6 +3096,47 @@
     "pagination": {
       "previous": "Précédent",
       "next": "Suivant"
+    }
+  },
+  "AITourScore": {
+    "title": "Score de succès IA™",
+    "generate": "Générer le score",
+    "generating": "Analyse en cours…",
+    "regenerate": "Régénérer",
+    "noScore": "Aucun score généré pour l'instant.",
+    "generatedAt": "Généré",
+    "error": "Échec de la génération du score. Veuillez réessayer.",
+    "breakdown": {
+      "title": "Détail du score",
+      "artistDemand": "Demande artiste",
+      "budgetHealth": "Santé budgétaire",
+      "marketFit": "Adéquation marché",
+      "promoterTrackRecord": "Historique promoteur"
+    },
+    "risks": {
+      "title": "Risques clés"
+    },
+    "recommendations": {
+      "title": "Recommandations"
+    }
+  },
+  "TourReport": {
+    "title": "Rapport post-événement",
+    "description": "Partagez comment le spectacle s'est déroulé pour améliorer les prédictions IA futures.",
+    "submit": "Soumettre le rapport",
+    "submitting": "Envoi en cours…",
+    "success": "Rapport soumis avec succès. Merci !",
+    "error": "Échec de la soumission du rapport. Veuillez réessayer.",
+    "submittedOn": "Soumis le",
+    "fields": {
+      "actualAttendance": "Fréquentation réelle",
+      "actualTicketRevenue": "Revenus billetterie (₦)",
+      "actualSponsorshipRevenue": "Revenus parrainage (₦)",
+      "actualMerchRevenue": "Revenus merchandising (₦)",
+      "actualTotalCosts": "Coûts totaux (₦)",
+      "actualNetProfit": "Bénéfice net (₦)",
+      "sellOutPct": "Taux de remplissage %",
+      "promoterNotes": "Notes / Leçons apprises"
     }
   },
   "AdminPage": {

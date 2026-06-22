@@ -1,5 +1,7 @@
 ﻿import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getTour, getTourMilestones } from "@/app/actions";
+import AITourScorePanel from "@/components/AITourScorePanel";
+import TourReportForm from "@/components/TourReportForm";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 import { Link } from "@/i18n/routing";
@@ -149,6 +151,30 @@ export default async function TourDetailPage({
 										</div>
 									</div>
 								</section>
+
+								{/* AI Tour Success Score */}
+								{tour.eoi_id && (
+									<section className="lg:col-span-12 bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+										<div className="flex items-center gap-2 mb-4">
+											<span className="material-symbols-outlined text-[#FF5A30]" style={{ fontVariationSettings: "'FILL' 1" }}>auto_awesome</span>
+											<h3 className="text-base font-(family-name:--font-manrope) font-semibold">
+												{t("aiScore.title")}
+											</h3>
+										</div>
+										<AITourScorePanel eoiId={String(tour.eoi_id)} />
+									</section>
+								)}
+
+								{/* Post-event report for completed tours */}
+								{status === "completed" && (
+									<section className="lg:col-span-12 bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+										<h3 className="text-base font-(family-name:--font-manrope) font-semibold mb-1">
+											{t("report.title")}
+										</h3>
+										<p className="text-sm text-on-surface-variant mb-4">{t("report.description")}</p>
+										<TourReportForm tourId={id} />
+									</section>
+								)}
 
 								<section className="lg:col-span-4 bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
 									<h3 className="text-base font-(family-name:--font-manrope) font-semibold mb-4">

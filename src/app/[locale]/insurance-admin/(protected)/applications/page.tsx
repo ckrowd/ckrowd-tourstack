@@ -97,6 +97,8 @@ export default function InsuranceAdminApplicationsPage() {
 					eoiId={pdfViewerEoiId}
 					portal="insurance"
 					adminSignature={adminProfile.adminSignature}
+					adminName={adminProfile.contactPerson || null}
+					adminOrgName={adminProfile.orgName || null}
 					ceoSignature={ceoSig}
 					onClose={() => setPdfViewerEoiId(null)}
 				/>
