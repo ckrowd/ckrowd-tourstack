@@ -1970,6 +1970,259 @@ export async function listBanks(country = "nigeria") {
 	};
 }
 
+// ── AI Tour Success Score ──────────────────────────────────────────────────
+
+async function deepseekJson<T>(
+	messages: ChatMessage[],
+): Promise<{ success: true; data: T } | { success: false; error: string }> {
+	const result = await chatWithAI(messages, { temperature: 0.3, max_tokens: 2048, json: true });
+	if (!result.success) return result;
+	try {
+		return { success: true, data: JSON.parse(result.data.content) as T };
+	} catch {
+		return { success: false, error: "AI returned invalid JSON" };
+	}
+}
+
+async function buildEoiContext(eoiId: string) {
+	const eoi = await getEOI(eoiId);
+	const e = eoi.success ? (eoi.data as Record<string, unknown>) : {};
+	const artist = (e.artist as Record<string, unknown>) ?? {};
+	return {
+		artistName: String(artist.name ?? "Unknown Artist"),
+		genre: String(artist.genre ?? "Unknown"),
+		tourName: String(artist.tour_name ?? "Unknown Tour"),
+		city: String(e.city ?? "Unknown"),
+		venue: String(e.venue ?? "Unknown"),
+		capacity: String(e.capacity ?? "Unknown"),
+		fundingType: String((e as Record<string, unknown>).funding_type ?? (e as Record<string, unknown>).fundingType ?? "Unknown"),
+	};
+}
+
+export async function getEOIScore(eoiId: string) {
+	const ctx = await buildEoiContext(eoiId);
+	const result = await deepseekJson<{
+		score: number;
+		verdict: string;
+		breakdown: { artist_demand: number; budget_health: number; market_fit: number; promoter_track_record: number };
+		risks: string[];
+		recommendations: string[];
+	}>([
+		{ role: "system", content: "You are a music tour industry analyst. Respond with valid JSON only." },
+		{
+			role: "user",
+			content: `Score this tour EOI from 0–100. Return JSON with exactly these keys: score (number 0-100), verdict (string, one sentence), breakdown (object with keys artist_demand, budget_health, market_fit, promoter_track_record each 0-25), risks (string[]), recommendations (string[]).
+
+Artist: ${ctx.artistName}, Genre: ${ctx.genre}, Tour: ${ctx.tourName}
+City: ${ctx.city}, Venue: ${ctx.venue}, Capacity: ${ctx.capacity}, Funding: ${ctx.fundingType}`,
+		},
+	]);
+	if (!result.success) return { success: false as const, data: null, error: result.error };
+	return {
+		success: true as const,
+		data: { ...result.data, model_used: "deepseek-chat", generated_at: new Date().toISOString() },
+	};
+}
+
+export async function generateEOIScore(eoiId: string) {
+	return getEOIScore(eoiId);
+}
+
+export async function getTicketForecast(eoiId: string, ticketPriceNgn: number) {
+	const ctx = await buildEoiContext(eoiId);
+	const result = await deepseekJson<{
+		projectedSales: number;
+		sellOutProbability: number;
+		estimatedRevenue: number;
+		recommendedPriceRange: string;
+		timeToSellOut: string;
+		pricingTiers: Record<string, { suggestedPrice: number; allocationPct: number }>;
+		insights: string;
+	}>([
+		{ role: "system", content: "You are a music event analyst. Respond with valid JSON only." },
+		{
+			role: "user",
+			content: `Forecast ticket sales. Return JSON with: projectedSales (number), sellOutProbability (0-100), estimatedRevenue (NGN number), recommendedPriceRange (string like "₦12,000 – ₦18,000"), timeToSellOut (string like "14 days"), pricingTiers (object with keys "Early Bird", "General", "VIP" each having suggestedPrice and allocationPct numbers), insights (paragraph string).
+
+Artist: ${ctx.artistName}, Genre: ${ctx.genre}, City: ${ctx.city}, Venue: ${ctx.venue}, Capacity: ${ctx.capacity}, Ticket price: ₦${ticketPriceNgn.toLocaleString()}`,
+		},
+	]);
+	if (!result.success) return { success: false as const, data: null, error: result.error };
+	return { success: true as const, data: result.data };
+}
+
+export async function getSponsorshipMatches(eoiId: string) {
+	const ctx = await buildEoiContext(eoiId);
+	const result = await deepseekJson<{
+		strategy: string;
+		totalPotential: string;
+		topCategory: string;
+		matches: Array<{
+			industry: string;
+			suggestedBrands: string[];
+			reasoning: string;
+			estimatedValue: string;
+			fitScore: number;
+			outreachTip: string;
+		}>;
+	}>([
+		{ role: "system", content: "You are a music sponsorship expert. Respond with valid JSON only." },
+		{
+			role: "user",
+			content: `Find sponsor matches for this tour. Return JSON with: strategy (paragraph), totalPotential (string like "$50,000 – $120,000"), topCategory (string), matches (array of 4-6 objects each with industry, suggestedBrands string[], reasoning, estimatedValue string, fitScore 0-100, outreachTip string).
+
+Artist: ${ctx.artistName}, Genre: ${ctx.genre}, City: ${ctx.city}, Capacity: ${ctx.capacity}`,
+		},
+	]);
+	if (!result.success) return { success: false as const, data: null, error: result.error };
+	return { success: true as const, data: result.data };
+}
+
+export async function getVenueRecommendations(body: {
+	city: string;
+	genre: string;
+	expectedAttendance: number;
+	budgetMaxUsd?: number;
+}) {
+	const result = await deepseekJson<{
+		cityInsights: string;
+		topPick: string;
+		recommendations: Array<{
+			name: string;
+			type: string;
+			location: string;
+			estimatedCapacity: number;
+			capacityUtilization: string;
+			estimatedRentalCostUsd: string;
+			suitabilityScore: number;
+			pros: string[];
+			cons: string[];
+		}>;
+		tip: string;
+	}>([
+		{ role: "system", content: "You are a music venue expert. Respond with valid JSON only." },
+		{
+			role: "user",
+			content: `Recommend venues for a ${body.genre} event in ${body.city} for ${body.expectedAttendance.toLocaleString()} attendees${body.budgetMaxUsd ? `, venue budget up to $${body.budgetMaxUsd.toLocaleString()}` : ""}. Return JSON with: cityInsights (paragraph about the city's music scene), topPick (venue name), recommendations (array of 3-5 objects each with name, type, location, estimatedCapacity number, capacityUtilization string like "75%", estimatedRentalCostUsd string like "$5,000 – $8,000", suitabilityScore 0-100, pros string[], cons string[]), tip (closing tip string).`,
+		},
+	]);
+	if (!result.success) return { success: false as const, data: null, error: result.error };
+	return { success: true as const, data: result.data };
+}
+
+export async function optimizeTourRoute(body: {
+	cities: string[];
+	startCity: string;
+	tourDurationDays?: number;
+}) {
+	const result = await deepseekJson<{
+		logisticsScore: number;
+		estimatedSavingsVsRandom: string;
+		totalTravelDays: number;
+		optimizedRoute: string[];
+		reasoning: string;
+		legs: Array<{ from: string; to: string; recommendedMode: string; travelTimeHours: number; estimatedCostUsd: string }>;
+		tips: string[];
+	}>([
+		{ role: "system", content: "You are a tour logistics expert. Respond with valid JSON only." },
+		{
+			role: "user",
+			content: `Optimize this tour route starting from ${body.startCity}${body.tourDurationDays ? ` over ${body.tourDurationDays} days` : ""}. Cities: ${body.cities.join(", ")}. Return JSON with: logisticsScore (0-100), estimatedSavingsVsRandom (string like "$3,000"), totalTravelDays (number), optimizedRoute (string[] city names in order), reasoning (paragraph), legs (array of objects with from, to, recommendedMode like "flight" or "road", travelTimeHours number, estimatedCostUsd string), tips (string[] of 3-4 tips).`,
+		},
+	]);
+	if (!result.success) return { success: false as const, data: null, error: result.error };
+	return { success: true as const, data: result.data };
+}
+
+export async function generateMarketingContent(eoiId: string) {
+	const ctx = await buildEoiContext(eoiId);
+	const result = await deepseekJson<{
+		instagram: unknown[];
+		twitter: unknown[];
+		facebook: unknown[];
+		emailSubject: string;
+		emailBody: string;
+		pressRelease: string;
+		promotionalCalendar: Array<{ week: number; day: string; platform: string; action: string; copy: string }>;
+	}>([
+		{ role: "system", content: "You are a music marketing expert. Respond with valid JSON only." },
+		{
+			role: "user",
+			content: `Generate marketing content for ${ctx.artistName}'s ${ctx.genre} tour in ${ctx.city} at ${ctx.venue}. Return JSON with these exact keys:
+- instagram: array of 3 plain strings (each string is a complete post with emojis and hashtags inline, NOT an object)
+- twitter: array of 5 plain strings (each string is a complete tweet ≤280 chars, NOT an object)
+- facebook: array of 2 plain strings (each string is a complete post, NOT an object)
+- emailSubject: string
+- emailBody: string (full email text)
+- pressRelease: string (full professional press release)
+- promotionalCalendar: array of 8 objects each with week (number 1-4), day (string), platform (string), action (string), copy (string)
+
+IMPORTANT: instagram, twitter, and facebook must be arrays of plain strings, not arrays of objects.`,
+		},
+	]);
+	if (!result.success) return { success: false as const, data: null, error: result.error };
+
+	const coerce = (arr: unknown[]): string[] =>
+		arr.map((item) => {
+			if (typeof item === "string") return item;
+			if (item && typeof item === "object") {
+				const o = item as Record<string, unknown>;
+				const text = String(o.post ?? o.text ?? o.content ?? o.caption ?? "");
+				const tags = Array.isArray(o.hashtags)
+					? (o.hashtags as string[]).map((h) => (h.startsWith("#") ? h : `#${h}`)).join(" ")
+					: "";
+				return [text, tags].filter(Boolean).join(" ");
+			}
+			return String(item);
+		});
+
+	return {
+		success: true as const,
+		data: {
+			...result.data,
+			instagram: coerce(result.data.instagram),
+			twitter: coerce(result.data.twitter),
+			facebook: coerce(result.data.facebook),
+		},
+	};
+}
+
+// ── Post-event Tour Report ─────────────────────────────────────────────────
+
+// biome-ignore lint/suspicious/noExplicitAny: tour report routes not yet in published pkg
+export async function getTourReport(tourId: string) {
+	const { data, error, status, headers } = await (client as any).tourstack.tours({ id: tourId })
+		.report.get();
+	return {
+		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: tour report routes not yet in published pkg
+export async function submitTourReport(
+	tourId: string,
+	body: {
+		actualAttendance?: number;
+		actualTicketRevenue?: number;
+		actualSponsorshipRevenue?: number;
+		actualMerchRevenue?: number;
+		actualTotalCosts?: number;
+		actualNetProfit?: number;
+		sellOutPct?: number;
+		promoterNotes?: string;
+	},
+) {
+	const { data, error, status, headers } = await (client as any).tourstack.tours({ id: tourId })
+		.report.post(body);
+	return {
+		data: await extractPayload(data, { status, headers }),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
 export async function resolveBankAccount(
 	body: Payload<(typeof client.payments)["resolve-account"]["post"]>,
 ) {
@@ -1979,5 +2232,47 @@ export async function resolveBankAccount(
 		data: await extractPayload(data),
 		success: !error && data?.success,
 		error: extractError(error, data),
+	};
+}
+
+// ── DeepSeek AI Chat ───────────────────────────────────────────────────────
+
+export type ChatMessage = {
+	role: "system" | "user" | "assistant";
+	content: string;
+};
+
+export async function chatWithAI(
+	messages: ChatMessage[],
+	options?: { model?: string; temperature?: number; max_tokens?: number; json?: boolean },
+) {
+	const apiKey = process.env.DEEPSEEK_API_KEY;
+	if (!apiKey) return { success: false as const, error: "DeepSeek API key not configured" };
+
+	const res = await fetch("https://api.deepseek.com/v1/chat/completions", {
+		method: "POST",
+		headers: {
+			"Content-Type": "application/json",
+			Authorization: `Bearer ${apiKey}`,
+		},
+		body: JSON.stringify({
+			model: options?.model ?? "deepseek-chat",
+			messages,
+			temperature: options?.temperature ?? 0.7,
+			max_tokens: options?.max_tokens ?? 2048,
+			...(options?.json ? { response_format: { type: "json_object" } } : {}),
+		}),
+	});
+
+	if (!res.ok) {
+		const errText = await res.text().catch(() => `HTTP ${res.status}`);
+		return { success: false as const, error: errText };
+	}
+
+	const json = await res.json();
+	const content: string = json.choices?.[0]?.message?.content ?? "";
+	return {
+		success: true as const,
+		data: { content, model: json.model as string, usage: json.usage },
 	};
 }
