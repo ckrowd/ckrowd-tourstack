@@ -25,12 +25,14 @@ export default async function ToursPage({ params, searchParams }: Props) {
 
 	const currentPage = Math.max(1, Number.parseInt(pageParam ?? "1", 10) || 1);
 
-	const [toursResult, dashboardResult, eoisResult] = await Promise.all([
+	const [toursResult, dashboardResult, eoisResult, allToursResult] = await Promise.all([
 		getTours(status, currentPage, PAGE_SIZE),
 		getTourstackDashboard(),
 		getEOIs(),
+		getTours(undefined, 1, 999),
 	]);
 	const tours = toursResult.data ?? [];
+	const allTours = allToursResult.data ?? [];
 	// EOIs still in the pipeline — not yet turned into a tour stop.
 	const pendingEois = (eoisResult.data ?? []).filter((eoi) => {
 		const eoiStatus = String(eoi.status ?? "").toLowerCase();
@@ -38,7 +40,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 	});
 	const pagination = toursResult.pagination;
 	const totalPages = pagination?.totalPages ?? 1;
-	const totalStops = pagination?.total ?? tours.length;
+	const totalStops = allToursResult.pagination?.total ?? allTours.length;
 
 	const dashData = dashboardResult.data;
 	const upcomingMilestones = (dashData?.upcomingMilestones ?? []).map((m) => {
@@ -87,10 +89,10 @@ export default async function ToursPage({ params, searchParams }: Props) {
 	}
 	const venueSummary = Array.from(venueMap.values()).slice(0, 5);
 
-	const confirmed = tours.filter(
+	const confirmed = allTours.filter(
 		(tour) => String(tour.status ?? "").toLowerCase() === "confirmed",
 	);
-	const inProgress = tours.filter((tour) =>
+	const inProgress = allTours.filter((tour) =>
 		[
 			"under_review",
 			"needs_revision",
@@ -98,7 +100,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 			"needs revision",
 		].includes(String(tour.status ?? "").toLowerCase()),
 	);
-	const rejected = tours.filter(
+	const rejected = allTours.filter(
 		(tour) => String(tour.status ?? "").toLowerCase() === "rejected",
 	);
 
@@ -553,78 +555,72 @@ export default async function ToursPage({ params, searchParams }: Props) {
 
 						{/* Sidebar: Milestones */}
 						<aside className="lg:col-span-4 space-y-6">
-							<div className="bg-surface-container-lowest rounded-2xl p-7 shadow-sm">
-								<h3 className="font-(family-name:--font-manrope) font-semibold text-base mb-6">
-									{t("upcomingMilestones")}
-								</h3>
-								<div className="space-y-4">
-									{upcomingMilestones.length === 0 && (
-										<p className="text-sm text-on-surface-variant text-center py-2">
-											{t("noMilestones")}
-										</p>
-									)}
-									{upcomingMilestones.map((m) => (
-										<div
-											key={`${m.date}-${m.label}`}
-											className="flex items-start gap-4"
-										>
+							{upcomingMilestones.length > 0 && (
+								<div className="bg-surface-container-lowest rounded-2xl p-7 shadow-sm">
+									<h3 className="font-(family-name:--font-manrope) font-semibold text-base mb-6">
+										{t("upcomingMilestones")}
+									</h3>
+									<div className="space-y-4">
+										{upcomingMilestones.map((m) => (
 											<div
-												className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${m.color}`}
+												key={`${m.date}-${m.label}`}
+												className="flex items-start gap-4"
 											>
-												<span
-													className="material-symbols-outlined text-sm"
-													style={{ fontVariationSettings: "'FILL' 1" }}
+												<div
+													className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${m.color}`}
 												>
-													{m.icon}
-												</span>
+													<span
+														className="material-symbols-outlined text-sm"
+														style={{ fontVariationSettings: "'FILL' 1" }}
+													>
+														{m.icon}
+													</span>
+												</div>
+												<div>
+													<p className="text-sm font-semibold text-on-surface leading-snug">
+														{m.label}
+													</p>
+													<p className="text-xs text-on-surface-variant mt-0.5">
+														{m.date}
+													</p>
+												</div>
 											</div>
-											<div>
-												<p className="text-sm font-semibold text-on-surface leading-snug">
-													{m.label}
-												</p>
-												<p className="text-xs text-on-surface-variant mt-0.5">
-													{m.date}
-												</p>
-											</div>
-										</div>
-									))}
+										))}
+									</div>
 								</div>
-							</div>
+							)}
 
 							{/* Venue snapshot */}
-							<div className="bg-surface-container-lowest rounded-2xl p-7 shadow-sm">
-								<h3 className="font-(family-name:--font-manrope) font-semibold text-base mb-5">
-									{t("venueSummary")}
-								</h3>
-								<div className="space-y-3">
-									{venueSummary.length === 0 && (
-										<p className="text-sm text-on-surface-variant text-center py-2">
-											{t("noVenues")}
-										</p>
-									)}
-									{venueSummary.map((v) => (
-										<div
-											key={v.label}
-											className="flex items-center gap-3 py-2 border-b border-outline-variant/10 last:border-0"
-										>
-											<span
-												className="material-symbols-outlined text-[#FF5A30]"
-												style={{ fontVariationSettings: "'FILL' 1" }}
+							{venueSummary.length > 0 && (
+								<div className="bg-surface-container-lowest rounded-2xl p-7 shadow-sm">
+									<h3 className="font-(family-name:--font-manrope) font-semibold text-base mb-5">
+										{t("venueSummary")}
+									</h3>
+									<div className="space-y-3">
+										{venueSummary.map((v) => (
+											<div
+												key={v.label}
+												className="flex items-center gap-3 py-2 border-b border-outline-variant/10 last:border-0"
 											>
-												stadium
-											</span>
-											<div className="flex-1 min-w-0">
-												<p className="text-sm font-semibold text-on-surface truncate">
-													{v.label}
-												</p>
-												<p className="text-xs text-on-surface-variant">
-													{t("cap")}: {v.cap} · {v.shows} {t("showSingle")}
-												</p>
+												<span
+													className="material-symbols-outlined text-[#FF5A30]"
+													style={{ fontVariationSettings: "'FILL' 1" }}
+												>
+													stadium
+												</span>
+												<div className="flex-1 min-w-0">
+													<p className="text-sm font-semibold text-on-surface truncate">
+														{v.label}
+													</p>
+													<p className="text-xs text-on-surface-variant">
+														{t("cap")}: {v.cap} · {v.shows} {t("showSingle")}
+													</p>
+												</div>
 											</div>
-										</div>
-									))}
+										))}
+									</div>
 								</div>
-							</div>
+							)}
 
 							{/* CTA */}
 							<Link

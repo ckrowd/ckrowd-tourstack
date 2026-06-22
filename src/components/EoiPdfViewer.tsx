@@ -4,9 +4,11 @@ import { useEffect, useId, useRef, useState } from "react";
 
 // Must match SIG constants in ckrowd-prisma/server/services/eoi-pdf.service.ts
 const SIG = {
-	imgY:    88,   // bottom edge of the signature image area
-	imgMaxH: 65,   // max signature image height
-	nameY:   68,   // signatory name text y
+	imgY:         88,   // bottom edge of the signature image area
+	imgMaxH:      65,   // max signature image height
+	nameY:        68,   // signatory name text y
+	orgNameY:     55,   // signatory org name text y
+	narrowSigColW: 150, // column width used for all sig columns
 } as const;
 
 interface Props {
@@ -40,7 +42,14 @@ async function buildSignedPdfUrl(
   const { width } = lastPage.getSize();
 
   const ML = 56;
-  const sigColW = width / 2 - ML - 20;
+  const MR = 56;
+  const NARROW = SIG.narrowSigColW;
+
+  // Fixed x positions — must match eoi-pdf.service.ts
+  const ceoSigX = ML;
+  const finSigX = width - MR - NARROW;
+  const insSigX = (width - NARROW) / 2;
+  const adminSigX = portal === "insurance" ? insSigX : finSigX;
 
   // Embed a signature image naturally — no box, just the image sitting above the underline
   async function embedSig(dataUrl: string, x: number) {
@@ -51,8 +60,8 @@ async function buildSignedPdfUrl(
       const bytes = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
       const img = isJpeg ? await pdfDoc.embedJpg(bytes) : await pdfDoc.embedPng(bytes);
       const dims = img.scale(1);
-      // Scale to fit within sigColW × imgMaxH, preserving aspect ratio
-      const scale = Math.min(sigColW / dims.width, SIG.imgMaxH / dims.height);
+      // Scale to fit within NARROW × imgMaxH, preserving aspect ratio
+      const scale = Math.min(NARROW / dims.width, SIG.imgMaxH / dims.height);
       const dw = dims.width * scale;
       const dh = dims.height * scale;
       // Place image so its BOTTOM edge aligns with SIG.imgY
@@ -74,19 +83,19 @@ async function buildSignedPdfUrl(
   }
 
   // LEFT: CEO signature
-  if (ceoSig) await embedSig(ceoSig, ML);
+  if (ceoSig) await embedSig(ceoSig, ceoSigX);
 
-  // RIGHT: Finance / Insurance admin signature
-  if (adminSig) await embedSig(adminSig, width / 2);
+  // Finance (far right) or Insurance (centred): admin signature
+  if (adminSig) await embedSig(adminSig, adminSigX);
 
-  // RIGHT: Add signatory name below the underline (comes from localStorage, not backend)
+  // Admin signatory name + org name below the underline (comes from localStorage, not backend)
   if (adminName || adminOrgName) {
     const font = await pdfDoc.embedFont("Helvetica-Bold" as Parameters<typeof pdfDoc.embedFont>[0]);
     const regFont = await pdfDoc.embedFont("Helvetica" as Parameters<typeof pdfDoc.embedFont>[0]);
 
     if (adminName) {
       lastPage.drawText(adminName, {
-        x: width / 2,
+        x: adminSigX,
         y: SIG.nameY,
         size: 8,
         font,
@@ -95,8 +104,8 @@ async function buildSignedPdfUrl(
     }
     if (adminOrgName) {
       lastPage.drawText(adminOrgName, {
-        x: width / 2,
-        y: SIG.nameY - 13,
+        x: adminSigX,
+        y: SIG.orgNameY,
         size: 7.5,
         font: regFont,
         color: rgb(0.33, 0.33, 0.33),

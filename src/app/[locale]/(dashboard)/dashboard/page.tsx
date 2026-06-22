@@ -81,17 +81,17 @@ export default async function DashboardPage({ params }: Props) {
 	const nextMilestoneTour = nextMilestone?.tour;
 	const statusStepDone: Record<string, number> = {
 		pending_review: 2,
-		needs_revision: 3,
-		approved: 4,
-		confirmed: 5,
-		rejected: 4,
+		needs_revision: 2,
+		approved: 3,
+		confirmed: 4,
+		rejected: 3,
 	};
 	const progressEOI = recentEOIs[0];
 	const progressStepsDone = progressEOI
 		? (statusStepDone[String(progressEOI.status ?? "pending_review")] ?? 2)
 		: 0;
 	const progressWidthClass =
-		["w-0", "w-1/5", "w-2/5", "w-3/5", "w-4/5", "w-full"][progressStepsDone] ??
+		["w-0", "w-1/4", "w-2/4", "w-3/4", "w-full"][progressStepsDone] ??
 		"w-0";
 	const progressArtist = progressEOI?.artist;
 	const progressTitle = progressEOI
@@ -113,9 +113,8 @@ export default async function DashboardPage({ params }: Props) {
 	const tourSteps = [
 		{ n: "01", label: t("steps.eoiSubmitted"), done: progressStepsDone >= 1 },
 		{ n: "02", label: t("steps.underReview"), done: progressStepsDone >= 2 },
-		{ n: "03", label: t("steps.matchScore"), done: progressStepsDone >= 3 },
-		{ n: "04", label: t("steps.decision"), done: progressStepsDone >= 4 },
-		{ n: "05", label: t("steps.confirmed"), done: progressStepsDone >= 5 },
+		{ n: "03", label: t("steps.decision"), done: progressStepsDone >= 3 },
+		{ n: "04", label: t("steps.confirmed"), done: progressStepsDone >= 4 },
 	];
 	return (
 		<div className="bg-surface text-on-surface">
@@ -412,15 +411,12 @@ export default async function DashboardPage({ params }: Props) {
 											<th className="px-3 md:px-5 py-3 md:py-4 text-[10px] md:text-xs font-semibold uppercase tracking-widest text-on-surface-variant">
 												{t("table.status")}
 											</th>
-											<th className="px-3 md:px-5 py-3 md:py-4 text-[10px] md:text-xs font-semibold uppercase tracking-widest text-on-surface-variant text-right hidden sm:table-cell">
-												{t("table.match")}
-											</th>
 										</tr>
 									</thead>
 									<tbody className="divide-y divide-outline-variant/10">
 										{eois.length === 0 ? (
 											<tr>
-												<td colSpan={4} className="px-5 py-12 text-center">
+												<td colSpan={3} className="px-5 py-12 text-center">
 													<span className="material-symbols-outlined text-4xl text-on-surface-variant block mb-3">
 														confirmation_number
 													</span>
@@ -496,14 +492,7 @@ export default async function DashboardPage({ params }: Props) {
 																{t(`statuses.${status}`)}
 															</span>
 														</td>
-														<td className="px-5 py-4 text-right">
-															<span className="font-(family-name:--font-manrope) font-extrabold text-[#FF5A30]">
-																{req.match_score != null
-																	? `${String(req.match_score)}%`
-																	: "—"}
-															</span>
-														</td>
-													</tr>
+																											</tr>
 												);
 											})
 										)}
@@ -611,6 +600,30 @@ export default async function DashboardPage({ params }: Props) {
 									</div>
 								)}
 							</div>
+
+							{/* Tour Intelligence card */}
+							<Link
+								href="/tour-intelligence"
+								className="flex items-start gap-4 bg-linear-to-br from-[#1a1a2e] to-[#16213e] text-white p-6 rounded-xl shadow-lg hover:scale-[1.02] transition-transform"
+							>
+								<span
+									className="material-symbols-outlined text-2xl shrink-0 text-purple-300 mt-0.5"
+									style={{ fontVariationSettings: "'FILL' 1" }}
+								>
+									auto_awesome
+								</span>
+								<div className="flex-1 min-w-0">
+									<p className="font-(family-name:--font-manrope) font-semibold text-sm">
+										{t("tourIntelligence.title")}
+									</p>
+									<p className="text-xs text-slate-300 mt-0.5 leading-snug">
+										{t("tourIntelligence.description")}
+									</p>
+								</div>
+								<span className="material-symbols-outlined ml-auto text-slate-400 shrink-0">
+									arrow_forward
+								</span>
+							</Link>
 
 							{/* Activity Feed */}
 							<div className="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
