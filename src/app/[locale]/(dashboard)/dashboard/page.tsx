@@ -1,4 +1,4 @@
-﻿import Image from "next/image";
+import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import {
 	getEOIs,
@@ -601,29 +601,7 @@ export default async function DashboardPage({ params }: Props) {
 								)}
 							</div>
 
-							{/* Tour Intelligence card */}
-							<Link
-								href="/tour-intelligence"
-								className="flex items-start gap-4 bg-linear-to-br from-[#1a1a2e] to-[#16213e] text-white p-6 rounded-xl shadow-lg hover:scale-[1.02] transition-transform"
-							>
-								<span
-									className="material-symbols-outlined text-2xl shrink-0 text-purple-300 mt-0.5"
-									style={{ fontVariationSettings: "'FILL' 1" }}
-								>
-									auto_awesome
-								</span>
-								<div className="flex-1 min-w-0">
-									<p className="font-(family-name:--font-manrope) font-semibold text-sm">
-										{t("tourIntelligence.title")}
-									</p>
-									<p className="text-xs text-slate-300 mt-0.5 leading-snug">
-										{t("tourIntelligence.description")}
-									</p>
-								</div>
-								<span className="material-symbols-outlined ml-auto text-slate-400 shrink-0">
-									arrow_forward
-								</span>
-							</Link>
+
 
 							{/* Activity Feed */}
 							<div className="bg-surface-container-lowest p-6 rounded-xl shadow-sm">

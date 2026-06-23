@@ -384,6 +384,7 @@
     "checkingSession": "Vérification de la session",
     "changePhoto": "Changer la photo",
     "uploadingPhoto": "Téléversement…",
+    "tourIntelligence": "Tour Intelligence",
     "notif": {
       "empty": "Aucune notification pour le moment",
       "eoiFallback": "Manifestation d'intérêt",
