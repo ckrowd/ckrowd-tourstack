@@ -40,9 +40,9 @@ export default async function ToursPage({ params, searchParams }: Props) {
 	});
 	const pagination = toursResult.pagination;
 	const totalPages = pagination?.totalPages ?? 1;
-	const totalStops = allToursResult.pagination?.total ?? allTours.length;
 
 	const dashData = dashboardResult.data;
+	const stats = dashData?.stats;
 	const upcomingMilestones = (dashData?.upcomingMilestones ?? []).map((m) => {
 		const mType = String(m.type ?? "");
 		return {
@@ -74,7 +74,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 		string,
 		{ label: string; cap: string; shows: number }
 	>();
-	for (const tour of tours) {
+	for (const tour of allTours) {
 		const key = String(tour.venue ?? tour.city ?? t("unknownVenue"));
 		const cap =
 			tour.capacity != null
@@ -89,10 +89,12 @@ export default async function ToursPage({ params, searchParams }: Props) {
 	}
 	const venueSummary = Array.from(venueMap.values()).slice(0, 5);
 
-	const confirmed = allTours.filter(
+	// Tour-record counts — used as a fallback when live dashboard stats are
+	// unavailable.
+	const confirmedTours = allTours.filter(
 		(tour) => String(tour.status ?? "").toLowerCase() === "confirmed",
 	);
-	const inProgress = allTours.filter((tour) =>
+	const inProgressTours = allTours.filter((tour) =>
 		[
 			"under_review",
 			"needs_revision",
@@ -100,9 +102,20 @@ export default async function ToursPage({ params, searchParams }: Props) {
 			"needs revision",
 		].includes(String(tour.status ?? "").toLowerCase()),
 	);
-	const rejected = allTours.filter(
+	const rejectedTours = allTours.filter(
 		(tour) => String(tour.status ?? "").toLowerCase() === "rejected",
 	);
+
+	// Live pipeline metrics — prefer the backend-computed dashboard stats so the
+	// summary reflects EOIs in the pipeline, not just approved tour records.
+	const totalStops =
+		stats?.totalEOIs ?? allToursResult.pagination?.total ?? allTours.length;
+	const confirmedCount = stats?.approvedEOIs ?? confirmedTours.length;
+	const inProgressCount =
+		stats != null
+			? (stats.pendingEOIs ?? 0) + (stats.needsRevisionEOIs ?? 0)
+			: inProgressTours.length;
+	const rejectedCount = stats?.rejectedEOIs ?? rejectedTours.length;
 
 	function pageHref(p: number) {
 		const sp = new URLSearchParams();
@@ -156,17 +169,17 @@ export default async function ToursPage({ params, searchParams }: Props) {
 							},
 							{
 								label: t("stats.confirmed"),
-								value: confirmed.length.toString(),
+								value: confirmedCount.toString(),
 								color: "border-emerald-400",
 							},
 							{
 								label: t("stats.inProgress"),
-								value: inProgress.length.toString(),
+								value: inProgressCount.toString(),
 								color: "border-yellow-400",
 							},
 							{
 								label: t("stats.rejected"),
-								value: rejected.length.toString(),
+								value: rejectedCount.toString(),
 								color: "border-red-400",
 							},
 						].map((s) => (
