@@ -69,6 +69,13 @@ export default async function AdminSideNav() {
 			tourAttr: "admin-nav-reports",
 		},
 		{
+			key: "profile",
+			label: t("profile"),
+			icon: "person",
+			href: "/admin/profile",
+			tourAttr: "admin-nav-profile",
+		},
+		{
 			key: "settings",
 			label: t("settings"),
 			icon: "settings",
