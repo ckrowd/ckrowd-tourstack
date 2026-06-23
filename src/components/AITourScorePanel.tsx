@@ -187,7 +187,9 @@ export default function AITourScorePanel({ eoiId }: { eoiId: string }) {
 						{generateMutation.isPending ? t("generating") : t("generate")}
 					</button>
 					{generateMutation.data && !generateMutation.data.success && (
-						<p className="text-xs text-rose-600 mt-2">{t("error")}</p>
+						<p className="text-xs text-rose-600 mt-2">
+							{generateMutation.data.error ?? t("error")}
+						</p>
 					)}
 				</div>
 			)}
