@@ -316,6 +316,27 @@ export default function TopNav() {
 						{/* Search — artmgmt searches roster; other portals use global search */}
 						{session?.user && (isArtmgmtPortal ? <ArtmgmtSearch /> : <GlobalSearch />)}
 
+						{/* Tour Intelligence (New dynamic button) */}
+						{session?.user && !isAdminPortal && !isFinancingAdminPortal && !isInsuranceAdminPortal && !isArtmgmtPortal && (
+							<div className="relative inline-flex overflow-hidden rounded-xl p-[2.5px] group hidden md:inline-flex shrink-0">
+								<span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#FF5A30_0%,#3b82f6_50%,#FF5A30_100%)]" />
+								<Link
+									href="/tour-intelligence"
+									className="relative flex items-center justify-center gap-2 w-full h-full bg-white rounded-[9.5px] px-3 py-1.5 transition-colors group-hover:bg-orange-50/50"
+								>
+									<span
+										className="material-symbols-outlined text-sm text-[#FF5A30]"
+										style={{ fontVariationSettings: "'FILL' 1" }}
+									>
+										auto_awesome
+									</span>
+									<span className="font-(family-name:--font-manrope) font-semibold text-xs text-slate-700 whitespace-nowrap group-hover:text-[#FF5A30] transition-colors">
+										{t("tourIntelligence")}
+									</span>
+								</Link>
+							</div>
+						)}
+
 						{/* Locale Switcher — desktop only (accessible via drawer on mobile) */}
 						<div className="relative hidden lg:block">
 							<button
