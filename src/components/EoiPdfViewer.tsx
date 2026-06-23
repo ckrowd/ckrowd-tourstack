@@ -5,7 +5,7 @@ import { useEffect, useId, useRef, useState } from "react";
 // Must match SIG constants in ckrowd-prisma/server/services/eoi-pdf.service.ts
 const SIG = {
 	imgY:         88,   // bottom edge of the signature image area
-	imgMaxH:      65,   // max signature image height
+	imgMaxH:      52,   // max signature image height (kept in sync with backend SIG)
 	nameY:        68,   // signatory name text y
 	orgNameY:     55,   // signatory org name text y
 	narrowSigColW: 150, // column width used for all sig columns
