@@ -5,6 +5,35 @@ import EoiActionPanel from "@/components/EoiActionPanel";
 import EoiDocumentsPanel from "@/components/EoiDocumentsPanel";
 import PageTour from "@/components/PageTour";
 
+function EoiNotesDisplay({ notes }: { notes: string }) {
+	const sections = notes
+		.split(/\n{2,}/)
+		.map((s) => s.trim())
+		.filter(Boolean);
+
+	return (
+		<div className="mt-1 space-y-1.5">
+			{sections.map((section, i) => {
+				const lines = section.split("\n");
+				const header = lines[0]?.trim();
+				const body = lines.slice(1).map((l) => l.trim()).filter(Boolean);
+				return (
+					<div key={i} className="px-3 py-2 bg-surface-container-low rounded-lg">
+						<p className="text-[9px] font-black uppercase tracking-widest text-[#FF5A30] mb-1">
+							{header}
+						</p>
+						{body.map((line, j) => (
+							<p key={j} className="text-xs text-on-surface leading-relaxed">
+								{line.split(" | ").join(" · ")}
+							</p>
+						))}
+					</div>
+				);
+			})}
+		</div>
+	);
+}
+
 function MatchBar({ score }: { score: number }) {
 	const color =
 		score >= 80
@@ -246,9 +275,9 @@ export default async function AdminEOIPage({
 
 									{/* Notes */}
 									{eoi.notes != null && String(eoi.notes).trim() !== "" && (
-										<div className="mt-1 px-3 py-2 bg-surface-container rounded-lg">
+										<div className="mt-1">
 											<p className="text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant mb-1">{t("notes")}</p>
-											<p className="text-xs text-on-surface whitespace-pre-line">{String(eoi.notes)}</p>
+											<EoiNotesDisplay notes={String(eoi.notes)} />
 										</div>
 									)}
 
