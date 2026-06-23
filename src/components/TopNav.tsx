@@ -148,6 +148,18 @@ export default function TopNav() {
 		pathname.startsWith("/insurance-admin") &&
 		!pathname.includes("/insurance-admin/login");
 
+	// Profile link target depends on the active portal — each portal has its own
+	// profile page under its route prefix (admin opened /profile before this).
+	const profileHref = isArtmgmtPortal
+		? "/artmgmt/profile"
+		: isAdminPortal
+			? "/admin/profile"
+			: isFinancingAdminPortal
+				? "/financing-admin/profile"
+				: isInsuranceAdminPortal
+					? "/insurance-admin/profile"
+					: "/profile";
+
 	const dashboardNavItems = [
 		{ label: tSideNav("dashboard"), icon: "dashboard", href: "/dashboard" },
 		{
@@ -420,7 +432,7 @@ export default function TopNav() {
 										/>
 										<div className="absolute right-0 top-10 z-50 w-44 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden">
 											<Link
-												href={isArtmgmtPortal ? "/artmgmt/profile" : "/profile"}
+												href={profileHref}
 												onClick={() => setProfileOpen(false)}
 												className="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors font-(family-name:--font-manrope)"
 											>
@@ -641,7 +653,7 @@ export default function TopNav() {
 
 									{/* Profile */}
 									<Link
-										href={isArtmgmtPortal ? "/artmgmt/profile" : "/profile"}
+										href={profileHref}
 										onClick={() => setMobileMenuOpen(false)}
 										className="flex items-center gap-3 px-4 py-3 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm text-slate-600 hover:bg-slate-50 transition-colors"
 									>
