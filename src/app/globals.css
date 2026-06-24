@@ -4,6 +4,13 @@
   --font-sans: var(--font-inter), system-ui, sans-serif;
 }
 
+@font-face {
+	font-family: "Material Symbols Outlined";
+	font-style: normal;
+	font-weight: 400;
+	font-display: block;
+	src: url("/fonts/material-symbols-outlined-400.ttf") format("truetype");
+}
 
 @theme {
   /* Primary brand color - Energetic Orange */
@@ -67,10 +74,10 @@
   --color-error-container: #ffdad6;
   --color-on-error-container: #93000a;
 
-  /* Font families — Inter is the single typeface across the platform */
-  --font-headline: var(--font-manrope), "Inter", sans-serif;
-  --font-body: var(--font-inter), "Inter", sans-serif;
-  --font-label: var(--font-inter), "Inter", sans-serif;
+  /* Font families */
+  --font-headline: "Manrope", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-label: "Inter", sans-serif;
 
   /* Border radius */
   --radius-DEFAULT: 0.25rem;
@@ -81,7 +88,7 @@
 
 /* Material Symbols baseline */
 .material-symbols-outlined {
-	font-family: var(--font-material-symbols);
+	font-family: "Material Symbols Outlined";
 	font-weight: normal;
 	font-style: normal;
 	font-size: 24px;
@@ -100,6 +107,103 @@
 		"wght" 400,
 		"GRAD" 0,
 		"opsz" 24;
+}
+
+/* ── Landing page motion & brand surfaces ──────────────────────────────── */
+
+/* Brand tones (navy base from the Ckrowd investor identity + orange accent) */
+:root {
+	--ck-navy: #0c1730;
+	--ck-navy-soft: #111f3d;
+	--ck-orange: #ff5a30;
+}
+
+/* Marquee (partner / proof strips) */
+@keyframes marquee {
+	from { transform: translateX(0); }
+	to { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+	animation: marquee 38s linear infinite;
+	will-change: transform;
+}
+.marquee-row:hover .animate-marquee {
+	animation-play-state: paused;
+}
+
+/* Slow aurora drift for hero / CTA glows */
+@keyframes auroraDrift {
+	0%   { transform: translate3d(0,0,0) scale(1); }
+	50%  { transform: translate3d(4%, -3%, 0) scale(1.08); }
+	100% { transform: translate3d(0,0,0) scale(1); }
+}
+.aurora {
+	animation: auroraDrift 18s ease-in-out infinite;
+	will-change: transform;
+}
+
+/* Floating hero card */
+@keyframes floatY {
+	0%, 100% { transform: translateY(0); }
+	50%      { transform: translateY(-10px); }
+}
+.float-slow {
+	animation: floatY 7s ease-in-out infinite;
+	will-change: transform;
+}
+
+/* Shimmer sweep for accent underlines / chips */
+@keyframes shimmer {
+	0%   { background-position: -200% 0; }
+	100% { background-position: 200% 0; }
+}
+.shimmer {
+	background: linear-gradient(
+		100deg,
+		rgba(255,90,48,0.0) 20%,
+		rgba(255,90,48,0.55) 50%,
+		rgba(255,90,48,0.0) 80%
+	);
+	background-size: 200% 100%;
+	animation: shimmer 3.5s linear infinite;
+}
+
+/* Cursor-following spotlight card */
+.spotlight-card {
+	position: relative;
+	isolation: isolate;
+	overflow: hidden;
+}
+.spotlight-card::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	opacity: 0;
+	transition: opacity 0.4s ease;
+	background: radial-gradient(
+		260px circle at var(--mx, 50%) var(--my, 50%),
+		rgba(255,90,48,0.16),
+		transparent 65%
+	);
+	pointer-events: none;
+}
+.spotlight-card:hover::before {
+	opacity: 1;
+}
+.spotlight-card > * {
+	position: relative;
+	z-index: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.animate-marquee,
+	.aurora,
+	.float-slow,
+	.shimmer {
+		animation: none !important;
+	}
 }
 
 /* Scrollbar hide utility */
@@ -141,11 +245,6 @@ h6 {
 	font-family: var(--font-headline);
 }
 
-/* Display-scale headings get tight tracking — matches autonoms.ai Inter heading style */
-h1 { letter-spacing: -0.04em; line-height: 1.1; font-weight: 600; }
-h2 { letter-spacing: -0.03em; line-height: 1.15; font-weight: 600; }
-h3 { letter-spacing: -0.02em; line-height: 1.2; font-weight: 600; }
-
 /* ── Driver.js tour guide overrides ────────────────────────────────────── */
 
 .driver-popover {
@@ -164,7 +263,7 @@ h3 { letter-spacing: -0.02em; line-height: 1.2; font-weight: 600; }
 	background: linear-gradient(135deg, #ff5a30, #cc4826);
 	color: #ffffff;
 	font-size: 15px;
-	font-weight: 600;
+	font-weight: 800;
 	letter-spacing: -0.01em;
 	padding: 18px 22px 14px;
 	margin: 0;
@@ -235,7 +334,7 @@ h3 { letter-spacing: -0.02em; line-height: 1.2; font-weight: 600; }
 	border-radius: 10px;
 	padding: 9px 22px;
 	font-size: 12px;
-	font-weight: 600;
+	font-weight: 800;
 	text-transform: uppercase;
 	letter-spacing: 0.08em;
 	cursor: pointer;

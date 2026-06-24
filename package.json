@@ -13,6 +13,7 @@
     "@ckrowd/ckrowd-prisma": "1.1.102",
     "@tanstack/react-query": "^5.100.10",
     "driver.js": "^1.4.0",
+    "motion": "^12.4.7",
     "next": "16.2.6",
     "next-intl": "^4.11.2",
     "pdf-lib": "^1.17.1",

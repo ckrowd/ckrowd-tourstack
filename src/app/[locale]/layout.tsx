@@ -1,5 +1,5 @@
 import type {} from "next";
-import localFont from "next/font/local";
+import { Archivo_Black, Inter, Rubik } from "next/font/google";
 import "../globals.css";
 import { notFound } from "next/navigation";
 import { NextIntlClientProvider } from "next-intl";
@@ -11,24 +11,24 @@ import {
 import QueryProvider from "@/components/QueryProvider";
 import { routing } from "@/i18n/routing";
 
-const rubik = localFont({
-	src: "../../../public/fonts/inter-variable.woff2",
+// Rubik replaces Manrope as the display/heading font — same CSS variable kept
+// for backwards compatibility with all existing font-(family-name:--font-manrope) usages.
+const rubik = Rubik({
 	variable: "--font-manrope",
-	display: "swap",
-	weight: "100 900",
+	subsets: ["latin"],
+	weight: ["300", "400", "500", "600", "700", "800", "900"],
 });
 
-const inter = localFont({
-	src: "../../../public/fonts/inter-variable.woff2",
+const inter = Inter({
 	variable: "--font-inter",
-	display: "swap",
-	weight: "100 900",
+	subsets: ["latin"],
+	weight: ["400", "500", "600", "700", "800", "900"],
 });
 
-const materialSymbols = localFont({
-	src: "../../../public/fonts/material-symbols-outlined-400.ttf",
-	variable: "--font-material-symbols",
-	display: "block",
+// Archivo Black — heavy display face for the landing headlines (single weight).
+const archivoBlack = Archivo_Black({
+	variable: "--font-display",
+	subsets: ["latin"],
 	weight: "400",
 });
 
@@ -131,7 +131,7 @@ export default async function RootLayout({
 	const messages = await getMessages();
 
 	return (
-		<html lang={locale} className={`${rubik.variable} ${inter.variable} ${materialSymbols.variable}`}>
+		<html lang={locale} className={`${rubik.variable} ${inter.variable} ${archivoBlack.variable}`}>
 			<body className="min-h-full antialiased" suppressHydrationWarning>
 				<NextIntlClientProvider locale={locale} messages={messages}>
 					<QueryProvider>{children}</QueryProvider>
