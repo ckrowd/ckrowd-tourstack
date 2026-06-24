@@ -1,4 +1,4 @@
-﻿"use server";
+"use server";
 
 import { createClient } from "@ckrowd/ckrowd-prisma";
 import { extractResponseCookies } from "@ckrowd/ckrowd-prisma/utils";
@@ -1971,7 +1971,7 @@ export async function listBanks(country = "nigeria") {
 }
 
 // ── AI Tools (Tour Intelligence) ──────────────────────────────────────────
-// All AI calls run on the backend (Dokploy) which holds DEEPSEEK_API_KEY.
+// All AI calls run on the backend (Dokploy) which holds the AI API keys.
 // biome-ignore lint/suspicious/noExplicitAny: AI routes not yet in published package types
 
 // biome-ignore lint/suspicious/noExplicitAny: AI routes not yet in published package types
