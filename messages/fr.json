@@ -5953,5 +5953,304 @@
         "description": "Générez du contenu prêt à publier pour les réseaux sociaux, des communiqués de presse et un calendrier promotionnel de 30 jours."
       }
     }
+  },
+  "TourstackLanding": {
+    "nav": {
+      "platform": "La plateforme",
+      "platformShort": "Plateforme",
+      "ecosystem": "Écosystème",
+      "explore": "Explorer",
+      "faq": "FAQ",
+      "contactSales": "Contacter l'équipe commerciale",
+      "join": "Rejoindre TourStack",
+      "byCkrowd": "par Ckrowd"
+    },
+    "hero": {
+      "title1": "La plateforme qui rend",
+      "title2": "les tournées africaines",
+      "title3": "finançables.",
+      "subtitle": "TourStack donne aux promoteurs, banques, assureurs et artistes la confiance, la conformité et les données nécessaires pour libérer le divertissement live à travers le continent, transformant les tournées en actifs finançables.",
+      "ctaPrimary": "Commencer",
+      "ctaSecondary": "Devenir promoteur certifié",
+      "scroll": "Défiler"
+    },
+    "trust": {
+      "eyebrow": "Soutenu par les leaders bancaires et assurantiels d'Afrique"
+    },
+    "stats": {
+      "title": "Les chiffres derrière la confiance.",
+      "desc": "Des règlements réels, des marchés réels, zéro défaut. La preuve que le divertissement live est finançable.",
+      "items": [
+        {
+          "prefix": "₦",
+          "count": 320,
+          "suffix": "M+",
+          "label": "Paiements facilités"
+        },
+        {
+          "prefix": "",
+          "count": 230,
+          "suffix": "+",
+          "label": "Dossiers de crédit de promoteurs"
+        },
+        {
+          "prefix": "",
+          "count": 24,
+          "suffix": "+",
+          "label": "Marchés africains"
+        },
+        {
+          "prefix": "",
+          "count": 0,
+          "suffix": "",
+          "label": "Défauts à ce jour"
+        },
+        {
+          "prefix": "",
+          "count": 500,
+          "suffix": "+",
+          "label": "Promoteurs vérifiés"
+        }
+      ]
+    },
+    "roles": [
+      "Promoteurs",
+      "Banques",
+      "Assureurs",
+      "Artistes",
+      "Salles",
+      "Prestataires de services",
+      "Agences",
+      "Commanditaires",
+      "Fournisseurs",
+      "Équipes"
+    ],
+    "gap": {
+      "card1": "01 / Le problème",
+      "card2": "Combler le fossé",
+      "eyebrow": "Le déficit d'infrastructure",
+      "title1": "Demande mondiale.",
+      "title2": "Réalité fragmentée.",
+      "desc": "L'appétit pour le divertissement live africain n'a jamais été aussi fort, pourtant l'exécution des tournées transfrontalières reste opaque et inassurable.",
+      "items": [
+        {
+          "text": "Aucune conformité centralisée, donc les capitaux ne voient que le risque."
+        },
+        {
+          "text": "Les paiements transfrontaliers non traçables dissuadent les institutions."
+        },
+        {
+          "text": "Aucune modélisation du risque, donc l'assurance de tournée existe à peine."
+        }
+      ]
+    },
+    "how": {
+      "eyebrow": "La plateforme",
+      "title1": "Un système",
+      "title2": "d'exploitation pour",
+      "title3": "le divertissement live.",
+      "desc": "Une confiance institutionnelle à chaque niveau, de la vérification au règlement.",
+      "features": [
+        {
+          "title": "Vérification",
+          "body": "Des profils de promoteurs vérifiés KYC et AML, un registre de confiance que toute l'industrie peut souscrire."
+        },
+        {
+          "title": "Séquestre et financement",
+          "body": "Séquestre sécurisé et contrats intelligents par jalons pour un déploiement sûr des capitaux dans les tournées."
+        },
+        {
+          "title": "Assurance",
+          "body": "Souscription automatisée et modélisation du risque pour obtenir une couverture annulation d'événement et non-présentation."
+        },
+        {
+          "title": "Paiements transfrontaliers",
+          "body": "Change conforme et paiements multidevises dans plus de 24 marchés africains, entièrement traçables."
+        },
+        {
+          "title": "Appels d'offres de services",
+          "body": "Approvisionnement transparent pour la production, la logistique et les services sur le terrain avec des paiements sous séquestre."
+        },
+        {
+          "title": "Données et reporting",
+          "body": "Reporting financier en temps réel et règlements post-tournée auditables qui se transforment en avantage durable."
+        }
+      ]
+    },
+    "capabilities": [
+      {
+        "eyebrow": "Capital",
+        "title": "Infrastructure de financement.",
+        "body": "Nous structurons les tournées comme des produits financiers standardisés. En contrôlant les flux de trésorerie via un séquestre intelligent, TourStack atténue le risque de défaut qui a tenu les prêteurs à l'écart des événements live.",
+        "link": "Découvrir le financement",
+        "alt": "Bureau sombre avec des graphiques financiers et des écrans de trading en direct"
+      },
+      {
+        "eyebrow": "Couverture",
+        "title": "Infrastructure d'assurance.",
+        "body": "Pour la première fois, une assurance complète annulation d'événement et non-présentation est accessible à l'échelle du continent, alimentée par notre jeu de données de risque propriétaire.",
+        "link": "Découvrir l'assurance",
+        "alt": "Salle de spectacle vide en préparation"
+      },
+      {
+        "eyebrow": "Avantage durable",
+        "title": "Les données créent l'avantage.",
+        "body": "Chaque transaction, scan de billet et paiement de fournisseur transite par TourStack, le jeu de données prédictif le plus complet sur la rentabilité du divertissement live africain.",
+        "link": "Voir la couche de données",
+        "alt": "Une vaste foule de fans éclairée en bleu lors d'un spectacle live"
+      }
+    ],
+    "explore": {
+      "eyebrow": "Aller plus loin",
+      "title1": "Conçu pour chaque acteur",
+      "title2": "de l'économie du live.",
+      "dragToScroll": "Faites glisser pour défiler",
+      "cards": [
+        {
+          "title": "Promoteurs",
+          "sub": "Accéder aux capitaux institutionnels"
+        },
+        {
+          "title": "Artistes",
+          "sub": "Protégez vos cachets"
+        },
+        {
+          "title": "Financiers",
+          "sub": "Déployer des capitaux en toute sécurité"
+        },
+        {
+          "title": "Assureurs",
+          "sub": "Souscrire avec des données réelles"
+        },
+        {
+          "title": "Salles",
+          "sub": "Simplifier les acomptes"
+        },
+        {
+          "title": "Prestataires de services",
+          "sub": "Remporter des contrats sous séquestre"
+        }
+      ]
+    },
+    "principles": {
+      "eyebrow": "Nos fondements",
+      "title": "Trois principes.",
+      "items": [
+        {
+          "title": "La confiance est une infrastructure",
+          "body": "La conformité et la vérification ne sont pas de la paperasse. Ce sont les rails qui permettent aux capitaux de circuler en toute sécurité vers les événements live."
+        },
+        {
+          "title": "Les données avant l'instinct",
+          "body": "Chaque règlement apprend au système. Nous évaluons le risque sur des preuves, pas sur l'intuition, pour une souscription plus précise à chaque tournée."
+        },
+        {
+          "title": "Conçu pour le continent",
+          "body": "Multi-marché, multidevise, conforme localement. Pensé pour le fonctionnement réel du divertissement live africain."
+        }
+      ]
+    },
+    "workflow": {
+      "eyebrow": "Déroulé de la plateforme",
+      "title1": "De la découverte",
+      "title2": "à l'exécution.",
+      "desc": "Quatre étapes mènent une tournée de l'annonce à une décision prête pour les financiers, sur un rail unique.",
+      "stepLabel": "Étape {n}",
+      "steps": [
+        {
+          "title": "Ckrowd annonce la tournée et les artistes",
+          "body": "L'administrateur crée un projet de tournée sur TourStack, incluant la liste des artistes, la fourchette de cachets, les dates de disponibilité et les exigences techniques."
+        },
+        {
+          "title": "Le promoteur soumet une déclaration d'intérêt",
+          "body": "Les promoteurs parcourent les artistes et tournées disponibles, puis soumettent une déclaration d'intérêt formelle avec leur salle, date, budget et modèle de financement."
+        },
+        {
+          "title": "Mise en correspondance et examen",
+          "body": "TourStack évalue chaque déclaration d'intérêt au regard des exigences des artistes. L'équipe Ckrowd examine les correspondances signalées et prend des décisions éclairées."
+        },
+        {
+          "title": "Rapport et décision",
+          "body": "Le système génère un résumé d'activité, les revenus estimés, les coûts et les notes de risque, structurés pour les financiers. L'administrateur approuve, rejette ou demande une révision."
+        }
+      ]
+    },
+    "whyAfrica": {
+      "title1": "Pourquoi l'Afrique.",
+      "title2": "Pourquoi maintenant.",
+      "desc": "L'export culturel mondial de la musique africaine a atteint des sommets records, pourtant les tournées domestiques restent largement sous-monétisées faute d'ossature institutionnelle. Le marché est mûr pour la consolidation.",
+      "stats": [
+        {
+          "prefix": "$",
+          "count": 28,
+          "suffix": "B",
+          "label": "Marché adressable"
+        },
+        {
+          "prefix": "",
+          "count": 400,
+          "suffix": "%",
+          "label": "Croissance annuelle du genre"
+        },
+        {
+          "prefix": "",
+          "count": 45,
+          "suffix": "+",
+          "label": "Marchés accessibles"
+        }
+      ]
+    },
+    "cta": {
+      "title": "Prêt à construire l'avenir du divertissement live ?",
+      "subtitle": "Rejoignez la plateforme d'infrastructure qui standardise les tournées africaines.",
+      "primary": "Commencer aujourd'hui",
+      "secondary": "Contacter l'équipe commerciale"
+    },
+    "faq": {
+      "eyebrow": "Réponses",
+      "title": "Questions fréquentes",
+      "items": [
+        {
+          "q": "À qui s'adresse TourStack ?",
+          "a": "TourStack est une plateforme B2B pour l'écosystème du divertissement live : promoteurs, artistes et managers, salles, financiers, assureurs, fournisseurs et prestataires de services. Chaque acteur s'inscrit, se fait vérifier et travaille sur un rail de confiance unique."
+        },
+        {
+          "q": "Comment fonctionnent le financement et le séquestre ?",
+          "a": "Nous structurons une tournée comme un produit financier et détenons les capitaux auprès de partenaires bancaires de premier rang sur nos marchés d'exploitation. Les fonds sont débloqués selon un séquestre intelligent par jalons, de sorte que les versements ne se déclenchent que lorsque des conditions vérifiées sont remplies."
+        },
+        {
+          "q": "Comment soumettre une déclaration d'intérêt ?",
+          "a": "Les promoteurs parcourent les artistes et tournées disponibles, puis soumettent une déclaration d'intérêt avec salle, date, budget et modèle de financement. TourStack évalue chaque déclaration au regard des exigences des artistes et notre équipe examine les correspondances signalées avant toute décision."
+        },
+        {
+          "q": "Comment fonctionne la couverture d'assurance ?",
+          "a": "En collaboration avec nos partenaires assureurs, nous utilisons une souscription automatisée et un jeu de données de risque propriétaire pour obtenir une couverture annulation d'événement et non-présentation, rendant l'assurance de tournée complète accessible à l'échelle du continent."
+        },
+        {
+          "q": "Sur quels marchés TourStack est-il actif ?",
+          "a": "Infrastructure financière complète au Nigéria, en Afrique du Sud, au Kenya, au Ghana, au Rwanda et en Ouganda, avec une couverture de conformité en expansion sur plus de 18 territoires africains supplémentaires."
+        }
+      ]
+    },
+    "footer": {
+      "tagline": "L'infrastructure financière de l'Afrique pour le divertissement live. Conçue pour l'économie live du continent.",
+      "platform": "Plateforme",
+      "company": "Entreprise",
+      "legal": "Mentions légales",
+      "links": {
+        "verification": "Vérification",
+        "financing": "Financement",
+        "insurance": "Assurance",
+        "payments": "Paiements",
+        "ecosystem": "Écosystème",
+        "howItWorks": "Comment ça marche",
+        "platform": "La plateforme",
+        "contact": "Contact",
+        "privacy": "Politique de confidentialité",
+        "terms": "Conditions d'utilisation"
+      },
+      "copyright": "© 2026 Ckrowd · TourStack Infrastructure. Tous droits réservés.",
+      "builtFor": "Conçu pour l'économie live de l'Afrique."
+    }
   }
 }

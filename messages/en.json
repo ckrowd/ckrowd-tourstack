@@ -5965,5 +5965,304 @@
         "description": "Generate ready-to-post social media content, press releases, and a 30-day promotional calendar."
       }
     }
+  },
+  "TourstackLanding": {
+    "nav": {
+      "platform": "The platform",
+      "platformShort": "Platform",
+      "ecosystem": "Ecosystem",
+      "explore": "Explore",
+      "faq": "FAQ",
+      "contactSales": "Contact sales",
+      "join": "Join TourStack",
+      "byCkrowd": "by Ckrowd"
+    },
+    "hero": {
+      "title1": "The platform that makes",
+      "title2": "African tours",
+      "title3": "financeable.",
+      "subtitle": "TourStack gives promoters, banks, insurers and artists the trust, compliance and data to unlock live entertainment across the continent, turning tours into financeable assets.",
+      "ctaPrimary": "Get started",
+      "ctaSecondary": "Become a certified promoter",
+      "scroll": "Scroll"
+    },
+    "trust": {
+      "eyebrow": "Backed by Africa's banking & insurance leaders"
+    },
+    "stats": {
+      "title": "The numbers behind the trust.",
+      "desc": "Real settlements, real markets, zero defaults. Proof that live entertainment is financeable.",
+      "items": [
+        {
+          "prefix": "₦",
+          "count": 320,
+          "suffix": "M+",
+          "label": "Payments facilitated"
+        },
+        {
+          "prefix": "",
+          "count": 230,
+          "suffix": "+",
+          "label": "Promoter credit files"
+        },
+        {
+          "prefix": "",
+          "count": 24,
+          "suffix": "+",
+          "label": "African markets"
+        },
+        {
+          "prefix": "",
+          "count": 0,
+          "suffix": "",
+          "label": "Defaults to date"
+        },
+        {
+          "prefix": "",
+          "count": 500,
+          "suffix": "+",
+          "label": "Verified promoters"
+        }
+      ]
+    },
+    "roles": [
+      "Promoters",
+      "Banks",
+      "Insurers",
+      "Artists",
+      "Venues",
+      "Service providers",
+      "Agencies",
+      "Sponsors",
+      "Vendors",
+      "Crews"
+    ],
+    "gap": {
+      "card1": "01 / The problem",
+      "card2": "Bridging the divide",
+      "eyebrow": "The infrastructure gap",
+      "title1": "Global demand.",
+      "title2": "Fragmented reality.",
+      "desc": "Appetite for African live entertainment has never been higher, yet executing cross-border tours stays opaque and uninsurable.",
+      "items": [
+        {
+          "text": "No centralized compliance, so capital sees only risk."
+        },
+        {
+          "text": "Untraceable cross-border payments deter institutions."
+        },
+        {
+          "text": "No risk modeling, so tour insurance barely exists."
+        }
+      ]
+    },
+    "how": {
+      "eyebrow": "The platform",
+      "title1": "One operating",
+      "title2": "system for",
+      "title3": "live entertainment.",
+      "desc": "Institutional trust at every layer, from verification to settlement.",
+      "features": [
+        {
+          "title": "Verification",
+          "body": "KYC and AML verified profiles for promoters, a trusted registry the whole industry can underwrite against."
+        },
+        {
+          "title": "Escrow & finance",
+          "body": "Secure escrow and milestone based smart contracts for safe capital deployment into tours."
+        },
+        {
+          "title": "Insurance",
+          "body": "Automated underwriting and risk modeling to procure event cancellation and non appearance cover."
+        },
+        {
+          "title": "Cross-border payments",
+          "body": "Compliant FX and multi currency payouts across 24+ African markets, fully traceable."
+        },
+        {
+          "title": "Service bidding",
+          "body": "Transparent procurement for production, logistics and on ground services with escrowed payouts."
+        },
+        {
+          "title": "Data & reporting",
+          "body": "Real time financial reporting and auditable post tour settlements that compound into a moat."
+        }
+      ]
+    },
+    "capabilities": [
+      {
+        "eyebrow": "Capital",
+        "title": "Financing infrastructure.",
+        "body": "We structure tours as standardized financial products. By controlling cash flow through smart escrow, TourStack mitigates the default risk that has kept lenders out of live events.",
+        "link": "Explore financing",
+        "alt": "Dark desk with live financial charts and trading screens"
+      },
+      {
+        "eyebrow": "Cover",
+        "title": "Insurance infrastructure.",
+        "body": "For the first time, comprehensive event cancellation and non appearance insurance is accessible continent wide, powered by our proprietary risk dataset.",
+        "link": "Explore insurance",
+        "alt": "Empty arena being prepared for a show"
+      },
+      {
+        "eyebrow": "Moat",
+        "title": "Data creates the moat.",
+        "body": "Every transaction, ticket scan and vendor payment flows through TourStack, the most comprehensive predictive dataset for African live entertainment profitability.",
+        "link": "See the data layer",
+        "alt": "A vast crowd of fans lit blue at a live show"
+      }
+    ],
+    "explore": {
+      "eyebrow": "Go deeper",
+      "title1": "Built for every side",
+      "title2": "of the live economy.",
+      "dragToScroll": "Drag to scroll",
+      "cards": [
+        {
+          "title": "Promoters",
+          "sub": "Access institutional capital"
+        },
+        {
+          "title": "Artists",
+          "sub": "Protect your fees"
+        },
+        {
+          "title": "Financiers",
+          "sub": "Deploy capital safely"
+        },
+        {
+          "title": "Insurers",
+          "sub": "Underwrite with real data"
+        },
+        {
+          "title": "Venues",
+          "sub": "Streamline deposits"
+        },
+        {
+          "title": "Service providers",
+          "sub": "Win escrowed contracts"
+        }
+      ]
+    },
+    "principles": {
+      "eyebrow": "What we stand on",
+      "title": "Three principles.",
+      "items": [
+        {
+          "title": "Trust is infrastructure",
+          "body": "Compliance and verification are not paperwork. They are the rails that let capital flow into live events safely."
+        },
+        {
+          "title": "Data over instinct",
+          "body": "Every settlement teaches the system. We price risk on evidence, not gut feel, so underwriting gets sharper each tour."
+        },
+        {
+          "title": "Built for the continent",
+          "body": "Multi market, multi currency, locally compliant. Designed for how African live entertainment actually operates."
+        }
+      ]
+    },
+    "workflow": {
+      "eyebrow": "Platform workflow",
+      "title1": "From discovery",
+      "title2": "to execution.",
+      "desc": "Four steps take a tour from announcement to a financier-ready decision, on a single rail.",
+      "stepLabel": "Step {n}",
+      "steps": [
+        {
+          "title": "Ckrowd announces tour & artistes",
+          "body": "Admin creates a Tour Project on TourStack, including artiste roster, fee range, availability dates, and technical requirements."
+        },
+        {
+          "title": "Promoter submits Expression of Interest",
+          "body": "Promoters browse available artistes and tours, then submit a formal EOI with their venue, date, budget, and funding model."
+        },
+        {
+          "title": "Matching & review",
+          "body": "TourStack scores each EOI against artiste requirements. The Ckrowd team reviews flagged matches and makes informed decisions."
+        },
+        {
+          "title": "Report & decision",
+          "body": "The system generates a business summary, estimated revenue, costs, and risk notes, structured for financiers. Admin approves, rejects, or requests revision."
+        }
+      ]
+    },
+    "whyAfrica": {
+      "title1": "Why Africa.",
+      "title2": "Why now.",
+      "desc": "African music's global cultural export has reached record heights, yet domestic touring stays severely under monetized for lack of institutional scaffolding. The market is primed for consolidation.",
+      "stats": [
+        {
+          "prefix": "$",
+          "count": 28,
+          "suffix": "B",
+          "label": "Addressable market"
+        },
+        {
+          "prefix": "",
+          "count": 400,
+          "suffix": "%",
+          "label": "YoY genre growth"
+        },
+        {
+          "prefix": "",
+          "count": 45,
+          "suffix": "+",
+          "label": "Markets in reach"
+        }
+      ]
+    },
+    "cta": {
+      "title": "Ready to build the future of live entertainment?",
+      "subtitle": "Join the infrastructure platform standardizing African touring.",
+      "primary": "Get started today",
+      "secondary": "Contact sales"
+    },
+    "faq": {
+      "eyebrow": "Answers",
+      "title": "Frequently asked questions",
+      "items": [
+        {
+          "q": "Who is TourStack for?",
+          "a": "TourStack is a B2B platform for the live-entertainment ecosystem: promoters, artists and managers, venues, financiers, insurers, vendors and service providers. Each stakeholder onboards, gets verified, and works on a single trusted rail."
+        },
+        {
+          "q": "How does financing and escrow work?",
+          "a": "We structure a tour as a financial product and hold capital with Tier 1 banking partners in our operating markets. Funds release against milestone based smart escrow, so disbursements trigger only when verified conditions are met."
+        },
+        {
+          "q": "How do I submit an Expression of Interest?",
+          "a": "Promoters browse available artists and tours, then submit an EOI with venue, date, budget and funding model. TourStack scores each EOI against the artiste requirements and our team reviews flagged matches before a decision is made."
+        },
+        {
+          "q": "How does insurance coverage work?",
+          "a": "Working with our insurance partners, we use automated underwriting and a proprietary risk dataset to procure event cancellation and non appearance cover, making comprehensive tour insurance accessible continent wide."
+        },
+        {
+          "q": "Which markets is TourStack active in?",
+          "a": "Full financial infrastructure in Nigeria, South Africa, Kenya, Ghana, Rwanda and Uganda, with expanding compliance coverage across 18+ additional African territories."
+        }
+      ]
+    },
+    "footer": {
+      "tagline": "Africa's financial infrastructure for live entertainment. Built for the continent's live economy.",
+      "platform": "Platform",
+      "company": "Company",
+      "legal": "Legal",
+      "links": {
+        "verification": "Verification",
+        "financing": "Financing",
+        "insurance": "Insurance",
+        "payments": "Payments",
+        "ecosystem": "Ecosystem",
+        "howItWorks": "How it works",
+        "platform": "Platform",
+        "contact": "Contact",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service"
+      },
+      "copyright": "© 2026 Ckrowd · TourStack Infrastructure. All rights reserved.",
+      "builtFor": "Built for Africa's live economy."
+    }
   }
 }
