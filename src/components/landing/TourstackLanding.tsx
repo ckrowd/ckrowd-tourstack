@@ -1,6 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { type ReactNode, useEffect, useRef, useState } from "react";
 
@@ -51,18 +53,18 @@ const GAP_ICONS: ReactNode[] = [
 ];
 
 const CAP_META = [
-	{ img: "/finance-dark.jpg", flip: false },
-	{ img: "/ctx-venue.jpg", flip: true },
-	{ img: "/crowd-blue.jpg", flip: false },
+	{ img: "/finance-dark.jpg", flip: false, route: "/financing" },
+	{ img: "/ctx-venue.jpg", flip: true, route: "/insurance" },
+	{ img: "/crowd-blue.jpg", flip: false, route: "/eoi" },
 ];
 
 const EXPLORE_META = [
-	{ n: "01", img: "/landing-promoter.jpg" },
-	{ n: "02", img: "/landing-artist.jpg" },
-	{ n: "03", img: "/concert-laser.jpg" },
-	{ n: "04", img: "/insurers-meeting.jpg" },
-	{ n: "05", img: "/festival-pyro.jpg" },
-	{ n: "06", img: "/production-drums.jpg" },
+	{ n: "01", img: "/landing-promoter.jpg", route: "/register" },
+	{ n: "02", img: "/landing-artist.jpg", route: "/onboard/artmgmt" },
+	{ n: "03", img: "/concert-laser.jpg", route: "/financing-admin/login" },
+	{ n: "04", img: "/insurers-meeting.jpg", route: "/insurance-admin/login" },
+	{ n: "05", img: "/festival-pyro.jpg", route: "/join" },
+	{ n: "06", img: "/production-drums.jpg", route: "/onboard/service" },
 ];
 
 const NAV_LINKS = [
@@ -74,6 +76,7 @@ const NAV_LINKS = [
 
 type CountStat = { prefix: string; count: number; suffix: string; label: string };
 type TextPair = { title: string; body: string };
+type FaqItem = { q: string; a: string; privacyNote?: boolean };
 
 const ArrowUpRight = ({ size = 13 }: { size?: number }) => (
 	<svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
@@ -91,6 +94,7 @@ const pad2 = (i: number) => String(i + 1).padStart(2, "0");
 
 export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 	const t = useTranslations("TourstackLanding");
+	const { locale } = useParams<{ locale: string }>();
 	const [theme, setTheme] = useState<"dark" | "light">("dark");
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -111,7 +115,7 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 	const principles = t.raw("principles.items") as TextPair[];
 	const steps = t.raw("workflow.steps") as TextPair[];
 	const whyStats = t.raw("whyAfrica.stats") as CountStat[];
-	const faqs = t.raw("faq.items") as { q: string; a: string }[];
+	const faqs = t.raw("faq.items") as FaqItem[];
 
 	// ---- theme: hydrate from storage / system, persist ----
 	useEffect(() => {
@@ -141,7 +145,10 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 	const toggleMenu = (open: boolean) => {
 		setMenuOpen(open);
 		document.body.style.overflow = open ? "hidden" : "";
-		if (lenisRef.current) open ? lenisRef.current.stop() : lenisRef.current.start();
+		if (lenisRef.current) {
+			if (open) lenisRef.current.stop();
+			else lenisRef.current.start();
+		}
 	};
 
 	// ---- motion engine: Lenis smooth scroll + GSAP/ScrollTrigger ----
@@ -166,9 +173,10 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 					const target = +(el.dataset.count || "0");
 					const pre = el.dataset.prefix || "";
 					const suf = el.dataset.suffix || "";
+					el.textContent = pre + "0" + suf;
 					const t0 = performance.now();
 					const tick = (now: number) => {
-						const p = Math.min((now - t0) / 1400, 1);
+						const p = Math.min((now - t0) / 1800, 1);
 						const v = Math.round(target * (1 - Math.pow(1 - p, 3)));
 						el.textContent = pre + v.toLocaleString("en-US") + suf;
 						if (p < 1) requestAnimationFrame(tick);
@@ -177,7 +185,7 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 					countIO.unobserve(el);
 				});
 			},
-			{ threshold: 0.6 },
+			{ threshold: 0.2 },
 		);
 		root.querySelectorAll("[data-count]").forEach((el) => countIO.observe(el));
 		cleanups.push(() => countIO.disconnect());
@@ -382,18 +390,18 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 								</svg>
 							)}
 						</button>
-						<a href="#" className="hidden lg:inline-flex text-[13.5px] text-muted hover:text-ink transition-colors px-3 py-2">
+						<Link href={`/${locale}/contact`} className="hidden lg:inline-flex text-[13.5px] text-muted hover:text-ink transition-colors px-3 py-2">
 							{t("nav.contactSales")}
-						</a>
-						<a
-							href="#join"
+						</Link>
+						<Link
+							href={`/${locale}/join`}
 							className="group press hidden md:inline-flex items-center gap-2 bg-orange text-white font-medium text-[13.5px] pl-4 pr-2 py-2 rounded-full"
 						>
 							{t("nav.join")}
 							<span className="btn-ico h-7 w-7 rounded-full bg-black/15 grid place-items-center">
 								<ArrowUpRight />
 							</span>
-						</a>
+						</Link>
 						<button
 							id="burger"
 							onClick={() => toggleMenu(!menuOpen)}
@@ -427,14 +435,14 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 						{l.key === "platform" ? t("nav.platformShort") : t(`nav.${l.key}`)}
 					</a>
 				))}
-				<a
-					href="#join"
+				<Link
+					href={`/${locale}/join`}
 					onClick={() => toggleMenu(false)}
 					className="mt-6 bg-orange text-white font-medium px-7 py-3 rounded-full"
 					style={{ transitionDelay: "0.25s" }}
 				>
 					{t("nav.join")}
-				</a>
+				</Link>
 			</div>
 
 			<main id="top">
@@ -469,19 +477,19 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 							{t("hero.subtitle")}
 						</p>
 						<div className="reveal mt-9 flex flex-col sm:flex-row gap-3 justify-center">
-							<a href="#join" className="group press inline-flex items-center justify-center gap-2 bg-orange text-white font-medium pl-6 pr-2 py-3.5 rounded-full">
+							<Link href={`/${locale}/join`} className="group press inline-flex items-center justify-center gap-2 bg-orange text-white font-medium pl-6 pr-2 py-3.5 rounded-full">
 								{t("hero.ctaPrimary")}
 								<span className="btn-ico h-8 w-8 rounded-full bg-black/15 grid place-items-center">
 									<ArrowUpRight size={15} />
 								</span>
-							</a>
-							<a
-								href="#how"
+							</Link>
+							<Link
+								href={`/${locale}/register`}
 								className="press inline-flex items-center justify-center gap-2 text-white font-medium px-6 py-3.5 rounded-full backdrop-blur-sm hover:bg-white/15 transition-colors"
 								style={{ border: "1px solid rgba(255,255,255,.25)", background: "rgba(255,255,255,.06)" }}
 							>
 								{t("hero.ctaSecondary")}
-							</a>
+							</Link>
 						</div>
 					</div>
 					<div className="absolute bottom-7 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-[10px] tracking-[.3em] uppercase text-white/55">
@@ -511,11 +519,10 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 						<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-10 gap-y-10" data-stagger>
 							{statsItems.map((s) => (
 								<div className="reveal" key={s.label}>
-									<div className="mono text-[clamp(1.7rem,2.4vw,3rem)] font-semibold text-orange leading-none tabular-nums whitespace-nowrap">
-										<span data-count={s.count} data-prefix={s.prefix} data-suffix={s.suffix}>
-											{s.prefix}
-											{s.count}
-											{s.suffix}
+									<div className="mono text-[clamp(1.7rem,2.4vw,3rem)] font-semibold text-orange leading-none tabular-nums whitespace-nowrap flex items-baseline">
+										{s.prefix && <span className="text-[0.58em] mr-0.5">{s.prefix}</span>}
+										<span data-count={s.count} data-suffix={s.suffix}>
+											{s.count}{s.suffix}
 										</span>
 									</div>
 									<div className="mt-4 pt-4 border-t text-[13px] text-muted" style={{ borderColor: "var(--border)" }}>
@@ -629,9 +636,9 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 									<span className="eyebrow text-orange">{c.eyebrow}</span>
 									<h3 className="display text-[clamp(1.8rem,4vw,3rem)] font-semibold mt-4">{c.title}</h3>
 									<p className="mt-5 text-lg text-muted max-w-xl">{c.body}</p>
-									<a href="#" className="group inline-flex items-center gap-2 mt-6 font-medium text-ink hover:text-orange transition-colors">
+									<Link href={`/${locale}${meta.route}`} className="group inline-flex items-center gap-2 mt-6 font-medium text-ink hover:text-orange transition-colors">
 										{c.link} <ChevronRight />
-									</a>
+									</Link>
 								</div>
 							);
 							const media = (
@@ -679,7 +686,7 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 						</div>
 						<div className="htrack px-6 sm:px-10">
 							{exploreCards.map((card, i) => (
-								<a href="#" key={EXPLORE_META[i].n} className="hcard imgcard group h-[56vh] sm:h-[60vh]">
+								<Link href={`/${locale}${EXPLORE_META[i].route}`} key={EXPLORE_META[i].n} className="hcard imgcard group h-[56vh] sm:h-[60vh]">
 									<img src={EXPLORE_META[i].img} className="absolute inset-0 h-full w-full object-cover" alt="" />
 									<div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,.8), transparent 60%)" }} />
 									<div className="absolute top-5 left-5 mono text-white/60 text-sm">{EXPLORE_META[i].n}</div>
@@ -689,7 +696,7 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 											{card.sub} <ChevronRight size={14} />
 										</div>
 									</div>
-								</a>
+								</Link>
 							))}
 						</div>
 					</div>
@@ -764,9 +771,7 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 									<div className="reveal" key={s.label}>
 										<div className="mono text-4xl sm:text-5xl font-semibold text-orange">
 											<span data-count={s.count} data-prefix={s.prefix} data-suffix={s.suffix}>
-												{s.prefix}
-												{s.count}
-												{s.suffix}
+												{s.prefix}{s.count}{s.suffix}
 											</span>
 										</div>
 										<div className="mt-2 eyebrow text-white/60">{s.label}</div>
@@ -787,15 +792,15 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 								<h2 className="display text-[clamp(2.1rem,5.5vw,4.2rem)] font-semibold">{t("cta.title")}</h2>
 								<p className="mt-5 text-lg text-white/85">{t("cta.subtitle")}</p>
 								<div className="mt-9 flex flex-col sm:flex-row justify-center gap-3">
-									<a href="#" className="group press inline-flex items-center justify-center gap-2 bg-black text-white font-medium pl-6 pr-2 py-3.5 rounded-full">
+									<Link href={`/${locale}/join`} className="group press inline-flex items-center justify-center gap-2 bg-black text-white font-medium pl-6 pr-2 py-3.5 rounded-full">
 										{t("cta.primary")}
 										<span className="btn-ico h-8 w-8 rounded-full bg-white/15 grid place-items-center">
 											<ArrowUpRight size={15} />
 										</span>
-									</a>
-									<a href="#" className="press inline-flex items-center justify-center gap-2 border-2 border-white/85 text-white font-medium px-6 py-3.5 rounded-full hover:bg-white hover:text-orange transition-colors">
+									</Link>
+									<Link href={`/${locale}/contact`} className="press inline-flex items-center justify-center gap-2 border-2 border-white/85 text-white font-medium px-6 py-3.5 rounded-full hover:bg-white hover:text-orange transition-colors">
 										{t("cta.secondary")}
-									</a>
+									</Link>
 								</div>
 							</div>
 						</div>
@@ -825,7 +830,15 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 									</button>
 									<div className="faq-body">
 										<div>
-											<p className="px-6 pb-6 text-muted leading-relaxed">{item.a}</p>
+											<p className="px-6 pb-6 text-muted leading-relaxed">
+												{item.a}
+												{item.privacyNote && (
+													<> {t.rich("faq.dataPrivacyNote", {
+														privacy: (chunks) => <Link href={`/${locale}/privacy`} className="text-orange hover:underline">{chunks}</Link>,
+														terms: (chunks) => <Link href={`/${locale}/terms`} className="text-orange hover:underline">{chunks}</Link>,
+													})}</>
+												)}
+											</p>
 										</div>
 									</div>
 								</div>
@@ -852,10 +865,10 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 						<div>
 							<div className="eyebrow text-muted mb-4">{t("footer.platform")}</div>
 							<div className="flex flex-col gap-3 text-muted text-[15px]">
-								<a href="#" className="hover:text-orange transition-colors">{t("footer.links.verification")}</a>
-								<a href="#" className="hover:text-orange transition-colors">{t("footer.links.financing")}</a>
-								<a href="#" className="hover:text-orange transition-colors">{t("footer.links.insurance")}</a>
-								<a href="#" className="hover:text-orange transition-colors">{t("footer.links.payments")}</a>
+								<Link href={`/${locale}/register`} className="hover:text-orange transition-colors">{t("footer.links.verification")}</Link>
+								<Link href={`/${locale}/financing`} className="hover:text-orange transition-colors">{t("footer.links.financing")}</Link>
+								<Link href={`/${locale}/insurance`} className="hover:text-orange transition-colors">{t("footer.links.insurance")}</Link>
+								<Link href={`/${locale}/eoi`} className="hover:text-orange transition-colors">{t("footer.links.payments")}</Link>
 							</div>
 						</div>
 						<div>
@@ -864,14 +877,14 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 								<a href="#ecosystem" className="hover:text-orange transition-colors">{t("footer.links.ecosystem")}</a>
 								<a href="#workflow" className="hover:text-orange transition-colors">{t("footer.links.howItWorks")}</a>
 								<a href="#how" className="hover:text-orange transition-colors">{t("footer.links.platform")}</a>
-								<a href="#" className="hover:text-orange transition-colors">{t("footer.links.contact")}</a>
+								<Link href={`/${locale}/contact`} className="hover:text-orange transition-colors">{t("footer.links.contact")}</Link>
 							</div>
 						</div>
 						<div>
 							<div className="eyebrow text-muted mb-4">{t("footer.legal")}</div>
 							<div className="flex flex-col gap-3 text-muted text-[15px]">
-								<a href="/privacy" className="hover:text-orange transition-colors">{t("footer.links.privacy")}</a>
-								<a href="/terms" className="hover:text-orange transition-colors">{t("footer.links.terms")}</a>
+								<Link href={`/${locale}/privacy`} className="hover:text-orange transition-colors">{t("footer.links.privacy")}</Link>
+								<Link href={`/${locale}/terms`} className="hover:text-orange transition-colors">{t("footer.links.terms")}</Link>
 							</div>
 						</div>
 					</div>
