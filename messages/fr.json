@@ -855,7 +855,8 @@
       "budget": "Budget total",
       "financing": "Financement",
       "insurance": "Assurance",
-      "disclaimer": "En soumettant, vous confirmez que toutes les informations ci-dessus sont exactes et autorisez Ckrowd à traiter votre candidature."
+      "disclaimer": "En soumettant, vous confirmez que toutes les informations ci-dessus sont exactes et autorisez Ckrowd à traiter votre candidature.",
+      "yes": "Oui"
     },
     "actions": {
       "back": "Retour",
@@ -3347,6 +3348,7 @@
     }
   },
   "AdminPage": {
+    "platform": "Ckrowd Global Live",
     "title": "Tableau de bord administrateur",
     "description": "Gérez les projets de tournée, examinez les EOI des promoteurs et prenez des décisions sur le circuit de tournée panafricain.",
     "createTour": "Créer un projet de tournée",

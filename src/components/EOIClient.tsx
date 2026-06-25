@@ -340,11 +340,12 @@ function OpportunityPanel({ artist, locale }: { artist: ArtistItem; locale: stri
 }
 
 function ReviewRow({ label, value }: { label: string; value?: string | boolean }) {
+	const t = useTranslations("EOIPage");
 	if (value === undefined || value === "" || value === false) return null;
 	return (
 		<div className="flex items-start gap-4 border-b border-slate-100 py-2.5 last:border-none">
 			<span className="mt-0.5 w-32 shrink-0 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">{label}</span>
-			<span className="text-sm font-semibold text-slate-900">{value === true ? "Yes" : value}</span>
+			<span className="text-sm font-semibold text-slate-900">{value === true ? t("review.yes") : value}</span>
 		</div>
 	);
 }
@@ -1102,7 +1103,7 @@ function EOIPageContent() {
 													<ReviewRow label={t("review.city")} value={form.venueCity} />
 													<ReviewRow label={t("review.capacity")} value={form.venueCapacity} />
 													<ReviewRow label={t("review.budget")} value={form.totalBudget ? `$${form.totalBudget}` : undefined} />
-													<ReviewRow label={t("review.financing")} value={form.needsFinancing ? (form.financingAmount ? `$${form.financingAmount}` : "Yes") : false} />
+													<ReviewRow label={t("review.financing")} value={form.needsFinancing ? (form.financingAmount ? `$${form.financingAmount}` : t("review.yes")) : false} />
 												</div>
 											</div>
 
