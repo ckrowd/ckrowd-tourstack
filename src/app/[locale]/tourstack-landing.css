@@ -1,0 +1,362 @@
+/* ============================================================================
+   TourStack landing — scoped styles (ported from standalone tourstack-landing.html)
+   All visual rules are namespaced under .tslp so they never bleed into the app.
+   Theme variables live on .tslp (default = dark) and .tslp.light.
+   ============================================================================ */
+
+.tslp {
+	--bg: #0a0a0a;
+	--surface: #161616;
+	--surface-2: #202020;
+	--text: #ffffff;
+	--muted: #a8a8a8;
+	--hair: rgba(255, 255, 255, 0.1);
+	--border: rgba(255, 255, 255, 0.07);
+
+	--ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+	--ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+	background: var(--bg);
+	color: var(--text);
+	font-family: var(--font-geist), system-ui, sans-serif;
+	transition: background 0.5s ease, color 0.5s ease;
+	overflow-x: clip;
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+}
+
+.tslp.light {
+	--bg: #ffffff;
+	--surface: #f5f4f2;
+	--surface-2: #ececea;
+	--text: #0c0c0c;
+	--muted: #5c5c5c;
+	--hair: rgba(0, 0, 0, 0.1);
+	--border: rgba(0, 0, 0, 0.07);
+}
+
+.tslp ::selection {
+	background: #ff5a30;
+	color: #fff;
+}
+
+/* smooth-scroll only matters while a Lenis page is mounted */
+html.lenis,
+html.lenis body {
+	height: auto;
+}
+.lenis.lenis-smooth {
+	scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+	overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+	overflow: hidden;
+}
+
+/* ---- primitives ---- */
+.tslp .hair {
+	border: 1px solid var(--hair);
+}
+.tslp .hair-b {
+	border-bottom: 1px solid var(--border);
+}
+.tslp .display {
+	font-family: var(--font-display), "Archivo Black", sans-serif;
+	font-weight: 400;
+	letter-spacing: -0.015em;
+	line-height: 1.02;
+}
+.tslp .eyebrow {
+	font-size: 11px;
+	letter-spacing: 0.24em;
+	text-transform: uppercase;
+	font-weight: 600;
+}
+.tslp .mono {
+	font-family: var(--font-geist-mono), "Geist Mono", monospace;
+}
+
+/* fixed film-grain overlay */
+.tslp .grain {
+	position: fixed;
+	inset: 0;
+	z-index: 60;
+	pointer-events: none;
+	opacity: 0.04;
+	mix-blend-mode: overlay;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* flat single-surface card */
+.tslp .card {
+	background: var(--surface);
+	border-radius: 18px;
+	transition: transform 0.45s var(--ease-out), background 0.45s var(--ease-out),
+		box-shadow 0.45s var(--ease-out);
+}
+.tslp .card:hover {
+	transform: translateY(-5px);
+	background: var(--surface-2);
+	box-shadow: 0 24px 48px -28px rgba(0, 0, 0, 0.55);
+}
+
+/* image card */
+.tslp .imgcard {
+	border-radius: 18px;
+	overflow: hidden;
+	position: relative;
+	transition: transform 0.55s var(--ease-out), box-shadow 0.55s var(--ease-out);
+}
+.tslp .imgcard img {
+	transition: transform 0.8s var(--ease-out);
+}
+.tslp .imgcard:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 32px 60px -34px rgba(0, 0, 0, 0.6);
+}
+.tslp .imgcard:hover img {
+	transform: scale(1.06);
+}
+
+/* reveal */
+.tslp .reveal {
+	opacity: 0;
+	transform: translateY(24px);
+	filter: blur(5px);
+	transition: opacity 0.85s var(--ease-out), transform 0.85s var(--ease-out),
+		filter 0.85s var(--ease-out);
+	will-change: transform, opacity;
+}
+.tslp .reveal-l {
+	transform: translateX(-52px);
+	filter: none;
+}
+.tslp .reveal-r {
+	transform: translateX(52px);
+	filter: none;
+}
+.tslp .reveal.in {
+	opacity: 1;
+	transform: none;
+	filter: none;
+}
+
+.tslp .btn-ico {
+	transition: transform 0.5s var(--ease-out);
+}
+.tslp .group:hover .btn-ico {
+	transform: translate(3px, -2px) scale(1.06);
+}
+.tslp .press {
+	transition: transform 0.16s var(--ease-out), background 0.3s ease,
+		color 0.3s ease, border-color 0.3s ease;
+}
+.tslp .press:active {
+	transform: scale(0.97);
+}
+
+/* accordion */
+.tslp .faq-body {
+	display: grid;
+	grid-template-rows: 0fr;
+	transition: grid-template-rows 0.42s var(--ease-drawer), opacity 0.3s ease;
+	opacity: 0.3;
+}
+.tslp .faq.open .faq-body {
+	grid-template-rows: 1fr;
+	opacity: 1;
+}
+.tslp .faq-body > div {
+	overflow: hidden;
+}
+.tslp .faq .chev {
+	transition: transform 0.42s var(--ease-drawer);
+}
+.tslp .faq.open .chev {
+	transform: rotate(45deg);
+}
+
+/* nav */
+.tslp #nav {
+	transition: transform 0.5s var(--ease-out), background 0.4s ease,
+		border-color 0.4s ease, box-shadow 0.4s ease;
+}
+.tslp .nav-solid {
+	background: color-mix(in srgb, var(--bg) 72%, transparent);
+	backdrop-filter: blur(18px);
+	-webkit-backdrop-filter: blur(18px);
+	box-shadow: 0 16px 40px -28px rgba(0, 0, 0, 0.7);
+}
+.tslp #nav:not(.nav-solid):not(.menu-open) {
+	color: #fff;
+	border-color: rgba(255, 255, 255, 0.24);
+}
+.tslp #nav:not(.nav-solid):not(.menu-open) .text-muted {
+	color: rgba(255, 255, 255, 0.74);
+}
+.tslp #nav:not(.nav-solid):not(.menu-open) #theme,
+.tslp #nav:not(.nav-solid):not(.menu-open) #burger {
+	border-color: rgba(255, 255, 255, 0.3);
+}
+
+.tslp #burger svg {
+	transition: opacity 0.3s ease, transform 0.35s var(--ease-out);
+}
+.tslp #burger .ico-close {
+	opacity: 0;
+	transform: rotate(-90deg) scale(0.7);
+}
+.tslp #burger.x .ico-menu {
+	opacity: 0;
+	transform: rotate(90deg) scale(0.7);
+}
+.tslp #burger.x .ico-close {
+	opacity: 1;
+	transform: none;
+}
+.tslp #overlay {
+	transition: opacity 0.5s var(--ease-out), visibility 0.5s;
+}
+.tslp #overlay a {
+	opacity: 0;
+	transform: translateY(26px);
+	transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+.tslp #overlay.show a {
+	opacity: 1;
+	transform: none;
+}
+
+/* marquee */
+.tslp .marquee {
+	display: flex;
+	width: max-content;
+	animation: ts-slide 58s linear infinite;
+}
+.tslp .marquee-rev {
+	display: flex;
+	width: max-content;
+	animation: ts-slide-rev 64s linear infinite;
+}
+@keyframes ts-slide {
+	to {
+		transform: translateX(-50%);
+	}
+}
+@keyframes ts-slide-rev {
+	from {
+		transform: translateX(-50%);
+	}
+	to {
+		transform: translateX(0);
+	}
+}
+.tslp .fade-x {
+	-webkit-mask-image: linear-gradient(
+		90deg,
+		transparent,
+		#000 9%,
+		#000 91%,
+		transparent
+	);
+	mask-image: linear-gradient(
+		90deg,
+		transparent,
+		#000 9%,
+		#000 91%,
+		transparent
+	);
+}
+
+/* parallax */
+.tslp .px-wrap {
+	overflow: hidden;
+}
+.tslp .px-img {
+	position: absolute;
+	inset: -14% 0;
+	height: 128%;
+	width: 100%;
+	object-fit: cover;
+	will-change: transform;
+}
+
+/* horizontal pinned scroll */
+.tslp .hpin-sticky {
+	height: 100dvh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	overflow: hidden;
+}
+.tslp .htrack {
+	display: flex;
+	gap: 20px;
+	will-change: transform;
+}
+.tslp .hcard {
+	flex: 0 0 auto;
+	width: min(82vw, 440px);
+}
+@media (max-width: 768px) {
+	.tslp .hpin {
+		height: auto !important;
+	}
+	.tslp .hpin-sticky {
+		height: auto;
+		padding-top: 6rem;
+		padding-bottom: 4rem;
+	}
+	.tslp .htrack {
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		padding-bottom: 1rem;
+		-webkit-overflow-scrolling: touch;
+		transform: none !important;
+	}
+	.tslp .hcard {
+		scroll-snap-align: start;
+		width: 78vw;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.tslp .px-img {
+		position: absolute;
+		inset: 0;
+		height: 100%;
+		transform: none !important;
+	}
+	.tslp .hpin {
+		height: auto !important;
+	}
+	.tslp .hpin-sticky {
+		position: static;
+		height: auto;
+	}
+	.tslp .htrack {
+		transform: none !important;
+		flex-wrap: wrap;
+	}
+	.tslp .reveal,
+	.tslp .btn-ico,
+	.tslp .press,
+	.tslp .faq-body,
+	.tslp .faq .chev,
+	.tslp #overlay a,
+	.tslp .card,
+	.tslp .imgcard img {
+		transition: opacity 0.2s ease !important;
+		transform: none !important;
+		filter: none !important;
+	}
+	.tslp .reveal {
+		opacity: 1;
+	}
+	.tslp .marquee,
+	.tslp .marquee-rev {
+		animation: none;
+	}
+}

@@ -519,76 +519,234 @@
         "companySection": "Company Details",
         "contactSection": "Primary Contact",
         "socialSection": "Online Presence",
-        "companyName": { "label": "Company / Organisation Name", "placeholder": "e.g. Afrobeats Promotions Ltd" },
-        "tradingName": { "label": "Trading / DBA Name", "placeholder": "e.g. Afro Events" },
-        "companyType": { "label": "Company Type", "placeholder": "e.g. Promoter, Agency" },
-        "registrationNumber": { "label": "Registration / RC Number", "placeholder": "e.g. RC-123456" },
-        "taxId": { "label": "Tax ID / TIN", "placeholder": "e.g. 1234567-0001" },
-        "primaryAddress": { "label": "Primary Business Address", "placeholder": "Street, City, Country" },
-        "country": { "label": "Country of Operation", "placeholder": "e.g. Nigeria" },
-        "contactPerson": { "label": "Full Name", "placeholder": "e.g. Amina Bello" },
-        "jobTitle": { "label": "Job Title / Role", "placeholder": "e.g. Managing Director" },
-        "contactEmail": { "label": "Contact Email", "placeholder": "you@company.com" },
-        "phone": { "label": "Phone Number", "placeholder": "+234 800 000 0000" },
-        "websiteUrl": { "label": "Website", "placeholder": "https://yourcompany.com" },
-        "instagram": { "label": "Instagram", "placeholder": "@handle" },
-        "xHandle": { "label": "X / Twitter", "placeholder": "@handle" },
-        "facebook": { "label": "Facebook", "placeholder": "facebook.com/yourpage" },
-        "tiktok": { "label": "TikTok", "placeholder": "@handle" }
+        "companyName": {
+          "label": "Company / Organisation Name",
+          "placeholder": "e.g. Afrobeats Promotions Ltd"
+        },
+        "tradingName": {
+          "label": "Trading / DBA Name",
+          "placeholder": "e.g. Afro Events"
+        },
+        "companyType": {
+          "label": "Company Type",
+          "placeholder": "e.g. Promoter, Agency"
+        },
+        "registrationNumber": {
+          "label": "Registration / RC Number",
+          "placeholder": "e.g. RC-123456"
+        },
+        "taxId": {
+          "label": "Tax ID / TIN",
+          "placeholder": "e.g. 1234567-0001"
+        },
+        "primaryAddress": {
+          "label": "Primary Business Address",
+          "placeholder": "Street, City, Country"
+        },
+        "country": {
+          "label": "Country of Operation",
+          "placeholder": "e.g. Nigeria"
+        },
+        "contactPerson": {
+          "label": "Full Name",
+          "placeholder": "e.g. Amina Bello"
+        },
+        "jobTitle": {
+          "label": "Job Title / Role",
+          "placeholder": "e.g. Managing Director"
+        },
+        "contactEmail": {
+          "label": "Contact Email",
+          "placeholder": "you@company.com"
+        },
+        "phone": {
+          "label": "Phone Number",
+          "placeholder": "+234 800 000 0000"
+        },
+        "websiteUrl": {
+          "label": "Website",
+          "placeholder": "https://yourcompany.com"
+        },
+        "instagram": {
+          "label": "Instagram",
+          "placeholder": "@handle"
+        },
+        "xHandle": {
+          "label": "X / Twitter",
+          "placeholder": "@handle"
+        },
+        "facebook": {
+          "label": "Facebook",
+          "placeholder": "facebook.com/yourpage"
+        },
+        "tiktok": {
+          "label": "TikTok",
+          "placeholder": "@handle"
+        }
       },
       "step2": {
         "title": "Promoter Experience",
-        "yearsInBusiness": { "label": "Years in Business", "placeholder": "e.g. 5" },
-        "concertsOrganized": { "label": "Total Concerts Organised", "placeholder": "e.g. 20" },
-        "largestConcertCapacity": { "label": "Largest Concert Capacity (attendees)", "placeholder": "e.g. 10,000" },
-        "averageEventsYear": { "label": "Average Events per Year", "placeholder": "e.g. 4" },
-        "genresSpecialties": { "label": "Genres / Specialties", "placeholder": "e.g. Afrobeats, Amapiano, R&B" },
-        "marketsRegions": { "label": "Markets / Regions Served", "placeholder": "e.g. West Africa, UK, USA" }
+        "yearsInBusiness": {
+          "label": "Years in Business",
+          "placeholder": "e.g. 5"
+        },
+        "concertsOrganized": {
+          "label": "Total Concerts Organised",
+          "placeholder": "e.g. 20"
+        },
+        "largestConcertCapacity": {
+          "label": "Largest Concert Capacity (attendees)",
+          "placeholder": "e.g. 10,000"
+        },
+        "averageEventsYear": {
+          "label": "Average Events per Year",
+          "placeholder": "e.g. 4"
+        },
+        "genresSpecialties": {
+          "label": "Genres / Specialties",
+          "placeholder": "e.g. Afrobeats, Amapiano, R&B"
+        },
+        "marketsRegions": {
+          "label": "Markets / Regions Served",
+          "placeholder": "e.g. West Africa, UK, USA"
+        }
       },
       "step3": {
         "title": "Tour Details & Artist Info",
         "tourSection": "Tour Information",
         "artistSection": "Artist Details",
-        "tourName": { "label": "Tour Name", "placeholder": "e.g. Afro Nation Lagos 2026" },
-        "tourManager": { "label": "Tour Manager Name", "placeholder": "Full name" },
-        "tourManagerEmail": { "label": "Tour Manager Email", "placeholder": "manager@tourco.com" },
-        "tourManagerPhone": { "label": "Tour Manager Phone", "placeholder": "+44 7000 000 000" },
-        "proposedCities": { "label": "Proposed Cities / Tour Stops", "placeholder": "e.g. Lagos, Accra, Nairobi" },
-        "preferredDates": { "label": "Preferred Tour Dates", "placeholder": "e.g. Oct 2026 – Dec 2026" },
-        "artistConfirmed": { "label": "Is the artist confirmed for this tour?", "confirmed": "Confirmed", "pending": "Pending" },
-        "spotifyListeners": { "label": "Monthly Spotify Listeners", "placeholder": "e.g. 2,500,000" },
-        "youtubeSubscribers": { "label": "YouTube Subscribers", "placeholder": "e.g. 500,000" },
-        "artistInstagram": { "label": "Artist Instagram Followers", "placeholder": "e.g. 1,200,000" }
+        "tourName": {
+          "label": "Tour Name",
+          "placeholder": "e.g. Afro Nation Lagos 2026"
+        },
+        "tourManager": {
+          "label": "Tour Manager Name",
+          "placeholder": "Full name"
+        },
+        "tourManagerEmail": {
+          "label": "Tour Manager Email",
+          "placeholder": "manager@tourco.com"
+        },
+        "tourManagerPhone": {
+          "label": "Tour Manager Phone",
+          "placeholder": "+44 7000 000 000"
+        },
+        "proposedCities": {
+          "label": "Proposed Cities / Tour Stops",
+          "placeholder": "e.g. Lagos, Accra, Nairobi"
+        },
+        "preferredDates": {
+          "label": "Preferred Tour Dates",
+          "placeholder": "e.g. Oct 2026 – Dec 2026"
+        },
+        "artistConfirmed": {
+          "label": "Is the artist confirmed for this tour?",
+          "confirmed": "Confirmed",
+          "pending": "Pending"
+        },
+        "spotifyListeners": {
+          "label": "Monthly Spotify Listeners",
+          "placeholder": "e.g. 2,500,000"
+        },
+        "youtubeSubscribers": {
+          "label": "YouTube Subscribers",
+          "placeholder": "e.g. 500,000"
+        },
+        "artistInstagram": {
+          "label": "Artist Instagram Followers",
+          "placeholder": "e.g. 1,200,000"
+        }
       },
       "step4": {
         "title": "Venue & Ticketing",
         "venueSection": "Venue Information",
         "ticketingSection": "Ticketing",
-        "venueName": { "label": "Venue Name", "placeholder": "e.g. Eko Convention Centre" },
-        "venueCity": { "label": "Venue City / Market", "placeholder": "e.g. Lagos" },
-        "venueCapacity": { "label": "Venue Capacity", "placeholder": "e.g. 8,000" },
-        "venueType": { "label": "Venue Type", "indoor": "Indoor", "outdoor": "Outdoor", "hybrid": "Hybrid" },
-        "venueStatus": { "label": "Venue Status", "confirmed": "Confirmed", "shortlisted": "Shortlisted", "pending": "Pending Approval" },
-        "venueRentalCost": { "label": "Estimated Rental Cost (USD)", "placeholder": "e.g. 50,000" },
-        "ticketingPartner": { "label": "Ticketing Partner", "placeholder": "e.g. Eventbrite, Flutterwave" },
-        "expectedTicketSales": { "label": "Expected Ticket Sales", "placeholder": "e.g. 6,000" },
-        "expectedOccupancy": { "label": "Expected Occupancy (%)", "placeholder": "e.g. 75" }
+        "venueName": {
+          "label": "Venue Name",
+          "placeholder": "e.g. Eko Convention Centre"
+        },
+        "venueCity": {
+          "label": "Venue City / Market",
+          "placeholder": "e.g. Lagos"
+        },
+        "venueCapacity": {
+          "label": "Venue Capacity",
+          "placeholder": "e.g. 8,000"
+        },
+        "venueType": {
+          "label": "Venue Type",
+          "indoor": "Indoor",
+          "outdoor": "Outdoor",
+          "hybrid": "Hybrid"
+        },
+        "venueStatus": {
+          "label": "Venue Status",
+          "confirmed": "Confirmed",
+          "shortlisted": "Shortlisted",
+          "pending": "Pending Approval"
+        },
+        "venueRentalCost": {
+          "label": "Estimated Rental Cost (USD)",
+          "placeholder": "e.g. 50,000"
+        },
+        "ticketingPartner": {
+          "label": "Ticketing Partner",
+          "placeholder": "e.g. Eventbrite, Flutterwave"
+        },
+        "expectedTicketSales": {
+          "label": "Expected Ticket Sales",
+          "placeholder": "e.g. 6,000"
+        },
+        "expectedOccupancy": {
+          "label": "Expected Occupancy (%)",
+          "placeholder": "e.g. 75"
+        }
       },
       "step5": {
         "title": "Tour Budget & Revenue",
         "budgetSection": "Tour Budget",
         "revenueSection": "Revenue Forecast",
         "budgetHint": "Estimates are acceptable at this stage. All amounts in USD.",
-        "artistFee": { "label": "Artist Fee / Guarantee", "placeholder": "e.g. 200,000" },
-        "productionCosts": { "label": "Production & Technical Costs", "placeholder": "e.g. 80,000" },
-        "marketingCosts": { "label": "Marketing & Promotion", "placeholder": "e.g. 40,000" },
-        "operationsCosts": { "label": "Operations & Logistics", "placeholder": "e.g. 30,000" },
-        "totalBudget": { "label": "Total Budget (USD)", "placeholder": "e.g. 350,000" },
-        "ticketingRevenue": { "label": "Ticketing Revenue", "placeholder": "e.g. 240,000" },
-        "sponsorshipRevenue": { "label": "Sponsorship Revenue", "placeholder": "e.g. 50,000" },
-        "otherRevenue": { "label": "Other Revenue", "placeholder": "e.g. 10,000" },
-        "totalRevenue": { "label": "Total Projected Revenue", "placeholder": "e.g. 300,000" },
-        "netProfit": { "label": "Projected Net Profit / Loss", "placeholder": "e.g. -50,000" }
+        "artistFee": {
+          "label": "Artist Fee / Guarantee",
+          "placeholder": "e.g. 200,000"
+        },
+        "productionCosts": {
+          "label": "Production & Technical Costs",
+          "placeholder": "e.g. 80,000"
+        },
+        "marketingCosts": {
+          "label": "Marketing & Promotion",
+          "placeholder": "e.g. 40,000"
+        },
+        "operationsCosts": {
+          "label": "Operations & Logistics",
+          "placeholder": "e.g. 30,000"
+        },
+        "totalBudget": {
+          "label": "Total Budget (USD)",
+          "placeholder": "e.g. 350,000"
+        },
+        "ticketingRevenue": {
+          "label": "Ticketing Revenue",
+          "placeholder": "e.g. 240,000"
+        },
+        "sponsorshipRevenue": {
+          "label": "Sponsorship Revenue",
+          "placeholder": "e.g. 50,000"
+        },
+        "otherRevenue": {
+          "label": "Other Revenue",
+          "placeholder": "e.g. 10,000"
+        },
+        "totalRevenue": {
+          "label": "Total Projected Revenue",
+          "placeholder": "e.g. 300,000"
+        },
+        "netProfit": {
+          "label": "Projected Net Profit / Loss",
+          "placeholder": "e.g. -50,000"
+        }
       },
       "step6": {
         "title": "Risk, Financing & Banking",
@@ -596,9 +754,15 @@
         "financingSection": "Financing Information",
         "bankingSection": "Banking Information",
         "hasCancellationHistory": "Have you had a concert cancellation in the past 3 years?",
-        "securityPlan": { "label": "Security & Crowd Management Plan", "placeholder": "Briefly describe your security and crowd management approach..." },
+        "securityPlan": {
+          "label": "Security & Crowd Management Plan",
+          "placeholder": "Briefly describe your security and crowd management approach..."
+        },
         "needsFinancing": "Do you require tour financing?",
-        "financingAmount": { "label": "Amount Required (USD)", "placeholder": "e.g. 150,000" },
+        "financingAmount": {
+          "label": "Amount Required (USD)",
+          "placeholder": "e.g. 150,000"
+        },
         "financingPurpose": {
           "label": "Purpose of Financing",
           "artistFee": "Artist Fee",
@@ -607,14 +771,35 @@
           "operations": "Operations",
           "other": "Other"
         },
-        "financingStructure": { "label": "Preferred Financing Structure", "loan": "Short-term Loan", "revShare": "Revenue Share", "equity": "Equity Investment", "advance": "Advance Against Revenue" },
-        "bankName": { "label": "Bank Name", "placeholder": "e.g. Zenith Bank" },
-        "bankAccountHolder": { "label": "Account Holder Name", "placeholder": "e.g. Afrobeats Promotions Ltd" },
-        "bankAccountNumber": { "label": "Account Number", "placeholder": "10-digit account number" },
-        "bvnOrRc": { "label": "BVN / Company RC Number", "placeholder": "BVN or RC number" },
+        "financingStructure": {
+          "label": "Preferred Financing Structure",
+          "loan": "Short-term Loan",
+          "revShare": "Revenue Share",
+          "equity": "Equity Investment",
+          "advance": "Advance Against Revenue"
+        },
+        "bankName": {
+          "label": "Bank Name",
+          "placeholder": "e.g. Zenith Bank"
+        },
+        "bankAccountHolder": {
+          "label": "Account Holder Name",
+          "placeholder": "e.g. Afrobeats Promotions Ltd"
+        },
+        "bankAccountNumber": {
+          "label": "Account Number",
+          "placeholder": "10-digit account number"
+        },
+        "bvnOrRc": {
+          "label": "BVN / Company RC Number",
+          "placeholder": "BVN or RC number"
+        },
         "insuranceSection": "Event Insurance",
         "hasInsurance": "Do you have event insurance coverage for this tour?",
-        "insuranceProvider": { "label": "Insurance Provider", "placeholder": "e.g. AXA, Allianz, Coronation Insurance" },
+        "insuranceProvider": {
+          "label": "Insurance Provider",
+          "placeholder": "e.g. AXA, Allianz, Coronation Insurance"
+        },
         "insuranceType": {
           "label": "Insurance Type",
           "cancellation": "Event Cancellation",
@@ -632,9 +817,18 @@
         "hasCACDocuments": "CAC Certificate / Business Registration Document",
         "hasFinancialStatements": "Financial Statements for the last 2 years",
         "hasTourDocs": "Tour itinerary or artist agreement (if available)",
-        "authorizedRepName": { "label": "Authorised Representative Name", "placeholder": "Full legal name" },
-        "authorizedRepTitle": { "label": "Title", "placeholder": "e.g. CEO, Managing Director" },
-        "additionalNotes": { "label": "Additional Notes (optional)", "placeholder": "Any other information relevant to your application..." },
+        "authorizedRepName": {
+          "label": "Authorised Representative Name",
+          "placeholder": "Full legal name"
+        },
+        "authorizedRepTitle": {
+          "label": "Title",
+          "placeholder": "e.g. CEO, Managing Director"
+        },
+        "additionalNotes": {
+          "label": "Additional Notes (optional)",
+          "placeholder": "Any other information relevant to your application..."
+        },
         "declarationText": "By submitting this Expression of Interest, I confirm that all information provided is accurate and complete. I authorise Ckrowd to use this information to assess financing and insurance requirements for this tour.",
         "reviewSection": "Application Summary"
       }
@@ -5964,6 +6158,311 @@
       "marketing": {
         "description": "Generate ready-to-post social media content, press releases, and a 30-day promotional calendar."
       }
+    }
+  },
+  "TourstackLanding": {
+    "nav": {
+      "platform": "The platform",
+      "platformShort": "Platform",
+      "ecosystem": "Ecosystem",
+      "explore": "Explore",
+      "faq": "FAQ",
+      "contactSales": "Contact sales",
+      "join": "Join TourStack",
+      "byCkrowd": "by Ckrowd"
+    },
+    "hero": {
+      "title1": "The platform that makes",
+      "title2": "African tours",
+      "title3": "financeable.",
+      "subtitle": "TourStack gives promoters, banks, insurers and artists the trust, compliance and data to unlock live entertainment across the continent, turning tours into financeable assets.",
+      "ctaPrimary": "Get started",
+      "ctaSecondary": "Become a certified promoter",
+      "scroll": "Scroll"
+    },
+    "trust": {
+      "eyebrow": "Backed by Africa's banking & insurance leaders"
+    },
+    "stats": {
+      "title": "The numbers behind the trust.",
+      "desc": "Real settlements, real markets, zero defaults. Proof that live entertainment is financeable.",
+      "items": [
+        {
+          "prefix": "₦",
+          "count": 320,
+          "suffix": "M+",
+          "label": "Payments facilitated"
+        },
+        {
+          "prefix": "",
+          "count": 230,
+          "suffix": "+",
+          "label": "Promoter credit files"
+        },
+        {
+          "prefix": "",
+          "count": 24,
+          "suffix": "+",
+          "label": "African markets"
+        },
+        {
+          "prefix": "",
+          "count": 0,
+          "suffix": "",
+          "label": "Defaults to date"
+        },
+        {
+          "prefix": "",
+          "count": 500,
+          "suffix": "+",
+          "label": "Verified promoters"
+        }
+      ]
+    },
+    "roles": [
+      "Promoters",
+      "Banks",
+      "Insurers",
+      "Artists",
+      "Venues",
+      "Service providers",
+      "Agencies",
+      "Sponsors",
+      "Vendors",
+      "Crews"
+    ],
+    "gap": {
+      "card1": "01 / The problem",
+      "card2": "Bridging the divide",
+      "eyebrow": "The infrastructure gap",
+      "title1": "Global demand.",
+      "title2": "Fragmented reality.",
+      "desc": "Appetite for African live entertainment has never been higher, yet executing cross-border tours stays opaque and uninsurable.",
+      "items": [
+        {
+          "text": "No centralized compliance, so capital sees only risk."
+        },
+        {
+          "text": "Untraceable cross-border payments deter institutions."
+        },
+        {
+          "text": "No risk modeling, so tour insurance barely exists."
+        }
+      ]
+    },
+    "how": {
+      "eyebrow": "The platform",
+      "title1": "One operating",
+      "title2": "system for",
+      "title3": "live entertainment.",
+      "desc": "Institutional trust at every layer, from verification to settlement.",
+      "features": [
+        {
+          "title": "Verification",
+          "body": "KYC and AML verified profiles for promoters, a trusted registry the whole industry can underwrite against."
+        },
+        {
+          "title": "Escrow & finance",
+          "body": "Secure escrow and milestone based smart contracts for safe capital deployment into tours."
+        },
+        {
+          "title": "Insurance",
+          "body": "Automated underwriting and risk modeling to procure event cancellation and non appearance cover."
+        },
+        {
+          "title": "Cross-border payments",
+          "body": "Compliant FX and multi currency payouts across 24+ African markets, fully traceable."
+        },
+        {
+          "title": "Service bidding",
+          "body": "Transparent procurement for production, logistics and on ground services with escrowed payouts."
+        },
+        {
+          "title": "Data & reporting",
+          "body": "Real time financial reporting and auditable post tour settlements that compound into a moat."
+        }
+      ]
+    },
+    "capabilities": [
+      {
+        "eyebrow": "Capital",
+        "title": "Financing infrastructure.",
+        "body": "We structure tours as standardized financial products. By controlling cash flow through smart escrow, TourStack mitigates the default risk that has kept lenders out of live events.",
+        "link": "Explore financing",
+        "alt": "Dark desk with live financial charts and trading screens"
+      },
+      {
+        "eyebrow": "Cover",
+        "title": "Insurance infrastructure.",
+        "body": "For the first time, comprehensive event cancellation and non appearance insurance is accessible continent wide, powered by our proprietary risk dataset.",
+        "link": "Explore insurance",
+        "alt": "Empty arena being prepared for a show"
+      },
+      {
+        "eyebrow": "Moat",
+        "title": "Data creates the moat.",
+        "body": "Every transaction, ticket scan and vendor payment flows through TourStack, the most comprehensive predictive dataset for African live entertainment profitability.",
+        "link": "See the data layer",
+        "alt": "A vast crowd of fans lit blue at a live show"
+      }
+    ],
+    "explore": {
+      "eyebrow": "Go deeper",
+      "title1": "Built for every side",
+      "title2": "of the live economy.",
+      "dragToScroll": "Drag to scroll",
+      "cards": [
+        {
+          "title": "Promoters",
+          "sub": "Access institutional capital"
+        },
+        {
+          "title": "Artists",
+          "sub": "Protect your fees"
+        },
+        {
+          "title": "Financiers",
+          "sub": "Deploy capital safely"
+        },
+        {
+          "title": "Insurers",
+          "sub": "Underwrite with real data"
+        },
+        {
+          "title": "Venues",
+          "sub": "Streamline deposits"
+        },
+        {
+          "title": "Service providers",
+          "sub": "Win escrowed contracts"
+        }
+      ]
+    },
+    "principles": {
+      "eyebrow": "What we stand on",
+      "title": "Three principles.",
+      "items": [
+        {
+          "title": "Trust is infrastructure",
+          "body": "Compliance and verification are not paperwork. They are the rails that let capital flow into live events safely."
+        },
+        {
+          "title": "Data over instinct",
+          "body": "Every settlement teaches the system. We price risk on evidence, not gut feel, so underwriting gets sharper each tour."
+        },
+        {
+          "title": "Built for the continent",
+          "body": "Multi market, multi currency, locally compliant. Designed for how African live entertainment actually operates."
+        }
+      ]
+    },
+    "workflow": {
+      "eyebrow": "Platform workflow",
+      "title1": "From discovery",
+      "title2": "to execution.",
+      "desc": "Four steps take a tour from announcement to a financier-ready decision, on a single rail.",
+      "stepLabel": "Step {n}",
+      "steps": [
+        {
+          "title": "Ckrowd announces tour & artistes",
+          "body": "Admin creates a Tour Project on TourStack, including artiste roster, fee range, availability dates, and technical requirements."
+        },
+        {
+          "title": "Promoter submits Expression of Interest",
+          "body": "Promoters browse available artistes and tours, then submit a formal EOI with their venue, date, budget, and funding model."
+        },
+        {
+          "title": "Matching & review",
+          "body": "TourStack scores each EOI against artiste requirements. The Ckrowd team reviews flagged matches and makes informed decisions."
+        },
+        {
+          "title": "Report & decision",
+          "body": "The system generates a business summary, estimated revenue, costs, and risk notes, structured for financiers. Admin approves, rejects, or requests revision."
+        }
+      ]
+    },
+    "whyAfrica": {
+      "title1": "Why Africa.",
+      "title2": "Why now.",
+      "desc": "African music's global cultural export has reached record heights, yet domestic touring stays severely under monetized for lack of institutional scaffolding. The market is primed for consolidation.",
+      "stats": [
+        {
+          "prefix": "$",
+          "count": 28,
+          "suffix": "B",
+          "label": "Addressable market"
+        },
+        {
+          "prefix": "",
+          "count": 400,
+          "suffix": "%",
+          "label": "YoY genre growth"
+        },
+        {
+          "prefix": "",
+          "count": 45,
+          "suffix": "+",
+          "label": "Markets in reach"
+        }
+      ]
+    },
+    "cta": {
+      "title": "Ready to build the future of live entertainment?",
+      "subtitle": "Join the infrastructure platform standardizing African touring.",
+      "primary": "Get started today",
+      "secondary": "Contact sales"
+    },
+    "faq": {
+      "eyebrow": "Answers",
+      "title": "Frequently asked questions",
+      "items": [
+        {
+          "q": "Who is TourStack for?",
+          "a": "TourStack is a B2B platform for the live-entertainment ecosystem: promoters, artists and managers, venues, financiers, insurers, vendors and service providers. Each stakeholder onboards, gets verified, and works on a single trusted rail."
+        },
+        {
+          "q": "How does financing and escrow work?",
+          "a": "We structure a tour as a financial product and hold capital with Tier 1 banking partners in our operating markets. Funds release against milestone based smart escrow, so disbursements trigger only when verified conditions are met."
+        },
+        {
+          "q": "How do I submit an Expression of Interest?",
+          "a": "Promoters browse available artists and tours, then submit an EOI with venue, date, budget and funding model. TourStack scores each EOI against the artiste requirements and our team reviews flagged matches before a decision is made."
+        },
+        {
+          "q": "How does insurance coverage work?",
+          "a": "Working with our insurance partners, we use automated underwriting and a proprietary risk dataset to procure event cancellation and non appearance cover, making comprehensive tour insurance accessible continent wide."
+        },
+        {
+          "q": "Which markets is TourStack active in?",
+          "a": "Full financial infrastructure in Nigeria, South Africa, Kenya, Ghana, Rwanda and Uganda, with expanding compliance coverage across 18+ additional African territories."
+        },
+        {
+          "q": "How is my data handled?",
+          "a": "We apply administrative, technical and organizational safeguards to protect your information, and we never sell personal data.",
+          "privacyNote": true
+        }
+      ],
+      "dataPrivacyNote": "See our <privacy>Privacy Policy</privacy> and <terms>Terms of Service</terms> for full detail."
+    },
+    "footer": {
+      "tagline": "Africa's financial infrastructure for live entertainment. Built for the continent's live economy.",
+      "platform": "Platform",
+      "company": "Company",
+      "legal": "Legal",
+      "links": {
+        "verification": "Verification",
+        "financing": "Financing",
+        "insurance": "Insurance",
+        "payments": "Payments",
+        "ecosystem": "Ecosystem",
+        "howItWorks": "How it works",
+        "platform": "Platform",
+        "contact": "Contact",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service"
+      },
+      "copyright": "© 2026 Ckrowd · TourStack Infrastructure. All rights reserved.",
+      "builtFor": "Built for Africa's live economy."
     }
   }
 }

@@ -77,6 +77,15 @@
   --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;
   --radius-full: 9999px;
+
+  /* TourStack landing tokens — enable bg-orange / text-muted / text-ink
+     (with opacity modifiers). `muted`/`ink` resolve against vars scoped to
+     the .tslp landing wrapper; `orange` is the brand accent. */
+  --color-orange: #ff5a30;
+  --color-ember: #ff7a52;
+  --color-lime: #1db954;
+  --color-muted: var(--muted, #a8a8a8);
+  --color-ink: var(--text, #ffffff);
 }
 
 /* Material Symbols baseline */
