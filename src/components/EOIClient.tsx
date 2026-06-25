@@ -4,7 +4,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Suspense, useMemo, useState } from "react";
-import { createEOI, getArtists, getTourstackProfile } from "@/app/actions";
+import { createEOI, getArtists, getTourstackProfile, listBanks, resolveBankAccount } from "@/app/actions";
 import { useSession } from "@/context/AuthContext";
 import { Link } from "@/i18n/routing";
 
@@ -79,6 +79,7 @@ type EOIForm = {
 	financingPurpose: string[];
 	financingStructure: string;
 	bankName: string;
+	bankCode: string;
 	bankAccountHolder: string;
 	bankAccountNumber: string;
 	bvnOrRc: string;
@@ -109,7 +110,7 @@ const DEFAULT_FORM: EOIForm = {
 	netProfit: "", hasCancellationHistory: false, securityPlan: "",
 	hasInsurance: true, insuranceProvider: "", insuranceType: "", insuranceAcknowledged: false,
 	needsFinancing: false, financingAmount: "", financingPurpose: [],
-	financingStructure: "", bankName: "", bankAccountHolder: "", bankAccountNumber: "",
+	financingStructure: "", bankName: "", bankCode: "", bankAccountHolder: "", bankAccountNumber: "",
 	bvnOrRc: "", hasCACDocuments: false, hasFinancialStatements: false,
 	hasTourDocs: false, authorizedRepName: "", authorizedRepTitle: "",
 	additionalNotes: "", declarationConfirmed: false,
@@ -379,6 +380,27 @@ function EOIPageContent() {
 	const { data: profileQuery } = useQuery({
 		queryKey: ["tourstackProfile"],
 		queryFn: getTourstackProfile,
+	});
+
+	const { data: banksQuery, isLoading: loadingBanks } = useQuery({
+		queryKey: ["banks"],
+		queryFn: () => listBanks("nigeria"),
+		staleTime: 1000 * 60 * 60,
+	});
+	const bankList = (banksQuery?.data as { name: string; code: string }[] | null | undefined) ?? [];
+
+	const [accountVerified, setAccountVerified] = useState(false);
+	const resolveAccountMutation = useMutation({
+		mutationFn: resolveBankAccount,
+		onSuccess: (result) => {
+			if (result.success && result.data) {
+				const d = result.data as { account_name?: string };
+				if (d.account_name) {
+					set("bankAccountHolder", d.account_name);
+					setAccountVerified(true);
+				}
+			}
+		},
 	});
 
 	const profileDefaults = useMemo<Partial<EOIForm>>(() => {
@@ -979,18 +1001,64 @@ function EOIPageContent() {
 											<SectionHeading>{t("form.step6.bankingSection")}</SectionHeading>
 											<div>
 												<FLabel htmlFor="s6-bname" required>{t("form.step6.bankName.label")}</FLabel>
-												<input id="s6-bname" type="text" placeholder={t("form.step6.bankName.placeholder")} value={form.bankName} onChange={e => set("bankName", e.target.value)} className={`${ic} ${errors.bankName ? icErr : ""}`} aria-invalid={!!errors.bankName} />
+												{loadingBanks ? (
+													<p className="text-xs text-slate-400 py-3">{t("form.step6.bankName.loading")}</p>
+												) : bankList.length > 0 ? (
+													<div className="relative">
+														<select
+															id="s6-bname"
+															value={form.bankCode}
+															onChange={e => {
+																const selected = bankList.find(b => b.code === e.target.value);
+																set("bankCode", e.target.value);
+																set("bankName", selected?.name ?? "");
+																setAccountVerified(false);
+															}}
+															className={`${ic} appearance-none pr-9 ${errors.bankName ? icErr : ""}`}
+															aria-invalid={!!errors.bankName}
+														>
+															<option value="">{t("form.step6.bankName.select")}</option>
+															{bankList.map(b => (
+																<option key={b.code} value={b.code}>{b.name}</option>
+															))}
+														</select>
+														<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-lg">expand_more</span>
+													</div>
+												) : (
+													<input id="s6-bname" type="text" placeholder={t("form.step6.bankName.placeholder")} value={form.bankName} onChange={e => { set("bankName", e.target.value); setAccountVerified(false); }} className={`${ic} ${errors.bankName ? icErr : ""}`} aria-invalid={!!errors.bankName} />
+												)}
 												<FError msg={errors.bankName} />
 											</div>
 											<div>
-												<FLabel htmlFor="s6-bholder" required>{t("form.step6.bankAccountHolder.label")}</FLabel>
-												<input id="s6-bholder" type="text" placeholder={t("form.step6.bankAccountHolder.placeholder")} value={form.bankAccountHolder} onChange={e => set("bankAccountHolder", e.target.value)} className={`${ic} ${errors.bankAccountHolder ? icErr : ""}`} aria-invalid={!!errors.bankAccountHolder} />
-												<FError msg={errors.bankAccountHolder} />
+												<FLabel htmlFor="s6-bnum" required>{t("form.step6.bankAccountNumber.label")}</FLabel>
+												<div className="flex gap-2">
+													<input id="s6-bnum" type="text" inputMode="numeric" placeholder={t("form.step6.bankAccountNumber.placeholder")} value={form.bankAccountNumber} onChange={e => { set("bankAccountNumber", e.target.value.replace(/\D/g, "")); setAccountVerified(false); }} className={`${ic} ${errors.bankAccountNumber ? icErr : ""}`} aria-invalid={!!errors.bankAccountNumber} />
+													{form.bankCode && form.bankAccountNumber.length === 10 && !accountVerified && (
+														<button
+															type="button"
+															disabled={resolveAccountMutation.isPending}
+															onClick={() => resolveAccountMutation.mutate({ account_number: form.bankAccountNumber, bank_code: form.bankCode })}
+															className="shrink-0 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-100 transition disabled:opacity-60"
+														>
+															{resolveAccountMutation.isPending ? t("form.step6.bankAccountNumber.verifying") : t("form.step6.bankAccountNumber.verify")}
+														</button>
+													)}
+												</div>
+												{accountVerified && (
+													<p className="mt-1.5 flex items-center gap-1 text-xs font-semibold text-emerald-600">
+														<span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+														{t("form.step6.bankAccountHolder.verified")}
+													</p>
+												)}
+												{resolveAccountMutation.data && !resolveAccountMutation.data.success && (
+													<p className="mt-1.5 text-xs text-amber-600 font-medium">{t("form.step6.bankAccountHolder.verifyFailed")}</p>
+												)}
+												<FError msg={errors.bankAccountNumber} />
 											</div>
 											<div>
-												<FLabel htmlFor="s6-bnum" required>{t("form.step6.bankAccountNumber.label")}</FLabel>
-												<input id="s6-bnum" type="text" inputMode="numeric" placeholder={t("form.step6.bankAccountNumber.placeholder")} value={form.bankAccountNumber} onChange={e => set("bankAccountNumber", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.bankAccountNumber ? icErr : ""}`} aria-invalid={!!errors.bankAccountNumber} />
-												<FError msg={errors.bankAccountNumber} />
+												<FLabel htmlFor="s6-bholder" required>{t("form.step6.bankAccountHolder.label")}</FLabel>
+												<input id="s6-bholder" type="text" placeholder={t("form.step6.bankAccountHolder.placeholder")} value={form.bankAccountHolder} onChange={e => { set("bankAccountHolder", e.target.value); setAccountVerified(false); }} className={`${ic} ${errors.bankAccountHolder ? icErr : ""}`} aria-invalid={!!errors.bankAccountHolder} />
+												<FError msg={errors.bankAccountHolder} />
 											</div>
 											<div>
 												<FLabel htmlFor="s6-bvn">{t("form.step6.bvnOrRc.label")}</FLabel>
@@ -1065,7 +1133,7 @@ function EOIPageContent() {
 														<div className={`w-5 h-5 rounded border-2 shrink-0 mt-0.5 flex items-center justify-center ${form.declarationConfirmed ? "bg-[#FF5A30] border-[#FF5A30]" : errors.declaration ? "border-rose-400" : "border-slate-300"}`}>
 															{form.declarationConfirmed && <span className="material-symbols-outlined text-white text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>}
 														</div>
-														<span className="text-sm font-semibold text-slate-800">I have read and agree to the declaration above.</span>
+														<span className="text-sm font-semibold text-slate-800">{t("form.step7.declarationAgree")}</span>
 													</label>
 													{errors.declaration && <p className="mt-2 ml-8 text-xs text-rose-600 font-medium">{errors.declaration}</p>}
 												</div>
