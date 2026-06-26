@@ -216,7 +216,7 @@ function TicketForecastTab({ eois }: { eois: EOI[] }) {
 					{!!d.pricingTiers && (
 						<div>
 							<SectionLabel>Recommended Pricing Tiers</SectionLabel>
-							<div className="grid grid-cols-3 gap-3">
+							<div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
 								{Object.entries(d.pricingTiers as Record<string, Record<string, unknown>>).map(([tier, info]) => (
 									<div key={tier} className="bg-surface-container-low rounded-xl p-3 text-center">
 										<p className="text-[10px] font-black uppercase tracking-widest text-[#FF5A30]">{tier}</p>

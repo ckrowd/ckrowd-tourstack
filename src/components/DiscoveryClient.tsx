@@ -163,8 +163,8 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 
 			{/* Filters */}
 			<section data-tour="discovery-filters" className="bg-surface-container-low rounded-2xl p-4 md:p-6 mb-10">
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:flex lg:flex-wrap lg:items-end gap-3 md:gap-4">
-				<div className="w-full lg:flex-1 lg:min-w-45">
+				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
+				<div className="w-full">
 					<label
 						htmlFor="filter-genre"
 						className="block text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest mb-1.5 ml-1"
@@ -194,7 +194,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 					</div>
 				</div>
 
-				<div className="w-full lg:flex-1 lg:min-w-45">
+				<div className="w-full">
 					<label
 						htmlFor="filter-window"
 						className="block text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest mb-1.5 ml-1"
@@ -219,7 +219,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 					</div>
 				</div>
 
-				<div className="w-full lg:flex-1 lg:min-w-45">
+				<div className="w-full">
 					<label
 						htmlFor="filter-fee"
 						className="block text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest mb-1.5 ml-1"
@@ -246,7 +246,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 					</div>
 				</div>
 
-				<div className="w-full lg:flex-1 lg:min-w-45">
+				<div className="w-full">
 					<label
 						htmlFor="filter-region"
 						className="block text-[10px] font-semibold text-on-surface-variant uppercase tracking-widest mb-1.5 ml-1"
@@ -274,7 +274,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 					</div>
 				</div>
 
-				<div className="w-full sm:col-span-2 lg:w-auto lg:self-end">
+				<div className="w-full sm:col-span-2 lg:col-span-1 lg:self-end">
 					<button
 						type="button"
 						onClick={() => {
@@ -325,7 +325,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 							<p className="text-sm mt-1">{t("noResults.description")}</p>
 						</div>
 					) : (
-						<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 							{filtered.map((artist) => (
 								<div
 									key={String(artist.id ?? artist.name)}

@@ -122,10 +122,10 @@ export default function AdminSubmissionsPage() {
 								<th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">
 									{t("submissionTitle")}
 								</th>
-								<th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">
+								<th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide hidden md:table-cell">
 									{t("submittedBy")}
 								</th>
-								<th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">
+								<th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide hidden md:table-cell">
 									{t("submittedAt")}
 								</th>
 								<th className="px-5 py-3" />
@@ -163,7 +163,7 @@ export default function AdminSubmissionsPage() {
 												</span>
 											</td>
 											<td className="px-5 py-4 text-slate-800 font-medium">{String(sub.title)}</td>
-											<td className="px-5 py-4 text-slate-600">
+											<td className="px-5 py-4 text-slate-600 hidden md:table-cell">
 												<p className="font-medium">
 													{profile?.company_name
 														? String(profile.company_name)
@@ -175,7 +175,7 @@ export default function AdminSubmissionsPage() {
 													<p className="text-xs text-slate-400">{String(profile.user.email)}</p>
 												)}
 											</td>
-											<td className="px-5 py-4 text-slate-500 whitespace-nowrap">
+											<td className="px-5 py-4 text-slate-500 whitespace-nowrap hidden md:table-cell">
 												{sub.submitted_at
 													? format.relativeTime(new Date(String(sub.submitted_at)))
 													: "—"}

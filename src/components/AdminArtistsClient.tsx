@@ -234,7 +234,7 @@ export default function AdminArtistsClient() {
 							<p className="text-on-surface-variant text-sm">{t("submissions.noSubmissionsDesc")}</p>
 						</div>
 					) : (
-						<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
+						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
 							{filtered.map((artist): React.ReactNode => {
 								const links = (artist.social_links ?? {}) as SocialLinks;
 								const status = String(artist.status ?? "pending");
@@ -412,7 +412,7 @@ export default function AdminArtistsClient() {
 							<p className="text-on-surface-variant text-sm">{t("noArtistsDesc")}</p>
 						</div>
 					) : (
-						<div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 							{published.map((artist) => {
 								const isActive = Boolean(artist.is_active);
 								const markets = Array.isArray(artist.markets)
