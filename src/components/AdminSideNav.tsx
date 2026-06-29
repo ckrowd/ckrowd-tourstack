@@ -55,6 +55,13 @@ export default async function AdminSideNav() {
 			tourAttr: "admin-nav-claims",
 		},
 		{
+			key: "tickets",
+			label: t("tickets"),
+			icon: "confirmation_number",
+			href: "/admin/tickets",
+			tourAttr: "admin-nav-tickets",
+		},
+		{
 			key: "directory",
 			label: t("directory"),
 			icon: "groups",
