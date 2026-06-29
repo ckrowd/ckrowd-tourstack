@@ -1,56 +1,66 @@
 "use client";
 
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useRef, useState } from "react";
+import { getInsuranceAdminProfile, updateInsuranceAdminProfile } from "@/app/actions";
 import SignaturePad from "@/components/SignaturePad";
 
-const STORAGE_KEY = "ins_admin_profile";
-
-interface Profile {
-  orgName: string;
-  contactPerson: string;
-  role: string;
-  email: string;
-  phone: string;
-  logo: string | null;
-  adminSignature: string | null;
-}
-
-function emptyProfile(): Profile {
-  return {
-    orgName: "",
-    contactPerson: "",
-    role: "",
-    email: "",
-    phone: "",
-    logo: null,
-    adminSignature: null,
-  };
-}
-
-function loadProfile(): Profile {
-  if (typeof window === "undefined") return emptyProfile();
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return { ...emptyProfile(), ...JSON.parse(raw) };
-  } catch {}
-  return emptyProfile();
-}
+type ServerProfile = {
+  org_name?: string | null;
+  contact_person?: string | null;
+  role?: string | null;
+  admin_signature?: string | null;
+};
 
 export default function InsuranceAdminProfilePage() {
   const t = useTranslations("InsuranceAdminProfilePage");
-  const [profile, setProfile] = useState<Profile>(() => loadProfile());
-  const [saved, setSaved] = useState(false);
+  const queryClient = useQueryClient();
   const logoInputRef = useRef<HTMLInputElement>(null);
 
-  function set<K extends keyof Profile>(key: K, value: Profile[K]) {
-    setProfile((p) => ({ ...p, [key]: value }));
-    setSaved(false);
-  }
+  const profileQuery = useQuery({
+    queryKey: ["insuranceAdminProfile"],
+    queryFn: getInsuranceAdminProfile,
+  });
+  const serverProfile = (profileQuery.data?.data ?? null) as ServerProfile | null;
 
-  function save() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
-    setSaved(true);
+  const [localEdits, setLocalEdits] = useState<{
+    orgName?: string;
+    contactPerson?: string;
+    role?: string;
+    adminSignature?: string | null;
+    logo?: string | null;
+  }>({});
+
+  const profile = {
+    orgName: localEdits.orgName ?? serverProfile?.org_name ?? "",
+    contactPerson: localEdits.contactPerson ?? serverProfile?.contact_person ?? "",
+    role: localEdits.role ?? serverProfile?.role ?? "",
+    adminSignature:
+      localEdits.adminSignature !== undefined
+        ? localEdits.adminSignature
+        : (serverProfile?.admin_signature ?? null),
+    logo: localEdits.logo !== undefined ? localEdits.logo : null,
+  };
+
+  const saveMutation = useMutation({
+    mutationFn: () =>
+      updateInsuranceAdminProfile({
+        orgName: profile.orgName || undefined,
+        contactPerson: profile.contactPerson || undefined,
+        role: profile.role || undefined,
+        adminSignature: profile.adminSignature,
+      }),
+    onSuccess: (result) => {
+      if (result.success) {
+        setLocalEdits({});
+        void queryClient.invalidateQueries({ queryKey: ["insuranceAdminProfile"] });
+      }
+    },
+  });
+
+  function set<K extends keyof typeof localEdits>(key: K, value: (typeof localEdits)[K]) {
+    setLocalEdits((p) => ({ ...p, [key]: value }));
   }
 
   function handleLogoUpload(e: React.ChangeEvent<HTMLInputElement>) {
@@ -174,34 +184,6 @@ export default function InsuranceAdminProfilePage() {
               className={inputClass}
             />
           </div>
-
-          <div>
-            <label className={labelClass} htmlFor="ins-email">
-              {t("fields.email")}
-            </label>
-            <input
-              id="ins-email"
-              type="email"
-              value={profile.email}
-              onChange={(e) => set("email", e.target.value)}
-              placeholder={t("fields.emailPlaceholder")}
-              className={inputClass}
-            />
-          </div>
-
-          <div>
-            <label className={labelClass} htmlFor="ins-phone">
-              {t("fields.phone")}
-            </label>
-            <input
-              id="ins-phone"
-              type="tel"
-              value={profile.phone}
-              onChange={(e) => set("phone", e.target.value)}
-              placeholder={t("fields.phonePlaceholder")}
-              className={inputClass}
-            />
-          </div>
         </div>
 
         {/* Signatures */}
@@ -210,29 +192,36 @@ export default function InsuranceAdminProfilePage() {
             {t("sections.signatures")}
           </h2>
           <SignaturePad
-              value={profile.adminSignature}
-              onChange={(v) => set("adminSignature", v)}
-              label={t("fields.adminSig")}
-              hint={t("fields.adminSigHint")}
-            />
+            value={profile.adminSignature}
+            onChange={(v) => set("adminSignature", v)}
+            label={t("fields.adminSig")}
+            hint={t("fields.adminSigHint")}
+          />
         </div>
       </div>
 
       <div className="mt-8 flex items-center gap-4">
         <button
           type="button"
-          onClick={save}
-          className="px-8 py-3 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all"
+          onClick={() => saveMutation.mutate()}
+          disabled={saveMutation.isPending}
+          className="px-8 py-3 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:opacity-60"
         >
-          {t("save")}
+          {saveMutation.isPending ? t("saving") : t("save")}
         </button>
-        {saved && (
+        {saveMutation.data?.success && (
           <p className="text-sm font-medium text-emerald-700 flex items-center gap-1.5">
-            <span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>
+            <span
+              className="material-symbols-outlined text-sm"
+              style={{ fontVariationSettings: "'FILL' 1" }}
+            >
               check_circle
             </span>
             {t("saved")}
           </p>
+        )}
+        {saveMutation.isSuccess && !saveMutation.data?.success && (
+          <p className="text-sm font-medium text-red-600">{t("saveError")}</p>
         )}
       </div>
     </>

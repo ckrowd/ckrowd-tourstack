@@ -13,6 +13,7 @@ type ProfileData = {
 	trading_name?: string | null;
 	contact_person?: string | null;
 	job_title?: string | null;
+	contact_email?: string | null;
 	phone?: string | null;
 	country?: string | null;
 	city?: string | null;
@@ -163,7 +164,7 @@ export default function AdminProfilePage() {
 				tradingName: String(d.trading_name ?? ""),
 				contactPerson: String(d.contact_person ?? ""),
 				jobTitle: String(d.job_title ?? ""),
-				email: "",
+				email: String(d.contact_email ?? ""),
 				phone: String(d.phone ?? ""),
 				country: String(d.country ?? ""),
 				city: String(d.city ?? ""),
@@ -205,6 +206,7 @@ export default function AdminProfilePage() {
 			tradingName: profile.tradingName || undefined,
 			contactPerson: profile.contactPerson || undefined,
 			jobTitle: profile.jobTitle || undefined,
+			contactEmail: profile.email || undefined,
 			bio: profile.bio || undefined,
 			phone: profile.phone || undefined,
 			country: profile.country || undefined,

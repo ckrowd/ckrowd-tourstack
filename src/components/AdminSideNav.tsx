@@ -48,6 +48,13 @@ export default async function AdminSideNav() {
 			tourAttr: "admin-nav-insurance",
 		},
 		{
+			key: "claims",
+			label: t("claims"),
+			icon: "health_and_safety",
+			href: "/admin/claims",
+			tourAttr: "admin-nav-claims",
+		},
+		{
 			key: "directory",
 			label: t("directory"),
 			icon: "groups",

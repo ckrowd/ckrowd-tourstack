@@ -1714,6 +1714,69 @@ export async function updateInsuranceEoi(
 	};
 }
 
+// biome-ignore lint/suspicious/noExplicitAny: revise route not yet in published package type
+export async function reviseEoi(
+	id: string,
+	body: { city?: string; venue?: string; capacity?: number; audience?: string; notes?: string; budget?: number; fundingType?: string },
+) {
+	const { data, error } = await (client as any).tourstack.eoi({ id }).revise.patch(body);
+	return {
+		data: await extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: financing-admin profile not yet in published package type
+export async function getFinancingAdminProfile() {
+	const { data, error } = await (client as any).tourstack["financing-admin"].profile.get();
+	return {
+		data: await extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: financing-admin profile not yet in published package type
+export async function updateFinancingAdminProfile(body: { orgName?: string; contactPerson?: string; role?: string; adminSignature?: string | null }) {
+	const { data, error } = await (client as any).tourstack["financing-admin"].profile.patch(body);
+	return {
+		data: await extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: insurance-admin profile not yet in published package type
+export async function getInsuranceAdminProfile() {
+	const { data, error } = await (client as any).tourstack["insurance-admin"].profile.get();
+	return {
+		data: await extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: insurance-admin profile not yet in published package type
+export async function updateInsuranceAdminProfile(body: { orgName?: string; contactPerson?: string; role?: string; adminSignature?: string | null }) {
+	const { data, error } = await (client as any).tourstack["insurance-admin"].profile.patch(body);
+	return {
+		data: await extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: admin claims not yet in published package type
+export async function getAdminClaims(status?: string) {
+	const { data, error } = await (client as any).tourstack.admin.claims.get(status ? { query: { status } } : {});
+	return {
+		data: await extractPayload(data),
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
 export async function setLeadAdmin(userId: string) {
 	try {
 		const cookieJar = await cookies();
