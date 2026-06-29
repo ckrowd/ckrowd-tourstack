@@ -80,7 +80,7 @@ export default function FinancingAdminProfilePage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Identity */}
         <div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm space-y-5">
           <h2 className="font-(family-name:--font-manrope) font-semibold text-base border-b border-outline-variant/15 pb-3">

@@ -738,7 +738,7 @@ export default function TopNav() {
 						onClick={() => setNotifOpen(false)}
 					/>
 					<div
-						className="fixed top-16 right-4 md:right-12 z-50 w-80 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden"
+						className="fixed top-16 right-2 md:right-12 z-50 w-[calc(100vw-1rem)] sm:w-80 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden"
 						role="dialog"
 						aria-label={t("notifications")}
 					>
