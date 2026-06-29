@@ -3454,7 +3454,8 @@
     "settings": "Settings",
     "startNewTour": "Start New Tour",
     "profileRequired": "Complete your profile first",
-    "aiTools": "Tour Intelligence"
+    "aiTools": "Tour Intelligence",
+    "tickets": "Ticketing"
   },
   "CreateTourPage": {
     "management": "Tour Management",
@@ -3798,7 +3799,8 @@
     "newTour": "New Tour",
     "financing": "Financing",
     "insurance": "Insurance",
-    "claims": "Claims"
+    "claims": "Claims",
+    "tickets": "Tickets"
   },
   "AdminArtistsPage": {
     "badge": "Artist Management",
@@ -6576,5 +6578,191 @@
       "copyright": "© 2026 Ckrowd · TourStack Infrastructure. All rights reserved.",
       "builtFor": "Built for Africa's live economy."
     }
+  },
+  "TicketsDashboardPage": {
+    "badge": "Ticketing",
+    "title": "My Ticket Events",
+    "description": "Create and manage ticket events for your tours. Sell directly to your audience.",
+    "create": "Create Event",
+    "empty": "No ticket events yet. Create your first event to start selling tickets.",
+    "status": {
+      "draft": "Draft",
+      "published": "Published",
+      "closed": "Closed",
+      "cancelled": "Cancelled"
+    },
+    "table": {
+      "event": "Event",
+      "date": "Date",
+      "location": "Location",
+      "tiers": "Tiers",
+      "sold": "Sold",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "actions": {
+      "manage": "Manage",
+      "publish": "Publish",
+      "close": "Close Sales"
+    },
+    "dateTBC": "Date TBC",
+    "locationTBC": "Location TBC"
+  },
+  "CreateTicketEventPage": {
+    "badge": "Ticketing",
+    "title": "Create Ticket Event",
+    "description": "Set up your event details, add ticket tiers, then publish to start selling.",
+    "steps": {
+      "details": "Event Details",
+      "tiers": "Ticket Tiers",
+      "review": "Review & Publish"
+    },
+    "form": {
+      "title": "Event Title",
+      "titlePlaceholder": "e.g. Burna Boy Live in Lagos",
+      "description": "Description",
+      "descriptionPlaceholder": "Tell buyers what to expect…",
+      "venue": "Venue",
+      "venuePlaceholder": "e.g. Eko Convention Centre",
+      "city": "City",
+      "cityPlaceholder": "e.g. Lagos",
+      "eventDate": "Event Date",
+      "linkTour": "Link to Tour (optional)",
+      "linkTourPlaceholder": "Select a tour EOI",
+      "currency": "Currency",
+      "next": "Next",
+      "back": "Back"
+    },
+    "tiers": {
+      "add": "Add Tier",
+      "name": "Tier Name",
+      "namePlaceholder": "e.g. General Admission",
+      "price": "Price (NGN)",
+      "capacity": "Capacity",
+      "capacityPlaceholder": "Leave blank for unlimited",
+      "remove": "Remove",
+      "noTiers": "Add at least one ticket tier to continue."
+    },
+    "review": {
+      "event": "Event",
+      "tiers": "Ticket Tiers",
+      "publish": "Publish Event",
+      "saveDraft": "Save as Draft",
+      "free": "Free"
+    },
+    "creating": "Creating…",
+    "publishing": "Publishing…"
+  },
+  "ManageTicketEventPage": {
+    "badge": "Ticketing",
+    "backToEvents": "Back to Events",
+    "tabs": {
+      "overview": "Overview",
+      "tiers": "Tiers",
+      "buyers": "Buyers"
+    },
+    "overview": {
+      "status": "Status",
+      "date": "Date",
+      "location": "Location",
+      "currency": "Currency",
+      "linkedTour": "Linked Tour",
+      "noTour": "Not linked to a tour",
+      "description": "Description",
+      "publish": "Publish Event",
+      "close": "Close Ticket Sales",
+      "publishing": "Publishing…",
+      "closing": "Closing…",
+      "publishError": "Could not publish event.",
+      "closeError": "Could not close ticket sales."
+    },
+    "tiers": {
+      "add": "Add Tier",
+      "name": "Tier Name",
+      "price": "Price",
+      "capacity": "Capacity",
+      "sold": "Sold",
+      "status": "Status",
+      "unlimited": "Unlimited",
+      "edit": "Edit",
+      "delete": "Delete",
+      "deleteConfirm": "Delete this tier? This cannot be undone.",
+      "saving": "Saving…",
+      "noTiers": "No tiers yet. Add a tier to start selling tickets."
+    },
+    "buyers": {
+      "name": "Buyer",
+      "email": "Email",
+      "phone": "Phone",
+      "tier": "Tier",
+      "qty": "Qty",
+      "amount": "Amount",
+      "code": "Ticket Code",
+      "paid": "Paid At",
+      "noBuyers": "No confirmed purchases yet."
+    },
+    "status": {
+      "draft": "Draft",
+      "published": "Published",
+      "closed": "Closed",
+      "cancelled": "Cancelled"
+    }
+  },
+  "PublicTicketPage": {
+    "by": "Presented by",
+    "date": "Date",
+    "location": "Location",
+    "dateTBC": "Date TBC",
+    "locationTBC": "Venue TBC",
+    "selectTier": "Choose Your Tickets",
+    "available": "available",
+    "soldOut": "Sold Out",
+    "qty": "Quantity",
+    "subtotal": "Subtotal",
+    "buyerDetails": "Your Details",
+    "name": "Full Name",
+    "namePlaceholder": "Your full name",
+    "email": "Email Address",
+    "emailPlaceholder": "you@example.com",
+    "phone": "Phone Number",
+    "phonePlaceholder": "+234 800 000 0000",
+    "checkout": "Proceed to Payment",
+    "processing": "Processing…",
+    "noEvent": "This event is not available.",
+    "platformNote": "Payments processed securely by Paystack. A 5% platform fee applies."
+  },
+  "TicketConfirmPage": {
+    "verifying": "Verifying your payment…",
+    "success": "Payment Confirmed!",
+    "successNote": "Your ticket has been emailed to you. Please check your inbox.",
+    "ticketCode": "Ticket Code",
+    "event": "Event",
+    "tier": "Tier",
+    "qty": "Quantity",
+    "amount": "Amount Paid",
+    "backToHome": "Back to Home",
+    "failed": "Payment Failed",
+    "failedNote": "Your payment could not be confirmed. Please try again or contact support.",
+    "retry": "Try Again"
+  },
+  "AdminTicketsPage": {
+    "badge": "Ticketing",
+    "title": "Ticket Events",
+    "description": "All ticket events created by promoters across the platform.",
+    "filters": {
+      "all": "All",
+      "draft": "Draft",
+      "published": "Published",
+      "closed": "Closed",
+      "cancelled": "Cancelled"
+    },
+    "table": {
+      "event": "Event",
+      "promoter": "Promoter",
+      "date": "Date",
+      "sold": "Tickets Sold",
+      "status": "Status"
+    },
+    "dateTBC": "Date TBC"
   }
 }

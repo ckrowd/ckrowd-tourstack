@@ -3454,7 +3454,8 @@
     "settings": "Paramètres",
     "startNewTour": "Démarrer une tournée",
     "profileRequired": "Complétez d'abord votre profil",
-    "aiTools": "Intelligence tournée"
+    "aiTools": "Intelligence tournée",
+    "tickets": "Billetterie"
   },
   "CreateTourPage": {
     "management": "Gestion des tournées",
@@ -3798,7 +3799,8 @@
     "newTour": "Nouvelle tournée",
     "financing": "Financement",
     "insurance": "Assurance",
-    "claims": "Réclamations"
+    "claims": "Réclamations",
+    "tickets": "Billetterie"
   },
   "AdminArtistsPage": {
     "badge": "Gestion des artistes",
@@ -6590,5 +6592,191 @@
       "copyright": "© 2026 Ckrowd · TourStack Infrastructure. Tous droits réservés.",
       "builtFor": "Conçu pour l'économie live de l'Afrique."
     }
+  },
+  "TicketsDashboardPage": {
+    "badge": "Billetterie",
+    "title": "Mes événements de billetterie",
+    "description": "Créez et gérez des événements de billetterie pour vos tournées. Vendez directement à votre public.",
+    "create": "Créer un événement",
+    "empty": "Aucun événement de billetterie pour l'instant. Créez votre premier événement pour commencer à vendre.",
+    "status": {
+      "draft": "Brouillon",
+      "published": "Publié",
+      "closed": "Clôturé",
+      "cancelled": "Annulé"
+    },
+    "table": {
+      "event": "Événement",
+      "date": "Date",
+      "location": "Lieu",
+      "tiers": "Catégories",
+      "sold": "Vendus",
+      "status": "Statut",
+      "actions": "Actions"
+    },
+    "actions": {
+      "manage": "Gérer",
+      "publish": "Publier",
+      "close": "Clôturer les ventes"
+    },
+    "dateTBC": "Date à confirmer",
+    "locationTBC": "Lieu à confirmer"
+  },
+  "CreateTicketEventPage": {
+    "badge": "Billetterie",
+    "title": "Créer un événement de billetterie",
+    "description": "Configurez les détails de votre événement, ajoutez des catégories de billets, puis publiez.",
+    "steps": {
+      "details": "Détails de l'événement",
+      "tiers": "Catégories de billets",
+      "review": "Révision & Publication"
+    },
+    "form": {
+      "title": "Titre de l'événement",
+      "titlePlaceholder": "ex. Burna Boy Live à Lagos",
+      "description": "Description",
+      "descriptionPlaceholder": "Décrivez ce que les acheteurs peuvent attendre…",
+      "venue": "Salle",
+      "venuePlaceholder": "ex. Eko Convention Centre",
+      "city": "Ville",
+      "cityPlaceholder": "ex. Lagos",
+      "eventDate": "Date de l'événement",
+      "linkTour": "Lier à une tournée (optionnel)",
+      "linkTourPlaceholder": "Sélectionner une EOI de tournée",
+      "currency": "Devise",
+      "next": "Suivant",
+      "back": "Retour"
+    },
+    "tiers": {
+      "add": "Ajouter une catégorie",
+      "name": "Nom de la catégorie",
+      "namePlaceholder": "ex. Entrée générale",
+      "price": "Prix (NGN)",
+      "capacity": "Capacité",
+      "capacityPlaceholder": "Laisser vide pour illimité",
+      "remove": "Supprimer",
+      "noTiers": "Ajoutez au moins une catégorie de billets pour continuer."
+    },
+    "review": {
+      "event": "Événement",
+      "tiers": "Catégories de billets",
+      "publish": "Publier l'événement",
+      "saveDraft": "Enregistrer comme brouillon",
+      "free": "Gratuit"
+    },
+    "creating": "Création…",
+    "publishing": "Publication…"
+  },
+  "ManageTicketEventPage": {
+    "badge": "Billetterie",
+    "backToEvents": "Retour aux événements",
+    "tabs": {
+      "overview": "Aperçu",
+      "tiers": "Catégories",
+      "buyers": "Acheteurs"
+    },
+    "overview": {
+      "status": "Statut",
+      "date": "Date",
+      "location": "Lieu",
+      "currency": "Devise",
+      "linkedTour": "Tournée liée",
+      "noTour": "Non lié à une tournée",
+      "description": "Description",
+      "publish": "Publier l'événement",
+      "close": "Clôturer la vente de billets",
+      "publishing": "Publication…",
+      "closing": "Clôture…",
+      "publishError": "Impossible de publier l'événement.",
+      "closeError": "Impossible de clôturer la vente de billets."
+    },
+    "tiers": {
+      "add": "Ajouter une catégorie",
+      "name": "Nom",
+      "price": "Prix",
+      "capacity": "Capacité",
+      "sold": "Vendus",
+      "status": "Statut",
+      "unlimited": "Illimité",
+      "edit": "Modifier",
+      "delete": "Supprimer",
+      "deleteConfirm": "Supprimer cette catégorie ? Cette action est irréversible.",
+      "saving": "Enregistrement…",
+      "noTiers": "Aucune catégorie pour l'instant. Ajoutez-en une pour commencer à vendre."
+    },
+    "buyers": {
+      "name": "Acheteur",
+      "email": "E-mail",
+      "phone": "Téléphone",
+      "tier": "Catégorie",
+      "qty": "Qté",
+      "amount": "Montant",
+      "code": "Code billet",
+      "paid": "Payé le",
+      "noBuyers": "Aucun achat confirmé pour l'instant."
+    },
+    "status": {
+      "draft": "Brouillon",
+      "published": "Publié",
+      "closed": "Clôturé",
+      "cancelled": "Annulé"
+    }
+  },
+  "PublicTicketPage": {
+    "by": "Présenté par",
+    "date": "Date",
+    "location": "Lieu",
+    "dateTBC": "Date à confirmer",
+    "locationTBC": "Salle à confirmer",
+    "selectTier": "Choisissez vos billets",
+    "available": "disponibles",
+    "soldOut": "Épuisé",
+    "qty": "Quantité",
+    "subtotal": "Sous-total",
+    "buyerDetails": "Vos coordonnées",
+    "name": "Nom complet",
+    "namePlaceholder": "Votre nom complet",
+    "email": "Adresse e-mail",
+    "emailPlaceholder": "vous@exemple.com",
+    "phone": "Numéro de téléphone",
+    "phonePlaceholder": "+234 800 000 0000",
+    "checkout": "Procéder au paiement",
+    "processing": "Traitement…",
+    "noEvent": "Cet événement n'est pas disponible.",
+    "platformNote": "Paiements traités de façon sécurisée par Paystack. Des frais de plateforme de 5 % s'appliquent."
+  },
+  "TicketConfirmPage": {
+    "verifying": "Vérification de votre paiement…",
+    "success": "Paiement confirmé !",
+    "successNote": "Votre billet vous a été envoyé par e-mail. Veuillez vérifier votre boîte de réception.",
+    "ticketCode": "Code billet",
+    "event": "Événement",
+    "tier": "Catégorie",
+    "qty": "Quantité",
+    "amount": "Montant payé",
+    "backToHome": "Retour à l'accueil",
+    "failed": "Paiement échoué",
+    "failedNote": "Votre paiement n'a pas pu être confirmé. Veuillez réessayer ou contacter le support.",
+    "retry": "Réessayer"
+  },
+  "AdminTicketsPage": {
+    "badge": "Billetterie",
+    "title": "Événements de billetterie",
+    "description": "Tous les événements de billetterie créés par les promoteurs sur la plateforme.",
+    "filters": {
+      "all": "Tous",
+      "draft": "Brouillon",
+      "published": "Publié",
+      "closed": "Clôturé",
+      "cancelled": "Annulé"
+    },
+    "table": {
+      "event": "Événement",
+      "promoter": "Promoteur",
+      "date": "Date",
+      "sold": "Billets vendus",
+      "status": "Statut"
+    },
+    "dateTBC": "Date à confirmer"
   }
 }

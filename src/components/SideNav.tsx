@@ -55,6 +55,13 @@ export default async function SideNav() {
 			tourAttr: "nav-insurance",
 		},
 		{
+			key: "tickets",
+			label: t("tickets"),
+			icon: "confirmation_number",
+			href: "/dashboard/tickets",
+			tourAttr: "nav-tickets",
+		},
+		{
 			key: "ai",
 			label: t("aiTools"),
 			icon: "auto_awesome",

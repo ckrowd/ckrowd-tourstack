@@ -2164,3 +2164,136 @@ export async function resolveBankAccount(
 	};
 }
 
+// ─── Ticketing System ────────────────────────────────────────────────────────
+
+// biome-ignore lint/suspicious/noExplicitAny: ticketing routes not yet in published package type
+export async function listTicketEvents() {
+	const { data, error } = await (client as any).tourstack.tickets.get();
+	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: ticketing routes not yet in published package type
+export async function createTicketEvent(body: {
+	title: string;
+	description?: string;
+	venue?: string;
+	city?: string;
+	eventDate?: string;
+	imageUrl?: string;
+	eoiId?: string;
+	currency?: string;
+}) {
+	const { data, error } = await (client as any).tourstack.tickets.post(body);
+	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: ticketing routes not yet in published package type
+export async function getTicketEvent(id: string) {
+	const { data, error } = await (client as any).tourstack.tickets({ id }).get();
+	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: ticketing routes not yet in published package type
+export async function updateTicketEvent(
+	id: string,
+	body: { title?: string; description?: string | null; venue?: string | null; city?: string | null; eventDate?: string | null; imageUrl?: string | null; currency?: string },
+) {
+	const { data, error } = await (client as any).tourstack.tickets({ id }).patch(body);
+	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: ticketing routes not yet in published package type
+export async function publishTicketEvent(id: string) {
+	const { data, error } = await (client as any).tourstack.tickets({ id }).publish.post();
+	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: ticketing routes not yet in published package type
+export async function closeTicketEvent(id: string) {
+	const { data, error } = await (client as any).tourstack.tickets({ id }).close.post();
+	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: ticketing routes not yet in published package type
+export async function createTicketTier(
+	eventId: string,
+	body: { name: string; price: number; description?: string; capacity?: number },
+) {
+	const { data, error } = await (client as any).tourstack.tickets({ id: eventId }).tiers.post(body);
+	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: ticketing routes not yet in published package type
+export async function updateTicketTier(
+	eventId: string,
+	tierId: string,
+	body: { name?: string; description?: string | null; price?: number; capacity?: number | null; status?: "active" | "sold_out" | "hidden" },
+) {
+	const { data, error } = await (client as any).tourstack.tickets({ id: eventId }).tiers({ tierId }).patch(body);
+	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: ticketing routes not yet in published package type
+export async function deleteTicketTier(eventId: string, tierId: string) {
+	const { data, error } = await (client as any).tourstack.tickets({ id: eventId }).tiers({ tierId }).delete();
+	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: ticketing routes not yet in published package type
+export async function listTicketPurchases(eventId: string, status?: string) {
+	const { data, error } = await (client as any).tourstack.tickets({ id: eventId }).purchases.get(status ? { query: { status } } : {});
+	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: public ticket routes not yet in published package type
+export async function getPublicTicketEvent(eventId: string) {
+	const { data, error } = await (client as any).tourstack.public.tickets({ eventId }).get();
+	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: public ticket routes not yet in published package type
+export async function initiateTicketPurchase(body: {
+	eventId: string;
+	tierId: string;
+	buyerName: string;
+	buyerEmail: string;
+	buyerPhone?: string;
+	quantity: number;
+}) {
+	const { data, error } = await (client as any).tourstack.public.tickets.purchase.post(body);
+	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: public ticket routes not yet in published package type
+export async function verifyTicketPayment(reference: string) {
+	const { data, error } = await (client as any).tourstack.public.tickets.verify({ reference }).get();
+	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: admin ticket routes not yet in published package type
+export async function getAdminTicketEvents(status?: string) {
+	const { data, error } = await (client as any).tourstack.admin["ticket-events"].get(status ? { query: { status } } : {});
+	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: admin ticket routes not yet in published package type
+export async function getAdminTicketPurchases(eventId?: string, status?: string) {
+	const query: Record<string, string> = {};
+	if (eventId) query.eventId = eventId;
+	if (status) query.status = status;
+	const { data, error } = await (client as any).tourstack.admin["ticket-purchases"].get(Object.keys(query).length ? { query } : {});
+	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: financing-admin ticket routes not yet in published package type
+export async function getFinancingAdminTicketParticipants(eventId?: string) {
+	const { data, error } = await (client as any).tourstack["financing-admin"].tickets.get(eventId ? { query: { eventId } } : {});
+	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: insurance-admin ticket routes not yet in published package type
+export async function getInsuranceAdminTicketParticipants(eventId?: string) {
+	const { data, error } = await (client as any).tourstack["insurance-admin"].tickets.get(eventId ? { query: { eventId } } : {});
+	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
+}
+
