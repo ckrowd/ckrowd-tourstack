@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import {
+	getFinancingAdminProfile,
 	getFinancingEois,
 	updateFinancingEoi,
 } from "@/app/actions";
@@ -26,19 +27,22 @@ export default function FinancingAdminApplicationsPage() {
 	const [partnerName, setPartnerName] = useState("");
 	const [termSheetUrl, setTermSheetUrl] = useState("");
 	const [note, setNote] = useState("");
-	const [contactPerson, setContactPerson] = useState("");
-	const [adminProfile] = useState<AdminProfile>(() => {
-		if (typeof window === "undefined") return { orgName: "", contactPerson: "", role: "", adminSignature: null };
-		try {
-			const raw = localStorage.getItem("fin_admin_profile");
-			if (raw) return { ...{ orgName: "", contactPerson: "", role: "", adminSignature: null }, ...(JSON.parse(raw) as Partial<AdminProfile>) };
-		} catch {}
-		return { orgName: "", contactPerson: "", role: "", adminSignature: null };
-	});
 	const [ceoSig] = useState<string | null>(() => {
 		if (typeof window === "undefined") return null;
 		return localStorage.getItem("platform_admin_ceo_signature");
 	});
+
+	const profileQuery = useQuery({
+		queryKey: ["financingAdminProfile"],
+		queryFn: getFinancingAdminProfile,
+	});
+	const rawProfile = profileQuery.data?.data as Record<string, unknown> | null | undefined;
+	const adminProfile: AdminProfile = {
+		orgName: String(rawProfile?.org_name ?? ""),
+		contactPerson: String(rawProfile?.contact_person ?? ""),
+		role: String(rawProfile?.role ?? ""),
+		adminSignature: typeof rawProfile?.admin_signature === "string" ? rawProfile.admin_signature : null,
+	};
 	const [pdfViewerEoiId, setPdfViewerEoiId] = useState<string | null>(null);
 
 	const eoisQuery = useQuery({
@@ -66,7 +70,6 @@ export default function FinancingAdminApplicationsPage() {
 		setPartnerName(String(eoi.partner_name ?? adminProfile.orgName ?? ""));
 		setTermSheetUrl(String(eoi.term_sheet_url ?? ""));
 		setNote(String(eoi.note ?? ""));
-		setContactPerson(adminProfile.contactPerson ?? "");
 		reviewMutation.reset();
 	}
 
@@ -78,6 +81,17 @@ export default function FinancingAdminApplicationsPage() {
 				finance_status: "disbursed",
 				partner_name: partnerName.trim() || undefined,
 				term_sheet_url: termSheetUrl.trim() || undefined,
+				note: note.trim() || undefined,
+			},
+		});
+	}
+
+	function submitReject() {
+		if (!selectedId) return;
+		reviewMutation.mutate({
+			id: selectedId,
+			body: {
+				finance_status: "rejected",
 				note: note.trim() || undefined,
 			},
 		});
@@ -233,18 +247,6 @@ export default function FinancingAdminApplicationsPage() {
 									>
 										<label className="block">
 											<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
-												{t("reviewForm.contactPerson")}
-											</span>
-											<input
-												type="text"
-												value={contactPerson}
-												onChange={(e) => setContactPerson(e.target.value)}
-												placeholder={t("reviewForm.contactPersonPlaceholder")}
-												className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
-											/>
-										</label>
-										<label className="block">
-											<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 												{t("reviewForm.fields.partner")}
 											</span>
 											<input
@@ -292,13 +294,23 @@ export default function FinancingAdminApplicationsPage() {
 													</p>
 												)}
 											</div>
-											<button
-												type="submit"
-												disabled={reviewMutation.isPending}
-												className="px-6 py-2.5 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-opacity disabled:opacity-60"
-											>
-												{reviewMutation.isPending ? t("reviewForm.saving") : t("actions.disburse")}
-											</button>
+											<div className="flex gap-2">
+												<button
+													type="button"
+													onClick={submitReject}
+													disabled={reviewMutation.isPending}
+													className="px-5 py-2.5 bg-red-50 text-red-700 rounded-xl font-semibold text-sm hover:bg-red-100 transition-colors disabled:opacity-60"
+												>
+													{t("actions.reject")}
+												</button>
+												<button
+													type="submit"
+													disabled={reviewMutation.isPending}
+													className="px-6 py-2.5 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-opacity disabled:opacity-60"
+												>
+													{reviewMutation.isPending ? t("reviewForm.saving") : t("actions.disburse")}
+												</button>
+											</div>
 										</div>
 									</form>
 								)}

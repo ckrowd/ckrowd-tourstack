@@ -3785,7 +3785,8 @@
     "settings": "Settings",
     "newTour": "New Tour",
     "financing": "Financing",
-    "insurance": "Insurance"
+    "insurance": "Insurance",
+    "claims": "Claims"
   },
   "AdminArtistsPage": {
     "badge": "Artist Management",
@@ -4716,7 +4717,8 @@
       "sync": "Refresh",
       "syncing": "Refreshing...",
       "review": "Review",
-      "disburse": "Mark Disbursed"
+      "disburse": "Mark Disbursed",
+      "reject": "Reject"
     },
     "reviewChecklist": {
       "title": "Disbursement Checklist",
@@ -4952,6 +4954,7 @@
       "saving": "Processing...",
       "success": "Review saved.",
       "error": "Couldn't save the review.",
+      "reject": "Reject",
       "contactPerson": "Contact Person",
       "contactPersonPlaceholder": "Your name"
     },
@@ -6059,6 +6062,30 @@
       ]
     }
   },
+  "AdminClaimsPage": {
+    "badge": "Risk & Coverage",
+    "title": "Insurance Claims",
+    "description": "Monitor all insurance claims filed against financed tour events.",
+    "refresh": "Refresh",
+    "refreshing": "Refreshing…",
+    "loadError": "Could not load claims.",
+    "empty": "No claims filed yet.",
+    "filters": {
+      "all": "All",
+      "open": "Open",
+      "under_review": "Under Review",
+      "settled": "Settled",
+      "rejected": "Rejected"
+    },
+    "table": {
+      "id": "Claim ID",
+      "promoter": "Promoter",
+      "description": "Description",
+      "amount": "Amount Claimed",
+      "status": "Status",
+      "filed": "Filed"
+    }
+  },
   "FinancingAdminProfilePage": {
     "badge": "Financing Admin",
     "title": "Your Profile",
@@ -6066,6 +6093,7 @@
     "saved": "Profile saved",
     "saveError": "Failed to save profile",
     "save": "Save Profile",
+    "saving": "Saving…",
     "sections": {
       "identity": "Organization Identity",
       "contact": "Contact Details",
@@ -6096,6 +6124,7 @@
     "saved": "Profile saved",
     "saveError": "Failed to save profile",
     "save": "Save Profile",
+    "saving": "Saving…",
     "sections": {
       "identity": "Organization Identity",
       "contact": "Contact Details",

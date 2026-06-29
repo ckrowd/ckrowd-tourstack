@@ -3785,7 +3785,8 @@
     "settings": "Paramètres",
     "newTour": "Nouvelle tournée",
     "financing": "Financement",
-    "insurance": "Assurance"
+    "insurance": "Assurance",
+    "claims": "Réclamations"
   },
   "AdminArtistsPage": {
     "badge": "Gestion des artistes",
@@ -4716,7 +4717,8 @@
       "sync": "Actualiser",
       "syncing": "Actualisation...",
       "review": "Réviser",
-      "disburse": "Marquer comme décaissé"
+      "disburse": "Marquer comme décaissé",
+      "reject": "Rejeter"
     },
     "reviewChecklist": {
       "title": "Liste de contrôle de décaissement",
@@ -4952,6 +4954,7 @@
       "saving": "Traitement...",
       "success": "Revue enregistrée.",
       "error": "Impossible d'enregistrer la revue.",
+      "reject": "Rejeter",
       "contactPerson": "Personne de contact",
       "contactPersonPlaceholder": "Votre nom"
     },
@@ -6047,6 +6050,54 @@
       ]
     }
   },
+  "AdminClaimsPage": {
+    "badge": "Risques & Couvertures",
+    "title": "Réclamations d'assurance",
+    "description": "Suivez toutes les réclamations d'assurance déposées pour les événements de tournée financés.",
+    "refresh": "Actualiser",
+    "refreshing": "Actualisation…",
+    "loadError": "Impossible de charger les réclamations.",
+    "empty": "Aucune réclamation déposée.",
+    "filters": {
+      "all": "Toutes",
+      "open": "Ouvertes",
+      "under_review": "En examen",
+      "settled": "Réglées",
+      "rejected": "Rejetées"
+    },
+    "table": {
+      "id": "ID Réclamation",
+      "promoter": "Promoteur",
+      "description": "Description",
+      "amount": "Montant réclamé",
+      "status": "Statut",
+      "filed": "Déposée le"
+    }
+  },
+  "AdminClaimsPage": {
+    "badge": "Risques & Couvertures",
+    "title": "Réclamations d'assurance",
+    "description": "Suivez toutes les réclamations d'assurance déposées pour les événements de tournée financés.",
+    "refresh": "Actualiser",
+    "refreshing": "Actualisation…",
+    "loadError": "Impossible de charger les réclamations.",
+    "empty": "Aucune réclamation déposée.",
+    "filters": {
+      "all": "Toutes",
+      "open": "Ouvertes",
+      "under_review": "En examen",
+      "settled": "Réglées",
+      "rejected": "Rejetées"
+    },
+    "table": {
+      "id": "ID Réclamation",
+      "promoter": "Promoteur",
+      "description": "Description",
+      "amount": "Montant réclamé",
+      "status": "Statut",
+      "filed": "Déposée le"
+    }
+  },
   "FinancingAdminProfilePage": {
     "badge": "Admin Financement",
     "title": "Votre Profil",
@@ -6054,6 +6105,8 @@
     "saved": "Profil enregistré",
     "saveError": "Échec de l'enregistrement",
     "save": "Enregistrer",
+    "saving": "Enregistrement…",
+    "saving": "Enregistrement…",
     "sections": {
       "identity": "Identité",
       "contact": "Coordonnées",
@@ -6084,6 +6137,8 @@
     "saved": "Profil enregistré",
     "saveError": "Échec de l'enregistrement",
     "save": "Enregistrer",
+    "saving": "Enregistrement…",
+    "saving": "Enregistrement…",
     "sections": {
       "identity": "Identité",
       "contact": "Coordonnées",

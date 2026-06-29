@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import {
+	getInsuranceAdminProfile,
 	getInsuranceEois,
 	updateInsuranceEoi,
 } from "@/app/actions";
@@ -25,19 +26,22 @@ export default function InsuranceAdminApplicationsPage() {
 	const [selectedId, setSelectedId] = useState<string | null>(null);
 	const [partnerName, setPartnerName] = useState("");
 	const [note, setNote] = useState("");
-	const [contactPerson, setContactPerson] = useState("");
-	const [adminProfile] = useState<AdminProfile>(() => {
-		if (typeof window === "undefined") return { orgName: "", contactPerson: "", role: "", adminSignature: null };
-		try {
-			const raw = localStorage.getItem("ins_admin_profile");
-			if (raw) return { ...{ orgName: "", contactPerson: "", role: "", adminSignature: null }, ...(JSON.parse(raw) as Partial<AdminProfile>) };
-		} catch {}
-		return { orgName: "", contactPerson: "", role: "", adminSignature: null };
-	});
 	const [ceoSig] = useState<string | null>(() => {
 		if (typeof window === "undefined") return null;
 		return localStorage.getItem("platform_admin_ceo_signature");
 	});
+
+	const profileQuery = useQuery({
+		queryKey: ["insuranceAdminProfile"],
+		queryFn: getInsuranceAdminProfile,
+	});
+	const rawProfile = profileQuery.data?.data as Record<string, unknown> | null | undefined;
+	const adminProfile: AdminProfile = {
+		orgName: String(rawProfile?.org_name ?? ""),
+		contactPerson: String(rawProfile?.contact_person ?? ""),
+		role: String(rawProfile?.role ?? ""),
+		adminSignature: typeof rawProfile?.admin_signature === "string" ? rawProfile.admin_signature : null,
+	};
 	const [pdfViewerEoiId, setPdfViewerEoiId] = useState<string | null>(null);
 
 	const eoisQuery = useQuery({
@@ -64,7 +68,6 @@ export default function InsuranceAdminApplicationsPage() {
 		setSelectedId(id);
 		setPartnerName(String(eoi.partner_name ?? adminProfile.orgName ?? ""));
 		setNote(String(eoi.note ?? ""));
-		setContactPerson(adminProfile.contactPerson ?? "");
 		reviewMutation.reset();
 	}
 
@@ -75,6 +78,17 @@ export default function InsuranceAdminApplicationsPage() {
 			body: {
 				insurance_status: "disbursed",
 				partner_name: partnerName.trim() || undefined,
+				note: note.trim() || undefined,
+			},
+		});
+	}
+
+	function submitReject() {
+		if (!selectedId) return;
+		reviewMutation.mutate({
+			id: selectedId,
+			body: {
+				insurance_status: "rejected",
 				note: note.trim() || undefined,
 			},
 		});
@@ -228,19 +242,7 @@ export default function InsuranceAdminApplicationsPage() {
 										}}
 										className="border-t border-outline-variant/10 p-5 grid grid-cols-1 sm:grid-cols-2 gap-4"
 									>
-										<label className="block">
-											<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
-												{t("review.contactPerson")}
-											</span>
-											<input
-												type="text"
-												value={contactPerson}
-												onChange={(e) => setContactPerson(e.target.value)}
-												placeholder={t("review.contactPersonPlaceholder")}
-												className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
-											/>
-										</label>
-										<label className="block">
+									<label className="block">
 											<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 												{t("review.partner")}
 											</span>
@@ -277,6 +279,15 @@ export default function InsuranceAdminApplicationsPage() {
 													</p>
 												)}
 											</div>
+											<div className="flex gap-2">
+											<button
+												type="button"
+												onClick={submitReject}
+												disabled={reviewMutation.isPending}
+												className="px-5 py-2.5 bg-red-50 text-red-700 rounded-xl font-semibold text-sm hover:bg-red-100 transition-colors disabled:opacity-60"
+											>
+												{t("review.reject")}
+											</button>
 											<button
 												type="submit"
 												disabled={reviewMutation.isPending}
@@ -284,6 +295,7 @@ export default function InsuranceAdminApplicationsPage() {
 											>
 												{reviewMutation.isPending ? t("review.saving") : t("review.save")}
 											</button>
+										</div>
 										</div>
 									</form>
 								)}
