@@ -780,15 +780,21 @@
         },
         "bankName": {
           "label": "Nom de la banque",
-          "placeholder": "ex. Zenith Bank"
+          "placeholder": "ex. Zenith Bank",
+          "loading": "Chargement des banques…",
+          "select": "Sélectionnez votre banque"
         },
         "bankAccountHolder": {
           "label": "Nom du titulaire du compte",
-          "placeholder": "ex. Afrobeats Promotions Ltd"
+          "placeholder": "ex. Afrobeats Promotions Ltd",
+          "verified": "Compte vérifié",
+          "verifyFailed": "Impossible de vérifier — saisissez manuellement"
         },
         "bankAccountNumber": {
           "label": "Numéro de compte",
-          "placeholder": "Numéro de compte à 10 chiffres"
+          "placeholder": "Numéro de compte à 10 chiffres",
+          "verify": "Vérifier",
+          "verifying": "Vérification…"
         },
         "bvnOrRc": {
           "label": "BVN / Numéro RC de l'entreprise",
@@ -830,6 +836,7 @@
           "placeholder": "Toute autre information pertinente pour votre candidature..."
         },
         "declarationText": "En soumettant cette manifestation d'intérêt, je confirme que toutes les informations fournies sont exactes et complètes. J'autorise Ckrowd à utiliser ces informations pour évaluer les besoins en financement et en assurance pour cette tournée.",
+        "declarationAgree": "J'ai lu et j'accepte la déclaration ci-dessus.",
         "reviewSection": "Récapitulatif de la candidature"
       }
     },
@@ -848,7 +855,8 @@
       "budget": "Budget total",
       "financing": "Financement",
       "insurance": "Assurance",
-      "disclaimer": "En soumettant, vous confirmez que toutes les informations ci-dessus sont exactes et autorisez Ckrowd à traiter votre candidature."
+      "disclaimer": "En soumettant, vous confirmez que toutes les informations ci-dessus sont exactes et autorisez Ckrowd à traiter votre candidature.",
+      "yes": "Oui"
     },
     "actions": {
       "back": "Retour",
@@ -1436,7 +1444,8 @@
     },
     "matrix": {
       "title": "Voir la matrice complète d'attribution des niveaux",
-      "tier": "Niveau {n}"
+      "tier": "Niveau {n}",
+      "ayaLabel": "Pilote Aya Nakamura"
     },
     "info": {
       "scoring": {
@@ -1458,7 +1467,8 @@
       "viewDashboard": "Voir le tableau de bord",
       "browseTours": "Parcourir les tournées",
       "enquiries": "Demandes de renseignements",
-      "ayaPilot": "Pilote Aya Nakamura"
+      "ayaPilot": "Pilote Aya Nakamura",
+      "workforceEmail": "workforce@ckrowd.africa"
     },
     "roles": {
       "stageManager": "Régisseur de scène",
@@ -1544,7 +1554,8 @@
     },
     "errors": {
       "failed": "L'envoi a échoué. Veuillez réessayer."
-    }
+    },
+    "footer": "Ckrowd Africa Technologies · Registre CTaaS · WCS v0.1"
   },
   "ProfilePage": {
     "promoterPortal": "Portail Promoteur",
@@ -3337,6 +3348,7 @@
     }
   },
   "AdminPage": {
+    "platform": "Ckrowd Global Live",
     "title": "Tableau de bord administrateur",
     "description": "Gérez les projets de tournée, examinez les EOI des promoteurs et prenez des décisions sur le circuit de tournée panafricain.",
     "createTour": "Créer un projet de tournée",
@@ -6184,23 +6196,94 @@
     "description": "Outils alimentés par l'IA pour optimiser votre stratégie de tournée, de la sélection des salles au marketing.",
     "tabs": {
       "score": {
+        "label": "Score de succès™",
         "description": "Obtenez un score de succès généré par l'IA pour votre tournée basé sur le profil de l'artiste, la salle, les conditions du marché, etc."
       },
       "forecast": {
+        "label": "Prévision billets",
         "description": "Prédisez les ventes de billets, les revenus et la tarification optimale pour votre tournée."
       },
       "sponsors": {
+        "label": "Recherche de sponsors",
         "description": "Découvrez les meilleurs partenariats pour votre tournée selon le genre, le public et le marché."
       },
       "venues": {
+        "label": "Recherche de salles",
         "description": "Trouvez les salles idéales pour votre tournée dans n'importe quelle ville, filtrées par capacité, budget et genre."
       },
       "route": {
+        "label": "Optimisation d'itinéraire",
         "description": "Optimisez votre itinéraire de tournée pour minimiser les coûts de déplacement et maximiser la portée."
       },
       "marketing": {
+        "label": "Contenu marketing",
         "description": "Générez du contenu prêt à publier pour les réseaux sociaux, des communiqués de presse et un calendrier promotionnel de 30 jours."
       }
+    },
+    "common": {
+      "selectEoiLabel": "Sélectionner un EOI",
+      "eoiPlaceholder": "— Sélectionnez un EOI —",
+      "generatedBy": "Généré par l'IA Tour Intelligence"
+    },
+    "score": {
+      "run": "Générer le score",
+      "running": "Analyse en cours…",
+      "breakdown": "Détail du score",
+      "risks": "Risques clés",
+      "recommendations": "Recommandations",
+      "error": "Impossible de générer le score."
+    },
+    "forecast": {
+      "run": "Prévoir les ventes",
+      "running": "Prévision en cours…",
+      "ticketPrice": "Prix du billet (₦)",
+      "projectedSales": "Ventes projetées",
+      "sellOutProbability": "Probabilité de complet",
+      "estimatedRevenue": "Revenu estimé",
+      "recommendedPrice": "Prix recommandé",
+      "timeToSellOut": "Délai pour complet",
+      "pricingTiers": "Tarifications recommandées",
+      "error": "Impossible de générer la prévision."
+    },
+    "sponsors": {
+      "run": "Trouver des sponsors",
+      "running": "Recherche en cours…",
+      "totalPotential": "Potentiel total",
+      "topCategory": "Catégorie principale",
+      "matches": "Sponsors correspondants",
+      "error": "Impossible de trouver des sponsors."
+    },
+    "venues": {
+      "run": "Trouver des salles",
+      "running": "Recherche en cours…",
+      "city": "Ville",
+      "genre": "Genre",
+      "expectedAttendance": "Audience attendue",
+      "budgetMax": "Budget salle max (USD, facultatif)",
+      "topPick": "Meilleur choix",
+      "error": "Impossible de trouver des salles."
+    },
+    "route": {
+      "run": "Optimiser l'itinéraire",
+      "running": "Optimisation en cours…",
+      "cities": "Villes (séparées par des virgules)",
+      "startCity": "Ville de départ",
+      "duration": "Durée de la tournée (jours, facultatif)",
+      "logisticsScore": "Score logistique",
+      "savings": "Économies estimées",
+      "travelDays": "Jours de déplacement",
+      "optimizedRoute": "Itinéraire optimisé",
+      "legs": "Étapes de déplacement",
+      "tips": "Conseils",
+      "error": "Impossible d'optimiser l'itinéraire."
+    },
+    "marketing": {
+      "run": "Générer le contenu",
+      "running": "Rédaction en cours…",
+      "pressRelease": "Communiqué de presse",
+      "calendar": "Calendrier 30 jours",
+      "subject": "Objet",
+      "error": "Impossible de générer le contenu."
     }
   },
   "TourstackLanding": {

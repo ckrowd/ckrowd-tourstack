@@ -565,7 +565,7 @@ export default function WorkforceClient() {
 					</div>
 					<p className="mt-6 text-xs text-on-surface-variant">
 						{t("success.enquiries")}:{" "}
-						<span className="font-semibold">workforce@ckrowd.africa</span>
+						<span className="font-semibold">{t("success.workforceEmail")}</span>
 					</p>
 				</div>
 			</main>
@@ -1343,7 +1343,7 @@ export default function WorkforceClient() {
 											>
 												star
 											</span>
-											Aya Nakamura Pilot Gate: {tier.aya}
+											{t("matrix.ayaLabel")}: {tier.aya}
 										</div>
 									)}
 								</div>
@@ -1383,7 +1383,7 @@ export default function WorkforceClient() {
 													<p
 														className={`text-xs ${t_config.text} opacity-70`}
 													>
-														Aya: {t_config.aya}
+														{t("matrix.ayaLabel")}: {t_config.aya}
 													</p>
 												)}
 											</div>
@@ -1459,12 +1459,11 @@ export default function WorkforceClient() {
 								</section>
 
 								<p className="text-xs text-center text-on-surface-variant">
-									Ckrowd Africa Technologies · CTaaS Workforce Registry ·
-									WCS v0.1
+									{t("footer")}
 									<br />
 									{t("success.enquiries")}:{" "}
 									<span className="font-semibold">
-										workforce@ckrowd.africa
+										{t("success.workforceEmail")}
 									</span>
 								</p>
 							</div>
@@ -1495,12 +1494,6 @@ export default function WorkforceClient() {
 								</button>
 							)}
 							<div className="flex gap-4">
-								<button
-									type="button"
-									className="px-8 py-3 bg-secondary-container text-on-secondary-container rounded-xl font-semibold hover:opacity-90 transition-opacity whitespace-nowrap"
-								>
-									{t("actions.saveDraft")}
-								</button>
 								<button
 									type="submit"
 									disabled={submitting}
