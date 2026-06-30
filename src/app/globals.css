@@ -111,6 +111,26 @@
 		"opsz" 24;
 }
 
+/* Onboarding wizard step transition (motivated: signals step change). */
+@keyframes funnel-step-in {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+.funnel-step-in {
+	animation: funnel-step-in 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+	.funnel-step-in {
+		animation: none;
+	}
+}
+
 /* Scrollbar hide utility */
 .no-scrollbar::-webkit-scrollbar {
 	display: none;

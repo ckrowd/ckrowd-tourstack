@@ -1,13 +1,22 @@
-﻿"use client";
+"use client";
 
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Suspense, useEffect, useState } from "react";
-import AuthBrandLockup from "@/components/AuthBrandLockup";
+import AuthShell from "@/components/auth/AuthShell";
+import { authInput, authLabel, authPrimaryBtn, authTitle } from "@/components/auth/authFields";
 import GoogleSignInButton from "@/components/GoogleSignInButton";
 import { useLogin, useSession } from "@/context/AuthContext";
 import { Link } from "@/i18n/routing";
 import { getRegularLoginRedirectPath } from "@/lib/auth";
+
+function AuthLoading({ label }: { label: string }) {
+	return (
+		<div className="min-h-[100dvh] bg-[#0a0a0a] flex items-center justify-center px-4 text-white/50 text-sm font-(family-name:--font-geist)">
+			{label}
+		</div>
+	);
+}
 
 function LoginPageContent() {
 	const locale = useLocale();
@@ -44,7 +53,7 @@ function LoginPageContent() {
 						setError(
 							code === "admin_only"
 								? t("errorAdminOnly")
-								: message ?? t("errorInvalid"),
+								: (message ?? t("errorInvalid")),
 						);
 					} else {
 						const localePath = from.startsWith("/") ? from : `/${from}`;
@@ -57,166 +66,122 @@ function LoginPageContent() {
 	}
 
 	if ((isLoading || isFetching) && !session) {
-		return (
-			<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 text-slate-600">
-				{t("loading")}
-			</div>
-		);
+		return <AuthLoading label={t("loading")} />;
 	}
 
 	return (
-		<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 py-12">
-			<div className="w-full max-w-md">
-				<div className="text-center mb-10">
-					<div className="flex items-center justify-center mb-6">
-						<AuthBrandLockup />
-					</div>
-					<p className="mt-2 text-sm text-slate-500 font-medium">
-						{t("description")}
-					</p>
-				</div>
-
-				<div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
-					<div className="mb-8">
-						<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-slate-900 mb-1">
-							{t("title")}
-						</h1>
-						<p className="text-sm text-slate-500">{t("description")}</p>
-					</div>
-
-					{verified && (
-						<div className="mb-6 flex items-center gap-3 rounded-xl bg-green-50 border border-green-200 px-4 py-3">
-							<svg className="w-5 h-5 text-green-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-								<path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-							</svg>
-							<p className="text-sm text-green-700 font-medium">{t("verifiedBanner")}</p>
-						</div>
-					)}
-
-					{reset && (
-						<div className="mb-6 flex items-center gap-3 rounded-xl bg-green-50 border border-green-200 px-4 py-3">
-							<svg className="w-5 h-5 text-green-500 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-								<path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-							</svg>
-							<p className="text-sm text-green-700 font-medium">{t("resetBanner")}</p>
-						</div>
-					)}
-
-					<form onSubmit={handleSubmit} className="space-y-5">
-						<div>
-							<label
-								htmlFor="email"
-								className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
-							>
-								{t("email")}
-							</label>
-							<input
-								id="email"
-								type="email"
-								autoComplete="email"
-								placeholder={t("emailPlaceholder")}
-								value={email}
-								onChange={(event) => setEmail(event.target.value)}
-								required
-								className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 focus:border-[#FF5A30] transition-all"
-							/>
-						</div>
-
-						<div>
-							<label
-								htmlFor="password"
-								className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
-							>
-								{t("password")}
-							</label>
-							<input
-								id="password"
-								type="password"
-								autoComplete="current-password"
-								placeholder={t("passwordPlaceholder")}
-								value={password}
-								onChange={(event) => setPassword(event.target.value)}
-								required
-								className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 focus:border-[#FF5A30] transition-all"
-							/>
-							<div className="flex justify-end mt-2">
-								<Link
-									href="/forgot-password"
-									className="text-xs font-semibold text-[#FF5A30] hover:underline"
-								>
-									{t("forgotPassword")}
-								</Link>
-							</div>
-						</div>
-
-						{error && (
-							<p className="text-sm text-red-600 font-medium" role="alert">
-								{error}
-							</p>
-						)}
-
-						<button
-							type="submit"
-							disabled={loginMutation.isPending}
-							className="w-full py-3 bg-[#FF5A30] text-white font-semibold rounded-xl shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60"
-						>
-							{loginMutation.isPending ? t("signingIn") : t("signIn")}
-						</button>
-					</form>
-
-					<div className="flex items-center gap-3 my-6">
-						<span className="h-px flex-1 bg-slate-200" />
-						<span className="text-xs font-semibold uppercase tracking-widest text-slate-400">
-							{tAuth("orDivider")}
-						</span>
-						<span className="h-px flex-1 bg-slate-200" />
-					</div>
-
-					<GoogleSignInButton callbackPath={from} />
-
-					<p className="text-center text-sm text-slate-500 mt-6">
-						{t("noAccount")}{" "}
-						<Link
-							href="/register"
-							className="text-[#FF5A30] font-semibold hover:underline"
-						>
-							{t("register")}
-						</Link>
-					</p>
-				</div>
-
-				<p className="text-center text-xs text-slate-400 mt-6">
-					{t("agreeTo")}{" "}
-					<Link
-						href="/terms"
-						className="hover:text-[#FF5A30] transition-colors"
-					>
-						{t("terms")}
-					</Link>{" "}
-					{t("and")}{" "}
-					<Link
-						href="/privacy"
-						className="hover:text-[#FF5A30] transition-colors"
-					>
-						{t("privacy")}
-					</Link>
-					.
-				</p>
+		<AuthShell>
+			<div className="mb-8">
+				<h1 className={authTitle}>{t("title")}</h1>
+				<p className="mt-2 text-sm text-white/55">{t("description")}</p>
 			</div>
-		</div>
+
+			{verified && (
+				<div className="mb-6 flex items-center gap-3 rounded-xl bg-lime/10 border border-lime/25 px-4 py-3">
+					<svg className="w-5 h-5 text-lime shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+						<path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+					</svg>
+					<p className="text-sm text-lime font-medium">{t("verifiedBanner")}</p>
+				</div>
+			)}
+
+			{reset && (
+				<div className="mb-6 flex items-center gap-3 rounded-xl bg-lime/10 border border-lime/25 px-4 py-3">
+					<svg className="w-5 h-5 text-lime shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+						<path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+					</svg>
+					<p className="text-sm text-lime font-medium">{t("resetBanner")}</p>
+				</div>
+			)}
+
+			<form onSubmit={handleSubmit} className="space-y-5">
+				<div>
+					<label htmlFor="email" className={authLabel}>
+						{t("email")}
+					</label>
+					<input
+						id="email"
+						type="email"
+						autoComplete="email"
+						placeholder={t("emailPlaceholder")}
+						value={email}
+						onChange={(event) => setEmail(event.target.value)}
+						required
+						className={authInput}
+					/>
+				</div>
+
+				<div>
+					<label htmlFor="password" className={authLabel}>
+						{t("password")}
+					</label>
+					<input
+						id="password"
+						type="password"
+						autoComplete="current-password"
+						placeholder={t("passwordPlaceholder")}
+						value={password}
+						onChange={(event) => setPassword(event.target.value)}
+						required
+						className={authInput}
+					/>
+					<div className="flex justify-end mt-2">
+						<Link
+							href="/forgot-password"
+							className="text-xs font-semibold text-orange hover:text-ember transition-colors"
+						>
+							{t("forgotPassword")}
+						</Link>
+					</div>
+				</div>
+
+				{error && (
+					<p className="text-sm text-red-400 font-medium" role="alert">
+						{error}
+					</p>
+				)}
+
+				<button type="submit" disabled={loginMutation.isPending} className={authPrimaryBtn}>
+					{loginMutation.isPending ? t("signingIn") : t("signIn")}
+				</button>
+			</form>
+
+			<div className="flex items-center gap-3 my-6">
+				<span className="h-px flex-1 bg-white/10" />
+				<span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/35">
+					{tAuth("orDivider")}
+				</span>
+				<span className="h-px flex-1 bg-white/10" />
+			</div>
+
+			<GoogleSignInButton callbackPath={from} />
+
+			<p className="text-center text-sm text-white/50 mt-7">
+				{t("noAccount")}{" "}
+				<Link href="/register" className="text-orange font-semibold hover:text-ember transition-colors">
+					{t("register")}
+				</Link>
+			</p>
+
+			<p className="text-center text-xs text-white/35 mt-8">
+				{t("agreeTo")}{" "}
+				<Link href="/terms" className="hover:text-white/60 transition-colors underline-offset-2 hover:underline">
+					{t("terms")}
+				</Link>{" "}
+				{t("and")}{" "}
+				<Link href="/privacy" className="hover:text-white/60 transition-colors underline-offset-2 hover:underline">
+					{t("privacy")}
+				</Link>
+				.
+			</p>
+		</AuthShell>
 	);
 }
 
 export default function LoginPage() {
 	const t = useTranslations("LoginPage");
 	return (
-		<Suspense
-			fallback={
-				<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 text-slate-600">
-					{t("loading")}
-				</div>
-			}
-		>
+		<Suspense fallback={<AuthLoading label={t("loading")} />}>
 			<LoginPageContent />
 		</Suspense>
 	);

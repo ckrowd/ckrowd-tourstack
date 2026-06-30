@@ -6764,5 +6764,105 @@
       "status": "Status"
     },
     "dateTBC": "Date TBC"
-  }
+  },
+	"OnboardingWizard": {
+		"back": "Back",
+		"backToSite": "Back to site",
+		"continue": "Continue",
+		"finish": "Create your account",
+		"progress": "Step {current} of {total}",
+		"stepShort": {
+			"role": "Your role",
+			"profile": "About you",
+			"focus": "Your focus",
+			"review": "Review"
+		},
+		"role": {
+			"title": "What brings you to TourStack?",
+			"subtitle": "Pick the role that fits you best. We will tailor your setup around it.",
+			"options": [
+				{
+					"id": "promoter",
+					"title": "Promoter / Organizer",
+					"desc": "Finance and de-risk your tours and shows."
+				},
+				{
+					"id": "artist",
+					"title": "Artist / Management",
+					"desc": "Protect fees and unlock cross-border payouts."
+				},
+				{
+					"id": "financier",
+					"title": "Bank / Financier",
+					"desc": "Underwrite vetted promoters with real credit data."
+				},
+				{
+					"id": "insurer",
+					"title": "Insurer",
+					"desc": "Price event cancellation and non-appearance cover."
+				},
+				{
+					"id": "venue",
+					"title": "Venue",
+					"desc": "Fill dates with verified, financeable events."
+				},
+				{
+					"id": "service",
+					"title": "Service provider / Crew",
+					"desc": "Get discovered and paid on time."
+				}
+			]
+		},
+		"profile": {
+			"title": "Tell us about you",
+			"subtitle": "This helps us route you to the right team and markets.",
+			"name": "Full name",
+			"namePlaceholder": "Ada Mensah",
+			"org": "Organization",
+			"orgPlaceholder": "Company or stage name",
+			"market": "Primary market",
+			"marketPlaceholder": "Lagos, Nigeria"
+		},
+		"focus": {
+			"title": "What do you want to unlock first?",
+			"subtitle": "Choose as many as you like. You can change this later.",
+			"options": [
+				{
+					"id": "financing",
+					"label": "Tour & show financing"
+				},
+				{
+					"id": "insurance",
+					"label": "Event insurance"
+				},
+				{
+					"id": "payments",
+					"label": "Cross-border payments"
+				},
+				{
+					"id": "certification",
+					"label": "Promoter certification"
+				},
+				{
+					"id": "discovery",
+					"label": "Talent & crew discovery"
+				},
+				{
+					"id": "data",
+					"label": "Market & credit data"
+				}
+			]
+		},
+		"review": {
+			"title": "You are all set",
+			"subtitle": "Here is what we will set up. Create your account to continue.",
+			"roleLabel": "Role",
+			"orgLabel": "Organization",
+			"marketLabel": "Market",
+			"focusLabel": "Focus areas",
+			"edit": "Edit",
+			"empty": "Not provided",
+			"finePrint": "By continuing you agree to our Terms and Privacy Policy."
+		}
+	}
 }

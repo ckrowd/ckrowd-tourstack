@@ -6778,5 +6778,105 @@
       "status": "Statut"
     },
     "dateTBC": "Date à confirmer"
-  }
+  },
+	"OnboardingWizard": {
+		"back": "Retour",
+		"backToSite": "Retour au site",
+		"continue": "Continuer",
+		"finish": "Créer votre compte",
+		"progress": "Étape {current} sur {total}",
+		"stepShort": {
+			"role": "Votre rôle",
+			"profile": "À propos de vous",
+			"focus": "Vos priorités",
+			"review": "Récapitulatif"
+		},
+		"role": {
+			"title": "Qu'est-ce qui vous amène sur TourStack ?",
+			"subtitle": "Choisissez le rôle qui vous correspond le mieux. Nous adapterons votre configuration en conséquence.",
+			"options": [
+				{
+					"id": "promoter",
+					"title": "Promoteur / Organisateur",
+					"desc": "Financez et sécurisez vos tournées et vos concerts."
+				},
+				{
+					"id": "artist",
+					"title": "Artiste / Management",
+					"desc": "Protégez vos cachets et débloquez les paiements transfrontaliers."
+				},
+				{
+					"id": "financier",
+					"title": "Banque / Financier",
+					"desc": "Financez des promoteurs vérifiés avec de vraies données de crédit."
+				},
+				{
+					"id": "insurer",
+					"title": "Assureur",
+					"desc": "Tarifez les couvertures annulation et défaut de présentation."
+				},
+				{
+					"id": "venue",
+					"title": "Salle",
+					"desc": "Remplissez vos dates avec des événements vérifiés et finançables."
+				},
+				{
+					"id": "service",
+					"title": "Prestataire / Équipe",
+					"desc": "Faites-vous connaître et soyez payé à temps."
+				}
+			]
+		},
+		"profile": {
+			"title": "Parlez-nous de vous",
+			"subtitle": "Cela nous aide à vous orienter vers la bonne équipe et les bons marchés.",
+			"name": "Nom complet",
+			"namePlaceholder": "Ada Mensah",
+			"org": "Organisation",
+			"orgPlaceholder": "Société ou nom de scène",
+			"market": "Marché principal",
+			"marketPlaceholder": "Lagos, Nigéria"
+		},
+		"focus": {
+			"title": "Que souhaitez-vous débloquer en premier ?",
+			"subtitle": "Choisissez autant d'options que vous le souhaitez. Vous pourrez les modifier plus tard.",
+			"options": [
+				{
+					"id": "financing",
+					"label": "Financement de tournées et de concerts"
+				},
+				{
+					"id": "insurance",
+					"label": "Assurance événementielle"
+				},
+				{
+					"id": "payments",
+					"label": "Paiements transfrontaliers"
+				},
+				{
+					"id": "certification",
+					"label": "Certification des promoteurs"
+				},
+				{
+					"id": "discovery",
+					"label": "Découverte de talents et d'équipes"
+				},
+				{
+					"id": "data",
+					"label": "Données de marché et de crédit"
+				}
+			]
+		},
+		"review": {
+			"title": "Tout est prêt",
+			"subtitle": "Voici ce que nous allons configurer. Créez votre compte pour continuer.",
+			"roleLabel": "Rôle",
+			"orgLabel": "Organisation",
+			"marketLabel": "Marché",
+			"focusLabel": "Domaines prioritaires",
+			"edit": "Modifier",
+			"empty": "Non renseigné",
+			"finePrint": "En continuant, vous acceptez nos Conditions et notre Politique de confidentialité."
+		}
+	}
 }
