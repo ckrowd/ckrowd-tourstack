@@ -1672,7 +1672,11 @@
         "bankSwiftBic": "Code SWIFT / BIC",
         "bankSwiftBicPlaceholder": "ex. ACCESSNGLA",
         "currencyPreference": "Devise Preferee",
-        "currencyPlaceholder": "ex. USD, EUR, XOF, NGN"
+        "currencyPlaceholder": "ex. USD, EUR, XOF, NGN",
+        "bankCode": "Code bancaire (Paystack)",
+        "bankCodePlaceholder": "ex. 058 (GTBank NG)",
+        "payoutCurrency": "Devise de virement",
+        "payoutCurrencyPlaceholder": "ex. NGN, GHS"
       }
     },
     "actions": {
@@ -3800,7 +3804,9 @@
     "financing": "Financement",
     "insurance": "Assurance",
     "claims": "Réclamations",
-    "tickets": "Billetterie"
+    "tickets": "Billetterie",
+    "payments": "Paiements",
+    "payouts": "Virements"
   },
   "AdminArtistsPage": {
     "badge": "Gestion des artistes",
@@ -6662,7 +6668,16 @@
       "tiers": "Catégories de billets",
       "publish": "Publier l'événement",
       "saveDraft": "Enregistrer comme brouillon",
-      "free": "Gratuit"
+      "free": "Gratuit",
+      "commissionTitle": "Accord de commission de plateforme",
+      "commissionBody": "En publiant cet événement sur TourStack, vous acceptez les conditions de commission suivantes :",
+      "commissionPoint1": "CKrowd facture une commission de plateforme de 5 % sur le chiffre d'affaires brut des billets vendus via TourStack.",
+      "commissionPoint2": "Cette commission couvre : le traitement sécurisé des paiements, l'infrastructure de billetterie, le support acheteur et la protection contre la fraude.",
+      "commissionPoint3": "La commission est automatiquement déduite avant le versement des revenus. Par exemple : un billet à ₦10 000 vous rapporte ₦9 500 — CKrowd retient ₦500.",
+      "commissionPoint4": "Les revenus sont versés sur votre compte bancaire enregistré dans les 7 jours ouvrables suivant la date de votre événement.",
+      "commissionPoint5": "Les billets gratuits (₦0) ne font l'objet d'aucune commission.",
+      "commissionCheckbox": "J'ai lu et j'accepte les conditions de commission de plateforme de TourStack ci-dessus.",
+      "commissionRequired": "Vous devez accepter les conditions de commission avant de publier."
     },
     "creating": "Création…",
     "publishing": "Publication…"
@@ -6743,7 +6758,7 @@
     "checkout": "Procéder au paiement",
     "processing": "Traitement…",
     "noEvent": "Cet événement n'est pas disponible.",
-    "platformNote": "Paiements traités de façon sécurisée par Paystack. Des frais de plateforme de 5 % s'appliquent."
+    "platformNote": "Les paiements sont traités de façon sécurisée par Paystack."
   },
   "TicketConfirmPage": {
     "verifying": "Vérification de votre paiement…",
@@ -6754,10 +6769,33 @@
     "tier": "Catégorie",
     "qty": "Quantité",
     "amount": "Montant payé",
+    "holder": "Titulaire du billet",
+    "admitOne": "ENTRÉE UNIQUE",
+    "downloadTicket": "Télécharger le billet",
     "backToHome": "Retour à l'accueil",
     "failed": "Paiement échoué",
     "failedNote": "Votre paiement n'a pas pu être confirmé. Veuillez réessayer ou contacter le support.",
     "retry": "Réessayer"
+  },
+  "TicketCheckPage": {
+    "valid": "Billet valide",
+    "invalid": "Billet invalide",
+    "notFound": "Billet introuvable",
+    "notFoundNote": "Ce code billet n'existe pas dans notre système.",
+    "validNote": "Ce billet a été payé et confirmé.",
+    "invalidNote": "Ce billet n'a pas pu être vérifié. Le paiement est peut-être en attente ou a échoué.",
+    "event": "Événement",
+    "date": "Date",
+    "location": "Lieu",
+    "tier": "Type de billet",
+    "qty": "Quantité",
+    "holder": "Titulaire",
+    "status": "Statut",
+    "statusConfirmed": "Confirmé",
+    "statusPending": "Paiement en attente",
+    "statusFailed": "Paiement échoué",
+    "dateTBC": "Date à confirmer",
+    "locationTBC": "Lieu à confirmer"
   },
   "AdminTicketsPage": {
     "badge": "Billetterie",
@@ -6777,6 +6815,89 @@
       "sold": "Billets vendus",
       "status": "Statut"
     },
-    "dateTBC": "Date à confirmer"
+    "dateTBC": "Date à confirmer",
+    "allPromoters": "Tous les promoteurs"
+  },
+  "AdminPayoutsPage": {
+    "badge": "Virements promoteurs",
+    "title": "Virements de billets",
+    "description": "Revenus collectés par événement après les frais de plateforme. Initiez les virements bancaires aux promoteurs ici.",
+    "tabs": {
+      "summary": "Résumé des virements",
+      "history": "Historique des virements"
+    },
+    "table": {
+      "event": "Événement",
+      "promoter": "Promoteur",
+      "tickets": "Billets",
+      "gross": "Revenu brut",
+      "fee": "Frais plateforme",
+      "net": "Net dû",
+      "unpaidNet": "Net non payé",
+      "bank": "Coordonnées bancaires",
+      "status": "Statut",
+      "date": "Date",
+      "amount": "Montant",
+      "actions": "Actions"
+    },
+    "payNow": "Payer",
+    "paying": "Initiation…",
+    "allPaid": "Tout payé",
+    "noBankDetails": "Pas de coordonnées bancaires",
+    "bankCodeMissing": "Code bancaire manquant",
+    "recipientReady": "Destinataire configuré",
+    "payConfirm": "Initier un virement de {amount} {currency} à {promoter} ?",
+    "noEvents": "Aucun événement avec des paiements.",
+    "noPayouts": "Aucun virement initié.",
+    "payoutStatus": {
+      "initiated": "Initié",
+      "pending": "En attente",
+      "success": "Envoyé",
+      "failed": "Échoué",
+      "reversed": "Reversé"
+    }
+  },
+  "PromoterBankSettings": {
+    "title": "Compte bancaire pour les virements",
+    "description": "Vos coordonnées bancaires sont utilisées par l'administrateur pour virer vos revenus de billets après déduction des frais.",
+    "bankName": "Nom de la banque",
+    "bankCode": "Code bancaire",
+    "bankCodeHint": "Code à 3 chiffres (ex. 058 pour GTBank Nigeria)",
+    "accountNumber": "Numéro de compte",
+    "accountHolder": "Titulaire du compte",
+    "payoutCurrency": "Devise de virement",
+    "save": "Enregistrer",
+    "saving": "Enregistrement…",
+    "saved": "Coordonnées bancaires enregistrées.",
+    "missingFields": "Veuillez renseigner le code bancaire, le numéro de compte et le titulaire."
+  },
+  "AdminPaymentsPage": {
+    "badge": "Paiements",
+    "title": "Paiements de billets",
+    "description": "Tous les achats de billets sur tous les événements. Filtrez, inspectez et émettez des remboursements.",
+    "filters": {
+      "all": "Tous",
+      "pending": "En attente",
+      "success": "Payé",
+      "failed": "Échoué",
+      "refunded": "Remboursé"
+    },
+    "table": {
+      "buyer": "Acheteur",
+      "event": "Événement",
+      "tier": "Catégorie",
+      "qty": "Qté",
+      "amount": "Montant",
+      "status": "Statut",
+      "date": "Date",
+      "actions": "Actions"
+    },
+    "refund": "Rembourser",
+    "refunding": "Remboursement…",
+    "refundConfirm": "Rembourser ce paiement ? Cette action est irréversible.",
+    "noPayments": "Aucun paiement trouvé.",
+    "prev": "← Préc.",
+    "next": "Suiv. →",
+    "page": "Page {page} sur {total}"
   }
 }

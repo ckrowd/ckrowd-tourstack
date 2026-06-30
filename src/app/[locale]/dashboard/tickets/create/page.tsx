@@ -22,6 +22,7 @@ export default function CreateTicketEventPage() {
 	const qc = useQueryClient();
 
 	const [step, setStep] = useState<"details" | "tiers" | "review">("details");
+	const [commissionAccepted, setCommissionAccepted] = useState(false);
 
 	// Step 1 — event details
 	const [title, setTitle] = useState("");
@@ -293,6 +294,36 @@ export default function CreateTicketEventPage() {
 						</div>
 					</div>
 
+					{/* Commission agreement */}
+					<div className="bg-orange-50 border border-orange-200 rounded-2xl p-5 space-y-3">
+						<div className="flex items-center gap-2">
+							<svg className="w-4 h-4 text-[#FF5A30] shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+								<path d="M9 12l2 2 4-4M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+							</svg>
+							<p className="text-sm font-black text-[#FF5A30]">{t("review.commissionTitle")}</p>
+						</div>
+						<p className="text-xs text-orange-800 leading-relaxed">{t("review.commissionBody")}</p>
+						<ul className="space-y-2">
+							{(["commissionPoint1", "commissionPoint2", "commissionPoint3", "commissionPoint4", "commissionPoint5"] as const).map((key) => (
+								<li key={key} className="flex items-start gap-2 text-xs text-orange-800 leading-relaxed">
+									<span className="text-[#FF5A30] font-black mt-0.5 shrink-0">•</span>
+									{t(`review.${key}`)}
+								</li>
+							))}
+						</ul>
+						<label className="flex items-start gap-3 pt-1 cursor-pointer">
+							<input
+								type="checkbox"
+								className="mt-0.5 h-4 w-4 accent-[#FF5A30] shrink-0 cursor-pointer"
+								checked={commissionAccepted}
+								onChange={(e) => setCommissionAccepted(e.target.checked)}
+							/>
+							<span className="text-xs font-semibold text-orange-900 leading-relaxed">
+								{t("review.commissionCheckbox")}
+							</span>
+						</label>
+					</div>
+
 					<div className="flex justify-between pt-2 gap-3">
 						<button
 							type="button"
@@ -312,14 +343,19 @@ export default function CreateTicketEventPage() {
 							</button>
 							<button
 								type="button"
-								disabled={createMutation.isPending}
+								disabled={createMutation.isPending || !commissionAccepted}
 								onClick={() => createMutation.mutate(true)}
 								className="bg-[#FF5A30] text-white font-bold text-sm px-6 py-2.5 rounded-xl hover:opacity-90 disabled:opacity-50 transition"
+								title={!commissionAccepted ? t("review.commissionRequired") : undefined}
 							>
 								{createMutation.isPending ? t("publishing") : t("review.publish")}
 							</button>
 						</div>
 					</div>
+
+					{!commissionAccepted && (
+						<p className="text-xs text-orange-600 text-right">{t("review.commissionRequired")}</p>
+					)}
 
 					{createMutation.isError && (
 						<p className="text-sm text-red-600">{String(createMutation.error)}</p>

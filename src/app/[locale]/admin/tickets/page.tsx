@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
-import { getAdminTicketEvents } from "@/app/actions";
+import { getAdminTicketEvents, getAdminTicketEventPromoters } from "@/app/actions";
 
 const FILTERS = ["all", "draft", "published", "closed", "cancelled"] as const;
 type Filter = (typeof FILTERS)[number];
@@ -11,13 +11,21 @@ type Filter = (typeof FILTERS)[number];
 export default function AdminTicketsPage() {
 	const t = useTranslations("AdminTicketsPage");
 	const [filter, setFilter] = useState<Filter>("all");
+	const [promoter, setPromoter] = useState("");
 
 	const { data: result, isLoading, refetch, isFetching } = useQuery({
-		queryKey: ["adminTicketEvents", filter],
-		queryFn: () => getAdminTicketEvents(filter === "all" ? undefined : filter),
+		queryKey: ["adminTicketEvents", filter, promoter],
+		queryFn: () => getAdminTicketEvents(filter === "all" ? undefined : filter, promoter || undefined),
+	});
+
+	const { data: promotersResult } = useQuery({
+		queryKey: ["adminTicketEventPromoters"],
+		queryFn: () => getAdminTicketEventPromoters(),
+		staleTime: 60_000,
 	});
 
 	const events = (result?.data as Record<string, unknown>[] | null) ?? [];
+	const promoters = (promotersResult?.data as { id: string; company_name: string | null }[] | null) ?? [];
 
 	const statusColor: Record<string, string> = {
 		draft: "bg-surface-container text-on-surface-variant",
@@ -45,21 +53,38 @@ export default function AdminTicketsPage() {
 			</div>
 
 			{/* Filters */}
-			<div className="flex gap-2 mb-6 flex-wrap">
-				{FILTERS.map((f) => (
-					<button
-						key={f}
-						type="button"
-						onClick={() => setFilter(f)}
-						className={`px-4 py-1.5 rounded-full text-xs font-bold transition ${
-							filter === f
-								? "bg-[#FF5A30] text-white"
-								: "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"
-						}`}
+			<div className="flex flex-wrap items-center gap-3 mb-6">
+				<div className="flex gap-2 flex-wrap">
+					{FILTERS.map((f) => (
+						<button
+							key={f}
+							type="button"
+							onClick={() => setFilter(f)}
+							className={`px-4 py-1.5 rounded-full text-xs font-bold transition ${
+								filter === f
+									? "bg-[#FF5A30] text-white"
+									: "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"
+							}`}
+						>
+							{t(`filters.${f}`)}
+						</button>
+					))}
+				</div>
+
+				{promoters.length > 0 && (
+					<select
+						value={promoter}
+						onChange={(e) => setPromoter(e.target.value)}
+						className="ml-auto text-xs font-semibold bg-surface-container text-on-surface-variant border border-outline-variant rounded-full px-4 py-1.5 focus:outline-none focus:ring-2 focus:ring-[#FF5A30] cursor-pointer"
 					>
-						{t(`filters.${f}`)}
-					</button>
-				))}
+						<option value="">{t("allPromoters")}</option>
+						{promoters.map((p) => (
+							<option key={p.id} value={p.id}>
+								{p.company_name ?? p.id}
+							</option>
+						))}
+					</select>
+				)}
 			</div>
 
 			{isLoading && (
@@ -74,7 +99,8 @@ export default function AdminTicketsPage() {
 
 			{!isLoading && events.length > 0 && (
 				<div className="bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant">
-					<table className="w-full text-sm">
+					<div className="overflow-x-auto">
+						<table className="w-full text-sm">
 						<thead>
 							<tr className="border-b border-outline-variant bg-surface-container">
 								{["event", "promoter", "date", "sold", "status"].map((col) => (
@@ -87,7 +113,7 @@ export default function AdminTicketsPage() {
 						<tbody>
 							{events.map((ev) => {
 								const raw = ev as Record<string, unknown>;
-								const promoter = raw.promoter as Record<string, unknown> | null | undefined;
+								const p = raw.promoter as Record<string, unknown> | null | undefined;
 								const count = raw._count as Record<string, number> | undefined;
 								const soldCount = count?.purchases ?? 0;
 								const status = String(raw.status ?? "draft");
@@ -103,7 +129,7 @@ export default function AdminTicketsPage() {
 											)}
 										</td>
 										<td className="px-4 py-3 text-on-surface-variant">
-											{promoter?.company_name ? String(promoter.company_name) : "—"}
+											{p?.company_name ? String(p.company_name) : "—"}
 										</td>
 										<td className="px-4 py-3 text-on-surface-variant">
 											{eventDate
@@ -120,7 +146,8 @@ export default function AdminTicketsPage() {
 								);
 							})}
 						</tbody>
-					</table>
+						</table>
+					</div>
 				</div>
 			)}
 		</div>

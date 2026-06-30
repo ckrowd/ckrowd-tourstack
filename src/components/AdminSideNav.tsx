@@ -62,6 +62,20 @@ export default async function AdminSideNav() {
 			tourAttr: "admin-nav-tickets",
 		},
 		{
+			key: "payments",
+			label: t("payments"),
+			icon: "payments",
+			href: "/admin/payments",
+			tourAttr: "admin-nav-payments",
+		},
+		{
+			key: "payouts",
+			label: t("payouts"),
+			icon: "account_balance",
+			href: "/admin/payouts",
+			tourAttr: "admin-nav-payouts",
+		},
+		{
 			key: "directory",
 			label: t("directory"),
 			icon: "groups",

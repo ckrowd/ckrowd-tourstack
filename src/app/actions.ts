@@ -2270,18 +2270,64 @@ export async function verifyTicketPayment(reference: string) {
 	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: admin ticket routes not yet in published package type
-export async function getAdminTicketEvents(status?: string) {
-	const { data, error } = await (client as any).tourstack.admin["ticket-events"].get(status ? { query: { status } } : {});
+// biome-ignore lint/suspicious/noExplicitAny: check endpoint not yet in published package type
+export async function checkTicketByCode(code: string) {
+	const { data, error } = await (client as any).tourstack.public.tickets.check[code].get();
 	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
 }
 
 // biome-ignore lint/suspicious/noExplicitAny: admin ticket routes not yet in published package type
-export async function getAdminTicketPurchases(eventId?: string, status?: string) {
+export async function getAdminTicketEvents(status?: string, promoterId?: string) {
 	const query: Record<string, string> = {};
+	if (status) query.status = status;
+	if (promoterId) query.promoterId = promoterId;
+	const { data, error } = await (client as any).tourstack.admin["ticket-events"].get(
+		Object.keys(query).length ? { query } : {},
+	);
+	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: admin ticket routes not yet in published package type
+export async function getAdminTicketEventPromoters() {
+	const { data, error } = await (client as any).tourstack.admin["ticket-event-promoters"].get();
+	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: admin ticket routes not yet in published package type
+export async function getAdminTicketPurchases(eventId?: string, status?: string, page = 1, limit = 50) {
+	const query: Record<string, string> = { page: String(page), limit: String(limit) };
 	if (eventId) query.eventId = eventId;
 	if (status) query.status = status;
-	const { data, error } = await (client as any).tourstack.admin["ticket-purchases"].get(Object.keys(query).length ? { query } : {});
+	const { data, error } = await (client as any).tourstack.admin["ticket-purchases"].get({ query });
+	return {
+		data: await extractPayload(data),
+		pagination: (data as Record<string, unknown> | null)?.pagination ?? null,
+		success: !error && data?.success,
+		error: extractError(error, data),
+	};
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: admin ticket routes not yet in published package type
+export async function refundTicketPurchase(id: string) {
+	const { data, error } = await (client as any).tourstack.admin["ticket-purchases"][id].refund.post();
+	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: admin ticket routes not yet in published package type
+export async function getTicketPayoutSummary() {
+	const { data, error } = await (client as any).tourstack.admin["ticket-payout-summary"].get();
+	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: admin ticket routes not yet in published package type
+export async function getAdminTicketPayouts() {
+	const { data, error } = await (client as any).tourstack.admin["ticket-payouts"].get();
+	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
+}
+
+// biome-ignore lint/suspicious/noExplicitAny: admin ticket routes not yet in published package type
+export async function initiateTicketPayout(eventId: string, notes?: string) {
+	const { data, error } = await (client as any).tourstack.admin["ticket-payouts"].post({ eventId, notes });
 	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
 }
 
