@@ -525,6 +525,8 @@ type ProfileExtras = {
 	bankAccountHolder?: string;
 	bankAccountNumber?: string;
 	bankSwiftBic?: string;
+	bankCode?: string;
+	payoutCurrency?: string;
 	currencyPreference?: string;
 };
 

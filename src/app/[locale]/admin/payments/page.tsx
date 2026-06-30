@@ -120,7 +120,7 @@ export default function AdminPaymentsPage() {
 											</td>
 											<td className="px-4 py-3 text-on-surface-variant">
 												<p className="truncate max-w-[160px]">{event?.title ? String(event.title) : "—"}</p>
-												{event?.city && (
+												{!!event?.city && (
 													<p className="text-xs">{String(event.city)}</p>
 												)}
 											</td>

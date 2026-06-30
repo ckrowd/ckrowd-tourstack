@@ -183,7 +183,7 @@ export default function AdminPayoutsPage() {
 													<span className="font-semibold text-on-surface">
 														{String(promoter.company_name ?? promoter.contact_person ?? "—")}
 													</span>
-													{promoter.user && ` · ${String((promoter.user as Record<string, unknown>).email ?? "")}`}
+													{!!promoter.user && ` · ${String((promoter.user as Record<string, unknown>).email ?? "")}`}
 												</span>
 												{hasBankDetails ? (
 													<span>
@@ -194,7 +194,7 @@ export default function AdminPayoutsPage() {
 														) : (
 															<span className="ml-2 text-amber-600">{t("bankCodeMissing")}</span>
 														)}
-														{promoter.paystack_recipient_code && (
+														{!!promoter.paystack_recipient_code && (
 															<span className="ml-2 text-emerald-600">{t("recipientReady")}</span>
 														)}
 													</span>
@@ -258,7 +258,7 @@ export default function AdminPayoutsPage() {
 												>
 													<td className="px-4 py-3">
 														<p className="font-semibold">{event?.title ? String(event.title) : "—"}</p>
-														{event?.city && (
+														{!!event?.city && (
 															<p className="text-xs text-on-surface-variant">{String(event.city)}</p>
 														)}
 													</td>
