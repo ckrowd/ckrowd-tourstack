@@ -166,6 +166,8 @@ type ProfileData = {
 	bankAccountHolder: string;
 	bankAccountNumber: string;
 	bankSwiftBic: string;
+	bankCode: string;
+	payoutCurrency: string;
 	currencyPreference: string;
 };
 
@@ -200,6 +202,8 @@ const EMPTY: ProfileData = {
 	bankAccountHolder: "",
 	bankAccountNumber: "",
 	bankSwiftBic: "",
+	bankCode: "",
+	payoutCurrency: "",
 	currencyPreference: "",
 };
 
@@ -253,6 +257,8 @@ export default function ProfileClient() {
 				bankAccountHolder: String(d.bank_account_holder ?? ""),
 				bankAccountNumber: String(d.bank_account_number ?? ""),
 				bankSwiftBic: String(d.bank_swift_bic ?? ""),
+				bankCode: String(d.bank_code ?? ""),
+				payoutCurrency: String(d.payout_currency ?? ""),
 				currencyPreference: String(d.currency_preference ?? ""),
 			};
 		}
@@ -353,6 +359,8 @@ export default function ProfileClient() {
 			bankAccountHolder: profile.bankAccountHolder || undefined,
 			bankAccountNumber: profile.bankAccountNumber || undefined,
 			bankSwiftBic: profile.bankSwiftBic || undefined,
+			bankCode: profile.bankCode || undefined,
+			payoutCurrency: profile.payoutCurrency || undefined,
 			currencyPreference: profile.currencyPreference || undefined,
 		});
 	};
@@ -796,6 +804,20 @@ export default function ProfileClient() {
 							placeholder={t("banking.fields.currencyPlaceholder")}
 							required
 							showError={showValidation}
+						/>
+						<Field
+							label={t("banking.fields.bankCode")}
+							id="bank-code"
+							value={profile.bankCode}
+							onChange={set("bankCode")}
+							placeholder={t("banking.fields.bankCodePlaceholder")}
+						/>
+						<Field
+							label={t("banking.fields.payoutCurrency")}
+							id="payout-currency"
+							value={profile.payoutCurrency}
+							onChange={set("payoutCurrency")}
+							placeholder={t("banking.fields.payoutCurrencyPlaceholder")}
 						/>
 					</div>
 				</Section>

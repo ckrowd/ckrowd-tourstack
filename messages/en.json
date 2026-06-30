@@ -1672,7 +1672,11 @@
         "bankSwiftBic": "SWIFT / BIC Code",
         "bankSwiftBicPlaceholder": "e.g. ACCESSNGLA",
         "currencyPreference": "Currency Preference",
-        "currencyPlaceholder": "e.g. USD, EUR, NGN, GHS"
+        "currencyPlaceholder": "e.g. USD, EUR, NGN, GHS",
+        "bankCode": "Bank Code (Paystack)",
+        "bankCodePlaceholder": "e.g. 058 (GTBank NG)",
+        "payoutCurrency": "Payout Currency",
+        "payoutCurrencyPlaceholder": "e.g. NGN, GHS"
       }
     },
     "actions": {
@@ -3800,7 +3804,9 @@
     "financing": "Financing",
     "insurance": "Insurance",
     "claims": "Claims",
-    "tickets": "Tickets"
+    "tickets": "Tickets",
+    "payments": "Payments",
+    "payouts": "Payouts"
   },
   "AdminArtistsPage": {
     "badge": "Artist Management",
@@ -6648,7 +6654,16 @@
       "tiers": "Ticket Tiers",
       "publish": "Publish Event",
       "saveDraft": "Save as Draft",
-      "free": "Free"
+      "free": "Free",
+      "commissionTitle": "Platform Commission Agreement",
+      "commissionBody": "By publishing this event on TourStack, you agree to the following commission terms:",
+      "commissionPoint1": "CKrowd charges a 5% platform fee on the gross ticket revenue from every sale made through TourStack.",
+      "commissionPoint2": "This fee covers: secure payment processing, ticketing infrastructure, buyer support, and fraud protection.",
+      "commissionPoint3": "The fee is automatically deducted before proceeds are settled to you. For example: a ₦10,000 ticket earns you ₦9,500 — CKrowd retains ₦500.",
+      "commissionPoint4": "Proceeds are settled to your registered bank account within 7 business days after your event date.",
+      "commissionPoint5": "Free-tier tickets (₦0) carry no commission charge.",
+      "commissionCheckbox": "I have read and agree to TourStack's platform commission terms above.",
+      "commissionRequired": "You must accept the commission terms before publishing."
     },
     "creating": "Creating…",
     "publishing": "Publishing…"
@@ -6729,7 +6744,7 @@
     "checkout": "Proceed to Payment",
     "processing": "Processing…",
     "noEvent": "This event is not available.",
-    "platformNote": "Payments processed securely by Paystack. A 5% platform fee applies."
+    "platformNote": "Payments are processed securely by Paystack."
   },
   "TicketConfirmPage": {
     "verifying": "Verifying your payment…",
@@ -6740,10 +6755,33 @@
     "tier": "Tier",
     "qty": "Quantity",
     "amount": "Amount Paid",
+    "holder": "Ticket Holder",
+    "admitOne": "ADMIT ONE",
+    "downloadTicket": "Download Ticket",
     "backToHome": "Back to Home",
     "failed": "Payment Failed",
     "failedNote": "Your payment could not be confirmed. Please try again or contact support.",
     "retry": "Try Again"
+  },
+  "TicketCheckPage": {
+    "valid": "Valid Ticket",
+    "invalid": "Invalid Ticket",
+    "notFound": "Ticket Not Found",
+    "notFoundNote": "This ticket code does not exist in our system.",
+    "validNote": "This ticket has been paid and confirmed.",
+    "invalidNote": "This ticket could not be verified. Payment may be pending or failed.",
+    "event": "Event",
+    "date": "Date",
+    "location": "Location",
+    "tier": "Ticket Type",
+    "qty": "Quantity",
+    "holder": "Ticket Holder",
+    "status": "Status",
+    "statusConfirmed": "Confirmed",
+    "statusPending": "Pending payment",
+    "statusFailed": "Payment failed",
+    "dateTBC": "Date TBC",
+    "locationTBC": "Venue TBC"
   },
   "AdminTicketsPage": {
     "badge": "Ticketing",
@@ -6763,6 +6801,89 @@
       "sold": "Tickets Sold",
       "status": "Status"
     },
-    "dateTBC": "Date TBC"
+    "dateTBC": "Date TBC",
+    "allPromoters": "All Promoters"
+  },
+  "AdminPayoutsPage": {
+    "badge": "Promoter Payouts",
+    "title": "Ticket Payouts",
+    "description": "Revenue collected per event after platform fees. Initiate bank transfers to promoters here.",
+    "tabs": {
+      "summary": "Payout Summary",
+      "history": "Payout History"
+    },
+    "table": {
+      "event": "Event",
+      "promoter": "Promoter",
+      "tickets": "Tickets",
+      "gross": "Gross Revenue",
+      "fee": "Platform Fee",
+      "net": "Net Owed",
+      "unpaidNet": "Unpaid Net",
+      "bank": "Bank Details",
+      "status": "Status",
+      "date": "Date",
+      "amount": "Amount",
+      "actions": "Actions"
+    },
+    "payNow": "Pay Now",
+    "paying": "Initiating…",
+    "allPaid": "All paid",
+    "noBankDetails": "No bank details",
+    "bankCodeMissing": "Bank code missing",
+    "recipientReady": "Recipient set up",
+    "payConfirm": "Initiate transfer of {amount} {currency} to {promoter}?",
+    "noEvents": "No events with payments yet.",
+    "noPayouts": "No payouts initiated yet.",
+    "payoutStatus": {
+      "initiated": "Initiated",
+      "pending": "Pending",
+      "success": "Sent",
+      "failed": "Failed",
+      "reversed": "Reversed"
+    }
+  },
+  "PromoterBankSettings": {
+    "title": "Bank Account for Payouts",
+    "description": "Your bank details are used by the platform admin to transfer your ticket revenue after fees.",
+    "bankName": "Bank Name",
+    "bankCode": "Bank Code",
+    "bankCodeHint": "3-digit code (e.g. 058 for GTBank Nigeria)",
+    "accountNumber": "Account Number",
+    "accountHolder": "Account Holder Name",
+    "payoutCurrency": "Payout Currency",
+    "save": "Save Bank Details",
+    "saving": "Saving…",
+    "saved": "Bank details saved.",
+    "missingFields": "Please fill in bank code, account number, and account holder name."
+  },
+  "AdminPaymentsPage": {
+    "badge": "Payments",
+    "title": "Ticket Payments",
+    "description": "All ticket purchases across every event. Filter, inspect, and issue refunds.",
+    "filters": {
+      "all": "All",
+      "pending": "Pending",
+      "success": "Paid",
+      "failed": "Failed",
+      "refunded": "Refunded"
+    },
+    "table": {
+      "buyer": "Buyer",
+      "event": "Event",
+      "tier": "Tier",
+      "qty": "Qty",
+      "amount": "Amount",
+      "status": "Status",
+      "date": "Date",
+      "actions": "Actions"
+    },
+    "refund": "Refund",
+    "refunding": "Refunding…",
+    "refundConfirm": "Refund this payment? This cannot be undone.",
+    "noPayments": "No payments found.",
+    "prev": "← Prev",
+    "next": "Next →",
+    "page": "Page {page} of {total}"
   }
 }

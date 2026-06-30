@@ -195,6 +195,21 @@ export default function TopNav() {
 		},
 		{ label: tAdminSideNav("eoi"), icon: "send", href: "/admin/eoi" },
 		{
+			label: tAdminSideNav("tickets"),
+			icon: "local_activity",
+			href: "/admin/tickets",
+		},
+		{
+			label: tAdminSideNav("payments"),
+			icon: "payments",
+			href: "/admin/payments",
+		},
+		{
+			label: tAdminSideNav("payouts"),
+			icon: "account_balance",
+			href: "/admin/payouts",
+		},
+		{
 			label: tAdminSideNav("directory"),
 			icon: "groups",
 			href: "/admin/directory",
