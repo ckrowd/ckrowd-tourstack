@@ -7,6 +7,15 @@ const nextConfig: NextConfig = {
 	// Emit a self-contained server bundle (.next/standalone) so the Docker
 	// image can run `node server.js` without the full node_modules tree.
 	output: "standalone",
+	experimental: {
+		serverActions: {
+			// Profile/logo uploads are sent as base64 data URLs through server
+			// actions (e.g. updateTourstackProfile). Next's default 1MB body
+			// limit rejects those before the handler ever runs, so saves with
+			// an image attached fail silently with a generic error.
+			bodySizeLimit: "8mb",
+		},
+	},
 	images: {
 		remotePatterns: [
 			{
