@@ -504,38 +504,10 @@ export async function getTourstackProfile() {
 	};
 }
 
-type ProfileExtras = {
-	companyType?: string;
-	registrationNumber?: string;
-	taxId?: string;
-	incorporationDate?: string;
-	incorporationCountry?: string;
-	logoUrl?: string;
-	primaryAddress?: string;
-	xHandle?: string;
-	facebookHandle?: string;
-	tiktokHandle?: string;
-	contactEmail?: string;
-	yearsInBusiness?: number;
-	companySize?: string;
-	marketsRegions?: string;
-	genresSpecialties?: string;
-	averageEventsYear?: number;
-	bankName?: string;
-	bankAccountHolder?: string;
-	bankAccountNumber?: string;
-	bankSwiftBic?: string;
-	bankCode?: string;
-	payoutCurrency?: string;
-	currencyPreference?: string;
-};
-
 export async function updateTourstackProfile(
-	body: Payload<typeof client.tourstack.profile.patch> & ProfileExtras,
+	body: Payload<typeof client.tourstack.profile.patch>,
 ) {
-	// biome-ignore lint/suspicious/noExplicitAny: new profile fields added in backend — remove cast after package update
-	const { data, error, status, headers } =
-		await client.tourstack.profile.patch(body as any);
+	const { data, error, status, headers } = await client.tourstack.profile.patch(body);
 	return {
 		data: await extractPayload(data, { status, headers }),
 		success: !error && data?.success,
@@ -1729,7 +1701,9 @@ export async function reviseEoi(
 	};
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: financing-admin profile not yet in published package type
+// biome-ignore lint/suspicious/noExplicitAny: tourstack/financing-admin/profile route is missing from the
+// published package's server/routes.d.ts (elysia-atlas route index was never regenerated after the route
+// was added) — remove this cast once that's fixed backend-side, not just on a version bump
 export async function getFinancingAdminProfile() {
 	const { data, error } = await (client as any).tourstack["financing-admin"].profile.get();
 	return {
@@ -1739,7 +1713,9 @@ export async function getFinancingAdminProfile() {
 	};
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: financing-admin profile not yet in published package type
+// biome-ignore lint/suspicious/noExplicitAny: tourstack/financing-admin/profile route is missing from the
+// published package's server/routes.d.ts (elysia-atlas route index was never regenerated after the route
+// was added) — remove this cast once that's fixed backend-side, not just on a version bump
 export async function updateFinancingAdminProfile(body: { orgName?: string; contactPerson?: string; role?: string; adminSignature?: string | null }) {
 	const { data, error } = await (client as any).tourstack["financing-admin"].profile.patch(body);
 	return {
@@ -1749,7 +1725,9 @@ export async function updateFinancingAdminProfile(body: { orgName?: string; cont
 	};
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: insurance-admin profile not yet in published package type
+// biome-ignore lint/suspicious/noExplicitAny: tourstack/insurance-admin/profile route is missing from the
+// published package's server/routes.d.ts (elysia-atlas route index was never regenerated after the route
+// was added) — remove this cast once that's fixed backend-side, not just on a version bump
 export async function getInsuranceAdminProfile() {
 	const { data, error } = await (client as any).tourstack["insurance-admin"].profile.get();
 	return {
@@ -1759,7 +1737,9 @@ export async function getInsuranceAdminProfile() {
 	};
 }
 
-// biome-ignore lint/suspicious/noExplicitAny: insurance-admin profile not yet in published package type
+// biome-ignore lint/suspicious/noExplicitAny: tourstack/insurance-admin/profile route is missing from the
+// published package's server/routes.d.ts (elysia-atlas route index was never regenerated after the route
+// was added) — remove this cast once that's fixed backend-side, not just on a version bump
 export async function updateInsuranceAdminProfile(body: { orgName?: string; contactPerson?: string; role?: string; adminSignature?: string | null }) {
 	const { data, error } = await (client as any).tourstack["insurance-admin"].profile.patch(body);
 	return {
