@@ -6622,10 +6622,19 @@
       "cityPlaceholder": "e.g. Lagos",
       "eventDate": "Event Date",
       "linkTour": "Link to Tour (optional)",
-      "linkTourPlaceholder": "Select a tour EOI",
+      "linkTourPlaceholder": "No tour — independent event",
+      "tourLockedHint": "Venue, city, and date are set by the linked tour and can't be edited here.",
       "currency": "Currency",
       "next": "Next",
       "back": "Back"
+    },
+    "tourStatus": {
+      "under_review": "Under Review",
+      "confirmed": "Confirmed",
+      "needs_revision": "Needs Revision",
+      "rejected": "Rejected",
+      "draft": "Draft",
+      "completed": "Completed"
     },
     "tiers": {
       "add": "Add Tier",
@@ -6671,6 +6680,10 @@
       "currency": "Currency",
       "linkedTour": "Linked Tour",
       "noTour": "Not linked to a tour",
+      "changeTour": "Change",
+      "noTourOption": "No tour",
+      "saveTour": "Save",
+      "cancelTourEdit": "Cancel",
       "description": "Description",
       "publish": "Publish Event",
       "close": "Close Ticket Sales",

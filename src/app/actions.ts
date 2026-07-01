@@ -2163,6 +2163,7 @@ export async function createTicketEvent(body: {
 	eventDate?: string;
 	imageUrl?: string;
 	eoiId?: string;
+	tourId?: string;
 	currency?: string;
 }) {
 	const { data, error } = await (client as any).tourstack.tickets.post(body);
@@ -2178,7 +2179,16 @@ export async function getTicketEvent(id: string) {
 // biome-ignore lint/suspicious/noExplicitAny: ticketing routes not yet in published package type
 export async function updateTicketEvent(
 	id: string,
-	body: { title?: string; description?: string | null; venue?: string | null; city?: string | null; eventDate?: string | null; imageUrl?: string | null; currency?: string },
+	body: {
+		title?: string;
+		description?: string | null;
+		venue?: string | null;
+		city?: string | null;
+		eventDate?: string | null;
+		imageUrl?: string | null;
+		tourId?: string | null;
+		currency?: string;
+	},
 ) {
 	const { data, error } = await (client as any).tourstack.tickets({ id }).patch(body);
 	return { data: await extractPayload(data), success: !error && data?.success, error: extractError(error, data) };
