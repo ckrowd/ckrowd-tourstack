@@ -276,11 +276,17 @@ export default function ProfileClient() {
 		"primaryAddress", "country", "city", "phone", "bio",
 		"contactPerson", "jobTitle", "contactEmail",
 		"yearsInBusiness", "companySize", "averageEventsYear",
-		"marketsRegions", "genresSpecialties",
+		"genresSpecialties",
 		"bankName", "bankAccountHolder", "bankAccountNumber", "bankSwiftBic", "currencyPreference",
 	];
 
 	const profile: ProfileData = { ...EMPTY, ...serverProfile, ...edits };
+	// marketsRegions is only required for company types that show it as required
+	// in the form below — keep this in sync with the Field's `required` prop.
+	const needsMarkets = profile.companyType === "promoter" || profile.companyType === "artistManagement";
+	const missingRequired =
+		REQUIRED_KEYS.some((k) => !profile[k]?.trim?.() && !profile[k]) ||
+		(needsMarkets && !profile.marketsRegions?.trim());
 
 	const set = (key: keyof ProfileData) => (v: string) =>
 		setEdits((p) => ({ ...p, [key]: v }));
@@ -316,10 +322,7 @@ export default function ProfileClient() {
 	});
 
 	const handleSave = () => {
-		const needsMarkets = profile.companyType === "promoter" || profile.companyType === "artistManagement";
-		const missingRequired = REQUIRED_KEYS.some((k) => !profile[k]?.trim?.() && !profile[k]);
-		const missingMarkets = needsMarkets && !profile.marketsRegions?.trim();
-		if (!profile.logoUrl || missingRequired || missingMarkets) {
+		if (!profile.logoUrl || missingRequired) {
 			setLogoError(!profile.logoUrl);
 			setShowValidation(true);
 			window.scrollTo({ top: 0, behavior: "smooth" });
@@ -823,7 +826,7 @@ export default function ProfileClient() {
 				</Section>
 
 				<div className="flex items-center justify-end gap-4">
-					{showValidation && REQUIRED_KEYS.some((k) => !profile[k]?.trim?.() && !profile[k]) && (
+					{showValidation && missingRequired && (
 						<span className="flex items-center gap-1.5 text-sm font-semibold text-rose-600">
 							<span className="material-symbols-outlined text-base" style={{ fontVariationSettings: "'FILL' 1" }}>error</span>
 							{t("actions.requiredFields")}
