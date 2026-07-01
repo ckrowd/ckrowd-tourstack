@@ -4,6 +4,9 @@
 #      @ckrowd GitHub registry) ----
 FROM oven/bun:1.3.13 AS deps
 WORKDIR /app
+# NODE_AUTH_TOKEN must be set as a build arg in Dokploy (GitHub PAT with read:packages)
+ARG NODE_AUTH_TOKEN
+ENV NODE_AUTH_TOKEN=$NODE_AUTH_TOKEN
 COPY package.json bun.lock .npmrc ./
 RUN bun install --frozen-lockfile
 
