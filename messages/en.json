@@ -6275,14 +6275,14 @@
       "ecosystem": "Ecosystem",
       "explore": "Explore",
       "faq": "FAQ",
-      "contactSales": "Contact sales",
+      "login": "Sign in",
       "join": "Join TourStack",
       "byCkrowd": "by Ckrowd"
     },
     "hero": {
-      "title1": "The platform that makes",
-      "title2": "African tours",
-      "title3": "financeable.",
+      "title1": "The Platform that makes",
+      "title2": "Concerts, Festivals, Tours",
+      "title3": "Financeable.",
       "subtitle": "TourStack gives promoters, banks, insurers and artists the trust, compliance and data to unlock live entertainment across the continent, turning tours into financeable assets.",
       "ctaPrimary": "Get started",
       "ctaSecondary": "Become a certified promoter",

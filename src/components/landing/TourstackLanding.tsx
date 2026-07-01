@@ -390,11 +390,11 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 								</svg>
 							)}
 						</button>
-						<Link href={`/${locale}/contact`} className="hidden lg:inline-flex text-[13.5px] text-muted hover:text-ink transition-colors px-3 py-2">
-							{t("nav.contactSales")}
+						<Link href={`/${locale}/login`} className="hidden lg:inline-flex text-[13.5px] text-muted hover:text-ink transition-colors px-3 py-2">
+							{t("nav.login")}
 						</Link>
 						<Link
-							href={`/${locale}/join`}
+							href={`/${locale}/register`}
 							className="group press hidden md:inline-flex items-center gap-2 bg-orange text-white font-medium text-[13.5px] pl-4 pr-2 py-2 rounded-full"
 						>
 							{t("nav.join")}
@@ -436,7 +436,7 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 					</a>
 				))}
 				<Link
-					href={`/${locale}/join`}
+					href={`/${locale}/register`}
 					onClick={() => toggleMenu(false)}
 					className="mt-6 bg-orange text-white font-medium px-7 py-3 rounded-full"
 					style={{ transitionDelay: "0.25s" }}
@@ -477,7 +477,7 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 							{t("hero.subtitle")}
 						</p>
 						<div className="reveal mt-9 flex flex-col sm:flex-row gap-3 justify-center">
-							<Link href={`/${locale}/join`} className="group press inline-flex items-center justify-center gap-2 bg-orange text-white font-medium pl-6 pr-2 py-3.5 rounded-full">
+							<Link href={`/${locale}/register`} className="group press inline-flex items-center justify-center gap-2 bg-orange text-white font-medium pl-6 pr-2 py-3.5 rounded-full">
 								{t("hero.ctaPrimary")}
 								<span className="btn-ico h-8 w-8 rounded-full bg-black/15 grid place-items-center">
 									<ArrowUpRight size={15} />
