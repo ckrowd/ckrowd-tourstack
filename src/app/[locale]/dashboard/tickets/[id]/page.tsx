@@ -34,6 +34,18 @@ export default function ManageTicketEventPage() {
 	const [editingTour, setEditingTour] = useState(false);
 	const [selectedTourId, setSelectedTourId] = useState("");
 
+	// Sharing the public ticket link
+	const [linkCopied, setLinkCopied] = useState(false);
+	const publicUrl =
+		typeof window !== "undefined" ? `${window.location.origin}/${locale}/tickets/${id}` : "";
+
+	async function handleCopyLink() {
+		if (!publicUrl) return;
+		await navigator.clipboard.writeText(publicUrl);
+		setLinkCopied(true);
+		setTimeout(() => setLinkCopied(false), 2000);
+	}
+
 	const eventQuery = useQuery({
 		queryKey: ["ticketEvent", id],
 		queryFn: () => getTicketEvent(id),
@@ -253,6 +265,29 @@ export default function ManageTicketEventPage() {
 							</div>
 						)}
 					</div>
+
+					{status === "published" && (
+						<div className="bg-surface-container-low rounded-2xl p-5 border border-outline-variant">
+							<p className="text-xs font-bold uppercase tracking-wide text-on-surface-variant mb-2">
+								{t("overview.shareLink")}
+							</p>
+							<div className="flex items-center gap-3 flex-wrap">
+								<code className="flex-1 min-w-0 text-xs text-on-surface-variant bg-surface-container px-3 py-2 rounded-xl truncate">
+									{publicUrl}
+								</code>
+								<button
+									type="button"
+									onClick={() => { void handleCopyLink(); }}
+									className="shrink-0 flex items-center gap-2 bg-[#FF5A30] text-white font-bold text-xs px-4 py-2 rounded-xl hover:opacity-90 transition"
+								>
+									<span className="material-symbols-outlined text-sm">
+										{linkCopied ? "check" : "content_copy"}
+									</span>
+									{linkCopied ? t("overview.linkCopied") : t("overview.copyLink")}
+								</button>
+							</div>
+						</div>
+					)}
 
 					<div className="flex gap-3">
 						{status === "draft" && (
