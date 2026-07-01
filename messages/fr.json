@@ -6177,10 +6177,6 @@
     "title": "Intelligence tournée",
     "description": "Outils alimentés par l'IA pour optimiser votre stratégie de tournée, de la sélection des salles au marketing.",
     "tabs": {
-      "score": {
-        "label": "Score de succès™",
-        "description": "Obtenez un score de succès généré par l'IA pour votre tournée basé sur le profil de l'artiste, la salle, les conditions du marché, etc."
-      },
       "forecast": {
         "label": "Prévision billets",
         "description": "Prédisez les ventes de billets, les revenus et la tarification optimale pour votre tournée."
@@ -6206,14 +6202,6 @@
       "selectEoiLabel": "Sélectionner un EOI",
       "eoiPlaceholder": "— Sélectionnez un EOI —",
       "generatedBy": "Généré par l'IA Tour Intelligence"
-    },
-    "score": {
-      "run": "Générer le score",
-      "running": "Analyse en cours…",
-      "breakdown": "Détail du score",
-      "risks": "Risques clés",
-      "recommendations": "Recommandations",
-      "error": "Impossible de générer le score."
     },
     "forecast": {
       "run": "Prévoir les ventes",

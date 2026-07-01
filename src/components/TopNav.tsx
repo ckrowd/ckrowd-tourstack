@@ -184,10 +184,25 @@ export default function TopNav() {
 			href: "/financing",
 		},
 		{ label: tSideNav("insurance"), icon: "shield", href: "/insurance" },
+		{
+			label: tSideNav("tickets"),
+			icon: "confirmation_number",
+			href: "/dashboard/tickets",
+		},
+		{
+			label: tSideNav("aiTools"),
+			icon: "auto_awesome",
+			href: "/tour-intelligence",
+		},
 	];
 
 	const adminNavItems = [
 		{ label: tAdminSideNav("overview"), icon: "dashboard", href: "/admin" },
+		{
+			label: tAdminSideNav("artists"),
+			icon: "album",
+			href: "/admin/artists",
+		},
 		{
 			label: tAdminSideNav("tours"),
 			icon: "confirmation_number",
@@ -195,8 +210,23 @@ export default function TopNav() {
 		},
 		{ label: tAdminSideNav("eoi"), icon: "send", href: "/admin/eoi" },
 		{
+			label: tAdminSideNav("financing"),
+			icon: "account_balance_wallet",
+			href: "/admin/financing",
+		},
+		{
+			label: tAdminSideNav("insurance"),
+			icon: "shield",
+			href: "/admin/insurance",
+		},
+		{
+			label: tAdminSideNav("claims"),
+			icon: "health_and_safety",
+			href: "/admin/claims",
+		},
+		{
 			label: tAdminSideNav("tickets"),
-			icon: "local_activity",
+			icon: "confirmation_number",
 			href: "/admin/tickets",
 		},
 		{
@@ -213,6 +243,11 @@ export default function TopNav() {
 			label: tAdminSideNav("directory"),
 			icon: "groups",
 			href: "/admin/directory",
+		},
+		{
+			label: tAdminSideNav("submissions"),
+			icon: "folder_open",
+			href: "/admin/submissions",
 		},
 		{
 			label: tAdminSideNav("reports"),

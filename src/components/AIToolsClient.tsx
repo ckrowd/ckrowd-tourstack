@@ -1,15 +1,13 @@
 "use client";
 
 import {
-	generateEOIScore,
 	generateMarketingContent,
-	getEOIScore,
 	getSponsorshipMatches,
 	getTicketForecast,
 	getVenueRecommendations,
 	optimizeTourRoute,
 } from "@/app/actions";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
@@ -98,86 +96,7 @@ function EOISelector({
 	);
 }
 
-// ── 1. Tour Success Score ──────────────────────────────────────────────────
-
-function TourSuccessScoreTab({ eois }: { eois: EOI[] }) {
-	const t = useTranslations("AIToolsPage");
-	const [eoiId, setEoiId] = useState("");
-
-	const { data: scoreData, refetch } = useQuery({
-		queryKey: ["ai-score", eoiId],
-		queryFn: () => getEOIScore(eoiId),
-		enabled: !!eoiId,
-	});
-
-	const score = scoreData?.data as Record<string, unknown> | null | undefined;
-
-	const mutation = useMutation({
-		mutationFn: () => generateEOIScore(eoiId),
-		onSuccess: (r) => { if (r.success) refetch(); },
-	});
-
-	const breakdown = score?.breakdown as Record<string, number> | undefined;
-	const sc = typeof score?.score === "number" ? score.score : null;
-	const ring = sc != null ? (sc >= 75 ? "ring-emerald-500" : sc >= 50 ? "ring-yellow-400" : "ring-rose-400") : "ring-slate-200";
-	const scoreColor = sc != null ? (sc >= 75 ? "text-emerald-600" : sc >= 50 ? "text-yellow-500" : "text-rose-500") : "text-on-surface-variant";
-
-	return (
-		<div className="space-y-5">
-			<EOISelector eois={eois} value={eoiId} onChange={setEoiId} label={t("common.selectEoiLabel")} />
-			{eoiId && (
-				<form onSubmit={(e) => { e.preventDefault(); mutation.mutate(); }}>
-					<RunButton loading={mutation.isPending} label={t("score.run")} loadingLabel={t("score.running")} />
-				</form>
-			)}
-			{score && (
-				<ResultCard>
-					<div className="flex items-center gap-5">
-						<div className={`w-20 h-20 rounded-full ring-4 ${ring} flex flex-col items-center justify-center shrink-0`}>
-							<span className={`text-2xl font-black font-(family-name:--font-manrope) ${scoreColor}`}>{sc}</span>
-							<span className="text-[9px] font-bold uppercase tracking-widest text-on-surface-variant">/ 100</span>
-						</div>
-						<div>
-							<p className="text-sm font-semibold text-on-surface">{String(score.verdict ?? "")}</p>
-							<p className="text-[10px] text-on-surface-variant mt-1">{t("common.generatedBy")}</p>
-						</div>
-					</div>
-					{breakdown && (
-						<div className="space-y-2.5">
-							<SectionLabel>{t("score.breakdown")}</SectionLabel>
-							{Object.entries(breakdown).map(([k, v]) => (
-								<div key={k}>
-									<div className="flex justify-between text-xs mb-1">
-										<span className="text-on-surface-variant font-medium capitalize">{k.replace(/_/g, " ")}</span>
-										<span className="font-bold">{v}/25</span>
-									</div>
-									<div className="h-1.5 bg-surface-container-high rounded-full overflow-hidden">
-										<div className={`h-full rounded-full ${v >= 20 ? "bg-emerald-500" : v >= 12 ? "bg-yellow-400" : "bg-rose-400"}`} style={{ width: `${(v / 25) * 100}%` }} />
-									</div>
-								</div>
-							))}
-						</div>
-					)}
-					{Array.isArray(score.risks) && (
-						<div>
-							<SectionLabel>{t("score.risks")}</SectionLabel>
-							<ul className="space-y-1">{(score.risks as string[]).map((r) => <li key={r} className="flex items-start gap-2 text-xs text-on-surface-variant"><span className="material-symbols-outlined text-rose-400 text-sm mt-0.5 shrink-0">warning</span>{r}</li>)}</ul>
-						</div>
-					)}
-					{Array.isArray(score.recommendations) && (
-						<div>
-							<SectionLabel>{t("score.recommendations")}</SectionLabel>
-							<ul className="space-y-1">{(score.recommendations as string[]).map((r) => <li key={r} className="flex items-start gap-2 text-xs text-on-surface-variant"><span className="material-symbols-outlined text-emerald-500 text-sm mt-0.5 shrink-0">check_circle</span>{r}</li>)}</ul>
-						</div>
-					)}
-				</ResultCard>
-			)}
-			{mutation.data && !mutation.data.success && <ErrorBanner msg={mutation.data.error ?? t("score.error")} />}
-		</div>
-	);
-}
-
-// ── 2. Ticket Sales Forecast ───────────────────────────────────────────────
+// ── 1. Ticket Sales Forecast ───────────────────────────────────────────────
 
 function TicketForecastTab({ eois }: { eois: EOI[] }) {
 	const t = useTranslations("AIToolsPage");
@@ -238,7 +157,7 @@ function TicketForecastTab({ eois }: { eois: EOI[] }) {
 	);
 }
 
-// ── 3. Sponsorship Matcher ─────────────────────────────────────────────────
+// ── 2. Sponsorship Matcher ─────────────────────────────────────────────────
 
 function SponsorshipMatcherTab({ eois }: { eois: EOI[] }) {
 	const t = useTranslations("AIToolsPage");
@@ -287,7 +206,7 @@ function SponsorshipMatcherTab({ eois }: { eois: EOI[] }) {
 	);
 }
 
-// ── 4. Venue Recommendation ────────────────────────────────────────────────
+// ── 3. Venue Recommendation ────────────────────────────────────────────────
 
 function VenueRecommendationTab() {
 	const t = useTranslations("AIToolsPage");
@@ -350,7 +269,7 @@ function VenueRecommendationTab() {
 	);
 }
 
-// ── 5. Tour Route Optimizer ────────────────────────────────────────────────
+// ── 4. Tour Route Optimizer ────────────────────────────────────────────────
 
 function RouteOptimizerTab() {
 	const t = useTranslations("AIToolsPage");
@@ -431,7 +350,7 @@ function RouteOptimizerTab() {
 	);
 }
 
-// ── 6. Marketing Content Generator ────────────────────────────────────────
+// ── 5. Marketing Content Generator ────────────────────────────────────────
 
 function MarketingContentTab({ eois }: { eois: EOI[] }) {
 	const t = useTranslations("AIToolsPage");
@@ -525,7 +444,6 @@ function MarketingContentTab({ eois }: { eois: EOI[] }) {
 // ── Main Tabs Component ────────────────────────────────────────────────────
 
 const TABS = [
-	{ key: "score", icon: "emoji_events" },
 	{ key: "forecast", icon: "confirmation_number" },
 	{ key: "sponsors", icon: "handshake" },
 	{ key: "venues", icon: "stadium" },
@@ -536,7 +454,7 @@ const TABS = [
 type TabKey = (typeof TABS)[number]["key"];
 
 export default function AIToolsClient({ eois }: { eois: EOI[] }) {
-	const [activeTab, setActiveTab] = useState<TabKey>("score");
+	const [activeTab, setActiveTab] = useState<TabKey>("forecast");
 	const t = useTranslations("AIToolsPage");
 
 	return (
@@ -572,7 +490,6 @@ export default function AIToolsClient({ eois }: { eois: EOI[] }) {
 				</h2>
 				<p className="text-sm text-on-surface-variant mb-6">{t(`tabs.${activeTab}.description`)}</p>
 
-				{activeTab === "score" && <TourSuccessScoreTab eois={eois} />}
 				{activeTab === "forecast" && <TicketForecastTab eois={eois} />}
 				{activeTab === "sponsors" && <SponsorshipMatcherTab eois={eois} />}
 				{activeTab === "venues" && <VenueRecommendationTab />}
