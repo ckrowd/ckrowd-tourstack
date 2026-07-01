@@ -6,11 +6,13 @@ import { useTranslations } from "next-intl";
 import { useParams, useRouter } from "next/navigation";
 import {
 	getTicketEvent,
+	getTours,
 	publishTicketEvent,
 	closeTicketEvent,
 	createTicketTier,
 	deleteTicketTier,
 	listTicketPurchases,
+	updateTicketEvent,
 } from "@/app/actions";
 
 type Tab = "overview" | "tiers" | "buyers";
@@ -28,9 +30,31 @@ export default function ManageTicketEventPage() {
 	const [newTierPrice, setNewTierPrice] = useState("");
 	const [newTierCap, setNewTierCap] = useState("");
 
+	// Editing the linked tour
+	const [editingTour, setEditingTour] = useState(false);
+	const [selectedTourId, setSelectedTourId] = useState("");
+
 	const eventQuery = useQuery({
 		queryKey: ["ticketEvent", id],
 		queryFn: () => getTicketEvent(id),
+	});
+
+	const toursQuery = useQuery({
+		queryKey: ["tours"],
+		queryFn: () => getTours(),
+		enabled: tab === "overview",
+	});
+	const tours = (toursQuery.data?.data as Record<string, unknown>[] | null) ?? [];
+	const linkableTours = tours.filter((tr) => tr.status !== "rejected");
+
+	const updateTourMutation = useMutation({
+		mutationFn: (nextTourId: string | null) => updateTicketEvent(id, { tourId: nextTourId }),
+		onSuccess: (res) => {
+			if (res.success) {
+				qc.invalidateQueries({ queryKey: ["ticketEvent", id] });
+				setEditingTour(false);
+			}
+		},
 	});
 
 	const purchasesQuery = useQuery({
@@ -110,8 +134,7 @@ export default function ManageTicketEventPage() {
 		return <div className="p-6 text-sm text-on-surface-variant">Event not found.</div>;
 	}
 
-	const eoiData = ev.eoi as Record<string, unknown> | null | undefined;
-	const artistData = eoiData?.artist as Record<string, unknown> | null | undefined;
+	const tourData = ev.tour as Record<string, unknown> | null | undefined;
 
 	return (
 		<div className="p-6 max-w-5xl mx-auto">
@@ -159,16 +182,70 @@ export default function ManageTicketEventPage() {
 							{ label: t("overview.date"), value: ev.event_date ? new Date(String(ev.event_date)).toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" }) : "—" },
 							{ label: t("overview.location"), value: [ev.venue, ev.city].filter(Boolean).join(", ") || "—" },
 							{ label: t("overview.currency"), value: String(ev.currency ?? "NGN") },
-							{
-								label: t("overview.linkedTour"),
-								value: artistData ? `${String(artistData.name)} — ${String(artistData.tour_name)}` : t("overview.noTour"),
-							},
 						].map(({ label, value }) => (
 							<div key={label} className="flex items-start gap-4">
 								<span className="text-xs font-bold uppercase tracking-wide text-on-surface-variant w-32 shrink-0">{label}</span>
 								<span className="text-sm">{value}</span>
 							</div>
 						))}
+						<div className="flex items-start gap-4">
+							<span className="text-xs font-bold uppercase tracking-wide text-on-surface-variant w-32 shrink-0">
+								{t("overview.linkedTour")}
+							</span>
+							<div className="flex-1">
+								{!editingTour ? (
+									<div className="flex items-center gap-3">
+										<span className="text-sm">
+											{tourData
+												? `${String(tourData.tour_name ?? tourData.venue)} — ${String(tourData.city)}`
+												: t("overview.noTour")}
+										</span>
+										{status !== "cancelled" && (
+											<button
+												type="button"
+												onClick={() => {
+													setSelectedTourId(tourData ? String(tourData.id) : "");
+													setEditingTour(true);
+												}}
+												className="text-xs text-[#FF5A30] font-semibold hover:underline"
+											>
+												{t("overview.changeTour")}
+											</button>
+										)}
+									</div>
+								) : (
+									<div className="flex items-center gap-2">
+										<select
+											className="border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-[#FF5A30]"
+											value={selectedTourId}
+											onChange={(e) => setSelectedTourId(e.target.value)}
+										>
+											<option value="">{t("overview.noTourOption")}</option>
+											{linkableTours.map((tour) => (
+												<option key={String(tour.id)} value={String(tour.id)}>
+													{String(tour.tour_name ?? tour.venue)} — {String(tour.city)}
+												</option>
+											))}
+										</select>
+										<button
+											type="button"
+											disabled={updateTourMutation.isPending}
+											onClick={() => updateTourMutation.mutate(selectedTourId || null)}
+											className="bg-[#FF5A30] text-white font-bold text-xs px-4 py-2 rounded-xl hover:opacity-90 disabled:opacity-50 transition"
+										>
+											{updateTourMutation.isPending ? t("tiers.saving") : t("overview.saveTour")}
+										</button>
+										<button
+											type="button"
+											onClick={() => setEditingTour(false)}
+											className="text-xs text-on-surface-variant hover:underline"
+										>
+											{t("overview.cancelTourEdit")}
+										</button>
+									</div>
+								)}
+							</div>
+						</div>
 						{!!ev.description && (
 							<div className="pt-2 border-t border-outline-variant">
 								<p className="text-xs font-bold uppercase tracking-wide text-on-surface-variant mb-1">{t("overview.description")}</p>

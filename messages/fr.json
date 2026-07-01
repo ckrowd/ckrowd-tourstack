@@ -6610,10 +6610,19 @@
       "cityPlaceholder": "ex. Lagos",
       "eventDate": "Date de l'événement",
       "linkTour": "Lier à une tournée (optionnel)",
-      "linkTourPlaceholder": "Sélectionner une EOI de tournée",
+      "linkTourPlaceholder": "Aucune tournée — événement indépendant",
+      "tourLockedHint": "Le lieu, la ville et la date sont définis par la tournée liée et ne peuvent pas être modifiés ici.",
       "currency": "Devise",
       "next": "Suivant",
       "back": "Retour"
+    },
+    "tourStatus": {
+      "under_review": "En révision",
+      "confirmed": "Confirmée",
+      "needs_revision": "Révision requise",
+      "rejected": "Rejetée",
+      "draft": "Brouillon",
+      "completed": "Terminée"
     },
     "tiers": {
       "add": "Ajouter une catégorie",
@@ -6659,6 +6668,10 @@
       "currency": "Devise",
       "linkedTour": "Tournée liée",
       "noTour": "Non lié à une tournée",
+      "changeTour": "Modifier",
+      "noTourOption": "Aucune tournée",
+      "saveTour": "Enregistrer",
+      "cancelTourEdit": "Annuler",
       "description": "Description",
       "publish": "Publier l'événement",
       "close": "Clôturer la vente de billets",

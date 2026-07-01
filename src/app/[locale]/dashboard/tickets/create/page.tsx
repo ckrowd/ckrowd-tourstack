@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useParams, useRouter } from "next/navigation";
-import { createTicketEvent, publishTicketEvent } from "@/app/actions";
+import { createTicketEvent, getTours, publishTicketEvent } from "@/app/actions";
 
 interface TierDraft {
 	name: string;
@@ -30,6 +30,21 @@ export default function CreateTicketEventPage() {
 	const [venue, setVenue] = useState("");
 	const [city, setCity] = useState("");
 	const [eventDate, setEventDate] = useState("");
+	const [tourId, setTourId] = useState("");
+
+	const toursQuery = useQuery({ queryKey: ["tours"], queryFn: () => getTours() });
+	const tours = (toursQuery.data?.data as Record<string, unknown>[] | null) ?? [];
+	const linkableTours = tours.filter((tr) => tr.status !== "rejected");
+
+	const handleTourChange = (value: string) => {
+		setTourId(value);
+		if (!value) return;
+		const tour = linkableTours.find((tr) => String(tr.id) === value);
+		if (!tour) return;
+		setVenue(String(tour.venue ?? ""));
+		setCity(String(tour.city ?? ""));
+		setEventDate(tour.date ? new Date(String(tour.date)).toISOString().slice(0, 16) : "");
+	};
 
 	// Step 2 — tiers
 	const [tiers, setTiers] = useState<TierDraft[]>([{ ...EMPTY_TIER }]);
@@ -42,6 +57,7 @@ export default function CreateTicketEventPage() {
 				venue: venue || undefined,
 				city: city || undefined,
 				eventDate: eventDate || undefined,
+				tourId: tourId || undefined,
 				currency: "NGN",
 			});
 			if (!ev.success || !ev.data) throw new Error(ev.error ?? "Failed to create event");
@@ -133,22 +149,41 @@ export default function CreateTicketEventPage() {
 							onChange={(e) => setDescription(e.target.value)}
 						/>
 					</div>
+					<div>
+						<label className="block text-sm font-semibold mb-1">{t("form.linkTour")}</label>
+						<select
+							className="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm bg-surface focus:outline-none focus:border-[#FF5A30]"
+							value={tourId}
+							onChange={(e) => handleTourChange(e.target.value)}
+						>
+							<option value="">{t("form.linkTourPlaceholder")}</option>
+							{linkableTours.map((tour) => (
+								<option key={String(tour.id)} value={String(tour.id)}>
+									{String(tour.tour_name ?? tour.venue)} — {String(tour.city)} (
+									{t(`tourStatus.${String(tour.status)}` as Parameters<typeof t>[0])})
+								</option>
+							))}
+						</select>
+						{tourId && <p className="text-xs text-on-surface-variant mt-1">{t("form.tourLockedHint")}</p>}
+					</div>
 					<div className="grid grid-cols-2 gap-4">
 						<div>
 							<label className="block text-sm font-semibold mb-1">{t("form.venue")}</label>
 							<input
-								className="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm bg-surface focus:outline-none focus:border-[#FF5A30]"
+								className="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm bg-surface focus:outline-none focus:border-[#FF5A30] disabled:bg-surface-container disabled:text-on-surface-variant disabled:cursor-not-allowed"
 								placeholder={t("form.venuePlaceholder")}
 								value={venue}
+								disabled={!!tourId}
 								onChange={(e) => setVenue(e.target.value)}
 							/>
 						</div>
 						<div>
 							<label className="block text-sm font-semibold mb-1">{t("form.city")}</label>
 							<input
-								className="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm bg-surface focus:outline-none focus:border-[#FF5A30]"
+								className="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm bg-surface focus:outline-none focus:border-[#FF5A30] disabled:bg-surface-container disabled:text-on-surface-variant disabled:cursor-not-allowed"
 								placeholder={t("form.cityPlaceholder")}
 								value={city}
+								disabled={!!tourId}
 								onChange={(e) => setCity(e.target.value)}
 							/>
 						</div>
@@ -156,8 +191,9 @@ export default function CreateTicketEventPage() {
 					<div>
 						<label className="block text-sm font-semibold mb-1">{t("form.eventDate")}</label>
 						<input
+							disabled={!!tourId}
 							type="datetime-local"
-							className="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm bg-surface focus:outline-none focus:border-[#FF5A30]"
+							className="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm bg-surface focus:outline-none focus:border-[#FF5A30] disabled:bg-surface-container disabled:text-on-surface-variant disabled:cursor-not-allowed"
 							value={eventDate}
 							onChange={(e) => setEventDate(e.target.value)}
 						/>
