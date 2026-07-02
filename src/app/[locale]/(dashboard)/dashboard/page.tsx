@@ -35,6 +35,7 @@ export default async function DashboardPage({ params }: Props) {
 	const { locale } = await params;
 	setRequestLocale(locale);
 	const t = await getTranslations("DashboardPage");
+	const tDocs = await getTranslations("EOIDocumentsPage");
 
 	const [
 		eoisResult,
@@ -70,6 +71,14 @@ export default async function DashboardPage({ params }: Props) {
 		? String(profile.company_name)
 		: t("yourOrganization");
 	const INSURANCE_PRODUCT_IDS = ["Event Cancellation", "Event Insurance Bundle", "Touring Workforce", "Aviation & Equipment", "Audience Ticket Protection"];
+	const approvedEoi = eois.find((e) => String(e.status) === "approved");
+	// Only EOIs submitted after required_documents was introduced have a real
+	// selection to report — older EOIs never captured this structurally, so we
+	// fall back to generic copy rather than guessing which docs were selected.
+	const approvedEoiDocTypes = approvedEoi?.required_documents ?? [];
+	const approvedEoiDocLabels = approvedEoiDocTypes
+		.map((dt) => tDocs(`docTypes.${dt}` as Parameters<typeof tDocs>[0]))
+		.join(", ");
 	const financingApps = financingResult.data ?? [];
 	const hasFinancingRequest = eois.some((e) => String(e.funding_type ?? "") === "required");
 	const hasInsuranceRequest = eois.some((e) => String(e.notes ?? "").includes("Insurance support requested"));
@@ -202,7 +211,7 @@ export default async function DashboardPage({ params }: Props) {
 						</div>
 					)}
 					{/* Document upload prompt for approved EOIs */}
-					{eois.some((e) => String(e.status) === "approved") && (
+					{approvedEoi && (
 						<div className="mb-6 bg-emerald-50 border border-emerald-200 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
 							<div className="flex items-start gap-3">
 								<span
@@ -216,12 +225,14 @@ export default async function DashboardPage({ params }: Props) {
 										{t("docsPrompt.title")}
 									</p>
 									<p className="text-xs text-emerald-800 mt-0.5">
-										{t("docsPrompt.description")}
+										{approvedEoiDocTypes.length > 0
+											? t("docsPrompt.description", { docs: approvedEoiDocLabels })
+											: t("docsPrompt.descriptionGeneric")}
 									</p>
 								</div>
 							</div>
 							<Link
-								href={`/eoi/documents?eoiId=${String(eois.find((e) => String(e.status) === "approved")?.id ?? "")}`}
+								href={`/eoi/documents?eoiId=${String(approvedEoi.id)}`}
 								className="bg-emerald-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-all shrink-0"
 							>
 								{t("docsPrompt.cta")}
