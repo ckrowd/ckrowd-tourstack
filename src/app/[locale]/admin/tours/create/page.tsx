@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useRef, useState } from "react";
+import DatePicker from "@/components/ui/DatePicker";
 import { Link, useRouter } from "@/i18n/routing";
 import { createAdminTour, uploadImage } from "../../../../actions";
 
@@ -12,6 +13,8 @@ export default function CreateTourPage() {
 	const t = useTranslations("CreateTourPage");
 	const [imageFile, setImageFile] = useState<File | null>(null);
 	const [imagePreview, setImagePreview] = useState<string>("");
+	const [dateFrom, setDateFrom] = useState("");
+	const [dateTo, setDateTo] = useState("");
 	const fileInputRef = useRef<HTMLInputElement>(null);
 
 	const createMutation = useMutation({
@@ -200,36 +203,22 @@ export default function CreateTourPage() {
 					</div>
 
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-						<div>
-							<label
-								htmlFor="date_from"
-								className="block text-xs font-semibold text-on-surface-variant mb-1.5 uppercase tracking-wider"
-							>
-								{t("availableFrom")}
-							</label>
-							<input
-								id="date_from"
-								name="date_from"
-								type="date"
-								required
-								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none"
-							/>
-						</div>
-						<div>
-							<label
-								htmlFor="date_to"
-								className="block text-xs font-semibold text-on-surface-variant mb-1.5 uppercase tracking-wider"
-							>
-								{t("availableTo")}
-							</label>
-							<input
-								id="date_to"
-								name="date_to"
-								type="date"
-								required
-								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none"
-							/>
-						</div>
+						<DatePicker
+							label={t("availableFrom")}
+							id="date_from"
+							value={dateFrom}
+							onChange={setDateFrom}
+							required
+						/>
+						<input type="hidden" name="date_from" value={dateFrom} />
+						<DatePicker
+							label={t("availableTo")}
+							id="date_to"
+							value={dateTo}
+							onChange={setDateTo}
+							required
+						/>
+						<input type="hidden" name="date_to" value={dateTo} />
 					</div>
 
 					<div>

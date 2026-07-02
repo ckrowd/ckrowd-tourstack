@@ -6,6 +6,9 @@ import { useEffect, useRef, useState } from "react";
 import { getTourstackProfile, updateTourstackProfile, uploadImage } from "@/app/actions";
 import { useSession } from "@/context/AuthContext";
 import { resizeImageFile } from "@/lib/image";
+import BankSelect from "@/components/ui/BankSelect";
+import CurrencySelect from "@/components/ui/CurrencySelect";
+import DatePicker from "@/components/ui/DatePicker";
 
 function Section({
 	title,
@@ -561,10 +564,9 @@ export default function ProfileClient() {
 							required
 							showError={showValidation}
 						/>
-						<Field
+						<DatePicker
 							label={t("companyInfo.fields.incorporationDate")}
 							id="inc-date"
-							type="date"
 							value={profile.incorporationDate}
 							onChange={set("incorporationDate")}
 							required
@@ -794,32 +796,38 @@ export default function ProfileClient() {
 				{/* 5. Financial & Banking Information */}
 				<Section title={t("banking.title")} description={t("banking.description")}>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-						<Field
-							label={t("banking.fields.bankName")}
-							id="bank-name"
-							value={profile.bankName}
-							onChange={set("bankName")}
-							placeholder={t("banking.fields.bankNamePlaceholder")}
+						<BankSelect
+							value={{
+								bankCode: profile.bankCode,
+								bankName: profile.bankName,
+								accountNumber: profile.bankAccountNumber,
+								accountHolder: profile.bankAccountHolder,
+							}}
+							onChange={(next) =>
+								setEdits((p) => ({
+									...p,
+									bankCode: next.bankCode,
+									bankName: next.bankName,
+									bankAccountNumber: next.accountNumber,
+									bankAccountHolder: next.accountHolder,
+								}))
+							}
 							required
 							showError={showValidation}
-						/>
-						<Field
-							label={t("banking.fields.bankAccountHolder")}
-							id="bank-holder"
-							value={profile.bankAccountHolder}
-							onChange={set("bankAccountHolder")}
-							placeholder={t("banking.fields.bankAccountHolderPlaceholder")}
-							required
-							showError={showValidation}
-						/>
-						<Field
-							label={t("banking.fields.bankAccountNumber")}
-							id="bank-account"
-							value={profile.bankAccountNumber}
-							onChange={set("bankAccountNumber")}
-							placeholder={t("banking.fields.bankAccountNumberPlaceholder")}
-							required
-							showError={showValidation}
+							labels={{
+								bank: t("banking.fields.bankName"),
+								bankSelectPlaceholder: t("banking.fields.bankSelectPlaceholder"),
+								bankLoading: t("banking.fields.bankLoading"),
+								bankPlaceholder: t("banking.fields.bankNamePlaceholder"),
+								accountNumber: t("banking.fields.bankAccountNumber"),
+								accountNumberPlaceholder: t("banking.fields.bankAccountNumberPlaceholder"),
+								verify: t("banking.fields.verify"),
+								verifying: t("banking.fields.verifying"),
+								verified: t("banking.fields.verified"),
+								verifyFailed: t("banking.fields.verifyFailed"),
+								accountHolder: t("banking.fields.bankAccountHolder"),
+								accountHolderPlaceholder: t("banking.fields.bankAccountHolderPlaceholder"),
+							}}
 						/>
 						<Field
 							label={t("banking.fields.bankSwiftBic")}
@@ -830,28 +838,21 @@ export default function ProfileClient() {
 							required
 							showError={showValidation}
 						/>
-						<Field
+						<CurrencySelect
 							label={t("banking.fields.currencyPreference")}
 							id="currency"
 							value={profile.currencyPreference}
 							onChange={set("currencyPreference")}
-							placeholder={t("banking.fields.currencyPlaceholder")}
+							placeholder={t("banking.fields.currencySelectPlaceholder")}
 							required
 							showError={showValidation}
 						/>
-						<Field
-							label={t("banking.fields.bankCode")}
-							id="bank-code"
-							value={profile.bankCode}
-							onChange={set("bankCode")}
-							placeholder={t("banking.fields.bankCodePlaceholder")}
-						/>
-						<Field
+						<CurrencySelect
 							label={t("banking.fields.payoutCurrency")}
 							id="payout-currency"
 							value={profile.payoutCurrency}
 							onChange={set("payoutCurrency")}
-							placeholder={t("banking.fields.payoutCurrencyPlaceholder")}
+							placeholder={t("banking.fields.payoutCurrencySelectPlaceholder")}
 						/>
 					</div>
 				</Section>

@@ -1678,7 +1678,15 @@
         "bankCode": "Bank Code (Paystack)",
         "bankCodePlaceholder": "e.g. 058 (GTBank NG)",
         "payoutCurrency": "Payout Currency",
-        "payoutCurrencyPlaceholder": "e.g. NGN, GHS"
+        "payoutCurrencyPlaceholder": "e.g. NGN, GHS",
+        "bankSelectPlaceholder": "Select your bank",
+        "bankLoading": "Loading banks...",
+        "verify": "Verify",
+        "verifying": "Verifying...",
+        "verified": "Account verified",
+        "verifyFailed": "Could not verify this account. Please check the details.",
+        "currencySelectPlaceholder": "Select a currency",
+        "payoutCurrencySelectPlaceholder": "Select a payout currency"
       }
     },
     "actions": {

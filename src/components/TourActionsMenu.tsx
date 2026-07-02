@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { deleteAdminTour, updateAdminTour } from "@/app/actions";
+import DatePicker from "@/components/ui/DatePicker";
 import { Link } from "@/i18n/routing";
 
 const TOUR_STATUSES = [
@@ -250,17 +251,12 @@ export default function TourActionsMenu({
 						</div>
 
 						{/* Date */}
-						<div>
-							<label className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1.5">
-								{t("editFields.date")}
-							</label>
-							<input
-								type="date"
-								value={form.date}
-								onChange={(e) => setForm((f) => ({ ...f, date: e.target.value }))}
-								className={inputClass}
-							/>
-						</div>
+						<DatePicker
+							label={t("editFields.date")}
+							id="tour-edit-date"
+							value={form.date}
+							onChange={(v) => setForm((f) => ({ ...f, date: v }))}
+						/>
 
 						{/* Capacity + Fee side by side */}
 						<div className="grid grid-cols-2 gap-3">
