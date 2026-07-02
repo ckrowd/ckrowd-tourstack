@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { createTourFromEoi, forwardEoi, updateAdminEoi } from "@/app/actions";
+import FormattedNumberInput from "@/components/ui/FormattedNumberInput";
 
 type Action = "approve" | "revision" | "reject" | "create_stop";
 
@@ -492,24 +493,20 @@ export default function EoiActionPanel({
 								<label className="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1">
 									{t("feeUsd")} *
 								</label>
-								<input
-									type="number"
-									min="1"
+								<FormattedNumberInput
 									value={stopForm.feeUsd}
-									onChange={(e) => setStopForm((f) => ({ ...f, feeUsd: e.target.value }))}
+									onChange={(v) => setStopForm((f) => ({ ...f, feeUsd: v }))}
 									className="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-sm focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/40"
-									placeholder="e.g. 25000"
+									placeholder="e.g. 25,000"
 								/>
 							</div>
 							<div className="sm:col-span-2">
 								<label className="block text-xs font-semibold uppercase tracking-wider text-on-surface-variant mb-1">
 									{t("capacity")}
 								</label>
-								<input
-									type="number"
-									min="1"
+								<FormattedNumberInput
 									value={stopForm.capacity}
-									onChange={(e) => setStopForm((f) => ({ ...f, capacity: e.target.value }))}
+									onChange={(v) => setStopForm((f) => ({ ...f, capacity: v }))}
 									className="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-sm focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/40"
 									placeholder={t("capacityPlaceholder")}
 								/>

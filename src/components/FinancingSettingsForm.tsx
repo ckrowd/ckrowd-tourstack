@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { updateFinancingSettings } from "@/app/actions";
+import FormattedNumberInput from "@/components/ui/FormattedNumberInput";
 
 type Settings = {
 	auto_reject_below_threshold: boolean;
@@ -139,12 +140,10 @@ export default function FinancingSettingsForm({
 							>
 								{t(`thresholds.${key}.label`)}
 							</label>
-							<input
+							<FormattedNumberInput
 								id={`finance-threshold-${key}`}
-								type="number"
-								min={0}
-								value={draft[key]}
-								onChange={(e) => setThreshold(key, e.target.value)}
+								value={String(draft[key])}
+								onChange={(v) => setThreshold(key, v)}
 								className="w-32 rounded-lg border border-outline-variant/20 bg-surface-container-lowest px-2 py-1 text-sm font-semibold text-on-surface text-right focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
 							/>
 						</div>

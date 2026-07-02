@@ -10,6 +10,7 @@ import {
 	getInsuranceClaims,
 	updateInsuranceClaim,
 } from "@/app/actions";
+import FormattedNumberInput from "@/components/ui/FormattedNumberInput";
 
 const CLAIM_STATUSES = [
 	"open",
@@ -244,12 +245,10 @@ export default function InsuranceAdminClaimsPage() {
 								<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 									{t("newClaim.amount")}
 								</span>
-								<input
-									type="number"
-									min={1}
+								<FormattedNumberInput
 									required
 									value={amountClaimed}
-									onChange={(event) => setAmountClaimed(event.target.value)}
+									onChange={(v) => setAmountClaimed(v)}
 									placeholder={t("newClaim.amountPlaceholder")}
 									className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
 								/>
@@ -439,13 +438,9 @@ export default function InsuranceAdminClaimsPage() {
 												<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 													{t("review.settlement")}
 												</span>
-												<input
-													type="number"
-													min={0}
+												<FormattedNumberInput
 													value={settlement}
-													onChange={(event) =>
-														setSettlement(event.target.value)
-													}
+													onChange={(v) => setSettlement(v)}
 													placeholder={t("review.settlementPlaceholder")}
 													className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
 												/>

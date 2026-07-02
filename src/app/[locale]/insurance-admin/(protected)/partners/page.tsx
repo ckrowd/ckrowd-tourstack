@@ -8,6 +8,7 @@ import {
 	createInsurancePartner,
 	getInsurancePartners,
 } from "@/app/actions";
+import FormattedNumberInput from "@/components/ui/FormattedNumberInput";
 
 const PARTNER_TYPES = ["underwriter", "broker", "reinsurer"] as const;
 type PartnerType = (typeof PARTNER_TYPES)[number];
@@ -238,12 +239,10 @@ export default function InsuranceAdminPartnersPage() {
 							<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 								{t("partnerForm.capacity")}
 							</span>
-							<input
-								type="number"
-								min={1}
+							<FormattedNumberInput
 								required
 								value={capacity}
-								onChange={(event) => setCapacity(event.target.value)}
+								onChange={(v) => setCapacity(v)}
 								placeholder={t("partnerForm.capacityPlaceholder")}
 								className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
 							/>

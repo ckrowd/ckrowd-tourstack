@@ -14,6 +14,7 @@ export default function FormattedNumberInput({
 	className,
 	ariaInvalid,
 	tabIndex,
+	required,
 }: {
 	id?: string;
 	value: string;
@@ -22,6 +23,7 @@ export default function FormattedNumberInput({
 	className?: string;
 	ariaInvalid?: boolean;
 	tabIndex?: number;
+	required?: boolean;
 }) {
 	const displayValue = value ? Number(value).toLocaleString("en-US") : "";
 
@@ -36,6 +38,7 @@ export default function FormattedNumberInput({
 			className={className}
 			aria-invalid={ariaInvalid}
 			tabIndex={tabIndex}
+			required={required}
 		/>
 	);
 }

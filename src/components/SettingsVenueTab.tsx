@@ -274,25 +274,25 @@ export default function SettingsVenueTab() {
 					<Field
 						label={t("venueDetails.fields.seatedCap")}
 						id="v-cap-seated"
-						type="number"
+						type="formatted-number"
 						value={form.seatedCapacity}
-						onChange={(v) => set("seatedCapacity")(v.replace(/\D/g, ""))}
+						onChange={set("seatedCapacity")}
 						placeholder={t("venueDetails.fields.seatedCapPlaceholder")}
 					/>
 					<Field
 						label={t("venueDetails.fields.standingCap")}
 						id="v-cap-stand"
-						type="number"
+						type="formatted-number"
 						value={form.standingCapacity}
-						onChange={(v) => set("standingCapacity")(v.replace(/\D/g, ""))}
+						onChange={set("standingCapacity")}
 						placeholder={t("venueDetails.fields.standingCapPlaceholder")}
 					/>
 					<Field
 						label={t("venueDetails.fields.expectedAttendance")}
 						id="v-expected-attendance"
-						type="number"
+						type="formatted-number"
 						value={form.expectedAttendance}
-						onChange={(v) => set("expectedAttendance")(v.replace(/\D/g, ""))}
+						onChange={set("expectedAttendance")}
 						placeholder={t("venueDetails.fields.expectedAttendancePlaceholder")}
 					/>
 					<Field

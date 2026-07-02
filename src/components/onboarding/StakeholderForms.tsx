@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { VENDOR_CATEGORIES, WORKFORCE_DEPARTMENTS } from "@/lib/stakeholderTaxonomy";
+import FormattedNumberInput from "@/components/ui/FormattedNumberInput";
 import GroupedMultiSelect from "./GroupedMultiSelect";
 
 // ─── Shared types ────────────────────────────────────────────────────────────────
@@ -448,7 +449,7 @@ export function ServiceProviderForm({ onSubmit, submitError, isPending }: Stakeh
 						<label className={labelCls} htmlFor="sp-largest-event">
 							{t("serviceProvider.fields.largestEventServed" as never)}
 						</label>
-						<input id="sp-largest-event" type="number" min="0" value={form.largestEventServed} onChange={f("largestEventServed")} placeholder={t("serviceProvider.fields.largestEventServedPlaceholder" as never)} className={inputCls} />
+						<FormattedNumberInput id="sp-largest-event" value={form.largestEventServed} onChange={(v) => setForm((p) => ({ ...p, largestEventServed: v }))} placeholder={t("serviceProvider.fields.largestEventServedPlaceholder" as never)} className={inputCls} />
 					</div>
 					<div>
 						<label className={labelCls} htmlFor="sp-notable-clients">
@@ -825,7 +826,7 @@ export function WorkforceForm({ onSubmit, submitError, isPending }: StakeholderF
 					</div>
 					<div>
 						<label className={labelCls} htmlFor="wf-day-rate">{t("workforce.fields.dayRate" as never)} *</label>
-						<input id="wf-day-rate" type="number" min="0" required value={form.dayRate} onChange={f("dayRate")} placeholder={t("workforce.fields.dayRatePlaceholder" as never)} className={inputCls} />
+						<FormattedNumberInput id="wf-day-rate" required value={form.dayRate} onChange={(v) => setForm((p) => ({ ...p, dayRate: v }))} placeholder={t("workforce.fields.dayRatePlaceholder" as never)} className={inputCls} />
 					</div>
 					<div>
 						<label className={labelCls} htmlFor="wf-availability">{t("workforce.fields.availability" as never)} *</label>
