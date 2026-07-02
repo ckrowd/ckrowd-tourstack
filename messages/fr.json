@@ -615,10 +615,7 @@
         "title": "Détails de la tournée & informations artiste",
         "tourSection": "Informations sur la tournée",
         "artistSection": "Détails de l'artiste",
-        "tourName": {
-          "label": "Nom de la tournée",
-          "placeholder": "ex. Afro Nation Lagos 2026"
-        },
+        "tourDetailsHint": "Le nom de la tournée, les dates et les marchés sont affichés sur le panneau d'opportunité — inutile de les ressaisir ici.",
         "tourManager": {
           "label": "Nom du directeur de tournée",
           "placeholder": "Nom complet"
@@ -630,14 +627,6 @@
         "tourManagerPhone": {
           "label": "Téléphone du directeur de tournée",
           "placeholder": "+44 7000 000 000"
-        },
-        "proposedCities": {
-          "label": "Villes proposées / Étapes de tournée",
-          "placeholder": "ex. Lagos, Accra, Nairobi"
-        },
-        "preferredDates": {
-          "label": "Dates de tournée souhaitées",
-          "placeholder": "ex. Oct 2026 – Déc 2026"
         },
         "artistConfirmed": {
           "label": "L'artiste est-il confirmé pour cette tournée ?",
@@ -660,7 +649,8 @@
       "step4": {
         "title": "Salle & billetterie",
         "venueSection": "Informations sur la salle",
-        "ticketingSection": "Billetterie",
+        "addVenue": "Ajouter une autre salle",
+        "removeVenue": "Retirer",
         "venueName": {
           "label": "Nom de la salle",
           "placeholder": "ex. Eko Convention Centre"
@@ -688,10 +678,6 @@
         "venueRentalCost": {
           "label": "Coût de location estimé (USD)",
           "placeholder": "ex. 50 000"
-        },
-        "ticketingPartner": {
-          "label": "Partenaire de billetterie",
-          "placeholder": "ex. Eventbrite, Flutterwave"
         },
         "expectedTicketSales": {
           "label": "Ventes de billets attendues",
@@ -801,19 +787,20 @@
           "placeholder": "BVN ou numéro RC"
         },
         "insuranceSection": "Assurance événementielle",
-        "hasInsurance": "Disposez-vous d'une assurance événementielle pour cette tournée ?",
-        "insuranceProvider": {
-          "label": "Assureur",
-          "placeholder": "ex. AXA, Allianz, Coronation Insurance"
+        "insuranceCompulsoryTitle": "L'assurance est obligatoire pour cette tournée",
+        "insuranceCompulsoryText": "TourStack s'est associé à Sanlam Allianz pour fournir une assurance événementielle. Souscrire une couverture via ce partenariat est une condition d'accès au financement TourStack et de la tenue de cette tournée — sélectionnez les produits applicables ci-dessous.",
+        "insuranceProducts": {
+          "label": "Produits d'assurance",
+          "eventCancellation": "Annulation d'événement",
+          "eventInsuranceBundle": "Forfait assurance événementielle",
+          "touringWorkforce": "Main-d'œuvre en tournée",
+          "aviationEquipment": "Aviation & équipement",
+          "audienceTicketProtection": "Protection billetterie du public"
         },
-        "insuranceType": {
-          "label": "Type d'assurance",
-          "cancellation": "Annulation d'événement",
-          "liability": "Responsabilité civile générale",
-          "comprehensive": "Couverture événementielle complète",
-          "workforce": "Main-d'œuvre en tournée"
-        },
-        "insuranceAcknowledgmentText": "Je reconnais que l'assurance événementielle est une condition d'accès au financement TourStack et doit être en place avant le décaissement des fonds."
+        "insuranceSumInsured": {
+          "label": "Valeur estimée / Somme assurée (USD)",
+          "placeholder": "ex. 150 000"
+        }
       },
       "step7": {
         "title": "Documents & déclaration",
@@ -821,6 +808,7 @@
         "declarationSection": "Déclaration",
         "documentsNote": "Confirmez les documents dont vous disposez. Il vous sera demandé de les télécharger après approbation de votre EOI.",
         "hasCACDocuments": "Certificat CAC / Document d'immatriculation de l'entreprise",
+        "required": "Obligatoire",
         "hasFinancialStatements": "États financiers des 2 dernières années",
         "hasTourDocs": "Itinéraire de tournée ou accord avec l'artiste (si disponible)",
         "authorizedRepName": {
@@ -835,7 +823,7 @@
           "label": "Notes supplémentaires (optionnel)",
           "placeholder": "Toute autre information pertinente pour votre candidature..."
         },
-        "declarationText": "En soumettant cette manifestation d'intérêt, je confirme que toutes les informations fournies sont exactes et complètes. J'autorise Ckrowd à utiliser ces informations pour évaluer les besoins en financement et en assurance pour cette tournée.",
+        "declarationText": "En soumettant cette manifestation d'intérêt, je confirme que toutes les informations fournies sont exactes et complètes, et je reconnais que l'assurance événementielle — fournie via le partenariat de TourStack avec Sanlam Allianz — est obligatoire et constitue une condition d'accès au financement TourStack et de la tenue de cette tournée. J'autorise Ckrowd à utiliser ces informations pour évaluer les besoins en financement et en assurance pour cette tournée.",
         "declarationAgree": "J'ai lu et j'accepte la déclaration ci-dessus.",
         "reviewSection": "Récapitulatif de la candidature"
       }
@@ -882,16 +870,13 @@
       "averageEventsRequired": "La moyenne d'événements par an est requise.",
       "genresRequired": "Les genres / spécialités sont requis.",
       "marketsRequired": "Les marchés / régions sont requis.",
-      "tourNameRequired": "Le nom de la tournée est requis.",
       "tourManagerRequired": "Le nom du directeur de tournée est requis.",
-      "proposedCitiesRequired": "Les villes proposées sont requises.",
-      "preferredDatesRequired": "Les dates de tournée souhaitées sont requises.",
       "venueNameRequired": "Le nom de la salle est requis.",
       "venueCityRequired": "La ville de la salle est requise.",
       "venueCapacityRequired": "La capacité de la salle est requise.",
       "venueTypeRequired": "Le type de salle est requis.",
       "venueStatusRequired": "Le statut de la salle est requis.",
-      "ticketingPartnerRequired": "Le partenaire de billetterie est requis.",
+      "venuesIncomplete": "Veuillez compléter tous les champs requis pour chaque salle.",
       "expectedSalesRequired": "Les ventes de billets attendues sont requises.",
       "occupancyRequired": "Le taux d'occupation prévu est requis.",
       "artistFeeRequired": "Le cachet de l'artiste est requis.",
@@ -902,7 +887,8 @@
       "bankNameRequired": "Le nom de la banque est requis.",
       "bankHolderRequired": "Le nom du titulaire du compte est requis.",
       "bankNumberRequired": "Le numéro de compte est requis.",
-      "insuranceAcknowledgedRequired": "Vous devez confirmer l'obligation d'assurance pour continuer.",
+      "insuranceRequired": "Sélectionnez au moins un produit d'assurance — l'assurance est obligatoire pour cette tournée.",
+      "insuranceSumRequired": "Indiquez une valeur estimée / somme assurée pour chaque produit d'assurance sélectionné.",
       "authorizedRepRequired": "Le nom du représentant autorisé est requis.",
       "authorizedTitleRequired": "Le titre est requis.",
       "declarationRequired": "Veuillez lire et confirmer la déclaration."
@@ -3256,7 +3242,7 @@
     },
     "docsPrompt": {
       "title": "Votre EOI a été approuvée — téléchargez vos documents",
-      "description": "Veuillez télécharger les documents requis : CAC/Immatriculation, États financiers et Itinéraire de tournée ou accord avec l'artiste.",
+      "description": "Veuillez televerger les documents requis pour votre candidature approuvee.",
       "cta": "Télécharger les documents"
     }
   },

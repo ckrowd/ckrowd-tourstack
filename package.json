@@ -10,7 +10,7 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "@ckrowd/ckrowd-prisma": "1.1.114",
+    "@ckrowd/ckrowd-prisma": "1.1.117",
     "@tanstack/react-query": "^5.100.10",
     "country-flag-icons": "^1.6.20",
     "driver.js": "^1.4.0",

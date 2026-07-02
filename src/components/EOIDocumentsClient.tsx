@@ -9,7 +9,16 @@ import { Link } from "@/i18n/routing";
 
 type DocType = "cac" | "financial_statements" | "tour_itinerary" | "other";
 
-const DOC_TYPES: DocType[] = ["cac", "financial_statements", "tour_itinerary", "other"];
+// EOIs submitted before required_documents existed have no structured
+// selection — fall back to the original fixed list for those.
+const LEGACY_DOC_TYPES: DocType[] = ["cac", "financial_statements", "tour_itinerary", "other"];
+
+const DOC_TYPE_ICONS: Record<string, string> = {
+	cac: "badge",
+	financial_statements: "account_balance",
+	tour_itinerary: "map",
+	other: "attach_file",
+};
 
 export default function EOIDocumentsClient() {
 	const t = useTranslations("EOIDocumentsPage");
@@ -17,7 +26,7 @@ export default function EOIDocumentsClient() {
 	const eoiId = searchParams.get("eoiId") ?? "";
 	const queryClient = useQueryClient();
 	const fileInputRef = useRef<HTMLInputElement>(null);
-	const [activeDocType, setActiveDocType] = useState<DocType>("cac");
+	const [activeDocType, setActiveDocType] = useState<string>("cac");
 	const [uploadSuccess, setUploadSuccess] = useState(false);
 	const [uploadErr, setUploadErr] = useState<string | null>(null);
 
@@ -53,6 +62,12 @@ export default function EOIDocumentsClient() {
 
 	const currentEoi = approvedEois.find((e) => String(e.id) === eoiId) ?? approvedEois[0];
 	const effectiveEoiId = currentEoi ? String(currentEoi.id) : "";
+
+	const requiredDocs = (currentEoi as Record<string, unknown> | undefined)?.required_documents as
+		| string[]
+		| undefined;
+	const docTypes: string[] =
+		requiredDocs && requiredDocs.length > 0 ? [...requiredDocs, "other"] : LEGACY_DOC_TYPES;
 
 	function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
 		const file = e.target.files?.[0];
@@ -129,7 +144,7 @@ export default function EOIDocumentsClient() {
 									{t("uploadBtn")}
 								</p>
 								<div className="grid gap-2 sm:grid-cols-2 mb-4">
-									{DOC_TYPES.map((dt) => (
+									{docTypes.map((dt) => (
 										<button
 											key={dt}
 											type="button"
@@ -137,9 +152,9 @@ export default function EOIDocumentsClient() {
 											className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-left text-sm transition ${activeDocType === dt ? "border-[#FF5A30] bg-[#FF5A30]/5 text-[#FF5A30] font-semibold" : "border-slate-200 text-slate-700 hover:bg-slate-50"}`}
 										>
 											<span className="material-symbols-outlined text-base shrink-0">
-												{dt === "cac" ? "badge" : dt === "financial_statements" ? "account_balance" : dt === "tour_itinerary" ? "map" : "attach_file"}
+												{DOC_TYPE_ICONS[dt] ?? "attach_file"}
 											</span>
-											{t(`docTypes.${dt}`)}
+											{t(`docTypes.${dt}` as Parameters<typeof t>[0])}
 										</button>
 									))}
 								</div>
@@ -150,7 +165,7 @@ export default function EOIDocumentsClient() {
 									className="inline-flex items-center gap-2 rounded-full bg-[#FF5A30] px-6 py-3 text-sm font-semibold text-white hover:opacity-90 transition disabled:opacity-60"
 								>
 									<span className="material-symbols-outlined text-base">upload</span>
-									{uploadMutation.isPending ? t("uploading") : `${t("uploadBtn")}: ${t(`docTypes.${activeDocType}`)}`}
+									{uploadMutation.isPending ? t("uploading") : `${t("uploadBtn")}: ${t(`docTypes.${activeDocType}` as Parameters<typeof t>[0])}`}
 								</button>
 								<input ref={fileInputRef} type="file" className="sr-only" onChange={handleFileChange} />
 								{uploadSuccess && (
