@@ -51,7 +51,11 @@ export default function BankSelect({
 		queryFn: () => listBanks(country),
 		staleTime: 1000 * 60 * 60,
 	});
-	const bankList = (banksQuery?.data as { name: string; code: string }[] | null | undefined) ?? [];
+	const rawBankList = (banksQuery?.data as { name: string; code: string }[] | null | undefined) ?? [];
+	// Paystack's bank list can list the same NUBAN code more than once (separate
+	// entries per channel, e.g. nuban vs mobile_money) — dedupe by code since
+	// that's the only field that matters for account resolution and <select> values.
+	const bankList = Array.from(new Map(rawBankList.map((b) => [b.code, b])).values());
 
 	const [verified, setVerified] = useState(false);
 	const resolveMutation = useMutation({
