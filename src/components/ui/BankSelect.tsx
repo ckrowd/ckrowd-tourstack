@@ -59,6 +59,12 @@ export default function BankSelect({
 
 	const [verified, setVerified] = useState(false);
 	const [verifyFailed, setVerifyFailed] = useState(false);
+	const [verifyErrorDetail, setVerifyErrorDetail] = useState<string | null>(null);
+	const resetVerifyState = () => {
+		setVerified(false);
+		setVerifyFailed(false);
+		setVerifyErrorDetail(null);
+	};
 	const resolveMutation = useMutation({
 		mutationFn: resolveBankAccount,
 		onSuccess: (result) => {
@@ -70,11 +76,16 @@ export default function BankSelect({
 				onChange({ ...value, accountHolder: holder });
 				setVerified(true);
 				setVerifyFailed(false);
+				setVerifyErrorDetail(null);
 			} else {
 				setVerifyFailed(true);
+				setVerifyErrorDetail(result.error ?? null);
 			}
 		},
-		onError: () => setVerifyFailed(true),
+		onError: () => {
+			setVerifyFailed(true);
+			setVerifyErrorDetail(null);
+		},
 	});
 
 	const bankHasError = required && showError && !value.bankName;
@@ -97,8 +108,7 @@ export default function BankSelect({
 							value={value.bankCode}
 							onChange={(e) => {
 								const selected = bankList.find((b) => b.code === e.target.value);
-								setVerified(false);
-								setVerifyFailed(false);
+								resetVerifyState();
 								onChange({ ...value, bankCode: e.target.value, bankName: selected?.name ?? "" });
 							}}
 							className={`${inputClass} appearance-none pr-9 ${bankHasError ? errorBorder : normalBorder}`}
@@ -121,8 +131,7 @@ export default function BankSelect({
 						placeholder={labels.bankPlaceholder}
 						value={value.bankName}
 						onChange={(e) => {
-							setVerified(false);
-							setVerifyFailed(false);
+							resetVerifyState();
 							onChange({ ...value, bankName: e.target.value });
 						}}
 						className={`${inputClass} ${bankHasError ? errorBorder : normalBorder}`}
@@ -149,8 +158,7 @@ export default function BankSelect({
 						placeholder={labels.accountNumberPlaceholder}
 						value={value.accountNumber}
 						onChange={(e) => {
-							setVerified(false);
-							setVerifyFailed(false);
+							resetVerifyState();
 							onChange({ ...value, accountNumber: e.target.value.replace(/\D/g, "") });
 						}}
 						className={`${inputClass} ${accountHasError ? errorBorder : normalBorder}`}
@@ -180,7 +188,10 @@ export default function BankSelect({
 					</p>
 				)}
 				{verifyFailed && (
-					<p className="mt-1.5 text-xs text-amber-600 font-medium">{labels.verifyFailed}</p>
+					<p className="mt-1.5 text-xs text-amber-600 font-medium">
+						{labels.verifyFailed}
+						{verifyErrorDetail ? ` (${verifyErrorDetail})` : ""}
+					</p>
 				)}
 				{accountHasError && (
 					<p className="text-xs text-rose-600 font-medium mt-1 flex items-center gap-1">
