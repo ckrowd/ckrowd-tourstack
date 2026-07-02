@@ -1678,7 +1678,15 @@
         "bankCode": "Code bancaire (Paystack)",
         "bankCodePlaceholder": "ex. 058 (GTBank NG)",
         "payoutCurrency": "Devise de virement",
-        "payoutCurrencyPlaceholder": "ex. NGN, GHS"
+        "payoutCurrencyPlaceholder": "ex. NGN, GHS",
+        "bankSelectPlaceholder": "Selectionnez votre banque",
+        "bankLoading": "Chargement des banques...",
+        "verify": "Verifier",
+        "verifying": "Verification...",
+        "verified": "Compte verifie",
+        "verifyFailed": "Impossible de verifier ce compte. Veuillez verifier les details.",
+        "currencySelectPlaceholder": "Selectionnez une devise",
+        "payoutCurrencySelectPlaceholder": "Selectionnez une devise de virement"
       }
     },
     "actions": {
