@@ -5,7 +5,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useRef, useState } from "react";
 import { Link, useRouter } from "@/i18n/routing";
-import { createAdminTour, uploadTourImage } from "../../../../actions";
+import { createAdminTour, uploadImage } from "../../../../actions";
 
 export default function CreateTourPage() {
 	const router = useRouter();
@@ -26,7 +26,7 @@ export default function CreateTourPage() {
 			if (file) {
 				const uploadData = new FormData();
 				uploadData.append("file", file);
-				const uploadResult = await uploadTourImage(uploadData);
+				const uploadResult = await uploadImage(uploadData);
 				if (!uploadResult.success) {
 					return {
 						success: false as const,

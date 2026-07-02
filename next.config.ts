@@ -9,10 +9,9 @@ const nextConfig: NextConfig = {
 	output: "standalone",
 	experimental: {
 		serverActions: {
-			// Profile/logo uploads are sent as base64 data URLs through server
-			// actions (e.g. updateTourstackProfile). Next's default 1MB body
-			// limit rejects those before the handler ever runs, so saves with
-			// an image attached fail silently with a generic error.
+			// File uploads (profile logos, EOI documents, tour images) go through
+			// server actions as multipart FormData. Next's default 1MB body limit
+			// rejects those before the handler ever runs.
 			bodySizeLimit: "8mb",
 		},
 	},
@@ -46,7 +45,16 @@ const nextConfig: NextConfig = {
 				value: "max-age=31536000; includeSubDomains",
 			},
 		];
-		return [{ source: "/:path*", headers: securityHeaders }];
+		return [
+			{ source: "/:path*", headers: securityHeaders },
+			{
+				// `output: "standalone"` means this app is self-hosted (no
+				// platform CDN in front), so /public assets need explicit
+				// long-lived caching or every request re-fetches them.
+				source: "/:all*(svg|jpg|jpeg|png|webp|gif|ico|mp4|webm)",
+				headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+			},
+		];
 	},
 	async redirects() {
 		return [

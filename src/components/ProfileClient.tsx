@@ -2,9 +2,10 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
-import { useRef, useState } from "react";
-import { getTourstackProfile, updateTourstackProfile } from "@/app/actions";
+import { useEffect, useRef, useState } from "react";
+import { getTourstackProfile, updateTourstackProfile, uploadImage } from "@/app/actions";
 import { useSession } from "@/context/AuthContext";
+import { resizeImageFile } from "@/lib/image";
 
 function Section({
 	title,
@@ -268,7 +269,14 @@ export default function ProfileClient() {
 	const [edits, setEdits] = useState<Partial<ProfileData>>({});
 	const [saveStatus, setSaveStatus] = useState<"idle" | "success" | "error">("idle");
 	const [logoError, setLogoError] = useState(false);
+	const [logoPreview, setLogoPreview] = useState<string | null>(null);
 	const [showValidation, setShowValidation] = useState(false);
+
+	useEffect(() => {
+		return () => {
+			if (logoPreview) URL.revokeObjectURL(logoPreview);
+		};
+	}, [logoPreview]);
 
 	const REQUIRED_KEYS: (keyof ProfileData)[] = [
 		"companyName", "companyType", "registrationNumber", "taxId",
@@ -291,16 +299,27 @@ export default function ProfileClient() {
 	const set = (key: keyof ProfileData) => (v: string) =>
 		setEdits((p) => ({ ...p, [key]: v }));
 
-	const handleLogoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+	const logoUploadMutation = useMutation({
+		mutationFn: uploadImage,
+		onSuccess: (result) => {
+			if (result.success) {
+				setEdits((p) => ({ ...p, logoUrl: result.data }));
+				setLogoError(false);
+			}
+		},
+	});
+
+	const handleLogoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		const file = e.target.files?.[0];
 		if (!file) return;
-		const reader = new FileReader();
-		reader.onload = (ev) => {
-			const result = ev.target?.result as string;
-			setEdits((p) => ({ ...p, logoUrl: result }));
-			setLogoError(false);
-		};
-		reader.readAsDataURL(file);
+		setLogoPreview((prev) => {
+			if (prev) URL.revokeObjectURL(prev);
+			return URL.createObjectURL(file);
+		});
+		const resized = await resizeImageFile(file);
+		const formData = new FormData();
+		formData.append("file", resized);
+		logoUploadMutation.mutate(formData);
 	};
 
 	const saveMutation = useMutation({
@@ -442,10 +461,10 @@ export default function ProfileClient() {
 							className="relative w-24 h-24 rounded-2xl overflow-hidden bg-surface-container-low border-2 border-dashed border-outline-variant/40 hover:border-[#FF5A30]/60 transition-colors flex items-center justify-center shrink-0 group"
 							aria-label={t("logo.label")}
 						>
-							{profile.logoUrl ? (
-								// eslint-disable-next-line @next/next/no-img-element -- src is a base64 data URL from FileReader; next/image does not support data: URIs
+							{logoPreview || profile.logoUrl ? (
+								// eslint-disable-next-line @next/next/no-img-element -- src may be a blob: object URL (local preview) or an existing base64 data URL from before this was migrated to object storage; next/image supports neither
 								<img
-									src={profile.logoUrl}
+									src={logoPreview ?? profile.logoUrl}
 									alt="Company logo"
 									className="w-full h-full object-cover"
 								/>
@@ -453,6 +472,11 @@ export default function ProfileClient() {
 								<span className="text-2xl font-semibold text-on-surface-variant group-hover:text-[#FF5A30] transition-colors">
 									{initials}
 								</span>
+							)}
+							{logoUploadMutation.isPending && (
+								<div className="absolute inset-0 bg-black/50 flex items-center justify-center">
+									<span className="material-symbols-outlined text-white text-2xl animate-spin">progress_activity</span>
+								</div>
 							)}
 							<div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
 								<span className="material-symbols-outlined text-white text-2xl">photo_camera</span>
@@ -462,15 +486,22 @@ export default function ProfileClient() {
 							<button
 								type="button"
 								onClick={() => fileInputRef.current?.click()}
-								className="inline-flex items-center gap-2 px-5 py-2.5 border border-outline-variant/40 rounded-xl text-sm font-semibold text-on-surface hover:border-[#FF5A30]/50 hover:text-[#FF5A30] transition-all"
+								disabled={logoUploadMutation.isPending}
+								className="inline-flex items-center gap-2 px-5 py-2.5 border border-outline-variant/40 rounded-xl text-sm font-semibold text-on-surface hover:border-[#FF5A30]/50 hover:text-[#FF5A30] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
 							>
 								<span className="material-symbols-outlined text-base">upload</span>
-								Upload Image
+								{logoUploadMutation.isPending ? t("logo.uploading") : "Upload Image"}
 							</button>
 							{logoError && (
 								<p className="text-xs text-rose-600 font-medium mt-2 flex items-center gap-1">
 									<span className="material-symbols-outlined text-sm">error</span>
 									{t("logo.required")}
+								</p>
+							)}
+							{(logoUploadMutation.isError || logoUploadMutation.data?.success === false) && (
+								<p className="text-xs text-rose-600 font-medium mt-2 flex items-center gap-1">
+									<span className="material-symbols-outlined text-sm">error</span>
+									{t("logo.uploadFailed")}
 								</p>
 							)}
 						</div>
@@ -851,7 +882,7 @@ export default function ProfileClient() {
 					<button
 						type="button"
 						onClick={handleSave}
-						disabled={saveMutation.isPending}
+						disabled={saveMutation.isPending || logoUploadMutation.isPending}
 						className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:opacity-60"
 					>
 						{saveMutation.isPending ? t("actions.saving") : t("actions.save")}

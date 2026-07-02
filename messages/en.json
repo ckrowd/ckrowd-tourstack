@@ -1568,7 +1568,9 @@
     "logo": {
       "label": "Company Logo / Profile Picture",
       "hint": "Required. Click to upload. Square image recommended, at least 200 x 200 px.",
-      "required": "Please upload a company logo or profile picture before saving."
+      "required": "Please upload a company logo or profile picture before saving.",
+      "uploading": "Uploading...",
+      "uploadFailed": "Upload failed. Please try again."
     },
     "companyInfo": {
       "title": "Company Information",

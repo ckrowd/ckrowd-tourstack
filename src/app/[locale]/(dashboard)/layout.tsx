@@ -13,7 +13,7 @@ export default async function DashboardLayout({
 	params: Promise<{ locale: string }>;
 }) {
 	const { locale } = await params;
-	const session = await getSession();
+	const [session, profile] = await Promise.all([getSession(), getTourstackProfile()]);
 
 	if (!session) {
 		redirect(`/${locale}/login`);
@@ -23,7 +23,6 @@ export default async function DashboardLayout({
 		redirect(`/${locale}${home}`);
 	}
 
-	const profile = await getTourstackProfile();
 	if (isArtmgmtProfile(profile.data as { role?: string | null } | null)) {
 		redirect(`/${locale}/artmgmt`);
 	}

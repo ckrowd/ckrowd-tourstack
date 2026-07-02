@@ -454,6 +454,8 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 						muted
 						loop
 						playsInline
+						preload="metadata"
+						poster="/hero-poster.jpg"
 						style={{ background: "#0a0a0a" }}
 					>
 						<source src="/hero-main.mp4" type="video/mp4" />
@@ -502,9 +504,9 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 					<div className="max-w-[1760px] mx-auto px-6 sm:px-10 py-12 flex flex-col lg:flex-row items-center justify-between gap-8 reveal">
 						<p className="eyebrow text-muted shrink-0">{t("trust.eyebrow")}</p>
 						<div className="flex items-center gap-10 sm:gap-14 flex-wrap justify-center">
-							<img src="/access-bank.png" alt="Access Bank" className="h-9 sm:h-10 w-auto object-contain opacity-90" />
+							<img src="/access-bank.png" alt="Access Bank" className="h-9 sm:h-10 w-auto object-contain opacity-90" loading="lazy" decoding="async" />
 							<span className="hidden sm:block h-8 w-px" style={{ background: "var(--hair)" }} />
-							<img src="/sanlam-allianz.png" alt="SanlamAllianz" className="h-8 sm:h-9 w-auto object-contain opacity-90" />
+							<img src="/sanlam-allianz.png" alt="SanlamAllianz" className="h-8 sm:h-9 w-auto object-contain opacity-90" loading="lazy" decoding="async" />
 						</div>
 					</div>
 				</section>
@@ -566,7 +568,7 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 				<section className="py-24 sm:py-32 hair-b">
 					<div className="max-w-6xl mx-auto px-6 sm:px-10 grid lg:grid-cols-2 gap-14 items-center">
 						<div className="reveal reveal-l imgcard px-wrap order-2 lg:order-1 h-[28rem]">
-							<img src="/landing-market.jpg" alt={t("gap.card2")} className="px-img" data-parallax="24" />
+							<img src="/landing-market.jpg" alt={t("gap.card2")} className="px-img" data-parallax="24" loading="lazy" decoding="async" />
 							<div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,.6), transparent 60%)" }} />
 							<div className="absolute bottom-0 p-7 text-white">
 								<div className="mono text-sm text-white/70">{t("gap.card1")}</div>
@@ -643,7 +645,7 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 							);
 							const media = (
 								<div className={`reveal ${meta.flip ? "reveal-l order-2 lg:order-1" : "reveal-r"} imgcard px-wrap h-[26rem]`}>
-									<img src={meta.img} className="px-img" data-parallax="20" alt={c.alt} />
+									<img src={meta.img} className="px-img" data-parallax="20" alt={c.alt} loading="lazy" decoding="async" />
 								</div>
 							);
 							return (
@@ -687,7 +689,7 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 						<div className="htrack px-6 sm:px-10">
 							{exploreCards.map((card, i) => (
 								<Link href={`/${locale}${EXPLORE_META[i].route}`} key={EXPLORE_META[i].n} className="hcard imgcard group h-[56vh] sm:h-[60vh]">
-									<img src={EXPLORE_META[i].img} className="absolute inset-0 h-full w-full object-cover" alt="" />
+									<img src={EXPLORE_META[i].img} className="absolute inset-0 h-full w-full object-cover" alt="" loading="lazy" decoding="async" />
 									<div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(0,0,0,.8), transparent 60%)" }} />
 									<div className="absolute top-5 left-5 mono text-white/60 text-sm">{EXPLORE_META[i].n}</div>
 									<div className="absolute bottom-0 p-6 text-white">
@@ -756,7 +758,7 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 
 				{/* ============ WHY AFRICA ============ */}
 				<section className="relative py-28 sm:py-36 hair-b overflow-hidden">
-					<img src="/landing-hero.jpg" className="px-img" data-parallax="34" alt="" />
+					<img src="/landing-hero.jpg" className="px-img" data-parallax="34" alt="" loading="lazy" decoding="async" />
 					<div className="absolute inset-0" style={{ background: "linear-gradient(90deg, rgba(0,0,0,.92), rgba(0,0,0,.55) 60%, rgba(0,0,0,.3))" }} />
 					<div className="relative z-10 max-w-[1760px] mx-auto px-6 sm:px-10">
 						<div className="max-w-2xl reveal text-white">
@@ -854,7 +856,7 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 					<div className="grid md:grid-cols-5 gap-10 pb-16">
 						<div className="md:col-span-2">
 							<div className="flex items-center gap-2.5">
-								<img src="/ckrowd-logo.png" alt="" className="h-8 w-8 object-contain" />
+								<img src="/ckrowd-logo.png" alt="" className="h-8 w-8 object-contain" loading="lazy" decoding="async" />
 								<span className="flex flex-col leading-none">
 									<span className="font-semibold text-[18px]">TourStack</span>
 									<span className="text-[10.5px] tracking-[.14em] uppercase text-muted mt-0.5">{t("nav.byCkrowd")}</span>
