@@ -3242,7 +3242,8 @@
     },
     "docsPrompt": {
       "title": "Votre EOI a été approuvée — téléchargez vos documents",
-      "description": "Veuillez televerger les documents requis pour votre candidature approuvee.",
+      "description": "Veuillez televerger les documents suivants que vous avez selectionnes : {docs}.",
+      "descriptionGeneric": "Veuillez televerger les documents requis pour votre candidature approuvee.",
       "cta": "Télécharger les documents"
     }
   },

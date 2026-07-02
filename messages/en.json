@@ -3242,7 +3242,8 @@
     },
     "docsPrompt": {
       "title": "Your EOI has been approved — upload your documents",
-      "description": "Please upload the documents required for your approved application.",
+      "description": "Please upload the following documents you selected: {docs}.",
+      "descriptionGeneric": "Please upload the documents required for your approved application.",
       "cta": "Upload Documents"
     }
   },
