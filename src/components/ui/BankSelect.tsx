@@ -206,14 +206,18 @@ export default function BankSelect({
 					{labels.accountHolder}
 					{required && <span className="text-rose-500 ml-1">*</span>}
 				</label>
+				{/* Locks once auto-verified, but stays editable otherwise — Paystack's
+				    test-mode key caps live account resolution at 3/day, so a hard
+				    lock-with-no-fallback would block onboarding entirely once that's hit. */}
 				<input
 					id="bank-account-holder"
 					type="text"
 					placeholder={labels.accountHolderPlaceholder}
 					value={value.accountHolder}
-					readOnly
-					aria-readonly="true"
-					className={`${inputClass} cursor-not-allowed opacity-60 ${required && showError && !value.accountHolder ? errorBorder : normalBorder}`}
+					readOnly={verified}
+					aria-readonly={verified}
+					onChange={(e) => !verified && onChange({ ...value, accountHolder: e.target.value })}
+					className={`${inputClass} ${verified ? "cursor-not-allowed opacity-60" : required && showError && !value.accountHolder ? errorBorder : normalBorder}`}
 				/>
 			</div>
 		</>
