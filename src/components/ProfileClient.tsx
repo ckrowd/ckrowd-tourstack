@@ -9,6 +9,7 @@ import { resizeImageFile } from "@/lib/image";
 import BankSelect from "@/components/ui/BankSelect";
 import CurrencySelect from "@/components/ui/CurrencySelect";
 import DatePicker from "@/components/ui/DatePicker";
+import FormattedNumberInput from "@/components/ui/FormattedNumberInput";
 
 function Section({
 	title,
@@ -65,15 +66,26 @@ function Field({
 				{label}
 				{required && <span className="text-rose-500 ml-1">*</span>}
 			</label>
-			<input
-				id={id}
-				type={type}
-				value={value ?? ""}
-				placeholder={placeholder}
-				onChange={onChange ? (e) => onChange(e.target.value) : undefined}
-				readOnly={!onChange}
-				className={`w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 ${hasError ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
-			/>
+			{type === "formatted-number" ? (
+				<FormattedNumberInput
+					id={id}
+					value={value ?? ""}
+					onChange={onChange ?? (() => {})}
+					placeholder={placeholder}
+					ariaInvalid={hasError}
+					className={`w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 ${hasError ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
+				/>
+			) : (
+				<input
+					id={id}
+					type={type}
+					value={value ?? ""}
+					placeholder={placeholder}
+					onChange={onChange ? (e) => onChange(e.target.value) : undefined}
+					readOnly={!onChange}
+					className={`w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 ${hasError ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
+				/>
+			)}
 			{hasError && (
 				<p className="text-xs text-rose-600 font-medium mt-1 flex items-center gap-1">
 					<span className="material-symbols-outlined text-sm">error</span>
@@ -746,9 +758,9 @@ export default function ProfileClient() {
 						<Field
 							label={t("businessDetails.fields.yearsInBusiness")}
 							id="years-in-business"
-							type="number"
+							type="formatted-number"
 							value={profile.yearsInBusiness}
-							onChange={(v) => set("yearsInBusiness")(v.replace(/\D/g, ""))}
+							onChange={set("yearsInBusiness")}
 							placeholder={t("businessDetails.fields.yearsInBusinessPlaceholder")}
 							required
 							showError={showValidation}
@@ -765,9 +777,9 @@ export default function ProfileClient() {
 						<Field
 							label={t("businessDetails.fields.averageEventsYear")}
 							id="avg-events"
-							type="number"
+							type="formatted-number"
 							value={profile.averageEventsYear}
-							onChange={(v) => set("averageEventsYear")(v.replace(/\D/g, ""))}
+							onChange={set("averageEventsYear")}
 							placeholder={t("businessDetails.fields.averageEventsYearPlaceholder")}
 							required
 							showError={showValidation}

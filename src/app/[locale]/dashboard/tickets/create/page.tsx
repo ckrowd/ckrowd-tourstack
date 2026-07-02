@@ -5,6 +5,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useParams, useRouter } from "next/navigation";
 import { createTicketEvent, getTours, publishTicketEvent } from "@/app/actions";
+import FormattedNumberInput from "@/components/ui/FormattedNumberInput";
 
 interface TierDraft {
 	name: string;
@@ -240,24 +241,20 @@ export default function CreateTicketEventPage() {
 								</div>
 								<div>
 									<label className="block text-xs font-semibold mb-1">{t("tiers.price")}</label>
-									<input
-										type="number"
-										min="0"
+									<FormattedNumberInput
 										className="w-full border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-[#FF5A30]"
 										placeholder="0"
 										value={tier.price}
-										onChange={(e) => updateTier(i, "price", e.target.value)}
+										onChange={(v) => updateTier(i, "price", v)}
 									/>
 								</div>
 								<div>
 									<label className="block text-xs font-semibold mb-1">{t("tiers.capacity")}</label>
-									<input
-										type="number"
-										min="1"
+									<FormattedNumberInput
 										className="w-full border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-[#FF5A30]"
 										placeholder={t("tiers.capacityPlaceholder")}
 										value={tier.capacity}
-										onChange={(e) => updateTier(i, "capacity", e.target.value)}
+										onChange={(v) => updateTier(i, "capacity", v)}
 									/>
 								</div>
 							</div>

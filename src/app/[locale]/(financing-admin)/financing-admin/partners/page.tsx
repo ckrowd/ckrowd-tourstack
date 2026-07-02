@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { createFinancingPartner, getAdminFinancingPartners } from "@/app/actions";
 import Loader from "@/components/Loader";
+import FormattedNumberInput from "@/components/ui/FormattedNumberInput";
 
 const PARTNER_TYPES = ["bank", "insurance", "credit_union"] as const;
 type PartnerType = (typeof PARTNER_TYPES)[number];
@@ -269,12 +270,10 @@ export default function FinancingAdminPartnersPage() {
 								<span className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 									{t("partnerForm.fields.capacity")}
 								</span>
-								<input
-									type="number"
-									min={1}
+								<FormattedNumberInput
 									required
 									value={capacity}
-									onChange={(event) => setCapacity(event.target.value)}
+									onChange={(v) => setCapacity(v)}
 									placeholder={t("partnerForm.placeholders.capacity")}
 									className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
 								/>

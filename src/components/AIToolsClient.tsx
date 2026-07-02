@@ -10,6 +10,7 @@ import {
 import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import FormattedNumberInput from "@/components/ui/FormattedNumberInput";
 
 // ── Shared ─────────────────────────────────────────────────────────────────
 
@@ -114,7 +115,7 @@ function TicketForecastTab({ eois }: { eois: EOI[] }) {
 			<EOISelector eois={eois} value={eoiId} onChange={setEoiId} label={t("common.selectEoiLabel")} />
 			<div>
 				<label className="block text-xs font-semibold text-on-surface-variant mb-1.5">{t("forecast.ticketPrice")}</label>
-				<input type="text" inputMode="numeric" value={price} onChange={(e) => setPrice(e.target.value.replace(/\D/g, ""))} placeholder="e.g. 15000" className={ic} />
+				<FormattedNumberInput value={price} onChange={(v) => setPrice(v)} placeholder="e.g. 15,000" className={ic} />
 			</div>
 			<form onSubmit={(e) => { e.preventDefault(); if (eoiId && price) mutation.mutate(); }}>
 				<RunButton loading={mutation.isPending} label={t("forecast.run")} loadingLabel={t("forecast.running")} />
@@ -230,8 +231,8 @@ function VenueRecommendationTab() {
 			<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
 				<div><label className="block text-xs font-semibold text-on-surface-variant mb-1.5">{t("venues.city")}</label><input type="text" value={form.city} onChange={(e) => set("city", e.target.value)} placeholder="e.g. Lagos" className={ic} /></div>
 				<div><label className="block text-xs font-semibold text-on-surface-variant mb-1.5">{t("venues.genre")}</label><input type="text" value={form.genre} onChange={(e) => set("genre", e.target.value)} placeholder="e.g. Afrobeats" className={ic} /></div>
-				<div><label className="block text-xs font-semibold text-on-surface-variant mb-1.5">{t("venues.expectedAttendance")}</label><input type="text" inputMode="numeric" value={form.expectedAttendance} onChange={(e) => set("expectedAttendance", e.target.value.replace(/\D/g, ""))} placeholder="e.g. 5000" className={ic} /></div>
-				<div><label className="block text-xs font-semibold text-on-surface-variant mb-1.5">{t("venues.budgetMax")}</label><input type="text" inputMode="numeric" value={form.budgetMaxUsd} onChange={(e) => set("budgetMaxUsd", e.target.value.replace(/\D/g, ""))} placeholder="e.g. 10000" className={ic} /></div>
+				<div><label className="block text-xs font-semibold text-on-surface-variant mb-1.5">{t("venues.expectedAttendance")}</label><FormattedNumberInput value={form.expectedAttendance} onChange={(v) => set("expectedAttendance", v)} placeholder="e.g. 5,000" className={ic} /></div>
+				<div><label className="block text-xs font-semibold text-on-surface-variant mb-1.5">{t("venues.budgetMax")}</label><FormattedNumberInput value={form.budgetMaxUsd} onChange={(v) => set("budgetMaxUsd", v)} placeholder="e.g. 10,000" className={ic} /></div>
 			</div>
 			<form onSubmit={(e) => { e.preventDefault(); if (form.city && form.genre && form.expectedAttendance) mutation.mutate(); }}>
 				<RunButton loading={mutation.isPending} label={t("venues.run")} loadingLabel={t("venues.running")} />

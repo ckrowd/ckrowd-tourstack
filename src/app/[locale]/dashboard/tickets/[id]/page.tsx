@@ -14,6 +14,7 @@ import {
 	listTicketPurchases,
 	updateTicketEvent,
 } from "@/app/actions";
+import FormattedNumberInput from "@/components/ui/FormattedNumberInput";
 
 type Tab = "overview" | "tiers" | "buyers";
 
@@ -398,22 +399,18 @@ export default function ManageTicketEventPage() {
 								</div>
 								<div>
 									<label className="block text-xs font-semibold mb-1">{t("tiers.price")}</label>
-									<input
-										type="number"
-										min="0"
+									<FormattedNumberInput
 										className="w-full border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-[#FF5A30]"
 										value={newTierPrice}
-										onChange={(e) => setNewTierPrice(e.target.value)}
+										onChange={(v) => setNewTierPrice(v)}
 									/>
 								</div>
 								<div>
 									<label className="block text-xs font-semibold mb-1">{t("tiers.capacity")}</label>
-									<input
-										type="number"
-										min="1"
+									<FormattedNumberInput
 										className="w-full border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-[#FF5A30]"
 										value={newTierCap}
-										onChange={(e) => setNewTierCap(e.target.value)}
+										onChange={(v) => setNewTierCap(v)}
 									/>
 								</div>
 							</div>

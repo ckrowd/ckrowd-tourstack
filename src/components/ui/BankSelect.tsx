@@ -191,8 +191,10 @@ export default function BankSelect({
 					type="text"
 					placeholder={labels.accountHolderPlaceholder}
 					value={value.accountHolder}
-					onChange={(e) => onChange({ ...value, accountHolder: e.target.value })}
-					className={`${inputClass} ${required && showError && !value.accountHolder ? errorBorder : normalBorder}`}
+					readOnly={verified}
+					aria-readonly={verified}
+					onChange={(e) => !verified && onChange({ ...value, accountHolder: e.target.value })}
+					className={`${inputClass} ${verified ? "cursor-not-allowed opacity-60" : required && showError && !value.accountHolder ? errorBorder : normalBorder}`}
 				/>
 			</div>
 		</>

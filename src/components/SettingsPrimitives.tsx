@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
+import FormattedNumberInput from "@/components/ui/FormattedNumberInput";
 
 export function Section({
 	title,
@@ -53,15 +54,25 @@ export function Field({
 			>
 				{label}
 			</label>
-			<input
-				id={id}
-				type={type}
-				placeholder={placeholder}
-				{...(onChange
-					? { value: value ?? "", onChange: (e) => onChange(e.target.value) }
-					: { defaultValue })}
-				className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30"
-			/>
+			{type === "formatted-number" && onChange ? (
+				<FormattedNumberInput
+					id={id}
+					value={value ?? ""}
+					onChange={onChange}
+					placeholder={placeholder}
+					className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30"
+				/>
+			) : (
+				<input
+					id={id}
+					type={type}
+					placeholder={placeholder}
+					{...(onChange
+						? { value: value ?? "", onChange: (e) => onChange(e.target.value) }
+						: { defaultValue })}
+					className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30"
+				/>
+			)}
 			{hint && <p className="text-xs text-on-surface-variant mt-1.5">{hint}</p>}
 		</div>
 	);

@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { deleteAdminArtist, updateAdminArtist } from "@/app/actions";
+import FormattedNumberInput from "@/components/ui/FormattedNumberInput";
 
 type EditForm = {
 	name: string;
@@ -255,11 +256,11 @@ export default function ArtistActionsMenu({
 						<div className="grid grid-cols-2 gap-3">
 							<div>
 								<label className={labelClass}>{t("fields.feeMin")}</label>
-								<input type="number" min={0} value={form.feeMin} onChange={(e) => setForm((f) => ({ ...f, feeMin: e.target.value }))} className={inputClass} placeholder={t("fields.feeMinPlaceholder")} />
+								<FormattedNumberInput value={form.feeMin} onChange={(v) => setForm((f) => ({ ...f, feeMin: v }))} className={inputClass} placeholder={t("fields.feeMinPlaceholder")} />
 							</div>
 							<div>
 								<label className={labelClass}>{t("fields.feeMax")}</label>
-								<input type="number" min={0} value={form.feeMax} onChange={(e) => setForm((f) => ({ ...f, feeMax: e.target.value }))} className={inputClass} placeholder={t("fields.feeMaxPlaceholder")} />
+								<FormattedNumberInput value={form.feeMax} onChange={(v) => setForm((f) => ({ ...f, feeMax: v }))} className={inputClass} placeholder={t("fields.feeMaxPlaceholder")} />
 							</div>
 						</div>
 

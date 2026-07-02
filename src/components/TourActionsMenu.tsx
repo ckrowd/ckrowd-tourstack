@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { deleteAdminTour, updateAdminTour } from "@/app/actions";
 import DatePicker from "@/components/ui/DatePicker";
+import FormattedNumberInput from "@/components/ui/FormattedNumberInput";
 import { Link } from "@/i18n/routing";
 
 const TOUR_STATUSES = [
@@ -264,26 +265,22 @@ export default function TourActionsMenu({
 								<label className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1.5">
 									{t("editFields.capacity")}
 								</label>
-								<input
-									type="number"
-									min={0}
+								<FormattedNumberInput
 									value={form.capacity}
-									onChange={(e) => setForm((f) => ({ ...f, capacity: e.target.value }))}
+									onChange={(v) => setForm((f) => ({ ...f, capacity: v }))}
 									className={inputClass}
-									placeholder="e.g. 5000"
+									placeholder="e.g. 5,000"
 								/>
 							</div>
 							<div>
 								<label className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1.5">
 									{t("editFields.feeUsd")}
 								</label>
-								<input
-									type="number"
-									min={0}
+								<FormattedNumberInput
 									value={form.feeUsd}
-									onChange={(e) => setForm((f) => ({ ...f, feeUsd: e.target.value }))}
+									onChange={(v) => setForm((f) => ({ ...f, feeUsd: v }))}
 									className={inputClass}
-									placeholder="e.g. 25000"
+									placeholder="e.g. 25,000"
 								/>
 							</div>
 						</div>

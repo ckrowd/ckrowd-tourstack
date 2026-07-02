@@ -4,6 +4,7 @@ import { getTourReport, submitTourReport } from "@/app/actions";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import FormattedNumberInput from "@/components/ui/FormattedNumberInput";
 
 type ReportData = {
 	actual_attendance?: number | null;
@@ -140,13 +141,21 @@ export default function TourReportForm({ tourId }: { tourId: string }) {
 						<label className="block text-xs font-semibold text-on-surface-variant mb-1.5">
 							{label}
 						</label>
-						<input
-							type="text"
-							inputMode="numeric"
-							value={form[key]}
-							onChange={(e) => set(key, e.target.value.replace(/\D/g, ""))}
-							className={ic}
-						/>
+						{key === "sellOutPct" ? (
+							<input
+								type="text"
+								inputMode="numeric"
+								value={form[key]}
+								onChange={(e) => set(key, e.target.value.replace(/\D/g, ""))}
+								className={ic}
+							/>
+						) : (
+							<FormattedNumberInput
+								value={form[key]}
+								onChange={(v) => set(key, v)}
+								className={ic}
+							/>
+						)}
 					</div>
 				))}
 			</div>

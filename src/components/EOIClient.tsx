@@ -766,22 +766,22 @@ function EOIPageContent() {
 										<div className="grid gap-5 sm:grid-cols-2">
 											<div>
 												<FLabel htmlFor="s2-years" required>{t("form.step2.yearsInBusiness.label")}</FLabel>
-												<input id="s2-years" type="text" inputMode="numeric" placeholder={t("form.step2.yearsInBusiness.placeholder")} value={form.yearsInBusiness} onChange={e => set("yearsInBusiness", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.yearsInBusiness ? icErr : ""}`} aria-invalid={!!errors.yearsInBusiness} />
+												<FormattedNumberInput id="s2-years" placeholder={t("form.step2.yearsInBusiness.placeholder")} value={form.yearsInBusiness} onChange={v => set("yearsInBusiness", v)} className={`${ic} ${errors.yearsInBusiness ? icErr : ""}`} ariaInvalid={!!errors.yearsInBusiness} />
 												<FError msg={errors.yearsInBusiness} />
 											</div>
 											<div>
 												<FLabel htmlFor="s2-concerts" required>{t("form.step2.concertsOrganized.label")}</FLabel>
-												<input id="s2-concerts" type="text" inputMode="numeric" placeholder={t("form.step2.concertsOrganized.placeholder")} value={form.concertsOrganized} onChange={e => set("concertsOrganized", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.concertsOrganized ? icErr : ""}`} aria-invalid={!!errors.concertsOrganized} />
+												<FormattedNumberInput id="s2-concerts" placeholder={t("form.step2.concertsOrganized.placeholder")} value={form.concertsOrganized} onChange={v => set("concertsOrganized", v)} className={`${ic} ${errors.concertsOrganized ? icErr : ""}`} ariaInvalid={!!errors.concertsOrganized} />
 												<FError msg={errors.concertsOrganized} />
 											</div>
 											<div>
 												<FLabel htmlFor="s2-largest" required>{t("form.step2.largestConcertCapacity.label")}</FLabel>
-												<input id="s2-largest" type="text" inputMode="numeric" placeholder={t("form.step2.largestConcertCapacity.placeholder")} value={form.largestConcertCapacity} onChange={e => set("largestConcertCapacity", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.largestConcertCapacity ? icErr : ""}`} aria-invalid={!!errors.largestConcertCapacity} />
+												<FormattedNumberInput id="s2-largest" placeholder={t("form.step2.largestConcertCapacity.placeholder")} value={form.largestConcertCapacity} onChange={v => set("largestConcertCapacity", v)} className={`${ic} ${errors.largestConcertCapacity ? icErr : ""}`} ariaInvalid={!!errors.largestConcertCapacity} />
 												<FError msg={errors.largestConcertCapacity} />
 											</div>
 											<div>
 												<FLabel htmlFor="s2-avg" required>{t("form.step2.averageEventsYear.label")}</FLabel>
-												<input id="s2-avg" type="text" inputMode="numeric" placeholder={t("form.step2.averageEventsYear.placeholder")} value={form.averageEventsYear} onChange={e => set("averageEventsYear", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.averageEventsYear ? icErr : ""}`} aria-invalid={!!errors.averageEventsYear} />
+												<FormattedNumberInput id="s2-avg" placeholder={t("form.step2.averageEventsYear.placeholder")} value={form.averageEventsYear} onChange={v => set("averageEventsYear", v)} className={`${ic} ${errors.averageEventsYear ? icErr : ""}`} ariaInvalid={!!errors.averageEventsYear} />
 												<FError msg={errors.averageEventsYear} />
 											</div>
 											<div className="sm:col-span-2">
@@ -827,15 +827,15 @@ function EOIPageContent() {
 											<SectionHeading>{t("form.step3.artistSection")}</SectionHeading>
 											<div>
 												<FLabel htmlFor="s3-spotify">{t("form.step3.spotifyListeners.label")}</FLabel>
-												<input id="s3-spotify" type="text" inputMode="numeric" placeholder={t("form.step3.spotifyListeners.placeholder")} value={form.spotifyListeners} onChange={e => set("spotifyListeners", e.target.value.replace(/\D/g, ""))} className={ic} />
+												<FormattedNumberInput id="s3-spotify" placeholder={t("form.step3.spotifyListeners.placeholder")} value={form.spotifyListeners} onChange={v => set("spotifyListeners", v)} className={ic} />
 											</div>
 											<div>
 												<FLabel htmlFor="s3-yt">{t("form.step3.youtubeSubscribers.label")}</FLabel>
-												<input id="s3-yt" type="text" inputMode="numeric" placeholder={t("form.step3.youtubeSubscribers.placeholder")} value={form.youtubeSubscribers} onChange={e => set("youtubeSubscribers", e.target.value.replace(/\D/g, ""))} className={ic} />
+												<FormattedNumberInput id="s3-yt" placeholder={t("form.step3.youtubeSubscribers.placeholder")} value={form.youtubeSubscribers} onChange={v => set("youtubeSubscribers", v)} className={ic} />
 											</div>
 											<div>
 												<FLabel htmlFor="s3-aig">{t("form.step3.artistInstagram.label")}</FLabel>
-												<input id="s3-aig" type="text" inputMode="numeric" placeholder={t("form.step3.artistInstagram.placeholder")} value={form.artistInstagram} onChange={e => set("artistInstagram", e.target.value.replace(/\D/g, ""))} className={ic} />
+												<FormattedNumberInput id="s3-aig" placeholder={t("form.step3.artistInstagram.placeholder")} value={form.artistInstagram} onChange={v => set("artistInstagram", v)} className={ic} />
 											</div>
 										</div>
 									)}
@@ -872,7 +872,7 @@ function EOIPageContent() {
 															</div>
 															<div>
 																<FLabel htmlFor={`s4-vcap-${i}`} required>{t("form.step4.venueCapacity.label")}</FLabel>
-																<input id={`s4-vcap-${i}`} type="text" inputMode="numeric" placeholder={t("form.step4.venueCapacity.placeholder")} value={venue.capacity} onChange={e => setVenue(i, "capacity", e.target.value.replace(/\D/g, ""))} className={`${ic} ${ve.capacity ? icErr : ""}`} aria-invalid={!!ve.capacity} />
+																<FormattedNumberInput id={`s4-vcap-${i}`} placeholder={t("form.step4.venueCapacity.placeholder")} value={venue.capacity} onChange={v => setVenue(i, "capacity", v)} className={`${ic} ${ve.capacity ? icErr : ""}`} ariaInvalid={!!ve.capacity} />
 																<FError msg={ve.capacity} />
 															</div>
 															<div>
@@ -907,7 +907,7 @@ function EOIPageContent() {
 															</div>
 															<div>
 																<FLabel htmlFor={`s4-tsales-${i}`} required>{t("form.step4.expectedTicketSales.label")}</FLabel>
-																<input id={`s4-tsales-${i}`} type="text" inputMode="numeric" placeholder={t("form.step4.expectedTicketSales.placeholder")} value={venue.expectedTicketSales} onChange={e => setVenue(i, "expectedTicketSales", e.target.value.replace(/\D/g, ""))} className={`${ic} ${ve.expectedTicketSales ? icErr : ""}`} aria-invalid={!!ve.expectedTicketSales} />
+																<FormattedNumberInput id={`s4-tsales-${i}`} placeholder={t("form.step4.expectedTicketSales.placeholder")} value={venue.expectedTicketSales} onChange={v => setVenue(i, "expectedTicketSales", v)} className={`${ic} ${ve.expectedTicketSales ? icErr : ""}`} ariaInvalid={!!ve.expectedTicketSales} />
 																<FError msg={ve.expectedTicketSales} />
 															</div>
 															<div>
