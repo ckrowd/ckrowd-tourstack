@@ -707,34 +707,6 @@ export async function getFinancingApplication(id: string) {
 	};
 }
 
-export async function applyForFinancing(
-	body: Payload<typeof client.tourstack.financing.post>,
-) {
-	const { data, error, status, headers } =
-		await client.tourstack.financing.post(body);
-	const result = {
-		data: await extractPayload(data, { status, headers }),
-		success: !error && data?.success,
-		error: extractError(error, data),
-	};
-	if (result.success) {
-		// Fire-and-forget: create a submission record for the admin directory
-		const formSnapshot: Record<string, unknown> = {
-			product: (body as Record<string, unknown>).product,
-			amount_requested: (body as Record<string, unknown>).amountRequested,
-			currency: (body as Record<string, unknown>).currency,
-			purpose: (body as Record<string, unknown>).purpose,
-		};
-		// biome-ignore lint/suspicious/noExplicitAny: submissions routes not yet in published pkg
-		void (client as any).tourstack.submissions.post({
-			category: "financing",
-			title: `Financing Application — ${String(formSnapshot.product ?? "Unknown Product")}`,
-			formData: formSnapshot,
-		});
-	}
-	return result;
-}
-
 export async function getFinancingPartners() {
 	const { data, error } = await client.tourstack.financing.partners.get();
 	return {

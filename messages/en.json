@@ -615,10 +615,7 @@
         "title": "Tour Details & Artist Info",
         "tourSection": "Tour Information",
         "artistSection": "Artist Details",
-        "tourName": {
-          "label": "Tour Name",
-          "placeholder": "e.g. Afro Nation Lagos 2026"
-        },
+        "tourDetailsHint": "Tour name, dates and markets are shown on the opportunity panel — no need to re-enter them here.",
         "tourManager": {
           "label": "Tour Manager Name",
           "placeholder": "Full name"
@@ -630,14 +627,6 @@
         "tourManagerPhone": {
           "label": "Tour Manager Phone",
           "placeholder": "+44 7000 000 000"
-        },
-        "proposedCities": {
-          "label": "Proposed Cities / Tour Stops",
-          "placeholder": "e.g. Lagos, Accra, Nairobi"
-        },
-        "preferredDates": {
-          "label": "Preferred Tour Dates",
-          "placeholder": "e.g. Oct 2026 – Dec 2026"
         },
         "artistConfirmed": {
           "label": "Is the artist confirmed for this tour?",
@@ -660,7 +649,8 @@
       "step4": {
         "title": "Venue & Ticketing",
         "venueSection": "Venue Information",
-        "ticketingSection": "Ticketing",
+        "addVenue": "Add another venue",
+        "removeVenue": "Remove",
         "venueName": {
           "label": "Venue Name",
           "placeholder": "e.g. Eko Convention Centre"
@@ -688,10 +678,6 @@
         "venueRentalCost": {
           "label": "Estimated Rental Cost (USD)",
           "placeholder": "e.g. 50,000"
-        },
-        "ticketingPartner": {
-          "label": "Ticketing Partner",
-          "placeholder": "e.g. Eventbrite, Flutterwave"
         },
         "expectedTicketSales": {
           "label": "Expected Ticket Sales",
@@ -801,19 +787,20 @@
           "placeholder": "BVN or RC number"
         },
         "insuranceSection": "Event Insurance",
-        "hasInsurance": "Do you have event insurance coverage for this tour?",
-        "insuranceProvider": {
-          "label": "Insurance Provider",
-          "placeholder": "e.g. AXA, Allianz, Coronation Insurance"
+        "insuranceCompulsoryTitle": "Insurance is compulsory for this tour",
+        "insuranceCompulsoryText": "TourStack has partnered with Sanlam Allianz to provide event insurance. Taking cover through this partnership is a condition of accessing TourStack financing and running this tour — select the products that apply below.",
+        "insuranceProducts": {
+          "label": "Insurance Products",
+          "eventCancellation": "Event Cancellation",
+          "eventInsuranceBundle": "Event Insurance Bundle",
+          "touringWorkforce": "Touring Workforce",
+          "aviationEquipment": "Aviation & Equipment",
+          "audienceTicketProtection": "Audience Ticket Protection"
         },
-        "insuranceType": {
-          "label": "Insurance Type",
-          "cancellation": "Event Cancellation",
-          "liability": "General Liability",
-          "comprehensive": "Comprehensive Event Cover",
-          "workforce": "Touring Workforce"
-        },
-        "insuranceAcknowledgmentText": "I acknowledge that event insurance is a condition for accessing TourStack financing and must be in place before funds are disbursed."
+        "insuranceSumInsured": {
+          "label": "Estimated Value / Sum Insured (USD)",
+          "placeholder": "e.g. 150,000"
+        }
       },
       "step7": {
         "title": "Documents & Declaration",
@@ -821,6 +808,7 @@
         "declarationSection": "Declaration",
         "documentsNote": "Confirm which documents you have available. You will be asked to upload them after your EOI is approved.",
         "hasCACDocuments": "CAC Certificate / Business Registration Document",
+        "required": "Required",
         "hasFinancialStatements": "Financial Statements for the last 2 years",
         "hasTourDocs": "Tour itinerary or artist agreement (if available)",
         "authorizedRepName": {
@@ -835,7 +823,7 @@
           "label": "Additional Notes (optional)",
           "placeholder": "Any other information relevant to your application..."
         },
-        "declarationText": "By submitting this Expression of Interest, I confirm that all information provided is accurate and complete. I authorise Ckrowd to use this information to assess financing and insurance requirements for this tour.",
+        "declarationText": "By submitting this Expression of Interest, I confirm that all information provided is accurate and complete, and I acknowledge that event insurance — provided through TourStack's partnership with Sanlam Allianz — is compulsory and a condition of accessing TourStack financing and running this tour. I authorise Ckrowd to use this information to assess financing and insurance requirements for this tour.",
         "declarationAgree": "I have read and agree to the declaration above.",
         "reviewSection": "Application Summary"
       }
@@ -882,16 +870,13 @@
       "averageEventsRequired": "Average events per year is required.",
       "genresRequired": "Genres / specialties is required.",
       "marketsRequired": "Markets / regions is required.",
-      "tourNameRequired": "Tour name is required.",
       "tourManagerRequired": "Tour manager name is required.",
-      "proposedCitiesRequired": "Proposed cities / tour stops is required.",
-      "preferredDatesRequired": "Preferred tour dates is required.",
       "venueNameRequired": "Venue name is required.",
       "venueCityRequired": "Venue city is required.",
       "venueCapacityRequired": "Venue capacity is required.",
       "venueTypeRequired": "Venue type is required.",
       "venueStatusRequired": "Venue status is required.",
-      "ticketingPartnerRequired": "Ticketing partner is required.",
+      "venuesIncomplete": "Please complete all required fields for each venue.",
       "expectedSalesRequired": "Expected ticket sales is required.",
       "occupancyRequired": "Expected occupancy is required.",
       "artistFeeRequired": "Artist fee is required.",
@@ -902,7 +887,8 @@
       "bankNameRequired": "Bank name is required.",
       "bankHolderRequired": "Account holder name is required.",
       "bankNumberRequired": "Account number is required.",
-      "insuranceAcknowledgedRequired": "You must acknowledge the insurance requirement to proceed.",
+      "insuranceRequired": "Select at least one insurance product — insurance is compulsory for this tour.",
+      "insuranceSumRequired": "Enter an estimated value / sum insured for each selected insurance product.",
       "authorizedRepRequired": "Authorised representative name is required.",
       "authorizedTitleRequired": "Title is required.",
       "declarationRequired": "Please read and confirm the declaration."
@@ -3256,7 +3242,7 @@
     },
     "docsPrompt": {
       "title": "Your EOI has been approved — upload your documents",
-      "description": "Please upload the required documents: CAC/Business Registration, Financial Statements, and Tour Itinerary or Artist Agreement.",
+      "description": "Please upload the documents required for your approved application.",
       "cta": "Upload Documents"
     }
   },

@@ -4,11 +4,58 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Suspense, useMemo, useState } from "react";
-import { createEOI, getArtists, getTourstackProfile, listBanks, resolveBankAccount } from "@/app/actions";
+import { createEOI, getArtists, getTourstackProfile } from "@/app/actions";
 import { useSession } from "@/context/AuthContext";
+import BankSelect, { type BankDetails } from "@/components/ui/BankSelect";
+import FormattedNumberInput from "@/components/ui/FormattedNumberInput";
 import { Link } from "@/i18n/routing";
 
 type ArtistItem = NonNullable<Awaited<ReturnType<typeof getArtists>>["data"]>[number];
+
+type VenueEntry = {
+	name: string;
+	city: string;
+	capacity: string;
+	type: string;
+	status: string;
+	rentalCost: string;
+	expectedTicketSales: string;
+	expectedOccupancy: string;
+};
+
+const EMPTY_VENUE: VenueEntry = {
+	name: "",
+	city: "",
+	capacity: "",
+	type: "",
+	status: "",
+	rentalCost: "",
+	expectedTicketSales: "",
+	expectedOccupancy: "",
+};
+
+const INSURANCE_PRODUCTS = [
+	"Event Cancellation",
+	"Event Insurance Bundle",
+	"Touring Workforce",
+	"Aviation & Equipment",
+	"Audience Ticket Protection",
+] as const;
+
+type InsuranceProduct = (typeof INSURANCE_PRODUCTS)[number];
+
+const INSURANCE_PRODUCT_I18N_KEY: Record<InsuranceProduct, string> = {
+	"Event Cancellation": "eventCancellation",
+	"Event Insurance Bundle": "eventInsuranceBundle",
+	"Touring Workforce": "touringWorkforce",
+	"Aviation & Equipment": "aviationEquipment",
+	"Audience Ticket Protection": "audienceTicketProtection",
+};
+
+type InsuranceSelection = {
+	product: InsuranceProduct;
+	sumInsured: string;
+};
 
 type EOIForm = {
 	// Step 1 — Promoter Info
@@ -36,26 +83,15 @@ type EOIForm = {
 	genresSpecialties: string;
 	marketsRegions: string;
 	// Step 3 — Tour & Artist
-	tourName: string;
 	tourManager: string;
 	tourManagerEmail: string;
 	tourManagerPhone: string;
-	proposedCities: string;
-	preferredDates: string;
 	artistConfirmed: boolean;
 	spotifyListeners: string;
 	youtubeSubscribers: string;
 	artistInstagram: string;
-	// Step 4 — Venue & Ticketing
-	venueName: string;
-	venueCity: string;
-	venueCapacity: string;
-	venueType: string;
-	venueStatus: string;
-	venueRentalCost: string;
-	ticketingPartner: string;
-	expectedTicketSales: string;
-	expectedOccupancy: string;
+	// Step 4 — Venue(s)
+	venues: VenueEntry[];
 	// Step 5 — Budget & Revenue
 	artistFee: string;
 	productionCosts: string;
@@ -70,10 +106,7 @@ type EOIForm = {
 	// Step 6 — Risk, Financing & Banking
 	hasCancellationHistory: boolean;
 	securityPlan: string;
-	hasInsurance: boolean;
-	insuranceProvider: string;
-	insuranceType: string;
-	insuranceAcknowledged: boolean;
+	insuranceSelections: InsuranceSelection[];
 	needsFinancing: boolean;
 	financingAmount: string;
 	financingPurpose: string[];
@@ -84,7 +117,6 @@ type EOIForm = {
 	bankAccountNumber: string;
 	bvnOrRc: string;
 	// Step 7 — Documents & Declaration
-	hasCACDocuments: boolean;
 	hasFinancialStatements: boolean;
 	hasTourDocs: boolean;
 	authorizedRepName: string;
@@ -99,24 +131,22 @@ const DEFAULT_FORM: EOIForm = {
 	contactEmail: "", phone: "", websiteUrl: "", instagram: "", xHandle: "",
 	facebook: "", tiktok: "", yearsInBusiness: "", concertsOrganized: "",
 	largestConcertCapacity: "", averageEventsYear: "", genresSpecialties: "",
-	marketsRegions: "", tourName: "", tourManager: "", tourManagerEmail: "",
-	tourManagerPhone: "", proposedCities: "", preferredDates: "",
+	marketsRegions: "", tourManager: "", tourManagerEmail: "",
+	tourManagerPhone: "",
 	artistConfirmed: false, spotifyListeners: "", youtubeSubscribers: "",
-	artistInstagram: "", venueName: "", venueCity: "", venueCapacity: "",
-	venueType: "", venueStatus: "", venueRentalCost: "", ticketingPartner: "",
-	expectedTicketSales: "", expectedOccupancy: "", artistFee: "",
+	artistInstagram: "", venues: [EMPTY_VENUE], artistFee: "",
 	productionCosts: "", marketingCosts: "", operationsCosts: "", totalBudget: "",
 	ticketingRevenue: "", sponsorshipRevenue: "", otherRevenue: "", totalRevenue: "",
 	netProfit: "", hasCancellationHistory: false, securityPlan: "",
-	hasInsurance: true, insuranceProvider: "", insuranceType: "", insuranceAcknowledged: false,
+	insuranceSelections: [],
 	needsFinancing: false, financingAmount: "", financingPurpose: [],
 	financingStructure: "", bankName: "", bankCode: "", bankAccountHolder: "", bankAccountNumber: "",
-	bvnOrRc: "", hasCACDocuments: false, hasFinancialStatements: false,
+	bvnOrRc: "", hasFinancialStatements: false,
 	hasTourDocs: false, authorizedRepName: "", authorizedRepTitle: "",
 	additionalNotes: "", declarationConfirmed: false,
 };
 
-function buildNotes(form: EOIForm): string {
+function buildNotes(form: EOIForm, artist: ArtistItem): string {
 	const sections: string[] = [];
 
 	sections.push(
@@ -138,18 +168,19 @@ function buildNotes(form: EOIForm): string {
 
 	sections.push(
 		`TOUR DETAILS\n` +
-		`Tour: ${form.tourName}\n` +
+		`Tour: ${String(artist.tour_name ?? "")}\n` +
 		`Tour Manager: ${form.tourManager}${form.tourManagerEmail ? ` — ${form.tourManagerEmail}` : ""}${form.tourManagerPhone ? ` | ${form.tourManagerPhone}` : ""}\n` +
-		`Cities: ${form.proposedCities} | Dates: ${form.preferredDates}\n` +
 		`Artist Confirmed: ${form.artistConfirmed ? "Yes" : "Pending"}\n` +
 		[form.spotifyListeners && `Spotify: ${form.spotifyListeners}/mo`, form.youtubeSubscribers && `YouTube: ${form.youtubeSubscribers}`, form.artistInstagram && `IG: ${form.artistInstagram}`].filter(Boolean).join(" | ")
 	);
 
 	sections.push(
-		`VENUE & TICKETING\n` +
-		`Venue: ${form.venueName} (${form.venueCity}) — ${form.venueCapacity} cap | ${form.venueType} | ${form.venueStatus}\n` +
-		(form.venueRentalCost ? `Rental: $${form.venueRentalCost}\n` : "") +
-		`Ticketing: ${form.ticketingPartner} | Expected Sales: ${form.expectedTicketSales} | Occupancy: ${form.expectedOccupancy}%`
+		`VENUE(S)\n` +
+		form.venues.map((v, i) =>
+			`${i + 1}. ${v.name} (${v.city}) — ${v.capacity || "?"} cap | ${v.type || "?"} | ${v.status || "?"}` +
+			(v.rentalCost ? ` | Rental: $${v.rentalCost}` : "") +
+			` | Expected Sales: ${v.expectedTicketSales || "?"} | Occupancy: ${v.expectedOccupancy || "?"}%`
+		).join("\n")
 	);
 
 	sections.push(
@@ -163,10 +194,10 @@ function buildNotes(form: EOIForm): string {
 
 	const riskLines = [`Cancellation History: ${form.hasCancellationHistory ? "Yes" : "No"}`];
 	if (form.securityPlan) riskLines.push(`Security Plan: ${form.securityPlan}`);
-	riskLines.push(`Event Insurance: ${form.hasInsurance ? "Yes" : "No"}`);
-	if (form.hasInsurance && form.insuranceProvider) riskLines.push(`Insurance Provider: ${form.insuranceProvider}`);
-	if (form.hasInsurance && form.insuranceType) riskLines.push(`Insurance Type: ${form.insuranceType}`);
-	riskLines.push(`Insurance Acknowledged: ${form.insuranceAcknowledged ? "Yes" : "No"}`);
+	riskLines.push("Insurance Partner: Sanlam Allianz (compulsory)");
+	for (const sel of form.insuranceSelections) {
+		riskLines.push(`${sel.product}: $${sel.sumInsured || "0"} sum insured`);
+	}
 	sections.push(`RISK & INSURANCE\n${riskLines.join("\n")}`);
 
 	if (form.needsFinancing) {
@@ -184,11 +215,10 @@ function buildNotes(form: EOIForm): string {
 		(form.bvnOrRc ? ` | BVN/RC: ${form.bvnOrRc}` : "")
 	);
 
-	const docs: string[] = [];
-	if (form.hasCACDocuments) docs.push("✓ CAC Certificate");
+	const docs: string[] = ["✓ CAC / Business Registration (required)"];
 	if (form.hasFinancialStatements) docs.push("✓ Financial Statements");
 	if (form.hasTourDocs) docs.push("✓ Tour Docs");
-	if (docs.length > 0) sections.push(`DOCUMENTS\n${docs.join("\n")}`);
+	sections.push(`DOCUMENTS\n${docs.join("\n")}`);
 
 	sections.push(`DECLARATION\nBy: ${form.authorizedRepName} (${form.authorizedRepTitle})`);
 
@@ -372,6 +402,7 @@ function EOIPageContent() {
 	const [step, setStep] = useState(0);
 	const [userEdits, setUserEdits] = useState<Partial<EOIForm>>({});
 	const [errors, setErrors] = useState<Partial<Record<keyof EOIForm | "declaration", string>>>({});
+	const [venueErrors, setVenueErrors] = useState<Partial<Record<keyof VenueEntry, string>>[]>([]);
 
 	const { data: artistsQuery, isLoading: loadingOpportunities } = useQuery({
 		queryKey: ["artists"],
@@ -381,27 +412,6 @@ function EOIPageContent() {
 	const { data: profileQuery } = useQuery({
 		queryKey: ["tourstackProfile"],
 		queryFn: getTourstackProfile,
-	});
-
-	const { data: banksQuery, isLoading: loadingBanks } = useQuery({
-		queryKey: ["banks"],
-		queryFn: () => listBanks("nigeria"),
-		staleTime: 1000 * 60 * 60,
-	});
-	const bankList = (banksQuery?.data as { name: string; code: string }[] | null | undefined) ?? [];
-
-	const [accountVerified, setAccountVerified] = useState(false);
-	const resolveAccountMutation = useMutation({
-		mutationFn: resolveBankAccount,
-		onSuccess: (result) => {
-			if (result.success && result.data) {
-				const d = result.data as { account_name?: string };
-				if (d.account_name) {
-					set("bankAccountHolder", d.account_name);
-					setAccountVerified(true);
-				}
-			}
-		},
 	});
 
 	const profileDefaults = useMemo<Partial<EOIForm>>(() => {
@@ -431,7 +441,6 @@ function EOIPageContent() {
 			bankName: String(d.bank_name ?? ""),
 			bankAccountHolder: String(d.bank_account_holder ?? ""),
 			bankAccountNumber: String(d.bank_account_number ?? ""),
-			venueCity: String(d.city ?? ""),
 			authorizedRepName: String(d.contact_person ?? ""),
 			authorizedRepTitle: String(d.job_title ?? ""),
 		};
@@ -461,11 +470,46 @@ function EOIPageContent() {
 		set("financingPurpose", next);
 	}
 
+	function setVenue(index: number, key: keyof VenueEntry, value: string) {
+		set("venues", form.venues.map((v, i) => (i === index ? { ...v, [key]: value } : v)));
+		setVenueErrors(prev => {
+			if (!prev[index]?.[key]) return prev;
+			const next = [...prev];
+			next[index] = { ...next[index] };
+			delete next[index][key];
+			return next;
+		});
+	}
+
+	function addVenue() {
+		set("venues", [...form.venues, EMPTY_VENUE]);
+	}
+
+	function removeVenue(index: number) {
+		set("venues", form.venues.filter((_, i) => i !== index));
+		setVenueErrors(prev => prev.filter((_, i) => i !== index));
+	}
+
+	function toggleInsuranceProduct(product: InsuranceProduct) {
+		const exists = form.insuranceSelections.some(sel => sel.product === product);
+		set(
+			"insuranceSelections",
+			exists
+				? form.insuranceSelections.filter(sel => sel.product !== product)
+				: [...form.insuranceSelections, { product, sumInsured: "" }],
+		);
+	}
+
+	function setInsuranceSumInsured(product: InsuranceProduct, value: string) {
+		set("insuranceSelections", form.insuranceSelections.map(sel => (sel.product === product ? { ...sel, sumInsured: value } : sel)));
+	}
+
 	function handleSelectOpportunity(id: string) {
 		setSelectedId(id);
 		setStep(0);
 		setUserEdits({});
 		setErrors({});
+		setVenueErrors([]);
 	}
 
 	function validateStep(s: number): boolean {
@@ -485,20 +529,24 @@ function EOIPageContent() {
 			if (!form.marketsRegions.trim()) e.marketsRegions = t("validation.marketsRequired");
 		}
 		if (s === 2) {
-			if (!form.tourName.trim()) e.tourName = t("validation.tourNameRequired");
 			if (!form.tourManager.trim()) e.tourManager = t("validation.tourManagerRequired");
-			if (!form.proposedCities.trim()) e.proposedCities = t("validation.proposedCitiesRequired");
-			if (!form.preferredDates.trim()) e.preferredDates = t("validation.preferredDatesRequired");
 		}
 		if (s === 3) {
-			if (!form.venueName.trim()) e.venueName = t("validation.venueNameRequired");
-			if (!form.venueCity.trim()) e.venueCity = t("validation.venueCityRequired");
-			if (!form.venueCapacity.trim()) e.venueCapacity = t("validation.venueCapacityRequired");
-			if (!form.venueType) e.venueType = t("validation.venueTypeRequired");
-			if (!form.venueStatus) e.venueStatus = t("validation.venueStatusRequired");
-			if (!form.ticketingPartner.trim()) e.ticketingPartner = t("validation.ticketingPartnerRequired");
-			if (!form.expectedTicketSales.trim()) e.expectedTicketSales = t("validation.expectedSalesRequired");
-			if (!form.expectedOccupancy.trim()) e.expectedOccupancy = t("validation.occupancyRequired");
+			const vErrs = form.venues.map((v) => {
+				const ve: Partial<Record<keyof VenueEntry, string>> = {};
+				if (!v.name.trim()) ve.name = t("validation.venueNameRequired");
+				if (!v.city.trim()) ve.city = t("validation.venueCityRequired");
+				if (!v.capacity.trim()) ve.capacity = t("validation.venueCapacityRequired");
+				if (!v.type) ve.type = t("validation.venueTypeRequired");
+				if (!v.status) ve.status = t("validation.venueStatusRequired");
+				if (!v.expectedTicketSales.trim()) ve.expectedTicketSales = t("validation.expectedSalesRequired");
+				if (!v.expectedOccupancy.trim()) ve.expectedOccupancy = t("validation.occupancyRequired");
+				return ve;
+			});
+			setVenueErrors(vErrs);
+			if (vErrs.some(ve => Object.keys(ve).length > 0)) {
+				e.venues = t("validation.venuesIncomplete");
+			}
 		}
 		if (s === 4) {
 			if (!form.artistFee.trim()) e.artistFee = t("validation.artistFeeRequired");
@@ -511,7 +559,11 @@ function EOIPageContent() {
 			if (!form.bankName.trim()) e.bankName = t("validation.bankNameRequired");
 			if (!form.bankAccountHolder.trim()) e.bankAccountHolder = t("validation.bankHolderRequired");
 			if (!form.bankAccountNumber.trim()) e.bankAccountNumber = t("validation.bankNumberRequired");
-			if (!form.insuranceAcknowledged) e.insuranceAcknowledged = t("validation.insuranceAcknowledgedRequired");
+			if (form.insuranceSelections.length === 0) {
+				e.insuranceSelections = t("validation.insuranceRequired");
+			} else if (form.insuranceSelections.some(sel => !sel.sumInsured.trim())) {
+				e.insuranceSelections = t("validation.insuranceSumRequired");
+			}
 		}
 		if (s === 6) {
 			if (!form.authorizedRepName.trim()) e.authorizedRepName = t("validation.authorizedRepRequired");
@@ -539,15 +591,38 @@ function EOIPageContent() {
 		if (!validateStep(step)) return;
 		if (!artist) return;
 		const safeNum = (s: string) => { const n = Number(s.replace(/,/g, "")); return Number.isFinite(n) ? n : undefined; };
+		const primaryVenue = form.venues[0];
 		submitMutation.mutate({
 			artistId: artist.id,
-			city: form.venueCity || form.proposedCities.split(",")[0]?.trim() || "",
-			venue: form.venueName || undefined,
-			capacity: form.venueCapacity ? safeNum(form.venueCapacity) : undefined,
+			city: primaryVenue.city,
+			venue: primaryVenue.name || undefined,
+			capacity: primaryVenue.capacity ? safeNum(primaryVenue.capacity) : undefined,
 			budget: form.totalBudget ? safeNum(form.totalBudget) : undefined,
-			audience: form.expectedTicketSales || undefined,
+			audience: primaryVenue.expectedTicketSales || undefined,
 			fundingType: form.needsFinancing ? (form.financingStructure || "required") : undefined,
-			notes: buildNotes(form),
+			notes: buildNotes(form, artist),
+			venues: form.venues.map(v => ({
+				name: v.name,
+				city: v.city,
+				capacity: v.capacity ? safeNum(v.capacity) : undefined,
+				type: v.type || undefined,
+				status: v.status || undefined,
+				rentalCost: v.rentalCost ? safeNum(v.rentalCost) : undefined,
+				expectedTicketSales: v.expectedTicketSales || undefined,
+				expectedOccupancy: v.expectedOccupancy ? safeNum(v.expectedOccupancy) : undefined,
+			})),
+			requiredDocuments: [
+				...(form.hasFinancialStatements ? (["financial_statements"] as const) : []),
+				...(form.hasTourDocs ? (["tour_itinerary"] as const) : []),
+			],
+			insurance: form.insuranceSelections.map(sel => ({
+				product: sel.product,
+				sumInsured: safeNum(sel.sumInsured) ?? 0,
+			})),
+			requiresFinancing: form.needsFinancing,
+			financingAmount: form.needsFinancing ? safeNum(form.financingAmount) : undefined,
+			financingStructure: form.needsFinancing ? (form.financingStructure || undefined) : undefined,
+			financingPurpose: form.needsFinancing && form.financingPurpose.length > 0 ? form.financingPurpose : undefined,
 		});
 	}
 
@@ -727,9 +802,7 @@ function EOIPageContent() {
 										<div className="grid gap-5 sm:grid-cols-2">
 											<SectionHeading>{t("form.step3.tourSection")}</SectionHeading>
 											<div className="sm:col-span-2">
-												<FLabel htmlFor="s3-tour" required>{t("form.step3.tourName.label")}</FLabel>
-												<input id="s3-tour" type="text" placeholder={t("form.step3.tourName.placeholder")} value={form.tourName} onChange={e => set("tourName", e.target.value)} className={`${ic} ${errors.tourName ? icErr : ""}`} aria-invalid={!!errors.tourName} />
-												<FError msg={errors.tourName} />
+												<p className="text-xs text-slate-500">{t("form.step3.tourDetailsHint")}</p>
 											</div>
 											<div>
 												<FLabel htmlFor="s3-mgr" required>{t("form.step3.tourManager.label")}</FLabel>
@@ -743,16 +816,6 @@ function EOIPageContent() {
 											<div>
 												<FLabel htmlFor="s3-mgr-phone">{t("form.step3.tourManagerPhone.label")}</FLabel>
 												<input id="s3-mgr-phone" type="tel" placeholder={t("form.step3.tourManagerPhone.placeholder")} value={form.tourManagerPhone} onChange={e => set("tourManagerPhone", e.target.value)} className={ic} />
-											</div>
-											<div>
-												<FLabel htmlFor="s3-cities" required>{t("form.step3.proposedCities.label")}</FLabel>
-												<input id="s3-cities" type="text" placeholder={t("form.step3.proposedCities.placeholder")} value={form.proposedCities} onChange={e => set("proposedCities", e.target.value)} className={`${ic} ${errors.proposedCities ? icErr : ""}`} aria-invalid={!!errors.proposedCities} />
-												<FError msg={errors.proposedCities} />
-											</div>
-											<div>
-												<FLabel htmlFor="s3-dates" required>{t("form.step3.preferredDates.label")}</FLabel>
-												<input id="s3-dates" type="text" placeholder={t("form.step3.preferredDates.placeholder")} value={form.preferredDates} onChange={e => set("preferredDates", e.target.value)} className={`${ic} ${errors.preferredDates ? icErr : ""}`} aria-invalid={!!errors.preferredDates} />
-												<FError msg={errors.preferredDates} />
 											</div>
 											<div className="sm:col-span-2">
 												<div className="flex items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4">
@@ -777,72 +840,89 @@ function EOIPageContent() {
 										</div>
 									)}
 
-									{/* ── STEP 4: Venue & Ticketing ── */}
+									{/* ── STEP 4: Venue(s) & Ticketing ── */}
 									{step === 3 && (
-										<div className="grid gap-5 sm:grid-cols-2">
-											<SectionHeading>{t("form.step4.venueSection")}</SectionHeading>
-											<div>
-												<FLabel htmlFor="s4-vname" required>{t("form.step4.venueName.label")}</FLabel>
-												<input id="s4-vname" type="text" placeholder={t("form.step4.venueName.placeholder")} value={form.venueName} onChange={e => set("venueName", e.target.value)} className={`${ic} ${errors.venueName ? icErr : ""}`} aria-invalid={!!errors.venueName} />
-												<FError msg={errors.venueName} />
-											</div>
-											<div>
-												<FLabel htmlFor="s4-vcity" required>{t("form.step4.venueCity.label")}</FLabel>
-												<input id="s4-vcity" type="text" placeholder={t("form.step4.venueCity.placeholder")} value={form.venueCity} onChange={e => set("venueCity", e.target.value)} className={`${ic} ${errors.venueCity ? icErr : ""}`} aria-invalid={!!errors.venueCity} />
-												<FError msg={errors.venueCity} />
-											</div>
-											<div>
-												<FLabel htmlFor="s4-vcap" required>{t("form.step4.venueCapacity.label")}</FLabel>
-												<input id="s4-vcap" type="text" inputMode="numeric" placeholder={t("form.step4.venueCapacity.placeholder")} value={form.venueCapacity} onChange={e => set("venueCapacity", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.venueCapacity ? icErr : ""}`} aria-invalid={!!errors.venueCapacity} />
-												<FError msg={errors.venueCapacity} />
-											</div>
-											<div>
-												<FLabel htmlFor="s4-vrent">{t("form.step4.venueRentalCost.label")}</FLabel>
-												<input id="s4-vrent" type="text" inputMode="numeric" placeholder={t("form.step4.venueRentalCost.placeholder")} value={form.venueRentalCost} onChange={e => set("venueRentalCost", e.target.value.replace(/\D/g, ""))} className={ic} />
-											</div>
-											<div>
-												<FLabel htmlFor="s4-vtype" required>{t("form.step4.venueType.label")}</FLabel>
-												<div className="relative">
-													<select id="s4-vtype" value={form.venueType} onChange={e => set("venueType", e.target.value)} className={`${ic} appearance-none pr-9 ${errors.venueType ? icErr : ""}`} aria-invalid={!!errors.venueType}>
-														<option value="">—</option>
-														<option value="indoor">{t("form.step4.venueType.indoor")}</option>
-														<option value="outdoor">{t("form.step4.venueType.outdoor")}</option>
-														<option value="hybrid">{t("form.step4.venueType.hybrid")}</option>
-													</select>
-													<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-lg">expand_more</span>
-												</div>
-												<FError msg={errors.venueType} />
-											</div>
-											<div>
-												<FLabel htmlFor="s4-vstatus" required>{t("form.step4.venueStatus.label")}</FLabel>
-												<div className="relative">
-													<select id="s4-vstatus" value={form.venueStatus} onChange={e => set("venueStatus", e.target.value)} className={`${ic} appearance-none pr-9 ${errors.venueStatus ? icErr : ""}`} aria-invalid={!!errors.venueStatus}>
-														<option value="">—</option>
-														<option value="confirmed">{t("form.step4.venueStatus.confirmed")}</option>
-														<option value="shortlisted">{t("form.step4.venueStatus.shortlisted")}</option>
-														<option value="pending">{t("form.step4.venueStatus.pending")}</option>
-													</select>
-													<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-lg">expand_more</span>
-												</div>
-												<FError msg={errors.venueStatus} />
-											</div>
-
-											<SectionHeading>{t("form.step4.ticketingSection")}</SectionHeading>
-											<div>
-												<FLabel htmlFor="s4-tpart" required>{t("form.step4.ticketingPartner.label")}</FLabel>
-												<input id="s4-tpart" type="text" placeholder={t("form.step4.ticketingPartner.placeholder")} value={form.ticketingPartner} onChange={e => set("ticketingPartner", e.target.value)} className={`${ic} ${errors.ticketingPartner ? icErr : ""}`} aria-invalid={!!errors.ticketingPartner} />
-												<FError msg={errors.ticketingPartner} />
-											</div>
-											<div>
-												<FLabel htmlFor="s4-tsales" required>{t("form.step4.expectedTicketSales.label")}</FLabel>
-												<input id="s4-tsales" type="text" inputMode="numeric" placeholder={t("form.step4.expectedTicketSales.placeholder")} value={form.expectedTicketSales} onChange={e => set("expectedTicketSales", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.expectedTicketSales ? icErr : ""}`} aria-invalid={!!errors.expectedTicketSales} />
-												<FError msg={errors.expectedTicketSales} />
-											</div>
-											<div>
-												<FLabel htmlFor="s4-occ" required>{t("form.step4.expectedOccupancy.label")}</FLabel>
-												<input id="s4-occ" type="text" inputMode="numeric" placeholder={t("form.step4.expectedOccupancy.placeholder")} value={form.expectedOccupancy} onChange={e => set("expectedOccupancy", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.expectedOccupancy ? icErr : ""}`} aria-invalid={!!errors.expectedOccupancy} />
-												<FError msg={errors.expectedOccupancy} />
-											</div>
+										<div className="space-y-6">
+											{errors.venues && <FError msg={errors.venues} />}
+											{form.venues.map((venue, i) => {
+												const ve = venueErrors[i] ?? {};
+												return (
+													<div key={`venue-${i}`} className="rounded-2xl border border-slate-200 p-5">
+														<div className="mb-4 flex items-center justify-between">
+															<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A30]">
+																{t("form.step4.venueSection")} {form.venues.length > 1 ? i + 1 : ""}
+															</p>
+															{form.venues.length > 1 && (
+																<button type="button" onClick={() => removeVenue(i)} className="flex items-center gap-1 text-xs font-semibold text-rose-500 hover:text-rose-600">
+																	<span className="material-symbols-outlined text-sm">delete</span>
+																	{t("form.step4.removeVenue")}
+																</button>
+															)}
+														</div>
+														<div className="grid gap-5 sm:grid-cols-2">
+															<div>
+																<FLabel htmlFor={`s4-vname-${i}`} required>{t("form.step4.venueName.label")}</FLabel>
+																<input id={`s4-vname-${i}`} type="text" placeholder={t("form.step4.venueName.placeholder")} value={venue.name} onChange={e => setVenue(i, "name", e.target.value)} className={`${ic} ${ve.name ? icErr : ""}`} aria-invalid={!!ve.name} />
+																<FError msg={ve.name} />
+															</div>
+															<div>
+																<FLabel htmlFor={`s4-vcity-${i}`} required>{t("form.step4.venueCity.label")}</FLabel>
+																<input id={`s4-vcity-${i}`} type="text" placeholder={t("form.step4.venueCity.placeholder")} value={venue.city} onChange={e => setVenue(i, "city", e.target.value)} className={`${ic} ${ve.city ? icErr : ""}`} aria-invalid={!!ve.city} />
+																<FError msg={ve.city} />
+															</div>
+															<div>
+																<FLabel htmlFor={`s4-vcap-${i}`} required>{t("form.step4.venueCapacity.label")}</FLabel>
+																<input id={`s4-vcap-${i}`} type="text" inputMode="numeric" placeholder={t("form.step4.venueCapacity.placeholder")} value={venue.capacity} onChange={e => setVenue(i, "capacity", e.target.value.replace(/\D/g, ""))} className={`${ic} ${ve.capacity ? icErr : ""}`} aria-invalid={!!ve.capacity} />
+																<FError msg={ve.capacity} />
+															</div>
+															<div>
+																<FLabel htmlFor={`s4-vrent-${i}`}>{t("form.step4.venueRentalCost.label")}</FLabel>
+																<FormattedNumberInput id={`s4-vrent-${i}`} placeholder={t("form.step4.venueRentalCost.placeholder")} value={venue.rentalCost} onChange={v => setVenue(i, "rentalCost", v)} className={ic} />
+															</div>
+															<div>
+																<FLabel htmlFor={`s4-vtype-${i}`} required>{t("form.step4.venueType.label")}</FLabel>
+																<div className="relative">
+																	<select id={`s4-vtype-${i}`} value={venue.type} onChange={e => setVenue(i, "type", e.target.value)} className={`${ic} appearance-none pr-9 ${ve.type ? icErr : ""}`} aria-invalid={!!ve.type}>
+																		<option value="">—</option>
+																		<option value="indoor">{t("form.step4.venueType.indoor")}</option>
+																		<option value="outdoor">{t("form.step4.venueType.outdoor")}</option>
+																		<option value="hybrid">{t("form.step4.venueType.hybrid")}</option>
+																	</select>
+																	<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-lg">expand_more</span>
+																</div>
+																<FError msg={ve.type} />
+															</div>
+															<div>
+																<FLabel htmlFor={`s4-vstatus-${i}`} required>{t("form.step4.venueStatus.label")}</FLabel>
+																<div className="relative">
+																	<select id={`s4-vstatus-${i}`} value={venue.status} onChange={e => setVenue(i, "status", e.target.value)} className={`${ic} appearance-none pr-9 ${ve.status ? icErr : ""}`} aria-invalid={!!ve.status}>
+																		<option value="">—</option>
+																		<option value="confirmed">{t("form.step4.venueStatus.confirmed")}</option>
+																		<option value="shortlisted">{t("form.step4.venueStatus.shortlisted")}</option>
+																		<option value="pending">{t("form.step4.venueStatus.pending")}</option>
+																	</select>
+																	<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-lg">expand_more</span>
+																</div>
+																<FError msg={ve.status} />
+															</div>
+															<div>
+																<FLabel htmlFor={`s4-tsales-${i}`} required>{t("form.step4.expectedTicketSales.label")}</FLabel>
+																<input id={`s4-tsales-${i}`} type="text" inputMode="numeric" placeholder={t("form.step4.expectedTicketSales.placeholder")} value={venue.expectedTicketSales} onChange={e => setVenue(i, "expectedTicketSales", e.target.value.replace(/\D/g, ""))} className={`${ic} ${ve.expectedTicketSales ? icErr : ""}`} aria-invalid={!!ve.expectedTicketSales} />
+																<FError msg={ve.expectedTicketSales} />
+															</div>
+															<div>
+																<FLabel htmlFor={`s4-occ-${i}`} required>{t("form.step4.expectedOccupancy.label")}</FLabel>
+																<input id={`s4-occ-${i}`} type="text" inputMode="numeric" placeholder={t("form.step4.expectedOccupancy.placeholder")} value={venue.expectedOccupancy} onChange={e => setVenue(i, "expectedOccupancy", e.target.value.replace(/\D/g, ""))} className={`${ic} ${ve.expectedOccupancy ? icErr : ""}`} aria-invalid={!!ve.expectedOccupancy} />
+																<FError msg={ve.expectedOccupancy} />
+															</div>
+														</div>
+													</div>
+												);
+											})}
+											<button type="button" onClick={addVenue} className="flex items-center gap-2 rounded-full border border-dashed border-slate-300 px-5 py-3 text-sm font-semibold text-slate-600 transition hover:border-[#FF5A30] hover:text-[#FF5A30]">
+												<span className="material-symbols-outlined text-base">add</span>
+												{t("form.step4.addVenue")}
+											</button>
 										</div>
 									)}
 
@@ -855,50 +935,50 @@ function EOIPageContent() {
 											</div>
 											<div>
 												<FLabel htmlFor="s5-afee" required>{t("form.step5.artistFee.label")}</FLabel>
-												<input id="s5-afee" type="text" inputMode="numeric" placeholder={t("form.step5.artistFee.placeholder")} value={form.artistFee} onChange={e => set("artistFee", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.artistFee ? icErr : ""}`} aria-invalid={!!errors.artistFee} />
+												<FormattedNumberInput id="s5-afee" placeholder={t("form.step5.artistFee.placeholder")} value={form.artistFee} onChange={v => set("artistFee", v)} className={`${ic} ${errors.artistFee ? icErr : ""}`} ariaInvalid={!!errors.artistFee} />
 												<FError msg={errors.artistFee} />
 											</div>
 											<div>
 												<FLabel htmlFor="s5-prod" required>{t("form.step5.productionCosts.label")}</FLabel>
-												<input id="s5-prod" type="text" inputMode="numeric" placeholder={t("form.step5.productionCosts.placeholder")} value={form.productionCosts} onChange={e => set("productionCosts", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.productionCosts ? icErr : ""}`} aria-invalid={!!errors.productionCosts} />
+												<FormattedNumberInput id="s5-prod" placeholder={t("form.step5.productionCosts.placeholder")} value={form.productionCosts} onChange={v => set("productionCosts", v)} className={`${ic} ${errors.productionCosts ? icErr : ""}`} ariaInvalid={!!errors.productionCosts} />
 												<FError msg={errors.productionCosts} />
 											</div>
 											<div>
 												<FLabel htmlFor="s5-mkt" required>{t("form.step5.marketingCosts.label")}</FLabel>
-												<input id="s5-mkt" type="text" inputMode="numeric" placeholder={t("form.step5.marketingCosts.placeholder")} value={form.marketingCosts} onChange={e => set("marketingCosts", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.marketingCosts ? icErr : ""}`} aria-invalid={!!errors.marketingCosts} />
+												<FormattedNumberInput id="s5-mkt" placeholder={t("form.step5.marketingCosts.placeholder")} value={form.marketingCosts} onChange={v => set("marketingCosts", v)} className={`${ic} ${errors.marketingCosts ? icErr : ""}`} ariaInvalid={!!errors.marketingCosts} />
 												<FError msg={errors.marketingCosts} />
 											</div>
 											<div>
 												<FLabel htmlFor="s5-ops" required>{t("form.step5.operationsCosts.label")}</FLabel>
-												<input id="s5-ops" type="text" inputMode="numeric" placeholder={t("form.step5.operationsCosts.placeholder")} value={form.operationsCosts} onChange={e => set("operationsCosts", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.operationsCosts ? icErr : ""}`} aria-invalid={!!errors.operationsCosts} />
+												<FormattedNumberInput id="s5-ops" placeholder={t("form.step5.operationsCosts.placeholder")} value={form.operationsCosts} onChange={v => set("operationsCosts", v)} className={`${ic} ${errors.operationsCosts ? icErr : ""}`} ariaInvalid={!!errors.operationsCosts} />
 												<FError msg={errors.operationsCosts} />
 											</div>
 											<div className="sm:col-span-2">
 												<FLabel htmlFor="s5-total" required>{t("form.step5.totalBudget.label")}</FLabel>
-												<input id="s5-total" type="text" inputMode="numeric" placeholder={t("form.step5.totalBudget.placeholder")} value={form.totalBudget} onChange={e => set("totalBudget", e.target.value.replace(/\D/g, ""))} className={`${ic} ${errors.totalBudget ? icErr : ""}`} aria-invalid={!!errors.totalBudget} />
+												<FormattedNumberInput id="s5-total" placeholder={t("form.step5.totalBudget.placeholder")} value={form.totalBudget} onChange={v => set("totalBudget", v)} className={`${ic} ${errors.totalBudget ? icErr : ""}`} ariaInvalid={!!errors.totalBudget} />
 												<FError msg={errors.totalBudget} />
 											</div>
 
 											<SectionHeading>{t("form.step5.revenueSection")}</SectionHeading>
 											<div>
 												<FLabel htmlFor="s5-trev">{t("form.step5.ticketingRevenue.label")}</FLabel>
-												<input id="s5-trev" type="text" inputMode="numeric" placeholder={t("form.step5.ticketingRevenue.placeholder")} value={form.ticketingRevenue} onChange={e => set("ticketingRevenue", e.target.value.replace(/\D/g, ""))} className={ic} />
+												<FormattedNumberInput id="s5-trev" placeholder={t("form.step5.ticketingRevenue.placeholder")} value={form.ticketingRevenue} onChange={v => set("ticketingRevenue", v)} className={ic} />
 											</div>
 											<div>
 												<FLabel htmlFor="s5-srev">{t("form.step5.sponsorshipRevenue.label")}</FLabel>
-												<input id="s5-srev" type="text" inputMode="numeric" placeholder={t("form.step5.sponsorshipRevenue.placeholder")} value={form.sponsorshipRevenue} onChange={e => set("sponsorshipRevenue", e.target.value.replace(/\D/g, ""))} className={ic} />
+												<FormattedNumberInput id="s5-srev" placeholder={t("form.step5.sponsorshipRevenue.placeholder")} value={form.sponsorshipRevenue} onChange={v => set("sponsorshipRevenue", v)} className={ic} />
 											</div>
 											<div>
 												<FLabel htmlFor="s5-orev">{t("form.step5.otherRevenue.label")}</FLabel>
-												<input id="s5-orev" type="text" inputMode="numeric" placeholder={t("form.step5.otherRevenue.placeholder")} value={form.otherRevenue} onChange={e => set("otherRevenue", e.target.value.replace(/\D/g, ""))} className={ic} />
+												<FormattedNumberInput id="s5-orev" placeholder={t("form.step5.otherRevenue.placeholder")} value={form.otherRevenue} onChange={v => set("otherRevenue", v)} className={ic} />
 											</div>
 											<div>
 												<FLabel htmlFor="s5-trev2">{t("form.step5.totalRevenue.label")}</FLabel>
-												<input id="s5-trev2" type="text" inputMode="numeric" placeholder={t("form.step5.totalRevenue.placeholder")} value={form.totalRevenue} onChange={e => set("totalRevenue", e.target.value.replace(/\D/g, ""))} className={ic} />
+												<FormattedNumberInput id="s5-trev2" placeholder={t("form.step5.totalRevenue.placeholder")} value={form.totalRevenue} onChange={v => set("totalRevenue", v)} className={ic} />
 											</div>
 											<div className="sm:col-span-2">
 												<FLabel htmlFor="s5-net">{t("form.step5.netProfit.label")}</FLabel>
-												<input id="s5-net" type="text" inputMode="numeric" placeholder={t("form.step5.netProfit.placeholder")} value={form.netProfit} onChange={e => set("netProfit", e.target.value.replace(/\D/g, ""))} className={ic} />
+												<FormattedNumberInput id="s5-net" placeholder={t("form.step5.netProfit.placeholder")} value={form.netProfit} onChange={v => set("netProfit", v)} className={ic} />
 											</div>
 										</div>
 									)}
@@ -920,42 +1000,46 @@ function EOIPageContent() {
 
 											<SectionHeading>{t("form.step6.insuranceSection")}</SectionHeading>
 											<div className="sm:col-span-2">
-												<div className="flex items-center justify-between gap-4 rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4">
-													<p className="text-sm font-semibold text-slate-900">{t("form.step6.hasInsurance")}</p>
-													<span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-600 px-3 py-1 text-xs font-bold text-white">
-														<span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-														{t("form.yes")}
-													</span>
-												</div>
-											</div>
-											<div className="sm:col-span-2 grid sm:grid-cols-2 gap-5">
-												<div>
-													<FLabel htmlFor="s6-ins-prov">{t("form.step6.insuranceProvider.label")}</FLabel>
-													<input id="s6-ins-prov" type="text" placeholder={t("form.step6.insuranceProvider.placeholder")} value={form.insuranceProvider} onChange={e => set("insuranceProvider", e.target.value)} className={ic} />
-												</div>
-												<div>
-													<FLabel htmlFor="s6-ins-type">{t("form.step6.insuranceType.label")}</FLabel>
-													<div className="relative">
-														<select id="s6-ins-type" value={form.insuranceType} onChange={e => set("insuranceType", e.target.value)} className={`${ic} appearance-none pr-9`}>
-															<option value="">—</option>
-															<option value="cancellation">{t("form.step6.insuranceType.cancellation")}</option>
-															<option value="liability">{t("form.step6.insuranceType.liability")}</option>
-															<option value="comprehensive">{t("form.step6.insuranceType.comprehensive")}</option>
-															<option value="workforce">{t("form.step6.insuranceType.workforce")}</option>
-														</select>
-														<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-lg">expand_more</span>
+												<div className="flex items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4">
+													<span className="material-symbols-outlined text-emerald-600 shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
+													<div>
+														<p className="text-sm font-semibold text-slate-900">{t("form.step6.insuranceCompulsoryTitle")}</p>
+														<p className="mt-1 text-xs leading-relaxed text-slate-600">{t("form.step6.insuranceCompulsoryText")}</p>
 													</div>
 												</div>
 											</div>
 											<div className="sm:col-span-2">
-												<label className={`flex items-start gap-3 cursor-pointer rounded-2xl border px-5 py-4 ${errors.insuranceAcknowledged ? "border-rose-300 bg-rose-50" : "border-amber-200 bg-amber-50/40"}`}>
-													<input type="checkbox" className="sr-only" checked={form.insuranceAcknowledged} onChange={e => { set("insuranceAcknowledged", e.target.checked); if (errors.insuranceAcknowledged) setErrors(p => { const n = { ...p }; delete n.insuranceAcknowledged; return n; }); }} />
-													<div className={`w-5 h-5 rounded border-2 shrink-0 mt-0.5 flex items-center justify-center ${form.insuranceAcknowledged ? "bg-amber-500 border-amber-500" : errors.insuranceAcknowledged ? "border-rose-400" : "border-amber-400"}`}>
-														{form.insuranceAcknowledged && <span className="material-symbols-outlined text-white text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>}
-													</div>
-													<span className="text-sm font-semibold text-slate-800">{t("form.step6.insuranceAcknowledgmentText")}</span>
-												</label>
-												<FError msg={errors.insuranceAcknowledged} />
+												<p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">{t("form.step6.insuranceProducts.label")}</p>
+												<div className="grid sm:grid-cols-2 gap-3">
+													{INSURANCE_PRODUCTS.map(product => {
+														const selection = form.insuranceSelections.find(sel => sel.product === product);
+														const checked = !!selection;
+														return (
+															<div key={product} className={`rounded-2xl border px-4 py-3 transition ${checked ? "border-[#FF5A30]/30 bg-orange-50" : "border-slate-200 bg-slate-50 hover:bg-slate-100"}`}>
+																<label className="flex items-center gap-2.5 cursor-pointer">
+																	<input type="checkbox" className="sr-only" checked={checked} onChange={() => toggleInsuranceProduct(product)} />
+																	<div className={`w-4 h-4 rounded border-2 shrink-0 flex items-center justify-center ${checked ? "bg-[#FF5A30] border-[#FF5A30]" : "border-slate-300"}`}>
+																		{checked && <span className="material-symbols-outlined text-white text-[10px]" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>}
+																	</div>
+																	<span className="text-xs font-semibold text-slate-700">{t(`form.step6.insuranceProducts.${INSURANCE_PRODUCT_I18N_KEY[product]}`)}</span>
+																</label>
+																{checked && (
+																	<div className="mt-3">
+																		<FLabel htmlFor={`ins-sum-${product}`}>{t("form.step6.insuranceSumInsured.label")}</FLabel>
+																		<FormattedNumberInput
+																			id={`ins-sum-${product}`}
+																			placeholder={t("form.step6.insuranceSumInsured.placeholder")}
+																			value={selection?.sumInsured ?? ""}
+																			onChange={v => setInsuranceSumInsured(product, v)}
+																			className={ic}
+																		/>
+																	</div>
+																)}
+															</div>
+														);
+													})}
+												</div>
+												<FError msg={errors.insuranceSelections} />
 											</div>
 
 											<SectionHeading>{t("form.step6.financingSection")}</SectionHeading>
@@ -968,7 +1052,7 @@ function EOIPageContent() {
 											<div className={`sm:col-span-2 grid sm:grid-cols-2 gap-5 transition-all ${form.needsFinancing ? "" : "opacity-40 pointer-events-none select-none"}`} aria-hidden={!form.needsFinancing}>
 												<div>
 													<FLabel htmlFor="s6-famount">{t("form.step6.financingAmount.label")}</FLabel>
-													<input id="s6-famount" type="text" inputMode="numeric" tabIndex={form.needsFinancing ? 0 : -1} placeholder={t("form.step6.financingAmount.placeholder")} value={form.financingAmount} onChange={e => set("financingAmount", e.target.value.replace(/\D/g, ""))} className={ic} />
+													<FormattedNumberInput id="s6-famount" tabIndex={form.needsFinancing ? 0 : -1} placeholder={t("form.step6.financingAmount.placeholder")} value={form.financingAmount} onChange={v => set("financingAmount", v)} className={ic} />
 												</div>
 												<div>
 													<FLabel htmlFor="s6-fstruct">{t("form.step6.financingStructure.label")}</FLabel>
@@ -1000,67 +1084,39 @@ function EOIPageContent() {
 											</div>
 
 											<SectionHeading>{t("form.step6.bankingSection")}</SectionHeading>
-											<div>
-												<FLabel htmlFor="s6-bname" required>{t("form.step6.bankName.label")}</FLabel>
-												{loadingBanks ? (
-													<p className="text-xs text-slate-400 py-3">{t("form.step6.bankName.loading")}</p>
-												) : bankList.length > 0 ? (
-													<div className="relative">
-														<select
-															id="s6-bname"
-															value={form.bankCode}
-															onChange={e => {
-																const selected = bankList.find(b => b.code === e.target.value);
-																set("bankCode", e.target.value);
-																set("bankName", selected?.name ?? "");
-																setAccountVerified(false);
-															}}
-															className={`${ic} appearance-none pr-9 ${errors.bankName ? icErr : ""}`}
-															aria-invalid={!!errors.bankName}
-														>
-															<option value="">{t("form.step6.bankName.select")}</option>
-															{bankList.map(b => (
-																<option key={b.code} value={b.code}>{b.name}</option>
-															))}
-														</select>
-														<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-lg">expand_more</span>
-													</div>
-												) : (
-													<input id="s6-bname" type="text" placeholder={t("form.step6.bankName.placeholder")} value={form.bankName} onChange={e => { set("bankName", e.target.value); setAccountVerified(false); }} className={`${ic} ${errors.bankName ? icErr : ""}`} aria-invalid={!!errors.bankName} />
-												)}
-												<FError msg={errors.bankName} />
-											</div>
-											<div>
-												<FLabel htmlFor="s6-bnum" required>{t("form.step6.bankAccountNumber.label")}</FLabel>
-												<div className="flex gap-2">
-													<input id="s6-bnum" type="text" inputMode="numeric" placeholder={t("form.step6.bankAccountNumber.placeholder")} value={form.bankAccountNumber} onChange={e => { set("bankAccountNumber", e.target.value.replace(/\D/g, "")); setAccountVerified(false); }} className={`${ic} ${errors.bankAccountNumber ? icErr : ""}`} aria-invalid={!!errors.bankAccountNumber} />
-													{form.bankCode && form.bankAccountNumber.length === 10 && !accountVerified && (
-														<button
-															type="button"
-															disabled={resolveAccountMutation.isPending}
-															onClick={() => resolveAccountMutation.mutate({ account_number: form.bankAccountNumber, bank_code: form.bankCode })}
-															className="shrink-0 rounded-xl border border-slate-200 bg-slate-50 px-4 py-2 text-xs font-semibold text-slate-700 hover:bg-slate-100 transition disabled:opacity-60"
-														>
-															{resolveAccountMutation.isPending ? t("form.step6.bankAccountNumber.verifying") : t("form.step6.bankAccountNumber.verify")}
-														</button>
-													)}
-												</div>
-												{accountVerified && (
-													<p className="mt-1.5 flex items-center gap-1 text-xs font-semibold text-emerald-600">
-														<span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
-														{t("form.step6.bankAccountHolder.verified")}
-													</p>
-												)}
-												{resolveAccountMutation.data && !resolveAccountMutation.data.success && (
-													<p className="mt-1.5 text-xs text-amber-600 font-medium">{t("form.step6.bankAccountHolder.verifyFailed")}</p>
-												)}
-												<FError msg={errors.bankAccountNumber} />
-											</div>
-											<div>
-												<FLabel htmlFor="s6-bholder" required>{t("form.step6.bankAccountHolder.label")}</FLabel>
-												<input id="s6-bholder" type="text" placeholder={t("form.step6.bankAccountHolder.placeholder")} value={form.bankAccountHolder} onChange={e => { set("bankAccountHolder", e.target.value); setAccountVerified(false); }} className={`${ic} ${errors.bankAccountHolder ? icErr : ""}`} aria-invalid={!!errors.bankAccountHolder} />
-												<FError msg={errors.bankAccountHolder} />
-											</div>
+											<BankSelect
+												value={{
+													bankCode: form.bankCode,
+													bankName: form.bankName,
+													accountNumber: form.bankAccountNumber,
+													accountHolder: form.bankAccountHolder,
+												}}
+												onChange={(next: BankDetails) => {
+													setUserEdits(p => ({
+														...p,
+														bankCode: next.bankCode,
+														bankName: next.bankName,
+														bankAccountNumber: next.accountNumber,
+														bankAccountHolder: next.accountHolder,
+													}));
+												}}
+												required
+												showError={Boolean(errors.bankName || errors.bankAccountNumber || errors.bankAccountHolder)}
+												labels={{
+													bank: t("form.step6.bankName.label"),
+													bankSelectPlaceholder: t("form.step6.bankName.select"),
+													bankLoading: t("form.step6.bankName.loading"),
+													bankPlaceholder: t("form.step6.bankName.placeholder"),
+													accountNumber: t("form.step6.bankAccountNumber.label"),
+													accountNumberPlaceholder: t("form.step6.bankAccountNumber.placeholder"),
+													verify: t("form.step6.bankAccountNumber.verify"),
+													verifying: t("form.step6.bankAccountNumber.verifying"),
+													verified: t("form.step6.bankAccountHolder.verified"),
+													verifyFailed: t("form.step6.bankAccountHolder.verifyFailed"),
+													accountHolder: t("form.step6.bankAccountHolder.label"),
+													accountHolderPlaceholder: t("form.step6.bankAccountHolder.placeholder"),
+												}}
+											/>
 											<div>
 												<FLabel htmlFor="s6-bvn">{t("form.step6.bvnOrRc.label")}</FLabel>
 												<input id="s6-bvn" type="text" placeholder={t("form.step6.bvnOrRc.placeholder")} value={form.bvnOrRc} onChange={e => set("bvnOrRc", e.target.value.replace(/\D/g, ""))} className={ic} />
@@ -1076,7 +1132,14 @@ function EOIPageContent() {
 												<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A30] mb-3">{t("form.step7.documentsSection")}</p>
 												<p className="text-xs text-slate-500 mb-4">{t("form.step7.documentsNote")}</p>
 												<div className="space-y-2.5">
-													{(["hasCACDocuments", "hasFinancialStatements", "hasTourDocs"] as const).map(key => (
+													<div className="flex items-center gap-3 rounded-2xl border border-emerald-300 bg-emerald-50 px-5 py-4">
+														<div className="w-5 h-5 rounded border-2 shrink-0 flex items-center justify-center bg-emerald-500 border-emerald-500">
+															<span className="material-symbols-outlined text-white text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>
+														</div>
+														<span className="text-sm font-semibold text-slate-800">{t("form.step7.hasCACDocuments")}</span>
+														<span className="ml-auto text-[10px] font-bold uppercase tracking-wider text-emerald-600">{t("form.step7.required")}</span>
+													</div>
+													{(["hasFinancialStatements", "hasTourDocs"] as const).map(key => (
 														<label key={key} className={`flex items-center gap-3 rounded-2xl border px-5 py-4 cursor-pointer transition ${form[key] ? "border-emerald-300 bg-emerald-50" : "border-slate-200 bg-slate-50 hover:bg-slate-100"}`}>
 															<input type="checkbox" className="sr-only" checked={form[key]} onChange={e => set(key, e.target.checked)} />
 															<div className={`w-5 h-5 rounded border-2 shrink-0 flex items-center justify-center ${form[key] ? "bg-emerald-500 border-emerald-500" : "border-slate-300"}`}>
@@ -1099,9 +1162,9 @@ function EOIPageContent() {
 													<ReviewRow label={t("review.contact")} value={form.contactPerson} />
 													<ReviewRow label={t("review.email")} value={form.contactEmail} />
 													<ReviewRow label={t("review.phone")} value={form.phone} />
-													<ReviewRow label={t("review.venues")} value={form.venueName} />
-													<ReviewRow label={t("review.city")} value={form.venueCity} />
-													<ReviewRow label={t("review.capacity")} value={form.venueCapacity} />
+													<ReviewRow label={t("review.venues")} value={form.venues.map(v => v.name).filter(Boolean).join(", ")} />
+													<ReviewRow label={t("review.city")} value={form.venues.map(v => v.city).filter(Boolean).join(", ")} />
+													<ReviewRow label={t("review.capacity")} value={form.venues.map(v => v.capacity).filter(Boolean).join(", ")} />
 													<ReviewRow label={t("review.budget")} value={form.totalBudget ? `$${form.totalBudget}` : undefined} />
 													<ReviewRow label={t("review.financing")} value={form.needsFinancing ? (form.financingAmount ? `$${form.financingAmount}` : t("review.yes")) : false} />
 												</div>
