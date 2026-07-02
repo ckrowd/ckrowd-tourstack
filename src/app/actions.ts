@@ -1248,13 +1248,13 @@ export async function rejectRosterArtist(id: string) {
 	};
 }
 
-export async function uploadTourImage(formData: FormData) {
+export async function uploadImage(formData: FormData) {
 	const file = formData.get("file");
 	if (!file || typeof file === "string") {
 		return { success: false as const, error: "No file provided" };
 	}
 	const ext = (file as File).name.split(".").pop()?.toLowerCase() ?? "jpg";
-	const path = `ts-artist-${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+	const path = `ts-image-${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
 	const { data, error } = await client.storage.upload.post({
 		file: file as File,
 		path,

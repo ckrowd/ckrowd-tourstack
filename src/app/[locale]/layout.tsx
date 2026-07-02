@@ -12,7 +12,7 @@ import QueryProvider from "@/components/QueryProvider";
 import { routing } from "@/i18n/routing";
 
 const rubik = localFont({
-	src: "../../../public/fonts/inter-variable.woff2",
+	src: "../../../public/fonts/rubik-variable.woff2",
 	variable: "--font-manrope",
 	display: "swap",
 	weight: "100 900",

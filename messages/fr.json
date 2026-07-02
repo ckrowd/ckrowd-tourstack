@@ -1568,7 +1568,9 @@
     "logo": {
       "label": "Logo / Photo de Profil",
       "hint": "Obligatoire. Cliquez pour telecharger. Image carree recommandee, au moins 200 x 200 px.",
-      "required": "Veuillez telecharger un logo ou une photo de profil avant d enregistrer."
+      "required": "Veuillez telecharger un logo ou une photo de profil avant d enregistrer.",
+      "uploading": "Televersement...",
+      "uploadFailed": "Echec du televersement. Veuillez reessayer."
     },
     "companyInfo": {
       "title": "Informations sur l Entreprise",
