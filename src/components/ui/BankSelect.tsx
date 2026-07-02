@@ -58,17 +58,23 @@ export default function BankSelect({
 	const bankList = Array.from(new Map(rawBankList.map((b) => [b.code, b])).values());
 
 	const [verified, setVerified] = useState(false);
+	const [verifyFailed, setVerifyFailed] = useState(false);
 	const resolveMutation = useMutation({
 		mutationFn: resolveBankAccount,
 		onSuccess: (result) => {
-			if (result.success && result.data) {
-				const holder = (result.data as { account_name?: string }).account_name;
-				if (holder) {
-					onChange({ ...value, accountHolder: holder });
-					setVerified(true);
-				}
+			const holder =
+				result.success && result.data
+					? (result.data as { account_name?: string }).account_name
+					: undefined;
+			if (holder) {
+				onChange({ ...value, accountHolder: holder });
+				setVerified(true);
+				setVerifyFailed(false);
+			} else {
+				setVerifyFailed(true);
 			}
 		},
+		onError: () => setVerifyFailed(true),
 	});
 
 	const bankHasError = required && showError && !value.bankName;
@@ -92,6 +98,7 @@ export default function BankSelect({
 							onChange={(e) => {
 								const selected = bankList.find((b) => b.code === e.target.value);
 								setVerified(false);
+								setVerifyFailed(false);
 								onChange({ ...value, bankCode: e.target.value, bankName: selected?.name ?? "" });
 							}}
 							className={`${inputClass} appearance-none pr-9 ${bankHasError ? errorBorder : normalBorder}`}
@@ -115,6 +122,7 @@ export default function BankSelect({
 						value={value.bankName}
 						onChange={(e) => {
 							setVerified(false);
+							setVerifyFailed(false);
 							onChange({ ...value, bankName: e.target.value });
 						}}
 						className={`${inputClass} ${bankHasError ? errorBorder : normalBorder}`}
@@ -142,6 +150,7 @@ export default function BankSelect({
 						value={value.accountNumber}
 						onChange={(e) => {
 							setVerified(false);
+							setVerifyFailed(false);
 							onChange({ ...value, accountNumber: e.target.value.replace(/\D/g, "") });
 						}}
 						className={`${inputClass} ${accountHasError ? errorBorder : normalBorder}`}
@@ -170,7 +179,7 @@ export default function BankSelect({
 						{labels.verified}
 					</p>
 				)}
-				{resolveMutation.data && !resolveMutation.data.success && (
+				{verifyFailed && (
 					<p className="mt-1.5 text-xs text-amber-600 font-medium">{labels.verifyFailed}</p>
 				)}
 				{accountHasError && (
@@ -191,10 +200,9 @@ export default function BankSelect({
 					type="text"
 					placeholder={labels.accountHolderPlaceholder}
 					value={value.accountHolder}
-					readOnly={verified}
-					aria-readonly={verified}
-					onChange={(e) => !verified && onChange({ ...value, accountHolder: e.target.value })}
-					className={`${inputClass} ${verified ? "cursor-not-allowed opacity-60" : required && showError && !value.accountHolder ? errorBorder : normalBorder}`}
+					readOnly
+					aria-readonly="true"
+					className={`${inputClass} cursor-not-allowed opacity-60 ${required && showError && !value.accountHolder ? errorBorder : normalBorder}`}
 				/>
 			</div>
 		</>

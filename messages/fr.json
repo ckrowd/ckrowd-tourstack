@@ -774,7 +774,7 @@
           "label": "Nom du titulaire du compte",
           "placeholder": "ex. Afrobeats Promotions Ltd",
           "verified": "Compte vérifié",
-          "verifyFailed": "Impossible de vérifier — saisissez manuellement"
+          "verifyFailed": "Impossible de vérifier ce compte. Veuillez vérifier les détails et réessayer."
         },
         "bankAccountNumber": {
           "label": "Numéro de compte",
