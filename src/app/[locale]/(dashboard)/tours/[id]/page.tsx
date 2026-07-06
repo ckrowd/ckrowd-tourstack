@@ -4,7 +4,22 @@ import AITourScorePanel from "@/components/AITourScorePanel";
 import TourReportForm from "@/components/TourReportForm";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
+import StatusBadge, { type StatusTone } from "@/components/ui/StatusBadge";
 import { Link } from "@/i18n/routing";
+
+function tourStatusToTone(status: string): StatusTone {
+	switch (status) {
+		case "confirmed":
+			return "approved";
+		case "rejected":
+			return "rejected";
+		case "needs_revision":
+		case "needs revision":
+			return "contacted";
+		default:
+			return "pending";
+	}
+}
 
 export default async function TourDetailPage({
 	params,
@@ -23,14 +38,6 @@ export default async function TourDetailPage({
 	const tour = tourResult.data;
 	const milestones = milestonesResult.data ?? [];
 	const status = String(tour?.status ?? "pending").toLowerCase();
-	const statusColor =
-		status === "confirmed"
-			? "bg-emerald-100 text-emerald-800"
-			: status === "rejected"
-				? "bg-red-100 text-red-800"
-				: status === "needs_revision" || status === "needs revision"
-					? "bg-blue-100 text-blue-800"
-					: "bg-yellow-100 text-yellow-800";
 
 	return (
 		<div className="bg-surface text-on-surface">
@@ -81,11 +88,9 @@ export default async function TourDetailPage({
 												{String(tour.artist?.genre ?? "")}
 											</p>
 										</div>
-										<span
-											className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter ${statusColor}`}
-										>
+										<StatusBadge tone={tourStatusToTone(status)}>
 											{String(tour.status ?? "pending").replace(/_/g, " ")}
-										</span>
+										</StatusBadge>
 									</div>
 
 									<div className="grid grid-cols-2 md:grid-cols-3 gap-3">

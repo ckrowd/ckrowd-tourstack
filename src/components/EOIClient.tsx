@@ -7,6 +7,7 @@ import { Suspense, useMemo, useState } from "react";
 import { createEOI, getArtists, getTourstackProfile } from "@/app/actions";
 import { useSession } from "@/context/AuthContext";
 import BankSelect, { type BankDetails } from "@/components/ui/BankSelect";
+import Button from "@/components/ui/Button";
 import FormattedNumberInput from "@/components/ui/FormattedNumberInput";
 import { Link } from "@/i18n/routing";
 
@@ -1210,18 +1211,16 @@ function EOIPageContent() {
 									)}
 
 									<div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-6">
-										<button type="button" onClick={() => setStep(s => Math.max(0, s - 1))} disabled={step === 0}
-											className="rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50">
+										<Button type="button" variant="secondary" onClick={() => setStep(s => Math.max(0, s - 1))} disabled={step === 0}>
 											{t("actions.back")}
-										</button>
+										</Button>
 										<div className="flex flex-wrap items-center gap-3">
-											<Link href="/discovery" className="rounded-full border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
+											<Button href="/discovery" variant="secondary">
 												{t("actions.cancel")}
-											</Link>
-											<button type="submit" disabled={submitting}
-												className="rounded-full bg-[#FF5A2E] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60">
+											</Button>
+											<Button type="submit" disabled={submitting}>
 												{submitting ? t("actions.submitting") : step === STEPS.length - 1 ? t("actions.submit") : t("actions.continue")}
-											</button>
+											</Button>
 										</div>
 									</div>
 								</form>

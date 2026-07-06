@@ -4,9 +4,25 @@ import { getEOIs, getTours, getTourstackDashboard } from "@/app/actions";
 import PageTour from "@/components/PageTour";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
+import Button from "@/components/ui/Button";
+import StatusBadge, { type StatusTone } from "@/components/ui/StatusBadge";
 import { Link } from "@/i18n/routing";
 
 const PAGE_SIZE = 8;
+
+function tourStatusToTone(statusLower: string): StatusTone {
+	switch (statusLower) {
+		case "confirmed":
+			return "approved";
+		case "rejected":
+			return "rejected";
+		case "needs_revision":
+		case "needs revision":
+			return "contacted";
+		default:
+			return "pending";
+	}
+}
 
 function getDaysAway(date: Date | null | undefined): number | null {
 	return date ? Math.round((date.getTime() - Date.now()) / 86400000) : null;
@@ -150,13 +166,10 @@ export default async function ToursPage({ params, searchParams }: Props) {
 								{t("description")}
 							</p>
 						</div>
-						<Link
-							href="/eoi"
-							className="flex items-center gap-2 bg-[#FF5A2E] text-white px-6 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-all self-start md:self-auto"
-						>
+						<Button href="/eoi" className="self-start md:self-auto shadow-lg shadow-primary/20">
 							<span className="material-symbols-outlined text-sm">add</span>
 							{t("newTourStop")}
-						</Link>
+						</Button>
 					</div>
 
 					{/* Summary strip */}
@@ -308,15 +321,12 @@ export default async function ToursPage({ params, searchParams }: Props) {
 									<p className="text-on-surface-variant text-sm max-w-xs mx-auto mb-6">
 										{t("noStopsDesc")}
 									</p>
-									<Link
-										href="/eoi"
-										className="inline-flex items-center gap-2 bg-[#FF5A2E] text-white px-6 py-3 rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity"
-									>
+									<Button href="/eoi">
 										<span className="material-symbols-outlined text-sm">
 											add
 										</span>
 										{t("submitEoi")}
-									</Link>
+									</Button>
 								</div>
 							) : (
 								<>
@@ -334,15 +344,6 @@ export default async function ToursPage({ params, searchParams }: Props) {
 												: 0;
 										const tourStatus = String(tour.status ?? "");
 										const statusLower = tourStatus.toLowerCase();
-										const statusColor =
-											statusLower === "confirmed"
-												? "bg-emerald-100 text-emerald-800"
-												: statusLower === "rejected"
-													? "bg-red-100 text-red-800"
-													: statusLower === "needs_revision" ||
-															statusLower === "needs revision"
-														? "bg-blue-100 text-blue-800"
-														: "bg-yellow-100 text-yellow-800";
 										const daysAway = getDaysAway(tour.date);
 
 										return (
@@ -391,11 +392,9 @@ export default async function ToursPage({ params, searchParams }: Props) {
 																	)}
 																</p>
 															</div>
-															<span
-																className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter shrink-0 ${statusColor}`}
-															>
+															<StatusBadge tone={tourStatusToTone(statusLower)} className="shrink-0">
 																{tourStatus.replace(/_/g, " ")}
-															</span>
+															</StatusBadge>
 														</div>
 
 														<div className="flex flex-wrap gap-x-5 gap-y-1.5 text-sm text-on-surface-variant">
