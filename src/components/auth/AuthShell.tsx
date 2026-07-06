@@ -76,7 +76,7 @@ export default function AuthShell({ children }: { children: React.ReactNode }) {
 				</Link>
 
 				<div className="relative z-10 max-w-md">
-					<h2 className="font-(family-name:--font-display) text-4xl xl:text-5xl leading-[1.05] tracking-tight">
+					<h2 className="font-(family-name:--font-display) text-4xl xl:text-5xl leading-[1.05] tracking-tight text-white">
 						{tLanding("hero.title1")} {tLanding("hero.title2")}{" "}
 						<span className="text-orange">{tLanding("hero.title3")}</span>
 					</h2>
