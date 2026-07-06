@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { useId, useState } from "react";
 import HowItWorksModal from "@/components/HowItWorksModal";
+import StatusBadge, { type StatusTone } from "@/components/ui/StatusBadge";
 
 type Application = { id: string; product?: string | null; amount_requested?: number | null; currency?: string | null; status?: string | null; created_at?: Date | string | null; tour?: { artist?: { name?: string | null } | null } | null };
 
@@ -11,12 +12,12 @@ interface Props {
 	locale: string;
 }
 
-function insStatusColor(status: string) {
+function insStatusToTone(status: string): StatusTone {
 	switch (status) {
-		case "approved": return "bg-emerald-100 text-emerald-800";
-		case "declined": return "bg-red-100 text-red-800";
-		case "disbursed": return "bg-purple-100 text-purple-800";
-		default: return "bg-yellow-100 text-yellow-800";
+		case "approved": return "approved";
+		case "declined": return "rejected";
+		case "disbursed": return "booked";
+		default: return "pending";
 	}
 }
 
@@ -210,7 +211,6 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 						{applications.map((app) => {
 							const status = String(app.status ?? "pending");
-							const color = insStatusColor(status);
 							return (
 								<div
 									key={String(app.id)}
@@ -225,9 +225,9 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 												{String(app.tour?.artist?.name ?? "")}
 											</p>
 										</div>
-										<span className={`px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-tight shrink-0 ${color}`}>
+										<StatusBadge tone={insStatusToTone(status)} className="shrink-0">
 											{t(`statuses.${status}`)}
-										</span>
+										</StatusBadge>
 									</div>
 									<div className="grid grid-cols-2 gap-3">
 										<div className="p-3 bg-surface-container-low rounded-lg">

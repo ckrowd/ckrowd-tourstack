@@ -1,13 +1,15 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getFinancingEois } from "@/app/actions";
+import Button from "@/components/ui/Button";
+import StatusBadge, { type StatusTone } from "@/components/ui/StatusBadge";
 import { Link } from "@/i18n/routing";
 
-function statusClass(status: string) {
+function financeStatusToTone(status: string): StatusTone {
 	switch (status) {
 		case "disbursed":
-			return "bg-emerald-100 text-emerald-800";
+			return "approved";
 		default:
-			return "bg-yellow-100 text-yellow-800";
+			return "pending";
 	}
 }
 
@@ -42,13 +44,13 @@ export default async function FinancingAdminPage({
 						{t("description")}
 					</p>
 				</div>
-				<Link
+				<Button
 					href="/financing-admin/applications"
-					className="flex items-center gap-2 px-4 py-2.5 bg-[#FF5A2E] text-white rounded-xl font-(family-name:--font-manrope) text-sm font-semibold shadow-lg shadow-[#FF5A2E]/20 hover:scale-[1.02] transition-transform active:scale-95 shrink-0"
+					className="font-(family-name:--font-manrope) shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 shrink-0"
 				>
 					<span className="material-symbols-outlined text-base">rate_review</span>
 					{t("reviewQueue")}
-				</Link>
+				</Button>
 			</div>
 
 			<div className="grid grid-cols-1 xl:grid-cols-[1.25fr_0.75fr] gap-8">
@@ -110,11 +112,9 @@ export default async function FinancingAdminPage({
 													<span className="text-xs font-black text-[#FF5A2E] uppercase tracking-widest">
 														{`#${String(eoi.id).slice(-6).toUpperCase()}`}
 													</span>
-													<span
-														className={`px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-tighter ${statusClass(financeStatus)}`}
-													>
+													<StatusBadge tone={financeStatusToTone(financeStatus)}>
 														{t(`status.${financeStatus}`)}
-													</span>
+													</StatusBadge>
 												</div>
 												<p className="font-(family-name:--font-manrope) font-semibold text-on-surface truncate">
 													{promoterName}
