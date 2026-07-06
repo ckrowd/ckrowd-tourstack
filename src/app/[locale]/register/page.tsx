@@ -55,7 +55,7 @@ export default function RegisterPage() {
 
 	if ((isLoading || isFetching) && !session) {
 		return (
-			<div className="min-h-[100dvh] bg-[#0a0a0a] flex items-center justify-center px-4 text-white/50 text-sm font-(family-name:--font-geist)">
+			<div className="min-h-[100dvh] bg-[#0a0a0a] flex items-center justify-center px-4 text-[var(--muted)] text-sm font-(family-name:--font-geist)">
 				{t("loading")}
 			</div>
 		);
@@ -68,7 +68,7 @@ export default function RegisterPage() {
 					{t("tagline")}
 				</p>
 				<h1 className={authTitle}>{t("title")}</h1>
-				<p className="mt-2 text-sm text-white/55">{t("description")}</p>
+				<p className="mt-2 text-sm text-[var(--muted)]">{t("description")}</p>
 			</div>
 
 			<form onSubmit={handleSubmit} className="space-y-4">
@@ -161,9 +161,9 @@ export default function RegisterPage() {
 						<svg className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
 							<path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
 						</svg>
-						<p className="text-sm text-amber-200 font-medium">
+						<p className="text-sm text-amber-500 font-medium">
 							{t("errorAlreadyExists")}{" "}
-							<Link href="/login" className="underline font-semibold hover:text-amber-100">
+							<Link href="/login" className="underline font-semibold hover:text-amber-400">
 								{t("signIn")}
 							</Link>
 						</p>
@@ -180,16 +180,16 @@ export default function RegisterPage() {
 			</form>
 
 			<div className="flex items-center gap-3 my-6">
-				<span className="h-px flex-1 bg-white/10" />
-				<span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/35">
+				<span className="h-px flex-1 bg-[var(--hair)]" />
+				<span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--muted)]">
 					{tAuth("orDivider")}
 				</span>
-				<span className="h-px flex-1 bg-white/10" />
+				<span className="h-px flex-1 bg-[var(--hair)]" />
 			</div>
 
 			<GoogleSignInButton callbackPath="/dashboard" />
 
-			<p className="text-center text-sm text-white/50 mt-7">
+			<p className="text-center text-sm text-[var(--muted)] mt-7">
 				{t("alreadyHaveAccount")}{" "}
 				<Link href="/login" className="text-orange font-semibold hover:text-ember transition-colors">
 					{t("signIn")}

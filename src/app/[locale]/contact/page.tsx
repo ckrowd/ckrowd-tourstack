@@ -2,39 +2,14 @@
 
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import ThemeToggle from "@/components/theme/ThemeToggle";
+import { useTsTheme } from "@/components/theme/useTsTheme";
 import { Link } from "@/i18n/routing";
-import "../tourstack-landing.css";
 
 export default function ContactPage() {
 	const t = useTranslations("ContactPage");
 	const tCommon = useTranslations("Common");
-
-	// Share the landing's theme system: `.tslp` theme vars, `ts-theme` storage.
-	const [theme, setTheme] = useState<"dark" | "light">("dark");
-	useEffect(() => {
-		let saved: string | null = null;
-		try {
-			saved = localStorage.getItem("ts-theme");
-		} catch {}
-		const next =
-			saved === "light" || saved === "dark"
-				? (saved as "light" | "dark")
-				: typeof matchMedia !== "undefined" &&
-						matchMedia("(prefers-color-scheme: light)").matches
-					? "light"
-					: "dark";
-		setTheme(next);
-	}, []);
-	function toggleTheme() {
-		setTheme((cur) => {
-			const next = cur === "dark" ? "light" : "dark";
-			try {
-				localStorage.setItem("ts-theme", next);
-			} catch {}
-			return next;
-		});
-	}
+	const { theme, toggle } = useTsTheme();
 
 	const contactItems = [
 		{
@@ -69,7 +44,7 @@ export default function ContactPage() {
 
 	return (
 		<div
-			className={`tslp relative min-h-[100dvh] flex flex-col overflow-hidden ${
+			className={`ts-theme relative min-h-[100dvh] flex flex-col overflow-hidden ${
 				theme === "light" ? "light" : ""
 			}`}
 		>
@@ -95,16 +70,7 @@ export default function ContactPage() {
 					</span>
 				</Link>
 				<div className="flex items-center gap-2">
-					<button
-						type="button"
-						onClick={toggleTheme}
-						aria-label="Toggle theme"
-						className="grid h-9 w-9 place-items-center rounded-full border border-[var(--hair)] text-[var(--muted)] hover:text-[var(--text)] hover:border-orange/40 transition-colors"
-					>
-						<span className="material-symbols-outlined text-[20px]">
-							{theme === "dark" ? "light_mode" : "dark_mode"}
-						</span>
-					</button>
+					<ThemeToggle theme={theme} onToggle={toggle} />
 					<Link
 						href="/"
 						className="group inline-flex items-center gap-1.5 text-sm font-medium text-[var(--muted)] hover:text-[var(--text)] transition-colors"

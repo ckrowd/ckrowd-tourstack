@@ -12,7 +12,7 @@ import { getRegularLoginRedirectPath } from "@/lib/auth";
 
 function AuthLoading({ label }: { label: string }) {
 	return (
-		<div className="min-h-[100dvh] bg-[#0a0a0a] flex items-center justify-center px-4 text-white/50 text-sm font-(family-name:--font-geist)">
+		<div className="min-h-[100dvh] bg-[#0a0a0a] flex items-center justify-center px-4 text-[var(--muted)] text-sm font-(family-name:--font-geist)">
 			{label}
 		</div>
 	);
@@ -73,7 +73,7 @@ function LoginPageContent() {
 		<AuthShell>
 			<div className="mb-8">
 				<h1 className={authTitle}>{t("title")}</h1>
-				<p className="mt-2 text-sm text-white/55">{t("description")}</p>
+				<p className="mt-2 text-sm text-[var(--muted)]">{t("description")}</p>
 			</div>
 
 			{verified && (
@@ -147,29 +147,29 @@ function LoginPageContent() {
 			</form>
 
 			<div className="flex items-center gap-3 my-6">
-				<span className="h-px flex-1 bg-white/10" />
-				<span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/35">
+				<span className="h-px flex-1 bg-[var(--hair)]" />
+				<span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--muted)]">
 					{tAuth("orDivider")}
 				</span>
-				<span className="h-px flex-1 bg-white/10" />
+				<span className="h-px flex-1 bg-[var(--hair)]" />
 			</div>
 
 			<GoogleSignInButton callbackPath={from} />
 
-			<p className="text-center text-sm text-white/50 mt-7">
+			<p className="text-center text-sm text-[var(--muted)] mt-7">
 				{t("noAccount")}{" "}
 				<Link href="/register" className="text-orange font-semibold hover:text-ember transition-colors">
 					{t("register")}
 				</Link>
 			</p>
 
-			<p className="text-center text-xs text-white/35 mt-8">
+			<p className="text-center text-xs text-[var(--muted)] mt-8">
 				{t("agreeTo")}{" "}
-				<Link href="/terms" className="hover:text-white/60 transition-colors underline-offset-2 hover:underline">
+				<Link href="/terms" className="hover:text-[var(--text)] transition-colors underline-offset-2 hover:underline">
 					{t("terms")}
 				</Link>{" "}
 				{t("and")}{" "}
-				<Link href="/privacy" className="hover:text-white/60 transition-colors underline-offset-2 hover:underline">
+				<Link href="/privacy" className="hover:text-[var(--text)] transition-colors underline-offset-2 hover:underline">
 					{t("privacy")}
 				</Link>
 				.

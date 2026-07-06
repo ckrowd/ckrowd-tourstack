@@ -3,6 +3,8 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import ThemeToggle from "@/components/theme/ThemeToggle";
+import { useTsTheme } from "@/components/theme/useTsTheme";
 import { Link } from "@/i18n/routing";
 
 /**
@@ -18,6 +20,7 @@ import { Link } from "@/i18n/routing";
 export default function AuthShell({ children }: { children: React.ReactNode }) {
 	const tLanding = useTranslations("TourstackLanding");
 	const tCommon = useTranslations("Common");
+	const { theme, toggle } = useTsTheme();
 	const [mounted, setMounted] = useState(false);
 
 	useEffect(() => {
@@ -34,7 +37,9 @@ export default function AuthShell({ children }: { children: React.ReactNode }) {
 	const proof = [stats[0], stats[3], stats[2]].filter(Boolean);
 
 	return (
-		<div className="min-h-[100dvh] w-full bg-[#0a0a0a] text-white font-(family-name:--font-geist) grid lg:grid-cols-[1.05fr_1fr]">
+		<div
+			className={`ts-theme ${theme === "light" ? "light" : ""} min-h-[100dvh] w-full font-(family-name:--font-geist) grid lg:grid-cols-[1.05fr_1fr]`}
+		>
 			{/* Brand panel */}
 			<aside className="relative hidden lg:flex flex-col justify-between overflow-hidden p-12 xl:p-16">
 				<Image
@@ -96,6 +101,9 @@ export default function AuthShell({ children }: { children: React.ReactNode }) {
 
 			{/* Form column */}
 			<main className="relative flex flex-col px-5 py-8 sm:px-10 md:px-12">
+				<div className="absolute right-5 top-6 sm:right-8 md:right-10 z-10">
+					<ThemeToggle theme={theme} onToggle={toggle} />
+				</div>
 				{/* Mobile brand row */}
 				<Link
 					href="/"
