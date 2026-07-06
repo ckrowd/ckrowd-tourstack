@@ -5,13 +5,14 @@ import { useFormatter, useTranslations } from "next-intl";
 import { Fragment, useState } from "react";
 import { getAdminSubmissions } from "@/app/actions";
 import Loader from "@/components/Loader";
+import Button from "@/components/ui/Button";
 
 type Category = "financing" | "insurance" | "eoi";
 
 const CATEGORY_COLORS: Record<string, { bg: string; text: string; icon: string }> = {
-	financing: { bg: "bg-blue-100", text: "text-blue-700", icon: "account_balance" },
-	insurance: { bg: "bg-purple-100", text: "text-purple-700", icon: "shield" },
-	eoi: { bg: "bg-orange-100", text: "text-[#FF5A2E]", icon: "send" },
+	financing: { bg: "bg-blue-100 dark:bg-blue-500/20", text: "text-blue-700 dark:text-blue-300", icon: "account_balance" },
+	insurance: { bg: "bg-purple-100 dark:bg-purple-500/20", text: "text-purple-700 dark:text-purple-300", icon: "shield" },
+	eoi: { bg: "bg-primary/10", text: "text-primary", icon: "send" },
 };
 
 export default function AdminSubmissionsPage() {
@@ -73,7 +74,7 @@ export default function AdminSubmissionsPage() {
 		<div>
 			{/* Header */}
 			<div className="mb-8">
-				<span className="inline-block px-3 py-1 rounded-full bg-[#FF5A2E]/10 text-[#FF5A2E] text-xs font-semibold uppercase tracking-wider mb-3">
+				<span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider mb-3">
 					{t("badge")}
 				</span>
 				<h1 className="font-(family-name:--font-manrope) text-3xl font-black text-on-surface">
@@ -85,18 +86,15 @@ export default function AdminSubmissionsPage() {
 			{/* Category tabs */}
 			<div className="flex gap-2 mb-6 flex-wrap">
 				{TABS.map((tab) => (
-					<button
+					<Button
 						key={tab.key}
 						type="button"
+						variant={activeCategory === tab.key ? "primary" : "secondary"}
 						onClick={() => setActiveCategory(tab.key)}
-						className={`px-4 py-2 rounded-xl text-sm font-semibold transition-colors ${
-							activeCategory === tab.key
-								? "bg-[#FF5A2E] text-white shadow-md shadow-[#FF5A2E]/20"
-								: "bg-white text-slate-600 border border-slate-200 hover:bg-slate-50"
-						}`}
+						className={activeCategory === tab.key ? "shadow-md shadow-primary/20" : ""}
 					>
 						{tab.label}
-					</button>
+					</Button>
 				))}
 			</div>
 
@@ -105,39 +103,39 @@ export default function AdminSubmissionsPage() {
 				<Loader />
 			) : submissions.length === 0 ? (
 				<div className="flex flex-col items-center justify-center py-24 text-on-surface-variant text-center">
-					<span className="material-symbols-outlined text-5xl mb-4 text-slate-300">
+					<span className="material-symbols-outlined text-5xl mb-4 text-on-surface-variant/40">
 						folder_open
 					</span>
 					<p className="font-semibold text-lg">{t("empty")}</p>
 					<p className="text-sm mt-1">{t("emptyHint")}</p>
 				</div>
 			) : (
-				<div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+				<div className="bg-surface-container-lowest rounded-2xl border border-outline-variant/20 shadow-sm overflow-hidden">
 					<table className="w-full text-sm">
-						<thead className="bg-slate-50 border-b border-slate-100">
+						<thead className="bg-surface-container-low border-b border-outline-variant/20">
 							<tr>
-								<th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">
+								<th className="text-left px-5 py-3 text-xs font-semibold text-on-surface-variant uppercase tracking-wide">
 									{t("category")}
 								</th>
-								<th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide">
+								<th className="text-left px-5 py-3 text-xs font-semibold text-on-surface-variant uppercase tracking-wide">
 									{t("submissionTitle")}
 								</th>
-								<th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide hidden md:table-cell">
+								<th className="text-left px-5 py-3 text-xs font-semibold text-on-surface-variant uppercase tracking-wide hidden md:table-cell">
 									{t("submittedBy")}
 								</th>
-								<th className="text-left px-5 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wide hidden md:table-cell">
+								<th className="text-left px-5 py-3 text-xs font-semibold text-on-surface-variant uppercase tracking-wide hidden md:table-cell">
 									{t("submittedAt")}
 								</th>
 								<th className="px-5 py-3" />
 							</tr>
 						</thead>
-						<tbody className="divide-y divide-slate-50">
+						<tbody className="divide-y divide-outline-variant/10">
 							{submissions.map((sub) => {
 								const subId = String(sub.id);
 								const cat = String(sub.category) as Category;
 								const colors = CATEGORY_COLORS[cat] ?? {
-									bg: "bg-slate-100",
-									text: "text-slate-600",
+									bg: "bg-surface-container-high",
+									text: "text-on-surface-variant",
 									icon: "description",
 								};
 								const profile = sub.profile as
@@ -152,7 +150,7 @@ export default function AdminSubmissionsPage() {
 								return (
 									<Fragment key={subId}>
 										<tr
-											className="hover:bg-slate-50 transition-colors"
+											className="hover:bg-surface-container-low transition-colors"
 										>
 											<td className="px-5 py-4">
 												<span
@@ -162,8 +160,8 @@ export default function AdminSubmissionsPage() {
 													{cat.toUpperCase()}
 												</span>
 											</td>
-											<td className="px-5 py-4 text-slate-800 font-medium">{String(sub.title)}</td>
-											<td className="px-5 py-4 text-slate-600 hidden md:table-cell">
+											<td className="px-5 py-4 text-on-surface font-medium">{String(sub.title)}</td>
+											<td className="px-5 py-4 text-on-surface-variant hidden md:table-cell">
 												<p className="font-medium">
 													{profile?.company_name
 														? String(profile.company_name)
@@ -172,10 +170,10 @@ export default function AdminSubmissionsPage() {
 															: "—"}
 												</p>
 												{profile?.user?.email && (
-													<p className="text-xs text-slate-400">{String(profile.user.email)}</p>
+													<p className="text-xs text-on-surface-variant/70">{String(profile.user.email)}</p>
 												)}
 											</td>
-											<td className="px-5 py-4 text-slate-500 whitespace-nowrap hidden md:table-cell">
+											<td className="px-5 py-4 text-on-surface-variant whitespace-nowrap hidden md:table-cell">
 												{sub.submitted_at
 													? format.relativeTime(new Date(String(sub.submitted_at)))
 													: "—"}
@@ -185,7 +183,7 @@ export default function AdminSubmissionsPage() {
 													<button
 														type="button"
 														onClick={() => setExpandedId(isExpanded ? null : subId)}
-														className="text-xs text-[#FF5A2E] font-semibold hover:underline"
+														className="text-xs text-primary font-semibold hover:underline"
 													>
 														{t("viewData")}
 													</button>
@@ -193,7 +191,7 @@ export default function AdminSubmissionsPage() {
 														<button
 															type="button"
 															onClick={() => downloadFormData(sub)}
-															className="text-xs text-blue-600 font-semibold hover:underline flex items-center gap-1"
+															className="text-xs text-status-contacted font-semibold hover:underline flex items-center gap-1"
 														>
 															<span className="material-symbols-outlined text-xs">
 																download
@@ -205,17 +203,17 @@ export default function AdminSubmissionsPage() {
 											</td>
 										</tr>
 										{isExpanded && sub.form_data && (
-											<tr className="bg-slate-50">
+											<tr className="bg-surface-container-low">
 												<td colSpan={5} className="px-5 py-4">
 													<div className="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-2 text-xs">
 														{Object.entries(
 															sub.form_data as Record<string, unknown>,
 														).map(([k, v]) => (
 															<div key={k} className="flex flex-col gap-0.5">
-																<span className="text-slate-400 font-semibold uppercase tracking-wide text-[10px]">
+																<span className="text-on-surface-variant/70 font-semibold uppercase tracking-wide text-[10px]">
 																	{k}
 																</span>
-																<span className="text-slate-700 font-medium break-all">
+																<span className="text-on-surface font-medium break-all">
 																	{typeof v === "object" ? JSON.stringify(v) : String(v ?? "—")}
 																</span>
 															</div>
