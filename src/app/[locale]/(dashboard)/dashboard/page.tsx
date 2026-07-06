@@ -13,6 +13,22 @@ import { computeEcosystemReadiness } from "@/lib/eligibility";
 import TopNav from "@/components/TopNav";
 import { Link } from "@/i18n/routing";
 import PageTour from "@/components/PageTour";
+import Button from "@/components/ui/Button";
+import StatusBadge, { type StatusTone } from "@/components/ui/StatusBadge";
+
+function eoiStatusToTone(status: string): StatusTone {
+	switch (status) {
+		case "approved":
+		case "confirmed":
+			return "approved";
+		case "rejected":
+			return "rejected";
+		case "needs_revision":
+			return "contacted";
+		default:
+			return "pending";
+	}
+}
 
 function formatTimeAgo(
 	date: Date,
@@ -112,13 +128,9 @@ export default async function DashboardPage({ params }: Props) {
 	const progressStatusLabel = progressEOI
 		? t(`statuses.${String(progressEOI.status ?? "pending")}`)
 		: t("noEois");
-	const progressStatusColor = progressEOI
-		? String(progressEOI.status) === "approved"
-			? "bg-emerald-100 text-emerald-800"
-			: String(progressEOI.status) === "rejected"
-				? "bg-red-100 text-red-800"
-				: "bg-yellow-100 text-yellow-800"
-		: "bg-surface-container-high text-on-surface-variant";
+	const progressStatusTone: StatusTone = progressEOI
+		? eoiStatusToTone(String(progressEOI.status ?? "pending"))
+		: "neutral";
 	const tourSteps = [
 		{ n: "01", label: t("steps.eoiSubmitted"), done: progressStepsDone >= 1 },
 		{ n: "02", label: t("steps.underReview"), done: progressStepsDone >= 2 },
@@ -176,12 +188,9 @@ export default async function DashboardPage({ params }: Props) {
 									</p>
 								</div>
 							</div>
-							<Link
-								href="/financing"
-								className="bg-[#FF5A2E] text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-all shrink-0"
-							>
+							<Button href="/financing" className="shrink-0">
 								{t("financePrompt.cta")}
-							</Link>
+							</Button>
 						</div>
 					)}
 					{(hasInsuranceRequest && !hasInsuranceApp) && (
@@ -202,12 +211,9 @@ export default async function DashboardPage({ params }: Props) {
 									</p>
 								</div>
 							</div>
-							<Link
-								href="/insurance"
-								className="bg-blue-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-all shrink-0"
-							>
+							<Button href="/insurance" className="shrink-0">
 								{t("insurancePrompt.cta")}
-							</Link>
+							</Button>
 						</div>
 					)}
 					{/* Document upload prompt for approved EOIs */}
@@ -231,12 +237,12 @@ export default async function DashboardPage({ params }: Props) {
 									</p>
 								</div>
 							</div>
-							<Link
+							<Button
 								href={`/eoi/documents?eoiId=${String(approvedEoi.id)}`}
-								className="bg-emerald-600 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-all shrink-0"
+								className="shrink-0"
 							>
 								{t("docsPrompt.cta")}
-							</Link>
+							</Button>
 						</div>
 					)}
 					{/* Tour Progress Tracker */}
@@ -245,11 +251,9 @@ export default async function DashboardPage({ params }: Props) {
 							<h2 className="font-(family-name:--font-manrope) font-semibold text-sm md:text-base truncate">
 								{progressTitle}
 							</h2>
-							<span
-								className={`px-2 md:px-3 py-1 rounded-full text-[10px] font-black tracking-tight shrink-0 ${progressStatusColor}`}
-							>
+							<StatusBadge tone={progressStatusTone} className="shrink-0">
 								{progressStatusLabel}
-							</span>
+							</StatusBadge>
 						</div>
 						<div>
 							<div className="flex items-center justify-between relative mt-6">
@@ -452,14 +456,6 @@ export default async function DashboardPage({ params }: Props) {
 											eois.map((req) => {
 												const reqArtist = req.artist;
 												const status = String(req.status ?? "pending");
-												const statusColor =
-													status === "approved"
-														? "bg-emerald-100 text-emerald-800"
-														: status === "rejected"
-															? "bg-red-100 text-red-800"
-															: status === "needs_revision"
-																? "bg-blue-100 text-blue-800"
-																: "bg-yellow-100 text-yellow-800";
 												return (
 													<tr
 														key={String(req.id ?? req.city)}
@@ -497,11 +493,9 @@ export default async function DashboardPage({ params }: Props) {
 															{String(req.venue ?? req.city ?? "—")}
 														</td>
 														<td className="px-5 py-4">
-															<span
-																className={`px-3 py-1 rounded-full text-[10px] font-black tracking-tight ${statusColor}`}
-															>
+															<StatusBadge tone={eoiStatusToTone(status)}>
 																{t(`statuses.${status}`)}
-															</span>
+															</StatusBadge>
 														</td>
 																											</tr>
 												);
