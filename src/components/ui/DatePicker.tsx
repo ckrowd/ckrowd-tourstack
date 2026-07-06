@@ -86,6 +86,12 @@ export default function DatePicker({
 						}}
 						captionLayout="dropdown"
 						defaultMonth={selected}
+						// The dropdown caption defaults to 100 years ago through the end of
+						// the current year (react-day-picker's own default) — too narrow
+						// for future-dated fields like tour availability windows, so widen
+						// it to also cover the next decade.
+						startMonth={new Date(new Date().getFullYear() - 100, 0)}
+						endMonth={new Date(new Date().getFullYear() + 10, 11)}
 						style={{ "--rdp-accent-color": "#FF5A30", "--rdp-accent-background-color": "#FFF1EC" } as React.CSSProperties}
 					/>
 				</div>
