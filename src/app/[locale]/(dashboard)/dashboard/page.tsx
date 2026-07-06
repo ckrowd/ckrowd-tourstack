@@ -15,6 +15,7 @@ import { Link } from "@/i18n/routing";
 import PageTour from "@/components/PageTour";
 import Button from "@/components/ui/Button";
 import StatusBadge, { type StatusTone } from "@/components/ui/StatusBadge";
+import StatusStepper from "@/components/ui/StatusStepper";
 
 function eoiStatusToTone(status: string): StatusTone {
 	switch (status) {
@@ -115,9 +116,6 @@ export default async function DashboardPage({ params }: Props) {
 	const progressStepsDone = progressEOI
 		? (statusStepDone[String(progressEOI.status ?? "pending_review")] ?? 2)
 		: 0;
-	const progressWidthClass =
-		["w-0", "w-1/4", "w-2/4", "w-3/4", "w-full"][progressStepsDone] ??
-		"w-0";
 	const progressArtist = progressEOI?.artist;
 	const progressTitle = progressEOI
 		? t("eoiProgressTitle", {
@@ -132,10 +130,10 @@ export default async function DashboardPage({ params }: Props) {
 		? eoiStatusToTone(String(progressEOI.status ?? "pending"))
 		: "neutral";
 	const tourSteps = [
-		{ n: "01", label: t("steps.eoiSubmitted"), done: progressStepsDone >= 1 },
-		{ n: "02", label: t("steps.underReview"), done: progressStepsDone >= 2 },
-		{ n: "03", label: t("steps.decision"), done: progressStepsDone >= 3 },
-		{ n: "04", label: t("steps.confirmed"), done: progressStepsDone >= 4 },
+		{ label: t("steps.eoiSubmitted"), done: progressStepsDone >= 1 },
+		{ label: t("steps.underReview"), done: progressStepsDone >= 2 },
+		{ label: t("steps.decision"), done: progressStepsDone >= 3 },
+		{ label: t("steps.confirmed"), done: progressStepsDone >= 4 },
 	];
 	return (
 		<div className="bg-surface text-on-surface">
@@ -255,42 +253,7 @@ export default async function DashboardPage({ params }: Props) {
 								{progressStatusLabel}
 							</StatusBadge>
 						</div>
-						<div>
-							<div className="flex items-center justify-between relative mt-6">
-								<div className="absolute top-4 left-0 w-full h-0.5 bg-surface-variant z-0" />
-								<div
-									className={`absolute top-4 left-0 h-0.5 bg-[#FF5A2E] z-0 transition-all duration-500 ${progressWidthClass}`}
-								/>
-								{tourSteps.map((s) => (
-									<div
-										key={s.n}
-										className="relative z-10 flex flex-col items-center gap-1.5"
-									>
-										<div
-											className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-semibold text-xs md:text-sm ring-4 ring-surface-container-lowest transition-all ${
-												s.done
-													? "bg-[#FF5A2E] text-white"
-													: "bg-surface-variant text-on-surface-variant"
-											}`}
-										>
-											{s.done ? (
-												<span
-													className="material-symbols-outlined text-xs md:text-sm"
-													style={{ fontVariationSettings: "'FILL' 1" }}
-												>
-													check
-												</span>
-											) : (
-												s.n
-											)}
-										</div>
-										<span className="text-[9px] md:text-[10px] font-semibold uppercase tracking-wide text-center w-14 leading-tight text-on-surface-variant">
-											{s.label}
-										</span>
-									</div>
-								))}
-							</div>
-						</div>
+						<StatusStepper steps={tourSteps} />
 					</div>
 
 					{/* Ecosystem readiness nudge (hidden once eligible) */}

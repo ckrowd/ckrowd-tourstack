@@ -1,11 +1,44 @@
 ﻿import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getAdminEOIs, getAdminTours } from "@/app/actions";
 import PageTour from "@/components/PageTour";
+import Button from "@/components/ui/Button";
+import StatusBadge, { type StatusTone } from "@/components/ui/StatusBadge";
 import { Link } from "@/i18n/routing";
 
 type Props = {
 	params: Promise<{ locale: string }>;
 };
+
+function eoiStatusToTone(status: string): StatusTone {
+	switch (status) {
+		case "approved":
+		case "confirmed":
+			return "approved";
+		case "rejected":
+			return "rejected";
+		case "needs_revision":
+			return "contacted";
+		default:
+			return "pending";
+	}
+}
+
+function tourStatusToTone(statusLower: string): StatusTone {
+	switch (statusLower) {
+		case "active":
+		case "confirmed":
+			return "approved";
+		case "rejected":
+			return "rejected";
+		case "needs_revision":
+		case "needs revision":
+			return "contacted";
+		case "draft":
+			return "neutral";
+		default:
+			return "pending";
+	}
+}
 
 export default async function AdminPage({ params }: Props) {
 	const { locale } = await params;
@@ -49,13 +82,13 @@ export default async function AdminPage({ params }: Props) {
 						{t("description")}
 					</p>
 				</div>
-				<Link
+				<Button
 					href="/admin/tours/create"
-					className="flex items-center gap-2 px-6 py-3 bg-[#FF5A2E] text-white rounded-xl font-(family-name:--font-manrope) font-semibold shadow-lg shadow-[#FF5A2E]/20 hover:scale-[1.02] transition-transform active:scale-95 shrink-0"
+					className="font-(family-name:--font-manrope) shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 shrink-0"
 				>
 					<span className="material-symbols-outlined">add</span>
 					{t("createTour")}
-				</Link>
+				</Button>
 			</div>
 
 			{/* Stats */}
@@ -153,16 +186,12 @@ export default async function AdminPage({ params }: Props) {
 											{String(tArtist?.genre ?? "")}
 										</p>
 									</div>
-									<span
-										className={`shrink-0 px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-tighter ${
-											String(t.status ?? "draft") === "active" ||
-											String(t.status ?? "") === "Active"
-												? "bg-emerald-100 text-emerald-700"
-												: "bg-slate-100 text-slate-500"
-										}`}
+									<StatusBadge
+										tone={tourStatusToTone(String(t.status ?? "draft").toLowerCase())}
+										className="shrink-0"
 									>
 										{String(t.status ?? "Draft")}
-									</span>
+									</StatusBadge>
 								</div>
 							);
 						})}
@@ -196,14 +225,6 @@ export default async function AdminPage({ params }: Props) {
 						{eois.slice(0, 5).map((eoi) => {
 							const eoiArtist = eoi.artist;
 							const status = String(eoi.status ?? "pending");
-							const statusColor =
-								status === "approved"
-									? "bg-emerald-100 text-emerald-800"
-									: status === "rejected"
-										? "bg-red-100 text-red-800"
-										: status === "needs_revision"
-											? "bg-blue-100 text-blue-800"
-											: "bg-yellow-100 text-yellow-800";
 							return (
 								<div
 									key={String(eoi.id)}
@@ -217,11 +238,9 @@ export default async function AdminPage({ params }: Props) {
 											{String(eoi.city ?? "Location")}
 										</p>
 									</div>
-									<span
-										className={`shrink-0 px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-tighter ${statusColor}`}
-									>
+									<StatusBadge tone={eoiStatusToTone(status)} className="shrink-0">
 										{status.replace(/_/g, " ")}
-									</span>
+									</StatusBadge>
 								</div>
 							);
 						})}

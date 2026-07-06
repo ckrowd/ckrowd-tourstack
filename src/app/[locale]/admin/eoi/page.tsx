@@ -4,6 +4,21 @@ import AITourScorePanel from "@/components/AITourScorePanel";
 import EoiActionPanel from "@/components/EoiActionPanel";
 import EoiDocumentsPanel from "@/components/EoiDocumentsPanel";
 import PageTour from "@/components/PageTour";
+import StatusBadge, { type StatusTone } from "@/components/ui/StatusBadge";
+
+function eoiStatusToTone(status: string): StatusTone {
+	switch (status) {
+		case "approved":
+		case "confirmed":
+			return "approved";
+		case "rejected":
+			return "rejected";
+		case "needs_revision":
+			return "contacted";
+		default:
+			return "pending";
+	}
+}
 
 function EoiNotesDisplay({ notes }: { notes: string }) {
 	const sections = notes
@@ -93,9 +108,9 @@ export default async function AdminEOIPage({
 					<h2 className="text-xl font-(family-name:--font-manrope) font-semibold">
 						{t("pendingSubmissions")}
 					</h2>
-					<span className="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-xs font-black">
+					<StatusBadge tone="pending">
 						{pendingEOICount} {t("pendingCount")}
-					</span>
+					</StatusBadge>
 				</div>
 
 				<div className="space-y-4">
@@ -116,14 +131,6 @@ export default async function AdminEOIPage({
 						const eoiArtist = eoi.artist;
 						const eoiPromoter = eoi.promoter;
 						const status = String(eoi.status ?? "pending");
-						const statusColor =
-							status === "approved"
-								? "bg-emerald-100 text-emerald-800"
-								: status === "rejected"
-									? "bg-red-100 text-red-800"
-									: status === "needs_revision"
-										? "bg-blue-100 text-blue-800"
-										: "bg-yellow-100 text-yellow-800";
 						const matchScore =
 							typeof eoi.match_score === "number"
 								? eoi.match_score
@@ -148,11 +155,9 @@ export default async function AdminEOIPage({
 													? `EOI-${String(eoi.id).slice(-4).toUpperCase()}`
 													: "EOI"}
 											</span>
-											<span
-												className={`px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-tighter ${statusColor}`}
-											>
+											<StatusBadge tone={eoiStatusToTone(status)}>
 												{status.replace(/_/g, " ")}
-											</span>
+											</StatusBadge>
 										</div>
 										<h3 className="font-(family-name:--font-manrope) font-semibold text-on-surface text-lg">
 											{String(eoiArtist?.name ?? "Artist")}
