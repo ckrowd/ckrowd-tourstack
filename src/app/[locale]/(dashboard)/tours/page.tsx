@@ -62,7 +62,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 							: "gavel",
 			color:
 				mType === "show"
-					? "bg-[#FF5A30]/10 text-[#FF5A30]"
+					? "bg-[#FF5A2E]/10 text-[#FF5A2E]"
 					: mType === "call"
 						? "bg-blue-100 text-blue-600"
 						: mType === "payment"
@@ -140,7 +140,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 					{/* Header */}
 					<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 						<div>
-							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
 								{t("promoterPortal")}
 							</span>
 							<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -152,7 +152,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 						</div>
 						<Link
 							href="/eoi"
-							className="flex items-center gap-2 bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all self-start md:self-auto"
+							className="flex items-center gap-2 bg-[#FF5A2E] text-white px-6 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-all self-start md:self-auto"
 						>
 							<span className="material-symbols-outlined text-sm">add</span>
 							{t("newTourStop")}
@@ -165,7 +165,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 							{
 								label: t("stats.totalStops"),
 								value: totalStops.toString(),
-								color: "border-[#FF5A30]",
+								color: "border-[#FF5A2E]",
 							},
 							{
 								label: t("stats.confirmed"),
@@ -282,7 +282,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 														{isRevision && (
 															<Link
 																href="/eoi"
-																className="flex items-center gap-1.5 text-[#FF5A30] font-semibold"
+																className="flex items-center gap-1.5 text-[#FF5A2E] font-semibold"
 															>
 																<span className="material-symbols-outlined text-sm">
 																	edit
@@ -310,7 +310,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 									</p>
 									<Link
 										href="/eoi"
-										className="inline-flex items-center gap-2 bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity"
+										className="inline-flex items-center gap-2 bg-[#FF5A2E] text-white px-6 py-3 rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity"
 									>
 										<span className="material-symbols-outlined text-sm">
 											add
@@ -428,7 +428,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 																</span>
 															)}
 															{tour.financing != null && (
-																<span className="flex items-center gap-1.5 text-[#FF5A30] font-semibold">
+																<span className="flex items-center gap-1.5 text-[#FF5A2E] font-semibold">
 																	<span className="material-symbols-outlined text-sm">
 																		account_balance
 																	</span>
@@ -451,7 +451,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 																</div>
 																<div className="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
 																	<div
-																		className="bg-[#FF5A30] h-full rounded-full transition-all"
+																		className="bg-[#FF5A2E] h-full rounded-full transition-all"
 																		style={{ width: `${soldPct}%` }}
 																	/>
 																</div>
@@ -475,7 +475,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 																		})}
 																	</span>
 																) : (
-																	<span className="text-xs font-semibold text-[#FF5A30]">
+																	<span className="text-xs font-semibold text-[#FF5A2E]">
 																		{t("showDay")}
 																	</span>
 																)
@@ -488,7 +488,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 																	statusLower === "needs revision") && (
 																	<Link
 																		href="/eoi"
-																		className="text-xs font-semibold text-[#FF5A30] border border-[#FF5A30]/30 px-3 py-1.5 rounded-lg hover:bg-[#FF5A30]/5 transition-colors"
+																		className="text-xs font-semibold text-[#FF5A2E] border border-[#FF5A2E]/30 px-3 py-1.5 rounded-lg hover:bg-[#FF5A2E]/5 transition-colors"
 																	>
 																		{t("reviseEoi")}
 																	</Link>
@@ -537,7 +537,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 																href={pageHref(p)}
 																className={`w-9 h-9 flex items-center justify-center rounded-lg text-sm font-semibold transition-colors ${
 																	p === currentPage
-																		? "bg-[#FF5A30] text-white shadow-sm"
+																		? "bg-[#FF5A2E] text-white shadow-sm"
 																		: "text-on-surface-variant hover:bg-surface-container-lowest"
 																}`}
 															>
@@ -616,7 +616,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 												className="flex items-center gap-3 py-2 border-b border-outline-variant/10 last:border-0"
 											>
 												<span
-													className="material-symbols-outlined text-[#FF5A30]"
+													className="material-symbols-outlined text-[#FF5A2E]"
 													style={{ fontVariationSettings: "'FILL' 1" }}
 												>
 													stadium
@@ -638,7 +638,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 							{/* CTA */}
 							<Link
 								href="/financing"
-								className="flex items-center gap-4 bg-linear-to-br from-[#FF5A30] to-[#cc4826] text-white p-6 rounded-2xl shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform"
+								className="flex items-center gap-4 bg-linear-to-br from-[#FF5A2E] to-[#cc4826] text-white p-6 rounded-2xl shadow-lg shadow-[#FF5A2E]/20 hover:scale-[1.02] transition-transform"
 							>
 								<span
 									className="material-symbols-outlined text-2xl"

@@ -48,7 +48,7 @@ export default function AdminPaymentsPage() {
 		<div className="p-6 max-w-7xl mx-auto">
 			<div className="flex flex-wrap items-start justify-between gap-2 mb-8">
 				<div>
-					<p className="text-xs font-black uppercase tracking-widest text-[#FF5A30] mb-1">{t("badge")}</p>
+					<p className="text-xs font-black uppercase tracking-widest text-[#FF5A2E] mb-1">{t("badge")}</p>
 					<h1 className="text-2xl font-black text-on-surface">{t("title")}</h1>
 					<p className="text-sm text-on-surface-variant mt-1">{t("description")}</p>
 				</div>
@@ -68,7 +68,7 @@ export default function AdminPaymentsPage() {
 						onClick={() => { setFilter(f); setPage(1); }}
 						className={`px-4 py-1.5 rounded-full text-xs font-bold transition ${
 							filter === f
-								? "bg-[#FF5A30] text-white"
+								? "bg-[#FF5A2E] text-white"
 								: "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"
 						}`}
 					>
@@ -79,7 +79,7 @@ export default function AdminPaymentsPage() {
 
 			{(isLoading || isFetching) && (
 				<div className="flex justify-center py-16">
-					<div className="w-6 h-6 border-2 border-[#FF5A30] border-t-transparent rounded-full animate-spin" />
+					<div className="w-6 h-6 border-2 border-[#FF5A2E] border-t-transparent rounded-full animate-spin" />
 				</div>
 			)}
 

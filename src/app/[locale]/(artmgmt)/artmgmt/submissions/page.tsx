@@ -175,14 +175,14 @@ export default function ArtmgmtSubmissionsPage() {
 	const rejected = pitches.filter((p) => p.status === "rejected").length;
 
 	const inputCls =
-		"w-full px-3 py-2 text-sm rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/40 placeholder:text-slate-400";
+		"w-full px-3 py-2 text-sm rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/40 placeholder:text-slate-400";
 
 	return (
 		<div>
 			{/* Header */}
 			<div className="mb-6 flex items-start justify-between gap-4 flex-wrap">
 				<div>
-					<span className="inline-block px-3 py-1 rounded-full bg-[#FF5A30]/10 text-[#FF5A30] text-xs font-semibold uppercase tracking-wider mb-3">
+					<span className="inline-block px-3 py-1 rounded-full bg-[#FF5A2E]/10 text-[#FF5A2E] text-xs font-semibold uppercase tracking-wider mb-3">
 						{t("badge")}
 					</span>
 					<h1 className="font-(family-name:--font-manrope) text-3xl font-black text-on-surface">
@@ -193,7 +193,7 @@ export default function ArtmgmtSubmissionsPage() {
 				<button
 					type="button"
 					onClick={openAdd}
-					className="flex items-center gap-2 px-5 py-2.5 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm hover:bg-[#e04e27] transition-colors shadow-md shadow-[#FF5A30]/20"
+					className="flex items-center gap-2 px-5 py-2.5 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm hover:bg-[#e04e27] transition-colors shadow-md shadow-[#FF5A2E]/20"
 				>
 					<span className="material-symbols-outlined text-sm">add</span>
 					{t("newPitch")}
@@ -262,8 +262,8 @@ export default function ArtmgmtSubmissionsPage() {
 							>
 								<div className="flex items-start gap-4 flex-wrap">
 									{/* Artist avatar */}
-									<div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FF5A30]/20 to-orange-100 flex items-center justify-center shrink-0">
-										<span className="material-symbols-outlined text-[#FF5A30] text-lg">person</span>
+									<div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#FF5A2E]/20 to-orange-100 flex items-center justify-center shrink-0">
+										<span className="material-symbols-outlined text-[#FF5A2E] text-lg">person</span>
 									</div>
 
 									{/* Main info */}
@@ -346,7 +346,7 @@ export default function ArtmgmtSubmissionsPage() {
 									<button
 										type="button"
 										onClick={() => openEdit(pitch)}
-										className="text-xs font-semibold text-[#FF5A30] hover:underline"
+										className="text-xs font-semibold text-[#FF5A2E] hover:underline"
 									>
 										{t("edit")}
 									</button>
@@ -442,7 +442,7 @@ export default function ArtmgmtSubmissionsPage() {
 								<button
 									type="submit"
 									disabled={isBusy}
-									className="flex-1 py-3 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm hover:bg-[#e04e27] disabled:opacity-60 transition-colors"
+									className="flex-1 py-3 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm hover:bg-[#e04e27] disabled:opacity-60 transition-colors"
 								>
 									{isBusy ? t("form.saving") : t("form.save")}
 								</button>

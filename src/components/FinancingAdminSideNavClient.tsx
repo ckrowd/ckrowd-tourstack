@@ -30,7 +30,7 @@ export default function FinancingAdminSideNavClient({
 						aria-current={activeItem === item.key ? "page" : undefined}
 						className={`flex items-center gap-3 px-4 py-3 rounded-xl mx-2 transition-all duration-200 font-(family-name:--font-manrope) font-semibold text-sm ${
 							activeItem === item.key
-								? "bg-orange-50 text-[#FF5A30]"
+								? "bg-orange-50 text-[#FF5A2E]"
 								: "text-slate-600 hover:bg-slate-200/50 hover:translate-x-1"
 						}`}
 					>
@@ -43,7 +43,7 @@ export default function FinancingAdminSideNavClient({
 			<div className="px-4 mt-auto">
 				<Link
 					href="/financing-admin/applications"
-					className="block w-full py-4 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 text-center flex items-center justify-center gap-2"
+					className="block w-full py-4 bg-[#FF5A2E] text-white rounded-xl font-(family-name:--font-manrope) font-semibold text-sm shadow-lg shadow-[#FF5A2E]/20 hover:scale-[1.02] transition-transform active:scale-95 text-center flex items-center justify-center gap-2"
 				>
 					<span className="material-symbols-outlined text-sm">rate_review</span>
 					{reviewQueueLabel}

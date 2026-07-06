@@ -15,14 +15,14 @@ import FormattedNumberInput from "@/components/ui/FormattedNumberInput";
 // ── Shared ─────────────────────────────────────────────────────────────────
 
 const ic =
-	"w-full rounded-xl border border-outline-variant/30 bg-surface-container-lowest px-4 py-3 text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 focus:border-[#FF5A30]/60 transition-all";
+	"w-full rounded-xl border border-outline-variant/30 bg-surface-container-lowest px-4 py-3 text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E]/60 transition-all";
 
 function RunButton({ loading, label, loadingLabel }: { loading: boolean; label: string; loadingLabel: string }) {
 	return (
 		<button
 			type="submit"
 			disabled={loading}
-			className="inline-flex items-center gap-2 bg-[#FF5A30] text-white font-bold text-sm px-6 py-3 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-60"
+			className="inline-flex items-center gap-2 bg-[#FF5A2E] text-white font-bold text-sm px-6 py-3 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-60"
 		>
 			<span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>
 				{loading ? "hourglass_top" : "auto_awesome"}
@@ -142,7 +142,7 @@ function TicketForecastTab({ eois }: { eois: EOI[] }) {
 							<div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
 								{Object.entries(d.pricingTiers as Record<string, Record<string, unknown>>).map(([tier, info]) => (
 									<div key={tier} className="bg-surface-container-low rounded-xl p-3 text-center">
-										<p className="text-[10px] font-black uppercase tracking-widest text-[#FF5A30]">{tier}</p>
+										<p className="text-[10px] font-black uppercase tracking-widest text-[#FF5A2E]">{tier}</p>
 										<p className="text-sm font-bold mt-1">₦{Number(info.suggestedPrice ?? 0).toLocaleString()}</p>
 										<p className="text-xs text-on-surface-variant">{String(info.allocationPct ?? 0)}% allocation</p>
 									</div>
@@ -240,7 +240,7 @@ function VenueRecommendationTab() {
 			{d && (
 				<ResultCard>
 					{!!d.cityInsights &&<p className="text-sm text-on-surface-variant">{String(d.cityInsights)}</p>}
-					{!!d.topPick &&<div className="inline-flex items-center gap-2 bg-[#FF5A30]/10 text-[#FF5A30] font-bold text-xs px-3 py-1.5 rounded-full"><span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>{t("venues.topPick")}: {String(d.topPick)}</div>}
+					{!!d.topPick &&<div className="inline-flex items-center gap-2 bg-[#FF5A2E]/10 text-[#FF5A2E] font-bold text-xs px-3 py-1.5 rounded-full"><span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>{t("venues.topPick")}: {String(d.topPick)}</div>}
 					{Array.isArray(d.recommendations) && (
 						<div className="space-y-3">
 							{(d.recommendations as Record<string, unknown>[]).map((v, i) => (
@@ -262,7 +262,7 @@ function VenueRecommendationTab() {
 							))}
 						</div>
 					)}
-					{!!d.tip &&<p className="text-xs text-on-surface-variant italic border-l-2 border-[#FF5A30]/40 pl-3">{String(d.tip)}</p>}
+					{!!d.tip &&<p className="text-xs text-on-surface-variant italic border-l-2 border-[#FF5A2E]/40 pl-3">{String(d.tip)}</p>}
 				</ResultCard>
 			)}
 			{mutation.data && !mutation.data.success && <ErrorBanner msg={mutation.data.error ?? t("venues.error")} />}
@@ -315,7 +315,7 @@ function RouteOptimizerTab() {
 							<div className="flex flex-wrap items-center gap-2">
 								{(d.optimizedRoute as string[]).map((city, i) => (
 									<span key={city} className="flex items-center gap-2">
-										<span className="bg-[#FF5A30] text-white font-bold text-xs px-3 py-1.5 rounded-full">{city}</span>
+										<span className="bg-[#FF5A2E] text-white font-bold text-xs px-3 py-1.5 rounded-full">{city}</span>
 										{i < (d.optimizedRoute as string[]).length - 1 && <span className="material-symbols-outlined text-sm text-on-surface-variant">arrow_forward</span>}
 									</span>
 								))}
@@ -341,7 +341,7 @@ function RouteOptimizerTab() {
 					{Array.isArray(d.tips) && (
 						<div>
 							<SectionLabel>{t("route.tips")}</SectionLabel>
-							<ul className="space-y-1">{(d.tips as string[]).map((tip) => <li key={tip} className="flex items-start gap-2 text-xs text-on-surface-variant"><span className="material-symbols-outlined text-[#FF5A30] text-sm mt-0.5 shrink-0">lightbulb</span>{tip}</li>)}</ul>
+							<ul className="space-y-1">{(d.tips as string[]).map((tip) => <li key={tip} className="flex items-start gap-2 text-xs text-on-surface-variant"><span className="material-symbols-outlined text-[#FF5A2E] text-sm mt-0.5 shrink-0">lightbulb</span>{tip}</li>)}</ul>
 						</div>
 					)}
 				</ResultCard>
@@ -378,7 +378,7 @@ function MarketingContentTab({ eois }: { eois: EOI[] }) {
 								key={tab}
 								type="button"
 								onClick={() => setActiveContent(tab)}
-								className={`text-xs font-bold px-3 py-1.5 rounded-lg transition-colors ${activeContent === tab ? "bg-[#FF5A30] text-white" : "bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high"}`}
+								className={`text-xs font-bold px-3 py-1.5 rounded-lg transition-colors ${activeContent === tab ? "bg-[#FF5A2E] text-white" : "bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high"}`}
 							>
 								{tab === "pressRelease"
 									? t("marketing.pressRelease")
@@ -424,7 +424,7 @@ function MarketingContentTab({ eois }: { eois: EOI[] }) {
 							{(d.promotionalCalendar as Record<string, unknown>[]).map((item, i) => (
 								<div key={i} className="flex items-start gap-3 bg-surface-container-low rounded-xl px-4 py-3">
 									<div className="shrink-0 text-center min-w-12">
-										<p className="text-[10px] font-black uppercase tracking-widest text-[#FF5A30]">Wk {String(item.week ?? "")}</p>
+										<p className="text-[10px] font-black uppercase tracking-widest text-[#FF5A2E]">Wk {String(item.week ?? "")}</p>
 										<p className="text-xs font-semibold text-on-surface-variant">{String(item.day ?? "")}</p>
 									</div>
 									<div className="flex-1 min-w-0">
@@ -469,7 +469,7 @@ export default function AIToolsClient({ eois }: { eois: EOI[] }) {
 						onClick={() => setActiveTab(tab.key)}
 						className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all text-left whitespace-nowrap lg:whitespace-normal shrink-0 lg:shrink ${
 							activeTab === tab.key
-								? "bg-[#FF5A30] text-white shadow-md shadow-[#FF5A30]/20"
+								? "bg-[#FF5A2E] text-white shadow-md shadow-[#FF5A2E]/20"
 								: "bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container-low"
 						}`}
 					>

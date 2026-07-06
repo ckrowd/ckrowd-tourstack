@@ -89,7 +89,7 @@ export default function InsuranceAdminPartnersPage() {
 	return (
 		<>
 			<div className="mb-10">
-				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
 					{t("badge")}
 				</span>
 				<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -110,7 +110,7 @@ export default function InsuranceAdminPartnersPage() {
 							type="button"
 							onClick={() => query.refetch()}
 							disabled={query.isFetching}
-							className="text-sm font-semibold text-[#FF5A30] hover:underline disabled:opacity-60"
+							className="text-sm font-semibold text-[#FF5A2E] hover:underline disabled:opacity-60"
 						>
 							{t("refresh")}
 						</button>
@@ -202,7 +202,7 @@ export default function InsuranceAdminPartnersPage() {
 								value={name}
 								onChange={(event) => setName(event.target.value)}
 								placeholder={t("partnerForm.namePlaceholder")}
-								className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+								className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 							/>
 						</label>
 						<label className="block">
@@ -214,7 +214,7 @@ export default function InsuranceAdminPartnersPage() {
 								onChange={(event) =>
 									setType(event.target.value as PartnerType)
 								}
-								className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+								className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 							>
 								{PARTNER_TYPES.map((value) => (
 									<option key={value} value={value}>
@@ -232,7 +232,7 @@ export default function InsuranceAdminPartnersPage() {
 								value={markets}
 								onChange={(event) => setMarkets(event.target.value)}
 								placeholder={t("partnerForm.marketsPlaceholder")}
-								className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+								className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 							/>
 						</label>
 						<label className="block">
@@ -244,7 +244,7 @@ export default function InsuranceAdminPartnersPage() {
 								value={capacity}
 								onChange={(v) => setCapacity(v)}
 								placeholder={t("partnerForm.capacityPlaceholder")}
-								className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+								className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 							/>
 						</label>
 						{createDone && (
@@ -260,7 +260,7 @@ export default function InsuranceAdminPartnersPage() {
 						<button
 							type="submit"
 							disabled={createMutation.isPending}
-							className="w-full py-3 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-opacity disabled:opacity-60"
+							className="w-full py-3 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-opacity disabled:opacity-60"
 						>
 							{createMutation.isPending
 								? t("partnerForm.saving")

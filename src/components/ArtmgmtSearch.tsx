@@ -70,7 +70,7 @@ function ArtmgmtSearchModal({ onClose }: { onClose: () => void }) {
 				{/* Input */}
 				<div className="flex items-center gap-3 px-4 py-4 border-b border-slate-100">
 					<span
-						className={`material-symbols-outlined text-xl transition-colors ${isFetching ? "text-[#FF5A30]" : "text-slate-400"}`}
+						className={`material-symbols-outlined text-xl transition-colors ${isFetching ? "text-[#FF5A2E]" : "text-slate-400"}`}
 					>
 						{isFetching ? "progress_activity" : "search"}
 					</span>
@@ -131,8 +131,8 @@ function ArtmgmtSearchModal({ onClose }: { onClose: () => void }) {
 									key={String(artist.id)}
 									className="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 transition-colors"
 								>
-									<div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#FF5A30]/20 to-orange-100 flex items-center justify-center shrink-0">
-										<span className="material-symbols-outlined text-[#FF5A30] text-base">
+									<div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#FF5A2E]/20 to-orange-100 flex items-center justify-center shrink-0">
+										<span className="material-symbols-outlined text-[#FF5A2E] text-base">
 											person
 										</span>
 									</div>

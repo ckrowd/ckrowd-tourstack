@@ -38,7 +38,7 @@ export default async function FinancingDetailPage({
 					<div className="w-full space-y-6">
 						<div className="flex items-center justify-between gap-3">
 							<div>
-								<p className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30]">
+								<p className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E]">
 									{t("tagline")}
 								</p>
 								<h1 className="text-3xl font-(family-name:--font-manrope) font-extrabold mt-1">
@@ -244,7 +244,7 @@ export default async function FinancingDetailPage({
 															href={app.term_sheet_url}
 															target="_blank"
 															rel="noopener noreferrer"
-															className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#FF5A30]/10 text-xs font-semibold text-[#FF5A30] hover:bg-[#FF5A30]/20 transition-colors"
+															className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#FF5A2E]/10 text-xs font-semibold text-[#FF5A2E] hover:bg-[#FF5A2E]/20 transition-colors"
 														>
 															<span className="material-symbols-outlined text-xs">
 																open_in_new

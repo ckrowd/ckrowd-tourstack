@@ -41,7 +41,7 @@ export default async function TourDetailPage({
 					<div className="w-full space-y-8">
 						<div className="flex flex-wrap items-center justify-between gap-3">
 							<div>
-								<p className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30]">
+								<p className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E]">
 									{t("tagline")}
 								</p>
 								<h1 className="text-3xl font-(family-name:--font-manrope) font-extrabold text-on-surface mt-1">
@@ -156,7 +156,7 @@ export default async function TourDetailPage({
 								{tour.eoi_id && (
 									<section className="lg:col-span-12 bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
 										<div className="flex items-center gap-2 mb-4">
-											<span className="material-symbols-outlined text-[#FF5A30]" style={{ fontVariationSettings: "'FILL' 1" }}>auto_awesome</span>
+											<span className="material-symbols-outlined text-[#FF5A2E]" style={{ fontVariationSettings: "'FILL' 1" }}>auto_awesome</span>
 											<h3 className="text-base font-(family-name:--font-manrope) font-semibold">
 												{t("aiScore.title")}
 											</h3>

@@ -161,7 +161,7 @@ export default function AdminInsurancePage() {
 		<>
 			<div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-5">
 				<div>
-					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
 						{t("badge")}
 					</span>
 					<h1 className="text-2xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -202,7 +202,7 @@ export default function AdminInsurancePage() {
 								onClick={() => setFilter(key)}
 								className={`px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-colors ${
 									filter === key
-										? "bg-[#FF5A30] text-white"
+										? "bg-[#FF5A2E] text-white"
 										: "bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high"
 								}`}
 							>
@@ -219,7 +219,7 @@ export default function AdminInsurancePage() {
 							value={search}
 							onChange={(e) => setSearch(e.target.value)}
 							placeholder={t("searchPlaceholder")}
-							className="w-full sm:w-64 rounded-xl border border-outline-variant/20 bg-surface-container-low px-9 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+							className="w-full sm:w-64 rounded-xl border border-outline-variant/20 bg-surface-container-low px-9 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 						/>
 					</label>
 				</div>
@@ -273,7 +273,7 @@ export default function AdminInsurancePage() {
 										key={id}
 										className={`bg-surface-container-low rounded-2xl p-6 border transition-colors ${
 											isSelected
-												? "border-[#FF5A30]/60"
+												? "border-[#FF5A2E]/60"
 												: "border-outline-variant/10"
 										}`}
 									>
@@ -286,7 +286,7 @@ export default function AdminInsurancePage() {
 												</div>
 												<div className="min-w-0">
 													<div className="flex items-center gap-2 flex-wrap mb-1">
-														<span className="text-xs font-black text-[#FF5A30] uppercase tracking-widest">
+														<span className="text-xs font-black text-[#FF5A2E] uppercase tracking-widest">
 															{`#${id.slice(-6).toUpperCase()}`}
 														</span>
 														<span
@@ -470,7 +470,7 @@ export default function AdminInsurancePage() {
 										onChange={(e) =>
 											setDecision(e.target.value as ReviewStatus)
 										}
-										className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+										className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 									>
 										{REVIEW_STATUSES.map((s) => (
 											<option key={s} value={s}>
@@ -488,7 +488,7 @@ export default function AdminInsurancePage() {
 										value={partnerName}
 										onChange={(e) => setPartnerName(e.target.value)}
 										placeholder={t("reviewForm.partnerPlaceholder")}
-										className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+										className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 									/>
 								</label>
 								<label className="block">
@@ -500,7 +500,7 @@ export default function AdminInsurancePage() {
 										value={note}
 										onChange={(e) => setNote(e.target.value)}
 										placeholder={t("reviewForm.notePlaceholder")}
-										className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+										className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 									/>
 								</label>
 								{reviewDone && (
@@ -522,7 +522,7 @@ export default function AdminInsurancePage() {
 								<button
 									type="submit"
 									disabled={reviewMutation.isPending}
-									className="w-full py-3 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-opacity disabled:opacity-60"
+									className="w-full py-3 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-opacity disabled:opacity-60"
 								>
 									{reviewMutation.isPending
 										? t("reviewForm.saving")
@@ -542,7 +542,7 @@ export default function AdminInsurancePage() {
 									key={item}
 									className="flex items-start gap-3 p-3 bg-surface-container-low rounded-xl"
 								>
-									<span className="material-symbols-outlined text-[#FF5A30] text-base mt-0.5">
+									<span className="material-symbols-outlined text-[#FF5A2E] text-base mt-0.5">
 										rule
 									</span>
 									<p className="text-sm text-on-surface-variant">{item}</p>

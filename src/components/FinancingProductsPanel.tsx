@@ -124,7 +124,7 @@ export default function FinancingProductsPanel() {
 						value={name}
 						onChange={(e) => setName(e.target.value)}
 						placeholder={t("namePlaceholder")}
-						className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+						className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 					/>
 				</label>
 				<label className="block">
@@ -138,7 +138,7 @@ export default function FinancingProductsPanel() {
 						value={maxAmount}
 						onChange={(e) => setMaxAmount(e.target.value)}
 						placeholder="50000"
-						className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+						className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 					/>
 				</label>
 				{createDone && (
@@ -154,7 +154,7 @@ export default function FinancingProductsPanel() {
 				<button
 					type="submit"
 					disabled={createMutation.isPending}
-					className="w-full py-3 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 disabled:opacity-60"
+					className="w-full py-3 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 disabled:opacity-60"
 				>
 					{createMutation.isPending ? t("creating") : t("createSubmit")}
 				</button>

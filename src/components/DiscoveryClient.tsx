@@ -107,13 +107,13 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 				return (
 					<div className="mb-10 flex flex-col md:flex-row md:items-start justify-between gap-6">
 						<div>
-							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
 								{t("hero.platform")}
 							</span>
 							<h1 className="text-3xl font-semibold font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
 								{t.rich("hero.title", {
 									spanNode: (chunks) => (
-										<span className="text-[#FF5A30]">{chunks}</span>
+										<span className="text-[#FF5A2E]">{chunks}</span>
 									),
 								})}
 							</h1>
@@ -176,7 +176,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 							id="filter-genre"
 							value={genre}
 							onChange={(e) => setGenre(e.target.value)}
-							className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A30]/20 appearance-none outline-none"
+							className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A2E]/20 appearance-none outline-none"
 						>
 							<option value="All Genres">{t("filters.allGenres")}</option>
 							<option value="Afrobeats">{t("genres.afrobeats")}</option>
@@ -206,7 +206,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 							id="filter-window"
 							value={window}
 							onChange={(e) => setWindow(e.target.value)}
-							className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A30]/20 appearance-none outline-none"
+							className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A2E]/20 appearance-none outline-none"
 						>
 							<option value="All Windows">{t("filters.allWindows")}</option>
 							{tourWindows.map((w) => (
@@ -231,7 +231,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 							id="filter-fee"
 							value={feeRange}
 							onChange={(e) => setFeeRange(e.target.value)}
-							className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A30]/20 appearance-none outline-none"
+							className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A2E]/20 appearance-none outline-none"
 						>
 							<option value="All Ranges">{t("filters.allRanges")}</option>
 							{FEE_RANGES.map((r) => (
@@ -258,7 +258,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 							id="filter-region"
 							value={region}
 							onChange={(e) => setRegion(e.target.value)}
-							className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A30]/20 appearance-none outline-none"
+							className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A2E]/20 appearance-none outline-none"
 						>
 							<option value="All Africa">{t("filters.allAfrica")}</option>
 							<option value="West Africa">{t("regions.westAfrica")}</option>
@@ -283,7 +283,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 							setFeeRange("All Ranges");
 							setRegion("All Africa");
 						}}
-						className="w-full lg:w-auto bg-[#FF5A30] text-white px-6 py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-lg shadow-[#FF5A30]/20"
+						className="w-full lg:w-auto bg-[#FF5A2E] text-white px-6 py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-lg shadow-[#FF5A2E]/20"
 					>
 						<span className="material-symbols-outlined text-sm">tune</span>
 						{t("filters.resetFilters")}
@@ -306,7 +306,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 							<span>{t("sortBy.label")}</span>
 							<button
 								type="button"
-								className="text-[#FF5A30] font-semibold flex items-center gap-1"
+								className="text-[#FF5A2E] font-semibold flex items-center gap-1"
 							>
 								{t("sortBy.newestFirst")}{" "}
 								<span className="material-symbols-outlined text-xs">
@@ -347,7 +347,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 											</div>
 										)}
 										<div className="absolute top-4 left-4">
-											<span className="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-semibold text-[#FF5A30] uppercase tracking-tighter shadow-sm">
+											<span className="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-semibold text-[#FF5A2E] uppercase tracking-tighter shadow-sm">
 												{String(artist.genre ?? "")}
 											</span>
 										</div>
@@ -366,7 +366,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 									</div>
 
 									<div className="p-5">
-										<h3 className="font-(family-name:--font-manrope) text-xl font-semibold group-hover:text-[#FF5A30] transition-colors">
+										<h3 className="font-(family-name:--font-manrope) text-xl font-semibold group-hover:text-[#FF5A2E] transition-colors">
 											{String(artist.name ?? "")}
 										</h3>
 										<div className="mt-3 space-y-2">
@@ -404,7 +404,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 										<div className="mt-5">
 											<Link
 												href={`/eoi${artist.id ? `?id=${String(artist.id)}` : ""}`}
-												className="block w-full bg-[#FF5A30] py-3 rounded-xl text-white font-semibold text-sm tracking-wide shadow-md shadow-[#FF5A30]/10 active:scale-[0.98] transition-all text-center"
+												className="block w-full bg-[#FF5A2E] py-3 rounded-xl text-white font-semibold text-sm tracking-wide shadow-md shadow-[#FF5A2E]/10 active:scale-[0.98] transition-all text-center"
 											>
 												{t("submitEoi")}
 											</Link>
@@ -463,7 +463,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 					</div>
 
 					{/* Financing Banner */}
-					<div className="bg-linear-to-br from-[#FF5A30] to-[#cc4826] rounded-2xl p-8 text-white relative overflow-hidden group">
+					<div className="bg-linear-to-br from-[#FF5A2E] to-[#cc4826] rounded-2xl p-8 text-white relative overflow-hidden group">
 						<div className="relative z-10">
 							<h4 className="font-(family-name:--font-manrope) text-xl font-semibold leading-tight">
 								{t("financing.title")}
@@ -473,7 +473,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 							</p>
 							<Link
 								href="/eoi"
-								className="mt-6 inline-block bg-white text-[#FF5A30] px-6 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider hover:scale-105 transition-transform"
+								className="mt-6 inline-block bg-white text-[#FF5A2E] px-6 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider hover:scale-105 transition-transform"
 							>
 								{t("financing.applyButton")}
 							</Link>
@@ -506,9 +506,9 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 							].map((stat) => (
 								<div
 									key={stat.label}
-									className="bg-surface-container-lowest p-4 rounded-xl text-center border border-[#FF5A30]/5 flex flex-col items-center justify-center min-h-24"
+									className="bg-surface-container-lowest p-4 rounded-xl text-center border border-[#FF5A2E]/5 flex flex-col items-center justify-center min-h-24"
 								>
-									<p className="text-2xl font-semibold font-(family-name:--font-manrope) text-[#FF5A30] leading-none">
+									<p className="text-2xl font-semibold font-(family-name:--font-manrope) text-[#FF5A2E] leading-none">
 										{stat.value}
 									</p>
 									<p className="text-[10px] uppercase font-semibold text-on-surface-variant mt-2 leading-tight">

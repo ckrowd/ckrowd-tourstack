@@ -171,7 +171,7 @@ export default function InsuranceAdminClaimsPage() {
 		<>
 			<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 				<div>
-					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
 						{t("badge")}
 					</span>
 					<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -184,7 +184,7 @@ export default function InsuranceAdminClaimsPage() {
 				<button
 					type="button"
 					onClick={() => setShowForm((v) => !v)}
-					className="flex items-center gap-2 px-4 py-2.5 bg-[#FF5A30] text-white rounded-xl text-sm font-semibold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 shrink-0"
+					className="flex items-center gap-2 px-4 py-2.5 bg-[#FF5A2E] text-white rounded-xl text-sm font-semibold shadow-lg shadow-[#FF5A2E]/20 hover:scale-[1.02] transition-transform active:scale-95 shrink-0"
 				>
 					<span className="material-symbols-outlined text-base">
 						{showForm ? "close" : "add"}
@@ -215,7 +215,7 @@ export default function InsuranceAdminClaimsPage() {
 									required
 									value={applicationId}
 									onChange={(event) => setApplicationId(event.target.value)}
-									className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+									className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 								>
 									<option value="">{t("newClaim.selectApplication")}</option>
 									{applications.map((app) => (
@@ -238,7 +238,7 @@ export default function InsuranceAdminClaimsPage() {
 									value={description}
 									onChange={(event) => setDescription(event.target.value)}
 									placeholder={t("newClaim.descriptionPlaceholder")}
-									className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+									className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 								/>
 							</label>
 							<label className="block">
@@ -250,7 +250,7 @@ export default function InsuranceAdminClaimsPage() {
 									value={amountClaimed}
 									onChange={(v) => setAmountClaimed(v)}
 									placeholder={t("newClaim.amountPlaceholder")}
-									className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+									className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 								/>
 							</label>
 							<label className="block">
@@ -262,7 +262,7 @@ export default function InsuranceAdminClaimsPage() {
 									value={claimNotes}
 									onChange={(event) => setClaimNotes(event.target.value)}
 									placeholder={t("newClaim.notesPlaceholder")}
-									className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+									className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 								/>
 							</label>
 							<div className="sm:col-span-2 flex items-center justify-between gap-3">
@@ -287,7 +287,7 @@ export default function InsuranceAdminClaimsPage() {
 								<button
 									type="submit"
 									disabled={createMutation.isPending}
-									className="px-5 py-2.5 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-60"
+									className="px-5 py-2.5 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-60"
 								>
 									{createMutation.isPending
 										? t("newClaim.submitting")
@@ -308,7 +308,7 @@ export default function InsuranceAdminClaimsPage() {
 						onClick={() => setFilter(key)}
 						className={`px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-colors ${
 							filter === key
-								? "bg-[#FF5A30] text-white"
+								? "bg-[#FF5A2E] text-white"
 								: "bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high"
 						}`}
 					>
@@ -322,7 +322,7 @@ export default function InsuranceAdminClaimsPage() {
 					<h3 className="font-(family-name:--font-manrope) font-semibold text-lg">
 						{t("claimsTitle")}
 					</h3>
-					<span className="material-symbols-outlined text-[#FF5A30]">
+					<span className="material-symbols-outlined text-[#FF5A2E]">
 						assignment_late
 					</span>
 				</div>
@@ -365,7 +365,7 @@ export default function InsuranceAdminClaimsPage() {
 									key={id}
 									className={`border rounded-xl transition-colors ${
 										expanded
-											? "border-[#FF5A30]/60"
+											? "border-[#FF5A2E]/60"
 											: "border-outline-variant/10"
 									}`}
 								>
@@ -399,7 +399,7 @@ export default function InsuranceAdminClaimsPage() {
 											<button
 												type="button"
 												onClick={() => toggleReview(claim)}
-												className="text-xs font-semibold text-[#FF5A30] hover:underline"
+												className="text-xs font-semibold text-[#FF5A2E] hover:underline"
 											>
 												{expanded ? t("closeReview") : t("reviewClaim")}
 											</button>
@@ -425,7 +425,7 @@ export default function InsuranceAdminClaimsPage() {
 															event.target.value as ClaimStatus,
 														)
 													}
-													className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+													className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 												>
 													{CLAIM_STATUSES.map((s) => (
 														<option key={s} value={s}>
@@ -442,7 +442,7 @@ export default function InsuranceAdminClaimsPage() {
 													value={settlement}
 													onChange={(v) => setSettlement(v)}
 													placeholder={t("review.settlementPlaceholder")}
-													className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+													className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 												/>
 											</label>
 											<label className="block sm:col-span-2">
@@ -456,7 +456,7 @@ export default function InsuranceAdminClaimsPage() {
 														setReviewNotes(event.target.value)
 													}
 													placeholder={t("review.notesPlaceholder")}
-													className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+													className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 												/>
 											</label>
 											<div className="sm:col-span-2 flex items-center justify-between gap-3">
@@ -482,7 +482,7 @@ export default function InsuranceAdminClaimsPage() {
 												<button
 													type="submit"
 													disabled={reviewMutation.isPending}
-													className="px-5 py-2.5 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-60"
+													className="px-5 py-2.5 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-60"
 												>
 													{reviewMutation.isPending
 														? t("review.saving")

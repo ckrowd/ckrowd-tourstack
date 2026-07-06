@@ -20,7 +20,7 @@ export default async function TermsPage({ params }: Props) {
 					<Link
 						key={i}
 						href="/contact"
-						className="text-[#FF5A30] font-semibold hover:underline"
+						className="text-[#FF5A2E] font-semibold hover:underline"
 					>
 						{t("contactLink")}
 					</Link>
@@ -32,7 +32,7 @@ export default async function TermsPage({ params }: Props) {
 					<a
 						key={i}
 						href={`mailto:${email}`}
-						className="text-[#FF5A30] font-semibold hover:underline"
+						className="text-[#FF5A2E] font-semibold hover:underline"
 					>
 						{email}
 					</a>
@@ -47,7 +47,7 @@ export default async function TermsPage({ params }: Props) {
 			<TopNav />
 			<main className="flex-1 pt-32 pb-20 px-6">
 				<div className="max-w-3xl mx-auto">
-					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
 						{t("legal")}
 					</span>
 					<h1 className="text-5xl font-black font-(family-name:--font-manrope) tracking-tight mb-4">

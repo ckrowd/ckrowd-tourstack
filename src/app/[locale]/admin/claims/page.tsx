@@ -31,7 +31,7 @@ export default function AdminClaimsPage() {
 	return (
 		<>
 			<div className="mb-8">
-				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
 					{t("badge")}
 				</span>
 				<h1 className="text-2xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -50,7 +50,7 @@ export default function AdminClaimsPage() {
 						onClick={() => setFilter(f)}
 						className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-colors ${
 							filter === f
-								? "bg-[#FF5A30] text-white"
+								? "bg-[#FF5A2E] text-white"
 								: "bg-surface-container-high text-on-surface hover:bg-surface-container-highest"
 						}`}
 					>

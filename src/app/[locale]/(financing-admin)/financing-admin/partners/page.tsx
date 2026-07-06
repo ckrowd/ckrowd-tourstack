@@ -99,7 +99,7 @@ export default function FinancingAdminPartnersPage() {
 		<>
 			<div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-5">
 				<div>
-					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
 						{t("badge")}
 					</span>
 					<h1 className="text-2xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -117,7 +117,7 @@ export default function FinancingAdminPartnersPage() {
 						key={card.key}
 						className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10"
 					>
-						<span className="material-symbols-outlined text-3xl text-[#FF5A30] block mb-5">
+						<span className="material-symbols-outlined text-3xl text-[#FF5A2E] block mb-5">
 							{card.icon}
 						</span>
 						<h2 className="font-(family-name:--font-manrope) font-semibold text-base text-on-surface">
@@ -140,7 +140,7 @@ export default function FinancingAdminPartnersPage() {
 							type="button"
 							onClick={() => query.refetch()}
 							disabled={query.isFetching}
-							className="text-sm font-semibold text-[#FF5A30] hover:underline disabled:opacity-60"
+							className="text-sm font-semibold text-[#FF5A2E] hover:underline disabled:opacity-60"
 						>
 							{t("refresh")}
 						</button>
@@ -233,7 +233,7 @@ export default function FinancingAdminPartnersPage() {
 									value={name}
 									onChange={(event) => setName(event.target.value)}
 									placeholder={t("partnerForm.placeholders.name")}
-									className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+									className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 								/>
 							</label>
 							<label className="block">
@@ -245,7 +245,7 @@ export default function FinancingAdminPartnersPage() {
 									onChange={(event) =>
 										setType(event.target.value as PartnerType)
 									}
-									className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+									className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 								>
 									{PARTNER_TYPES.map((value) => (
 										<option key={value} value={value}>
@@ -263,7 +263,7 @@ export default function FinancingAdminPartnersPage() {
 									value={markets}
 									onChange={(event) => setMarkets(event.target.value)}
 									placeholder={t("partnerForm.placeholders.markets")}
-									className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+									className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 								/>
 							</label>
 							<label className="block">
@@ -275,7 +275,7 @@ export default function FinancingAdminPartnersPage() {
 									value={capacity}
 									onChange={(v) => setCapacity(v)}
 									placeholder={t("partnerForm.placeholders.capacity")}
-									className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+									className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 								/>
 							</label>
 							{createDone && (
@@ -294,7 +294,7 @@ export default function FinancingAdminPartnersPage() {
 							<button
 								type="submit"
 								disabled={createMutation.isPending}
-								className="w-full py-3 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-opacity disabled:opacity-60"
+								className="w-full py-3 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-opacity disabled:opacity-60"
 							>
 								{createMutation.isPending
 									? t("partnerForm.saving")
@@ -313,7 +313,7 @@ export default function FinancingAdminPartnersPage() {
 									key={lane.title}
 									className="bg-surface-container-low rounded-2xl p-4 flex items-start gap-3"
 								>
-									<span className="material-symbols-outlined text-[#FF5A30] shrink-0">
+									<span className="material-symbols-outlined text-[#FF5A2E] shrink-0">
 										{lane.icon}
 									</span>
 									<div className="flex-1">

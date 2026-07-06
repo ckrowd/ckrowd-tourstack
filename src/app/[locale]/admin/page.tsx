@@ -39,7 +39,7 @@ export default async function AdminPage({ params }: Props) {
 			{/* Header */}
 			<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 				<div>
-					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
 						{t("platform")}
 					</span>
 					<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -51,7 +51,7 @@ export default async function AdminPage({ params }: Props) {
 				</div>
 				<Link
 					href="/admin/tours/create"
-					className="flex items-center gap-2 px-6 py-3 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-semibold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 shrink-0"
+					className="flex items-center gap-2 px-6 py-3 bg-[#FF5A2E] text-white rounded-xl font-(family-name:--font-manrope) font-semibold shadow-lg shadow-[#FF5A2E]/20 hover:scale-[1.02] transition-transform active:scale-95 shrink-0"
 				>
 					<span className="material-symbols-outlined">add</span>
 					{t("createTour")}
@@ -65,7 +65,7 @@ export default async function AdminPage({ params }: Props) {
 						label: t("stats.activeTours"),
 						value: String(activeTourCount),
 						icon: "confirmation_number",
-						accent: "border-[#FF5A30]",
+						accent: "border-[#FF5A2E]",
 						href: "/admin/tours",
 					},
 					{
@@ -119,7 +119,7 @@ export default async function AdminPage({ params }: Props) {
 						</h3>
 						<Link
 							href="/admin/tours"
-							className="text-sm font-semibold text-[#FF5A30] hover:underline"
+							className="text-sm font-semibold text-[#FF5A2E] hover:underline"
 						>
 							{t("viewAll")}
 						</Link>
@@ -177,7 +177,7 @@ export default async function AdminPage({ params }: Props) {
 						</h3>
 						<Link
 							href="/admin/eoi"
-							className="text-sm font-semibold text-[#FF5A30] hover:underline"
+							className="text-sm font-semibold text-[#FF5A2E] hover:underline"
 						>
 							{t("viewAll")}
 						</Link>

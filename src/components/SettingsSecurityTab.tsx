@@ -176,7 +176,7 @@ export default function SettingsSecurityTab() {
 							!newPw ||
 							!confirmPw
 						}
-						className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:cursor-not-allowed disabled:opacity-60"
+						className="bg-[#FF5A2E] text-white px-8 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-all disabled:cursor-not-allowed disabled:opacity-60"
 					>
 						{passwordMutation.isPending
 							? t("password.updating")
@@ -224,7 +224,7 @@ export default function SettingsSecurityTab() {
 								type="button"
 								onClick={() => setupMutation.mutate()}
 								disabled={setupMutation.isPending || showSetup}
-								className="text-sm font-semibold text-[#FF5A30] border border-[#FF5A30]/30 px-4 py-2 rounded-lg hover:bg-[#FF5A30]/5 transition-colors disabled:opacity-50"
+								className="text-sm font-semibold text-[#FF5A2E] border border-[#FF5A2E]/30 px-4 py-2 rounded-lg hover:bg-[#FF5A2E]/5 transition-colors disabled:opacity-50"
 							>
 								{setupMutation.isPending ? "…" : t("twoFactor.actions.enable")}
 							</button>
@@ -270,7 +270,7 @@ export default function SettingsSecurityTab() {
 								value={totpCode}
 								onChange={(e) => setTotpCode(e.target.value.replace(/\D/g, ""))}
 								placeholder={t("twoFactor.setup.codePlaceholder")}
-								className="w-full bg-surface-container border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-center tracking-widest focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30"
+								className="w-full bg-surface-container border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-center tracking-widest focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30"
 							/>
 
 							{verifyMutation.data && !verifyMutation.data.success && (
@@ -295,7 +295,7 @@ export default function SettingsSecurityTab() {
 									type="button"
 									onClick={() => verifyMutation.mutate()}
 									disabled={totpCode.length < 6 || verifyMutation.isPending}
-									className="flex-1 py-2.5 bg-[#FF5A30] text-white rounded-xl text-sm font-semibold hover:opacity-90 transition-all disabled:opacity-50"
+									className="flex-1 py-2.5 bg-[#FF5A2E] text-white rounded-xl text-sm font-semibold hover:opacity-90 transition-all disabled:opacity-50"
 								>
 									{verifyMutation.isPending
 										? "…"

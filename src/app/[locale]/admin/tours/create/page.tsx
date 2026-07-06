@@ -103,7 +103,7 @@ export default function CreateTourPage() {
 					</span>
 				</Link>
 				<div>
-					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-1">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-1">
 						{t("management")}
 					</span>
 					<h1 className="text-3xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface">
@@ -114,7 +114,7 @@ export default function CreateTourPage() {
 
 			<div className="bg-surface-container-lowest rounded-2xl p-6 md:p-8 shadow-sm">
 				<div className="flex items-center gap-2 mb-8">
-					<span className="material-symbols-outlined text-[#FF5A30]">
+					<span className="material-symbols-outlined text-[#FF5A2E]">
 						add_circle
 					</span>
 					<h3 className="font-(family-name:--font-manrope) font-semibold text-lg">
@@ -144,7 +144,7 @@ export default function CreateTourPage() {
 								type="text"
 								required
 								placeholder={t("placeholderArtist")}
-								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none"
+								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A2E] outline-none"
 							/>
 						</div>
 						<div>
@@ -160,7 +160,7 @@ export default function CreateTourPage() {
 								type="text"
 								required
 								placeholder={t("placeholderTour")}
-								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none"
+								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A2E] outline-none"
 							/>
 						</div>
 					</div>
@@ -180,7 +180,7 @@ export default function CreateTourPage() {
 								min="0"
 								required
 								placeholder={t("placeholderFeeMin")}
-								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none"
+								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A2E] outline-none"
 							/>
 						</div>
 						<div>
@@ -197,7 +197,7 @@ export default function CreateTourPage() {
 								min="0"
 								required
 								placeholder={t("placeholderFeeMax")}
-								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none"
+								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A2E] outline-none"
 							/>
 						</div>
 					</div>
@@ -233,7 +233,7 @@ export default function CreateTourPage() {
 								id="genre"
 								name="genre"
 								required
-								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm font-medium text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none appearance-none"
+								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm font-medium text-on-surface focus:ring-2 focus:ring-[#FF5A2E] outline-none appearance-none"
 							>
 								<option value="Afrobeats">{t("genres.afrobeats")}</option>
 								<option value="Afropop">{t("genres.afropop")}</option>
@@ -261,7 +261,7 @@ export default function CreateTourPage() {
 									id="region"
 									name="region"
 									required
-									className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm font-medium text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none appearance-none"
+									className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm font-medium text-on-surface focus:ring-2 focus:ring-[#FF5A2E] outline-none appearance-none"
 								>
 									<option value="West Africa">{t("regions.westAfrica")}</option>
 									<option value="East Africa">{t("regions.eastAfrica")}</option>
@@ -286,7 +286,7 @@ export default function CreateTourPage() {
 								name="markets"
 								type="text"
 								placeholder={t("placeholderTourCities")}
-								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none"
+								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A2E] outline-none"
 							/>
 						</div>
 					</div>
@@ -301,7 +301,7 @@ export default function CreateTourPage() {
 						<div
 							role="button"
 							tabIndex={0}
-							className="relative w-full rounded-xl border-2 border-dashed border-outline-variant/40 bg-surface-container-high overflow-hidden cursor-pointer hover:border-[#FF5A30]/50 transition-colors"
+							className="relative w-full rounded-xl border-2 border-dashed border-outline-variant/40 bg-surface-container-high overflow-hidden cursor-pointer hover:border-[#FF5A2E]/50 transition-colors"
 							style={{ minHeight: "140px" }}
 							onClick={() => fileInputRef.current?.click()}
 							onKeyDown={(e) => e.key === "Enter" && fileInputRef.current?.click()}
@@ -358,7 +358,7 @@ export default function CreateTourPage() {
 							name="bio"
 							rows={3}
 							placeholder={t("placeholderBio")}
-							className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none resize-none"
+							className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A2E] outline-none resize-none"
 						/>
 					</div>
 
@@ -374,7 +374,7 @@ export default function CreateTourPage() {
 							name="technical_requirements"
 							rows={4}
 							placeholder={t("placeholderRequirements")}
-							className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none resize-none"
+							className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A2E] outline-none resize-none"
 						/>
 					</div>
 
@@ -382,7 +382,7 @@ export default function CreateTourPage() {
 						<button
 							type="submit"
 							disabled={createMutation.isPending}
-							className="px-8 py-4 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-semibold shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+							className="px-8 py-4 bg-[#FF5A2E] text-white rounded-xl font-(family-name:--font-manrope) font-semibold shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
 						>
 							{createMutation.isPending ? t("publishing") : t("publish")}
 						</button>

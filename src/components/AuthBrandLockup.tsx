@@ -24,7 +24,7 @@ export default function AuthBrandLockup() {
 				priority
 			/>
 			<span className="flex flex-col leading-tight text-left">
-				<span className="text-lg font-black tracking-tight text-[#FF5A30] font-(family-name:--font-manrope)">
+				<span className="text-lg font-black tracking-tight text-[#FF5A2E] font-(family-name:--font-manrope)">
 					{tCommon("brandName")}
 				</span>
 				<span className="text-[10px] font-semibold text-black font-(family-name:--font-manrope)">

@@ -51,7 +51,7 @@ export default function ForgotPasswordPage() {
 							<p className="text-sm text-slate-500 mb-6">{t("sentBody")}</p>
 							<Link
 								href="/login"
-								className="inline-block text-[#FF5A30] font-semibold hover:underline text-sm"
+								className="inline-block text-[#FF5A2E] font-semibold hover:underline text-sm"
 							>
 								{t("backToLogin")}
 							</Link>
@@ -87,7 +87,7 @@ export default function ForgotPasswordPage() {
 										value={email}
 										onChange={(event) => setEmail(event.target.value)}
 										required
-										className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 focus:border-[#FF5A30] transition-all"
+										className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
 									/>
 								</div>
 
@@ -100,7 +100,7 @@ export default function ForgotPasswordPage() {
 								<button
 									type="submit"
 									disabled={mutation.isPending}
-									className="w-full py-3 bg-[#FF5A30] text-white font-semibold rounded-xl shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60"
+									className="w-full py-3 bg-[#FF5A2E] text-white font-semibold rounded-xl shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60"
 								>
 									{mutation.isPending ? t("sending") : t("sendLink")}
 								</button>
@@ -109,7 +109,7 @@ export default function ForgotPasswordPage() {
 							<p className="text-center text-sm text-slate-500 mt-6">
 								<Link
 									href="/login"
-									className="text-[#FF5A30] font-semibold hover:underline"
+									className="text-[#FF5A2E] font-semibold hover:underline"
 								>
 									{t("backToLogin")}
 								</Link>

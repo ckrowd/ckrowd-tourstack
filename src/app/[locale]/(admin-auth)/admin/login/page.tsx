@@ -67,7 +67,7 @@ function AdminLoginPageContent() {
 
 				<div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
 					<div className="mb-8">
-						<p className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] mb-3">
+						<p className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] mb-3">
 							{t("portal")}
 						</p>
 						<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-slate-900 mb-2">
@@ -92,7 +92,7 @@ function AdminLoginPageContent() {
 								value={email}
 								onChange={(event) => setEmail(event.target.value)}
 								required
-								className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 focus:border-[#FF5A30] transition-all"
+								className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
 							/>
 						</div>
 
@@ -111,12 +111,12 @@ function AdminLoginPageContent() {
 								value={password}
 								onChange={(event) => setPassword(event.target.value)}
 								required
-								className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 focus:border-[#FF5A30] transition-all"
+								className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
 							/>
 							<div className="flex justify-end mt-2">
 								<Link
 									href="/forgot-password"
-									className="text-xs font-semibold text-[#FF5A30] hover:underline"
+									className="text-xs font-semibold text-[#FF5A2E] hover:underline"
 								>
 									{t("forgotPassword")}
 								</Link>
@@ -132,7 +132,7 @@ function AdminLoginPageContent() {
 						<button
 							type="submit"
 							disabled={loginMutation.isPending}
-							className="w-full py-3 bg-[#FF5A30] text-white font-semibold rounded-xl shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60"
+							className="w-full py-3 bg-[#FF5A2E] text-white font-semibold rounded-xl shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60"
 						>
 							{loginMutation.isPending ? t("signingIn") : t("signIn")}
 						</button>
@@ -142,7 +142,7 @@ function AdminLoginPageContent() {
 						{t("regularAccount")}{" "}
 						<Link
 							href="/login"
-							className="text-[#FF5A30] font-semibold hover:underline"
+							className="text-[#FF5A2E] font-semibold hover:underline"
 						>
 							{t("regularLogin")}
 						</Link>

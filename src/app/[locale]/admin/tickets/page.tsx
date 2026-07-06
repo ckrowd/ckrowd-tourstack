@@ -38,7 +38,7 @@ export default function AdminTicketsPage() {
 		<div className="p-6 max-w-6xl mx-auto">
 			<div className="flex items-start justify-between mb-8">
 				<div>
-					<p className="text-xs font-black uppercase tracking-widest text-[#FF5A30] mb-1">{t("badge")}</p>
+					<p className="text-xs font-black uppercase tracking-widest text-[#FF5A2E] mb-1">{t("badge")}</p>
 					<h1 className="text-2xl font-black text-on-surface">{t("title")}</h1>
 					<p className="text-sm text-on-surface-variant mt-1">{t("description")}</p>
 				</div>
@@ -62,7 +62,7 @@ export default function AdminTicketsPage() {
 							onClick={() => setFilter(f)}
 							className={`px-4 py-1.5 rounded-full text-xs font-bold transition ${
 								filter === f
-									? "bg-[#FF5A30] text-white"
+									? "bg-[#FF5A2E] text-white"
 									: "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"
 							}`}
 						>
@@ -75,7 +75,7 @@ export default function AdminTicketsPage() {
 					<select
 						value={promoter}
 						onChange={(e) => setPromoter(e.target.value)}
-						className="ml-auto text-xs font-semibold bg-surface-container text-on-surface-variant border border-outline-variant rounded-full px-4 py-1.5 focus:outline-none focus:ring-2 focus:ring-[#FF5A30] cursor-pointer"
+						className="ml-auto text-xs font-semibold bg-surface-container text-on-surface-variant border border-outline-variant rounded-full px-4 py-1.5 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E] cursor-pointer"
 					>
 						<option value="">{t("allPromoters")}</option>
 						{promoters.map((p) => (
@@ -89,7 +89,7 @@ export default function AdminTicketsPage() {
 
 			{isLoading && (
 				<div className="flex justify-center py-16">
-					<div className="w-6 h-6 border-2 border-[#FF5A30] border-t-transparent rounded-full animate-spin" />
+					<div className="w-6 h-6 border-2 border-[#FF5A2E] border-t-transparent rounded-full animate-spin" />
 				</div>
 			)}
 

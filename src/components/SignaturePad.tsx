@@ -151,7 +151,7 @@ export default function SignaturePad({ value, onChange, label, hint }: Props) {
           <button
             type="button"
             onClick={() => fileInputRef.current?.click()}
-            className="w-full border-2 border-dashed border-outline-variant/30 rounded-xl p-6 flex flex-col items-center gap-2 hover:border-[#FF5A30]/40 transition-colors bg-surface-container-lowest"
+            className="w-full border-2 border-dashed border-outline-variant/30 rounded-xl p-6 flex flex-col items-center gap-2 hover:border-[#FF5A2E]/40 transition-colors bg-surface-container-lowest"
           >
             <span className="material-symbols-outlined text-2xl text-on-surface-variant">upload_file</span>
             <p className="text-xs text-on-surface-variant font-medium">

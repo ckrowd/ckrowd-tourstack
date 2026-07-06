@@ -174,7 +174,7 @@ export default function ArtmgmtPage() {
 
 	const isBusy = createMutation.isPending || updateMutation.isPending;
 	const inputCls =
-		"w-full px-3 py-2 text-sm rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/40 placeholder:text-slate-400";
+		"w-full px-3 py-2 text-sm rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/40 placeholder:text-slate-400";
 
 	const totalArtists = artists.length;
 	const activeArtists = artists.filter((a) => Boolean(a.is_active)).length;
@@ -185,7 +185,7 @@ export default function ArtmgmtPage() {
 			{/* Header */}
 			<div className="mb-6 flex items-start justify-between gap-4 flex-wrap">
 				<div>
-					<span className="inline-block px-3 py-1 rounded-full bg-[#FF5A30]/10 text-[#FF5A30] text-xs font-semibold uppercase tracking-wider mb-3">
+					<span className="inline-block px-3 py-1 rounded-full bg-[#FF5A2E]/10 text-[#FF5A2E] text-xs font-semibold uppercase tracking-wider mb-3">
 						{t("badge")}
 					</span>
 					<h1 className="font-(family-name:--font-manrope) text-3xl font-black text-on-surface">
@@ -196,7 +196,7 @@ export default function ArtmgmtPage() {
 				<button
 					type="button"
 					onClick={openAdd}
-					className="flex items-center gap-2 px-5 py-2.5 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm hover:bg-[#e04e27] transition-colors shadow-md shadow-[#FF5A30]/20"
+					className="flex items-center gap-2 px-5 py-2.5 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm hover:bg-[#e04e27] transition-colors shadow-md shadow-[#FF5A2E]/20"
 				>
 					<span className="material-symbols-outlined text-sm">add</span>
 					{t("addArtist")}
@@ -207,8 +207,8 @@ export default function ArtmgmtPage() {
 			{!isLoading && (
 				<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
 					<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex items-center gap-4">
-						<div className="w-11 h-11 rounded-xl bg-[#FF5A30]/10 flex items-center justify-center shrink-0">
-							<span className="material-symbols-outlined text-[#FF5A30] text-xl">
+						<div className="w-11 h-11 rounded-xl bg-[#FF5A2E]/10 flex items-center justify-center shrink-0">
+							<span className="material-symbols-outlined text-[#FF5A2E] text-xl">
 								groups
 							</span>
 						</div>
@@ -296,8 +296,8 @@ export default function ArtmgmtPage() {
 											unoptimized
 										/>
 									) : (
-										<div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#FF5A30]/20 to-orange-100 flex items-center justify-center shrink-0">
-											<span className="material-symbols-outlined text-[#FF5A30] text-2xl">
+										<div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#FF5A2E]/20 to-orange-100 flex items-center justify-center shrink-0">
+											<span className="material-symbols-outlined text-[#FF5A2E] text-2xl">
 												person
 											</span>
 										</div>
@@ -385,7 +385,7 @@ export default function ArtmgmtPage() {
 									<button
 										type="button"
 										onClick={() => openEdit(artist)}
-										className="text-xs text-[#FF5A30] font-semibold hover:underline"
+										className="text-xs text-[#FF5A2E] font-semibold hover:underline"
 									>
 										{t("editArtist")}
 									</button>
@@ -548,7 +548,7 @@ export default function ArtmgmtPage() {
 									onClick={() =>
 										setForm((p) => ({ ...p, isActive: !p.isActive }))
 									}
-									className={`w-10 h-6 rounded-full transition-colors relative ${form.isActive ? "bg-[#FF5A30]" : "bg-slate-300"}`}
+									className={`w-10 h-6 rounded-full transition-colors relative ${form.isActive ? "bg-[#FF5A2E]" : "bg-slate-300"}`}
 								>
 									<span
 										className={`absolute top-1 left-1 w-4 h-4 rounded-full bg-white shadow transition-transform ${form.isActive ? "translate-x-4" : ""}`}
@@ -563,7 +563,7 @@ export default function ArtmgmtPage() {
 								<button
 									type="submit"
 									disabled={isBusy}
-									className="flex-1 py-3 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm hover:bg-[#e04e27] disabled:opacity-60 transition-colors"
+									className="flex-1 py-3 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm hover:bg-[#e04e27] disabled:opacity-60 transition-colors"
 								>
 									{isBusy ? t("form.saving") : t("form.save")}
 								</button>

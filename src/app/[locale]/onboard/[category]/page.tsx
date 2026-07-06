@@ -48,7 +48,7 @@ export default function SelfServeOnboardingPage({
 					<p className="text-sm text-rose-700 mt-4">{t("errorUnavailable")}</p>
 					<Link
 						href="/join"
-						className="inline-flex items-center justify-center mt-6 px-5 py-3 rounded-xl bg-[#FF5A30] text-white text-sm font-semibold hover:opacity-90"
+						className="inline-flex items-center justify-center mt-6 px-5 py-3 rounded-xl bg-[#FF5A2E] text-white text-sm font-semibold hover:opacity-90"
 					>
 						{t("success.returnHome")}
 					</Link>
@@ -71,7 +71,7 @@ export default function SelfServeOnboardingPage({
 					<p className="text-sm text-on-surface-variant mt-2">{t("success.description")}</p>
 					<Link
 						href="/"
-						className="inline-flex items-center justify-center mt-6 px-5 py-3 rounded-xl bg-[#FF5A30] text-white text-sm font-semibold hover:opacity-90"
+						className="inline-flex items-center justify-center mt-6 px-5 py-3 rounded-xl bg-[#FF5A2E] text-white text-sm font-semibold hover:opacity-90"
 					>
 						{t("success.returnHome")}
 					</Link>
@@ -84,7 +84,7 @@ export default function SelfServeOnboardingPage({
 		<div className="min-h-screen bg-surface-container-low py-10 px-6">
 			<div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-sm p-6 md:p-8">
 				<BrandHeader />
-				<p className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30]">
+				<p className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E]">
 					{category === "service"
 						? t("serviceProvider.tagline" as never)
 						: category === "workforce"

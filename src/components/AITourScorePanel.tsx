@@ -181,7 +181,7 @@ export default function AITourScorePanel({ eoiId }: { eoiId: string }) {
 						type="button"
 						onClick={() => generateMutation.mutate()}
 						disabled={generateMutation.isPending}
-						className="inline-flex items-center gap-2 bg-[#FF5A30] text-white text-xs font-bold px-4 py-2 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-60"
+						className="inline-flex items-center gap-2 bg-[#FF5A2E] text-white text-xs font-bold px-4 py-2 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-60"
 					>
 						<span className="material-symbols-outlined text-sm">auto_awesome</span>
 						{generateMutation.isPending ? t("generating") : t("generate")}

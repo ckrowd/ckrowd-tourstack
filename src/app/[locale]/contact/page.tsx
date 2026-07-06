@@ -39,7 +39,7 @@ export default function ContactPage() {
 		<div className="bg-surface text-on-surface min-h-screen flex flex-col">
 			<TopNav />
 			<main className="flex-1 pt-28 pb-20 px-6 md:px-12 max-w-4xl mx-auto w-full">
-				<span className="text-[#FF5A30] font-semibold uppercase tracking-widest text-xs mb-4 block">
+				<span className="text-[#FF5A2E] font-semibold uppercase tracking-widest text-xs mb-4 block">
 					{t("getInTouch")}
 				</span>
 				<h1 className="font-(family-name:--font-manrope) text-4xl font-extrabold tracking-tight text-on-surface mb-4">
@@ -54,11 +54,11 @@ export default function ContactPage() {
 						<a
 							key={item.title}
 							href={item.href}
-							className="flex items-start gap-4 p-6 bg-surface-container-lowest rounded-2xl border border-outline-variant/10 shadow-sm hover:shadow-md hover:border-[#FF5A30]/20 transition-all group"
+							className="flex items-start gap-4 p-6 bg-surface-container-lowest rounded-2xl border border-outline-variant/10 shadow-sm hover:shadow-md hover:border-[#FF5A2E]/20 transition-all group"
 						>
-							<div className="w-12 h-12 rounded-xl bg-[#FF5A30]/10 flex items-center justify-center shrink-0 group-hover:bg-[#FF5A30]/20 transition-colors">
+							<div className="w-12 h-12 rounded-xl bg-[#FF5A2E]/10 flex items-center justify-center shrink-0 group-hover:bg-[#FF5A2E]/20 transition-colors">
 								<span
-									className="material-symbols-outlined text-[#FF5A30]"
+									className="material-symbols-outlined text-[#FF5A2E]"
 									style={{ fontVariationSettings: "'FILL' 1" }}
 								>
 									{item.icon}
@@ -69,7 +69,7 @@ export default function ContactPage() {
 								<p className="text-on-surface-variant text-sm leading-relaxed mb-3">
 									{item.description}
 								</p>
-								<p className="text-[#FF5A30] font-semibold text-sm group-hover:underline">
+								<p className="text-[#FF5A2E] font-semibold text-sm group-hover:underline">
 									{item.value}
 								</p>
 							</div>
@@ -79,7 +79,7 @@ export default function ContactPage() {
 
 				<div className="bg-surface-container-low rounded-2xl p-8 border border-outline-variant/10 text-center">
 					<span
-						className="material-symbols-outlined text-[#FF5A30] text-3xl mb-3 block"
+						className="material-symbols-outlined text-[#FF5A2E] text-3xl mb-3 block"
 						style={{ fontVariationSettings: "'FILL' 1" }}
 					>
 						location_on

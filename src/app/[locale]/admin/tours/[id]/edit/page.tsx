@@ -106,7 +106,7 @@ export default function EditTourPage({
 					</span>
 				</Link>
 				<div>
-					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-1">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-1">
 						{t("badge")}
 					</span>
 					<h1 className="text-3xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface">
@@ -139,7 +139,7 @@ export default function EditTourPage({
 								required
 								defaultValue={tour.venue}
 								placeholder={t("fields.venuePlaceholder")}
-								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none"
+								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A2E] outline-none"
 							/>
 						</div>
 						<div>
@@ -153,7 +153,7 @@ export default function EditTourPage({
 								required
 								defaultValue={tour.city}
 								placeholder={t("fields.cityPlaceholder")}
-								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none"
+								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A2E] outline-none"
 							/>
 						</div>
 					</div>
@@ -169,7 +169,7 @@ export default function EditTourPage({
 								type="text"
 								defaultValue={tour.country ?? ""}
 								placeholder={t("fields.countryPlaceholder")}
-								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none"
+								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A2E] outline-none"
 							/>
 						</div>
 						<div>
@@ -182,7 +182,7 @@ export default function EditTourPage({
 								type="date"
 								required
 								defaultValue={isoDate}
-								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none"
+								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A2E] outline-none"
 							/>
 						</div>
 					</div>
@@ -200,7 +200,7 @@ export default function EditTourPage({
 								required
 								defaultValue={tour.fee_usd}
 								placeholder={t("fields.feeUsdPlaceholder")}
-								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none"
+								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A2E] outline-none"
 							/>
 						</div>
 						<div>
@@ -214,7 +214,7 @@ export default function EditTourPage({
 								min="0"
 								defaultValue={tour.capacity ?? ""}
 								placeholder={t("fields.capacityPlaceholder")}
-								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none"
+								className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A2E] outline-none"
 							/>
 						</div>
 					</div>
@@ -229,7 +229,7 @@ export default function EditTourPage({
 									id="status"
 									name="status"
 									defaultValue={tour.status}
-									className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm font-medium text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none appearance-none"
+									className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm font-medium text-on-surface focus:ring-2 focus:ring-[#FF5A2E] outline-none appearance-none"
 								>
 									{TOUR_STATUSES.map((s) => (
 										<option key={s} value={s}>
@@ -251,7 +251,7 @@ export default function EditTourPage({
 									id="financing"
 									name="financing"
 									defaultValue={String(tour.financing)}
-									className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm font-medium text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none appearance-none"
+									className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm font-medium text-on-surface focus:ring-2 focus:ring-[#FF5A2E] outline-none appearance-none"
 								>
 									<option value="false">{t("no")}</option>
 									<option value="true">{t("yes")}</option>
@@ -274,7 +274,7 @@ export default function EditTourPage({
 							min="0"
 							defaultValue={tour.financing_amount ?? ""}
 							placeholder={t("fields.financingAmountPlaceholder")}
-							className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A30] outline-none"
+							className="w-full px-4 py-3 bg-surface-container-high border-none rounded-xl text-sm text-on-surface focus:ring-2 focus:ring-[#FF5A2E] outline-none"
 						/>
 					</div>
 
@@ -288,7 +288,7 @@ export default function EditTourPage({
 						<button
 							type="submit"
 							disabled={mutation.isPending}
-							className="px-8 py-3 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-semibold shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-opacity disabled:opacity-50"
+							className="px-8 py-3 bg-[#FF5A2E] text-white rounded-xl font-(family-name:--font-manrope) font-semibold shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-opacity disabled:opacity-50"
 						>
 							{mutation.isPending ? t("saving") : t("save")}
 						</button>

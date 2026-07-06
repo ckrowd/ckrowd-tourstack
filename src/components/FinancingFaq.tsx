@@ -37,7 +37,7 @@ export default function FinancingFaq({ faqs }: { faqs: Faq[] }) {
 				onClick={() => setOpen(true)}
 				className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-semibold hover:bg-surface-container-high transition-colors"
 			>
-				<span className="material-symbols-outlined text-base text-[#FF5A30]">
+				<span className="material-symbols-outlined text-base text-[#FF5A2E]">
 					help
 				</span>
 				{t("faqButton")}

@@ -215,7 +215,7 @@ export default function EoiPdfViewer({
               <button
                 type="button"
                 onClick={downloadSigned}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-[#FF5A30] text-white rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity"
+                className="inline-flex items-center gap-2 px-4 py-2 bg-[#FF5A2E] text-white rounded-xl text-sm font-semibold hover:opacity-90 transition-opacity"
               >
                 <span className="material-symbols-outlined text-sm">download</span>
                 Download Signed PDF

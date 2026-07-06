@@ -135,7 +135,7 @@ export default function AdminDirectoryPage() {
 				<button
 					type="button"
 					onClick={() => setSelectedId(null)}
-					className="flex items-center gap-2 text-slate-500 hover:text-[#FF5A30] text-sm font-semibold transition-colors"
+					className="flex items-center gap-2 text-slate-500 hover:text-[#FF5A2E] text-sm font-semibold transition-colors"
 				>
 					<span className="material-symbols-outlined text-sm">arrow_back</span>
 					{t("backToDirectory")}
@@ -143,13 +143,13 @@ export default function AdminDirectoryPage() {
 
 				<div className="bg-surface-container-lowest rounded-2xl p-8 shadow-sm border border-outline-variant/10">
 					<div className="flex items-start gap-5 mb-8">
-						<div className="w-16 h-16 rounded-2xl bg-[#FF5A30]/10 flex items-center justify-center shrink-0">
-							<span className="material-symbols-outlined text-[#FF5A30] text-2xl">
+						<div className="w-16 h-16 rounded-2xl bg-[#FF5A2E]/10 flex items-center justify-center shrink-0">
+							<span className="material-symbols-outlined text-[#FF5A2E] text-2xl">
 								{CATEGORY_ICONS[selected.category]}
 							</span>
 						</div>
 						<div>
-							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-1">
+							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-1">
 								{CATEGORY_LABELS[selected.category]}
 							</span>
 							<h2 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-on-surface">
@@ -187,7 +187,7 @@ export default function AdminDirectoryPage() {
 	return (
 		<div className="w-full">
 			<header className="mb-8">
-				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-3">
+				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-3">
 					{t("tagline")}
 				</span>
 				<h1 className="text-4xl font-extrabold tracking-tight text-on-surface mb-2 font-(family-name:--font-manrope)">
@@ -206,7 +206,7 @@ export default function AdminDirectoryPage() {
 					onChange={(e) => setSearch(e.target.value)}
 					placeholder={t("searchPlaceholder")}
 					aria-label={t("searchPlaceholder")}
-					className="w-full rounded-xl bg-surface-container-highest pl-10 pr-4 py-2.5 text-sm border border-outline-variant/30 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+					className="w-full rounded-xl bg-surface-container-highest pl-10 pr-4 py-2.5 text-sm border border-outline-variant/30 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 				/>
 			</div>
 
@@ -219,7 +219,7 @@ export default function AdminDirectoryPage() {
 							onClick={() => setFilter(tab.key)}
 							className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
 								filter === tab.key
-									? "bg-[#FF5A30] text-white shadow-md"
+									? "bg-[#FF5A2E] text-white shadow-md"
 									: "bg-surface-container-highest text-on-surface-variant hover:bg-surface-container-high"
 							}`}
 						>
@@ -289,8 +289,8 @@ export default function AdminDirectoryPage() {
 								>
 									<td className="px-5 py-4">
 										<div className="flex items-center gap-3">
-											<div className="w-9 h-9 rounded-xl bg-[#FF5A30]/10 flex items-center justify-center shrink-0">
-												<span className="material-symbols-outlined text-[#FF5A30] text-base">
+											<div className="w-9 h-9 rounded-xl bg-[#FF5A2E]/10 flex items-center justify-center shrink-0">
+												<span className="material-symbols-outlined text-[#FF5A2E] text-base">
 													{CATEGORY_ICONS[entry.category]}
 												</span>
 											</div>
@@ -307,7 +307,7 @@ export default function AdminDirectoryPage() {
 										</div>
 									</td>
 									<td className="px-5 py-4 hidden md:table-cell">
-										<span className="px-2 py-1 bg-[#FF5A30]/10 text-[#FF5A30] text-xs font-semibold rounded-lg">
+										<span className="px-2 py-1 bg-[#FF5A2E]/10 text-[#FF5A2E] text-xs font-semibold rounded-lg">
 											{CATEGORY_LABELS[entry.category]}
 										</span>
 									</td>
@@ -325,7 +325,7 @@ export default function AdminDirectoryPage() {
 										<button
 											type="button"
 											onClick={() => setSelectedId(entry.id)}
-											className="text-xs font-semibold text-[#FF5A30] hover:underline"
+											className="text-xs font-semibold text-[#FF5A2E] hover:underline"
 										>
 											{t("table.view")}
 										</button>

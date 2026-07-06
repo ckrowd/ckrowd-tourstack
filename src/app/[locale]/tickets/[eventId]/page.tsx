@@ -121,7 +121,7 @@ export default function PublicTicketPage() {
 			<div className="min-h-screen flex flex-col">
 				<TicketHeader locale={locale} />
 				<div className="flex-1 flex items-center justify-center">
-					<div className="w-8 h-8 border-2 border-[#FF5A30] border-t-transparent rounded-full animate-spin" />
+					<div className="w-8 h-8 border-2 border-[#FF5A2E] border-t-transparent rounded-full animate-spin" />
 				</div>
 			</div>
 		);
@@ -145,7 +145,7 @@ export default function PublicTicketPage() {
 			{/* Hero band */}
 			<div className="bg-gradient-to-br from-[#1a1a1a] to-[#2d1810] text-white">
 				<div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
-					<p className="text-xs font-black uppercase tracking-widest text-[#FF5A30] mb-3">
+					<p className="text-xs font-black uppercase tracking-widest text-[#FF5A2E] mb-3">
 						TourStack Tickets
 					</p>
 					<h1 className="text-3xl sm:text-4xl font-black leading-tight mb-5">
@@ -212,10 +212,10 @@ export default function PublicTicketPage() {
 											}}
 											className={`w-full flex items-center justify-between rounded-xl px-4 py-4 border-2 transition text-left group ${
 												isSelected
-													? "border-[#FF5A30] bg-orange-50"
+													? "border-[#FF5A2E] bg-orange-50"
 													: isSoldOut
 														? "border-gray-100 bg-gray-50 opacity-60 cursor-not-allowed"
-														: "border-gray-200 hover:border-[#FF5A30]/60 hover:bg-orange-50/30"
+														: "border-gray-200 hover:border-[#FF5A2E]/60 hover:bg-orange-50/30"
 											}`}
 										>
 											<div>
@@ -236,7 +236,7 @@ export default function PublicTicketPage() {
 													{Number(tr.price) === 0 ? "FREE" : fmtAmount(Number(tr.price))}
 												</span>
 												{isSelected && (
-													<div className="w-5 h-5 rounded-full bg-[#FF5A30] flex items-center justify-center shrink-0">
+													<div className="w-5 h-5 rounded-full bg-[#FF5A2E] flex items-center justify-center shrink-0">
 														<svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" strokeWidth="3" viewBox="0 0 24 24">
 															<path d="m5 12 5 5 9-9" />
 														</svg>
@@ -257,7 +257,7 @@ export default function PublicTicketPage() {
 										<button
 											type="button"
 											onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-											className="w-8 h-8 rounded-full border border-gray-200 bg-white flex items-center justify-center font-bold text-gray-600 hover:border-[#FF5A30] hover:text-[#FF5A30] transition"
+											className="w-8 h-8 rounded-full border border-gray-200 bg-white flex items-center justify-center font-bold text-gray-600 hover:border-[#FF5A2E] hover:text-[#FF5A2E] transition"
 										>
 											−
 										</button>
@@ -271,14 +271,14 @@ export default function PublicTicketPage() {
 														: 10;
 												setQuantity((q) => Math.min(10, avail, q + 1));
 											}}
-											className="w-8 h-8 rounded-full border border-gray-200 bg-white flex items-center justify-center font-bold text-gray-600 hover:border-[#FF5A30] hover:text-[#FF5A30] transition"
+											className="w-8 h-8 rounded-full border border-gray-200 bg-white flex items-center justify-center font-bold text-gray-600 hover:border-[#FF5A2E] hover:text-[#FF5A2E] transition"
 										>
 											+
 										</button>
 									</div>
 									<div className="ml-auto text-right">
 										<p className="text-xs text-gray-400">{t("subtotal")}</p>
-										<p className="font-black text-[#FF5A30] text-lg">{fmtAmount(subtotal)}</p>
+										<p className="font-black text-[#FF5A2E] text-lg">{fmtAmount(subtotal)}</p>
 									</div>
 								</div>
 							)}
@@ -292,10 +292,10 @@ export default function PublicTicketPage() {
 							<div className="p-6 space-y-4">
 								<div>
 									<label className="block text-sm font-semibold text-gray-700 mb-1.5">
-										{t("name")} <span className="text-[#FF5A30]">*</span>
+										{t("name")} <span className="text-[#FF5A2E]">*</span>
 									</label>
 									<input
-										className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF5A30] transition bg-white"
+										className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF5A2E] transition bg-white"
 										placeholder={t("namePlaceholder")}
 										value={buyerName}
 										onChange={(e) => setBuyerName(e.target.value)}
@@ -303,11 +303,11 @@ export default function PublicTicketPage() {
 								</div>
 								<div>
 									<label className="block text-sm font-semibold text-gray-700 mb-1.5">
-										{t("email")} <span className="text-[#FF5A30]">*</span>
+										{t("email")} <span className="text-[#FF5A2E]">*</span>
 									</label>
 									<input
 										type="email"
-										className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF5A30] transition bg-white"
+										className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF5A2E] transition bg-white"
 										placeholder={t("emailPlaceholder")}
 										value={buyerEmail}
 										onChange={(e) => setBuyerEmail(e.target.value)}
@@ -319,7 +319,7 @@ export default function PublicTicketPage() {
 									</label>
 									<input
 										type="tel"
-										className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF5A30] transition bg-white"
+										className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF5A2E] transition bg-white"
 										placeholder={t("phonePlaceholder")}
 										value={buyerPhone}
 										onChange={(e) => setBuyerPhone(e.target.value)}
@@ -351,7 +351,7 @@ export default function PublicTicketPage() {
 										</div>
 										<div className="border-t border-gray-100 pt-3 flex items-center justify-between">
 											<p className="text-sm font-bold text-gray-900">Total</p>
-											<p className="text-xl font-black text-[#FF5A30]">{fmtAmount(subtotal)}</p>
+											<p className="text-xl font-black text-[#FF5A2E]">{fmtAmount(subtotal)}</p>
 										</div>
 									</>
 								) : (
@@ -368,7 +368,7 @@ export default function PublicTicketPage() {
 									type="button"
 									disabled={!canSubmit || purchaseMutation.isPending}
 									onClick={() => purchaseMutation.mutate()}
-									className="w-full bg-[#FF5A30] text-white font-black text-sm py-4 rounded-xl hover:opacity-90 disabled:opacity-40 transition shadow-sm"
+									className="w-full bg-[#FF5A2E] text-white font-black text-sm py-4 rounded-xl hover:opacity-90 disabled:opacity-40 transition shadow-sm"
 								>
 									{purchaseMutation.isPending ? t("processing") : t("checkout")}
 								</button>

@@ -22,12 +22,12 @@ export default async function JoinPage({ params, searchParams }: Props) {
 			key: "service" as const,
 			token: s ?? null,
 			icon: "business_center",
-			headerBg: "bg-gradient-to-br from-[#FF5A30] to-[#cc4826]",
-			accentBg: "bg-[#FF5A30]/8",
-			accentText: "text-[#FF5A30]",
-			accentBorder: "border-[#FF5A30]/30",
-			accentBtn: "bg-[#FF5A30] hover:bg-[#cc4826]",
-			checkIcon: "text-[#FF5A30]",
+			headerBg: "bg-gradient-to-br from-[#FF5A2E] to-[#cc4826]",
+			accentBg: "bg-[#FF5A2E]/8",
+			accentText: "text-[#FF5A2E]",
+			accentBorder: "border-[#FF5A2E]/30",
+			accentBtn: "bg-[#FF5A2E] hover:bg-[#cc4826]",
+			checkIcon: "text-[#FF5A2E]",
 		},
 		{
 			key: "workforce" as const,
@@ -125,7 +125,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 								key={key}
 								className="p-6 rounded-2xl bg-slate-50 border border-slate-100"
 							>
-								<p className="text-3xl md:text-4xl font-black text-[#FF5A30] font-(family-name:--font-manrope) mb-2">
+								<p className="text-3xl md:text-4xl font-black text-[#FF5A2E] font-(family-name:--font-manrope) mb-2">
 									{t(`stats.${key}.value`)}
 								</p>
 								<p className="text-xs font-semibold text-slate-500 leading-relaxed">
@@ -141,7 +141,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 			<section className="py-24 px-6 md:px-12">
 				<div className="max-w-5xl mx-auto">
 					<div className="text-center mb-10">
-						<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-3">
+						<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-3">
 							{t("model.eyebrow")}
 						</span>
 						<h2 className="text-3xl font-extrabold font-(family-name:--font-manrope) text-[#191c1e] mb-3">
@@ -158,9 +158,9 @@ export default async function JoinPage({ params, searchParams }: Props) {
 								className="relative p-6 rounded-2xl bg-white border border-slate-100 shadow-sm"
 							>
 								<div className="flex items-center gap-3 mb-3">
-									<div className="w-9 h-9 rounded-xl bg-[#FF5A30]/10 flex items-center justify-center shrink-0">
+									<div className="w-9 h-9 rounded-xl bg-[#FF5A2E]/10 flex items-center justify-center shrink-0">
 										<span
-											className="material-symbols-outlined text-[#FF5A30]"
+											className="material-symbols-outlined text-[#FF5A2E]"
 											style={{ fontVariationSettings: "'FILL' 1" }}
 										>
 											{key === "certify"
@@ -192,7 +192,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 			<section className="py-24 px-6 md:px-12 bg-white">
 				<div className="max-w-5xl mx-auto">
 					<div className="max-w-2xl">
-						<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-3">
+						<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-3">
 							{t("about.eyebrow")}
 						</span>
 						<h2 className="text-3xl font-extrabold font-(family-name:--font-manrope) text-[#191c1e] mb-4">
@@ -209,9 +209,9 @@ export default async function JoinPage({ params, searchParams }: Props) {
 								key={key}
 								className="flex items-start gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-100"
 							>
-								<div className="w-10 h-10 rounded-xl bg-[#FF5A30]/10 flex items-center justify-center shrink-0">
+								<div className="w-10 h-10 rounded-xl bg-[#FF5A2E]/10 flex items-center justify-center shrink-0">
 									<span
-										className="material-symbols-outlined text-[#FF5A30]"
+										className="material-symbols-outlined text-[#FF5A2E]"
 										style={{ fontVariationSettings: "'FILL' 1" }}
 									>
 										{key === "data"
@@ -246,7 +246,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 					<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 						{steps.map((key, i) => (
 							<div key={key} className="relative flex flex-col items-start">
-								<div className="w-12 h-12 rounded-2xl bg-[#FF5A30] text-white flex items-center justify-center font-extrabold text-lg font-(family-name:--font-manrope) mb-4 shadow-lg shadow-[#FF5A30]/30">
+								<div className="w-12 h-12 rounded-2xl bg-[#FF5A2E] text-white flex items-center justify-center font-extrabold text-lg font-(family-name:--font-manrope) mb-4 shadow-lg shadow-[#FF5A2E]/30">
 									{i + 1}
 								</div>
 								<h3 className="font-extrabold text-[#191c1e] mb-2 font-(family-name:--font-manrope)">
@@ -270,7 +270,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 			<section className="py-24 px-6 md:px-12 bg-white">
 				<div className="max-w-5xl mx-auto">
 					<div className="text-center mb-10">
-						<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-3">
+						<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-3">
 							{t("roles.eyebrow")}
 						</span>
 						<h2 className="text-3xl font-extrabold font-(family-name:--font-manrope) text-[#191c1e] mb-3">
@@ -353,7 +353,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 											<ul className="space-y-1.5">
 												{benefits.map((b: string) => (
 													<li key={b} className="flex items-start gap-2 text-xs text-slate-600">
-														<span className="material-symbols-outlined text-sm shrink-0 text-[#FF5A30] mt-px">
+														<span className="material-symbols-outlined text-sm shrink-0 text-[#FF5A2E] mt-px">
 															arrow_forward
 														</span>
 														{b}
@@ -383,7 +383,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 			<section className="py-24 px-6 md:px-12">
 				<div className="max-w-5xl mx-auto">
 					<div className="max-w-2xl mb-8">
-						<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-3">
+						<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-3">
 							{t("markets.eyebrow")}
 						</span>
 						<h2 className="text-3xl font-extrabold font-(family-name:--font-manrope) text-[#191c1e] mb-4">
@@ -401,7 +401,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 							>
 								<div className="flex items-center gap-2 mb-3">
 									<span
-										className="material-symbols-outlined text-[#FF5A30]"
+										className="material-symbols-outlined text-[#FF5A2E]"
 										style={{ fontVariationSettings: "'FILL' 1" }}
 									>
 										public
@@ -424,7 +424,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 				<div className="max-w-5xl mx-auto">
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 						<div>
-							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-3">
+							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-3">
 								{t("vision.eyebrow")}
 							</span>
 							<h2 className="text-3xl font-extrabold font-(family-name:--font-manrope) mb-5 leading-tight">
@@ -444,7 +444,7 @@ export default async function JoinPage({ params, searchParams }: Props) {
 									className="p-5 rounded-2xl bg-white/5 border border-white/10"
 								>
 									<span
-										className="material-symbols-outlined text-[#FF5A30] block mb-3"
+										className="material-symbols-outlined text-[#FF5A2E] block mb-3"
 										style={{ fontVariationSettings: "'FILL' 1" }}
 									>
 										{key === "promoters"

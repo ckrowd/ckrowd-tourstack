@@ -143,7 +143,7 @@ export default function AdminArtistsClient() {
 			{/* Header */}
 			<div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
 				<div>
-					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
 						{t("badge")}
 					</span>
 					<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -177,7 +177,7 @@ export default function AdminArtistsClient() {
 					{/* Stats */}
 					<div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
 						{[
-							{ label: t("submissions.total"), value: submissions.length, icon: "groups", color: "text-[#FF5A30]", bg: "bg-[#FF5A30]/10" },
+							{ label: t("submissions.total"), value: submissions.length, icon: "groups", color: "text-[#FF5A2E]", bg: "bg-[#FF5A2E]/10" },
 							{ label: t("submissions.pending"), value: pending.length, icon: "schedule", color: "text-amber-600", bg: "bg-amber-50" },
 							{ label: t("submissions.approved"), value: approved.length, icon: "check_circle", color: "text-emerald-600", bg: "bg-emerald-50" },
 							{ label: t("submissions.rejected"), value: rejected.length, icon: "cancel", color: "text-red-500", bg: "bg-red-50" },
@@ -208,7 +208,7 @@ export default function AdminArtistsClient() {
 								onClick={() => setFilter(f.key)}
 								className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
 									filter === f.key
-										? "bg-[#FF5A30] text-white"
+										? "bg-[#FF5A2E] text-white"
 										: "bg-surface-container-low text-on-surface-variant hover:text-on-surface"
 								}`}
 							>
@@ -223,7 +223,7 @@ export default function AdminArtistsClient() {
 					{/* Artist submission cards */}
 					{submissionsQuery.isLoading ? (
 						<div className="py-16 flex justify-center">
-							<span className="material-symbols-outlined animate-spin text-3xl text-[#FF5A30]">progress_activity</span>
+							<span className="material-symbols-outlined animate-spin text-3xl text-[#FF5A2E]">progress_activity</span>
 						</div>
 					) : filtered.length === 0 ? (
 						<div className="bg-surface-container-lowest rounded-2xl p-14 text-center shadow-sm">
@@ -338,8 +338,8 @@ export default function AdminArtistsClient() {
 
 											{/* Manager attribution */}
 											<div className="mt-auto pt-3 border-t border-outline-variant/10 flex items-center gap-2">
-												<div className="w-7 h-7 rounded-full bg-[#FF5A30]/10 flex items-center justify-center shrink-0">
-													<span className="material-symbols-outlined text-sm text-[#FF5A30]">manage_accounts</span>
+												<div className="w-7 h-7 rounded-full bg-[#FF5A2E]/10 flex items-center justify-center shrink-0">
+													<span className="material-symbols-outlined text-sm text-[#FF5A2E]">manage_accounts</span>
 												</div>
 												<div className="min-w-0">
 													<p className="text-[11px] font-semibold text-on-surface truncate">
@@ -403,7 +403,7 @@ export default function AdminArtistsClient() {
 
 					{publishedQuery.isLoading ? (
 						<div className="py-16 flex justify-center">
-							<span className="material-symbols-outlined animate-spin text-3xl text-[#FF5A30]">progress_activity</span>
+							<span className="material-symbols-outlined animate-spin text-3xl text-[#FF5A2E]">progress_activity</span>
 						</div>
 					) : published.length === 0 ? (
 						<div className="bg-surface-container-low rounded-2xl p-12 text-center">

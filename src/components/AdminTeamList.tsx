@@ -169,7 +169,7 @@ export default function AdminTeamList({
 									scopes.map((s) => (
 										<span
 											key={s}
-											className="text-xs font-semibold text-[#FF5A30] bg-orange-50 px-3 py-1 rounded-full"
+											className="text-xs font-semibold text-[#FF5A2E] bg-orange-50 px-3 py-1 rounded-full"
 										>
 											{scopeLabel(s)}
 										</span>
@@ -214,13 +214,13 @@ export default function AdminTeamList({
 												key={scope}
 												className={`flex items-center gap-2 text-xs font-semibold px-3 py-2 rounded-lg border cursor-pointer ${
 													checked
-														? "border-[#FF5A30] bg-orange-50 text-[#FF5A30]"
+														? "border-[#FF5A2E] bg-orange-50 text-[#FF5A2E]"
 														: "border-outline-variant/30 text-on-surface-variant hover:bg-surface-container-low"
 												}`}
 											>
 												<input
 													type="checkbox"
-													className="accent-[#FF5A30]"
+													className="accent-[#FF5A2E]"
 													checked={checked}
 													onChange={() => toggleDraftScope(scope)}
 												/>
@@ -239,7 +239,7 @@ export default function AdminTeamList({
 											})
 										}
 										disabled={saving}
-										className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-[#FF5A30] text-white hover:bg-[#e64f29] disabled:opacity-60"
+										className="text-xs font-semibold px-3 py-1.5 rounded-lg bg-[#FF5A2E] text-white hover:bg-[#e64f29] disabled:opacity-60"
 									>
 										{saving ? t("savingRoles") : t("saveRoles")}
 									</button>
@@ -285,7 +285,7 @@ export default function AdminTeamList({
 							<span className="text-[10px] font-semibold uppercase tracking-wider text-amber-700 bg-amber-100 px-2 py-1 rounded-full">
 								{t("invitedBadge")}
 							</span>
-							<span className="text-xs font-semibold text-[#FF5A30] bg-orange-50 px-3 py-1 rounded-full">
+							<span className="text-xs font-semibold text-[#FF5A2E] bg-orange-50 px-3 py-1 rounded-full">
 								{scopeLabel(invite.role)}
 							</span>
 							<button

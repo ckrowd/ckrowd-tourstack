@@ -98,7 +98,7 @@ export default function JoinHeroSlider({
 									<div className="flex flex-col sm:flex-row gap-4 pt-2">
 										<Link
 											href={s.href}
-											className="justify-center inline-flex items-center gap-3 px-6 md:px-8 py-3 md:py-4 bg-[#FF5A30] text-white rounded-xl font-semibold shadow-2xl shadow-[#FF5A30]/40 hover:scale-[1.02] active:scale-[0.98] transition-transform"
+											className="justify-center inline-flex items-center gap-3 px-6 md:px-8 py-3 md:py-4 bg-[#FF5A2E] text-white rounded-xl font-semibold shadow-2xl shadow-[#FF5A2E]/40 hover:scale-[1.02] active:scale-[0.98] transition-transform"
 										>
 											{s.cta}
 											<span className="material-symbols-outlined">arrow_forward</span>
@@ -121,7 +121,7 @@ export default function JoinHeroSlider({
 													{s.examplesLabel}
 												</h3>
 												<span
-													className="material-symbols-outlined text-[#FF5A30]"
+													className="material-symbols-outlined text-[#FF5A2E]"
 													style={{ fontVariationSettings: "'FILL' 1" }}
 												>
 													verified
@@ -133,7 +133,7 @@ export default function JoinHeroSlider({
 														key={ex}
 														className="flex items-center gap-3 py-2.5 border-b border-slate-100 last:border-b-0"
 													>
-														<span className="w-2 h-2 rounded-full bg-[#FF5A30] shrink-0" />
+														<span className="w-2 h-2 rounded-full bg-[#FF5A2E] shrink-0" />
 														<span className="text-sm font-semibold text-slate-700">
 															{ex}
 														</span>

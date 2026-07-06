@@ -40,7 +40,7 @@ export default async function AdminToursPage({
 			<PageTour pageId="admin-tours" />
 			<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 				<div>
-					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
 						{t("badge")}
 					</span>
 					<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -52,7 +52,7 @@ export default async function AdminToursPage({
 				</div>
 				<Link
 					href="/admin/tours/create"
-					className="flex items-center gap-2 px-6 py-3 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-semibold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 shrink-0"
+					className="flex items-center gap-2 px-6 py-3 bg-[#FF5A2E] text-white rounded-xl font-(family-name:--font-manrope) font-semibold shadow-lg shadow-[#FF5A2E]/20 hover:scale-[1.02] transition-transform active:scale-95 shrink-0"
 				>
 					<span className="material-symbols-outlined">add</span>
 					{t("createTour")}
@@ -165,7 +165,7 @@ export default async function AdminToursPage({
 											href={pageHref(p)}
 											className={`w-9 h-9 flex items-center justify-center rounded-lg text-sm font-semibold transition-colors ${
 												p === currentPage
-													? "bg-[#FF5A30] text-white shadow-sm"
+													? "bg-[#FF5A2E] text-white shadow-sm"
 													: "text-on-surface-variant hover:bg-surface-container-low"
 											}`}
 										>

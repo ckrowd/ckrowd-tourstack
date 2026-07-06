@@ -42,7 +42,7 @@ export default function AdminTeamInvite() {
 			<button
 				type="button"
 				onClick={() => setOpen(true)}
-				className="w-full py-3 border-2 border-dashed border-outline-variant/40 rounded-xl text-sm font-semibold text-on-surface-variant hover:border-[#FF5A30]/40 hover:text-[#FF5A30] transition-all flex items-center justify-center gap-2 mt-4"
+				className="w-full py-3 border-2 border-dashed border-outline-variant/40 rounded-xl text-sm font-semibold text-on-surface-variant hover:border-[#FF5A2E]/40 hover:text-[#FF5A2E] transition-all flex items-center justify-center gap-2 mt-4"
 			>
 				<span className="material-symbols-outlined text-sm">person_add</span>
 				{t("team.invite")}
@@ -53,7 +53,7 @@ export default function AdminTeamInvite() {
 	const labelClass =
 		"mb-1.5 block text-xs font-semibold uppercase tracking-[0.18em] text-on-surface-variant";
 	const inputClass =
-		"w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-4 py-2.5 text-sm font-medium text-on-surface outline-none transition focus:ring-2 focus:ring-[#FF5A30]/20";
+		"w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-4 py-2.5 text-sm font-medium text-on-surface outline-none transition focus:ring-2 focus:ring-[#FF5A2E]/20";
 
 	return (
 		<form
@@ -119,7 +119,7 @@ export default function AdminTeamInvite() {
 				<button
 					type="submit"
 					disabled={inviteMutation.isPending}
-					className="flex-1 py-2.5 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
+					className="flex-1 py-2.5 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity disabled:cursor-not-allowed disabled:opacity-60"
 				>
 					{inviteMutation.isPending ? t("team.inviting") : t("team.sendInvite")}
 				</button>

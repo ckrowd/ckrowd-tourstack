@@ -100,7 +100,7 @@ function VerifyEmailContent() {
 		return (
 			<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 text-slate-600">
 				{t("noEmail")}{" "}
-				<Link href="/register" className="text-[#FF5A30] font-semibold hover:underline ml-1">
+				<Link href="/register" className="text-[#FF5A2E] font-semibold hover:underline ml-1">
 					{t("signIn")}
 				</Link>
 			</div>
@@ -127,7 +127,7 @@ function VerifyEmailContent() {
 						</h1>
 						<p className="text-sm text-slate-500">{t("verifiedMessage")}</p>
 						<div className="mt-6 flex justify-center">
-							<div className="w-6 h-6 border-2 border-[#FF5A30] border-t-transparent rounded-full animate-spin" />
+							<div className="w-6 h-6 border-2 border-[#FF5A2E] border-t-transparent rounded-full animate-spin" />
 						</div>
 					</div>
 				</div>
@@ -171,7 +171,7 @@ function VerifyEmailContent() {
 										onKeyDown={(e) => handleKeyDown(i, e)}
 										onPaste={handlePaste}
 										disabled={verifyMutation.isPending}
-										className="w-12 h-14 text-center text-xl font-semibold bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 focus:border-[#FF5A30] transition-all disabled:opacity-60"
+										className="w-12 h-14 text-center text-xl font-semibold bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all disabled:opacity-60"
 									/>
 								))}
 							</div>
@@ -190,7 +190,7 @@ function VerifyEmailContent() {
 						<button
 							type="submit"
 							disabled={verifyMutation.isPending || digits.join("").length < 6}
-							className="w-full py-3 bg-[#FF5A30] text-white font-semibold rounded-xl shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60"
+							className="w-full py-3 bg-[#FF5A2E] text-white font-semibold rounded-xl shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60"
 						>
 							{verifyMutation.isPending ? t("submitting") : t("submit")}
 						</button>
@@ -202,14 +202,14 @@ function VerifyEmailContent() {
 							type="button"
 							onClick={() => resendMutation.mutate()}
 							disabled={resendMutation.isPending}
-							className="text-[#FF5A30] font-semibold hover:underline disabled:opacity-60"
+							className="text-[#FF5A2E] font-semibold hover:underline disabled:opacity-60"
 						>
 							{resendMutation.isPending ? t("resending") : t("resend")}
 						</button>
 					</p>
 
 					<p className="text-center text-sm text-slate-500 mt-2">
-						<Link href="/login" className="text-[#FF5A30] font-semibold hover:underline">
+						<Link href="/login" className="text-[#FF5A2E] font-semibold hover:underline">
 							{t("signIn")}
 						</Link>
 					</p>
@@ -224,7 +224,7 @@ export default function VerifyEmailPage() {
 		<Suspense
 			fallback={
 				<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4">
-					<div className="w-6 h-6 border-2 border-[#FF5A30] border-t-transparent rounded-full animate-spin" />
+					<div className="w-6 h-6 border-2 border-[#FF5A2E] border-t-transparent rounded-full animate-spin" />
 				</div>
 			}
 		>

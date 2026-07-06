@@ -68,7 +68,7 @@ export default function AdminPayoutsPage() {
 	return (
 		<div className="p-6 max-w-7xl mx-auto">
 			<div className="mb-8">
-				<p className="text-xs font-black uppercase tracking-widest text-[#FF5A30] mb-1">{t("badge")}</p>
+				<p className="text-xs font-black uppercase tracking-widest text-[#FF5A2E] mb-1">{t("badge")}</p>
 				<h1 className="text-2xl font-black text-on-surface">{t("title")}</h1>
 				<p className="text-sm text-on-surface-variant mt-1">{t("description")}</p>
 			</div>
@@ -94,7 +94,7 @@ export default function AdminPayoutsPage() {
 				<>
 					{summaryLoading && (
 						<div className="flex justify-center py-16">
-							<div className="w-6 h-6 border-2 border-[#FF5A30] border-t-transparent rounded-full animate-spin" />
+							<div className="w-6 h-6 border-2 border-[#FF5A2E] border-t-transparent rounded-full animate-spin" />
 						</div>
 					)}
 					{!summaryLoading && summaryRows.length === 0 && (
@@ -138,7 +138,7 @@ export default function AdminPayoutsPage() {
 														type="button"
 														onClick={() => handlePay(row)}
 														disabled={isPayingThis || payoutMutation.isPending}
-														className="px-4 py-2 bg-[#FF5A30] text-white text-xs font-bold rounded-xl hover:bg-[#e04e28] disabled:opacity-50 transition"
+														className="px-4 py-2 bg-[#FF5A2E] text-white text-xs font-bold rounded-xl hover:bg-[#e04e28] disabled:opacity-50 transition"
 													>
 														{isPayingThis ? t("paying") : `${t("payNow")} · ${fmt(unpaid.net_amount, currency)}`}
 													</button>
@@ -169,7 +169,7 @@ export default function AdminPayoutsPage() {
 											].map(({ label, value, highlight }) => (
 												<div key={label} className="bg-surface-container-low p-4">
 													<p className="text-xs text-on-surface-variant mb-1">{label}</p>
-													<p className={`font-bold text-sm ${highlight ? "text-[#FF5A30]" : "text-on-surface"}`}>
+													<p className={`font-bold text-sm ${highlight ? "text-[#FF5A2E]" : "text-on-surface"}`}>
 														{value}
 													</p>
 												</div>
@@ -216,7 +216,7 @@ export default function AdminPayoutsPage() {
 				<>
 					{payoutsLoading && (
 						<div className="flex justify-center py-16">
-							<div className="w-6 h-6 border-2 border-[#FF5A30] border-t-transparent rounded-full animate-spin" />
+							<div className="w-6 h-6 border-2 border-[#FF5A2E] border-t-transparent rounded-full animate-spin" />
 						</div>
 					)}
 					{!payoutsLoading && payoutRows.length === 0 && (

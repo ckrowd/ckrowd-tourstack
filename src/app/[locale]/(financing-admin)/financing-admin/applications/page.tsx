@@ -123,7 +123,7 @@ export default function FinancingAdminApplicationsPage() {
 
 			<div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-5">
 				<div>
-					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
 						{t("badge")}
 					</span>
 					<h1 className="text-2xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -134,8 +134,8 @@ export default function FinancingAdminApplicationsPage() {
 					</p>
 					{orgInitials && (
 						<div className="mt-3 inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-surface-container-high">
-							<div className="w-6 h-6 rounded-lg bg-[#FF5A30]/15 flex items-center justify-center">
-								<span className="text-[9px] font-black text-[#FF5A30]">{orgInitials}</span>
+							<div className="w-6 h-6 rounded-lg bg-[#FF5A2E]/15 flex items-center justify-center">
+								<span className="text-[9px] font-black text-[#FF5A2E]">{orgInitials}</span>
 							</div>
 							<span className="text-xs font-semibold text-on-surface">{orgName}</span>
 							{adminProfile.role && (
@@ -183,12 +183,12 @@ export default function FinancingAdminApplicationsPage() {
 							<div
 								key={eoiId}
 								className={`bg-surface-container-lowest rounded-2xl border shadow-sm transition-colors ${
-									expanded ? "border-[#FF5A30]/60" : "border-outline-variant/10"
+									expanded ? "border-[#FF5A2E]/60" : "border-outline-variant/10"
 								}`}
 							>
 								<div className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 									<div>
-										<p className="text-xs font-black text-[#FF5A30] uppercase tracking-widest mb-0.5">
+										<p className="text-xs font-black text-[#FF5A2E] uppercase tracking-widest mb-0.5">
 											{`EOI-${eoiId.slice(-6).toUpperCase()}`}
 										</p>
 										<p className="font-(family-name:--font-manrope) font-semibold text-on-surface">
@@ -210,7 +210,7 @@ export default function FinancingAdminApplicationsPage() {
 										<button
 											type="button"
 											onClick={() => setPdfViewerEoiId(eoiId)}
-											className="flex items-center gap-2 px-4 py-2.5 bg-[#FF5A30]/10 text-[#FF5A30] rounded-xl text-sm font-semibold hover:bg-[#FF5A30]/20 transition-colors"
+											className="flex items-center gap-2 px-4 py-2.5 bg-[#FF5A2E]/10 text-[#FF5A2E] rounded-xl text-sm font-semibold hover:bg-[#FF5A2E]/20 transition-colors"
 										>
 											<span className="material-symbols-outlined text-sm">draw</span>
 											{t("eois.previewSign")}
@@ -254,7 +254,7 @@ export default function FinancingAdminApplicationsPage() {
 												value={partnerName}
 												onChange={(e) => setPartnerName(e.target.value)}
 												placeholder={t("reviewForm.placeholders.partner")}
-												className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+												className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 											/>
 										</label>
 										<label className="block">
@@ -266,7 +266,7 @@ export default function FinancingAdminApplicationsPage() {
 												value={termSheetUrl}
 												onChange={(e) => setTermSheetUrl(e.target.value)}
 												placeholder={t("reviewForm.placeholders.termSheet")}
-												className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+												className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 											/>
 										</label>
 										<label className="block">
@@ -278,7 +278,7 @@ export default function FinancingAdminApplicationsPage() {
 												value={note}
 												onChange={(e) => setNote(e.target.value)}
 												placeholder={t("reviewForm.placeholders.note")}
-												className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+												className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-3 py-2.5 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 											/>
 										</label>
 										<div className="sm:col-span-2 flex items-center justify-between gap-3">
@@ -306,7 +306,7 @@ export default function FinancingAdminApplicationsPage() {
 												<button
 													type="submit"
 													disabled={reviewMutation.isPending}
-													className="px-6 py-2.5 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-opacity disabled:opacity-60"
+													className="px-6 py-2.5 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-opacity disabled:opacity-60"
 												>
 													{reviewMutation.isPending ? t("reviewForm.saving") : t("actions.disburse")}
 												</button>

@@ -43,7 +43,7 @@ export default function TicketsDashboardPage() {
 		<div className="p-6 max-w-6xl mx-auto">
 			<div className="flex items-start justify-between mb-8">
 				<div>
-					<p className="text-xs font-black uppercase tracking-widest text-[#FF5A30] mb-1">
+					<p className="text-xs font-black uppercase tracking-widest text-[#FF5A2E] mb-1">
 						{t("badge")}
 					</p>
 					<h1 className="text-2xl font-black text-on-surface">{t("title")}</h1>
@@ -52,7 +52,7 @@ export default function TicketsDashboardPage() {
 				<button
 					type="button"
 					onClick={() => router.push(`/${locale}/dashboard/tickets/create`)}
-					className="bg-[#FF5A30] text-white font-bold text-sm px-4 py-2.5 rounded-xl hover:opacity-90 transition"
+					className="bg-[#FF5A2E] text-white font-bold text-sm px-4 py-2.5 rounded-xl hover:opacity-90 transition"
 				>
 					{t("create")}
 				</button>
@@ -60,7 +60,7 @@ export default function TicketsDashboardPage() {
 
 			{isLoading && (
 				<div className="flex justify-center py-16">
-					<div className="w-6 h-6 border-2 border-[#FF5A30] border-t-transparent rounded-full animate-spin" />
+					<div className="w-6 h-6 border-2 border-[#FF5A2E] border-t-transparent rounded-full animate-spin" />
 				</div>
 			)}
 
@@ -111,7 +111,7 @@ export default function TicketsDashboardPage() {
 												<button
 													type="button"
 													onClick={() => router.push(`/${locale}/dashboard/tickets/${String(raw.id)}`)}
-													className="text-xs font-semibold text-[#FF5A30] hover:underline"
+													className="text-xs font-semibold text-[#FF5A2E] hover:underline"
 												>
 													{t("actions.manage")}
 												</button>

@@ -43,11 +43,11 @@ const AM_DEALS = ["flat_fee", "percentage_split", "nda_required", "open_to_negot
 const labelCls =
 	"block text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant mb-1.5";
 const inputCls =
-	"w-full rounded-xl bg-surface-container-high px-4 py-3 text-sm border border-outline-variant/30 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20";
+	"w-full rounded-xl bg-surface-container-high px-4 py-3 text-sm border border-outline-variant/30 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20";
 const chipBase =
 	"px-3 py-2 rounded-xl text-xs font-semibold border transition-all cursor-pointer";
-const chipActive = "bg-[#FF5A30] text-white border-[#FF5A30]";
-const chipInactive = "border-outline-variant/30 text-on-surface-variant hover:border-[#FF5A30]/40";
+const chipActive = "bg-[#FF5A2E] text-white border-[#FF5A2E]";
+const chipInactive = "border-outline-variant/30 text-on-surface-variant hover:border-[#FF5A2E]/40";
 
 // ─── Shared Components ───────────────────────────────────────────────────────────
 
@@ -56,7 +56,7 @@ export function BrandHeader() {
 		<div className="flex items-center justify-center gap-2.5 mb-6">
 			<Image src="/ckrowd-logo.png" alt="Ckrowd" width={36} height={36} />
 			<div className="flex flex-col leading-tight">
-				<span className="text-lg font-black tracking-tight text-[#FF5A30] font-(family-name:--font-manrope)">
+				<span className="text-lg font-black tracking-tight text-[#FF5A2E] font-(family-name:--font-manrope)">
 					TourStack
 				</span>
 				<span className="text-[10px] font-semibold text-black font-(family-name:--font-manrope)">
@@ -76,9 +76,9 @@ function StepIndicator({ labels, current }: { labels: string[]; current: number 
 						<div
 							className={`w-6 h-6 rounded-full text-[10px] font-semibold flex items-center justify-center shrink-0 ${
 								i < current
-									? "bg-[#FF5A30] text-white"
+									? "bg-[#FF5A2E] text-white"
 									: i === current
-										? "border-2 border-[#FF5A30] text-[#FF5A30]"
+										? "border-2 border-[#FF5A2E] text-[#FF5A2E]"
 										: "border-2 border-outline-variant/30 text-on-surface-variant"
 							}`}
 						>
@@ -90,7 +90,7 @@ function StepIndicator({ labels, current }: { labels: string[]; current: number 
 						</div>
 						<span
 							className={`text-[10px] font-semibold hidden sm:block whitespace-nowrap ${
-								i === current ? "text-[#FF5A30]" : i < current ? "text-on-surface" : "text-on-surface-variant"
+								i === current ? "text-[#FF5A2E]" : i < current ? "text-on-surface" : "text-on-surface-variant"
 							}`}
 						>
 							{label}
@@ -98,7 +98,7 @@ function StepIndicator({ labels, current }: { labels: string[]; current: number 
 					</div>
 					{i < labels.length - 1 && (
 						<div
-							className={`flex-1 h-px mx-1 ${i < current ? "bg-[#FF5A30]" : "bg-outline-variant/30"}`}
+							className={`flex-1 h-px mx-1 ${i < current ? "bg-[#FF5A2E]" : "bg-outline-variant/30"}`}
 						/>
 					)}
 				</div>
@@ -191,7 +191,7 @@ function StepNav({
 			<button
 				type="submit"
 				disabled={isPending}
-				className="flex-1 rounded-xl bg-[#FF5A30] text-white py-3 text-sm font-semibold hover:opacity-90 disabled:opacity-60 transition-opacity"
+				className="flex-1 rounded-xl bg-[#FF5A2E] text-white py-3 text-sm font-semibold hover:opacity-90 disabled:opacity-60 transition-opacity"
 			>
 				{isLastStep ? (isPending ? submittingLabel : submitLabel) : t("steps.next" as never)}
 			</button>
@@ -519,7 +519,7 @@ export function ServiceProviderForm({ onSubmit, submitError, isPending }: Stakeh
 									type="checkbox"
 									checked={form[key]}
 									onChange={f(key)}
-									className="mt-0.5 w-4 h-4 rounded accent-[#FF5A30] shrink-0"
+									className="mt-0.5 w-4 h-4 rounded accent-[#FF5A2E] shrink-0"
 								/>
 								<span className="text-sm text-on-surface-variant">{label}</span>
 							</label>
@@ -930,7 +930,7 @@ export function WorkforceForm({ onSubmit, submitError, isPending }: StakeholderF
 							["clause3", t("declaration.clause3" as never)],
 						] as const).map(([key, label]) => (
 							<label key={key} className="flex items-start gap-3 cursor-pointer">
-								<input required type="checkbox" checked={form[key]} onChange={f(key)} className="mt-0.5 w-4 h-4 rounded accent-[#FF5A30] shrink-0" />
+								<input required type="checkbox" checked={form[key]} onChange={f(key)} className="mt-0.5 w-4 h-4 rounded accent-[#FF5A2E] shrink-0" />
 								<span className="text-sm text-on-surface-variant">{label}</span>
 							</label>
 						))}
@@ -1180,7 +1180,7 @@ export function ArtistMgmtForm({ onSubmit, submitError, isPending }: Stakeholder
 							["clause3", t("declaration.clause3" as never)],
 						] as const).map(([key, label]) => (
 							<label key={key} className="flex items-start gap-3 cursor-pointer">
-								<input required type="checkbox" checked={form[key]} onChange={f(key)} className="mt-0.5 w-4 h-4 rounded accent-[#FF5A30] shrink-0" />
+								<input required type="checkbox" checked={form[key]} onChange={f(key)} className="mt-0.5 w-4 h-4 rounded accent-[#FF5A2E] shrink-0" />
 								<span className="text-sm text-on-surface-variant">{label}</span>
 							</label>
 						))}

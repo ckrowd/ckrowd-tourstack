@@ -120,7 +120,7 @@ export default function FinancingTeamPanel() {
 										<p className="text-xs text-on-surface-variant">{email}</p>
 									</div>
 								</div>
-								<span className="text-xs font-semibold text-[#FF5A30] bg-orange-50 px-3 py-1 rounded-full">
+								<span className="text-xs font-semibold text-[#FF5A2E] bg-orange-50 px-3 py-1 rounded-full">
 									{t("activeBadge")}
 								</span>
 							</div>
@@ -188,7 +188,7 @@ export default function FinancingTeamPanel() {
 				<button
 					type="button"
 					onClick={() => setOpen(true)}
-					className="mt-4 w-full py-3 border-2 border-dashed border-outline-variant/40 rounded-xl text-sm font-semibold text-on-surface-variant hover:border-[#FF5A30]/40 hover:text-[#FF5A30] transition-all flex items-center justify-center gap-2"
+					className="mt-4 w-full py-3 border-2 border-dashed border-outline-variant/40 rounded-xl text-sm font-semibold text-on-surface-variant hover:border-[#FF5A2E]/40 hover:text-[#FF5A2E] transition-all flex items-center justify-center gap-2"
 				>
 					<span className="material-symbols-outlined text-sm">person_add</span>
 					{t("invite")}
@@ -222,7 +222,7 @@ export default function FinancingTeamPanel() {
 							value={name}
 							onChange={(e) => setName(e.target.value)}
 							placeholder={t("namePlaceholder")}
-							className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-4 py-2.5 text-sm font-medium text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+							className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-4 py-2.5 text-sm font-medium text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 						/>
 					</div>
 					<div>
@@ -239,14 +239,14 @@ export default function FinancingTeamPanel() {
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
 							placeholder={t("emailPlaceholder")}
-							className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-4 py-2.5 text-sm font-medium text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+							className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-4 py-2.5 text-sm font-medium text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 						/>
 					</div>
 					<div className="flex gap-2">
 						<button
 							type="submit"
 							disabled={inviteMutation.isPending}
-							className="flex-1 py-2.5 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm hover:opacity-90 disabled:opacity-60"
+							className="flex-1 py-2.5 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm hover:opacity-90 disabled:opacity-60"
 						>
 							{inviteMutation.isPending ? t("inviting") : t("sendInvite")}
 						</button>

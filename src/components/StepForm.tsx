@@ -12,11 +12,11 @@ export default function StepForm({
 	const t = useTranslations("StepForm");
 
 	const inputClass =
-		"w-full px-4 py-3 bg-surface border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm";
+		"w-full px-4 py-3 bg-surface border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A2E] transition-all text-on-surface outline-none text-sm";
 	const labelClass =
 		"block text-[10px] font-semibold text-on-surface-variant uppercase tracking-wider mb-1.5";
 	const fileClass =
-		"block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:font-semibold file:bg-[#FF5A30]/10 file:text-[#FF5A30] hover:file:bg-[#FF5A30]/20 transition-all cursor-pointer";
+		"block w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:font-semibold file:bg-[#FF5A2E]/10 file:text-[#FF5A2E] hover:file:bg-[#FF5A2E]/20 transition-all cursor-pointer";
 
 	const renderStep = () => {
 		if (stakeholderId === "promoter") {
@@ -112,7 +112,7 @@ export default function StepForm({
 						<label className="flex items-start gap-3 mt-4">
 							<input
 								type="checkbox"
-								className="mt-1 w-4 h-4 text-[#FF5A30] border-outline-variant/30 rounded focus:ring-[#FF5A30]"
+								className="mt-1 w-4 h-4 text-[#FF5A2E] border-outline-variant/30 rounded focus:ring-[#FF5A2E]"
 								required
 							/>
 							<span className="text-sm text-on-surface-variant">
@@ -127,7 +127,7 @@ export default function StepForm({
 						<label className="flex items-start gap-3">
 							<input
 								type="checkbox"
-								className="mt-1 w-4 h-4 text-[#FF5A30] border-outline-variant/30 rounded focus:ring-[#FF5A30]"
+								className="mt-1 w-4 h-4 text-[#FF5A2E] border-outline-variant/30 rounded focus:ring-[#FF5A2E]"
 								required
 							/>
 							<span className="text-sm text-on-surface-variant">
@@ -351,7 +351,7 @@ export default function StepForm({
 						<label className="flex items-start gap-3">
 							<input
 								type="checkbox"
-								className="mt-1 w-4 h-4 text-[#FF5A30] border-outline-variant/30 rounded focus:ring-[#FF5A30]"
+								className="mt-1 w-4 h-4 text-[#FF5A2E] border-outline-variant/30 rounded focus:ring-[#FF5A2E]"
 								required
 							/>
 							<span className="text-sm text-on-surface-variant">
@@ -440,7 +440,7 @@ export default function StepForm({
 						<label className="flex items-start gap-3 mt-4">
 							<input
 								type="checkbox"
-								className="mt-1 w-4 h-4 text-[#FF5A30] border-outline-variant/30 rounded focus:ring-[#FF5A30]"
+								className="mt-1 w-4 h-4 text-[#FF5A2E] border-outline-variant/30 rounded focus:ring-[#FF5A2E]"
 								required
 							/>
 							<span className="text-sm text-on-surface-variant">
@@ -455,7 +455,7 @@ export default function StepForm({
 						<label className="flex items-start gap-3">
 							<input
 								type="checkbox"
-								className="mt-1 w-4 h-4 text-[#FF5A30] border-outline-variant/30 rounded focus:ring-[#FF5A30]"
+								className="mt-1 w-4 h-4 text-[#FF5A2E] border-outline-variant/30 rounded focus:ring-[#FF5A2E]"
 								required
 							/>
 							<span className="text-sm text-on-surface-variant">

@@ -23,7 +23,7 @@ export default function InsuranceAdminSideNavClient({
 	return (
 		<aside className="hidden lg:flex flex-col gap-2 py-6 sticky top-16 h-[calc(100vh-4rem)] overflow-y-auto w-64 border-r border-slate-200 bg-slate-50 shrink-0">
 			<div className="px-4 mb-4">
-				<span className="text-[10px] font-black uppercase tracking-widest text-[#FF5A30]">
+				<span className="text-[10px] font-black uppercase tracking-widest text-[#FF5A2E]">
 					{portalLabel}
 				</span>
 			</div>
@@ -34,7 +34,7 @@ export default function InsuranceAdminSideNavClient({
 						href={item.href}
 						className={`flex items-center gap-3 px-4 py-3 rounded-xl mx-2 transition-all duration-200 font-(family-name:--font-manrope) font-semibold text-sm ${
 							activeItem === item.key
-								? "bg-orange-50 text-[#FF5A30]"
+								? "bg-orange-50 text-[#FF5A2E]"
 								: "text-slate-600 hover:bg-slate-200/50 hover:translate-x-1"
 						}`}
 					>

@@ -12,7 +12,7 @@ export interface BankDetails {
 }
 
 const inputClass =
-	"w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30";
+	"w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30";
 const labelClass =
 	"block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-1.5";
 const errorBorder = "border-rose-400 ring-1 ring-rose-300";
