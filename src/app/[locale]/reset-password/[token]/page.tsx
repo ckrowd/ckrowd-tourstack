@@ -85,7 +85,7 @@ export default function ResetPasswordPage({
 								onChange={(event) => setPassword(event.target.value)}
 								required
 								minLength={8}
-								className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 focus:border-[#FF5A30] transition-all"
+								className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
 							/>
 							{tooShort && (
 								<p className="mt-1.5 text-xs text-amber-600">{t("tooShort")}</p>
@@ -107,7 +107,7 @@ export default function ResetPasswordPage({
 								value={confirm}
 								onChange={(event) => setConfirm(event.target.value)}
 								required
-								className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 focus:border-[#FF5A30] transition-all"
+								className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
 							/>
 							{mismatch && (
 								<p className="mt-1.5 text-xs text-amber-600">{t("mismatch")}</p>
@@ -123,7 +123,7 @@ export default function ResetPasswordPage({
 						<button
 							type="submit"
 							disabled={!canSubmit}
-							className="w-full py-3 bg-[#FF5A30] text-white font-semibold rounded-xl shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
+							className="w-full py-3 bg-[#FF5A2E] text-white font-semibold rounded-xl shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed"
 						>
 							{mutation.isPending ? t("saving") : t("submit")}
 						</button>
@@ -132,7 +132,7 @@ export default function ResetPasswordPage({
 					<p className="text-center text-sm text-slate-500 mt-6">
 						<Link
 							href="/login"
-							className="text-[#FF5A30] font-semibold hover:underline"
+							className="text-[#FF5A2E] font-semibold hover:underline"
 						>
 							{t("backToLogin")}
 						</Link>

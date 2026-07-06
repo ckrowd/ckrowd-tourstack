@@ -46,7 +46,7 @@ export default function HowItWorksModal({
 				}`}
 				aria-label={buttonLabel}
 			>
-				<span className="material-symbols-outlined text-[#FF5A30]" style={{ fontSize: "18px" }}>
+				<span className="material-symbols-outlined text-[#FF5A2E]" style={{ fontSize: "18px" }}>
 					info
 				</span>
 				<span>{buttonLabel}</span>
@@ -96,8 +96,8 @@ export default function HowItWorksModal({
 											<div
 												className={`absolute -left-8 w-7 h-7 rounded-full flex items-center justify-center text-xs font-black shrink-0 border-2 ${
 													i === 0
-														? "bg-[#FF5A30] text-white border-[#FF5A30]"
-														: "bg-surface text-[#FF5A30] border-[#FF5A30]/40"
+														? "bg-[#FF5A2E] text-white border-[#FF5A2E]"
+														: "bg-surface text-[#FF5A2E] border-[#FF5A2E]/40"
 												}`}
 											>
 												{s.step}

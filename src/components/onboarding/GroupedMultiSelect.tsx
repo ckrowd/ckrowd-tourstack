@@ -6,9 +6,9 @@ type Group = { key: string; items: readonly string[] };
 
 const chipBase =
 	"px-3 py-1.5 rounded-xl text-xs font-semibold border transition-all cursor-pointer";
-const chipActive = "bg-[#FF5A30] text-white border-[#FF5A30]";
+const chipActive = "bg-[#FF5A2E] text-white border-[#FF5A2E]";
 const chipInactive =
-	"border-outline-variant/30 text-on-surface-variant hover:border-[#FF5A30]/40";
+	"border-outline-variant/30 text-on-surface-variant hover:border-[#FF5A2E]/40";
 
 /**
  * Searchable, grouped multi-select for large taxonomies (e.g. the 110 workforce
@@ -94,7 +94,7 @@ export default function GroupedMultiSelect({
 						onChange={(e) => setQuery(e.target.value)}
 						placeholder={searchPlaceholder}
 						aria-label={searchPlaceholder}
-						className="w-full rounded-lg bg-surface-container-lowest pl-10 pr-4 py-2.5 text-sm border border-outline-variant/30 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+						className="w-full rounded-lg bg-surface-container-lowest pl-10 pr-4 py-2.5 text-sm border border-outline-variant/30 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 					/>
 				</div>
 			</div>
@@ -108,7 +108,7 @@ export default function GroupedMultiSelect({
 				) : (
 					filtered.map((g) => (
 						<div key={g.key}>
-							<p className="text-[10px] font-semibold uppercase tracking-widest text-[#FF5A30] mb-2 sticky top-0 bg-surface-container-high py-1">
+							<p className="text-[10px] font-semibold uppercase tracking-widest text-[#FF5A2E] mb-2 sticky top-0 bg-surface-container-high py-1">
 								{groupLabel(g.key)}
 							</p>
 							<div className="flex flex-wrap gap-1.5">

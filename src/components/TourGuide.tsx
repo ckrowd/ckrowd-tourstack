@@ -134,7 +134,7 @@ export default function TourGuide({ tourId }: { tourId: TourId }) {
 		<button
 			type="button"
 			onClick={startTour}
-			className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-slate-500 hover:text-[#FF5A30] hover:bg-orange-50 transition-colors w-full"
+			className="flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-semibold text-slate-500 hover:text-[#FF5A2E] hover:bg-orange-50 transition-colors w-full"
 		>
 			<span className="material-symbols-outlined text-base" style={{ fontVariationSettings: "'FILL' 1" }}>
 				travel_explore

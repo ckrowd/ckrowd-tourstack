@@ -66,7 +66,7 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 									key={suite.name}
 									className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10 flex flex-col gap-3"
 								>
-									<span className="text-[10px] font-semibold uppercase tracking-wider text-[#FF5A30] bg-[#FF5A30]/10 px-2 py-0.5 rounded-full self-start">
+									<span className="text-[10px] font-semibold uppercase tracking-wider text-[#FF5A2E] bg-[#FF5A2E]/10 px-2 py-0.5 rounded-full self-start">
 										{suite.tag}
 									</span>
 									<p className="font-(family-name:--font-manrope) font-semibold text-on-surface text-sm">
@@ -140,7 +140,7 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 			{/* Header */}
 			<div className="mb-8 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
 				<div>
-					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
 						{t("promoterPortal")}
 					</span>
 					<h1 className="text-3xl font-semibold font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -156,7 +156,7 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 						onClick={() => setProductsOpen(true)}
 						className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-semibold hover:bg-surface-container-high transition-colors"
 					>
-						<span className="material-symbols-outlined text-base text-[#FF5A30]">category</span>
+						<span className="material-symbols-outlined text-base text-[#FF5A2E]">category</span>
 						{t("productsButton")}
 					</button>
 					<HowItWorksModal
@@ -174,7 +174,7 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 						onClick={() => setFaqOpen(true)}
 						className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-semibold hover:bg-surface-container-high transition-colors"
 					>
-						<span className="material-symbols-outlined text-base text-[#FF5A30]">help</span>
+						<span className="material-symbols-outlined text-base text-[#FF5A2E]">help</span>
 						{tIns("faqButton")}
 					</button>
 				</div>

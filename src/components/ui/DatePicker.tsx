@@ -64,7 +64,7 @@ export default function DatePicker({
 				type="button"
 				id={id}
 				onClick={() => setOpen((o) => !o)}
-				className={`w-full flex items-center justify-between gap-2 bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 ${hasError ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
+				className={`w-full flex items-center justify-between gap-2 bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 ${hasError ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
 			>
 				<span className={selected ? "" : "text-on-surface-variant"}>
 					{selected
@@ -92,7 +92,7 @@ export default function DatePicker({
 						// it to also cover the next decade.
 						startMonth={new Date(new Date().getFullYear() - 100, 0)}
 						endMonth={new Date(new Date().getFullYear() + 10, 11)}
-						style={{ "--rdp-accent-color": "#FF5A30", "--rdp-accent-background-color": "#FFF1EC" } as React.CSSProperties}
+						style={{ "--rdp-accent-color": "#FF5A2E", "--rdp-accent-background-color": "#FFF1EC" } as React.CSSProperties}
 					/>
 				</div>
 			)}

@@ -37,7 +37,7 @@ const CATEGORY_ICONS: Record<Category, string> = {
 /* ─────────────────────── Shared UI ─────────────────────── */
 
 const inputClass =
-	"w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm";
+	"w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A2E] transition-all text-on-surface outline-none text-sm";
 
 function Label({
 	htmlFor,
@@ -84,17 +84,17 @@ function RadioGroup({
 						onClick={() => onChange(opt)}
 						className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold border transition-all text-left ${
 							checked
-								? "bg-[#FF5A30]/10 border-[#FF5A30] text-[#FF5A30]"
-								: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A30]/40"
+								? "bg-[#FF5A2E]/10 border-[#FF5A2E] text-[#FF5A2E]"
+								: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A2E]/40"
 						}`}
 					>
 						<span
 							className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 border-2 transition-colors ${
-								checked ? "border-[#FF5A30]" : "border-current"
+								checked ? "border-[#FF5A2E]" : "border-current"
 							}`}
 						>
 							{checked && (
-								<span className="w-2.5 h-2.5 rounded-full bg-[#FF5A30] block" />
+								<span className="w-2.5 h-2.5 rounded-full bg-[#FF5A2E] block" />
 							)}
 						</span>
 						{opt}
@@ -140,13 +140,13 @@ function ConsentChecklist({
 						onClick={() => onToggle(key)}
 						className={`flex items-start gap-3 w-full text-left px-4 py-3 rounded-xl border transition-all text-sm font-medium ${
 							checked
-								? "bg-[#FF5A30]/10 border-[#FF5A30] text-on-surface"
-								: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A30]/40"
+								? "bg-[#FF5A2E]/10 border-[#FF5A2E] text-on-surface"
+								: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A2E]/40"
 						}`}
 					>
 						<span
 							className={`material-symbols-outlined text-base mt-0.5 shrink-0 ${
-								checked ? "text-[#FF5A30]" : "text-on-surface-variant/50"
+								checked ? "text-[#FF5A2E]" : "text-on-surface-variant/50"
 							}`}
 							style={checked ? { fontVariationSettings: "'FILL' 1" } : undefined}
 						>
@@ -199,7 +199,7 @@ function CategoryStep({
 	return (
 		<div className="space-y-6">
 			<div className="flex items-center gap-2 mb-2">
-				<span className="material-symbols-outlined text-[#FF5A30]">
+				<span className="material-symbols-outlined text-[#FF5A2E]">
 					category
 				</span>
 				<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
@@ -217,14 +217,14 @@ function CategoryStep({
 							onClick={() => onChange(cat.key)}
 							className={`flex flex-col gap-4 p-6 rounded-2xl border-2 text-left transition-all ${
 								selected
-									? "bg-[#FF5A30]/5 border-[#FF5A30]"
-									: "bg-surface-container-highest border-outline-variant/20 hover:border-[#FF5A30]/40"
+									? "bg-[#FF5A2E]/5 border-[#FF5A2E]"
+									: "bg-surface-container-highest border-outline-variant/20 hover:border-[#FF5A2E]/40"
 							}`}
 						>
 							<div
 								className={`w-12 h-12 rounded-xl flex items-center justify-center ${
 									selected
-										? "bg-[#FF5A30] text-white"
+										? "bg-[#FF5A2E] text-white"
 										: "bg-surface-container-low text-on-surface-variant"
 								}`}
 							>
@@ -233,7 +233,7 @@ function CategoryStep({
 							<div>
 								<p
 									className={`font-semibold text-base font-(family-name:--font-manrope) mb-1 ${
-										selected ? "text-[#FF5A30]" : "text-on-surface"
+										selected ? "text-[#FF5A2E]" : "text-on-surface"
 									}`}
 								>
 									{cat.label}
@@ -320,7 +320,7 @@ function ServiceProviderForm({
 		return (
 			<div className="space-y-8">
 				<div className="flex items-center gap-2 mb-2">
-					<span className="material-symbols-outlined text-[#FF5A30]">
+					<span className="material-symbols-outlined text-[#FF5A2E]">
 						business
 					</span>
 					<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
@@ -428,7 +428,7 @@ function ServiceProviderForm({
 		return (
 			<div className="space-y-8">
 				<div className="flex items-center gap-2 mb-2">
-					<span className="material-symbols-outlined text-[#FF5A30]">
+					<span className="material-symbols-outlined text-[#FF5A2E]">
 						build
 					</span>
 					<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
@@ -447,15 +447,15 @@ function ServiceProviderForm({
 									onClick={() => setField("serviceType", s)}
 									className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-semibold border transition-all text-left ${
 										checked
-											? "bg-[#FF5A30]/10 border-[#FF5A30] text-[#FF5A30]"
-											: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A30]/40"
+											? "bg-[#FF5A2E]/10 border-[#FF5A2E] text-[#FF5A2E]"
+											: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A2E]/40"
 									}`}
 								>
 									<span
-										className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${checked ? "border-[#FF5A30]" : "border-current"}`}
+										className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${checked ? "border-[#FF5A2E]" : "border-current"}`}
 									>
 										{checked && (
-											<span className="w-2 h-2 rounded-full bg-[#FF5A30] block" />
+											<span className="w-2 h-2 rounded-full bg-[#FF5A2E] block" />
 										)}
 									</span>
 									{s}
@@ -504,7 +504,7 @@ function ServiceProviderForm({
 						id="sp-clients"
 						rows={3}
 						placeholder={t("experience.pastClients.placeholder")}
-						className="w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
+						className="w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A2E] transition-all text-on-surface outline-none text-sm resize-none"
 						value={form.pastClients}
 						onChange={(e) => setField("pastClients", e.target.value)}
 					/>
@@ -517,7 +517,7 @@ function ServiceProviderForm({
 						id="sp-certs"
 						rows={2}
 						placeholder={t("experience.certifications.placeholder")}
-						className="w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
+						className="w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A2E] transition-all text-on-surface outline-none text-sm resize-none"
 						value={form.certifications}
 						onChange={(e) => setField("certifications", e.target.value)}
 					/>
@@ -530,7 +530,7 @@ function ServiceProviderForm({
 		return (
 			<div className="space-y-8">
 				<div className="flex items-center gap-2 mb-2">
-					<span className="material-symbols-outlined text-[#FF5A30]">
+					<span className="material-symbols-outlined text-[#FF5A2E]">
 						gavel
 					</span>
 					<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
@@ -637,7 +637,7 @@ function ArtMgmtForm({
 		return (
 			<div className="space-y-8">
 				<div className="flex items-center gap-2 mb-2">
-					<span className="material-symbols-outlined text-[#FF5A30]">
+					<span className="material-symbols-outlined text-[#FF5A2E]">
 						business
 					</span>
 					<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
@@ -758,7 +758,7 @@ function ArtMgmtForm({
 		return (
 			<div className="space-y-8">
 				<div className="flex items-center gap-2 mb-2">
-					<span className="material-symbols-outlined text-[#FF5A30]">
+					<span className="material-symbols-outlined text-[#FF5A2E]">
 						music_note
 					</span>
 					<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
@@ -814,7 +814,7 @@ function ArtMgmtForm({
 						id="am-artists"
 						rows={3}
 						placeholder={t("roster.artists.placeholder")}
-						className="w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
+						className="w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A2E] transition-all text-on-surface outline-none text-sm resize-none"
 						value={form.artistsRepresented}
 						onChange={(e) => setField("artistsRepresented", e.target.value)}
 					/>
@@ -827,7 +827,7 @@ function ArtMgmtForm({
 						id="am-collabs"
 						rows={3}
 						placeholder={t("roster.pastCollaborations.placeholder")}
-						className="w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
+						className="w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A2E] transition-all text-on-surface outline-none text-sm resize-none"
 						value={form.pastCollaborations}
 						onChange={(e) => setField("pastCollaborations", e.target.value)}
 					/>
@@ -840,7 +840,7 @@ function ArtMgmtForm({
 		return (
 			<div className="space-y-8">
 				<div className="flex items-center gap-2 mb-2">
-					<span className="material-symbols-outlined text-[#FF5A30]">
+					<span className="material-symbols-outlined text-[#FF5A2E]">
 						gavel
 					</span>
 					<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
@@ -899,7 +899,7 @@ function Stepper({ steps, current }: { steps: string[]; current: number }) {
 			<div className="flex justify-between items-center relative">
 				<div className="absolute top-1/2 left-0 w-full h-0.5 bg-surface-variant -translate-y-1/2 z-0" />
 				<div
-					className="absolute top-1/2 left-0 h-0.5 bg-[#FF5A30] -translate-y-1/2 z-0 transition-all duration-500"
+					className="absolute top-1/2 left-0 h-0.5 bg-[#FF5A2E] -translate-y-1/2 z-0 transition-all duration-500"
 					style={{ width: `${progress}%` }}
 				/>
 				{steps.map((label, i) => {
@@ -913,7 +913,7 @@ function Stepper({ steps, current }: { steps: string[]; current: number }) {
 							<div
 								className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ring-4 ring-surface-container-low ${
 									done || active
-										? "bg-[#FF5A30] text-white"
+										? "bg-[#FF5A2E] text-white"
 										: "bg-surface-variant text-on-surface-variant"
 								}`}
 							>
@@ -931,9 +931,9 @@ function Stepper({ steps, current }: { steps: string[]; current: number }) {
 							<span
 								className={`mt-2 text-[10px] font-semibold uppercase tracking-wider text-center leading-tight ${
 									active
-										? "text-[#FF5A30]"
+										? "text-[#FF5A2E]"
 										: done
-											? "text-[#FF5A30]/70"
+											? "text-[#FF5A2E]/70"
 											: "text-on-surface-variant"
 								}`}
 							>
@@ -984,7 +984,7 @@ function DirectoryTab({
 				<button
 					type="button"
 					onClick={() => setSelected(null)}
-					className="flex items-center gap-2 text-slate-500 hover:text-[#FF5A30] text-sm font-semibold mb-6 transition-colors"
+					className="flex items-center gap-2 text-slate-500 hover:text-[#FF5A2E] text-sm font-semibold mb-6 transition-colors"
 				>
 					<span className="material-symbols-outlined text-sm">arrow_back</span>
 					{t("backToDirectory")}
@@ -992,13 +992,13 @@ function DirectoryTab({
 
 				<div className="bg-surface-container-lowest rounded-2xl p-8 shadow-sm border border-outline-variant/10">
 					<div className="flex items-start gap-5 mb-8">
-						<div className="w-16 h-16 rounded-2xl bg-[#FF5A30]/10 flex items-center justify-center shrink-0">
-							<span className="material-symbols-outlined text-[#FF5A30] text-2xl">
+						<div className="w-16 h-16 rounded-2xl bg-[#FF5A2E]/10 flex items-center justify-center shrink-0">
+							<span className="material-symbols-outlined text-[#FF5A2E] text-2xl">
 								{CATEGORY_ICONS[selected.category]}
 							</span>
 						</div>
 						<div>
-							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-1">
+							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-1">
 								{CATEGORY_LABELS[selected.category]}
 							</span>
 							<h2 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-on-surface">
@@ -1067,7 +1067,7 @@ function DirectoryTab({
 							onClick={() => setFilter(tab.key)}
 							className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
 								filter === tab.key
-									? "bg-[#FF5A30] text-white shadow-md"
+									? "bg-[#FF5A2E] text-white shadow-md"
 									: "bg-surface-container-highest text-on-surface-variant hover:bg-surface-container-high"
 							}`}
 						>
@@ -1157,8 +1157,8 @@ function DirectoryTab({
 								>
 									<td className="px-5 py-4">
 										<div className="flex items-center gap-3">
-											<div className="w-9 h-9 rounded-xl bg-[#FF5A30]/10 flex items-center justify-center shrink-0">
-												<span className="material-symbols-outlined text-[#FF5A30] text-base">
+											<div className="w-9 h-9 rounded-xl bg-[#FF5A2E]/10 flex items-center justify-center shrink-0">
+												<span className="material-symbols-outlined text-[#FF5A2E] text-base">
 													{CATEGORY_ICONS[entry.category]}
 												</span>
 											</div>
@@ -1175,7 +1175,7 @@ function DirectoryTab({
 										</div>
 									</td>
 									<td className="px-5 py-4 hidden md:table-cell">
-										<span className="px-2 py-1 bg-[#FF5A30]/10 text-[#FF5A30] text-xs font-semibold rounded-lg">
+										<span className="px-2 py-1 bg-[#FF5A2E]/10 text-[#FF5A2E] text-xs font-semibold rounded-lg">
 											{CATEGORY_LABELS[entry.category]}
 										</span>
 									</td>
@@ -1193,7 +1193,7 @@ function DirectoryTab({
 										<button
 											type="button"
 											onClick={() => setSelected(entry)}
-											className="text-xs font-semibold text-[#FF5A30] hover:underline"
+											className="text-xs font-semibold text-[#FF5A2E] hover:underline"
 										>
 											{t("table.view")}
 										</button>
@@ -1411,7 +1411,7 @@ export default function OnboardingForm() {
 								resetForm();
 								setTab("directory");
 							}}
-							className="px-8 py-3 bg-[#FF5A30] text-white rounded-xl font-semibold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform"
+							className="px-8 py-3 bg-[#FF5A2E] text-white rounded-xl font-semibold shadow-lg shadow-[#FF5A2E]/20 hover:scale-[1.02] transition-transform"
 						>
 							{t("success.viewDirectory")}
 						</button>
@@ -1433,7 +1433,7 @@ export default function OnboardingForm() {
 			<div className="w-full">
 				{/* Header */}
 				<header className="mb-8">
-					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-3">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-3">
 						{t("header.platform")}
 					</span>
 					<h1 className="text-4xl font-extrabold tracking-tight text-on-surface mb-2 font-(family-name:--font-manrope)">
@@ -1459,7 +1459,7 @@ export default function OnboardingForm() {
 						>
 							{t_key === "form" ? t("tabs.onboard") : t("tabs.directory")}
 							{t_key === "directory" && entries.length > 0 && (
-								<span className="ml-2 px-1.5 py-0.5 bg-[#FF5A30] text-white text-[10px] font-semibold rounded-full">
+								<span className="ml-2 px-1.5 py-0.5 bg-[#FF5A2E] text-white text-[10px] font-semibold rounded-full">
 									{entries.length}
 								</span>
 							)}
@@ -1512,7 +1512,7 @@ export default function OnboardingForm() {
 										type="button"
 										disabled={!category || category === "workforce"}
 										onClick={() => setStep(1)}
-										className="px-10 py-3 bg-linear-to-r from-[#FF5A30] to-[#cc4826] text-white rounded-xl font-semibold shadow-xl shadow-[#FF5A30]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none"
+										className="px-10 py-3 bg-linear-to-r from-[#FF5A2E] to-[#cc4826] text-white rounded-xl font-semibold shadow-xl shadow-[#FF5A2E]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none"
 									>
 										{t("actions.continue")}
 										<span className="material-symbols-outlined">
@@ -1561,7 +1561,7 @@ export default function OnboardingForm() {
 										<button
 											type="submit"
 											disabled={step === totalSteps - 1 && !allConsented}
-											className="px-10 py-3 bg-linear-to-r from-[#FF5A30] to-[#cc4826] text-white rounded-xl font-semibold shadow-xl shadow-[#FF5A30]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none disabled:hover:scale-100"
+											className="px-10 py-3 bg-linear-to-r from-[#FF5A2E] to-[#cc4826] text-white rounded-xl font-semibold shadow-xl shadow-[#FF5A2E]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none disabled:hover:scale-100"
 										>
 											{step < totalSteps - 1
 												? t("actions.continue")

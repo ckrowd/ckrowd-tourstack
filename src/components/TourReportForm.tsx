@@ -19,7 +19,7 @@ type ReportData = {
 };
 
 const ic =
-	"w-full rounded-xl border border-outline-variant/30 bg-surface-container-lowest px-4 py-3 text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 focus:border-[#FF5A30]/60 transition-all";
+	"w-full rounded-xl border border-outline-variant/30 bg-surface-container-lowest px-4 py-3 text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E]/60 transition-all";
 
 export default function TourReportForm({ tourId }: { tourId: string }) {
 	const t = useTranslations("TourReport");
@@ -179,7 +179,7 @@ export default function TourReportForm({ tourId }: { tourId: string }) {
 			<button
 				type="submit"
 				disabled={mutation.isPending}
-				className="w-full bg-[#FF5A30] text-white font-bold text-sm py-3 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-60"
+				className="w-full bg-[#FF5A2E] text-white font-bold text-sm py-3 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-60"
 			>
 				{mutation.isPending ? t("submitting") : t("submit")}
 			</button>

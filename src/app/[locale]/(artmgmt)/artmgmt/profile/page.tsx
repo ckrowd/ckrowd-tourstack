@@ -85,13 +85,13 @@ export default function ArtmgmtProfilePage() {
 	}
 
 	const inputCls =
-		"w-full px-3 py-2.5 text-sm rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/40 placeholder:text-slate-400";
+		"w-full px-3 py-2.5 text-sm rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/40 placeholder:text-slate-400";
 
 	return (
 		<div className="max-w-2xl">
 			{/* Header */}
 			<div className="mb-8">
-				<span className="inline-block px-3 py-1 rounded-full bg-[#FF5A30]/10 text-[#FF5A30] text-xs font-semibold uppercase tracking-wider mb-3">
+				<span className="inline-block px-3 py-1 rounded-full bg-[#FF5A2E]/10 text-[#FF5A2E] text-xs font-semibold uppercase tracking-wider mb-3">
 					{t("badge")}
 				</span>
 				<h1 className="font-(family-name:--font-manrope) text-3xl font-black text-on-surface">
@@ -116,13 +116,13 @@ export default function ArtmgmtProfilePage() {
 					<button
 						type="button"
 						onClick={() => fileInputRef.current?.click()}
-						className="relative w-20 h-20 rounded-2xl overflow-hidden bg-slate-100 border-2 border-dashed border-slate-300 hover:border-[#FF5A30]/60 transition-colors flex items-center justify-center shrink-0 group"
+						className="relative w-20 h-20 rounded-2xl overflow-hidden bg-slate-100 border-2 border-dashed border-slate-300 hover:border-[#FF5A2E]/60 transition-colors flex items-center justify-center shrink-0 group"
 					>
 						{logoUrl ? (
 							// eslint-disable-next-line @next/next/no-img-element
 							<img src={logoUrl} alt="" className="w-full h-full object-cover" />
 						) : (
-							<span className="text-xl font-semibold text-slate-400 group-hover:text-[#FF5A30] transition-colors">
+							<span className="text-xl font-semibold text-slate-400 group-hover:text-[#FF5A2E] transition-colors">
 								{initials}
 							</span>
 						)}
@@ -135,7 +135,7 @@ export default function ArtmgmtProfilePage() {
 							type="button"
 							onClick={() => fileInputRef.current?.click()}
 							disabled={photoMutation.isPending}
-							className="inline-flex items-center gap-2 px-4 py-2 border border-slate-200 rounded-xl text-sm font-semibold text-slate-700 hover:border-[#FF5A30]/50 hover:text-[#FF5A30] transition-all disabled:opacity-60"
+							className="inline-flex items-center gap-2 px-4 py-2 border border-slate-200 rounded-xl text-sm font-semibold text-slate-700 hover:border-[#FF5A2E]/50 hover:text-[#FF5A2E] transition-all disabled:opacity-60"
 						>
 							<span className="material-symbols-outlined text-base">upload</span>
 							{photoMutation.isPending ? t("uploadingPhoto") : t("uploadPhoto")}
@@ -244,7 +244,7 @@ export default function ArtmgmtProfilePage() {
 					<button
 						type="submit"
 						disabled={passwordMutation.isPending}
-						className="w-full py-3 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm hover:bg-[#e04e27] disabled:opacity-60 transition-colors mt-2"
+						className="w-full py-3 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm hover:bg-[#e04e27] disabled:opacity-60 transition-colors mt-2"
 					>
 						{passwordMutation.isPending ? t("saving") : t("savePassword")}
 					</button>

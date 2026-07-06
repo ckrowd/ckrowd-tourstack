@@ -105,7 +105,7 @@ export default function AcceptInviteClient({
 				<div className="mt-5 flex justify-end">
 					<Link
 						href="/login"
-						className="px-4 py-2 rounded-lg text-sm font-semibold bg-[#FF5A30] text-white hover:opacity-90"
+						className="px-4 py-2 rounded-lg text-sm font-semibold bg-[#FF5A2E] text-white hover:opacity-90"
 					>
 						{t("goToSignIn")}
 					</Link>
@@ -151,14 +151,14 @@ export default function AcceptInviteClient({
 					{invite.userExists ? (
 						<Link
 							href={signInHref}
-							className="block w-full text-center px-4 py-2.5 rounded-lg text-sm font-semibold bg-[#FF5A30] text-white hover:opacity-90"
+							className="block w-full text-center px-4 py-2.5 rounded-lg text-sm font-semibold bg-[#FF5A2E] text-white hover:opacity-90"
 						>
 							{t("signInToAccept")}
 						</Link>
 					) : (
 						<Link
 							href={registerHref}
-							className="block w-full text-center px-4 py-2.5 rounded-lg text-sm font-semibold bg-[#FF5A30] text-white hover:opacity-90"
+							className="block w-full text-center px-4 py-2.5 rounded-lg text-sm font-semibold bg-[#FF5A2E] text-white hover:opacity-90"
 						>
 							{t("createAccountToAccept")}
 						</Link>
@@ -227,7 +227,7 @@ export default function AcceptInviteClient({
 				type="button"
 				disabled={acceptMutation.isPending}
 				onClick={() => acceptMutation.mutate()}
-				className="w-full px-4 py-2.5 rounded-lg text-sm font-semibold bg-[#FF5A30] text-white hover:opacity-90 disabled:opacity-60"
+				className="w-full px-4 py-2.5 rounded-lg text-sm font-semibold bg-[#FF5A2E] text-white hover:opacity-90 disabled:opacity-60"
 			>
 				{acceptMutation.isPending ? t("accepting") : t("acceptInvitation")}
 			</button>

@@ -246,7 +246,7 @@ const defaultForm: FormData = {
 /* ─────────────────────────── shared UI ─────────────────────────── */
 
 const inputClass =
-	"w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm";
+	"w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A2E] transition-all text-on-surface outline-none text-sm";
 
 function Label({
 	htmlFor,
@@ -293,17 +293,17 @@ function RadioGroup({
 						onClick={() => onChange(opt)}
 						className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold border transition-all text-left ${
 							checked
-								? "bg-[#FF5A30]/10 border-[#FF5A30] text-[#FF5A30]"
-								: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A30]/40"
+								? "bg-[#FF5A2E]/10 border-[#FF5A2E] text-[#FF5A2E]"
+								: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A2E]/40"
 						}`}
 					>
 						<span
 							className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 border-2 transition-colors ${
-								checked ? "border-[#FF5A30]" : "border-current"
+								checked ? "border-[#FF5A2E]" : "border-current"
 							}`}
 						>
 							{checked && (
-								<span className="w-2.5 h-2.5 rounded-full bg-[#FF5A30] block" />
+								<span className="w-2.5 h-2.5 rounded-full bg-[#FF5A2E] block" />
 							)}
 						</span>
 						{opt}
@@ -327,7 +327,7 @@ function Stepper({
 			<div className="flex justify-between items-center relative">
 				<div className="absolute top-1/2 left-0 w-full h-0.5 bg-surface-variant -translate-y-1/2 z-0" />
 				<div
-					className="absolute top-1/2 left-0 h-0.5 bg-[#FF5A30] -translate-y-1/2 z-0 transition-all duration-500"
+					className="absolute top-1/2 left-0 h-0.5 bg-[#FF5A2E] -translate-y-1/2 z-0 transition-all duration-500"
 					style={{ width: `${progress}%` }}
 				/>
 				{steps.map((step, i) => {
@@ -341,7 +341,7 @@ function Stepper({
 							<div
 								className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ring-4 ring-surface-container-low ${
 									done || active
-										? "bg-[#FF5A30] text-white"
+										? "bg-[#FF5A2E] text-white"
 										: "bg-surface-variant text-on-surface-variant"
 								}`}
 							>
@@ -359,9 +359,9 @@ function Stepper({
 							<span
 								className={`mt-2 text-[10px] font-semibold uppercase tracking-wider text-center leading-tight ${
 									active
-										? "text-[#FF5A30]"
+										? "text-[#FF5A2E]"
 										: done
-											? "text-[#FF5A30]/70"
+											? "text-[#FF5A2E]/70"
 											: "text-on-surface-variant"
 								}`}
 							>
@@ -552,7 +552,7 @@ export default function WorkforceClient() {
 					<div className="flex flex-col sm:flex-row gap-4 justify-center">
 						<Link
 							href="/dashboard"
-							className="px-8 py-3 bg-[#FF5A30] text-white rounded-xl font-semibold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform"
+							className="px-8 py-3 bg-[#FF5A2E] text-white rounded-xl font-semibold shadow-lg shadow-[#FF5A2E]/20 hover:scale-[1.02] transition-transform"
 						>
 							{t("success.viewDashboard")}
 						</Link>
@@ -579,7 +579,7 @@ export default function WorkforceClient() {
 				<header className="mb-10">
 					<div className="flex items-start justify-between gap-4">
 						<div>
-							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-3">
+							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-3">
 								{t("header.platform")}
 							</span>
 							<h1 className="text-4xl font-extrabold tracking-tight text-on-surface mb-2">
@@ -649,7 +649,7 @@ export default function WorkforceClient() {
 						{step === 0 && (
 							<div className="space-y-8">
 								<div className="flex items-center gap-2 mb-2">
-									<span className="material-symbols-outlined text-[#FF5A30]">
+									<span className="material-symbols-outlined text-[#FF5A2E]">
 										person
 									</span>
 									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
@@ -790,7 +790,7 @@ export default function WorkforceClient() {
 						{step === 1 && (
 							<div className="space-y-10">
 								<div className="flex items-center gap-2 mb-2">
-									<span className="material-symbols-outlined text-[#FF5A30]">
+									<span className="material-symbols-outlined text-[#FF5A2E]">
 										engineering
 									</span>
 									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
@@ -823,14 +823,14 @@ export default function WorkforceClient() {
 													}}
 													className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-semibold border transition-all text-left ${
 														checked
-															? "bg-[#FF5A30]/10 border-[#FF5A30] text-[#FF5A30]"
-															: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A30]/40"
+															? "bg-[#FF5A2E]/10 border-[#FF5A2E] text-[#FF5A2E]"
+															: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A2E]/40"
 													}`}
 												>
 													<span
 														className={`w-4 h-4 rounded flex-shrink-0 flex items-center justify-center border-2 ${
 															checked
-																? "bg-[#FF5A30] border-[#FF5A30]"
+																? "bg-[#FF5A2E] border-[#FF5A2E]"
 																: "border-current"
 														}`}
 													>
@@ -882,7 +882,7 @@ export default function WorkforceClient() {
 										/>
 									</div>
 									{form.yearsExperience && (
-										<div className="mt-3 flex items-center gap-2 text-xs text-[#FF5A30] font-semibold">
+										<div className="mt-3 flex items-center gap-2 text-xs text-[#FF5A2E] font-semibold">
 											<span
 												className="material-symbols-outlined text-sm"
 												style={{ fontVariationSettings: "'FILL' 1" }}
@@ -910,7 +910,7 @@ export default function WorkforceClient() {
 										/>
 									</div>
 									{form.largestEvent && (
-										<div className="mt-3 flex items-center gap-2 text-xs text-[#FF5A30] font-semibold">
+										<div className="mt-3 flex items-center gap-2 text-xs text-[#FF5A2E] font-semibold">
 											<span
 												className="material-symbols-outlined text-sm"
 												style={{ fontVariationSettings: "'FILL' 1" }}
@@ -928,7 +928,7 @@ export default function WorkforceClient() {
 						{step === 2 && (
 							<div className="space-y-10">
 								<div className="flex items-center gap-2 mb-2">
-									<span className="material-symbols-outlined text-[#FF5A30]">
+									<span className="material-symbols-outlined text-[#FF5A2E]">
 										travel_explore
 									</span>
 									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
@@ -950,7 +950,7 @@ export default function WorkforceClient() {
 										/>
 									</div>
 									{form.tourAvailability && (
-										<div className="mt-3 flex items-center gap-2 text-xs text-[#FF5A30] font-semibold">
+										<div className="mt-3 flex items-center gap-2 text-xs text-[#FF5A2E] font-semibold">
 											<span
 												className="material-symbols-outlined text-sm"
 												style={{ fontVariationSettings: "'FILL' 1" }}
@@ -965,7 +965,7 @@ export default function WorkforceClient() {
 								<div>
 									<div className="flex items-start justify-between gap-4 mb-2">
 										<Label>{t("touring.deploy48h.label")}</Label>
-										<span className="text-xs font-semibold text-[#FF5A30] bg-[#FF5A30]/10 px-2 py-1 rounded-full shrink-0">
+										<span className="text-xs font-semibold text-[#FF5A2E] bg-[#FF5A2E]/10 px-2 py-1 rounded-full shrink-0">
 											+{t("shared.bonusPointsValue", { pts: 10 })}
 										</span>
 									</div>
@@ -982,7 +982,7 @@ export default function WorkforceClient() {
 								<div>
 									<div className="flex items-start justify-between gap-4 mb-2">
 										<Label optional>{t("touring.passport.label")}</Label>
-										<span className="text-xs font-semibold text-[#FF5A30] bg-[#FF5A30]/10 px-2 py-1 rounded-full shrink-0">
+										<span className="text-xs font-semibold text-[#FF5A2E] bg-[#FF5A2E]/10 px-2 py-1 rounded-full shrink-0">
 											+{t("shared.bonusPointsValue", { pts: 10 })}
 										</span>
 									</div>
@@ -1005,7 +1005,7 @@ export default function WorkforceClient() {
 											id="markets"
 											rows={3}
 											placeholder={t("touring.markets.placeholder")}
-											className="w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
+											className="w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A2E] transition-all text-on-surface outline-none text-sm resize-none"
 											value={form.marketsWorked}
 											onChange={(e) => set("marketsWorked", e.target.value)}
 										/>
@@ -1035,7 +1035,7 @@ export default function WorkforceClient() {
 						{step === 3 && (
 							<div className="space-y-10">
 								<div className="flex items-center gap-2 mb-2">
-									<span className="material-symbols-outlined text-[#FF5A30]">
+									<span className="material-symbols-outlined text-[#FF5A2E]">
 										verified_user
 									</span>
 									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
@@ -1150,7 +1150,7 @@ export default function WorkforceClient() {
 											id="portfolio"
 											rows={3}
 											placeholder={t("credentials.portfolio.placeholder")}
-											className="w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
+											className="w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A2E] transition-all text-on-surface outline-none text-sm resize-none"
 											value={form.portfolioLinks}
 											onChange={(e) => set("portfolioLinks", e.target.value)}
 										/>
@@ -1177,7 +1177,7 @@ export default function WorkforceClient() {
 										id="equipment"
 										rows={3}
 										placeholder={t("credentials.equipment.placeholder")}
-										className="w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm resize-none"
+										className="w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A2E] transition-all text-on-surface outline-none text-sm resize-none"
 										value={form.equipment}
 										onChange={(e) => set("equipment", e.target.value)}
 									/>
@@ -1189,7 +1189,7 @@ export default function WorkforceClient() {
 						{step === 4 && (
 							<div className="space-y-10">
 								<div className="flex items-center gap-2 mb-2">
-									<span className="material-symbols-outlined text-[#FF5A30]">
+									<span className="material-symbols-outlined text-[#FF5A2E]">
 										analytics
 									</span>
 									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
@@ -1238,7 +1238,7 @@ export default function WorkforceClient() {
 													</div>
 													<div className="h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
 														<div
-															className="h-full bg-[#FF5A30] rounded-full transition-all"
+															className="h-full bg-[#FF5A2E] rounded-full transition-all"
 															style={{
 																width: `${(item.pts / item.max) * 100}%`,
 															}}
@@ -1392,9 +1392,9 @@ export default function WorkforceClient() {
 								</details>
 
 								{/* Declaration */}
-								<section className="bg-surface-container-low rounded-2xl p-6 border border-[#FF5A30]/10 space-y-5">
+								<section className="bg-surface-container-low rounded-2xl p-6 border border-[#FF5A2E]/10 space-y-5">
 									<div className="flex items-center gap-2">
-										<span className="material-symbols-outlined text-[#FF5A30]">
+										<span className="material-symbols-outlined text-[#FF5A2E]">
 											gavel
 										</span>
 										<h4 className="font-semibold text-on-surface font-(family-name:--font-manrope)">
@@ -1412,7 +1412,7 @@ export default function WorkforceClient() {
 												className="flex items-start gap-2 text-sm text-on-surface-variant"
 											>
 												<span
-													className="material-symbols-outlined text-[#FF5A30] text-base mt-0.5 shrink-0"
+													className="material-symbols-outlined text-[#FF5A2E] text-base mt-0.5 shrink-0"
 													style={{ fontVariationSettings: "'FILL' 1" }}
 												>
 													check_box
@@ -1497,7 +1497,7 @@ export default function WorkforceClient() {
 								<button
 									type="submit"
 									disabled={submitting}
-									className="px-10 py-3 bg-linear-to-r from-[#FF5A30] to-[#cc4826] text-white rounded-xl font-semibold shadow-xl shadow-[#FF5A30]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+									className="px-10 py-3 bg-linear-to-r from-[#FF5A2E] to-[#cc4826] text-white rounded-xl font-semibold shadow-xl shadow-[#FF5A2E]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
 								>
 									{submitting
 										? t("actions.submitting")
@@ -1541,8 +1541,8 @@ export default function WorkforceClient() {
 							},
 						].map((item) => (
 							<div key={item.title} className="flex gap-4">
-								<div className="w-10 h-10 rounded-full bg-[#FF5A30]/10 flex items-center justify-center shrink-0">
-									<span className="material-symbols-outlined text-[#FF5A30] text-base">
+								<div className="w-10 h-10 rounded-full bg-[#FF5A2E]/10 flex items-center justify-center shrink-0">
+									<span className="material-symbols-outlined text-[#FF5A2E] text-base">
 										{item.icon}
 									</span>
 								</div>

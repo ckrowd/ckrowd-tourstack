@@ -30,7 +30,7 @@ export default function EcosystemReadiness({
 			className={`rounded-2xl border shadow-sm overflow-hidden ${
 				eligible
 					? "border-emerald-200 bg-emerald-50/40"
-					: "border-[#FF5A30]/20 bg-[#FF5A30]/5"
+					: "border-[#FF5A2E]/20 bg-[#FF5A2E]/5"
 			}`}
 		>
 			<div className="p-5 md:p-6">
@@ -39,7 +39,7 @@ export default function EcosystemReadiness({
 						<div className="flex items-center gap-2 mb-1">
 							<span
 								className={`material-symbols-outlined text-lg ${
-									eligible ? "text-emerald-600" : "text-[#FF5A30]"
+									eligible ? "text-emerald-600" : "text-[#FF5A2E]"
 								}`}
 								style={{ fontVariationSettings: "'FILL' 1" }}
 							>
@@ -56,7 +56,7 @@ export default function EcosystemReadiness({
 					<div className="text-right shrink-0">
 						<p
 							className={`text-2xl font-black font-(family-name:--font-manrope) ${
-								eligible ? "text-emerald-600" : "text-[#FF5A30]"
+								eligible ? "text-emerald-600" : "text-[#FF5A2E]"
 							}`}
 						>
 							{completionPct}%
@@ -71,7 +71,7 @@ export default function EcosystemReadiness({
 				<div className="h-2 w-full rounded-full bg-surface-container-high overflow-hidden mb-5">
 					<div
 						className={`h-full rounded-full transition-all ${
-							eligible ? "bg-emerald-500" : "bg-[#FF5A30]"
+							eligible ? "bg-emerald-500" : "bg-[#FF5A2E]"
 						}`}
 						style={{ width: `${completionPct}%` }}
 					/>
@@ -110,7 +110,7 @@ export default function EcosystemReadiness({
 					<div className="mt-5 flex flex-col sm:flex-row gap-2.5">
 						<Link
 							href="/stakeholders"
-							className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#FF5A30] text-white text-sm font-semibold hover:opacity-90 transition-opacity"
+							className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#FF5A2E] text-white text-sm font-semibold hover:opacity-90 transition-opacity"
 						>
 							<span className="material-symbols-outlined text-sm">share</span>
 							{t("ctaInvite")}

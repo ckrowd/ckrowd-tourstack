@@ -51,15 +51,15 @@ export default function ArtmgmtPasswordGate({
 	if (!forcePasswordChange || done) return <>{children}</>;
 
 	const inputCls =
-		"w-full px-3 py-2.5 text-sm rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/40 placeholder:text-slate-400";
+		"w-full px-3 py-2.5 text-sm rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/40 placeholder:text-slate-400";
 
 	return (
 		<div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
 			<div className="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 overflow-hidden">
-				<div className="h-1.5 w-full bg-[#FF5A30]" />
+				<div className="h-1.5 w-full bg-[#FF5A2E]" />
 				<div className="p-8">
 					<div className="flex items-center gap-3 mb-6">
-						<span className="material-symbols-outlined text-[#FF5A30] text-3xl">
+						<span className="material-symbols-outlined text-[#FF5A2E] text-3xl">
 							lock_reset
 						</span>
 						<div>
@@ -125,7 +125,7 @@ export default function ArtmgmtPasswordGate({
 						<button
 							type="submit"
 							disabled={mutation.isPending}
-							className="w-full py-3 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm hover:bg-[#e04e27] disabled:opacity-60 transition-colors mt-2"
+							className="w-full py-3 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm hover:bg-[#e04e27] disabled:opacity-60 transition-colors mt-2"
 						>
 							{mutation.isPending ? t("saving") : t("submit")}
 						</button>

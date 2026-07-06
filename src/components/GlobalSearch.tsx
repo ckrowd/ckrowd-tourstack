@@ -16,7 +16,7 @@ const CATEGORY_LABELS: Record<SearchResult["category"], string> = {
 };
 
 const CATEGORY_COLORS: Record<SearchResult["category"], string> = {
-	tour: "bg-orange-50 text-[#FF5A30]",
+	tour: "bg-orange-50 text-[#FF5A2E]",
 	eoi: "bg-blue-50 text-blue-700",
 	financing: "bg-emerald-50 text-emerald-700",
 	venue: "bg-purple-50 text-purple-700",
@@ -107,7 +107,7 @@ function SearchModal({ onClose }: { onClose: () => void }) {
 				{/* Input row */}
 				<div className="flex items-center gap-3 px-4 py-4 border-b border-slate-100">
 					<span
-						className={`material-symbols-outlined text-xl transition-colors ${isFetching ? "text-[#FF5A30]" : "text-slate-400"}`}
+						className={`material-symbols-outlined text-xl transition-colors ${isFetching ? "text-[#FF5A2E]" : "text-slate-400"}`}
 					>
 						{isFetching ? "progress_activity" : "search"}
 					</span>

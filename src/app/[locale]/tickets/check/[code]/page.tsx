@@ -54,7 +54,7 @@ export default function TicketCheckPage() {
 				<div className="w-full max-w-sm space-y-4">
 					{isLoading ? (
 						<div className="bg-white rounded-2xl p-10 shadow-sm flex flex-col items-center gap-4">
-							<div className="w-10 h-10 border-2 border-[#FF5A30] border-t-transparent rounded-full animate-spin" />
+							<div className="w-10 h-10 border-2 border-[#FF5A2E] border-t-transparent rounded-full animate-spin" />
 							<p className="text-sm text-gray-500">Checking ticket…</p>
 						</div>
 					) : !found ? (
@@ -94,7 +94,7 @@ export default function TicketCheckPage() {
 							{/* Ticket details */}
 							<div className="bg-white rounded-2xl shadow-sm overflow-hidden">
 								<div className="bg-gray-900 px-5 py-4">
-									<p className="text-[10px] font-black uppercase tracking-[.2em] text-[#FF5A30] mb-0.5">
+									<p className="text-[10px] font-black uppercase tracking-[.2em] text-[#FF5A2E] mb-0.5">
 										{t("event")}
 									</p>
 									<p className="text-base font-black text-white leading-snug">
@@ -121,7 +121,7 @@ export default function TicketCheckPage() {
 									<p className="text-[10px] font-bold uppercase tracking-[.18em] text-orange-600 mb-1">
 										Ticket Code
 									</p>
-									<p className="font-mono font-black text-[#FF5A30] text-sm tracking-wider break-all">
+									<p className="font-mono font-black text-[#FF5A2E] text-sm tracking-wider break-all">
 										{String(ticket?.ticketCode ?? code)}
 									</p>
 								</div>

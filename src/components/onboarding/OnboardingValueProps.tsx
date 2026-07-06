@@ -17,16 +17,16 @@ const ITEMS = [
 export default function OnboardingValueProps() {
 	const t = useTranslations("StakeholderRegistrationPage");
 	return (
-		<section className="mt-6 rounded-2xl border border-[#FF5A30]/20 bg-[#FF5A30]/5 p-5">
+		<section className="mt-6 rounded-2xl border border-[#FF5A2E]/20 bg-[#FF5A2E]/5 p-5">
 			<p className="text-sm font-extrabold text-[#191c1e] font-(family-name:--font-manrope) mb-4">
 				{t("valueProps.heading")}
 			</p>
 			<div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
 				{ITEMS.map((item) => (
 					<div key={item.key} className="flex items-start gap-3">
-						<div className="w-8 h-8 rounded-lg bg-[#FF5A30]/10 flex items-center justify-center shrink-0">
+						<div className="w-8 h-8 rounded-lg bg-[#FF5A2E]/10 flex items-center justify-center shrink-0">
 							<span
-								className="material-symbols-outlined text-[#FF5A30] text-base"
+								className="material-symbols-outlined text-[#FF5A2E] text-base"
 								style={{ fontVariationSettings: "'FILL' 1" }}
 							>
 								{item.icon}
@@ -43,7 +43,7 @@ export default function OnboardingValueProps() {
 					</div>
 				))}
 			</div>
-			<p className="text-xs text-on-surface-variant leading-relaxed mt-4 pt-4 border-t border-[#FF5A30]/15">
+			<p className="text-xs text-on-surface-variant leading-relaxed mt-4 pt-4 border-t border-[#FF5A2E]/15">
 				{t("valueProps.note")}
 			</p>
 		</section>

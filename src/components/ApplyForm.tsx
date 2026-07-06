@@ -7,10 +7,10 @@ import { registerStakeholder, uploadFile } from "@/app/actions";
 import { Link } from "@/i18n/routing";
 
 const inputClass =
-	"w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm";
+	"w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A2E] transition-all text-on-surface outline-none text-sm";
 
 const selectClass =
-	"w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm appearance-none";
+	"w-full px-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A2E] transition-all text-on-surface outline-none text-sm appearance-none";
 
 function Label({
 	htmlFor,
@@ -67,14 +67,14 @@ function CheckGroup({
 						onClick={() => toggle(opt)}
 						className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-semibold border transition-all ${
 							checked
-								? "bg-[#FF5A30]/10 border-[#FF5A30] text-[#FF5A30]"
-								: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A30]/40"
+								? "bg-[#FF5A2E]/10 border-[#FF5A2E] text-[#FF5A2E]"
+								: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A2E]/40"
 						}`}
 						aria-pressed={checked}
 					>
 						<span
 							className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
-								checked ? "border-[#FF5A30] bg-[#FF5A30]" : "border-current"
+								checked ? "border-[#FF5A2E] bg-[#FF5A2E]" : "border-current"
 							}`}
 						>
 							{checked && (
@@ -107,7 +107,7 @@ function Stepper({
 			<div className="flex justify-between items-center relative">
 				<div className="absolute top-1/2 left-0 w-full h-0.5 bg-surface-variant -translate-y-1/2 z-0" />
 				<div
-					className="absolute top-1/2 left-0 h-0.5 bg-[#FF5A30] -translate-y-1/2 z-0 transition-all duration-500"
+					className="absolute top-1/2 left-0 h-0.5 bg-[#FF5A2E] -translate-y-1/2 z-0 transition-all duration-500"
 					style={{ width: `${progress}%` }}
 				/>
 				{steps.map((step, i) => {
@@ -121,7 +121,7 @@ function Stepper({
 							<div
 								className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ring-4 ring-surface-container-low ${
 									done || active
-										? "bg-[#FF5A30] text-white"
+										? "bg-[#FF5A2E] text-white"
 										: "bg-surface-variant text-on-surface-variant"
 								}`}
 							>
@@ -139,9 +139,9 @@ function Stepper({
 							<span
 								className={`mt-2 text-[10px] font-semibold uppercase tracking-wider text-center  leading-tight ${
 									active
-										? "text-[#FF5A30]"
+										? "text-[#FF5A2E]"
 										: done
-											? "text-[#FF5A30]/70"
+											? "text-[#FF5A2E]/70"
 											: "text-on-surface-variant"
 								}`}
 							>
@@ -297,9 +297,9 @@ export default function ApplyForm() {
 		return (
 			<div className="p-6 md:p-12 flex items-center justify-center min-h-full">
 				<div className="text-center">
-					<div className="w-24 h-24 rounded-full flex items-center justify-center mb-6 bg-[#FF5A30]/10">
+					<div className="w-24 h-24 rounded-full flex items-center justify-center mb-6 bg-[#FF5A2E]/10">
 						<span
-							className="material-symbols-outlined text-[#FF5A30] text-5xl"
+							className="material-symbols-outlined text-[#FF5A2E] text-5xl"
 							style={{ fontVariationSettings: "'FILL' 1" }}
 						>
 							verified
@@ -325,7 +325,7 @@ export default function ApplyForm() {
 					<div className="flex flex-col sm:flex-row gap-4 justify-center">
 						<Link
 							href="/dashboard"
-							className="px-8 py-3 bg-[#FF5A30] text-white rounded-xl font-semibold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform"
+							className="px-8 py-3 bg-[#FF5A2E] text-white rounded-xl font-semibold shadow-lg shadow-[#FF5A2E]/20 hover:scale-[1.02] transition-transform"
 						>
 							{t("actions.dashboard")}
 						</Link>
@@ -345,7 +345,7 @@ export default function ApplyForm() {
 		<div className="p-6 md:p-12 w-full">
 			{/* Header */}
 			<header className="mb-10">
-				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-3">
+				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-3">
 					{t("promoterOnboarding")}
 				</span>
 				<h1 className="text-4xl font-extrabold tracking-tight text-on-surface mb-2">
@@ -401,7 +401,7 @@ export default function ApplyForm() {
 					{step === 0 && (
 						<div className="space-y-8">
 							<div className="flex items-center gap-2 mb-6">
-								<span className="material-symbols-outlined text-[#FF5A30]">
+								<span className="material-symbols-outlined text-[#FF5A2E]">
 									person
 								</span>
 								<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
@@ -498,7 +498,7 @@ export default function ApplyForm() {
 					{step === 1 && (
 						<div className="space-y-10">
 							<div className="flex items-center gap-2 mb-2">
-								<span className="material-symbols-outlined text-[#FF5A30]">
+								<span className="material-symbols-outlined text-[#FF5A2E]">
 									workspace_premium
 								</span>
 								<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
@@ -608,7 +608,7 @@ export default function ApplyForm() {
 					{step === 2 && (
 						<div className="space-y-10">
 							<div className="flex items-center gap-2 mb-2">
-								<span className="material-symbols-outlined text-[#FF5A30]">
+								<span className="material-symbols-outlined text-[#FF5A2E]">
 									lock_open
 								</span>
 								<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
@@ -634,7 +634,7 @@ export default function ApplyForm() {
 							{form.hostedLargeVenue === "Yes" && (
 								<div className="space-y-6">
 									<div
-										className="border-2 border-dashed border-[#FF5A30]/30 rounded-2xl p-8 text-center cursor-pointer hover:border-[#FF5A30]/60 transition-colors bg-[#FF5A30]/5"
+										className="border-2 border-dashed border-[#FF5A2E]/30 rounded-2xl p-8 text-center cursor-pointer hover:border-[#FF5A2E]/60 transition-colors bg-[#FF5A2E]/5"
 										onClick={() => fileInputRef.current?.click()}
 										onDragOver={(e) => e.preventDefault()}
 										onDrop={(e) => {
@@ -656,7 +656,7 @@ export default function ApplyForm() {
 										{form.proofFileName ? (
 											<div className="flex items-center justify-center gap-3">
 												<span
-													className="material-symbols-outlined text-[#FF5A30] text-3xl"
+													className="material-symbols-outlined text-[#FF5A2E] text-3xl"
 													style={{ fontVariationSettings: "'FILL' 1" }}
 												>
 													{uploadMutation.isPending
@@ -680,7 +680,7 @@ export default function ApplyForm() {
 											</div>
 										) : (
 											<>
-												<span className="material-symbols-outlined text-[#FF5A30] text-4xl mb-3 block">
+												<span className="material-symbols-outlined text-[#FF5A2E] text-4xl mb-3 block">
 													cloud_upload
 												</span>
 												<p className="font-semibold text-on-surface mb-1">
@@ -742,7 +742,7 @@ export default function ApplyForm() {
 					{step === 3 && (
 						<div className="space-y-10">
 							<div className="flex items-center gap-2 mb-2">
-								<span className="material-symbols-outlined text-[#FF5A30]">
+								<span className="material-symbols-outlined text-[#FF5A2E]">
 									verified_user
 								</span>
 								<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
@@ -797,7 +797,7 @@ export default function ApplyForm() {
 												id={item.id}
 												type="url"
 												placeholder={item.placeholder}
-												className="w-full pl-11 pr-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm"
+												className="w-full pl-11 pr-4 py-3 bg-surface-container-lowest border border-outline-variant/20 rounded-xl focus:ring-2 focus:ring-[#FF5A2E] transition-all text-on-surface outline-none text-sm"
 												value={form[item.field]}
 												onChange={(e) => set(item.field, e.target.value)}
 											/>
@@ -833,14 +833,14 @@ export default function ApplyForm() {
 											htmlFor={item.id}
 											className={`flex items-center gap-4 p-4 rounded-xl border cursor-pointer transition-all ${
 												form[item.field]
-													? "bg-[#FF5A30]/5 border-[#FF5A30]/30"
-													: "bg-surface-container-highest border-outline-variant/20 hover:border-[#FF5A30]/20"
+													? "bg-[#FF5A2E]/5 border-[#FF5A2E]/30"
+													: "bg-surface-container-highest border-outline-variant/20 hover:border-[#FF5A2E]/20"
 											}`}
 										>
 											<input
 												id={item.id}
 												type="checkbox"
-												className="rounded border-[#FF5A30] text-[#FF5A30] focus:ring-[#FF5A30] w-4 h-4"
+												className="rounded border-[#FF5A2E] text-[#FF5A2E] focus:ring-[#FF5A2E] w-4 h-4"
 												checked={form[item.field]}
 												onChange={(e) =>
 													set(item.field, e.target.checked)
@@ -860,7 +860,7 @@ export default function ApplyForm() {
 					{step === 4 && (
 						<div className="space-y-10">
 							<div className="flex items-center gap-2 mb-2">
-								<span className="material-symbols-outlined text-[#FF5A30]">
+								<span className="material-symbols-outlined text-[#FF5A2E]">
 									rocket_launch
 								</span>
 								<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
@@ -959,7 +959,7 @@ export default function ApplyForm() {
 						<button
 							type="submit"
 							disabled={submitting}
-							className="flex items-center gap-2 px-10 py-4 bg-[#FF5A30] text-white rounded-xl font-semibold shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:opacity-50"
+							className="flex items-center gap-2 px-10 py-4 bg-[#FF5A2E] text-white rounded-xl font-semibold shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-all disabled:opacity-50"
 						>
 							{submitting ? (
 								<>

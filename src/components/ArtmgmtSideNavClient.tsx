@@ -38,7 +38,7 @@ export default function ArtmgmtSideNavClient({ navItems, portalLabel }: Props) {
 						aria-current={activeItem === item.key ? "page" : undefined}
 						className={`flex items-center gap-3 px-4 py-3 rounded-xl mx-2 transition-all duration-200 font-(family-name:--font-manrope) font-semibold text-sm ${
 							activeItem === item.key
-								? "bg-orange-50 text-[#FF5A30]"
+								? "bg-orange-50 text-[#FF5A2E]"
 								: "text-slate-600 hover:bg-slate-200/50 hover:translate-x-1"
 						}`}
 					>

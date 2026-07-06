@@ -174,7 +174,7 @@ function SubmissionModal({
 					</dl>
 					{proofFileId && (
 						<div className="mt-6 rounded-xl border border-outline-variant/15 bg-surface-container-low px-4 py-3 flex items-center gap-3">
-							<span className="material-symbols-outlined text-[#FF5A30] shrink-0">
+							<span className="material-symbols-outlined text-[#FF5A2E] shrink-0">
 								attach_file
 							</span>
 							<div className="min-w-0 flex-1">
@@ -187,7 +187,7 @@ function SubmissionModal({
 								href={`/api/download/${encodeURIComponent(proofFileId)}`}
 								target="_blank"
 								rel="noopener noreferrer"
-								className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[#FF5A30] text-white text-xs font-semibold hover:opacity-90 transition-opacity shrink-0"
+								className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[#FF5A2E] text-white text-xs font-semibold hover:opacity-90 transition-opacity shrink-0"
 							>
 								<span className="material-symbols-outlined text-sm">download</span>
 								{t("submissions.download")}
@@ -291,7 +291,7 @@ export default function StakeholdersClient() {
 					{/* Header */}
 					<header className="flex flex-col md:flex-row md:items-end justify-between gap-4">
 						<div>
-							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
 								{t("header.platform")}
 							</span>
 							<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -314,7 +314,7 @@ export default function StakeholdersClient() {
 
 					{/* ── Invite Ecosystem banner ──────────────────────────────── */}
 					<section className="rounded-2xl overflow-hidden shadow-md">
-						<div className="bg-gradient-to-r from-[#FF5A30] to-[#cc4826] p-6 text-white">
+						<div className="bg-gradient-to-r from-[#FF5A2E] to-[#cc4826] p-6 text-white">
 							<div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
 								<div className="flex items-start gap-4">
 									<div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
@@ -334,7 +334,7 @@ export default function StakeholdersClient() {
 										<button
 											type="button"
 											onClick={() => { void handleCopyUniversalUrl(); }}
-											className="flex items-center gap-2 px-5 py-2.5 bg-white text-[#FF5A30] rounded-xl text-sm font-semibold hover:bg-white/90 transition-colors shadow-sm"
+											className="flex items-center gap-2 px-5 py-2.5 bg-white text-[#FF5A2E] rounded-xl text-sm font-semibold hover:bg-white/90 transition-colors shadow-sm"
 										>
 											<span className="material-symbols-outlined text-sm">
 												{copied ? "check" : "content_copy"}
@@ -346,7 +346,7 @@ export default function StakeholdersClient() {
 											type="button"
 											disabled={generateEcosystemMutation.isPending || linksQuery.isLoading}
 											onClick={() => generateEcosystemMutation.mutate(missingCategories)}
-											className="flex items-center gap-2 px-5 py-2.5 bg-white text-[#FF5A30] rounded-xl text-sm font-semibold hover:bg-white/90 transition-colors shadow-sm disabled:opacity-60"
+											className="flex items-center gap-2 px-5 py-2.5 bg-white text-[#FF5A2E] rounded-xl text-sm font-semibold hover:bg-white/90 transition-colors shadow-sm disabled:opacity-60"
 										>
 											<span className="material-symbols-outlined text-sm">
 												{generateEcosystemMutation.isPending ? "pending" : "link"}
@@ -377,7 +377,7 @@ export default function StakeholdersClient() {
 							<h2 className="font-(family-name:--font-manrope) text-xl font-semibold flex items-center gap-2">
 								{t("submissions.title")}
 								{submissions.length > 0 && (
-									<span className="px-2 py-0.5 text-xs font-semibold bg-[#FF5A30] text-white rounded-full">
+									<span className="px-2 py-0.5 text-xs font-semibold bg-[#FF5A2E] text-white rounded-full">
 										{submissions.length}
 									</span>
 								)}
@@ -390,7 +390,7 @@ export default function StakeholdersClient() {
 										onClick={() => setCategoryFilter(key)}
 										className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
 											categoryFilter === key
-												? "bg-[#FF5A30] text-white"
+												? "bg-[#FF5A2E] text-white"
 												: "bg-surface-container-high text-on-surface-variant hover:bg-surface-container"
 										}`}
 									>

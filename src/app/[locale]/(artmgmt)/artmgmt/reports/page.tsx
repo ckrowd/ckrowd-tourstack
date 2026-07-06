@@ -102,7 +102,7 @@ export default function ArtmgmtReportsPage() {
 	return (
 		<div>
 			<div className="mb-6">
-				<span className="inline-block px-3 py-1 rounded-full bg-[#FF5A30]/10 text-[#FF5A30] text-xs font-semibold uppercase tracking-wider mb-3">
+				<span className="inline-block px-3 py-1 rounded-full bg-[#FF5A2E]/10 text-[#FF5A2E] text-xs font-semibold uppercase tracking-wider mb-3">
 					{t("badge")}
 				</span>
 				<h1 className="font-(family-name:--font-manrope) text-3xl font-black text-on-surface">
@@ -113,8 +113,8 @@ export default function ArtmgmtReportsPage() {
 
 			<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
 				<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex items-center gap-4">
-					<div className="w-11 h-11 rounded-xl bg-[#FF5A30]/10 flex items-center justify-center shrink-0">
-						<span className="material-symbols-outlined text-[#FF5A30] text-xl">
+					<div className="w-11 h-11 rounded-xl bg-[#FF5A2E]/10 flex items-center justify-center shrink-0">
+						<span className="material-symbols-outlined text-[#FF5A2E] text-xl">
 							groups
 						</span>
 					</div>
@@ -163,7 +163,7 @@ export default function ArtmgmtReportsPage() {
 				{/* Genre breakdown */}
 				<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
 					<h2 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
-						<span className="material-symbols-outlined text-[#FF5A30] text-lg">
+						<span className="material-symbols-outlined text-[#FF5A2E] text-lg">
 							music_note
 						</span>
 						{t("genres.title")}
@@ -178,7 +178,7 @@ export default function ArtmgmtReportsPage() {
 									label={genre}
 									count={count}
 									max={maxGenre}
-									color="bg-[#FF5A30]"
+									color="bg-[#FF5A2E]"
 								/>
 							))}
 						</div>

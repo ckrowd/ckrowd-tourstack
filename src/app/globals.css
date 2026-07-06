@@ -1,15 +1,22 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: var(--font-inter), system-ui, sans-serif;
 }
 
 
-@theme {
-  /* Primary brand color - Energetic Orange */
-  --color-primary: #FF5A30;
+/* `static` disables Tailwind v4's dead-variable elimination: several of
+   these (--color-primary, --color-background, --color-status-*) aren't yet
+   consumed via a generated utility class anywhere (only via var() in plain
+   CSS below, or read directly in JS/CSS by components), so without `static`
+   Tailwind silently drops them from the compiled output. */
+@theme static {
+  /* Primary brand color - Energetic Orange (design system: same value in light + dark) */
+  --color-primary: #FF5A2E;
   --color-on-primary: #ffffff;
-  --color-primary-container: #FF5A30;
+  --color-primary-container: #FF5A2E;
   --color-on-primary-container: #ffffff;
   --color-primary-fixed: #ffdfd6;
   --color-primary-fixed-dim: #ffb4a1;
@@ -37,8 +44,9 @@
   --color-on-tertiary-fixed: #2a1700;
   --color-on-tertiary-fixed-variant: #653e00;
 
-  /* Surface hierarchy */
-  --color-surface: #f7f9fb;
+  /* Surface hierarchy — light mode (design system defaults) */
+  --color-surface: #FFFFFF;
+  --color-surface-2: #FBFAF9;
   --color-surface-dim: #d8dadc;
   --color-surface-bright: #f7f9fb;
   --color-surface-variant: #e0e3e5;
@@ -47,25 +55,32 @@
   --color-surface-container: #eceef0;
   --color-surface-container-high: #e6e8ea;
   --color-surface-container-highest: #e0e3e5;
-  --color-surface-tint: #FF5A30;
+  --color-surface-tint: #FF5A2E;
   --color-inverse-surface: #362f2d;
   --color-inverse-on-surface: #fbeeeb;
 
   /* On-surface */
-  --color-on-surface: #191c1e;
+  --color-on-surface: #16171B;
   --color-on-surface-variant: #53433f;
-  --color-background: #f7f9fb;
-  --color-on-background: #191c1e;
+  --color-background: #F6F6F4;
+  --color-on-background: #16171B;
 
   /* Outline */
   --color-outline: #85736e;
-  --color-outline-variant: #d8c2bc;
+  --color-outline-variant: #E8E6E1;
 
   /* Error */
   --color-error: #ba1a1a;
   --color-on-error: #ffffff;
   --color-error-container: #ffdad6;
   --color-on-error-container: #93000a;
+
+  /* Status colors — light mode (design system) */
+  --color-status-approved: #15803D;
+  --color-status-pending: #B45309;
+  --color-status-contacted: #2054C7;
+  --color-status-booked: #6D28D9;
+  --color-status-rejected: #B91C1C;
 
   /* Font families — Inter is the single typeface across the platform */
   --font-headline: var(--font-manrope), "Inter", sans-serif;
@@ -80,12 +95,49 @@
 
   /* TourStack landing tokens — enable bg-orange / text-muted / text-ink
      (with opacity modifiers). `muted`/`ink` resolve against vars scoped to
-     the .tslp landing wrapper; `orange` is the brand accent. */
+     the .tslp landing wrapper; `orange` is the brand accent. Intentionally
+     NOT part of the design-system rollout — the landing page keeps its
+     original fixed light look. */
   --color-orange: #ff5a30;
   --color-ember: #ff7a52;
   --color-lime: #1db954;
   --color-muted: var(--muted, #a8a8a8);
   --color-ink: var(--text, #ffffff);
+}
+
+/* Dark mode — toggled via next-themes adding/removing `.dark` on <html>.
+   Overrides the same custom properties so every component already using
+   the semantic bg-surface/text-on-surface/etc. classes picks up dark
+   styling automatically, with no per-component changes required. */
+.dark {
+  --color-background: #0B0C0F;
+  --color-on-background: #F3F3F4;
+  --color-surface: #16181D;
+  --color-surface-2: #1D2027;
+  --color-surface-dim: #0B0C0F;
+  --color-surface-bright: #16181D;
+  --color-surface-variant: #272A32;
+  --color-surface-container-lowest: #0B0C0F;
+  --color-surface-container-low: #16181D;
+  --color-surface-container: #1D2027;
+  --color-surface-container-high: #262A32;
+  --color-surface-container-highest: #2F333C;
+  --color-inverse-surface: #F3F3F4;
+  --color-inverse-on-surface: #16171B;
+
+  --color-on-surface: #F3F3F4;
+  --color-on-surface-variant: #9CA3AF;
+
+  --color-outline: #4B5058;
+  --color-outline-variant: #272A32;
+
+  --color-error: #F87171;
+
+  --color-status-approved: #4ADE80;
+  --color-status-pending: #FBBF24;
+  --color-status-contacted: #60A5FA;
+  --color-status-booked: #C4B5FD;
+  --color-status-rejected: #F87171;
 }
 
 /* Material Symbols baseline */
@@ -130,7 +182,7 @@
 .hero-gradient {
 	background: linear-gradient(
 		135deg,
-		rgba(255, 90, 48, 0.9) 0%,
+		rgba(255, 90, 46, 0.9) 0%,
 		rgba(164, 32, 0, 0.7) 100%
 	);
 }
@@ -170,7 +222,7 @@ h3 { letter-spacing: -0.02em; line-height: 1.2; font-weight: 600; }
 
 /* Coloured header strip */
 .driver-popover-title {
-	background: linear-gradient(135deg, #ff5a30, #cc4826);
+	background: linear-gradient(135deg, #ff5a2e, #cc4825);
 	color: #ffffff;
 	font-size: 15px;
 	font-weight: 600;
@@ -238,7 +290,7 @@ h3 { letter-spacing: -0.02em; line-height: 1.2; font-weight: 600; }
 
 .driver-popover-next-btn,
 .driver-popover-done-btn {
-	background: #ff5a30;
+	background: #ff5a2e;
 	color: #ffffff;
 	border: none;
 	border-radius: 10px;
@@ -249,7 +301,7 @@ h3 { letter-spacing: -0.02em; line-height: 1.2; font-weight: 600; }
 	letter-spacing: 0.08em;
 	cursor: pointer;
 	transition: opacity 0.15s;
-	box-shadow: 0 4px 12px rgba(255, 90, 48, 0.35);
+	box-shadow: 0 4px 12px rgba(255, 90, 46, 0.35);
 }
 
 .driver-popover-next-btn:hover,

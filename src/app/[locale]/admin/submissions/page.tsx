@@ -11,7 +11,7 @@ type Category = "financing" | "insurance" | "eoi";
 const CATEGORY_COLORS: Record<string, { bg: string; text: string; icon: string }> = {
 	financing: { bg: "bg-blue-100", text: "text-blue-700", icon: "account_balance" },
 	insurance: { bg: "bg-purple-100", text: "text-purple-700", icon: "shield" },
-	eoi: { bg: "bg-orange-100", text: "text-[#FF5A30]", icon: "send" },
+	eoi: { bg: "bg-orange-100", text: "text-[#FF5A2E]", icon: "send" },
 };
 
 export default function AdminSubmissionsPage() {
@@ -73,7 +73,7 @@ export default function AdminSubmissionsPage() {
 		<div>
 			{/* Header */}
 			<div className="mb-8">
-				<span className="inline-block px-3 py-1 rounded-full bg-[#FF5A30]/10 text-[#FF5A30] text-xs font-semibold uppercase tracking-wider mb-3">
+				<span className="inline-block px-3 py-1 rounded-full bg-[#FF5A2E]/10 text-[#FF5A2E] text-xs font-semibold uppercase tracking-wider mb-3">
 					{t("badge")}
 				</span>
 				<h1 className="font-(family-name:--font-manrope) text-3xl font-black text-on-surface">
@@ -91,7 +91,7 @@ export default function AdminSubmissionsPage() {
 						onClick={() => setActiveCategory(tab.key)}
 						className={`px-4 py-2 rounded-xl text-sm font-semibold transition-colors ${
 							activeCategory === tab.key
-								? "bg-[#FF5A30] text-white shadow-md shadow-[#FF5A30]/20"
+								? "bg-[#FF5A2E] text-white shadow-md shadow-[#FF5A2E]/20"
 								: "bg-white text-slate-600 border border-slate-200 hover:bg-slate-50"
 						}`}
 					>
@@ -185,7 +185,7 @@ export default function AdminSubmissionsPage() {
 													<button
 														type="button"
 														onClick={() => setExpandedId(isExpanded ? null : subId)}
-														className="text-xs text-[#FF5A30] font-semibold hover:underline"
+														className="text-xs text-[#FF5A2E] font-semibold hover:underline"
 													>
 														{t("viewData")}
 													</button>

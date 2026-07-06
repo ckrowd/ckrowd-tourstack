@@ -146,11 +146,11 @@ export default function SettingsVenueTab() {
 								key={String(v.id)}
 								type="button"
 								onClick={() => setViewingVenue(v)}
-								className="w-full text-left flex items-center gap-4 p-5 bg-surface-container-low rounded-xl border border-outline-variant/10 hover:border-[#FF5A30]/40 transition-colors"
+								className="w-full text-left flex items-center gap-4 p-5 bg-surface-container-low rounded-xl border border-outline-variant/10 hover:border-[#FF5A2E]/40 transition-colors"
 							>
-								<div className="w-10 h-10 rounded-xl bg-[#FF5A30]/10 flex items-center justify-center shrink-0">
+								<div className="w-10 h-10 rounded-xl bg-[#FF5A2E]/10 flex items-center justify-center shrink-0">
 									<span
-										className="material-symbols-outlined text-[#FF5A30]"
+										className="material-symbols-outlined text-[#FF5A2E]"
 										style={{ fontVariationSettings: "'FILL' 1" }}
 									>
 										stadium
@@ -191,7 +191,7 @@ export default function SettingsVenueTab() {
 										}}
 										role="button"
 										tabIndex={0}
-										className="text-xs font-semibold text-on-surface-variant hover:text-[#FF5A30] transition-colors cursor-pointer"
+										className="text-xs font-semibold text-on-surface-variant hover:text-[#FF5A2E] transition-colors cursor-pointer"
 									>
 										{t("myVenues.actions.edit")}
 									</span>
@@ -230,7 +230,7 @@ export default function SettingsVenueTab() {
 					<button
 						type="button"
 						onClick={resetForm}
-						className="w-full py-3 border-2 border-dashed border-outline-variant/40 rounded-xl text-sm font-semibold text-on-surface-variant hover:border-[#FF5A30]/40 hover:text-[#FF5A30] transition-all flex items-center justify-center gap-2"
+						className="w-full py-3 border-2 border-dashed border-outline-variant/40 rounded-xl text-sm font-semibold text-on-surface-variant hover:border-[#FF5A2E]/40 hover:text-[#FF5A2E] transition-all flex items-center justify-center gap-2"
 					>
 						<span className="material-symbols-outlined text-sm">add</span>
 						{t("myVenues.actions.addNew")}
@@ -324,7 +324,7 @@ export default function SettingsVenueTab() {
 						value={form.notes}
 						onChange={(e) => set("notes")(e.target.value)}
 						placeholder={t("venueDetails.fields.notesPlaceholder")}
-						className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-lowest px-4 py-3 text-sm font-medium text-on-surface outline-none transition focus:ring-2 focus:ring-[#FF5A30]/20 resize-none"
+						className="w-full rounded-xl border border-outline-variant/20 bg-surface-container-lowest px-4 py-3 text-sm font-medium text-on-surface outline-none transition focus:ring-2 focus:ring-[#FF5A2E]/20 resize-none"
 					/>
 				</div>
 				<div className="flex items-center justify-end gap-4 pt-2">
@@ -351,7 +351,7 @@ export default function SettingsVenueTab() {
 						type="button"
 						onClick={() => saveMutation.mutate()}
 						disabled={!canSave || saveMutation.isPending}
-						className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:cursor-not-allowed disabled:opacity-60"
+						className="bg-[#FF5A2E] text-white px-8 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-all disabled:cursor-not-allowed disabled:opacity-60"
 					>
 						{saveMutation.isPending
 							? t("venueDetails.actions.saving")

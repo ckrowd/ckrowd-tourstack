@@ -60,7 +60,7 @@ export function Field({
 					value={value ?? ""}
 					onChange={onChange}
 					placeholder={placeholder}
-					className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30"
+					className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30"
 				/>
 			) : (
 				<input
@@ -70,7 +70,7 @@ export function Field({
 					{...(onChange
 						? { value: value ?? "", onChange: (e) => onChange(e.target.value) }
 						: { defaultValue })}
-					className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30"
+					className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30"
 				/>
 			)}
 			{hint && <p className="text-xs text-on-surface-variant mt-1.5">{hint}</p>}
@@ -127,7 +127,7 @@ export function Toggle({
 				onClick={handleClick}
 				disabled={disabled}
 				className={`relative w-11 h-6 rounded-full transition-colors shrink-0 disabled:opacity-50 ${
-					on ? "bg-[#FF5A30]" : "bg-surface-container-high"
+					on ? "bg-[#FF5A2E]" : "bg-surface-container-high"
 				}`}
 			>
 				<span

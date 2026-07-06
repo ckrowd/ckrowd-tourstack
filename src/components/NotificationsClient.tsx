@@ -10,7 +10,7 @@ import { Link } from "@/i18n/routing";
 const STATUS_META: Record<string, { icon: string; color: string; labelKey: string }> = {
 	approved: { icon: "task_alt", color: "text-emerald-500", labelKey: "notif.statusApproved" },
 	rejected: { icon: "cancel", color: "text-red-500", labelKey: "notif.statusRejected" },
-	needs_revision: { icon: "edit_note", color: "text-[#FF5A30]", labelKey: "notif.statusNeedsRevision" },
+	needs_revision: { icon: "edit_note", color: "text-[#FF5A2E]", labelKey: "notif.statusNeedsRevision" },
 	pending_review: { icon: "schedule", color: "text-blue-500", labelKey: "notif.statusPendingReview" },
 };
 
@@ -45,7 +45,7 @@ export default function NotificationsClient() {
 			<div className="mb-8">
 				<Link
 					href="/dashboard"
-					className="inline-flex items-center gap-1 text-xs font-semibold text-on-surface-variant hover:text-[#FF5A30] transition-colors mb-3"
+					className="inline-flex items-center gap-1 text-xs font-semibold text-on-surface-variant hover:text-[#FF5A2E] transition-colors mb-3"
 				>
 					<span className="material-symbols-outlined text-sm">arrow_back</span>
 					{t("backToDashboard")}

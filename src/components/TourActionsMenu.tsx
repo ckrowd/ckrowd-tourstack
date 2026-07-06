@@ -126,7 +126,7 @@ export default function TourActionsMenu({
 	});
 
 	const inputClass =
-		"w-full rounded-xl border border-outline-variant/30 bg-surface px-3 py-2 text-sm text-on-surface outline-none focus:border-[#FF5A30] focus:ring-2 focus:ring-[#FF5A30]/20 transition";
+		"w-full rounded-xl border border-outline-variant/30 bg-surface px-3 py-2 text-sm text-on-surface outline-none focus:border-[#FF5A2E] focus:ring-2 focus:ring-[#FF5A2E]/20 transition";
 
 	return (
 		<div className="relative" ref={menuRef}>
@@ -136,7 +136,7 @@ export default function TourActionsMenu({
 				aria-expanded={open}
 				aria-label={t("openMenu")}
 				onClick={() => setOpen((v) => !v)}
-				className="ml-2 p-2 text-on-surface-variant hover:text-[#FF5A30] hover:bg-[#FF5A30]/10 rounded-lg transition-colors"
+				className="ml-2 p-2 text-on-surface-variant hover:text-[#FF5A2E] hover:bg-[#FF5A2E]/10 rounded-lg transition-colors"
 			>
 				<span className="material-symbols-outlined">more_vert</span>
 			</button>
@@ -302,7 +302,7 @@ export default function TourActionsMenu({
 								type="button"
 								onClick={() => editMutation.mutate()}
 								disabled={editMutation.isPending}
-								className="px-5 py-2 rounded-lg text-sm font-semibold bg-[#FF5A30] text-white hover:opacity-90 disabled:opacity-60 transition-opacity"
+								className="px-5 py-2 rounded-lg text-sm font-semibold bg-[#FF5A2E] text-white hover:opacity-90 disabled:opacity-60 transition-opacity"
 							>
 								{editMutation.isPending ? t("saving") : t("save")}
 							</button>

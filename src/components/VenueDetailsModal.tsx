@@ -63,7 +63,7 @@ export default function VenueDetailsModal({
 					href={String(venue.google_maps_url)}
 					target="_blank"
 					rel="noopener noreferrer"
-					className="text-[#FF5A30] hover:underline break-all"
+					className="text-[#FF5A2E] hover:underline break-all"
 				>
 					{String(venue.google_maps_url)}
 				</a>

@@ -137,7 +137,7 @@ export default async function DashboardPage({ params }: Props) {
 					{/* Header */}
 					<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 						<div>
-							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
 								{t("promoterPortal")}
 							</span>
 							<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -178,7 +178,7 @@ export default async function DashboardPage({ params }: Props) {
 							</div>
 							<Link
 								href="/financing"
-								className="bg-[#FF5A30] text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-all shrink-0"
+								className="bg-[#FF5A2E] text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:opacity-90 transition-all shrink-0"
 							>
 								{t("financePrompt.cta")}
 							</Link>
@@ -255,7 +255,7 @@ export default async function DashboardPage({ params }: Props) {
 							<div className="flex items-center justify-between relative mt-6">
 								<div className="absolute top-4 left-0 w-full h-0.5 bg-surface-variant z-0" />
 								<div
-									className={`absolute top-4 left-0 h-0.5 bg-[#FF5A30] z-0 transition-all duration-500 ${progressWidthClass}`}
+									className={`absolute top-4 left-0 h-0.5 bg-[#FF5A2E] z-0 transition-all duration-500 ${progressWidthClass}`}
 								/>
 								{tourSteps.map((s) => (
 									<div
@@ -265,7 +265,7 @@ export default async function DashboardPage({ params }: Props) {
 										<div
 											className={`w-8 h-8 md:w-10 md:h-10 rounded-full flex items-center justify-center font-semibold text-xs md:text-sm ring-4 ring-surface-container-lowest transition-all ${
 												s.done
-													? "bg-[#FF5A30] text-white"
+													? "bg-[#FF5A2E] text-white"
 													: "bg-surface-variant text-on-surface-variant"
 											}`}
 										>
@@ -298,7 +298,7 @@ export default async function DashboardPage({ params }: Props) {
 
 					{/* Stats Grid */}
 					<div data-tour="dashboard-stats" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-10">
-						<div className="bg-surface-container-lowest p-4 md:p-6 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-[#FF5A30]">
+						<div className="bg-surface-container-lowest p-4 md:p-6 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-[#FF5A2E]">
 							<p className="text-xs md:text-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-3 md:mb-4">
 								{t("stats.eoisSubmitted")}
 							</p>
@@ -308,7 +308,7 @@ export default async function DashboardPage({ params }: Props) {
 										? dashData.stats.totalEOIs
 										: eois.length}
 								</span>
-								<span className="text-[#FF5A30] font-semibold flex items-center text-xs md:text-sm">
+								<span className="text-[#FF5A2E] font-semibold flex items-center text-xs md:text-sm">
 									{t("stats.newThisMonth", { count: newEoisThisMonth })}
 								</span>
 							</div>
@@ -350,7 +350,7 @@ export default async function DashboardPage({ params }: Props) {
 							</div>
 						</div>
 
-						<div className="relative overflow-hidden bg-[#FF5A30] p-4 md:p-6 rounded-xl shadow-sm flex flex-col justify-between">
+						<div className="relative overflow-hidden bg-[#FF5A2E] p-4 md:p-6 rounded-xl shadow-sm flex flex-col justify-between">
 							<div className="absolute top-0 right-0 p-2 opacity-20">
 								<span
 									className="material-symbols-outlined text-8xl"
@@ -402,7 +402,7 @@ export default async function DashboardPage({ params }: Props) {
 								</h2>
 								<Link
 									href="/eoi"
-									className="text-sm font-semibold text-[#FF5A30] flex items-center gap-1 hover:underline"
+									className="text-sm font-semibold text-[#FF5A2E] flex items-center gap-1 hover:underline"
 								>
 									{t("newEoi")}{" "}
 									<span className="material-symbols-outlined text-sm">add</span>
@@ -439,7 +439,7 @@ export default async function DashboardPage({ params }: Props) {
 													</p>
 													<Link
 														href="/discovery"
-														className="inline-flex items-center gap-1 mt-4 text-sm font-semibold text-[#FF5A30] hover:underline"
+														className="inline-flex items-center gap-1 mt-4 text-sm font-semibold text-[#FF5A2E] hover:underline"
 													>
 														<span className="material-symbols-outlined text-sm">
 															search
@@ -520,7 +520,7 @@ export default async function DashboardPage({ params }: Props) {
 									<h3 className="font-(family-name:--font-manrope) font-semibold text-lg">
 										{t("financingStatus")}
 									</h3>
-									<span className="material-symbols-outlined text-[#FF5A30]">
+									<span className="material-symbols-outlined text-[#FF5A2E]">
 										account_balance
 									</span>
 								</div>
@@ -531,7 +531,7 @@ export default async function DashboardPage({ params }: Props) {
 												<span className="text-on-surface-variant font-medium">
 													{String(latestFinancing.product ?? t("application"))}
 												</span>
-												<span className="font-semibold text-[#FF5A30] capitalize">
+												<span className="font-semibold text-[#FF5A2E] capitalize">
 													{t(
 														`statuses.${String(latestFinancing.status ?? "pending")}`,
 													)}
@@ -539,7 +539,7 @@ export default async function DashboardPage({ params }: Props) {
 											</div>
 											<div className="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
 												<div
-													className="bg-[#FF5A30] h-full rounded-full"
+													className="bg-[#FF5A2E] h-full rounded-full"
 													style={{
 														width:
 															String(latestFinancing.status) === "approved"
@@ -583,7 +583,7 @@ export default async function DashboardPage({ params }: Props) {
 										</div>
 										<Link
 											href="/financing"
-											className="block w-full py-3 bg-orange-50 text-[#FF5A30] font-(family-name:--font-manrope) font-semibold text-sm rounded-lg hover:brightness-95 transition-all text-center"
+											className="block w-full py-3 bg-orange-50 text-[#FF5A2E] font-(family-name:--font-manrope) font-semibold text-sm rounded-lg hover:brightness-95 transition-all text-center"
 										>
 											{t("viewFinancingDetails")}
 										</Link>
@@ -601,7 +601,7 @@ export default async function DashboardPage({ params }: Props) {
 										</p>
 										<Link
 											href="/financing"
-											className="inline-flex items-center gap-1 mt-4 text-sm font-semibold text-[#FF5A30] hover:underline"
+											className="inline-flex items-center gap-1 mt-4 text-sm font-semibold text-[#FF5A2E] hover:underline"
 										>
 											{t("exploreFinancing")}
 											<span className="material-symbols-outlined text-sm">
@@ -644,7 +644,7 @@ export default async function DashboardPage({ params }: Props) {
 												eoiStatus === "approved"
 													? "bg-emerald-500"
 													: eoiStatus === "needs_revision"
-														? "bg-[#FF5A30]"
+														? "bg-[#FF5A2E]"
 														: "bg-tertiary-container";
 											const activityLabel = t(`activityLabels.${eoiStatus}`, {
 												artist: artistName,

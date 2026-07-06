@@ -52,10 +52,10 @@ function TicketCard({
 			<div className="bg-gradient-to-br from-slate-900 via-slate-800 to-[#1a1a2e] px-6 pt-6 pb-5">
 				<div className="flex items-start justify-between mb-5">
 					<div>
-						<p className="text-[10px] font-black uppercase tracking-[.2em] text-[#FF5A30]">TourStack</p>
+						<p className="text-[10px] font-black uppercase tracking-[.2em] text-[#FF5A2E]">TourStack</p>
 						<p className="text-[9px] uppercase tracking-[.14em] text-slate-500 mt-0.5">by CKrowd</p>
 					</div>
-					<span className="bg-[#FF5A30] text-white text-[9px] font-black tracking-[.15em] uppercase px-2.5 py-1.5 rounded-md">
+					<span className="bg-[#FF5A2E] text-white text-[9px] font-black tracking-[.15em] uppercase px-2.5 py-1.5 rounded-md">
 						ADMIT ONE
 					</span>
 				</div>
@@ -90,7 +90,7 @@ function TicketCard({
 					</div>
 					<div>
 						<p className="text-[9px] text-slate-400 uppercase tracking-[.12em] mb-0.5">Amount Paid</p>
-						<p className="text-sm font-black text-[#FF5A30]">{totalAmount}</p>
+						<p className="text-sm font-black text-[#FF5A2E]">{totalAmount}</p>
 					</div>
 					<div>
 						<p className="text-[9px] text-slate-400 uppercase tracking-[.12em] mb-0.5">Ticket Holder</p>
@@ -109,7 +109,7 @@ function TicketCard({
 					</div>
 					<div className="min-w-0">
 						<p className="text-[9px] font-bold uppercase tracking-[.16em] text-orange-700 mb-1">Ticket Code</p>
-						<p className="font-mono font-black text-[#FF5A30] text-[13px] leading-snug break-all">{ticketCode}</p>
+						<p className="font-mono font-black text-[#FF5A2E] text-[13px] leading-snug break-all">{ticketCode}</p>
 						<p className="text-[9px] text-orange-600 mt-1">Scan QR to verify</p>
 					</div>
 				</div>
@@ -117,7 +117,7 @@ function TicketCard({
 
 			<div className="bg-slate-50 border-t border-slate-100 px-6 py-2.5 flex items-center justify-between">
 				<p className="text-[9px] text-slate-400">Present at venue entrance</p>
-				<p className="text-[9px] font-black text-[#FF5A30] tracking-widest">TOURSTACK</p>
+				<p className="text-[9px] font-black text-[#FF5A2E] tracking-widest">TOURSTACK</p>
 			</div>
 		</div>
 	);
@@ -179,7 +179,7 @@ async function renderTicketToCanvas(data: TicketCardProps & { qrDataUrl: string 
 
 	// TourStack
 	ctx.font = "800 10px Arial,sans-serif";
-	ctx.fillStyle = "#FF5A30";
+	ctx.fillStyle = "#FF5A2E";
 	ctx.fillText("TOURSTACK", 20, 28);
 
 	ctx.font = "400 8px Arial,sans-serif";
@@ -188,7 +188,7 @@ async function renderTicketToCanvas(data: TicketCardProps & { qrDataUrl: string 
 
 	// ADMIT ONE badge
 	rr(W - 92, 13, 76, 22, 5);
-	ctx.fillStyle = "#FF5A30";
+	ctx.fillStyle = "#FF5A2E";
 	ctx.fill();
 	ctx.font = "800 8px Arial,sans-serif";
 	ctx.fillStyle = "#ffffff";
@@ -258,7 +258,7 @@ async function renderTicketToCanvas(data: TicketCardProps & { qrDataUrl: string 
 	const cells: [string, string, string][] = [
 		["TICKET TYPE", data.tierName, "#0f172a"],
 		["QUANTITY", `× ${data.quantity}`, "#0f172a"],
-		["AMOUNT PAID", data.totalAmount, "#FF5A30"],
+		["AMOUNT PAID", data.totalAmount, "#FF5A2E"],
 		["TICKET HOLDER", fit(data.buyerName, W / 2 - 30), "#0f172a"],
 	];
 
@@ -312,7 +312,7 @@ async function renderTicketToCanvas(data: TicketCardProps & { qrDataUrl: string 
 	ctx.fillText("TICKET CODE", codeX, qrSecY + 24);
 
 	ctx.font = "700 10px 'Courier New',monospace";
-	ctx.fillStyle = "#FF5A30";
+	ctx.fillStyle = "#FF5A2E";
 	let codeLine = "";
 	let codeLineY = qrSecY + 40;
 	for (const ch of data.ticketCode) {
@@ -346,7 +346,7 @@ async function renderTicketToCanvas(data: TicketCardProps & { qrDataUrl: string 
 	ctx.fillText("Present at venue entrance", 20, footerY + 22);
 
 	ctx.font = "700 9px Arial,sans-serif";
-	ctx.fillStyle = "#FF5A30";
+	ctx.fillStyle = "#FF5A2E";
 	ctx.textAlign = "right";
 	ctx.fillText("TOURSTACK", W - 20, footerY + 22);
 	ctx.textAlign = "left";
@@ -461,7 +461,7 @@ export default function TicketConfirmPage() {
 				<TicketHeader locale={locale} />
 				<div className="flex-1 flex items-center justify-center">
 					<div className="text-center space-y-4">
-						<div className="w-10 h-10 border-2 border-[#FF5A30] border-t-transparent rounded-full animate-spin mx-auto" />
+						<div className="w-10 h-10 border-2 border-[#FF5A2E] border-t-transparent rounded-full animate-spin mx-auto" />
 						<p className="text-sm text-gray-600">{t("verifying")}</p>
 					</div>
 				</div>
@@ -485,7 +485,7 @@ export default function TicketConfirmPage() {
 						<button
 							type="button"
 							onClick={() => router.push(`/${locale}/tickets/${eventId}`)}
-							className="w-full bg-[#FF5A30] text-white font-bold text-sm py-3 rounded-xl hover:opacity-90 transition"
+							className="w-full bg-[#FF5A2E] text-white font-bold text-sm py-3 rounded-xl hover:opacity-90 transition"
 						>
 							{t("retry")}
 						</button>
@@ -529,7 +529,7 @@ export default function TicketConfirmPage() {
 						type="button"
 						onClick={handleDownload}
 						disabled={downloading || !qrDataUrl}
-						className="flex-1 bg-[#FF5A30] text-white font-bold text-sm py-3.5 rounded-xl hover:opacity-90 disabled:opacity-50 transition flex items-center justify-center gap-2"
+						className="flex-1 bg-[#FF5A2E] text-white font-bold text-sm py-3.5 rounded-xl hover:opacity-90 disabled:opacity-50 transition flex items-center justify-center gap-2"
 					>
 						{downloading ? (
 							<>

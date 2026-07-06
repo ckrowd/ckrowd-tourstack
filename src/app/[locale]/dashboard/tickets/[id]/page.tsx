@@ -138,7 +138,7 @@ export default function ManageTicketEventPage() {
 	if (eventQuery.isLoading) {
 		return (
 			<div className="flex justify-center py-16">
-				<div className="w-6 h-6 border-2 border-[#FF5A30] border-t-transparent rounded-full animate-spin" />
+				<div className="w-6 h-6 border-2 border-[#FF5A2E] border-t-transparent rounded-full animate-spin" />
 			</div>
 		);
 	}
@@ -161,7 +161,7 @@ export default function ManageTicketEventPage() {
 
 			<div className="flex items-start justify-between mb-6">
 				<div>
-					<p className="text-xs font-black uppercase tracking-widest text-[#FF5A30] mb-1">{t("badge")}</p>
+					<p className="text-xs font-black uppercase tracking-widest text-[#FF5A2E] mb-1">{t("badge")}</p>
 					<h1 className="text-2xl font-black">{String(ev.title)}</h1>
 				</div>
 				<span className={`mt-1 px-3 py-1 rounded-full text-xs font-bold ${statusColor[status] ?? ""}`}>
@@ -178,7 +178,7 @@ export default function ManageTicketEventPage() {
 						onClick={() => setTab(tabKey)}
 						className={`px-5 py-3 text-sm font-semibold border-b-2 transition ${
 							tab === tabKey
-								? "border-[#FF5A30] text-[#FF5A30]"
+								? "border-[#FF5A2E] text-[#FF5A2E]"
 								: "border-transparent text-on-surface-variant hover:text-on-surface"
 						}`}
 					>
@@ -220,7 +220,7 @@ export default function ManageTicketEventPage() {
 													setSelectedTourId(tourData ? String(tourData.id) : "");
 													setEditingTour(true);
 												}}
-												className="text-xs text-[#FF5A30] font-semibold hover:underline"
+												className="text-xs text-[#FF5A2E] font-semibold hover:underline"
 											>
 												{t("overview.changeTour")}
 											</button>
@@ -229,7 +229,7 @@ export default function ManageTicketEventPage() {
 								) : (
 									<div className="flex items-center gap-2">
 										<select
-											className="border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-[#FF5A30]"
+											className="border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-[#FF5A2E]"
 											value={selectedTourId}
 											onChange={(e) => setSelectedTourId(e.target.value)}
 										>
@@ -244,7 +244,7 @@ export default function ManageTicketEventPage() {
 											type="button"
 											disabled={updateTourMutation.isPending}
 											onClick={() => updateTourMutation.mutate(selectedTourId || null)}
-											className="bg-[#FF5A30] text-white font-bold text-xs px-4 py-2 rounded-xl hover:opacity-90 disabled:opacity-50 transition"
+											className="bg-[#FF5A2E] text-white font-bold text-xs px-4 py-2 rounded-xl hover:opacity-90 disabled:opacity-50 transition"
 										>
 											{updateTourMutation.isPending ? t("tiers.saving") : t("overview.saveTour")}
 										</button>
@@ -279,7 +279,7 @@ export default function ManageTicketEventPage() {
 								<button
 									type="button"
 									onClick={() => { void handleCopyLink(); }}
-									className="shrink-0 flex items-center gap-2 bg-[#FF5A30] text-white font-bold text-xs px-4 py-2 rounded-xl hover:opacity-90 transition"
+									className="shrink-0 flex items-center gap-2 bg-[#FF5A2E] text-white font-bold text-xs px-4 py-2 rounded-xl hover:opacity-90 transition"
 								>
 									<span className="material-symbols-outlined text-sm">
 										{linkCopied ? "check" : "content_copy"}
@@ -296,7 +296,7 @@ export default function ManageTicketEventPage() {
 								type="button"
 								disabled={publishMutation.isPending}
 								onClick={() => publishMutation.mutate()}
-								className="bg-[#FF5A30] text-white font-bold text-sm px-6 py-2.5 rounded-xl hover:opacity-90 disabled:opacity-50 transition"
+								className="bg-[#FF5A2E] text-white font-bold text-sm px-6 py-2.5 rounded-xl hover:opacity-90 disabled:opacity-50 transition"
 							>
 								{publishMutation.isPending ? t("overview.publishing") : t("overview.publish")}
 							</button>
@@ -392,7 +392,7 @@ export default function ManageTicketEventPage() {
 								<div>
 									<label className="block text-xs font-semibold mb-1">{t("tiers.name")}</label>
 									<input
-										className="w-full border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-[#FF5A30]"
+										className="w-full border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-[#FF5A2E]"
 										value={newTierName}
 										onChange={(e) => setNewTierName(e.target.value)}
 									/>
@@ -400,7 +400,7 @@ export default function ManageTicketEventPage() {
 								<div>
 									<label className="block text-xs font-semibold mb-1">{t("tiers.price")}</label>
 									<FormattedNumberInput
-										className="w-full border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-[#FF5A30]"
+										className="w-full border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-[#FF5A2E]"
 										value={newTierPrice}
 										onChange={(v) => setNewTierPrice(v)}
 									/>
@@ -408,7 +408,7 @@ export default function ManageTicketEventPage() {
 								<div>
 									<label className="block text-xs font-semibold mb-1">{t("tiers.capacity")}</label>
 									<FormattedNumberInput
-										className="w-full border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-[#FF5A30]"
+										className="w-full border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-[#FF5A2E]"
 										value={newTierCap}
 										onChange={(v) => setNewTierCap(v)}
 									/>
@@ -422,7 +422,7 @@ export default function ManageTicketEventPage() {
 									type="button"
 									disabled={!newTierName || !newTierPrice || addTierMutation.isPending}
 									onClick={() => addTierMutation.mutate()}
-									className="bg-[#FF5A30] text-white font-bold text-xs px-4 py-2 rounded-xl hover:opacity-90 disabled:opacity-50 transition"
+									className="bg-[#FF5A2E] text-white font-bold text-xs px-4 py-2 rounded-xl hover:opacity-90 disabled:opacity-50 transition"
 								>
 									{addTierMutation.isPending ? t("tiers.saving") : t("tiers.add")}
 								</button>
@@ -434,7 +434,7 @@ export default function ManageTicketEventPage() {
 						<button
 							type="button"
 							onClick={() => setAddingTier(true)}
-							className="w-full border-2 border-dashed border-outline-variant rounded-xl py-3 text-sm font-semibold text-on-surface-variant hover:border-[#FF5A30] hover:text-[#FF5A30] transition"
+							className="w-full border-2 border-dashed border-outline-variant rounded-xl py-3 text-sm font-semibold text-on-surface-variant hover:border-[#FF5A2E] hover:text-[#FF5A2E] transition"
 						>
 							+ {t("tiers.add")}
 						</button>
@@ -447,7 +447,7 @@ export default function ManageTicketEventPage() {
 				<div>
 					{purchasesQuery.isLoading && (
 						<div className="flex justify-center py-8">
-							<div className="w-5 h-5 border-2 border-[#FF5A30] border-t-transparent rounded-full animate-spin" />
+							<div className="w-5 h-5 border-2 border-[#FF5A2E] border-t-transparent rounded-full animate-spin" />
 						</div>
 					)}
 					{!purchasesQuery.isLoading && purchases.length === 0 && (

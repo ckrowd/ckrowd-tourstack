@@ -229,9 +229,9 @@ function buildNotes(form: EOIForm, artist: ArtistItem): string {
 	return sections.join("\n\n");
 }
 
-const ic = "w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#FF5A30] focus:ring-2 focus:ring-[#FF5A30]/20";
+const ic = "w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#FF5A2E] focus:ring-2 focus:ring-[#FF5A2E]/20";
 const icErr = "border-rose-400 focus:border-rose-400 focus:ring-rose-400/20";
-const sc = "w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#FF5A30] focus:ring-2 focus:ring-[#FF5A30]/20 min-h-28";
+const sc = "w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#FF5A2E] focus:ring-2 focus:ring-[#FF5A2E]/20 min-h-28";
 
 function FLabel({ htmlFor, required, children }: { htmlFor: string; required?: boolean; children: React.ReactNode }) {
 	return (
@@ -249,7 +249,7 @@ function FError({ msg }: { msg?: string }) {
 function SectionHeading({ children }: { children: React.ReactNode }) {
 	return (
 		<div className="col-span-full border-b border-slate-100 pb-3 mb-1">
-			<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A30]">{children}</p>
+			<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A2E]">{children}</p>
 		</div>
 	);
 }
@@ -262,7 +262,7 @@ function ToggleGroup({ value, onChange, options }: { value: boolean; onChange: (
 				{options[0]}
 			</button>
 			<button type="button" role="switch" aria-checked={value} onClick={() => onChange(true)}
-				className={`px-4 py-2 transition ${value ? "bg-[#FF5A30] text-white" : "bg-white text-slate-500 hover:bg-slate-50"}`}>
+				className={`px-4 py-2 transition ${value ? "bg-[#FF5A2E] text-white" : "bg-white text-slate-500 hover:bg-slate-50"}`}>
 				{options[1]}
 			</button>
 		</div>
@@ -275,16 +275,16 @@ function Stepper({ current, steps }: { current: number; steps: { label: string }
 		<div className="mb-8">
 			<div className="relative flex items-center justify-between">
 				<div className="absolute left-0 top-1/2 z-0 h-0.5 w-full -translate-y-1/2 bg-slate-200" />
-				<div className="absolute left-0 top-1/2 z-0 h-0.5 -translate-y-1/2 bg-[#FF5A30] transition-all duration-500" style={{ width: `${progress}%` }} />
+				<div className="absolute left-0 top-1/2 z-0 h-0.5 -translate-y-1/2 bg-[#FF5A2E] transition-all duration-500" style={{ width: `${progress}%` }} />
 				{steps.map((step, i) => {
 					const done = i < current;
 					const active = i === current;
 					return (
 						<div key={step.label} className="relative z-10 flex flex-col items-center">
-							<div className={`flex h-8 w-8 items-center justify-center rounded-full ring-4 ring-[#f6f4ef] font-semibold text-xs ${done || active ? "bg-[#FF5A30] text-white" : "bg-slate-200 text-slate-500"}`}>
+							<div className={`flex h-8 w-8 items-center justify-center rounded-full ring-4 ring-[#f6f4ef] font-semibold text-xs ${done || active ? "bg-[#FF5A2E] text-white" : "bg-slate-200 text-slate-500"}`}>
 								{done ? <span className="material-symbols-outlined text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>check</span> : i + 1}
 							</div>
-							<span className={`mt-1.5 hidden sm:block text-[9px] font-semibold uppercase tracking-wider ${active ? "text-[#FF5A30]" : done ? "text-[#FF5A30]/60" : "text-slate-400"}`}>
+							<span className={`mt-1.5 hidden sm:block text-[9px] font-semibold uppercase tracking-wider ${active ? "text-[#FF5A2E]" : done ? "text-[#FF5A2E]/60" : "text-slate-400"}`}>
 								{step.label}
 							</span>
 						</div>
@@ -312,7 +312,7 @@ function OpportunitySelector({ opportunities, loading, selectedId, onSelect }: {
 			<div className="relative mb-3">
 				<span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-base">search</span>
 				<input type="text" placeholder={t("selector.searchPlaceholder")} value={search} onChange={e => setSearch(e.target.value)}
-					className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-[#FF5A30] focus:ring-2 focus:ring-[#FF5A30]/20 transition" />
+					className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-[#FF5A2E] focus:ring-2 focus:ring-[#FF5A2E]/20 transition" />
 			</div>
 			{loading ? (
 				<p className="text-sm text-slate-500 text-center py-4">{t("selector.loading")}</p>
@@ -325,12 +325,12 @@ function OpportunitySelector({ opportunities, loading, selectedId, onSelect }: {
 						const sel = id === selectedId;
 						return (
 							<button key={id} type="button" onClick={() => onSelect(id)}
-								className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all ${sel ? "bg-orange-50 border border-[#FF5A30]/25" : "hover:bg-slate-50 border border-transparent"}`}>
-								<div className={`w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center transition-colors ${sel ? "border-[#FF5A30]" : "border-slate-300"}`}>
-									{sel && <div className="w-2 h-2 rounded-full bg-[#FF5A30]" />}
+								className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all ${sel ? "bg-orange-50 border border-[#FF5A2E]/25" : "hover:bg-slate-50 border border-transparent"}`}>
+								<div className={`w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center transition-colors ${sel ? "border-[#FF5A2E]" : "border-slate-300"}`}>
+									{sel && <div className="w-2 h-2 rounded-full bg-[#FF5A2E]" />}
 								</div>
 								<div className="flex-1 min-w-0">
-									<p className={`text-sm font-semibold truncate ${sel ? "text-[#FF5A30]" : "text-slate-900"}`}>{String(a.name ?? "")}</p>
+									<p className={`text-sm font-semibold truncate ${sel ? "text-[#FF5A2E]" : "text-slate-900"}`}>{String(a.name ?? "")}</p>
 									{a.tour_name && <p className="text-xs text-slate-500 truncate">{String(a.tour_name)}</p>}
 								</div>
 								{a.genre && <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 shrink-0">{String(a.genre)}</span>}
@@ -354,7 +354,7 @@ function OpportunityPanel({ artist, locale }: { artist: ArtistItem; locale: stri
 	return (
 		<div className="rounded-2xl border border-slate-200 bg-white shadow-sm p-5 space-y-4">
 			<div>
-				<p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#FF5A30] mb-1">{t("tourPanel.heading")}</p>
+				<p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#FF5A2E] mb-1">{t("tourPanel.heading")}</p>
 				<h2 className="text-lg font-(family-name:--font-manrope) font-semibold text-slate-950 leading-tight">{String(artist.tour_name ?? artist.name ?? "")}</h2>
 				<p className="mt-0.5 text-sm font-semibold text-slate-500">{String(artist.name ?? "")}</p>
 			</div>
@@ -641,7 +641,7 @@ function EOIPageContent() {
 						<h1 className="text-3xl font-semibold tracking-tight text-slate-950 font-(family-name:--font-manrope)">{t("success.title")}</h1>
 						<p className="mt-4 text-sm leading-6 text-slate-600">{t("success.description", { artist: String(artist.name ?? "") })}</p>
 						<div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-							<Link href="/dashboard" className="inline-flex items-center justify-center rounded-full bg-[#FF5A30] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90">
+							<Link href="/dashboard" className="inline-flex items-center justify-center rounded-full bg-[#FF5A2E] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90">
 								{t("success.viewDashboard")}
 							</Link>
 							<Link href="/discovery" className="inline-flex items-center justify-center rounded-full border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
@@ -658,7 +658,7 @@ function EOIPageContent() {
 		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
 			<div className="w-full">
 				<header className="mb-8">
-					<span className="mb-2 block text-xs font-semibold uppercase tracking-[0.3em] text-[#FF5A30]">{t("hero.platform")}</span>
+					<span className="mb-2 block text-xs font-semibold uppercase tracking-[0.3em] text-[#FF5A2E]">{t("hero.platform")}</span>
 					<h1 className="text-3xl font-semibold tracking-tight text-slate-950 md:text-4xl font-(family-name:--font-manrope)">{t("hero.title")}</h1>
 					<p className="mt-3 text-base leading-relaxed text-slate-600">{t("hero.description")}</p>
 				</header>
@@ -849,7 +849,7 @@ function EOIPageContent() {
 												return (
 													<div key={`venue-${i}`} className="rounded-2xl border border-slate-200 p-5">
 														<div className="mb-4 flex items-center justify-between">
-															<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A30]">
+															<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A2E]">
 																{t("form.step4.venueSection")} {form.venues.length > 1 ? i + 1 : ""}
 															</p>
 															{form.venues.length > 1 && (
@@ -919,7 +919,7 @@ function EOIPageContent() {
 													</div>
 												);
 											})}
-											<button type="button" onClick={addVenue} className="flex items-center gap-2 rounded-full border border-dashed border-slate-300 px-5 py-3 text-sm font-semibold text-slate-600 transition hover:border-[#FF5A30] hover:text-[#FF5A30]">
+											<button type="button" onClick={addVenue} className="flex items-center gap-2 rounded-full border border-dashed border-slate-300 px-5 py-3 text-sm font-semibold text-slate-600 transition hover:border-[#FF5A2E] hover:text-[#FF5A2E]">
 												<span className="material-symbols-outlined text-base">add</span>
 												{t("form.step4.addVenue")}
 											</button>
@@ -1015,10 +1015,10 @@ function EOIPageContent() {
 														const selection = form.insuranceSelections.find(sel => sel.product === product);
 														const checked = !!selection;
 														return (
-															<div key={product} className={`rounded-2xl border px-4 py-3 transition ${checked ? "border-[#FF5A30]/30 bg-orange-50" : "border-slate-200 bg-slate-50 hover:bg-slate-100"}`}>
+															<div key={product} className={`rounded-2xl border px-4 py-3 transition ${checked ? "border-[#FF5A2E]/30 bg-orange-50" : "border-slate-200 bg-slate-50 hover:bg-slate-100"}`}>
 																<label className="flex items-center gap-2.5 cursor-pointer">
 																	<input type="checkbox" className="sr-only" checked={checked} onChange={() => toggleInsuranceProduct(product)} />
-																	<div className={`w-4 h-4 rounded border-2 shrink-0 flex items-center justify-center ${checked ? "bg-[#FF5A30] border-[#FF5A30]" : "border-slate-300"}`}>
+																	<div className={`w-4 h-4 rounded border-2 shrink-0 flex items-center justify-center ${checked ? "bg-[#FF5A2E] border-[#FF5A2E]" : "border-slate-300"}`}>
 																		{checked && <span className="material-symbols-outlined text-white text-[10px]" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>}
 																	</div>
 																	<span className="text-xs font-semibold text-slate-700">{t(`form.step6.insuranceProducts.${INSURANCE_PRODUCT_I18N_KEY[product]}`)}</span>
@@ -1071,9 +1071,9 @@ function EOIPageContent() {
 													<p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">{t("form.step6.financingPurpose.label")}</p>
 													<div className="grid sm:grid-cols-3 gap-2">
 														{(["artistFee", "production", "marketing", "operations", "other"] as const).map(key => (
-															<label key={key} className={`flex items-center gap-2.5 rounded-xl border px-4 py-3 cursor-pointer transition ${form.financingPurpose.includes(key) ? "border-[#FF5A30]/30 bg-orange-50" : "border-slate-200 bg-slate-50 hover:bg-slate-100"}`}>
+															<label key={key} className={`flex items-center gap-2.5 rounded-xl border px-4 py-3 cursor-pointer transition ${form.financingPurpose.includes(key) ? "border-[#FF5A2E]/30 bg-orange-50" : "border-slate-200 bg-slate-50 hover:bg-slate-100"}`}>
 																<input type="checkbox" className="sr-only" tabIndex={form.needsFinancing ? 0 : -1} checked={form.financingPurpose.includes(key)} onChange={() => togglePurpose(key)} />
-																<div className={`w-4 h-4 rounded border-2 shrink-0 flex items-center justify-center ${form.financingPurpose.includes(key) ? "bg-[#FF5A30] border-[#FF5A30]" : "border-slate-300"}`}>
+																<div className={`w-4 h-4 rounded border-2 shrink-0 flex items-center justify-center ${form.financingPurpose.includes(key) ? "bg-[#FF5A2E] border-[#FF5A2E]" : "border-slate-300"}`}>
 																	{form.financingPurpose.includes(key) && <span className="material-symbols-outlined text-white text-[10px]" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>}
 																</div>
 																<span className="text-xs font-semibold text-slate-700">{t(`form.step6.financingPurpose.${key}`)}</span>
@@ -1129,7 +1129,7 @@ function EOIPageContent() {
 										<div className="space-y-6">
 											{/* Documents */}
 											<div>
-												<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A30] mb-3">{t("form.step7.documentsSection")}</p>
+												<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A2E] mb-3">{t("form.step7.documentsSection")}</p>
 												<p className="text-xs text-slate-500 mb-4">{t("form.step7.documentsNote")}</p>
 												<div className="space-y-2.5">
 													<div className="flex items-center gap-3 rounded-2xl border border-emerald-300 bg-emerald-50 px-5 py-4">
@@ -1153,7 +1153,7 @@ function EOIPageContent() {
 
 											{/* Review summary */}
 											<div>
-												<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A30] mb-3">{t("form.step7.reviewSection")}</p>
+												<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A2E] mb-3">{t("form.step7.reviewSection")}</p>
 												<div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 divide-y divide-slate-100">
 													<ReviewRow label={t("review.artist")} value={String(artist.name ?? "")} />
 													<ReviewRow label={t("review.tour")} value={String(artist.tour_name ?? "")} />
@@ -1172,7 +1172,7 @@ function EOIPageContent() {
 
 											{/* Declaration */}
 											<div>
-												<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A30] mb-3">{t("form.step7.declarationSection")}</p>
+												<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A2E] mb-3">{t("form.step7.declarationSection")}</p>
 												<div className="grid gap-5 sm:grid-cols-2">
 													<div>
 														<FLabel htmlFor="s7-repname" required>{t("form.step7.authorizedRepName.label")}</FLabel>
@@ -1194,7 +1194,7 @@ function EOIPageContent() {
 													<p className="text-sm text-slate-600 leading-relaxed mb-4">{t("form.step7.declarationText")}</p>
 													<label className={`flex items-start gap-3 cursor-pointer`}>
 														<input type="checkbox" className="sr-only" checked={form.declarationConfirmed} onChange={e => { set("declarationConfirmed", e.target.checked); if (errors.declaration) setErrors(p => { const n = { ...p }; delete n.declaration; return n; }); }} />
-														<div className={`w-5 h-5 rounded border-2 shrink-0 mt-0.5 flex items-center justify-center ${form.declarationConfirmed ? "bg-[#FF5A30] border-[#FF5A30]" : errors.declaration ? "border-rose-400" : "border-slate-300"}`}>
+														<div className={`w-5 h-5 rounded border-2 shrink-0 mt-0.5 flex items-center justify-center ${form.declarationConfirmed ? "bg-[#FF5A2E] border-[#FF5A2E]" : errors.declaration ? "border-rose-400" : "border-slate-300"}`}>
 															{form.declarationConfirmed && <span className="material-symbols-outlined text-white text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>}
 														</div>
 														<span className="text-sm font-semibold text-slate-800">{t("form.step7.declarationAgree")}</span>
@@ -1219,7 +1219,7 @@ function EOIPageContent() {
 												{t("actions.cancel")}
 											</Link>
 											<button type="submit" disabled={submitting}
-												className="rounded-full bg-[#FF5A30] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60">
+												className="rounded-full bg-[#FF5A2E] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60">
 												{submitting ? t("actions.submitting") : step === STEPS.length - 1 ? t("actions.submit") : t("actions.continue")}
 											</button>
 										</div>

@@ -9,6 +9,7 @@ import { useLogout, useSession } from "@/context/AuthContext";
 import { Link, routing, usePathname, useRouter } from "@/i18n/routing";
 import ArtmgmtSearch from "@/components/ArtmgmtSearch";
 import GlobalSearch from "@/components/GlobalSearch";
+import ThemeToggle from "@/components/ThemeToggle";
 
 export default function TopNav() {
 	const pathname = usePathname();
@@ -94,7 +95,7 @@ export default function TopNav() {
 		},
 		needs_revision: {
 			icon: "edit_note",
-			color: "text-[#FF5A30]",
+			color: "text-[#FF5A2E]",
 			label: t("notif.statusNeedsRevision"),
 		},
 		pending_review: {
@@ -352,7 +353,7 @@ export default function TopNav() {
 								height={36}
 							/>
 							<div className="hidden lg:flex flex-col leading-tight">
-								<span className="text-lg font-black tracking-tight text-[#FF5A30] font-(family-name:--font-manrope)">
+								<span className="text-lg font-black tracking-tight text-[#FF5A2E] font-(family-name:--font-manrope)">
 									{tCommon("brandName")}
 								</span>
 								<span className="text-[10px] font-semibold text-black font-(family-name:--font-manrope)">
@@ -369,18 +370,18 @@ export default function TopNav() {
 						{/* Tour Intelligence (New dynamic button) */}
 						{session?.user && !isAdminPortal && !isFinancingAdminPortal && !isInsuranceAdminPortal && !isArtmgmtPortal && (
 							<div className="relative inline-flex overflow-hidden rounded-xl p-[2.5px] group hidden md:inline-flex shrink-0">
-								<span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#FF5A30_0%,#3b82f6_50%,#FF5A30_100%)]" />
+								<span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#FF5A2E_0%,#3b82f6_50%,#FF5A2E_100%)]" />
 								<Link
 									href="/tour-intelligence"
 									className="relative flex items-center justify-center gap-2 w-full h-full bg-white rounded-[9.5px] px-3 py-1.5 transition-colors group-hover:bg-orange-50/50"
 								>
 									<span
-										className="material-symbols-outlined text-sm text-[#FF5A30]"
+										className="material-symbols-outlined text-sm text-[#FF5A2E]"
 										style={{ fontVariationSettings: "'FILL' 1" }}
 									>
 										auto_awesome
 									</span>
-									<span className="font-(family-name:--font-manrope) font-semibold text-xs text-slate-700 whitespace-nowrap group-hover:text-[#FF5A30] transition-colors">
+									<span className="font-(family-name:--font-manrope) font-semibold text-xs text-slate-700 whitespace-nowrap group-hover:text-[#FF5A2E] transition-colors">
 										{t("tourIntelligence")}
 									</span>
 								</Link>
@@ -425,7 +426,7 @@ export default function TopNav() {
 													});
 													setLangOpen(false);
 												}}
-												className={`flex items-center justify-between w-full px-3 py-2 text-xs font-semibold uppercase hover:bg-slate-50 transition-colors ${locale === l ? "text-[#FF5A30]" : "text-slate-600"}`}
+												className={`flex items-center justify-between w-full px-3 py-2 text-xs font-semibold uppercase hover:bg-slate-50 transition-colors ${locale === l ? "text-[#FF5A2E]" : "text-slate-600"}`}
 											>
 												{l.toUpperCase()}
 												{locale === l && (
@@ -439,6 +440,9 @@ export default function TopNav() {
 								</>
 							)}
 						</div>
+
+						{/* Theme toggle */}
+						<ThemeToggle />
 
 						{/* Notifications */}
 						{session?.user && (
@@ -454,7 +458,7 @@ export default function TopNav() {
 										notifications
 									</span>
 									{hasUnread && (
-										<span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#FF5A30] rounded-full" />
+										<span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#FF5A2E] rounded-full" />
 									)}
 								</button>
 							</div>
@@ -469,7 +473,7 @@ export default function TopNav() {
 								className="p-2 hover:bg-slate-50/50 rounded-lg transition-all active:scale-95 hidden lg:flex items-center justify-center"
 								title="Page guide"
 							>
-								<span className="material-symbols-outlined text-[#FF5A30] text-[20px]">
+								<span className="material-symbols-outlined text-[#FF5A2E] text-[20px]">
 									travel_explore
 								</span>
 							</button>
@@ -483,7 +487,7 @@ export default function TopNav() {
 									aria-label={t("openProfileMenu")}
 									aria-expanded={profileOpen}
 									onClick={() => setProfileOpen((v) => !v)}
-									className="h-8 w-8 rounded-full bg-[#FF5A30] overflow-hidden flex items-center justify-center text-white text-xs font-semibold select-none hover:opacity-90 transition-opacity active:scale-95"
+									className="h-8 w-8 rounded-full bg-[#FF5A2E] overflow-hidden flex items-center justify-center text-white text-xs font-semibold select-none hover:opacity-90 transition-opacity active:scale-95"
 								>
 									{profileLogoUrl ? (
 										// eslint-disable-next-line @next/next/no-img-element -- may be a base64 data URL; next/image does not support data: URIs
@@ -550,7 +554,7 @@ export default function TopNav() {
 						) : (
 							<Link
 								href="/login"
-								className="hidden lg:inline-flex px-4 py-2 bg-[#FF5A30] text-white text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity"
+								className="hidden lg:inline-flex px-4 py-2 bg-[#FF5A2E] text-white text-sm font-semibold rounded-xl hover:opacity-90 transition-opacity"
 							>
 								{tCommon("signIn")}
 							</Link>
@@ -602,7 +606,7 @@ export default function TopNav() {
 									height={32}
 								/>
 								<div className="flex flex-col leading-tight">
-									<span className="text-base font-black tracking-tight text-[#FF5A30] font-(family-name:--font-manrope)">
+									<span className="text-base font-black tracking-tight text-[#FF5A2E] font-(family-name:--font-manrope)">
 										{tCommon("brandName")}
 									</span>
 									<span className="text-[10px] font-semibold text-black/50 font-(family-name:--font-manrope)">
@@ -635,7 +639,7 @@ export default function TopNav() {
 									}}
 										className={`flex-1 py-2 rounded-lg text-xs font-semibold uppercase transition-colors ${
 											locale === l
-												? "bg-[#FF5A30] text-white"
+												? "bg-[#FF5A2E] text-white"
 												: "bg-slate-100 text-slate-600 hover:bg-slate-200"
 										}`}
 									>
@@ -654,7 +658,7 @@ export default function TopNav() {
 									onClick={() => setMobileMenuOpen(false)}
 									className={`flex items-center gap-3 px-5 py-3 mx-2 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm transition-all ${
 										isNavActive(item.href)
-											? "bg-orange-50 text-[#FF5A30]"
+											? "bg-orange-50 text-[#FF5A2E]"
 											: "text-slate-600 hover:bg-slate-50"
 									}`}
 								>
@@ -681,7 +685,7 @@ export default function TopNav() {
 										<Link
 											href="/"
 											onClick={() => setMobileMenuOpen(false)}
-											className={`flex items-center gap-3 px-5 py-3 mx-2 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm transition-all ${pathname === "/" ? "bg-orange-50 text-[#FF5A30]" : "text-slate-600 hover:bg-slate-50"}`}
+											className={`flex items-center gap-3 px-5 py-3 mx-2 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm transition-all ${pathname === "/" ? "bg-orange-50 text-[#FF5A2E]" : "text-slate-600 hover:bg-slate-50"}`}
 										>
 											<span className="material-symbols-outlined">home</span>
 											<span>{t("home")}</span>
@@ -689,7 +693,7 @@ export default function TopNav() {
 										<Link
 											href="/join"
 											onClick={() => setMobileMenuOpen(false)}
-											className={`flex items-center gap-3 px-5 py-3 mx-2 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm transition-all ${pathname === "/join" ? "bg-orange-50 text-[#FF5A30]" : "text-slate-600 hover:bg-slate-50"}`}
+											className={`flex items-center gap-3 px-5 py-3 mx-2 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm transition-all ${pathname === "/join" ? "bg-orange-50 text-[#FF5A2E]" : "text-slate-600 hover:bg-slate-50"}`}
 										>
 											<span className="material-symbols-outlined">group_add</span>
 											<span>{t("join")}</span>
@@ -716,7 +720,7 @@ export default function TopNav() {
 										</span>
 										<span>{t("notifications")}</span>
 										{hasUnread && (
-											<span className="ml-auto min-w-5 h-5 px-1 rounded-full bg-[#FF5A30] text-white text-[10px] flex items-center justify-center font-semibold">
+											<span className="ml-auto min-w-5 h-5 px-1 rounded-full bg-[#FF5A2E] text-white text-[10px] flex items-center justify-center font-semibold">
 												{unreadCount}
 											</span>
 										)}
@@ -765,7 +769,7 @@ export default function TopNav() {
 								<Link
 									href="/login"
 									onClick={() => setMobileMenuOpen(false)}
-									className="flex items-center justify-center gap-2 w-full py-3 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm font-(family-name:--font-manrope) hover:opacity-90 transition-opacity"
+									className="flex items-center justify-center gap-2 w-full py-3 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm font-(family-name:--font-manrope) hover:opacity-90 transition-opacity"
 								>
 									<span className="material-symbols-outlined text-sm">
 										login
@@ -798,7 +802,7 @@ export default function TopNav() {
 									{t("notifications")}
 								</h3>
 								{hasUnread && (
-									<span className="min-w-[18px] h-[18px] px-1 rounded-full bg-[#FF5A30] text-white text-[10px] flex items-center justify-center font-semibold">
+									<span className="min-w-[18px] h-[18px] px-1 rounded-full bg-[#FF5A2E] text-white text-[10px] flex items-center justify-center font-semibold">
 										{unreadCount}
 									</span>
 								)}
@@ -844,7 +848,7 @@ export default function TopNav() {
 														</span>
 													)}
 													{n.unread && (
-														<span className="w-2 h-2 rounded-full bg-[#FF5A30]" />
+														<span className="w-2 h-2 rounded-full bg-[#FF5A2E]" />
 													)}
 												</div>
 											</Link>
@@ -854,14 +858,14 @@ export default function TopNav() {
 								<div className="px-5 py-3 border-t border-slate-100 flex items-center justify-between gap-4">
 									<button
 										type="button"
-										className="text-xs font-semibold text-[#FF5A30] hover:underline"
+										className="text-xs font-semibold text-[#FF5A2E] hover:underline"
 										onClick={markAllRead}
 									>
 										{t("markAllAsRead")}
 									</button>
 									<Link
 										href="/notifications"
-										className="text-xs font-semibold text-slate-500 hover:text-[#FF5A30] transition-colors"
+										className="text-xs font-semibold text-slate-500 hover:text-[#FF5A2E] transition-colors"
 										onClick={() => setNotifOpen(false)}
 									>
 										{t("viewAllNotifications")}

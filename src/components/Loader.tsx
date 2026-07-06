@@ -11,7 +11,7 @@ export default function Loader({
 		<div className="relative flex items-center justify-center" style={{ width: size + 16, height: size + 16 }}>
 			{/* Spinning orange arc ring */}
 			<span
-				className="absolute inset-0 rounded-full border-2 border-[#FF5A30]/20 border-t-[#FF5A30] animate-spin"
+				className="absolute inset-0 rounded-full border-2 border-[#FF5A2E]/20 border-t-[#FF5A2E] animate-spin"
 				style={{ animationDuration: "0.9s" }}
 			/>
 			{/* Logo counter-rotating slightly for a layered feel */}

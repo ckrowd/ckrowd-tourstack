@@ -92,14 +92,14 @@ export default function EOIDocumentsClient() {
 		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
 			<Link
 				href="/dashboard"
-				className="inline-flex items-center gap-2 text-sm font-semibold text-on-surface-variant hover:text-[#FF5A30] transition mb-6"
+				className="inline-flex items-center gap-2 text-sm font-semibold text-on-surface-variant hover:text-[#FF5A2E] transition mb-6"
 			>
 				<span className="material-symbols-outlined text-base">arrow_back</span>
 				{t("backToDashboard")}
 			</Link>
 
 			<header className="mb-8">
-				<span className="mb-2 block text-xs font-semibold uppercase tracking-[0.3em] text-[#FF5A30]">
+				<span className="mb-2 block text-xs font-semibold uppercase tracking-[0.3em] text-[#FF5A2E]">
 					TourStack
 				</span>
 				<h1 className="text-3xl font-semibold tracking-tight text-slate-950 md:text-4xl font-(family-name:--font-manrope)">
@@ -121,9 +121,9 @@ export default function EOIDocumentsClient() {
 								<Link
 									key={String(eoi.id)}
 									href={`/eoi/documents?eoiId=${String(eoi.id)}`}
-									className={`block rounded-2xl border p-4 transition ${String(eoi.id) === effectiveEoiId ? "border-[#FF5A30] bg-[#FF5A30]/5" : "border-slate-200 hover:bg-slate-50"}`}
+									className={`block rounded-2xl border p-4 transition ${String(eoi.id) === effectiveEoiId ? "border-[#FF5A2E] bg-[#FF5A2E]/5" : "border-slate-200 hover:bg-slate-50"}`}
 								>
-									<p className="text-xs font-bold text-[#FF5A30] uppercase tracking-wider mb-1">
+									<p className="text-xs font-bold text-[#FF5A2E] uppercase tracking-wider mb-1">
 										EOI-{String(eoi.id).slice(-4).toUpperCase()}
 									</p>
 									<p className="text-sm font-semibold text-slate-800">
@@ -140,7 +140,7 @@ export default function EOIDocumentsClient() {
 						<div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8 space-y-6">
 							{/* Upload section */}
 							<div>
-								<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A30] mb-3">
+								<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A2E] mb-3">
 									{t("uploadBtn")}
 								</p>
 								<div className="grid gap-2 sm:grid-cols-2 mb-4">
@@ -149,7 +149,7 @@ export default function EOIDocumentsClient() {
 											key={dt}
 											type="button"
 											onClick={() => setActiveDocType(dt)}
-											className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-left text-sm transition ${activeDocType === dt ? "border-[#FF5A30] bg-[#FF5A30]/5 text-[#FF5A30] font-semibold" : "border-slate-200 text-slate-700 hover:bg-slate-50"}`}
+											className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-left text-sm transition ${activeDocType === dt ? "border-[#FF5A2E] bg-[#FF5A2E]/5 text-[#FF5A2E] font-semibold" : "border-slate-200 text-slate-700 hover:bg-slate-50"}`}
 										>
 											<span className="material-symbols-outlined text-base shrink-0">
 												{DOC_TYPE_ICONS[dt] ?? "attach_file"}
@@ -162,7 +162,7 @@ export default function EOIDocumentsClient() {
 									type="button"
 									onClick={() => fileInputRef.current?.click()}
 									disabled={uploadMutation.isPending}
-									className="inline-flex items-center gap-2 rounded-full bg-[#FF5A30] px-6 py-3 text-sm font-semibold text-white hover:opacity-90 transition disabled:opacity-60"
+									className="inline-flex items-center gap-2 rounded-full bg-[#FF5A2E] px-6 py-3 text-sm font-semibold text-white hover:opacity-90 transition disabled:opacity-60"
 								>
 									<span className="material-symbols-outlined text-base">upload</span>
 									{uploadMutation.isPending ? t("uploading") : `${t("uploadBtn")}: ${t(`docTypes.${activeDocType}` as Parameters<typeof t>[0])}`}
@@ -178,7 +178,7 @@ export default function EOIDocumentsClient() {
 
 							{/* Uploaded documents */}
 							<div>
-								<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A30] mb-3">
+								<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A2E] mb-3">
 									{t("uploadedDocs")}
 								</p>
 								{docsLoading ? (

@@ -19,7 +19,7 @@ function EoiNotesDisplay({ notes }: { notes: string }) {
 				const body = lines.slice(1).map((l) => l.trim()).filter(Boolean);
 				return (
 					<div key={i} className="px-3 py-2 bg-surface-container-low rounded-lg">
-						<p className="text-[9px] font-black uppercase tracking-widest text-[#FF5A30] mb-1">
+						<p className="text-[9px] font-black uppercase tracking-widest text-[#FF5A2E] mb-1">
 							{header}
 						</p>
 						{body.map((line, j) => (
@@ -77,7 +77,7 @@ export default async function AdminEOIPage({
 		<>
 			<PageTour pageId="admin-eoi" />
 			<div className="mb-10">
-				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
 					{t("badge")}
 				</span>
 				<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -143,7 +143,7 @@ export default async function AdminEOIPage({
 									</div>
 									<div className="flex-1 min-w-0">
 										<div className="flex items-center gap-2 flex-wrap mb-1">
-											<span className="text-xs font-black text-[#FF5A30] uppercase tracking-widest">
+											<span className="text-xs font-black text-[#FF5A2E] uppercase tracking-widest">
 												{eoi.id
 													? `EOI-${String(eoi.id).slice(-4).toUpperCase()}`
 													: "EOI"}

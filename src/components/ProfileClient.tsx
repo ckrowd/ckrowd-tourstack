@@ -73,7 +73,7 @@ function Field({
 					onChange={onChange ?? (() => {})}
 					placeholder={placeholder}
 					ariaInvalid={hasError}
-					className={`w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 ${hasError ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
+					className={`w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 ${hasError ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
 				/>
 			) : (
 				<input
@@ -83,7 +83,7 @@ function Field({
 					placeholder={placeholder}
 					onChange={onChange ? (e) => onChange(e.target.value) : undefined}
 					readOnly={!onChange}
-					className={`w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 ${hasError ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
+					className={`w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 ${hasError ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
 				/>
 			)}
 			{hasError && (
@@ -129,7 +129,7 @@ function SelectField({
 					id={id}
 					value={value}
 					onChange={(e) => onChange(e.target.value)}
-					className={`w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 appearance-none ${hasError ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
+					className={`w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 appearance-none ${hasError ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
 				>
 					{options.map((opt) => (
 						<option key={opt.value} value={opt.value}>
@@ -431,15 +431,15 @@ export default function ProfileClient() {
 	return (
 		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
 			{isSetup && (
-				<div className="mb-6 bg-[#FF5A30]/10 border border-[#FF5A30]/20 rounded-2xl p-5 flex items-start gap-4">
+				<div className="mb-6 bg-[#FF5A2E]/10 border border-[#FF5A2E]/20 rounded-2xl p-5 flex items-start gap-4">
 					<span
-						className="material-symbols-outlined text-[#FF5A30] mt-0.5 shrink-0"
+						className="material-symbols-outlined text-[#FF5A2E] mt-0.5 shrink-0"
 						style={{ fontVariationSettings: "'FILL' 1" }}
 					>
 						person_add
 					</span>
 					<div>
-						<p className="font-(family-name:--font-manrope) font-semibold text-[#FF5A30] text-sm">
+						<p className="font-(family-name:--font-manrope) font-semibold text-[#FF5A2E] text-sm">
 							{t("setupBanner.title")}
 						</p>
 						<p className="text-sm text-on-surface-variant mt-1">
@@ -450,7 +450,7 @@ export default function ProfileClient() {
 			)}
 
 			<div className="mb-8">
-				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
 					{t("promoterPortal")}
 				</span>
 				<h1 className="text-3xl font-semibold font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -473,7 +473,7 @@ export default function ProfileClient() {
 						<button
 							type="button"
 							onClick={() => fileInputRef.current?.click()}
-							className="relative w-24 h-24 rounded-2xl overflow-hidden bg-surface-container-low border-2 border-dashed border-outline-variant/40 hover:border-[#FF5A30]/60 transition-colors flex items-center justify-center shrink-0 group"
+							className="relative w-24 h-24 rounded-2xl overflow-hidden bg-surface-container-low border-2 border-dashed border-outline-variant/40 hover:border-[#FF5A2E]/60 transition-colors flex items-center justify-center shrink-0 group"
 							aria-label={t("logo.label")}
 						>
 							{logoPreview || profile.logoUrl ? (
@@ -484,7 +484,7 @@ export default function ProfileClient() {
 									className="w-full h-full object-cover"
 								/>
 							) : (
-								<span className="text-2xl font-semibold text-on-surface-variant group-hover:text-[#FF5A30] transition-colors">
+								<span className="text-2xl font-semibold text-on-surface-variant group-hover:text-[#FF5A2E] transition-colors">
 									{initials}
 								</span>
 							)}
@@ -502,7 +502,7 @@ export default function ProfileClient() {
 								type="button"
 								onClick={() => fileInputRef.current?.click()}
 								disabled={logoUploadMutation.isPending}
-								className="inline-flex items-center gap-2 px-5 py-2.5 border border-outline-variant/40 rounded-xl text-sm font-semibold text-on-surface hover:border-[#FF5A30]/50 hover:text-[#FF5A30] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+								className="inline-flex items-center gap-2 px-5 py-2.5 border border-outline-variant/40 rounded-xl text-sm font-semibold text-on-surface hover:border-[#FF5A2E]/50 hover:text-[#FF5A2E] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
 							>
 								<span className="material-symbols-outlined text-base">upload</span>
 								{logoUploadMutation.isPending ? t("logo.uploading") : "Upload Image"}
@@ -661,7 +661,7 @@ export default function ProfileClient() {
 							value={profile.bio}
 							placeholder={t("publicInfo.fields.bioPlaceholder")}
 							onChange={(e) => set("bio")(e.target.value)}
-							className={`w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 resize-none ${showValidation && !profile.bio.trim() ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
+							className={`w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 resize-none ${showValidation && !profile.bio.trim() ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
 						/>
 						{showValidation && !profile.bio.trim() && (
 							<p className="text-xs text-rose-600 font-medium mt-1 flex items-center gap-1">
@@ -896,7 +896,7 @@ export default function ProfileClient() {
 						type="button"
 						onClick={handleSave}
 						disabled={saveMutation.isPending || logoUploadMutation.isPending}
-						className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:opacity-60"
+						className="bg-[#FF5A2E] text-white px-8 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-all disabled:opacity-60"
 					>
 						{saveMutation.isPending ? t("actions.saving") : t("actions.save")}
 					</button>

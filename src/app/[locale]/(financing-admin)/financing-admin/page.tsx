@@ -32,7 +32,7 @@ export default async function FinancingAdminPage({
 		<>
 			<div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-5">
 				<div>
-					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
 						{t("badge")}
 					</span>
 					<h1 className="text-2xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -44,7 +44,7 @@ export default async function FinancingAdminPage({
 				</div>
 				<Link
 					href="/financing-admin/applications"
-					className="flex items-center gap-2 px-4 py-2.5 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) text-sm font-semibold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 shrink-0"
+					className="flex items-center gap-2 px-4 py-2.5 bg-[#FF5A2E] text-white rounded-xl font-(family-name:--font-manrope) text-sm font-semibold shadow-lg shadow-[#FF5A2E]/20 hover:scale-[1.02] transition-transform active:scale-95 shrink-0"
 				>
 					<span className="material-symbols-outlined text-base">rate_review</span>
 					{t("reviewQueue")}
@@ -59,7 +59,7 @@ export default async function FinancingAdminPage({
 						</h2>
 						<Link
 							href="/financing-admin/applications"
-							className="text-sm font-semibold text-[#FF5A30] hover:underline"
+							className="text-sm font-semibold text-[#FF5A2E] hover:underline"
 						>
 							{t("queue.viewAll")}
 						</Link>
@@ -107,7 +107,7 @@ export default async function FinancingAdminPage({
 											</div>
 											<div className="min-w-0">
 												<div className="flex items-center gap-2 flex-wrap mb-1">
-													<span className="text-xs font-black text-[#FF5A30] uppercase tracking-widest">
+													<span className="text-xs font-black text-[#FF5A2E] uppercase tracking-widest">
 														{`#${String(eoi.id).slice(-6).toUpperCase()}`}
 													</span>
 													<span
@@ -147,7 +147,7 @@ export default async function FinancingAdminPage({
 								key={item.title}
 								className="bg-surface-container-low rounded-2xl p-4 flex items-start gap-3"
 							>
-								<span className="material-symbols-outlined text-[#FF5A30] shrink-0">
+								<span className="material-symbols-outlined text-[#FF5A2E] shrink-0">
 									{item.icon}
 								</span>
 								<div>

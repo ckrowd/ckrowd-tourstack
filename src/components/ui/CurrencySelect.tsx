@@ -69,7 +69,7 @@ export default function CurrencySelect({
 				onClick={() => setOpen((o) => !o)}
 				aria-haspopup="listbox"
 				aria-expanded={open}
-				className={`w-full flex items-center justify-between gap-2 bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 ${hasError ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
+				className={`w-full flex items-center justify-between gap-2 bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 ${hasError ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
 			>
 				<span className="flex items-center gap-2.5 min-w-0">
 					{selected ? (
@@ -102,7 +102,7 @@ export default function CurrencySelect({
 								onChange(c.code);
 								setOpen(false);
 							}}
-							className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left hover:bg-surface-container transition-colors ${c.code === value ? "bg-[#FF5A30]/10 text-[#FF5A30] font-semibold" : "text-on-surface"}`}
+							className={`w-full flex items-center gap-2.5 px-4 py-2.5 text-sm text-left hover:bg-surface-container transition-colors ${c.code === value ? "bg-[#FF5A2E]/10 text-[#FF5A2E] font-semibold" : "text-on-surface"}`}
 						>
 							<FlagIcon code={c.flag} className="w-5 h-auto rounded-[2px] shrink-0" />
 							<span className="truncate">

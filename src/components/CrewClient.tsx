@@ -253,7 +253,7 @@ const defaultForm: FormData = {
 /* ─────────────────────────── shared UI ─────────────────────────── */
 
 const inputClass =
-	"w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A30] transition-all text-on-surface outline-none text-sm";
+	"w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A2E] transition-all text-on-surface outline-none text-sm";
 
 function Label({
 	htmlFor,
@@ -297,17 +297,17 @@ function RadioGroup({
 						onClick={() => onChange(opt)}
 						className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold border transition-all text-left ${
 							checked
-								? "bg-[#FF5A30]/10 border-[#FF5A30] text-[#FF5A30]"
-								: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A30]/40"
+								? "bg-[#FF5A2E]/10 border-[#FF5A2E] text-[#FF5A2E]"
+								: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A2E]/40"
 						}`}
 					>
 						<span
 							className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 border-2 transition-colors ${
-								checked ? "border-[#FF5A30]" : "border-current"
+								checked ? "border-[#FF5A2E]" : "border-current"
 							}`}
 						>
 							{checked && (
-								<span className="w-2.5 h-2.5 rounded-full bg-[#FF5A30] block" />
+								<span className="w-2.5 h-2.5 rounded-full bg-[#FF5A2E] block" />
 							)}
 						</span>
 						{opt}
@@ -331,7 +331,7 @@ function Stepper({
 			<div className="flex justify-between items-center relative">
 				<div className="absolute top-1/2 left-0 w-full h-0.5 bg-surface-variant -translate-y-1/2 z-0" />
 				<div
-					className="absolute top-1/2 left-0 h-0.5 bg-[#FF5A30] -translate-y-1/2 z-0 transition-all duration-500"
+					className="absolute top-1/2 left-0 h-0.5 bg-[#FF5A2E] -translate-y-1/2 z-0 transition-all duration-500"
 					style={{ width: `${progress}%` }}
 				/>
 				{steps.map((step, i) => {
@@ -345,7 +345,7 @@ function Stepper({
 							<div
 								className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ring-4 ring-surface-container-low ${
 									done || active
-										? "bg-[#FF5A30] text-white"
+										? "bg-[#FF5A2E] text-white"
 										: "bg-surface-variant text-on-surface-variant"
 								}`}
 							>
@@ -363,9 +363,9 @@ function Stepper({
 							<span
 								className={`mt-2 text-[10px] font-semibold uppercase tracking-wider text-center  leading-tight ${
 									active
-										? "text-[#FF5A30]"
+										? "text-[#FF5A2E]"
 										: done
-											? "text-[#FF5A30]/70"
+											? "text-[#FF5A2E]/70"
 											: "text-on-surface-variant"
 								}`}
 							>
@@ -563,7 +563,7 @@ export default function CrewClient() {
 					<div className="flex flex-col sm:flex-row gap-4 justify-center">
 						<Link
 							href="/dashboard"
-							className="px-8 py-3 bg-[#FF5A30] text-white rounded-xl font-semibold shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform"
+							className="px-8 py-3 bg-[#FF5A2E] text-white rounded-xl font-semibold shadow-lg shadow-[#FF5A2E]/20 hover:scale-[1.02] transition-transform"
 						>
 							{t("actions.dashboard")}
 						</Link>
@@ -586,7 +586,7 @@ export default function CrewClient() {
 				<header className="mb-10">
 					<div className="flex items-start justify-between gap-4">
 						<div>
-							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-3">
+							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-3">
 								{t("registry")}
 							</span>
 							<h1 className="text-4xl font-extrabold tracking-tight text-on-surface mb-2">
@@ -654,7 +654,7 @@ export default function CrewClient() {
 						{step === 0 && (
 							<div className="space-y-8">
 								<div className="flex items-center gap-2 mb-2">
-									<span className="material-symbols-outlined text-[#FF5A30]">
+									<span className="material-symbols-outlined text-[#FF5A2E]">
 										person
 									</span>
 									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
@@ -815,7 +815,7 @@ export default function CrewClient() {
 						{step === 1 && (
 							<div className="space-y-10">
 								<div className="flex items-center gap-2 mb-2">
-									<span className="material-symbols-outlined text-[#FF5A30]">
+									<span className="material-symbols-outlined text-[#FF5A2E]">
 										engineering
 									</span>
 									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
@@ -847,14 +847,14 @@ export default function CrewClient() {
 													}}
 													className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold border transition-all text-left ${
 														checked
-															? "bg-[#FF5A30]/10 border-[#FF5A30] text-[#FF5A30]"
-															: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A30]/40"
+															? "bg-[#FF5A2E]/10 border-[#FF5A2E] text-[#FF5A2E]"
+															: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A2E]/40"
 													}`}
 												>
 													<span
 														className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
 															checked
-																? "border-[#FF5A30] bg-[#FF5A30]"
+																? "border-[#FF5A2E] bg-[#FF5A2E]"
 																: "border-current"
 														}`}
 													>
@@ -896,7 +896,7 @@ export default function CrewClient() {
 						{step === 2 && (
 							<div className="space-y-10">
 								<div className="flex items-center gap-2 mb-2">
-									<span className="material-symbols-outlined text-[#FF5A30]">
+									<span className="material-symbols-outlined text-[#FF5A2E]">
 										travel_explore
 									</span>
 									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
@@ -968,7 +968,7 @@ export default function CrewClient() {
 						{step === 3 && (
 							<div className="space-y-8">
 								<div className="flex items-center gap-2 mb-2">
-									<span className="material-symbols-outlined text-[#FF5A30]">
+									<span className="material-symbols-outlined text-[#FF5A2E]">
 										verified
 									</span>
 									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
@@ -1041,7 +1041,7 @@ export default function CrewClient() {
 								</div>
 
 								<div className="pt-6 border-t border-outline-variant/10">
-									<p className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] mb-4">
+									<p className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] mb-4">
 										Industry Reference
 									</p>
 									<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1114,7 +1114,7 @@ export default function CrewClient() {
 						{step === 4 && (
 							<div className="space-y-10">
 								<div className="flex items-center gap-2 mb-2">
-									<span className="material-symbols-outlined text-[#FF5A30]">
+									<span className="material-symbols-outlined text-[#FF5A2E]">
 										analytics
 									</span>
 									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
@@ -1156,7 +1156,7 @@ export default function CrewClient() {
 												<div className="h-px bg-outline-variant/10 my-2" />
 												<div className="flex justify-between text-base">
 													<span className="font-semibold">Total WCS Score</span>
-													<span className="font-black text-[#FF5A30]">
+													<span className="font-black text-[#FF5A2E]">
 														{wcs.total}
 													</span>
 												</div>
@@ -1259,7 +1259,7 @@ export default function CrewClient() {
 							<button
 								type="submit"
 								disabled={submitting}
-								className="flex items-center gap-2 px-10 py-4 bg-[#FF5A30] text-white rounded-xl font-semibold shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:opacity-50"
+								className="flex items-center gap-2 px-10 py-4 bg-[#FF5A2E] text-white rounded-xl font-semibold shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-all disabled:opacity-50"
 							>
 								{submitting ? (
 									<>

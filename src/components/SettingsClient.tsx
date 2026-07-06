@@ -35,7 +35,7 @@ export default function SettingsClient() {
 		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
 			{/* Header */}
 			<div className="mb-8">
-				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
 					{t("promoterPortal")}
 				</span>
 				<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -55,7 +55,7 @@ export default function SettingsClient() {
 						onClick={() => setActiveTab(tab.key)}
 						className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-semibold transition-all ${
 							activeTab === tab.key
-								? "bg-[#FF5A30] text-white shadow-sm"
+								? "bg-[#FF5A2E] text-white shadow-sm"
 								: "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low"
 						}`}
 					>

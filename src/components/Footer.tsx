@@ -23,19 +23,19 @@ export default function Footer() {
 					</h4>
 					<Link
 						href="/discovery"
-						className="font-[family-name:var(--font-inter)] text-xs uppercase tracking-widest text-slate-400 hover:text-[#FF5A30] transition-colors"
+						className="font-[family-name:var(--font-inter)] text-xs uppercase tracking-widest text-slate-400 hover:text-[#FF5A2E] transition-colors"
 					>
 						{t("platform.discovery")}
 					</Link>
 					<Link
 						href="/dashboard"
-						className="font-[family-name:var(--font-inter)] text-xs uppercase tracking-widest text-slate-400 hover:text-[#FF5A30] transition-colors"
+						className="font-[family-name:var(--font-inter)] text-xs uppercase tracking-widest text-slate-400 hover:text-[#FF5A2E] transition-colors"
 					>
 						{t("platform.analytics")}
 					</Link>
 					<Link
 						href="/financing"
-						className="font-[family-name:var(--font-inter)] text-xs uppercase tracking-widest text-slate-400 hover:text-[#FF5A30] transition-colors"
+						className="font-[family-name:var(--font-inter)] text-xs uppercase tracking-widest text-slate-400 hover:text-[#FF5A2E] transition-colors"
 					>
 						{t("platform.financing")}
 					</Link>
@@ -47,19 +47,19 @@ export default function Footer() {
 					</h4>
 					<Link
 						href="/contact"
-						className="font-[family-name:var(--font-inter)] text-xs uppercase tracking-widest text-slate-400 hover:text-[#FF5A30] transition-colors"
+						className="font-[family-name:var(--font-inter)] text-xs uppercase tracking-widest text-slate-400 hover:text-[#FF5A2E] transition-colors"
 					>
 						{t("company.contact")}
 					</Link>
 					<Link
 						href="/privacy"
-						className="font-[family-name:var(--font-inter)] text-xs uppercase tracking-widest text-slate-400 hover:text-[#FF5A30] transition-colors"
+						className="font-[family-name:var(--font-inter)] text-xs uppercase tracking-widest text-slate-400 hover:text-[#FF5A2E] transition-colors"
 					>
 						{t("company.privacy")}
 					</Link>
 					<Link
 						href="/terms"
-						className="font-[family-name:var(--font-inter)] text-xs uppercase tracking-widest text-slate-400 hover:text-[#FF5A30] transition-colors"
+						className="font-[family-name:var(--font-inter)] text-xs uppercase tracking-widest text-slate-400 hover:text-[#FF5A2E] transition-colors"
 					>
 						{t("company.terms")}
 					</Link>
@@ -73,11 +73,11 @@ export default function Footer() {
 						<input
 							type="email"
 							placeholder={t("stayUpdated.placeholder")}
-							className="bg-white border-none rounded-lg focus:ring-2 focus:ring-[#FF5A30] text-sm w-full px-3 py-2 outline-none"
+							className="bg-white border-none rounded-lg focus:ring-2 focus:ring-[#FF5A2E] text-sm w-full px-3 py-2 outline-none"
 						/>
 						<button
 							type="submit"
-							className="bg-[#FF5A30] text-white p-2 rounded-lg hover:opacity-90 transition-opacity"
+							className="bg-[#FF5A2E] text-white p-2 rounded-lg hover:opacity-90 transition-opacity"
 						>
 							<span className="material-symbols-outlined">send</span>
 						</button>

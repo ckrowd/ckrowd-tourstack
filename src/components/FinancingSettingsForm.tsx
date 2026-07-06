@@ -88,7 +88,7 @@ export default function FinancingSettingsForm({
 				<button
 					type="submit"
 					disabled={!dirty || mutation.isPending}
-					className="px-4 py-2 rounded-lg text-sm font-semibold bg-[#FF5A30] text-white shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 disabled:opacity-50"
+					className="px-4 py-2 rounded-lg text-sm font-semibold bg-[#FF5A2E] text-white shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 disabled:opacity-50"
 				>
 					{mutation.isPending ? t("saving") : t("saveChanges")}
 				</button>
@@ -111,7 +111,7 @@ export default function FinancingSettingsForm({
 								{t(`policies.${key}.description`)}
 							</p>
 						</div>
-						<label className="relative w-11 h-6 rounded-full shrink-0 cursor-pointer bg-surface-container-high has-[:checked]:bg-[#FF5A30]">
+						<label className="relative w-11 h-6 rounded-full shrink-0 cursor-pointer bg-surface-container-high has-[:checked]:bg-[#FF5A2E]">
 							<input
 								type="checkbox"
 								role="switch"
@@ -144,7 +144,7 @@ export default function FinancingSettingsForm({
 								id={`finance-threshold-${key}`}
 								value={String(draft[key])}
 								onChange={(v) => setThreshold(key, v)}
-								className="w-32 rounded-lg border border-outline-variant/20 bg-surface-container-lowest px-2 py-1 text-sm font-semibold text-on-surface text-right focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20"
+								className="w-32 rounded-lg border border-outline-variant/20 bg-surface-container-lowest px-2 py-1 text-sm font-semibold text-on-surface text-right focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20"
 							/>
 						</div>
 						<p className="text-xs text-on-surface-variant leading-5">

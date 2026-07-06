@@ -44,7 +44,7 @@ function Toggle({
 				aria-describedby={`${id}-desc`}
 				onClick={() => onChange(!checked)}
 				className={`relative w-11 h-6 rounded-full shrink-0 cursor-pointer transition-colors ${
-					checked ? "bg-[#FF5A30]" : "bg-surface-container-high"
+					checked ? "bg-[#FF5A2E]" : "bg-surface-container-high"
 				}`}
 			>
 				<span
@@ -102,7 +102,7 @@ export default function AdminSettingsForm({ initial }: Props) {
 						})
 					}
 					disabled={!dirty || saveMutation.isPending}
-					className="flex items-center gap-2 px-5 py-2.5 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-opacity disabled:cursor-not-allowed disabled:opacity-50"
+					className="flex items-center gap-2 px-5 py-2.5 bg-[#FF5A2E] text-white rounded-xl font-(family-name:--font-manrope) font-semibold text-sm shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-opacity disabled:cursor-not-allowed disabled:opacity-50"
 				>
 					{saveMutation.isPending ? t("saving") : t("saveChanges")}
 				</button>

@@ -87,7 +87,7 @@ function Field({
 				{...(onChange
 					? { value: value ?? "", onChange: (e) => onChange(e.target.value) }
 					: { defaultValue })}
-				className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30"
+				className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30"
 			/>
 			{hint && <p className="text-xs text-on-surface-variant mt-1.5">{hint}</p>}
 		</div>
@@ -219,7 +219,7 @@ export default function AdminProfilePage() {
 	return (
 		<>
 			<div className="mb-8">
-				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
 					{t("role")}
 				</span>
 				<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -237,13 +237,13 @@ export default function AdminProfilePage() {
 						<button
 							type="button"
 							onClick={() => fileInputRef.current?.click()}
-							className="relative w-20 h-20 rounded-2xl overflow-hidden bg-surface-container-low border-2 border-dashed border-outline-variant/40 hover:border-[#FF5A30]/60 transition-colors flex items-center justify-center shrink-0 group"
+							className="relative w-20 h-20 rounded-2xl overflow-hidden bg-surface-container-low border-2 border-dashed border-outline-variant/40 hover:border-[#FF5A2E]/60 transition-colors flex items-center justify-center shrink-0 group"
 						>
 							{logoUrl ? (
 								// eslint-disable-next-line @next/next/no-img-element
 								<img src={logoUrl} alt="" className="w-full h-full object-cover" />
 							) : (
-								<span className="text-xl font-semibold text-on-surface-variant group-hover:text-[#FF5A30] transition-colors">
+								<span className="text-xl font-semibold text-on-surface-variant group-hover:text-[#FF5A2E] transition-colors">
 									{initials}
 								</span>
 							)}
@@ -256,7 +256,7 @@ export default function AdminProfilePage() {
 								type="button"
 								onClick={() => fileInputRef.current?.click()}
 								disabled={photoMutation.isPending}
-								className="inline-flex items-center gap-2 px-4 py-2.5 border border-outline-variant/40 rounded-xl text-sm font-semibold text-on-surface hover:border-[#FF5A30]/50 hover:text-[#FF5A30] transition-all disabled:opacity-60"
+								className="inline-flex items-center gap-2 px-4 py-2.5 border border-outline-variant/40 rounded-xl text-sm font-semibold text-on-surface hover:border-[#FF5A2E]/50 hover:text-[#FF5A2E] transition-all disabled:opacity-60"
 							>
 								<span className="material-symbols-outlined text-base">upload</span>
 								{photoMutation.isPending ? t("uploadingPhoto") : t("uploadPhoto")}
@@ -339,7 +339,7 @@ export default function AdminProfilePage() {
 								value={profile.bio}
 								onChange={(e) => set("bio")(e.target.value)}
 								placeholder={t("bioPlaceholder")}
-								className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/30 resize-none"
+								className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 resize-none"
 							/>
 						</div>
 						<Field
@@ -365,7 +365,7 @@ export default function AdminProfilePage() {
 						<button
 							type="button"
 							onClick={saveCeoSignature}
-							className="px-6 py-2.5 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all"
+							className="px-6 py-2.5 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-all"
 						>
 							{t("saveCeoSig")}
 						</button>
@@ -383,7 +383,7 @@ export default function AdminProfilePage() {
 						type="button"
 						onClick={handleSave}
 						disabled={saveMutation.isPending}
-						className="bg-[#FF5A30] text-white px-8 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:opacity-60"
+						className="bg-[#FF5A2E] text-white px-8 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-all disabled:opacity-60"
 					>
 						{saveMutation.isPending ? t("saving") : t("save")}
 					</button>

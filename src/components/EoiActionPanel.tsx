@@ -244,7 +244,7 @@ export default function EoiActionPanel({
 					<button
 						type="button"
 						onClick={() => startAction("create_stop")}
-						className="flex-1 py-2.5 bg-[#FF5A30]/10 text-[#FF5A30] rounded-xl text-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-[#FF5A30]/20 transition-colors"
+						className="flex-1 py-2.5 bg-[#FF5A2E]/10 text-[#FF5A2E] rounded-xl text-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-[#FF5A2E]/20 transition-colors"
 					>
 						<span className="material-symbols-outlined text-sm">add_location_alt</span>
 						{t("createStop")}
@@ -387,7 +387,7 @@ export default function EoiActionPanel({
 							value={notes}
 							onChange={(e) => setNotes(e.target.value)}
 							rows={3}
-							className="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-sm text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/40"
+							className="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-sm text-on-surface placeholder:text-on-surface-variant/60 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/40"
 							placeholder={
 								open === "revision" ? t("revisionNotesPlaceholder") : t("optionalNotesPlaceholder")
 							}
@@ -450,7 +450,7 @@ export default function EoiActionPanel({
 									type="text"
 									value={stopForm.venue}
 									onChange={(e) => setStopForm((f) => ({ ...f, venue: e.target.value }))}
-									className="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-sm focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/40"
+									className="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-sm focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/40"
 									placeholder={t("venuePlaceholder")}
 								/>
 							</div>
@@ -462,7 +462,7 @@ export default function EoiActionPanel({
 									type="text"
 									value={stopForm.city}
 									onChange={(e) => setStopForm((f) => ({ ...f, city: e.target.value }))}
-									className="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-sm focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/40"
+									className="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-sm focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/40"
 									placeholder={t("cityPlaceholder")}
 								/>
 							</div>
@@ -474,7 +474,7 @@ export default function EoiActionPanel({
 									type="text"
 									value={stopForm.country}
 									onChange={(e) => setStopForm((f) => ({ ...f, country: e.target.value }))}
-									className="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-sm focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/40"
+									className="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-sm focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/40"
 									placeholder={t("countryPlaceholder")}
 								/>
 							</div>
@@ -486,7 +486,7 @@ export default function EoiActionPanel({
 									type="date"
 									value={stopForm.date}
 									onChange={(e) => setStopForm((f) => ({ ...f, date: e.target.value }))}
-									className="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-sm focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/40"
+									className="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-sm focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/40"
 								/>
 							</div>
 							<div>
@@ -496,7 +496,7 @@ export default function EoiActionPanel({
 								<FormattedNumberInput
 									value={stopForm.feeUsd}
 									onChange={(v) => setStopForm((f) => ({ ...f, feeUsd: v }))}
-									className="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-sm focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/40"
+									className="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-sm focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/40"
 									placeholder="e.g. 25,000"
 								/>
 							</div>
@@ -507,7 +507,7 @@ export default function EoiActionPanel({
 								<FormattedNumberInput
 									value={stopForm.capacity}
 									onChange={(v) => setStopForm((f) => ({ ...f, capacity: v }))}
-									className="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-sm focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/40"
+									className="w-full px-3 py-2 rounded-lg border border-outline-variant bg-surface-container-lowest text-sm focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/40"
 									placeholder={t("capacityPlaceholder")}
 								/>
 							</div>
@@ -528,7 +528,7 @@ export default function EoiActionPanel({
 								type="button"
 								onClick={submitStop}
 								disabled={isPending}
-								className="px-4 py-2 rounded-lg text-sm font-semibold text-white bg-[#FF5A30] hover:opacity-90 disabled:opacity-60"
+								className="px-4 py-2 rounded-lg text-sm font-semibold text-white bg-[#FF5A2E] hover:opacity-90 disabled:opacity-60"
 							>
 								{isPending ? t("creating") : t("createStopConfirm")}
 							</button>

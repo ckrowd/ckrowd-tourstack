@@ -8,11 +8,15 @@ import {
 	getTranslations,
 	setRequestLocale,
 } from "next-intl/server";
+import { ThemeProvider } from "next-themes";
 import QueryProvider from "@/components/QueryProvider";
 import { routing } from "@/i18n/routing";
 
-const rubik = localFont({
-	src: "../../../public/fonts/rubik-variable.woff2",
+// Binds the --font-manrope variable — kept for the many existing
+// font-(family-name:--font-manrope) call sites, but now loads the same Inter
+// file as --font-inter, since the design system moved to a single typeface.
+const headingFont = localFont({
+	src: "../../../public/fonts/inter-variable.woff2",
 	variable: "--font-manrope",
 	display: "swap",
 	weight: "100 900",
@@ -131,11 +135,13 @@ export default async function RootLayout({
 	const messages = await getMessages();
 
 	return (
-		<html lang={locale} className={`${rubik.variable} ${inter.variable} ${materialSymbols.variable}`}>
+		<html lang={locale} className={`${headingFont.variable} ${inter.variable} ${materialSymbols.variable}`} suppressHydrationWarning>
 			<body className="min-h-full antialiased" suppressHydrationWarning>
-				<NextIntlClientProvider locale={locale} messages={messages}>
-					<QueryProvider>{children}</QueryProvider>
-				</NextIntlClientProvider>
+				<ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
+					<NextIntlClientProvider locale={locale} messages={messages}>
+						<QueryProvider>{children}</QueryProvider>
+					</NextIntlClientProvider>
+				</ThemeProvider>
 			</body>
 		</html>
 	);

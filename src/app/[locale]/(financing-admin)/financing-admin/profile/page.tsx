@@ -72,14 +72,14 @@ export default function FinancingAdminProfilePage() {
   }
 
   const inputClass =
-    "w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A30]/20";
+    "w-full rounded-xl border border-outline-variant/20 bg-surface-container-low px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20";
   const labelClass =
     "block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2";
 
   return (
     <>
       <div className="mb-8">
-        <span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+        <span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
           {t("badge")}
         </span>
         <h1 className="text-2xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -205,7 +205,7 @@ export default function FinancingAdminProfilePage() {
           type="button"
           onClick={() => saveMutation.mutate()}
           disabled={saveMutation.isPending}
-          className="px-8 py-3 bg-[#FF5A30] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:opacity-90 transition-all disabled:opacity-60"
+          className="px-8 py-3 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-all disabled:opacity-60"
         >
           {saveMutation.isPending ? t("saving") : t("save")}
         </button>

@@ -35,7 +35,7 @@ export default async function InsuranceAdminPage({ params }: Props) {
 			label: t("stats.activeApplications"),
 			value: eois.length,
 			icon: "description",
-			accent: "border-[#FF5A30]",
+			accent: "border-[#FF5A2E]",
 			href: "/insurance-admin/applications",
 		},
 		{
@@ -67,7 +67,7 @@ export default async function InsuranceAdminPage({ params }: Props) {
 		<>
 			<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 				<div>
-					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A30] block mb-2">
+					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
 						{t("badge")}
 					</span>
 					<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -108,7 +108,7 @@ export default async function InsuranceAdminPage({ params }: Props) {
 					</h3>
 					<Link
 						href="/insurance-admin/applications"
-						className="text-sm font-semibold text-[#FF5A30] hover:underline"
+						className="text-sm font-semibold text-[#FF5A2E] hover:underline"
 					>
 						{t("viewAll")}
 					</Link>

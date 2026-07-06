@@ -69,7 +69,7 @@ export default function SideNavClient({ navItems, startNewTourLabel }: Props) {
 							data-tour={item.tourAttr}
 							className={`flex items-center gap-3 px-4 py-3 rounded-xl mx-2 transition-all duration-200 font-(family-name:--font-manrope) font-semibold text-sm ${
 								isActive
-									? "bg-orange-50 text-[#FF5A30]"
+									? "bg-orange-50 text-[#FF5A2E]"
 									: "text-slate-600 hover:bg-slate-200/50 hover:translate-x-1"
 							}`}
 						>
@@ -85,7 +85,7 @@ export default function SideNavClient({ navItems, startNewTourLabel }: Props) {
 					<Link
 						href="/eoi"
 						data-tour="nav-cta"
-						className="block w-full py-4 bg-[#FF5A30] text-white rounded-xl font-(family-name:--font-manrope) font-semibold text-sm shadow-lg shadow-[#FF5A30]/20 hover:scale-[1.02] transition-transform active:scale-95 text-center"
+						className="block w-full py-4 bg-[#FF5A2E] text-white rounded-xl font-(family-name:--font-manrope) font-semibold text-sm shadow-lg shadow-[#FF5A2E]/20 hover:scale-[1.02] transition-transform active:scale-95 text-center"
 					>
 						{startNewTourLabel}
 					</Link>
