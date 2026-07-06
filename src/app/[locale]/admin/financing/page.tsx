@@ -5,6 +5,8 @@ import { useFormatter, useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { getAdminFinancing, updateFinancingApplication } from "@/app/actions";
 import Loader from "@/components/Loader";
+import Button from "@/components/ui/Button";
+import StatusBadge, { type StatusTone } from "@/components/ui/StatusBadge";
 
 type Application = NonNullable<
 	Awaited<ReturnType<typeof getAdminFinancing>>["data"]
@@ -22,32 +24,32 @@ const FILTERS = [
 	"disbursed",
 ] as const;
 
-function statusClass(status: string) {
+function statusToTone(status: string): StatusTone {
 	switch (status) {
 		case "approved":
-			return "bg-emerald-100 text-emerald-800";
+			return "approved";
 		case "rejected":
-			return "bg-red-100 text-red-800";
+			return "rejected";
 		case "under_review":
-			return "bg-blue-100 text-blue-800";
+			return "contacted";
 		case "disbursed":
-			return "bg-purple-100 text-purple-800";
+			return "booked";
 		default:
-			return "bg-yellow-100 text-yellow-800";
+			return "pending";
 	}
 }
 
-function tourStatusClass(status: string) {
+function tourStatusToTone(status: string): StatusTone {
 	switch (status) {
 		case "confirmed":
 		case "active":
-			return "bg-emerald-100 text-emerald-700";
+			return "approved";
 		case "under_review":
-			return "bg-blue-100 text-blue-700";
+			return "contacted";
 		case "cancelled":
-			return "bg-red-100 text-red-700";
+			return "rejected";
 		default:
-			return "bg-amber-100 text-amber-700";
+			return "pending";
 	}
 }
 
@@ -195,19 +197,16 @@ export default function AdminFinancingPage() {
 				<div className="flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
 					<div className="flex flex-wrap gap-2">
 						{FILTERS.map((key) => (
-							<button
+							<Button
 								key={key}
 								type="button"
+								variant={filter === key ? "primary" : "secondary"}
 								aria-pressed={filter === key}
 								onClick={() => setFilter(key)}
-								className={`px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-colors ${
-									filter === key
-										? "bg-[#FF5A2E] text-white"
-										: "bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high"
-								}`}
+								className="text-xs font-black uppercase tracking-wider"
 							>
 								{t(`filters.${key}`)}
-							</button>
+							</Button>
 						))}
 					</div>
 					<label className="relative">
@@ -288,24 +287,18 @@ export default function AdminFinancingPage() {
 														<span className="text-xs font-black text-[#FF5A2E] uppercase tracking-widest">
 															{`#${id.slice(-6).toUpperCase()}`}
 														</span>
-														<span
-															className={`px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-tighter ${statusClass(status)}`}
-														>
+														<StatusBadge tone={statusToTone(status)}>
 															{t(`status.${status}`)}
-														</span>
+														</StatusBadge>
 														{f.tour ? (
-															<span
-																className={`px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-tighter flex items-center gap-1 ${tourStatusClass(tourStatus)}`}
-															>
+															<StatusBadge tone={tourStatusToTone(tourStatus)}>
 																<span className="material-symbols-outlined text-[10px]">
 																	{canForward ? "check_circle" : "pending"}
 																</span>
 																{t(`tourStatus.${tourStatus || "unknown"}`)}
-															</span>
+															</StatusBadge>
 														) : (
-															<span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-slate-100 text-slate-600 uppercase tracking-tighter">
-																{t("noTour")}
-															</span>
+															<StatusBadge tone="neutral">{t("noTour")}</StatusBadge>
 														)}
 													</div>
 													<h3 className="font-(family-name:--font-manrope) font-semibold text-on-surface text-base">
@@ -531,15 +524,11 @@ export default function AdminFinancingPage() {
 										{reviewMutation.data?.error || t("reviewForm.error")}
 									</p>
 								)}
-								<button
-									type="submit"
-									disabled={reviewMutation.isPending}
-									className="w-full py-3 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-opacity disabled:opacity-60"
-								>
+								<Button type="submit" disabled={reviewMutation.isPending} className="w-full shadow-lg shadow-primary/20">
 									{reviewMutation.isPending
 										? t("reviewForm.saving")
 										: t("reviewForm.submit")}
-								</button>
+								</Button>
 							</form>
 						)}
 					</div>

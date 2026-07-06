@@ -5,15 +5,17 @@ import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import { getAdminClaims } from "@/app/actions";
 import Loader from "@/components/Loader";
+import Button from "@/components/ui/Button";
+import StatusBadge, { type StatusTone } from "@/components/ui/StatusBadge";
 
 const FILTERS = ["all", "open", "under_review", "settled", "rejected"] as const;
 type Filter = (typeof FILTERS)[number];
 
-function statusClass(status: string) {
-	if (status === "settled") return "bg-emerald-50 text-emerald-700";
-	if (status === "rejected") return "bg-red-50 text-red-700";
-	if (status === "under_review") return "bg-blue-50 text-blue-700";
-	return "bg-yellow-50 text-yellow-700";
+function statusToTone(status: string): StatusTone {
+	if (status === "settled") return "approved";
+	if (status === "rejected") return "rejected";
+	if (status === "under_review") return "contacted";
+	return "pending";
 }
 
 export default function AdminClaimsPage() {
@@ -44,18 +46,15 @@ export default function AdminClaimsPage() {
 
 			<div className="flex flex-wrap items-center gap-2 mb-6">
 				{FILTERS.map((f) => (
-					<button
+					<Button
 						key={f}
 						type="button"
+						variant={filter === f ? "primary" : "secondary"}
 						onClick={() => setFilter(f)}
-						className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-colors ${
-							filter === f
-								? "bg-[#FF5A2E] text-white"
-								: "bg-surface-container-high text-on-surface hover:bg-surface-container-highest"
-						}`}
+						className="text-xs"
 					>
 						{t(`filters.${f}`)}
-					</button>
+					</Button>
 				))}
 				<button
 					type="button"
@@ -121,9 +120,9 @@ export default function AdminClaimsPage() {
 												: "—"}
 										</td>
 										<td className="px-4 py-3">
-											<span className={`inline-flex px-2 py-0.5 rounded-full text-xs font-semibold ${statusClass(status)}`}>
+											<StatusBadge tone={statusToTone(status)}>
 												{status.replace(/_/g, " ")}
-											</span>
+											</StatusBadge>
 										</td>
 										<td className="px-4 py-3 text-on-surface-variant">{filedAt}</td>
 									</tr>
