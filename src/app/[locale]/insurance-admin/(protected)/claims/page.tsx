@@ -10,7 +10,9 @@ import {
 	getInsuranceClaims,
 	updateInsuranceClaim,
 } from "@/app/actions";
+import Button from "@/components/ui/Button";
 import FormattedNumberInput from "@/components/ui/FormattedNumberInput";
+import StatusBadge, { type StatusTone } from "@/components/ui/StatusBadge";
 
 const CLAIM_STATUSES = [
 	"open",
@@ -22,16 +24,16 @@ type ClaimStatus = (typeof CLAIM_STATUSES)[number];
 
 const FILTERS = ["all", ...CLAIM_STATUSES] as const;
 
-function statusClass(status: string) {
+function statusToTone(status: string): StatusTone {
 	switch (status) {
 		case "settled":
-			return "text-emerald-700 bg-emerald-50";
+			return "approved";
 		case "rejected":
-			return "text-red-700 bg-red-50";
+			return "rejected";
 		case "under_review":
-			return "text-blue-700 bg-blue-50";
+			return "contacted";
 		default:
-			return "text-yellow-600 bg-yellow-50";
+			return "pending";
 	}
 }
 
@@ -181,16 +183,16 @@ export default function InsuranceAdminClaimsPage() {
 						{t("description")}
 					</p>
 				</div>
-				<button
+				<Button
 					type="button"
 					onClick={() => setShowForm((v) => !v)}
-					className="flex items-center gap-2 px-4 py-2.5 bg-[#FF5A2E] text-white rounded-xl text-sm font-semibold shadow-lg shadow-[#FF5A2E]/20 hover:scale-[1.02] transition-transform active:scale-95 shrink-0"
+					className="shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-95 shrink-0"
 				>
 					<span className="material-symbols-outlined text-base">
 						{showForm ? "close" : "add"}
 					</span>
 					{showForm ? t("newClaim.cancel") : t("newClaim.title")}
-				</button>
+				</Button>
 			</div>
 
 			{showForm && (
@@ -284,15 +286,11 @@ export default function InsuranceAdminClaimsPage() {
 										</p>
 									)}
 								</div>
-								<button
-									type="submit"
-									disabled={createMutation.isPending}
-									className="px-5 py-2.5 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-60"
-								>
+								<Button type="submit" disabled={createMutation.isPending}>
 									{createMutation.isPending
 										? t("newClaim.submitting")
 										: t("newClaim.submit")}
-								</button>
+								</Button>
 							</div>
 						</>
 					)}
@@ -301,19 +299,16 @@ export default function InsuranceAdminClaimsPage() {
 
 			<div className="flex flex-wrap gap-2 mb-6">
 				{FILTERS.map((key) => (
-					<button
+					<Button
 						key={key}
 						type="button"
+						variant={filter === key ? "primary" : "secondary"}
 						aria-pressed={filter === key}
 						onClick={() => setFilter(key)}
-						className={`px-4 py-2 rounded-xl text-xs font-black uppercase tracking-wider transition-colors ${
-							filter === key
-								? "bg-[#FF5A2E] text-white"
-								: "bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high"
-						}`}
+						className="text-xs font-black uppercase tracking-wider"
 					>
 						{t(`filters.${key}`)}
-					</button>
+					</Button>
 				))}
 			</div>
 
@@ -391,11 +386,9 @@ export default function InsuranceAdminClaimsPage() {
 											</p>
 										</div>
 										<div className="flex flex-col items-end gap-2 shrink-0">
-											<span
-												className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter ${statusClass(status)}`}
-											>
+											<StatusBadge tone={statusToTone(status)}>
 												{t(`status.${status}`)}
-											</span>
+											</StatusBadge>
 											<button
 												type="button"
 												onClick={() => toggleReview(claim)}
@@ -479,15 +472,11 @@ export default function InsuranceAdminClaimsPage() {
 														</p>
 													)}
 												</div>
-												<button
-													type="submit"
-													disabled={reviewMutation.isPending}
-													className="px-5 py-2.5 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm hover:opacity-90 transition-opacity disabled:opacity-60"
-												>
+												<Button type="submit" disabled={reviewMutation.isPending}>
 													{reviewMutation.isPending
 														? t("review.saving")
 														: t("review.save")}
-												</button>
+												</Button>
 											</div>
 										</form>
 									)}

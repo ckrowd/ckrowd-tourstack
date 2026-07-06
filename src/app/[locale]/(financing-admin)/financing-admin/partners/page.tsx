@@ -5,7 +5,9 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { createFinancingPartner, getAdminFinancingPartners } from "@/app/actions";
 import Loader from "@/components/Loader";
+import Button from "@/components/ui/Button";
 import FormattedNumberInput from "@/components/ui/FormattedNumberInput";
+import StatusBadge, { type StatusTone } from "@/components/ui/StatusBadge";
 
 const PARTNER_TYPES = ["bank", "insurance", "credit_union"] as const;
 type PartnerType = (typeof PARTNER_TYPES)[number];
@@ -16,14 +18,14 @@ const TYPE_ICON: Record<string, string> = {
 	credit_union: "groups",
 };
 
-function statusClass(status: string) {
+function statusToTone(status: string): StatusTone {
 	switch (status) {
 		case "active":
-			return "bg-emerald-100 text-emerald-800";
+			return "approved";
 		case "review":
-			return "bg-blue-100 text-blue-800";
+			return "contacted";
 		default:
-			return "bg-yellow-100 text-yellow-800";
+			return "pending";
 	}
 }
 
@@ -185,11 +187,9 @@ export default function FinancingAdminPartnersPage() {
 													<p className="font-(family-name:--font-manrope) font-semibold text-on-surface">
 														{String(partner.name ?? "—")}
 													</p>
-													<span
-														className={`px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-tighter ${statusClass(status)}`}
-													>
+													<StatusBadge tone={statusToTone(status)}>
 														{t(`status.${status}`)}
-													</span>
+													</StatusBadge>
 												</div>
 												<p className="text-sm text-on-surface-variant mt-1">
 													{t(`types.${partnerType}`)}
@@ -291,15 +291,11 @@ export default function FinancingAdminPartnersPage() {
 									{createMutation.data?.error || t("partnerForm.error")}
 								</p>
 							)}
-							<button
-								type="submit"
-								disabled={createMutation.isPending}
-								className="w-full py-3 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-opacity disabled:opacity-60"
-							>
+							<Button type="submit" disabled={createMutation.isPending} className="w-full shadow-lg shadow-primary/20">
 								{createMutation.isPending
 									? t("partnerForm.saving")
 									: t("partnerForm.submit")}
-							</button>
+							</Button>
 						</div>
 					</form>
 

@@ -10,6 +10,7 @@ import {
 } from "@/app/actions";
 import EoiPdfViewer from "@/components/EoiPdfViewer";
 import Loader from "@/components/Loader";
+import Button from "@/components/ui/Button";
 
 interface AdminProfile {
 	orgName: string;
@@ -288,13 +289,9 @@ export default function InsuranceAdminApplicationsPage() {
 											>
 												{t("review.reject")}
 											</button>
-											<button
-												type="submit"
-												disabled={reviewMutation.isPending}
-												className="px-6 py-2.5 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-opacity disabled:opacity-60"
-											>
+											<Button type="submit" disabled={reviewMutation.isPending} className="shadow-lg shadow-primary/20">
 												{reviewMutation.isPending ? t("review.saving") : t("review.save")}
-											</button>
+											</Button>
 										</div>
 										</div>
 									</form>

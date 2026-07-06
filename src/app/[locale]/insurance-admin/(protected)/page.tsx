@@ -1,17 +1,18 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getInsuranceEois, getInsuranceClaims } from "@/app/actions";
+import StatusBadge, { type StatusTone } from "@/components/ui/StatusBadge";
 import { Link } from "@/i18n/routing";
 
 type Props = {
 	params: Promise<{ locale: string }>;
 };
 
-function statusClass(status: string) {
+function insuranceStatusToTone(status: string): StatusTone {
 	switch (status) {
 		case "disbursed":
-			return "bg-emerald-100 text-emerald-700";
+			return "approved";
 		default:
-			return "bg-yellow-100 text-yellow-700";
+			return "pending";
 	}
 }
 
@@ -161,11 +162,9 @@ export default async function InsuranceAdminPage({ params }: Props) {
 											{eoi.city != null ? ` · ${String(eoi.city)}` : ""}
 										</p>
 									</div>
-									<span
-										className={`shrink-0 px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-tighter ${statusClass(insuranceStatus)}`}
-									>
+									<StatusBadge tone={insuranceStatusToTone(insuranceStatus)} className="shrink-0">
 										{t(`status.${insuranceStatus}`)}
-									</span>
+									</StatusBadge>
 								</div>
 							);
 						})
