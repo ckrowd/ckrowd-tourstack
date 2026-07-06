@@ -13,6 +13,13 @@
 	--hair: rgba(255, 255, 255, 0.1);
 	--border: rgba(255, 255, 255, 0.07);
 
+	/* Re-bind the Tailwind ink/muted tokens to the themed vars *on this element*
+	   so text-ink / text-muted follow the light/dark toggle. Defining them in
+	   @theme (at :root) collapses to the fallback because --text is only set
+	   here on .tslp, leaving text-ink stuck white (invisible in light mode). */
+	--color-ink: var(--text);
+	--color-muted: var(--muted);
+
 	--ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 	--ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 
