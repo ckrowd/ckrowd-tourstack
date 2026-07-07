@@ -788,7 +788,7 @@
         },
         "insuranceSection": "Event Insurance",
         "insuranceCompulsoryTitle": "Insurance is compulsory for this tour",
-        "insuranceCompulsoryText": "TourStack has partnered with Sanlam Allianz to provide event insurance. Taking cover through this partnership is a condition of accessing TourStack financing and running this tour — select the products that apply below.",
+        "insuranceCompulsoryText": "TourStack has partnered with Insurance Partner to provide event insurance. Taking cover through this partnership is a condition of accessing TourStack financing and running this tour — select the products that apply below.",
         "insuranceProducts": {
           "label": "Insurance Products",
           "eventCancellation": "Event Cancellation",
@@ -823,7 +823,7 @@
           "label": "Additional Notes (optional)",
           "placeholder": "Any other information relevant to your application..."
         },
-        "declarationText": "By submitting this Expression of Interest, I confirm that all information provided is accurate and complete, and I acknowledge that event insurance — provided through TourStack's partnership with Sanlam Allianz — is compulsory and a condition of accessing TourStack financing and running this tour. I authorise Ckrowd to use this information to assess financing and insurance requirements for this tour.",
+        "declarationText": "By submitting this Expression of Interest, I confirm that all information provided is accurate and complete, and I acknowledge that event insurance — provided through TourStack's partnership with Insurance Partner — is compulsory and a condition of accessing TourStack financing and running this tour. I authorise Ckrowd to use this information to assess financing and insurance requirements for this tour.",
         "declarationAgree": "I have read and agree to the declaration above.",
         "reviewSection": "Application Summary"
       }
@@ -1444,7 +1444,7 @@
       },
       "insurance": {
         "title": "Insurance Included",
-        "body": "Tier 2+ crew receive group insurance coverage via SanlamAllianz."
+        "body": "Tier 2+ crew receive group insurance coverage via Insurance Partner."
       }
     },
     "success": {
@@ -1490,8 +1490,8 @@
         "range": "51 – 70",
         "perks": {
           "local": "Single-city tour deployment eligibility",
-          "payment": "Access Bank payment onboarding & day rate locked",
-          "insurance": "Group insurance coverage via SanlamAllianz"
+          "payment": "Banking Partner payment onboarding & day rate locked",
+          "insurance": "Group insurance coverage via Insurance Partner"
         },
         "aya": "Eligible as local crew (per city)"
       },
@@ -1652,7 +1652,7 @@
       "description": "Used for financing disbursements and payment processing. All data is stored securely.",
       "fields": {
         "bankName": "Bank Name",
-        "bankNamePlaceholder": "e.g. Access Bank",
+        "bankNamePlaceholder": "e.g. Your Bank Name",
         "bankAccountHolder": "Account Holder Name",
         "bankAccountHolderPlaceholder": "e.g. Ckrowd Music Ltd",
         "bankAccountNumber": "Account Number / IBAN",
@@ -2087,8 +2087,8 @@
         "range": "51 – 70",
         "perks": {
           "local": "Single-city tour deployment eligibility",
-          "payment": "Access Bank payment onboarding & day rate locked",
-          "insurance": "Group insurance coverage via SanlamAllianz"
+          "payment": "Banking Partner payment onboarding & day rate locked",
+          "insurance": "Group insurance coverage via Insurance Partner"
         },
         "aya": "Eligible as local crew (per city)"
       },
@@ -2250,7 +2250,7 @@
     "hub": "TourStack · Insurance Hub",
     "hero": {
       "title": "Insurance for <spanHighlight>Every Role.</spanHighlight><br></br>Built Into the Pipeline.",
-      "description": "SanlamAllianz-powered coverage embedded in the CTaaS certification pipeline — activating automatically as you onboard.",
+      "description": "Insurance Partner-powered coverage embedded in the CTaaS certification pipeline — activating automatically as you onboard.",
       "startOnboarding": "Start Onboarding",
       "viewProducts": "View Products"
     },
@@ -2268,7 +2268,7 @@
     },
     "stats": {
       "portfolio": "Insurable Portfolio",
-      "markets": "SanlamAllianz Markets",
+      "markets": "Partner Markets",
       "lines": "Coverage Lines",
       "roles": "Certified Roles",
       "values": {
@@ -2304,11 +2304,11 @@
       "partners": "Insurance Partners",
       "partnersList": [
         {
-          "name": "SanlamAllianz Nigeria",
+          "name": "Insurance Partner (TBC)",
           "sub": "Pan-Africa · All Insurance Lines"
         },
         {
-          "name": "Access Bank Plc",
+          "name": "Banking Partner (TBC)",
           "sub": "Pan-Africa · Tour Finance Facility"
         },
         {
@@ -2319,11 +2319,11 @@
       "step": "Step {current} of {total}",
       "activates": {
         "title": "Insurance Activates at This Step",
-        "description": "SanlamAllianz coverage activates automatically upon certification completion. No separate application required."
+        "description": "Insurance Partner coverage activates automatically upon certification completion. No separate application required."
       },
       "finance": {
         "title": "Finance Products Unlocked",
-        "description": "Tour finance facilities are now available via Access Bank. Apply directly through the Financing tab."
+        "description": "Tour finance facilities are now available via Banking Partner. Apply directly through the Financing tab."
       },
       "actions": {
         "previous": "Previous",
@@ -2340,7 +2340,7 @@
         "description": "Pan-African insurance leader. 27 markets. All product lines underwritten and managed in-partnership with Ckrowd.",
         "portfolio": "Insurable Portfolio",
         "scale": "at 5-year scale",
-        "brand": "SanlamAllianz",
+        "brand": "Insurance Partner (TBC)",
         "portfolioValue": "$600M"
       }
     },
@@ -2378,11 +2378,11 @@
         },
         {
           "q": "What happens if the event is cancelled?",
-          "a": "Promoter-initiated cancellation triggers the Event Cancellation policy. Claims are processed within 30 days via SanlamAllianz."
+          "a": "Promoter-initiated cancellation triggers the Event Cancellation policy. Claims are processed within 30 days via Insurance Partner."
         },
         {
           "q": "Is a bank account in Africa required?",
-          "a": "Yes. Funds and insurance premiums are routed via Access Bank. The enterprise account is opened as part of the onboarding pipeline."
+          "a": "Yes. Funds and insurance premiums are routed via Banking Partner. The enterprise account is opened as part of the onboarding pipeline."
         }
       ]
     },
@@ -2407,16 +2407,16 @@
             "detail": "Complete CTaaS LMS certification. Pass the Promoter module to unlock certified partner status."
           },
           {
-            "label": "Access Bank Onboarding",
-            "detail": "Open an Enterprise Account via the Ckrowd partnership with Access Bank. Required for insurance and finance activation."
+            "label": "Banking Partner Onboarding",
+            "detail": "Open an Enterprise Account via the Ckrowd partnership with Banking Partner. Required for insurance and finance activation."
           },
           {
             "label": "Insurance Activation",
-            "detail": "SanlamAllianz Business Insurance activates upon certification completion. Coverage includes event cancellation, liability, and credit guarantee."
+            "detail": "Insurance Partner Business Insurance activates upon certification completion. Coverage includes event cancellation, liability, and credit guarantee."
           },
           {
             "label": "Finance Eligibility",
-            "detail": "Certified Access Bank account becomes Paymaster-eligible. Tour Stop Advance and Venue Build-Out Credit unlocked."
+            "detail": "Certified Banking Partner account becomes Paymaster-eligible. Tour Stop Advance and Venue Build-Out Credit unlocked."
           }
         ],
         "coverage": [
@@ -2437,7 +2437,7 @@
           {
             "product": "Credit Guarantee Insurance",
             "type": "HIGHEST VALUE",
-            "desc": "Underwrites Tour Stop Advance lending facility. Enables Access Bank lending.",
+            "desc": "Underwrites Tour Stop Advance lending facility. Enables Banking Partner lending.",
             "premium": "0.8–1.2%",
             "term": "Per Facility"
           },
@@ -2488,7 +2488,7 @@
           },
           {
             "label": "Group Insurance Activation",
-            "detail": "Personal accident, employer liability, and contractor coverage activated via SanlamAllianz group policy."
+            "detail": "Personal accident, employer liability, and contractor coverage activated via Insurance Partner group policy."
           },
           {
             "label": "Cross-Border Deployment",
@@ -2551,7 +2551,7 @@
           },
           {
             "label": "Insurance Profile Creation",
-            "detail": "SME business insurance bundle activated via SanlamAllianz. Covers equipment, cargo, and business interruption."
+            "detail": "SME business insurance bundle activated via Insurance Partner. Covers equipment, cargo, and business interruption."
           },
           {
             "label": "Finance Access",
@@ -2669,11 +2669,11 @@
       },
       {
         "label": "Bank Onboarding",
-        "desc": "Access Bank enterprise account opened via Ckrowd partnership."
+        "desc": "Banking Partner enterprise account opened via Ckrowd partnership."
       },
       {
         "label": "Insurance Activation",
-        "desc": "SanlamAllianz product suite activates automatically."
+        "desc": "Insurance Partner product suite activates automatically."
       },
       {
         "label": "Finance Eligibility",
@@ -5198,7 +5198,7 @@
       },
       "step4": {
         "startDate": "Coverage Start Date",
-        "terms": "I agree to the SanlamAllianz terms of service and authorize automatic premium deduction from my enterprise account."
+        "terms": "I agree to the Insurance Partner terms of service and authorize automatic premium deduction from my enterprise account."
       },
       "step5": {
         "acknowledgement": "I acknowledge that Tour Finance facilities are unlocked and agree to submit event budgets for underwriting."
@@ -5283,7 +5283,7 @@
       },
       "step5": {
         "bankName": "Agency Bank Name",
-        "bankNamePlaceholder": "e.g. Access Bank",
+        "bankNamePlaceholder": "e.g. Your Bank Name",
         "accountNumber": "Account Number",
         "accountNumberPlaceholder": "10 digits",
         "routingCode": "Routing/Sort Code",
@@ -6118,7 +6118,7 @@
     },
     "fields": {
       "orgName": "Organization / Bank Name",
-      "orgNamePlaceholder": "e.g. Access Bank Plc",
+      "orgNamePlaceholder": "e.g. Your Organization Name",
       "contactPerson": "Contact Person",
       "contactPersonPlaceholder": "Full name",
       "role": "Role / Title",

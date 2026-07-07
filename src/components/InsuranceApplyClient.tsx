@@ -186,10 +186,9 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 				<p className="text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant mb-3">
 					{t("partnersLabel")}
 				</p>
+				{/* Partner name/logo withheld until confirmation is received */}
 				<div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-outline-variant/15 bg-surface-container-lowest w-fit">
-					{/* eslint-disable-next-line @next/next/no-img-element */}
-					<img src="/sanlam-allianz.png" alt="Sanlam Allianz" className="h-7 w-auto object-contain" />
-					<span className="text-xs font-semibold text-on-surface">Sanlam Allianz</span>
+					<span className="text-xs font-semibold text-on-surface">Insurance Partner</span>
 				</div>
 			</div>
 

@@ -195,7 +195,7 @@ function buildNotes(form: EOIForm, artist: ArtistItem): string {
 
 	const riskLines = [`Cancellation History: ${form.hasCancellationHistory ? "Yes" : "No"}`];
 	if (form.securityPlan) riskLines.push(`Security Plan: ${form.securityPlan}`);
-	riskLines.push("Insurance Partner: Sanlam Allianz (compulsory)");
+	riskLines.push("Insurance Partner: TBC (compulsory)");
 	for (const sel of form.insuranceSelections) {
 		riskLines.push(`${sel.product}: $${sel.sumInsured || "0"} sum insured`);
 	}
