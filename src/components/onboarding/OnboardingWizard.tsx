@@ -118,11 +118,11 @@ export default function OnboardingWizard() {
 										} ${i > step ? "cursor-default" : "cursor-pointer"}`}
 									>
 										<span
-											className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[13px] font-semibold transition-colors ${
+											className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-[13px] font-semibold transition-all duration-300 ${
 												done
-													? "bg-orange text-white"
+													? "bg-gradient-to-br from-orange to-ember text-white shadow-md shadow-orange/30"
 													: active
-														? "border-2 border-orange text-orange"
+														? "border-2 border-orange text-orange ring-4 ring-orange/15"
 														: "border border-[var(--hair)] text-[var(--muted)]"
 											}`}
 										>
@@ -163,7 +163,9 @@ export default function OnboardingWizard() {
 			</aside>
 
 			{/* Content */}
-			<div className="flex flex-col min-h-[100dvh] lg:min-h-0">
+			<div className="relative flex flex-col min-h-[100dvh] lg:min-h-0 overflow-hidden">
+				<div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 h-[30rem] w-[46rem] rounded-full bg-orange/[0.07] blur-[140px]" />
+				<div className="pointer-events-none absolute bottom-0 right-0 h-[24rem] w-[24rem] rounded-full bg-orange/[0.04] blur-[130px]" />
 				{/* Mobile top bar */}
 				<div className="lg:hidden px-5 pt-6 pb-4">
 					<div className="flex items-center justify-between mb-4">
@@ -191,10 +193,10 @@ export default function OnboardingWizard() {
 				<main className="flex-1 flex flex-col px-5 sm:px-8 md:px-14 py-8 md:py-14">
 					<div key={current} className="funnel-step-in flex-1 w-full max-w-2xl mx-auto text-center">
 						{/* Step header */}
-						<h1 className="font-(family-name:--font-display) text-3xl md:text-4xl leading-[1.1] tracking-tight">
+						<h1 className="font-(family-name:--font-display) text-[2rem] md:text-[2.75rem] leading-[1.05] tracking-tight">
 							{t(`${current}.title`)}
 						</h1>
-						<p className="mt-3 text-[var(--muted)] text-sm md:text-base max-w-xl mx-auto">
+						<p className="mt-4 text-[var(--muted)] text-sm md:text-base max-w-xl mx-auto leading-relaxed">
 							{t(`${current}.subtitle`)}
 						</p>
 
@@ -209,15 +211,17 @@ export default function OnboardingWizard() {
 											type="button"
 											onClick={() => setRole(r.id)}
 											aria-pressed={selected}
-											className={`group relative flex flex-col items-start gap-3 rounded-2xl border p-5 text-left transition-all duration-200 ${
+											className={`group relative flex flex-col items-start gap-3.5 rounded-2xl border p-5 text-left transition-all duration-300 hover:-translate-y-0.5 ${
 												selected
-													? "border-orange bg-orange/[0.08]"
-													: "border-[var(--hair)] bg-[var(--surface)] hover:border-[var(--muted)] hover:bg-[var(--surface-2)]"
+													? "border-orange bg-orange/[0.07] ring-1 ring-orange/40 shadow-[0_16px_50px_-12px_rgba(255,90,48,0.35)]"
+													: "border-[var(--hair)] bg-[var(--surface)] hover:border-[var(--muted)] hover:shadow-[0_16px_50px_-12px_rgba(0,0,0,0.35)]"
 											}`}
 										>
 											<span
-												className={`flex h-11 w-11 items-center justify-center rounded-xl transition-colors ${
-													selected ? "bg-orange text-white" : "bg-[var(--surface-2)] text-[var(--text)]"
+												className={`flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-300 ${
+													selected
+														? "bg-gradient-to-br from-orange to-ember text-white shadow-lg shadow-orange/30"
+														: "bg-[var(--surface-2)] text-[var(--muted)] group-hover:text-[var(--text)]"
 												}`}
 											>
 												<span className="material-symbols-outlined">
@@ -314,15 +318,17 @@ export default function OnboardingWizard() {
 												type="button"
 												onClick={() => togglePriority(o.id)}
 												aria-pressed={selected}
-												className={`flex items-center gap-3 rounded-xl border px-4 py-3.5 text-left transition-all duration-200 ${
+												className={`group flex items-center gap-3 rounded-xl border px-4 py-3.5 text-left transition-all duration-300 hover:-translate-y-0.5 ${
 													selected
-														? "border-orange bg-orange/[0.08]"
+														? "border-orange bg-orange/[0.07] ring-1 ring-orange/40 shadow-[0_12px_36px_-12px_rgba(255,90,48,0.3)]"
 														: "border-[var(--hair)] bg-[var(--surface)] hover:border-[var(--muted)]"
 												}`}
 											>
 												<span
-													className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md border transition-colors ${
-														selected ? "border-orange bg-orange" : "border-[var(--muted)]"
+													className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md border transition-all duration-300 ${
+														selected
+															? "border-transparent bg-gradient-to-br from-orange to-ember shadow-sm shadow-orange/40"
+															: "border-[var(--muted)] group-hover:border-[var(--text)]"
 													}`}
 												>
 													{selected && (
@@ -430,10 +436,12 @@ export default function OnboardingWizard() {
 							type="button"
 							onClick={goNext}
 							disabled={!canContinue}
-							className="inline-flex items-center gap-2 rounded-xl bg-orange px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-orange/25 transition-all hover:bg-ember active:scale-[0.98] disabled:opacity-40 disabled:pointer-events-none"
+							className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-orange to-ember px-7 py-3 text-sm font-semibold text-white shadow-lg shadow-orange/30 transition-all hover:-translate-y-0.5 hover:shadow-xl hover:shadow-orange/40 active:scale-[0.98] disabled:opacity-40 disabled:pointer-events-none disabled:translate-y-0 disabled:shadow-none"
 						>
 							{step === total - 1 ? t("review.cta") : t("continue")}
-							<span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+							<span className="material-symbols-outlined text-[18px] transition-transform group-hover:translate-x-0.5">
+								arrow_forward
+							</span>
 						</button>
 					</div>
 				</main>
