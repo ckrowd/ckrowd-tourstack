@@ -16,10 +16,10 @@ const CATEGORY_LABELS: Record<SearchResult["category"], string> = {
 };
 
 const CATEGORY_COLORS: Record<SearchResult["category"], string> = {
-	tour: "bg-orange-50 text-[#FF5A2E]",
-	eoi: "bg-blue-50 text-blue-700",
-	financing: "bg-emerald-50 text-emerald-700",
-	venue: "bg-purple-50 text-purple-700",
+	tour: "bg-primary/10 text-primary",
+	eoi: "bg-status-contacted/10 text-status-contacted",
+	financing: "bg-status-approved/10 text-status-approved",
+	venue: "bg-status-booked/10 text-status-booked",
 };
 
 function SearchModal({ onClose }: { onClose: () => void }) {
@@ -103,11 +103,11 @@ function SearchModal({ onClose }: { onClose: () => void }) {
 			/>
 
 			{/* Card */}
-			<div className="relative z-10 w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[80vh]">
+			<div className="relative z-10 w-full max-w-2xl bg-surface-container-lowest rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[80vh]">
 				{/* Input row */}
-				<div className="flex items-center gap-3 px-4 py-4 border-b border-slate-100">
+				<div className="flex items-center gap-3 px-4 py-4 border-b border-outline-variant/20">
 					<span
-						className={`material-symbols-outlined text-xl transition-colors ${isFetching ? "text-[#FF5A2E]" : "text-slate-400"}`}
+						className={`material-symbols-outlined text-xl transition-colors ${isFetching ? "text-primary" : "text-on-surface-variant"}`}
 					>
 						{isFetching ? "progress_activity" : "search"}
 					</span>
@@ -118,7 +118,7 @@ function SearchModal({ onClose }: { onClose: () => void }) {
 						onChange={(e) => setTerm(e.target.value)}
 						onKeyDown={onKeyDown}
 						placeholder={t("placeholder")}
-						className="flex-1 text-base text-slate-900 placeholder:text-slate-400 outline-none bg-transparent"
+						className="flex-1 text-base text-on-surface placeholder:text-on-surface-variant outline-none bg-transparent"
 						aria-label={t("placeholder")}
 						autoComplete="off"
 					/>
@@ -126,14 +126,14 @@ function SearchModal({ onClose }: { onClose: () => void }) {
 						<button
 							type="button"
 							onClick={() => setTerm("")}
-							className="text-slate-400 hover:text-slate-600 transition-colors"
+							className="text-on-surface-variant hover:text-on-surface transition-colors"
 							aria-label={t("clear")}
 						>
 							<span className="material-symbols-outlined text-lg">close</span>
 						</button>
 					)}
 					<kbd
-						className="hidden sm:inline-flex items-center px-2 py-0.5 rounded border border-slate-200 text-[11px] font-mono text-slate-500 cursor-pointer hover:bg-slate-50"
+						className="hidden sm:inline-flex items-center px-2 py-0.5 rounded border border-outline-variant/30 text-[11px] font-mono text-on-surface-variant cursor-pointer hover:bg-surface-container-low"
 						onClick={onClose}
 					>
 						Esc
@@ -143,7 +143,7 @@ function SearchModal({ onClose }: { onClose: () => void }) {
 				{/* Results */}
 				<div ref={listRef} className="overflow-y-auto flex-1">
 					{showHint && (
-						<div className="flex flex-col items-center justify-center py-14 gap-3 text-slate-400">
+						<div className="flex flex-col items-center justify-center py-14 gap-3 text-on-surface-variant">
 							<span className="material-symbols-outlined text-4xl">manage_search</span>
 							<p className="text-sm font-medium">{t("typeToSearch")}</p>
 							<p className="text-xs">{t("hint")}</p>
@@ -151,7 +151,7 @@ function SearchModal({ onClose }: { onClose: () => void }) {
 					)}
 
 					{showEmpty && (
-						<div className="flex flex-col items-center justify-center py-14 gap-3 text-slate-400">
+						<div className="flex flex-col items-center justify-center py-14 gap-3 text-on-surface-variant">
 							<span className="material-symbols-outlined text-4xl">search_off</span>
 							<p className="text-sm font-medium">{t("noResults", { term: debouncedTerm })}</p>
 						</div>
@@ -159,7 +159,7 @@ function SearchModal({ onClose }: { onClose: () => void }) {
 
 					{Object.entries(grouped).map(([category, items]) => (
 						<div key={category}>
-							<p className="px-4 pt-4 pb-1 text-[10px] font-black uppercase tracking-widest text-slate-400">
+							<p className="px-4 pt-4 pb-1 text-[10px] font-black uppercase tracking-widest text-on-surface-variant">
 								{CATEGORY_LABELS[category as SearchResult["category"]]}
 							</p>
 							{items.map((result) => {
@@ -171,7 +171,7 @@ function SearchModal({ onClose }: { onClose: () => void }) {
 										href={result.href as `/${string}`}
 										onClick={onClose}
 										onMouseEnter={() => setActiveIdx(idx)}
-										className={`flex items-center gap-3 px-4 py-3 transition-colors ${isActive ? "bg-slate-50" : "hover:bg-slate-50"}`}
+										className={`flex items-center gap-3 px-4 py-3 transition-colors ${isActive ? "bg-surface-container-low" : "hover:bg-surface-container-low"}`}
 									>
 										<span
 											className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 ${CATEGORY_COLORS[result.category as SearchResult["category"]]}`}
@@ -181,11 +181,11 @@ function SearchModal({ onClose }: { onClose: () => void }) {
 											</span>
 										</span>
 										<div className="min-w-0 flex-1">
-											<p className="text-sm font-semibold text-slate-900 truncate">
+											<p className="text-sm font-semibold text-on-surface truncate">
 												{result.title}
 											</p>
 											{result.subtitle && (
-												<p className="text-xs text-slate-500 truncate">
+												<p className="text-xs text-on-surface-variant truncate">
 													{result.subtitle}
 												</p>
 											)}
@@ -203,17 +203,17 @@ function SearchModal({ onClose }: { onClose: () => void }) {
 				</div>
 
 				{/* Footer */}
-				<div className="border-t border-slate-100 px-4 py-2.5 flex items-center gap-4 text-[11px] text-slate-400">
+				<div className="border-t border-outline-variant/20 px-4 py-2.5 flex items-center gap-4 text-[11px] text-on-surface-variant">
 					<span className="flex items-center gap-1">
-						<kbd className="px-1.5 py-0.5 rounded border border-slate-200 font-mono">↑↓</kbd>
+						<kbd className="px-1.5 py-0.5 rounded border border-outline-variant/30 font-mono">↑↓</kbd>
 						{t("keyNavigate")}
 					</span>
 					<span className="flex items-center gap-1">
-						<kbd className="px-1.5 py-0.5 rounded border border-slate-200 font-mono">↵</kbd>
+						<kbd className="px-1.5 py-0.5 rounded border border-outline-variant/30 font-mono">↵</kbd>
 						{t("keySelect")}
 					</span>
 					<span className="flex items-center gap-1">
-						<kbd className="px-1.5 py-0.5 rounded border border-slate-200 font-mono">Esc</kbd>
+						<kbd className="px-1.5 py-0.5 rounded border border-outline-variant/30 font-mono">Esc</kbd>
 						{t("keyClose")}
 					</span>
 				</div>
@@ -244,11 +244,11 @@ export default function GlobalSearch() {
 				type="button"
 				onClick={() => setOpen(true)}
 				aria-label={t("openSearch")}
-				className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50/80 hover:bg-slate-100 transition-colors text-sm text-slate-400 min-w-52"
+				className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl border border-outline-variant/30 bg-surface-container-low/80 hover:bg-surface-container transition-colors text-sm text-on-surface-variant min-w-52"
 			>
 				<span className="material-symbols-outlined text-base leading-none">search</span>
 				<span className="flex-1 text-left text-[13px]">{t("placeholder")}</span>
-				<kbd className="flex items-center gap-0.5 text-[10px] font-mono border border-slate-300 rounded px-1 py-0.5 text-slate-400">
+				<kbd className="flex items-center gap-0.5 text-[10px] font-mono border border-outline-variant/40 rounded px-1 py-0.5 text-on-surface-variant">
 					<span>⌘</span>K
 				</kbd>
 			</button>
@@ -258,9 +258,9 @@ export default function GlobalSearch() {
 				type="button"
 				onClick={() => setOpen(true)}
 				aria-label={t("openSearch")}
-				className="lg:hidden p-2 hover:bg-slate-50/50 rounded-lg transition-all active:scale-95"
+				className="lg:hidden p-2 hover:bg-surface-container-low rounded-lg transition-all active:scale-95"
 			>
-				<span className="material-symbols-outlined text-[#494455]">search</span>
+				<span className="material-symbols-outlined text-on-surface-variant">search</span>
 			</button>
 
 			{open && createPortal(

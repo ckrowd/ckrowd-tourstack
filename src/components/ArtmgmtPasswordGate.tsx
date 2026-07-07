@@ -51,28 +51,28 @@ export default function ArtmgmtPasswordGate({
 	if (!forcePasswordChange || done) return <>{children}</>;
 
 	const inputCls =
-		"w-full px-3 py-2.5 text-sm rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/40 placeholder:text-slate-400";
+		"w-full px-3 py-2.5 text-sm rounded-xl border border-outline-variant/30 bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-primary/40 placeholder:text-on-surface-variant";
 
 	return (
 		<div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-			<div className="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 overflow-hidden">
-				<div className="h-1.5 w-full bg-[#FF5A2E]" />
+			<div className="bg-surface-container-lowest rounded-2xl shadow-2xl w-full max-w-md mx-4 overflow-hidden">
+				<div className="h-1.5 w-full bg-primary" />
 				<div className="p-8">
 					<div className="flex items-center gap-3 mb-6">
-						<span className="material-symbols-outlined text-[#FF5A2E] text-3xl">
+						<span className="material-symbols-outlined text-primary text-3xl">
 							lock_reset
 						</span>
 						<div>
-							<h2 className="font-(family-name:--font-manrope) text-xl font-black text-slate-900">
+							<h2 className="font-(family-name:--font-manrope) text-xl font-black text-on-surface">
 								{t("title")}
 							</h2>
-							<p className="text-xs text-slate-500 mt-0.5">{t("description")}</p>
+							<p className="text-xs text-on-surface-variant mt-0.5">{t("description")}</p>
 						</div>
 					</div>
 
 					<form onSubmit={handleSubmit} className="space-y-4">
 						<div>
-							<label className="block text-xs font-semibold text-slate-700 mb-1">
+							<label className="block text-xs font-semibold text-on-surface-variant mb-1">
 								{t("currentPasswordLabel")}
 							</label>
 							<input
@@ -87,7 +87,7 @@ export default function ArtmgmtPasswordGate({
 						</div>
 
 						<div>
-							<label className="block text-xs font-semibold text-slate-700 mb-1">
+							<label className="block text-xs font-semibold text-on-surface-variant mb-1">
 								{t("newPasswordLabel")}
 							</label>
 							<input
@@ -102,7 +102,7 @@ export default function ArtmgmtPasswordGate({
 						</div>
 
 						<div>
-							<label className="block text-xs font-semibold text-slate-700 mb-1">
+							<label className="block text-xs font-semibold text-on-surface-variant mb-1">
 								{t("confirmPasswordLabel")}
 							</label>
 							<input
@@ -125,7 +125,7 @@ export default function ArtmgmtPasswordGate({
 						<button
 							type="submit"
 							disabled={mutation.isPending}
-							className="w-full py-3 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm hover:bg-[#e04e27] disabled:opacity-60 transition-colors mt-2"
+							className="w-full py-3 bg-primary text-on-primary rounded-xl font-semibold text-sm hover:opacity-90 disabled:opacity-60 transition-colors mt-2"
 						>
 							{mutation.isPending ? t("saving") : t("submit")}
 						</button>

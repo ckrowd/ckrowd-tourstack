@@ -190,19 +190,19 @@ export default function EoiActionPanel({
 			{(forwardedToFinance || forwardedToInsurance || signedOff) && (
 				<div className="flex flex-wrap gap-2 mt-2">
 					{forwardedToFinance && (
-						<div className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 rounded-lg text-xs text-blue-700 font-semibold">
-							<span className="material-symbols-outlined text-xs text-blue-500">account_balance</span>
+						<div className="flex items-center gap-1.5 px-3 py-1.5 bg-status-contacted/10 rounded-lg text-xs text-status-contacted font-semibold">
+							<span className="material-symbols-outlined text-xs text-status-contacted">account_balance</span>
 							{t("forwardedTo", { target: t("finance") })}
 						</div>
 					)}
 					{forwardedToInsurance && (
-						<div className="flex items-center gap-1.5 px-3 py-1.5 bg-emerald-50 rounded-lg text-xs text-emerald-700 font-semibold">
-							<span className="material-symbols-outlined text-xs text-emerald-500">verified_user</span>
+						<div className="flex items-center gap-1.5 px-3 py-1.5 bg-status-approved/10 rounded-lg text-xs text-status-approved font-semibold">
+							<span className="material-symbols-outlined text-xs text-status-approved">verified_user</span>
 							{t("forwardedTo", { target: t("insurance") })}
 						</div>
 					)}
 					{signedOff && (
-						<div className="flex items-center gap-1.5 px-3 py-1.5 bg-teal-50 rounded-lg text-xs text-teal-700 font-semibold">
+						<div className="flex items-center gap-1.5 px-3 py-1.5 bg-teal-50 dark:bg-teal-500/20 rounded-lg text-xs text-teal-700 dark:text-teal-300 font-semibold">
 							<span className="material-symbols-outlined text-xs text-teal-500">task_alt</span>
 							{t("signedOff")}
 						</div>
@@ -214,7 +214,7 @@ export default function EoiActionPanel({
 					<button
 						type="button"
 						onClick={() => startAction("approve")}
-						className="flex-1 py-2.5 bg-emerald-50 text-emerald-700 rounded-xl text-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-emerald-100 transition-colors"
+						className="flex-1 py-2.5 bg-status-approved/10 text-status-approved rounded-xl text-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-status-approved/20 transition-colors"
 					>
 						<span className="material-symbols-outlined text-sm">check_circle</span>
 						{t("approve")}
@@ -224,7 +224,7 @@ export default function EoiActionPanel({
 					<button
 						type="button"
 						onClick={() => startAction("revision")}
-						className="flex-1 py-2.5 bg-blue-50 text-blue-700 rounded-xl text-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-blue-100 transition-colors"
+						className="flex-1 py-2.5 bg-status-contacted/10 text-status-contacted rounded-xl text-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-status-contacted/20 transition-colors"
 					>
 						<span className="material-symbols-outlined text-sm">edit_note</span>
 						{t("revision")}
@@ -234,7 +234,7 @@ export default function EoiActionPanel({
 					<button
 						type="button"
 						onClick={() => startAction("reject")}
-						className="flex-1 py-2.5 bg-red-50 text-red-700 rounded-xl text-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-red-100 transition-colors"
+						className="flex-1 py-2.5 bg-status-rejected/10 text-status-rejected rounded-xl text-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-status-rejected/20 transition-colors"
 					>
 						<span className="material-symbols-outlined text-sm">cancel</span>
 						{t("reject")}
@@ -244,7 +244,7 @@ export default function EoiActionPanel({
 					<button
 						type="button"
 						onClick={() => startAction("create_stop")}
-						className="flex-1 py-2.5 bg-[#FF5A2E]/10 text-[#FF5A2E] rounded-xl text-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-[#FF5A2E]/20 transition-colors"
+						className="flex-1 py-2.5 bg-primary/10 text-primary rounded-xl text-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-primary/20 transition-colors"
 					>
 						<span className="material-symbols-outlined text-sm">add_location_alt</span>
 						{t("createStop")}
@@ -256,20 +256,20 @@ export default function EoiActionPanel({
 							type="button"
 							onClick={() => { setSendDropdownOpen((v) => !v); setForwardError(null); }}
 							disabled={isPending}
-							className="w-full py-2.5 bg-purple-50 text-purple-700 rounded-xl text-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-purple-100 transition-colors disabled:opacity-60"
+							className="w-full py-2.5 bg-status-booked/10 text-status-booked rounded-xl text-sm font-semibold flex items-center justify-center gap-1.5 hover:bg-status-booked/20 transition-colors disabled:opacity-60"
 						>
 							<span className="material-symbols-outlined text-sm">send</span>
 							{t("send")}
 							<span className="material-symbols-outlined text-xs">arrow_drop_down</span>
 						</button>
 						{sendDropdownOpen && (
-							<div className="absolute left-0 bottom-full mb-1 w-full bg-white rounded-xl shadow-lg border border-slate-100 overflow-hidden z-20">
+							<div className="absolute left-0 bottom-full mb-1 w-full bg-surface-container-lowest rounded-xl shadow-lg border border-outline-variant/20 overflow-hidden z-20">
 								{!forwardedToFinance && (
 									<button
 										type="button"
 										onClick={() => forwardMutation.mutate("finance")}
 										disabled={forwardMutation.isPending}
-										className="w-full px-4 py-3 text-left text-sm font-semibold text-slate-700 hover:bg-blue-50 flex items-center gap-2 disabled:opacity-50"
+										className="w-full px-4 py-3 text-left text-sm font-semibold text-on-surface-variant hover:bg-status-contacted/10 flex items-center gap-2 disabled:opacity-50"
 									>
 										<span className="material-symbols-outlined text-sm">account_balance</span>
 										{t("sendToFinance")}
@@ -281,7 +281,7 @@ export default function EoiActionPanel({
 										type="button"
 										onClick={() => forwardMutation.mutate("insurance")}
 										disabled={forwardMutation.isPending}
-										className="w-full px-4 py-3 text-left text-sm font-semibold text-slate-700 hover:bg-emerald-50 flex items-center gap-2 disabled:opacity-50"
+										className="w-full px-4 py-3 text-left text-sm font-semibold text-on-surface-variant hover:bg-status-approved/10 flex items-center gap-2 disabled:opacity-50"
 									>
 										<span className="material-symbols-outlined text-sm">shield</span>
 										{t("sendToInsurance")}
@@ -293,7 +293,7 @@ export default function EoiActionPanel({
 										type="button"
 										onClick={() => forwardMutation.mutate("both")}
 										disabled={forwardMutation.isPending}
-										className="w-full px-4 py-3 text-left text-sm font-semibold text-slate-700 hover:bg-purple-50 flex items-center gap-2 disabled:opacity-50"
+										className="w-full px-4 py-3 text-left text-sm font-semibold text-on-surface-variant hover:bg-status-booked/10 flex items-center gap-2 disabled:opacity-50"
 									>
 										<span className="material-symbols-outlined text-sm">send</span>
 										{t("sendToBoth")}
@@ -301,7 +301,7 @@ export default function EoiActionPanel({
 									</button>
 								)}
 								{forwardError && (
-									<p className="px-4 py-2 text-xs text-red-600 font-semibold border-t border-red-50 bg-red-50">
+									<p className="px-4 py-2 text-xs text-status-rejected font-semibold border-t border-status-rejected/20 bg-status-rejected/10">
 										{forwardError}
 									</p>
 								)}
@@ -408,12 +408,12 @@ export default function EoiActionPanel({
 								type="button"
 								onClick={submitStatus}
 								disabled={isPending}
-								className={`px-4 py-2 rounded-lg text-sm font-semibold text-white disabled:opacity-60 ${
+								className={`px-4 py-2 rounded-lg text-sm font-semibold text-on-primary disabled:opacity-60 ${
 									open === "approve"
-										? "bg-emerald-600 hover:bg-emerald-700"
+										? "bg-status-approved hover:opacity-90"
 										: open === "revision"
-											? "bg-blue-600 hover:bg-blue-700"
-											: "bg-red-600 hover:bg-red-700"
+											? "bg-status-contacted hover:opacity-90"
+											: "bg-status-rejected hover:opacity-90"
 								}`}
 							>
 								{isPending ? t("submitting") : t(`${open}Confirm`)}
