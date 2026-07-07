@@ -6769,100 +6769,87 @@
 		"back": "Back",
 		"backToSite": "Back to site",
 		"continue": "Continue",
-		"finish": "Create your account",
 		"progress": "Step {current} of {total}",
 		"stepShort": {
 			"role": "Your role",
-			"profile": "About you",
-			"focus": "Your focus",
-			"review": "Review"
+			"workspace": "Your workspace"
 		},
 		"role": {
 			"title": "What brings you to TourStack?",
-			"subtitle": "Pick the role that fits you best. We will tailor your setup around it.",
+			"subtitle": "Choose how you work with live entertainment. We'll set you up in the right place.",
 			"options": [
 				{
 					"id": "promoter",
 					"title": "Promoter / Organizer",
-					"desc": "Finance and de-risk your tours and shows."
-				},
-				{
-					"id": "artist",
-					"title": "Artist / Management",
-					"desc": "Protect fees and unlock cross-border payouts."
-				},
-				{
-					"id": "financier",
-					"title": "Bank / Financier",
-					"desc": "Underwrite vetted promoters with real credit data."
-				},
-				{
-					"id": "insurer",
-					"title": "Insurer",
-					"desc": "Price event cancellation and non-appearance cover."
-				},
-				{
-					"id": "venue",
-					"title": "Venue",
-					"desc": "Fill dates with verified, financeable events."
+					"desc": "Finance, insure and run your tours and shows."
 				},
 				{
 					"id": "service",
-					"title": "Service provider / Crew",
-					"desc": "Get discovered and paid on time."
+					"title": "Service provider",
+					"desc": "Offer production, logistics or venue services to tours."
+				},
+				{
+					"id": "workforce",
+					"title": "Crew / Workforce",
+					"desc": "Join the verified talent and crew registry."
+				},
+				{
+					"id": "artmgmt",
+					"title": "Artist management",
+					"desc": "Manage your roster, submissions and bookings."
 				}
 			]
 		},
-		"profile": {
-			"title": "Tell us about you",
-			"subtitle": "This helps us route you to the right team and markets.",
-			"name": "Full name",
-			"namePlaceholder": "Ada Mensah",
-			"org": "Organization",
-			"orgPlaceholder": "Company or stage name",
-			"market": "Primary market",
-			"marketPlaceholder": "Lagos, Nigeria"
-		},
-		"focus": {
-			"title": "What do you want to unlock first?",
-			"subtitle": "Choose as many as you like. You can change this later.",
-			"options": [
-				{
-					"id": "financing",
-					"label": "Tour & show financing"
-				},
-				{
-					"id": "insurance",
-					"label": "Event insurance"
-				},
-				{
-					"id": "payments",
-					"label": "Cross-border payments"
-				},
-				{
-					"id": "certification",
-					"label": "Promoter certification"
-				},
-				{
-					"id": "discovery",
-					"label": "Talent & crew discovery"
-				},
-				{
-					"id": "data",
-					"label": "Market & credit data"
-				}
-			]
-		},
-		"review": {
-			"title": "You are all set",
-			"subtitle": "Here is what we will set up. Create your account to continue.",
-			"roleLabel": "Role",
-			"orgLabel": "Organization",
-			"marketLabel": "Market",
-			"focusLabel": "Focus areas",
-			"edit": "Edit",
-			"empty": "Not provided",
-			"finePrint": "By continuing you agree to our Terms and Privacy Policy."
+		"workspace": {
+			"eyebrow": "Your setup",
+			"title": "You're joining as {role}",
+			"subtitle": "Here's what your workspace includes and where you go next.",
+			"includesLabel": "What you get",
+			"cta": "Continue",
+			"features": {
+				"promoter": [
+					"Tour and show financing applications",
+					"Event insurance and cancellation cover",
+					"A certified ecosystem of crew, services and artists",
+					"Cross-border settlements and credit data"
+				],
+				"service": [
+					"A verified service-provider profile",
+					"Discovery by promoters and touring productions",
+					"Contract and payout tracking"
+				],
+				"workforce": [
+					"A verified profile in the crew registry",
+					"Bookings across vetted tours and shows",
+					"On-time cross-border payouts"
+				],
+				"artmgmt": [
+					"Your artist roster and submissions",
+					"Tour and booking opportunities",
+					"Fee protection and settlement"
+				]
+			}
 		}
+	},
+	"AuthShowcase": {
+		"label": "What you can do on TourStack",
+		"slides": [
+			{
+				"title": "Tour financing",
+				"text": "Fund tours and shows with vetted, underwritable capital."
+			},
+			{
+				"title": "Event insurance",
+				"text": "Cancellation and non-appearance cover, priced on real risk data."
+			},
+			{
+				"title": "Cross-border payments",
+				"text": "Settle payouts across 24+ African markets, on time."
+			},
+			{
+				"title": "Certified ecosystem",
+				"text": "Verified promoters, crew, services and artists in one place."
+			}
+		]
 	}
 }

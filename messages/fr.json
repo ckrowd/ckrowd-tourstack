@@ -6783,100 +6783,87 @@
 		"back": "Retour",
 		"backToSite": "Retour au site",
 		"continue": "Continuer",
-		"finish": "Créer votre compte",
 		"progress": "Étape {current} sur {total}",
 		"stepShort": {
 			"role": "Votre rôle",
-			"profile": "À propos de vous",
-			"focus": "Vos priorités",
-			"review": "Récapitulatif"
+			"workspace": "Votre espace"
 		},
 		"role": {
 			"title": "Qu'est-ce qui vous amène sur TourStack ?",
-			"subtitle": "Choisissez le rôle qui vous correspond le mieux. Nous adapterons votre configuration en conséquence.",
+			"subtitle": "Choisissez votre manière de travailler dans le live. Nous vous orientons au bon endroit.",
 			"options": [
 				{
 					"id": "promoter",
 					"title": "Promoteur / Organisateur",
-					"desc": "Financez et sécurisez vos tournées et vos concerts."
-				},
-				{
-					"id": "artist",
-					"title": "Artiste / Management",
-					"desc": "Protégez vos cachets et débloquez les paiements transfrontaliers."
-				},
-				{
-					"id": "financier",
-					"title": "Banque / Financier",
-					"desc": "Financez des promoteurs vérifiés avec de vraies données de crédit."
-				},
-				{
-					"id": "insurer",
-					"title": "Assureur",
-					"desc": "Tarifez les couvertures annulation et défaut de présentation."
-				},
-				{
-					"id": "venue",
-					"title": "Salle",
-					"desc": "Remplissez vos dates avec des événements vérifiés et finançables."
+					"desc": "Financez, assurez et gérez vos tournées et concerts."
 				},
 				{
 					"id": "service",
-					"title": "Prestataire / Équipe",
-					"desc": "Faites-vous connaître et soyez payé à temps."
+					"title": "Prestataire de services",
+					"desc": "Proposez production, logistique ou services de salle aux tournées."
+				},
+				{
+					"id": "workforce",
+					"title": "Équipe / Personnel",
+					"desc": "Rejoignez le registre vérifié des talents et des équipes."
+				},
+				{
+					"id": "artmgmt",
+					"title": "Management d'artistes",
+					"desc": "Gérez votre roster, vos soumissions et vos réservations."
 				}
 			]
 		},
-		"profile": {
-			"title": "Parlez-nous de vous",
-			"subtitle": "Cela nous aide à vous orienter vers la bonne équipe et les bons marchés.",
-			"name": "Nom complet",
-			"namePlaceholder": "Ada Mensah",
-			"org": "Organisation",
-			"orgPlaceholder": "Société ou nom de scène",
-			"market": "Marché principal",
-			"marketPlaceholder": "Lagos, Nigéria"
-		},
-		"focus": {
-			"title": "Que souhaitez-vous débloquer en premier ?",
-			"subtitle": "Choisissez autant d'options que vous le souhaitez. Vous pourrez les modifier plus tard.",
-			"options": [
-				{
-					"id": "financing",
-					"label": "Financement de tournées et de concerts"
-				},
-				{
-					"id": "insurance",
-					"label": "Assurance événementielle"
-				},
-				{
-					"id": "payments",
-					"label": "Paiements transfrontaliers"
-				},
-				{
-					"id": "certification",
-					"label": "Certification des promoteurs"
-				},
-				{
-					"id": "discovery",
-					"label": "Découverte de talents et d'équipes"
-				},
-				{
-					"id": "data",
-					"label": "Données de marché et de crédit"
-				}
-			]
-		},
-		"review": {
-			"title": "Tout est prêt",
-			"subtitle": "Voici ce que nous allons configurer. Créez votre compte pour continuer.",
-			"roleLabel": "Rôle",
-			"orgLabel": "Organisation",
-			"marketLabel": "Marché",
-			"focusLabel": "Domaines prioritaires",
-			"edit": "Modifier",
-			"empty": "Non renseigné",
-			"finePrint": "En continuant, vous acceptez nos Conditions et notre Politique de confidentialité."
+		"workspace": {
+			"eyebrow": "Votre configuration",
+			"title": "Vous rejoignez en tant que {role}",
+			"subtitle": "Voici ce que comprend votre espace et la prochaine étape.",
+			"includesLabel": "Ce que vous obtenez",
+			"cta": "Continuer",
+			"features": {
+				"promoter": [
+					"Demandes de financement de tournées et de concerts",
+					"Assurance événementielle et couverture annulation",
+					"Un écosystème certifié d'équipes, de prestataires et d'artistes",
+					"Règlements transfrontaliers et données de crédit"
+				],
+				"service": [
+					"Un profil de prestataire vérifié",
+					"Découverte par les promoteurs et les productions",
+					"Suivi des contrats et des paiements"
+				],
+				"workforce": [
+					"Un profil vérifié dans le registre des équipes",
+					"Des réservations sur des tournées vérifiées",
+					"Des paiements transfrontaliers effectués à temps"
+				],
+				"artmgmt": [
+					"Votre roster d'artistes et vos soumissions",
+					"Des opportunités de tournées et de réservations",
+					"Protection des cachets et règlement"
+				]
+			}
 		}
+	},
+	"AuthShowcase": {
+		"label": "Ce que vous pouvez faire sur TourStack",
+		"slides": [
+			{
+				"title": "Financement de tournées",
+				"text": "Financez tournées et concerts avec un capital vérifié et finançable."
+			},
+			{
+				"title": "Assurance événementielle",
+				"text": "Couverture annulation et défaut de présentation, tarifée sur des données de risque réelles."
+			},
+			{
+				"title": "Paiements transfrontaliers",
+				"text": "Réglez les paiements dans plus de 24 marchés africains, à temps."
+			},
+			{
+				"title": "Écosystème certifié",
+				"text": "Promoteurs, équipes, prestataires et artistes vérifiés au même endroit."
+			}
+		]
 	}
 }

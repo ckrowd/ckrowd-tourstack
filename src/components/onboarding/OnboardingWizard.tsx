@@ -2,64 +2,63 @@
 
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { useId, useState } from "react";
-import { authInput, authLabel } from "@/components/auth/authFields";
+import { useState } from "react";
 import ThemeToggle from "@/components/theme/ThemeToggle";
 import { useTsTheme } from "@/components/theme/useTsTheme";
 import { Link, useRouter } from "@/i18n/routing";
 
 type RoleOption = { id: string; title: string; desc: string };
-type FocusOption = { id: string; label: string };
 
-const STEPS = ["role", "profile", "focus", "review"] as const;
+const STEPS = ["role", "workspace"] as const;
 type StepKey = (typeof STEPS)[number];
 
-// Material Symbols glyph per role id (icon font already loaded app-wide).
+// Material Symbols glyph per real user type (icon font already loaded app-wide).
 const ROLE_ICON: Record<string, string> = {
 	promoter: "campaign",
-	artist: "mic",
-	financier: "account_balance",
-	insurer: "verified_user",
-	venue: "stadium",
-	service: "construction",
+	service: "business_center",
+	workforce: "engineering",
+	artmgmt: "queue_music",
+};
+
+// Where each self-serve user type actually goes. Promoters create a platform
+// account (then land on the dashboard); stakeholders self-onboard into their
+// registry. These mirror the real /join and /onboard routes.
+const ROLE_DEST: Record<string, string> = {
+	promoter: "/register",
+	service: "/onboard/service",
+	workforce: "/onboard/workforce",
+	artmgmt: "/onboard/artmgmt",
 };
 
 export default function OnboardingWizard() {
 	const t = useTranslations("OnboardingWizard");
 	const tCommon = useTranslations("Common");
 	const router = useRouter();
-	const formId = useId();
 	const { theme, toggle } = useTsTheme();
 
 	const [step, setStep] = useState(0);
 	const [role, setRole] = useState<string | null>(null);
-	const [name, setName] = useState("");
-	const [org, setOrg] = useState("");
-	const [market, setMarket] = useState("");
-	const [focus, setFocus] = useState<string[]>([]);
 
 	const roleOptions = t.raw("role.options") as RoleOption[];
-	const focusOptions = t.raw("focus.options") as FocusOption[];
 	const total = STEPS.length;
 	const current: StepKey = STEPS[step];
 	const progress = Math.round(((step + 1) / total) * 100);
+	const selectedRole = roleOptions.find((r) => r.id === role);
 
-	const canContinue =
-		current === "role" ? role !== null : current === "profile" ? name.trim().length > 0 : true;
+	const canContinue = current === "role" ? role !== null : true;
 
 	function next() {
 		if (!canContinue) return;
 		if (step < total - 1) setStep((s) => s + 1);
-		else router.push("/register");
+		else if (role) router.push(ROLE_DEST[role] ?? "/register");
 	}
 	function back() {
 		if (step > 0) setStep((s) => s - 1);
 	}
-	function toggleFocus(id: string) {
-		setFocus((f) => (f.includes(id) ? f.filter((x) => x !== id) : [...f, id]));
-	}
 
-	const selectedRole = roleOptions.find((r) => r.id === role);
+	const features = selectedRole
+		? (t.raw(`workspace.features.${selectedRole.id}`) as string[])
+		: [];
 
 	return (
 		<div
@@ -116,7 +115,7 @@ export default function OnboardingWizard() {
 										</span>
 										<span
 											className={`text-sm font-medium transition-colors ${
-												active ? "text-[var(--text)]" : done ? "text-[var(--text)]" : "text-[var(--muted)]"
+												active || done ? "text-[var(--text)]" : "text-[var(--muted)]"
 											}`}
 										>
 											{t(`stepShort.${key}`)}
@@ -172,16 +171,16 @@ export default function OnboardingWizard() {
 
 				<main className="flex-1 flex flex-col px-5 sm:px-8 md:px-14 py-8 md:py-14">
 					<div key={current} className="funnel-step-in flex-1 w-full max-w-2xl mx-auto lg:mx-0">
-						<h1 className="font-(family-name:--font-display) text-3xl md:text-4xl leading-[1.08] tracking-tight">
-							{t(`${current}.title`)}
-						</h1>
-						<p className="mt-3 text-[var(--muted)] text-sm md:text-base max-w-xl">
-							{t(`${current}.subtitle`)}
-						</p>
+						{current === "role" && (
+							<>
+								<h1 className="font-(family-name:--font-display) text-3xl md:text-4xl leading-[1.08] tracking-tight">
+									{t("role.title")}
+								</h1>
+								<p className="mt-3 text-[var(--muted)] text-sm md:text-base max-w-xl">
+									{t("role.subtitle")}
+								</p>
 
-						<div className="mt-9">
-							{current === "role" && (
-								<div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+								<div className="mt-9 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
 									{roleOptions.map((r) => {
 										const selected = role === r.id;
 										return (
@@ -218,141 +217,51 @@ export default function OnboardingWizard() {
 														selected ? "bg-orange opacity-100" : "opacity-0"
 													}`}
 												>
-													<span className="material-symbols-outlined text-[15px] text-[var(--text)]">check</span>
+													<span className="material-symbols-outlined text-[15px] text-white">check</span>
 												</span>
 											</button>
 										);
 									})}
 								</div>
-							)}
+							</>
+						)}
 
-							{current === "profile" && (
-								<form
-									id={formId}
-									onSubmit={(e) => {
-										e.preventDefault();
-										next();
-									}}
-									className="space-y-5 max-w-lg"
-								>
-									<div>
-										<label htmlFor="ob-name" className={authLabel}>
-											{t("profile.name")}
-										</label>
-										<input
-											id="ob-name"
-											type="text"
-											autoComplete="name"
-											value={name}
-											onChange={(e) => setName(e.target.value)}
-											placeholder={t("profile.namePlaceholder")}
-											required
-											className={authInput}
-										/>
-									</div>
-									<div>
-										<label htmlFor="ob-org" className={authLabel}>
-											{t("profile.org")}
-										</label>
-										<input
-											id="ob-org"
-											type="text"
-											autoComplete="organization"
-											value={org}
-											onChange={(e) => setOrg(e.target.value)}
-											placeholder={t("profile.orgPlaceholder")}
-											className={authInput}
-										/>
-									</div>
-									<div>
-										<label htmlFor="ob-market" className={authLabel}>
-											{t("profile.market")}
-										</label>
-										<input
-											id="ob-market"
-											type="text"
-											value={market}
-											onChange={(e) => setMarket(e.target.value)}
-											placeholder={t("profile.marketPlaceholder")}
-											className={authInput}
-										/>
-									</div>
-								</form>
-							)}
-
-							{current === "focus" && (
-								<div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-									{focusOptions.map((f) => {
-										const selected = focus.includes(f.id);
-										return (
-											<button
-												key={f.id}
-												type="button"
-												onClick={() => toggleFocus(f.id)}
-												aria-pressed={selected}
-												className={`flex items-center gap-3 rounded-xl border px-4 py-3.5 text-left transition-all duration-200 ${
-													selected
-														? "border-orange bg-orange/[0.08]"
-														: "border-[var(--hair)] bg-[var(--surface)] hover:border-[var(--muted)]"
-												}`}
-											>
-												<span
-													className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md border transition-colors ${
-														selected ? "border-orange bg-orange" : "border-[var(--muted)]"
-													}`}
-												>
-													{selected && (
-														<span className="material-symbols-outlined text-[16px] text-white">
-															check
-														</span>
-													)}
-												</span>
-												<span className="text-sm font-medium text-[var(--text)]">{f.label}</span>
-											</button>
-										);
-									})}
+						{current === "workspace" && selectedRole && (
+							<>
+								<p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-orange">
+									{t("workspace.eyebrow")}
+								</p>
+								<div className="mt-4 flex items-center gap-4">
+									<span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-orange/12 text-orange shrink-0">
+										<span className="material-symbols-outlined text-[28px]">
+											{ROLE_ICON[selectedRole.id] ?? "person"}
+										</span>
+									</span>
+									<h1 className="font-(family-name:--font-display) text-2xl md:text-3xl leading-[1.1] tracking-tight">
+										{t("workspace.title", { role: selectedRole.title })}
+									</h1>
 								</div>
-							)}
+								<p className="mt-4 text-[var(--muted)] text-sm md:text-base max-w-xl">
+									{t("workspace.subtitle")}
+								</p>
 
-							{current === "review" && (
-								<div className="space-y-3">
-									<ReviewRow
-										label={t("review.roleLabel")}
-										value={selectedRole?.title ?? t("review.empty")}
-										onEdit={() => setStep(0)}
-										editLabel={t("review.edit")}
-									/>
-									<ReviewRow
-										label={t("review.orgLabel")}
-										value={org.trim() || t("review.empty")}
-										onEdit={() => setStep(1)}
-										editLabel={t("review.edit")}
-									/>
-									<ReviewRow
-										label={t("review.marketLabel")}
-										value={market.trim() || t("review.empty")}
-										onEdit={() => setStep(1)}
-										editLabel={t("review.edit")}
-									/>
-									<ReviewRow
-										label={t("review.focusLabel")}
-										value={
-											focus.length
-												? focusOptions
-														.filter((f) => focus.includes(f.id))
-														.map((f) => f.label)
-														.join(", ")
-												: t("review.empty")
-										}
-										onEdit={() => setStep(2)}
-										editLabel={t("review.edit")}
-									/>
-									<p className="pt-3 text-xs text-[var(--muted)] leading-relaxed">
-										{t("review.finePrint")}
+								<div className="mt-8 rounded-2xl border border-[var(--hair)] bg-[var(--surface)] p-6 md:p-7">
+									<p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--muted)] mb-4">
+										{t("workspace.includesLabel")}
 									</p>
+									<ul className="space-y-3.5">
+										{features.map((feat) => (
+											<li key={feat} className="flex items-start gap-3">
+												<span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-orange/15 text-orange">
+													<span className="material-symbols-outlined text-[15px]">check</span>
+												</span>
+												<span className="text-sm text-[var(--text)]">{feat}</span>
+											</li>
+										))}
+									</ul>
 								</div>
-							)}
-						</div>
+							</>
+						)}
 					</div>
 
 					{/* Footer nav */}
@@ -377,46 +286,17 @@ export default function OnboardingWizard() {
 						)}
 
 						<button
-							type="submit"
-							form={current === "profile" ? formId : undefined}
-							onClick={current === "profile" ? undefined : next}
+							type="button"
+							onClick={next}
 							disabled={!canContinue}
 							className="inline-flex items-center gap-2 rounded-xl bg-orange px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-orange/25 transition-all hover:bg-ember active:scale-[0.98] disabled:opacity-40 disabled:pointer-events-none"
 						>
-							{step === total - 1 ? t("finish") : t("continue")}
+							{step === total - 1 ? t("workspace.cta") : t("continue")}
 							<span className="material-symbols-outlined text-[18px]">arrow_forward</span>
 						</button>
 					</div>
 				</main>
 			</div>
-		</div>
-	);
-}
-
-function ReviewRow({
-	label,
-	value,
-	onEdit,
-	editLabel,
-}: {
-	label: string;
-	value: string;
-	onEdit: () => void;
-	editLabel: string;
-}) {
-	return (
-		<div className="flex items-start justify-between gap-4 rounded-xl border border-[var(--hair)] bg-[var(--surface)] px-5 py-4">
-			<div className="min-w-0">
-				<p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--muted)]">{label}</p>
-				<p className="mt-1 text-sm text-[var(--text)] break-words">{value}</p>
-			</div>
-			<button
-				type="button"
-				onClick={onEdit}
-				className="shrink-0 text-xs font-semibold text-orange hover:text-ember transition-colors"
-			>
-				{editLabel}
-			</button>
 		</div>
 	);
 }
