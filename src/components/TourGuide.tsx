@@ -35,26 +35,42 @@ function buildPromoterSteps(t: ReturnType<typeof useTranslations<"Tour">>): Driv
 	return [
 		{ popover: { title: t("promoter.step0.title"), description: t("promoter.step0.description") } },
 		{
-			element: '[data-tour="nav-discovery"]',
+			element: '[data-tour="nav-dashboard"]',
 			popover: { title: t("promoter.step1.title"), description: t("promoter.step1.description"), side: "right", align: "center" },
 		},
 		{
-			element: '[data-tour="nav-tours"]',
+			element: '[data-tour="nav-discovery"]',
 			popover: { title: t("promoter.step2.title"), description: t("promoter.step2.description"), side: "right", align: "center" },
 		},
 		{
-			element: '[data-tour="nav-financing"]',
+			element: '[data-tour="nav-tours"]',
 			popover: { title: t("promoter.step3.title"), description: t("promoter.step3.description"), side: "right", align: "center" },
 		},
 		{
-			element: '[data-tour="nav-insurance"]',
+			element: '[data-tour="nav-stakeholders"]',
 			popover: { title: t("promoter.step4.title"), description: t("promoter.step4.description"), side: "right", align: "center" },
 		},
 		{
-			element: '[data-tour="nav-cta"]',
-			popover: { title: t("promoter.step5.title"), description: t("promoter.step5.description"), side: "top", align: "center" },
+			element: '[data-tour="nav-financing"]',
+			popover: { title: t("promoter.step5.title"), description: t("promoter.step5.description"), side: "right", align: "center" },
 		},
-		{ popover: { title: t("promoter.step6.title"), description: t("promoter.step6.description") } },
+		{
+			element: '[data-tour="nav-insurance"]',
+			popover: { title: t("promoter.step6.title"), description: t("promoter.step6.description"), side: "right", align: "center" },
+		},
+		{
+			element: '[data-tour="nav-tickets"]',
+			popover: { title: t("promoter.step7.title"), description: t("promoter.step7.description"), side: "right", align: "center" },
+		},
+		{
+			element: '[data-tour="nav-ai"]',
+			popover: { title: t("promoter.step8.title"), description: t("promoter.step8.description"), side: "right", align: "center" },
+		},
+		{
+			element: '[data-tour="nav-cta"]',
+			popover: { title: t("promoter.step9.title"), description: t("promoter.step9.description"), side: "top", align: "center" },
+		},
+		{ popover: { title: t("promoter.step10.title"), description: t("promoter.step10.description") } },
 	];
 }
 
@@ -74,14 +90,26 @@ function buildAdminSteps(t: ReturnType<typeof useTranslations<"Tour">>): DriveSt
 			popover: { title: t("admin.step3.title"), description: t("admin.step3.description"), side: "right", align: "center" },
 		},
 		{
-			element: '[data-tour="admin-nav-reports"]',
+			element: '[data-tour="admin-nav-financing"]',
 			popover: { title: t("admin.step4.title"), description: t("admin.step4.description"), side: "right", align: "center" },
 		},
 		{
-			element: '[data-tour="admin-nav-cta"]',
-			popover: { title: t("admin.step5.title"), description: t("admin.step5.description"), side: "top", align: "center" },
+			element: '[data-tour="admin-nav-tickets"]',
+			popover: { title: t("admin.step5.title"), description: t("admin.step5.description"), side: "right", align: "center" },
 		},
-		{ popover: { title: t("admin.step6.title"), description: t("admin.step6.description") } },
+		{
+			element: '[data-tour="admin-nav-directory"]',
+			popover: { title: t("admin.step6.title"), description: t("admin.step6.description"), side: "right", align: "center" },
+		},
+		{
+			element: '[data-tour="admin-nav-reports"]',
+			popover: { title: t("admin.step7.title"), description: t("admin.step7.description"), side: "right", align: "center" },
+		},
+		{
+			element: '[data-tour="admin-nav-cta"]',
+			popover: { title: t("admin.step8.title"), description: t("admin.step8.description"), side: "top", align: "center" },
+		},
+		{ popover: { title: t("admin.step9.title"), description: t("admin.step9.description") } },
 	];
 }
 

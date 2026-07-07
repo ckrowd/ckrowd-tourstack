@@ -3678,7 +3678,7 @@
     }
   },
   "Tour": {
-    "replayButton": "Visite de la plateforme",
+    "replayButton": "Visite de la Plateforme",
     "progressSeparator": "sur",
     "next": "Suivant →",
     "prev": "← Retour",
@@ -3686,61 +3686,89 @@
     "promoter": {
       "step0": {
         "title": "👋 Bienvenue sur TourStack !",
-        "description": "Votre plateforme tout-en-un pour vous connecter aux tournées d'artistes en Afrique. Cette visite rapide vous montrera les fonctionnalités essentielles — moins de 2 minutes."
+        "description": "Votre plateforme tout-en-un pour vous connecter aux tournées mondiales d'artistes à travers l'Afrique. Cette visite rapide vous montrera où tout se trouve."
       },
       "step1": {
-        "title": "🔍 Découvrir les tournées",
-        "description": "Parcourez les tournées d'artistes disponibles à l'accueil. Filtrez par genre, région et fourchette de cachet pour trouver le projet idéal."
+        "title": "📊 Tableau de bord",
+        "description": "Votre centre de contrôle. Obtenez un aperçu rapide de vos prochaines tournées, tâches et activités récentes en un coup d'œil."
       },
       "step2": {
-        "title": "🎫 Mes arrêts de tournée",
-        "description": "Suivez toutes vos manifestations d'intérêt soumises. Consultez les mises à jour, demandes de révision et réservations confirmées au même endroit."
+        "title": "🔍 Découvrir les Tournées",
+        "description": "Parcourez les tournées d'artistes en direct disponibles pour l'accueil. Filtrez par genre, région et fourchette de prix."
       },
       "step3": {
-        "title": "💰 Financement",
-        "description": "Besoin de fonds pour accueillir un artiste ? Demandez un financement auprès de nos banques partenaires — avances, crédits aménagement, et plus."
+        "title": "🎫 Mes Étapes de Tournée",
+        "description": "Suivez chaque manifestation d'intérêt que vous avez soumise. Consultez les mises à jour de statut, les demandes de révision et les réservations."
       },
       "step4": {
-        "title": "🛡️ Assurance",
-        "description": "Protégez vos événements avec des produits d'assurance adaptés — annulation d'événement, garantie de crédit, protection des billets, et plus."
+        "title": "🤝 Parties prenantes",
+        "description": "Gérez votre équipe, vos sponsors et vos partenaires en toute simplicité. Gardez tout le monde aligné."
       },
       "step5": {
-        "title": "🚀 Prêt à démarrer ?",
-        "description": "Cliquez ici pour parcourir les artistes disponibles et soumettre votre première manifestation d'intérêt. Cela ne prend que quelques minutes !"
+        "title": "💰 Financement",
+        "description": "Besoin de financement ? Demandez un financement de tournée auprès de nos banques partenaires."
       },
       "step6": {
-        "title": "✅ Vous êtes prêt !",
-        "description": "Vous connaissez maintenant TourStack. Cliquez sur 'Visite de la plateforme' en bas de la barre latérale pour rejouer ce guide. Bonne chance !"
+        "title": "🛡️ Assurance",
+        "description": "Protégez vos événements avec des produits d'assurance sur mesure — annulation d'événement, garanties de crédit, etc."
+      },
+      "step7": {
+        "title": "🎟️ Billets",
+        "description": "Gérez les ventes de billets, scannez les codes QR pour les enregistrements et suivez la participation de votre public."
+      },
+      "step8": {
+        "title": "🤖 Outils IA",
+        "description": "Tirez parti de Tour Intelligence pour des informations basées sur les données et des analyses prédictives."
+      },
+      "step9": {
+        "title": "🚀 Prêt à Commencer ?",
+        "description": "Cliquez ici pour parcourir les artistes disponibles et soumettre votre première Manifestation d'Intérêt."
+      },
+      "step10": {
+        "title": "✅ Vous Êtes Prêt !",
+        "description": "Vous connaissez maintenant TourStack. Cliquez sur 'Visite de la Plateforme' en bas pour rejouer ce guide."
       }
     },
     "admin": {
       "step0": {
-        "title": "👋 Bienvenue dans TourStack Admin !",
-        "description": "Voici votre centre de commande pour gérer la plateforme TourStack. Découvrons les sections clés."
+        "title": "👋 Bienvenue sur l'Admin TourStack !",
+        "description": "Ceci est votre centre de commandement pour gérer la plateforme. Passons en revue les sections clés."
       },
       "step1": {
-        "title": "📥 Soumissions EOI",
-        "description": "Examinez et traitez les manifestations d'intérêt des promoteurs. Approuvez, demandez des révisions, rejetez ou convertissez en arrêt de tournée confirmé."
+        "title": "📥 Soumissions de MDI",
+        "description": "Examinez et traitez les manifestations d'intérêt des promoteurs. Approuvez, demandez des révisions ou rejetez."
       },
       "step2": {
-        "title": "🎫 Arrêts de tournée",
-        "description": "Gérez tous les arrêts confirmés et en attente. Chaque arrêt est lié à l'EOI du promoteur et peut être modifié ou supprimé."
+        "title": "🎫 Étapes de Tournée",
+        "description": "Affichez et gérez toutes les étapes de tournée confirmées et en attente. Chaque étape est liée à une MDI."
       },
       "step3": {
         "title": "🎵 Artistes",
-        "description": "Gérez le catalogue d'artistes que les promoteurs parcourent sur la page Découverte. Ajoutez de nouveaux artistes, mettez à jour les détails et les fourchettes de cachet."
+        "description": "Gérez le catalogue d'artistes que les promoteurs parcourent. Ajoutez de nouveaux artistes et mettez à jour les détails."
       },
       "step4": {
-        "title": "📊 Rapports",
-        "description": "Suivez les performances de la plateforme — volumes d'EOI, taux de conversion, adoption du financement et analyses de revenus."
+        "title": "💼 Financement & Assurance",
+        "description": "Gérez les demandes de financement et les réclamations d'assurance sur toutes les étapes de la tournée."
       },
       "step5": {
-        "title": "➕ Créer un projet de tournée",
-        "description": "Publiez un nouveau projet de tournée pour attirer des candidatures de promoteurs. Renseignez l'artiste, la fourchette de cachet, la fenêtre et la région."
+        "title": "🎟️ Billets & Réclamations",
+        "description": "Supervisez les volumes de billetterie, les problèmes et gérez les réclamations d'incidents signalées."
       },
       "step6": {
-        "title": "✅ Vous êtes prêt !",
-        "description": "Vous connaissez le portail admin. Cliquez sur 'Visite de la plateforme' en bas de la barre latérale pour rejouer ce guide."
+        "title": "👥 Annuaire & Paiements",
+        "description": "Gérez les promoteurs inscrits, les parties prenantes et traitez les paiements pour les tournées réussies."
+      },
+      "step7": {
+        "title": "📊 Rapports",
+        "description": "Suivez les performances de la plateforme — volumes de MDI, taux de conversion et analyses de revenus."
+      },
+      "step8": {
+        "title": "➕ Créer un Projet",
+        "description": "Publiez un nouveau projet de tournée d'artiste pour attirer les candidatures des promoteurs."
+      },
+      "step9": {
+        "title": "✅ Vous Êtes Prêt !",
+        "description": "Vous connaissez l'interface admin. Cliquez sur 'Visite de la Plateforme' pour rejouer ce guide."
       }
     }
   },

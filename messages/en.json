@@ -3689,28 +3689,44 @@
         "description": "Your all-in-one platform for connecting with global artist tours across Africa. This quick tour will show you where everything is — takes less than 2 minutes."
       },
       "step1": {
-        "title": "🔍 Discover Tour Opportunities",
-        "description": "Browse live artist tours available for hosting. Filter by genre, region, and fee range to find the perfect match for your market."
+        "title": "📊 Dashboard",
+        "description": "Your central hub. Get a quick overview of your upcoming tours, tasks, and recent activity at a glance."
       },
       "step2": {
-        "title": "🎫 My Tour Stops",
-        "description": "Track every Expression of Interest you've submitted. See status updates, revision requests, and confirmed bookings all in one place."
+        "title": "🔍 Discover Tours",
+        "description": "Browse live artist tours available for hosting. Filter by genre, region, and fee range to find the perfect match."
       },
       "step3": {
-        "title": "💰 Financing",
-        "description": "Need funding to bring an artist to your city? Apply for tour finance from our partner banks — tour advances, venue build-out credit, and more."
+        "title": "🎫 My Tour Stops",
+        "description": "Track every Expression of Interest you've submitted. See status updates, revision requests, and confirmed bookings."
       },
       "step4": {
-        "title": "🛡️ Insurance",
-        "description": "Protect your events with tailored insurance products — event cancellation, credit guarantees, audience ticket protection, and more."
+        "title": "🤝 Stakeholders",
+        "description": "Manage your team, sponsors, and partners seamlessly. Keep everyone aligned and onboarded for your tour stops."
       },
       "step5": {
+        "title": "💰 Financing",
+        "description": "Need funding to bring an artist to your city? Apply for tour finance from our partner banks — tour advances, and more."
+      },
+      "step6": {
+        "title": "🛡️ Insurance",
+        "description": "Protect your events with tailored insurance products — event cancellation, credit guarantees, and audience ticket protection."
+      },
+      "step7": {
+        "title": "🎟️ Tickets",
+        "description": "Manage ticket sales, scan QR codes for check-ins, and track your audience attendance effortlessly."
+      },
+      "step8": {
+        "title": "🤖 AI Tools",
+        "description": "Leverage Tour Intelligence for data-driven insights, demand forecasting, and predictive analytics."
+      },
+      "step9": {
         "title": "🚀 Ready to Get Started?",
         "description": "Click here to browse available artists and submit your first Expression of Interest. It only takes a few minutes!"
       },
-      "step6": {
+      "step10": {
         "title": "✅ You're All Set!",
-        "description": "You now know your way around TourStack. Click 'Platform Tour' at the bottom of the sidebar anytime to replay this guide. Good luck!"
+        "description": "You now know your way around TourStack. Click 'Platform Tour' at the bottom of the sidebar anytime to replay this guide."
       }
     },
     "admin": {
@@ -3720,27 +3736,39 @@
       },
       "step1": {
         "title": "📥 EOI Submissions",
-        "description": "Review and process Expression of Interest submissions from promoters. Approve, request revisions, reject, or convert to a confirmed tour stop."
+        "description": "Review and process Expression of Interest submissions from promoters. Approve, request revisions, or reject."
       },
       "step2": {
         "title": "🎫 Tour Stops",
-        "description": "View and manage all confirmed and pending tour stops. Each stop is linked to the promoter's EOI and can be edited or deleted."
+        "description": "View and manage all confirmed and pending tour stops. Each stop is linked to a promoter's EOI."
       },
       "step3": {
         "title": "🎵 Artists",
-        "description": "Manage the artist catalog that promoters browse on the Discovery page. Add new artists, update tour details, fee ranges, and availability windows."
+        "description": "Manage the artist catalog that promoters browse on the Discovery page. Add new artists and update details."
       },
       "step4": {
-        "title": "📊 Reports",
-        "description": "Track platform performance — EOI volumes, conversion rates, financing uptake, and revenue analytics."
+        "title": "💼 Financing & Insurance",
+        "description": "Manage financing applications and insurance claims across all tour stops."
       },
       "step5": {
-        "title": "➕ Create Tour Project",
-        "description": "Publish a new artist tour project to attract promoter applications. Fill in the artist, fee range, tour window, and region."
+        "title": "🎟️ Tickets & Claims",
+        "description": "Oversee ticketing volumes, issues, and manage any incident claims reported."
       },
       "step6": {
+        "title": "👥 Directory & Payouts",
+        "description": "Manage registered promoters, stakeholders, and process payouts for successful tours."
+      },
+      "step7": {
+        "title": "📊 Reports",
+        "description": "Track platform performance — EOI volumes, conversion rates, and revenue analytics."
+      },
+      "step8": {
+        "title": "➕ Create Tour Project",
+        "description": "Publish a new artist tour project to attract promoter applications."
+      },
+      "step9": {
         "title": "✅ You're All Set!",
-        "description": "You know your way around the admin portal. Click 'Platform Tour' at the bottom of the sidebar anytime to replay this guide."
+        "description": "You know your way around the admin portal. Click 'Platform Tour' anytime to replay this guide."
       }
     }
   },
