@@ -230,13 +230,13 @@ function buildNotes(form: EOIForm, artist: ArtistItem): string {
 	return sections.join("\n\n");
 }
 
-const ic = "w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#FF5A2E] focus:ring-2 focus:ring-[#FF5A2E]/20";
+const ic = "w-full rounded-2xl border border-outline-variant/20 bg-surface-container-low px-4 py-3 text-sm text-on-surface outline-none transition focus:border-[#FF5A2E] focus:ring-2 focus:ring-[#FF5A2E]/20";
 const icErr = "border-rose-400 focus:border-rose-400 focus:ring-rose-400/20";
-const sc = "w-full rounded-2xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-[#FF5A2E] focus:ring-2 focus:ring-[#FF5A2E]/20 min-h-28";
+const sc = "w-full rounded-2xl border border-outline-variant/20 bg-surface-container-low px-4 py-3 text-sm text-on-surface outline-none transition focus:border-[#FF5A2E] focus:ring-2 focus:ring-[#FF5A2E]/20 min-h-28";
 
 function FLabel({ htmlFor, required, children }: { htmlFor: string; required?: boolean; children: React.ReactNode }) {
 	return (
-		<label htmlFor={htmlFor} className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">
+		<label htmlFor={htmlFor} className="mb-1.5 block text-[10px] font-semibold uppercase tracking-[0.22em] text-on-surface-variant">
 			{children}{required && <span className="text-rose-500 ml-1">*</span>}
 		</label>
 	);
@@ -249,7 +249,7 @@ function FError({ msg }: { msg?: string }) {
 
 function SectionHeading({ children }: { children: React.ReactNode }) {
 	return (
-		<div className="col-span-full border-b border-slate-100 pb-3 mb-1">
+		<div className="col-span-full border-b border-outline-variant/10 pb-3 mb-1">
 			<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A2E]">{children}</p>
 		</div>
 	);
@@ -257,13 +257,13 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
 
 function ToggleGroup({ value, onChange, options }: { value: boolean; onChange: (v: boolean) => void; options: [string, string] }) {
 	return (
-		<div className="flex shrink-0 rounded-xl border border-slate-200 overflow-hidden text-sm font-semibold">
+		<div className="flex shrink-0 rounded-xl border border-outline-variant/20 overflow-hidden text-sm font-semibold">
 			<button type="button" role="switch" aria-checked={!value} onClick={() => onChange(false)}
-				className={`px-4 py-2 transition ${!value ? "bg-slate-900 text-white" : "bg-white text-slate-500 hover:bg-slate-50"}`}>
+				className={`px-4 py-2 transition ${!value ? "bg-inverse-surface text-inverse-on-surface" : "bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container-low"}`}>
 				{options[0]}
 			</button>
 			<button type="button" role="switch" aria-checked={value} onClick={() => onChange(true)}
-				className={`px-4 py-2 transition ${value ? "bg-[#FF5A2E] text-white" : "bg-white text-slate-500 hover:bg-slate-50"}`}>
+				className={`px-4 py-2 transition ${value ? "bg-primary text-on-primary" : "bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container-low"}`}>
 				{options[1]}
 			</button>
 		</div>
@@ -275,17 +275,17 @@ function Stepper({ current, steps }: { current: number; steps: { label: string }
 	return (
 		<div className="mb-8">
 			<div className="relative flex items-center justify-between">
-				<div className="absolute left-0 top-1/2 z-0 h-0.5 w-full -translate-y-1/2 bg-slate-200" />
+				<div className="absolute left-0 top-1/2 z-0 h-0.5 w-full -translate-y-1/2 bg-surface-container-high" />
 				<div className="absolute left-0 top-1/2 z-0 h-0.5 -translate-y-1/2 bg-[#FF5A2E] transition-all duration-500" style={{ width: `${progress}%` }} />
 				{steps.map((step, i) => {
 					const done = i < current;
 					const active = i === current;
 					return (
 						<div key={step.label} className="relative z-10 flex flex-col items-center">
-							<div className={`flex h-8 w-8 items-center justify-center rounded-full ring-4 ring-[#f6f4ef] font-semibold text-xs ${done || active ? "bg-[#FF5A2E] text-white" : "bg-slate-200 text-slate-500"}`}>
+							<div className={`flex h-8 w-8 items-center justify-center rounded-full ring-4 ring-surface-container-lowest font-semibold text-xs ${done || active ? "bg-primary text-on-primary" : "bg-surface-container-high text-on-surface-variant"}`}>
 								{done ? <span className="material-symbols-outlined text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>check</span> : i + 1}
 							</div>
-							<span className={`mt-1.5 hidden sm:block text-[9px] font-semibold uppercase tracking-wider ${active ? "text-[#FF5A2E]" : done ? "text-[#FF5A2E]/60" : "text-slate-400"}`}>
+							<span className={`mt-1.5 hidden sm:block text-[9px] font-semibold uppercase tracking-wider ${active ? "text-[#FF5A2E]" : done ? "text-[#FF5A2E]/60" : "text-on-surface-variant"}`}>
 								{step.label}
 							</span>
 						</div>
@@ -308,17 +308,17 @@ function OpportunitySelector({ opportunities, loading, selectedId, onSelect }: {
 		? opportunities.filter(a => String(a.name ?? "").toLowerCase().includes(search.toLowerCase()) || String(a.tour_name ?? "").toLowerCase().includes(search.toLowerCase()))
 		: opportunities;
 	return (
-		<div className="rounded-2xl border border-slate-200 bg-white shadow-sm p-5">
-			<p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-slate-500 mb-3">{t("selector.heading")}</p>
+		<div className="rounded-2xl border border-outline-variant/20 bg-surface-container-lowest shadow-sm p-5">
+			<p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-on-surface-variant mb-3">{t("selector.heading")}</p>
 			<div className="relative mb-3">
-				<span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none text-base">search</span>
+				<span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-base">search</span>
 				<input type="text" placeholder={t("selector.searchPlaceholder")} value={search} onChange={e => setSearch(e.target.value)}
-					className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm text-slate-900 outline-none focus:border-[#FF5A2E] focus:ring-2 focus:ring-[#FF5A2E]/20 transition" />
+					className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-outline-variant/20 bg-surface-container-low text-sm text-on-surface outline-none focus:border-[#FF5A2E] focus:ring-2 focus:ring-[#FF5A2E]/20 transition" />
 			</div>
 			{loading ? (
-				<p className="text-sm text-slate-500 text-center py-4">{t("selector.loading")}</p>
+				<p className="text-sm text-on-surface-variant text-center py-4">{t("selector.loading")}</p>
 			) : filtered.length === 0 ? (
-				<p className="text-sm text-slate-500 text-center py-4">{t("selector.noResults")}</p>
+				<p className="text-sm text-on-surface-variant text-center py-4">{t("selector.noResults")}</p>
 			) : (
 				<div className="max-h-56 overflow-y-auto space-y-0.5 pr-0.5">
 					{filtered.map(a => {
@@ -326,15 +326,15 @@ function OpportunitySelector({ opportunities, loading, selectedId, onSelect }: {
 						const sel = id === selectedId;
 						return (
 							<button key={id} type="button" onClick={() => onSelect(id)}
-								className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all ${sel ? "bg-orange-50 border border-[#FF5A2E]/25" : "hover:bg-slate-50 border border-transparent"}`}>
-								<div className={`w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center transition-colors ${sel ? "border-[#FF5A2E]" : "border-slate-300"}`}>
+								className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all ${sel ? "bg-primary/10 border border-[#FF5A2E]/25" : "hover:bg-surface-container-low border border-transparent"}`}>
+								<div className={`w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center transition-colors ${sel ? "border-[#FF5A2E]" : "border-outline-variant/40"}`}>
 									{sel && <div className="w-2 h-2 rounded-full bg-[#FF5A2E]" />}
 								</div>
 								<div className="flex-1 min-w-0">
-									<p className={`text-sm font-semibold truncate ${sel ? "text-[#FF5A2E]" : "text-slate-900"}`}>{String(a.name ?? "")}</p>
-									{a.tour_name && <p className="text-xs text-slate-500 truncate">{String(a.tour_name)}</p>}
+									<p className={`text-sm font-semibold truncate ${sel ? "text-[#FF5A2E]" : "text-on-surface"}`}>{String(a.name ?? "")}</p>
+									{a.tour_name && <p className="text-xs text-on-surface-variant truncate">{String(a.tour_name)}</p>}
 								</div>
-								{a.genre && <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 shrink-0">{String(a.genre)}</span>}
+								{a.genre && <span className="text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant shrink-0">{String(a.genre)}</span>}
 							</button>
 						);
 					})}
@@ -353,18 +353,18 @@ function OpportunityPanel({ artist, locale }: { artist: ArtistItem; locale: stri
 		? `$${Math.round(Number(artist.fee_min) / 1000)}k – $${Math.round(Number(artist.fee_max) / 1000)}k USD` : null;
 	const markets = Array.isArray(artist.markets) ? (artist.markets as string[]).join(", ") : String(artist.markets ?? "");
 	return (
-		<div className="rounded-2xl border border-slate-200 bg-white shadow-sm p-5 space-y-4">
+		<div className="rounded-2xl border border-outline-variant/20 bg-surface-container-lowest shadow-sm p-5 space-y-4">
 			<div>
 				<p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#FF5A2E] mb-1">{t("tourPanel.heading")}</p>
-				<h2 className="text-lg font-(family-name:--font-manrope) font-semibold text-slate-950 leading-tight">{String(artist.tour_name ?? artist.name ?? "")}</h2>
-				<p className="mt-0.5 text-sm font-semibold text-slate-500">{String(artist.name ?? "")}</p>
+				<h2 className="text-lg font-(family-name:--font-manrope) font-semibold text-on-surface leading-tight">{String(artist.tour_name ?? artist.name ?? "")}</h2>
+				<p className="mt-0.5 text-sm font-semibold text-on-surface-variant">{String(artist.name ?? "")}</p>
 			</div>
 			<div className="space-y-2.5">
-				{artist.genre && <div><p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">{t("tourPanel.genre")}</p><p className="text-sm font-semibold text-slate-800 mt-0.5">{String(artist.genre)}</p></div>}
-				{dateRange && <div><p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">{t("tourPanel.dates")}</p><p className="text-sm font-semibold text-slate-800 mt-0.5">{dateRange}</p></div>}
-				{markets && <div><p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">{t("tourPanel.markets")}</p><p className="text-sm font-semibold text-slate-800 mt-0.5">{markets}</p></div>}
-				{feeRange && <div><p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">{t("tourPanel.fee")}</p><p className="text-sm font-semibold text-slate-800 mt-0.5">{feeRange}</p></div>}
-				{artist.region && <div><p className="text-[10px] font-semibold uppercase tracking-wider text-slate-400">{t("tourPanel.region")}</p><p className="text-sm font-semibold text-slate-800 mt-0.5">{String(artist.region)}</p></div>}
+				{artist.genre && <div><p className="text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant">{t("tourPanel.genre")}</p><p className="text-sm font-semibold text-on-surface mt-0.5">{String(artist.genre)}</p></div>}
+				{dateRange && <div><p className="text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant">{t("tourPanel.dates")}</p><p className="text-sm font-semibold text-on-surface mt-0.5">{dateRange}</p></div>}
+				{markets && <div><p className="text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant">{t("tourPanel.markets")}</p><p className="text-sm font-semibold text-on-surface mt-0.5">{markets}</p></div>}
+				{feeRange && <div><p className="text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant">{t("tourPanel.fee")}</p><p className="text-sm font-semibold text-on-surface mt-0.5">{feeRange}</p></div>}
+				{artist.region && <div><p className="text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant">{t("tourPanel.region")}</p><p className="text-sm font-semibold text-on-surface mt-0.5">{String(artist.region)}</p></div>}
 			</div>
 		</div>
 	);
@@ -374,9 +374,9 @@ function ReviewRow({ label, value }: { label: string; value?: string | boolean }
 	const t = useTranslations("EOIPage");
 	if (value === undefined || value === "" || value === false) return null;
 	return (
-		<div className="flex items-start gap-4 border-b border-slate-100 py-2.5 last:border-none">
-			<span className="mt-0.5 w-32 shrink-0 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-400">{label}</span>
-			<span className="text-sm font-semibold text-slate-900">{value === true ? t("review.yes") : value}</span>
+		<div className="flex items-start gap-4 border-b border-outline-variant/10 py-2.5 last:border-none">
+			<span className="mt-0.5 w-32 shrink-0 text-[10px] font-semibold uppercase tracking-[0.22em] text-on-surface-variant">{label}</span>
+			<span className="text-sm font-semibold text-on-surface">{value === true ? t("review.yes") : value}</span>
 		</div>
 	);
 }
@@ -635,17 +635,17 @@ function EOIPageContent() {
 		return (
 			<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-12">
 				<div className="flex min-h-[calc(100vh-5rem)] items-center justify-center">
-					<div className="w-full max-w-lg rounded-3xl border border-slate-200 bg-white p-8 text-center shadow-sm md:p-12">
+					<div className="w-full max-w-lg rounded-3xl border border-outline-variant/20 bg-surface-container-lowest p-8 text-center shadow-sm md:p-12">
 						<div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 mx-auto">
 							<span className="material-symbols-outlined text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
 						</div>
-						<h1 className="text-3xl font-semibold tracking-tight text-slate-950 font-(family-name:--font-manrope)">{t("success.title")}</h1>
-						<p className="mt-4 text-sm leading-6 text-slate-600">{t("success.description", { artist: String(artist.name ?? "") })}</p>
+						<h1 className="text-3xl font-semibold tracking-tight text-on-surface font-(family-name:--font-manrope)">{t("success.title")}</h1>
+						<p className="mt-4 text-sm leading-6 text-on-surface-variant">{t("success.description", { artist: String(artist.name ?? "") })}</p>
 						<div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
 							<Link href="/dashboard" className="inline-flex items-center justify-center rounded-full bg-[#FF5A2E] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90">
 								{t("success.viewDashboard")}
 							</Link>
-							<Link href="/discovery" className="inline-flex items-center justify-center rounded-full border border-slate-200 px-6 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50">
+							<Link href="/discovery" className="inline-flex items-center justify-center rounded-full border border-outline-variant/20 px-6 py-3 text-sm font-semibold text-on-surface-variant transition hover:bg-surface-container-low">
 								{t("success.backToDiscovery")}
 							</Link>
 						</div>
@@ -660,8 +660,8 @@ function EOIPageContent() {
 			<div className="w-full">
 				<header className="mb-8">
 					<span className="mb-2 block text-xs font-semibold uppercase tracking-[0.3em] text-[#FF5A2E]">{t("hero.platform")}</span>
-					<h1 className="text-3xl font-semibold tracking-tight text-slate-950 md:text-4xl font-(family-name:--font-manrope)">{t("hero.title")}</h1>
-					<p className="mt-3 text-base leading-relaxed text-slate-600">{t("hero.description")}</p>
+					<h1 className="text-3xl font-semibold tracking-tight text-on-surface md:text-4xl font-(family-name:--font-manrope)">{t("hero.title")}</h1>
+					<p className="mt-3 text-base leading-relaxed text-on-surface-variant">{t("hero.description")}</p>
 				</header>
 
 				<div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
@@ -674,12 +674,12 @@ function EOIPageContent() {
 					{/* Right: form */}
 					<div data-tour="eoi-form" className="lg:col-span-8">
 						{!artist ? (
-							<div className="rounded-3xl border-2 border-dashed border-slate-200 bg-white/50 p-12 text-center">
-								<span className="material-symbols-outlined text-5xl text-slate-300 block mb-4">confirmation_number</span>
-								<p className="text-base font-semibold text-slate-400">{t("selector.selectPrompt")}</p>
+							<div className="rounded-3xl border-2 border-dashed border-outline-variant/20 bg-surface-container-lowest/50 p-12 text-center">
+								<span className="material-symbols-outlined text-5xl text-on-surface-variant/50 block mb-4">confirmation_number</span>
+								<p className="text-base font-semibold text-on-surface-variant">{t("selector.selectPrompt")}</p>
 							</div>
 						) : (
-							<section className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm md:p-8">
+							<section className="rounded-3xl border border-outline-variant/20 bg-surface-container-lowest p-6 shadow-sm md:p-8">
 								<Stepper current={step} steps={STEPS} />
 
 								<form noValidate autoComplete="off" onSubmit={handleSubmit} className="space-y-8">
@@ -803,7 +803,7 @@ function EOIPageContent() {
 										<div className="grid gap-5 sm:grid-cols-2">
 											<SectionHeading>{t("form.step3.tourSection")}</SectionHeading>
 											<div className="sm:col-span-2">
-												<p className="text-xs text-slate-500">{t("form.step3.tourDetailsHint")}</p>
+												<p className="text-xs text-on-surface-variant">{t("form.step3.tourDetailsHint")}</p>
 											</div>
 											<div>
 												<FLabel htmlFor="s3-mgr" required>{t("form.step3.tourManager.label")}</FLabel>
@@ -819,8 +819,8 @@ function EOIPageContent() {
 												<input id="s3-mgr-phone" type="tel" placeholder={t("form.step3.tourManagerPhone.placeholder")} value={form.tourManagerPhone} onChange={e => set("tourManagerPhone", e.target.value)} className={ic} />
 											</div>
 											<div className="sm:col-span-2">
-												<div className="flex items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4">
-													<p className="text-sm font-semibold text-slate-900">{t("form.step3.artistConfirmed.label")}</p>
+												<div className="flex items-center justify-between gap-4 rounded-2xl border border-outline-variant/20 bg-surface-container-low px-5 py-4">
+													<p className="text-sm font-semibold text-on-surface">{t("form.step3.artistConfirmed.label")}</p>
 													<ToggleGroup value={form.artistConfirmed} onChange={v => set("artistConfirmed", v)} options={[t("form.step3.artistConfirmed.pending"), t("form.step3.artistConfirmed.confirmed")]} />
 												</div>
 											</div>
@@ -848,7 +848,7 @@ function EOIPageContent() {
 											{form.venues.map((venue, i) => {
 												const ve = venueErrors[i] ?? {};
 												return (
-													<div key={`venue-${i}`} className="rounded-2xl border border-slate-200 p-5">
+													<div key={`venue-${i}`} className="rounded-2xl border border-outline-variant/20 p-5">
 														<div className="mb-4 flex items-center justify-between">
 															<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A2E]">
 																{t("form.step4.venueSection")} {form.venues.length > 1 ? i + 1 : ""}
@@ -889,7 +889,7 @@ function EOIPageContent() {
 																		<option value="outdoor">{t("form.step4.venueType.outdoor")}</option>
 																		<option value="hybrid">{t("form.step4.venueType.hybrid")}</option>
 																	</select>
-																	<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-lg">expand_more</span>
+																	<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-lg">expand_more</span>
 																</div>
 																<FError msg={ve.type} />
 															</div>
@@ -902,7 +902,7 @@ function EOIPageContent() {
 																		<option value="shortlisted">{t("form.step4.venueStatus.shortlisted")}</option>
 																		<option value="pending">{t("form.step4.venueStatus.pending")}</option>
 																	</select>
-																	<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-lg">expand_more</span>
+																	<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-lg">expand_more</span>
 																</div>
 																<FError msg={ve.status} />
 															</div>
@@ -920,7 +920,7 @@ function EOIPageContent() {
 													</div>
 												);
 											})}
-											<button type="button" onClick={addVenue} className="flex items-center gap-2 rounded-full border border-dashed border-slate-300 px-5 py-3 text-sm font-semibold text-slate-600 transition hover:border-[#FF5A2E] hover:text-[#FF5A2E]">
+											<button type="button" onClick={addVenue} className="flex items-center gap-2 rounded-full border border-dashed border-outline-variant/40 px-5 py-3 text-sm font-semibold text-on-surface-variant transition hover:border-[#FF5A2E] hover:text-[#FF5A2E]">
 												<span className="material-symbols-outlined text-base">add</span>
 												{t("form.step4.addVenue")}
 											</button>
@@ -932,7 +932,7 @@ function EOIPageContent() {
 										<div className="grid gap-5 sm:grid-cols-2">
 											<SectionHeading>{t("form.step5.budgetSection")}</SectionHeading>
 											<div className="col-span-full">
-												<p className="text-xs text-slate-500 mb-4">{t("form.step5.budgetHint")}</p>
+												<p className="text-xs text-on-surface-variant mb-4">{t("form.step5.budgetHint")}</p>
 											</div>
 											<div>
 												<FLabel htmlFor="s5-afee" required>{t("form.step5.artistFee.label")}</FLabel>
@@ -989,8 +989,8 @@ function EOIPageContent() {
 										<div className="grid gap-5 sm:grid-cols-2">
 											<SectionHeading>{t("form.step6.riskSection")}</SectionHeading>
 											<div className="sm:col-span-2">
-												<div className="flex items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4">
-													<p className="text-sm font-semibold text-slate-900">{t("form.step6.hasCancellationHistory")}</p>
+												<div className="flex items-center justify-between gap-4 rounded-2xl border border-outline-variant/20 bg-surface-container-low px-5 py-4">
+													<p className="text-sm font-semibold text-on-surface">{t("form.step6.hasCancellationHistory")}</p>
 													<ToggleGroup value={form.hasCancellationHistory} onChange={v => set("hasCancellationHistory", v)} options={[t("form.no"), t("form.yes")]} />
 												</div>
 											</div>
@@ -1004,25 +1004,25 @@ function EOIPageContent() {
 												<div className="flex items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4">
 													<span className="material-symbols-outlined text-emerald-600 shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
 													<div>
-														<p className="text-sm font-semibold text-slate-900">{t("form.step6.insuranceCompulsoryTitle")}</p>
-														<p className="mt-1 text-xs leading-relaxed text-slate-600">{t("form.step6.insuranceCompulsoryText")}</p>
+														<p className="text-sm font-semibold text-on-surface">{t("form.step6.insuranceCompulsoryTitle")}</p>
+														<p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{t("form.step6.insuranceCompulsoryText")}</p>
 													</div>
 												</div>
 											</div>
 											<div className="sm:col-span-2">
-												<p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">{t("form.step6.insuranceProducts.label")}</p>
+												<p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-on-surface-variant">{t("form.step6.insuranceProducts.label")}</p>
 												<div className="grid sm:grid-cols-2 gap-3">
 													{INSURANCE_PRODUCTS.map(product => {
 														const selection = form.insuranceSelections.find(sel => sel.product === product);
 														const checked = !!selection;
 														return (
-															<div key={product} className={`rounded-2xl border px-4 py-3 transition ${checked ? "border-[#FF5A2E]/30 bg-orange-50" : "border-slate-200 bg-slate-50 hover:bg-slate-100"}`}>
+															<div key={product} className={`rounded-2xl border px-4 py-3 transition ${checked ? "border-[#FF5A2E]/30 bg-primary/10" : "border-outline-variant/20 bg-surface-container-low hover:bg-surface-container"}`}>
 																<label className="flex items-center gap-2.5 cursor-pointer">
 																	<input type="checkbox" className="sr-only" checked={checked} onChange={() => toggleInsuranceProduct(product)} />
-																	<div className={`w-4 h-4 rounded border-2 shrink-0 flex items-center justify-center ${checked ? "bg-[#FF5A2E] border-[#FF5A2E]" : "border-slate-300"}`}>
+																	<div className={`w-4 h-4 rounded border-2 shrink-0 flex items-center justify-center ${checked ? "bg-[#FF5A2E] border-[#FF5A2E]" : "border-outline-variant/40"}`}>
 																		{checked && <span className="material-symbols-outlined text-white text-[10px]" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>}
 																	</div>
-																	<span className="text-xs font-semibold text-slate-700">{t(`form.step6.insuranceProducts.${INSURANCE_PRODUCT_I18N_KEY[product]}`)}</span>
+																	<span className="text-xs font-semibold text-on-surface-variant">{t(`form.step6.insuranceProducts.${INSURANCE_PRODUCT_I18N_KEY[product]}`)}</span>
 																</label>
 																{checked && (
 																	<div className="mt-3">
@@ -1045,8 +1045,8 @@ function EOIPageContent() {
 
 											<SectionHeading>{t("form.step6.financingSection")}</SectionHeading>
 											<div className="sm:col-span-2">
-												<div className="flex items-center justify-between gap-4 rounded-2xl border border-slate-200 bg-slate-50 px-5 py-4">
-													<p className="text-sm font-semibold text-slate-900">{t("form.step6.needsFinancing")}</p>
+												<div className="flex items-center justify-between gap-4 rounded-2xl border border-outline-variant/20 bg-surface-container-low px-5 py-4">
+													<p className="text-sm font-semibold text-on-surface">{t("form.step6.needsFinancing")}</p>
 													<ToggleGroup value={form.needsFinancing} onChange={v => set("needsFinancing", v)} options={[t("form.no"), t("form.yes")]} />
 												</div>
 											</div>
@@ -1065,19 +1065,19 @@ function EOIPageContent() {
 															<option value="equity">{t("form.step6.financingStructure.equity")}</option>
 															<option value="advance">{t("form.step6.financingStructure.advance")}</option>
 														</select>
-														<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-lg">expand_more</span>
+														<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-lg">expand_more</span>
 													</div>
 												</div>
 												<div className="sm:col-span-2">
-													<p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-slate-500">{t("form.step6.financingPurpose.label")}</p>
+													<p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-on-surface-variant">{t("form.step6.financingPurpose.label")}</p>
 													<div className="grid sm:grid-cols-3 gap-2">
 														{(["artistFee", "production", "marketing", "operations", "other"] as const).map(key => (
-															<label key={key} className={`flex items-center gap-2.5 rounded-xl border px-4 py-3 cursor-pointer transition ${form.financingPurpose.includes(key) ? "border-[#FF5A2E]/30 bg-orange-50" : "border-slate-200 bg-slate-50 hover:bg-slate-100"}`}>
+															<label key={key} className={`flex items-center gap-2.5 rounded-xl border px-4 py-3 cursor-pointer transition ${form.financingPurpose.includes(key) ? "border-[#FF5A2E]/30 bg-primary/10" : "border-outline-variant/20 bg-surface-container-low hover:bg-surface-container"}`}>
 																<input type="checkbox" className="sr-only" tabIndex={form.needsFinancing ? 0 : -1} checked={form.financingPurpose.includes(key)} onChange={() => togglePurpose(key)} />
-																<div className={`w-4 h-4 rounded border-2 shrink-0 flex items-center justify-center ${form.financingPurpose.includes(key) ? "bg-[#FF5A2E] border-[#FF5A2E]" : "border-slate-300"}`}>
+																<div className={`w-4 h-4 rounded border-2 shrink-0 flex items-center justify-center ${form.financingPurpose.includes(key) ? "bg-[#FF5A2E] border-[#FF5A2E]" : "border-outline-variant/40"}`}>
 																	{form.financingPurpose.includes(key) && <span className="material-symbols-outlined text-white text-[10px]" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>}
 																</div>
-																<span className="text-xs font-semibold text-slate-700">{t(`form.step6.financingPurpose.${key}`)}</span>
+																<span className="text-xs font-semibold text-on-surface-variant">{t(`form.step6.financingPurpose.${key}`)}</span>
 															</label>
 														))}
 													</div>
@@ -1131,22 +1131,22 @@ function EOIPageContent() {
 											{/* Documents */}
 											<div>
 												<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A2E] mb-3">{t("form.step7.documentsSection")}</p>
-												<p className="text-xs text-slate-500 mb-4">{t("form.step7.documentsNote")}</p>
+												<p className="text-xs text-on-surface-variant mb-4">{t("form.step7.documentsNote")}</p>
 												<div className="space-y-2.5">
-													<div className="flex items-center gap-3 rounded-2xl border border-emerald-300 bg-emerald-50 px-5 py-4">
-														<div className="w-5 h-5 rounded border-2 shrink-0 flex items-center justify-center bg-emerald-500 border-emerald-500">
-															<span className="material-symbols-outlined text-white text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>
+													<div className="flex items-center gap-3 rounded-2xl border border-status-approved/30 bg-status-approved/10 px-5 py-4">
+														<div className="w-5 h-5 rounded border-2 shrink-0 flex items-center justify-center bg-status-approved border-status-approved">
+															<span className="material-symbols-outlined text-on-primary text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>
 														</div>
-														<span className="text-sm font-semibold text-slate-800">{t("form.step7.hasCACDocuments")}</span>
-														<span className="ml-auto text-[10px] font-bold uppercase tracking-wider text-emerald-600">{t("form.step7.required")}</span>
+														<span className="text-sm font-semibold text-on-surface">{t("form.step7.hasCACDocuments")}</span>
+														<span className="ml-auto text-[10px] font-bold uppercase tracking-wider text-status-approved">{t("form.step7.required")}</span>
 													</div>
 													{(["hasFinancialStatements", "hasTourDocs"] as const).map(key => (
-														<label key={key} className={`flex items-center gap-3 rounded-2xl border px-5 py-4 cursor-pointer transition ${form[key] ? "border-emerald-300 bg-emerald-50" : "border-slate-200 bg-slate-50 hover:bg-slate-100"}`}>
+														<label key={key} className={`flex items-center gap-3 rounded-2xl border px-5 py-4 cursor-pointer transition ${form[key] ? "border-status-approved/30 bg-status-approved/10" : "border-outline-variant/20 bg-surface-container-low hover:bg-surface-container"}`}>
 															<input type="checkbox" className="sr-only" checked={form[key]} onChange={e => set(key, e.target.checked)} />
-															<div className={`w-5 h-5 rounded border-2 shrink-0 flex items-center justify-center ${form[key] ? "bg-emerald-500 border-emerald-500" : "border-slate-300"}`}>
-																{form[key] && <span className="material-symbols-outlined text-white text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>}
+															<div className={`w-5 h-5 rounded border-2 shrink-0 flex items-center justify-center ${form[key] ? "bg-status-approved border-status-approved" : "border-outline-variant/40"}`}>
+																{form[key] && <span className="material-symbols-outlined text-on-primary text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>}
 															</div>
-															<span className="text-sm font-semibold text-slate-800">{t(`form.step7.${key}`)}</span>
+															<span className="text-sm font-semibold text-on-surface">{t(`form.step7.${key}`)}</span>
 														</label>
 													))}
 												</div>
@@ -1155,7 +1155,7 @@ function EOIPageContent() {
 											{/* Review summary */}
 											<div>
 												<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A2E] mb-3">{t("form.step7.reviewSection")}</p>
-												<div className="rounded-2xl border border-slate-200 bg-slate-50 p-5 divide-y divide-slate-100">
+												<div className="rounded-2xl border border-outline-variant/20 bg-surface-container-low p-5 divide-y divide-outline-variant/10">
 													<ReviewRow label={t("review.artist")} value={String(artist.name ?? "")} />
 													<ReviewRow label={t("review.tour")} value={String(artist.tour_name ?? "")} />
 													<ReviewRow label={t("review.markets")} value={markets} />
@@ -1191,14 +1191,14 @@ function EOIPageContent() {
 													</div>
 												</div>
 
-												<div className="mt-4 rounded-2xl border border-slate-200 bg-slate-50 p-5">
-													<p className="text-sm text-slate-600 leading-relaxed mb-4">{t("form.step7.declarationText")}</p>
+												<div className="mt-4 rounded-2xl border border-outline-variant/20 bg-surface-container-low p-5">
+													<p className="text-sm text-on-surface-variant leading-relaxed mb-4">{t("form.step7.declarationText")}</p>
 													<label className={`flex items-start gap-3 cursor-pointer`}>
 														<input type="checkbox" className="sr-only" checked={form.declarationConfirmed} onChange={e => { set("declarationConfirmed", e.target.checked); if (errors.declaration) setErrors(p => { const n = { ...p }; delete n.declaration; return n; }); }} />
-														<div className={`w-5 h-5 rounded border-2 shrink-0 mt-0.5 flex items-center justify-center ${form.declarationConfirmed ? "bg-[#FF5A2E] border-[#FF5A2E]" : errors.declaration ? "border-rose-400" : "border-slate-300"}`}>
+														<div className={`w-5 h-5 rounded border-2 shrink-0 mt-0.5 flex items-center justify-center ${form.declarationConfirmed ? "bg-[#FF5A2E] border-[#FF5A2E]" : errors.declaration ? "border-rose-400" : "border-outline-variant/40"}`}>
 															{form.declarationConfirmed && <span className="material-symbols-outlined text-white text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>}
 														</div>
-														<span className="text-sm font-semibold text-slate-800">{t("form.step7.declarationAgree")}</span>
+														<span className="text-sm font-semibold text-on-surface">{t("form.step7.declarationAgree")}</span>
 													</label>
 													{errors.declaration && <p className="mt-2 ml-8 text-xs text-rose-600 font-medium">{errors.declaration}</p>}
 												</div>
@@ -1210,7 +1210,7 @@ function EOIPageContent() {
 										<p className="text-sm font-medium text-rose-700" role="alert">{submitError}</p>
 									)}
 
-									<div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-6">
+									<div className="flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant/10 pt-6">
 										<Button type="button" variant="secondary" onClick={() => setStep(s => Math.max(0, s - 1))} disabled={step === 0}>
 											{t("actions.back")}
 										</Button>

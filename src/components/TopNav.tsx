@@ -341,7 +341,7 @@ export default function TopNav() {
 
 	return (
 		<>
-			<header className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl border-b border-orange-100/10 shadow-sm">
+			<header className="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-sm">
 				<div className="flex justify-between items-center h-16 px-4 md:px-6 lg:px-12 w-full mx-auto">
 					{/* Brand — full lockup on desktop, logo only on mobile */}
 					<div className="flex items-center gap-8">
@@ -356,7 +356,7 @@ export default function TopNav() {
 								<span className="text-lg font-black tracking-tight text-[#FF5A2E] font-(family-name:--font-manrope)">
 									{tCommon("brandName")}
 								</span>
-								<span className="text-[10px] font-semibold text-black font-(family-name:--font-manrope)">
+								<span className="text-[10px] font-semibold text-on-surface-variant font-(family-name:--font-manrope)">
 									{tCommon("brandBy")}
 								</span>
 							</div>
@@ -373,7 +373,7 @@ export default function TopNav() {
 								<span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#FF5A2E_0%,#3b82f6_50%,#FF5A2E_100%)]" />
 								<Link
 									href="/tour-intelligence"
-									className="relative flex items-center justify-center gap-2 w-full h-full bg-white rounded-[9.5px] px-3 py-1.5 transition-colors group-hover:bg-orange-50/50"
+									className="relative flex items-center justify-center gap-2 w-full h-full bg-surface rounded-[9.5px] px-3 py-1.5 transition-colors group-hover:bg-primary/5"
 								>
 									<span
 										className="material-symbols-outlined text-sm text-[#FF5A2E]"
@@ -381,7 +381,7 @@ export default function TopNav() {
 									>
 										auto_awesome
 									</span>
-									<span className="font-(family-name:--font-manrope) font-semibold text-xs text-slate-700 whitespace-nowrap group-hover:text-[#FF5A2E] transition-colors">
+									<span className="font-(family-name:--font-manrope) font-semibold text-xs text-on-surface-variant whitespace-nowrap group-hover:text-primary transition-colors">
 										{t("tourIntelligence")}
 									</span>
 								</Link>
@@ -393,7 +393,7 @@ export default function TopNav() {
 							<button
 								type="button"
 								onClick={() => setLangOpen((v) => !v)}
-								className="flex items-center gap-0.5 text-xs font-semibold px-2 py-1 rounded-md border border-slate-200 hover:bg-slate-50 transition-colors uppercase"
+								className="flex items-center gap-0.5 text-xs font-semibold px-2 py-1 rounded-md border border-outline-variant/30 hover:bg-surface-container-low transition-colors uppercase"
 								aria-haspopup="listbox"
 								aria-expanded={langOpen}
 							>
@@ -411,7 +411,7 @@ export default function TopNav() {
 										aria-label="Close language menu"
 									/>
 									<div
-										className="absolute right-0 top-9 z-50 w-20 bg-white rounded-xl shadow-lg border border-slate-100 overflow-hidden"
+										className="absolute right-0 top-9 z-50 w-20 bg-surface-container-lowest rounded-xl shadow-lg border border-outline-variant/20 overflow-hidden"
 										role="listbox"
 									>
 										{(routing.locales as readonly string[]).map((l) => (
@@ -426,7 +426,7 @@ export default function TopNav() {
 													});
 													setLangOpen(false);
 												}}
-												className={`flex items-center justify-between w-full px-3 py-2 text-xs font-semibold uppercase hover:bg-slate-50 transition-colors ${locale === l ? "text-[#FF5A2E]" : "text-slate-600"}`}
+												className={`flex items-center justify-between w-full px-3 py-2 text-xs font-semibold uppercase hover:bg-surface-container-low transition-colors ${locale === l ? "text-primary" : "text-on-surface-variant"}`}
 											>
 												{l.toUpperCase()}
 												{locale === l && (
@@ -452,9 +452,9 @@ export default function TopNav() {
 									aria-label={t("openNotifications")}
 									aria-expanded={notifOpen}
 									onClick={() => setNotifOpen((v) => !v)}
-									className="p-2 hover:bg-slate-50/50 rounded-lg transition-all active:scale-95 relative"
+									className="p-2 hover:bg-surface-container-low rounded-lg transition-all active:scale-95 relative"
 								>
-									<span className="material-symbols-outlined text-[#494455]">
+									<span className="material-symbols-outlined text-on-surface-variant">
 										notifications
 									</span>
 									{hasUnread && (
@@ -470,10 +470,10 @@ export default function TopNav() {
 								type="button"
 								aria-label="Start page guide"
 								onClick={() => window.dispatchEvent(new CustomEvent("ts:start-tour"))}
-								className="p-2 hover:bg-slate-50/50 rounded-lg transition-all active:scale-95 hidden lg:flex items-center justify-center"
+								className="p-2 hover:bg-surface-container-low rounded-lg transition-all active:scale-95 hidden lg:flex items-center justify-center"
 								title="Page guide"
 							>
-								<span className="material-symbols-outlined text-[#FF5A2E] text-[20px]">
+								<span className="material-symbols-outlined text-primary text-[20px]">
 									travel_explore
 								</span>
 							</button>
@@ -505,13 +505,13 @@ export default function TopNav() {
 											className="fixed inset-0 z-40 w-full h-full cursor-default bg-transparent border-none"
 											onClick={() => setProfileOpen(false)}
 										/>
-										<div className="absolute right-0 top-10 z-50 w-44 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden">
+										<div className="absolute right-0 top-10 z-50 w-44 bg-surface-container-lowest rounded-2xl shadow-2xl border border-outline-variant/20 overflow-hidden">
 											<Link
 												href={profileHref}
 												onClick={() => setProfileOpen(false)}
-												className="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors font-(family-name:--font-manrope)"
+												className="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-on-surface-variant hover:bg-surface-container-low transition-colors font-(family-name:--font-manrope)"
 											>
-												<span className="material-symbols-outlined text-base text-[#494455]">
+												<span className="material-symbols-outlined text-base text-on-surface-variant">
 													person
 												</span>
 												{tCommon("profile")}
@@ -520,9 +520,9 @@ export default function TopNav() {
 												<Link
 													href="/settings"
 													onClick={() => setProfileOpen(false)}
-													className="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors font-(family-name:--font-manrope)"
+													className="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-on-surface-variant hover:bg-surface-container-low transition-colors font-(family-name:--font-manrope)"
 												>
-													<span className="material-symbols-outlined text-base text-[#494455]">
+													<span className="material-symbols-outlined text-base text-on-surface-variant">
 														settings
 													</span>
 													{tCommon("settings")}
@@ -534,9 +534,9 @@ export default function TopNav() {
 													setProfileOpen(false);
 													handleLogout();
 												}}
-												className="flex items-center gap-3 w-full px-4 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors font-(family-name:--font-manrope)"
+												className="flex items-center gap-3 w-full px-4 py-3 text-sm font-semibold text-on-surface-variant hover:bg-surface-container-low transition-colors font-(family-name:--font-manrope)"
 											>
-												<span className="material-symbols-outlined text-base text-[#494455]">
+												<span className="material-symbols-outlined text-base text-on-surface-variant">
 													logout
 												</span>
 												{tCommon("signOut")}
@@ -547,7 +547,7 @@ export default function TopNav() {
 							</div>
 						) : sessionPending ? (
 							<div
-								className="hidden lg:block h-9 w-9 rounded-full bg-slate-100 animate-pulse"
+								className="hidden lg:block h-9 w-9 rounded-full bg-surface-container animate-pulse"
 								aria-label={t("checkingSession")}
 								role="status"
 							/>
@@ -563,7 +563,7 @@ export default function TopNav() {
 						{/* Hamburger — mobile only */}
 						<button
 							type="button"
-							className="lg:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-700"
+							className="lg:hidden p-2 rounded-lg hover:bg-surface-container-low transition-colors text-on-surface-variant"
 							onClick={() => setMobileMenuOpen(true)}
 							aria-label="Open navigation menu"
 							aria-expanded={mobileMenuOpen}
@@ -587,13 +587,13 @@ export default function TopNav() {
 
 					{/* Drawer */}
 					<div
-						className="fixed left-0 top-0 h-full w-72 z-50 bg-white flex flex-col shadow-2xl lg:hidden"
+						className="fixed left-0 top-0 h-full w-72 z-50 bg-surface-container-lowest flex flex-col shadow-2xl lg:hidden"
 						role="dialog"
 						aria-modal="true"
 						aria-label="Navigation menu"
 					>
 						{/* Drawer header */}
-						<div className="flex items-center justify-between px-5 h-16 border-b border-slate-100 shrink-0">
+						<div className="flex items-center justify-between px-5 h-16 border-b border-outline-variant/20 shrink-0">
 							<Link
 								href="/"
 								className="flex items-center gap-2.5"
@@ -609,7 +609,7 @@ export default function TopNav() {
 									<span className="text-base font-black tracking-tight text-[#FF5A2E] font-(family-name:--font-manrope)">
 										{tCommon("brandName")}
 									</span>
-									<span className="text-[10px] font-semibold text-black/50 font-(family-name:--font-manrope)">
+									<span className="text-[10px] font-semibold text-on-surface-variant font-(family-name:--font-manrope)">
 										{tCommon("brandBy")}
 									</span>
 								</div>
@@ -617,7 +617,7 @@ export default function TopNav() {
 							<button
 								type="button"
 								onClick={() => setMobileMenuOpen(false)}
-								className="p-2 rounded-lg hover:bg-slate-100 transition-colors text-slate-400"
+								className="p-2 rounded-lg hover:bg-surface-container-low transition-colors text-on-surface-variant"
 								aria-label="Close navigation menu"
 							>
 								<span className="material-symbols-outlined">close</span>
@@ -625,7 +625,7 @@ export default function TopNav() {
 						</div>
 
 						{/* Language switcher */}
-						<div className="px-5 py-3 border-b border-slate-100 shrink-0">
+						<div className="px-5 py-3 border-b border-outline-variant/20 shrink-0">
 							<div className="flex gap-2">
 								{(routing.locales as readonly string[]).map((l) => (
 									<button
@@ -639,8 +639,8 @@ export default function TopNav() {
 									}}
 										className={`flex-1 py-2 rounded-lg text-xs font-semibold uppercase transition-colors ${
 											locale === l
-												? "bg-[#FF5A2E] text-white"
-												: "bg-slate-100 text-slate-600 hover:bg-slate-200"
+												? "bg-primary text-on-primary"
+												: "bg-surface-container text-on-surface-variant hover:bg-surface-container-high"
 										}`}
 									>
 										{l.toUpperCase()}
@@ -658,8 +658,8 @@ export default function TopNav() {
 									onClick={() => setMobileMenuOpen(false)}
 									className={`flex items-center gap-3 px-5 py-3 mx-2 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm transition-all ${
 										isNavActive(item.href)
-											? "bg-orange-50 text-[#FF5A2E]"
-											: "text-slate-600 hover:bg-slate-50"
+											? "bg-primary/10 text-primary"
+											: "text-on-surface-variant hover:bg-surface-container-low"
 									}`}
 								>
 									<span
@@ -685,7 +685,7 @@ export default function TopNav() {
 										<Link
 											href="/"
 											onClick={() => setMobileMenuOpen(false)}
-											className={`flex items-center gap-3 px-5 py-3 mx-2 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm transition-all ${pathname === "/" ? "bg-orange-50 text-[#FF5A2E]" : "text-slate-600 hover:bg-slate-50"}`}
+											className={`flex items-center gap-3 px-5 py-3 mx-2 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm transition-all ${pathname === "/" ? "bg-primary/10 text-primary" : "text-on-surface-variant hover:bg-surface-container-low"}`}
 										>
 											<span className="material-symbols-outlined">home</span>
 											<span>{t("home")}</span>
@@ -693,7 +693,7 @@ export default function TopNav() {
 										<Link
 											href="/join"
 											onClick={() => setMobileMenuOpen(false)}
-											className={`flex items-center gap-3 px-5 py-3 mx-2 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm transition-all ${pathname === "/join" ? "bg-orange-50 text-[#FF5A2E]" : "text-slate-600 hover:bg-slate-50"}`}
+											className={`flex items-center gap-3 px-5 py-3 mx-2 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm transition-all ${pathname === "/join" ? "bg-primary/10 text-primary" : "text-on-surface-variant hover:bg-surface-container-low"}`}
 										>
 											<span className="material-symbols-outlined">group_add</span>
 											<span>{t("join")}</span>
@@ -703,7 +703,7 @@ export default function TopNav() {
 						</nav>
 
 						{/* Account section */}
-						<div className="border-t border-slate-100 px-3 py-3 space-y-0.5 shrink-0">
+						<div className="border-t border-outline-variant/20 px-3 py-3 space-y-0.5 shrink-0">
 							{session?.user ? (
 								<>
 									{/* Notifications */}
@@ -713,9 +713,9 @@ export default function TopNav() {
 											setMobileMenuOpen(false);
 											setNotifOpen(true);
 										}}
-										className="flex items-center gap-3 w-full px-4 py-3 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm text-slate-600 hover:bg-slate-50 transition-colors"
+										className="flex items-center gap-3 w-full px-4 py-3 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
 									>
-										<span className="material-symbols-outlined text-[#494455]">
+										<span className="material-symbols-outlined text-on-surface-variant">
 											notifications
 										</span>
 										<span>{t("notifications")}</span>
@@ -730,9 +730,9 @@ export default function TopNav() {
 									<Link
 										href={profileHref}
 										onClick={() => setMobileMenuOpen(false)}
-										className="flex items-center gap-3 px-4 py-3 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm text-slate-600 hover:bg-slate-50 transition-colors"
+										className="flex items-center gap-3 px-4 py-3 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
 									>
-										<span className="material-symbols-outlined text-[#494455]">
+										<span className="material-symbols-outlined text-on-surface-variant">
 											person
 										</span>
 										<span>{tCommon("profile")}</span>
@@ -743,9 +743,9 @@ export default function TopNav() {
 										<Link
 											href="/settings"
 											onClick={() => setMobileMenuOpen(false)}
-											className="flex items-center gap-3 px-4 py-3 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm text-slate-600 hover:bg-slate-50 transition-colors"
+											className="flex items-center gap-3 px-4 py-3 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
 										>
-											<span className="material-symbols-outlined text-[#494455]">
+											<span className="material-symbols-outlined text-on-surface-variant">
 												settings
 											</span>
 											<span>{tCommon("settings")}</span>
@@ -792,17 +792,17 @@ export default function TopNav() {
 						onClick={() => setNotifOpen(false)}
 					/>
 					<div
-						className="fixed top-16 right-2 md:right-12 z-50 w-[calc(100vw-1rem)] sm:w-80 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden"
+						className="fixed top-16 right-2 md:right-12 z-50 w-[calc(100vw-1rem)] sm:w-80 bg-surface-container-lowest rounded-2xl shadow-2xl border border-outline-variant/20 overflow-hidden"
 						role="dialog"
 						aria-label={t("notifications")}
 					>
-						<div className="flex items-center justify-between px-5 py-4 border-b border-slate-100">
+						<div className="flex items-center justify-between px-5 py-4 border-b border-outline-variant/20">
 							<div className="flex items-center gap-2">
-								<h3 className="font-(family-name:--font-manrope) font-semibold text-sm text-slate-900">
+								<h3 className="font-(family-name:--font-manrope) font-semibold text-sm text-on-surface">
 									{t("notifications")}
 								</h3>
 								{hasUnread && (
-									<span className="min-w-[18px] h-[18px] px-1 rounded-full bg-[#FF5A2E] text-white text-[10px] flex items-center justify-center font-semibold">
+									<span className="min-w-[18px] h-[18px] px-1 rounded-full bg-primary text-on-primary text-[10px] flex items-center justify-center font-semibold">
 										{unreadCount}
 									</span>
 								)}
@@ -810,25 +810,25 @@ export default function TopNav() {
 							<button
 								type="button"
 								onClick={() => setNotifOpen(false)}
-								className="text-slate-400 hover:text-slate-600 transition-colors"
+								className="text-on-surface-variant hover:text-on-surface transition-colors"
 								aria-label={t("closeNotifications")}
 							>
 								<span className="material-symbols-outlined text-sm">close</span>
 							</button>
 						</div>
 						{notifications.length === 0 ? (
-							<p className="px-5 py-10 text-center text-sm text-slate-400">
+							<p className="px-5 py-10 text-center text-sm text-on-surface-variant">
 								{t("notif.empty")}
 							</p>
 						) : (
 							<>
-								<ul className="divide-y divide-slate-50">
+								<ul className="divide-y divide-outline-variant/10">
 									{notifications.map((n) => (
 										<li key={n.id}>
 											<Link
 												href={n.href}
 												onClick={() => setNotifOpen(false)}
-												className={`flex items-start gap-3 px-5 py-4 transition-colors ${n.unread ? "bg-orange-50 hover:bg-orange-100/60" : "hover:bg-slate-50"}`}
+												className={`flex items-start gap-3 px-5 py-4 transition-colors ${n.unread ? "bg-primary/5 hover:bg-primary/10" : "hover:bg-surface-container-low"}`}
 											>
 												<span
 													className={`material-symbols-outlined text-lg mt-0.5 shrink-0 ${n.color}`}
@@ -836,36 +836,36 @@ export default function TopNav() {
 													{n.icon}
 												</span>
 												<div className="flex-1 min-w-0">
-													<p className={`text-sm text-slate-900 truncate ${n.unread ? "font-semibold" : "font-semibold"}`}>
+													<p className={`text-sm text-on-surface truncate ${n.unread ? "font-semibold" : "font-semibold"}`}>
 														{n.title}
 													</p>
-													<p className="text-xs text-slate-500 mt-0.5">{n.body}</p>
+													<p className="text-xs text-on-surface-variant mt-0.5">{n.body}</p>
 												</div>
 												<div className="flex flex-col items-end gap-1.5 shrink-0">
 													{n.date && (
-														<span className="text-[10px] text-slate-400 font-medium mt-0.5">
+														<span className="text-[10px] text-on-surface-variant/70 font-medium mt-0.5">
 															{format.relativeTime(n.date, { now })}
 														</span>
 													)}
 													{n.unread && (
-														<span className="w-2 h-2 rounded-full bg-[#FF5A2E]" />
+														<span className="w-2 h-2 rounded-full bg-primary" />
 													)}
 												</div>
 											</Link>
 										</li>
 									))}
 								</ul>
-								<div className="px-5 py-3 border-t border-slate-100 flex items-center justify-between gap-4">
+								<div className="px-5 py-3 border-t border-outline-variant/20 flex items-center justify-between gap-4">
 									<button
 										type="button"
-										className="text-xs font-semibold text-[#FF5A2E] hover:underline"
+										className="text-xs font-semibold text-primary hover:underline"
 										onClick={markAllRead}
 									>
 										{t("markAllAsRead")}
 									</button>
 									<Link
 										href="/notifications"
-										className="text-xs font-semibold text-slate-500 hover:text-[#FF5A2E] transition-colors"
+										className="text-xs font-semibold text-on-surface-variant hover:text-primary transition-colors"
 										onClick={() => setNotifOpen(false)}
 									>
 										{t("viewAllNotifications")}
