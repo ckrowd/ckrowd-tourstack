@@ -10,6 +10,7 @@ import BankSelect, { type BankDetails } from "@/components/ui/BankSelect";
 import Button from "@/components/ui/Button";
 import FormattedNumberInput from "@/components/ui/FormattedNumberInput";
 import { Link } from "@/i18n/routing";
+import PageTour from "@/components/PageTour";
 
 type ArtistItem = NonNullable<Awaited<ReturnType<typeof getArtists>>["data"]>[number];
 
@@ -657,6 +658,7 @@ function EOIPageContent() {
 
 	return (
 		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
+			<PageTour pageId="eoi" />
 			<div className="w-full">
 				<header className="mb-8">
 					<span className="mb-2 block text-xs font-semibold uppercase tracking-[0.3em] text-[#FF5A2E]">{t("hero.platform")}</span>

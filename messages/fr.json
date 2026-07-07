@@ -3675,6 +3675,150 @@
         "title": "➕ Créer un nouveau",
         "description": "Utilisez le bouton 'Créer une tournée' pour ajouter un nouveau projet de tournée artiste au catalogue Découverte."
       }
+    },
+    "admin-artists": {
+      "step0": {
+        "title": "Bienvenue sur Roster & Artistes",
+        "description": "Ici, vous pouvez gérer les soumissions d'artistes et voir tous les artistes publiés."
+      },
+      "step1": {
+        "title": "Soumissions et Publiés",
+        "description": "Passez des soumissions en attente au catalogue d'artistes publiés."
+      },
+      "step2": {
+        "title": "Liste des Artistes",
+        "description": "Examinez, approuvez ou rejetez les artistes."
+      }
+    },
+    "admin-financing": {
+      "step0": {
+        "title": "Bienvenue sur Financement",
+        "description": "Ici, vous pouvez examiner et gérer les demandes de financement des promoteurs."
+      },
+      "step1": {
+        "title": "Liste des Demandes",
+        "description": "Consultez, transférez ou rejetez les demandes de financement."
+      }
+    },
+    "admin-insurance": {
+      "step0": {
+        "title": "Bienvenue sur Assurance",
+        "description": "Ici, vous pouvez examiner et gérer les demandes de couverture d'assurance."
+      },
+      "step1": {
+        "title": "Liste des Couvertures",
+        "description": "Consultez, transférez ou rejetez les demandes d'assurance."
+      }
+    },
+    "admin-claims": {
+      "step0": {
+        "title": "Bienvenue sur Réclamations",
+        "description": "Ici, vous pouvez suivre et gérer les réclamations d'assurance déposées par les promoteurs."
+      },
+      "step1": {
+        "title": "Registre des Réclamations",
+        "description": "Suivez le statut des réclamations ouvertes et réglées."
+      }
+    },
+    "admin-tickets": {
+      "step0": {
+        "title": "Bienvenue sur Billetterie",
+        "description": "Ici, vous pouvez voir tous les événements billettés et leurs performances de vente."
+      },
+      "step1": {
+        "title": "Événements et Ventes",
+        "description": "Surveillez les allocations de billets et les revenus des tournées."
+      }
+    },
+    "admin-directory": {
+      "step0": {
+        "title": "Bienvenue sur Annuaire",
+        "description": "Ici, vous pouvez voir l'annuaire complet des acteurs de l'industrie."
+      },
+      "step1": {
+        "title": "Liste des Acteurs",
+        "description": "Filtrez par catégorie et exportez les coordonnées."
+      }
+    },
+    "admin-reports": {
+      "step0": {
+        "title": "Bienvenue sur Rapports",
+        "description": "Ici, vous pouvez voir les analyses de haut niveau et exporter les rapports de la plateforme."
+      },
+      "step1": {
+        "title": "Indicateurs de Tableau de Bord",
+        "description": "Examinez les indicateurs clés de performance et leurs répartitions."
+      },
+      "step2": {
+        "title": "Exporter les Rapports",
+        "description": "Téléchargez un rapport de l'activité de la plateforme pour une consultation ou un partage hors ligne."
+      }
+    },
+    "tickets": {
+      "step0": {
+        "title": "Bienvenue sur la Billetterie",
+        "description": "Gérez vos événements et suivez les ventes de billets."
+      },
+      "step1": {
+        "title": "Créer et Gérer",
+        "description": "Créez de nouveaux événements, définissez les allocations et publiez-les."
+      },
+      "step2": {
+        "title": "Tableau de Bord des Ventes",
+        "description": "Consultez les ventes en temps réel et la capacité restante de vos événements."
+      }
+    },
+    "stakeholders": {
+      "step0": {
+        "title": "Bienvenue sur les Partenaires",
+        "description": "Gérez vos invitations et l'intégration de vos partenaires et équipes."
+      },
+      "step1": {
+        "title": "Liens d'Invitation",
+        "description": "Générez et partagez des liens d'intégration sécurisés avec votre équipe."
+      },
+      "step2": {
+        "title": "Soumissions",
+        "description": "Suivez le statut de tous les partenaires intégrés."
+      }
+    },
+    "tour-intelligence": {
+      "step0": {
+        "title": "Bienvenue sur Tour Intelligence",
+        "description": "Accédez à des outils d'IA pour prévoir les revenus et attirer des sponsors."
+      },
+      "step1": {
+        "title": "Outils IA",
+        "description": "Basculez entre les prévisions de revenus, les présentations de sponsoring et les outils d'optimisation."
+      },
+      "step2": {
+        "title": "Panneau d'Informations",
+        "description": "Exécutez des modèles d'IA et consultez des informations exploitables pour vos tournées."
+      }
+    },
+    "profile": {
+      "step0": {
+        "title": "Bienvenue sur votre Profil",
+        "description": "Complétez votre profil pour instaurer la confiance et passer les contrôles de conformité."
+      },
+      "step1": {
+        "title": "Logo de l'Entreprise",
+        "description": "Téléchargez un logo professionnel pour représenter votre marque sur la plateforme."
+      },
+      "step2": {
+        "title": "Détails de l'Entreprise",
+        "description": "Assurez-vous que vos informations légales et opérationnelles sont exactes."
+      }
+    },
+    "settings": {
+      "step0": {
+        "title": "Paramètres de la Plateforme",
+        "description": "Configurez les préférences et la sécurité de votre compte."
+      },
+      "step1": {
+        "title": "Navigation des Paramètres",
+        "description": "Gérez la facturation, les notifications et les préférences de lieu."
+      }
     }
   },
   "Tour": {

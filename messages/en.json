@@ -3675,6 +3675,150 @@
         "title": "➕ Create New",
         "description": "Use the 'Create Tour' button to add a new artist tour project to the Discovery catalog."
       }
+    },
+    "admin-artists": {
+      "step0": {
+        "title": "Welcome to Roster & Artists",
+        "description": "Here you can manage artist submissions and view all published artists."
+      },
+      "step1": {
+        "title": "Submissions & Published",
+        "description": "Switch between pending submissions and the roster of published artists."
+      },
+      "step2": {
+        "title": "Artist List",
+        "description": "Review, approve, or reject artists."
+      }
+    },
+    "admin-financing": {
+      "step0": {
+        "title": "Welcome to Financing",
+        "description": "Here you can review and manage financing requests from promoters."
+      },
+      "step1": {
+        "title": "Applications List",
+        "description": "View, forward, or reject financing applications."
+      }
+    },
+    "admin-insurance": {
+      "step0": {
+        "title": "Welcome to Insurance",
+        "description": "Here you can review and manage insurance coverage requests."
+      },
+      "step1": {
+        "title": "Coverage List",
+        "description": "View, forward, or reject insurance requests."
+      }
+    },
+    "admin-claims": {
+      "step0": {
+        "title": "Welcome to Claims",
+        "description": "Here you can monitor and manage insurance claims filed by promoters."
+      },
+      "step1": {
+        "title": "Claims Register",
+        "description": "Track the status of open and settled claims."
+      }
+    },
+    "admin-tickets": {
+      "step0": {
+        "title": "Welcome to Ticketing",
+        "description": "Here you can view all ticketed events and their sales performance."
+      },
+      "step1": {
+        "title": "Events & Sales",
+        "description": "Monitor ticket allocations and revenue across tours."
+      }
+    },
+    "admin-directory": {
+      "step0": {
+        "title": "Welcome to Directory",
+        "description": "Here you can view the complete directory of industry stakeholders."
+      },
+      "step1": {
+        "title": "Stakeholder List",
+        "description": "Filter by category and export contact details."
+      }
+    },
+    "admin-reports": {
+      "step0": {
+        "title": "Welcome to Reports",
+        "description": "Here you can view high-level analytics and export platform reports."
+      },
+      "step1": {
+        "title": "Dashboard Metrics",
+        "description": "Review key performance indicators and breakdowns."
+      },
+      "step2": {
+        "title": "Export Reports",
+        "description": "Download a report of platform activity for offline review or sharing."
+      }
+    },
+    "tickets": {
+      "step0": {
+        "title": "Welcome to Ticketing",
+        "description": "Here you can manage your events and track ticket sales."
+      },
+      "step1": {
+        "title": "Create & Manage",
+        "description": "Create new events, set ticket allocations, and publish them."
+      },
+      "step2": {
+        "title": "Sales Dashboard",
+        "description": "View real-time sales and remaining capacity for your events."
+      }
+    },
+    "stakeholders": {
+      "step0": {
+        "title": "Welcome to Stakeholders",
+        "description": "Manage your invitations and onboarding for partners and crew."
+      },
+      "step1": {
+        "title": "Invite Links",
+        "description": "Generate and share secure onboarding links with your team."
+      },
+      "step2": {
+        "title": "Submissions",
+        "description": "Track the status of all onboarded stakeholders."
+      }
+    },
+    "tour-intelligence": {
+      "step0": {
+        "title": "Welcome to Tour Intelligence",
+        "description": "Access powerful AI tools to forecast revenue and attract sponsors."
+      },
+      "step1": {
+        "title": "AI Tools",
+        "description": "Switch between revenue forecasting, sponsorship decks, and optimization tools."
+      },
+      "step2": {
+        "title": "Insight Panel",
+        "description": "Run AI models and view actionable insights for your tours."
+      }
+    },
+    "profile": {
+      "step0": {
+        "title": "Welcome to your Profile",
+        "description": "Complete your profile to build trust and pass compliance checks."
+      },
+      "step1": {
+        "title": "Company Logo",
+        "description": "Upload a professional logo to represent your brand across the platform."
+      },
+      "step2": {
+        "title": "Company Details",
+        "description": "Ensure your legal and operational information is accurate."
+      }
+    },
+    "settings": {
+      "step0": {
+        "title": "Platform Settings",
+        "description": "Configure your account preferences and security."
+      },
+      "step1": {
+        "title": "Settings Navigation",
+        "description": "Manage billing, notifications, and venue preferences."
+      }
     }
   },
   "Tour": {

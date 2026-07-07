@@ -1,7 +1,7 @@
 "use client";
 
 import type { DriveStep } from "driver.js";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { applyTourStyles } from "@/lib/tour-styles";
 import { useSession } from "@/context/AuthContext";
@@ -26,7 +26,19 @@ export type PageTourId =
 	| "dashboard"
 	| "admin-dashboard"
 	| "admin-eoi"
-	| "admin-tours";
+	| "admin-tours"
+	| "stakeholders"
+	| "tickets"
+	| "tour-intelligence"
+	| "profile"
+	| "settings"
+	| "admin-artists"
+	| "admin-financing"
+	| "admin-insurance"
+	| "admin-claims"
+	| "admin-tickets"
+	| "admin-directory"
+	| "admin-reports";
 
 function buildSteps(
 	pageId: PageTourId,
@@ -84,6 +96,34 @@ function buildSteps(
 			return [step(0), step(1, '[data-tour="admin-eoi-list"]'), step(2)];
 		case "admin-tours":
 			return [step(0), step(1, '[data-tour="admin-tours-list"]'), step(2)];
+		case "stakeholders":
+			return [step(0), step(1, '[data-tour="stakeholders-invite"]'), step(2, '[data-tour="stakeholders-submissions"]')];
+		case "tickets":
+			return [step(0), step(1, '[data-tour="tickets-create"]'), step(2, '[data-tour="tickets-list"]')];
+		case "tour-intelligence":
+			return [step(0), step(1, '[data-tour="ai-tools-tabs"]'), step(2, '[data-tour="ai-tools-panel"]')];
+		case "profile":
+			return [step(0), step(1, '[data-tour="profile-logo"]'), step(2, '[data-tour="profile-company"]')];
+		case "settings":
+			return [step(0), step(1, '[data-tour="settings-tabs"]')];
+		case "admin-artists":
+			return [step(0), step(1, '[data-tour="admin-artists-tabs"]'), step(2, '[data-tour="admin-artists-list"]')];
+		case "admin-financing":
+			return [step(0), step(1, '[data-tour="admin-financing-list"]')];
+		case "admin-insurance":
+			return [step(0), step(1, '[data-tour="admin-insurance-list"]')];
+		case "admin-claims":
+			return [step(0), step(1, '[data-tour="admin-claims-list"]')];
+		case "admin-tickets":
+			return [step(0), step(1, '[data-tour="admin-tickets-list"]')];
+		case "admin-directory":
+			return [step(0), step(1, '[data-tour="admin-directory-list"]')];
+		case "admin-reports":
+			return [
+				step(0),
+				step(1, '[data-tour="admin-reports-dashboard"]'),
+				step(2, '[data-tour="admin-reports-actions"]'),
+			];
 		default:
 			return [step(0)];
 	}
@@ -102,6 +142,8 @@ export default function PageTour({ pageId }: { pageId: PageTourId }) {
 	const { data: session } = useSession();
 	const userId = session?.user?.id as string | undefined;
 
+	const driverRef = useRef<{ destroy: () => void } | null>(null);
+
 	const steps = useMemo(() => buildSteps(pageId, t), [pageId, t]);
 
 	// Build the driver.js progress template in code — ICU/next-intl cannot
@@ -112,6 +154,10 @@ export default function PageTour({ pageId }: { pageId: PageTourId }) {
 	const startTour = useCallback(async () => {
 		const { driver } = await import("driver.js");
 		const storageKey = makeStorageKey(pageId, userId);
+
+		if (driverRef.current) {
+			driverRef.current.destroy();
+		}
 
 		const driverObj = driver({
 			showProgress: true,
@@ -128,8 +174,11 @@ export default function PageTour({ pageId }: { pageId: PageTourId }) {
 			onDestroyStarted: () => {
 				localStorage.setItem(storageKey, "1");
 				driverObj.destroy();
+				driverRef.current = null;
 			},
 		});
+
+		driverRef.current = driverObj;
 		driverObj.drive();
 	}, [steps, pageId, userId, progressTemplate, tTour]);
 
@@ -151,6 +200,16 @@ export default function PageTour({ pageId }: { pageId: PageTourId }) {
 		window.addEventListener("ts:start-tour", handler);
 		return () => window.removeEventListener("ts:start-tour", handler);
 	}, [startTour]);
+
+	// Cleanup on unmount
+	useEffect(() => {
+		return () => {
+			if (driverRef.current) {
+				driverRef.current.destroy();
+				driverRef.current = null;
+			}
+		};
+	}, []);
 
 	return null;
 }
