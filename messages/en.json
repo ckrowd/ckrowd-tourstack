@@ -6282,6 +6282,7 @@
       "explore": "Explore",
       "faq": "FAQ",
       "contactSales": "Contact sales",
+      "signIn": "Sign in",
       "join": "Join TourStack",
       "byCkrowd": "by Ckrowd"
     },
@@ -6768,6 +6769,10 @@
 	"OnboardingWizard": {
 		"back": "Back",
 		"backToSite": "Back to site",
+		"changeRole": "Change role",
+		"continueDashboard": "Continue to dashboard",
+		"haveAccount": "Already have an account?",
+		"signIn": "Sign in",
 		"continue": "Continue",
 		"progress": "Step {current} of {total}",
 		"stepShort": {

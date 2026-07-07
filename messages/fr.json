@@ -6296,6 +6296,7 @@
       "explore": "Explorer",
       "faq": "FAQ",
       "contactSales": "Contacter l'équipe commerciale",
+      "signIn": "Se connecter",
       "join": "Rejoindre TourStack",
       "byCkrowd": "par Ckrowd"
     },
@@ -6782,6 +6783,10 @@
 	"OnboardingWizard": {
 		"back": "Retour",
 		"backToSite": "Retour au site",
+		"changeRole": "Changer de rôle",
+		"continueDashboard": "Continuer vers le tableau de bord",
+		"haveAccount": "Vous avez déjà un compte ?",
+		"signIn": "Se connecter",
 		"continue": "Continuer",
 		"progress": "Étape {current} sur {total}",
 		"stepShort": {

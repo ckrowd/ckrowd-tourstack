@@ -1,4 +1,5 @@
-﻿import Image from "next/image";
+﻿import { redirect } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import Footer from "@/components/Footer";
@@ -14,6 +15,13 @@ export default async function JoinPage({ params, searchParams }: Props) {
 	const { locale } = await params;
 	const { s, w, a } = await searchParams;
 	setRequestLocale(locale);
+
+	// The self-serve role chooser now lives in the /get-started wizard. Untokened
+	// visitors are sent there; tokened links (promoter-attributed onboarding)
+	// keep working and continue to render this page.
+	if (!s && !w && !a) {
+		redirect(`/${locale}/get-started`);
+	}
 
 	const t = await getTranslations("JoinPage");
 
