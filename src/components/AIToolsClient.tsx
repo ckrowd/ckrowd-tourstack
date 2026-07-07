@@ -461,7 +461,7 @@ export default function AIToolsClient({ eois }: { eois: EOI[] }) {
 	return (
 		<div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
 			{/* Tab sidebar */}
-			<nav className="lg:col-span-3 flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-1 lg:pb-0">
+			<nav data-tour="ai-tools-tabs" className="lg:col-span-3 flex lg:flex-col gap-2 overflow-x-auto lg:overflow-visible pb-1 lg:pb-0">
 				{TABS.map((tab) => (
 					<button
 						key={tab.key}
@@ -485,7 +485,7 @@ export default function AIToolsClient({ eois }: { eois: EOI[] }) {
 			</nav>
 
 			{/* Active panel */}
-			<div className="lg:col-span-9 bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+			<div data-tour="ai-tools-panel" className="lg:col-span-9 bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
 				<h2 className="font-(family-name:--font-manrope) font-extrabold text-xl text-on-surface mb-1">
 					{t(`tabs.${activeTab}.label`)}
 				</h2>

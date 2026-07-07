@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import { getStakeholders } from "@/app/actions";
 import { downloadCsv } from "@/lib/csv";
 import Loader from "@/components/Loader";
+import PageTour from "@/components/PageTour";
 
 type Category = "service" | "workforce" | "artmgmt";
 
@@ -186,6 +187,7 @@ export default function AdminDirectoryPage() {
 
 	return (
 		<div className="w-full">
+			<PageTour pageId="admin-directory" />
 			<header className="mb-8">
 				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-3">
 					{t("tagline")}
@@ -243,6 +245,7 @@ export default function AdminDirectoryPage() {
 				</button>
 			</div>
 
+			<div data-tour="admin-directory-list">
 			{isLoading ? (
 				<div className="bg-surface-container-lowest rounded-2xl border border-outline-variant/10">
 					<Loader />
@@ -336,6 +339,7 @@ export default function AdminDirectoryPage() {
 					</table>
 				</div>
 			)}
+			</div>
 		</div>
 	);
 }

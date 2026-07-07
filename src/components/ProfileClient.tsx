@@ -10,18 +10,21 @@ import BankSelect from "@/components/ui/BankSelect";
 import CurrencySelect from "@/components/ui/CurrencySelect";
 import DatePicker from "@/components/ui/DatePicker";
 import FormattedNumberInput from "@/components/ui/FormattedNumberInput";
+import PageTour from "@/components/PageTour";
 
 function Section({
 	title,
 	description,
 	children,
+	dataTour,
 }: {
 	title: string;
 	description?: string;
 	children: React.ReactNode;
+	dataTour?: string;
 }) {
 	return (
-		<div className="bg-surface-container-lowest rounded-2xl p-8 shadow-sm space-y-6">
+		<div data-tour={dataTour} className="bg-surface-container-lowest rounded-2xl p-8 shadow-sm space-y-6">
 			<div className="border-b border-outline-variant/20 pb-4">
 				<h3 className="font-(family-name:--font-manrope) font-semibold text-lg text-on-surface">
 					{title}
@@ -430,6 +433,7 @@ export default function ProfileClient() {
 
 	return (
 		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
+			<PageTour pageId="profile" />
 			{isSetup && (
 				<div className="mb-6 bg-[#FF5A2E]/10 border border-[#FF5A2E]/20 rounded-2xl p-5 flex items-start gap-4">
 					<span
@@ -461,7 +465,7 @@ export default function ProfileClient() {
 
 			<div className="space-y-6">
 				{/* Logo Upload */}
-				<div className="bg-surface-container-lowest rounded-2xl p-8 shadow-sm">
+				<div data-tour="profile-logo" className="bg-surface-container-lowest rounded-2xl p-8 shadow-sm">
 					<div className="border-b border-outline-variant/20 pb-4 mb-6">
 						<h3 className="font-(family-name:--font-manrope) font-semibold text-lg text-on-surface">
 							{t("logo.label")}
@@ -531,7 +535,7 @@ export default function ProfileClient() {
 				</div>
 
 				{/* 1. Company Information */}
-				<Section title={t("companyInfo.title")} description={t("companyInfo.description")}>
+				<Section dataTour="profile-company" title={t("companyInfo.title")} description={t("companyInfo.description")}>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 						<Field
 							label={t("companyInfo.fields.companyName")}

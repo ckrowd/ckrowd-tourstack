@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useParams, useRouter } from "next/navigation";
 import { listTicketEvents, publishTicketEvent, closeTicketEvent } from "@/app/actions";
+import PageTour from "@/components/PageTour";
 
 export default function TicketsDashboardPage() {
 	const t = useTranslations("TicketsDashboardPage");
@@ -41,6 +42,7 @@ export default function TicketsDashboardPage() {
 
 	return (
 		<div className="p-6 max-w-6xl mx-auto">
+			<PageTour pageId="tickets" />
 			<div className="flex items-start justify-between mb-8">
 				<div>
 					<p className="text-xs font-black uppercase tracking-widest text-[#FF5A2E] mb-1">
@@ -51,6 +53,7 @@ export default function TicketsDashboardPage() {
 				</div>
 				<button
 					type="button"
+					data-tour="tickets-create"
 					onClick={() => router.push(`/${locale}/dashboard/tickets/create`)}
 					className="bg-[#FF5A2E] text-white font-bold text-sm px-4 py-2.5 rounded-xl hover:opacity-90 transition"
 				>
@@ -69,7 +72,7 @@ export default function TicketsDashboardPage() {
 			)}
 
 			{!isLoading && events.length > 0 && (
-				<div className="bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant">
+				<div data-tour="tickets-list" className="bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant">
 					<table className="w-full text-sm">
 						<thead>
 							<tr className="border-b border-outline-variant bg-surface-container">

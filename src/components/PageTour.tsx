@@ -160,6 +160,7 @@ export default function PageTour({ pageId }: { pageId: PageTourId }) {
 		}
 
 		const driverObj = driver({
+			animate: true,
 			showProgress: true,
 			allowClose: true,
 			overlayOpacity: 0.5,

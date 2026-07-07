@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { useCallback, useEffect, useState } from "react";
 import Loader from "@/components/Loader";
+import PageTour from "@/components/PageTour";
 import {
 	createOnboardingLink,
 	exportStakeholders,
@@ -286,6 +287,7 @@ export default function StakeholdersClient() {
 	return (
 		<>
 			<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
+				<PageTour pageId="stakeholders" />
 				<div className="w-full space-y-10">
 
 					{/* Header */}
@@ -313,7 +315,7 @@ export default function StakeholdersClient() {
 					</header>
 
 					{/* ── Invite Ecosystem banner ──────────────────────────────── */}
-					<section className="rounded-2xl overflow-hidden shadow-md">
+					<section data-tour="stakeholders-invite" className="rounded-2xl overflow-hidden shadow-md">
 						<div className="bg-gradient-to-r from-[#FF5A2E] to-[#cc4826] p-6 text-white">
 							<div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
 								<div className="flex items-start gap-4">
@@ -372,7 +374,7 @@ export default function StakeholdersClient() {
 					</section>
 
 					{/* ── Submissions ──────────────────────────────────────────── */}
-					<section className="bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/10">
+					<section data-tour="stakeholders-submissions" className="bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/10">
 						<div className="p-6 border-b border-outline-variant/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 							<h2 className="font-(family-name:--font-manrope) text-xl font-semibold flex items-center gap-2">
 								{t("submissions.title")}

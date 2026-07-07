@@ -6,6 +6,7 @@ import SettingsBillingTab from "@/components/SettingsBillingTab";
 import SettingsNotificationsTab from "@/components/SettingsNotificationsTab";
 import SettingsSecurityTab from "@/components/SettingsSecurityTab";
 import SettingsVenueTab from "@/components/SettingsVenueTab";
+import PageTour from "@/components/PageTour";
 
 type Tab = "venue" | "notifications" | "billing" | "security";
 
@@ -33,6 +34,7 @@ export default function SettingsClient() {
 
 	return (
 		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
+			<PageTour pageId="settings" />
 			{/* Header */}
 			<div className="mb-8">
 				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
@@ -47,7 +49,7 @@ export default function SettingsClient() {
 			</div>
 
 			{/* Tabs */}
-			<div className="flex gap-1 bg-surface-container-lowest rounded-xl p-1 mb-8 w-fit shadow-sm flex-wrap">
+			<div data-tour="settings-tabs" className="flex gap-1 bg-surface-container-lowest rounded-xl p-1 mb-8 w-fit shadow-sm flex-wrap">
 				{tabs.map((tab) => (
 					<button
 						key={tab.key}

@@ -101,6 +101,7 @@ export default function TourGuide({ tourId }: { tourId: TourId }) {
 		const key = storageKey(tourId, userId);
 
 		const driverObj = driver({
+			animate: true,
 			showProgress: true,
 			allowClose: true,
 			overlayOpacity: 0.55,

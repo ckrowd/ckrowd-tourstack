@@ -154,6 +154,7 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 				<div className="flex items-center gap-2 flex-wrap">
 					<button
 						type="button"
+						data-tour="insurance-products"
 						onClick={() => setProductsOpen(true)}
 						className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-semibold hover:bg-surface-container-high transition-colors"
 					>
