@@ -29,12 +29,12 @@ export default function ForgotPasswordPage() {
 					<div className="flex items-center justify-center mb-6">
 						<AuthBrandLockup />
 					</div>
-					<p className="mt-2 text-sm text-slate-500 font-medium">
+					<p className="mt-2 text-sm text-on-surface-variant font-medium">
 						{t("subtitle")}
 					</p>
 				</div>
 
-				<div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+				<div className="bg-surface rounded-2xl shadow-sm border border-outline-variant/30 p-8">
 					{submitted ? (
 						<div className="text-center">
 							<div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-full bg-green-50 text-green-600">
@@ -45,10 +45,10 @@ export default function ForgotPasswordPage() {
 									mark_email_read
 								</span>
 							</div>
-							<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-slate-900 mb-2">
+							<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-on-surface mb-2">
 								{t("sentTitle")}
 							</h1>
-							<p className="text-sm text-slate-500 mb-6">{t("sentBody")}</p>
+							<p className="text-sm text-on-surface-variant mb-6">{t("sentBody")}</p>
 							<Link
 								href="/login"
 								className="inline-block text-[#FF5A2E] font-semibold hover:underline text-sm"
@@ -59,10 +59,10 @@ export default function ForgotPasswordPage() {
 					) : (
 						<>
 							<div className="mb-8">
-								<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-slate-900 mb-1">
+								<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-on-surface mb-1">
 									{t("title")}
 								</h1>
-								<p className="text-sm text-slate-500">{t("description")}</p>
+								<p className="text-sm text-on-surface-variant">{t("description")}</p>
 							</div>
 
 							<form
@@ -75,7 +75,7 @@ export default function ForgotPasswordPage() {
 								<div>
 									<label
 										htmlFor="email"
-										className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
+										className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2"
 									>
 										{t("email")}
 									</label>
@@ -87,7 +87,7 @@ export default function ForgotPasswordPage() {
 										value={email}
 										onChange={(event) => setEmail(event.target.value)}
 										required
-										className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
+										className="w-full px-4 py-3 bg-surface-container-low border border-outline-variant/30 rounded-xl text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
 									/>
 								</div>
 
@@ -106,7 +106,7 @@ export default function ForgotPasswordPage() {
 								</button>
 							</form>
 
-							<p className="text-center text-sm text-slate-500 mt-6">
+							<p className="text-center text-sm text-on-surface-variant mt-6">
 								<Link
 									href="/login"
 									className="text-[#FF5A2E] font-semibold hover:underline"

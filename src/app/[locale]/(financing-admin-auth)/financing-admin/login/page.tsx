@@ -70,23 +70,23 @@ function FinancingAdminLoginContent() {
 					<div className="flex items-center justify-center mb-6">
 						<AuthBrandLockup />
 					</div>
-					<p className="mt-2 text-xs font-semibold uppercase tracking-widest text-slate-400">
+					<p className="mt-2 text-xs font-semibold uppercase tracking-widest text-on-surface-variant/50">
 						{t("portal")}
 					</p>
-					<p className="mt-2 text-sm text-slate-500 font-medium">
+					<p className="mt-2 text-sm text-on-surface-variant font-medium">
 						{t("description")}
 					</p>
 				</div>
 
-				<div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+				<div className="bg-surface rounded-2xl shadow-sm border border-outline-variant/30 p-8">
 					<div className="mb-8">
 						<p className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] mb-2">
 							{t("badge")}
 						</p>
-						<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-slate-900 mb-1">
+						<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-on-surface mb-1">
 							{t("title")}
 						</h1>
-						<p className="text-sm text-slate-500">
+						<p className="text-sm text-on-surface-variant">
 							{t("description")}
 						</p>
 					</div>
@@ -95,7 +95,7 @@ function FinancingAdminLoginContent() {
 						<div>
 							<label
 								htmlFor="finance-admin-email"
-								className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
+								className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2"
 							>
 								{t("email")}
 							</label>
@@ -107,14 +107,14 @@ function FinancingAdminLoginContent() {
 								value={email}
 								onChange={(event) => setEmail(event.target.value)}
 								required
-								className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
+								className="w-full px-4 py-3 bg-surface-container-low border border-outline-variant/30 rounded-xl text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
 							/>
 						</div>
 
 						<div>
 							<label
 								htmlFor="finance-admin-password"
-								className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
+								className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2"
 							>
 								{t("password")}
 							</label>
@@ -126,7 +126,7 @@ function FinancingAdminLoginContent() {
 								value={password}
 								onChange={(event) => setPassword(event.target.value)}
 								required
-								className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
+								className="w-full px-4 py-3 bg-surface-container-low border border-outline-variant/30 rounded-xl text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
 							/>
 							<div className="flex justify-end mt-2">
 								<Link
@@ -154,7 +154,7 @@ function FinancingAdminLoginContent() {
 					</form>
 				</div>
 
-				<p className="text-center text-xs text-slate-400 mt-6">
+				<p className="text-center text-xs text-on-surface-variant/50 mt-6">
 					{t("footer")}
 				</p>
 			</div>

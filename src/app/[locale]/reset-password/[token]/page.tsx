@@ -55,24 +55,24 @@ export default function ResetPasswordPage({
 					<div className="flex items-center justify-center mb-6">
 						<AuthBrandLockup />
 					</div>
-					<p className="mt-2 text-sm text-slate-500 font-medium">
+					<p className="mt-2 text-sm text-on-surface-variant font-medium">
 						{t("subtitle")}
 					</p>
 				</div>
 
-				<div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+				<div className="bg-surface rounded-2xl shadow-sm border border-outline-variant/30 p-8">
 					<div className="mb-8">
-						<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-slate-900 mb-1">
+						<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-on-surface mb-1">
 							{t("title")}
 						</h1>
-						<p className="text-sm text-slate-500">{t("description")}</p>
+						<p className="text-sm text-on-surface-variant">{t("description")}</p>
 					</div>
 
 					<form onSubmit={handleSubmit} className="space-y-5">
 						<div>
 							<label
 								htmlFor="password"
-								className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
+								className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2"
 							>
 								{t("password")}
 							</label>
@@ -85,7 +85,7 @@ export default function ResetPasswordPage({
 								onChange={(event) => setPassword(event.target.value)}
 								required
 								minLength={8}
-								className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
+								className="w-full px-4 py-3 bg-surface-container-low border border-outline-variant/30 rounded-xl text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
 							/>
 							{tooShort && (
 								<p className="mt-1.5 text-xs text-amber-600">{t("tooShort")}</p>
@@ -95,7 +95,7 @@ export default function ResetPasswordPage({
 						<div>
 							<label
 								htmlFor="confirm"
-								className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
+								className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2"
 							>
 								{t("confirm")}
 							</label>
@@ -107,7 +107,7 @@ export default function ResetPasswordPage({
 								value={confirm}
 								onChange={(event) => setConfirm(event.target.value)}
 								required
-								className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
+								className="w-full px-4 py-3 bg-surface-container-low border border-outline-variant/30 rounded-xl text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
 							/>
 							{mismatch && (
 								<p className="mt-1.5 text-xs text-amber-600">{t("mismatch")}</p>
@@ -129,7 +129,7 @@ export default function ResetPasswordPage({
 						</button>
 					</form>
 
-					<p className="text-center text-sm text-slate-500 mt-6">
+					<p className="text-center text-sm text-on-surface-variant mt-6">
 						<Link
 							href="/login"
 							className="text-[#FF5A2E] font-semibold hover:underline"

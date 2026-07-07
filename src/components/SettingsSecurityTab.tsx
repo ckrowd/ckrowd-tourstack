@@ -351,29 +351,29 @@ export default function SettingsSecurityTab() {
 
 			<Section title={t("dangerZone.title")}>
 				{!showDeleteConfirm ? (
-					<div className="flex items-center justify-between p-5 bg-red-50 rounded-xl border border-red-100">
+					<div className="flex items-center justify-between p-5 bg-red-50 dark:bg-red-950/30 rounded-xl border border-red-100 dark:border-red-900/50">
 						<div>
-							<p className="font-semibold text-sm text-red-800">
+							<p className="font-semibold text-sm text-red-800 dark:text-red-400">
 								{t("dangerZone.delete.title")}
 							</p>
-							<p className="text-xs text-red-600 mt-0.5">
+							<p className="text-xs text-red-600 dark:text-red-500 mt-0.5">
 								{t("dangerZone.delete.description")}
 							</p>
 						</div>
 						<button
 							type="button"
 							onClick={() => setShowDeleteConfirm(true)}
-							className="text-sm font-semibold text-red-600 border border-red-300 px-4 py-2 rounded-lg hover:bg-red-100 transition-colors"
+							className="text-sm font-semibold text-red-600 dark:text-red-400 border border-red-300 dark:border-red-800 px-4 py-2 rounded-lg hover:bg-red-100 dark:hover:bg-red-900/50 transition-colors"
 						>
 							{t("dangerZone.actions.delete")}
 						</button>
 					</div>
 				) : (
-					<div className="rounded-xl border border-red-200 bg-red-50 p-5 space-y-4">
-						<p className="text-sm font-semibold text-red-800">
+					<div className="rounded-xl border border-red-200 dark:border-red-900/50 bg-red-50 dark:bg-red-950/30 p-5 space-y-4">
+						<p className="text-sm font-semibold text-red-800 dark:text-red-400">
 							{t("dangerZone.delete.title")}
 						</p>
-						<p className="text-xs text-red-600">
+						<p className="text-xs text-red-600 dark:text-red-500">
 							{t("dangerZone.confirm.instruction")}
 						</p>
 						<input
@@ -381,7 +381,7 @@ export default function SettingsSecurityTab() {
 							value={confirmEmail}
 							onChange={(e) => setConfirmEmail(e.target.value)}
 							placeholder={t("dangerZone.confirm.emailPlaceholder")}
-							className="w-full bg-white border border-red-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-300"
+							className="w-full bg-white dark:bg-surface border border-red-200 dark:border-red-900/50 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-500 dark:focus:ring-red-400"
 						/>
 						{deleteMutation.data && !deleteMutation.data.success && (
 							<p className="text-xs text-red-600">{deleteMutation.data.error}</p>

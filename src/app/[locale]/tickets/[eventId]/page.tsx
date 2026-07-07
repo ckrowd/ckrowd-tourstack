@@ -9,19 +9,19 @@ import { getPublicTicketEvent, initiateTicketPurchase } from "@/app/actions";
 
 function TicketHeader({ locale }: { locale: string }) {
 	return (
-		<header className="w-full bg-white border-b border-gray-100 sticky top-0 z-40">
+		<header className="w-full bg-surface border-b border-outline-variant/30 sticky top-0 z-40">
 			<div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
 				<Link href={`/${locale}`} className="flex items-center gap-2.5">
 					{/* eslint-disable-next-line @next/next/no-img-element */}
 					<img src="/ckrowd-logo.png" alt="TourStack" className="h-8 w-8 object-contain" />
 					<span className="flex flex-col leading-none">
 						<span className="font-bold text-[17px] tracking-tight text-gray-900">TourStack</span>
-						<span className="text-[10px] tracking-[.14em] uppercase text-gray-400 mt-0.5">by CKrowd</span>
+						<span className="text-[10px] tracking-[.14em] uppercase text-on-surface-variant/50 mt-0.5">by CKrowd</span>
 					</span>
 				</Link>
 				<Link
 					href={`/${locale}/login`}
-					className="text-sm font-semibold text-gray-600 hover:text-gray-900 transition-colors"
+					className="text-sm font-semibold text-on-surface-variant hover:text-on-surface transition-colors"
 				>
 					Sign in
 				</Link>
@@ -131,7 +131,7 @@ export default function PublicTicketPage() {
 		return (
 			<div className="min-h-screen flex flex-col">
 				<TicketHeader locale={locale} />
-				<div className="flex-1 flex items-center justify-center text-gray-400 text-sm">
+				<div className="flex-1 flex items-center justify-center text-on-surface-variant/50 text-sm">
 					{t("noEvent")}
 				</div>
 			</div>
@@ -177,7 +177,7 @@ export default function PublicTicketPage() {
 						)}
 					</div>
 					{!!ev.description && (
-						<p className="text-sm text-gray-400 mt-4 max-w-2xl leading-relaxed">
+						<p className="text-sm text-on-surface-variant/50 mt-4 max-w-2xl leading-relaxed">
 							{String(ev.description)}
 						</p>
 					)}
@@ -189,7 +189,7 @@ export default function PublicTicketPage() {
 				<div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
 					{/* Left — tier selection */}
 					<div className="lg:col-span-3 space-y-4">
-						<div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+						<div className="bg-surface rounded-2xl shadow-sm overflow-hidden">
 							<div className="px-6 pt-5 pb-4 border-b border-gray-100">
 								<h2 className="text-base font-bold text-gray-900">{t("selectTier")}</h2>
 							</div>
@@ -215,13 +215,13 @@ export default function PublicTicketPage() {
 													? "border-[#FF5A2E] bg-orange-50"
 													: isSoldOut
 														? "border-gray-100 bg-gray-50 opacity-60 cursor-not-allowed"
-														: "border-gray-200 hover:border-[#FF5A2E]/60 hover:bg-orange-50/30"
+														: "border-outline-variant/30 hover:border-[#FF5A2E]/60 hover:bg-orange-50/30"
 											}`}
 										>
 											<div>
 												<p className="font-bold text-gray-900 text-sm">{String(tr.name)}</p>
 												{tr.available !== null && !isSoldOut && (
-													<p className="text-xs text-gray-400 mt-0.5">
+													<p className="text-xs text-on-surface-variant/50 mt-0.5">
 														{Number(tr.available)} {t("available")}
 													</p>
 												)}
@@ -250,14 +250,14 @@ export default function PublicTicketPage() {
 
 							{selectedTier && (
 								<div className="mx-4 mb-4 p-4 bg-gray-50 rounded-xl flex items-center gap-4">
-									<label className="text-sm font-semibold text-gray-700 shrink-0">
+									<label className="text-sm font-semibold text-on-surface shrink-0">
 										{t("qty")}
 									</label>
 									<div className="flex items-center gap-2">
 										<button
 											type="button"
 											onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-											className="w-8 h-8 rounded-full border border-gray-200 bg-white flex items-center justify-center font-bold text-gray-600 hover:border-[#FF5A2E] hover:text-[#FF5A2E] transition"
+											className="w-8 h-8 rounded-full border border-outline-variant/30 bg-surface flex items-center justify-center font-bold text-on-surface-variant hover:border-[#FF5A2E] hover:text-[#FF5A2E] transition"
 										>
 											−
 										</button>
@@ -271,13 +271,13 @@ export default function PublicTicketPage() {
 														: 10;
 												setQuantity((q) => Math.min(10, avail, q + 1));
 											}}
-											className="w-8 h-8 rounded-full border border-gray-200 bg-white flex items-center justify-center font-bold text-gray-600 hover:border-[#FF5A2E] hover:text-[#FF5A2E] transition"
+											className="w-8 h-8 rounded-full border border-outline-variant/30 bg-surface flex items-center justify-center font-bold text-on-surface-variant hover:border-[#FF5A2E] hover:text-[#FF5A2E] transition"
 										>
 											+
 										</button>
 									</div>
 									<div className="ml-auto text-right">
-										<p className="text-xs text-gray-400">{t("subtotal")}</p>
+										<p className="text-xs text-on-surface-variant/50">{t("subtotal")}</p>
 										<p className="font-black text-[#FF5A2E] text-lg">{fmtAmount(subtotal)}</p>
 									</div>
 								</div>
@@ -285,41 +285,41 @@ export default function PublicTicketPage() {
 						</div>
 
 						{/* Buyer details */}
-						<div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+						<div className="bg-surface rounded-2xl shadow-sm overflow-hidden">
 							<div className="px-6 pt-5 pb-4 border-b border-gray-100">
 								<h2 className="text-base font-bold text-gray-900">{t("buyerDetails")}</h2>
 							</div>
 							<div className="p-6 space-y-4">
 								<div>
-									<label className="block text-sm font-semibold text-gray-700 mb-1.5">
+									<label className="block text-sm font-semibold text-on-surface mb-1.5">
 										{t("name")} <span className="text-[#FF5A2E]">*</span>
 									</label>
 									<input
-										className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF5A2E] transition bg-white"
+										className="w-full border border-outline-variant/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF5A2E] transition bg-surface"
 										placeholder={t("namePlaceholder")}
 										value={buyerName}
 										onChange={(e) => setBuyerName(e.target.value)}
 									/>
 								</div>
 								<div>
-									<label className="block text-sm font-semibold text-gray-700 mb-1.5">
+									<label className="block text-sm font-semibold text-on-surface mb-1.5">
 										{t("email")} <span className="text-[#FF5A2E]">*</span>
 									</label>
 									<input
 										type="email"
-										className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF5A2E] transition bg-white"
+										className="w-full border border-outline-variant/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF5A2E] transition bg-surface"
 										placeholder={t("emailPlaceholder")}
 										value={buyerEmail}
 										onChange={(e) => setBuyerEmail(e.target.value)}
 									/>
 								</div>
 								<div>
-									<label className="block text-sm font-semibold text-gray-700 mb-1.5">
+									<label className="block text-sm font-semibold text-on-surface mb-1.5">
 										{t("phone")}
 									</label>
 									<input
 										type="tel"
-										className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF5A2E] transition bg-white"
+										className="w-full border border-outline-variant/30 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-[#FF5A2E] transition bg-surface"
 										placeholder={t("phonePlaceholder")}
 										value={buyerPhone}
 										onChange={(e) => setBuyerPhone(e.target.value)}
@@ -331,7 +331,7 @@ export default function PublicTicketPage() {
 
 					{/* Right — order summary + checkout */}
 					<div className="lg:col-span-2 space-y-4 lg:sticky lg:top-24">
-						<div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+						<div className="bg-surface rounded-2xl shadow-sm overflow-hidden">
 							<div className="px-6 pt-5 pb-4 border-b border-gray-100">
 								<h2 className="text-base font-bold text-gray-900">Order Summary</h2>
 							</div>
@@ -343,7 +343,7 @@ export default function PublicTicketPage() {
 												<p className="text-sm font-semibold text-gray-900">
 													{String(selectedTier.name)}
 												</p>
-												<p className="text-xs text-gray-400 mt-0.5">× {quantity}</p>
+												<p className="text-xs text-on-surface-variant/50 mt-0.5">× {quantity}</p>
 											</div>
 											<p className="text-sm font-bold text-gray-900 shrink-0">
 												{fmtAmount(subtotal)}
@@ -355,7 +355,7 @@ export default function PublicTicketPage() {
 										</div>
 									</>
 								) : (
-									<p className="text-sm text-gray-400">Select a ticket tier to continue.</p>
+									<p className="text-sm text-on-surface-variant/50">Select a ticket tier to continue.</p>
 								)}
 
 								{purchaseMutation.data && !purchaseMutation.data.success && (
@@ -373,15 +373,15 @@ export default function PublicTicketPage() {
 									{purchaseMutation.isPending ? t("processing") : t("checkout")}
 								</button>
 
-								<p className="text-[11px] text-gray-400 text-center leading-relaxed">
+								<p className="text-[11px] text-on-surface-variant/50 text-center leading-relaxed">
 									{t("platformNote")}
 								</p>
 							</div>
 						</div>
 
 						{/* Event details recap */}
-						<div className="bg-white rounded-2xl shadow-sm p-5 space-y-3">
-							<p className="text-xs font-bold uppercase tracking-widest text-gray-400">Event</p>
+						<div className="bg-surface rounded-2xl shadow-sm p-5 space-y-3">
+							<p className="text-xs font-bold uppercase tracking-widest text-on-surface-variant/50">Event</p>
 							<p className="font-bold text-gray-900 text-sm">{String(ev.title)}</p>
 							{eventDate && (
 								<p className="text-xs text-gray-500 flex items-center gap-1.5">

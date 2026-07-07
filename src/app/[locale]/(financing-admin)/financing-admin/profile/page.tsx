@@ -105,7 +105,7 @@ export default function FinancingAdminProfilePage() {
                 <img
                   src={profile.logo}
                   alt="Logo"
-                  className="w-16 h-16 rounded-xl object-contain border border-outline-variant/20 bg-white p-1"
+                  className="w-16 h-16 rounded-xl object-contain border border-outline-variant/30 bg-surface p-1"
                 />
               ) : (
                 <div className="w-16 h-16 rounded-xl bg-surface-container-high flex items-center justify-center">

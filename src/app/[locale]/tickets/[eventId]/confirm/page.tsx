@@ -9,14 +9,14 @@ import { verifyTicketPayment } from "@/app/actions";
 
 function TicketHeader({ locale }: { locale: string }) {
 	return (
-		<header className="w-full bg-white border-b border-gray-100">
+		<header className="w-full bg-surface border-b border-outline-variant/30">
 			<div className="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center">
 				<Link href={`/${locale}`} className="flex items-center gap-2.5">
 					{/* eslint-disable-next-line @next/next/no-img-element */}
 					<img src="/ckrowd-logo.png" alt="TourStack" className="h-8 w-8 object-contain" />
 					<span className="flex flex-col leading-none">
 						<span className="font-bold text-[17px] tracking-tight text-gray-900">TourStack</span>
-						<span className="text-[10px] tracking-[.14em] uppercase text-gray-400 mt-0.5">by CKrowd</span>
+						<span className="text-[10px] tracking-[.14em] uppercase text-on-surface-variant/50 mt-0.5">by CKrowd</span>
 					</span>
 				</Link>
 			</div>
@@ -53,7 +53,7 @@ function TicketCard({
 				<div className="flex items-start justify-between mb-5">
 					<div>
 						<p className="text-[10px] font-black uppercase tracking-[.2em] text-[#FF5A2E]">TourStack</p>
-						<p className="text-[9px] uppercase tracking-[.14em] text-slate-500 mt-0.5">by CKrowd</p>
+						<p className="text-[9px] uppercase tracking-[.14em] text-on-surface-variant mt-0.5">by CKrowd</p>
 					</div>
 					<span className="bg-[#FF5A2E] text-white text-[9px] font-black tracking-[.15em] uppercase px-2.5 py-1.5 rounded-md">
 						ADMIT ONE
@@ -62,11 +62,11 @@ function TicketCard({
 				<h2 className="text-[19px] font-black text-white leading-tight mb-4">{eventTitle}</h2>
 				<div className="grid grid-cols-2 gap-3">
 					<div>
-						<p className="text-[9px] text-slate-500 uppercase tracking-[.12em] mb-0.5">Date</p>
+						<p className="text-[9px] text-on-surface-variant uppercase tracking-[.12em] mb-0.5">Date</p>
 						<p className="text-xs font-semibold text-slate-200 leading-tight">{eventDate || "Date TBC"}</p>
 					</div>
 					<div>
-						<p className="text-[9px] text-slate-500 uppercase tracking-[.12em] mb-0.5">Location</p>
+						<p className="text-[9px] text-on-surface-variant uppercase tracking-[.12em] mb-0.5">Location</p>
 						<p className="text-xs font-semibold text-slate-200 leading-tight">{eventLocation || "Venue TBC"}</p>
 					</div>
 				</div>
@@ -74,27 +74,27 @@ function TicketCard({
 
 			<div className="flex items-center bg-white">
 				<div className="w-5 h-5 -ml-2.5 rounded-full bg-[#f7f9fb] shrink-0" />
-				<div className="flex-1 border-t-2 border-dashed border-slate-200 mx-1.5" />
+				<div className="flex-1 border-t-2 border-dashed border-outline-variant/30 mx-1.5" />
 				<div className="w-5 h-5 -mr-2.5 rounded-full bg-[#f7f9fb] shrink-0" />
 			</div>
 
-			<div className="bg-white px-6 py-5 space-y-4">
-				<div className="grid grid-cols-2 gap-x-5 gap-y-3 pb-4 border-b border-slate-100">
+			<div className="bg-surface px-6 py-5 space-y-4">
+				<div className="grid grid-cols-2 gap-x-5 gap-y-3 pb-4 border-b border-outline-variant/30">
 					<div>
-						<p className="text-[9px] text-slate-400 uppercase tracking-[.12em] mb-0.5">Ticket Type</p>
-						<p className="text-sm font-bold text-slate-900">{tierName}</p>
+						<p className="text-[9px] text-on-surface-variant/50 uppercase tracking-[.12em] mb-0.5">Ticket Type</p>
+						<p className="text-sm font-bold text-on-surface">{tierName}</p>
 					</div>
 					<div>
-						<p className="text-[9px] text-slate-400 uppercase tracking-[.12em] mb-0.5">Quantity</p>
-						<p className="text-sm font-bold text-slate-900">× {quantity}</p>
+						<p className="text-[9px] text-on-surface-variant/50 uppercase tracking-[.12em] mb-0.5">Quantity</p>
+						<p className="text-sm font-bold text-on-surface">× {quantity}</p>
 					</div>
 					<div>
-						<p className="text-[9px] text-slate-400 uppercase tracking-[.12em] mb-0.5">Amount Paid</p>
+						<p className="text-[9px] text-on-surface-variant/50 uppercase tracking-[.12em] mb-0.5">Amount Paid</p>
 						<p className="text-sm font-black text-[#FF5A2E]">{totalAmount}</p>
 					</div>
 					<div>
-						<p className="text-[9px] text-slate-400 uppercase tracking-[.12em] mb-0.5">Ticket Holder</p>
-						<p className="text-sm font-semibold text-slate-900">{buyerName}</p>
+						<p className="text-[9px] text-on-surface-variant/50 uppercase tracking-[.12em] mb-0.5">Ticket Holder</p>
+						<p className="text-sm font-semibold text-on-surface">{buyerName}</p>
 					</div>
 				</div>
 
@@ -115,8 +115,8 @@ function TicketCard({
 				</div>
 			</div>
 
-			<div className="bg-slate-50 border-t border-slate-100 px-6 py-2.5 flex items-center justify-between">
-				<p className="text-[9px] text-slate-400">Present at venue entrance</p>
+			<div className="bg-surface-container-low border-t border-outline-variant/30 px-6 py-2.5 flex items-center justify-between">
+				<p className="text-[9px] text-on-surface-variant/50">Present at venue entrance</p>
 				<p className="text-[9px] font-black text-[#FF5A2E] tracking-widest">TOURSTACK</p>
 			</div>
 		</div>
@@ -462,7 +462,7 @@ export default function TicketConfirmPage() {
 				<div className="flex-1 flex items-center justify-center">
 					<div className="text-center space-y-4">
 						<div className="w-10 h-10 border-2 border-[#FF5A2E] border-t-transparent rounded-full animate-spin mx-auto" />
-						<p className="text-sm text-gray-600">{t("verifying")}</p>
+						<p className="text-sm text-on-surface-variant">{t("verifying")}</p>
 					</div>
 				</div>
 			</div>
@@ -474,7 +474,7 @@ export default function TicketConfirmPage() {
 			<div className="min-h-screen flex flex-col">
 				<TicketHeader locale={locale} />
 				<div className="flex-1 bg-[#f7f9fb] flex items-center justify-center py-10 px-4">
-					<div className="max-w-sm w-full bg-white rounded-2xl p-8 shadow-sm text-center space-y-4">
+					<div className="max-w-sm w-full bg-surface rounded-2xl p-8 shadow-sm text-center space-y-4">
 						<div className="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center mx-auto">
 							<svg className="w-8 h-8 text-red-500" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
 								<path d="M18 6 6 18M6 6l12 12" />
@@ -547,14 +547,14 @@ export default function TicketConfirmPage() {
 					</button>
 					<Link
 						href={`/${locale}`}
-						className="flex-1 border border-gray-200 text-gray-700 font-semibold text-sm py-3.5 rounded-xl hover:bg-gray-50 transition text-center"
+						className="flex-1 border border-outline-variant/30 text-on-surface-variant font-semibold text-sm py-3.5 rounded-xl hover:bg-surface-container-low transition text-center"
 					>
 						{t("backToHome")}
 					</Link>
 				</div>
 
 				{!qrDataUrl && (
-					<p className="text-xs text-gray-400 mt-3">Generating QR code, download will be ready shortly…</p>
+					<p className="text-xs text-on-surface-variant/50 mt-3">Generating QR code, download will be ready shortly…</p>
 				)}
 			</div>
 		</div>

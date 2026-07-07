@@ -45,7 +45,7 @@ export default function PublicOnboardingLinkPage({
 	if (submitMutation.data?.success) {
 		return (
 			<div className="min-h-screen bg-surface-container-low flex items-center justify-center px-6">
-				<div className="max-w-md w-full bg-white rounded-2xl shadow-sm p-8 text-center">
+				<div className="max-w-md w-full bg-surface rounded-2xl shadow-sm p-8 text-center">
 					<BrandHeader />
 					<div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-700 mx-auto flex items-center justify-center mb-4">
 						<span className="material-symbols-outlined text-3xl">check</span>
@@ -67,7 +67,7 @@ export default function PublicOnboardingLinkPage({
 
 	return (
 		<div className="min-h-screen bg-surface-container-low py-10 px-6">
-			<div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-sm p-6 md:p-8">
+			<div className="max-w-2xl mx-auto bg-surface rounded-2xl shadow-sm p-6 md:p-8">
 				<BrandHeader />
 				{linkQuery.isLoading ? (
 					<Loader />

@@ -406,7 +406,7 @@ export default function AdminInsurancePage() {
 														className={`flex-1 py-2 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors disabled:cursor-not-allowed ${
 															canForward
 																? "bg-emerald-50 text-emerald-700 hover:bg-emerald-100 disabled:opacity-60"
-																: "bg-slate-100 text-slate-400 opacity-60"
+																: "bg-surface-container text-on-surface-variant/50 opacity-60"
 														}`}
 													>
 														<span className="material-symbols-outlined text-sm">

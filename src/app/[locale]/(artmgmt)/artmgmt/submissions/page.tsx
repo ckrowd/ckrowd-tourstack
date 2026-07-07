@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useFormatter, useTranslations } from "next-intl";
@@ -175,7 +175,7 @@ export default function ArtmgmtSubmissionsPage() {
 	const rejected = pitches.filter((p) => p.status === "rejected").length;
 
 	const inputCls =
-		"w-full px-3 py-2 text-sm rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/40 placeholder:text-slate-400";
+		"w-full px-3 py-2 text-sm rounded-xl border border-outline-variant/30 bg-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/40 placeholder:text-on-surface-variant/50";
 
 	return (
 		<div>
@@ -203,31 +203,31 @@ export default function ArtmgmtSubmissionsPage() {
 			{/* Stats */}
 			{!isLoading && (
 				<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-					<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex items-center gap-4">
+					<div className="bg-surface rounded-2xl border border-outline-variant/30 shadow-sm p-5 flex items-center gap-4">
 						<div className="w-11 h-11 rounded-xl bg-amber-50 flex items-center justify-center shrink-0">
 							<span className="material-symbols-outlined text-amber-500 text-xl">schedule</span>
 						</div>
 						<div>
-							<p className="text-2xl font-black text-slate-900 leading-none">{pending}</p>
-							<p className="text-xs text-slate-500 font-semibold mt-0.5">{t("stats.pending")}</p>
+							<p className="text-2xl font-black text-on-surface leading-none">{pending}</p>
+							<p className="text-xs text-on-surface-variant font-semibold mt-0.5">{t("stats.pending")}</p>
 						</div>
 					</div>
-					<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex items-center gap-4">
+					<div className="bg-surface rounded-2xl border border-outline-variant/30 shadow-sm p-5 flex items-center gap-4">
 						<div className="w-11 h-11 rounded-xl bg-emerald-50 flex items-center justify-center shrink-0">
 							<span className="material-symbols-outlined text-emerald-600 text-xl">check_circle</span>
 						</div>
 						<div>
-							<p className="text-2xl font-black text-slate-900 leading-none">{accepted}</p>
-							<p className="text-xs text-slate-500 font-semibold mt-0.5">{t("stats.accepted")}</p>
+							<p className="text-2xl font-black text-on-surface leading-none">{accepted}</p>
+							<p className="text-xs text-on-surface-variant font-semibold mt-0.5">{t("stats.accepted")}</p>
 						</div>
 					</div>
-					<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex items-center gap-4">
+					<div className="bg-surface rounded-2xl border border-outline-variant/30 shadow-sm p-5 flex items-center gap-4">
 						<div className="w-11 h-11 rounded-xl bg-rose-50 flex items-center justify-center shrink-0">
 							<span className="material-symbols-outlined text-rose-400 text-xl">cancel</span>
 						</div>
 						<div>
-							<p className="text-2xl font-black text-slate-900 leading-none">{rejected}</p>
-							<p className="text-xs text-slate-500 font-semibold mt-0.5">{t("stats.rejected")}</p>
+							<p className="text-2xl font-black text-on-surface leading-none">{rejected}</p>
+							<p className="text-xs text-on-surface-variant font-semibold mt-0.5">{t("stats.rejected")}</p>
 						</div>
 					</div>
 				</div>
@@ -258,7 +258,7 @@ export default function ArtmgmtSubmissionsPage() {
 						return (
 							<div
 								key={String(pitch.id)}
-								className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5"
+								className="bg-surface rounded-2xl border border-outline-variant/30 shadow-sm p-5"
 							>
 								<div className="flex items-start gap-4 flex-wrap">
 									{/* Artist avatar */}
@@ -269,25 +269,25 @@ export default function ArtmgmtSubmissionsPage() {
 									{/* Main info */}
 									<div className="flex-1 min-w-0">
 										<div className="flex items-center gap-2 flex-wrap">
-											<p className="font-semibold text-slate-900">
+											<p className="font-semibold text-on-surface">
 												{String(pitch.roster_artist.name)}
 											</p>
 											<span className="text-slate-300">·</span>
-											<p className="text-sm text-slate-500">{String(pitch.roster_artist.genre)}</p>
+											<p className="text-sm text-on-surface-variant">{String(pitch.roster_artist.genre)}</p>
 										</div>
-										<p className="text-sm font-semibold text-slate-700 mt-0.5">
-											<span className="material-symbols-outlined text-xs text-slate-400 mr-1 align-middle">
+										<p className="text-sm font-semibold text-on-surface mt-0.5">
+											<span className="material-symbols-outlined text-xs text-on-surface-variant/50 mr-1 align-middle">
 												music_note
 											</span>
 											{String(pitch.tour_name)}
 										</p>
 										{pitch.promoter_contact != null && (
-											<p className="text-xs text-slate-400 mt-0.5">
+											<p className="text-xs text-on-surface-variant/50 mt-0.5">
 												{t("contact")}: {String(pitch.promoter_contact)}
 											</p>
 										)}
 										{pitch.notes != null && (
-											<p className="text-xs text-slate-500 mt-1 line-clamp-2">{String(pitch.notes)}</p>
+											<p className="text-xs text-on-surface-variant mt-1 line-clamp-2">{String(pitch.notes)}</p>
 										)}
 									</div>
 
@@ -302,7 +302,7 @@ export default function ArtmgmtSubmissionsPage() {
 											{t(`status.${status}`)}
 										</span>
 										{pitch.created_at != null && (
-											<span className="text-[10px] text-slate-400">
+											<span className="text-[10px] text-on-surface-variant/50">
 												{format.relativeTime(new Date(String(pitch.created_at)))}
 											</span>
 										)}
@@ -367,19 +367,19 @@ export default function ArtmgmtSubmissionsPage() {
 			{/* Add / Edit modal */}
 			{showForm && (
 				<div className="fixed inset-0 z-40 bg-black/40 flex items-end sm:items-center justify-center p-4">
-					<div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6">
+					<div className="bg-surface rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto p-6">
 						<div className="flex items-center justify-between mb-5">
-							<h2 className="font-(family-name:--font-manrope) text-xl font-black text-slate-900">
+							<h2 className="font-(family-name:--font-manrope) text-xl font-black text-on-surface">
 								{editId ? t("form.editTitle") : t("form.addTitle")}
 							</h2>
-							<button type="button" onClick={closeForm} className="text-slate-400 hover:text-slate-700">
+							<button type="button" onClick={closeForm} className="text-on-surface-variant hover:text-on-surface">
 								<span className="material-symbols-outlined">close</span>
 							</button>
 						</div>
 
 						<form onSubmit={handleSubmit} className="flex flex-col gap-4">
 							<div>
-								<label className="block text-xs font-semibold text-slate-700 mb-1">
+								<label className="block text-xs font-semibold text-on-surface mb-1">
 									{t("form.artist")} *
 								</label>
 								<select
@@ -399,7 +399,7 @@ export default function ArtmgmtSubmissionsPage() {
 							</div>
 
 							<div>
-								<label className="block text-xs font-semibold text-slate-700 mb-1">
+								<label className="block text-xs font-semibold text-on-surface mb-1">
 									{t("form.tourName")} *
 								</label>
 								<input
@@ -413,7 +413,7 @@ export default function ArtmgmtSubmissionsPage() {
 							</div>
 
 							<div>
-								<label className="block text-xs font-semibold text-slate-700 mb-1">
+								<label className="block text-xs font-semibold text-on-surface mb-1">
 									{t("form.promoterContact")}
 								</label>
 								<input
@@ -426,7 +426,7 @@ export default function ArtmgmtSubmissionsPage() {
 							</div>
 
 							<div>
-								<label className="block text-xs font-semibold text-slate-700 mb-1">
+								<label className="block text-xs font-semibold text-on-surface mb-1">
 									{t("form.notes")}
 								</label>
 								<textarea
@@ -449,7 +449,7 @@ export default function ArtmgmtSubmissionsPage() {
 								<button
 									type="button"
 									onClick={closeForm}
-									className="flex-1 py-3 bg-slate-100 text-slate-700 rounded-xl font-semibold text-sm hover:bg-slate-200 transition-colors"
+									className="flex-1 py-3 bg-surface-container text-on-surface-variant rounded-xl font-semibold text-sm hover:bg-surface-container-high transition-colors"
 								>
 									{t("form.cancel")}
 								</button>
@@ -462,11 +462,11 @@ export default function ArtmgmtSubmissionsPage() {
 			{/* Delete confirm */}
 			{confirmDeleteId && (
 				<div className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center p-4">
-					<div className="bg-white rounded-2xl shadow-2xl p-6 max-w-sm w-full text-center">
+					<div className="bg-surface rounded-2xl shadow-2xl p-6 max-w-sm w-full text-center">
 						<span className="material-symbols-outlined text-rose-500 text-4xl mb-3 block">
 							delete_forever
 						</span>
-						<p className="font-semibold text-slate-900 mb-4">{t("confirmDelete")}</p>
+						<p className="font-semibold text-on-surface mb-4">{t("confirmDelete")}</p>
 						<div className="flex gap-3">
 							<button
 								type="button"
@@ -481,7 +481,7 @@ export default function ArtmgmtSubmissionsPage() {
 							<button
 								type="button"
 								onClick={() => setConfirmDeleteId(null)}
-								className="flex-1 py-3 bg-slate-100 text-slate-700 rounded-xl font-semibold text-sm hover:bg-slate-200 transition-colors"
+								className="flex-1 py-3 bg-surface-container text-on-surface-variant rounded-xl font-semibold text-sm hover:bg-surface-container-high transition-colors"
 							>
 								{t("form.cancel")}
 							</button>

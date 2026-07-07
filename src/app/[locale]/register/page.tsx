@@ -67,17 +67,17 @@ export default function RegisterPage() {
 					<div className="flex items-center justify-center mb-6">
 						<AuthBrandLockup />
 					</div>
-					<p className="mt-2 text-sm text-slate-500 font-medium">
+					<p className="mt-2 text-sm text-on-surface-variant font-medium">
 						{t("tagline")}
 					</p>
 				</div>
 
-				<div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+				<div className="bg-surface rounded-2xl shadow-sm border border-outline-variant/30 p-8">
 					<div className="mb-8">
-						<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-slate-900 mb-1">
+						<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-on-surface mb-1">
 							{t("title")}
 						</h1>
-						<p className="text-sm text-slate-500">{t("description")}</p>
+						<p className="text-sm text-on-surface-variant">{t("description")}</p>
 					</div>
 
 					<form onSubmit={handleSubmit} className="space-y-4">
@@ -85,7 +85,7 @@ export default function RegisterPage() {
 							<div>
 								<label
 									htmlFor="first-name"
-									className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
+									className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2"
 								>
 									{t("firstName")}
 								</label>
@@ -97,14 +97,14 @@ export default function RegisterPage() {
 									value={firstName}
 									onChange={(event) => setFirstName(event.target.value)}
 									required
-									className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
+									className="w-full px-4 py-3 bg-surface-container-low border border-outline-variant/30 rounded-xl text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
 								/>
 							</div>
 
 							<div>
 								<label
 									htmlFor="last-name"
-									className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
+									className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2"
 								>
 									{t("lastName")}
 								</label>
@@ -116,7 +116,7 @@ export default function RegisterPage() {
 									value={lastName}
 									onChange={(event) => setLastName(event.target.value)}
 									required
-									className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
+									className="w-full px-4 py-3 bg-surface-container-low border border-outline-variant/30 rounded-xl text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
 								/>
 							</div>
 						</div>
@@ -124,7 +124,7 @@ export default function RegisterPage() {
 						<div>
 							<label
 								htmlFor="email"
-								className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
+								className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2"
 							>
 								{t("email")}
 							</label>
@@ -136,7 +136,7 @@ export default function RegisterPage() {
 								value={email}
 								onChange={(event) => setEmail(event.target.value)}
 								required
-								className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
+								className="w-full px-4 py-3 bg-surface-container-low border border-outline-variant/30 rounded-xl text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
 							/>
 						</div>
 
@@ -144,7 +144,7 @@ export default function RegisterPage() {
 							<div>
 								<label
 									htmlFor="password"
-									className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
+									className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2"
 								>
 									{t("password")}
 								</label>
@@ -156,14 +156,14 @@ export default function RegisterPage() {
 									value={password}
 									onChange={(event) => setPassword(event.target.value)}
 									required
-									className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
+									className="w-full px-4 py-3 bg-surface-container-low border border-outline-variant/30 rounded-xl text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
 								/>
 							</div>
 
 							<div>
 								<label
 									htmlFor="confirm-password"
-									className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
+									className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2"
 								>
 									{t("confirmPassword")}
 								</label>
@@ -175,7 +175,7 @@ export default function RegisterPage() {
 									value={confirmPassword}
 									onChange={(event) => setConfirmPassword(event.target.value)}
 									required
-									className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
+									className="w-full px-4 py-3 bg-surface-container-low border border-outline-variant/30 rounded-xl text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
 								/>
 							</div>
 						</div>
@@ -211,7 +211,7 @@ export default function RegisterPage() {
 
 					<div className="flex items-center gap-3 my-6">
 						<span className="h-px flex-1 bg-slate-200" />
-						<span className="text-xs font-semibold uppercase tracking-widest text-slate-400">
+						<span className="text-xs font-semibold uppercase tracking-widest text-on-surface-variant/50">
 							{tAuth("orDivider")}
 						</span>
 						<span className="h-px flex-1 bg-slate-200" />
@@ -219,7 +219,7 @@ export default function RegisterPage() {
 
 					<GoogleSignInButton callbackPath="/dashboard" />
 
-					<p className="text-center text-sm text-slate-500 mt-6">
+					<p className="text-center text-sm text-on-surface-variant mt-6">
 						{t("alreadyHaveAccount")}{" "}
 						<Link
 							href="/login"

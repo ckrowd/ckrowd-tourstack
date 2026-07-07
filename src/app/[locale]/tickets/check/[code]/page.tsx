@@ -41,26 +41,26 @@ export default function TicketCheckPage() {
 	return (
 		<div className="min-h-screen bg-[#f0f2f5] flex flex-col">
 			{/* Header */}
-			<header className="bg-white border-b border-gray-100">
+			<header className="bg-surface border-b border-outline-variant/30">
 				<div className="max-w-lg mx-auto px-4 h-14 flex items-center gap-2.5">
 					{/* eslint-disable-next-line @next/next/no-img-element */}
 					<img src="/ckrowd-logo.png" alt="TourStack" className="h-7 w-7 object-contain" />
 					<span className="font-bold text-[16px] text-gray-900 tracking-tight">TourStack</span>
-					<span className="text-[10px] uppercase tracking-widest text-gray-400 mt-0.5">Ticket Verify</span>
+					<span className="text-[10px] uppercase tracking-widest text-on-surface-variant/50 mt-0.5">Ticket Verify</span>
 				</div>
 			</header>
 
 			<div className="flex-1 flex items-center justify-center px-4 py-10">
 				<div className="w-full max-w-sm space-y-4">
 					{isLoading ? (
-						<div className="bg-white rounded-2xl p-10 shadow-sm flex flex-col items-center gap-4">
+						<div className="bg-surface rounded-2xl p-10 shadow-sm flex flex-col items-center gap-4">
 							<div className="w-10 h-10 border-2 border-[#FF5A2E] border-t-transparent rounded-full animate-spin" />
 							<p className="text-sm text-gray-500">Checking ticket…</p>
 						</div>
 					) : !found ? (
-						<div className="bg-white rounded-2xl p-8 shadow-sm text-center space-y-3">
+						<div className="bg-surface rounded-2xl p-8 shadow-sm text-center space-y-3">
 							<div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center mx-auto">
-								<svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+								<svg className="w-8 h-8 text-on-surface-variant/50" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
 									<circle cx="12" cy="12" r="10" />
 									<path d="M12 8v4M12 16h.01" />
 								</svg>
@@ -92,7 +92,7 @@ export default function TicketCheckPage() {
 							</div>
 
 							{/* Ticket details */}
-							<div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+							<div className="bg-surface rounded-2xl shadow-sm overflow-hidden">
 								<div className="bg-gray-900 px-5 py-4">
 									<p className="text-[10px] font-black uppercase tracking-[.2em] text-[#FF5A2E] mb-0.5">
 										{t("event")}
@@ -111,7 +111,7 @@ export default function TicketCheckPage() {
 										{ label: t("status"), value: statusLabel() },
 									].map(({ label, value }) => (
 										<div key={label} className="flex items-center justify-between px-5 py-3">
-											<span className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{label}</span>
+											<span className="text-xs font-semibold text-on-surface-variant/50 uppercase tracking-wider">{label}</span>
 											<span className="text-sm font-bold text-gray-900 text-right max-w-[60%]">{value}</span>
 										</div>
 									))}
@@ -131,7 +131,7 @@ export default function TicketCheckPage() {
 
 					<Link
 						href={`/${locale}`}
-						className="block text-center text-xs text-gray-400 hover:text-gray-600 transition py-2"
+						className="block text-center text-xs text-on-surface-variant/50 hover:text-on-surface-variant transition py-2"
 					>
 						Powered by TourStack by CKrowd
 					</Link>

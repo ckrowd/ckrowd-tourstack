@@ -237,14 +237,14 @@ export default function AcceptInviteClient({
 
 function Shell({ children }: { children: React.ReactNode }) {
 	return (
-		<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 py-12">
+		<div className="min-h-screen bg-surface-bright flex items-center justify-center px-4 py-12">
 			<div className="w-full max-w-md">
 				<div className="text-center mb-8">
 					<div className="flex items-center justify-center">
 						<AuthBrandLockup />
 					</div>
 				</div>
-				<div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+				<div className="bg-surface rounded-2xl shadow-sm border border-outline-variant/30 p-8">
 					{children}
 				</div>
 			</div>

@@ -81,7 +81,7 @@ export default function AdminPayoutsPage() {
 						type="button"
 						onClick={() => setTab(t2)}
 						className={`px-5 py-2 rounded-lg text-sm font-semibold transition ${
-							tab === t2 ? "bg-white shadow text-on-surface" : "text-on-surface-variant hover:text-on-surface"
+							tab === t2 ? "bg-surface shadow text-on-surface" : "text-on-surface-variant hover:text-on-surface"
 						}`}
 					>
 						{t(`tabs.${t2}`)}
