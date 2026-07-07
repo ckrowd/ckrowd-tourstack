@@ -66,11 +66,11 @@ function ArtmgmtSearchModal({ onClose }: { onClose: () => void }) {
 			/>
 
 			{/* Card */}
-			<div className="relative z-10 w-full max-w-2xl bg-white rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[80vh]">
+			<div className="relative z-10 w-full max-w-2xl bg-surface-container-lowest rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[80vh]">
 				{/* Input */}
-				<div className="flex items-center gap-3 px-4 py-4 border-b border-slate-100">
+				<div className="flex items-center gap-3 px-4 py-4 border-b border-outline-variant/20">
 					<span
-						className={`material-symbols-outlined text-xl transition-colors ${isFetching ? "text-[#FF5A2E]" : "text-slate-400"}`}
+						className={`material-symbols-outlined text-xl transition-colors ${isFetching ? "text-[#FF5A2E]" : "text-on-surface-variant"}`}
 					>
 						{isFetching ? "progress_activity" : "search"}
 					</span>
@@ -80,7 +80,7 @@ function ArtmgmtSearchModal({ onClose }: { onClose: () => void }) {
 						value={term}
 						onChange={(e) => setTerm(e.target.value)}
 						placeholder={t("placeholder")}
-						className="flex-1 text-base text-slate-900 placeholder:text-slate-400 outline-none bg-transparent"
+						className="flex-1 text-base text-on-surface placeholder:text-on-surface-variant outline-none bg-transparent"
 						aria-label={t("placeholder")}
 						autoComplete="off"
 					/>
@@ -88,14 +88,14 @@ function ArtmgmtSearchModal({ onClose }: { onClose: () => void }) {
 						<button
 							type="button"
 							onClick={() => setTerm("")}
-							className="text-slate-400 hover:text-slate-600 transition-colors"
+							className="text-on-surface-variant hover:text-on-surface transition-colors"
 							aria-label={t("clear")}
 						>
 							<span className="material-symbols-outlined text-lg">close</span>
 						</button>
 					)}
 					<kbd
-						className="hidden sm:inline-flex items-center px-2 py-0.5 rounded border border-slate-200 text-[11px] font-mono text-slate-500 cursor-pointer hover:bg-slate-50"
+						className="hidden sm:inline-flex items-center px-2 py-0.5 rounded border border-outline-variant/30 text-[11px] font-mono text-on-surface-variant cursor-pointer hover:bg-surface-container-low"
 						onClick={onClose}
 					>
 						Esc
@@ -105,7 +105,7 @@ function ArtmgmtSearchModal({ onClose }: { onClose: () => void }) {
 				{/* Results */}
 				<div className="overflow-y-auto flex-1">
 					{term.length < 1 ? (
-						<div className="flex flex-col items-center justify-center py-14 gap-3 text-slate-400">
+						<div className="flex flex-col items-center justify-center py-14 gap-3 text-on-surface-variant">
 							<span className="material-symbols-outlined text-4xl">
 								manage_search
 							</span>
@@ -113,7 +113,7 @@ function ArtmgmtSearchModal({ onClose }: { onClose: () => void }) {
 							<p className="text-xs">{t("hint")}</p>
 						</div>
 					) : filtered.length === 0 ? (
-						<div className="flex flex-col items-center justify-center py-14 gap-3 text-slate-400">
+						<div className="flex flex-col items-center justify-center py-14 gap-3 text-on-surface-variant">
 							<span className="material-symbols-outlined text-4xl">
 								search_off
 							</span>
@@ -123,24 +123,24 @@ function ArtmgmtSearchModal({ onClose }: { onClose: () => void }) {
 						</div>
 					) : (
 						<div>
-							<p className="px-4 pt-4 pb-1 text-[10px] font-black uppercase tracking-widest text-slate-400">
+							<p className="px-4 pt-4 pb-1 text-[10px] font-black uppercase tracking-widest text-on-surface-variant">
 								{t("artistsLabel")}
 							</p>
 							{filtered.map((artist) => (
 								<div
 									key={String(artist.id)}
-									className="flex items-center gap-3 px-4 py-3 hover:bg-slate-50 transition-colors"
+									className="flex items-center gap-3 px-4 py-3 hover:bg-surface-container-low transition-colors"
 								>
-									<div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#FF5A2E]/20 to-orange-100 flex items-center justify-center shrink-0">
+									<div className="w-9 h-9 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 flex items-center justify-center shrink-0">
 										<span className="material-symbols-outlined text-[#FF5A2E] text-base">
 											person
 										</span>
 									</div>
 									<div className="min-w-0 flex-1">
-										<p className="text-sm font-semibold text-slate-900 truncate">
+										<p className="text-sm font-semibold text-on-surface truncate">
 											{String(artist.name)}
 										</p>
-										<p className="text-xs text-slate-500 truncate">
+										<p className="text-xs text-on-surface-variant truncate">
 											{String(artist.genre ?? "")}
 											{artist.nationality
 												? ` · ${String(artist.nationality)}`
@@ -148,7 +148,7 @@ function ArtmgmtSearchModal({ onClose }: { onClose: () => void }) {
 										</p>
 									</div>
 									<span
-										className={`shrink-0 text-[10px] font-semibold px-2 py-0.5 rounded-full ${artist.is_active ? "bg-emerald-50 text-emerald-700" : "bg-slate-100 text-slate-500"}`}
+										className={`shrink-0 text-[10px] font-semibold px-2 py-0.5 rounded-full ${artist.is_active ? "bg-status-approved/10 text-status-approved" : "bg-surface-container text-on-surface-variant"}`}
 									>
 										{artist.is_active ? t("active") : t("inactive")}
 									</span>
@@ -159,8 +159,8 @@ function ArtmgmtSearchModal({ onClose }: { onClose: () => void }) {
 				</div>
 
 				{/* Footer */}
-				<div className="border-t border-slate-100 px-4 py-2.5 flex items-center gap-2 text-[11px] text-slate-400">
-					<kbd className="px-1.5 py-0.5 rounded border border-slate-200 font-mono">
+				<div className="border-t border-outline-variant/20 px-4 py-2.5 flex items-center gap-2 text-[11px] text-on-surface-variant">
+					<kbd className="px-1.5 py-0.5 rounded border border-outline-variant/30 font-mono">
 						Esc
 					</kbd>
 					<span>{t("keyClose")}</span>
@@ -192,13 +192,13 @@ export default function ArtmgmtSearch() {
 				type="button"
 				onClick={() => setOpen(true)}
 				aria-label={t("openSearch")}
-				className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50/80 hover:bg-slate-100 transition-colors text-sm text-slate-400 min-w-52"
+				className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl border border-outline-variant/30 bg-surface-container-low/80 hover:bg-surface-container transition-colors text-sm text-on-surface-variant min-w-52"
 			>
 				<span className="material-symbols-outlined text-base leading-none">
 					search
 				</span>
 				<span className="flex-1 text-left text-[13px]">{t("placeholder")}</span>
-				<kbd className="flex items-center gap-0.5 text-[10px] font-mono border border-slate-300 rounded px-1 py-0.5 text-slate-400">
+				<kbd className="flex items-center gap-0.5 text-[10px] font-mono border border-outline-variant/40 rounded px-1 py-0.5 text-on-surface-variant">
 					<span>⌘</span>K
 				</kbd>
 			</button>
@@ -208,9 +208,9 @@ export default function ArtmgmtSearch() {
 				type="button"
 				onClick={() => setOpen(true)}
 				aria-label={t("openSearch")}
-				className="lg:hidden p-2 hover:bg-slate-50/50 rounded-lg transition-all active:scale-95"
+				className="lg:hidden p-2 hover:bg-surface-container-low/50 rounded-lg transition-all active:scale-95"
 			>
-				<span className="material-symbols-outlined text-[#494455]">search</span>
+				<span className="material-symbols-outlined text-on-surface-variant">search</span>
 			</button>
 
 			{open &&
