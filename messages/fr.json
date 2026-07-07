@@ -6786,11 +6786,13 @@
 		"progress": "Étape {current} sur {total}",
 		"stepShort": {
 			"role": "Votre rôle",
-			"workspace": "Votre espace"
+			"about": "À propos",
+			"setup": "Configuration",
+			"review": "Récapitulatif"
 		},
 		"role": {
 			"title": "Qu'est-ce qui vous amène sur TourStack ?",
-			"subtitle": "Choisissez votre manière de travailler dans le live. Nous vous orientons au bon endroit.",
+			"subtitle": "Choisissez votre manière de travailler dans le live. Nous adaptons votre configuration et vous orientons au bon endroit.",
 			"options": [
 				{
 					"id": "promoter",
@@ -6814,12 +6816,115 @@
 				}
 			]
 		},
+		"about": {
+			"title": "Parlez-nous de vous",
+			"subtitle": "Nous personnaliserons votre espace en conséquence.",
+			"name": "Nom complet",
+			"namePlaceholder": "Ada Mensah",
+			"org": "Organisation",
+			"orgPlaceholder": "Société, agence ou nom de scène",
+			"market": "Marché principal",
+			"marketPlaceholder": "Lagos, Nigéria"
+		},
+		"setup": {
+			"title": "Que souhaitez-vous configurer en premier ?",
+			"subtitle": "Choisissez ce qui compte pour vous. Nous le mettrons en avant sur votre tableau de bord.",
+			"hint": "Sélectionnez tout ce qui s'applique",
+			"options": {
+				"promoter": [
+					{
+						"id": "financing",
+						"label": "Financement de tournées et concerts"
+					},
+					{
+						"id": "insurance",
+						"label": "Assurance événementielle"
+					},
+					{
+						"id": "ecosystem",
+						"label": "Certifier équipes et prestataires"
+					},
+					{
+						"id": "payments",
+						"label": "Paiements transfrontaliers"
+					},
+					{
+						"id": "data",
+						"label": "Données de marché et de crédit"
+					}
+				],
+				"service": [
+					{
+						"id": "discovery",
+						"label": "Être découvert par les tournées"
+					},
+					{
+						"id": "contracts",
+						"label": "Gérer les contrats"
+					},
+					{
+						"id": "payments",
+						"label": "Suivre les paiements"
+					},
+					{
+						"id": "verify",
+						"label": "Vérifier mon entreprise"
+					}
+				],
+				"workforce": [
+					{
+						"id": "registry",
+						"label": "Rejoindre le registre des équipes"
+					},
+					{
+						"id": "bookings",
+						"label": "Trouver des missions"
+					},
+					{
+						"id": "payouts",
+						"label": "Être payé à temps"
+					},
+					{
+						"id": "verify",
+						"label": "Vérifier mes compétences"
+					}
+				],
+				"artmgmt": [
+					{
+						"id": "roster",
+						"label": "Lister mes artistes"
+					},
+					{
+						"id": "submissions",
+						"label": "Postuler aux tournées"
+					},
+					{
+						"id": "bookings",
+						"label": "Gérer les réservations"
+					},
+					{
+						"id": "fees",
+						"label": "Protéger les cachets"
+					}
+				]
+			}
+		},
+		"review": {
+			"eyebrow": "Presque terminé",
+			"title": "Vérifiez votre configuration",
+			"subtitle": "Confirmez vos informations et nous vous emmenons vers votre espace.",
+			"roleLabel": "Rôle",
+			"nameLabel": "Nom",
+			"orgLabel": "Organisation",
+			"marketLabel": "Marché",
+			"prioritiesLabel": "Priorités",
+			"includesLabel": "Votre tableau de bord comprendra",
+			"edit": "Modifier",
+			"empty": "Non renseigné",
+			"cta": "Terminer la configuration",
+			"finePrint": "En continuant, vous acceptez nos Conditions et notre Politique de confidentialité."
+		},
 		"workspace": {
-			"eyebrow": "Votre configuration",
-			"title": "Vous rejoignez en tant que {role}",
-			"subtitle": "Voici ce que comprend votre espace et la prochaine étape.",
-			"includesLabel": "Ce que vous obtenez",
-			"cta": "Continuer",
 			"features": {
 				"promoter": [
 					"Demandes de financement de tournées et de concerts",

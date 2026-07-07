@@ -3,13 +3,15 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useState } from "react";
+import { authInput, authLabel } from "@/components/auth/authFields";
 import ThemeToggle from "@/components/theme/ThemeToggle";
 import { useTsTheme } from "@/components/theme/useTsTheme";
 import { Link, useRouter } from "@/i18n/routing";
 
 type RoleOption = { id: string; title: string; desc: string };
+type SetupOption = { id: string; label: string };
 
-const STEPS = ["role", "workspace"] as const;
+const STEPS = ["role", "about", "setup", "review"] as const;
 type StepKey = (typeof STEPS)[number];
 
 // Material Symbols glyph per real user type (icon font already loaded app-wide).
@@ -20,9 +22,9 @@ const ROLE_ICON: Record<string, string> = {
 	artmgmt: "queue_music",
 };
 
-// Where each self-serve user type actually goes. Promoters create a platform
-// account (then land on the dashboard); stakeholders self-onboard into their
-// registry. These mirror the real /join and /onboard routes.
+// Where each self-serve user type actually goes (mirrors the real /join and
+// /onboard routes). Promoters create a platform account then land on the
+// dashboard; stakeholders continue into their registry.
 const ROLE_DEST: Record<string, string> = {
 	promoter: "/register",
 	service: "/onboard/service",
@@ -38,27 +40,44 @@ export default function OnboardingWizard() {
 
 	const [step, setStep] = useState(0);
 	const [role, setRole] = useState<string | null>(null);
+	const [name, setName] = useState("");
+	const [org, setOrg] = useState("");
+	const [market, setMarket] = useState("");
+	const [priorities, setPriorities] = useState<string[]>([]);
 
 	const roleOptions = t.raw("role.options") as RoleOption[];
 	const total = STEPS.length;
 	const current: StepKey = STEPS[step];
 	const progress = Math.round(((step + 1) / total) * 100);
 	const selectedRole = roleOptions.find((r) => r.id === role);
+	const setupOptions = role ? (t.raw(`setup.options.${role}`) as SetupOption[]) : [];
+	const dashboardFeatures = role ? (t.raw(`workspace.features.${role}`) as string[]) : [];
 
-	const canContinue = current === "role" ? role !== null : true;
+	const canContinue =
+		current === "role" ? role !== null : current === "about" ? name.trim().length > 0 : true;
 
-	function next() {
+	function goNext() {
 		if (!canContinue) return;
-		if (step < total - 1) setStep((s) => s + 1);
-		else if (role) router.push(ROLE_DEST[role] ?? "/register");
+		if (step < total - 1) {
+			setStep((s) => s + 1);
+			return;
+		}
+		// Finish: stash the tailored onboarding so the destination/dashboard can
+		// seed itself, then route the user to where their type onboards.
+		try {
+			sessionStorage.setItem(
+				"ts-onboarding",
+				JSON.stringify({ role, name, org, market, priorities }),
+			);
+		} catch {}
+		if (role) router.push(ROLE_DEST[role] ?? "/register");
 	}
 	function back() {
 		if (step > 0) setStep((s) => s - 1);
 	}
-
-	const features = selectedRole
-		? (t.raw(`workspace.features.${selectedRole.id}`) as string[])
-		: [];
+	function togglePriority(id: string) {
+		setPriorities((p) => (p.includes(id) ? p.filter((x) => x !== id) : [...p, id]));
+	}
 
 	return (
 		<div
@@ -170,87 +189,205 @@ export default function OnboardingWizard() {
 				</div>
 
 				<main className="flex-1 flex flex-col px-5 sm:px-8 md:px-14 py-8 md:py-14">
-					<div key={current} className="funnel-step-in flex-1 w-full max-w-2xl mx-auto lg:mx-0">
-						{current === "role" && (
-							<>
-								<h1 className="font-(family-name:--font-display) text-3xl md:text-4xl leading-[1.08] tracking-tight">
-									{t("role.title")}
-								</h1>
-								<p className="mt-3 text-[var(--muted)] text-sm md:text-base max-w-xl">
-									{t("role.subtitle")}
-								</p>
+					<div key={current} className="funnel-step-in flex-1 w-full max-w-2xl mx-auto text-center">
+						{/* Step header */}
+						<h1 className="font-(family-name:--font-display) text-3xl md:text-4xl leading-[1.1] tracking-tight">
+							{t(`${current}.title`)}
+						</h1>
+						<p className="mt-3 text-[var(--muted)] text-sm md:text-base max-w-xl mx-auto">
+							{t(`${current}.subtitle`)}
+						</p>
 
-								<div className="mt-9 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-									{roleOptions.map((r) => {
-										const selected = role === r.id;
+						{/* Step 1 — role */}
+						{current === "role" && (
+							<div className="mt-9 grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-left">
+								{roleOptions.map((r) => {
+									const selected = role === r.id;
+									return (
+										<button
+											key={r.id}
+											type="button"
+											onClick={() => setRole(r.id)}
+											aria-pressed={selected}
+											className={`group relative flex flex-col items-start gap-3 rounded-2xl border p-5 text-left transition-all duration-200 ${
+												selected
+													? "border-orange bg-orange/[0.08]"
+													: "border-[var(--hair)] bg-[var(--surface)] hover:border-[var(--muted)] hover:bg-[var(--surface-2)]"
+											}`}
+										>
+											<span
+												className={`flex h-11 w-11 items-center justify-center rounded-xl transition-colors ${
+													selected ? "bg-orange text-white" : "bg-[var(--surface-2)] text-[var(--text)]"
+												}`}
+											>
+												<span className="material-symbols-outlined">
+													{ROLE_ICON[r.id] ?? "person"}
+												</span>
+											</span>
+											<span>
+												<span className="block font-semibold text-[15px] text-[var(--text)]">
+													{r.title}
+												</span>
+												<span className="mt-1 block text-[13px] leading-snug text-[var(--muted)]">
+													{r.desc}
+												</span>
+											</span>
+											<span
+												className={`absolute right-4 top-4 flex h-5 w-5 items-center justify-center rounded-full transition-all ${
+													selected ? "bg-orange opacity-100" : "opacity-0"
+												}`}
+											>
+												<span className="material-symbols-outlined text-[15px] text-white">check</span>
+											</span>
+										</button>
+									);
+								})}
+							</div>
+						)}
+
+						{/* Step 2 — about you */}
+						{current === "about" && (
+							<form
+								onSubmit={(e) => {
+									e.preventDefault();
+									goNext();
+								}}
+								className="mt-9 mx-auto max-w-md space-y-5 text-left"
+							>
+								<div>
+									<label htmlFor="ob-name" className={authLabel}>
+										{t("about.name")}
+									</label>
+									<input
+										id="ob-name"
+										type="text"
+										autoComplete="name"
+										value={name}
+										onChange={(e) => setName(e.target.value)}
+										placeholder={t("about.namePlaceholder")}
+										required
+										className={authInput}
+									/>
+								</div>
+								<div>
+									<label htmlFor="ob-org" className={authLabel}>
+										{t("about.org")}
+									</label>
+									<input
+										id="ob-org"
+										type="text"
+										autoComplete="organization"
+										value={org}
+										onChange={(e) => setOrg(e.target.value)}
+										placeholder={t("about.orgPlaceholder")}
+										className={authInput}
+									/>
+								</div>
+								<div>
+									<label htmlFor="ob-market" className={authLabel}>
+										{t("about.market")}
+									</label>
+									<input
+										id="ob-market"
+										type="text"
+										value={market}
+										onChange={(e) => setMarket(e.target.value)}
+										placeholder={t("about.marketPlaceholder")}
+										className={authInput}
+									/>
+								</div>
+							</form>
+						)}
+
+						{/* Step 3 — tailored setup */}
+						{current === "setup" && (
+							<div className="mt-4">
+								<p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--muted)] mb-6">
+									{t("setup.hint")}
+								</p>
+								<div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-left">
+									{setupOptions.map((o) => {
+										const selected = priorities.includes(o.id);
 										return (
 											<button
-												key={r.id}
+												key={o.id}
 												type="button"
-												onClick={() => setRole(r.id)}
+												onClick={() => togglePriority(o.id)}
 												aria-pressed={selected}
-												className={`group relative flex flex-col items-start gap-3 rounded-2xl border p-5 text-left transition-all duration-200 ${
+												className={`flex items-center gap-3 rounded-xl border px-4 py-3.5 text-left transition-all duration-200 ${
 													selected
 														? "border-orange bg-orange/[0.08]"
-														: "border-[var(--hair)] bg-[var(--surface)] hover:border-[var(--muted)] hover:bg-[var(--surface-2)]"
+														: "border-[var(--hair)] bg-[var(--surface)] hover:border-[var(--muted)]"
 												}`}
 											>
 												<span
-													className={`flex h-11 w-11 items-center justify-center rounded-xl transition-colors ${
-														selected ? "bg-orange text-white" : "bg-[var(--surface-2)] text-[var(--text)]"
+													className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-md border transition-colors ${
+														selected ? "border-orange bg-orange" : "border-[var(--muted)]"
 													}`}
 												>
-													<span className="material-symbols-outlined">
-														{ROLE_ICON[r.id] ?? "person"}
-													</span>
+													{selected && (
+														<span className="material-symbols-outlined text-[16px] text-white">
+															check
+														</span>
+													)}
 												</span>
-												<span>
-													<span className="block font-semibold text-[15px] text-[var(--text)]">
-														{r.title}
-													</span>
-													<span className="mt-1 block text-[13px] leading-snug text-[var(--muted)]">
-														{r.desc}
-													</span>
-												</span>
-												<span
-													className={`absolute right-4 top-4 flex h-5 w-5 items-center justify-center rounded-full transition-all ${
-														selected ? "bg-orange opacity-100" : "opacity-0"
-													}`}
-												>
-													<span className="material-symbols-outlined text-[15px] text-white">check</span>
-												</span>
+												<span className="text-sm font-medium text-[var(--text)]">{o.label}</span>
 											</button>
 										);
 									})}
 								</div>
-							</>
+							</div>
 						)}
 
-						{current === "workspace" && selectedRole && (
-							<>
-								<p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-orange">
-									{t("workspace.eyebrow")}
-								</p>
-								<div className="mt-4 flex items-center gap-4">
-									<span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-orange/12 text-orange shrink-0">
-										<span className="material-symbols-outlined text-[28px]">
-											{ROLE_ICON[selectedRole.id] ?? "person"}
-										</span>
-									</span>
-									<h1 className="font-(family-name:--font-display) text-2xl md:text-3xl leading-[1.1] tracking-tight">
-										{t("workspace.title", { role: selectedRole.title })}
-									</h1>
+						{/* Step 4 — review */}
+						{current === "review" && selectedRole && (
+							<div className="mt-9 text-left">
+								<div className="space-y-3">
+									<ReviewRow
+										label={t("review.roleLabel")}
+										value={selectedRole.title}
+										editLabel={t("review.edit")}
+										onEdit={() => setStep(0)}
+									/>
+									<ReviewRow
+										label={t("review.nameLabel")}
+										value={name.trim() || t("review.empty")}
+										editLabel={t("review.edit")}
+										onEdit={() => setStep(1)}
+									/>
+									<ReviewRow
+										label={t("review.orgLabel")}
+										value={org.trim() || t("review.empty")}
+										editLabel={t("review.edit")}
+										onEdit={() => setStep(1)}
+									/>
+									<ReviewRow
+										label={t("review.marketLabel")}
+										value={market.trim() || t("review.empty")}
+										editLabel={t("review.edit")}
+										onEdit={() => setStep(1)}
+									/>
+									<ReviewRow
+										label={t("review.prioritiesLabel")}
+										value={
+											priorities.length
+												? setupOptions
+														.filter((o) => priorities.includes(o.id))
+														.map((o) => o.label)
+														.join(", ")
+												: t("review.empty")
+										}
+										editLabel={t("review.edit")}
+										onEdit={() => setStep(2)}
+									/>
 								</div>
-								<p className="mt-4 text-[var(--muted)] text-sm md:text-base max-w-xl">
-									{t("workspace.subtitle")}
-								</p>
 
-								<div className="mt-8 rounded-2xl border border-[var(--hair)] bg-[var(--surface)] p-6 md:p-7">
+								<div className="mt-6 rounded-2xl border border-[var(--hair)] bg-[var(--surface)] p-6">
 									<p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[var(--muted)] mb-4">
-										{t("workspace.includesLabel")}
+										{t("review.includesLabel")}
 									</p>
-									<ul className="space-y-3.5">
-										{features.map((feat) => (
+									<ul className="space-y-3">
+										{dashboardFeatures.map((feat) => (
 											<li key={feat} className="flex items-start gap-3">
 												<span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-orange/15 text-orange">
 													<span className="material-symbols-outlined text-[15px]">check</span>
@@ -260,12 +397,16 @@ export default function OnboardingWizard() {
 										))}
 									</ul>
 								</div>
-							</>
+
+								<p className="mt-5 text-xs text-[var(--muted)] leading-relaxed">
+									{t("review.finePrint")}
+								</p>
+							</div>
 						)}
 					</div>
 
 					{/* Footer nav */}
-					<div className="mt-10 w-full max-w-2xl mx-auto lg:mx-0 flex items-center justify-between gap-4 border-t border-[var(--hair)] pt-6">
+					<div className="mt-10 w-full max-w-2xl mx-auto flex items-center justify-between gap-4 border-t border-[var(--hair)] pt-6">
 						{step === 0 ? (
 							<Link
 								href="/"
@@ -287,16 +428,44 @@ export default function OnboardingWizard() {
 
 						<button
 							type="button"
-							onClick={next}
+							onClick={goNext}
 							disabled={!canContinue}
 							className="inline-flex items-center gap-2 rounded-xl bg-orange px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-orange/25 transition-all hover:bg-ember active:scale-[0.98] disabled:opacity-40 disabled:pointer-events-none"
 						>
-							{step === total - 1 ? t("workspace.cta") : t("continue")}
+							{step === total - 1 ? t("review.cta") : t("continue")}
 							<span className="material-symbols-outlined text-[18px]">arrow_forward</span>
 						</button>
 					</div>
 				</main>
 			</div>
+		</div>
+	);
+}
+
+function ReviewRow({
+	label,
+	value,
+	editLabel,
+	onEdit,
+}: {
+	label: string;
+	value: string;
+	editLabel: string;
+	onEdit: () => void;
+}) {
+	return (
+		<div className="flex items-start justify-between gap-4 rounded-xl border border-[var(--hair)] bg-[var(--surface)] px-5 py-4">
+			<div className="min-w-0">
+				<p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[var(--muted)]">{label}</p>
+				<p className="mt-1 text-sm text-[var(--text)] break-words">{value}</p>
+			</div>
+			<button
+				type="button"
+				onClick={onEdit}
+				className="shrink-0 text-xs font-semibold text-orange hover:text-ember transition-colors"
+			>
+				{editLabel}
+			</button>
 		</div>
 	);
 }

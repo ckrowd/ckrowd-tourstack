@@ -6772,11 +6772,13 @@
 		"progress": "Step {current} of {total}",
 		"stepShort": {
 			"role": "Your role",
-			"workspace": "Your workspace"
+			"about": "About you",
+			"setup": "Set up",
+			"review": "Review"
 		},
 		"role": {
 			"title": "What brings you to TourStack?",
-			"subtitle": "Choose how you work with live entertainment. We'll set you up in the right place.",
+			"subtitle": "Choose how you work with live entertainment. We'll tailor your setup and take you to the right place.",
 			"options": [
 				{
 					"id": "promoter",
@@ -6800,12 +6802,115 @@
 				}
 			]
 		},
+		"about": {
+			"title": "Tell us about you",
+			"subtitle": "We'll personalize your workspace around this.",
+			"name": "Full name",
+			"namePlaceholder": "Ada Mensah",
+			"org": "Organization",
+			"orgPlaceholder": "Company, agency or stage name",
+			"market": "Primary market",
+			"marketPlaceholder": "Lagos, Nigeria"
+		},
+		"setup": {
+			"title": "What do you want to set up first?",
+			"subtitle": "Pick what matters to you. We'll put these front and center on your dashboard.",
+			"hint": "Select all that apply",
+			"options": {
+				"promoter": [
+					{
+						"id": "financing",
+						"label": "Tour & show financing"
+					},
+					{
+						"id": "insurance",
+						"label": "Event insurance"
+					},
+					{
+						"id": "ecosystem",
+						"label": "Certify crew & services"
+					},
+					{
+						"id": "payments",
+						"label": "Cross-border payouts"
+					},
+					{
+						"id": "data",
+						"label": "Market & credit data"
+					}
+				],
+				"service": [
+					{
+						"id": "discovery",
+						"label": "Get discovered by tours"
+					},
+					{
+						"id": "contracts",
+						"label": "Manage contracts"
+					},
+					{
+						"id": "payments",
+						"label": "Track payments"
+					},
+					{
+						"id": "verify",
+						"label": "Verify my company"
+					}
+				],
+				"workforce": [
+					{
+						"id": "registry",
+						"label": "Join the crew registry"
+					},
+					{
+						"id": "bookings",
+						"label": "Find bookings"
+					},
+					{
+						"id": "payouts",
+						"label": "Get paid on time"
+					},
+					{
+						"id": "verify",
+						"label": "Verify my skills"
+					}
+				],
+				"artmgmt": [
+					{
+						"id": "roster",
+						"label": "List my artists"
+					},
+					{
+						"id": "submissions",
+						"label": "Submit for tours"
+					},
+					{
+						"id": "bookings",
+						"label": "Manage bookings"
+					},
+					{
+						"id": "fees",
+						"label": "Protect fees"
+					}
+				]
+			}
+		},
+		"review": {
+			"eyebrow": "Almost there",
+			"title": "Review your setup",
+			"subtitle": "Confirm your details and we'll take you to your workspace.",
+			"roleLabel": "Role",
+			"nameLabel": "Name",
+			"orgLabel": "Organization",
+			"marketLabel": "Market",
+			"prioritiesLabel": "Priorities",
+			"includesLabel": "Your dashboard will include",
+			"edit": "Edit",
+			"empty": "Not set",
+			"cta": "Finish setup",
+			"finePrint": "By continuing you agree to our Terms and Privacy Policy."
+		},
 		"workspace": {
-			"eyebrow": "Your setup",
-			"title": "You're joining as {role}",
-			"subtitle": "Here's what your workspace includes and where you go next.",
-			"includesLabel": "What you get",
-			"cta": "Continue",
 			"features": {
 				"promoter": [
 					"Tour and show financing applications",
