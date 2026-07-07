@@ -6,6 +6,7 @@ import { useMemo, useState } from "react";
 import { getAdminFinancing, updateFinancingApplication } from "@/app/actions";
 import Loader from "@/components/Loader";
 import Button from "@/components/ui/Button";
+import PageTour from "@/components/PageTour";
 import StatusBadge, { type StatusTone } from "@/components/ui/StatusBadge";
 
 type Application = NonNullable<
@@ -163,6 +164,7 @@ export default function AdminFinancingPage() {
 
 	return (
 		<>
+			<PageTour pageId="admin-financing" />
 			<div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-5">
 				<div>
 					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
@@ -225,7 +227,7 @@ export default function AdminFinancingPage() {
 			</div>
 
 			<div className="grid grid-cols-1 xl:grid-cols-[1.35fr_0.65fr] gap-8">
-				<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+				<div data-tour="admin-financing-list" className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
 					<h2 className="text-base font-(family-name:--font-manrope) font-semibold mb-6">
 						{t("queueTitle")}
 					</h2>

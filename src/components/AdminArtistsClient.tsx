@@ -12,6 +12,7 @@ import {
 	rejectRosterArtist,
 } from "@/app/actions";
 import ArtistActionsMenu from "@/components/ArtistActionsMenu";
+import PageTour from "@/components/PageTour";
 
 type Tab = "submissions" | "published";
 type StatusFilter = "all" | "pending" | "approved" | "rejected";
@@ -140,6 +141,7 @@ export default function AdminArtistsClient() {
 
 	return (
 		<>
+			<PageTour pageId="admin-artists" />
 			{/* Header */}
 			<div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-6">
 				<div>
@@ -154,7 +156,7 @@ export default function AdminArtistsClient() {
 			</div>
 
 			{/* Tabs */}
-			<div className="flex gap-1 mb-6 bg-surface-container-low rounded-xl p-1 w-fit">
+			<div data-tour="admin-artists-tabs" className="flex gap-1 mb-6 bg-surface-container-low rounded-xl p-1 w-fit">
 				{(["submissions", "published"] as Tab[]).map((t2) => (
 					<button
 						key={t2}
@@ -173,7 +175,7 @@ export default function AdminArtistsClient() {
 
 			{/* ── Submissions tab ─────────────────────────────────────── */}
 			{tab === "submissions" && (
-				<div>
+				<div data-tour="admin-artists-list">
 					{/* Stats */}
 					<div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
 						{[

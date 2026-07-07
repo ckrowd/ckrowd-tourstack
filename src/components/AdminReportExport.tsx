@@ -36,7 +36,7 @@ export default function AdminReportExport() {
 		(exportMutation.data != null && !exportMutation.data.success);
 
 	return (
-		<div className="flex flex-col items-start gap-1 md:items-end">
+		<div data-tour="admin-reports-actions" className="flex flex-col items-start gap-1 md:items-end">
 			<button
 				type="button"
 				onClick={() => exportMutation.mutate()}

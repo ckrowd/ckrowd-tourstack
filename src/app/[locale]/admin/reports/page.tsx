@@ -1,6 +1,7 @@
 ﻿import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getAdminReport } from "@/app/actions";
 import AdminReportExport from "@/components/AdminReportExport";
+import PageTour from "@/components/PageTour";
 
 export default async function AdminReportsPage({
 	params,
@@ -46,6 +47,7 @@ export default async function AdminReportsPage({
 
 	return (
 		<>
+			<PageTour pageId="admin-reports" />
 			<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 				<div>
 					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
@@ -61,6 +63,7 @@ export default async function AdminReportsPage({
 				<AdminReportExport />
 			</div>
 
+			<div data-tour="admin-reports-dashboard">
 			{!report ? (
 				<div className="bg-surface-container-lowest rounded-2xl p-12 text-center shadow-sm border border-outline-variant/10">
 					<span className="material-symbols-outlined text-6xl text-on-surface-variant block mb-6">
@@ -124,6 +127,7 @@ export default async function AdminReportsPage({
 					</div>
 				</div>
 			)}
+			</div>
 		</>
 	);
 }

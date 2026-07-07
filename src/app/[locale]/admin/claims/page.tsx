@@ -6,6 +6,7 @@ import { useState } from "react";
 import { getAdminClaims } from "@/app/actions";
 import Loader from "@/components/Loader";
 import Button from "@/components/ui/Button";
+import PageTour from "@/components/PageTour";
 import StatusBadge, { type StatusTone } from "@/components/ui/StatusBadge";
 
 const FILTERS = ["all", "open", "under_review", "settled", "rejected"] as const;
@@ -32,6 +33,7 @@ export default function AdminClaimsPage() {
 
 	return (
 		<>
+			<PageTour pageId="admin-claims" />
 			<div className="mb-8">
 				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
 					{t("badge")}
@@ -67,6 +69,7 @@ export default function AdminClaimsPage() {
 				</button>
 			</div>
 
+			<div data-tour="admin-claims-list">
 			{claimsQuery.isLoading ? (
 				<Loader />
 			) : !claimsQuery.data?.success ? (
@@ -132,6 +135,7 @@ export default function AdminClaimsPage() {
 					</table>
 				</div>
 			)}
+			</div>
 		</>
 	);
 }

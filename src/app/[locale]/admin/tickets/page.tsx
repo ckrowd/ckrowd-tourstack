@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { getAdminTicketEvents, getAdminTicketEventPromoters } from "@/app/actions";
+import PageTour from "@/components/PageTour";
 
 const FILTERS = ["all", "draft", "published", "closed", "cancelled"] as const;
 type Filter = (typeof FILTERS)[number];
@@ -36,6 +37,7 @@ export default function AdminTicketsPage() {
 
 	return (
 		<div className="p-6 max-w-6xl mx-auto">
+			<PageTour pageId="admin-tickets" />
 			<div className="flex items-start justify-between mb-8">
 				<div>
 					<p className="text-xs font-black uppercase tracking-widest text-[#FF5A2E] mb-1">{t("badge")}</p>
@@ -87,6 +89,7 @@ export default function AdminTicketsPage() {
 				)}
 			</div>
 
+			<div data-tour="admin-tickets-list">
 			{isLoading && (
 				<div className="flex justify-center py-16">
 					<div className="w-6 h-6 border-2 border-[#FF5A2E] border-t-transparent rounded-full animate-spin" />
@@ -150,6 +153,7 @@ export default function AdminTicketsPage() {
 					</div>
 				</div>
 			)}
+			</div>
 		</div>
 	);
 }

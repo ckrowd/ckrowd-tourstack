@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "driver.js/dist/driver.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -218,6 +219,10 @@ h3 { letter-spacing: -0.02em; line-height: 1.2; font-weight: 600; }
 	min-width: 300px;
 	max-width: 380px;
 	border: none;
+	/* driver.js repositions the popover between steps by updating its inline
+	   top/left — transitioning those lets it glide to the next anchor instead
+	   of snapping there instantly. */
+	transition: top 0.25s ease, left 0.25s ease, opacity 0.15s ease;
 }
 
 /* Coloured header strip */

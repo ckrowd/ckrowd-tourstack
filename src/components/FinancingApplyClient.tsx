@@ -126,6 +126,7 @@ export default function FinancingApplyClient({ applications, locale, readiness }
 				<div className="flex items-center gap-2 flex-wrap">
 					<button
 						type="button"
+						data-tour="financing-products"
 						onClick={() => setProductsOpen(true)}
 						className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-semibold hover:bg-surface-container-high transition-colors"
 					>
@@ -166,7 +167,7 @@ export default function FinancingApplyClient({ applications, locale, readiness }
 			</div>
 
 			{/* Applications list */}
-			<div>
+			<div data-tour="financing-apply">
 				<h2 className="font-(family-name:--font-manrope) text-xl font-semibold text-on-surface mb-5">
 					{t("myApplications")}
 				</h2>
