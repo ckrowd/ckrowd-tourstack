@@ -164,6 +164,56 @@
 		"opsz" 24;
 }
 
+/* ── Funnel dual-theme surface ───────────────────────────────────────────
+   Reusable light/dark token set for the public funnel (sign in, sign up,
+   onboarding, contact). Mirrors the landing's .tslp vars and shares the
+   same `ts-theme` localStorage key, so the whole funnel stays in sync.
+   Rebinds --color-ink / --color-muted on the element so text-ink /
+   text-muted follow the theme (see the .tslp note in tourstack-landing.css). */
+.ts-theme {
+	--bg: #0a0a0a;
+	--surface: #161616;
+	--surface-2: #202020;
+	--text: #ffffff;
+	--muted: #a8a8a8;
+	--hair: rgba(255, 255, 255, 0.1);
+	--border: rgba(255, 255, 255, 0.07);
+	--color-ink: var(--text);
+	--color-muted: var(--muted);
+	background: var(--bg);
+	color: var(--text);
+	transition: background 0.4s ease, color 0.4s ease;
+}
+.ts-theme.light {
+	--bg: #ffffff;
+	--surface: #f5f4f2;
+	--surface-2: #ececea;
+	--text: #0c0c0c;
+	--muted: #5c5c5c;
+	--hair: rgba(0, 0, 0, 0.1);
+	--border: rgba(0, 0, 0, 0.07);
+}
+
+/* Onboarding wizard step transition (motivated: signals step change). */
+@keyframes funnel-step-in {
+	from {
+		opacity: 0;
+		transform: translateY(10px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+.funnel-step-in {
+	animation: funnel-step-in 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+	.funnel-step-in {
+		animation: none;
+	}
+}
+
 /* Scrollbar hide utility */
 .no-scrollbar::-webkit-scrollbar {
 	display: none;

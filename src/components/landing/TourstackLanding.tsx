@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { type ReactNode, useEffect, useRef, useState } from "react";
+import { useSession } from "@/context/AuthContext";
+import { adminHomePath } from "@/lib/auth";
 
 // Proper nouns — not translated.
 const CITIES = [
@@ -60,11 +62,11 @@ const CAP_META = [
 
 const EXPLORE_META = [
 	{ n: "01", img: "/landing-promoter.jpg", route: "/register" },
-	{ n: "02", img: "/landing-artist.jpg", route: "/onboard/artmgmt" },
+	{ n: "02", img: "/landing-artist.jpg", route: "/register" },
 	{ n: "03", img: "/concert-laser.jpg", route: "/financing-admin/login" },
 	{ n: "04", img: "/insurers-meeting.jpg", route: "/insurance-admin/login" },
-	{ n: "05", img: "/festival-pyro.jpg", route: "/join" },
-	{ n: "06", img: "/production-drums.jpg", route: "/onboard/service" },
+	{ n: "05", img: "/festival-pyro.jpg", route: "/register" },
+	{ n: "06", img: "/production-drums.jpg", route: "/register" },
 ];
 
 const NAV_LINKS = [
@@ -95,6 +97,17 @@ const pad2 = (i: number) => String(i + 1).padStart(2, "0");
 export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 	const t = useTranslations("TourstackLanding");
 	const { locale } = useParams<{ locale: string }>();
+
+	// Landing CTAs head to authentication. Signed-out visitors go to the
+	// register / sign-in pages; already-authenticated visitors are sent straight
+	// to their dashboard (or admin portal). Session resolves client-side, so the
+	// signed-out targets render first and update on hydration — no mismatch.
+	const { data: session } = useSession();
+	const loggedIn = !!session?.user;
+	const dashboardHref = `/${locale}${adminHomePath(session) ?? "/dashboard"}`;
+	const signInHref = loggedIn ? dashboardHref : `/${locale}/login`;
+	const createAccountHref = loggedIn ? dashboardHref : `/${locale}/register`;
+
 	const [theme, setTheme] = useState<"dark" | "light">("dark");
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -390,11 +403,11 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 								</svg>
 							)}
 						</button>
-						<Link href={`/${locale}/login`} className="hidden lg:inline-flex text-[13.5px] text-muted hover:text-ink transition-colors px-3 py-2">
+						<Link href={signInHref} className="hidden lg:inline-flex text-[13.5px] text-muted hover:text-ink transition-colors px-3 py-2">
 							{t("nav.login")}
 						</Link>
 						<Link
-							href={`/${locale}/register`}
+							href={createAccountHref}
 							className="group press hidden md:inline-flex items-center gap-2 bg-orange text-white font-medium text-[13.5px] pl-4 pr-2 py-2 rounded-full"
 						>
 							{t("nav.join")}
@@ -436,10 +449,18 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 					</a>
 				))}
 				<Link
-					href={`/${locale}/register`}
+					href={signInHref}
 					onClick={() => toggleMenu(false)}
-					className="mt-6 bg-orange text-white font-medium px-7 py-3 rounded-full"
-					style={{ transitionDelay: "0.25s" }}
+					className="mt-6 display text-4xl font-semibold py-2"
+					style={{ transitionDelay: "0.22s" }}
+				>
+					{t("nav.signIn")}
+				</Link>
+				<Link
+					href={createAccountHref}
+					onClick={() => toggleMenu(false)}
+					className="mt-4 bg-orange text-white font-medium px-7 py-3 rounded-full"
+					style={{ transitionDelay: "0.27s" }}
 				>
 					{t("nav.join")}
 				</Link>
@@ -479,14 +500,14 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 							{t("hero.subtitle")}
 						</p>
 						<div className="reveal mt-9 flex flex-col sm:flex-row gap-3 justify-center">
-							<Link href={`/${locale}/register`} className="group press inline-flex items-center justify-center gap-2 bg-orange text-white font-medium pl-6 pr-2 py-3.5 rounded-full">
+							<Link href={createAccountHref} className="group press inline-flex items-center justify-center gap-2 bg-orange text-white font-medium pl-6 pr-2 py-3.5 rounded-full">
 								{t("hero.ctaPrimary")}
 								<span className="btn-ico h-8 w-8 rounded-full bg-black/15 grid place-items-center">
 									<ArrowUpRight size={15} />
 								</span>
 							</Link>
 							<Link
-								href={`/${locale}/register`}
+								href={createAccountHref}
 								className="press inline-flex items-center justify-center gap-2 text-white font-medium px-6 py-3.5 rounded-full backdrop-blur-sm hover:bg-white/15 transition-colors"
 								style={{ border: "1px solid rgba(255,255,255,.25)", background: "rgba(255,255,255,.06)" }}
 							>
@@ -795,7 +816,7 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 								<h2 className="display text-[clamp(2.1rem,5.5vw,4.2rem)] font-semibold">{t("cta.title")}</h2>
 								<p className="mt-5 text-lg text-white/85">{t("cta.subtitle")}</p>
 								<div className="mt-9 flex flex-col sm:flex-row justify-center gap-3">
-									<Link href={`/${locale}/join`} className="group press inline-flex items-center justify-center gap-2 bg-black text-white font-medium pl-6 pr-2 py-3.5 rounded-full">
+									<Link href={createAccountHref} className="group press inline-flex items-center justify-center gap-2 bg-black text-white font-medium pl-6 pr-2 py-3.5 rounded-full">
 										{t("cta.primary")}
 										<span className="btn-ico h-8 w-8 rounded-full bg-white/15 grid place-items-center">
 											<ArrowUpRight size={15} />

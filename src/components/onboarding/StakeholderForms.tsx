@@ -40,14 +40,18 @@ const AM_YEARS = ["under_1", "1_3", "4_7", "8_plus"] as const;
 const AM_ROSTER = ["1_2", "3_5", "6_10", "11_20", "20_plus"] as const;
 const AM_DEALS = ["flat_fee", "percentage_split", "nda_required", "open_to_negotiation"] as const;
 
+// Tokens resolve against the funnel's `.ts-theme` wrapper (dark + `.light`).
+// Fallbacks match the light palette so the form also renders correctly on the
+// standalone white-card `/stakeholders/[token]` page (outside any ts-theme).
 const labelCls =
-	"block text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant mb-1.5";
+	"block text-[10px] font-semibold uppercase tracking-widest text-[var(--muted,#5c5c5c)] mb-1.5";
 const inputCls =
-	"w-full rounded-xl bg-surface-container-high px-4 py-3 text-sm border border-outline-variant/30 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/20";
+	"w-full rounded-xl bg-[var(--surface-2,#ececea)] text-[var(--text,#0c0c0c)] px-4 py-3 text-sm border border-[var(--hair,rgba(0,0,0,0.1))] focus:outline-none focus:ring-2 focus:ring-orange/20 focus:border-orange/50";
 const chipBase =
 	"px-3 py-2 rounded-xl text-xs font-semibold border transition-all cursor-pointer";
-const chipActive = "bg-[#FF5A2E] text-white border-[#FF5A2E]";
-const chipInactive = "border-outline-variant/30 text-on-surface-variant hover:border-[#FF5A2E]/40";
+const chipActive = "bg-orange text-white border-orange";
+const chipInactive =
+	"border-[var(--hair,rgba(0,0,0,0.1))] text-[var(--muted,#5c5c5c)] hover:border-orange/40";
 
 // ─── Shared Components ───────────────────────────────────────────────────────────
 
@@ -56,10 +60,10 @@ export function BrandHeader() {
 		<div className="flex items-center justify-center gap-2.5 mb-6">
 			<Image src="/ckrowd-logo.png" alt="Ckrowd" width={36} height={36} />
 			<div className="flex flex-col leading-tight">
-				<span className="text-lg font-black tracking-tight text-[#FF5A2E] font-(family-name:--font-manrope)">
+				<span className="text-lg font-black tracking-tight text-orange font-(family-name:--font-manrope)">
 					TourStack
 				</span>
-				<span className="text-[10px] font-semibold text-black font-(family-name:--font-manrope)">
+				<span className="text-[10px] font-semibold text-[var(--text,#0c0c0c)] font-(family-name:--font-manrope)">
 					by Ckrowd
 				</span>
 			</div>
@@ -76,10 +80,10 @@ function StepIndicator({ labels, current }: { labels: string[]; current: number 
 						<div
 							className={`w-6 h-6 rounded-full text-[10px] font-semibold flex items-center justify-center shrink-0 ${
 								i < current
-									? "bg-[#FF5A2E] text-white"
+									? "bg-orange text-white"
 									: i === current
-										? "border-2 border-[#FF5A2E] text-[#FF5A2E]"
-										: "border-2 border-outline-variant/30 text-on-surface-variant"
+										? "border-2 border-orange text-orange"
+										: "border-2 border-[var(--hair,rgba(0,0,0,0.1))] text-[var(--muted,#5c5c5c)]"
 							}`}
 						>
 							{i < current ? (
@@ -90,7 +94,7 @@ function StepIndicator({ labels, current }: { labels: string[]; current: number 
 						</div>
 						<span
 							className={`text-[10px] font-semibold hidden sm:block whitespace-nowrap ${
-								i === current ? "text-[#FF5A2E]" : i < current ? "text-on-surface" : "text-on-surface-variant"
+								i === current ? "text-orange" : i < current ? "text-[var(--text,#0c0c0c)]" : "text-[var(--muted,#5c5c5c)]"
 							}`}
 						>
 							{label}
@@ -98,7 +102,7 @@ function StepIndicator({ labels, current }: { labels: string[]; current: number 
 					</div>
 					{i < labels.length - 1 && (
 						<div
-							className={`flex-1 h-px mx-1 ${i < current ? "bg-[#FF5A2E]" : "bg-outline-variant/30"}`}
+							className={`flex-1 h-px mx-1 ${i < current ? "bg-orange" : "bg-[var(--hair,rgba(0,0,0,0.1))]"}`}
 						/>
 					)}
 				</div>
@@ -183,7 +187,7 @@ function StepNav({
 				<button
 					type="button"
 					onClick={onBack}
-					className="flex-1 rounded-xl border border-outline-variant/30 py-3 text-sm font-semibold text-on-surface hover:bg-surface-container-high transition-colors"
+					className="flex-1 rounded-xl border border-[var(--hair,rgba(0,0,0,0.1))] py-3 text-sm font-semibold text-[var(--text,#0c0c0c)] hover:bg-[var(--surface-2,#ececea)] transition-colors"
 				>
 					{t("steps.back" as never)}
 				</button>
@@ -191,7 +195,7 @@ function StepNav({
 			<button
 				type="submit"
 				disabled={isPending}
-				className="flex-1 rounded-xl bg-[#FF5A2E] text-white py-3 text-sm font-semibold hover:opacity-90 disabled:opacity-60 transition-opacity"
+				className="flex-1 rounded-xl bg-orange text-white py-3 text-sm font-semibold hover:opacity-90 disabled:opacity-60 transition-opacity"
 			>
 				{isLastStep ? (isPending ? submittingLabel : submitLabel) : t("steps.next" as never)}
 			</button>
@@ -486,7 +490,7 @@ export function ServiceProviderForm({ onSubmit, submitError, isPending }: Stakeh
 
 			{step === 2 && (
 				<div className="space-y-5">
-					<p className="text-sm text-on-surface-variant">{t("declaration.title" as never)}</p>
+					<p className="text-sm text-[var(--muted,#5c5c5c)]">{t("declaration.title" as never)}</p>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 						<div>
 							<label className={labelCls} htmlFor="sp-rep-name">
@@ -519,9 +523,9 @@ export function ServiceProviderForm({ onSubmit, submitError, isPending }: Stakeh
 									type="checkbox"
 									checked={form[key]}
 									onChange={f(key)}
-									className="mt-0.5 w-4 h-4 rounded accent-[#FF5A2E] shrink-0"
+									className="mt-0.5 w-4 h-4 rounded accent-orange shrink-0"
 								/>
-								<span className="text-sm text-on-surface-variant">{label}</span>
+								<span className="text-sm text-[var(--muted,#5c5c5c)]">{label}</span>
 							</label>
 						))}
 					</div>
@@ -912,7 +916,7 @@ export function WorkforceForm({ onSubmit, submitError, isPending }: StakeholderF
 
 			{step === 4 && (
 				<div className="space-y-5">
-					<p className="text-sm text-on-surface-variant">{t("declaration.title" as never)}</p>
+					<p className="text-sm text-[var(--muted,#5c5c5c)]">{t("declaration.title" as never)}</p>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 						<div>
 							<label className={labelCls} htmlFor="wf-rep-name">{t("declaration.representativeName" as never)} *</label>
@@ -930,8 +934,8 @@ export function WorkforceForm({ onSubmit, submitError, isPending }: StakeholderF
 							["clause3", t("declaration.clause3" as never)],
 						] as const).map(([key, label]) => (
 							<label key={key} className="flex items-start gap-3 cursor-pointer">
-								<input required type="checkbox" checked={form[key]} onChange={f(key)} className="mt-0.5 w-4 h-4 rounded accent-[#FF5A2E] shrink-0" />
-								<span className="text-sm text-on-surface-variant">{label}</span>
+								<input required type="checkbox" checked={form[key]} onChange={f(key)} className="mt-0.5 w-4 h-4 rounded accent-orange shrink-0" />
+								<span className="text-sm text-[var(--muted,#5c5c5c)]">{label}</span>
 							</label>
 						))}
 					</div>
@@ -1162,7 +1166,7 @@ export function ArtistMgmtForm({ onSubmit, submitError, isPending }: Stakeholder
 
 			{step === 2 && (
 				<div className="space-y-5">
-					<p className="text-sm text-on-surface-variant">{t("declaration.title" as never)}</p>
+					<p className="text-sm text-[var(--muted,#5c5c5c)]">{t("declaration.title" as never)}</p>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 						<div>
 							<label className={labelCls} htmlFor="am-rep-name">{t("declaration.representativeName" as never)} *</label>
@@ -1180,8 +1184,8 @@ export function ArtistMgmtForm({ onSubmit, submitError, isPending }: Stakeholder
 							["clause3", t("declaration.clause3" as never)],
 						] as const).map(([key, label]) => (
 							<label key={key} className="flex items-start gap-3 cursor-pointer">
-								<input required type="checkbox" checked={form[key]} onChange={f(key)} className="mt-0.5 w-4 h-4 rounded accent-[#FF5A2E] shrink-0" />
-								<span className="text-sm text-on-surface-variant">{label}</span>
+								<input required type="checkbox" checked={form[key]} onChange={f(key)} className="mt-0.5 w-4 h-4 rounded accent-orange shrink-0" />
+								<span className="text-sm text-[var(--muted,#5c5c5c)]">{label}</span>
 							</label>
 						))}
 					</div>

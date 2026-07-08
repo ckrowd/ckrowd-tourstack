@@ -59,13 +59,17 @@ const nextConfig: NextConfig = {
 	async redirects() {
 		return [
 			{
+				// Orphaned pre-redesign application form — the unified onboarding
+				// funnel now lives at /get-started. (Locale-prefixed paths like
+				// /en/apply are handled by src/app/[locale]/apply/page.tsx, which
+				// redirects to the same place.)
 				source: "/apply",
-				destination: "/onboarding",
+				destination: "/get-started",
 				permanent: true,
 			},
 			{
 				source: "/apply/:path*",
-				destination: "/onboarding/:path*",
+				destination: "/get-started",
 				permanent: true,
 			},
 			{
