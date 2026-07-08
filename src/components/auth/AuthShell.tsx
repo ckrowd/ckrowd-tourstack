@@ -2,11 +2,13 @@
 
 import { useTranslations } from "next-intl";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import BrandShowcase from "@/components/auth/BrandShowcase";
 import ThemeToggle from "@/components/theme/ThemeToggle";
 import { useTsTheme } from "@/components/theme/useTsTheme";
 import { Link } from "@/i18n/routing";
+
+const noopSubscribe = () => () => {};
 
 /**
  * Split-screen chrome for the auth funnel (sign in / sign up).
@@ -18,11 +20,14 @@ import { Link } from "@/i18n/routing";
 export default function AuthShell({ children }: { children: React.ReactNode }) {
 	const tCommon = useTranslations("Common");
 	const { theme, toggle } = useTsTheme();
-	const [mounted, setMounted] = useState(false);
-
-	useEffect(() => {
-		setMounted(true);
-	}, []);
+	// Drives the form column's fade-in-on-mount transition; getServerSnapshot
+	// keeps the first client render matching the server, same pattern as
+	// ThemeToggle's mount detection.
+	const mounted = useSyncExternalStore(
+		noopSubscribe,
+		() => true,
+		() => false,
+	);
 
 	return (
 		<div

@@ -1,8 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useSyncExternalStore } from "react";
 
 export type TsTheme = "dark" | "light";
+
+const STORAGE_KEY = "ts-theme";
+
+// useSyncExternalStore avoids the server/client hydration mismatch that a
+// lazy-initialiser useState would cause (server has no localStorage), same
+// pattern as TopNav's notification read-state.
+function getSnapshot(): TsTheme {
+	let saved: string | null = null;
+	try {
+		saved = localStorage.getItem(STORAGE_KEY);
+	} catch {}
+	if (saved === "light" || saved === "dark") return saved;
+	return typeof matchMedia !== "undefined" &&
+		matchMedia("(prefers-color-scheme: light)").matches
+		? "light"
+		: "dark";
+}
+
+function getServerSnapshot(): TsTheme {
+	return "dark";
+}
 
 /**
  * Shared light/dark theme state for the public funnel (sign in, sign up,
@@ -12,32 +33,23 @@ export type TsTheme = "dark" | "light";
  * preference on mount.
  */
 export function useTsTheme() {
-	const [theme, setTheme] = useState<TsTheme>("dark");
+	const theme = useSyncExternalStore(
+		(cb) => {
+			window.addEventListener("storage", cb);
+			return () => window.removeEventListener("storage", cb);
+		},
+		getSnapshot,
+		getServerSnapshot,
+	);
 
-	useEffect(() => {
-		let saved: string | null = null;
+	const toggle = useCallback(() => {
+		const next: TsTheme = getSnapshot() === "dark" ? "light" : "dark";
 		try {
-			saved = localStorage.getItem("ts-theme");
+			localStorage.setItem(STORAGE_KEY, next);
 		} catch {}
-		const next: TsTheme =
-			saved === "light" || saved === "dark"
-				? saved
-				: typeof matchMedia !== "undefined" &&
-						matchMedia("(prefers-color-scheme: light)").matches
-					? "light"
-					: "dark";
-		setTheme(next);
+		// Dispatch storage event so useSyncExternalStore re-reads in this tab.
+		window.dispatchEvent(new StorageEvent("storage", { key: STORAGE_KEY }));
 	}, []);
-
-	function toggle() {
-		setTheme((cur) => {
-			const next: TsTheme = cur === "dark" ? "light" : "dark";
-			try {
-				localStorage.setItem("ts-theme", next);
-			} catch {}
-			return next;
-		});
-	}
 
 	return { theme, toggle, isLight: theme === "light" };
 }
