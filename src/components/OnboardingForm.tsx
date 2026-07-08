@@ -1453,8 +1453,8 @@ export default function OnboardingForm() {
 							onClick={() => setTab(t_key)}
 							className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all ${
 								tab === t_key
-									? "bg-white text-on-surface shadow-sm"
-									: "text-on-surface-variant hover:text-on-surface"
+									? "bg-surface-container-low text-on-surface shadow-sm ring-1 ring-outline-variant/20"
+									: "text-on-surface-variant hover:text-on-surface hover:bg-surface-container"
 							}`}
 						>
 							{t_key === "form" ? t("tabs.onboard") : t("tabs.directory")}

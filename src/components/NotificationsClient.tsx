@@ -60,30 +60,30 @@ export default function NotificationsClient() {
 				<Loader />
 			) : notifications.length === 0 ? (
 				<div className="flex flex-col items-center justify-center py-24 text-on-surface-variant text-center">
-					<span className="material-symbols-outlined text-5xl mb-4 text-slate-300">
+					<span className="material-symbols-outlined text-5xl mb-4 text-on-surface-variant/40">
 						notifications_off
 					</span>
 					<p className="font-semibold text-lg">{t("empty")}</p>
 					<p className="text-sm mt-1">{t("emptyHint")}</p>
 				</div>
 			) : (
-				<div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden max-w-2xl">
-					<ul className="divide-y divide-slate-50">
+				<div className="bg-surface-container-lowest rounded-2xl border border-outline-variant/20 shadow-sm overflow-hidden max-w-2xl">
+					<ul className="divide-y divide-outline-variant/10">
 						{notifications.map((n) => (
 							<li key={n.id}>
 								<Link
 									href={n.href}
-									className="flex items-start gap-4 px-6 py-5 hover:bg-slate-50 transition-colors"
+									className="flex items-start gap-4 px-6 py-5 hover:bg-surface-container-low transition-colors"
 								>
 									<span className={`material-symbols-outlined text-xl mt-0.5 shrink-0 ${n.color}`}>
 										{n.icon}
 									</span>
 									<div className="flex-1 min-w-0">
-										<p className="text-sm font-semibold text-slate-900">{n.title}</p>
-										<p className="text-xs text-slate-500 mt-0.5">{n.body}</p>
+										<p className="text-sm font-semibold text-on-surface">{n.title}</p>
+										<p className="text-xs text-on-surface-variant mt-0.5">{n.body}</p>
 									</div>
 									{n.date && (
-										<span className="text-[11px] text-slate-400 font-medium shrink-0 mt-0.5 whitespace-nowrap">
+										<span className="text-[11px] text-on-surface-variant font-medium shrink-0 mt-0.5 whitespace-nowrap">
 											{format.relativeTime(n.date)}
 										</span>
 									)}
