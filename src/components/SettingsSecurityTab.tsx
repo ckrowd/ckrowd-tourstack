@@ -381,7 +381,7 @@ export default function SettingsSecurityTab() {
 							value={confirmEmail}
 							onChange={(e) => setConfirmEmail(e.target.value)}
 							placeholder={t("dangerZone.confirm.emailPlaceholder")}
-							className="w-full bg-white border border-red-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-300"
+							className="w-full bg-surface-container-lowest border border-red-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-red-300"
 						/>
 						{deleteMutation.data && !deleteMutation.data.success && (
 							<p className="text-xs text-red-600">{deleteMutation.data.error}</p>

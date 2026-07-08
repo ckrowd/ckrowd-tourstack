@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
@@ -109,23 +109,23 @@ function VerifyEmailContent() {
 
 	if (verified) {
 		return (
-			<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 py-12">
+			<div className="min-h-screen bg-surface flex items-center justify-center px-4 py-12">
 				<div className="w-full max-w-md">
 					<div className="text-center mb-10">
 						<div className="flex items-center justify-center">
 							<AuthBrandLockup />
 						</div>
 					</div>
-					<div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8 text-center">
+					<div className="bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/20 p-8 text-center">
 						<div className="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-5">
 							<svg className="w-8 h-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
 								<path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
 							</svg>
 						</div>
-						<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-slate-900 mb-2">
+						<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-on-surface mb-2">
 							{t("verifiedTitle")}
 						</h1>
-						<p className="text-sm text-slate-500">{t("verifiedMessage")}</p>
+						<p className="text-sm text-on-surface-variant">{t("verifiedMessage")}</p>
 						<div className="mt-6 flex justify-center">
 							<div className="w-6 h-6 border-2 border-[#FF5A2E] border-t-transparent rounded-full animate-spin" />
 						</div>
@@ -136,26 +136,26 @@ function VerifyEmailContent() {
 	}
 
 	return (
-		<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 py-12">
+		<div className="min-h-screen bg-surface flex items-center justify-center px-4 py-12">
 			<div className="w-full max-w-md">
 				<div className="text-center mb-10">
 					<div className="flex items-center justify-center mb-6">
 						<AuthBrandLockup />
 					</div>
-					<p className="mt-2 text-sm text-slate-500 font-medium">{t("tagline")}</p>
+					<p className="mt-2 text-sm text-on-surface-variant font-medium">{t("tagline")}</p>
 				</div>
 
-				<div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+				<div className="bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/20 p-8">
 					<div className="mb-8">
-						<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-slate-900 mb-1">
+						<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-on-surface mb-1">
 							{t("title")}
 						</h1>
-						<p className="text-sm text-slate-500">{t("description", { email })}</p>
+						<p className="text-sm text-on-surface-variant">{t("description", { email })}</p>
 					</div>
 
 					<form onSubmit={handleSubmit} className="space-y-6">
 						<div>
-							<label className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-3">
+							<label className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-3">
 								{t("codeLabel")}
 							</label>
 							<div className="flex gap-2 justify-between">
@@ -171,7 +171,7 @@ function VerifyEmailContent() {
 										onKeyDown={(e) => handleKeyDown(i, e)}
 										onPaste={handlePaste}
 										disabled={verifyMutation.isPending}
-										className="w-12 h-14 text-center text-xl font-semibold bg-slate-50 border border-slate-200 rounded-xl text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all disabled:opacity-60"
+										className="w-12 h-14 text-center text-xl font-semibold bg-surface-container border border-outline-variant/40 rounded-xl text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all disabled:opacity-60"
 									/>
 								))}
 							</div>
@@ -196,7 +196,7 @@ function VerifyEmailContent() {
 						</button>
 					</form>
 
-					<p className="text-center text-sm text-slate-500 mt-6">
+					<p className="text-center text-sm text-on-surface-variant mt-6">
 						{t("resendPrompt")}{" "}
 						<button
 							type="button"
@@ -208,7 +208,7 @@ function VerifyEmailContent() {
 						</button>
 					</p>
 
-					<p className="text-center text-sm text-slate-500 mt-2">
+					<p className="text-center text-sm text-on-surface-variant mt-2">
 						<Link href="/login" className="text-[#FF5A2E] font-semibold hover:underline">
 							{t("signIn")}
 						</Link>
