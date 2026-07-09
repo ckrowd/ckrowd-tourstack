@@ -44,16 +44,16 @@ function BarRow({
 	const pct = max > 0 ? Math.round((count / max) * 100) : 0;
 	return (
 		<div className="flex items-center gap-3">
-			<span className="text-xs text-slate-600 font-semibold w-28 shrink-0 truncate">
+			<span className="text-xs text-on-surface-variant font-semibold w-28 shrink-0 truncate">
 				{label}
 			</span>
-			<div className="flex-1 bg-slate-100 rounded-full h-2.5 overflow-hidden">
+			<div className="flex-1 bg-surface-container-high rounded-full h-2.5 overflow-hidden">
 				<div
 					className={`h-full rounded-full transition-all duration-500 ${color}`}
 					style={{ width: `${pct}%` }}
 				/>
 			</div>
-			<span className="text-xs font-semibold text-slate-700 w-5 text-right">
+			<span className="text-xs font-semibold text-on-surface-variant w-5 text-right">
 				{count}
 			</span>
 		</div>
@@ -102,7 +102,7 @@ export default function ArtmgmtReportsPage() {
 	return (
 		<div>
 			<div className="mb-6">
-				<span className="inline-block px-3 py-1 rounded-full bg-[#FF5A2E]/10 text-[#FF5A2E] text-xs font-semibold uppercase tracking-wider mb-3">
+				<span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider mb-3">
 					{t("badge")}
 				</span>
 				<h1 className="font-(family-name:--font-manrope) text-3xl font-black text-on-surface">
@@ -112,47 +112,47 @@ export default function ArtmgmtReportsPage() {
 			</div>
 
 			<div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-				<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex items-center gap-4">
-					<div className="w-11 h-11 rounded-xl bg-[#FF5A2E]/10 flex items-center justify-center shrink-0">
-						<span className="material-symbols-outlined text-[#FF5A2E] text-xl">
+				<div className="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-sm p-5 flex items-center gap-4">
+					<div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
+						<span className="material-symbols-outlined text-primary text-xl">
 							groups
 						</span>
 					</div>
 					<div className="min-w-0">
-						<p className="text-2xl font-black text-slate-900 leading-none">
+						<p className="text-2xl font-black text-on-surface leading-none">
 							{artists.length}
 						</p>
-						<p className="text-xs text-slate-500 font-semibold mt-0.5">
+						<p className="text-xs text-on-surface-variant font-semibold mt-0.5">
 							{t("stats.total")}
 						</p>
 					</div>
 				</div>
-				<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex items-center gap-4">
+				<div className="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-sm p-5 flex items-center gap-4">
 					<div className="w-11 h-11 rounded-xl bg-violet-50 flex items-center justify-center shrink-0">
 						<span className="material-symbols-outlined text-violet-600 text-xl">
 							category
 						</span>
 					</div>
 					<div className="min-w-0">
-						<p className="text-2xl font-black text-slate-900 leading-none">
+						<p className="text-2xl font-black text-on-surface leading-none">
 							{genreCounts.length}
 						</p>
-						<p className="text-xs text-slate-500 font-semibold mt-0.5">
+						<p className="text-xs text-on-surface-variant font-semibold mt-0.5">
 							{t("stats.genres")}
 						</p>
 					</div>
 				</div>
-				<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex items-center gap-4">
+				<div className="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-sm p-5 flex items-center gap-4">
 					<div className="w-11 h-11 rounded-xl bg-emerald-50 flex items-center justify-center shrink-0">
 						<span className="material-symbols-outlined text-emerald-600 text-xl">
 							public
 						</span>
 					</div>
 					<div className="min-w-0">
-						<p className="text-2xl font-black text-slate-900 leading-none">
+						<p className="text-2xl font-black text-on-surface leading-none">
 							{nationalityCounts.length}
 						</p>
-						<p className="text-xs text-slate-500 font-semibold mt-0.5">
+						<p className="text-xs text-on-surface-variant font-semibold mt-0.5">
 							{t("stats.nationalities")}
 						</p>
 					</div>
@@ -161,15 +161,15 @@ export default function ArtmgmtReportsPage() {
 
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
 				{/* Genre breakdown */}
-				<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
-					<h2 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
-						<span className="material-symbols-outlined text-[#FF5A2E] text-lg">
+				<div className="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-sm p-6">
+					<h2 className="font-semibold text-on-surface mb-4 flex items-center gap-2">
+						<span className="material-symbols-outlined text-primary text-lg">
 							music_note
 						</span>
 						{t("genres.title")}
 					</h2>
 					{genreCounts.length === 0 ? (
-						<p className="text-sm text-slate-400">{t("noData")}</p>
+						<p className="text-sm text-on-surface-variant">{t("noData")}</p>
 					) : (
 						<div className="space-y-3">
 							{genreCounts.map(([genre, count]) => (
@@ -178,7 +178,7 @@ export default function ArtmgmtReportsPage() {
 									label={genre}
 									count={count}
 									max={maxGenre}
-									color="bg-[#FF5A2E]"
+									color="bg-primary"
 								/>
 							))}
 						</div>
@@ -186,15 +186,15 @@ export default function ArtmgmtReportsPage() {
 				</div>
 
 				{/* Nationality breakdown */}
-				<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
-					<h2 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
+				<div className="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-sm p-6">
+					<h2 className="font-semibold text-on-surface mb-4 flex items-center gap-2">
 						<span className="material-symbols-outlined text-emerald-600 text-lg">
 							public
 						</span>
 						{t("nationalities.title")}
 					</h2>
 					{nationalityCounts.length === 0 ? (
-						<p className="text-sm text-slate-400">{t("noData")}</p>
+						<p className="text-sm text-on-surface-variant">{t("noData")}</p>
 					) : (
 						<div className="space-y-3">
 							{nationalityCounts.map(([nat, count]) => (
@@ -213,37 +213,37 @@ export default function ArtmgmtReportsPage() {
 
 			<div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 				{/* Active vs inactive */}
-				<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
-					<h2 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
+				<div className="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-sm p-6">
+					<h2 className="font-semibold text-on-surface mb-4 flex items-center gap-2">
 						<span className="material-symbols-outlined text-violet-600 text-lg">
 							donut_large
 						</span>
 						{t("status.title")}
 					</h2>
 					{artists.length === 0 ? (
-						<p className="text-sm text-slate-400">{t("noData")}</p>
+						<p className="text-sm text-on-surface-variant">{t("noData")}</p>
 					) : (
 						<div className="space-y-4">
 							<div className="flex items-center justify-between text-sm mb-1">
-								<span className="font-semibold text-slate-700">{t("status.active")}</span>
-								<span className="font-semibold text-slate-900">
+								<span className="font-semibold text-on-surface-variant">{t("status.active")}</span>
+								<span className="font-semibold text-on-surface">
 									{activeCount}{" "}
-									<span className="text-slate-400 font-normal">({activePct}%)</span>
+									<span className="text-on-surface-variant font-normal">({activePct}%)</span>
 								</span>
 							</div>
-							<div className="w-full bg-slate-100 rounded-full h-4 overflow-hidden">
+							<div className="w-full bg-surface-container-high rounded-full h-4 overflow-hidden">
 								<div
 									className="h-full bg-emerald-500 rounded-full transition-all duration-500"
 									style={{ width: `${activePct}%` }}
 								/>
 							</div>
 							<div className="flex gap-4 pt-1">
-								<div className="flex items-center gap-2 text-xs text-slate-600">
+								<div className="flex items-center gap-2 text-xs text-on-surface-variant">
 									<span className="w-3 h-3 rounded-full bg-emerald-500 shrink-0" />
 									{t("status.active")}: {activeCount}
 								</div>
-								<div className="flex items-center gap-2 text-xs text-slate-600">
-									<span className="w-3 h-3 rounded-full bg-slate-200 shrink-0" />
+								<div className="flex items-center gap-2 text-xs text-on-surface-variant">
+									<span className="w-3 h-3 rounded-full bg-surface-container-highest shrink-0" />
 									{t("status.inactive")}: {inactiveCount}
 								</div>
 							</div>
@@ -252,15 +252,15 @@ export default function ArtmgmtReportsPage() {
 				</div>
 
 				{/* Monthly growth */}
-				<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
-					<h2 className="font-semibold text-slate-900 mb-4 flex items-center gap-2">
+				<div className="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-sm p-6">
+					<h2 className="font-semibold text-on-surface mb-4 flex items-center gap-2">
 						<span className="material-symbols-outlined text-blue-500 text-lg">
 							trending_up
 						</span>
 						{t("growth.title")}
 					</h2>
 					{monthEntries.length === 0 ? (
-						<p className="text-sm text-slate-400">{t("noData")}</p>
+						<p className="text-sm text-on-surface-variant">{t("noData")}</p>
 					) : (
 						<div className="space-y-3">
 							{monthEntries.map(([month, count]) => (

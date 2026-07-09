@@ -93,7 +93,7 @@ export default async function AdminToursPage({
 							under_review:   "bg-blue-100 text-blue-700",
 							needs_revision: "bg-amber-100 text-amber-700",
 							rejected:       "bg-red-100 text-red-700",
-							draft:          "bg-slate-100 text-slate-500",
+							draft:          "bg-surface-container text-on-surface-variant",
 						};
 						const statusLabel: Record<string, string> = {
 							confirmed:      "Active",
@@ -117,7 +117,7 @@ export default async function AdminToursPage({
 									</p>
 								</div>
 								<span
-									className={`shrink-0 px-3 py-1 rounded-full text-xs font-black uppercase tracking-tighter ${statusStyle[tStatus] ?? "bg-slate-100 text-slate-500"}`}
+									className={`shrink-0 px-3 py-1 rounded-full text-xs font-black uppercase tracking-tighter ${statusStyle[tStatus] ?? "bg-surface-container text-on-surface-variant"}`}
 								>
 									{statusLabel[tStatus] ?? tStatus.replace(/_/g, " ")}
 								</span>
