@@ -1,4 +1,5 @@
 import type {} from "next";
+import { Archivo_Black, Geist, Geist_Mono } from "next/font/google";
 import localFont from "next/font/local";
 import "../globals.css";
 import { notFound } from "next/navigation";
@@ -34,6 +35,30 @@ const materialSymbols = localFont({
 	variable: "--font-material-symbols",
 	display: "block",
 	weight: "400",
+});
+
+// Landing / funnel display + mono faces (sign in, sign up, contact,
+// onboarding). Exposed app-wide as CSS variables so the dark-cinematic
+// funnel surfaces match the marketing landing without per-page font setup.
+const geist = Geist({
+	subsets: ["latin"],
+	variable: "--font-geist",
+	weight: ["400", "500", "600", "700"],
+	display: "swap",
+});
+
+const geistMono = Geist_Mono({
+	subsets: ["latin"],
+	variable: "--font-geist-mono",
+	weight: ["500", "600"],
+	display: "swap",
+});
+
+const archivoBlack = Archivo_Black({
+	subsets: ["latin"],
+	variable: "--font-display",
+	weight: "400",
+	display: "swap",
 });
 
 export async function generateMetadata({
@@ -135,7 +160,11 @@ export default async function RootLayout({
 	const messages = await getMessages();
 
 	return (
-		<html lang={locale} className={`${headingFont.variable} ${inter.variable} ${materialSymbols.variable}`} suppressHydrationWarning>
+		<html
+			lang={locale}
+			className={`${headingFont.variable} ${inter.variable} ${materialSymbols.variable} ${geist.variable} ${geistMono.variable} ${archivoBlack.variable}`}
+			suppressHydrationWarning
+		>
 			<body className="min-h-full antialiased" suppressHydrationWarning>
 				<ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
 					<NextIntlClientProvider locale={locale} messages={messages}>

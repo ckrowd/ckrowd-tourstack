@@ -4,8 +4,9 @@ import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { acceptAdminInvite, signOut } from "@/app/actions";
+import AuthShell from "@/components/auth/AuthShell";
+import { authPrimaryBtn, authTitle } from "@/components/auth/authFields";
 import Loader from "@/components/Loader";
-import AuthBrandLockup from "@/components/AuthBrandLockup";
 import { useSession } from "@/context/AuthContext";
 import { Link, useRouter } from "@/i18n/routing";
 
@@ -25,6 +26,10 @@ type Invite = {
 	invitedBy: { name: string | null; email: string | null } | null;
 	userExists: boolean;
 };
+
+// Full-width link styled as the primary CTA (authPrimaryBtn is built for
+// <button>, so links add the block/centering).
+const primaryLinkCls = `${authPrimaryBtn} block text-center`;
 
 export default function AcceptInviteClient({
 	token,
@@ -64,61 +69,50 @@ export default function AcceptInviteClient({
 
 	if (!invite || invite.status === "not_found") {
 		return (
-			<Shell>
-				<h1 className="text-xl font-semibold text-on-surface mb-2">
-					{t("notFoundTitle")}
-				</h1>
-				<p className="text-sm text-on-surface-variant">{t("notFoundDesc")}</p>
-			</Shell>
+			<AuthShell>
+				<h1 className={authTitle}>{t("notFoundTitle")}</h1>
+				<p className="mt-2 text-sm text-[var(--muted)]">{t("notFoundDesc")}</p>
+			</AuthShell>
 		);
 	}
 
 	if (invite.status === "revoked") {
 		return (
-			<Shell>
-				<h1 className="text-xl font-semibold text-on-surface mb-2">
-					{t("revokedTitle")}
-				</h1>
-				<p className="text-sm text-on-surface-variant">{t("revokedDesc")}</p>
-			</Shell>
+			<AuthShell>
+				<h1 className={authTitle}>{t("revokedTitle")}</h1>
+				<p className="mt-2 text-sm text-[var(--muted)]">{t("revokedDesc")}</p>
+			</AuthShell>
 		);
 	}
 
 	if (invite.status === "expired") {
 		return (
-			<Shell>
-				<h1 className="text-xl font-semibold text-on-surface mb-2">
-					{t("expiredTitle")}
-				</h1>
-				<p className="text-sm text-on-surface-variant">{t("expiredDesc")}</p>
-			</Shell>
+			<AuthShell>
+				<h1 className={authTitle}>{t("expiredTitle")}</h1>
+				<p className="mt-2 text-sm text-[var(--muted)]">{t("expiredDesc")}</p>
+			</AuthShell>
 		);
 	}
 
 	if (invite.status === "accepted") {
 		return (
-			<Shell>
-				<h1 className="text-xl font-semibold text-on-surface mb-2">
-					{t("acceptedTitle")}
-				</h1>
-				<p className="text-sm text-on-surface-variant">{t("acceptedDesc")}</p>
-				<div className="mt-5 flex justify-end">
-					<Link
-						href="/login"
-						className="px-4 py-2 rounded-lg text-sm font-semibold bg-[#FF5A2E] text-white hover:opacity-90"
-					>
-						{t("goToSignIn")}
-					</Link>
-				</div>
-			</Shell>
+			<AuthShell>
+				<h1 className={authTitle}>{t("acceptedTitle")}</h1>
+				<p className="mt-2 mb-6 text-sm text-[var(--muted)]">{t("acceptedDesc")}</p>
+				<Link href="/login" className={primaryLinkCls}>
+					{t("goToSignIn")}
+				</Link>
+			</AuthShell>
 		);
 	}
 
 	if (isLoading && !session) {
 		return (
-			<Shell>
-				<Loader size={36} />
-			</Shell>
+			<AuthShell>
+				<div className="flex justify-center">
+					<Loader size={36} />
+				</div>
+			</AuthShell>
 		);
 	}
 
@@ -132,53 +126,43 @@ export default function AcceptInviteClient({
 		const signInHref = `/login?from=${next}`;
 		const registerHref = `/register?from=${next}`;
 		return (
-			<Shell>
-				<h1 className="text-xl font-semibold text-on-surface mb-1">
-					{t("invitedTitle")}
-				</h1>
-				<p className="text-sm text-on-surface-variant mb-4">
+			<AuthShell>
+				<h1 className={authTitle}>{t("invitedTitle")}</h1>
+				<p className="mt-2 mb-6 text-sm text-[var(--muted)]">
 					{t("invitedDesc", {
 						inviter: inviterLabel,
 						scope: scopeLabel(invite.role),
 					})}
 				</p>
-				<dl className="mb-5 text-sm bg-surface-container-low rounded-xl p-4 space-y-2">
+				<dl className="mb-6 text-sm bg-[var(--surface)] border border-[var(--hair)] rounded-xl p-4 space-y-2">
 					<Row label={t("inviteeName")} value={invite.name} />
 					<Row label={t("inviteeEmail")} value={invite.email} />
 					<Row label={t("scope")} value={scopeLabel(invite.role)} />
 				</dl>
-				<div className="flex flex-col gap-2">
+				<div className="flex flex-col gap-3">
 					{invite.userExists ? (
-						<Link
-							href={signInHref}
-							className="block w-full text-center px-4 py-2.5 rounded-lg text-sm font-semibold bg-[#FF5A2E] text-white hover:opacity-90"
-						>
+						<Link href={signInHref} className={primaryLinkCls}>
 							{t("signInToAccept")}
 						</Link>
 					) : (
-						<Link
-							href={registerHref}
-							className="block w-full text-center px-4 py-2.5 rounded-lg text-sm font-semibold bg-[#FF5A2E] text-white hover:opacity-90"
-						>
+						<Link href={registerHref} className={primaryLinkCls}>
 							{t("createAccountToAccept")}
 						</Link>
 					)}
-					<p className="text-xs text-on-surface-variant text-center">
+					<p className="text-xs text-[var(--muted)] text-center">
 						{t("useExactEmail", { email: invite.email })}
 					</p>
 				</div>
-			</Shell>
+			</AuthShell>
 		);
 	}
 
 	// Signed in as wrong account
 	if (session.user.email?.toLowerCase() !== invite.email.toLowerCase()) {
 		return (
-			<Shell>
-				<h1 className="text-xl font-semibold text-on-surface mb-1">
-					{t("wrongAccountTitle")}
-				</h1>
-				<p className="text-sm text-on-surface-variant mb-4">
+			<AuthShell>
+				<h1 className={authTitle}>{t("wrongAccountTitle")}</h1>
+				<p className="mt-2 mb-6 text-sm text-[var(--muted)]">
 					{t("wrongAccountDesc", { invitee: invite.email })}
 				</p>
 				<button
@@ -189,11 +173,11 @@ export default function AcceptInviteClient({
 						await signOut();
 						router.refresh();
 					}}
-					className="w-full px-4 py-2.5 rounded-lg text-sm font-semibold border border-outline-variant/30 hover:bg-surface-container-low"
+					className="w-full py-3.5 rounded-xl border border-[var(--hair)] text-sm font-semibold text-[var(--text)] hover:bg-[var(--surface)] transition-colors disabled:opacity-60"
 				>
 					{signingOut ? t("signingOut") : t("signOutToSwitch")}
 				</button>
-			</Shell>
+			</AuthShell>
 		);
 	}
 
@@ -206,59 +190,42 @@ export default function AcceptInviteClient({
 				: null;
 
 	return (
-		<Shell>
-			<h1 className="text-xl font-semibold text-on-surface mb-1">
-				{t("readyTitle")}
-			</h1>
-			<p className="text-sm text-on-surface-variant mb-4">
+		<AuthShell>
+			<h1 className={authTitle}>{t("readyTitle")}</h1>
+			<p className="mt-2 mb-6 text-sm text-[var(--muted)]">
 				{t("readyDesc", {
 					inviter: inviterLabel,
 					scope: scopeLabel(invite.role),
 				})}
 			</p>
-			<dl className="mb-5 text-sm bg-surface-container-low rounded-xl p-4 space-y-2">
+			<dl className="mb-6 text-sm bg-[var(--surface)] border border-[var(--hair)] rounded-xl p-4 space-y-2">
 				<Row label={t("inviteeEmail")} value={invite.email} />
 				<Row label={t("scope")} value={scopeLabel(invite.role)} />
 			</dl>
 			{resultError && (
-				<p className="text-sm text-red-600 font-semibold mb-3">{resultError}</p>
+				<p className="text-sm text-red-400 font-semibold mb-3" role="alert">
+					{resultError}
+				</p>
 			)}
 			<button
 				type="button"
 				disabled={acceptMutation.isPending}
 				onClick={() => acceptMutation.mutate()}
-				className="w-full px-4 py-2.5 rounded-lg text-sm font-semibold bg-[#FF5A2E] text-white hover:opacity-90 disabled:opacity-60"
+				className={authPrimaryBtn}
 			>
 				{acceptMutation.isPending ? t("accepting") : t("acceptInvitation")}
 			</button>
-		</Shell>
-	);
-}
-
-function Shell({ children }: { children: React.ReactNode }) {
-	return (
-		<div className="min-h-screen bg-surface flex items-center justify-center px-4 py-12">
-			<div className="w-full max-w-md">
-				<div className="text-center mb-8">
-					<div className="flex items-center justify-center">
-						<AuthBrandLockup />
-					</div>
-				</div>
-				<div className="bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/20 p-8">
-					{children}
-				</div>
-			</div>
-		</div>
+		</AuthShell>
 	);
 }
 
 function Row({ label, value }: { label: string; value: string }) {
 	return (
 		<div className="flex justify-between gap-3">
-			<dt className="text-xs font-semibold uppercase tracking-wider text-on-surface-variant">
+			<dt className="text-xs font-semibold uppercase tracking-wider text-[var(--muted)]">
 				{label}
 			</dt>
-			<dd className="text-sm font-semibold text-on-surface text-right">
+			<dd className="text-sm font-semibold text-[var(--text)] text-right">
 				{value}
 			</dd>
 		</div>

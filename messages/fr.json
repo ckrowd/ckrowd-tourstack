@@ -6405,6 +6405,8 @@
       "explore": "Explorer",
       "faq": "FAQ",
       "login": "Se connecter",
+      "contactSales": "Contacter l'équipe commerciale",
+      "signIn": "Se connecter",
       "join": "Rejoindre TourStack",
       "byCkrowd": "par Ckrowd"
     },
@@ -7018,5 +7020,201 @@
     "prev": "← Préc.",
     "next": "Suiv. →",
     "page": "Page {page} sur {total}"
-  }
+  },
+  "OnboardingWizard": {
+		"back": "Retour",
+		"backToSite": "Retour au site",
+		"changeRole": "Changer de rôle",
+		"continueDashboard": "Continuer vers le tableau de bord",
+		"haveAccount": "Vous avez déjà un compte ?",
+		"signIn": "Se connecter",
+		"continue": "Continuer",
+		"progress": "Étape {current} sur {total}",
+		"stepShort": {
+			"role": "Votre rôle",
+			"about": "À propos",
+			"setup": "Configuration",
+			"review": "Récapitulatif"
+		},
+		"role": {
+			"title": "Qu'est-ce qui vous amène sur TourStack ?",
+			"subtitle": "Choisissez votre manière de travailler dans le live. Nous adaptons votre configuration et vous orientons au bon endroit.",
+			"options": [
+				{
+					"id": "promoter",
+					"title": "Promoteur / Organisateur",
+					"desc": "Financez, assurez et gérez vos tournées et concerts."
+				},
+				{
+					"id": "service",
+					"title": "Prestataire de services",
+					"desc": "Proposez production, logistique ou services de salle aux tournées."
+				},
+				{
+					"id": "workforce",
+					"title": "Équipe / Personnel",
+					"desc": "Rejoignez le registre vérifié des talents et des équipes."
+				},
+				{
+					"id": "artmgmt",
+					"title": "Management d'artistes",
+					"desc": "Gérez votre roster, vos soumissions et vos réservations."
+				}
+			]
+		},
+		"about": {
+			"title": "Parlez-nous de vous",
+			"subtitle": "Nous personnaliserons votre espace en conséquence.",
+			"name": "Nom complet",
+			"namePlaceholder": "Ada Mensah",
+			"org": "Organisation",
+			"orgPlaceholder": "Société, agence ou nom de scène",
+			"market": "Marché principal",
+			"marketPlaceholder": "Lagos, Nigéria"
+		},
+		"setup": {
+			"title": "Que souhaitez-vous configurer en premier ?",
+			"subtitle": "Choisissez ce qui compte pour vous. Nous le mettrons en avant sur votre tableau de bord.",
+			"hint": "Sélectionnez tout ce qui s'applique",
+			"options": {
+				"promoter": [
+					{
+						"id": "financing",
+						"label": "Financement de tournées et concerts"
+					},
+					{
+						"id": "insurance",
+						"label": "Assurance événementielle"
+					},
+					{
+						"id": "ecosystem",
+						"label": "Certifier équipes et prestataires"
+					},
+					{
+						"id": "payments",
+						"label": "Paiements transfrontaliers"
+					},
+					{
+						"id": "data",
+						"label": "Données de marché et de crédit"
+					}
+				],
+				"service": [
+					{
+						"id": "discovery",
+						"label": "Être découvert par les tournées"
+					},
+					{
+						"id": "contracts",
+						"label": "Gérer les contrats"
+					},
+					{
+						"id": "payments",
+						"label": "Suivre les paiements"
+					},
+					{
+						"id": "verify",
+						"label": "Vérifier mon entreprise"
+					}
+				],
+				"workforce": [
+					{
+						"id": "registry",
+						"label": "Rejoindre le registre des équipes"
+					},
+					{
+						"id": "bookings",
+						"label": "Trouver des missions"
+					},
+					{
+						"id": "payouts",
+						"label": "Être payé à temps"
+					},
+					{
+						"id": "verify",
+						"label": "Vérifier mes compétences"
+					}
+				],
+				"artmgmt": [
+					{
+						"id": "roster",
+						"label": "Lister mes artistes"
+					},
+					{
+						"id": "submissions",
+						"label": "Postuler aux tournées"
+					},
+					{
+						"id": "bookings",
+						"label": "Gérer les réservations"
+					},
+					{
+						"id": "fees",
+						"label": "Protéger les cachets"
+					}
+				]
+			}
+		},
+		"review": {
+			"eyebrow": "Presque terminé",
+			"title": "Vérifiez votre configuration",
+			"subtitle": "Confirmez vos informations et nous vous emmenons vers votre espace.",
+			"roleLabel": "Rôle",
+			"nameLabel": "Nom",
+			"orgLabel": "Organisation",
+			"marketLabel": "Marché",
+			"prioritiesLabel": "Priorités",
+			"includesLabel": "Votre tableau de bord comprendra",
+			"edit": "Modifier",
+			"empty": "Non renseigné",
+			"cta": "Terminer la configuration",
+			"finePrint": "En continuant, vous acceptez nos Conditions et notre Politique de confidentialité."
+		},
+		"workspace": {
+			"features": {
+				"promoter": [
+					"Demandes de financement de tournées et de concerts",
+					"Assurance événementielle et couverture annulation",
+					"Un écosystème certifié d'équipes, de prestataires et d'artistes",
+					"Règlements transfrontaliers et données de crédit"
+				],
+				"service": [
+					"Un profil de prestataire vérifié",
+					"Découverte par les promoteurs et les productions",
+					"Suivi des contrats et des paiements"
+				],
+				"workforce": [
+					"Un profil vérifié dans le registre des équipes",
+					"Des réservations sur des tournées vérifiées",
+					"Des paiements transfrontaliers effectués à temps"
+				],
+				"artmgmt": [
+					"Votre roster d'artistes et vos soumissions",
+					"Des opportunités de tournées et de réservations",
+					"Protection des cachets et règlement"
+				]
+			}
+		}
+	},
+	"AuthShowcase": {
+		"label": "Ce que vous pouvez faire sur TourStack",
+		"slides": [
+			{
+				"title": "Financement de tournées",
+				"text": "Financez tournées et concerts avec un capital vérifié et finançable."
+			},
+			{
+				"title": "Assurance événementielle",
+				"text": "Couverture annulation et défaut de présentation, tarifée sur des données de risque réelles."
+			},
+			{
+				"title": "Paiements transfrontaliers",
+				"text": "Réglez les paiements dans plus de 24 marchés africains, à temps."
+			},
+			{
+				"title": "Écosystème certifié",
+				"text": "Promoteurs, équipes, prestataires et artistes vérifiés au même endroit."
+			}
+		]
+	}
 }
