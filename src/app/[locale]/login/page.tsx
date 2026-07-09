@@ -3,20 +3,13 @@
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Suspense, useEffect, useState } from "react";
+import AuthLoading from "@/components/auth/AuthLoading";
 import AuthShell from "@/components/auth/AuthShell";
 import { authInput, authLabel, authPrimaryBtn, authTitle } from "@/components/auth/authFields";
 import GoogleSignInButton from "@/components/GoogleSignInButton";
 import { useLogin, useSession } from "@/context/AuthContext";
 import { Link } from "@/i18n/routing";
 import { getRegularLoginRedirectPath } from "@/lib/auth";
-
-function AuthLoading({ label }: { label: string }) {
-	return (
-		<div className="min-h-[100dvh] bg-[#0a0a0a] flex items-center justify-center px-4 text-[var(--muted)] text-sm font-(family-name:--font-geist)">
-			{label}
-		</div>
-	);
-}
 
 function LoginPageContent() {
 	const locale = useLocale();

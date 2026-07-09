@@ -5,17 +5,10 @@ import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useRef, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { resendVerificationOtp, verifyEmail } from "@/app/actions";
+import AuthLoading from "@/components/auth/AuthLoading";
 import AuthShell from "@/components/auth/AuthShell";
 import { authPrimaryBtn, authTitle } from "@/components/auth/authFields";
 import { Link, useRouter } from "@/i18n/routing";
-
-function AuthLoading({ label }: { label: string }) {
-	return (
-		<div className="min-h-[100dvh] bg-[#0a0a0a] flex items-center justify-center px-4 text-[var(--muted)] text-sm font-(family-name:--font-geist)">
-			{label}
-		</div>
-	);
-}
 
 function VerifyEmailContent() {
 	const router = useRouter();

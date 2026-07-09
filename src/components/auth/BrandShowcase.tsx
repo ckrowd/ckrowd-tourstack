@@ -19,8 +19,9 @@ type Slide = { title: string; text: string };
 
 /**
  * The auth left panel: an auto-advancing, crossfading slideshow of TourStack's
- * product offerings. Always a dark photographic showcase (theme-independent).
- * Pauses auto-advance under prefers-reduced-motion and lets users pick a slide.
+ * product offerings. Follows the funnel's light/dark toggle via the `.ts-theme`
+ * vars inherited from AuthShell's wrapper. Pauses auto-advance under
+ * prefers-reduced-motion and lets users pick a slide.
  */
 export default function BrandShowcase() {
 	const tShow = useTranslations("AuthShowcase");
@@ -51,7 +52,7 @@ export default function BrandShowcase() {
 	const proof = [stats[0], stats[3], stats[2]].filter(Boolean);
 
 	return (
-		<aside className="relative hidden lg:flex flex-col justify-between overflow-hidden p-12 xl:p-16 bg-[#0a0a0a] text-white">
+		<aside className="relative hidden lg:flex flex-col justify-between overflow-hidden p-12 xl:p-16 bg-[var(--bg)] text-[var(--text)]">
 			{/* Crossfading images */}
 			{SLIDE_IMAGES.map((src, i) => (
 				<Image
@@ -66,7 +67,7 @@ export default function BrandShowcase() {
 					}`}
 				/>
 			))}
-			<div className="absolute inset-0 bg-gradient-to-tr from-[#0a0a0a] via-[#0a0a0a]/85 to-[#0a0a0a]/40" />
+			<div className="absolute inset-0 bg-gradient-to-tr from-[var(--bg)] via-[var(--bg)]/85 to-[var(--bg)]/40" />
 			<div
 				className="absolute inset-0 opacity-[0.12] mix-blend-overlay pointer-events-none"
 				style={{
@@ -86,7 +87,7 @@ export default function BrandShowcase() {
 					<span className="text-base font-bold tracking-tight text-orange">
 						{tCommon("brandName")}
 					</span>
-					<span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/55">
+					<span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--muted)]">
 						{tCommon("brandBy")}
 					</span>
 				</span>
@@ -106,10 +107,10 @@ export default function BrandShowcase() {
 								i === index ? "opacity-100" : "opacity-0 pointer-events-none"
 							}`}
 						>
-							<h2 className="font-(family-name:--font-display) text-3xl xl:text-4xl leading-[1.08] tracking-tight text-white">
+							<h2 className="font-(family-name:--font-display) text-3xl xl:text-4xl leading-[1.08] tracking-tight text-[var(--text)]">
 								{s.title}
 							</h2>
-							<p className="mt-4 text-sm leading-relaxed text-white/70 max-w-sm">
+							<p className="mt-4 text-sm leading-relaxed text-[var(--muted)] max-w-sm">
 								{s.text}
 							</p>
 						</div>
@@ -126,7 +127,7 @@ export default function BrandShowcase() {
 							aria-label={s.title}
 							aria-current={i === index}
 							className={`h-1.5 rounded-full transition-all duration-300 ${
-								i === index ? "w-7 bg-orange" : "w-3 bg-white/25 hover:bg-white/45"
+								i === index ? "w-7 bg-orange" : "w-3 bg-[var(--hair)] hover:bg-[var(--muted)]"
 							}`}
 						/>
 					))}
@@ -134,15 +135,15 @@ export default function BrandShowcase() {
 			</div>
 
 			{/* Proof stats */}
-			<dl className="relative z-10 grid grid-cols-3 gap-6 border-t border-white/10 pt-7">
+			<dl className="relative z-10 grid grid-cols-3 gap-6 border-t border-[var(--hair)] pt-7">
 				{proof.map((s) => (
 					<div key={s.label}>
-						<dt className="font-(family-name:--font-geist-mono) text-2xl xl:text-[1.75rem] font-semibold text-white tabular-nums">
+						<dt className="font-(family-name:--font-geist-mono) text-2xl xl:text-[1.75rem] font-semibold text-[var(--text)] tabular-nums">
 							{s.prefix}
 							{s.count}
 							{s.suffix}
 						</dt>
-						<dd className="mt-1 text-[11px] leading-snug text-white/50">{s.label}</dd>
+						<dd className="mt-1 text-[11px] leading-snug text-[var(--muted)]">{s.label}</dd>
 					</div>
 				))}
 			</dl>
