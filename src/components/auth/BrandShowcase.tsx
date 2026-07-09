@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import type { TsTheme } from "@/components/theme/useTsTheme";
 import { Link } from "@/i18n/routing";
 
 // Slideshow images paired by index with the AuthShowcase.slides copy.
@@ -23,7 +24,7 @@ type Slide = { title: string; text: string };
  * vars inherited from AuthShell's wrapper. Pauses auto-advance under
  * prefers-reduced-motion and lets users pick a slide.
  */
-export default function BrandShowcase() {
+export default function BrandShowcase({ theme }: { theme: TsTheme }) {
 	const tShow = useTranslations("AuthShowcase");
 	const tLanding = useTranslations("TourstackLanding");
 	const tCommon = useTranslations("Common");
@@ -67,7 +68,20 @@ export default function BrandShowcase() {
 					}`}
 				/>
 			))}
-			<div className="absolute inset-0 bg-gradient-to-tr from-[var(--bg)] via-[var(--bg)]/85 to-[var(--bg)]/40" />
+			{/* Scrim: two fixed-color gradients crossfading via opacity, not a single
+			    gradient re-colored via var(--bg) — background-image doesn't animate
+			    smoothly across a custom-property change, so that snapped instantly
+			    while everything else on the page eased in. */}
+			<div
+				className={`absolute inset-0 bg-gradient-to-tr from-black via-black/85 to-black/40 transition-opacity duration-300 ${
+					theme === "light" ? "opacity-0" : "opacity-100"
+				}`}
+			/>
+			<div
+				className={`absolute inset-0 bg-gradient-to-tr from-white via-white/85 to-white/40 transition-opacity duration-300 ${
+					theme === "light" ? "opacity-100" : "opacity-0"
+				}`}
+			/>
 			<div
 				className="absolute inset-0 opacity-[0.12] mix-blend-overlay pointer-events-none"
 				style={{

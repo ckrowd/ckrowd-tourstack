@@ -12,7 +12,7 @@ const noopSubscribe = () => () => {};
 
 /**
  * Split-screen chrome for the auth funnel (sign in / sign up).
- * Left: a dark product-offering slideshow (BrandShowcase). Right: the
+ * Left: a theme-aware product-offering slideshow (BrandShowcase). Right: the
  * theme-aware form column. The page passes its form markup as `children`;
  * this component owns the layout, theme, and mobile brand header.
  * Collapses to a single column below `lg`.
@@ -33,7 +33,7 @@ export default function AuthShell({ children }: { children: React.ReactNode }) {
 		<div
 			className={`ts-theme ${theme === "light" ? "light" : ""} min-h-[100dvh] w-full font-(family-name:--font-geist) grid lg:grid-cols-[1.05fr_1fr]`}
 		>
-			<BrandShowcase />
+			<BrandShowcase theme={theme} />
 
 			{/* Form column */}
 			<main className="relative flex flex-col px-5 py-8 sm:px-10 md:px-12">
@@ -51,7 +51,7 @@ export default function AuthShell({ children }: { children: React.ReactNode }) {
 						<span className="text-base font-bold tracking-tight text-orange">
 							{tCommon("brandName")}
 						</span>
-						<span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--muted)]">
+						<span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-[var(--muted)] transition-colors duration-300">
 							{tCommon("brandBy")}
 						</span>
 					</span>

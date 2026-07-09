@@ -180,9 +180,27 @@
 	--border: rgba(255, 255, 255, 0.07);
 	--color-ink: var(--text);
 	--color-muted: var(--muted);
+	/* Every "transition-" utility under this wrapper (inputs, buttons, cards, ...)
+	   falls back to --default-transition-duration when it doesn't set its own
+	   duration-* — overriding it here means every one of those, plus the rules
+	   below, animate the light/dark swap in lockstep instead of some elements
+	   (Tailwind's 150ms default) finishing before others (300ms). */
+	--default-transition-duration: 0.3s;
 	background: var(--bg);
 	color: var(--text);
-	transition: background 0.4s ease, color 0.4s ease;
+	transition: background var(--default-transition-duration) var(--default-transition-timing-function),
+		color var(--default-transition-duration) var(--default-transition-timing-function);
+}
+/* Descendants that read the vars directly (bg-[var(--surface)], border-[var(--hair)],
+   etc.) but declare no transition-* class of their own don't inherit one — CSS
+   custom-property changes don't propagate a transition to children, only to the
+   element that declares one. Elements with their own transition-all/-colors/
+   -opacity class are unaffected (skipped below) and pick up the synced duration
+   above through --default-transition-duration instead. */
+.ts-theme *:not([class*="transition-"]) {
+	transition: background-color var(--default-transition-duration) var(--default-transition-timing-function),
+		color var(--default-transition-duration) var(--default-transition-timing-function),
+		border-color var(--default-transition-duration) var(--default-transition-timing-function);
 }
 .ts-theme.light {
 	--bg: #ffffff;
