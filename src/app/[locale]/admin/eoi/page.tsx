@@ -307,14 +307,14 @@ export default async function AdminEOIPage({
 									/>
 								</div>
 								{status === "approved" && (
-									<div className="mt-4 border-t border-slate-100 pt-4">
+									<div className="mt-4 border-t border-outline-variant pt-4">
 										<p className="text-[10px] font-black uppercase tracking-widest text-on-surface-variant mb-2">
 											Uploaded Documents
 										</p>
 										<EoiDocumentsPanel eoiId={String(eoi.id)} />
 									</div>
 								)}
-								<div className="mt-4 border-t border-slate-100 pt-4">
+								<div className="mt-4 border-t border-outline-variant pt-4">
 									<p className="text-[10px] font-black uppercase tracking-widest text-on-surface-variant mb-3">
 										AI Tour Success Score™
 									</p>

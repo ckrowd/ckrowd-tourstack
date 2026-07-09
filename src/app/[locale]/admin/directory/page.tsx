@@ -136,7 +136,7 @@ export default function AdminDirectoryPage() {
 				<button
 					type="button"
 					onClick={() => setSelectedId(null)}
-					className="flex items-center gap-2 text-slate-500 hover:text-[#FF5A2E] text-sm font-semibold transition-colors"
+					className="flex items-center gap-2 text-on-surface-variant hover:text-primary text-sm font-semibold transition-colors"
 				>
 					<span className="material-symbols-outlined text-sm">arrow_back</span>
 					{t("backToDirectory")}

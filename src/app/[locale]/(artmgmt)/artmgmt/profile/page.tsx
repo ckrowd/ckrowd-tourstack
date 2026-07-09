@@ -85,13 +85,13 @@ export default function ArtmgmtProfilePage() {
 	}
 
 	const inputCls =
-		"w-full px-3 py-2.5 text-sm rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/40 placeholder:text-slate-400";
+		"w-full px-3 py-2.5 text-sm rounded-xl border border-outline-variant bg-surface-container-lowest text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/40 placeholder:text-on-surface-variant";
 
 	return (
 		<div className="max-w-2xl">
 			{/* Header */}
 			<div className="mb-8">
-				<span className="inline-block px-3 py-1 rounded-full bg-[#FF5A2E]/10 text-[#FF5A2E] text-xs font-semibold uppercase tracking-wider mb-3">
+				<span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold uppercase tracking-wider mb-3">
 					{t("badge")}
 				</span>
 				<h1 className="font-(family-name:--font-manrope) text-3xl font-black text-on-surface">
@@ -110,19 +110,19 @@ export default function ArtmgmtProfilePage() {
 			)}
 
 			{/* Profile photo */}
-			<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 mb-6">
-				<h2 className="font-semibold text-slate-900 mb-4">{t("profilePhoto")}</h2>
+			<div className="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-sm p-6 mb-6">
+				<h2 className="font-semibold text-on-surface mb-4">{t("profilePhoto")}</h2>
 				<div className="flex items-center gap-5">
 					<button
 						type="button"
 						onClick={() => fileInputRef.current?.click()}
-						className="relative w-20 h-20 rounded-2xl overflow-hidden bg-slate-100 border-2 border-dashed border-slate-300 hover:border-[#FF5A2E]/60 transition-colors flex items-center justify-center shrink-0 group"
+						className="relative w-20 h-20 rounded-2xl overflow-hidden bg-surface-container-high border-2 border-dashed border-outline-variant hover:border-primary/60 transition-colors flex items-center justify-center shrink-0 group"
 					>
 						{logoUrl ? (
 							// eslint-disable-next-line @next/next/no-img-element
 							<img src={logoUrl} alt="" className="w-full h-full object-cover" />
 						) : (
-							<span className="text-xl font-semibold text-slate-400 group-hover:text-[#FF5A2E] transition-colors">
+							<span className="text-xl font-semibold text-on-surface-variant group-hover:text-primary transition-colors">
 								{initials}
 							</span>
 						)}
@@ -135,7 +135,7 @@ export default function ArtmgmtProfilePage() {
 							type="button"
 							onClick={() => fileInputRef.current?.click()}
 							disabled={photoMutation.isPending}
-							className="inline-flex items-center gap-2 px-4 py-2 border border-slate-200 rounded-xl text-sm font-semibold text-slate-700 hover:border-[#FF5A2E]/50 hover:text-[#FF5A2E] transition-all disabled:opacity-60"
+							className="inline-flex items-center gap-2 px-4 py-2 border border-outline-variant rounded-xl text-sm font-semibold text-on-surface-variant hover:border-primary/50 hover:text-primary transition-all disabled:opacity-60"
 						>
 							<span className="material-symbols-outlined text-base">upload</span>
 							{photoMutation.isPending ? t("uploadingPhoto") : t("uploadPhoto")}
@@ -152,52 +152,52 @@ export default function ArtmgmtProfilePage() {
 			</div>
 
 			{/* Account info */}
-			<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6 mb-6">
-				<h2 className="font-semibold text-slate-900 mb-4">{t("accountInfo")}</h2>
+			<div className="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-sm p-6 mb-6">
+				<h2 className="font-semibold text-on-surface mb-4">{t("accountInfo")}</h2>
 				<div className="space-y-3">
 					{profile?.user?.name && (
 						<div>
-							<p className="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-0.5">
+							<p className="text-xs text-on-surface-variant font-semibold uppercase tracking-wider mb-0.5">
 								{t("name")}
 							</p>
-							<p className="text-sm font-semibold text-slate-800">{profile.user.name}</p>
+							<p className="text-sm font-semibold text-on-surface">{profile.user.name}</p>
 						</div>
 					)}
 					{profile?.user?.email && (
 						<div>
-							<p className="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-0.5">
+							<p className="text-xs text-on-surface-variant font-semibold uppercase tracking-wider mb-0.5">
 								{t("email")}
 							</p>
-							<p className="text-sm font-semibold text-slate-800">{profile.user.email}</p>
+							<p className="text-sm font-semibold text-on-surface">{profile.user.email}</p>
 						</div>
 					)}
 					{profile?.company_name && (
 						<div>
-							<p className="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-0.5">
+							<p className="text-xs text-on-surface-variant font-semibold uppercase tracking-wider mb-0.5">
 								{t("company")}
 							</p>
-							<p className="text-sm font-semibold text-slate-800">{profile.company_name}</p>
+							<p className="text-sm font-semibold text-on-surface">{profile.company_name}</p>
 						</div>
 					)}
 					{profile?.contact_person && (
 						<div>
-							<p className="text-xs text-slate-400 font-semibold uppercase tracking-wider mb-0.5">
+							<p className="text-xs text-on-surface-variant font-semibold uppercase tracking-wider mb-0.5">
 								{t("contactPerson")}
 							</p>
-							<p className="text-sm font-semibold text-slate-800">{profile.contact_person}</p>
+							<p className="text-sm font-semibold text-on-surface">{profile.contact_person}</p>
 						</div>
 					)}
 				</div>
 			</div>
 
 			{/* Change password */}
-			<div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
-				<h2 className="font-semibold text-slate-900 mb-1">{t("changePassword")}</h2>
-				<p className="text-xs text-slate-500 mb-5">{t("changePasswordHint")}</p>
+			<div className="bg-surface-container-lowest rounded-2xl border border-outline-variant shadow-sm p-6">
+				<h2 className="font-semibold text-on-surface mb-1">{t("changePassword")}</h2>
+				<p className="text-xs text-on-surface-variant mb-5">{t("changePasswordHint")}</p>
 
 				<form onSubmit={handlePasswordSubmit} className="space-y-4">
 					<div>
-						<label className="block text-xs font-semibold text-slate-700 mb-1">
+						<label className="block text-xs font-semibold text-on-surface-variant mb-1">
 							{t("currentPassword")}
 						</label>
 						<input
@@ -212,7 +212,7 @@ export default function ArtmgmtProfilePage() {
 					</div>
 
 					<div>
-						<label className="block text-xs font-semibold text-slate-700 mb-1">
+						<label className="block text-xs font-semibold text-on-surface-variant mb-1">
 							{t("newPassword")}
 						</label>
 						<input
@@ -227,7 +227,7 @@ export default function ArtmgmtProfilePage() {
 					</div>
 
 					<div>
-						<label className="block text-xs font-semibold text-slate-700 mb-1">
+						<label className="block text-xs font-semibold text-on-surface-variant mb-1">
 							{t("confirmPassword")}
 						</label>
 						<input
@@ -244,7 +244,7 @@ export default function ArtmgmtProfilePage() {
 					<button
 						type="submit"
 						disabled={passwordMutation.isPending}
-						className="w-full py-3 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm hover:bg-[#e04e27] disabled:opacity-60 transition-colors mt-2"
+						className="w-full py-3 bg-primary text-on-primary rounded-xl font-semibold text-sm hover:opacity-90 disabled:opacity-60 transition-colors mt-2"
 					>
 						{passwordMutation.isPending ? t("saving") : t("savePassword")}
 					</button>

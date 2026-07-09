@@ -59,36 +59,36 @@ function InsuranceAdminLoginContent() {
 
 	if (isLoading && !session) {
 		return (
-			<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 text-slate-600">
+			<div className="min-h-screen bg-background flex items-center justify-center px-4 text-on-surface-variant">
 				{t("loading")}
 			</div>
 		);
 	}
 
 	return (
-		<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 py-12">
+		<div className="min-h-screen bg-background flex items-center justify-center px-4 py-12">
 			<div className="w-full max-w-md">
 				<div className="text-center mb-10">
 					<div className="flex items-center justify-center mb-6">
 						<AuthBrandLockup />
 					</div>
-					<p className="mt-2 text-xs font-semibold uppercase tracking-widest text-slate-400">
+					<p className="mt-2 text-xs font-semibold uppercase tracking-widest text-on-surface-variant">
 						Insurance Admin Portal
 					</p>
 				</div>
 
-				<div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-8">
+				<div className="bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant p-8">
 					<div className="flex items-center gap-3 mb-8">
-						<div className="h-10 w-10 rounded-xl bg-orange-50 flex items-center justify-center">
-							<span className="material-symbols-outlined text-[#FF5A2E]">
+						<div className="h-10 w-10 rounded-xl bg-primary/10 flex items-center justify-center">
+							<span className="material-symbols-outlined text-primary">
 								shield
 							</span>
 						</div>
 						<div>
-							<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-slate-900 leading-tight">
+							<h1 className="text-2xl font-extrabold font-(family-name:--font-manrope) text-on-surface leading-tight">
 								{t("title")}
 							</h1>
-							<p className="text-sm text-slate-500">{t("description")}</p>
+							<p className="text-sm text-on-surface-variant">{t("description")}</p>
 						</div>
 					</div>
 
@@ -96,7 +96,7 @@ function InsuranceAdminLoginContent() {
 						<div>
 							<label
 								htmlFor="email"
-								className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
+								className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2"
 							>
 								{t("email")}
 							</label>
@@ -108,14 +108,14 @@ function InsuranceAdminLoginContent() {
 								value={email}
 								onChange={(event) => setEmail(event.target.value)}
 								required
-								className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
+								className="w-full px-4 py-3 bg-surface-container-low border border-outline-variant rounded-xl text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
 							/>
 						</div>
 
 						<div>
 							<label
 								htmlFor="password"
-								className="block text-xs font-semibold uppercase tracking-widest text-slate-500 mb-2"
+								className="block text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2"
 							>
 								{t("password")}
 							</label>
@@ -127,12 +127,12 @@ function InsuranceAdminLoginContent() {
 								value={password}
 								onChange={(event) => setPassword(event.target.value)}
 								required
-								className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E] transition-all"
+								className="w-full px-4 py-3 bg-surface-container-low border border-outline-variant rounded-xl text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all"
 							/>
 							<div className="flex justify-end mt-2">
 								<Link
 									href="/forgot-password"
-									className="text-xs font-semibold text-[#FF5A2E] hover:underline"
+									className="text-xs font-semibold text-primary hover:underline"
 								>
 									{t("forgotPassword")}
 								</Link>
@@ -148,7 +148,7 @@ function InsuranceAdminLoginContent() {
 						<button
 							type="submit"
 							disabled={loginMutation.isPending}
-							className="w-full py-3 bg-[#FF5A2E] text-white font-semibold rounded-xl shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60"
+							className="w-full py-3 bg-primary text-on-primary font-semibold rounded-xl shadow-lg shadow-primary/20 hover:opacity-90 transition-all active:scale-[0.98] disabled:opacity-60"
 						>
 							{loginMutation.isPending ? t("signingIn") : t("signIn")}
 						</button>
@@ -164,7 +164,7 @@ export default function InsuranceAdminLoginPage() {
 	return (
 		<Suspense
 			fallback={
-				<div className="min-h-screen bg-[#f7f9fb] flex items-center justify-center px-4 text-slate-600">
+				<div className="min-h-screen bg-background flex items-center justify-center px-4 text-on-surface-variant">
 					{t("loading")}
 				</div>
 			}
