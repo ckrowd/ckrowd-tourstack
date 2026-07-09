@@ -4704,6 +4704,7 @@
   },
   "InsuranceAdminLoginPage": {
     "title": "Portail Admin Assurance",
+    "portal": "Portail Admin Assurance",
     "description": "Connectez-vous pour gérer les demandes d'assurance de tournée.",
     "email": "Adresse e-mail",
     "emailPlaceholder": "admin@assureur.com",
