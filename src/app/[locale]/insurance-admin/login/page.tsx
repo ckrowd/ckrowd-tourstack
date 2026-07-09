@@ -73,7 +73,7 @@ function InsuranceAdminLoginContent() {
 						<AuthBrandLockup />
 					</div>
 					<p className="mt-2 text-xs font-semibold uppercase tracking-widest text-on-surface-variant">
-						Insurance Admin Portal
+						{t("portal")}
 					</p>
 				</div>
 

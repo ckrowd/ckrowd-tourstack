@@ -4704,6 +4704,7 @@
   },
   "InsuranceAdminLoginPage": {
     "title": "Insurance Admin Portal",
+    "portal": "Insurance Admin Portal",
     "description": "Sign in to manage tour insurance applications and claims.",
     "email": "Email Address",
     "emailPlaceholder": "admin@insurer.com",
