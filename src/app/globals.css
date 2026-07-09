@@ -5,6 +5,13 @@
 
 @theme {
   --font-sans: var(--font-inter), system-ui, sans-serif;
+  /* Every "transition-" utility platform-wide (transition-colors, transition-all,
+     ...) falls back to this when it doesn't set its own duration-* — raised
+     from Tailwind's 150ms default so light/dark-mode color changes (the
+     dashboard's .dark tokens and the funnel's .ts-theme vars alike) animate
+     at the same speed everywhere, instead of some elements finishing before
+     others. */
+  --default-transition-duration: 0.3s;
 }
 
 
@@ -180,27 +187,10 @@
 	--border: rgba(255, 255, 255, 0.07);
 	--color-ink: var(--text);
 	--color-muted: var(--muted);
-	/* Every "transition-" utility under this wrapper (inputs, buttons, cards, ...)
-	   falls back to --default-transition-duration when it doesn't set its own
-	   duration-* — overriding it here means every one of those, plus the rules
-	   below, animate the light/dark swap in lockstep instead of some elements
-	   (Tailwind's 150ms default) finishing before others (300ms). */
-	--default-transition-duration: 0.3s;
 	background: var(--bg);
 	color: var(--text);
 	transition: background var(--default-transition-duration) var(--default-transition-timing-function),
 		color var(--default-transition-duration) var(--default-transition-timing-function);
-}
-/* Descendants that read the vars directly (bg-[var(--surface)], border-[var(--hair)],
-   etc.) but declare no transition-* class of their own don't inherit one — CSS
-   custom-property changes don't propagate a transition to children, only to the
-   element that declares one. Elements with their own transition-all/-colors/
-   -opacity class are unaffected (skipped below) and pick up the synced duration
-   above through --default-transition-duration instead. */
-.ts-theme *:not([class*="transition-"]) {
-	transition: background-color var(--default-transition-duration) var(--default-transition-timing-function),
-		color var(--default-transition-duration) var(--default-transition-timing-function),
-		border-color var(--default-transition-duration) var(--default-transition-timing-function);
 }
 .ts-theme.light {
 	--bg: #ffffff;
@@ -210,6 +200,20 @@
 	--muted: #5c5c5c;
 	--hair: rgba(0, 0, 0, 0.1);
 	--border: rgba(0, 0, 0, 0.07);
+}
+/* Descendants that read the vars directly (bg-[var(--surface)], border-[var(--hair)],
+   etc.) but declare no transition-* class of their own don't inherit one — CSS
+   custom-property changes don't propagate a transition to children, only to the
+   element that declares one. Scoped to .ts-theme specifically (verified no
+   descendant here has its own hand-written, non-Tailwind-utility transition
+   this would clobber) rather than applied platform-wide — the dashboard has
+   cases like driver.js's .driver-popover that rely on a custom transition for
+   its own unrelated purpose (gliding between tour steps) and would break if a
+   blanket rule silently replaced it. */
+.ts-theme *:not([class*="transition-"]) {
+	transition: background-color var(--default-transition-duration) var(--default-transition-timing-function),
+		color var(--default-transition-duration) var(--default-transition-timing-function),
+		border-color var(--default-transition-duration) var(--default-transition-timing-function);
 }
 
 /* Onboarding wizard step transition (motivated: signals step change). */
