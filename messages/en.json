@@ -249,111 +249,6 @@
       "rights_licensing_agency": "Rights & Licensing Agency"
     }
   },
-  "LandingPage": {
-    "hero": {
-      "imageAlt": "High-energy live concert crowd at night with vibrant stage lights and raised hands",
-      "badge": "Live Music Ecosystem",
-      "title": "Concert & Touring as a <spanTag>Service.</spanTag>",
-      "description": "TourStack by Ckrowd connects concert & festival promoters with artiste management companies. Plan live music with confidence — from discovery to execution.",
-      "ctaPrimary": "Browse Artistes & Tours",
-      "ctaSecondary": "Promoter Dashboard"
-    },
-    "analytics": {
-      "title": "Tour Pipeline Overview",
-      "active": "Active Tour Projects",
-      "review": "EOIs Under Review",
-      "approved": "Approved Tour Stops",
-      "promoters": "Promoters",
-      "markets": "Markets"
-    },
-    "why": {
-      "badge": "Why TourStack",
-      "title": "Built for the Touring Business",
-      "description": "A dedicated platform for the entire touring ecosystem — Promoters, Artiste Management, Service Providers, Banks, Insurance, and Workforce."
-    },
-    "WhyCkrowd": {
-      "centralized": {
-        "icon": "hub",
-        "title": "Centralized Touring Workflow",
-        "desc": "Manage every stage of tour planning in one place — from discovery to execution. No fragmented spreadsheets, no missed messages."
-      },
-      "matching": {
-        "icon": "temp_preferences_custom",
-        "title": "Smart Promoter–Artiste Matching",
-        "desc": "Rule-based matching connects promoters with artistes based on date availability, venue capacity, and budget alignment."
-      },
-      "dataDriven": {
-        "icon": "bar_chart",
-        "title": "Data-Driven Event Planning",
-        "desc": "Generate business summaries with estimated revenue, cost projections, and risk notes — structured for financiers from day one."
-      },
-      "financing": {
-        "icon": "account_balance",
-        "title": "Financing & Insurance Support",
-        "desc": "Track financing requirements, connect with capital partners, and unlock insurance backing to scale ambitious live experiences."
-      }
-    },
-    "promoters": {
-      "badge": "For Promoters",
-      "title": "Join the Pan-African Tour Circuit.",
-      "description": "Become part of a structured, continent-wide touring network. Discover top-tier artistes, submit formal Expressions of Interest, and access financing support to bring ambitious shows to life.",
-      "features": {
-        "stop": "Show interest in being part of a Tour Stop",
-        "discovery": "Discover and submit EOIs for top-tier artistes",
-        "financing": "State financing needs for your concert or festival",
-        "alignment": "Streamline planning and align with other Tour Promoters"
-      },
-      "cta": "Browse Artistes & Tours",
-      "imageAlt": "Music producer working on a sophisticated digital soundboard in an orange-lit studio"
-    },
-    "artists": {
-      "badge": "For Artists & Management",
-      "title": "Expand into New Markets.",
-      "description": "State your touring intent, get matched with serious promoters, and receive structured high-quality booking requests. Reduce friction and grow with confidence across new territories.",
-      "features": {
-        "intent": "State interest to tour and set your availability window",
-        "matching": "Get matched with verified, serious promoters",
-        "eoi": "Receive structured Expressions of Interest",
-        "alignment": "Align on tour dates and expand into new markets"
-      },
-      "cta": "Start Your Touring Journey",
-      "imageAlt": "Solo artist performing with intense emotion on a smoke-filled stage under a single bright spotlight"
-    },
-    "how": {
-      "badge": "Platform Workflow",
-      "title": "From Discovery to Execution",
-      "step": "Step {number}"
-    },
-    "HowItWorks": {
-      "announcement": {
-        "icon": "campaign",
-        "title": "Ckrowd Announces Tour & Artistes",
-        "desc": "Admin creates a Tour Project on TourStack — including artiste roster, fee range, availability dates, and technical requirements."
-      },
-      "submission": {
-        "icon": "send",
-        "title": "Promoter Submits Expression of Interest",
-        "desc": "Promoters browse available artistes and tours, then submit a formal EOI with their venue, date, budget, and funding model."
-      },
-      "matching": {
-        "icon": "manage_search",
-        "title": "Matching & Review",
-        "desc": "TourStack scores each EOI against artiste requirements. Ckrowd team reviews flagged matches and makes informed decisions."
-      },
-      "decision": {
-        "icon": "task_alt",
-        "title": "Report & Decision",
-        "desc": "The system generates a business summary — estimated revenue, costs, and risk notes — structured for financiers. Admin approves, rejects, or requests revision."
-      }
-    },
-    "cta": {
-      "title": "Ready to Take the Stage?",
-      "description": "Join TourStack and become part of the Pan-African touring ecosystem. Whether you're a promoter, artiste management company, or service provider — this is your platform.",
-      "ctaPromoter": "Get Started as a Promoter",
-      "ctaBrowse": "Browse Artistes & Tours",
-      "trustedBy": "Trusted by 500+ promoters across 24 markets."
-    }
-  },
   "GlobalSearch": {
     "placeholder": "Search tours, artists, venues...",
     "openSearch": "Open search",
@@ -6421,7 +6316,10 @@
       "contactSales": "Contact sales",
       "signIn": "Sign in",
       "join": "Join TourStack",
-      "byCkrowd": "by Ckrowd"
+      "dashboard": "Dashboard",
+      "byCkrowd": "by Ckrowd",
+      "toggleTheme": "Toggle theme",
+      "menu": "Menu"
     },
     "hero": {
       "title1": "The Platform that makes",
@@ -6430,10 +6328,13 @@
       "subtitle": "TourStack gives promoters, banks, insurers and artists the trust, compliance and data to unlock live entertainment across the continent, turning tours into financeable assets.",
       "ctaPrimary": "Get started",
       "ctaSecondary": "Become a certified promoter",
+      "ctaPrimaryLoggedIn": "Go to dashboard",
       "scroll": "Scroll"
     },
     "trust": {
-      "eyebrow": "Backed by Africa's banking & insurance leaders"
+      "eyebrow": "Backed by Africa's banking & insurance leaders",
+      "bankingPartner": "Banking Partner",
+      "insurancePartner": "Insurance Partner"
     },
     "stats": {
       "title": "The numbers behind the trust.",
@@ -6662,6 +6563,7 @@
       "title": "Ready to build the future of live entertainment?",
       "subtitle": "Join the infrastructure platform standardizing African touring.",
       "primary": "Get started today",
+      "primaryLoggedIn": "Go to dashboard",
       "secondary": "Contact sales"
     },
     "faq": {

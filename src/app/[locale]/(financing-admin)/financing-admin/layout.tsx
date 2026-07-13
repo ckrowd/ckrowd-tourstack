@@ -1,9 +1,10 @@
 import { setRequestLocale } from "next-intl/server";
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import FinancingAdminSideNav from "@/components/FinancingAdminSideNav";
 import TopNav from "@/components/TopNav";
 import { getSession } from "@/app/actions";
-import { adminHomePath, isFinancingAdmin } from "@/lib/auth";
+import { adminHomePath, isFinancingAdmin, stripLocalePrefix } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -19,7 +20,9 @@ export default async function FinancingAdminLayout({
 
 	const session = await getSession();
 	if (!session) {
-		redirect(`/${locale}/financing-admin/login`);
+		const pathname = (await headers()).get("x-pathname") ?? `/${locale}/financing-admin`;
+		const from = stripLocalePrefix(pathname, locale);
+		redirect(`/${locale}/financing-admin/login?from=${encodeURIComponent(from)}`);
 	}
 	if (!isFinancingAdmin(session)) {
 		const home = adminHomePath(session);

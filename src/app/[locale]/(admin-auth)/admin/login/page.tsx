@@ -1,16 +1,19 @@
 ﻿"use client";
 
 import { useLocale, useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import AuthBrandLockup from "@/components/AuthBrandLockup";
 import { useAdminLogin, useSession } from "@/context/AuthContext";
 import { Link } from "@/i18n/routing";
-import { adminHomePath } from "@/lib/auth";
+import { adminHomePath, isPlatformAdmin } from "@/lib/auth";
 
 function AdminLoginPageContent() {
 	const locale = useLocale();
+	const searchParams = useSearchParams();
 	const { data: session, isFetching, isLoading } = useSession();
 	const loginMutation = useAdminLogin();
+	const from = searchParams.get("from") ?? "/admin";
 	const t = useTranslations("AdminLoginPage");
 
 	const [email, setEmail] = useState("");
@@ -19,10 +22,16 @@ function AdminLoginPageContent() {
 
 	useEffect(() => {
 		if (!isLoading && session?.user) {
-			const home = adminHomePath(session);
-			window.location.replace(`/${locale}${home ?? "/dashboard"}`);
+			// Already signed in — send platform admins to their target (or
+			// portal home), anyone else to their own admin home or dashboard.
+			if (isPlatformAdmin(session)) {
+				window.location.replace(`/${locale}${from}`);
+			} else {
+				const home = adminHomePath(session);
+				window.location.replace(`/${locale}${home ?? "/dashboard"}`);
+			}
 		}
-	}, [session, isLoading, locale]);
+	}, [session, from, isLoading, locale]);
 
 	function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
@@ -40,7 +49,7 @@ function AdminLoginPageContent() {
 								: message ?? t("errorInvalid"),
 						);
 					} else {
-						window.location.replace(`/${locale}/admin`);
+						window.location.replace(`/${locale}${from}`);
 					}
 				},
 				onError: () => setError(t("errorFailed")),

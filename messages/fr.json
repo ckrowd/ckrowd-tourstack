@@ -249,111 +249,6 @@
       "rights_licensing_agency": "Agence droits & licences"
     }
   },
-  "LandingPage": {
-    "hero": {
-      "imageAlt": "Foule de concert en direct à haute énergie la nuit avec des lumières de scène vibrantes et des mains levées",
-      "badge": "Écosystème de musique en direct",
-      "title": "Concert et tournée en tant que <spanTag>Service.</spanTag>",
-      "description": "TourStack par Ckrowd connecte les promoteurs de concerts et de festivals aux sociétés de gestion d'artistes. Planifiez de la musique en direct en toute confiance — de la découverte à l'exécution.",
-      "ctaPrimary": "Parcourir les artistes et les tournées",
-      "ctaSecondary": "Tableau de bord du promoteur"
-    },
-    "analytics": {
-      "title": "Aperçu du pipeline de tournées",
-      "active": "Projets de tournée actifs",
-      "review": "EOIs en cours d'examen",
-      "approved": "Arrêts de tournée approuvés",
-      "promoters": "Promoteurs",
-      "markets": "Marchés"
-    },
-    "why": {
-      "badge": "Pourquoi TourStack",
-      "title": "Conçu pour le business de la tournée",
-      "description": "Une plateforme dédiée à l'ensemble de l'écosystème de la tournée — promoteurs, gestion d'artistes, prestataires de services, banques, assurances et main-d'œuvre."
-    },
-    "WhyCkrowd": {
-      "centralized": {
-        "icon": "hub",
-        "title": "Flux de travail de tournée centralisé",
-        "desc": "Gérez chaque étape de la planification de la tournée en un seul endroit — de la découverte à l'exécution. Pas de feuilles de calcul fragmentées, pas de messages manqués."
-      },
-      "matching": {
-        "icon": "temp_preferences_custom",
-        "title": "Mise en relation intelligente promoteur-artiste",
-        "desc": "La mise en relation basée sur des règles connecte les promoteurs aux artistes en fonction de la disponibilité des dates, de la capacité de la salle et de l'alignement budgétaire."
-      },
-      "dataDriven": {
-        "icon": "bar_chart",
-        "title": "Planification d'événements basée sur les données",
-        "desc": "Générez des résumés d'activités avec des revenus estimés, des projections de coûts et des notes de risque — structurés pour les financiers dès le premier jour."
-      },
-      "financing": {
-        "icon": "account_balance",
-        "title": "Soutien au financement et à l'assurance",
-        "desc": "Suivez les besoins de financement, connectez-vous avec des partenaires financiers et débloquez un soutien en assurance pour développer des expériences live ambitieuses."
-      }
-    },
-    "promoters": {
-      "badge": "Pour les promoteurs",
-      "title": "Rejoignez le circuit de tournée panafricain.",
-      "description": "Faites partie d'un réseau de tournées structuré à l'échelle du continent. Découvrez des artistes de premier plan, soumettez des expressions d'intérêt formelles et accédez à un soutien financier pour donner vie à des spectacles ambitieux.",
-      "features": {
-        "stop": "Manifester de l'intérêt pour faire partie d'un arrêt de tournée",
-        "discovery": "Découvrir et soumettre des EOI pour des artistes de premier plan",
-        "financing": "Déclarer les besoins de financement pour votre concert ou festival",
-        "alignment": "Rationaliser la planification et s'aligner avec d'autres promoteurs de tournées"
-      },
-      "cta": "Parcourir les artistes et les tournées",
-      "imageAlt": "Producteur de musique travaillant sur une table de mixage numérique sophistiquée dans un studio éclairé à l'orange"
-    },
-    "artists": {
-      "badge": "Pour les artistes et le management",
-      "title": "Développez-vous sur de nouveaux marchés.",
-      "description": "Déclarez votre intention de tournée, soyez mis en relation avec des promoteurs sérieux et recevez des demandes de réservation structurées de haute qualité. Réduisez les frictions et développez-vous en toute confiance sur de nouveaux territoires.",
-      "features": {
-        "intent": "Déclarer son intérêt pour une tournée et définir sa fenêtre de disponibilité",
-        "matching": "Être mis en relation avec des promoteurs vérifiés et sérieux",
-        "eoi": "Recevoir des expressions d'intérêt structurées",
-        "alignment": "S'aligner sur les dates de tournée et s'étendre sur de nouveaux marchés"
-      },
-      "cta": "Commencez votre voyage de tournée",
-      "imageAlt": "Artiste solo se produisant avec une émotion intense sur une scène remplie de fumée sous un seul projecteur brillant"
-    },
-    "how": {
-      "badge": "Flux de travail de la plateforme",
-      "title": "De la découverte à l'exécution",
-      "step": "Étape {number}"
-    },
-    "HowItWorks": {
-      "announcement": {
-        "icon": "campaign",
-        "title": "Ckrowd annonce la tournée et les artistes",
-        "desc": "L'administrateur crée un projet de tournée sur TourStack — comprenant la liste des artistes, la fourchette de cachets, les dates de disponibilité et les exigences techniques."
-      },
-      "submission": {
-        "icon": "send",
-        "title": "Le promoteur soumet une expression d'intérêt",
-        "desc": "Les promoteurs parcourent les artistes et les tournées disponibles, puis soumettent une EOI formelle avec leur salle, leur date, leur budget et leur modèle de financement."
-      },
-      "matching": {
-        "icon": "manage_search",
-        "title": "Mise en relation et examen",
-        "desc": "TourStack évalue chaque EOI par rapport aux exigences de l'artiste. L'équipe Ckrowd examine les correspondances signalées et prend des décisions éclairées."
-      },
-      "decision": {
-        "icon": "task_alt",
-        "title": "Rapport et décision",
-        "desc": "Le système génère un résumé d'activité — revenus estimés, coûts et notes de risque — structuré pour les financiers. L'administrateur approuve, rejette ou demande une révision."
-      }
-    },
-    "cta": {
-      "title": "Prêt à monter sur scène ?",
-      "description": "Rejoignez TourStack et faites partie de l'écosystème de tournées panafricain. Que vous soyez un promoteur, une société de gestion d'artistes ou un prestataire de services — c'est votre plateforme.",
-      "ctaPromoter": "Commencer en tant que promoteur",
-      "ctaBrowse": "Parcourir les artistes et les tournées",
-      "trustedBy": "Fait confiance par plus de 500 promoteurs sur 24 marchés."
-    }
-  },
   "GlobalSearch": {
     "placeholder": "Rechercher tournées, artistes, salles...",
     "openSearch": "Ouvrir la recherche",
@@ -6409,7 +6304,10 @@
       "contactSales": "Contacter l'équipe commerciale",
       "signIn": "Se connecter",
       "join": "Rejoindre TourStack",
-      "byCkrowd": "par Ckrowd"
+      "dashboard": "Tableau de bord",
+      "byCkrowd": "par Ckrowd",
+      "toggleTheme": "Changer de thème",
+      "menu": "Menu"
     },
     "hero": {
       "title1": "La plateforme qui rend",
@@ -6418,10 +6316,13 @@
       "subtitle": "TourStack donne aux promoteurs, banques, assureurs et artistes la confiance, la conformité et les données nécessaires pour libérer le divertissement live à travers le continent, transformant les tournées en actifs finançables.",
       "ctaPrimary": "Commencer",
       "ctaSecondary": "Devenir promoteur certifié",
+      "ctaPrimaryLoggedIn": "Accéder au tableau de bord",
       "scroll": "Défiler"
     },
     "trust": {
-      "eyebrow": "Soutenu par les leaders bancaires et assurantiels d'Afrique"
+      "eyebrow": "Soutenu par les leaders bancaires et assurantiels d'Afrique",
+      "bankingPartner": "Partenaire bancaire",
+      "insurancePartner": "Partenaire assurance"
     },
     "stats": {
       "title": "Les chiffres derrière la confiance.",
@@ -6650,6 +6551,7 @@
       "title": "Prêt à construire l'avenir du divertissement live ?",
       "subtitle": "Rejoignez la plateforme d'infrastructure qui standardise les tournées africaines.",
       "primary": "Commencer aujourd'hui",
+      "primaryLoggedIn": "Accéder au tableau de bord",
       "secondary": "Contacter l'équipe commerciale"
     },
     "faq": {
