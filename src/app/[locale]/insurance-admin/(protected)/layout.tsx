@@ -1,9 +1,10 @@
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
 import { getSession } from "@/app/actions";
 import InsuranceAdminSideNav from "@/components/InsuranceAdminSideNav";
 import TopNav from "@/components/TopNav";
-import { adminHomePath, isInsuranceAdmin } from "@/lib/auth";
+import { adminHomePath, isInsuranceAdmin, stripLocalePrefix } from "@/lib/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -19,7 +20,9 @@ export default async function InsuranceAdminLayout({
 
 	const session = await getSession();
 	if (!session) {
-		redirect(`/${locale}/insurance-admin/login`);
+		const pathname = (await headers()).get("x-pathname") ?? `/${locale}/insurance-admin`;
+		const from = stripLocalePrefix(pathname, locale);
+		redirect(`/${locale}/insurance-admin/login?from=${encodeURIComponent(from)}`);
 	}
 	if (!isInsuranceAdmin(session)) {
 		const home = adminHomePath(session);

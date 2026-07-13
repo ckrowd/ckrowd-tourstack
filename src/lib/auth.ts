@@ -82,6 +82,13 @@ export function adminHomePath(
 	return scope ? ADMIN_SCOPE_HOME[scope] : null;
 }
 
+/** Strips the `/<locale>` prefix from a pathname read off `x-pathname`, e.g. `/en/tours?x=1` → `/tours?x=1`. */
+export function stripLocalePrefix(pathname: string, locale: string) {
+	const prefix = `/${locale}`;
+	if (pathname === prefix) return "/";
+	return pathname.startsWith(`${prefix}/`) ? pathname.slice(prefix.length) : pathname;
+}
+
 export function normalizeInternalPath(
 	path: string | null | undefined,
 	fallback = "/dashboard",

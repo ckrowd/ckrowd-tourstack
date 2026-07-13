@@ -1,6 +1,7 @@
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { getSession, getTourstackProfile } from "@/app/actions";
-import { adminHomePath, isArtmgmtProfile } from "@/lib/auth";
+import { adminHomePath, isArtmgmtProfile, stripLocalePrefix } from "@/lib/auth";
 import ProfileSetupGate from "@/components/ProfileSetupGate";
 
 export const dynamic = "force-dynamic";
@@ -16,7 +17,9 @@ export default async function DashboardLayout({
 	const [session, profile] = await Promise.all([getSession(), getTourstackProfile()]);
 
 	if (!session) {
-		redirect(`/${locale}/login`);
+		const pathname = (await headers()).get("x-pathname") ?? `/${locale}/dashboard`;
+		const from = stripLocalePrefix(pathname, locale);
+		redirect(`/${locale}/login?from=${encodeURIComponent(from)}`);
 	}
 	const home = adminHomePath(session);
 	if (home) {

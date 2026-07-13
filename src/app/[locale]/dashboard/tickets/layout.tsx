@@ -1,6 +1,7 @@
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { getSession } from "@/app/actions";
-import { adminHomePath } from "@/lib/auth";
+import { adminHomePath, stripLocalePrefix } from "@/lib/auth";
 import TopNav from "@/components/TopNav";
 import SideNav from "@/components/SideNav";
 
@@ -16,7 +17,9 @@ export default async function TicketsDashboardLayout({
 	const { locale } = await params;
 	const session = await getSession();
 	if (!session) {
-		redirect(`/${locale}/login`);
+		const pathname = (await headers()).get("x-pathname") ?? `/${locale}/dashboard/tickets`;
+		const from = stripLocalePrefix(pathname, locale);
+		redirect(`/${locale}/login?from=${encodeURIComponent(from)}`);
 	}
 	const home = adminHomePath(session);
 	if (home) {

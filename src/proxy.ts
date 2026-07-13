@@ -19,7 +19,11 @@ export async function proxy(request: NextRequest) {
 		return intlResponse;
 	}
 
-	const response = NextResponse.next();
+	// Exposes the current path (incl. query) to Server Components via
+	// headers() so layouts can build a `?from=` redirect back after login.
+	const requestHeaders = new Headers(request.headers);
+	requestHeaders.set("x-pathname", request.nextUrl.pathname + request.nextUrl.search);
+	const response = NextResponse.next({ request: { headers: requestHeaders } });
 
 	intlResponse.headers.forEach((value, key) => {
 		if (key.toLowerCase() !== "set-cookie") {

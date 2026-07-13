@@ -390,7 +390,7 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 							id="theme"
 							onClick={toggleTheme}
 							className="press h-9 w-9 grid place-items-center rounded-full hair text-muted hover:text-ink"
-							aria-label="Toggle theme"
+							aria-label={t("nav.toggleTheme")}
 						>
 							{theme === "dark" ? (
 								<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
@@ -403,14 +403,16 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 								</svg>
 							)}
 						</button>
-						<Link href={signInHref} className="hidden lg:inline-flex text-[13.5px] text-muted hover:text-ink transition-colors px-3 py-2">
-							{t("nav.login")}
-						</Link>
+						{!loggedIn && (
+							<Link href={signInHref} className="hidden lg:inline-flex text-[13.5px] text-muted hover:text-ink transition-colors px-3 py-2">
+								{t("nav.login")}
+							</Link>
+						)}
 						<Link
 							href={createAccountHref}
 							className="group press hidden md:inline-flex items-center gap-2 bg-orange text-white font-medium text-[13.5px] pl-4 pr-2 py-2 rounded-full"
 						>
-							{t("nav.join")}
+							{loggedIn ? t("nav.dashboard") : t("nav.join")}
 							<span className="btn-ico h-7 w-7 rounded-full bg-black/15 grid place-items-center">
 								<ArrowUpRight />
 							</span>
@@ -419,7 +421,7 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 							id="burger"
 							onClick={() => toggleMenu(!menuOpen)}
 							className={`md:hidden relative h-9 w-9 rounded-full hair${menuOpen ? " x" : ""}`}
-							aria-label="Menu"
+							aria-label={t("nav.menu")}
 						>
 							<svg className="ico-menu absolute inset-0 m-auto" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round">
 								<path d="M4 9h16M4 15h16" />
@@ -448,21 +450,23 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 						{l.key === "platform" ? t("nav.platformShort") : t(`nav.${l.key}`)}
 					</a>
 				))}
-				<Link
-					href={signInHref}
-					onClick={() => toggleMenu(false)}
-					className="mt-6 display text-4xl font-semibold py-2"
-					style={{ transitionDelay: "0.22s" }}
-				>
-					{t("nav.signIn")}
-				</Link>
+				{!loggedIn && (
+					<Link
+						href={signInHref}
+						onClick={() => toggleMenu(false)}
+						className="mt-6 display text-4xl font-semibold py-2"
+						style={{ transitionDelay: "0.22s" }}
+					>
+						{t("nav.signIn")}
+					</Link>
+				)}
 				<Link
 					href={createAccountHref}
 					onClick={() => toggleMenu(false)}
-					className="mt-4 bg-orange text-white font-medium px-7 py-3 rounded-full"
-					style={{ transitionDelay: "0.27s" }}
+					className={`bg-orange text-white font-medium px-7 py-3 rounded-full${loggedIn ? " mt-6" : " mt-4"}`}
+					style={{ transitionDelay: loggedIn ? "0.22s" : "0.27s" }}
 				>
-					{t("nav.join")}
+					{loggedIn ? t("nav.dashboard") : t("nav.join")}
 				</Link>
 			</div>
 
@@ -501,18 +505,20 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 						</p>
 						<div className="reveal mt-9 flex flex-col sm:flex-row gap-3 justify-center">
 							<Link href={createAccountHref} className="group press inline-flex items-center justify-center gap-2 bg-orange text-white font-medium pl-6 pr-2 py-3.5 rounded-full">
-								{t("hero.ctaPrimary")}
+								{loggedIn ? t("hero.ctaPrimaryLoggedIn") : t("hero.ctaPrimary")}
 								<span className="btn-ico h-8 w-8 rounded-full bg-black/15 grid place-items-center">
 									<ArrowUpRight size={15} />
 								</span>
 							</Link>
-							<Link
-								href={createAccountHref}
-								className="press inline-flex items-center justify-center gap-2 text-white font-medium px-6 py-3.5 rounded-full backdrop-blur-sm hover:bg-white/15 transition-colors"
-								style={{ border: "1px solid rgba(255,255,255,.25)", background: "rgba(255,255,255,.06)" }}
-							>
-								{t("hero.ctaSecondary")}
-							</Link>
+							{!loggedIn && (
+								<Link
+									href={createAccountHref}
+									className="press inline-flex items-center justify-center gap-2 text-white font-medium px-6 py-3.5 rounded-full backdrop-blur-sm hover:bg-white/15 transition-colors"
+									style={{ border: "1px solid rgba(255,255,255,.25)", background: "rgba(255,255,255,.06)" }}
+								>
+									{t("hero.ctaSecondary")}
+								</Link>
+							)}
 						</div>
 					</div>
 					<div className="absolute bottom-7 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-[10px] tracking-[.3em] uppercase text-white/55">
@@ -526,9 +532,9 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 						<p className="eyebrow text-muted shrink-0">{t("trust.eyebrow")}</p>
 						{/* Partner names/logos withheld until confirmation is received */}
 						<div className="flex items-center gap-10 sm:gap-14 flex-wrap justify-center">
-							<span className="text-sm font-semibold uppercase tracking-widest text-muted opacity-90">Banking Partner</span>
+							<span className="text-sm font-semibold uppercase tracking-widest text-muted opacity-90">{t("trust.bankingPartner")}</span>
 							<span className="hidden sm:block h-8 w-px" style={{ background: "var(--hair)" }} />
-							<span className="text-sm font-semibold uppercase tracking-widest text-muted opacity-90">Insurance Partner</span>
+							<span className="text-sm font-semibold uppercase tracking-widest text-muted opacity-90">{t("trust.insurancePartner")}</span>
 						</div>
 					</div>
 				</section>
@@ -817,7 +823,7 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 								<p className="mt-5 text-lg text-white/85">{t("cta.subtitle")}</p>
 								<div className="mt-9 flex flex-col sm:flex-row justify-center gap-3">
 									<Link href={createAccountHref} className="group press inline-flex items-center justify-center gap-2 bg-black text-white font-medium pl-6 pr-2 py-3.5 rounded-full">
-										{t("cta.primary")}
+										{loggedIn ? t("cta.primaryLoggedIn") : t("cta.primary")}
 										<span className="btn-ico h-8 w-8 rounded-full bg-white/15 grid place-items-center">
 											<ArrowUpRight size={15} />
 										</span>
