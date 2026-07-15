@@ -2,6 +2,7 @@
 import { getTour, getTourMilestones } from "@/app/actions";
 import AITourScorePanel from "@/components/AITourScorePanel";
 import TourReportForm from "@/components/TourReportForm";
+import Icon from "@/components/icons";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 import StatusBadge, { type StatusTone } from "@/components/ui/StatusBadge";
@@ -48,7 +49,7 @@ export default async function TourDetailPage({
 					<div className="w-full space-y-8">
 						<div className="flex flex-wrap items-center justify-between gap-3">
 							<div>
-								<p className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E]">
+								<p className="text-xs font-semibold uppercase tracking-widest text-primary">
 									{t("tagline")}
 								</p>
 								<h1 className="text-3xl font-(family-name:--font-manrope) font-extrabold text-on-surface mt-1">
@@ -61,9 +62,7 @@ export default async function TourDetailPage({
 								href="/tours"
 								className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-outline-variant/30 text-sm font-semibold text-on-surface-variant hover:bg-surface-container-low"
 							>
-								<span className="material-symbols-outlined text-sm">
-									arrow_back
-								</span>
+								<Icon name="arrow-left" size={15} />
 								{t("actions.back")}
 							</Link>
 						</div>
@@ -74,7 +73,7 @@ export default async function TourDetailPage({
 							</div>
 						) : (
 							<div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-								<section className="lg:col-span-8 bg-surface-container-lowest rounded-2xl p-6 shadow-sm space-y-5">
+								<section className="lg:col-span-8 bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant space-y-5">
 									<div className="flex items-start justify-between gap-3">
 										<div>
 											<h2 className="text-xl font-(family-name:--font-manrope) font-semibold">
@@ -159,9 +158,9 @@ export default async function TourDetailPage({
 
 								{/* AI Tour Success Score */}
 								{tour.eoi_id && (
-									<section className="lg:col-span-12 bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+									<section className="lg:col-span-12 bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant">
 										<div className="flex items-center gap-2 mb-4">
-											<span className="material-symbols-outlined text-[#FF5A2E]" style={{ fontVariationSettings: "'FILL' 1" }}>auto_awesome</span>
+											<Icon name="ai" size={20} className="text-primary" />
 											<h3 className="text-base font-(family-name:--font-manrope) font-semibold">
 												{t("aiScore.title")}
 											</h3>
@@ -172,7 +171,7 @@ export default async function TourDetailPage({
 
 								{/* Post-event report for completed tours */}
 								{status === "completed" && (
-									<section className="lg:col-span-12 bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+									<section className="lg:col-span-12 bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant">
 										<h3 className="text-base font-(family-name:--font-manrope) font-semibold mb-1">
 											{t("report.title")}
 										</h3>
@@ -181,7 +180,7 @@ export default async function TourDetailPage({
 									</section>
 								)}
 
-								<section className="lg:col-span-4 bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+								<section className="lg:col-span-4 lg:sticky lg:top-24 self-start bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant">
 									<h3 className="text-base font-(family-name:--font-manrope) font-semibold mb-4">
 										{t("milestones.title")}
 									</h3>

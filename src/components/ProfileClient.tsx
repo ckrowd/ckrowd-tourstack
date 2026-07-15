@@ -1,6 +1,7 @@
 "use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import Icon from "@/components/icons";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { getTourstackProfile, updateTourstackProfile, uploadImage } from "@/app/actions";
@@ -24,7 +25,7 @@ function Section({
 	dataTour?: string;
 }) {
 	return (
-		<div data-tour={dataTour} className="bg-surface-container-lowest rounded-2xl p-8 shadow-sm space-y-6">
+		<div data-tour={dataTour} className="tsd-card p-6 md:p-8 space-y-6">
 			<div className="border-b border-outline-variant/20 pb-4">
 				<h3 className="font-(family-name:--font-manrope) font-semibold text-lg text-on-surface">
 					{title}
@@ -76,7 +77,7 @@ function Field({
 					onChange={onChange ?? (() => {})}
 					placeholder={placeholder}
 					ariaInvalid={hasError}
-					className={`w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 ${hasError ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
+					className={`w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/30 ${hasError ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
 				/>
 			) : (
 				<input
@@ -86,12 +87,12 @@ function Field({
 					placeholder={placeholder}
 					onChange={onChange ? (e) => onChange(e.target.value) : undefined}
 					readOnly={!onChange}
-					className={`w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 ${hasError ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
+					className={`w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/30 ${hasError ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
 				/>
 			)}
 			{hasError && (
 				<p className="text-xs text-rose-600 font-medium mt-1 flex items-center gap-1">
-					<span className="material-symbols-outlined text-sm">error</span>
+					<Icon name="alert-circle" size={14} />
 					Required
 				</p>
 			)}
@@ -132,7 +133,7 @@ function SelectField({
 					id={id}
 					value={value}
 					onChange={(e) => onChange(e.target.value)}
-					className={`w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 appearance-none ${hasError ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
+					className={`w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/30 appearance-none ${hasError ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
 				>
 					{options.map((opt) => (
 						<option key={opt.value} value={opt.value}>
@@ -140,13 +141,11 @@ function SelectField({
 						</option>
 					))}
 				</select>
-				<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-lg">
-					expand_more
-				</span>
+				<Icon name="chevron-down" size={18} className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant" />
 			</div>
 			{hasError && (
 				<p className="text-xs text-rose-600 font-medium mt-1 flex items-center gap-1">
-					<span className="material-symbols-outlined text-sm">error</span>
+					<Icon name="alert-circle" size={14} />
 					Required
 				</p>
 			)}
@@ -289,6 +288,7 @@ export default function ProfileClient() {
 	const [logoError, setLogoError] = useState(false);
 	const [logoPreview, setLogoPreview] = useState<string | null>(null);
 	const [showValidation, setShowValidation] = useState(false);
+	const [activeTab, setActiveTab] = useState<"company" | "public" | "business" | "banking">("company");
 
 	useEffect(() => {
 		return () => {
@@ -316,6 +316,35 @@ export default function ProfileClient() {
 
 	const set = (key: keyof ProfileData) => (v: string) =>
 		setEdits((p) => ({ ...p, [key]: v }));
+
+	// ── Tab system ─────────────────────────────────────────────────────────
+	// One shared form state across tabs; panels conditionally render, so
+	// switching tabs never loses edits. Per-tab required-key mapping powers
+	// the validation badges and the jump-to-first-invalid-tab on save.
+	type ProfileTab = "company" | "public" | "business" | "banking";
+	const TABS: ProfileTab[] = ["company", "public", "business", "banking"];
+	const TAB_ICONS: Record<ProfileTab, string> = {
+		company: "building",
+		public: "globe",
+		business: "briefcase",
+		banking: "financing",
+	};
+	const TAB_FIELDS: Record<ProfileTab, (keyof ProfileData)[]> = {
+		company: ["companyName", "companyType", "registrationNumber", "taxId", "incorporationDate", "incorporationCountry"],
+		public: ["primaryAddress", "country", "city", "phone", "bio"],
+		business: ["contactPerson", "jobTitle", "contactEmail", "yearsInBusiness", "companySize", "averageEventsYear", "genresSpecialties"],
+		banking: ["bankName", "bankAccountHolder", "bankAccountNumber", "bankSwiftBic", "currencyPreference"],
+	};
+	const tabMissing = (tab: ProfileTab) =>
+		TAB_FIELDS[tab].some((k) => !profile[k]?.trim?.() && !profile[k]) ||
+		(tab === "company" && !profile.logoUrl) ||
+		(tab === "business" && needsMarkets && !profile.marketsRegions?.trim());
+	const stepIndex = TABS.indexOf(activeTab);
+	const doneCount = TABS.filter((tb) => !tabMissing(tb)).length;
+	const goToStep = (tb: ProfileTab) => {
+		setActiveTab(tb);
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	};
 
 	const logoUploadMutation = useMutation({
 		mutationFn: uploadImage,
@@ -362,6 +391,8 @@ export default function ProfileClient() {
 		if (!profile.logoUrl || missingRequired) {
 			setLogoError(!profile.logoUrl);
 			setShowValidation(true);
+			const firstInvalid = TABS.find((tb) => tabMissing(tb));
+			if (firstInvalid) setActiveTab(firstInvalid);
 			window.scrollTo({ top: 0, behavior: "smooth" });
 			return;
 		}
@@ -435,15 +466,10 @@ export default function ProfileClient() {
 		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
 			<PageTour pageId="profile" />
 			{isSetup && (
-				<div className="mb-6 bg-[#FF5A2E]/10 border border-[#FF5A2E]/20 rounded-2xl p-5 flex items-start gap-4">
-					<span
-						className="material-symbols-outlined text-[#FF5A2E] mt-0.5 shrink-0"
-						style={{ fontVariationSettings: "'FILL' 1" }}
-					>
-						person_add
-					</span>
+				<div className="mb-6 bg-primary/10 border border-primary/20 rounded-2xl p-5 flex items-start gap-4">
+					<Icon name="user-plus" size={18} className="text-primary mt-0.5 shrink-0" />
 					<div>
-						<p className="font-(family-name:--font-manrope) font-semibold text-[#FF5A2E] text-sm">
+						<p className="font-(family-name:--font-manrope) font-semibold text-primary text-sm">
 							{t("setupBanner.title")}
 						</p>
 						<p className="text-sm text-on-surface-variant mt-1">
@@ -454,7 +480,7 @@ export default function ProfileClient() {
 			)}
 
 			<div className="mb-8">
-				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
+				<span className="text-xs font-semibold uppercase tracking-widest text-primary block mb-2">
 					{t("promoterPortal")}
 				</span>
 				<h1 className="text-3xl font-semibold font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -463,9 +489,80 @@ export default function ProfileClient() {
 				<p className="text-on-surface-variant">{t("description")}</p>
 			</div>
 
-			<div className="space-y-6">
+			{/* Journey rail */}
+			<div className="tsd-card p-5 md:p-6 mb-8">
+				<ol className="flex items-center gap-0">
+					{TABS.map((tb, idx) => {
+						const complete = !tabMissing(tb);
+						const active = activeTab === tb;
+						const invalid = showValidation && tabMissing(tb);
+						return (
+							<li key={tb} className="flex items-center flex-1 last:flex-none min-w-0">
+								<button
+									type="button"
+									onClick={() => goToStep(tb)}
+									className="group flex items-center gap-2.5 min-w-0"
+								>
+									<span
+										className={`flex items-center justify-center w-8 h-8 rounded-full border text-xs font-semibold shrink-0 transition-all duration-300 [transition-timing-function:var(--ease-out)] ${
+											complete
+												? "bg-emerald-500 border-emerald-500 text-white"
+												: invalid
+													? "border-rose-500 text-rose-500"
+													: active
+														? "border-primary text-primary bg-primary/10"
+														: "border-outline-variant text-on-surface-variant group-hover:border-on-surface-variant"
+										}`}
+									>
+										{complete ? (
+											<Icon name="check" size={14} strokeWidth={2.5} />
+										) : (
+											String(idx + 1).padStart(2, "0")
+										)}
+									</span>
+									<span
+										className={`hidden md:flex flex-col items-start min-w-0 text-left ${active ? "" : "opacity-70 group-hover:opacity-100"} transition-opacity`}
+									>
+										<span
+											className={`text-sm truncate ${active ? "font-semibold text-on-surface" : "font-medium text-on-surface-variant"}`}
+										>
+											{t(`tabs.${tb}`)}
+										</span>
+									</span>
+								</button>
+								{idx < TABS.length - 1 && (
+									<span className="flex-1 h-px mx-3 md:mx-4 relative bg-outline-variant overflow-hidden rounded-full">
+										<span
+											className="absolute inset-y-0 left-0 bg-emerald-500 transition-[width] duration-500 [transition-timing-function:var(--ease-out)]"
+											style={{ width: complete ? "100%" : "0%" }}
+										/>
+									</span>
+								)}
+							</li>
+						);
+					})}
+				</ol>
+				<div className="flex items-center justify-between gap-4 mt-5">
+					<p
+						className={`text-xs font-medium ${doneCount === TABS.length ? "text-emerald-500" : "text-on-surface-variant"}`}
+					>
+						{doneCount === TABS.length
+							? t("journey.ready")
+							: t("journey.progress", { done: doneCount, total: TABS.length })}
+					</p>
+					<div className="w-32 md:w-48 h-1.5 rounded-full bg-surface-container-high overflow-hidden">
+						<div
+							className={`h-full rounded-full transition-[width] duration-500 [transition-timing-function:var(--ease-out)] ${doneCount === TABS.length ? "bg-emerald-500" : "bg-primary"}`}
+							style={{ width: `${(doneCount / TABS.length) * 100}%` }}
+						/>
+					</div>
+				</div>
+			</div>
+
+			<div key={activeTab} className="tsd-rise space-y-6">
+				{activeTab === "company" && (<>
 				{/* Logo Upload */}
-				<div data-tour="profile-logo" className="bg-surface-container-lowest rounded-2xl p-8 shadow-sm">
+				<div data-tour="profile-logo" className="tsd-card p-6 md:p-8">
 					<div className="border-b border-outline-variant/20 pb-4 mb-6">
 						<h3 className="font-(family-name:--font-manrope) font-semibold text-lg text-on-surface">
 							{t("logo.label")}
@@ -477,7 +574,7 @@ export default function ProfileClient() {
 						<button
 							type="button"
 							onClick={() => fileInputRef.current?.click()}
-							className="relative w-24 h-24 rounded-2xl overflow-hidden bg-surface-container-low border-2 border-dashed border-outline-variant/40 hover:border-[#FF5A2E]/60 transition-colors flex items-center justify-center shrink-0 group"
+							className="relative w-24 h-24 rounded-2xl overflow-hidden bg-surface-container-low border-2 border-dashed border-outline-variant/40 hover:border-primary/60 transition-colors flex items-center justify-center shrink-0 group"
 							aria-label={t("logo.label")}
 						>
 							{logoPreview || profile.logoUrl ? (
@@ -488,17 +585,17 @@ export default function ProfileClient() {
 									className="w-full h-full object-cover"
 								/>
 							) : (
-								<span className="text-2xl font-semibold text-on-surface-variant group-hover:text-[#FF5A2E] transition-colors">
+								<span className="text-2xl font-semibold text-on-surface-variant group-hover:text-primary transition-colors">
 									{initials}
 								</span>
 							)}
 							{logoUploadMutation.isPending && (
 								<div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-									<span className="material-symbols-outlined text-white text-2xl animate-spin">progress_activity</span>
+									<Icon name="loader" size={24} className="text-white animate-spin" />
 								</div>
 							)}
 							<div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-								<span className="material-symbols-outlined text-white text-2xl">photo_camera</span>
+								<Icon name="camera" size={24} className="text-white" />
 							</div>
 						</button>
 						<div>
@@ -506,20 +603,20 @@ export default function ProfileClient() {
 								type="button"
 								onClick={() => fileInputRef.current?.click()}
 								disabled={logoUploadMutation.isPending}
-								className="inline-flex items-center gap-2 px-5 py-2.5 border border-outline-variant/40 rounded-xl text-sm font-semibold text-on-surface hover:border-[#FF5A2E]/50 hover:text-[#FF5A2E] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+								className="inline-flex items-center gap-2 px-5 py-2.5 border border-outline-variant/40 rounded-xl text-sm font-semibold text-on-surface hover:border-primary/50 hover:text-primary transition-all disabled:opacity-50 disabled:cursor-not-allowed"
 							>
-								<span className="material-symbols-outlined text-base">upload</span>
+								<Icon name="upload" size={16} />
 								{logoUploadMutation.isPending ? t("logo.uploading") : "Upload Image"}
 							</button>
 							{logoError && (
 								<p className="text-xs text-rose-600 font-medium mt-2 flex items-center gap-1">
-									<span className="material-symbols-outlined text-sm">error</span>
+									<Icon name="alert-circle" size={14} />
 									{t("logo.required")}
 								</p>
 							)}
 							{(logoUploadMutation.isError || logoUploadMutation.data?.success === false) && (
 								<p className="text-xs text-rose-600 font-medium mt-2 flex items-center gap-1">
-									<span className="material-symbols-outlined text-sm">error</span>
+									<Icon name="alert-circle" size={14} />
 									{t("logo.uploadFailed")}
 								</p>
 							)}
@@ -599,8 +696,10 @@ export default function ProfileClient() {
 						/>
 					</div>
 				</Section>
+				</>)}
 
 				{/* 2. Public Information */}
+				{activeTab === "public" && (
 				<Section title={t("publicInfo.title")} description={t("publicInfo.description")}>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 						<div className="md:col-span-2">
@@ -665,11 +764,11 @@ export default function ProfileClient() {
 							value={profile.bio}
 							placeholder={t("publicInfo.fields.bioPlaceholder")}
 							onChange={(e) => set("bio")(e.target.value)}
-							className={`w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 resize-none ${showValidation && !profile.bio.trim() ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
+							className={`w-full bg-surface-container-low border rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none ${showValidation && !profile.bio.trim() ? "border-rose-400 ring-1 ring-rose-300" : "border-outline-variant/30"}`}
 						/>
 						{showValidation && !profile.bio.trim() && (
 							<p className="text-xs text-rose-600 font-medium mt-1 flex items-center gap-1">
-								<span className="material-symbols-outlined text-sm">error</span>
+								<Icon name="alert-circle" size={14} />
 								Required
 							</p>
 						)}
@@ -713,8 +812,10 @@ export default function ProfileClient() {
 						</div>
 					</div>
 				</Section>
+				)}
 
 				{/* 3. Key Personnel */}
+				{activeTab === "business" && (<>
 				<Section title={t("keyPersonnel.title")} description={t("keyPersonnel.description")}>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 						<Field
@@ -808,8 +909,10 @@ export default function ProfileClient() {
 						showError={showValidation}
 					/>
 				</Section>
+				</>)}
 
 				{/* 5. Financial & Banking Information */}
+				{activeTab === "banking" && (
 				<Section title={t("banking.title")} description={t("banking.description")}>
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-5">
 						<BankSelect
@@ -872,22 +975,31 @@ export default function ProfileClient() {
 						/>
 					</div>
 				</Section>
+				)}
 
-				<div className="flex items-center justify-end gap-4">
+				<div className="flex items-center justify-between gap-4">
+					{stepIndex > 0 ? (
+						<button
+							type="button"
+							onClick={() => goToStep(TABS[stepIndex - 1])}
+							className="inline-flex items-center gap-2 px-5 py-3 rounded-xl border border-outline-variant text-sm font-semibold text-on-surface-variant hover:text-on-surface hover:border-on-surface-variant transition-colors"
+						>
+							<Icon name="arrow-left" size={15} />
+							{t("journey.back")}
+						</button>
+					) : (
+						<span />
+					)}
+					<div className="flex items-center gap-4">
 					{showValidation && missingRequired && (
 						<span className="flex items-center gap-1.5 text-sm font-semibold text-rose-600">
-							<span className="material-symbols-outlined text-base" style={{ fontVariationSettings: "'FILL' 1" }}>error</span>
+							<Icon name="alert-circle" size={16} />
 							{t("actions.requiredFields")}
 						</span>
 					)}
 					{saveStatus === "success" && (
 						<span className="flex items-center gap-1.5 text-sm font-semibold text-emerald-600">
-							<span
-								className="material-symbols-outlined text-base"
-								style={{ fontVariationSettings: "'FILL' 1" }}
-							>
-								check_circle
-							</span>
+							<Icon name="check-circle" size={16} />
 							{t("actions.saveSuccess")}
 						</span>
 					)}
@@ -900,10 +1012,21 @@ export default function ProfileClient() {
 						type="button"
 						onClick={handleSave}
 						disabled={saveMutation.isPending || logoUploadMutation.isPending}
-						className="bg-[#FF5A2E] text-white px-8 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-all disabled:opacity-60"
+						className="bg-primary text-white px-8 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-primary/20 hover:opacity-90 transition-all disabled:opacity-60"
 					>
 						{saveMutation.isPending ? t("actions.saving") : t("actions.save")}
 					</button>
+					{stepIndex < TABS.length - 1 && (
+						<button
+							type="button"
+							onClick={() => goToStep(TABS[stepIndex + 1])}
+							className="inline-flex items-center gap-2 bg-surface-container-highest text-on-surface px-6 py-3 rounded-xl font-semibold text-sm hover:bg-surface-container-high transition-colors"
+						>
+							{t("journey.continue")}
+							<Icon name="arrow-right" size={15} />
+						</button>
+					)}
+					</div>
 				</div>
 			</div>
 		</main>

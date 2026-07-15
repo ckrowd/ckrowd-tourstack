@@ -8,6 +8,8 @@ import {
 	getTourstackProfile,
 } from "@/app/actions";
 import EcosystemReadiness from "@/components/EcosystemReadiness";
+import Icon from "@/components/icons";
+import EmptyState from "@/components/ui/EmptyState";
 import SideNav from "@/components/SideNav";
 import { computeEcosystemReadiness } from "@/lib/eligibility";
 import TopNav from "@/components/TopNav";
@@ -144,26 +146,70 @@ export default async function DashboardPage({ params }: Props) {
 
 				<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
 					<PageTour pageId="dashboard" />
-					{/* Header */}
-					<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
-						<div>
-							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
-								{t("promoterPortal")}
-							</span>
-							<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
-								{t("title")}
-							</h1>
-							<p className="text-on-surface-variant font-medium">
-								{t("welcomeBack", { name: companyName })}
-							</p>
+					{/* Identity strip header */}
+					<div className="tsd-card tsd-card-glow mb-10 overflow-hidden tsd-rise">
+						<div className="p-6 md:p-8 flex items-center gap-5">
+							<div className="w-14 h-14 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0 overflow-hidden">
+								{profile?.logo_url ? (
+									// eslint-disable-next-line @next/next/no-img-element -- may be a base64 data URL
+									<img src={String(profile.logo_url)} alt="" className="w-full h-full object-cover" />
+								) : (
+									<span className="text-lg font-(family-name:--font-display) text-primary">
+										{companyName.slice(0, 2).toUpperCase()}
+									</span>
+								)}
+							</div>
+							<div className="min-w-0">
+								<span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-primary block">
+									{t("promoterPortal")}
+								</span>
+								<h1 className="text-2xl md:text-3xl font-semibold tracking-tight text-on-surface truncate">
+									{t("title")}
+								</h1>
+								<p className="text-sm text-on-surface-variant truncate">
+									{t("welcomeBack", { name: companyName })}
+								</p>
+							</div>
 						</div>
-						<div className="flex items-center gap-3 bg-surface-container-lowest p-2 rounded-xl shadow-sm">
-							<span className="material-symbols-outlined text-tertiary-container ml-2">
-								calendar_month
-							</span>
-							<span className="font-(family-name:--font-manrope) font-semibold text-sm pr-4">
-								{t("touringSeason")}: {t("touringSeasonYears")}
-							</span>
+						<div className="tsd-foot grid grid-cols-2 md:grid-cols-4 divide-x divide-outline-variant/60">
+							<div className="px-6 py-4">
+								<p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-on-surface-variant mb-1">
+									{t("touringSeason")}
+								</p>
+								<p className="text-sm font-semibold text-on-surface">
+									{t("touringSeasonYears")}
+								</p>
+							</div>
+							<div className="px-6 py-4">
+								<p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-on-surface-variant mb-1">
+									{t("stats.eoisSubmitted")}
+								</p>
+								<p className="text-sm font-semibold text-on-surface">
+									{typeof dashData?.stats?.totalEOIs === "number"
+										? dashData.stats.totalEOIs
+										: eois.length}
+								</p>
+							</div>
+							<div className="px-6 py-4">
+								<p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-on-surface-variant mb-1">
+									{t("stats.approved")}
+								</p>
+								<p className="text-sm font-semibold text-emerald-500">
+									{typeof dashData?.stats?.approvedEOIs === "number"
+										? dashData.stats.approvedEOIs
+										: 0}
+								</p>
+							</div>
+							<div className="px-6 py-4">
+								<p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-on-surface-variant mb-1">
+									{t("stats.nextShow")}
+								</p>
+								<p className="text-sm font-semibold text-on-surface truncate">
+									{nextMilestone
+										? `${String(nextMilestoneTour?.venue ?? "TBD")} · ${new Date(String(nextMilestone.date)).toLocaleDateString(locale, { month: "short", day: "numeric" })}`
+										: "—"}
+								</p>
+							</div>
 						</div>
 					</div>
 
@@ -171,12 +217,7 @@ export default async function DashboardPage({ params }: Props) {
 					{(hasFinancingRequest && !hasFinancingApp) && (
 						<div className="mb-6 bg-amber-50 border border-amber-200 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
 							<div className="flex items-start gap-3">
-								<span
-									className="material-symbols-outlined text-amber-600 mt-0.5 shrink-0"
-									style={{ fontVariationSettings: "'FILL' 1" }}
-								>
-									payments
-								</span>
+								<Icon name="wallet" size={18} className="text-amber-600 mt-0.5 shrink-0" />
 								<div>
 									<p className="font-(family-name:--font-manrope) font-semibold text-amber-900 text-sm">
 										{t("financePrompt.title")}
@@ -194,12 +235,7 @@ export default async function DashboardPage({ params }: Props) {
 					{(hasInsuranceRequest && !hasInsuranceApp) && (
 						<div className="mb-6 bg-blue-50 border border-blue-200 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
 							<div className="flex items-start gap-3">
-								<span
-									className="material-symbols-outlined text-blue-600 mt-0.5 shrink-0"
-									style={{ fontVariationSettings: "'FILL' 1" }}
-								>
-									shield
-								</span>
+								<Icon name="insurance" size={18} className="text-blue-600 mt-0.5 shrink-0" />
 								<div>
 									<p className="font-(family-name:--font-manrope) font-semibold text-blue-900 text-sm">
 										{t("insurancePrompt.title")}
@@ -218,12 +254,7 @@ export default async function DashboardPage({ params }: Props) {
 					{approvedEoi && (
 						<div className="mb-6 bg-emerald-50 border border-emerald-200 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
 							<div className="flex items-start gap-3">
-								<span
-									className="material-symbols-outlined text-emerald-600 mt-0.5 shrink-0"
-									style={{ fontVariationSettings: "'FILL' 1" }}
-								>
-									upload_file
-								</span>
+								<Icon name="upload" size={18} className="text-emerald-600 mt-0.5 shrink-0" />
 								<div>
 									<p className="font-(family-name:--font-manrope) font-semibold text-emerald-900 text-sm">
 										{t("docsPrompt.title")}
@@ -244,7 +275,7 @@ export default async function DashboardPage({ params }: Props) {
 						</div>
 					)}
 					{/* Tour Progress Tracker */}
-					<div className="bg-surface-container-lowest rounded-xl p-4 md:p-6 shadow-sm mb-10">
+					<div className="tsd-rise tsd-card p-4 md:p-6 mb-10">
 						<div className="flex items-center justify-between mb-4 gap-2">
 							<h2 className="font-(family-name:--font-manrope) font-semibold text-sm md:text-base truncate">
 								{progressTitle}
@@ -264,50 +295,65 @@ export default async function DashboardPage({ params }: Props) {
 					)}
 
 					{/* Stats Grid */}
-					<div data-tour="dashboard-stats" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-10">
-						<div className="bg-surface-container-lowest p-4 md:p-6 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-[#FF5A2E]">
-							<p className="text-xs md:text-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-3 md:mb-4">
-								{t("stats.eoisSubmitted")}
-							</p>
-							<div className="flex items-end justify-between">
-								<span className="text-3xl md:text-4xl font-(family-name:--font-manrope) font-extrabold text-on-surface">
+					<div data-tour="dashboard-stats" className="tsd-stagger grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-10">
+						<div className="tsd-card tsd-card-hover p-5 md:p-6 flex flex-col justify-between gap-5">
+							<div className="flex items-center justify-between">
+								<p className="text-[11px] font-semibold text-on-surface-variant uppercase tracking-[0.12em]">
+									{t("stats.eoisSubmitted")}
+								</p>
+								<span className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+									<Icon name="tours" size={16} />
+								</span>
+							</div>
+							<div className="flex items-end justify-between gap-2">
+								<span className="text-3xl md:text-4xl font-(family-name:--font-display) text-on-surface leading-none">
 									{typeof dashData?.stats?.totalEOIs === "number"
 										? dashData.stats.totalEOIs
 										: eois.length}
 								</span>
-								<span className="text-[#FF5A2E] font-semibold flex items-center text-xs md:text-sm">
+								<span className="text-primary font-semibold flex items-center text-xs">
 									{t("stats.newThisMonth", { count: newEoisThisMonth })}
 								</span>
 							</div>
 						</div>
 
-						<div className="bg-surface-container-lowest p-4 md:p-6 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-secondary">
-							<p className="text-xs md:text-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-3 md:mb-4">
-								{t("stats.approved")}
-							</p>
-							<div className="flex items-end justify-between">
-								<span className="text-3xl md:text-4xl font-(family-name:--font-manrope) font-extrabold text-on-surface">
+						<div className="tsd-card tsd-card-hover p-5 md:p-6 flex flex-col justify-between gap-5">
+							<div className="flex items-center justify-between">
+								<p className="text-[11px] font-semibold text-on-surface-variant uppercase tracking-[0.12em]">
+									{t("stats.approved")}
+								</p>
+								<span className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
+									<Icon name="check" size={16} strokeWidth={2.25} />
+								</span>
+							</div>
+							<div className="flex items-end justify-between gap-2">
+								<span className="text-3xl md:text-4xl font-(family-name:--font-display) text-on-surface leading-none">
 									{typeof dashData?.stats?.approvedEOIs === "number"
 										? dashData.stats.approvedEOIs
 										: 0}
 								</span>
-								<span className="text-emerald-600 font-semibold text-xs md:text-sm">
+								<span className="text-emerald-500 font-semibold text-xs">
 									{t("stats.confirmed")}
 								</span>
 							</div>
 						</div>
 
-						<div className="bg-surface-container-lowest p-4 md:p-6 rounded-xl shadow-sm flex flex-col justify-between border-l-4 border-tertiary-container">
-							<p className="text-xs md:text-sm font-semibold text-on-surface-variant uppercase tracking-wider mb-3 md:mb-4">
-								{t("stats.financingStatus")}
-							</p>
-							<div className="flex items-end justify-between">
-								<span className="text-3xl md:text-4xl font-(family-name:--font-manrope) font-extrabold text-on-surface">
+						<div className="tsd-card tsd-card-hover p-5 md:p-6 flex flex-col justify-between gap-5">
+							<div className="flex items-center justify-between">
+								<p className="text-[11px] font-semibold text-on-surface-variant uppercase tracking-[0.12em]">
+									{t("stats.financingStatus")}
+								</p>
+								<span className="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-500 flex items-center justify-center">
+									<Icon name="wallet" size={16} />
+								</span>
+							</div>
+							<div className="flex items-end justify-between gap-2">
+								<span className="text-3xl md:text-4xl font-(family-name:--font-display) text-on-surface leading-none">
 									{latestFinancing
 										? `$${Math.round(Number(latestFinancing.amount_requested) / 1000)}K`
 										: "—"}
 								</span>
-								<span className="text-tertiary-container font-semibold text-xs md:text-sm capitalize">
+								<span className="text-blue-500 font-semibold text-xs capitalize">
 									{latestFinancing
 										? t(
 												`statuses.${String(latestFinancing.status ?? "pending")}`,
@@ -317,26 +363,21 @@ export default async function DashboardPage({ params }: Props) {
 							</div>
 						</div>
 
-						<div className="relative overflow-hidden bg-[#FF5A2E] p-4 md:p-6 rounded-xl shadow-sm flex flex-col justify-between">
-							<div className="absolute top-0 right-0 p-2 opacity-20">
-								<span
-									className="material-symbols-outlined text-8xl"
-									style={{ fontVariationSettings: "'FILL' 1" }}
-								>
-									electric_bolt
-								</span>
+						<div className="relative overflow-hidden p-5 md:p-6 rounded-2xl flex flex-col justify-between gap-5 bg-linear-to-br from-[#ff5a30] to-[#b83816] text-white">
+							<div className="absolute -top-6 -right-6 opacity-15 pointer-events-none">
+								<Icon name="zap" size={130} strokeWidth={1} />
 							</div>
-							<p className="text-sm font-semibold text-white uppercase tracking-wider mb-4 z-10">
+							<p className="text-[11px] font-semibold text-white/90 uppercase tracking-[0.12em] z-10">
 								{t("stats.nextShow")}
 							</p>
 							<div className="z-10">
 								{nextMilestone ? (
 									<>
-										<span className="block text-xl font-(family-name:--font-manrope) font-extrabold text-white leading-tight">
+										<span className="block text-lg font-(family-name:--font-display) leading-tight">
 											{String(nextMilestoneTour?.venue ?? "TBD")} @{" "}
 											{String(nextMilestoneTour?.city ?? "TBD")}
 										</span>
-										<span className="text-orange-50 font-medium text-sm">
+										<span className="text-orange-100 font-medium text-sm">
 											{new Date(String(nextMilestone.date)).toLocaleDateString(
 												locale,
 												{
@@ -349,10 +390,10 @@ export default async function DashboardPage({ params }: Props) {
 									</>
 								) : (
 									<>
-										<span className="block text-xl font-(family-name:--font-manrope) font-extrabold text-white leading-tight">
+										<span className="block text-lg font-(family-name:--font-display) leading-tight">
 											{t("stats.noUpcomingShows")}
 										</span>
-										<span className="text-orange-50 font-medium text-sm">
+										<span className="text-orange-100 font-medium text-sm">
 											{t("stats.submitEoiPrompt")}
 										</span>
 									</>
@@ -369,14 +410,14 @@ export default async function DashboardPage({ params }: Props) {
 								</h2>
 								<Link
 									href="/eoi"
-									className="text-sm font-semibold text-[#FF5A2E] flex items-center gap-1 hover:underline"
+									className="text-sm font-semibold text-primary flex items-center gap-1 hover:underline"
 								>
 									{t("newEoi")}{" "}
-									<span className="material-symbols-outlined text-sm">add</span>
+									<Icon name="plus" size={15} strokeWidth={2.25} />
 								</Link>
 							</div>
 
-							<div className="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+							<div className="tsd-card overflow-hidden">
 								<table className="w-full text-left border-collapse">
 									<thead>
 										<tr className="bg-surface-container-high">
@@ -394,25 +435,15 @@ export default async function DashboardPage({ params }: Props) {
 									<tbody className="divide-y divide-outline-variant/10">
 										{eois.length === 0 ? (
 											<tr>
-												<td colSpan={3} className="px-5 py-12 text-center">
-													<span className="material-symbols-outlined text-4xl text-on-surface-variant block mb-3">
-														confirmation_number
-													</span>
-													<p className="font-(family-name:--font-manrope) font-semibold text-on-surface-variant text-sm">
-														{t("table.noEois")}
-													</p>
-													<p className="text-xs text-on-surface-variant mt-1">
-														{t("table.noEoisDesc")}
-													</p>
-													<Link
-														href="/discovery"
-														className="inline-flex items-center gap-1 mt-4 text-sm font-semibold text-[#FF5A2E] hover:underline"
-													>
-														<span className="material-symbols-outlined text-sm">
-															search
-														</span>
-														{t("table.discoverArtistes")}
-													</Link>
+												<td colSpan={3}>
+													<EmptyState
+														icon="tours"
+														title={t("table.noEois")}
+														description={t("table.noEoisDesc")}
+														actionLabel={t("table.discoverArtistes")}
+														actionHref="/discovery"
+														actionIcon="search"
+													/>
 												</td>
 											</tr>
 										) : (
@@ -435,9 +466,7 @@ export default async function DashboardPage({ params }: Props) {
 																			className="object-cover"
 																		/>
 																	) : (
-																		<span className="material-symbols-outlined text-on-surface-variant">
-																			music_note
-																		</span>
+																		<Icon name="music" size={18} className="text-on-surface-variant" strokeWidth={1.5} />
 																	)}
 																</div>
 																<div>
@@ -472,23 +501,31 @@ export default async function DashboardPage({ params }: Props) {
 						{/* Widgets */}
 						<div className="space-y-8">
 							{/* Financing Widget */}
-							<div className="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+							<div className="tsd-card p-6">
 								<div className="flex items-center justify-between mb-6">
 									<h3 className="font-(family-name:--font-manrope) font-semibold text-lg">
 										{t("financingStatus")}
 									</h3>
-									<span className="material-symbols-outlined text-[#FF5A2E]">
-										account_balance
-									</span>
+									<Icon name="financing" size={20} className="text-primary" />
 								</div>
-								{latestFinancing ? (
+								{!latestFinancing ? (
+									<EmptyState
+										icon="wallet"
+										title={t("noAppsYet")}
+										description={t("noAppsDesc")}
+										actionLabel={t("exploreFinancing")}
+										actionHref="/financing"
+										actionIcon="arrow-right"
+										className="py-4"
+									/>
+								) : (
 									<div className="space-y-5">
 										<div>
 											<div className="flex justify-between text-sm mb-2">
 												<span className="text-on-surface-variant font-medium">
 													{String(latestFinancing.product ?? t("application"))}
 												</span>
-												<span className="font-semibold text-[#FF5A2E] capitalize">
+												<span className="font-semibold text-primary capitalize">
 													{t(
 														`statuses.${String(latestFinancing.status ?? "pending")}`,
 													)}
@@ -496,7 +533,7 @@ export default async function DashboardPage({ params }: Props) {
 											</div>
 											<div className="w-full bg-surface-container-high h-2 rounded-full overflow-hidden">
 												<div
-													className="bg-[#FF5A2E] h-full rounded-full"
+													className="bg-primary h-full rounded-full"
 													style={{
 														width:
 															String(latestFinancing.status) === "approved"
@@ -540,30 +577,9 @@ export default async function DashboardPage({ params }: Props) {
 										</div>
 										<Link
 											href="/financing"
-											className="block w-full py-3 bg-orange-50 text-[#FF5A2E] font-(family-name:--font-manrope) font-semibold text-sm rounded-lg hover:brightness-95 transition-all text-center"
+											className="block w-full py-3 bg-primary/10 text-primary font-semibold text-sm rounded-lg hover:bg-primary/15 transition-colors text-center"
 										>
 											{t("viewFinancingDetails")}
-										</Link>
-									</div>
-								) : (
-									<div className="text-center py-4">
-										<span className="material-symbols-outlined text-3xl text-on-surface-variant block mb-2">
-											account_balance
-										</span>
-										<p className="text-sm font-semibold text-on-surface-variant">
-											{t("noAppsYet")}
-										</p>
-										<p className="text-xs text-on-surface-variant mt-1">
-											{t("noAppsDesc")}
-										</p>
-										<Link
-											href="/financing"
-											className="inline-flex items-center gap-1 mt-4 text-sm font-semibold text-[#FF5A2E] hover:underline"
-										>
-											{t("exploreFinancing")}
-											<span className="material-symbols-outlined text-sm">
-												arrow_forward
-											</span>
 										</Link>
 									</div>
 								)}
@@ -572,19 +588,12 @@ export default async function DashboardPage({ params }: Props) {
 
 
 							{/* Activity Feed */}
-							<div className="bg-surface-container-lowest p-6 rounded-xl shadow-sm">
+							<div className="tsd-card p-6">
 								<h3 className="font-(family-name:--font-manrope) font-semibold text-lg mb-6">
 									{t("tourActivity")}
 								</h3>
 								{recentEOIs.length === 0 ? (
-									<div className="text-center py-4">
-										<span className="material-symbols-outlined text-3xl text-on-surface-variant block mb-2">
-											inbox
-										</span>
-										<p className="text-sm text-on-surface-variant font-medium">
-											{t("noActivity")}
-										</p>
-									</div>
+									<EmptyState icon="inbox" title={t("noActivity")} className="py-4" />
 								) : (
 									<div className="space-y-6 relative before:absolute before:left-2.75 before:top-2 before:bottom-2 before:w-0.5 before:bg-surface-container-high">
 										{recentEOIs.slice(0, 5).map((eoi) => {
@@ -601,7 +610,7 @@ export default async function DashboardPage({ params }: Props) {
 												eoiStatus === "approved"
 													? "bg-emerald-500"
 													: eoiStatus === "needs_revision"
-														? "bg-[#FF5A2E]"
+														? "bg-primary"
 														: "bg-tertiary-container";
 											const activityLabel = t(`activityLabels.${eoiStatus}`, {
 												artist: artistName,

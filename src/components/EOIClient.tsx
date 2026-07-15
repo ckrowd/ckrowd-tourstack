@@ -1,6 +1,7 @@
 "use client";
 
 import { useMutation, useQuery } from "@tanstack/react-query";
+import Icon from "@/components/icons";
 import { useSearchParams } from "next/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { Suspense, useMemo, useState } from "react";
@@ -231,9 +232,9 @@ function buildNotes(form: EOIForm, artist: ArtistItem): string {
 	return sections.join("\n\n");
 }
 
-const ic = "w-full rounded-2xl border border-outline-variant/20 bg-surface-container-low px-4 py-3 text-sm text-on-surface outline-none transition focus:border-[#FF5A2E] focus:ring-2 focus:ring-[#FF5A2E]/20";
+const ic = "w-full rounded-2xl border border-outline-variant/20 bg-surface-container-low px-4 py-3 text-sm text-on-surface outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20";
 const icErr = "border-rose-400 focus:border-rose-400 focus:ring-rose-400/20";
-const sc = "w-full rounded-2xl border border-outline-variant/20 bg-surface-container-low px-4 py-3 text-sm text-on-surface outline-none transition focus:border-[#FF5A2E] focus:ring-2 focus:ring-[#FF5A2E]/20 min-h-28";
+const sc = "w-full rounded-2xl border border-outline-variant/20 bg-surface-container-low px-4 py-3 text-sm text-on-surface outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/20 min-h-28";
 
 function FLabel({ htmlFor, required, children }: { htmlFor: string; required?: boolean; children: React.ReactNode }) {
 	return (
@@ -251,7 +252,7 @@ function FError({ msg }: { msg?: string }) {
 function SectionHeading({ children }: { children: React.ReactNode }) {
 	return (
 		<div className="col-span-full border-b border-outline-variant/10 pb-3 mb-1">
-			<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A2E]">{children}</p>
+			<p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">{children}</p>
 		</div>
 	);
 }
@@ -277,16 +278,16 @@ function Stepper({ current, steps }: { current: number; steps: { label: string }
 		<div className="mb-8">
 			<div className="relative flex items-center justify-between">
 				<div className="absolute left-0 top-1/2 z-0 h-0.5 w-full -translate-y-1/2 bg-surface-container-high" />
-				<div className="absolute left-0 top-1/2 z-0 h-0.5 -translate-y-1/2 bg-[#FF5A2E] transition-all duration-500" style={{ width: `${progress}%` }} />
+				<div className="absolute left-0 top-1/2 z-0 h-0.5 -translate-y-1/2 bg-primary transition-all duration-500" style={{ width: `${progress}%` }} />
 				{steps.map((step, i) => {
 					const done = i < current;
 					const active = i === current;
 					return (
 						<div key={step.label} className="relative z-10 flex flex-col items-center">
 							<div className={`flex h-8 w-8 items-center justify-center rounded-full ring-4 ring-surface-container-lowest font-semibold text-xs ${done || active ? "bg-primary text-on-primary" : "bg-surface-container-high text-on-surface-variant"}`}>
-								{done ? <span className="material-symbols-outlined text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>check</span> : i + 1}
+								{done ? <Icon name="check" size={12} /> : i + 1}
 							</div>
-							<span className={`mt-1.5 hidden sm:block text-[9px] font-semibold uppercase tracking-wider ${active ? "text-[#FF5A2E]" : done ? "text-[#FF5A2E]/60" : "text-on-surface-variant"}`}>
+							<span className={`mt-1.5 hidden sm:block text-[9px] font-semibold uppercase tracking-wider ${active ? "text-primary" : done ? "text-primary/60" : "text-on-surface-variant"}`}>
 								{step.label}
 							</span>
 						</div>
@@ -309,12 +310,12 @@ function OpportunitySelector({ opportunities, loading, selectedId, onSelect }: {
 		? opportunities.filter(a => String(a.name ?? "").toLowerCase().includes(search.toLowerCase()) || String(a.tour_name ?? "").toLowerCase().includes(search.toLowerCase()))
 		: opportunities;
 	return (
-		<div className="rounded-2xl border border-outline-variant/20 bg-surface-container-lowest shadow-sm p-5">
+		<div className="tsd-card p-5">
 			<p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-on-surface-variant mb-3">{t("selector.heading")}</p>
 			<div className="relative mb-3">
-				<span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none text-base">search</span>
+				<Icon name="search" size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none" />
 				<input type="text" placeholder={t("selector.searchPlaceholder")} value={search} onChange={e => setSearch(e.target.value)}
-					className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-outline-variant/20 bg-surface-container-low text-sm text-on-surface outline-none focus:border-[#FF5A2E] focus:ring-2 focus:ring-[#FF5A2E]/20 transition" />
+					className="w-full pl-9 pr-4 py-2.5 rounded-xl border border-outline-variant/20 bg-surface-container-low text-sm text-on-surface outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition" />
 			</div>
 			{loading ? (
 				<p className="text-sm text-on-surface-variant text-center py-4">{t("selector.loading")}</p>
@@ -327,12 +328,12 @@ function OpportunitySelector({ opportunities, loading, selectedId, onSelect }: {
 						const sel = id === selectedId;
 						return (
 							<button key={id} type="button" onClick={() => onSelect(id)}
-								className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all ${sel ? "bg-primary/10 border border-[#FF5A2E]/25" : "hover:bg-surface-container-low border border-transparent"}`}>
-								<div className={`w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center transition-colors ${sel ? "border-[#FF5A2E]" : "border-outline-variant/40"}`}>
-									{sel && <div className="w-2 h-2 rounded-full bg-[#FF5A2E]" />}
+								className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-left transition-all ${sel ? "bg-primary/10 border border-primary/25" : "hover:bg-surface-container-low border border-transparent"}`}>
+								<div className={`w-4 h-4 rounded-full border-2 shrink-0 flex items-center justify-center transition-colors ${sel ? "border-primary" : "border-outline-variant/40"}`}>
+									{sel && <div className="w-2 h-2 rounded-full bg-primary" />}
 								</div>
 								<div className="flex-1 min-w-0">
-									<p className={`text-sm font-semibold truncate ${sel ? "text-[#FF5A2E]" : "text-on-surface"}`}>{String(a.name ?? "")}</p>
+									<p className={`text-sm font-semibold truncate ${sel ? "text-primary" : "text-on-surface"}`}>{String(a.name ?? "")}</p>
 									{a.tour_name && <p className="text-xs text-on-surface-variant truncate">{String(a.tour_name)}</p>}
 								</div>
 								{a.genre && <span className="text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant shrink-0">{String(a.genre)}</span>}
@@ -354,9 +355,9 @@ function OpportunityPanel({ artist, locale }: { artist: ArtistItem; locale: stri
 		? `$${Math.round(Number(artist.fee_min) / 1000)}k – $${Math.round(Number(artist.fee_max) / 1000)}k USD` : null;
 	const markets = Array.isArray(artist.markets) ? (artist.markets as string[]).join(", ") : String(artist.markets ?? "");
 	return (
-		<div className="rounded-2xl border border-outline-variant/20 bg-surface-container-lowest shadow-sm p-5 space-y-4">
+		<div className="tsd-card p-5 space-y-4">
 			<div>
-				<p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-[#FF5A2E] mb-1">{t("tourPanel.heading")}</p>
+				<p className="text-[10px] font-semibold uppercase tracking-[0.28em] text-primary mb-1">{t("tourPanel.heading")}</p>
 				<h2 className="text-lg font-(family-name:--font-manrope) font-semibold text-on-surface leading-tight">{String(artist.tour_name ?? artist.name ?? "")}</h2>
 				<p className="mt-0.5 text-sm font-semibold text-on-surface-variant">{String(artist.name ?? "")}</p>
 			</div>
@@ -636,14 +637,14 @@ function EOIPageContent() {
 		return (
 			<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-12">
 				<div className="flex min-h-[calc(100vh-5rem)] items-center justify-center">
-					<div className="w-full max-w-lg rounded-3xl border border-outline-variant/20 bg-surface-container-lowest p-8 text-center shadow-sm md:p-12">
+					<div className="tsd-card w-full max-w-lg p-8 text-center md:p-12">
 						<div className="mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 mx-auto">
-							<span className="material-symbols-outlined text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+							<Icon name="check-circle" size={36} />
 						</div>
 						<h1 className="text-3xl font-semibold tracking-tight text-on-surface font-(family-name:--font-manrope)">{t("success.title")}</h1>
 						<p className="mt-4 text-sm leading-6 text-on-surface-variant">{t("success.description", { artist: String(artist.name ?? "") })}</p>
 						<div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-							<Link href="/dashboard" className="inline-flex items-center justify-center rounded-full bg-[#FF5A2E] px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90">
+							<Link href="/dashboard" className="inline-flex items-center justify-center rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white transition hover:opacity-90">
 								{t("success.viewDashboard")}
 							</Link>
 							<Link href="/discovery" className="inline-flex items-center justify-center rounded-full border border-outline-variant/20 px-6 py-3 text-sm font-semibold text-on-surface-variant transition hover:bg-surface-container-low">
@@ -661,7 +662,7 @@ function EOIPageContent() {
 			<PageTour pageId="eoi" />
 			<div className="w-full">
 				<header className="mb-8">
-					<span className="mb-2 block text-xs font-semibold uppercase tracking-[0.3em] text-[#FF5A2E]">{t("hero.platform")}</span>
+					<span className="mb-2 block text-xs font-semibold uppercase tracking-[0.3em] text-primary">{t("hero.platform")}</span>
 					<h1 className="text-3xl font-semibold tracking-tight text-on-surface md:text-4xl font-(family-name:--font-manrope)">{t("hero.title")}</h1>
 					<p className="mt-3 text-base leading-relaxed text-on-surface-variant">{t("hero.description")}</p>
 				</header>
@@ -677,11 +678,11 @@ function EOIPageContent() {
 					<div data-tour="eoi-form" className="lg:col-span-8">
 						{!artist ? (
 							<div className="rounded-3xl border-2 border-dashed border-outline-variant/20 bg-surface-container-lowest/50 p-12 text-center">
-								<span className="material-symbols-outlined text-5xl text-on-surface-variant/50 block mb-4">confirmation_number</span>
+								<Icon name="tours" size={44} className="text-on-surface-variant/50 block mb-4" />
 								<p className="text-base font-semibold text-on-surface-variant">{t("selector.selectPrompt")}</p>
 							</div>
 						) : (
-							<section className="rounded-3xl border border-outline-variant/20 bg-surface-container-lowest p-6 shadow-sm md:p-8">
+							<section className="tsd-card p-6 md:p-8">
 								<Stepper current={step} steps={STEPS} />
 
 								<form noValidate autoComplete="off" onSubmit={handleSubmit} className="space-y-8">
@@ -852,12 +853,12 @@ function EOIPageContent() {
 												return (
 													<div key={`venue-${i}`} className="rounded-2xl border border-outline-variant/20 p-5">
 														<div className="mb-4 flex items-center justify-between">
-															<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A2E]">
+															<p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary">
 																{t("form.step4.venueSection")} {form.venues.length > 1 ? i + 1 : ""}
 															</p>
 															{form.venues.length > 1 && (
 																<button type="button" onClick={() => removeVenue(i)} className="flex items-center gap-1 text-xs font-semibold text-rose-500 hover:text-rose-600">
-																	<span className="material-symbols-outlined text-sm">delete</span>
+																	<Icon name="trash" size={14} />
 																	{t("form.step4.removeVenue")}
 																</button>
 															)}
@@ -891,7 +892,7 @@ function EOIPageContent() {
 																		<option value="outdoor">{t("form.step4.venueType.outdoor")}</option>
 																		<option value="hybrid">{t("form.step4.venueType.hybrid")}</option>
 																	</select>
-																	<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-lg">expand_more</span>
+																	<Icon name="chevron-down" size={18} className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant" />
 																</div>
 																<FError msg={ve.type} />
 															</div>
@@ -904,7 +905,7 @@ function EOIPageContent() {
 																		<option value="shortlisted">{t("form.step4.venueStatus.shortlisted")}</option>
 																		<option value="pending">{t("form.step4.venueStatus.pending")}</option>
 																	</select>
-																	<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-lg">expand_more</span>
+																	<Icon name="chevron-down" size={18} className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant" />
 																</div>
 																<FError msg={ve.status} />
 															</div>
@@ -922,8 +923,8 @@ function EOIPageContent() {
 													</div>
 												);
 											})}
-											<button type="button" onClick={addVenue} className="flex items-center gap-2 rounded-full border border-dashed border-outline-variant/40 px-5 py-3 text-sm font-semibold text-on-surface-variant transition hover:border-[#FF5A2E] hover:text-[#FF5A2E]">
-												<span className="material-symbols-outlined text-base">add</span>
+											<button type="button" onClick={addVenue} className="flex items-center gap-2 rounded-full border border-dashed border-outline-variant/40 px-5 py-3 text-sm font-semibold text-on-surface-variant transition hover:border-primary hover:text-primary">
+												<Icon name="plus" size={16} />
 												{t("form.step4.addVenue")}
 											</button>
 										</div>
@@ -1004,7 +1005,7 @@ function EOIPageContent() {
 											<SectionHeading>{t("form.step6.insuranceSection")}</SectionHeading>
 											<div className="sm:col-span-2">
 												<div className="flex items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4">
-													<span className="material-symbols-outlined text-emerald-600 shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
+													<Icon name="check-circle" size={18} className="text-emerald-600 shrink-0" />
 													<div>
 														<p className="text-sm font-semibold text-on-surface">{t("form.step6.insuranceCompulsoryTitle")}</p>
 														<p className="mt-1 text-xs leading-relaxed text-on-surface-variant">{t("form.step6.insuranceCompulsoryText")}</p>
@@ -1018,11 +1019,11 @@ function EOIPageContent() {
 														const selection = form.insuranceSelections.find(sel => sel.product === product);
 														const checked = !!selection;
 														return (
-															<div key={product} className={`rounded-2xl border px-4 py-3 transition ${checked ? "border-[#FF5A2E]/30 bg-primary/10" : "border-outline-variant/20 bg-surface-container-low hover:bg-surface-container"}`}>
+															<div key={product} className={`rounded-2xl border px-4 py-3 transition ${checked ? "border-primary/30 bg-primary/10" : "border-outline-variant/20 bg-surface-container-low hover:bg-surface-container"}`}>
 																<label className="flex items-center gap-2.5 cursor-pointer">
 																	<input type="checkbox" className="sr-only" checked={checked} onChange={() => toggleInsuranceProduct(product)} />
-																	<div className={`w-4 h-4 rounded border-2 shrink-0 flex items-center justify-center ${checked ? "bg-[#FF5A2E] border-[#FF5A2E]" : "border-outline-variant/40"}`}>
-																		{checked && <span className="material-symbols-outlined text-white text-[10px]" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>}
+																	<div className={`w-4 h-4 rounded border-2 shrink-0 flex items-center justify-center ${checked ? "bg-primary border-primary" : "border-outline-variant/40"}`}>
+																		{checked && <Icon name="check" size={10} className="text-white" />}
 																	</div>
 																	<span className="text-xs font-semibold text-on-surface-variant">{t(`form.step6.insuranceProducts.${INSURANCE_PRODUCT_I18N_KEY[product]}`)}</span>
 																</label>
@@ -1067,17 +1068,17 @@ function EOIPageContent() {
 															<option value="equity">{t("form.step6.financingStructure.equity")}</option>
 															<option value="advance">{t("form.step6.financingStructure.advance")}</option>
 														</select>
-														<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-lg">expand_more</span>
+														<Icon name="chevron-down" size={18} className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant" />
 													</div>
 												</div>
 												<div className="sm:col-span-2">
 													<p className="mb-2 text-[10px] font-semibold uppercase tracking-[0.22em] text-on-surface-variant">{t("form.step6.financingPurpose.label")}</p>
 													<div className="grid sm:grid-cols-3 gap-2">
 														{(["artistFee", "production", "marketing", "operations", "other"] as const).map(key => (
-															<label key={key} className={`flex items-center gap-2.5 rounded-xl border px-4 py-3 cursor-pointer transition ${form.financingPurpose.includes(key) ? "border-[#FF5A2E]/30 bg-primary/10" : "border-outline-variant/20 bg-surface-container-low hover:bg-surface-container"}`}>
+															<label key={key} className={`flex items-center gap-2.5 rounded-xl border px-4 py-3 cursor-pointer transition ${form.financingPurpose.includes(key) ? "border-primary/30 bg-primary/10" : "border-outline-variant/20 bg-surface-container-low hover:bg-surface-container"}`}>
 																<input type="checkbox" className="sr-only" tabIndex={form.needsFinancing ? 0 : -1} checked={form.financingPurpose.includes(key)} onChange={() => togglePurpose(key)} />
-																<div className={`w-4 h-4 rounded border-2 shrink-0 flex items-center justify-center ${form.financingPurpose.includes(key) ? "bg-[#FF5A2E] border-[#FF5A2E]" : "border-outline-variant/40"}`}>
-																	{form.financingPurpose.includes(key) && <span className="material-symbols-outlined text-white text-[10px]" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>}
+																<div className={`w-4 h-4 rounded border-2 shrink-0 flex items-center justify-center ${form.financingPurpose.includes(key) ? "bg-primary border-primary" : "border-outline-variant/40"}`}>
+																	{form.financingPurpose.includes(key) && <Icon name="check" size={10} className="text-white" />}
 																</div>
 																<span className="text-xs font-semibold text-on-surface-variant">{t(`form.step6.financingPurpose.${key}`)}</span>
 															</label>
@@ -1132,12 +1133,12 @@ function EOIPageContent() {
 										<div className="space-y-6">
 											{/* Documents */}
 											<div>
-												<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A2E] mb-3">{t("form.step7.documentsSection")}</p>
+												<p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary mb-3">{t("form.step7.documentsSection")}</p>
 												<p className="text-xs text-on-surface-variant mb-4">{t("form.step7.documentsNote")}</p>
 												<div className="space-y-2.5">
 													<div className="flex items-center gap-3 rounded-2xl border border-status-approved/30 bg-status-approved/10 px-5 py-4">
 														<div className="w-5 h-5 rounded border-2 shrink-0 flex items-center justify-center bg-status-approved border-status-approved">
-															<span className="material-symbols-outlined text-on-primary text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>
+															<Icon name="check" size={12} className="text-on-primary" />
 														</div>
 														<span className="text-sm font-semibold text-on-surface">{t("form.step7.hasCACDocuments")}</span>
 														<span className="ml-auto text-[10px] font-bold uppercase tracking-wider text-status-approved">{t("form.step7.required")}</span>
@@ -1146,7 +1147,7 @@ function EOIPageContent() {
 														<label key={key} className={`flex items-center gap-3 rounded-2xl border px-5 py-4 cursor-pointer transition ${form[key] ? "border-status-approved/30 bg-status-approved/10" : "border-outline-variant/20 bg-surface-container-low hover:bg-surface-container"}`}>
 															<input type="checkbox" className="sr-only" checked={form[key]} onChange={e => set(key, e.target.checked)} />
 															<div className={`w-5 h-5 rounded border-2 shrink-0 flex items-center justify-center ${form[key] ? "bg-status-approved border-status-approved" : "border-outline-variant/40"}`}>
-																{form[key] && <span className="material-symbols-outlined text-on-primary text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>}
+																{form[key] && <Icon name="check" size={12} className="text-on-primary" />}
 															</div>
 															<span className="text-sm font-semibold text-on-surface">{t(`form.step7.${key}`)}</span>
 														</label>
@@ -1156,7 +1157,7 @@ function EOIPageContent() {
 
 											{/* Review summary */}
 											<div>
-												<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A2E] mb-3">{t("form.step7.reviewSection")}</p>
+												<p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary mb-3">{t("form.step7.reviewSection")}</p>
 												<div className="rounded-2xl border border-outline-variant/20 bg-surface-container-low p-5 divide-y divide-outline-variant/10">
 													<ReviewRow label={t("review.artist")} value={String(artist.name ?? "")} />
 													<ReviewRow label={t("review.tour")} value={String(artist.tour_name ?? "")} />
@@ -1175,7 +1176,7 @@ function EOIPageContent() {
 
 											{/* Declaration */}
 											<div>
-												<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A2E] mb-3">{t("form.step7.declarationSection")}</p>
+												<p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary mb-3">{t("form.step7.declarationSection")}</p>
 												<div className="grid gap-5 sm:grid-cols-2">
 													<div>
 														<FLabel htmlFor="s7-repname" required>{t("form.step7.authorizedRepName.label")}</FLabel>
@@ -1197,8 +1198,8 @@ function EOIPageContent() {
 													<p className="text-sm text-on-surface-variant leading-relaxed mb-4">{t("form.step7.declarationText")}</p>
 													<label className={`flex items-start gap-3 cursor-pointer`}>
 														<input type="checkbox" className="sr-only" checked={form.declarationConfirmed} onChange={e => { set("declarationConfirmed", e.target.checked); if (errors.declaration) setErrors(p => { const n = { ...p }; delete n.declaration; return n; }); }} />
-														<div className={`w-5 h-5 rounded border-2 shrink-0 mt-0.5 flex items-center justify-center ${form.declarationConfirmed ? "bg-[#FF5A2E] border-[#FF5A2E]" : errors.declaration ? "border-rose-400" : "border-outline-variant/40"}`}>
-															{form.declarationConfirmed && <span className="material-symbols-outlined text-white text-xs" style={{ fontVariationSettings: "'FILL' 1" }}>check</span>}
+														<div className={`w-5 h-5 rounded border-2 shrink-0 mt-0.5 flex items-center justify-center ${form.declarationConfirmed ? "bg-primary border-primary" : errors.declaration ? "border-rose-400" : "border-outline-variant/40"}`}>
+															{form.declarationConfirmed && <Icon name="check" size={12} className="text-white" />}
 														</div>
 														<span className="text-sm font-semibold text-on-surface">{t("form.step7.declarationAgree")}</span>
 													</label>

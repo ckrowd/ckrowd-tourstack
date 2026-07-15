@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Icon from "@/components/icons";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useParams, useRouter } from "next/navigation";
@@ -138,7 +139,7 @@ export default function ManageTicketEventPage() {
 	if (eventQuery.isLoading) {
 		return (
 			<div className="flex justify-center py-16">
-				<div className="w-6 h-6 border-2 border-[#FF5A2E] border-t-transparent rounded-full animate-spin" />
+				<div className="w-6 h-6 border-2 border-primary border-t-transparent rounded-full animate-spin" />
 			</div>
 		);
 	}
@@ -161,7 +162,7 @@ export default function ManageTicketEventPage() {
 
 			<div className="flex items-start justify-between mb-6">
 				<div>
-					<p className="text-xs font-black uppercase tracking-widest text-[#FF5A2E] mb-1">{t("badge")}</p>
+					<p className="text-xs font-black uppercase tracking-widest text-primary mb-1">{t("badge")}</p>
 					<h1 className="text-2xl font-black">{String(ev.title)}</h1>
 				</div>
 				<span className={`mt-1 px-3 py-1 rounded-full text-xs font-bold ${statusColor[status] ?? ""}`}>
@@ -178,7 +179,7 @@ export default function ManageTicketEventPage() {
 						onClick={() => setTab(tabKey)}
 						className={`px-5 py-3 text-sm font-semibold border-b-2 transition ${
 							tab === tabKey
-								? "border-[#FF5A2E] text-[#FF5A2E]"
+								? "border-primary text-primary"
 								: "border-transparent text-on-surface-variant hover:text-on-surface"
 						}`}
 					>
@@ -190,7 +191,7 @@ export default function ManageTicketEventPage() {
 			{/* Overview Tab */}
 			{tab === "overview" && (
 				<div className="space-y-6">
-					<div className="bg-surface-container-low rounded-2xl p-5 border border-outline-variant space-y-3">
+					<div className="tsd-card p-5 space-y-3">
 						{[
 							{ label: t("overview.date"), value: ev.event_date ? new Date(String(ev.event_date)).toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" }) : "—" },
 							{ label: t("overview.location"), value: [ev.venue, ev.city].filter(Boolean).join(", ") || "—" },
@@ -220,7 +221,7 @@ export default function ManageTicketEventPage() {
 													setSelectedTourId(tourData ? String(tourData.id) : "");
 													setEditingTour(true);
 												}}
-												className="text-xs text-[#FF5A2E] font-semibold hover:underline"
+												className="text-xs text-primary font-semibold hover:underline"
 											>
 												{t("overview.changeTour")}
 											</button>
@@ -229,7 +230,7 @@ export default function ManageTicketEventPage() {
 								) : (
 									<div className="flex items-center gap-2">
 										<select
-											className="border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-[#FF5A2E]"
+											className="border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-primary"
 											value={selectedTourId}
 											onChange={(e) => setSelectedTourId(e.target.value)}
 										>
@@ -244,7 +245,7 @@ export default function ManageTicketEventPage() {
 											type="button"
 											disabled={updateTourMutation.isPending}
 											onClick={() => updateTourMutation.mutate(selectedTourId || null)}
-											className="bg-[#FF5A2E] text-white font-bold text-xs px-4 py-2 rounded-xl hover:opacity-90 disabled:opacity-50 transition"
+											className="bg-primary text-white font-bold text-xs px-4 py-2 rounded-xl hover:opacity-90 disabled:opacity-50 transition"
 										>
 											{updateTourMutation.isPending ? t("tiers.saving") : t("overview.saveTour")}
 										</button>
@@ -268,7 +269,7 @@ export default function ManageTicketEventPage() {
 					</div>
 
 					{status === "published" && (
-						<div className="bg-surface-container-low rounded-2xl p-5 border border-outline-variant">
+						<div className="tsd-card p-5">
 							<p className="text-xs font-bold uppercase tracking-wide text-on-surface-variant mb-2">
 								{t("overview.shareLink")}
 							</p>
@@ -279,11 +280,9 @@ export default function ManageTicketEventPage() {
 								<button
 									type="button"
 									onClick={() => { void handleCopyLink(); }}
-									className="shrink-0 flex items-center gap-2 bg-[#FF5A2E] text-white font-bold text-xs px-4 py-2 rounded-xl hover:opacity-90 transition"
+									className="shrink-0 flex items-center gap-2 bg-primary text-white font-bold text-xs px-4 py-2 rounded-xl hover:opacity-90 transition"
 								>
-									<span className="material-symbols-outlined text-sm">
-										{linkCopied ? "check" : "content_copy"}
-									</span>
+									<Icon name={linkCopied ? "check" : "copy"} size={14} />
 									{linkCopied ? t("overview.linkCopied") : t("overview.copyLink")}
 								</button>
 							</div>
@@ -296,7 +295,7 @@ export default function ManageTicketEventPage() {
 								type="button"
 								disabled={publishMutation.isPending}
 								onClick={() => publishMutation.mutate()}
-								className="bg-[#FF5A2E] text-white font-bold text-sm px-6 py-2.5 rounded-xl hover:opacity-90 disabled:opacity-50 transition"
+								className="bg-primary text-white font-bold text-sm px-6 py-2.5 rounded-xl hover:opacity-90 disabled:opacity-50 transition"
 							>
 								{publishMutation.isPending ? t("overview.publishing") : t("overview.publish")}
 							</button>
@@ -330,7 +329,7 @@ export default function ManageTicketEventPage() {
 					)}
 
 					{tiers.length > 0 && (
-						<div className="bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant">
+						<div className="tsd-card overflow-hidden">
 							<table className="w-full text-sm">
 								<thead>
 									<tr className="border-b border-outline-variant bg-surface-container">
@@ -387,12 +386,12 @@ export default function ManageTicketEventPage() {
 
 					{/* Add tier form */}
 					{addingTier && (
-						<div className="bg-surface-container-low rounded-2xl p-4 border border-outline-variant space-y-3">
+						<div className="tsd-card p-4 space-y-3">
 							<div className="grid grid-cols-3 gap-3">
 								<div>
 									<label className="block text-xs font-semibold mb-1">{t("tiers.name")}</label>
 									<input
-										className="w-full border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-[#FF5A2E]"
+										className="w-full border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-primary"
 										value={newTierName}
 										onChange={(e) => setNewTierName(e.target.value)}
 									/>
@@ -400,7 +399,7 @@ export default function ManageTicketEventPage() {
 								<div>
 									<label className="block text-xs font-semibold mb-1">{t("tiers.price")}</label>
 									<FormattedNumberInput
-										className="w-full border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-[#FF5A2E]"
+										className="w-full border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-primary"
 										value={newTierPrice}
 										onChange={(v) => setNewTierPrice(v)}
 									/>
@@ -408,7 +407,7 @@ export default function ManageTicketEventPage() {
 								<div>
 									<label className="block text-xs font-semibold mb-1">{t("tiers.capacity")}</label>
 									<FormattedNumberInput
-										className="w-full border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-[#FF5A2E]"
+										className="w-full border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-primary"
 										value={newTierCap}
 										onChange={(v) => setNewTierCap(v)}
 									/>
@@ -422,7 +421,7 @@ export default function ManageTicketEventPage() {
 									type="button"
 									disabled={!newTierName || !newTierPrice || addTierMutation.isPending}
 									onClick={() => addTierMutation.mutate()}
-									className="bg-[#FF5A2E] text-white font-bold text-xs px-4 py-2 rounded-xl hover:opacity-90 disabled:opacity-50 transition"
+									className="bg-primary text-white font-bold text-xs px-4 py-2 rounded-xl hover:opacity-90 disabled:opacity-50 transition"
 								>
 									{addTierMutation.isPending ? t("tiers.saving") : t("tiers.add")}
 								</button>
@@ -434,7 +433,7 @@ export default function ManageTicketEventPage() {
 						<button
 							type="button"
 							onClick={() => setAddingTier(true)}
-							className="w-full border-2 border-dashed border-outline-variant rounded-xl py-3 text-sm font-semibold text-on-surface-variant hover:border-[#FF5A2E] hover:text-[#FF5A2E] transition"
+							className="w-full border-2 border-dashed border-outline-variant rounded-xl py-3 text-sm font-semibold text-on-surface-variant hover:border-primary hover:text-primary transition"
 						>
 							+ {t("tiers.add")}
 						</button>
@@ -447,14 +446,14 @@ export default function ManageTicketEventPage() {
 				<div>
 					{purchasesQuery.isLoading && (
 						<div className="flex justify-center py-8">
-							<div className="w-5 h-5 border-2 border-[#FF5A2E] border-t-transparent rounded-full animate-spin" />
+							<div className="w-5 h-5 border-2 border-primary border-t-transparent rounded-full animate-spin" />
 						</div>
 					)}
 					{!purchasesQuery.isLoading && purchases.length === 0 && (
 						<p className="text-sm text-on-surface-variant py-6">{t("buyers.noBuyers")}</p>
 					)}
 					{purchases.length > 0 && (
-						<div className="bg-surface-container-low rounded-2xl overflow-hidden border border-outline-variant">
+						<div className="tsd-card overflow-hidden">
 							<table className="w-full text-sm">
 								<thead>
 									<tr className="border-b border-outline-variant bg-surface-container">

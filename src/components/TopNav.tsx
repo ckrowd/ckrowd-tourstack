@@ -1,6 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import Icon from "@/components/icons";
 import Image from "next/image";
 import { useFormatter, useLocale, useNow, useTranslations } from "next-intl";
 import { useCallback, useSyncExternalStore, useState } from "react";
@@ -84,22 +85,22 @@ export default function TopNav() {
 		{ icon: string; color: string; label: string }
 	> = {
 		approved: {
-			icon: "task_alt",
+			icon: "check-circle",
 			color: "text-emerald-500",
 			label: t("notif.statusApproved"),
 		},
 		rejected: {
-			icon: "cancel",
+			icon: "x",
 			color: "text-red-500",
 			label: t("notif.statusRejected"),
 		},
 		needs_revision: {
-			icon: "edit_note",
+			icon: "edit",
 			color: "text-[#FF5A2E]",
 			label: t("notif.statusNeedsRevision"),
 		},
 		pending_review: {
-			icon: "schedule",
+			icon: "clock",
 			color: "text-blue-500",
 			label: t("notif.statusPendingReview"),
 		},
@@ -108,7 +109,7 @@ export default function TopNav() {
 	const allNotifications = (eoisQuery.data?.data ?? []).map((eoi) => {
 		const status = String(eoi.status ?? "pending_review");
 		const meta = statusMeta[status] ?? {
-			icon: "notifications",
+			icon: "bell",
 			color: "text-slate-400",
 			label: status.replace(/_/g, " "),
 		};
@@ -162,97 +163,97 @@ export default function TopNav() {
 					: "/profile";
 
 	const dashboardNavItems = [
-		{ label: tSideNav("dashboard"), icon: "dashboard", href: "/dashboard" },
+		{ label: tSideNav("dashboard"), icon: "overview", href: "/dashboard" },
 		{
 			label: tSideNav("tours"),
-			icon: "confirmation_number",
+			icon: "tours",
 			href: "/tours",
 		},
 		{
 			label: tSideNav("onboarding"),
-			icon: "how_to_reg",
+			icon: "onboarding",
 			href: "/onboarding",
 		},
 		{
 			label: tSideNav("stakeholders"),
-			icon: "groups",
+			icon: "stakeholders",
 			href: "/stakeholders",
 		},
-		{ label: tSideNav("discovery"), icon: "explore", href: "/discovery" },
+		{ label: tSideNav("discovery"), icon: "discovery", href: "/discovery" },
 		{
 			label: tSideNav("financing"),
-			icon: "account_balance",
+			icon: "financing",
 			href: "/financing",
 		},
-		{ label: tSideNav("insurance"), icon: "shield", href: "/insurance" },
+		{ label: tSideNav("insurance"), icon: "insurance", href: "/insurance" },
 		{
 			label: tSideNav("tickets"),
-			icon: "confirmation_number",
+			icon: "tours",
 			href: "/dashboard/tickets",
 		},
 		{
 			label: tSideNav("aiTools"),
-			icon: "auto_awesome",
+			icon: "ai",
 			href: "/tour-intelligence",
 		},
 	];
 
 	const adminNavItems = [
-		{ label: tAdminSideNav("overview"), icon: "dashboard", href: "/admin" },
+		{ label: tAdminSideNav("overview"), icon: "overview", href: "/admin" },
 		{
 			label: tAdminSideNav("artists"),
-			icon: "album",
+			icon: "music",
 			href: "/admin/artists",
 		},
 		{
 			label: tAdminSideNav("tours"),
-			icon: "confirmation_number",
+			icon: "tours",
 			href: "/admin/tours",
 		},
 		{ label: tAdminSideNav("eoi"), icon: "send", href: "/admin/eoi" },
 		{
 			label: tAdminSideNav("financing"),
-			icon: "account_balance_wallet",
+			icon: "wallet",
 			href: "/admin/financing",
 		},
 		{
 			label: tAdminSideNav("insurance"),
-			icon: "shield",
+			icon: "insurance",
 			href: "/admin/insurance",
 		},
 		{
 			label: tAdminSideNav("claims"),
-			icon: "health_and_safety",
+			icon: "shield-check",
 			href: "/admin/claims",
 		},
 		{
 			label: tAdminSideNav("tickets"),
-			icon: "confirmation_number",
+			icon: "tours",
 			href: "/admin/tickets",
 		},
 		{
 			label: tAdminSideNav("payments"),
-			icon: "payments",
+			icon: "wallet",
 			href: "/admin/payments",
 		},
 		{
 			label: tAdminSideNav("payouts"),
-			icon: "account_balance",
+			icon: "financing",
 			href: "/admin/payouts",
 		},
 		{
 			label: tAdminSideNav("directory"),
-			icon: "groups",
+			icon: "stakeholders",
 			href: "/admin/directory",
 		},
 		{
 			label: tAdminSideNav("submissions"),
-			icon: "folder_open",
+			icon: "folder",
 			href: "/admin/submissions",
 		},
 		{
 			label: tAdminSideNav("reports"),
-			icon: "bar_chart",
+			icon: "chart",
 			href: "/admin/reports",
 		},
 		{
@@ -265,22 +266,22 @@ export default function TopNav() {
 	const financingAdminNavItems = [
 		{
 			label: tFinancingAdminSideNav("overview"),
-			icon: "dashboard",
+			icon: "overview",
 			href: "/financing-admin",
 		},
 		{
 			label: tFinancingAdminSideNav("applications"),
-			icon: "request_quote",
+			icon: "file-text",
 			href: "/financing-admin/applications",
 		},
 		{
 			label: tFinancingAdminSideNav("partners"),
-			icon: "account_balance",
+			icon: "financing",
 			href: "/financing-admin/partners",
 		},
 		{
 			label: tFinancingAdminSideNav("settings"),
-			icon: "tune",
+			icon: "sliders",
 			href: "/financing-admin/settings",
 		},
 	];
@@ -288,17 +289,17 @@ export default function TopNav() {
 	const insuranceAdminNavItems = [
 		{
 			label: tInsuranceAdminSideNav("overview"),
-			icon: "shield",
+			icon: "insurance",
 			href: "/insurance-admin",
 		},
 		{
 			label: tInsuranceAdminSideNav("applications"),
-			icon: "description",
+			icon: "file-text",
 			href: "/insurance-admin/applications",
 		},
 		{
 			label: tInsuranceAdminSideNav("claims"),
-			icon: "assignment_late",
+			icon: "alert-triangle",
 			href: "/insurance-admin/claims",
 		},
 		{
@@ -311,7 +312,7 @@ export default function TopNav() {
 	const artmgmtNavItems = [
 		{ label: tArtmgmtSideNav("artists"), icon: "star", href: "/artmgmt" },
 		{ label: tArtmgmtSideNav("submissions"), icon: "send", href: "/artmgmt/submissions" },
-		{ label: tArtmgmtSideNav("reports"), icon: "bar_chart", href: "/artmgmt/reports" },
+		{ label: tArtmgmtSideNav("reports"), icon: "chart", href: "/artmgmt/reports" },
 	];
 
 	const mobileNavItems = isAdminPortal
@@ -375,12 +376,7 @@ export default function TopNav() {
 									href="/tour-intelligence"
 									className="relative flex items-center justify-center gap-2 w-full h-full bg-surface rounded-[9.5px] px-3 py-1.5 transition-colors group-hover:bg-primary/5"
 								>
-									<span
-										className="material-symbols-outlined text-sm text-[#FF5A2E]"
-										style={{ fontVariationSettings: "'FILL' 1" }}
-									>
-										auto_awesome
-									</span>
+									<Icon name="ai" size={14} className="text-[#FF5A2E]" />
 									<span className="font-(family-name:--font-manrope) font-semibold text-xs text-on-surface-variant whitespace-nowrap group-hover:text-primary transition-colors">
 										{t("tourIntelligence")}
 									</span>
@@ -398,9 +394,7 @@ export default function TopNav() {
 								aria-expanded={langOpen}
 							>
 								{locale.toUpperCase()}
-								<span className="material-symbols-outlined text-[14px] leading-none">
-									expand_more
-								</span>
+								<Icon name="chevron-down" size={14} className="leading-none" />
 							</button>
 							{langOpen && (
 								<>
@@ -430,9 +424,7 @@ export default function TopNav() {
 											>
 												{l.toUpperCase()}
 												{locale === l && (
-													<span className="material-symbols-outlined text-[12px] leading-none">
-														check
-													</span>
+													<Icon name="check" size={12} className="leading-none" />
 												)}
 											</button>
 										))}
@@ -454,9 +446,7 @@ export default function TopNav() {
 									onClick={() => setNotifOpen((v) => !v)}
 									className="p-2 hover:bg-surface-container-low rounded-lg transition-all active:scale-95 relative"
 								>
-									<span className="material-symbols-outlined text-on-surface-variant">
-										notifications
-									</span>
+									<Icon name="bell" size={20} className="text-on-surface-variant" />
 									{hasUnread && (
 										<span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#FF5A2E] rounded-full" />
 									)}
@@ -473,9 +463,7 @@ export default function TopNav() {
 								className="p-2 hover:bg-surface-container-low rounded-lg transition-all active:scale-95 hidden lg:flex items-center justify-center"
 								title="Page guide"
 							>
-								<span className="material-symbols-outlined text-primary text-[20px]">
-									travel_explore
-								</span>
+								<Icon name="discovery" size={20} className="text-primary" />
 							</button>
 						)}
 
@@ -511,9 +499,7 @@ export default function TopNav() {
 												onClick={() => setProfileOpen(false)}
 												className="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-on-surface-variant hover:bg-surface-container-low transition-colors font-(family-name:--font-manrope)"
 											>
-												<span className="material-symbols-outlined text-base text-on-surface-variant">
-													person
-												</span>
+												<Icon name="profile" size={16} className="text-on-surface-variant" />
 												{tCommon("profile")}
 											</Link>
 											{!isArtmgmtPortal && (
@@ -522,9 +508,7 @@ export default function TopNav() {
 													onClick={() => setProfileOpen(false)}
 													className="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-on-surface-variant hover:bg-surface-container-low transition-colors font-(family-name:--font-manrope)"
 												>
-													<span className="material-symbols-outlined text-base text-on-surface-variant">
-														settings
-													</span>
+													<Icon name="settings" size={16} className="text-on-surface-variant" />
 													{tCommon("settings")}
 												</Link>
 											)}
@@ -536,9 +520,7 @@ export default function TopNav() {
 												}}
 												className="flex items-center gap-3 w-full px-4 py-3 text-sm font-semibold text-on-surface-variant hover:bg-surface-container-low transition-colors font-(family-name:--font-manrope)"
 											>
-												<span className="material-symbols-outlined text-base text-on-surface-variant">
-													logout
-												</span>
+												<Icon name="logout" size={16} className="text-on-surface-variant" />
 												{tCommon("signOut")}
 											</button>
 										</div>
@@ -568,7 +550,7 @@ export default function TopNav() {
 							aria-label="Open navigation menu"
 							aria-expanded={mobileMenuOpen}
 						>
-							<span className="material-symbols-outlined">menu</span>
+							<Icon name="menu" size={20} />
 						</button>
 					</div>
 				</div>
@@ -620,7 +602,7 @@ export default function TopNav() {
 								className="p-2 rounded-lg hover:bg-surface-container-low transition-colors text-on-surface-variant"
 								aria-label="Close navigation menu"
 							>
-								<span className="material-symbols-outlined">close</span>
+								<Icon name="x" size={20} />
 							</button>
 						</div>
 
@@ -662,16 +644,7 @@ export default function TopNav() {
 											: "text-on-surface-variant hover:bg-surface-container-low"
 									}`}
 								>
-									<span
-										className="material-symbols-outlined"
-										style={{
-											fontVariationSettings: isNavActive(item.href)
-												? "'FILL' 1"
-												: "'FILL' 0",
-										}}
-									>
-										{item.icon}
-									</span>
+									<Icon name={item.icon} size={20} />
 									<span>{item.label}</span>
 								</Link>
 							))}
@@ -687,7 +660,7 @@ export default function TopNav() {
 											onClick={() => setMobileMenuOpen(false)}
 											className={`flex items-center gap-3 px-5 py-3 mx-2 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm transition-all ${pathname === "/" ? "bg-primary/10 text-primary" : "text-on-surface-variant hover:bg-surface-container-low"}`}
 										>
-											<span className="material-symbols-outlined">home</span>
+											<Icon name="overview" size={20} />
 											<span>{t("home")}</span>
 										</Link>
 										<Link
@@ -695,7 +668,7 @@ export default function TopNav() {
 											onClick={() => setMobileMenuOpen(false)}
 											className={`flex items-center gap-3 px-5 py-3 mx-2 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm transition-all ${pathname === "/join" ? "bg-primary/10 text-primary" : "text-on-surface-variant hover:bg-surface-container-low"}`}
 										>
-											<span className="material-symbols-outlined">group_add</span>
+											<Icon name="user-plus" size={20} />
 											<span>{t("join")}</span>
 										</Link>
 									</>
@@ -715,9 +688,7 @@ export default function TopNav() {
 										}}
 										className="flex items-center gap-3 w-full px-4 py-3 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
 									>
-										<span className="material-symbols-outlined text-on-surface-variant">
-											notifications
-										</span>
+										<Icon name="bell" size={20} className="text-on-surface-variant" />
 										<span>{t("notifications")}</span>
 										{hasUnread && (
 											<span className="ml-auto min-w-5 h-5 px-1 rounded-full bg-[#FF5A2E] text-white text-[10px] flex items-center justify-center font-semibold">
@@ -732,9 +703,7 @@ export default function TopNav() {
 										onClick={() => setMobileMenuOpen(false)}
 										className="flex items-center gap-3 px-4 py-3 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
 									>
-										<span className="material-symbols-outlined text-on-surface-variant">
-											person
-										</span>
+										<Icon name="profile" size={20} className="text-on-surface-variant" />
 										<span>{tCommon("profile")}</span>
 									</Link>
 
@@ -745,9 +714,7 @@ export default function TopNav() {
 											onClick={() => setMobileMenuOpen(false)}
 											className="flex items-center gap-3 px-4 py-3 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
 										>
-											<span className="material-symbols-outlined text-on-surface-variant">
-												settings
-											</span>
+											<Icon name="settings" size={20} className="text-on-surface-variant" />
 											<span>{tCommon("settings")}</span>
 										</Link>
 									)}
@@ -761,7 +728,7 @@ export default function TopNav() {
 										}}
 										className="flex items-center gap-3 w-full px-4 py-3 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm text-red-500 hover:bg-red-50 transition-colors"
 									>
-										<span className="material-symbols-outlined">logout</span>
+										<Icon name="logout" size={20} />
 										<span>{tCommon("signOut")}</span>
 									</button>
 								</>
@@ -771,9 +738,7 @@ export default function TopNav() {
 									onClick={() => setMobileMenuOpen(false)}
 									className="flex items-center justify-center gap-2 w-full py-3 bg-[#FF5A2E] text-white rounded-xl font-semibold text-sm font-(family-name:--font-manrope) hover:opacity-90 transition-opacity"
 								>
-									<span className="material-symbols-outlined text-sm">
-										login
-									</span>
+									<Icon name="logout" size={14} />
 									{tCommon("signIn")}
 								</Link>
 							)}
@@ -813,7 +778,7 @@ export default function TopNav() {
 								className="text-on-surface-variant hover:text-on-surface transition-colors"
 								aria-label={t("closeNotifications")}
 							>
-								<span className="material-symbols-outlined text-sm">close</span>
+								<Icon name="x" size={14} />
 							</button>
 						</div>
 						{notifications.length === 0 ? (
@@ -830,11 +795,7 @@ export default function TopNav() {
 												onClick={() => setNotifOpen(false)}
 												className={`flex items-start gap-3 px-5 py-4 transition-colors ${n.unread ? "bg-primary/5 hover:bg-primary/10" : "hover:bg-surface-container-low"}`}
 											>
-												<span
-													className={`material-symbols-outlined text-lg mt-0.5 shrink-0 ${n.color}`}
-												>
-													{n.icon}
-												</span>
+												<Icon name={n.icon} size={18} className={`mt-0.5 shrink-0 ${n.color}`} />
 												<div className="flex-1 min-w-0">
 													<p className={`text-sm text-on-surface truncate ${n.unread ? "font-semibold" : "font-semibold"}`}>
 														{n.title}

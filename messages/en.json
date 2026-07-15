@@ -1551,6 +1551,8 @@
       "title": "Welcome - complete your profile to get started",
       "description": "Fill in your company information, contact details, and country. These are required before you can access the rest of the platform."
     },
+    "tabs": {"company": "Company", "public": "Public profile", "business": "Business & team", "banking": "Banking"},
+    "journey": {"progress": "{done} of {total} sections complete", "back": "Back", "continue": "Continue", "ready": "All sections complete — ready to save"},
     "logo": {
       "label": "Company Logo / Profile Picture",
       "hint": "Required. Click to upload. Square image recommended, at least 200 x 200 px.",
@@ -3454,6 +3456,10 @@
     "profile": "Profile",
     "settings": "Settings",
     "startNewTour": "Start New Tour",
+    "groupTourOps": "Tour operations",
+    "groupEcosystem": "Ecosystem",
+    "groupCapital": "Capital",
+    "groupAccount": "Account",
     "profileRequired": "Complete your profile first",
     "aiTools": "Tour Intelligence",
     "tickets": "Ticketing"

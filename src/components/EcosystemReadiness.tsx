@@ -1,14 +1,15 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import Icon from "@/components/icons";
 import type { EcosystemReadiness as Readiness, ReadinessKey } from "@/lib/eligibility";
 import { Link } from "@/i18n/routing";
 
 const ICONS: Record<ReadinessKey, string> = {
-	service: "business_center",
-	workforce: "engineering",
-	artmgmt: "queue_music",
-	insurance: "security",
+	service: "briefcase",
+	workforce: "wrench",
+	artmgmt: "music",
+	insurance: "insurance",
 };
 
 /**
@@ -27,24 +28,21 @@ export default function EcosystemReadiness({
 
 	return (
 		<section
-			className={`rounded-2xl border shadow-sm overflow-hidden ${
+			className={`rounded-2xl border overflow-hidden ${
 				eligible
-					? "border-emerald-200 bg-emerald-50/40"
-					: "border-[#FF5A2E]/20 bg-[#FF5A2E]/5"
+					? "border-emerald-500/25 bg-emerald-500/5"
+					: "border-primary/20 bg-primary/5"
 			}`}
 		>
 			<div className="p-5 md:p-6">
 				<div className="flex items-start justify-between gap-4 mb-4">
 					<div>
 						<div className="flex items-center gap-2 mb-1">
-							<span
-								className={`material-symbols-outlined text-lg ${
-									eligible ? "text-emerald-600" : "text-[#FF5A2E]"
-								}`}
-								style={{ fontVariationSettings: "'FILL' 1" }}
-							>
-								{eligible ? "verified" : "hub"}
-							</span>
+							<Icon
+								name={eligible ? "check-circle" : "share"}
+								size={18}
+								className={eligible ? "text-emerald-500 shrink-0" : "text-primary shrink-0"}
+							/>
 							<h2 className="font-(family-name:--font-manrope) font-extrabold text-on-surface">
 								{eligible ? t("eligibleTitle") : t("title")}
 							</h2>
@@ -56,7 +54,7 @@ export default function EcosystemReadiness({
 					<div className="text-right shrink-0">
 						<p
 							className={`text-2xl font-black font-(family-name:--font-manrope) ${
-								eligible ? "text-emerald-600" : "text-[#FF5A2E]"
+								eligible ? "text-emerald-500" : "text-primary"
 							}`}
 						>
 							{completionPct}%
@@ -71,7 +69,7 @@ export default function EcosystemReadiness({
 				<div className="h-2 w-full rounded-full bg-surface-container-high overflow-hidden mb-5">
 					<div
 						className={`h-full rounded-full transition-all ${
-							eligible ? "bg-emerald-500" : "bg-[#FF5A2E]"
+							eligible ? "bg-emerald-500" : "bg-primary"
 						}`}
 						style={{ width: `${completionPct}%` }}
 					/>
@@ -86,14 +84,11 @@ export default function EcosystemReadiness({
 							key={item.key}
 							className="flex items-center gap-2.5 rounded-xl bg-surface-container-lowest border border-outline-variant/10 px-3 py-2.5"
 						>
-							<span
-								className={`material-symbols-outlined text-base shrink-0 ${
-									item.done ? "text-emerald-600" : "text-on-surface-variant/40"
-								}`}
-								style={item.done ? { fontVariationSettings: "'FILL' 1" } : undefined}
-							>
-								{item.done ? "check_circle" : ICONS[item.key]}
-							</span>
+							<Icon
+								name={item.done ? "check-circle" : ICONS[item.key]}
+								size={16}
+								className={`shrink-0 ${item.done ? "text-emerald-500" : "text-on-surface-variant/40"}`}
+							/>
 							<span className="text-sm font-medium text-on-surface truncate">
 								{t(`items.${item.key}`)}
 							</span>
@@ -110,9 +105,9 @@ export default function EcosystemReadiness({
 					<div className="mt-5 flex flex-col sm:flex-row gap-2.5">
 						<Link
 							href="/stakeholders"
-							className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#FF5A2E] text-white text-sm font-semibold hover:opacity-90 transition-opacity"
+							className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-white text-sm font-semibold hover:opacity-90 transition-opacity"
 						>
-							<span className="material-symbols-outlined text-sm">share</span>
+							<Icon name="share" size={15} />
 							{t("ctaInvite")}
 						</Link>
 						{!readiness.hasInsurance && (
@@ -120,7 +115,7 @@ export default function EcosystemReadiness({
 								href="/insurance"
 								className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-outline-variant/30 text-sm font-semibold text-on-surface hover:bg-surface-container-high transition-colors"
 							>
-								<span className="material-symbols-outlined text-sm">security</span>
+								<Icon name="insurance" size={15} />
 								{t("ctaInsurance")}
 							</Link>
 						)}

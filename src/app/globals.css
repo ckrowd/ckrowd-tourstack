@@ -216,6 +216,205 @@
 		border-color var(--default-transition-duration) var(--default-transition-timing-function);
 }
 
+/* ── Dashboard redesign theme scope ──────────────────────────────────────
+   Remaps the semantic design-system tokens to the TourStack landing
+   palette (.tslp) for the promoter dashboard only. Pure value remap:
+   every existing bg-surface / text-on-surface / border-outline-variant
+   call site re-skins with no markup or logic changes, and the admin /
+   financing-admin / insurance-admin / artmgmt portals keep the original
+   tokens. Light is the default; `.dark` (set by next-themes on <html>)
+   flips the same names — note cards sit LIGHTER than the canvas in dark
+   (#161616 on #0a0a0a), unlike the old token set. */
+.ts-dash {
+	/* accent — landing orange */
+	--color-primary: #ff5a30;
+	--color-primary-container: #ff5a30;
+	--color-surface-tint: #ff5a30;
+
+	/* canvas + card hierarchy — warm paper neutrals from .tslp.light */
+	--color-background: #f5f4f2;
+	--color-surface: #f5f4f2;
+	--color-surface-2: #ececea;
+	--color-surface-dim: #e4e3e0;
+	--color-surface-bright: #ffffff;
+	--color-surface-variant: #ececea;
+	--color-surface-container-lowest: #ffffff;
+	--color-surface-container-low: #f5f4f2;
+	--color-surface-container: #ececea;
+	--color-surface-container-high: #e4e3e0;
+	--color-surface-container-highest: #dcdbd8;
+
+	--color-on-surface: #0c0c0c;
+	--color-on-surface-variant: #5c5c5c;
+	--color-on-background: #0c0c0c;
+
+	--color-outline: #8a8a86;
+	--color-outline-variant: rgba(12, 12, 12, 0.1);
+
+	/* landing motion curves — shared fluid-system easings */
+	--ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+	--ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+	/* type — Geist everywhere; Archivo Black (--font-display) reserved for
+	   display numerals / hero headings applied per-component. Remapping
+	   --font-manrope covers the many font-(family-name:--font-manrope)
+	   call sites without touching them. */
+	--font-manrope: var(--font-geist);
+	--font-headline: var(--font-geist), system-ui, sans-serif;
+	--font-body: var(--font-geist), system-ui, sans-serif;
+	--font-label: var(--font-geist), system-ui, sans-serif;
+	font-family: var(--font-geist), system-ui, sans-serif;
+	background: var(--color-surface);
+	color: var(--color-on-surface);
+}
+
+.dark .ts-dash {
+	--color-background: #0a0a0a;
+	--color-surface: #0a0a0a;
+	--color-surface-2: #202020;
+	--color-surface-dim: #050505;
+	--color-surface-bright: #161616;
+	--color-surface-variant: #262626;
+	--color-surface-container-lowest: #161616;
+	--color-surface-container-low: #1c1c1c;
+	--color-surface-container: #202020;
+	--color-surface-container-high: #262626;
+	--color-surface-container-highest: #2e2e2e;
+
+	--color-on-surface: #ffffff;
+	--color-on-surface-variant: #a8a8a8;
+	--color-on-background: #ffffff;
+
+	--color-outline: #4a4a4a;
+	--color-outline-variant: rgba(255, 255, 255, 0.08);
+}
+
+/* ── Dashboard card language (Linear × Vercel synthesis) ─────────────────
+   .tsd-card       — layered surface: hairline border + inner top-edge light
+                     (Linear's lit-edge) on dark; crisp 1px + soft shadow on
+                     light (Vercel). 12px radius — deliberately tighter than
+                     the old rounded-2xl bubble cards.
+   .tsd-card-hover — border brightens + depth grows on hover (no jumpy lift).
+   .tsd-card-glow  — radial accent bloom from the top edge, for ONE hero
+                     card per view.
+   .tsd-foot       — Vercel-style muted footer strip inside a card (actions
+                     live here, separated by a hairline). */
+.ts-dash .tsd-card {
+	background: var(--color-surface-container-lowest);
+	border: 1px solid var(--color-outline-variant);
+	border-radius: 12px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+	transition:
+		border-color 0.2s var(--ease-out),
+		box-shadow 0.2s var(--ease-out);
+}
+.dark .ts-dash .tsd-card {
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+.ts-dash .tsd-card-hover:hover {
+	border-color: color-mix(in srgb, var(--color-on-surface) 18%, transparent);
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+}
+.dark .ts-dash .tsd-card-hover:hover {
+	box-shadow:
+		inset 0 1px 0 rgba(255, 255, 255, 0.09),
+		0 8px 24px rgba(0, 0, 0, 0.35);
+}
+.ts-dash .tsd-card-glow {
+	position: relative;
+	overflow: hidden;
+}
+.ts-dash .tsd-card-glow::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(
+		70% 55% at 50% 0%,
+		color-mix(in srgb, var(--color-primary) 14%, transparent),
+		transparent 70%
+	);
+	pointer-events: none;
+}
+.ts-dash .tsd-foot {
+	border-top: 1px solid var(--color-outline-variant);
+	background: color-mix(in srgb, var(--color-surface-container-low) 55%, transparent);
+	border-radius: 0 0 11px 11px;
+}
+
+/* ── Dashboard fluid-motion utilities (scoped to .ts-dash) ───────────────
+   Server-rendered pages get entrance motion via CSS only: .tsd-rise on a
+   single element, .tsd-stagger on a container to cascade its children.
+   .tsd-empty-icon gives empty-state glyphs a slow idle float so empty
+   screens feel alive. All respect prefers-reduced-motion. */
+@keyframes tsd-rise {
+	from {
+		opacity: 0;
+		transform: translateY(12px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+@keyframes tsd-float {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-6px);
+	}
+}
+@keyframes tsd-ring {
+	from {
+		transform: scale(0.85);
+		opacity: 0.6;
+	}
+	to {
+		transform: scale(1.35);
+		opacity: 0;
+	}
+}
+.ts-dash .tsd-rise,
+.ts-dash .tsd-stagger > * {
+	animation: tsd-rise 0.55s var(--ease-out) both;
+}
+.ts-dash .tsd-stagger > *:nth-child(2) {
+	animation-delay: 0.06s;
+}
+.ts-dash .tsd-stagger > *:nth-child(3) {
+	animation-delay: 0.12s;
+}
+.ts-dash .tsd-stagger > *:nth-child(4) {
+	animation-delay: 0.18s;
+}
+.ts-dash .tsd-stagger > *:nth-child(5) {
+	animation-delay: 0.24s;
+}
+.ts-dash .tsd-stagger > *:nth-child(6) {
+	animation-delay: 0.3s;
+}
+.ts-dash .tsd-stagger > *:nth-child(7) {
+	animation-delay: 0.36s;
+}
+.ts-dash .tsd-stagger > *:nth-child(n + 8) {
+	animation-delay: 0.42s;
+}
+.ts-dash .tsd-empty-icon {
+	animation: tsd-float 3.4s ease-in-out infinite;
+}
+.ts-dash .tsd-empty-ring {
+	animation: tsd-ring 2.6s var(--ease-out) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+	.ts-dash .tsd-rise,
+	.ts-dash .tsd-stagger > *,
+	.ts-dash .tsd-empty-icon,
+	.ts-dash .tsd-empty-ring {
+		animation: none;
+	}
+}
+
 /* Onboarding wizard step transition (motivated: signals step change). */
 @keyframes funnel-step-in {
 	from {

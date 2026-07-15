@@ -1,6 +1,7 @@
 "use client";
 
 import type { ComponentType, SVGProps } from "react";
+import Icon from "@/components/icons";
 import { useEffect, useRef, useState } from "react";
 import * as Flags from "country-flag-icons/react/3x2";
 
@@ -83,9 +84,7 @@ export default function CurrencySelect({
 						<span className="text-on-surface-variant">{placeholder}</span>
 					)}
 				</span>
-				<span className="material-symbols-outlined text-base text-on-surface-variant shrink-0">
-					expand_more
-				</span>
+				<Icon name="chevron-down" size={16} className="text-on-surface-variant shrink-0" />
 			</button>
 			{open && (
 				<div
@@ -114,7 +113,7 @@ export default function CurrencySelect({
 			)}
 			{hasError && (
 				<p className="text-xs text-rose-600 font-medium mt-1 flex items-center gap-1">
-					<span className="material-symbols-outlined text-sm">error</span>
+					<Icon name="alert-circle" size={14} />
 					Required
 				</p>
 			)}

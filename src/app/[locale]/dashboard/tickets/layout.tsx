@@ -24,7 +24,7 @@ export default async function TicketsDashboardLayout({
 	}
 
 	return (
-		<div className="bg-surface text-on-surface">
+		<div className="ts-dash bg-surface text-on-surface">
 			<TopNav />
 			<div className="flex pt-16">
 				<SideNav />

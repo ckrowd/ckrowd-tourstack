@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import Icon from "@/components/icons";
 import { useEffect, useId, useState } from "react";
 
 type Faq = { q: string; a: string };
@@ -37,9 +38,7 @@ export default function FinancingFaq({ faqs }: { faqs: Faq[] }) {
 				onClick={() => setOpen(true)}
 				className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-semibold hover:bg-surface-container-high transition-colors"
 			>
-				<span className="material-symbols-outlined text-base text-[#FF5A2E]">
-					help
-				</span>
+				<Icon name="help-circle" size={16} className="text-primary" />
 				{t("faqButton")}
 			</button>
 
@@ -78,7 +77,7 @@ export default function FinancingFaq({ faqs }: { faqs: Faq[] }) {
 								aria-label={t("faqClose")}
 								className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors"
 							>
-								<span className="material-symbols-outlined">close</span>
+								<Icon name="x" size={18} />
 							</button>
 						</div>
 
@@ -99,13 +98,7 @@ export default function FinancingFaq({ faqs }: { faqs: Faq[] }) {
 											<span className="font-(family-name:--font-manrope) font-semibold text-sm text-on-surface">
 												{f.q}
 											</span>
-											<span
-												className={`material-symbols-outlined text-on-surface-variant shrink-0 transition-transform ${
-													isOpen ? "rotate-180" : ""
-												}`}
-											>
-												expand_more
-											</span>
+											<Icon name="chevron-down" size={18} className={`text-on-surface-variant shrink-0 transition-transform ${ isOpen ? "rotate-180" : "" }`} />
 										</button>
 										{isOpen && (
 											<p className="px-4 pb-4 text-sm text-on-surface-variant leading-relaxed">

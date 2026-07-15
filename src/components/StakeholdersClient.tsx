@@ -1,6 +1,7 @@
 "use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import Icon from "@/components/icons";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { useCallback, useEffect, useState } from "react";
 import Loader from "@/components/Loader";
@@ -64,9 +65,7 @@ function SubmissionRow({
 						dateStyle: "medium",
 					})}
 				</span>
-				<span className="material-symbols-outlined text-on-surface-variant text-base">
-					chevron_right
-				</span>
+				<Icon name="chevron-right" size={16} className="text-on-surface-variant" />
 			</div>
 		</button>
 	);
@@ -138,7 +137,7 @@ function SubmissionModal({
 						aria-label={t("submissions.close")}
 						className="text-on-surface-variant hover:text-on-surface transition-colors shrink-0"
 					>
-						<span className="material-symbols-outlined">close</span>
+						<Icon name="x" size={18} />
 					</button>
 				</div>
 				<div className="px-6 py-5">
@@ -175,9 +174,7 @@ function SubmissionModal({
 					</dl>
 					{proofFileId && (
 						<div className="mt-6 rounded-xl border border-outline-variant/15 bg-surface-container-low px-4 py-3 flex items-center gap-3">
-							<span className="material-symbols-outlined text-[#FF5A2E] shrink-0">
-								attach_file
-							</span>
+							<Icon name="file-text" size={18} className="text-primary shrink-0" />
 							<div className="min-w-0 flex-1">
 								<p className="text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant">
 									{t("submissions.proofFile")}
@@ -188,9 +185,9 @@ function SubmissionModal({
 								href={`/api/download/${encodeURIComponent(proofFileId)}`}
 								target="_blank"
 								rel="noopener noreferrer"
-								className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[#FF5A2E] text-white text-xs font-semibold hover:opacity-90 transition-opacity shrink-0"
+								className="inline-flex items-center gap-1.5 px-3 py-2 rounded-lg bg-primary text-white text-xs font-semibold hover:opacity-90 transition-opacity shrink-0"
 							>
-								<span className="material-symbols-outlined text-sm">download</span>
+								<Icon name="download" size={14} />
 								{t("submissions.download")}
 							</a>
 						</div>
@@ -293,7 +290,7 @@ export default function StakeholdersClient() {
 					{/* Header */}
 					<header className="flex flex-col md:flex-row md:items-end justify-between gap-4">
 						<div>
-							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
+							<span className="text-xs font-semibold uppercase tracking-widest text-primary block mb-2">
 								{t("header.platform")}
 							</span>
 							<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -309,18 +306,18 @@ export default function StakeholdersClient() {
 							disabled={exportMutation.isPending}
 							className="flex items-center gap-2 px-5 py-2.5 bg-surface-container-lowest border border-outline-variant/30 rounded-xl text-sm font-semibold text-on-surface hover:bg-surface-container transition-colors disabled:opacity-50 shrink-0"
 						>
-							<span className="material-symbols-outlined text-sm">download</span>
+							<Icon name="download" size={14} />
 							{exportMutation.isPending ? t("header.exporting") : t("header.export")}
 						</button>
 					</header>
 
 					{/* ── Invite Ecosystem banner ──────────────────────────────── */}
 					<section data-tour="stakeholders-invite" className="rounded-2xl overflow-hidden shadow-md">
-						<div className="bg-gradient-to-r from-[#FF5A2E] to-[#cc4826] p-6 text-white">
+						<div className="bg-gradient-to-r from-primary to-[#cc4826] p-6 text-white">
 							<div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
 								<div className="flex items-start gap-4">
 									<div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
-										<span className="material-symbols-outlined text-white">share</span>
+										<Icon name="share" size={18} className="text-white" />
 									</div>
 									<div>
 										<h2 className="font-(family-name:--font-manrope) text-lg font-extrabold mb-1">
@@ -336,11 +333,9 @@ export default function StakeholdersClient() {
 										<button
 											type="button"
 											onClick={() => { void handleCopyUniversalUrl(); }}
-											className="flex items-center gap-2 px-5 py-2.5 bg-white text-[#FF5A2E] rounded-xl text-sm font-semibold hover:bg-white/90 transition-colors shadow-sm"
+											className="flex items-center gap-2 px-5 py-2.5 bg-white text-primary rounded-xl text-sm font-semibold hover:bg-white/90 transition-colors shadow-sm"
 										>
-											<span className="material-symbols-outlined text-sm">
-												{copied ? "check" : "content_copy"}
-											</span>
+											<Icon name={copied ? "check" : "copy"} size={14} />
 											{copied ? t("inviteEcosystem.copied") : t("inviteEcosystem.copyLink")}
 										</button>
 									) : (
@@ -348,11 +343,9 @@ export default function StakeholdersClient() {
 											type="button"
 											disabled={generateEcosystemMutation.isPending || linksQuery.isLoading}
 											onClick={() => generateEcosystemMutation.mutate(missingCategories)}
-											className="flex items-center gap-2 px-5 py-2.5 bg-white text-[#FF5A2E] rounded-xl text-sm font-semibold hover:bg-white/90 transition-colors shadow-sm disabled:opacity-60"
+											className="flex items-center gap-2 px-5 py-2.5 bg-white text-primary rounded-xl text-sm font-semibold hover:bg-white/90 transition-colors shadow-sm disabled:opacity-60"
 										>
-											<span className="material-symbols-outlined text-sm">
-												{generateEcosystemMutation.isPending ? "pending" : "link"}
-											</span>
+											<Icon name={generateEcosystemMutation.isPending ? "loader" : "link"} size={14} className={generateEcosystemMutation.isPending ? "animate-spin" : undefined} />
 											{generateEcosystemMutation.isPending
 												? t("inviteEcosystem.generating")
 												: t("inviteEcosystem.generateAll")}
@@ -374,12 +367,12 @@ export default function StakeholdersClient() {
 					</section>
 
 					{/* ── Submissions ──────────────────────────────────────────── */}
-					<section data-tour="stakeholders-submissions" className="bg-surface-container-lowest rounded-2xl shadow-sm border border-outline-variant/10">
+					<section data-tour="stakeholders-submissions" className="tsd-card">
 						<div className="p-6 border-b border-outline-variant/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 							<h2 className="font-(family-name:--font-manrope) text-xl font-semibold flex items-center gap-2">
 								{t("submissions.title")}
 								{submissions.length > 0 && (
-									<span className="px-2 py-0.5 text-xs font-semibold bg-[#FF5A2E] text-white rounded-full">
+									<span className="px-2 py-0.5 text-xs font-semibold bg-primary text-white rounded-full">
 										{submissions.length}
 									</span>
 								)}
@@ -392,7 +385,7 @@ export default function StakeholdersClient() {
 										onClick={() => setCategoryFilter(key)}
 										className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
 											categoryFilter === key
-												? "bg-[#FF5A2E] text-white"
+												? "bg-primary text-white"
 												: "bg-surface-container-high text-on-surface-variant hover:bg-surface-container"
 										}`}
 									>
@@ -411,9 +404,7 @@ export default function StakeholdersClient() {
 							<Loader />
 						) : filtered.length === 0 ? (
 							<div className="text-center py-16 px-6">
-								<span className="material-symbols-outlined text-5xl text-on-surface-variant/30 block mb-3">
-									group_add
-								</span>
+								<Icon name="user-plus" size={44} className="text-on-surface-variant/30 block mb-3" />
 								<p className="text-sm font-semibold text-on-surface-variant">
 									{t("submissions.none")}
 								</p>

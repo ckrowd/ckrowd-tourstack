@@ -1,6 +1,7 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
+import Icon from "@/components/icons";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { registerCrewMember } from "@/app/actions";
@@ -246,7 +247,7 @@ const defaultForm: FormData = {
 /* ─────────────────────────── shared UI ─────────────────────────── */
 
 const inputClass =
-	"w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A2E] transition-all text-on-surface outline-none text-sm";
+	"w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-primary transition-all text-on-surface outline-none text-sm";
 
 function Label({
 	htmlFor,
@@ -293,17 +294,17 @@ function RadioGroup({
 						onClick={() => onChange(opt)}
 						className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold border transition-all text-left ${
 							checked
-								? "bg-[#FF5A2E]/10 border-[#FF5A2E] text-[#FF5A2E]"
-								: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A2E]/40"
+								? "bg-primary/10 border-primary text-primary"
+								: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-primary/40"
 						}`}
 					>
 						<span
 							className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 border-2 transition-colors ${
-								checked ? "border-[#FF5A2E]" : "border-current"
+								checked ? "border-primary" : "border-current"
 							}`}
 						>
 							{checked && (
-								<span className="w-2.5 h-2.5 rounded-full bg-[#FF5A2E] block" />
+								<span className="w-2.5 h-2.5 rounded-full bg-primary block" />
 							)}
 						</span>
 						{opt}
@@ -327,7 +328,7 @@ function Stepper({
 			<div className="flex justify-between items-center relative">
 				<div className="absolute top-1/2 left-0 w-full h-0.5 bg-surface-variant -translate-y-1/2 z-0" />
 				<div
-					className="absolute top-1/2 left-0 h-0.5 bg-[#FF5A2E] -translate-y-1/2 z-0 transition-all duration-500"
+					className="absolute top-1/2 left-0 h-0.5 bg-primary -translate-y-1/2 z-0 transition-all duration-500"
 					style={{ width: `${progress}%` }}
 				/>
 				{steps.map((step, i) => {
@@ -341,17 +342,12 @@ function Stepper({
 							<div
 								className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ring-4 ring-surface-container-low ${
 									done || active
-										? "bg-[#FF5A2E] text-white"
+										? "bg-primary text-white"
 										: "bg-surface-variant text-on-surface-variant"
 								}`}
 							>
 								{done ? (
-									<span
-										className="material-symbols-outlined text-sm"
-										style={{ fontVariationSettings: "'FILL' 1" }}
-									>
-										check
-									</span>
+									<Icon name="check" size={14} />
 								) : (
 									i + 1
 								)}
@@ -359,9 +355,9 @@ function Stepper({
 							<span
 								className={`mt-2 text-[10px] font-semibold uppercase tracking-wider text-center leading-tight ${
 									active
-										? "text-[#FF5A2E]"
+										? "text-primary"
 										: done
-											? "text-[#FF5A2E]/70"
+											? "text-primary/70"
 											: "text-on-surface-variant"
 								}`}
 							>
@@ -421,18 +417,7 @@ function ScoreGauge({
 				<div
 					className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold ${tier.bg} ${tier.text}`}
 				>
-					<span
-						className="material-symbols-outlined text-sm"
-						style={{ fontVariationSettings: "'FILL' 1" }}
-					>
-						{score >= 86
-							? "military_tech"
-							: score >= 71
-								? "verified"
-								: score >= 51
-									? "badge"
-									: "person"}
-					</span>
+					<Icon name={score >= 86 ? "medal" : score >= 71 ? "check-circle" : score >= 51 ? "id-card" : "profile"} size={14} />
 					{t("tier")} {tier.tier} — {tier.label}
 				</div>
 			</div>
@@ -502,18 +487,7 @@ export default function WorkforceClient() {
 						className={`rounded-2xl p-5 border mb-6 text-left ${tier.bg} ${tier.border}`}
 					>
 						<div className="flex items-center gap-2 mb-3">
-							<span
-								className="material-symbols-outlined text-sm"
-								style={{ fontVariationSettings: "'FILL' 1" }}
-							>
-								{wcs.total >= 86
-									? "military_tech"
-									: wcs.total >= 71
-										? "verified"
-										: wcs.total >= 51
-											? "badge"
-											: "person"}
-							</span>
+							<Icon name={wcs.total >= 86 ? "medal" : wcs.total >= 71 ? "check-circle" : wcs.total >= 51 ? "id-card" : "profile"} size={14} />
 							<h4 className={`text-sm font-semibold ${tier.text}`}>
 								{t("score.tier")} {tier.tier} — {tier.label}
 							</h4>
@@ -524,24 +498,14 @@ export default function WorkforceClient() {
 									key={p}
 									className={`flex items-start gap-2 text-xs ${tier.text}`}
 								>
-									<span
-										className="material-symbols-outlined text-xs mt-0.5"
-										style={{ fontVariationSettings: "'FILL' 1" }}
-									>
-										check_circle
-									</span>
+									<Icon name="check-circle" size={12} className="mt-0.5" />
 									{p}
 								</li>
 							))}
 						</ul>
 						{tier.aya && (
 							<div className="mt-3 pt-3 border-t border-current/20 flex items-center gap-2">
-								<span
-									className="material-symbols-outlined text-xs"
-									style={{ fontVariationSettings: "'FILL' 1" }}
-								>
-									star
-								</span>
+								<Icon name="star" size={12} />
 								<span className={`text-xs font-semibold ${tier.text}`}>
 									{t("success.ayaPilot")}: {tier.aya}
 								</span>
@@ -552,7 +516,7 @@ export default function WorkforceClient() {
 					<div className="flex flex-col sm:flex-row gap-4 justify-center">
 						<Link
 							href="/dashboard"
-							className="px-8 py-3 bg-[#FF5A2E] text-white rounded-xl font-semibold shadow-lg shadow-[#FF5A2E]/20 hover:scale-[1.02] transition-transform"
+							className="px-8 py-3 bg-primary text-white rounded-xl font-semibold shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform"
 						>
 							{t("success.viewDashboard")}
 						</Link>
@@ -579,7 +543,7 @@ export default function WorkforceClient() {
 				<header className="mb-10">
 					<div className="flex items-start justify-between gap-4">
 						<div>
-							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-3">
+							<span className="text-xs font-semibold uppercase tracking-widest text-primary block mb-3">
 								{t("header.platform")}
 							</span>
 							<h1 className="text-4xl font-extrabold tracking-tight text-on-surface mb-2">
@@ -611,7 +575,7 @@ export default function WorkforceClient() {
 					</div>
 
 					<div className="mt-4 flex items-center gap-2 text-xs text-on-surface-variant">
-						<span className="material-symbols-outlined text-sm">timer</span>
+						<Icon name="clock" size={14} />
 						{t("timer.completion")} &nbsp;·&nbsp; {t("timer.process")}
 					</div>
 				</header>
@@ -619,7 +583,7 @@ export default function WorkforceClient() {
 				<Stepper current={step} steps={STEPS} />
 
 				{/* Form Card */}
-				<div className="bg-surface-container-lowest rounded-2xl p-8 md:p-10 shadow-sm border border-outline-variant/10">
+				<div className="tsd-card p-8 md:p-10">
 					<form
 						onSubmit={(e) => {
 							e.preventDefault();
@@ -649,9 +613,7 @@ export default function WorkforceClient() {
 						{step === 0 && (
 							<div className="space-y-8">
 								<div className="flex items-center gap-2 mb-2">
-									<span className="material-symbols-outlined text-[#FF5A2E]">
-										person
-									</span>
+									<Icon name="profile" size={18} className="text-primary" />
 									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 										{t("personal.title")}
 									</h3>
@@ -790,9 +752,7 @@ export default function WorkforceClient() {
 						{step === 1 && (
 							<div className="space-y-10">
 								<div className="flex items-center gap-2 mb-2">
-									<span className="material-symbols-outlined text-[#FF5A2E]">
-										engineering
-									</span>
+									<Icon name="wrench" size={18} className="text-primary" />
 									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 										{t("role.title")}
 									</h3>
@@ -823,24 +783,19 @@ export default function WorkforceClient() {
 													}}
 													className={`flex items-center gap-2 px-3 py-2.5 rounded-xl text-xs font-semibold border transition-all text-left ${
 														checked
-															? "bg-[#FF5A2E]/10 border-[#FF5A2E] text-[#FF5A2E]"
-															: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A2E]/40"
+															? "bg-primary/10 border-primary text-primary"
+															: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-primary/40"
 													}`}
 												>
 													<span
 														className={`w-4 h-4 rounded flex-shrink-0 flex items-center justify-center border-2 ${
 															checked
-																? "bg-[#FF5A2E] border-[#FF5A2E]"
+																? "bg-primary border-primary"
 																: "border-current"
 														}`}
 													>
 														{checked && (
-															<span
-																className="material-symbols-outlined text-white"
-																style={{ fontSize: 10 }}
-															>
-																check
-															</span>
+															<Icon name="check" size={18} className="text-white" />
 														)}
 													</span>
 													{role}
@@ -882,13 +837,8 @@ export default function WorkforceClient() {
 										/>
 									</div>
 									{form.yearsExperience && (
-										<div className="mt-3 flex items-center gap-2 text-xs text-[#FF5A2E] font-semibold">
-											<span
-												className="material-symbols-outlined text-sm"
-												style={{ fontVariationSettings: "'FILL' 1" }}
-											>
-												add_circle
-											</span>
+										<div className="mt-3 flex items-center gap-2 text-xs text-primary font-semibold">
+											<Icon name="plus-circle" size={14} />
 											+{calcWCS(form, t).expPts} {t("shared.basePoints")}
 										</div>
 									)}
@@ -910,13 +860,8 @@ export default function WorkforceClient() {
 										/>
 									</div>
 									{form.largestEvent && (
-										<div className="mt-3 flex items-center gap-2 text-xs text-[#FF5A2E] font-semibold">
-											<span
-												className="material-symbols-outlined text-sm"
-												style={{ fontVariationSettings: "'FILL' 1" }}
-											>
-												add_circle
-											</span>
+										<div className="mt-3 flex items-center gap-2 text-xs text-primary font-semibold">
+											<Icon name="plus-circle" size={14} />
 											+{calcWCS(form, t).scalePts} {t("shared.basePoints")}
 										</div>
 									)}
@@ -928,9 +873,7 @@ export default function WorkforceClient() {
 						{step === 2 && (
 							<div className="space-y-10">
 								<div className="flex items-center gap-2 mb-2">
-									<span className="material-symbols-outlined text-[#FF5A2E]">
-										travel_explore
-									</span>
+									<Icon name="discovery" size={18} className="text-primary" />
 									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 										{t("touring.title")}
 									</h3>
@@ -950,13 +893,8 @@ export default function WorkforceClient() {
 										/>
 									</div>
 									{form.tourAvailability && (
-										<div className="mt-3 flex items-center gap-2 text-xs text-[#FF5A2E] font-semibold">
-											<span
-												className="material-symbols-outlined text-sm"
-												style={{ fontVariationSettings: "'FILL' 1" }}
-											>
-												add_circle
-											</span>
+										<div className="mt-3 flex items-center gap-2 text-xs text-primary font-semibold">
+											<Icon name="plus-circle" size={14} />
 											+{calcWCS(form, t).tourPts} {t("shared.basePoints")}
 										</div>
 									)}
@@ -965,7 +903,7 @@ export default function WorkforceClient() {
 								<div>
 									<div className="flex items-start justify-between gap-4 mb-2">
 										<Label>{t("touring.deploy48h.label")}</Label>
-										<span className="text-xs font-semibold text-[#FF5A2E] bg-[#FF5A2E]/10 px-2 py-1 rounded-full shrink-0">
+										<span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full shrink-0">
 											+{t("shared.bonusPointsValue", { pts: 10 })}
 										</span>
 									</div>
@@ -982,7 +920,7 @@ export default function WorkforceClient() {
 								<div>
 									<div className="flex items-start justify-between gap-4 mb-2">
 										<Label optional>{t("touring.passport.label")}</Label>
-										<span className="text-xs font-semibold text-[#FF5A2E] bg-[#FF5A2E]/10 px-2 py-1 rounded-full shrink-0">
+										<span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full shrink-0">
 											+{t("shared.bonusPointsValue", { pts: 10 })}
 										</span>
 									</div>
@@ -1005,7 +943,7 @@ export default function WorkforceClient() {
 											id="markets"
 											rows={3}
 											placeholder={t("touring.markets.placeholder")}
-											className="w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A2E] transition-all text-on-surface outline-none text-sm resize-none"
+											className="w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-primary transition-all text-on-surface outline-none text-sm resize-none"
 											value={form.marketsWorked}
 											onChange={(e) => set("marketsWorked", e.target.value)}
 										/>
@@ -1035,9 +973,7 @@ export default function WorkforceClient() {
 						{step === 3 && (
 							<div className="space-y-10">
 								<div className="flex items-center gap-2 mb-2">
-									<span className="material-symbols-outlined text-[#FF5A2E]">
-										verified_user
-									</span>
+									<Icon name="shield-check" size={18} className="text-primary" />
 									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 										{t("credentials.title")}
 									</h3>
@@ -1116,12 +1052,7 @@ export default function WorkforceClient() {
 									</div>
 									{form.refereeName.trim() && (
 										<div className="mt-4 flex items-center gap-2 text-xs text-amber-700 font-semibold">
-											<span
-												className="material-symbols-outlined text-sm"
-												style={{ fontVariationSettings: "'FILL' 1" }}
-											>
-												check_circle
-											</span>
+											<Icon name="check-circle" size={14} />
 											{t("shared.bonusPointsUnlocked", { pts: 15 })}
 										</div>
 									)}
@@ -1150,19 +1081,14 @@ export default function WorkforceClient() {
 											id="portfolio"
 											rows={3}
 											placeholder={t("credentials.portfolio.placeholder")}
-											className="w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A2E] transition-all text-on-surface outline-none text-sm resize-none"
+											className="w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-primary transition-all text-on-surface outline-none text-sm resize-none"
 											value={form.portfolioLinks}
 											onChange={(e) => set("portfolioLinks", e.target.value)}
 										/>
 									</div>
 									{form.portfolioLinks.trim() && (
 										<div className="mt-4 flex items-center gap-2 text-xs text-amber-700 font-semibold">
-											<span
-												className="material-symbols-outlined text-sm"
-												style={{ fontVariationSettings: "'FILL' 1" }}
-											>
-												check_circle
-											</span>
+											<Icon name="check-circle" size={14} />
 											{t("shared.bonusPointsUnlocked", { pts: 10 })}
 										</div>
 									)}
@@ -1177,7 +1103,7 @@ export default function WorkforceClient() {
 										id="equipment"
 										rows={3}
 										placeholder={t("credentials.equipment.placeholder")}
-										className="w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A2E] transition-all text-on-surface outline-none text-sm resize-none"
+										className="w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-primary transition-all text-on-surface outline-none text-sm resize-none"
 										value={form.equipment}
 										onChange={(e) => set("equipment", e.target.value)}
 									/>
@@ -1189,9 +1115,7 @@ export default function WorkforceClient() {
 						{step === 4 && (
 							<div className="space-y-10">
 								<div className="flex items-center gap-2 mb-2">
-									<span className="material-symbols-outlined text-[#FF5A2E]">
-										analytics
-									</span>
+									<Icon name="chart" size={18} className="text-primary" />
 									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 										{t("score.liveScore")}
 									</h3>
@@ -1238,7 +1162,7 @@ export default function WorkforceClient() {
 													</div>
 													<div className="h-1.5 bg-surface-container-highest rounded-full overflow-hidden">
 														<div
-															className="h-full bg-[#FF5A2E] rounded-full transition-all"
+															className="h-full bg-primary rounded-full transition-all"
 															style={{
 																width: `${(item.pts / item.max) * 100}%`,
 															}}
@@ -1260,14 +1184,7 @@ export default function WorkforceClient() {
 													key={b.label}
 													className="flex items-start gap-3"
 												>
-													<span
-														className={`material-symbols-outlined text-base mt-0.5 shrink-0 ${b.earned ? "text-amber-500" : "text-slate-300"}`}
-														style={{ fontVariationSettings: "'FILL' 1" }}
-													>
-														{b.earned
-															? "check_circle"
-															: "radio_button_unchecked"}
-													</span>
+													<Icon name={b.earned ? "check-circle" : "circle"} size={16} className={`mt-0.5 shrink-0 ${b.earned ? "text-amber-500" : "text-slate-300"}`} />
 													<div className="flex-1 min-w-0">
 														<p
 															className={`text-xs font-semibold ${b.earned ? "text-on-surface" : "text-on-surface-variant/50"}`}
@@ -1291,18 +1208,7 @@ export default function WorkforceClient() {
 									className={`rounded-2xl p-6 border-2 ${tier.bg} ${tier.border}`}
 								>
 									<div className="flex items-center gap-3 mb-4">
-										<span
-											className={`material-symbols-outlined text-2xl ${tier.text}`}
-											style={{ fontVariationSettings: "'FILL' 1" }}
-										>
-											{wcs.total >= 86
-												? "military_tech"
-												: wcs.total >= 71
-													? "verified"
-													: wcs.total >= 51
-														? "badge"
-														: "person"}
-										</span>
+										<Icon name={wcs.total >= 86 ? "medal" : wcs.total >= 71 ? "check-circle" : wcs.total >= 51 ? "id-card" : "profile"} size={24} className={tier.text} />
 										<div>
 											<p
 												className={`text-xs font-semibold uppercase tracking-wider ${tier.text} opacity-70`}
@@ -1323,12 +1229,7 @@ export default function WorkforceClient() {
 												key={p}
 												className={`flex items-start gap-2 text-sm ${tier.text}`}
 											>
-												<span
-													className="material-symbols-outlined text-sm mt-0.5 shrink-0"
-													style={{ fontVariationSettings: "'FILL' 1" }}
-												>
-													check_circle
-												</span>
+												<Icon name="check-circle" size={14} className="mt-0.5 shrink-0" />
 												{p}
 											</li>
 										))}
@@ -1337,12 +1238,7 @@ export default function WorkforceClient() {
 										<div
 											className={`flex items-center gap-2 pt-4 border-t border-current/20 text-sm font-semibold ${tier.text}`}
 										>
-											<span
-												className="material-symbols-outlined text-sm"
-												style={{ fontVariationSettings: "'FILL' 1" }}
-											>
-												star
-											</span>
+											<Icon name="star" size={14} />
 											{t("matrix.ayaLabel")}: {tier.aya}
 										</div>
 									)}
@@ -1352,9 +1248,7 @@ export default function WorkforceClient() {
 								<details className="bg-surface-container-low rounded-2xl border border-outline-variant/10 overflow-hidden">
 									<summary className="px-6 py-4 cursor-pointer text-sm font-semibold text-on-surface flex items-center justify-between">
 										<span>{t("matrix.title")}</span>
-										<span className="material-symbols-outlined text-on-surface-variant">
-											expand_more
-										</span>
+										<Icon name="chevron-down" size={18} className="text-on-surface-variant" />
 									</summary>
 									<div className="px-6 pb-6 grid grid-cols-1 md:grid-cols-2 gap-3">
 										{TIER_CONFIG.map((t_config) => (
@@ -1392,11 +1286,9 @@ export default function WorkforceClient() {
 								</details>
 
 								{/* Declaration */}
-								<section className="bg-surface-container-low rounded-2xl p-6 border border-[#FF5A2E]/10 space-y-5">
+								<section className="bg-surface-container-low rounded-2xl p-6 border border-primary/10 space-y-5">
 									<div className="flex items-center gap-2">
-										<span className="material-symbols-outlined text-[#FF5A2E]">
-											gavel
-										</span>
+										<Icon name="gavel" size={18} className="text-primary" />
 										<h4 className="font-semibold text-on-surface font-(family-name:--font-manrope)">
 											{t("declaration.title")}
 										</h4>
@@ -1411,12 +1303,7 @@ export default function WorkforceClient() {
 												key={item}
 												className="flex items-start gap-2 text-sm text-on-surface-variant"
 											>
-												<span
-													className="material-symbols-outlined text-[#FF5A2E] text-base mt-0.5 shrink-0"
-													style={{ fontVariationSettings: "'FILL' 1" }}
-												>
-													check_box
-												</span>
+												<Icon name="checkbox" size={16} className="text-primary mt-0.5 shrink-0" />
 												{item}
 											</li>
 										))}
@@ -1476,9 +1363,7 @@ export default function WorkforceClient() {
 									href="/dashboard"
 									className="px-8 py-3 text-on-surface-variant font-semibold hover:text-on-surface transition-colors flex items-center gap-2"
 								>
-									<span className="material-symbols-outlined">
-										arrow_back
-									</span>
+									<Icon name="arrow-left" size={18} />
 									{t("actions.back")}
 								</Link>
 							) : (
@@ -1487,9 +1372,7 @@ export default function WorkforceClient() {
 									onClick={() => setStep((s) => s - 1)}
 									className="px-8 py-3 text-on-surface-variant font-semibold hover:text-on-surface transition-colors flex items-center gap-2"
 								>
-									<span className="material-symbols-outlined">
-										arrow_back
-									</span>
+									<Icon name="arrow-left" size={18} />
 									{t("actions.back")}
 								</button>
 							)}
@@ -1497,7 +1380,7 @@ export default function WorkforceClient() {
 								<button
 									type="submit"
 									disabled={submitting}
-									className="px-10 py-3 bg-linear-to-r from-[#FF5A2E] to-[#cc4826] text-white rounded-xl font-semibold shadow-xl shadow-[#FF5A2E]/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+									className="px-10 py-3 bg-linear-to-r from-primary to-[#cc4826] text-white rounded-xl font-semibold shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
 								>
 									{submitting
 										? t("actions.submitting")
@@ -1505,9 +1388,7 @@ export default function WorkforceClient() {
 											? t("actions.continue")
 											: t("actions.submit")}
 									{!submitting && (
-										<span className="material-symbols-outlined">
-											{step < STEPS.length - 1 ? "arrow_forward" : "send"}
-										</span>
+										<Icon name={step < STEPS.length - 1 ? "arrow-right" : "send"} size={18} />
 									)}
 								</button>
 							</div>
@@ -1525,26 +1406,24 @@ export default function WorkforceClient() {
 					<div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
 						{[
 							{
-								icon: "bolt",
+								icon: "zap",
 								title: t("info.scoring.title"),
 								body: t("info.scoring.body"),
 							},
 							{
-								icon: "payments",
+								icon: "wallet",
 								title: t("info.rate.title"),
 								body: t("info.rate.body"),
 							},
 							{
-								icon: "shield",
+								icon: "insurance",
 								title: t("info.insurance.title"),
 								body: t("info.insurance.body"),
 							},
 						].map((item) => (
 							<div key={item.title} className="flex gap-4">
-								<div className="w-10 h-10 rounded-full bg-[#FF5A2E]/10 flex items-center justify-center shrink-0">
-									<span className="material-symbols-outlined text-[#FF5A2E] text-base">
-										{item.icon}
-									</span>
+								<div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+									<Icon name={item.icon} size={16} className="text-primary" />
 								</div>
 								<div>
 									<h5 className="font-semibold text-on-surface text-sm mb-0.5">

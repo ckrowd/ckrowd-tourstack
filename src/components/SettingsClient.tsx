@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import Icon from "@/components/icons";
 import { useState } from "react";
 import SettingsBillingTab from "@/components/SettingsBillingTab";
 import SettingsNotificationsTab from "@/components/SettingsNotificationsTab";
@@ -19,9 +20,9 @@ export default function SettingsClient() {
 		{
 			key: "notifications",
 			label: t("tabs.notifications"),
-			icon: "notifications",
+			icon: "bell",
 		},
-		{ key: "billing", label: t("tabs.billing"), icon: "credit_card" },
+		{ key: "billing", label: t("tabs.billing"), icon: "credit-card" },
 		{ key: "security", label: t("tabs.security"), icon: "lock" },
 	];
 
@@ -49,7 +50,7 @@ export default function SettingsClient() {
 			</div>
 
 			{/* Tabs */}
-			<div data-tour="settings-tabs" className="flex gap-1 bg-surface-container-lowest rounded-xl p-1 mb-8 w-fit shadow-sm flex-wrap">
+			<div data-tour="settings-tabs" className="tsd-card flex gap-1 p-1 mb-8 w-fit flex-wrap">
 				{tabs.map((tab) => (
 					<button
 						key={tab.key}
@@ -61,9 +62,7 @@ export default function SettingsClient() {
 								: "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low"
 						}`}
 					>
-						<span className="material-symbols-outlined text-sm">
-							{tab.icon}
-						</span>
+						<Icon name={tab.icon} size={14} />
 						{tab.label}
 					</button>
 				))}

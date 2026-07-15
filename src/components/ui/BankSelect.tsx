@@ -1,6 +1,7 @@
 "use client";
 
 import { useMutation, useQuery } from "@tanstack/react-query";
+import Icon from "@/components/icons";
 import { useState } from "react";
 import { listBanks, resolveBankAccount } from "@/app/actions";
 
@@ -120,9 +121,7 @@ export default function BankSelect({
 								</option>
 							))}
 						</select>
-						<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant text-lg">
-							expand_more
-						</span>
+						<Icon name="chevron-down" size={18} className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant" />
 					</div>
 				) : (
 					<input
@@ -139,7 +138,7 @@ export default function BankSelect({
 				)}
 				{bankHasError && (
 					<p className="text-xs text-rose-600 font-medium mt-1 flex items-center gap-1">
-						<span className="material-symbols-outlined text-sm">error</span>
+						<Icon name="alert-circle" size={14} />
 						Required
 					</p>
 				)}
@@ -181,9 +180,7 @@ export default function BankSelect({
 				</div>
 				{verified && (
 					<p className="mt-1.5 flex items-center gap-1 text-xs font-semibold text-emerald-600">
-						<span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>
-							check_circle
-						</span>
+						<Icon name="check-circle" size={14} />
 						{labels.verified}
 					</p>
 				)}
@@ -195,7 +192,7 @@ export default function BankSelect({
 				)}
 				{accountHasError && (
 					<p className="text-xs text-rose-600 font-medium mt-1 flex items-center gap-1">
-						<span className="material-symbols-outlined text-sm">error</span>
+						<Icon name="alert-circle" size={14} />
 						Required
 					</p>
 				)}

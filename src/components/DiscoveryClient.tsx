@@ -1,6 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
+import Icon from "@/components/icons";
 import Image from "next/image";
 import { useLocale, useTranslations } from "next-intl";
 import { useState } from "react";
@@ -107,13 +108,13 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 				return (
 					<div className="mb-10 flex flex-col md:flex-row md:items-start justify-between gap-6">
 						<div>
-							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
+							<span className="text-xs font-semibold uppercase tracking-widest text-primary block mb-2">
 								{t("hero.platform")}
 							</span>
 							<h1 className="text-3xl font-semibold font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
 								{t.rich("hero.title", {
 									spanNode: (chunks) => (
-										<span className="text-[#FF5A2E]">{chunks}</span>
+										<span className="text-primary">{chunks}</span>
 									),
 								})}
 							</h1>
@@ -135,12 +136,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 								/>
 							</div>
 							<div className="bg-tertiary-fixed p-5 rounded-xl flex items-start gap-4 shadow-sm">
-								<span
-									className="material-symbols-outlined text-tertiary text-3xl"
-									style={{ fontVariationSettings: "'FILL' 1" }}
-								>
-									bolt
-								</span>
+								<Icon name="zap" size={30} className="text-tertiary" />
 								<div>
 									<p className="font-(family-name:--font-manrope) font-semibold text-on-tertiary-fixed leading-tight">
 										{t("trending.title")}
@@ -176,7 +172,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 							id="filter-genre"
 							value={genre}
 							onChange={(e) => setGenre(e.target.value)}
-							className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A2E]/20 appearance-none outline-none"
+							className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-primary/20 appearance-none outline-none"
 						>
 							<option value="All Genres">{t("filters.allGenres")}</option>
 							<option value="Afrobeats">{t("genres.afrobeats")}</option>
@@ -188,9 +184,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 								{t("genres.modernClassical")}
 							</option>
 						</select>
-						<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">
-							expand_more
-						</span>
+						<Icon name="chevron-down" size={18} className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant" />
 					</div>
 				</div>
 
@@ -206,16 +200,14 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 							id="filter-window"
 							value={window}
 							onChange={(e) => setWindow(e.target.value)}
-							className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A2E]/20 appearance-none outline-none"
+							className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-primary/20 appearance-none outline-none"
 						>
 							<option value="All Windows">{t("filters.allWindows")}</option>
 							{tourWindows.map((w) => (
 								<option key={w} value={w}>{w}</option>
 							))}
 						</select>
-						<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">
-							calendar_today
-						</span>
+						<Icon name="calendar" size={18} className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant" />
 					</div>
 				</div>
 
@@ -231,7 +223,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 							id="filter-fee"
 							value={feeRange}
 							onChange={(e) => setFeeRange(e.target.value)}
-							className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A2E]/20 appearance-none outline-none"
+							className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-primary/20 appearance-none outline-none"
 						>
 							<option value="All Ranges">{t("filters.allRanges")}</option>
 							{FEE_RANGES.map((r) => (
@@ -240,9 +232,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 								</option>
 							))}
 						</select>
-						<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">
-							payments
-						</span>
+						<Icon name="wallet" size={18} className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant" />
 					</div>
 				</div>
 
@@ -258,7 +248,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 							id="filter-region"
 							value={region}
 							onChange={(e) => setRegion(e.target.value)}
-							className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-[#FF5A2E]/20 appearance-none outline-none"
+							className="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl py-3 px-4 text-sm font-medium focus:ring-2 focus:ring-primary/20 appearance-none outline-none"
 						>
 							<option value="All Africa">{t("filters.allAfrica")}</option>
 							<option value="West Africa">{t("regions.westAfrica")}</option>
@@ -268,9 +258,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 							</option>
 							<option value="North Africa">{t("regions.northAfrica")}</option>
 						</select>
-						<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">
-							public
-						</span>
+						<Icon name="globe" size={18} className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant" />
 					</div>
 				</div>
 
@@ -283,9 +271,9 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 							setFeeRange("All Ranges");
 							setRegion("All Africa");
 						}}
-						className="w-full lg:w-auto bg-[#FF5A2E] text-white px-6 py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-lg shadow-[#FF5A2E]/20"
+						className="w-full lg:w-auto bg-primary text-white px-6 py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 hover:opacity-90 transition-all shadow-lg shadow-primary/20"
 					>
-						<span className="material-symbols-outlined text-sm">tune</span>
+						<Icon name="sliders" size={14} />
 						{t("filters.resetFilters")}
 					</button>
 				</div>
@@ -306,21 +294,17 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 							<span>{t("sortBy.label")}</span>
 							<button
 								type="button"
-								className="text-[#FF5A2E] font-semibold flex items-center gap-1"
+								className="text-primary font-semibold flex items-center gap-1"
 							>
 								{t("sortBy.newestFirst")}{" "}
-								<span className="material-symbols-outlined text-xs">
-									arrow_drop_down
-								</span>
+								<Icon name="chevron-down" size={12} />
 							</button>
 						</div>
 					</div>
 
 					{filtered.length === 0 ? (
 						<div className="flex flex-col items-center justify-center py-24 text-on-surface-variant">
-							<span className="material-symbols-outlined text-5xl mb-4">
-								search_off
-							</span>
+							<Icon name="search-x" size={44} className="mb-4" />
 							<p className="font-semibold text-lg">{t("noResults.title")}</p>
 							<p className="text-sm mt-1">{t("noResults.description")}</p>
 						</div>
@@ -329,7 +313,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 							{filtered.map((artist) => (
 								<div
 									key={String(artist.id ?? artist.name)}
-									className="bg-surface-container-lowest rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group border border-transparent hover:border-outline-variant/20"
+									className="tsd-card tsd-card-hover overflow-hidden group"
 								>
 									<div className="h-56 relative overflow-hidden bg-surface-container-high">
 										{artist.image_url ? (
@@ -341,13 +325,11 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 											/>
 										) : (
 											<div className="w-full h-full flex items-center justify-center">
-												<span className="material-symbols-outlined text-5xl text-on-surface-variant">
-													music_note
-												</span>
+												<Icon name="music" size={44} className="text-on-surface-variant" />
 											</div>
 										)}
 										<div className="absolute top-4 left-4">
-											<span className="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-semibold text-[#FF5A2E] uppercase tracking-tighter shadow-sm">
+											<span className="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-semibold text-primary uppercase tracking-tighter shadow-sm">
 												{String(artist.genre ?? "")}
 											</span>
 										</div>
@@ -366,14 +348,12 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 									</div>
 
 									<div className="p-5">
-										<h3 className="font-(family-name:--font-manrope) text-xl font-semibold group-hover:text-[#FF5A2E] transition-colors">
+										<h3 className="font-(family-name:--font-manrope) text-xl font-semibold group-hover:text-primary transition-colors">
 											{String(artist.name ?? "")}
 										</h3>
 										<div className="mt-3 space-y-2">
 											<div className="flex items-center gap-2 text-on-surface-variant">
-												<span className="material-symbols-outlined text-base">
-													event
-												</span>
+												<Icon name="calendar" size={16} />
 												<span className="text-sm font-medium">
 													{artist.tour_start && artist.tour_end
 														? `${new Date(String(artist.tour_start)).toLocaleDateString(locale)} – ${new Date(String(artist.tour_end)).toLocaleDateString(locale)}`
@@ -381,9 +361,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 												</span>
 											</div>
 											<div className="flex items-center gap-2 text-on-surface-variant">
-												<span className="material-symbols-outlined text-base">
-													monetization_on
-												</span>
+												<Icon name="wallet" size={16} />
 												<span className="text-sm font-medium">
 													{artist.fee_min != null && artist.fee_max != null
 														? `$${Math.round(Number(artist.fee_min) / 1000)}k – $${Math.round(Number(artist.fee_max) / 1000)}k USD`
@@ -391,9 +369,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 												</span>
 											</div>
 											<div className="flex items-center gap-2 text-on-surface-variant">
-												<span className="material-symbols-outlined text-base">
-													location_on
-												</span>
+												<Icon name="map-pin" size={16} />
 												<span className="text-sm font-medium">
 													{Array.isArray(artist.markets)
 														? (artist.markets as string[]).join(", ")
@@ -404,7 +380,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 										<div className="mt-5">
 											<Link
 												href={`/eoi${artist.id ? `?id=${String(artist.id)}` : ""}`}
-												className="block w-full bg-[#FF5A2E] py-3 rounded-xl text-white font-semibold text-sm tracking-wide shadow-md shadow-[#FF5A2E]/10 active:scale-[0.98] transition-all text-center"
+												className="block w-full bg-primary py-3 rounded-xl text-white font-semibold text-sm tracking-wide shadow-md shadow-primary/10 active:scale-[0.98] transition-all text-center"
 											>
 												{t("submitEoi")}
 											</Link>
@@ -419,7 +395,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 				{/* Sidebar */}
 				<aside className="lg:col-span-4 space-y-8">
 					{/* My Active Tours */}
-					<div className="bg-surface-container-lowest rounded-2xl border border-outline-variant/10 shadow-sm overflow-hidden">
+					<div className="tsd-card overflow-hidden">
 						<div className="px-6 py-4 border-b border-outline-variant/10">
 							<h3 className="font-(family-name:--font-manrope) font-semibold text-sm text-on-surface">
 								{t("myTours.title")}
@@ -463,7 +439,7 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 					</div>
 
 					{/* Financing Banner */}
-					<div className="bg-linear-to-br from-[#FF5A2E] to-[#cc4826] rounded-2xl p-8 text-white relative overflow-hidden group">
+					<div className="bg-linear-to-br from-primary to-[#cc4826] rounded-2xl p-8 text-white relative overflow-hidden group">
 						<div className="relative z-10">
 							<h4 className="font-(family-name:--font-manrope) text-xl font-semibold leading-tight">
 								{t("financing.title")}
@@ -473,14 +449,12 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 							</p>
 							<Link
 								href="/eoi"
-								className="mt-6 inline-block bg-white text-[#FF5A2E] px-6 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider hover:scale-105 transition-transform"
+								className="mt-6 inline-block bg-white text-primary px-6 py-2.5 rounded-xl text-xs font-semibold uppercase tracking-wider hover:scale-105 transition-transform"
 							>
 								{t("financing.applyButton")}
 							</Link>
 						</div>
-						<span className="material-symbols-outlined absolute -bottom-4 -right-4 text-white/10 text-[120px] rotate-12 group-hover:scale-110 transition-transform duration-500">
-							account_balance_wallet
-						</span>
+						<Icon name="wallet" size={120} className="absolute -bottom-4 -right-4 text-white/10 rotate-12 group-hover:scale-110 transition-transform duration-500" />
 					</div>
 
 					{/* Platform Stats */}
@@ -506,9 +480,9 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 							].map((stat) => (
 								<div
 									key={stat.label}
-									className="bg-surface-container-lowest p-4 rounded-xl text-center border border-[#FF5A2E]/5 flex flex-col items-center justify-center min-h-24"
+									className="bg-surface-container-lowest p-4 rounded-xl text-center border border-primary/5 flex flex-col items-center justify-center min-h-24"
 								>
-									<p className="text-2xl font-semibold font-(family-name:--font-manrope) text-[#FF5A2E] leading-none">
+									<p className="text-2xl font-semibold font-(family-name:--font-manrope) text-primary leading-none">
 										{stat.value}
 									</p>
 									<p className="text-[10px] uppercase font-semibold text-on-surface-variant mt-2 leading-tight">

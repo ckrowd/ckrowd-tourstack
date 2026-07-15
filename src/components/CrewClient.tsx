@@ -1,6 +1,7 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
+import Icon from "@/components/icons";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { registerCrewMember } from "@/app/actions";
@@ -253,7 +254,7 @@ const defaultForm: FormData = {
 /* ─────────────────────────── shared UI ─────────────────────────── */
 
 const inputClass =
-	"w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-[#FF5A2E] transition-all text-on-surface outline-none text-sm";
+	"w-full px-4 py-3 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-primary transition-all text-on-surface outline-none text-sm";
 
 function Label({
 	htmlFor,
@@ -297,17 +298,17 @@ function RadioGroup({
 						onClick={() => onChange(opt)}
 						className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold border transition-all text-left ${
 							checked
-								? "bg-[#FF5A2E]/10 border-[#FF5A2E] text-[#FF5A2E]"
-								: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A2E]/40"
+								? "bg-primary/10 border-primary text-primary"
+								: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-primary/40"
 						}`}
 					>
 						<span
 							className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 border-2 transition-colors ${
-								checked ? "border-[#FF5A2E]" : "border-current"
+								checked ? "border-primary" : "border-current"
 							}`}
 						>
 							{checked && (
-								<span className="w-2.5 h-2.5 rounded-full bg-[#FF5A2E] block" />
+								<span className="w-2.5 h-2.5 rounded-full bg-primary block" />
 							)}
 						</span>
 						{opt}
@@ -331,7 +332,7 @@ function Stepper({
 			<div className="flex justify-between items-center relative">
 				<div className="absolute top-1/2 left-0 w-full h-0.5 bg-surface-variant -translate-y-1/2 z-0" />
 				<div
-					className="absolute top-1/2 left-0 h-0.5 bg-[#FF5A2E] -translate-y-1/2 z-0 transition-all duration-500"
+					className="absolute top-1/2 left-0 h-0.5 bg-primary -translate-y-1/2 z-0 transition-all duration-500"
 					style={{ width: `${progress}%` }}
 				/>
 				{steps.map((step, i) => {
@@ -345,17 +346,12 @@ function Stepper({
 							<div
 								className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ring-4 ring-surface-container-low ${
 									done || active
-										? "bg-[#FF5A2E] text-white"
+										? "bg-primary text-white"
 										: "bg-surface-variant text-on-surface-variant"
 								}`}
 							>
 								{done ? (
-									<span
-										className="material-symbols-outlined text-sm"
-										style={{ fontVariationSettings: "'FILL' 1" }}
-									>
-										check
-									</span>
+									<Icon name="check" size={14} />
 								) : (
 									i + 1
 								)}
@@ -363,9 +359,9 @@ function Stepper({
 							<span
 								className={`mt-2 text-[10px] font-semibold uppercase tracking-wider text-center  leading-tight ${
 									active
-										? "text-[#FF5A2E]"
+										? "text-primary"
 										: done
-											? "text-[#FF5A2E]/70"
+											? "text-primary/70"
 											: "text-on-surface-variant"
 								}`}
 							>
@@ -426,18 +422,7 @@ function ScoreGauge({
 				<div
 					className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold ${tier.bg} ${tier.text}`}
 				>
-					<span
-						className="material-symbols-outlined text-sm"
-						style={{ fontVariationSettings: "'FILL' 1" }}
-					>
-						{score >= 86
-							? "military_tech"
-							: score >= 71
-								? "verified"
-								: score >= 51
-									? "badge"
-									: "person"}
-					</span>
+					<Icon name={score >= 86 ? "medal" : score >= 71 ? "check-circle" : score >= 51 ? "id-card" : "profile"} size={14} />
 					{labels.tier} {tier.tier} — {tier.label}
 				</div>
 			</div>
@@ -513,18 +498,7 @@ export default function CrewClient() {
 						className={`rounded-2xl p-5 border mb-6 text-left ${tier.bg} ${tier.border}`}
 					>
 						<div className="flex items-center gap-2 mb-3">
-							<span
-								className="material-symbols-outlined text-sm"
-								style={{ fontVariationSettings: "'FILL' 1" }}
-							>
-								{wcs.total >= 86
-									? "military_tech"
-									: wcs.total >= 71
-										? "verified"
-										: wcs.total >= 51
-											? "badge"
-											: "person"}
-							</span>
+							<Icon name={wcs.total >= 86 ? "medal" : wcs.total >= 71 ? "check-circle" : wcs.total >= 51 ? "id-card" : "profile"} size={14} />
 							<h4 className={`text-sm font-semibold ${tier.text}`}>
 								Tier {tier.tier} — {tier.label}
 							</h4>
@@ -535,24 +509,14 @@ export default function CrewClient() {
 									key={p}
 									className={`flex items-start gap-2 text-xs ${tier.text}`}
 								>
-									<span
-										className="material-symbols-outlined text-xs mt-0.5"
-										style={{ fontVariationSettings: "'FILL' 1" }}
-									>
-										check_circle
-									</span>
+									<Icon name="check-circle" size={12} className="mt-0.5" />
 									{p}
 								</li>
 							))}
 						</ul>
 						{tier.aya && (
 							<div className="mt-3 pt-3 border-t border-current/20 flex items-center gap-2">
-								<span
-									className="material-symbols-outlined text-xs"
-									style={{ fontVariationSettings: "'FILL' 1" }}
-								>
-									star
-								</span>
+								<Icon name="star" size={12} />
 								<span className={`text-xs font-semibold ${tier.text}`}>
 									{t("success.aya")}: {tier.aya}
 								</span>
@@ -563,7 +527,7 @@ export default function CrewClient() {
 					<div className="flex flex-col sm:flex-row gap-4 justify-center">
 						<Link
 							href="/dashboard"
-							className="px-8 py-3 bg-[#FF5A2E] text-white rounded-xl font-semibold shadow-lg shadow-[#FF5A2E]/20 hover:scale-[1.02] transition-transform"
+							className="px-8 py-3 bg-primary text-white rounded-xl font-semibold shadow-lg shadow-primary/20 hover:scale-[1.02] transition-transform"
 						>
 							{t("actions.dashboard")}
 						</Link>
@@ -586,7 +550,7 @@ export default function CrewClient() {
 				<header className="mb-10">
 					<div className="flex items-start justify-between gap-4">
 						<div>
-							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-3">
+							<span className="text-xs font-semibold uppercase tracking-widest text-primary block mb-3">
 								{t("registry")}
 							</span>
 							<h1 className="text-4xl font-extrabold tracking-tight text-on-surface mb-2">
@@ -620,7 +584,7 @@ export default function CrewClient() {
 				<Stepper current={step} steps={STEPS} />
 
 				{/* Form Card */}
-				<div className="bg-surface-container-lowest rounded-2xl p-8 md:p-10 shadow-sm border border-outline-variant/10">
+				<div className="tsd-card p-8 md:p-10">
 					<form
 						onSubmit={(e) => {
 							e.preventDefault();
@@ -654,9 +618,7 @@ export default function CrewClient() {
 						{step === 0 && (
 							<div className="space-y-8">
 								<div className="flex items-center gap-2 mb-2">
-									<span className="material-symbols-outlined text-[#FF5A2E]">
-										person
-									</span>
+									<Icon name="profile" size={18} className="text-primary" />
 									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 										{t("sections.personal.title")}
 									</h3>
@@ -815,9 +777,7 @@ export default function CrewClient() {
 						{step === 1 && (
 							<div className="space-y-10">
 								<div className="flex items-center gap-2 mb-2">
-									<span className="material-symbols-outlined text-[#FF5A2E]">
-										engineering
-									</span>
+									<Icon name="wrench" size={18} className="text-primary" />
 									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 										{t("sections.role.title")}
 									</h3>
@@ -847,24 +807,19 @@ export default function CrewClient() {
 													}}
 													className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold border transition-all text-left ${
 														checked
-															? "bg-[#FF5A2E]/10 border-[#FF5A2E] text-[#FF5A2E]"
-															: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-[#FF5A2E]/40"
+															? "bg-primary/10 border-primary text-primary"
+															: "bg-surface-container-highest border-outline-variant/20 text-on-surface-variant hover:border-primary/40"
 													}`}
 												>
 													<span
 														className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
 															checked
-																? "border-[#FF5A2E] bg-[#FF5A2E]"
+																? "border-primary bg-primary"
 																: "border-current"
 														}`}
 													>
 														{checked && (
-															<span
-																className="material-symbols-outlined text-white"
-																style={{ fontSize: 10 }}
-															>
-																check
-															</span>
+															<Icon name="check" size={18} className="text-white" />
 														)}
 													</span>
 													{role}
@@ -896,9 +851,7 @@ export default function CrewClient() {
 						{step === 2 && (
 							<div className="space-y-10">
 								<div className="flex items-center gap-2 mb-2">
-									<span className="material-symbols-outlined text-[#FF5A2E]">
-										travel_explore
-									</span>
+									<Icon name="discovery" size={18} className="text-primary" />
 									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 										{t("sections.touring.title")}
 									</h3>
@@ -968,9 +921,7 @@ export default function CrewClient() {
 						{step === 3 && (
 							<div className="space-y-8">
 								<div className="flex items-center gap-2 mb-2">
-									<span className="material-symbols-outlined text-[#FF5A2E]">
-										verified
-									</span>
+									<Icon name="check-circle" size={18} className="text-primary" />
 									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 										{t("sections.credentials.title")}
 									</h3>
@@ -1041,7 +992,7 @@ export default function CrewClient() {
 								</div>
 
 								<div className="pt-6 border-t border-outline-variant/10">
-									<p className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] mb-4">
+									<p className="text-xs font-semibold uppercase tracking-widest text-primary mb-4">
 										Industry Reference
 									</p>
 									<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -1114,9 +1065,7 @@ export default function CrewClient() {
 						{step === 4 && (
 							<div className="space-y-10">
 								<div className="flex items-center gap-2 mb-2">
-									<span className="material-symbols-outlined text-[#FF5A2E]">
-										analytics
-									</span>
+									<Icon name="chart" size={18} className="text-primary" />
 									<h3 className="text-xl font-semibold font-(family-name:--font-manrope)">
 										{t("sections.wcs.title")}
 									</h3>
@@ -1156,7 +1105,7 @@ export default function CrewClient() {
 												<div className="h-px bg-outline-variant/10 my-2" />
 												<div className="flex justify-between text-base">
 													<span className="font-semibold">Total WCS Score</span>
-													<span className="font-black text-[#FF5A2E]">
+													<span className="font-black text-primary">
 														{wcs.total}
 													</span>
 												</div>
@@ -1179,9 +1128,7 @@ export default function CrewClient() {
 													>
 														<span>{item.label}</span>
 														{item.earned ? (
-															<span className="material-symbols-outlined text-sm">
-																check_circle
-															</span>
+															<Icon name="check-circle" size={14} />
 														) : (
 															<span>+0</span>
 														)}
@@ -1250,16 +1197,14 @@ export default function CrewClient() {
 										: "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low"
 								}`}
 							>
-								<span className="material-symbols-outlined text-sm">
-									arrow_back
-								</span>
+								<Icon name="arrow-left" size={14} />
 								{t("actions.back")}
 							</button>
 
 							<button
 								type="submit"
 								disabled={submitting}
-								className="flex items-center gap-2 px-10 py-4 bg-[#FF5A2E] text-white rounded-xl font-semibold shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-all disabled:opacity-50"
+								className="flex items-center gap-2 px-10 py-4 bg-primary text-white rounded-xl font-semibold shadow-lg shadow-primary/20 hover:opacity-90 transition-all disabled:opacity-50"
 							>
 								{submitting ? (
 									<>
@@ -1271,9 +1216,7 @@ export default function CrewClient() {
 										{step === STEPS.length - 1
 											? t("actions.submit")
 											: t("actions.continue")}
-										<span className="material-symbols-outlined text-sm">
-											{step === STEPS.length - 1 ? "send" : "arrow_forward"}
-										</span>
+										<Icon name={step === STEPS.length - 1 ? "send" : "arrow-right"} size={14} />
 									</>
 								)}
 							</button>

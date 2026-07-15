@@ -1,7 +1,9 @@
 ﻿import Image from "next/image";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getEOIs, getTours, getTourstackDashboard } from "@/app/actions";
+import Icon from "@/components/icons";
 import PageTour from "@/components/PageTour";
+import EmptyState from "@/components/ui/EmptyState";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 import Button from "@/components/ui/Button";
@@ -70,20 +72,20 @@ export default async function ToursPage({ params, searchParams }: Props) {
 			type: mType,
 			icon:
 				mType === "show"
-					? "celebration"
+					? "zap"
 					: mType === "call"
-						? "call"
+						? "phone"
 						: mType === "payment"
-							? "payments"
+							? "wallet"
 							: "gavel",
 			color:
 				mType === "show"
-					? "bg-[#FF5A2E]/10 text-[#FF5A2E]"
+					? "bg-primary/10 text-primary"
 					: mType === "call"
-						? "bg-blue-100 text-blue-600"
+						? "bg-blue-500/10 text-blue-500"
 						: mType === "payment"
-							? "bg-emerald-100 text-emerald-700"
-							: "bg-yellow-100 text-yellow-700",
+							? "bg-emerald-500/10 text-emerald-500"
+							: "bg-amber-500/10 text-amber-500",
 		};
 	});
 	const venueMap = new Map<
@@ -156,7 +158,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 					{/* Header */}
 					<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
 						<div>
-							<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
+							<span className="text-xs font-semibold uppercase tracking-widest text-primary block mb-2">
 								{t("promoterPortal")}
 							</span>
 							<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -167,43 +169,52 @@ export default async function ToursPage({ params, searchParams }: Props) {
 							</p>
 						</div>
 						<Button href="/eoi" className="self-start md:self-auto shadow-lg shadow-primary/20">
-							<span className="material-symbols-outlined text-sm">add</span>
+							<Icon name="plus" size={15} strokeWidth={2.25} />
 							{t("newTourStop")}
 						</Button>
 					</div>
 
 					{/* Summary strip */}
-					<div data-tour="tours-stats" className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-10">
+					<div data-tour="tours-stats" className="tsd-stagger grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-10">
 						{[
 							{
 								label: t("stats.totalStops"),
 								value: totalStops.toString(),
-								color: "border-[#FF5A2E]",
+								icon: "map-pin",
+								chip: "bg-primary/10 text-primary",
 							},
 							{
 								label: t("stats.confirmed"),
 								value: confirmedCount.toString(),
-								color: "border-emerald-400",
+								icon: "check",
+								chip: "bg-emerald-500/10 text-emerald-500",
 							},
 							{
 								label: t("stats.inProgress"),
 								value: inProgressCount.toString(),
-								color: "border-yellow-400",
+								icon: "clock",
+								chip: "bg-amber-500/10 text-amber-500",
 							},
 							{
 								label: t("stats.rejected"),
 								value: rejectedCount.toString(),
-								color: "border-red-400",
+								icon: "x",
+								chip: "bg-red-500/10 text-red-500",
 							},
 						].map((s) => (
 							<div
 								key={s.label}
-								className={`bg-surface-container-lowest rounded-xl p-4 md:p-5 shadow-sm border-l-4 ${s.color}`}
+								className="tsd-card tsd-card-hover p-4 md:p-5 flex flex-col gap-4"
 							>
-								<p className="text-[10px] md:text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
-									{s.label}
-								</p>
-								<p className="text-2xl md:text-3xl font-black font-(family-name:--font-manrope) text-on-surface">
+								<div className="flex items-center justify-between gap-2">
+									<p className="text-[10px] md:text-[11px] font-semibold uppercase tracking-[0.12em] text-on-surface-variant">
+										{s.label}
+									</p>
+									<span className={`w-7 h-7 rounded-lg flex items-center justify-center shrink-0 ${s.chip}`}>
+										<Icon name={s.icon} size={14} strokeWidth={2} />
+									</span>
+								</div>
+								<p className="text-2xl md:text-3xl font-(family-name:--font-display) text-on-surface leading-none">
 									{s.value}
 								</p>
 							</div>
@@ -214,7 +225,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 						{/* Pipeline + Tour Cards */}
 						<div className="lg:col-span-8 space-y-5">
 							{pendingEois.length > 0 && (
-								<section data-tour="tours-pipeline" className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+								<section data-tour="tours-pipeline" className="tsd-card p-6">
 									<div className="mb-4">
 										<h2 className="font-(family-name:--font-manrope) font-semibold text-lg text-on-surface">
 											{t("pendingEois.title")}
@@ -271,17 +282,13 @@ export default async function ToursPage({ params, searchParams }: Props) {
 													<div className="flex flex-wrap items-center gap-x-5 gap-y-1.5 text-sm text-on-surface-variant mt-3">
 														{eoi.city != null && eoi.city !== "" && (
 															<span className="flex items-center gap-1.5">
-																<span className="material-symbols-outlined text-sm">
-																	location_on
-																</span>
+																<Icon name="map-pin" size={14} className="shrink-0" />
 																{String(eoi.city)}
 															</span>
 														)}
 														{eoi.created_at != null && (
 															<span className="flex items-center gap-1.5">
-																<span className="material-symbols-outlined text-sm">
-																	schedule
-																</span>
+																<Icon name="clock" size={14} className="shrink-0" />
 																{t("pendingEois.submitted")}{" "}
 																{new Date(
 																	String(eoi.created_at),
@@ -295,11 +302,9 @@ export default async function ToursPage({ params, searchParams }: Props) {
 														{isRevision && (
 															<Link
 																href="/eoi"
-																className="flex items-center gap-1.5 text-[#FF5A2E] font-semibold"
+																className="flex items-center gap-1.5 text-primary font-semibold"
 															>
-																<span className="material-symbols-outlined text-sm">
-																	edit
-																</span>
+																<Icon name="edit" size={14} className="shrink-0" />
 																{t("reviseEoi")}
 															</Link>
 														)}
@@ -311,22 +316,15 @@ export default async function ToursPage({ params, searchParams }: Props) {
 								</section>
 							)}
 							{tours.length === 0 ? (
-								<div data-tour="tours-list" className="bg-surface-container-lowest rounded-2xl p-12 text-center shadow-sm">
-									<span className="material-symbols-outlined text-5xl text-on-surface-variant block mb-4">
-										confirmation_number
-									</span>
-									<h3 className="font-(family-name:--font-manrope) font-semibold text-on-surface text-lg mb-2">
-										{t("noStops")}
-									</h3>
-									<p className="text-on-surface-variant text-sm max-w-xs mx-auto mb-6">
-										{t("noStopsDesc")}
-									</p>
-									<Button href="/eoi">
-										<span className="material-symbols-outlined text-sm">
-											add
-										</span>
-										{t("submitEoi")}
-									</Button>
+								<div data-tour="tours-list" className="tsd-card">
+									<EmptyState
+										icon="tours"
+										title={t("noStops")}
+										description={t("noStopsDesc")}
+										actionLabel={t("submitEoi")}
+										actionHref="/eoi"
+										actionIcon="plus"
+									/>
 								</div>
 							) : (
 								<>
@@ -349,7 +347,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 										return (
 											<div
 												key={String(tour.id)}
-												className="bg-surface-container-lowest rounded-2xl shadow-sm overflow-hidden border border-transparent hover:border-outline-variant/20 hover:shadow-lg transition-all duration-300"
+												className="tsd-card tsd-card-hover overflow-hidden"
 											>
 												<div className="flex flex-col sm:flex-row">
 													{/* Image */}
@@ -365,9 +363,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 																<div className="absolute inset-0 bg-linear-to-r from-black/20 to-transparent sm:bg-linear-to-b sm:from-transparent sm:to-black/30" />
 															</>
 														) : (
-															<span className="material-symbols-outlined text-3xl text-on-surface-variant">
-																music_note
-															</span>
+															<Icon name="music" size={28} className="text-on-surface-variant" strokeWidth={1.5} />
 														)}
 													</div>
 
@@ -400,17 +396,13 @@ export default async function ToursPage({ params, searchParams }: Props) {
 														<div className="flex flex-wrap gap-x-5 gap-y-1.5 text-sm text-on-surface-variant">
 															{tour.city != null && tour.city !== "" && (
 																<span className="flex items-center gap-1.5">
-																	<span className="material-symbols-outlined text-sm">
-																		location_on
-																	</span>
+																	<Icon name="map-pin" size={14} className="shrink-0" />
 																	{String(tour.city)}
 																</span>
 															)}
 															{tour.date != null && (
 																<span className="flex items-center gap-1.5">
-																	<span className="material-symbols-outlined text-sm">
-																		event
-																	</span>
+																	<Icon name="calendar" size={14} className="shrink-0" />
 																	{tour.date.toLocaleDateString(locale, {
 																		month: "short",
 																		day: "numeric",
@@ -420,17 +412,13 @@ export default async function ToursPage({ params, searchParams }: Props) {
 															)}
 															{tour.fee_usd != null && (
 																<span className="flex items-center gap-1.5">
-																	<span className="material-symbols-outlined text-sm">
-																		monetization_on
-																	</span>
+																	<Icon name="wallet" size={14} className="shrink-0" />
 																	${Number(tour.fee_usd).toLocaleString(locale)}
 																</span>
 															)}
 															{tour.financing != null && (
-																<span className="flex items-center gap-1.5 text-[#FF5A2E] font-semibold">
-																	<span className="material-symbols-outlined text-sm">
-																		account_balance
-																	</span>
+																<span className="flex items-center gap-1.5 text-primary font-semibold">
+																	<Icon name="financing" size={14} className="shrink-0" />
 																	{t("financed")}
 																	{tour.financing_amount
 																		? ` · $${Number(tour.financing_amount).toLocaleString(locale)}`
@@ -450,7 +438,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 																</div>
 																<div className="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
 																	<div
-																		className="bg-[#FF5A2E] h-full rounded-full transition-all"
+																		className="bg-primary h-full rounded-full transition-all"
 																		style={{ width: `${soldPct}%` }}
 																	/>
 																</div>
@@ -474,7 +462,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 																		})}
 																	</span>
 																) : (
-																	<span className="text-xs font-semibold text-[#FF5A2E]">
+																	<span className="text-xs font-semibold text-primary">
 																		{t("showDay")}
 																	</span>
 																)
@@ -487,7 +475,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 																	statusLower === "needs revision") && (
 																	<Link
 																		href="/eoi"
-																		className="text-xs font-semibold text-[#FF5A2E] border border-[#FF5A2E]/30 px-3 py-1.5 rounded-lg hover:bg-[#FF5A2E]/5 transition-colors"
+																		className="text-xs font-semibold text-primary border border-primary/30 px-3 py-1.5 rounded-lg hover:bg-primary/5 transition-colors"
 																	>
 																		{t("reviseEoi")}
 																	</Link>
@@ -517,7 +505,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 														: "text-on-surface-variant hover:bg-surface-container-lowest"
 												}`}
 											>
-												<span className="material-symbols-outlined text-sm">chevron_left</span>
+												<Icon name="chevron-left" size={15} />
 												{t("pagination.previous")}
 											</Link>
 
@@ -536,7 +524,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 																href={pageHref(p)}
 																className={`w-9 h-9 flex items-center justify-center rounded-lg text-sm font-semibold transition-colors ${
 																	p === currentPage
-																		? "bg-[#FF5A2E] text-white shadow-sm"
+																		? "bg-primary text-white"
 																		: "text-on-surface-variant hover:bg-surface-container-lowest"
 																}`}
 															>
@@ -557,7 +545,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 												}`}
 											>
 												{t("pagination.next")}
-												<span className="material-symbols-outlined text-sm">chevron_right</span>
+												<Icon name="chevron-right" size={15} />
 											</Link>
 										</div>
 									)}
@@ -568,7 +556,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 						{/* Sidebar: Milestones */}
 						<aside className="lg:col-span-4 space-y-6">
 							{upcomingMilestones.length > 0 && (
-								<div className="bg-surface-container-lowest rounded-2xl p-7 shadow-sm">
+								<div className="tsd-card p-7">
 									<h3 className="font-(family-name:--font-manrope) font-semibold text-base mb-6">
 										{t("upcomingMilestones")}
 									</h3>
@@ -581,12 +569,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 												<div
 													className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 ${m.color}`}
 												>
-													<span
-														className="material-symbols-outlined text-sm"
-														style={{ fontVariationSettings: "'FILL' 1" }}
-													>
-														{m.icon}
-													</span>
+													<Icon name={m.icon} size={15} strokeWidth={2} />
 												</div>
 												<div>
 													<p className="text-sm font-semibold text-on-surface leading-snug">
@@ -604,7 +587,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 
 							{/* Venue snapshot */}
 							{venueSummary.length > 0 && (
-								<div className="bg-surface-container-lowest rounded-2xl p-7 shadow-sm">
+								<div className="tsd-card p-7">
 									<h3 className="font-(family-name:--font-manrope) font-semibold text-base mb-5">
 										{t("venueSummary")}
 									</h3>
@@ -614,12 +597,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 												key={v.label}
 												className="flex items-center gap-3 py-2 border-b border-outline-variant/10 last:border-0"
 											>
-												<span
-													className="material-symbols-outlined text-[#FF5A2E]"
-													style={{ fontVariationSettings: "'FILL' 1" }}
-												>
-													stadium
-												</span>
+												<Icon name="stadium" size={18} className="text-primary shrink-0" />
 												<div className="flex-1 min-w-0">
 													<p className="text-sm font-semibold text-on-surface truncate">
 														{v.label}
@@ -637,25 +615,18 @@ export default async function ToursPage({ params, searchParams }: Props) {
 							{/* CTA */}
 							<Link
 								href="/financing"
-								className="flex items-center gap-4 bg-linear-to-br from-[#FF5A2E] to-[#cc4826] text-white p-6 rounded-2xl shadow-lg shadow-[#FF5A2E]/20 hover:scale-[1.02] transition-transform"
+								className="group flex items-center gap-4 bg-linear-to-br from-[#ff5a30] to-[#b83816] text-white p-6 rounded-2xl shadow-lg shadow-primary/20 transition-transform duration-200 [transition-timing-function:var(--ease-out)] hover:scale-[1.02]"
 							>
-								<span
-									className="material-symbols-outlined text-2xl"
-									style={{ fontVariationSettings: "'FILL' 1" }}
-								>
-									account_balance_wallet
-								</span>
+								<Icon name="wallet" size={26} strokeWidth={1.5} className="shrink-0" />
 								<div>
-									<p className="font-(family-name:--font-manrope) font-semibold text-sm">
+									<p className="font-semibold text-sm">
 										{t("ctaFinancingTitle")}
 									</p>
 									<p className="text-xs text-orange-100 mt-0.5">
 										{t("ctaFinancingDesc")}
 									</p>
 								</div>
-								<span className="material-symbols-outlined ml-auto">
-									arrow_forward
-								</span>
+								<Icon name="arrow-right" size={18} className="ml-auto shrink-0 transition-transform duration-200 group-hover:translate-x-0.5" />
 							</Link>
 						</aside>
 					</div>

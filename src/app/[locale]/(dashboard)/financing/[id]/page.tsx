@@ -1,5 +1,6 @@
 ﻿import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getFinancingApplication } from "@/app/actions";
+import Icon from "@/components/icons";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 import { Link } from "@/i18n/routing";
@@ -38,7 +39,7 @@ export default async function FinancingDetailPage({
 					<div className="w-full space-y-6">
 						<div className="flex items-center justify-between gap-3">
 							<div>
-								<p className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E]">
+								<p className="text-xs font-semibold uppercase tracking-widest text-primary">
 									{t("tagline")}
 								</p>
 								<h1 className="text-3xl font-(family-name:--font-manrope) font-extrabold mt-1">
@@ -49,9 +50,7 @@ export default async function FinancingDetailPage({
 								href="/financing"
 								className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-outline-variant/30 text-sm font-semibold text-on-surface-variant hover:bg-surface-container-low"
 							>
-								<span className="material-symbols-outlined text-sm">
-									arrow_back
-								</span>
+								<Icon name="arrow-left" size={15} />
 								{t("actions.back")}
 							</Link>
 						</div>
@@ -76,7 +75,7 @@ export default async function FinancingDetailPage({
 								return (
 									<div className="space-y-6">
 										{/* Summary */}
-										<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm space-y-5">
+										<div className="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant space-y-5">
 											<div className="flex flex-wrap items-start justify-between gap-3">
 												<div>
 													<p className="text-sm text-on-surface-variant">
@@ -127,7 +126,7 @@ export default async function FinancingDetailPage({
 
 										{/* Tour details */}
 										{tour ? (
-											<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+											<div className="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant">
 												<p className="text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-4">
 													{t("tour.title")}
 												</p>
@@ -176,7 +175,7 @@ export default async function FinancingDetailPage({
 
 										{/* Disbursement account */}
 										{hasBanking ? (
-											<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+											<div className="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant">
 												<div className="flex items-center justify-between gap-3 mb-4">
 													<p className="text-xs font-semibold uppercase tracking-widest text-on-surface-variant">
 														{t("banking.title")}
@@ -215,7 +214,7 @@ export default async function FinancingDetailPage({
 										) : null}
 
 										{/* Documents + term sheet */}
-										<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+										<div className="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant">
 											<p className="text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-3">
 												{t("fields.documents")}
 											</p>
@@ -233,9 +232,7 @@ export default async function FinancingDetailPage({
 															rel="noopener noreferrer"
 															className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-surface-container-high text-xs font-semibold text-on-surface hover:bg-surface-container-highest transition-colors"
 														>
-															<span className="material-symbols-outlined text-xs">
-																attach_file
-															</span>
+															<Icon name="file-text" size={13} />
 															{t("docs.open", { index: index + 1 })}
 														</a>
 													))}
@@ -244,11 +241,9 @@ export default async function FinancingDetailPage({
 															href={app.term_sheet_url}
 															target="_blank"
 															rel="noopener noreferrer"
-															className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-[#FF5A2E]/10 text-xs font-semibold text-[#FF5A2E] hover:bg-[#FF5A2E]/20 transition-colors"
+															className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-primary/10 text-xs font-semibold text-primary hover:bg-primary/20 transition-colors"
 														>
-															<span className="material-symbols-outlined text-xs">
-																open_in_new
-															</span>
+															<Icon name="external-link" size={13} />
 															{t("docs.termSheet")}
 														</a>
 													) : null}
@@ -258,7 +253,7 @@ export default async function FinancingDetailPage({
 
 										{/* Reviewer note */}
 										{app.note ? (
-											<div className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+											<div className="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant">
 												<p className="text-xs font-semibold uppercase tracking-widest text-on-surface-variant mb-2">
 													{t("fields.note")}
 												</p>

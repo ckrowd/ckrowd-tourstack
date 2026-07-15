@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import Icon from "@/components/icons";
 import { useId, useState } from "react";
 import HowItWorksModal from "@/components/HowItWorksModal";
 import StatusBadge, { type StatusTone } from "@/components/ui/StatusBadge";
@@ -58,16 +59,16 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 								aria-label="Close"
 								className="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors"
 							>
-								<span className="material-symbols-outlined">close</span>
+								<Icon name="x" size={18} />
 							</button>
 						</div>
 						<div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
 							{(t.raw("productSuite") as { name: string; tag: string; desc: string }[]).map((suite) => (
 								<div
 									key={suite.name}
-									className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10 flex flex-col gap-3"
+									className="tsd-card p-6 flex flex-col gap-3"
 								>
-									<span className="text-[10px] font-semibold uppercase tracking-wider text-[#FF5A2E] bg-[#FF5A2E]/10 px-2 py-0.5 rounded-full self-start">
+									<span className="text-[10px] font-semibold uppercase tracking-wider text-primary bg-primary/10 px-2 py-0.5 rounded-full self-start">
 										{suite.tag}
 									</span>
 									<p className="font-(family-name:--font-manrope) font-semibold text-on-surface text-sm">
@@ -108,7 +109,7 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 								aria-label={tIns("faqClose")}
 								className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors"
 							>
-								<span className="material-symbols-outlined">close</span>
+								<Icon name="x" size={18} />
 							</button>
 						</div>
 						<div className="p-6 space-y-2">
@@ -123,9 +124,7 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 											className="w-full flex items-center justify-between gap-3 text-left p-4 hover:bg-surface-container-low transition-colors"
 										>
 											<span className="font-(family-name:--font-manrope) font-semibold text-sm text-on-surface">{f.q}</span>
-											<span className={`material-symbols-outlined text-on-surface-variant shrink-0 transition-transform ${isExpanded ? "rotate-180" : ""}`}>
-												expand_more
-											</span>
+											<Icon name="chevron-down" size={18} className={`text-on-surface-variant shrink-0 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
 										</button>
 										{isExpanded && (
 											<p className="px-4 pb-4 text-sm text-on-surface-variant leading-relaxed">{f.a}</p>
@@ -141,7 +140,7 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 			{/* Header */}
 			<div className="mb-8 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
 				<div>
-					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
+					<span className="text-xs font-semibold uppercase tracking-widest text-primary block mb-2">
 						{t("promoterPortal")}
 					</span>
 					<h1 className="text-3xl font-semibold font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -158,7 +157,7 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 						onClick={() => setProductsOpen(true)}
 						className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-semibold hover:bg-surface-container-high transition-colors"
 					>
-						<span className="material-symbols-outlined text-base text-[#FF5A2E]">category</span>
+						<Icon name="shapes" size={16} className="text-primary" />
 						{t("productsButton")}
 					</button>
 					<HowItWorksModal
@@ -176,7 +175,7 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 						onClick={() => setFaqOpen(true)}
 						className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-semibold hover:bg-surface-container-high transition-colors"
 					>
-						<span className="material-symbols-outlined text-base text-[#FF5A2E]">help</span>
+						<Icon name="help-circle" size={16} className="text-primary" />
 						{tIns("faqButton")}
 					</button>
 				</div>
@@ -199,10 +198,8 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 					{t("myApplications")}
 				</h2>
 				{applications.length === 0 ? (
-					<div className="bg-surface-container-lowest rounded-2xl p-10 text-center shadow-sm">
-						<span className="material-symbols-outlined text-4xl text-on-surface-variant block mb-3">
-							shield
-						</span>
+					<div className="tsd-card p-10 text-center">
+						<Icon name="insurance" size={36} className="text-on-surface-variant block mb-3" />
 						<p className="text-sm font-semibold text-on-surface-variant">
 							{t("noApplications")}
 						</p>
@@ -214,7 +211,7 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 							return (
 								<div
 									key={String(app.id)}
-									className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-transparent hover:border-outline-variant/20 transition-all"
+									className="tsd-card tsd-card-hover p-6"
 								>
 									<div className="flex items-start justify-between gap-4 mb-4">
 										<div>

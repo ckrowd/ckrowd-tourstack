@@ -28,9 +28,9 @@ export default async function DashboardLayout({
 	}
 
 	return (
-		<>
+		<div className="ts-dash">
 			<ProfileSetupGate />
 			{children}
-		</>
+		</div>
 	);
 }

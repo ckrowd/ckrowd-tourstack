@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import Icon from "@/components/icons";
 import { useId, useState } from "react";
 import EcosystemReadiness from "@/components/EcosystemReadiness";
 import FinancingFaq from "@/components/FinancingFaq";
@@ -73,16 +74,16 @@ export default function FinancingApplyClient({ applications, locale, readiness }
 								aria-label="Close"
 								className="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors"
 							>
-								<span className="material-symbols-outlined">close</span>
+								<Icon name="x" size={18} />
 							</button>
 						</div>
 						<div className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
 							{PRODUCT_CARD_KEYS.map((key) => (
 								<div
 									key={key}
-									className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10 flex flex-col gap-3"
+									className="tsd-card p-6 flex flex-col gap-3"
 								>
-									<span className="text-xs font-semibold uppercase tracking-wider text-[#FF5A2E] bg-[#FF5A2E]/10 px-2 py-0.5 rounded-full self-start">
+									<span className="text-xs font-semibold uppercase tracking-wider text-primary bg-primary/10 px-2 py-0.5 rounded-full self-start">
 										{t(`productCards.${key}.tag`)}
 									</span>
 									<p className="font-(family-name:--font-manrope) font-semibold text-on-surface text-base">
@@ -113,7 +114,7 @@ export default function FinancingApplyClient({ applications, locale, readiness }
 			{/* Header */}
 			<div className="mb-8 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
 				<div>
-					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
+					<span className="text-xs font-semibold uppercase tracking-widest text-primary block mb-2">
 						{t("promoterPortal")}
 					</span>
 					<h1 className="text-3xl font-semibold font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
@@ -130,7 +131,7 @@ export default function FinancingApplyClient({ applications, locale, readiness }
 						onClick={() => setProductsOpen(true)}
 						className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-semibold hover:bg-surface-container-high transition-colors"
 					>
-						<span className="material-symbols-outlined text-base text-[#FF5A2E]">category</span>
+						<Icon name="shapes" size={16} className="text-primary" />
 						{t("productsButton")}
 					</button>
 					<HowItWorksModal
@@ -172,10 +173,8 @@ export default function FinancingApplyClient({ applications, locale, readiness }
 					{t("myApplications")}
 				</h2>
 				{applications.length === 0 ? (
-					<div className="bg-surface-container-lowest rounded-2xl p-10 text-center shadow-sm">
-						<span className="material-symbols-outlined text-4xl text-on-surface-variant block mb-3">
-							account_balance
-						</span>
+					<div className="tsd-card p-10 text-center">
+						<Icon name="financing" size={36} className="text-on-surface-variant block mb-3" />
 						<p className="text-sm font-semibold text-on-surface-variant">
 							{t("noApplications")}
 						</p>
@@ -187,7 +186,7 @@ export default function FinancingApplyClient({ applications, locale, readiness }
 							return (
 								<div
 									key={String(app.id)}
-									className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-transparent hover:border-outline-variant/20 transition-all"
+									className="tsd-card tsd-card-hover p-6"
 								>
 									<div className="flex items-start justify-between gap-4 mb-4">
 										<div>
@@ -226,7 +225,7 @@ export default function FinancingApplyClient({ applications, locale, readiness }
 									<div className="mt-4">
 										<Link
 											href={`/financing/${String(app.id)}`}
-											className="text-sm font-semibold text-[#FF5A2E] hover:underline"
+											className="text-sm font-semibold text-primary hover:underline"
 										>
 											{t("viewDetails")}
 										</Link>
