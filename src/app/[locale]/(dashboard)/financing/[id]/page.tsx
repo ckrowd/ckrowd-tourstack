@@ -56,7 +56,7 @@ export default async function FinancingDetailPage({
 						</div>
 
 						{!result.success || !app ? (
-							<div className="bg-rose-50 border border-rose-200 text-rose-700 rounded-2xl p-6 text-sm font-medium">
+							<div className="bg-rose-500/10 border border-rose-500/25 text-rose-600 dark:text-rose-300 rounded-2xl p-6 text-sm font-medium">
 								{result.error ?? t("errors.load")}
 							</div>
 						) : (

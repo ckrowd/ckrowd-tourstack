@@ -273,27 +273,46 @@ function ToggleGroup({ value, onChange, options }: { value: boolean; onChange: (
 }
 
 function Stepper({ current, steps }: { current: number; steps: { label: string }[] }) {
-	const progress = (current / (steps.length - 1)) * 100;
+	// Journey rail — same language as the profile journey: numbered circles
+	// that turn emerald once passed, connectors that fill as you advance.
 	return (
-		<div className="mb-8">
-			<div className="relative flex items-center justify-between">
-				<div className="absolute left-0 top-1/2 z-0 h-0.5 w-full -translate-y-1/2 bg-surface-container-high" />
-				<div className="absolute left-0 top-1/2 z-0 h-0.5 -translate-y-1/2 bg-primary transition-all duration-500" style={{ width: `${progress}%` }} />
+		<div className="tsd-card p-4 md:p-5 mb-8">
+			<ol className="flex items-center gap-0">
 				{steps.map((step, i) => {
 					const done = i < current;
 					const active = i === current;
 					return (
-						<div key={step.label} className="relative z-10 flex flex-col items-center">
-							<div className={`flex h-8 w-8 items-center justify-center rounded-full ring-4 ring-surface-container-lowest font-semibold text-xs ${done || active ? "bg-primary text-on-primary" : "bg-surface-container-high text-on-surface-variant"}`}>
-								{done ? <Icon name="check" size={12} /> : i + 1}
+						<li key={step.label} className="flex items-center flex-1 last:flex-none min-w-0">
+							<div className="flex items-center gap-2 min-w-0">
+								<span
+									className={`flex h-7 w-7 md:h-8 md:w-8 items-center justify-center rounded-full border text-[11px] font-semibold shrink-0 transition-all duration-300 [transition-timing-function:var(--ease-out)] ${
+										done
+											? "bg-emerald-500 border-emerald-500 text-white"
+											: active
+												? "border-primary text-primary bg-primary/10"
+												: "border-outline-variant text-on-surface-variant"
+									}`}
+								>
+									{done ? <Icon name="check" size={13} strokeWidth={2.5} /> : String(i + 1).padStart(2, "0")}
+								</span>
+								<span
+									className={`hidden lg:block text-[10px] font-semibold uppercase tracking-wider truncate ${active ? "text-on-surface" : done ? "text-on-surface-variant" : "text-on-surface-variant/60"}`}
+								>
+									{step.label}
+								</span>
 							</div>
-							<span className={`mt-1.5 hidden sm:block text-[9px] font-semibold uppercase tracking-wider ${active ? "text-primary" : done ? "text-primary/60" : "text-on-surface-variant"}`}>
-								{step.label}
-							</span>
-						</div>
+							{i < steps.length - 1 && (
+								<span className="flex-1 h-px mx-2 md:mx-3 relative bg-outline-variant overflow-hidden rounded-full">
+									<span
+										className="absolute inset-y-0 left-0 bg-emerald-500 transition-[width] duration-500 [transition-timing-function:var(--ease-out)]"
+										style={{ width: done ? "100%" : "0%" }}
+									/>
+								</span>
+							)}
+						</li>
 					);
 				})}
-			</div>
+			</ol>
 		</div>
 	);
 }
@@ -1004,7 +1023,7 @@ function EOIPageContent() {
 
 											<SectionHeading>{t("form.step6.insuranceSection")}</SectionHeading>
 											<div className="sm:col-span-2">
-												<div className="flex items-start gap-3 rounded-2xl border border-emerald-200 bg-emerald-50 px-5 py-4">
+												<div className="flex items-start gap-3 rounded-2xl border border-emerald-500/25 bg-emerald-500/10 px-5 py-4">
 													<Icon name="check-circle" size={18} className="text-emerald-600 shrink-0" />
 													<div>
 														<p className="text-sm font-semibold text-on-surface">{t("form.step6.insuranceCompulsoryTitle")}</p>
@@ -1210,7 +1229,7 @@ function EOIPageContent() {
 									)}
 
 									{submitError && (
-										<p className="text-sm font-medium text-rose-700" role="alert">{submitError}</p>
+										<p className="text-sm font-medium text-rose-600 dark:text-rose-300" role="alert">{submitError}</p>
 									)}
 
 									<div className="flex flex-wrap items-center justify-between gap-3 border-t border-outline-variant/10 pt-6">

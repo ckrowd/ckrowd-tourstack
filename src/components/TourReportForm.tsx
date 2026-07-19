@@ -106,9 +106,9 @@ export default function TourReportForm({ tourId }: { tourId: string }) {
 
 	if (mutation.data?.success) {
 		return (
-			<div className="flex items-center gap-3 bg-emerald-50 border border-emerald-200 rounded-2xl p-5">
+			<div className="flex items-center gap-3 bg-emerald-500/10 border border-emerald-500/25 rounded-2xl p-5">
 				<Icon name="check-circle" size={24} className="text-emerald-600 shrink-0" />
-				<p className="text-sm font-semibold text-emerald-900">{t("success")}</p>
+				<p className="text-sm font-semibold text-emerald-700 dark:text-emerald-300">{t("success")}</p>
 			</div>
 		);
 	}

@@ -63,7 +63,7 @@ function useCrewConstants() {
 			range: t("tiers.tier2.range"),
 			color: "emerald",
 			bg: "bg-emerald-100",
-			text: "text-emerald-800",
+			text: "text-emerald-700/90 dark:text-emerald-300/80",
 			border: "border-emerald-300",
 			ring: "ring-emerald-400",
 			perks: [
@@ -79,7 +79,7 @@ function useCrewConstants() {
 			range: t("tiers.tier3.range"),
 			color: "blue",
 			bg: "bg-blue-100",
-			text: "text-blue-800",
+			text: "text-blue-700/90 dark:text-blue-300/80",
 			border: "border-blue-300",
 			ring: "ring-blue-400",
 			perks: [
@@ -96,7 +96,7 @@ function useCrewConstants() {
 			range: t("tiers.tier4.range"),
 			color: "amber",
 			bg: "bg-amber-100",
-			text: "text-amber-800",
+			text: "text-amber-700/90 dark:text-amber-300/80",
 			border: "border-amber-400",
 			ring: "ring-amber-500",
 			perks: [
@@ -1122,7 +1122,7 @@ export default function CrewClient() {
 														key={item.label}
 														className={`flex items-center justify-between p-3 rounded-xl border text-xs font-semibold ${
 															item.earned
-																? "bg-emerald-50 border-emerald-200 text-emerald-800"
+																? "bg-emerald-500/10 border-emerald-500/25 text-emerald-700/90 dark:text-emerald-300/80"
 																: "bg-surface-container-low border-outline-variant/10 text-on-surface-variant opacity-60"
 														}`}
 													>

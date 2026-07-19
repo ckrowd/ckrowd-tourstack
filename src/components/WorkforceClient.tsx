@@ -63,7 +63,7 @@ function useWorkforceConstants() {
 			range: t("tiers.tier2.range"),
 			color: "emerald",
 			bg: "bg-emerald-100",
-			text: "text-emerald-800",
+			text: "text-emerald-700/90 dark:text-emerald-300/80",
 			border: "border-emerald-300",
 			ring: "ring-emerald-400",
 			perks: [
@@ -79,7 +79,7 @@ function useWorkforceConstants() {
 			range: t("tiers.tier3.range"),
 			color: "blue",
 			bg: "bg-blue-100",
-			text: "text-blue-800",
+			text: "text-blue-700/90 dark:text-blue-300/80",
 			border: "border-blue-300",
 			ring: "ring-blue-400",
 			perks: [
@@ -96,7 +96,7 @@ function useWorkforceConstants() {
 			range: t("tiers.tier4.range"),
 			color: "amber",
 			bg: "bg-amber-100",
-			text: "text-amber-800",
+			text: "text-amber-700/90 dark:text-amber-300/80",
 			border: "border-amber-400",
 			ring: "ring-amber-500",
 			perks: [

@@ -49,7 +49,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 function ErrorBanner({ msg }: { msg: string }) {
 	return (
-		<div className="mt-4 bg-rose-50 border border-rose-200 text-rose-700 rounded-xl px-4 py-3 text-sm font-medium">
+		<div className="mt-4 bg-rose-500/10 border border-rose-500/25 text-rose-600 dark:text-rose-300 rounded-xl px-4 py-3 text-sm font-medium">
 			{msg}
 		</div>
 	);
@@ -177,7 +177,7 @@ function SponsorshipMatcherTab({ eois }: { eois: EOI[] }) {
 				<ResultCard>
 					{!!d.strategy &&<p className="text-sm text-on-surface-variant italic">{String(d.strategy)}</p>}
 					<div className="flex gap-4 flex-wrap">
-						{!!d.totalPotential &&<div className="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-2"><p className="text-[10px] font-black uppercase tracking-widest text-emerald-700">{t("sponsors.totalPotential")}</p><p className="text-base font-black text-emerald-900">{String(d.totalPotential)}</p></div>}
+						{!!d.totalPotential &&<div className="bg-emerald-500/10 border border-emerald-500/25 rounded-xl px-4 py-2"><p className="text-[10px] font-black uppercase tracking-widest text-emerald-700">{t("sponsors.totalPotential")}</p><p className="text-base font-black text-emerald-700 dark:text-emerald-300">{String(d.totalPotential)}</p></div>}
 						{!!d.topCategory &&<div className="bg-surface-container-low rounded-xl px-4 py-2"><p className="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">{t("sponsors.topCategory")}</p><p className="text-base font-bold text-on-surface">{String(d.topCategory)}</p></div>}
 					</div>
 					{Array.isArray(d.matches) && (
@@ -187,7 +187,7 @@ function SponsorshipMatcherTab({ eois }: { eois: EOI[] }) {
 								<div key={i} className="bg-surface-container-low rounded-xl p-4">
 									<div className="flex items-center justify-between mb-2">
 										<p className="font-bold text-sm text-on-surface">{String(m.industry ?? "")}</p>
-										<span className={`text-xs font-black px-2 py-0.5 rounded-full ${Number(m.fitScore ?? 0) >= 80 ? "bg-emerald-100 text-emerald-800" : "bg-yellow-100 text-yellow-800"}`}>{String(m.fitScore ?? 0)}% fit</span>
+										<span className={`text-xs font-black px-2 py-0.5 rounded-full ${Number(m.fitScore ?? 0) >= 80 ? "bg-emerald-100 text-emerald-700/90 dark:text-emerald-300/80" : "bg-yellow-100 text-yellow-800"}`}>{String(m.fitScore ?? 0)}% fit</span>
 									</div>
 									{Array.isArray(m.suggestedBrands) && <p className="text-xs text-on-surface-variant mb-1"><span className="font-semibold">Brands:</span> {(m.suggestedBrands as string[]).join(", ")}</p>}
 									<p className="text-xs text-on-surface-variant mb-1">{String(m.reasoning ?? "")}</p>
@@ -247,7 +247,7 @@ function VenueRecommendationTab() {
 											<p className="font-bold text-sm text-on-surface">{String(v.name ?? "")}</p>
 											<p className="text-xs text-on-surface-variant">{String(v.type ?? "")} · {String(v.location ?? "")}</p>
 										</div>
-										<span className={`text-xs font-black px-2 py-0.5 rounded-full shrink-0 ${Number(v.suitabilityScore ?? 0) >= 80 ? "bg-emerald-100 text-emerald-800" : "bg-yellow-100 text-yellow-800"}`}>{String(v.suitabilityScore ?? 0)}/100</span>
+										<span className={`text-xs font-black px-2 py-0.5 rounded-full shrink-0 ${Number(v.suitabilityScore ?? 0) >= 80 ? "bg-emerald-100 text-emerald-700/90 dark:text-emerald-300/80" : "bg-yellow-100 text-yellow-800"}`}>{String(v.suitabilityScore ?? 0)}/100</span>
 									</div>
 									<div className="flex flex-wrap gap-3 text-xs mb-2">
 										<span><span className="font-semibold">Capacity:</span> {Number(v.estimatedCapacity ?? 0).toLocaleString()} ({String(v.capacityUtilization ?? "—")} utilization)</span>
@@ -302,7 +302,7 @@ function RouteOptimizerTab() {
 			{d && (
 				<ResultCard>
 					<div className="flex flex-wrap gap-3">
-						{d.logisticsScore != null && <div className="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-2"><p className="text-[10px] font-black uppercase tracking-widest text-emerald-700">{t("route.logisticsScore")}</p><p className="text-xl font-black text-emerald-900">{String(d.logisticsScore)}/100</p></div>}
+						{d.logisticsScore != null && <div className="bg-emerald-500/10 border border-emerald-500/25 rounded-xl px-4 py-2"><p className="text-[10px] font-black uppercase tracking-widest text-emerald-700">{t("route.logisticsScore")}</p><p className="text-xl font-black text-emerald-700 dark:text-emerald-300">{String(d.logisticsScore)}/100</p></div>}
 						{!!d.estimatedSavingsVsRandom &&<div className="bg-surface-container-low rounded-xl px-4 py-2"><p className="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">{t("route.savings")}</p><p className="text-xl font-black text-on-surface">{String(d.estimatedSavingsVsRandom)}</p></div>}
 						{d.totalTravelDays != null && <div className="bg-surface-container-low rounded-xl px-4 py-2"><p className="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">{t("route.travelDays")}</p><p className="text-xl font-black text-on-surface">{String(d.totalTravelDays)}</p></div>}
 					</div>

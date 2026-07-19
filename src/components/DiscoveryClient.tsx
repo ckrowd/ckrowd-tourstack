@@ -309,84 +309,95 @@ export default function DiscoveryClient({ myTours = [] }: { myTours?: MyTour[] }
 							<p className="text-sm mt-1">{t("noResults.description")}</p>
 						</div>
 					) : (
-						<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+						<div className="tsd-stagger grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
 							{filtered.map((artist) => (
-								<div
+								<article
 									key={String(artist.id ?? artist.name)}
-									className="tsd-card tsd-card-hover overflow-hidden group"
+									className="tsd-card tsd-card-hover overflow-hidden group flex flex-col"
 								>
-									<div className="h-56 relative overflow-hidden bg-surface-container-high">
+									<div className="h-44 relative overflow-hidden bg-surface-container-high">
 										{artist.image_url ? (
 											<Image
 												src={String(artist.image_url)}
 												alt={String(artist.name ?? "")}
 												fill
-												className="object-cover group-hover:scale-110 transition-transform duration-700"
+												className="object-cover group-hover:scale-[1.04] transition-transform duration-700 [transition-timing-function:var(--ease-out)]"
 											/>
 										) : (
 											<div className="w-full h-full flex items-center justify-center">
-												<Icon name="music" size={44} className="text-on-surface-variant" />
+												<Icon name="music" size={40} className="text-on-surface-variant" />
 											</div>
 										)}
-										<div className="absolute top-4 left-4">
-											<span className="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-semibold text-primary uppercase tracking-tighter shadow-sm">
-												{String(artist.genre ?? "")}
-											</span>
-										</div>
+										<div className="absolute inset-x-0 bottom-0 h-24 bg-linear-to-t from-black/70 to-transparent" />
 										{!!artist.is_trending && (
-											<div className="absolute top-4 right-4">
-												<span className="bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-widest shadow-sm">
-													{t("trendingLabel")}
-												</span>
-											</div>
-										)}
-										<div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/60 to-transparent p-4">
-											<span className="text-white text-xs font-semibold uppercase tracking-wider opacity-90">
-												{String(artist.tour_name ?? "")}
+											<span className="absolute top-3 right-3 inline-flex items-center gap-1.5 bg-primary text-white px-2.5 py-1 rounded-md text-[10px] font-semibold uppercase tracking-widest">
+												<Icon name="trending-up" size={11} strokeWidth={2.5} />
+												{t("trendingLabel")}
 											</span>
+										)}
+										<div className="absolute bottom-3 left-4 right-4 flex items-end justify-between gap-3">
+											<div className="min-w-0">
+												<h3 className="text-white text-lg font-semibold leading-tight truncate group-hover:text-orange-200 transition-colors">
+													{String(artist.name ?? "")}
+												</h3>
+												<p className="text-white/80 text-xs font-medium truncate">
+													{String(artist.tour_name ?? "")}
+												</p>
+											</div>
+											{artist.genre ? (
+												<span className="shrink-0 inline-flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-widest text-white/90 bg-white/10 backdrop-blur px-2.5 py-1 rounded-md border border-white/15">
+													<span className="w-1 h-1 rounded-full bg-primary" />
+													{String(artist.genre)}
+												</span>
+											) : null}
 										</div>
 									</div>
 
-									<div className="p-5">
-										<h3 className="font-(family-name:--font-manrope) text-xl font-semibold group-hover:text-primary transition-colors">
-											{String(artist.name ?? "")}
-										</h3>
-										<div className="mt-3 space-y-2">
-											<div className="flex items-center gap-2 text-on-surface-variant">
-												<Icon name="calendar" size={16} />
-												<span className="text-sm font-medium">
-													{artist.tour_start && artist.tour_end
-														? `${new Date(String(artist.tour_start)).toLocaleDateString(locale)} – ${new Date(String(artist.tour_end)).toLocaleDateString(locale)}`
-														: String(artist.tour_window ?? "")}
-												</span>
-											</div>
-											<div className="flex items-center gap-2 text-on-surface-variant">
-												<Icon name="wallet" size={16} />
-												<span className="text-sm font-medium">
-													{artist.fee_min != null && artist.fee_max != null
-														? `$${Math.round(Number(artist.fee_min) / 1000)}k – $${Math.round(Number(artist.fee_max) / 1000)}k USD`
-														: "—"}
-												</span>
-											</div>
-											<div className="flex items-center gap-2 text-on-surface-variant">
-												<Icon name="map-pin" size={16} />
-												<span className="text-sm font-medium">
-													{Array.isArray(artist.markets)
-														? (artist.markets as string[]).join(", ")
-														: String(artist.markets ?? "")}
-												</span>
-											</div>
+									<dl className="px-5 py-1 flex-1 divide-y divide-outline-variant/60 text-sm">
+										<div className="flex items-center justify-between gap-3 py-2.5">
+											<dt className="flex items-center gap-2 text-on-surface-variant text-xs font-medium shrink-0">
+												<Icon name="calendar" size={13} />
+												{t("filters.availableWindow")}
+											</dt>
+											<dd className="font-semibold text-on-surface text-xs text-right truncate">
+												{artist.tour_start && artist.tour_end
+													? `${new Date(String(artist.tour_start)).toLocaleDateString(locale)} – ${new Date(String(artist.tour_end)).toLocaleDateString(locale)}`
+													: String(artist.tour_window ?? "")}
+											</dd>
 										</div>
-										<div className="mt-5">
-											<Link
-												href={`/eoi${artist.id ? `?id=${String(artist.id)}` : ""}`}
-												className="block w-full bg-primary py-3 rounded-xl text-white font-semibold text-sm tracking-wide shadow-md shadow-primary/10 active:scale-[0.98] transition-all text-center"
-											>
-												{t("submitEoi")}
-											</Link>
+										<div className="flex items-center justify-between gap-3 py-2.5">
+											<dt className="flex items-center gap-2 text-on-surface-variant text-xs font-medium shrink-0">
+												<Icon name="map-pin" size={13} />
+												{t("filters.region")}
+											</dt>
+											<dd className="font-semibold text-on-surface text-xs text-right truncate">
+												{Array.isArray(artist.markets)
+													? (artist.markets as string[]).join(", ")
+													: String(artist.markets ?? "")}
+											</dd>
 										</div>
+									</dl>
+
+									<div className="tsd-foot px-5 py-3.5 flex items-center justify-between gap-3">
+										<div className="min-w-0">
+											<p className="text-[9px] font-semibold uppercase tracking-[0.14em] text-on-surface-variant">
+												{t("filters.feeRange")}
+											</p>
+											<p className="text-sm font-(family-name:--font-display) text-on-surface leading-tight">
+												{artist.fee_min != null && artist.fee_max != null
+													? `$${Math.round(Number(artist.fee_min) / 1000)}k – $${Math.round(Number(artist.fee_max) / 1000)}k`
+													: "—"}
+											</p>
+										</div>
+										<Link
+											href={`/eoi${artist.id ? `?id=${String(artist.id)}` : ""}`}
+											className="shrink-0 inline-flex items-center gap-1.5 bg-primary text-white text-xs font-semibold px-4 py-2.5 rounded-lg hover:opacity-90 active:scale-95 transition-all"
+										>
+											{t("submitEoi")}
+											<Icon name="arrow-right" size={13} strokeWidth={2.25} />
+										</Link>
 									</div>
-								</div>
+								</article>
 							))}
 						</div>
 					)}

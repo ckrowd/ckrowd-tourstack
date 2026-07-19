@@ -215,14 +215,14 @@ export default async function DashboardPage({ params }: Props) {
 
 					{/* Finance / insurance action prompts */}
 					{(hasFinancingRequest && !hasFinancingApp) && (
-						<div className="mb-6 bg-amber-50 border border-amber-200 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+						<div className="mb-6 bg-amber-500/10 border border-amber-500/25 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
 							<div className="flex items-start gap-3">
 								<Icon name="wallet" size={18} className="text-amber-600 mt-0.5 shrink-0" />
 								<div>
-									<p className="font-(family-name:--font-manrope) font-semibold text-amber-900 text-sm">
+									<p className="font-(family-name:--font-manrope) font-semibold text-amber-700 dark:text-amber-300 text-sm">
 										{t("financePrompt.title")}
 									</p>
-									<p className="text-xs text-amber-800 mt-0.5">
+									<p className="text-xs text-amber-700/90 dark:text-amber-300/80 mt-0.5">
 										{t("financePrompt.description")}
 									</p>
 								</div>
@@ -233,14 +233,14 @@ export default async function DashboardPage({ params }: Props) {
 						</div>
 					)}
 					{(hasInsuranceRequest && !hasInsuranceApp) && (
-						<div className="mb-6 bg-blue-50 border border-blue-200 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+						<div className="mb-6 bg-blue-500/10 border border-blue-500/25 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
 							<div className="flex items-start gap-3">
 								<Icon name="insurance" size={18} className="text-blue-600 mt-0.5 shrink-0" />
 								<div>
-									<p className="font-(family-name:--font-manrope) font-semibold text-blue-900 text-sm">
+									<p className="font-(family-name:--font-manrope) font-semibold text-blue-700 dark:text-blue-300 text-sm">
 										{t("insurancePrompt.title")}
 									</p>
-									<p className="text-xs text-blue-800 mt-0.5">
+									<p className="text-xs text-blue-700/90 dark:text-blue-300/80 mt-0.5">
 										{t("insurancePrompt.description")}
 									</p>
 								</div>
@@ -252,14 +252,14 @@ export default async function DashboardPage({ params }: Props) {
 					)}
 					{/* Document upload prompt for approved EOIs */}
 					{approvedEoi && (
-						<div className="mb-6 bg-emerald-50 border border-emerald-200 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+						<div className="mb-6 bg-emerald-500/10 border border-emerald-500/25 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
 							<div className="flex items-start gap-3">
 								<Icon name="upload" size={18} className="text-emerald-600 mt-0.5 shrink-0" />
 								<div>
-									<p className="font-(family-name:--font-manrope) font-semibold text-emerald-900 text-sm">
+									<p className="font-(family-name:--font-manrope) font-semibold text-emerald-700 dark:text-emerald-300 text-sm">
 										{t("docsPrompt.title")}
 									</p>
-									<p className="text-xs text-emerald-800 mt-0.5">
+									<p className="text-xs text-emerald-700/90 dark:text-emerald-300/80 mt-0.5">
 										{approvedEoiDocTypes.length > 0
 											? t("docsPrompt.description", { docs: approvedEoiDocLabels })
 											: t("docsPrompt.descriptionGeneric")}

@@ -68,7 +68,7 @@ export default async function TourDetailPage({
 						</div>
 
 						{!tourResult.success || !tour ? (
-							<div className="bg-rose-50 border border-rose-200 text-rose-700 rounded-2xl p-6 text-sm font-medium">
+							<div className="bg-rose-500/10 border border-rose-500/25 text-rose-600 dark:text-rose-300 rounded-2xl p-6 text-sm font-medium">
 								{tourResult.error ?? t("errors.load")}
 							</div>
 						) : (
@@ -185,7 +185,7 @@ export default async function TourDetailPage({
 										{t("milestones.title")}
 									</h3>
 									{!milestonesResult.success ? (
-										<p className="text-sm text-rose-700">
+										<p className="text-sm text-rose-600 dark:text-rose-300">
 											{milestonesResult.error ?? t("errors.milestones")}
 										</p>
 									) : milestones.length === 0 ? (
