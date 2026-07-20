@@ -21,21 +21,33 @@ const toneClasses: Record<StatusTone, string> = {
 	running: "bg-status-approved/10 text-status-approved",
 };
 
+const dotClasses: Record<StatusTone, string> = {
+	approved: "bg-status-approved",
+	pending: "bg-status-pending",
+	contacted: "bg-status-contacted",
+	booked: "bg-status-booked",
+	rejected: "bg-status-rejected",
+	neutral: "bg-on-surface-variant",
+	running: "bg-status-approved",
+};
+
 export default function StatusBadge({
 	tone,
 	children,
 	className,
+	dot = false,
 }: {
 	tone: StatusTone;
 	children: React.ReactNode;
 	className?: string;
+	dot?: boolean;
 }) {
 	return (
 		<span
 			className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider ${toneClasses[tone]} ${className ?? ""}`}
 		>
-			{tone === "running" && (
-				<span className="w-1.5 h-1.5 rounded-full bg-status-approved" />
+			{(dot || tone === "running") && (
+				<span className={`w-1.5 h-1.5 rounded-full ${dotClasses[tone]}`} />
 			)}
 			{children}
 		</span>

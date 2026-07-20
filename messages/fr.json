@@ -3217,6 +3217,7 @@
     },
     "table": {
       "artistTour": "Artiste / Tournée",
+      "submitted": "Soumis",
       "venue": "Lieu",
       "status": "Statut",
       "noEois": "Pas encore d'EOI soumises",

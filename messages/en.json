@@ -3217,6 +3217,7 @@
     },
     "table": {
       "artistTour": "Artiste / Tour",
+      "submitted": "Submitted",
       "venue": "Venue",
       "status": "Status",
       "noEois": "No EOIs submitted yet",

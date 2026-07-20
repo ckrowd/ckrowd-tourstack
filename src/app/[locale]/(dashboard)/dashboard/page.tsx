@@ -555,22 +555,25 @@ export default async function DashboardPage({ params }: Props) {
 							<div className="tsd-card overflow-hidden">
 								<table className="w-full text-left border-collapse">
 									<thead>
-										<tr className="bg-surface-container-high">
-											<th className="px-3 md:px-5 py-3 md:py-4 text-[10px] md:text-xs font-semibold uppercase tracking-widest text-on-surface-variant">
+										<tr className="border-b border-outline-variant">
+											<th className="px-5 py-3 text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant text-left">
 												{t("table.artistTour")}
 											</th>
-											<th className="px-3 md:px-5 py-3 md:py-4 text-[10px] md:text-xs font-semibold uppercase tracking-widest text-on-surface-variant hidden md:table-cell">
+											<th className="px-5 py-3 text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant text-left hidden md:table-cell">
 												{t("table.venue")}
 											</th>
-											<th className="px-3 md:px-5 py-3 md:py-4 text-[10px] md:text-xs font-semibold uppercase tracking-widest text-on-surface-variant">
+											<th className="px-5 py-3 text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant text-left hidden sm:table-cell">
+												{t("table.submitted")}
+											</th>
+											<th className="px-5 py-3 text-[10px] font-semibold uppercase tracking-widest text-on-surface-variant text-right">
 												{t("table.status")}
 											</th>
 										</tr>
 									</thead>
-									<tbody className="divide-y divide-outline-variant/10">
+									<tbody>
 										{eois.length === 0 ? (
 											<tr>
-												<td colSpan={3}>
+												<td colSpan={4}>
 													<EmptyState
 														icon="tours"
 														title={t("table.noEois")}
@@ -588,27 +591,27 @@ export default async function DashboardPage({ params }: Props) {
 												return (
 													<tr
 														key={String(req.id ?? req.city)}
-														className="hover:bg-surface-container-low transition-colors"
+														className="group border-b border-outline-variant/60 last:border-0 hover:bg-surface-container-low transition-colors"
 													>
-														<td className="px-5 py-4">
+														<td className="px-5 py-3.5">
 															<div className="flex items-center gap-3">
-																<div className="h-10 w-10 rounded-lg overflow-hidden shrink-0 relative bg-surface-container-high flex items-center justify-center">
+																<div className="h-9 w-9 rounded-lg overflow-hidden shrink-0 relative bg-surface-container-high ring-1 ring-outline-variant flex items-center justify-center">
 																	{reqArtist?.image_url ? (
 																		<Image
 																			src={String(reqArtist.image_url)}
 																			alt={String(reqArtist.name ?? "")}
 																			fill
-																			className="object-cover"
+																			className="object-cover transition-transform duration-300 group-hover:scale-105"
 																		/>
 																	) : (
-																		<Icon name="music" size={18} className="text-on-surface-variant" strokeWidth={1.5} />
+																		<Icon name="music" size={16} className="text-on-surface-variant" strokeWidth={1.5} />
 																	)}
 																</div>
-																<div>
-																	<span className="block font-(family-name:--font-manrope) font-semibold text-on-surface text-sm">
+																<div className="min-w-0">
+																	<span className="block font-semibold text-on-surface text-sm truncate">
 																		{String(reqArtist?.name ?? "Artist")}
 																	</span>
-																	<span className="block text-xs text-on-surface-variant">
+																	<span className="block text-xs text-on-surface-variant truncate">
 																		{String(
 																			reqArtist?.tour_name ?? req.city ?? "",
 																		)}
@@ -616,15 +619,20 @@ export default async function DashboardPage({ params }: Props) {
 																</div>
 															</div>
 														</td>
-														<td className="px-5 py-4 text-xs text-on-surface-variant font-medium hidden md:table-cell">
+														<td className="px-5 py-3.5 text-xs text-on-surface-variant font-medium hidden md:table-cell">
 															{String(req.venue ?? req.city ?? "—")}
 														</td>
-														<td className="px-5 py-4">
-															<StatusBadge tone={eoiStatusToTone(status)}>
+														<td className="px-5 py-3.5 text-xs text-on-surface-variant font-medium hidden sm:table-cell whitespace-nowrap">
+															{req.created_at
+																? new Date(String(req.created_at)).toLocaleDateString(locale, { month: "short", day: "numeric", year: "numeric" })
+																: "—"}
+														</td>
+														<td className="px-5 py-3.5 text-right">
+															<StatusBadge tone={eoiStatusToTone(status)} dot>
 																{t(`statuses.${status}`)}
 															</StatusBadge>
 														</td>
-																											</tr>
+													</tr>
 												);
 											})
 										)}
