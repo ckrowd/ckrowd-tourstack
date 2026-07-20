@@ -3164,7 +3164,7 @@
     "eoiProgressTitle": "EOI Progress — {artist}{tour}",
     "noEoisYet": "No EOIs yet",
     "noEois": "No EOIs",
-    "analytics": {"eyebrow": "Analytics", "title": "Tour pipeline volume", "period": "Last 6 months", "unit": "EOIs"},
+    "analytics": {"submitted": "Submitted", "approved": "Approved", "eyebrow": "Analytics", "title": "Tour pipeline volume", "period": "Last 6 months", "unit": "EOIs"},
     "pipelineTitle": "EOI pipeline",
     "myEoiSubmissions": "My EOI Submissions",
     "newEoi": "New EOI",

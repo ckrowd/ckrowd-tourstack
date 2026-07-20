@@ -463,19 +463,31 @@ export default async function DashboardPage({ params }: Props) {
 										{t("analytics.title")}
 									</h2>
 								</div>
-								<span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-on-surface-variant bg-surface-container px-2.5 py-1 rounded-md shrink-0">
-									<span className="w-1.5 h-1.5 rounded-full bg-primary" />
+								<span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-on-surface-variant shrink-0">
+									<Icon name="calendar" size={12} />
 									{t("analytics.period")}
 								</span>
 							</div>
 							<AreaChart
-								values={eoiSeries}
+								series={[
+									{
+										values: eoiSeries,
+										label: t("analytics.submitted"),
+										color: "var(--color-primary)",
+									},
+									{
+										values: approvedSeries,
+										label: t("analytics.approved"),
+										color: "var(--chart-approved)",
+										fill: false,
+									},
+								]}
 								labels={monthLabels}
 								locale={locale}
 								unitLabel={t("analytics.unit")}
 								integer
 								height={250}
-								className="mt-4"
+								className="mt-6"
 							/>
 						</div>
 						<div className="lg:col-span-1">

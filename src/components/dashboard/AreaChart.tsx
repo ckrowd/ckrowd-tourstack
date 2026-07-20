@@ -2,28 +2,35 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 
-/* Framed hero area chart — the analytics centerpiece. Real y-axis ticks,
-   recessive gridlines, month labels, a draw-in reveal on mount, and a live
-   hover crosshair + tooltip. Responsive via ResizeObserver (crisp text and
-   non-distorted 2px marks, not a squashed preserveAspectRatio). Single
-   series keeps it honest and on-brand; identity is carried by the title,
-   so no legend box is needed (dataviz rule). Reduced-motion skips the draw. */
+/* Framed hero area chart — the analytics centerpiece. Real y-axis ticks
+   (integer-aware for counts), recessive gridlines, month labels, a clip-path
+   draw-in reveal, and a live hover crosshair + shared tooltip. Responsive via
+   ResizeObserver (crisp text and non-distorted 2px marks). Supports 1–2
+   series: the first is the filled hero, a second renders as a comparison
+   line (fill vs line = secondary encoding beyond color). A legend is always
+   shown for ≥2 series so identity is never color-alone. Reduced-motion skips
+   the draw. Colors are passed as CSS custom-property strings so the chart
+   follows the validated per-theme tokens. */
+
+export interface ChartSeries {
+	values: number[];
+	label: string;
+	color: string; // CSS color, e.g. "var(--color-primary)"
+	fill?: boolean;
+}
 
 interface AreaChartProps {
-	values: number[];
+	series: ChartSeries[];
 	labels: string[];
 	locale?: string;
 	valuePrefix?: string;
 	valueSuffix?: string;
-	unitLabel?: string; // e.g. "EOIs" — shown in the tooltip
-	integer?: boolean; // ticks stay whole numbers (counts, not currency)
+	unitLabel?: string;
+	integer?: boolean;
 	height?: number;
 	className?: string;
 }
 
-// Returns { yMax, ticks } so every gridline lands on a "nice" value. For
-// integer series (counts) the step is forced to a whole number, so a max of
-// 2 reads 0·1·2 instead of 0·0.5·1·1.5·2.
 function niceScale(max: number, integer: boolean, target = 4) {
 	if (max <= 0) return { yMax: integer ? 1 : 4, ticks: 1 };
 	const raw = max / target;
@@ -31,12 +38,15 @@ function niceScale(max: number, integer: boolean, target = 4) {
 	const f = raw / pow;
 	let step = (f <= 1 ? 1 : f <= 2 ? 2 : f <= 5 ? 5 : 10) * pow;
 	if (integer) step = Math.max(1, Math.round(step));
-	const yMax = Math.ceil(max / step) * step;
+	let yMax = Math.ceil(max / step) * step;
+	// Headroom: keep the line off the top frame (and clear of the legend) by
+	// bumping one step when the peak would touch the ceiling.
+	if (yMax <= max) yMax += step;
 	return { yMax, ticks: Math.round(yMax / step) };
 }
 
 export default function AreaChart({
-	values,
+	series,
 	labels,
 	locale = "en",
 	valuePrefix = "",
@@ -83,17 +93,21 @@ export default function AreaChart({
 	const plotW = Math.max(w - PAD_L - PAD_R, 10);
 	const plotH = H - PAD_T - PAD_B;
 
-	const rawMax = Math.max(...values, 1);
+	const n = labels.length;
+	const rawMax = Math.max(...series.flatMap((s) => s.values), 1);
 	const { yMax, ticks } = niceScale(rawMax, integer);
 	const xAt = (i: number) =>
-		PAD_L + (values.length <= 1 ? plotW / 2 : (i / (values.length - 1)) * plotW);
+		PAD_L + (n <= 1 ? plotW / 2 : (i / (n - 1)) * plotW);
 	const yAt = (v: number) => PAD_T + plotH - (v / yMax) * plotH;
 
-	const pts = values.map((v, i) => [xAt(i), yAt(v)] as const);
-	const line = pts
-		.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`)
-		.join(" ");
-	const area = `${line} L${xAt(values.length - 1).toFixed(1)},${(PAD_T + plotH).toFixed(1)} L${PAD_L.toFixed(1)},${(PAD_T + plotH).toFixed(1)} Z`;
+	const paths = series.map((s) => {
+		const pts = s.values.map((v, i) => [xAt(i), yAt(v)] as const);
+		const line = pts
+			.map(([x, y], i) => `${i === 0 ? "M" : "L"}${x.toFixed(1)},${y.toFixed(1)}`)
+			.join(" ");
+		const area = `${line} L${xAt(n - 1).toFixed(1)},${(PAD_T + plotH).toFixed(1)} L${PAD_L.toFixed(1)},${(PAD_T + plotH).toFixed(1)} Z`;
+		return { pts, line, area };
+	});
 
 	const fmt = (v: number) =>
 		`${valuePrefix}${new Intl.NumberFormat(locale).format(v)}${valueSuffix}`;
@@ -103,8 +117,8 @@ export default function AreaChart({
 		const x = e.clientX - rect.left;
 		let best = 0;
 		let bestD = Infinity;
-		for (let i = 0; i < pts.length; i++) {
-			const d = Math.abs(pts[i][0] - x);
+		for (let i = 0; i < n; i++) {
+			const d = Math.abs(xAt(i) - x);
 			if (d < bestD) {
 				bestD = d;
 				best = i;
@@ -113,24 +127,43 @@ export default function AreaChart({
 		setActive(best);
 	}
 
-	const activePt = active != null ? pts[active] : null;
+	const multi = series.length > 1;
 
 	return (
 		<div ref={wrapRef} className={`relative w-full ${className}`}>
+			{/* Legend (identity never color-alone) */}
+			{multi && (
+				<div className="absolute right-1 top-0 z-10 flex items-center gap-3 rounded-md border border-outline-variant/60 bg-surface-container-lowest/80 px-2.5 py-1 backdrop-blur-sm">
+					{series.map((s) => (
+						<span key={s.label} className="flex items-center gap-1.5">
+							<span
+								className={`w-2.5 rounded-full ${s.fill === false ? "h-0.5" : "h-2.5"}`}
+								style={{ background: s.color }}
+							/>
+							<span className="text-[11px] font-medium text-on-surface-variant">
+								{s.label}
+							</span>
+						</span>
+					))}
+				</div>
+			)}
+
 			<svg
 				width={w}
 				height={H}
 				role="img"
-				aria-label="Monthly trend"
+				aria-label={series.map((s) => s.label).join(", ")}
 				className="block touch-none"
 				onPointerMove={onMove}
 				onPointerLeave={() => setActive(null)}
 			>
 				<defs>
-					<linearGradient id={`area-${uid}`} x1="0" y1="0" x2="0" y2="1">
-						<stop offset="0%" stopColor="var(--color-primary)" stopOpacity="0.20" />
-						<stop offset="100%" stopColor="var(--color-primary)" stopOpacity="0" />
-					</linearGradient>
+					{series.map((s, si) => (
+						<linearGradient key={s.label} id={`area-${uid}-${si}`} x1="0" y1="0" x2="0" y2="1">
+							<stop offset="0%" stopColor={s.color} stopOpacity="0.20" />
+							<stop offset="100%" stopColor={s.color} stopOpacity="0" />
+						</linearGradient>
+					))}
 					<clipPath id={`reveal-${uid}`}>
 						<rect
 							x="0"
@@ -142,7 +175,7 @@ export default function AreaChart({
 					</clipPath>
 				</defs>
 
-				{/* Y grid + axis labels (recessive) */}
+				{/* Y grid + axis labels */}
 				{Array.from({ length: ticks + 1 }, (_, i) => {
 					const v = (yMax / ticks) * i;
 					const y = yAt(v);
@@ -184,62 +217,81 @@ export default function AreaChart({
 					</text>
 				))}
 
-				{/* Area + line (revealed via clip) */}
+				{/* Series (revealed via clip). Fill first (hero) so comparison
+				    lines sit on top. */}
 				<g clipPath={`url(#reveal-${uid})`}>
-					<path d={area} fill={`url(#area-${uid})`} />
-					<path
-						d={line}
-						fill="none"
-						stroke="var(--color-primary)"
-						strokeWidth="2.5"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-					/>
+					{series.map((s, si) =>
+						s.fill !== false ? (
+							<path key={`f-${s.label}`} d={paths[si].area} fill={`url(#area-${uid}-${si})`} />
+						) : null,
+					)}
+					{series.map((s, si) => (
+						<path
+							key={`l-${s.label}`}
+							d={paths[si].line}
+							fill="none"
+							stroke={s.color}
+							strokeWidth={s.fill === false ? 2 : 2.5}
+							strokeLinecap="round"
+							strokeLinejoin="round"
+							strokeDasharray={s.fill === false ? "5 4" : undefined}
+						/>
+					))}
 				</g>
 
-				{/* Hover crosshair + marker */}
-				{activePt && (
+				{/* Hover crosshair + markers */}
+				{active != null && (
 					<g className="pointer-events-none">
 						<line
-							x1={activePt[0]}
+							x1={xAt(active)}
 							y1={PAD_T}
-							x2={activePt[0]}
+							x2={xAt(active)}
 							y2={PAD_T + plotH}
-							stroke="var(--color-primary)"
+							stroke="var(--color-on-surface-variant)"
 							strokeWidth="1"
 							strokeDasharray="3 3"
-							opacity="0.5"
+							opacity="0.4"
 						/>
-						<circle cx={activePt[0]} cy={activePt[1]} r="6" fill="var(--color-primary)" opacity="0.18" />
-						<circle
-							cx={activePt[0]}
-							cy={activePt[1]}
-							r="3.5"
-							fill="var(--color-primary)"
-							stroke="var(--color-surface-container-lowest)"
-							strokeWidth="2"
-						/>
+						{series.map((s, si) => (
+							<circle
+								key={s.label}
+								cx={xAt(active)}
+								cy={paths[si].pts[active][1]}
+								r="3.5"
+								fill={s.color}
+								stroke="var(--color-surface-container-lowest)"
+								strokeWidth="2"
+							/>
+						))}
 					</g>
 				)}
 			</svg>
 
-			{/* Tooltip */}
-			{active != null && activePt && (
+			{/* Shared tooltip */}
+			{active != null && (
 				<div
 					className="pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-full rounded-lg border border-outline-variant bg-surface-container-lowest px-3 py-2 shadow-lg"
-					style={{ left: activePt[0], top: activePt[1] - 10 }}
+					style={{ left: xAt(active), top: paths[0].pts[active][1] - 12 }}
 				>
 					<p className="text-[10px] font-semibold uppercase tracking-wider text-on-surface-variant whitespace-nowrap">
 						{labels[active]}
 					</p>
-					<p className="text-sm font-(family-name:--font-display) text-on-surface whitespace-nowrap leading-tight mt-0.5">
-						{fmt(values[active])}
-						{unitLabel ? (
-							<span className="text-[11px] font-medium font-sans text-on-surface-variant ml-1">
-								{unitLabel}
-							</span>
-						) : null}
-					</p>
+					<div className="mt-1 space-y-0.5">
+						{series.map((s) => (
+							<div key={s.label} className="flex items-center gap-2 whitespace-nowrap">
+								<span className="w-2 h-2 rounded-full shrink-0" style={{ background: s.color }} />
+								<span className="text-[11px] font-medium text-on-surface-variant">
+									{s.label}
+								</span>
+								<span className="text-[11px] font-semibold text-on-surface ml-auto tabular-nums">
+									{fmt(s.values[active])}
+									{unitLabel ? (
+										<span className="text-on-surface-variant font-medium ml-1">{unitLabel}</span>
+									) : null}
+								</span>
+							</div>
+						))}
+					</div>
 				</div>
 			)}
 		</div>
