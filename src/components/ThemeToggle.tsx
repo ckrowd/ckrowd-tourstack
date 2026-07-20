@@ -2,6 +2,7 @@
 
 import { useTheme } from "next-themes";
 import { useSyncExternalStore } from "react";
+import Icon from "@/components/icons";
 
 const noopSubscribe = () => () => {};
 
@@ -28,9 +29,11 @@ export default function ThemeToggle({ className }: { className?: string }) {
 			onClick={() => setTheme(isDark ? "light" : "dark")}
 			className={`p-2 hover:bg-surface-container-low rounded-lg transition-all active:scale-95 ${className ?? ""}`}
 		>
-			<span className="material-symbols-outlined text-on-surface-variant text-[20px]">
-				{mounted ? (isDark ? "light_mode" : "dark_mode") : "dark_mode"}
-			</span>
+			<Icon
+				name={mounted && isDark ? "sun" : "moon"}
+				size={20}
+				className="text-on-surface-variant"
+			/>
 		</button>
 	);
 }

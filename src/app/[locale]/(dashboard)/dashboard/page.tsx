@@ -7,6 +7,7 @@ import {
 	getTourstackDashboard,
 	getTourstackProfile,
 } from "@/app/actions";
+import AreaChart from "@/components/dashboard/AreaChart";
 import DonutChart from "@/components/dashboard/DonutChart";
 import Sparkline from "@/components/dashboard/Sparkline";
 import EcosystemReadiness from "@/components/EcosystemReadiness";
@@ -148,6 +149,10 @@ export default async function DashboardPage({ params }: Props) {
 			? null
 			: `${d.getFullYear()}-${d.getMonth()}`;
 	};
+	const monthLabels = monthKeys.map((k) => {
+		const [yy, mm] = k.split("-").map(Number);
+		return new Date(yy, mm, 1).toLocaleDateString(locale, { month: "short" });
+	});
 	const eoiSeries = monthKeys.map(
 		(k) => eois.filter((e) => monthKeyOf(e.created_at) === k).length,
 	);
@@ -320,26 +325,6 @@ export default async function DashboardPage({ params }: Props) {
 							</Button>
 						</div>
 					)}
-					{/* Tour Progress Tracker */}
-					<div className="tsd-rise tsd-card p-4 md:p-6 mb-10">
-						<div className="flex items-center justify-between mb-4 gap-2">
-							<h2 className="font-(family-name:--font-manrope) font-semibold text-sm md:text-base truncate">
-								{progressTitle}
-							</h2>
-							<StatusBadge tone={progressStatusTone} className="shrink-0">
-								{progressStatusLabel}
-							</StatusBadge>
-						</div>
-						<StatusStepper steps={tourSteps} />
-					</div>
-
-					{/* Ecosystem readiness nudge (hidden once eligible) */}
-					{!readiness.eligible && (
-						<div className="mb-10">
-							<EcosystemReadiness readiness={readiness} compact />
-						</div>
-					)}
-
 					{/* Stats Grid */}
 					<div data-tour="dashboard-stats" className="tsd-stagger grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-10">
 						<div className="tsd-card tsd-card-hover p-5 md:p-6 flex flex-col justify-between gap-5">
@@ -466,6 +451,92 @@ export default async function DashboardPage({ params }: Props) {
 						</div>
 					</div>
 
+{/* Hero analytics row */}
+					<div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-5 mb-10">
+						<div className="lg:col-span-2 tsd-card p-5 md:p-6 flex flex-col">
+							<div className="flex items-start justify-between gap-3">
+								<div>
+									<p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-primary">
+										{t("analytics.eyebrow")}
+									</p>
+									<h2 className="text-lg font-(family-name:--font-manrope) font-semibold text-on-surface">
+										{t("analytics.title")}
+									</h2>
+								</div>
+								<span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-on-surface-variant bg-surface-container px-2.5 py-1 rounded-md shrink-0">
+									<span className="w-1.5 h-1.5 rounded-full bg-primary" />
+									{t("analytics.period")}
+								</span>
+							</div>
+							<AreaChart
+								values={eoiSeries}
+								labels={monthLabels}
+								locale={locale}
+								unitLabel={t("analytics.unit")}
+								integer
+								height={250}
+								className="mt-4"
+							/>
+						</div>
+						<div className="lg:col-span-1">
+							{/* EOI pipeline composition */}
+						<div className="tsd-card p-6">
+							<div className="flex items-center justify-between mb-5">
+								<h3 className="font-(family-name:--font-manrope) font-semibold text-lg">
+									{t("pipelineTitle")}
+								</h3>
+								<span className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+									<Icon name="chart" size={16} />
+								</span>
+							</div>
+							<div className="flex items-center gap-6">
+								<DonutChart
+									segments={pipelineSegments}
+									centerValue={String(totalEoiCount)}
+									centerLabel={t("stats.eoisSubmitted")}
+									size={132}
+								/>
+								<ul className="flex-1 min-w-0 space-y-2.5">
+									{pipelineSegments.map((seg) => (
+										<li key={seg.label} className="flex items-center gap-2.5">
+											<span
+												className="w-2 h-2 rounded-full shrink-0"
+												style={{ background: seg.color }}
+											/>
+											<span className="text-xs font-medium text-on-surface-variant flex-1 truncate">
+												{seg.label}
+											</span>
+											<span className="text-xs font-semibold text-on-surface tabular-nums">
+												{seg.value}
+											</span>
+										</li>
+									))}
+								</ul>
+							</div>
+						</div>
+						</div>
+					</div>
+
+					{/* Tour Progress Tracker */}
+					<div className="tsd-rise tsd-card p-4 md:p-6 mb-10">
+						<div className="flex items-center justify-between mb-4 gap-2">
+							<h2 className="font-(family-name:--font-manrope) font-semibold text-sm md:text-base truncate">
+								{progressTitle}
+							</h2>
+							<StatusBadge tone={progressStatusTone} className="shrink-0">
+								{progressStatusLabel}
+							</StatusBadge>
+						</div>
+						<StatusStepper steps={tourSteps} />
+					</div>
+
+					{/* Ecosystem readiness nudge (hidden once eligible) */}
+					{!readiness.eligible && (
+						<div className="mb-10">
+							<EcosystemReadiness readiness={readiness} compact />
+						</div>
+					)}
+
 					<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 						<div data-tour="dashboard-eois" className="lg:col-span-2 space-y-6">
 							<div className="flex items-center justify-between">
@@ -564,42 +635,6 @@ export default async function DashboardPage({ params }: Props) {
 
 						{/* Widgets */}
 						<div className="space-y-8">
-						{/* EOI pipeline composition */}
-						<div className="tsd-card p-6">
-							<div className="flex items-center justify-between mb-5">
-								<h3 className="font-(family-name:--font-manrope) font-semibold text-lg">
-									{t("pipelineTitle")}
-								</h3>
-								<span className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
-									<Icon name="chart" size={16} />
-								</span>
-							</div>
-							<div className="flex items-center gap-6">
-								<DonutChart
-									segments={pipelineSegments}
-									centerValue={String(totalEoiCount)}
-									centerLabel={t("stats.eoisSubmitted")}
-									size={132}
-								/>
-								<ul className="flex-1 min-w-0 space-y-2.5">
-									{pipelineSegments.map((seg) => (
-										<li key={seg.label} className="flex items-center gap-2.5">
-											<span
-												className="w-2 h-2 rounded-full shrink-0"
-												style={{ background: seg.color }}
-											/>
-											<span className="text-xs font-medium text-on-surface-variant flex-1 truncate">
-												{seg.label}
-											</span>
-											<span className="text-xs font-semibold text-on-surface tabular-nums">
-												{seg.value}
-											</span>
-										</li>
-									))}
-								</ul>
-							</div>
-						</div>
-
 						{/* Financing Widget */}
 							<div className="tsd-card p-6">
 								<div className="flex items-center justify-between mb-6">
