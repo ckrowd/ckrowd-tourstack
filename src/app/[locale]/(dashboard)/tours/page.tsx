@@ -388,7 +388,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 																	)}
 																</p>
 															</div>
-															<StatusBadge tone={tourStatusToTone(statusLower)} className="shrink-0">
+															<StatusBadge tone={tourStatusToTone(statusLower)} dot className="shrink-0">
 																{tourStatus.replace(/_/g, " ")}
 															</StatusBadge>
 														</div>

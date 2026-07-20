@@ -197,7 +197,7 @@ export default function FinancingApplyClient({ applications, locale, readiness }
 												{String(app.tour?.artist?.name ?? "")}
 											</p>
 										</div>
-										<StatusBadge tone={statusToTone(status)} className="shrink-0">
+										<StatusBadge tone={statusToTone(status)} dot className="shrink-0">
 											{t(`statuses.${status}`)}
 										</StatusBadge>
 									</div>

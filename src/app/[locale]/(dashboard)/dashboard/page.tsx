@@ -523,7 +523,7 @@ export default async function DashboardPage({ params }: Props) {
 							<h2 className="font-(family-name:--font-manrope) font-semibold text-sm md:text-base truncate">
 								{progressTitle}
 							</h2>
-							<StatusBadge tone={progressStatusTone} className="shrink-0">
+							<StatusBadge tone={progressStatusTone} dot className="shrink-0">
 								{progressStatusLabel}
 							</StatusBadge>
 						</div>

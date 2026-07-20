@@ -222,7 +222,7 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 												{String(app.tour?.artist?.name ?? "")}
 											</p>
 										</div>
-										<StatusBadge tone={insStatusToTone(status)} className="shrink-0">
+										<StatusBadge tone={insStatusToTone(status)} dot className="shrink-0">
 											{t(`statuses.${status}`)}
 										</StatusBadge>
 									</div>

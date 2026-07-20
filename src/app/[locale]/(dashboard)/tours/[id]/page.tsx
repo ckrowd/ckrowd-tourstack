@@ -87,7 +87,7 @@ export default async function TourDetailPage({
 												{String(tour.artist?.genre ?? "")}
 											</p>
 										</div>
-										<StatusBadge tone={tourStatusToTone(status)}>
+										<StatusBadge tone={tourStatusToTone(status)} dot>
 											{String(tour.status ?? "pending").replace(/_/g, " ")}
 										</StatusBadge>
 									</div>
