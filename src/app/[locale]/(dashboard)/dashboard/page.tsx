@@ -7,7 +7,10 @@ import {
 	getTourstackDashboard,
 	getTourstackProfile,
 } from "@/app/actions";
+import DonutChart from "@/components/dashboard/DonutChart";
+import Sparkline from "@/components/dashboard/Sparkline";
 import EcosystemReadiness from "@/components/EcosystemReadiness";
+import CountUp from "@/components/ui/CountUp";
 import Icon from "@/components/icons";
 import EmptyState from "@/components/ui/EmptyState";
 import SideNav from "@/components/SideNav";
@@ -131,6 +134,49 @@ export default async function DashboardPage({ params }: Props) {
 	const progressStatusTone: StatusTone = progressEOI
 		? eoiStatusToTone(String(progressEOI.status ?? "pending"))
 		: "neutral";
+	// ── Chart series — derived purely from the already-fetched lists ────────
+	// Six-month buckets for the stat-tile sparklines and the status counts
+	// for the pipeline donut. No additional requests.
+	const monthKeys = Array.from({ length: 6 }, (_, i) => {
+		const d = new Date(now.getFullYear(), now.getMonth() - (5 - i), 1);
+		return `${d.getFullYear()}-${d.getMonth()}`;
+	});
+	const monthKeyOf = (raw: unknown) => {
+		if (!raw) return null;
+		const d = new Date(String(raw));
+		return Number.isNaN(d.getTime())
+			? null
+			: `${d.getFullYear()}-${d.getMonth()}`;
+	};
+	const eoiSeries = monthKeys.map(
+		(k) => eois.filter((e) => monthKeyOf(e.created_at) === k).length,
+	);
+	const approvedSeries = monthKeys.map(
+		(k) =>
+			eois.filter(
+				(e) =>
+					["approved", "confirmed"].includes(String(e.status ?? "")) &&
+					monthKeyOf(e.created_at) === k,
+			).length,
+	);
+	const financingSeries = monthKeys.map((k) =>
+		financingApps
+			.filter((a) => monthKeyOf(a.created_at) === k)
+			.reduce((s, a) => s + Number(a.amount_requested ?? 0), 0),
+	);
+	const countStatus = (wanted: string[]) =>
+		eois.filter((e) => wanted.includes(String(e.status ?? ""))).length;
+	const pipelineSegments = [
+		{ label: t("statuses.approved"), value: countStatus(["approved", "confirmed"]), color: "var(--chart-approved)" },
+		{ label: t("statuses.pending_review"), value: countStatus(["pending_review", "pending", "under_review"]), color: "var(--chart-pending)" },
+		{ label: t("statuses.needs_revision"), value: countStatus(["needs_revision"]), color: "var(--chart-contacted)" },
+		{ label: t("statuses.rejected"), value: countStatus(["rejected", "declined"]), color: "var(--chart-rejected)" },
+	];
+	const totalEoiCount =
+		typeof dashData?.stats?.totalEOIs === "number"
+			? dashData.stats.totalEOIs
+			: eois.length;
+
 	const tourSteps = [
 		{ label: t("steps.eoiSubmitted"), done: progressStepsDone >= 1 },
 		{ label: t("steps.underReview"), done: progressStepsDone >= 2 },
@@ -306,16 +352,20 @@ export default async function DashboardPage({ params }: Props) {
 								</span>
 							</div>
 							<div className="flex items-end justify-between gap-2">
-								<span className="text-3xl md:text-4xl font-(family-name:--font-display) text-on-surface leading-none">
-									{typeof dashData?.stats?.totalEOIs === "number"
-										? dashData.stats.totalEOIs
-										: eois.length}
-								</span>
-								<span className="text-primary font-semibold flex items-center text-xs">
-									{t("stats.newThisMonth", { count: newEoisThisMonth })}
-								</span>
-							</div>
+								<CountUp
+								value={totalEoiCount}
+								locale={locale}
+								className="text-3xl md:text-4xl font-(family-name:--font-display) text-on-surface leading-none"
+							/>
+							<span
+								className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-semibold ${newEoisThisMonth > 0 ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400" : "bg-surface-container text-on-surface-variant"}`}
+							>
+								<Icon name="trending-up" size={11} strokeWidth={2.5} />
+								{t("stats.newThisMonth", { count: newEoisThisMonth })}
+							</span>
 						</div>
+						<Sparkline data={eoiSeries} className="text-primary" height={30} />
+					</div>
 
 						<div className="tsd-card tsd-card-hover p-5 md:p-6 flex flex-col justify-between gap-5">
 							<div className="flex items-center justify-between">
@@ -327,16 +377,21 @@ export default async function DashboardPage({ params }: Props) {
 								</span>
 							</div>
 							<div className="flex items-end justify-between gap-2">
-								<span className="text-3xl md:text-4xl font-(family-name:--font-display) text-on-surface leading-none">
-									{typeof dashData?.stats?.approvedEOIs === "number"
+								<CountUp
+								value={
+									typeof dashData?.stats?.approvedEOIs === "number"
 										? dashData.stats.approvedEOIs
-										: 0}
-								</span>
-								<span className="text-emerald-500 font-semibold text-xs">
-									{t("stats.confirmed")}
-								</span>
-							</div>
+										: 0
+								}
+								locale={locale}
+								className="text-3xl md:text-4xl font-(family-name:--font-display) text-on-surface leading-none"
+							/>
+							<span className="text-emerald-500 font-semibold text-xs">
+								{t("stats.confirmed")}
+							</span>
 						</div>
+						<Sparkline data={approvedSeries} height={30} className="[color:var(--chart-approved)]" />
+					</div>
 
 						<div className="tsd-card tsd-card-hover p-5 md:p-6 flex flex-col justify-between gap-5">
 							<div className="flex items-center justify-between">
@@ -348,11 +403,19 @@ export default async function DashboardPage({ params }: Props) {
 								</span>
 							</div>
 							<div className="flex items-end justify-between gap-2">
+								{latestFinancing ? (
+								<CountUp
+									value={Math.round(Number(latestFinancing.amount_requested) / 1000)}
+									locale={locale}
+									prefix="$"
+									suffix="K"
+									className="text-3xl md:text-4xl font-(family-name:--font-display) text-on-surface leading-none"
+								/>
+							) : (
 								<span className="text-3xl md:text-4xl font-(family-name:--font-display) text-on-surface leading-none">
-									{latestFinancing
-										? `$${Math.round(Number(latestFinancing.amount_requested) / 1000)}K`
-										: "—"}
+									—
 								</span>
+							)}
 								<span className="text-blue-500 font-semibold text-xs capitalize">
 									{latestFinancing
 										? t(
@@ -361,7 +424,8 @@ export default async function DashboardPage({ params }: Props) {
 										: t("stats.noApps")}
 								</span>
 							</div>
-						</div>
+						<Sparkline data={financingSeries} height={30} className="[color:var(--chart-contacted)]" />
+					</div>
 
 						<div className="relative overflow-hidden p-5 md:p-6 rounded-2xl flex flex-col justify-between gap-5 bg-linear-to-br from-[#ff5a30] to-[#b83816] text-white">
 							<div className="absolute -top-6 -right-6 opacity-15 pointer-events-none">
@@ -500,7 +564,43 @@ export default async function DashboardPage({ params }: Props) {
 
 						{/* Widgets */}
 						<div className="space-y-8">
-							{/* Financing Widget */}
+						{/* EOI pipeline composition */}
+						<div className="tsd-card p-6">
+							<div className="flex items-center justify-between mb-5">
+								<h3 className="font-(family-name:--font-manrope) font-semibold text-lg">
+									{t("pipelineTitle")}
+								</h3>
+								<span className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+									<Icon name="chart" size={16} />
+								</span>
+							</div>
+							<div className="flex items-center gap-6">
+								<DonutChart
+									segments={pipelineSegments}
+									centerValue={String(totalEoiCount)}
+									centerLabel={t("stats.eoisSubmitted")}
+									size={132}
+								/>
+								<ul className="flex-1 min-w-0 space-y-2.5">
+									{pipelineSegments.map((seg) => (
+										<li key={seg.label} className="flex items-center gap-2.5">
+											<span
+												className="w-2 h-2 rounded-full shrink-0"
+												style={{ background: seg.color }}
+											/>
+											<span className="text-xs font-medium text-on-surface-variant flex-1 truncate">
+												{seg.label}
+											</span>
+											<span className="text-xs font-semibold text-on-surface tabular-nums">
+												{seg.value}
+											</span>
+										</li>
+									))}
+								</ul>
+							</div>
+						</div>
+
+						{/* Financing Widget */}
 							<div className="tsd-card p-6">
 								<div className="flex items-center justify-between mb-6">
 									<h3 className="font-(family-name:--font-manrope) font-semibold text-lg">

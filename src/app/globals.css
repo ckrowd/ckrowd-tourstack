@@ -255,6 +255,14 @@
 	--ease-out: cubic-bezier(0.23, 1, 0.32, 1);
 	--ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
 
+	/* chart mark colors — status hues tuned for chart marks and validated
+	   (lightness band + CVD separation + ≥3:1 contrast) against the card
+	   surface per mode; the status TEXT tokens stay separate. */
+	--chart-approved: #15803d;
+	--chart-pending: #b45309;
+	--chart-contacted: #2054c7;
+	--chart-rejected: #b91c1c;
+
 	/* type — Geist everywhere; Archivo Black (--font-display) reserved for
 	   display numerals / hero headings applied per-component. Remapping
 	   --font-manrope covers the many font-(family-name:--font-manrope)
@@ -269,6 +277,11 @@
 }
 
 .dark .ts-dash {
+	--chart-approved: #059669;
+	--chart-pending: #d97706;
+	--chart-contacted: #0284c7;
+	--chart-rejected: #dc2626;
+
 	--color-background: #0a0a0a;
 	--color-surface: #0a0a0a;
 	--color-surface-2: #202020;

@@ -3164,6 +3164,7 @@
     "eoiProgressTitle": "Progression de l'EOI — {artist}{tour}",
     "noEoisYet": "Pas encore d'EOI",
     "noEois": "Pas d'EOI",
+    "pipelineTitle": "Pipeline des EOI",
     "myEoiSubmissions": "Mes soumissions d'EOI",
     "newEoi": "Nouvelle EOI",
     "financingStatus": "Statut du financement",
