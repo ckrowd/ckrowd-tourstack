@@ -90,7 +90,7 @@ export default function EOIDocumentsClient() {
 	}>;
 
 	return (
-		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
+		<main className="flex-1 lg:ml-64 bg-surface p-6 md:px-10 md:pt-5 md:pb-10">
 			<Link
 				href="/dashboard"
 				className="inline-flex items-center gap-2 text-sm font-semibold text-on-surface-variant hover:text-primary transition mb-6"

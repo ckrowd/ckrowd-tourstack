@@ -342,17 +342,22 @@ export default function TopNav() {
 
 	return (
 		<>
-			<header className="fixed top-0 w-full z-50 bg-surface/80 backdrop-blur-xl border-b border-outline-variant/10 shadow-sm">
-				<div className="flex justify-between items-center h-16 px-4 md:px-6 lg:px-12 w-full mx-auto">
-					{/* Brand — full lockup on desktop, logo only on mobile */}
-					<div className="flex items-center gap-8">
-						<Link href="/" className="flex items-center gap-2.5">
-							<Image
-								src="/ckrowd-logo.png"
-								alt="Ckrowd logo"
-								width={36}
-								height={36}
-							/>
+			<header className="fixed top-0 w-full z-50 bg-surface/70 backdrop-blur-2xl border-b border-outline-variant/15 shadow-[0_1px_20px_-12px_rgba(0,0,0,0.35)]">
+				<div className="flex justify-between items-center h-16 w-full pr-4 md:pr-6 lg:pr-12 mx-auto">
+					{/* Left group mirrors the body grid: the brand fills the sidebar
+					    column (w-64, logo at ~24px like the nav items) and the search
+					    sits in the content column (lg:pl-10 = main's p-10), so it lines
+					    up with the cards' left edge. */}
+					<div className="flex items-center flex-1 min-w-0">
+						<Link href="/" className="group flex items-center gap-2.5 shrink-0 pl-4 md:pl-6 lg:w-64 lg:pl-6">
+							<span className="relative flex items-center justify-center transition-transform group-hover:scale-105 group-active:scale-95">
+								<Image
+									src="/ckrowd-logo.png"
+									alt="Ckrowd logo"
+									width={34}
+									height={34}
+								/>
+							</span>
 							<div className="hidden lg:flex flex-col leading-tight">
 								<span className="text-lg font-black tracking-tight text-[#FF5A2E] font-(family-name:--font-manrope)">
 									{tCommon("brandName")}
@@ -362,34 +367,39 @@ export default function TopNav() {
 								</span>
 							</div>
 						</Link>
-					</div>
-
-					<div className="flex items-center gap-3">
 						{/* Search — artmgmt searches roster; other portals use global search */}
-						{session?.user && (isArtmgmtPortal ? <ArtmgmtSearch /> : <GlobalSearch />)}
-
-						{/* Tour Intelligence (New dynamic button) */}
-						{session?.user && !isAdminPortal && !isFinancingAdminPortal && !isInsuranceAdminPortal && !isArtmgmtPortal && (
-							<div className="relative inline-flex overflow-hidden rounded-xl p-[2.5px] group hidden md:inline-flex shrink-0">
-								<span className="absolute inset-[-1000%] animate-[spin_3s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#FF5A2E_0%,#3b82f6_50%,#FF5A2E_100%)]" />
-								<Link
-									href="/tour-intelligence"
-									className="relative flex items-center justify-center gap-2 w-full h-full bg-surface rounded-[9.5px] px-3 py-1.5 transition-colors group-hover:bg-primary/5"
-								>
-									<Icon name="ai" size={14} className="text-[#FF5A2E]" />
-									<span className="font-(family-name:--font-manrope) font-semibold text-xs text-on-surface-variant whitespace-nowrap group-hover:text-primary transition-colors">
-										{t("tourIntelligence")}
-									</span>
-								</Link>
+						{session?.user && (
+							<div className="flex-1 min-w-0 max-w-2xl pl-3 md:pl-4 lg:pl-10 lg:pr-6">
+								{isArtmgmtPortal ? <ArtmgmtSearch /> : <GlobalSearch />}
 							</div>
 						)}
+					</div>
 
+					<div className="flex items-center gap-2 md:gap-2.5 shrink-0">
+						{/* Tour Intelligence (New dynamic button) */}
+						{session?.user && !isAdminPortal && !isFinancingAdminPortal && !isInsuranceAdminPortal && !isArtmgmtPortal && (
+							<Link
+								href="/tour-intelligence"
+								className="group hidden md:inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border border-outline-variant/60 bg-surface-container-low/50 hover:border-primary/40 hover:bg-primary/5 transition-colors shrink-0"
+							>
+								<Icon name="ai" size={14} className="text-primary" />
+								<span className="font-(family-name:--font-manrope) font-semibold text-xs text-on-surface-variant whitespace-nowrap group-hover:text-primary transition-colors">
+									{t("tourIntelligence")}
+								</span>
+							</Link>
+						)}
+
+						{/* Divider before the utility control rail (desktop) */}
+						<span className="hidden lg:block w-px h-6 bg-outline-variant/25 mx-0.5" aria-hidden />
+
+						{/* Utility control rail — grouped on desktop into one cohesive cluster */}
+						<div className="flex items-center gap-0.5 lg:gap-1 lg:rounded-full lg:border lg:border-outline-variant/15 lg:bg-surface-container-low/50 lg:px-1.5 lg:py-1">
 						{/* Locale Switcher — desktop only (accessible via drawer on mobile) */}
 						<div className="relative hidden lg:block">
 							<button
 								type="button"
 								onClick={() => setLangOpen((v) => !v)}
-								className="flex items-center gap-0.5 text-xs font-semibold px-2 py-1 rounded-md border border-outline-variant/30 hover:bg-surface-container-low transition-colors uppercase"
+								className="flex items-center gap-0.5 text-xs font-semibold px-2 py-1 rounded-full hover:bg-surface-container-high transition-colors uppercase"
 								aria-haspopup="listbox"
 								aria-expanded={langOpen}
 							>
@@ -444,9 +454,9 @@ export default function TopNav() {
 									aria-label={t("openNotifications")}
 									aria-expanded={notifOpen}
 									onClick={() => setNotifOpen((v) => !v)}
-									className="p-2 hover:bg-surface-container-low rounded-lg transition-all active:scale-95 relative"
+									className="p-2 hover:bg-surface-container-high rounded-full transition-all active:scale-95 relative"
 								>
-									<Icon name="bell" size={20} className="text-on-surface-variant" />
+									<Icon name="bell" size={19} className="text-on-surface-variant" />
 									{hasUnread && (
 										<span className="absolute top-1.5 right-1.5 w-2 h-2 bg-[#FF5A2E] rounded-full" />
 									)}
@@ -460,11 +470,18 @@ export default function TopNav() {
 								type="button"
 								aria-label="Start page guide"
 								onClick={() => window.dispatchEvent(new CustomEvent("ts:start-tour"))}
-								className="p-2 hover:bg-surface-container-low rounded-lg transition-all active:scale-95 hidden lg:flex items-center justify-center"
+								className="p-2 hover:bg-surface-container-high rounded-full transition-all active:scale-95 hidden lg:flex items-center justify-center"
 								title="Page guide"
 							>
-								<Icon name="discovery" size={20} className="text-primary" />
+								<Icon name="help-circle" size={19} className="text-on-surface-variant" />
 							</button>
+						)}
+						</div>
+						{/* end utility control rail */}
+
+						{/* Divider before profile (desktop) */}
+						{session?.user && (
+							<span className="hidden lg:block w-px h-6 bg-outline-variant/25 mx-0.5" aria-hidden />
 						)}
 
 						{/* Avatar / session — visible on all sizes */}

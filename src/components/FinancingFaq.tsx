@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { createPortal } from "react-dom";
 import Icon from "@/components/icons";
 import { useEffect, useId, useState } from "react";
 
@@ -42,7 +43,7 @@ export default function FinancingFaq({ faqs }: { faqs: Faq[] }) {
 				{t("faqButton")}
 			</button>
 
-			{open && (
+			{open && createPortal(
 				<div
 					className="fixed inset-0 z-50 flex items-center justify-center p-4"
 					role="dialog"
@@ -110,7 +111,8 @@ export default function FinancingFaq({ faqs }: { faqs: Faq[] }) {
 							})}
 						</div>
 					</div>
-				</div>
+				</div>,
+				document.body,
 			)}
 		</>
 	);

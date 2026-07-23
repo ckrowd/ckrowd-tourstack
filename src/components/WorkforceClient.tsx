@@ -5,6 +5,7 @@ import Icon from "@/components/icons";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { registerCrewMember } from "@/app/actions";
+import PageHero from "@/components/PageHero";
 import { Link } from "@/i18n/routing";
 
 /* ─────────────────────────── constants ─────────────────────────── */
@@ -541,38 +542,27 @@ export default function WorkforceClient() {
 			<div className="w-full">
 				{/* Header */}
 				<header className="mb-10">
-					<div className="flex items-start justify-between gap-4">
-						<div>
-							<span className="text-xs font-semibold uppercase tracking-widest text-primary block mb-3">
-								{t("header.platform")}
-							</span>
-							<h1 className="text-4xl font-extrabold tracking-tight text-on-surface mb-2">
-								{t("header.title")}
-							</h1>
-							<p className="text-on-surface-variant">
-								{t("header.description")}
-							</p>
-						</div>
+					<PageHero
+						className="!mb-0"
+						eyebrow={t("header.platform")}
+						title={t("header.title")}
+						description={t("header.description")}
+					>
 						{step > 0 && (
 							<div
-								className={`shrink-0 flex flex-col items-center px-5 py-3 rounded-2xl border-2 ${tier.bg} ${tier.border} min-w-24`}
+								className={`flex items-center gap-3 px-4 py-2.5 rounded-2xl border-2 ${tier.bg} ${tier.border}`}
 							>
-								<span className={`text-3xl font-black ${tier.text}`}>
+								<span className={`text-2xl font-black ${tier.text}`}>
 									{wcs.total}
 								</span>
-								<span
-									className={`text-[10px] font-semibold uppercase tracking-wider ${tier.text} opacity-70`}
-								>
+								<span className={`text-[10px] font-semibold uppercase tracking-wider leading-tight ${tier.text}`}>
 									{t("score.wcs")}
-								</span>
-								<span
-									className={`text-[10px] font-semibold ${tier.text} mt-0.5`}
-								>
+									<br />
 									{t("score.tier")} {tier.tier}
 								</span>
 							</div>
 						)}
-					</div>
+					</PageHero>
 
 					<div className="mt-4 flex items-center gap-2 text-xs text-on-surface-variant">
 						<Icon name="clock" size={14} />
@@ -1380,7 +1370,7 @@ export default function WorkforceClient() {
 								<button
 									type="submit"
 									disabled={submitting}
-									className="px-10 py-3 bg-linear-to-r from-primary to-[#cc4826] text-white rounded-xl font-semibold shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+									className="px-10 py-3 bg-primary text-white rounded-xl font-semibold hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
 								>
 									{submitting
 										? t("actions.submitting")

@@ -201,6 +201,12 @@ const PATHS: Record<string, React.ReactNode> = {
 			<path d="m22 7-8.5 8.5-5-5L2 17" />
 		</>
 	),
+	"trending-down": (
+		<>
+			<path d="M16 17h6v-6" />
+			<path d="m22 17-8.5-8.5-5 5L2 7" />
+		</>
+	),
 	"file-text": (
 		<>
 			<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />

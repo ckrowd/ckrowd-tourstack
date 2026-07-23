@@ -5,7 +5,9 @@ import Icon from "@/components/icons";
 import { useFormatter, useLocale, useTranslations } from "next-intl";
 import { useCallback, useEffect, useState } from "react";
 import Loader from "@/components/Loader";
+import PageHero from "@/components/PageHero";
 import PageTour from "@/components/PageTour";
+import EmptyState from "@/components/ui/EmptyState";
 import {
 	createOnboardingLink,
 	exportStakeholders,
@@ -283,37 +285,32 @@ export default function StakeholdersClient() {
 
 	return (
 		<>
-			<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
+			<main className="flex-1 lg:ml-64 bg-surface p-6 md:px-10 md:pt-5 md:pb-10">
 				<PageTour pageId="stakeholders" />
 				<div className="w-full space-y-10">
 
 					{/* Header */}
-					<header className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-						<div>
-							<span className="text-xs font-semibold uppercase tracking-widest text-primary block mb-2">
-								{t("header.platform")}
-							</span>
-							<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
-								{t("header.title")}
-							</h1>
-							<p className="text-on-surface-variant font-medium">
-								{t("header.description")}
-							</p>
-						</div>
+					<PageHero
+						className="!mb-0"
+						image="/landing-market.jpg"
+						eyebrow={t("header.platform")}
+						title={t("header.title")}
+						description={t("header.description")}
+					>
 						<button
 							type="button"
 							onClick={() => exportMutation.mutate()}
 							disabled={exportMutation.isPending}
-							className="flex items-center gap-2 px-5 py-2.5 bg-surface-container-lowest border border-outline-variant/30 rounded-xl text-sm font-semibold text-on-surface hover:bg-surface-container transition-colors disabled:opacity-50 shrink-0"
+							className="flex items-center gap-2 px-5 py-2.5 bg-surface-container-highest rounded-xl text-sm font-semibold text-on-surface hover:bg-surface-container-high transition-colors disabled:opacity-50 shrink-0"
 						>
 							<Icon name="download" size={14} />
 							{exportMutation.isPending ? t("header.exporting") : t("header.export")}
 						</button>
-					</header>
+					</PageHero>
 
 					{/* ── Invite Ecosystem banner ──────────────────────────────── */}
 					<section data-tour="stakeholders-invite" className="rounded-2xl overflow-hidden shadow-md">
-						<div className="bg-gradient-to-r from-primary to-[#cc4826] p-6 text-white">
+						<div className="bg-primary p-6 text-white">
 							<div className="flex flex-col md:flex-row md:items-center justify-between gap-5">
 								<div className="flex items-start gap-4">
 									<div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
@@ -367,7 +364,7 @@ export default function StakeholdersClient() {
 					</section>
 
 					{/* ── Submissions ──────────────────────────────────────────── */}
-					<section data-tour="stakeholders-submissions" className="tsd-card">
+					<section data-tour="stakeholders-submissions" className="rounded-2xl border border-outline-variant/60 overflow-hidden">
 						<div className="p-6 border-b border-outline-variant/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
 							<h2 className="font-(family-name:--font-manrope) text-xl font-semibold flex items-center gap-2">
 								{t("submissions.title")}
@@ -403,12 +400,7 @@ export default function StakeholdersClient() {
 						{stakeholdersQuery.isLoading ? (
 							<Loader />
 						) : filtered.length === 0 ? (
-							<div className="text-center py-16 px-6">
-								<Icon name="user-plus" size={44} className="text-on-surface-variant/30 block mb-3" />
-								<p className="text-sm font-semibold text-on-surface-variant">
-									{t("submissions.none")}
-								</p>
-							</div>
+							<EmptyState icon="user-plus" title={t("submissions.none")} />
 						) : (
 							<div className="divide-y divide-outline-variant/10">
 								{filtered.map((submission) => (

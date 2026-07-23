@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
+import { createPortal } from "react-dom";
 import Icon from "@/components/icons";
 
 type Step = { step: string; title: string; desc: string };
@@ -51,7 +52,7 @@ export default function HowItWorksModal({
 				<span>{buttonLabel}</span>
 			</button>
 
-			{open && (
+			{open && createPortal(
 				<div
 					className="fixed inset-0 z-50 flex items-center justify-center p-4"
 					role="dialog"
@@ -115,7 +116,8 @@ export default function HowItWorksModal({
 							</div>
 						</div>
 					</div>
-				</div>
+				</div>,
+				document.body,
 			)}
 		</>
 	);

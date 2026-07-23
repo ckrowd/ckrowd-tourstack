@@ -175,7 +175,7 @@ export default function OnboardingWizard() {
 									onClick={() => pickRole(r.id)}
 									className="group relative flex flex-col items-start gap-3.5 rounded-2xl border border-[var(--hair)] bg-[var(--surface)] p-5 text-left transition-all duration-300 hover:-translate-y-0.5 hover:border-orange hover:shadow-[0_16px_50px_-12px_rgba(255,90,48,0.28)]"
 								>
-									<span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--surface-2)] text-[var(--muted)] transition-all duration-300 group-hover:bg-gradient-to-br group-hover:from-orange group-hover:to-ember group-hover:text-white group-hover:shadow-lg group-hover:shadow-orange/30">
+									<span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--surface-2)] text-[var(--muted)] transition-all duration-300 group-hover:bg-primary group-hover:text-white">
 										<span className="material-symbols-outlined">{ROLE_ICON[r.id] ?? "person"}</span>
 									</span>
 									<span>

@@ -3,6 +3,7 @@ import { getEOIs } from "@/app/actions";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 import AIToolsClient from "@/components/AIToolsClient";
+import PageHero from "@/components/PageHero";
 import PageTour from "@/components/PageTour";
 
 export default async function AIToolsPage({
@@ -22,14 +23,13 @@ export default async function AIToolsPage({
 			<TopNav />
 			<div className="flex pt-16">
 				<SideNav />
-				<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
+				<main className="flex-1 lg:ml-64 bg-surface p-6 md:px-10 md:pt-5 md:pb-10">
 					<PageTour pageId="tour-intelligence" />
-					<div className="mb-8">
-						<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
-							{t("title")}
-						</h1>
-						<p className="text-on-surface-variant font-medium">{t("description")}</p>
-					</div>
+					<PageHero
+						image="/landing-artist.jpg"
+						title={t("title")}
+						description={t("description")}
+					/>
 					<AIToolsClient eois={eois} />
 				</main>
 			</div>

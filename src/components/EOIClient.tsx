@@ -677,7 +677,7 @@ function EOIPageContent() {
 	}
 
 	return (
-		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
+		<main className="flex-1 lg:ml-64 bg-surface p-6 md:px-10 md:pt-5 md:pb-10">
 			<PageTour pageId="eoi" />
 			<div className="w-full">
 				<header className="mb-8">
@@ -697,7 +697,7 @@ function EOIPageContent() {
 					<div data-tour="eoi-form" className="lg:col-span-8">
 						{!artist ? (
 							<div className="rounded-3xl border-2 border-dashed border-outline-variant/20 bg-surface-container-lowest/50 p-12 text-center">
-								<Icon name="tours" size={44} className="text-on-surface-variant/50 block mb-4" />
+								<Icon name="tours" size={44} className="text-on-surface-variant/50 mx-auto mb-4" />
 								<p className="text-base font-semibold text-on-surface-variant">{t("selector.selectPrompt")}</p>
 							</div>
 						) : (

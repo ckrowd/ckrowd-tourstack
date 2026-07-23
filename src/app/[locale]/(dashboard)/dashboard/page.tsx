@@ -10,6 +10,7 @@ import {
 import AreaChart from "@/components/dashboard/AreaChart";
 import DonutChart from "@/components/dashboard/DonutChart";
 import Sparkline from "@/components/dashboard/Sparkline";
+import DashboardGettingStarted from "@/components/DashboardGettingStarted";
 import EcosystemReadiness from "@/components/EcosystemReadiness";
 import CountUp from "@/components/ui/CountUp";
 import Icon from "@/components/icons";
@@ -19,7 +20,6 @@ import { computeEcosystemReadiness } from "@/lib/eligibility";
 import TopNav from "@/components/TopNav";
 import { Link } from "@/i18n/routing";
 import PageTour from "@/components/PageTour";
-import Button from "@/components/ui/Button";
 import StatusBadge, { type StatusTone } from "@/components/ui/StatusBadge";
 import StatusStepper from "@/components/ui/StatusStepper";
 
@@ -93,6 +93,15 @@ export default async function DashboardPage({ params }: Props) {
 	const companyName = profile?.company_name
 		? String(profile.company_name)
 		: t("yourOrganization");
+	// First-run experience — a promoter with no EOIs has all-zero stats and
+	// empty charts, so we lead with an actionable getting-started surface.
+	const isFirstTime = eois.length === 0;
+	// Mirror the same core fields the SideNav lock + ProfileSetupGate use, so the
+	// checklist's "profile" step agrees with the rest of the shell.
+	const profileComplete = [
+		"company_name", "company_type", "contact_person",
+		"contact_email", "phone", "country", "city",
+	].every((k) => Boolean((profile as Record<string, unknown> | null)?.[k]));
 	const INSURANCE_PRODUCT_IDS = ["Event Cancellation", "Event Insurance Bundle", "Touring Workforce", "Aviation & Equipment", "Audience Ticket Protection"];
 	const approvedEoi = eois.find((e) => String(e.status) === "approved");
 	// Only EOIs submitted after required_documents was introduced have a real
@@ -169,6 +178,12 @@ export default async function DashboardPage({ params }: Props) {
 			.filter((a) => monthKeyOf(a.created_at) === k)
 			.reduce((s, a) => s + Number(a.amount_requested ?? 0), 0),
 	);
+	// Aggregate total so the stat-card headline matches the (aggregate) sparkline
+	// trend rather than showing only the latest application's amount.
+	const totalFinancingRequested = financingApps.reduce(
+		(s, a) => s + Number(a.amount_requested ?? 0),
+		0,
+	);
 	const countStatus = (wanted: string[]) =>
 		eois.filter((e) => wanted.includes(String(e.status ?? ""))).length;
 	const pipelineSegments = [
@@ -195,10 +210,10 @@ export default async function DashboardPage({ params }: Props) {
 			<div className="flex pt-16">
 				<SideNav />
 
-				<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
+				<main className="flex-1 lg:ml-64 bg-surface p-6 md:px-10 md:pt-5 md:pb-10">
 					<PageTour pageId="dashboard" />
 					{/* Identity strip header */}
-					<div className="tsd-card tsd-card-glow mb-10 overflow-hidden tsd-rise">
+					<div className="tsd-card mb-8 overflow-hidden tsd-rise">
 						<div className="p-6 md:p-8 flex items-center gap-5">
 							<div className="w-14 h-14 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0 overflow-hidden">
 								{profile?.logo_url ? (
@@ -210,7 +225,7 @@ export default async function DashboardPage({ params }: Props) {
 									</span>
 								)}
 							</div>
-							<div className="min-w-0">
+							<div className="min-w-0 flex-1">
 								<span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-primary block">
 									{t("promoterPortal")}
 								</span>
@@ -221,118 +236,118 @@ export default async function DashboardPage({ params }: Props) {
 									{t("welcomeBack", { name: companyName })}
 								</p>
 							</div>
-						</div>
-						<div className="tsd-foot grid grid-cols-2 md:grid-cols-4 divide-x divide-outline-variant/60">
-							<div className="px-6 py-4">
-								<p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-on-surface-variant mb-1">
+							{/* Touring season — the one identity metric not repeated in the
+							    stat cards below, so it earns a spot here as a chip. */}
+							<div className="hidden sm:flex flex-col items-end shrink-0 pl-4">
+								<span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-on-surface-variant mb-1.5">
 									{t("touringSeason")}
-								</p>
-								<p className="text-sm font-semibold text-on-surface">
+								</span>
+								<span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container text-sm font-semibold text-on-surface whitespace-nowrap">
+									<Icon name="calendar" size={13} className="text-primary" />
 									{t("touringSeasonYears")}
-								</p>
-							</div>
-							<div className="px-6 py-4">
-								<p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-on-surface-variant mb-1">
-									{t("stats.eoisSubmitted")}
-								</p>
-								<p className="text-sm font-semibold text-on-surface">
-									{typeof dashData?.stats?.totalEOIs === "number"
-										? dashData.stats.totalEOIs
-										: eois.length}
-								</p>
-							</div>
-							<div className="px-6 py-4">
-								<p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-on-surface-variant mb-1">
-									{t("stats.approved")}
-								</p>
-								<p className="text-sm font-semibold text-emerald-500">
-									{typeof dashData?.stats?.approvedEOIs === "number"
-										? dashData.stats.approvedEOIs
-										: 0}
-								</p>
-							</div>
-							<div className="px-6 py-4">
-								<p className="text-[10px] font-semibold uppercase tracking-[0.12em] text-on-surface-variant mb-1">
-									{t("stats.nextShow")}
-								</p>
-								<p className="text-sm font-semibold text-on-surface truncate">
-									{nextMilestone
-										? `${String(nextMilestoneTour?.venue ?? "TBD")} · ${new Date(String(nextMilestone.date)).toLocaleDateString(locale, { month: "short", day: "numeric" })}`
-										: "—"}
-								</p>
+								</span>
 							</div>
 						</div>
 					</div>
 
-					{/* Finance / insurance action prompts */}
-					{(hasFinancingRequest && !hasFinancingApp) && (
-						<div className="mb-6 bg-amber-500/10 border border-amber-500/25 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-							<div className="flex items-start gap-3">
-								<Icon name="wallet" size={18} className="text-amber-600 mt-0.5 shrink-0" />
-								<div>
-									<p className="font-(family-name:--font-manrope) font-semibold text-amber-700 dark:text-amber-300 text-sm">
-										{t("financePrompt.title")}
-									</p>
-									<p className="text-xs text-amber-700/90 dark:text-amber-300/80 mt-0.5">
-										{t("financePrompt.description")}
-									</p>
-								</div>
-							</div>
-							<Button href="/financing" className="shrink-0">
-								{t("financePrompt.cta")}
-							</Button>
+					{/* Ecosystem readiness — surfaced right under the header so an
+					    incomplete ecosystem reads as the urgent next task. First-run
+					    users already see this as a getting-started step. */}
+					{!isFirstTime && !readiness.eligible && (
+						<div className="mb-8 tsd-rise">
+							<EcosystemReadiness readiness={readiness} compact />
 						</div>
 					)}
-					{(hasInsuranceRequest && !hasInsuranceApp) && (
-						<div className="mb-6 bg-blue-500/10 border border-blue-500/25 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-							<div className="flex items-start gap-3">
-								<Icon name="insurance" size={18} className="text-blue-600 mt-0.5 shrink-0" />
-								<div>
-									<p className="font-(family-name:--font-manrope) font-semibold text-blue-700 dark:text-blue-300 text-sm">
-										{t("insurancePrompt.title")}
-									</p>
-									<p className="text-xs text-blue-700/90 dark:text-blue-300/80 mt-0.5">
-										{t("insurancePrompt.description")}
-									</p>
-								</div>
-							</div>
-							<Button href="/insurance" className="shrink-0">
-								{t("insurancePrompt.cta")}
-							</Button>
-						</div>
+
+					{/* First-run getting-started surface — leads the page for new
+					    promoters (no EOIs yet), before the empty stats/charts. */}
+					{isFirstTime && (
+						<DashboardGettingStarted
+							name={companyName}
+							profileComplete={profileComplete}
+							ecosystemDone={readiness.eligible}
+						/>
 					)}
-					{/* Document upload prompt for approved EOIs */}
-					{approvedEoi && (
-						<div className="mb-6 bg-emerald-500/10 border border-emerald-500/25 rounded-2xl p-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-							<div className="flex items-start gap-3">
-								<Icon name="upload" size={18} className="text-emerald-600 mt-0.5 shrink-0" />
-								<div>
-									<p className="font-(family-name:--font-manrope) font-semibold text-emerald-700 dark:text-emerald-300 text-sm">
-										{t("docsPrompt.title")}
-									</p>
-									<p className="text-xs text-emerald-700/90 dark:text-emerald-300/80 mt-0.5">
-										{approvedEoiDocTypes.length > 0
-											? t("docsPrompt.description", { docs: approvedEoiDocLabels })
-											: t("docsPrompt.descriptionGeneric")}
-									</p>
-								</div>
+
+					{/* Consolidated "needs your attention" — one card, one row per
+					    active prompt, instead of stacked full-width banners. */}
+					{((hasFinancingRequest && !hasFinancingApp) ||
+						(hasInsuranceRequest && !hasInsuranceApp) ||
+						approvedEoi) && (
+						<div className="tsd-card mb-8 overflow-hidden tsd-rise">
+							<div className="px-5 md:px-6 py-3.5 border-b border-outline-variant/60 flex items-center gap-2">
+								<Icon name="bell" size={15} className="text-primary" />
+								<h2 className="text-sm font-semibold text-on-surface">
+									{t("attentionTitle")}
+								</h2>
 							</div>
-							<Button
-								href={`/eoi/documents?eoiId=${String(approvedEoi.id)}`}
-								className="shrink-0"
-							>
-								{t("docsPrompt.cta")}
-							</Button>
+							<div className="divide-y divide-outline-variant/60">
+								{hasFinancingRequest && !hasFinancingApp && (
+									<div className="flex items-center justify-between gap-4 px-5 md:px-6 py-3.5 hover:bg-surface-container-low transition-colors">
+										<div className="flex items-center gap-3 min-w-0">
+											<span className="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-600 flex items-center justify-center shrink-0">
+												<Icon name="wallet" size={16} />
+											</span>
+											<div className="min-w-0">
+												<p className="text-sm font-semibold text-on-surface truncate">{t("financePrompt.title")}</p>
+												<p className="text-xs text-on-surface-variant truncate">{t("financePrompt.description")}</p>
+											</div>
+										</div>
+										<Link href="/financing" className="shrink-0 inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:gap-2.5 transition-all">
+											{t("financePrompt.cta")}
+											<Icon name="arrow-right" size={13} strokeWidth={2.25} />
+										</Link>
+									</div>
+								)}
+								{hasInsuranceRequest && !hasInsuranceApp && (
+									<div className="flex items-center justify-between gap-4 px-5 md:px-6 py-3.5 hover:bg-surface-container-low transition-colors">
+										<div className="flex items-center gap-3 min-w-0">
+											<span className="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-600 flex items-center justify-center shrink-0">
+												<Icon name="insurance" size={16} />
+											</span>
+											<div className="min-w-0">
+												<p className="text-sm font-semibold text-on-surface truncate">{t("insurancePrompt.title")}</p>
+												<p className="text-xs text-on-surface-variant truncate">{t("insurancePrompt.description")}</p>
+											</div>
+										</div>
+										<Link href="/insurance" className="shrink-0 inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:gap-2.5 transition-all">
+											{t("insurancePrompt.cta")}
+											<Icon name="arrow-right" size={13} strokeWidth={2.25} />
+										</Link>
+									</div>
+								)}
+								{approvedEoi && (
+									<div className="flex items-center justify-between gap-4 px-5 md:px-6 py-3.5 hover:bg-surface-container-low transition-colors">
+										<div className="flex items-center gap-3 min-w-0">
+											<span className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 flex items-center justify-center shrink-0">
+												<Icon name="upload" size={16} />
+											</span>
+											<div className="min-w-0">
+												<p className="text-sm font-semibold text-on-surface truncate">{t("docsPrompt.title")}</p>
+												<p className="text-xs text-on-surface-variant truncate">
+													{approvedEoiDocTypes.length > 0
+														? t("docsPrompt.description", { docs: approvedEoiDocLabels })
+														: t("docsPrompt.descriptionGeneric")}
+												</p>
+											</div>
+										</div>
+										<Link href={`/eoi/documents?eoiId=${String(approvedEoi.id)}`} className="shrink-0 inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:gap-2.5 transition-all">
+											{t("docsPrompt.cta")}
+											<Icon name="arrow-right" size={13} strokeWidth={2.25} />
+										</Link>
+									</div>
+								)}
+							</div>
 						</div>
 					)}
 					{/* Stats Grid */}
-					<div data-tour="dashboard-stats" className="tsd-stagger grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-10">
+					<div data-tour="dashboard-stats" className="tsd-stagger grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 mb-8">
 						<div className="tsd-card tsd-card-hover p-5 md:p-6 flex flex-col justify-between gap-5">
 							<div className="flex items-center justify-between">
 								<p className="text-[11px] font-semibold text-on-surface-variant uppercase tracking-[0.12em]">
 									{t("stats.eoisSubmitted")}
 								</p>
-								<span className="w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+								<span className="tsd-chip w-8 h-8 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
 									<Icon name="tours" size={16} />
 								</span>
 							</div>
@@ -357,7 +372,7 @@ export default async function DashboardPage({ params }: Props) {
 								<p className="text-[11px] font-semibold text-on-surface-variant uppercase tracking-[0.12em]">
 									{t("stats.approved")}
 								</p>
-								<span className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
+								<span className="tsd-chip w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
 									<Icon name="check" size={16} strokeWidth={2.25} />
 								</span>
 							</div>
@@ -383,14 +398,14 @@ export default async function DashboardPage({ params }: Props) {
 								<p className="text-[11px] font-semibold text-on-surface-variant uppercase tracking-[0.12em]">
 									{t("stats.financingStatus")}
 								</p>
-								<span className="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-500 flex items-center justify-center">
+								<span className="tsd-chip w-8 h-8 rounded-lg bg-violet-500/10 text-violet-500 flex items-center justify-center">
 									<Icon name="wallet" size={16} />
 								</span>
 							</div>
 							<div className="flex items-end justify-between gap-2">
 								{latestFinancing ? (
 								<CountUp
-									value={Math.round(Number(latestFinancing.amount_requested) / 1000)}
+									value={Math.round(totalFinancingRequested / 1000)}
 									locale={locale}
 									prefix="$"
 									suffix="K"
@@ -401,7 +416,7 @@ export default async function DashboardPage({ params }: Props) {
 									—
 								</span>
 							)}
-								<span className="text-blue-500 font-semibold text-xs capitalize">
+								<span className="text-violet-500 font-semibold text-xs capitalize">
 									{latestFinancing
 										? t(
 												`statuses.${String(latestFinancing.status ?? "pending")}`,
@@ -409,50 +424,50 @@ export default async function DashboardPage({ params }: Props) {
 										: t("stats.noApps")}
 								</span>
 							</div>
-						<Sparkline data={financingSeries} height={30} className="[color:var(--chart-contacted)]" />
+						<Sparkline data={financingSeries} height={30} className="text-violet-500" />
 					</div>
 
-						<div className="relative overflow-hidden p-5 md:p-6 rounded-2xl flex flex-col justify-between gap-5 bg-linear-to-br from-[#ff5a30] to-[#b83816] text-white">
+						<div className="relative overflow-hidden p-5 md:p-6 rounded-2xl flex flex-col justify-between gap-5 bg-primary text-white">
 							<div className="absolute -top-6 -right-6 opacity-15 pointer-events-none">
 								<Icon name="zap" size={130} strokeWidth={1} />
 							</div>
-							<p className="text-[11px] font-semibold text-white/90 uppercase tracking-[0.12em] z-10">
-								{t("stats.nextShow")}
-							</p>
-							<div className="z-10">
-								{nextMilestone ? (
-									<>
-										<span className="block text-lg font-(family-name:--font-display) leading-tight">
-											{String(nextMilestoneTour?.venue ?? "TBD")} @{" "}
-											{String(nextMilestoneTour?.city ?? "TBD")}
-										</span>
-										<span className="text-orange-100 font-medium text-sm">
-											{new Date(String(nextMilestone.date)).toLocaleDateString(
-												locale,
-												{
-													month: "short",
-													day: "numeric",
-													year: "numeric",
-												},
-											)}
-										</span>
-									</>
-								) : (
-									<>
-										<span className="block text-lg font-(family-name:--font-display) leading-tight">
-											{t("stats.noUpcomingShows")}
-										</span>
-										<span className="text-orange-100 font-medium text-sm">
-											{t("stats.submitEoiPrompt")}
-										</span>
-									</>
-								)}
+							<div className="flex items-center justify-between z-10">
+								<p className="text-[11px] font-semibold text-white/90 uppercase tracking-[0.12em]">
+									{t("stats.nextShow")}
+								</p>
+								<span className="w-8 h-8 rounded-lg bg-white/15 flex items-center justify-center">
+									<Icon name="calendar" size={16} />
+								</span>
 							</div>
+							{nextMilestone ? (
+								<>
+									<div className="z-10 flex items-end justify-between gap-2">
+										<span className="text-3xl md:text-4xl font-(family-name:--font-display) leading-none">
+											{new Date(String(nextMilestone.date)).toLocaleDateString(locale, { month: "short", day: "numeric" })}
+										</span>
+										<span className="text-orange-100 font-semibold text-xs">
+											{new Date(String(nextMilestone.date)).getFullYear()}
+										</span>
+									</div>
+									<p className="z-10 text-orange-100 text-sm font-medium truncate">
+										{String(nextMilestoneTour?.venue ?? "TBD")} @ {String(nextMilestoneTour?.city ?? "TBD")}
+									</p>
+								</>
+							) : (
+								<>
+									<span className="z-10 block text-2xl font-(family-name:--font-display) leading-tight">
+										{t("stats.noUpcomingShows")}
+									</span>
+									<p className="z-10 text-orange-100 font-medium text-sm">
+										{t("stats.submitEoiPrompt")}
+									</p>
+								</>
+							)}
 						</div>
 					</div>
 
 {/* Hero analytics row */}
-					<div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-5 mb-10">
+					<div data-reveal className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-5 mb-8">
 						<div className="lg:col-span-2 tsd-card p-5 md:p-6 flex flex-col">
 							<div className="flex items-start justify-between gap-3">
 								<div>
@@ -490,9 +505,8 @@ export default async function DashboardPage({ params }: Props) {
 								className="mt-6"
 							/>
 						</div>
-						<div className="lg:col-span-1">
+						<div className="lg:col-span-1 tsd-card p-6 flex flex-col">
 							{/* EOI pipeline composition */}
-						<div className="tsd-card p-6">
 							<div className="flex items-center justify-between mb-5">
 								<h3 className="font-(family-name:--font-manrope) font-semibold text-lg">
 									{t("pipelineTitle")}
@@ -501,7 +515,7 @@ export default async function DashboardPage({ params }: Props) {
 									<Icon name="chart" size={16} />
 								</span>
 							</div>
-							<div className="flex items-center gap-6">
+							<div className="flex-1 flex items-center gap-6">
 								<DonutChart
 									segments={pipelineSegments}
 									centerValue={String(totalEoiCount)}
@@ -526,15 +540,19 @@ export default async function DashboardPage({ params }: Props) {
 								</ul>
 							</div>
 						</div>
-						</div>
 					</div>
 
 					{/* Tour Progress Tracker */}
-					<div className="tsd-rise tsd-card p-4 md:p-6 mb-10">
+					<div data-reveal className="tsd-card p-4 md:p-6 mb-8">
 						<div className="flex items-center justify-between mb-4 gap-2">
-							<h2 className="font-(family-name:--font-manrope) font-semibold text-sm md:text-base truncate">
-								{progressTitle}
-							</h2>
+							<div className="min-w-0">
+								<span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-primary block mb-0.5">
+									{t("latestSubmission")}
+								</span>
+								<h2 className="font-(family-name:--font-manrope) font-semibold text-sm md:text-base truncate">
+									{progressTitle}
+								</h2>
+							</div>
 							<StatusBadge tone={progressStatusTone} dot className="shrink-0">
 								{progressStatusLabel}
 							</StatusBadge>
@@ -542,17 +560,10 @@ export default async function DashboardPage({ params }: Props) {
 						<StatusStepper steps={tourSteps} />
 					</div>
 
-					{/* Ecosystem readiness nudge (hidden once eligible) */}
-					{!readiness.eligible && (
-						<div className="mb-10">
-							<EcosystemReadiness readiness={readiness} compact />
-						</div>
-					)}
-
-					<div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+					<div data-reveal className="grid grid-cols-1 lg:grid-cols-3 gap-8">
 						<div data-tour="dashboard-eois" className="lg:col-span-2 space-y-6">
 							<div className="flex items-center justify-between">
-								<h2 className="text-2xl font-(family-name:--font-manrope) font-semibold text-on-surface">
+								<h2 className="text-lg font-(family-name:--font-manrope) font-semibold text-on-surface">
 									{t("myEoiSubmissions")}
 								</h2>
 								<Link

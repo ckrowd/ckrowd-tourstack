@@ -27,11 +27,11 @@ export default function ThemeToggle({ className }: { className?: string }) {
 			aria-checked={isDark}
 			aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
 			onClick={() => setTheme(isDark ? "light" : "dark")}
-			className={`p-2 hover:bg-surface-container-low rounded-lg transition-all active:scale-95 ${className ?? ""}`}
+			className={`p-2 hover:bg-surface-container-high rounded-full transition-all active:scale-95 ${className ?? ""}`}
 		>
 			<Icon
 				name={mounted && isDark ? "sun" : "moon"}
-				size={20}
+				size={19}
 				className="text-on-surface-variant"
 			/>
 		</button>

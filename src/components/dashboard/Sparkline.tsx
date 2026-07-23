@@ -63,7 +63,7 @@ export default function Sparkline({ data, className = "", height = 36 }: Sparkli
 					<stop offset="100%" stopColor="currentColor" stopOpacity="0" />
 				</linearGradient>
 			</defs>
-			<path d={area} fill={`url(#${gradId})`} />
+			<path d={area} fill={`url(#${gradId})`} className="tsd-spark-area" />
 			<path
 				d={line}
 				fill="none"
@@ -72,12 +72,15 @@ export default function Sparkline({ data, className = "", height = 36 }: Sparkli
 				strokeLinecap="round"
 				strokeLinejoin="round"
 				vectorEffect="non-scaling-stroke"
+				pathLength={1}
+				className="tsd-spark-line"
 			/>
 			<circle
 				cx={points[points.length - 1][0]}
 				cy={points[points.length - 1][1]}
 				r="2.5"
 				fill="currentColor"
+				className="tsd-spark-dot"
 			/>
 		</svg>
 	);

@@ -167,7 +167,7 @@ export default function AITourScorePanel({ eoiId }: { eoiId: string }) {
 				</>
 			) : (
 				<div className="text-center py-4">
-					<Icon name="ai" size={36} className="text-on-surface-variant block mb-2" />
+					<Icon name="ai" size={36} className="text-on-surface-variant mx-auto mb-2" />
 					<p className="text-sm text-on-surface-variant mb-3">{t("noScore")}</p>
 					<button
 						type="button"

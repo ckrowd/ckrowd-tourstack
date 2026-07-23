@@ -5,6 +5,7 @@ import Icon from "@/components/icons";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { registerCrewMember } from "@/app/actions";
+import PageHero from "@/components/PageHero";
 import { Link } from "@/i18n/routing";
 
 /* ─────────────────────────── constants ─────────────────────────── */
@@ -548,37 +549,28 @@ export default function CrewClient() {
 			<div className="w-full">
 				{/* Header */}
 				<header className="mb-10">
-					<div className="flex items-start justify-between gap-4">
-						<div>
-							<span className="text-xs font-semibold uppercase tracking-widest text-primary block mb-3">
-								{t("registry")}
-							</span>
-							<h1 className="text-4xl font-extrabold tracking-tight text-on-surface mb-2">
-								{t("title")}
-							</h1>
-							<p className="text-on-surface-variant">{t("description")}</p>
-						</div>
+					<PageHero
+						className="!mb-0"
+						eyebrow={t("registry")}
+						title={t("title")}
+						description={t("description")}
+					>
 						{/* Live score pill */}
 						{step > 0 && (
 							<div
-								className={`shrink-0 flex flex-col items-center px-5 py-3 rounded-2xl border-2 ${tier.bg} ${tier.border} min-w-24`}
+								className={`flex items-center gap-3 px-4 py-2.5 rounded-2xl border-2 ${tier.bg} ${tier.border}`}
 							>
-								<span className={`text-3xl font-black ${tier.text}`}>
+								<span className={`text-2xl font-black ${tier.text}`}>
 									{wcs.total}
 								</span>
-								<span
-									className={`text-[10px] font-semibold uppercase tracking-wider ${tier.text} opacity-70`}
-								>
+								<span className={`text-[10px] font-semibold uppercase tracking-wider leading-tight ${tier.text}`}>
 									WCS Score
-								</span>
-								<span
-									className={`text-[10px] font-semibold ${tier.text} mt-0.5`}
-								>
+									<br />
 									Tier {tier.tier}
 								</span>
 							</div>
 						)}
-					</div>
+					</PageHero>
 				</header>
 
 				<Stepper current={step} steps={STEPS} />

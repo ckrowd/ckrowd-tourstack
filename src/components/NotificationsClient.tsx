@@ -5,6 +5,8 @@ import Icon from "@/components/icons";
 import { useFormatter, useTranslations } from "next-intl";
 import { getEOIs } from "@/app/actions";
 import Loader from "@/components/Loader";
+import PageHero from "@/components/PageHero";
+import EmptyState from "@/components/ui/EmptyState";
 import { useSession } from "@/context/AuthContext";
 import { Link } from "@/i18n/routing";
 
@@ -42,28 +44,21 @@ export default function NotificationsClient() {
 	});
 
 	return (
-		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
-			<div className="mb-8">
-				<Link
-					href="/dashboard"
-					className="inline-flex items-center gap-1 text-xs font-semibold text-on-surface-variant hover:text-primary transition-colors mb-3"
-				>
-					<Icon name="arrow-left" size={14} />
-					{t("backToDashboard")}
-				</Link>
-				<h1 className="font-(family-name:--font-manrope) text-3xl font-black text-on-surface">
-					{t("title")}
-				</h1>
-				<p className="text-on-surface-variant text-sm mt-1">{t("subtitle")}</p>
-			</div>
+		<main className="flex-1 lg:ml-64 bg-surface p-6 md:px-10 md:pt-5 md:pb-10">
+			<Link
+				href="/dashboard"
+				className="inline-flex items-center gap-1 text-xs font-semibold text-on-surface-variant hover:text-primary transition-colors mb-3"
+			>
+				<Icon name="arrow-left" size={14} />
+				{t("backToDashboard")}
+			</Link>
+			<PageHero title={t("title")} description={t("subtitle")} />
 
 			{eoisQuery.isLoading ? (
 				<Loader />
 			) : notifications.length === 0 ? (
-				<div className="flex flex-col items-center justify-center py-24 text-on-surface-variant text-center">
-					<Icon name="bell-off" size={44} className="mb-4 text-on-surface-variant/40" />
-					<p className="font-semibold text-lg">{t("empty")}</p>
-					<p className="text-sm mt-1">{t("emptyHint")}</p>
+				<div className="rounded-2xl border border-outline-variant/60">
+					<EmptyState icon="bell-off" title={t("empty")} description={t("emptyHint")} />
 				</div>
 			) : (
 				<div className="tsd-card overflow-hidden max-w-2xl">

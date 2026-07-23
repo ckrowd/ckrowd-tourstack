@@ -244,7 +244,7 @@ export default function GlobalSearch() {
 				type="button"
 				onClick={() => setOpen(true)}
 				aria-label={t("openSearch")}
-				className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl border border-outline-variant/30 bg-surface-container-low/80 hover:bg-surface-container transition-colors text-sm text-on-surface-variant min-w-52"
+				className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-xl border border-outline-variant/30 bg-surface-container-low/80 hover:bg-surface-container transition-colors text-sm text-on-surface-variant w-full min-w-52"
 			>
 				<span className="material-symbols-outlined text-base leading-none">search</span>
 				<span className="flex-1 text-left text-[13px]">{t("placeholder")}</span>

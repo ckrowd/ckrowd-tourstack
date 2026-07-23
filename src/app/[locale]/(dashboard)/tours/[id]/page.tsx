@@ -45,7 +45,7 @@ export default async function TourDetailPage({
 			<TopNav />
 			<div className="flex pt-16">
 				<SideNav />
-				<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
+				<main className="flex-1 lg:ml-64 bg-surface p-6 md:px-10 md:pt-5 md:pb-10">
 					<div className="w-full space-y-8">
 						<div className="flex flex-wrap items-center justify-between gap-3">
 							<div>

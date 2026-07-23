@@ -3,7 +3,9 @@
 import { useTranslations } from "next-intl";
 import Icon from "@/components/icons";
 import { useId, useState } from "react";
+import EmptyState from "@/components/ui/EmptyState";
 import HowItWorksModal from "@/components/HowItWorksModal";
+import PageHero from "@/components/PageHero";
 import StatusBadge, { type StatusTone } from "@/components/ui/StatusBadge";
 
 type Application = { id: string; product?: string | null; amount_requested?: number | null; currency?: string | null; status?: string | null; created_at?: Date | string | null; tour?: { artist?: { name?: string | null } | null } | null };
@@ -33,7 +35,7 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 	const [productsOpen, setProductsOpen] = useState(false);
 
 	return (
-		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
+		<main className="flex-1 lg:ml-64 bg-surface p-6 md:px-10 md:pt-5 md:pb-10">
 			{/* Products modal */}
 			{productsOpen && (
 				<div
@@ -138,48 +140,40 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 			)}
 
 			{/* Header */}
-			<div className="mb-8 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-				<div>
-					<span className="text-xs font-semibold uppercase tracking-widest text-primary block mb-2">
-						{t("promoterPortal")}
-					</span>
-					<h1 className="text-3xl font-semibold font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
-						{t("title")}
-					</h1>
-					<p className="text-on-surface-variant font-medium max-w-xl">
-						{t("description")}
-					</p>
-				</div>
-				<div className="flex items-center gap-2 flex-wrap">
-					<button
-						type="button"
-						data-tour="insurance-products"
-						onClick={() => setProductsOpen(true)}
-						className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-semibold hover:bg-surface-container-high transition-colors"
-					>
-						<Icon name="shapes" size={16} className="text-primary" />
-						{t("productsButton")}
-					</button>
-					<HowItWorksModal
-						title={tIns("howItWorksTitle")}
-						subtitle={tIns("howItWorksSubtitle")}
-						buttonLabel={tIns("howItWorksButton")}
-						steps={(tIns.raw("ecosystemFlow") as { label: string; desc: string }[]).map((s, i) => ({
-							step: String(i + 1).padStart(2, "0"),
-							title: s.label,
-							desc: s.desc,
-						}))}
-					/>
-					<button
-						type="button"
-						onClick={() => setFaqOpen(true)}
-						className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-semibold hover:bg-surface-container-high transition-colors"
-					>
-						<Icon name="help-circle" size={16} className="text-primary" />
-						{tIns("faqButton")}
-					</button>
-				</div>
-			</div>
+			<PageHero
+				image="/festival-pyro.jpg"
+				eyebrow={t("promoterPortal")}
+				title={t("title")}
+				description={t("description")}
+			>
+				<button
+					type="button"
+					data-tour="insurance-products"
+					onClick={() => setProductsOpen(true)}
+					className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-semibold hover:bg-surface-container-high transition-colors"
+				>
+					<Icon name="shapes" size={16} className="text-primary" />
+					{t("productsButton")}
+				</button>
+				<HowItWorksModal
+					title={tIns("howItWorksTitle")}
+					subtitle={tIns("howItWorksSubtitle")}
+					buttonLabel={tIns("howItWorksButton")}
+					steps={(tIns.raw("ecosystemFlow") as { label: string; desc: string }[]).map((s, i) => ({
+						step: String(i + 1).padStart(2, "0"),
+						title: s.label,
+						desc: s.desc,
+					}))}
+				/>
+				<button
+					type="button"
+					onClick={() => setFaqOpen(true)}
+					className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-semibold hover:bg-surface-container-high transition-colors"
+				>
+					<Icon name="help-circle" size={16} className="text-primary" />
+					{tIns("faqButton")}
+				</button>
+			</PageHero>
 
 			{/* Insurance partner */}
 			<div className="mb-8">
@@ -198,11 +192,8 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 					{t("myApplications")}
 				</h2>
 				{applications.length === 0 ? (
-					<div className="tsd-card p-10 text-center">
-						<Icon name="insurance" size={36} className="text-on-surface-variant block mb-3" />
-						<p className="text-sm font-semibold text-on-surface-variant">
-							{t("noApplications")}
-						</p>
+					<div className="rounded-2xl border border-outline-variant/60">
+						<EmptyState icon="insurance" title={t("noApplications")} />
 					</div>
 				) : (
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">

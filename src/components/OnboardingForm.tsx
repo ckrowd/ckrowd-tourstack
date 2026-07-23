@@ -5,6 +5,8 @@ import Icon from "@/components/icons";
 import { useLocale, useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import Loader from "@/components/Loader";
+import PageHero from "@/components/PageHero";
+import EmptyState from "@/components/ui/EmptyState";
 import {
 	getCrewMembers,
 	getStakeholders,
@@ -1091,14 +1093,12 @@ function DirectoryTab({
 					<Loader />
 				</div>
 			) : filtered.length === 0 ? (
-				<div className="text-center py-20 bg-surface-container-lowest rounded-2xl border border-outline-variant/10">
-					<Icon name="user-plus" size={44} className="text-on-surface-variant/30 block mb-4" />
-					<p className="text-on-surface-variant font-medium">
-						{t("noEntries.title")}
-					</p>
-					<p className="text-sm text-on-surface-variant mt-1">
-						{t("noEntries.description")}
-					</p>
+				<div className="bg-surface-container-lowest rounded-2xl border border-outline-variant/10">
+					<EmptyState
+						icon="user-plus"
+						title={t("noEntries.title")}
+						description={t("noEntries.description")}
+					/>
 				</div>
 			) : (
 				<div className="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
@@ -1393,20 +1393,15 @@ export default function OnboardingForm() {
 	}
 
 	return (
-		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
+		<main className="flex-1 lg:ml-64 bg-surface p-6 md:px-10 md:pt-5 md:pb-10">
 			<div className="w-full">
 				{/* Header */}
-				<header className="mb-8">
-					<span className="text-xs font-semibold uppercase tracking-widest text-primary block mb-3">
-						{t("header.platform")}
-					</span>
-					<h1 className="text-4xl font-extrabold tracking-tight text-on-surface mb-2 font-(family-name:--font-manrope)">
-						{t("header.title")}
-					</h1>
-					<p className="text-on-surface-variant">
-						{t("header.description")}
-					</p>
-				</header>
+				<PageHero
+					image="/production-drums.jpg"
+					eyebrow={t("header.platform")}
+					title={t("header.title")}
+					description={t("header.description")}
+				/>
 
 				{/* Tabs */}
 				<div className="flex gap-1 bg-surface-container-highest rounded-2xl p-1 mb-8 w-fit">
@@ -1472,7 +1467,7 @@ export default function OnboardingForm() {
 										type="button"
 										disabled={!category || category === "workforce"}
 										onClick={() => setStep(1)}
-										className="px-10 py-3 bg-linear-to-r from-primary to-[#cc4826] text-white rounded-xl font-semibold shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none"
+										className="px-10 py-3 bg-primary text-white rounded-xl font-semibold hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none"
 									>
 										{t("actions.continue")}
 										<Icon name="arrow-right" size={18} />
@@ -1517,7 +1512,7 @@ export default function OnboardingForm() {
 										<button
 											type="submit"
 											disabled={step === totalSteps - 1 && !allConsented}
-											className="px-10 py-3 bg-linear-to-r from-primary to-[#cc4826] text-white rounded-xl font-semibold shadow-xl shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none disabled:hover:scale-100"
+											className="px-10 py-3 bg-primary text-white rounded-xl font-semibold hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed disabled:transform-none disabled:hover:scale-100"
 										>
 											{step < totalSteps - 1
 												? t("actions.continue")

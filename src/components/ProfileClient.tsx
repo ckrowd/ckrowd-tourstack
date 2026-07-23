@@ -2,6 +2,7 @@
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import Icon from "@/components/icons";
+import PageHero from "@/components/PageHero";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { getTourstackProfile, updateTourstackProfile, uploadImage } from "@/app/actions";
@@ -463,7 +464,7 @@ export default function ProfileClient() {
 		: session?.user?.email?.slice(0, 2).toUpperCase() ?? "?";
 
 	return (
-		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
+		<main className="flex-1 lg:ml-64 bg-surface p-6 md:px-10 md:pt-5 md:pb-10">
 			<PageTour pageId="profile" />
 			{isSetup && (
 				<div className="mb-6 bg-primary/10 border border-primary/20 rounded-2xl p-5 flex items-start gap-4">
@@ -479,15 +480,12 @@ export default function ProfileClient() {
 				</div>
 			)}
 
-			<div className="mb-8">
-				<span className="text-xs font-semibold uppercase tracking-widest text-primary block mb-2">
-					{t("promoterPortal")}
-				</span>
-				<h1 className="text-3xl font-semibold font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
-					{t("title")}
-				</h1>
-				<p className="text-on-surface-variant">{t("description")}</p>
-			</div>
+			<PageHero
+				image="/landing-promoter.jpg"
+				eyebrow={t("promoterPortal")}
+				title={t("title")}
+				description={t("description")}
+			/>
 
 			{/* Journey rail */}
 			<div className="tsd-card p-5 md:p-6 mb-8">

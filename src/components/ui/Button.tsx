@@ -16,9 +16,9 @@ const variantClasses: Record<ButtonVariant, string> = {
 	ghost: "text-on-surface-variant hover:bg-surface-container-low",
 };
 
-// "Gradient CTA" from the mockup is a Primary button with a subtle gradient —
-// not a distinct visual system, so it's a modifier rather than its own variant.
-const gradientClasses = "bg-gradient-to-br from-primary to-[#CC4825] text-on-primary hover:opacity-90";
+// The `gradient` CTA modifier is retained for API compatibility but now renders
+// as a solid primary — the design language is deliberately gradient-free.
+const gradientClasses = "bg-primary text-on-primary hover:opacity-90";
 
 type CommonProps = {
 	variant?: ButtonVariant;

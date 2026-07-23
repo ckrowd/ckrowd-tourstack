@@ -4,8 +4,11 @@ import { useTranslations } from "next-intl";
 import Icon from "@/components/icons";
 import { useId, useState } from "react";
 import EcosystemReadiness from "@/components/EcosystemReadiness";
+import FinancingAnalytics from "@/components/FinancingAnalytics";
 import FinancingFaq from "@/components/FinancingFaq";
+import EmptyState from "@/components/ui/EmptyState";
 import HowItWorksModal from "@/components/HowItWorksModal";
+import PageHero from "@/components/PageHero";
 import StatusBadge, { type StatusTone } from "@/components/ui/StatusBadge";
 import { Link } from "@/i18n/routing";
 import type { EcosystemReadiness as Readiness } from "@/lib/eligibility";
@@ -48,7 +51,7 @@ export default function FinancingApplyClient({ applications, locale, readiness }
 	const [productsOpen, setProductsOpen] = useState(false);
 
 	return (
-		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
+		<main className="flex-1 lg:ml-64 bg-surface p-6 md:px-10 md:pt-5 md:pb-10">
 			{/* Products modal */}
 			{productsOpen && (
 				<div
@@ -111,50 +114,46 @@ export default function FinancingApplyClient({ applications, locale, readiness }
 				</div>
 			)}
 
-			{/* Header */}
-			<div className="mb-8 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-				<div>
-					<span className="text-xs font-semibold uppercase tracking-widest text-primary block mb-2">
-						{t("promoterPortal")}
-					</span>
-					<h1 className="text-3xl font-semibold font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
-						{t("title")}
-					</h1>
-					<p className="text-on-surface-variant font-medium max-w-xl">
-						{t("description")}
-					</p>
-				</div>
-				<div className="flex items-center gap-2 flex-wrap">
-					<button
-						type="button"
-						data-tour="financing-products"
-						onClick={() => setProductsOpen(true)}
-						className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-semibold hover:bg-surface-container-high transition-colors"
-					>
-						<Icon name="shapes" size={16} className="text-primary" />
-						{t("productsButton")}
-					</button>
-					<HowItWorksModal
-						title={tFin("howItWorksTitle")}
-						buttonLabel={tFin("howItWorksButton")}
-						steps={[
-							{ step: "01", title: tFin("steps.s1.title"), desc: tFin("steps.s1.description") },
-							{ step: "02", title: tFin("steps.s2.title"), desc: tFin("steps.s2.description") },
-							{ step: "03", title: tFin("steps.s3.title"), desc: tFin("steps.s3.description") },
-							{ step: "04", title: tFin("steps.s4.title"), desc: tFin("steps.s4.description") },
-							{ step: "05", title: tFin("steps.s5.title"), desc: tFin("steps.s5.description") },
-						]}
-					/>
-					<FinancingFaq faqs={financingFaqs} />
-				</div>
-			</div>
+			{/* Hero header — photographic band with capital framing */}
+			<PageHero
+				image="/finance-dark.jpg"
+				eyebrow={t("promoterPortal")}
+				title={t("title")}
+				description={t("description")}
+			>
+				<button
+					type="button"
+					data-tour="financing-products"
+					onClick={() => setProductsOpen(true)}
+					className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-semibold hover:bg-surface-container-high transition-colors"
+				>
+					<Icon name="shapes" size={16} className="text-primary" />
+					{t("productsButton")}
+				</button>
+				<HowItWorksModal
+					title={tFin("howItWorksTitle")}
+					buttonLabel={tFin("howItWorksButton")}
+					steps={[
+						{ step: "01", title: tFin("steps.s1.title"), desc: tFin("steps.s1.description") },
+						{ step: "02", title: tFin("steps.s2.title"), desc: tFin("steps.s2.description") },
+						{ step: "03", title: tFin("steps.s3.title"), desc: tFin("steps.s3.description") },
+						{ step: "04", title: tFin("steps.s4.title"), desc: tFin("steps.s4.description") },
+						{ step: "05", title: tFin("steps.s5.title"), desc: tFin("steps.s5.description") },
+					]}
+				/>
+				<FinancingFaq faqs={financingFaqs} />
+			</PageHero>
 
-			{/* Ecosystem readiness gate */}
+			{/* Ecosystem readiness gate — surfaced right under the header so it
+			    reads as the urgent task blocking financing. */}
 			{readiness && !readiness.eligible && (
 				<div className="mb-8">
 					<EcosystemReadiness readiness={readiness} />
 				</div>
 			)}
+
+			{/* Capital analytics */}
+			<FinancingAnalytics applications={applications} locale={locale} />
 
 			{/* Financing partner */}
 			<div className="mb-8">
@@ -173,11 +172,8 @@ export default function FinancingApplyClient({ applications, locale, readiness }
 					{t("myApplications")}
 				</h2>
 				{applications.length === 0 ? (
-					<div className="tsd-card p-10 text-center">
-						<Icon name="financing" size={36} className="text-on-surface-variant block mb-3" />
-						<p className="text-sm font-semibold text-on-surface-variant">
-							{t("noApplications")}
-						</p>
+					<div className="rounded-2xl border border-outline-variant/60">
+						<EmptyState icon="financing" title={t("noApplications")} />
 					</div>
 				) : (
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">

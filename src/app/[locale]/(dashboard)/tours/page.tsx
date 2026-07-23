@@ -2,12 +2,14 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getEOIs, getTours, getTourstackDashboard } from "@/app/actions";
 import Icon from "@/components/icons";
+import PageHero from "@/components/PageHero";
 import PageTour from "@/components/PageTour";
 import EmptyState from "@/components/ui/EmptyState";
 import SideNav from "@/components/SideNav";
 import TopNav from "@/components/TopNav";
 import Button from "@/components/ui/Button";
 import StatusBadge, { type StatusTone } from "@/components/ui/StatusBadge";
+import { tourCoverFor } from "@/lib/tour-covers";
 import { Link } from "@/i18n/routing";
 
 const PAGE_SIZE = 8;
@@ -154,25 +156,19 @@ export default async function ToursPage({ params, searchParams }: Props) {
 			<div className="flex pt-16">
 				<SideNav />
 
-				<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
+				<main className="flex-1 lg:ml-64 bg-surface p-6 md:px-10 md:pt-5 md:pb-10">
 					{/* Header */}
-					<div className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
-						<div>
-							<span className="text-xs font-semibold uppercase tracking-widest text-primary block mb-2">
-								{t("promoterPortal")}
-							</span>
-							<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
-								{t("title")}
-							</h1>
-							<p className="text-on-surface-variant font-medium">
-								{t("description")}
-							</p>
-						</div>
-						<Button href="/eoi" className="self-start md:self-auto shadow-lg shadow-primary/20">
+					<PageHero
+						image="/concert-laser.jpg"
+						eyebrow={t("promoterPortal")}
+						title={t("title")}
+						description={t("description")}
+					>
+						<Button href="/eoi" className="shadow-lg shadow-primary/25">
 							<Icon name="plus" size={15} strokeWidth={2.25} />
 							{t("newTourStop")}
 						</Button>
-					</div>
+					</PageHero>
 
 					{/* Summary strip */}
 					<div data-tour="tours-stats" className="tsd-stagger grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-10">
@@ -223,7 +219,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 
 					<div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
 						{/* Pipeline + Tour Cards */}
-						<div className="lg:col-span-8 space-y-5">
+						<div data-reveal-group className="lg:col-span-8 space-y-5">
 							{pendingEois.length > 0 && (
 								<section data-tour="tours-pipeline" className="tsd-card p-6">
 									<div className="mb-4">
@@ -351,19 +347,30 @@ export default async function ToursPage({ params, searchParams }: Props) {
 											>
 												<div className="flex flex-col sm:flex-row">
 													{/* Image */}
-													<div className="sm:w-36 h-36 relative shrink-0 bg-surface-container-high flex items-center justify-center">
+													<div className="sm:w-36 h-36 relative shrink-0 bg-surface-container-high overflow-hidden">
 														{tourArtist?.image_url ? (
+															<Image
+																src={String(tourArtist.image_url)}
+																alt={String(tourArtist.name ?? "")}
+																fill
+																className="object-cover"
+															/>
+														) : (
 															<>
 																<Image
-																	src={String(tourArtist.image_url)}
-																	alt={String(tourArtist.name ?? "")}
+																	src={tourCoverFor(String(tour.id))}
+																	alt=""
 																	fill
+																	sizes="144px"
 																	className="object-cover"
 																/>
-																<div className="absolute inset-0 bg-linear-to-r from-black/20 to-transparent sm:bg-linear-to-b sm:from-transparent sm:to-black/30" />
+																{/* Scrim + glyph so the pooled cover reads as branded
+																    placeholder art, not a mistaken real artist photo. */}
+																<div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/10 to-transparent" />
+																<span className="absolute bottom-2 left-2 w-7 h-7 rounded-lg bg-black/35 backdrop-blur-sm flex items-center justify-center">
+																	<Icon name="music" size={14} className="text-white" strokeWidth={1.75} />
+																</span>
 															</>
-														) : (
-															<Icon name="music" size={28} className="text-on-surface-variant" strokeWidth={1.5} />
 														)}
 													</div>
 
@@ -554,7 +561,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 						</div>
 
 						{/* Sidebar: Milestones */}
-						<aside className="lg:col-span-4 space-y-6">
+						<aside data-reveal="right" className="lg:col-span-4 space-y-6">
 							{upcomingMilestones.length > 0 && (
 								<div className="tsd-card p-7">
 									<h3 className="font-(family-name:--font-manrope) font-semibold text-base mb-6">
@@ -615,7 +622,7 @@ export default async function ToursPage({ params, searchParams }: Props) {
 							{/* CTA */}
 							<Link
 								href="/financing"
-								className="group flex items-center gap-4 bg-linear-to-br from-[#ff5a30] to-[#b83816] text-white p-6 rounded-2xl shadow-lg shadow-primary/20 transition-transform duration-200 [transition-timing-function:var(--ease-out)] hover:scale-[1.02]"
+								className="group flex items-center gap-4 bg-primary text-white p-6 rounded-2xl transition-transform duration-200 [transition-timing-function:var(--ease-out)] hover:scale-[1.02]"
 							>
 								<Icon name="wallet" size={26} strokeWidth={1.5} className="shrink-0" />
 								<div>
