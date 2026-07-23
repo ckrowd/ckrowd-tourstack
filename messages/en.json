@@ -2871,7 +2871,11 @@
     "activeTourProjects": "Active Tour Projects",
     "sortBy": {
       "label": "Sort by:",
-      "newestFirst": "Newest First"
+      "newestFirst": "Newest First",
+      "trending": "Trending First",
+      "feeHigh": "Fee: High to Low",
+      "feeLow": "Fee: Low to High",
+      "nameAz": "Name A–Z"
     },
     "noResults": {
       "title": "No results match your filters",
@@ -3158,10 +3162,13 @@
     "promoterPortal": "Promoter Portal",
     "title": "Your Tour Dashboard",
     "welcomeBack": "Welcome back, {name}. Track your EOIs and tour process below.",
+    "attentionTitle": "Needs your attention",
+    "latestSubmission": "Latest submission",
     "yourOrganization": "your organization",
     "touringSeason": "Touring Season",
     "touringSeasonYears": "2024 / 2025",
     "eoiProgressTitle": "EOI Progress — {artist}{tour}",
+    "gettingStarted": {"eyebrow": "Getting started", "title": "Welcome to TourStack, {name}", "subtitle": "A few steps to book your first artiste and unlock touring capital.", "progress": "{done} of {total} steps done", "browseCta": "Browse artistes", "completeProfileCta": "Complete profile", "buildCta": "Onboard ecosystem", "stepProfileTitle": "Set up your promoter profile", "stepProfileDesc": "Company details, contact and country.", "stepEcosystemTitle": "Build your ecosystem", "stepEcosystemDesc": "Onboard service providers, workforce and insurance.", "stepDiscoverTitle": "Discover artistes", "stepDiscoverDesc": "Explore artistes announced for the Pan-African circuit.", "stepEoiTitle": "Submit your first Expression of Interest", "stepEoiDesc": "Pitch to host a tour stop at your venue.", "flowTitle": "How an Expression of Interest works", "flowS1": "Discover", "flowS1Desc": "Browse announced artistes", "flowS2": "Submit EOI", "flowS2Desc": "Pitch your venue & dates", "flowS3": "Review", "flowS3Desc": "Ckrowd reviews in ~48h", "flowS4": "Confirmed", "flowS4Desc": "Lock in the tour stop"},
     "noEoisYet": "No EOIs yet",
     "noEois": "No EOIs",
     "analytics": {"submitted": "Submitted", "approved": "Approved", "eyebrow": "Analytics", "title": "Tour pipeline volume", "period": "Last 6 months", "unit": "EOIs"},
@@ -6048,7 +6055,8 @@
     },
     "productsButton": "Products",
     "productsModalTitle": "Our Financing Products",
-    "partnersLabel": "Financing Partners"
+    "partnersLabel": "Financing Partners",
+    "analytics": {"eyebrow": "Capital Analytics", "title": "Financing overview", "period": "Last 6 months", "totalRequested": "Total Requested", "approvedCapital": "Approved Capital", "approvalRate": "Approval Rate", "applications": "Applications", "trendTitle": "Capital requested vs. approved", "requestedSeries": "Requested", "approvedSeries": "Approved", "statusTitle": "Application status", "productTitle": "Capital by product", "unit": "", "empty": "Submit your first application and your capital analytics will appear here.", "ofDecided": "of decided", "acrossProducts": "{count, plural, one {# product} other {# products}}", "vsPrev": "vs prev. 6 mo", "live": "Live"}
   },
   "InsuranceApplyPage": {
     "promoterPortal": "Promoter Portal",
