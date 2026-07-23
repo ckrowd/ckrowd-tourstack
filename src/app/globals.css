@@ -274,6 +274,10 @@
 	font-family: var(--font-geist), system-ui, sans-serif;
 	background: var(--color-surface);
 	color: var(--color-on-surface);
+	/* Fill the viewport so the dashboard canvas (this scope's --color-surface)
+	   always covers the global body background — otherwise the older global
+	   dark surface (#16181D, a blue-grey) shows through below short pages. */
+	min-height: 100dvh;
 }
 
 .dark .ts-dash {
@@ -390,7 +394,11 @@
 }
 .ts-dash .tsd-rise,
 .ts-dash .tsd-stagger > * {
-	animation: tsd-rise 0.55s var(--ease-out) both;
+	/* `backwards` (not `both`): apply the start frame during the delay, but do
+	   NOT retain the end frame afterward. Retaining `transform: translateY(0)`
+	   left a lingering transform that made the element a containing block, which
+	   trapped `position: fixed` modals (How-it-works / FAQ) inside the card. */
+	animation: tsd-rise 0.55s var(--ease-out) backwards;
 }
 .ts-dash .tsd-stagger > *:nth-child(2) {
 	animation-delay: 0.06s;
@@ -419,12 +427,66 @@
 .ts-dash .tsd-empty-ring {
 	animation: tsd-ring 2.6s var(--ease-out) infinite;
 }
+
+/* Sparkline draw-in — the line strokes in left→right (pathLength normalised
+   to 1), then the fill + end dot fade up. Purely decorative reveal that echoes
+   the AreaChart's clip-path draw, so the trend strips feel authored, not static. */
+@keyframes tsd-spark-draw {
+	from {
+		stroke-dashoffset: 1;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+@keyframes tsd-fade-up {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+.ts-dash .tsd-spark-line {
+	stroke-dasharray: 1;
+	stroke-dashoffset: 1;
+	animation: tsd-spark-draw 0.85s var(--ease-out) 0.15s forwards;
+}
+.ts-dash .tsd-spark-area,
+.ts-dash .tsd-spark-dot {
+	opacity: 0;
+	animation: tsd-fade-up 0.5s var(--ease-out) 0.75s forwards;
+}
+
+/* Icon-chip nudge — the coloured glyph chip inside a hoverable card scales a
+   hair on hover. Motion lives on the chip, not the card, so there is no jumpy
+   lift (the card keeps its border/shadow response). */
+.ts-dash .tsd-card-hover .tsd-chip {
+	transition: transform 0.25s var(--ease-out);
+}
+.ts-dash .tsd-card-hover:hover .tsd-chip {
+	transform: scale(1.08);
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.ts-dash .tsd-rise,
 	.ts-dash .tsd-stagger > *,
 	.ts-dash .tsd-empty-icon,
-	.ts-dash .tsd-empty-ring {
+	.ts-dash .tsd-empty-ring,
+	.ts-dash .tsd-spark-line,
+	.ts-dash .tsd-spark-area,
+	.ts-dash .tsd-spark-dot {
 		animation: none;
+	}
+	.ts-dash .tsd-spark-line {
+		stroke-dashoffset: 0;
+	}
+	.ts-dash .tsd-spark-area,
+	.ts-dash .tsd-spark-dot {
+		opacity: 1;
+	}
+	.ts-dash .tsd-card-hover:hover .tsd-chip {
+		transform: none;
 	}
 }
 
@@ -445,6 +507,65 @@
 @media (prefers-reduced-motion: reduce) {
 	.funnel-step-in {
 		animation: none;
+	}
+}
+
+/* ── Brand loader (global, portal-agnostic) ─────────────────────────────
+   Used by <Loader/> across every portal + route-level loading.tsx. Pure CSS
+   so it renders instantly with zero JS during a Suspense fallback. A brand
+   tile breathes behind a rotating accent arc, over an indeterminate shimmer
+   track. Layered so the motion reads as authored, not a bare spinner. */
+@keyframes ckld-orbit {
+	to {
+		transform: rotate(360deg);
+	}
+}
+@keyframes ckld-breathe {
+	0%,
+	100% {
+		transform: scale(1);
+		box-shadow: 0 0 0 0 rgba(255, 90, 46, 0);
+	}
+	50% {
+		transform: scale(1.05);
+		box-shadow: 0 8px 30px -6px rgba(255, 90, 46, 0.45);
+	}
+}
+@keyframes ckld-dot {
+	0%,
+	80%,
+	100% {
+		opacity: 0.2;
+	}
+	40% {
+		opacity: 1;
+	}
+}
+.ckld-ring {
+	animation: ckld-orbit 1s linear infinite;
+}
+.ckld-tile {
+	animation: ckld-breathe 2.2s ease-in-out infinite;
+}
+.ckld-dots > span {
+	animation: ckld-dot 1.4s ease-in-out infinite;
+}
+.ckld-dots > span:nth-child(2) {
+	animation-delay: 0.18s;
+}
+.ckld-dots > span:nth-child(3) {
+	animation-delay: 0.36s;
+}
+@media (prefers-reduced-motion: reduce) {
+	.ckld-ring {
+		animation-duration: 2.4s;
+	}
+	.ckld-tile,
+	.ckld-dots > span {
+		animation: none;
+	}
+	.ckld-dots > span {
+		opacity: 0.7;
 	}
 }
 
@@ -502,16 +623,27 @@ h3 { letter-spacing: -0.02em; line-height: 1.2; font-weight: 600; }
 	overflow: hidden;
 	min-width: 300px;
 	max-width: 380px;
-	border: none;
+	border: 1px solid rgba(12, 12, 12, 0.08);
 	/* driver.js repositions the popover between steps by updating its inline
 	   top/left — transitioning those lets it glide to the next anchor instead
 	   of snapping there instantly. */
 	transition: top 0.25s ease, left 0.25s ease, opacity 0.15s ease;
 }
 
-/* Coloured header strip */
+/* Dark-theme popover surface (JS inline styles cover most of this per render;
+   these are robust fallbacks so there's no light flash before onPopoverRender). */
+.dark .driver-popover {
+	background: #161616;
+	border-color: rgba(255, 255, 255, 0.1);
+	box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+}
+.dark .driver-popover-description {
+	color: #d7d7d7;
+}
+
+/* Solid header strip (gradient-free) */
 .driver-popover-title {
-	background: linear-gradient(135deg, #ff5a2e, #cc4825);
+	background: #ff5a2e;
 	color: #ffffff;
 	font-size: 15px;
 	font-weight: 600;
@@ -598,19 +730,20 @@ h3 { letter-spacing: -0.02em; line-height: 1.2; font-weight: 600; }
 	opacity: 0.9;
 }
 
-/* Arrow matches body white */
+/* Arrow follows the themed popover body (--tour-arrow is set per render on the
+   popover wrapper in applyTourStyles; falls back to white for light theme). */
 .driver-popover-arrow-side-top .driver-popover-arrow {
-	border-top-color: #ffffff;
+	border-top-color: var(--tour-arrow, #ffffff);
 }
 
 .driver-popover-arrow-side-bottom .driver-popover-arrow {
-	border-bottom-color: #ffffff;
+	border-bottom-color: var(--tour-arrow, #ffffff);
 }
 
 .driver-popover-arrow-side-left .driver-popover-arrow {
-	border-left-color: #ffffff;
+	border-left-color: var(--tour-arrow, #ffffff);
 }
 
 .driver-popover-arrow-side-right .driver-popover-arrow {
-	border-right-color: #ffffff;
+	border-right-color: var(--tour-arrow, #ffffff);
 }
