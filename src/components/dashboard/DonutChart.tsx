@@ -30,14 +30,18 @@ export default function DonutChart({
 	const total = segments.reduce((s, seg) => s + seg.value, 0);
 	const visible = segments.filter((s) => s.value > 0);
 
-	let offset = 0;
-	const arcs = visible.map((seg) => {
-		const frac = seg.value / total;
-		const len = Math.max(frac * C - (visible.length > 1 ? GAP : 0), 1.5);
-		const arc = { ...seg, len, offset };
-		offset += frac * C;
-		return arc;
-	});
+	const arcs = visible.reduce<{
+		list: Array<DonutSegment & { len: number; offset: number }>;
+		offset: number;
+	}>(
+		(acc, seg) => {
+			const frac = seg.value / total;
+			const len = Math.max(frac * C - (visible.length > 1 ? GAP : 0), 1.5);
+			acc.list.push({ ...seg, len, offset: acc.offset });
+			return { list: acc.list, offset: acc.offset + frac * C };
+		},
+		{ list: [], offset: 0 },
+	).list;
 
 	return (
 		<div className="relative shrink-0" style={{ width: size, height: size }}>

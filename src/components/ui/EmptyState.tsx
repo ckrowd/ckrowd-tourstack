@@ -40,7 +40,7 @@ export default function EmptyState({
 			) : null}
 			{actionLabel && actionHref ? (
 				<Link
-					// biome-ignore lint/suspicious/noExplicitAny: href union comes from typed routes; callers pass known routes
+					// eslint-disable-next-line @typescript-eslint/no-explicit-any -- href union comes from typed routes; callers pass known routes
 					href={actionHref as any}
 					className="inline-flex items-center gap-1.5 mt-5 text-sm font-semibold text-primary hover:underline"
 				>

@@ -74,13 +74,6 @@ export default function AreaChart({
 	}, []);
 
 	useEffect(() => {
-		const reduce =
-			typeof window !== "undefined" &&
-			window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-		if (reduce) {
-			setDrawn(true);
-			return;
-		}
 		const r = requestAnimationFrame(() => setDrawn(true));
 		return () => cancelAnimationFrame(r);
 	}, []);
@@ -170,7 +163,7 @@ export default function AreaChart({
 							y="0"
 							width={drawn ? w : 0}
 							height={H}
-							className="transition-[width] duration-[900ms] [transition-timing-function:var(--ease-out)]"
+							className="transition-[width] duration-[900ms] motion-reduce:duration-0 [transition-timing-function:var(--ease-out)]"
 						/>
 					</clipPath>
 				</defs>

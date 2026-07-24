@@ -34,7 +34,6 @@ export default function CountUp({
 			(typeof window !== "undefined" &&
 				window.matchMedia("(prefers-reduced-motion: reduce)").matches)
 		) {
-			setDisplay(value);
 			return;
 		}
 		let raf: number;
@@ -45,7 +44,6 @@ export default function CountUp({
 			setDisplay(Math.round(value * eased));
 			if (t < 1) raf = requestAnimationFrame(tick);
 		};
-		setDisplay(0);
 		raf = requestAnimationFrame(tick);
 		return () => cancelAnimationFrame(raf);
 	}, [value, durationMs]);

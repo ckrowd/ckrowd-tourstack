@@ -4,7 +4,6 @@ import { useTranslations } from "next-intl";
 import AreaChart from "@/components/dashboard/AreaChart";
 import DonutChart from "@/components/dashboard/DonutChart";
 import Sparkline from "@/components/dashboard/Sparkline";
-import CountUp from "@/components/ui/CountUp";
 import Icon from "@/components/icons";
 
 type Application = {

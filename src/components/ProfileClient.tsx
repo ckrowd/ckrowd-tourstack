@@ -324,12 +324,6 @@ export default function ProfileClient() {
 	// the validation badges and the jump-to-first-invalid-tab on save.
 	type ProfileTab = "company" | "public" | "business" | "banking";
 	const TABS: ProfileTab[] = ["company", "public", "business", "banking"];
-	const TAB_ICONS: Record<ProfileTab, string> = {
-		company: "building",
-		public: "globe",
-		business: "briefcase",
-		banking: "financing",
-	};
 	const TAB_FIELDS: Record<ProfileTab, (keyof ProfileData)[]> = {
 		company: ["companyName", "companyType", "registrationNumber", "taxId", "incorporationDate", "incorporationCountry"],
 		public: ["primaryAddress", "country", "city", "phone", "bio"],
