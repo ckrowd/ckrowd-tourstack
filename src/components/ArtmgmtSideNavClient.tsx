@@ -1,6 +1,7 @@
 "use client";
 
 import { Link, usePathname } from "@/i18n/routing";
+import NavIcon from "@/components/icons/NavIcon";
 
 interface NavItem {
 	key: string;
@@ -42,7 +43,7 @@ export default function ArtmgmtSideNavClient({ navItems, portalLabel }: Props) {
 								: "text-on-surface-variant hover:bg-surface-container-high/50 hover:translate-x-1"
 						}`}
 					>
-						<span className="material-symbols-outlined">{item.icon}</span>
+						<NavIcon name={item.key} size={20} />
 						<span>{item.label}</span>
 					</Link>
 				))}

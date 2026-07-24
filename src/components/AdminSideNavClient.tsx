@@ -2,6 +2,7 @@
 
 import { Link, usePathname } from "@/i18n/routing";
 import TourGuide from "@/components/TourGuide";
+import NavIcon from "@/components/icons/NavIcon";
 import type { NavItem } from "@/components/SideNavClient";
 
 interface Props {
@@ -32,7 +33,7 @@ export default function AdminSideNavClient({ navItems, newTourLabel }: Props) {
 								: "text-on-surface-variant hover:bg-surface-container-high/50 hover:translate-x-1"
 						}`}
 					>
-						<span className="material-symbols-outlined">{item.icon}</span>
+						<NavIcon name={item.key} size={20} />
 						<span>{item.label}</span>
 					</Link>
 				))}

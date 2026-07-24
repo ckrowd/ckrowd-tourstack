@@ -683,7 +683,7 @@
         },
         "insuranceSection": "Assurance événementielle",
         "insuranceCompulsoryTitle": "L'assurance est obligatoire pour cette tournée",
-        "insuranceCompulsoryText": "TourStack s'est associé à notre partenaire assurance pour fournir une assurance événementielle. Souscrire une couverture via ce partenariat est une condition d'accès au financement TourStack et de la tenue de cette tournée — sélectionnez les produits applicables ci-dessous.",
+        "insuranceCompulsoryText": "TourStack s'est associé à Sanlam Allianz pour fournir une assurance événementielle. Souscrire une couverture via ce partenariat est une condition d'accès au financement TourStack et de la tenue de cette tournée — sélectionnez les produits applicables ci-dessous.",
         "insuranceProducts": {
           "label": "Produits d'assurance",
           "eventCancellation": "Annulation d'événement",
@@ -718,7 +718,7 @@
           "label": "Notes supplémentaires (optionnel)",
           "placeholder": "Toute autre information pertinente pour votre candidature..."
         },
-        "declarationText": "En soumettant cette manifestation d'intérêt, je confirme que toutes les informations fournies sont exactes et complètes, et je reconnais que l'assurance événementielle — fournie via le partenariat de TourStack avec notre partenaire assurance — est obligatoire et constitue une condition d'accès au financement TourStack et de la tenue de cette tournée. J'autorise Ckrowd à utiliser ces informations pour évaluer les besoins en financement et en assurance pour cette tournée.",
+        "declarationText": "En soumettant cette manifestation d'intérêt, je confirme que toutes les informations fournies sont exactes et complètes, et je reconnais que l'assurance événementielle — fournie via le partenariat de TourStack avec Sanlam Allianz — est obligatoire et constitue une condition d'accès au financement TourStack et de la tenue de cette tournée. J'autorise Ckrowd à utiliser ces informations pour évaluer les besoins en financement et en assurance pour cette tournée.",
         "declarationAgree": "J'ai lu et j'accepte la déclaration ci-dessus.",
         "reviewSection": "Récapitulatif de la candidature"
       }
@@ -1339,7 +1339,7 @@
       },
       "insurance": {
         "title": "Assurance incluse",
-        "body": "L'équipage de niveau 2+ bénéficie d'une couverture d'assurance de groupe via notre partenaire assurance."
+        "body": "L'équipage de niveau 2+ bénéficie d'une couverture d'assurance de groupe via SanlamAllianz."
       }
     },
     "success": {
@@ -1386,7 +1386,7 @@
         "perks": {
           "local": "Éligibilité au déploiement pour une tournée dans une seule ville",
           "payment": "Intégration du paiement notre partenaire bancaire et tarif journalier bloqué",
-          "insurance": "Couverture d'assurance de groupe via notre partenaire assurance"
+          "insurance": "Couverture d'assurance de groupe via SanlamAllianz"
         },
         "aya": "Éligible comme équipe locale (par ville)"
       },
@@ -1985,7 +1985,7 @@
         "perks": {
           "local": "Éligibilité au déploiement en tournée dans une seule ville",
           "payment": "Intégration du paiement notre partenaire bancaire et taux journalier bloqué",
-          "insurance": "Couverture d'assurance collective via notre partenaire assurance"
+          "insurance": "Couverture d'assurance collective via SanlamAllianz"
         },
         "aya": "Éligible en tant qu'équipe locale (par ville)"
       },
@@ -2147,7 +2147,7 @@
     "hub": "TourStack · Centre d'assurance",
     "hero": {
       "title": "Une assurance pour <spanHighlight>chaque rôle.</spanHighlight><br></br>Intégrée au pipeline.",
-      "description": "Couverture propulsée par notre partenaire assurance intégrée au pipeline de certification CTaaS — s'activant automatiquement lors de votre intégration.",
+      "description": "Couverture propulsée par SanlamAllianz intégrée au pipeline de certification CTaaS — s'activant automatiquement lors de votre intégration.",
       "startOnboarding": "Commencer l'intégration",
       "viewProducts": "Voir les produits"
     },
@@ -2165,7 +2165,7 @@
     },
     "stats": {
       "portfolio": "Portefeuille assurable",
-      "markets": "Marchés partenaires",
+      "markets": "Marchés SanlamAllianz",
       "lines": "Lignes de couverture",
       "roles": "Rôles certifiés",
       "values": {
@@ -2201,7 +2201,7 @@
       "partners": "Partenaires d'assurance",
       "partnersList": [
         {
-          "name": "Partenaire Assurance (à confirmer)",
+          "name": "SanlamAllianz Nigeria",
           "sub": "Panafricain · Toutes lignes d'assurance"
         },
         {
@@ -2216,7 +2216,7 @@
       "step": "Étape {current} sur {total}",
       "activates": {
         "title": "L'assurance s'active à cette étape",
-        "description": "La couverture notre partenaire assurance s'active automatiquement à la fin de la certification. Aucune demande séparée n'est requise."
+        "description": "La couverture SanlamAllianz s'active automatiquement à la fin de la certification. Aucune demande séparée n'est requise."
       },
       "finance": {
         "title": "Produits financiers débloqués",
@@ -2237,7 +2237,7 @@
         "description": "Leader panafricain de l'assurance. 27 marchés. Toutes les lignes de produits sont souscrites et gérées en partenariat avec Ckrowd.",
         "portfolio": "Portefeuille assurable",
         "scale": "à l'échelle de 5 ans",
-        "brand": "Partenaire Assurance (à confirmer)",
+        "brand": "SanlamAllianz",
         "portfolioValue": "600 M$"
       }
     },
@@ -2275,7 +2275,7 @@
         },
         {
           "q": "Que se passe-t-il si l'événement est annulé ?",
-          "a": "L'annulation à l'initiative du promoteur déclenche la police d'annulation d'événement. Les réclamations sont traitées dans les 30 jours via notre partenaire assurance."
+          "a": "L'annulation à l'initiative du promoteur déclenche la police d'annulation d'événement. Les réclamations sont traitées dans les 30 jours via SanlamAllianz."
         },
         {
           "q": "Un compte bancaire en Afrique est-il requis ?",
@@ -2309,7 +2309,7 @@
           },
           {
             "label": "Activation de l'assurance",
-            "detail": "L'assurance entreprise notre partenaire assurance s'active à la fin de la certification. La couverture comprend l'annulation d'événement, la responsabilité civile et la garantie de crédit."
+            "detail": "L'assurance entreprise SanlamAllianz s'active à la fin de la certification. La couverture comprend l'annulation d'événement, la responsabilité civile et la garantie de crédit."
           },
           {
             "label": "Éligibilité au financement",
@@ -2385,7 +2385,7 @@
           },
           {
             "label": "Activation de l'assurance de groupe",
-            "detail": "Accident individuel, responsabilité civile employeur et couverture de sous-traitant activés via la police de groupe notre partenaire assurance."
+            "detail": "Accident individuel, responsabilité civile employeur et couverture de sous-traitant activés via la police de groupe SanlamAllianz."
           },
           {
             "label": "Déploiement transfrontalier",
@@ -2448,7 +2448,7 @@
           },
           {
             "label": "Création du profil d'assurance",
-            "detail": "Pack d'assurance entreprise PME activé via notre partenaire assurance. Couvre l'équipement, le fret et la perte d'exploitation."
+            "detail": "Pack d'assurance entreprise PME activé via SanlamAllianz. Couvre l'équipement, le fret et la perte d'exploitation."
           },
           {
             "label": "Accès au financement",
@@ -2570,7 +2570,7 @@
       },
       {
         "label": "Activation de l'assurance",
-        "desc": "La gamme de produits notre partenaire assurance s'active automatiquement."
+        "desc": "La gamme de produits SanlamAllianz s'active automatiquement."
       },
       {
         "label": "Éligibilité au financement",
@@ -5254,7 +5254,7 @@
       },
       "step4": {
         "startDate": "Date de début de la couverture",
-        "terms": "J'accepte les conditions de service de notre partenaire assurance et j'autorise le prélèvement automatique des primes sur mon compte d'entreprise."
+        "terms": "J'accepte les conditions de service de SanlamAllianz et j'autorise le prélèvement automatique des primes sur mon compte d'entreprise."
       },
       "step5": {
         "acknowledgement": "Je reconnais que les facilités de Tour Finance sont débloquées et j'accepte de soumettre les budgets des événements pour souscription."
