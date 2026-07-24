@@ -1,6 +1,7 @@
 "use client";
 
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import Icon from "@/components/icons";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useRef, useState } from "react";
@@ -14,10 +15,10 @@ type DocType = "cac" | "financial_statements" | "tour_itinerary" | "other";
 const LEGACY_DOC_TYPES: DocType[] = ["cac", "financial_statements", "tour_itinerary", "other"];
 
 const DOC_TYPE_ICONS: Record<string, string> = {
-	cac: "badge",
-	financial_statements: "account_balance",
+	cac: "id-card",
+	financial_statements: "financing",
 	tour_itinerary: "map",
-	other: "attach_file",
+	other: "file-text",
 };
 
 export default function EOIDocumentsClient() {
@@ -89,17 +90,17 @@ export default function EOIDocumentsClient() {
 	}>;
 
 	return (
-		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
+		<main className="flex-1 lg:ml-64 bg-surface p-6 md:px-10 md:pt-5 md:pb-10">
 			<Link
 				href="/dashboard"
-				className="inline-flex items-center gap-2 text-sm font-semibold text-on-surface-variant hover:text-[#FF5A2E] transition mb-6"
+				className="inline-flex items-center gap-2 text-sm font-semibold text-on-surface-variant hover:text-primary transition mb-6"
 			>
-				<span className="material-symbols-outlined text-base">arrow_back</span>
+				<Icon name="arrow-left" size={16} />
 				{t("backToDashboard")}
 			</Link>
 
 			<header className="mb-8">
-				<span className="mb-2 block text-xs font-semibold uppercase tracking-[0.3em] text-[#FF5A2E]">
+				<span className="mb-2 block text-xs font-semibold uppercase tracking-[0.3em] text-primary">
 					TourStack
 				</span>
 				<h1 className="text-3xl font-semibold tracking-tight text-on-surface md:text-4xl font-(family-name:--font-manrope)">
@@ -110,7 +111,7 @@ export default function EOIDocumentsClient() {
 
 			{approvedEois.length === 0 ? (
 				<div className="rounded-3xl border-2 border-dashed border-outline-variant/40 bg-surface-container/30 p-12 text-center">
-					<span className="material-symbols-outlined text-4xl text-on-surface-variant/50 mb-3 block">folder_open</span>
+					<Icon name="folder" size={36} className="text-on-surface-variant/50 mb-3 block" />
 					<p className="text-sm text-on-surface-variant">{t("noDocsYet")}</p>
 				</div>
 			) : (
@@ -121,9 +122,9 @@ export default function EOIDocumentsClient() {
 								<Link
 									key={String(eoi.id)}
 									href={`/eoi/documents?eoiId=${String(eoi.id)}`}
-									className={`block rounded-2xl border p-4 transition ${String(eoi.id) === effectiveEoiId ? "border-[#FF5A2E] bg-[#FF5A2E]/5" : "border-outline-variant/30 hover:bg-surface-container-low"}`}
+									className={`block rounded-2xl border p-4 transition ${String(eoi.id) === effectiveEoiId ? "border-primary bg-primary/5" : "border-outline-variant/30 hover:bg-surface-container-low"}`}
 								>
-									<p className="text-xs font-bold text-[#FF5A2E] uppercase tracking-wider mb-1">
+									<p className="text-xs font-bold text-primary uppercase tracking-wider mb-1">
 										EOI-{String(eoi.id).slice(-4).toUpperCase()}
 									</p>
 									<p className="text-sm font-semibold text-on-surface">
@@ -137,10 +138,10 @@ export default function EOIDocumentsClient() {
 					)}
 
 					<div className={approvedEois.length > 1 ? "lg:col-span-8" : "lg:col-span-12"}>
-						<div className="rounded-3xl border border-outline-variant/30 bg-surface-container-lowest p-6 shadow-sm md:p-8 space-y-6">
+						<div className="tsd-card p-6 md:p-8 space-y-6">
 							{/* Upload section */}
 							<div>
-								<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A2E] mb-3">
+								<p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary mb-3">
 									{t("uploadBtn")}
 								</p>
 								<div className="grid gap-2 sm:grid-cols-2 mb-4">
@@ -149,11 +150,9 @@ export default function EOIDocumentsClient() {
 											key={dt}
 											type="button"
 											onClick={() => setActiveDocType(dt)}
-											className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-left text-sm transition ${activeDocType === dt ? "border-[#FF5A2E] bg-[#FF5A2E]/5 text-[#FF5A2E] font-semibold" : "border-outline-variant/30 text-on-surface-variant hover:bg-surface-container-low"}`}
+											className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-left text-sm transition ${activeDocType === dt ? "border-primary bg-primary/5 text-primary font-semibold" : "border-outline-variant/30 text-on-surface-variant hover:bg-surface-container-low"}`}
 										>
-											<span className="material-symbols-outlined text-base shrink-0">
-												{DOC_TYPE_ICONS[dt] ?? "attach_file"}
-											</span>
+											<Icon name={DOC_TYPE_ICONS[dt] ?? "file-text"} size={16} className="shrink-0" />
 											{t(`docTypes.${dt}` as Parameters<typeof t>[0])}
 										</button>
 									))}
@@ -162,9 +161,9 @@ export default function EOIDocumentsClient() {
 									type="button"
 									onClick={() => fileInputRef.current?.click()}
 									disabled={uploadMutation.isPending}
-									className="inline-flex items-center gap-2 rounded-full bg-[#FF5A2E] px-6 py-3 text-sm font-semibold text-white hover:opacity-90 transition disabled:opacity-60"
+									className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-sm font-semibold text-white hover:opacity-90 transition disabled:opacity-60"
 								>
-									<span className="material-symbols-outlined text-base">upload</span>
+									<Icon name="upload" size={16} />
 									{uploadMutation.isPending ? t("uploading") : `${t("uploadBtn")}: ${t(`docTypes.${activeDocType}` as Parameters<typeof t>[0])}`}
 								</button>
 								<input ref={fileInputRef} type="file" className="sr-only" onChange={handleFileChange} />
@@ -178,7 +177,7 @@ export default function EOIDocumentsClient() {
 
 							{/* Uploaded documents */}
 							<div>
-								<p className="text-xs font-semibold uppercase tracking-[0.28em] text-[#FF5A2E] mb-3">
+								<p className="text-xs font-semibold uppercase tracking-[0.28em] text-primary mb-3">
 									{t("uploadedDocs")}
 								</p>
 								{docsLoading ? (
@@ -189,7 +188,7 @@ export default function EOIDocumentsClient() {
 									<div className="space-y-2">
 										{docs.map((doc) => (
 											<div key={doc.id} className="flex items-center gap-3 rounded-xl border border-outline-variant/30 bg-surface-container px-4 py-3">
-												<span className="material-symbols-outlined text-on-surface-variant shrink-0">description</span>
+												<Icon name="file-text" size={18} className="text-on-surface-variant shrink-0" />
 												<div className="flex-1 min-w-0">
 													<p className="text-sm font-semibold text-on-surface truncate">{doc.file_name}</p>
 													<p className="text-xs text-on-surface-variant">
@@ -202,7 +201,7 @@ export default function EOIDocumentsClient() {
 													download={doc.file_name}
 													className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-100 transition"
 												>
-													<span className="material-symbols-outlined text-xs">download</span>
+													<Icon name="download" size={12} />
 													{t("download")}
 												</a>
 											</div>

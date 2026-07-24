@@ -13,7 +13,7 @@ export function Section({
 	children: React.ReactNode;
 }) {
 	return (
-		<div className="bg-surface-container-lowest rounded-2xl p-8 shadow-sm space-y-6">
+		<div className="tsd-card p-8 space-y-6">
 			<div className="border-b border-outline-variant/20 pb-4">
 				<h3 className="font-(family-name:--font-manrope) font-semibold text-lg text-on-surface">
 					{title}
@@ -60,7 +60,7 @@ export function Field({
 					value={value ?? ""}
 					onChange={onChange}
 					placeholder={placeholder}
-					className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30"
+					className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/30"
 				/>
 			) : (
 				<input
@@ -70,7 +70,7 @@ export function Field({
 					{...(onChange
 						? { value: value ?? "", onChange: (e) => onChange(e.target.value) }
 						: { defaultValue })}
-					className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30"
+					className="w-full bg-surface-container-low border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/30"
 				/>
 			)}
 			{hint && <p className="text-xs text-on-surface-variant mt-1.5">{hint}</p>}
@@ -127,7 +127,7 @@ export function Toggle({
 				onClick={handleClick}
 				disabled={disabled}
 				className={`relative w-11 h-6 rounded-full transition-colors shrink-0 disabled:opacity-50 ${
-					on ? "bg-[#FF5A2E]" : "bg-surface-container-high"
+					on ? "bg-primary" : "bg-surface-container-high"
 				}`}
 			>
 				<span

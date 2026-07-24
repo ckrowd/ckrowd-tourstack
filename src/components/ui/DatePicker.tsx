@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Icon from "@/components/icons";
 import { DayPicker } from "react-day-picker";
 import "react-day-picker/style.css";
 
@@ -71,9 +72,7 @@ export default function DatePicker({
 						? selected.toLocaleDateString(undefined, { year: "numeric", month: "long", day: "numeric" })
 						: placeholder}
 				</span>
-				<span className="material-symbols-outlined text-base text-on-surface-variant shrink-0">
-					calendar_month
-				</span>
+				<Icon name="calendar" size={16} className="text-on-surface-variant shrink-0" />
 			</button>
 			{open && (
 				<div className="absolute z-20 mt-1 bg-surface-container-lowest border border-outline-variant/30 rounded-xl shadow-lg p-2">
@@ -98,7 +97,7 @@ export default function DatePicker({
 			)}
 			{hasError && (
 				<p className="text-xs text-rose-600 font-medium mt-1 flex items-center gap-1">
-					<span className="material-symbols-outlined text-sm">error</span>
+					<Icon name="alert-circle" size={14} />
 					Required
 				</p>
 			)}

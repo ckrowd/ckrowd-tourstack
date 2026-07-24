@@ -1,6 +1,7 @@
 "use client";
 
 import { getTourReport, submitTourReport } from "@/app/actions";
+import Icon from "@/components/icons";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
@@ -19,7 +20,7 @@ type ReportData = {
 };
 
 const ic =
-	"w-full rounded-xl border border-outline-variant/30 bg-surface-container-lowest px-4 py-3 text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E]/60 transition-all";
+	"w-full rounded-xl border border-outline-variant/30 bg-surface-container-lowest px-4 py-3 text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/60 transition-all";
 
 export default function TourReportForm({ tourId }: { tourId: string }) {
 	const t = useTranslations("TourReport");
@@ -105,14 +106,9 @@ export default function TourReportForm({ tourId }: { tourId: string }) {
 
 	if (mutation.data?.success) {
 		return (
-			<div className="flex items-center gap-3 bg-emerald-50 border border-emerald-200 rounded-2xl p-5">
-				<span
-					className="material-symbols-outlined text-emerald-600 text-2xl shrink-0"
-					style={{ fontVariationSettings: "'FILL' 1" }}
-				>
-					check_circle
-				</span>
-				<p className="text-sm font-semibold text-emerald-900">{t("success")}</p>
+			<div className="flex items-center gap-3 bg-emerald-500/10 border border-emerald-500/25 rounded-2xl p-5">
+				<Icon name="check-circle" size={24} className="text-emerald-600 shrink-0" />
+				<p className="text-sm font-semibold text-emerald-700 dark:text-emerald-300">{t("success")}</p>
 			</div>
 		);
 	}
@@ -179,7 +175,7 @@ export default function TourReportForm({ tourId }: { tourId: string }) {
 			<button
 				type="submit"
 				disabled={mutation.isPending}
-				className="w-full bg-[#FF5A2E] text-white font-bold text-sm py-3 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-60"
+				className="w-full bg-primary text-white font-bold text-sm py-3 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-60"
 			>
 				{mutation.isPending ? t("submitting") : t("submit")}
 			</button>

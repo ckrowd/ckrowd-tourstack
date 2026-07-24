@@ -1446,6 +1446,8 @@
       "title": "Bienvenue - completez votre profil pour commencer",
       "description": "Remplissez vos informations d entreprise, coordonnees et pays. Ces donnees sont requises avant d acceder au reste de la plateforme."
     },
+    "tabs": {"company": "Entreprise", "public": "Profil public", "business": "Activité & équipe", "banking": "Coordonnées bancaires"},
+    "journey": {"progress": "{done} sections sur {total} complétées", "back": "Retour", "continue": "Continuer", "ready": "Toutes les sections sont complètes — prêt à enregistrer"},
     "logo": {
       "label": "Logo / Photo de Profil",
       "hint": "Obligatoire. Cliquez pour telecharger. Image carree recommandee, au moins 200 x 200 px.",
@@ -2764,7 +2766,11 @@
     "activeTourProjects": "Projets de tournée actifs",
     "sortBy": {
       "label": "Trier par :",
-      "newestFirst": "Plus récents en premier"
+      "newestFirst": "Plus récents en premier",
+      "trending": "Tendances d'abord",
+      "feeHigh": "Cachet : décroissant",
+      "feeLow": "Cachet : croissant",
+      "nameAz": "Nom A–Z"
     },
     "noResults": {
       "title": "Aucun résultat ne correspond à vos filtres",
@@ -3051,12 +3057,17 @@
     "promoterPortal": "Portail des promoteurs",
     "title": "Votre tableau de bord de tournée",
     "welcomeBack": "Bienvenue, {name}. Suivez vos EOI et le processus de tournée ci-dessous.",
+    "attentionTitle": "Requiert votre attention",
+    "latestSubmission": "Dernière soumission",
     "yourOrganization": "votre organisation",
     "touringSeason": "Saison de tournée",
     "touringSeasonYears": "2024 / 2025",
     "eoiProgressTitle": "Progression de l'EOI — {artist}{tour}",
+    "gettingStarted": {"eyebrow": "Pour commencer", "title": "Bienvenue sur TourStack, {name}", "subtitle": "Quelques étapes pour réserver votre premier artiste et débloquer le capital de tournée.", "progress": "{done} sur {total} étapes", "browseCta": "Parcourir les artistes", "completeProfileCta": "Compléter le profil", "buildCta": "Intégrer l'écosystème", "stepProfileTitle": "Configurez votre profil de promoteur", "stepProfileDesc": "Détails de l'entreprise, contact et pays.", "stepEcosystemTitle": "Construisez votre écosystème", "stepEcosystemDesc": "Intégrez prestataires, personnel et assurance.", "stepDiscoverTitle": "Découvrez les artistes", "stepDiscoverDesc": "Explorez les artistes annoncés pour le circuit panafricain.", "stepEoiTitle": "Soumettez votre première déclaration d'intérêt", "stepEoiDesc": "Proposez d'accueillir une étape de tournée à votre lieu.", "flowTitle": "Comment fonctionne une déclaration d'intérêt", "flowS1": "Découvrir", "flowS1Desc": "Parcourir les artistes annoncés", "flowS2": "Soumettre l'EOI", "flowS2Desc": "Proposez votre lieu et vos dates", "flowS3": "Examen", "flowS3Desc": "Ckrowd examine en ~48h", "flowS4": "Confirmé", "flowS4Desc": "Verrouillez l'étape de tournée"},
     "noEoisYet": "Pas encore d'EOI",
     "noEois": "Pas d'EOI",
+    "analytics": {"submitted": "Soumises", "approved": "Approuvées", "eyebrow": "Analytique", "title": "Volume du pipeline", "period": "6 derniers mois", "unit": "EOI"},
+    "pipelineTitle": "Pipeline des EOI",
     "myEoiSubmissions": "Mes soumissions d'EOI",
     "newEoi": "Nouvelle EOI",
     "financingStatus": "Statut du financement",
@@ -3108,6 +3119,7 @@
     },
     "table": {
       "artistTour": "Artiste / Tournée",
+      "submitted": "Soumis",
       "venue": "Lieu",
       "status": "Statut",
       "noEois": "Pas encore d'EOI soumises",
@@ -3349,6 +3361,10 @@
     "profile": "Profil",
     "settings": "Paramètres",
     "startNewTour": "Démarrer une tournée",
+    "groupTourOps": "Opérations de tournée",
+    "groupEcosystem": "Écosystème",
+    "groupCapital": "Capital",
+    "groupAccount": "Compte",
     "profileRequired": "Complétez d'abord votre profil",
     "aiTools": "Intelligence tournée",
     "tickets": "Billetterie"
@@ -5922,7 +5938,8 @@
     },
     "productsButton": "Produits",
     "productsModalTitle": "Nos Produits de Financement",
-    "partnersLabel": "Partenaires de financement"
+    "partnersLabel": "Partenaires de financement",
+    "analytics": {"eyebrow": "Analyse du capital", "title": "Aperçu du financement", "period": "6 derniers mois", "totalRequested": "Total demandé", "approvedCapital": "Capital approuvé", "approvalRate": "Taux d’approbation", "applications": "Demandes", "trendTitle": "Capital demandé vs. approuvé", "requestedSeries": "Demandé", "approvedSeries": "Approuvé", "statusTitle": "Statut des demandes", "productTitle": "Capital par produit", "unit": "", "empty": "Soumettez votre première demande et votre analyse du capital apparaîtra ici.", "ofDecided": "des décidées", "acrossProducts": "{count, plural, one {# produit} other {# produits}}", "vsPrev": "vs 6 mois préc.", "live": "En direct"}
   },
   "InsuranceApplyPage": {
     "promoterPortal": "Portail du promoteur",

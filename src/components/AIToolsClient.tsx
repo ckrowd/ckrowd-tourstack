@@ -8,6 +8,7 @@ import {
 	optimizeTourRoute,
 } from "@/app/actions";
 import { useMutation } from "@tanstack/react-query";
+import Icon from "@/components/icons";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import FormattedNumberInput from "@/components/ui/FormattedNumberInput";
@@ -15,18 +16,16 @@ import FormattedNumberInput from "@/components/ui/FormattedNumberInput";
 // ── Shared ─────────────────────────────────────────────────────────────────
 
 const ic =
-	"w-full rounded-xl border border-outline-variant/30 bg-surface-container-lowest px-4 py-3 text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30 focus:border-[#FF5A2E]/60 transition-all";
+	"w-full rounded-xl border border-outline-variant/30 bg-surface-container-lowest px-4 py-3 text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/60 transition-all";
 
 function RunButton({ loading, label, loadingLabel }: { loading: boolean; label: string; loadingLabel: string }) {
 	return (
 		<button
 			type="submit"
 			disabled={loading}
-			className="inline-flex items-center gap-2 bg-[#FF5A2E] text-white font-bold text-sm px-6 py-3 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-60"
+			className="inline-flex items-center gap-2 bg-primary text-white font-bold text-sm px-6 py-3 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-60"
 		>
-			<span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>
-				{loading ? "hourglass_top" : "auto_awesome"}
-			</span>
+			<Icon name={loading ? "loader" : "ai"} size={14} className={loading ? "animate-spin" : undefined} />
 			{loading ? loadingLabel : label}
 		</button>
 	);
@@ -50,7 +49,7 @@ function SectionLabel({ children }: { children: React.ReactNode }) {
 
 function ErrorBanner({ msg }: { msg: string }) {
 	return (
-		<div className="mt-4 bg-rose-50 border border-rose-200 text-rose-700 rounded-xl px-4 py-3 text-sm font-medium">
+		<div className="mt-4 bg-rose-500/10 border border-rose-500/25 text-rose-600 dark:text-rose-300 rounded-xl px-4 py-3 text-sm font-medium">
 			{msg}
 		</div>
 	);
@@ -89,9 +88,7 @@ function EOISelector({
 						);
 					})}
 				</select>
-				<span className="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400 text-lg">
-					expand_more
-				</span>
+				<Icon name="chevron-down" size={18} className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400" />
 			</div>
 		</div>
 	);
@@ -142,7 +139,7 @@ function TicketForecastTab({ eois }: { eois: EOI[] }) {
 							<div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
 								{Object.entries(d.pricingTiers as Record<string, Record<string, unknown>>).map(([tier, info]) => (
 									<div key={tier} className="bg-surface-container-low rounded-xl p-3 text-center">
-										<p className="text-[10px] font-black uppercase tracking-widest text-[#FF5A2E]">{tier}</p>
+										<p className="text-[10px] font-black uppercase tracking-widest text-primary">{tier}</p>
 										<p className="text-sm font-bold mt-1">₦{Number(info.suggestedPrice ?? 0).toLocaleString()}</p>
 										<p className="text-xs text-on-surface-variant">{String(info.allocationPct ?? 0)}% allocation</p>
 									</div>
@@ -180,7 +177,7 @@ function SponsorshipMatcherTab({ eois }: { eois: EOI[] }) {
 				<ResultCard>
 					{!!d.strategy &&<p className="text-sm text-on-surface-variant italic">{String(d.strategy)}</p>}
 					<div className="flex gap-4 flex-wrap">
-						{!!d.totalPotential &&<div className="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-2"><p className="text-[10px] font-black uppercase tracking-widest text-emerald-700">{t("sponsors.totalPotential")}</p><p className="text-base font-black text-emerald-900">{String(d.totalPotential)}</p></div>}
+						{!!d.totalPotential &&<div className="bg-emerald-500/10 border border-emerald-500/25 rounded-xl px-4 py-2"><p className="text-[10px] font-black uppercase tracking-widest text-emerald-700">{t("sponsors.totalPotential")}</p><p className="text-base font-black text-emerald-700 dark:text-emerald-300">{String(d.totalPotential)}</p></div>}
 						{!!d.topCategory &&<div className="bg-surface-container-low rounded-xl px-4 py-2"><p className="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">{t("sponsors.topCategory")}</p><p className="text-base font-bold text-on-surface">{String(d.topCategory)}</p></div>}
 					</div>
 					{Array.isArray(d.matches) && (
@@ -190,7 +187,7 @@ function SponsorshipMatcherTab({ eois }: { eois: EOI[] }) {
 								<div key={i} className="bg-surface-container-low rounded-xl p-4">
 									<div className="flex items-center justify-between mb-2">
 										<p className="font-bold text-sm text-on-surface">{String(m.industry ?? "")}</p>
-										<span className={`text-xs font-black px-2 py-0.5 rounded-full ${Number(m.fitScore ?? 0) >= 80 ? "bg-emerald-100 text-emerald-800" : "bg-yellow-100 text-yellow-800"}`}>{String(m.fitScore ?? 0)}% fit</span>
+										<span className={`text-xs font-black px-2 py-0.5 rounded-full ${Number(m.fitScore ?? 0) >= 80 ? "bg-emerald-100 text-emerald-700/90 dark:text-emerald-300/80" : "bg-yellow-100 text-yellow-800"}`}>{String(m.fitScore ?? 0)}% fit</span>
 									</div>
 									{Array.isArray(m.suggestedBrands) && <p className="text-xs text-on-surface-variant mb-1"><span className="font-semibold">Brands:</span> {(m.suggestedBrands as string[]).join(", ")}</p>}
 									<p className="text-xs text-on-surface-variant mb-1">{String(m.reasoning ?? "")}</p>
@@ -240,7 +237,7 @@ function VenueRecommendationTab() {
 			{d && (
 				<ResultCard>
 					{!!d.cityInsights &&<p className="text-sm text-on-surface-variant">{String(d.cityInsights)}</p>}
-					{!!d.topPick &&<div className="inline-flex items-center gap-2 bg-[#FF5A2E]/10 text-[#FF5A2E] font-bold text-xs px-3 py-1.5 rounded-full"><span className="material-symbols-outlined text-sm" style={{ fontVariationSettings: "'FILL' 1" }}>star</span>{t("venues.topPick")}: {String(d.topPick)}</div>}
+					{!!d.topPick &&<div className="inline-flex items-center gap-2 bg-primary/10 text-primary font-bold text-xs px-3 py-1.5 rounded-full"><Icon name="star" size={14} />{t("venues.topPick")}: {String(d.topPick)}</div>}
 					{Array.isArray(d.recommendations) && (
 						<div className="space-y-3">
 							{(d.recommendations as Record<string, unknown>[]).map((v, i) => (
@@ -250,7 +247,7 @@ function VenueRecommendationTab() {
 											<p className="font-bold text-sm text-on-surface">{String(v.name ?? "")}</p>
 											<p className="text-xs text-on-surface-variant">{String(v.type ?? "")} · {String(v.location ?? "")}</p>
 										</div>
-										<span className={`text-xs font-black px-2 py-0.5 rounded-full shrink-0 ${Number(v.suitabilityScore ?? 0) >= 80 ? "bg-emerald-100 text-emerald-800" : "bg-yellow-100 text-yellow-800"}`}>{String(v.suitabilityScore ?? 0)}/100</span>
+										<span className={`text-xs font-black px-2 py-0.5 rounded-full shrink-0 ${Number(v.suitabilityScore ?? 0) >= 80 ? "bg-emerald-100 text-emerald-700/90 dark:text-emerald-300/80" : "bg-yellow-100 text-yellow-800"}`}>{String(v.suitabilityScore ?? 0)}/100</span>
 									</div>
 									<div className="flex flex-wrap gap-3 text-xs mb-2">
 										<span><span className="font-semibold">Capacity:</span> {Number(v.estimatedCapacity ?? 0).toLocaleString()} ({String(v.capacityUtilization ?? "—")} utilization)</span>
@@ -262,7 +259,7 @@ function VenueRecommendationTab() {
 							))}
 						</div>
 					)}
-					{!!d.tip &&<p className="text-xs text-on-surface-variant italic border-l-2 border-[#FF5A2E]/40 pl-3">{String(d.tip)}</p>}
+					{!!d.tip &&<p className="text-xs text-on-surface-variant italic border-l-2 border-primary/40 pl-3">{String(d.tip)}</p>}
 				</ResultCard>
 			)}
 			{mutation.data && !mutation.data.success && <ErrorBanner msg={mutation.data.error ?? t("venues.error")} />}
@@ -305,7 +302,7 @@ function RouteOptimizerTab() {
 			{d && (
 				<ResultCard>
 					<div className="flex flex-wrap gap-3">
-						{d.logisticsScore != null && <div className="bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-2"><p className="text-[10px] font-black uppercase tracking-widest text-emerald-700">{t("route.logisticsScore")}</p><p className="text-xl font-black text-emerald-900">{String(d.logisticsScore)}/100</p></div>}
+						{d.logisticsScore != null && <div className="bg-emerald-500/10 border border-emerald-500/25 rounded-xl px-4 py-2"><p className="text-[10px] font-black uppercase tracking-widest text-emerald-700">{t("route.logisticsScore")}</p><p className="text-xl font-black text-emerald-700 dark:text-emerald-300">{String(d.logisticsScore)}/100</p></div>}
 						{!!d.estimatedSavingsVsRandom &&<div className="bg-surface-container-low rounded-xl px-4 py-2"><p className="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">{t("route.savings")}</p><p className="text-xl font-black text-on-surface">{String(d.estimatedSavingsVsRandom)}</p></div>}
 						{d.totalTravelDays != null && <div className="bg-surface-container-low rounded-xl px-4 py-2"><p className="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">{t("route.travelDays")}</p><p className="text-xl font-black text-on-surface">{String(d.totalTravelDays)}</p></div>}
 					</div>
@@ -315,8 +312,8 @@ function RouteOptimizerTab() {
 							<div className="flex flex-wrap items-center gap-2">
 								{(d.optimizedRoute as string[]).map((city, i) => (
 									<span key={city} className="flex items-center gap-2">
-										<span className="bg-[#FF5A2E] text-white font-bold text-xs px-3 py-1.5 rounded-full">{city}</span>
-										{i < (d.optimizedRoute as string[]).length - 1 && <span className="material-symbols-outlined text-sm text-on-surface-variant">arrow_forward</span>}
+										<span className="bg-primary text-white font-bold text-xs px-3 py-1.5 rounded-full">{city}</span>
+										{i < (d.optimizedRoute as string[]).length - 1 && <Icon name="arrow-right" size={14} className="text-on-surface-variant" />}
 									</span>
 								))}
 							</div>
@@ -330,7 +327,7 @@ function RouteOptimizerTab() {
 								{(d.legs as Record<string, unknown>[]).map((leg, i) => (
 									<div key={i} className="flex items-center gap-3 bg-surface-container-low rounded-xl px-4 py-2.5 text-sm">
 										<span className="font-semibold text-on-surface">{String(leg.from ?? "")}</span>
-										<span className="material-symbols-outlined text-sm text-on-surface-variant">arrow_forward</span>
+										<Icon name="arrow-right" size={14} className="text-on-surface-variant" />
 										<span className="font-semibold text-on-surface">{String(leg.to ?? "")}</span>
 										<span className="ml-auto text-xs text-on-surface-variant">{String(leg.recommendedMode ?? "")} · {String(leg.travelTimeHours ?? "")}h · {String(leg.estimatedCostUsd ?? "")}</span>
 									</div>
@@ -341,7 +338,7 @@ function RouteOptimizerTab() {
 					{Array.isArray(d.tips) && (
 						<div>
 							<SectionLabel>{t("route.tips")}</SectionLabel>
-							<ul className="space-y-1">{(d.tips as string[]).map((tip) => <li key={tip} className="flex items-start gap-2 text-xs text-on-surface-variant"><span className="material-symbols-outlined text-[#FF5A2E] text-sm mt-0.5 shrink-0">lightbulb</span>{tip}</li>)}</ul>
+							<ul className="space-y-1">{(d.tips as string[]).map((tip) => <li key={tip} className="flex items-start gap-2 text-xs text-on-surface-variant"><Icon name="lightbulb" size={14} className="text-primary mt-0.5 shrink-0" />{tip}</li>)}</ul>
 						</div>
 					)}
 				</ResultCard>
@@ -378,7 +375,7 @@ function MarketingContentTab({ eois }: { eois: EOI[] }) {
 								key={tab}
 								type="button"
 								onClick={() => setActiveContent(tab)}
-								className={`text-xs font-bold px-3 py-1.5 rounded-lg transition-colors ${activeContent === tab ? "bg-[#FF5A2E] text-white" : "bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high"}`}
+								className={`text-xs font-bold px-3 py-1.5 rounded-lg transition-colors ${activeContent === tab ? "bg-primary text-white" : "bg-surface-container-low text-on-surface-variant hover:bg-surface-container-high"}`}
 							>
 								{tab === "pressRelease"
 									? t("marketing.pressRelease")
@@ -424,7 +421,7 @@ function MarketingContentTab({ eois }: { eois: EOI[] }) {
 							{(d.promotionalCalendar as Record<string, unknown>[]).map((item, i) => (
 								<div key={i} className="flex items-start gap-3 bg-surface-container-low rounded-xl px-4 py-3">
 									<div className="shrink-0 text-center min-w-12">
-										<p className="text-[10px] font-black uppercase tracking-widest text-[#FF5A2E]">Wk {String(item.week ?? "")}</p>
+										<p className="text-[10px] font-black uppercase tracking-widest text-primary">Wk {String(item.week ?? "")}</p>
 										<p className="text-xs font-semibold text-on-surface-variant">{String(item.day ?? "")}</p>
 									</div>
 									<div className="flex-1 min-w-0">
@@ -445,11 +442,11 @@ function MarketingContentTab({ eois }: { eois: EOI[] }) {
 // ── Main Tabs Component ────────────────────────────────────────────────────
 
 const TABS = [
-	{ key: "forecast", icon: "confirmation_number" },
+	{ key: "forecast", icon: "tours" },
 	{ key: "sponsors", icon: "handshake" },
 	{ key: "venues", icon: "stadium" },
 	{ key: "route", icon: "route" },
-	{ key: "marketing", icon: "campaign" },
+	{ key: "marketing", icon: "megaphone" },
 ] as const;
 
 type TabKey = (typeof TABS)[number]["key"];
@@ -469,23 +466,18 @@ export default function AIToolsClient({ eois }: { eois: EOI[] }) {
 						onClick={() => setActiveTab(tab.key)}
 						className={`flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all text-left whitespace-nowrap lg:whitespace-normal shrink-0 lg:shrink ${
 							activeTab === tab.key
-								? "bg-[#FF5A2E] text-white shadow-md shadow-[#FF5A2E]/20"
+								? "bg-primary text-white shadow-md shadow-primary/20"
 								: "bg-surface-container-lowest text-on-surface-variant hover:bg-surface-container-low"
 						}`}
 					>
-						<span
-							className="material-symbols-outlined text-base shrink-0"
-							style={{ fontVariationSettings: activeTab === tab.key ? "'FILL' 1" : "'FILL' 0" }}
-						>
-							{tab.icon}
-						</span>
+						<Icon name={tab.icon} size={16} className="shrink-0" />
 						<span className="lg:block">{t(`tabs.${tab.key}.label`)}</span>
 					</button>
 				))}
 			</nav>
 
 			{/* Active panel */}
-			<div data-tour="ai-tools-panel" className="lg:col-span-9 bg-surface-container-lowest rounded-2xl p-6 shadow-sm">
+			<div data-tour="ai-tools-panel" className="tsd-card lg:col-span-9 p-6">
 				<h2 className="font-(family-name:--font-manrope) font-extrabold text-xl text-on-surface mb-1">
 					{t(`tabs.${activeTab}.label`)}
 				</h2>

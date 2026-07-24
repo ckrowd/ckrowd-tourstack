@@ -1,6 +1,7 @@
 "use client";
 
 import { generateEOIScore, getEOIScore } from "@/app/actions";
+import Icon from "@/components/icons";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 
@@ -131,9 +132,7 @@ export default function AITourScorePanel({ eoiId }: { eoiId: string }) {
 							<ul className="space-y-1">
 								{(score.risks as string[]).map((r) => (
 									<li key={r} className="flex items-start gap-2 text-xs text-on-surface-variant">
-										<span className="material-symbols-outlined text-rose-400 text-sm mt-0.5 shrink-0">
-											warning
-										</span>
+										<Icon name="alert-triangle" size={14} className="text-rose-400 mt-0.5 shrink-0" />
 										{r}
 									</li>
 								))}
@@ -149,9 +148,7 @@ export default function AITourScorePanel({ eoiId }: { eoiId: string }) {
 							<ul className="space-y-1">
 								{(score.recommendations as string[]).map((r) => (
 									<li key={r} className="flex items-start gap-2 text-xs text-on-surface-variant">
-										<span className="material-symbols-outlined text-emerald-500 text-sm mt-0.5 shrink-0">
-											check_circle
-										</span>
+										<Icon name="check-circle" size={14} className="text-emerald-500 mt-0.5 shrink-0" />
 										{r}
 									</li>
 								))}
@@ -170,20 +167,15 @@ export default function AITourScorePanel({ eoiId }: { eoiId: string }) {
 				</>
 			) : (
 				<div className="text-center py-4">
-					<span
-						className="material-symbols-outlined text-4xl text-on-surface-variant block mb-2"
-						style={{ fontVariationSettings: "'FILL' 1" }}
-					>
-						auto_awesome
-					</span>
+					<Icon name="ai" size={36} className="text-on-surface-variant mx-auto mb-2" />
 					<p className="text-sm text-on-surface-variant mb-3">{t("noScore")}</p>
 					<button
 						type="button"
 						onClick={() => generateMutation.mutate()}
 						disabled={generateMutation.isPending}
-						className="inline-flex items-center gap-2 bg-[#FF5A2E] text-white text-xs font-bold px-4 py-2 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-60"
+						className="inline-flex items-center gap-2 bg-primary text-white text-xs font-bold px-4 py-2 rounded-xl hover:opacity-90 transition-opacity disabled:opacity-60"
 					>
-						<span className="material-symbols-outlined text-sm">auto_awesome</span>
+						<Icon name="ai" size={14} />
 						{generateMutation.isPending ? t("generating") : t("generate")}
 					</button>
 					{generateMutation.data && !generateMutation.data.success && (

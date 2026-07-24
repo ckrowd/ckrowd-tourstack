@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
+import { createPortal } from "react-dom";
+import Icon from "@/components/icons";
 
 type Step = { step: string; title: string; desc: string };
 
@@ -46,13 +48,11 @@ export default function HowItWorksModal({
 				}`}
 				aria-label={buttonLabel}
 			>
-				<span className="material-symbols-outlined text-[#FF5A2E]" style={{ fontSize: "18px" }}>
-					info
-				</span>
+				<Icon name="info" size={18} className="text-primary" />
 				<span>{buttonLabel}</span>
 			</button>
 
-			{open && (
+			{open && createPortal(
 				<div
 					className="fixed inset-0 z-50 flex items-center justify-center p-4"
 					role="dialog"
@@ -84,7 +84,7 @@ export default function HowItWorksModal({
 								aria-label="Close"
 								className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors"
 							>
-								<span className="material-symbols-outlined">close</span>
+								<Icon name="x" size={18} />
 							</button>
 						</div>
 						<div className="p-6">
@@ -96,8 +96,8 @@ export default function HowItWorksModal({
 											<div
 												className={`absolute -left-8 w-7 h-7 rounded-full flex items-center justify-center text-xs font-black shrink-0 border-2 ${
 													i === 0
-														? "bg-[#FF5A2E] text-white border-[#FF5A2E]"
-														: "bg-surface text-[#FF5A2E] border-[#FF5A2E]/40"
+														? "bg-primary text-white border-primary"
+														: "bg-surface text-primary border-primary/40"
 												}`}
 											>
 												{s.step}
@@ -116,7 +116,8 @@ export default function HowItWorksModal({
 							</div>
 						</div>
 					</div>
-				</div>
+				</div>,
+				document.body,
 			)}
 		</>
 	);

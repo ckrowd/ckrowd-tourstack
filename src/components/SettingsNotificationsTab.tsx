@@ -198,7 +198,7 @@ export default function SettingsNotificationsTab() {
 								checked={prefs?.digest_frequency === opt.key}
 								disabled={!prefs}
 								onChange={() => setPref("digest_frequency")(opt.key)}
-								className="accent-[#FF5A2E]"
+								className="accent-primary"
 							/>
 							<span className="text-sm font-semibold text-on-surface">
 								{opt.label}
@@ -240,7 +240,7 @@ export default function SettingsNotificationsTab() {
 					type="button"
 					onClick={() => prefs && saveMutation.mutate(prefs)}
 					disabled={!prefs || saveMutation.isPending}
-					className="bg-[#FF5A2E] text-white px-8 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-all disabled:cursor-not-allowed disabled:opacity-60"
+					className="bg-primary text-white px-8 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-primary/20 hover:opacity-90 transition-all disabled:cursor-not-allowed disabled:opacity-60"
 				>
 					{saveMutation.isPending ? t("saving") : t("actions.save")}
 				</button>

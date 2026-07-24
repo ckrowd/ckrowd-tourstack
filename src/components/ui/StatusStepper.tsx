@@ -1,3 +1,5 @@
+import Icon from "@/components/icons";
+
 export type StatusStep = {
 	label: string;
 	done: boolean;
@@ -25,12 +27,7 @@ export default function StatusStepper({ steps }: { steps: StatusStep[] }) {
 						}`}
 					>
 						{s.done ? (
-							<span
-								className="material-symbols-outlined text-xs md:text-sm"
-								style={{ fontVariationSettings: "'FILL' 1" }}
-							>
-								check
-							</span>
+							<Icon name="check" size={14} strokeWidth={2.5} />
 						) : (
 							String(i + 1).padStart(2, "0")
 						)}

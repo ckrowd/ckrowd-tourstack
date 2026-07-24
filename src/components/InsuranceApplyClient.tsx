@@ -1,8 +1,11 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import Icon from "@/components/icons";
 import { useId, useState } from "react";
+import EmptyState from "@/components/ui/EmptyState";
 import HowItWorksModal from "@/components/HowItWorksModal";
+import PageHero from "@/components/PageHero";
 import StatusBadge, { type StatusTone } from "@/components/ui/StatusBadge";
 
 type Application = { id: string; product?: string | null; amount_requested?: number | null; currency?: string | null; status?: string | null; created_at?: Date | string | null; tour?: { artist?: { name?: string | null } | null } | null };
@@ -32,7 +35,7 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 	const [productsOpen, setProductsOpen] = useState(false);
 
 	return (
-		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
+		<main className="flex-1 lg:ml-64 bg-surface p-6 md:px-10 md:pt-5 md:pb-10">
 			{/* Products modal */}
 			{productsOpen && (
 				<div
@@ -58,16 +61,16 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 								aria-label="Close"
 								className="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors"
 							>
-								<span className="material-symbols-outlined">close</span>
+								<Icon name="x" size={18} />
 							</button>
 						</div>
 						<div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
 							{(t.raw("productSuite") as { name: string; tag: string; desc: string }[]).map((suite) => (
 								<div
 									key={suite.name}
-									className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-outline-variant/10 flex flex-col gap-3"
+									className="tsd-card p-6 flex flex-col gap-3"
 								>
-									<span className="text-[10px] font-semibold uppercase tracking-wider text-[#FF5A2E] bg-[#FF5A2E]/10 px-2 py-0.5 rounded-full self-start">
+									<span className="text-[10px] font-semibold uppercase tracking-wider text-primary bg-primary/10 px-2 py-0.5 rounded-full self-start">
 										{suite.tag}
 									</span>
 									<p className="font-(family-name:--font-manrope) font-semibold text-on-surface text-sm">
@@ -108,7 +111,7 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 								aria-label={tIns("faqClose")}
 								className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-high transition-colors"
 							>
-								<span className="material-symbols-outlined">close</span>
+								<Icon name="x" size={18} />
 							</button>
 						</div>
 						<div className="p-6 space-y-2">
@@ -123,9 +126,7 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 											className="w-full flex items-center justify-between gap-3 text-left p-4 hover:bg-surface-container-low transition-colors"
 										>
 											<span className="font-(family-name:--font-manrope) font-semibold text-sm text-on-surface">{f.q}</span>
-											<span className={`material-symbols-outlined text-on-surface-variant shrink-0 transition-transform ${isExpanded ? "rotate-180" : ""}`}>
-												expand_more
-											</span>
+											<Icon name="chevron-down" size={18} className={`text-on-surface-variant shrink-0 transition-transform ${isExpanded ? "rotate-180" : ""}`} />
 										</button>
 										{isExpanded && (
 											<p className="px-4 pb-4 text-sm text-on-surface-variant leading-relaxed">{f.a}</p>
@@ -139,48 +140,40 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 			)}
 
 			{/* Header */}
-			<div className="mb-8 flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-				<div>
-					<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
-						{t("promoterPortal")}
-					</span>
-					<h1 className="text-3xl font-semibold font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
-						{t("title")}
-					</h1>
-					<p className="text-on-surface-variant font-medium max-w-xl">
-						{t("description")}
-					</p>
-				</div>
-				<div className="flex items-center gap-2 flex-wrap">
-					<button
-						type="button"
-						data-tour="insurance-products"
-						onClick={() => setProductsOpen(true)}
-						className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-semibold hover:bg-surface-container-high transition-colors"
-					>
-						<span className="material-symbols-outlined text-base text-[#FF5A2E]">category</span>
-						{t("productsButton")}
-					</button>
-					<HowItWorksModal
-						title={tIns("howItWorksTitle")}
-						subtitle={tIns("howItWorksSubtitle")}
-						buttonLabel={tIns("howItWorksButton")}
-						steps={(tIns.raw("ecosystemFlow") as { label: string; desc: string }[]).map((s, i) => ({
-							step: String(i + 1).padStart(2, "0"),
-							title: s.label,
-							desc: s.desc,
-						}))}
-					/>
-					<button
-						type="button"
-						onClick={() => setFaqOpen(true)}
-						className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-semibold hover:bg-surface-container-high transition-colors"
-					>
-						<span className="material-symbols-outlined text-base text-[#FF5A2E]">help</span>
-						{tIns("faqButton")}
-					</button>
-				</div>
-			</div>
+			<PageHero
+				image="/festival-pyro.jpg"
+				eyebrow={t("promoterPortal")}
+				title={t("title")}
+				description={t("description")}
+			>
+				<button
+					type="button"
+					data-tour="insurance-products"
+					onClick={() => setProductsOpen(true)}
+					className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-semibold hover:bg-surface-container-high transition-colors"
+				>
+					<Icon name="shapes" size={16} className="text-primary" />
+					{t("productsButton")}
+				</button>
+				<HowItWorksModal
+					title={tIns("howItWorksTitle")}
+					subtitle={tIns("howItWorksSubtitle")}
+					buttonLabel={tIns("howItWorksButton")}
+					steps={(tIns.raw("ecosystemFlow") as { label: string; desc: string }[]).map((s, i) => ({
+						step: String(i + 1).padStart(2, "0"),
+						title: s.label,
+						desc: s.desc,
+					}))}
+				/>
+				<button
+					type="button"
+					onClick={() => setFaqOpen(true)}
+					className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-surface-container-highest text-on-surface text-sm font-semibold hover:bg-surface-container-high transition-colors"
+				>
+					<Icon name="help-circle" size={16} className="text-primary" />
+					{tIns("faqButton")}
+				</button>
+			</PageHero>
 
 			{/* Insurance partner */}
 			<div className="mb-8">
@@ -199,13 +192,8 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 					{t("myApplications")}
 				</h2>
 				{applications.length === 0 ? (
-					<div className="bg-surface-container-lowest rounded-2xl p-10 text-center shadow-sm">
-						<span className="material-symbols-outlined text-4xl text-on-surface-variant block mb-3">
-							shield
-						</span>
-						<p className="text-sm font-semibold text-on-surface-variant">
-							{t("noApplications")}
-						</p>
+					<div className="rounded-2xl border border-outline-variant/60">
+						<EmptyState icon="insurance" title={t("noApplications")} />
 					</div>
 				) : (
 					<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -214,7 +202,7 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 							return (
 								<div
 									key={String(app.id)}
-									className="bg-surface-container-lowest rounded-2xl p-6 shadow-sm border border-transparent hover:border-outline-variant/20 transition-all"
+									className="tsd-card tsd-card-hover p-6"
 								>
 									<div className="flex items-start justify-between gap-4 mb-4">
 										<div>
@@ -225,7 +213,7 @@ export default function InsuranceApplyClient({ applications, locale }: Props) {
 												{String(app.tour?.artist?.name ?? "")}
 											</p>
 										</div>
-										<StatusBadge tone={insStatusToTone(status)} className="shrink-0">
+										<StatusBadge tone={insStatusToTone(status)} dot className="shrink-0">
 											{t(`statuses.${status}`)}
 										</StatusBadge>
 									</div>

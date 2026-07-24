@@ -1,7 +1,9 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import Icon from "@/components/icons";
 import { useState } from "react";
+import PageHero from "@/components/PageHero";
 import SettingsBillingTab from "@/components/SettingsBillingTab";
 import SettingsNotificationsTab from "@/components/SettingsNotificationsTab";
 import SettingsSecurityTab from "@/components/SettingsSecurityTab";
@@ -19,9 +21,9 @@ export default function SettingsClient() {
 		{
 			key: "notifications",
 			label: t("tabs.notifications"),
-			icon: "notifications",
+			icon: "bell",
 		},
-		{ key: "billing", label: t("tabs.billing"), icon: "credit_card" },
+		{ key: "billing", label: t("tabs.billing"), icon: "credit-card" },
 		{ key: "security", label: t("tabs.security"), icon: "lock" },
 	];
 
@@ -33,23 +35,17 @@ export default function SettingsClient() {
 	};
 
 	return (
-		<main className="flex-1 lg:ml-64 bg-surface p-6 md:p-10">
+		<main className="flex-1 lg:ml-64 bg-surface p-6 md:px-10 md:pt-5 md:pb-10">
 			<PageTour pageId="settings" />
 			{/* Header */}
-			<div className="mb-8">
-				<span className="text-xs font-semibold uppercase tracking-widest text-[#FF5A2E] block mb-2">
-					{t("promoterPortal")}
-				</span>
-				<h1 className="text-4xl font-black font-(family-name:--font-manrope) tracking-tight text-on-surface mb-2">
-					{t("title")}
-				</h1>
-				<p className="text-on-surface-variant font-medium">
-					{t("description")}
-				</p>
-			</div>
+			<PageHero
+				eyebrow={t("promoterPortal")}
+				title={t("title")}
+				description={t("description")}
+			/>
 
 			{/* Tabs */}
-			<div data-tour="settings-tabs" className="flex gap-1 bg-surface-container-lowest rounded-xl p-1 mb-8 w-fit shadow-sm flex-wrap">
+			<div data-tour="settings-tabs" className="tsd-card flex gap-1 p-1 mb-8 w-fit flex-wrap">
 				{tabs.map((tab) => (
 					<button
 						key={tab.key}
@@ -61,9 +57,7 @@ export default function SettingsClient() {
 								: "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-low"
 						}`}
 					>
-						<span className="material-symbols-outlined text-sm">
-							{tab.icon}
-						</span>
+						<Icon name={tab.icon} size={14} />
 						{tab.label}
 					</button>
 				))}

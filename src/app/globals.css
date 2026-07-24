@@ -216,6 +216,280 @@
 		border-color var(--default-transition-duration) var(--default-transition-timing-function);
 }
 
+/* ── Dashboard redesign theme scope ──────────────────────────────────────
+   Remaps the semantic design-system tokens to the TourStack landing
+   palette (.tslp) for the promoter dashboard only. Pure value remap:
+   every existing bg-surface / text-on-surface / border-outline-variant
+   call site re-skins with no markup or logic changes, and the admin /
+   financing-admin / insurance-admin / artmgmt portals keep the original
+   tokens. Light is the default; `.dark` (set by next-themes on <html>)
+   flips the same names — note cards sit LIGHTER than the canvas in dark
+   (#161616 on #0a0a0a), unlike the old token set. */
+.ts-dash {
+	/* accent — landing orange */
+	--color-primary: #ff5a30;
+	--color-primary-container: #ff5a30;
+	--color-surface-tint: #ff5a30;
+
+	/* canvas + card hierarchy — warm paper neutrals from .tslp.light */
+	--color-background: #f5f4f2;
+	--color-surface: #f5f4f2;
+	--color-surface-2: #ececea;
+	--color-surface-dim: #e4e3e0;
+	--color-surface-bright: #ffffff;
+	--color-surface-variant: #ececea;
+	--color-surface-container-lowest: #ffffff;
+	--color-surface-container-low: #f5f4f2;
+	--color-surface-container: #ececea;
+	--color-surface-container-high: #e4e3e0;
+	--color-surface-container-highest: #dcdbd8;
+
+	--color-on-surface: #0c0c0c;
+	--color-on-surface-variant: #5c5c5c;
+	--color-on-background: #0c0c0c;
+
+	--color-outline: #8a8a86;
+	--color-outline-variant: rgba(12, 12, 12, 0.1);
+
+	/* landing motion curves — shared fluid-system easings */
+	--ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+	--ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+	/* chart mark colors — status hues tuned for chart marks and validated
+	   (lightness band + CVD separation + ≥3:1 contrast) against the card
+	   surface per mode; the status TEXT tokens stay separate. */
+	--chart-approved: #15803d;
+	--chart-pending: #b45309;
+	--chart-contacted: #2054c7;
+	--chart-rejected: #b91c1c;
+
+	/* type — Geist everywhere; Archivo Black (--font-display) reserved for
+	   display numerals / hero headings applied per-component. Remapping
+	   --font-manrope covers the many font-(family-name:--font-manrope)
+	   call sites without touching them. */
+	--font-manrope: var(--font-geist);
+	--font-headline: var(--font-geist), system-ui, sans-serif;
+	--font-body: var(--font-geist), system-ui, sans-serif;
+	--font-label: var(--font-geist), system-ui, sans-serif;
+	font-family: var(--font-geist), system-ui, sans-serif;
+	background: var(--color-surface);
+	color: var(--color-on-surface);
+	/* Fill the viewport so the dashboard canvas (this scope's --color-surface)
+	   always covers the global body background — otherwise the older global
+	   dark surface (#16181D, a blue-grey) shows through below short pages. */
+	min-height: 100dvh;
+}
+
+.dark .ts-dash {
+	--chart-approved: #059669;
+	--chart-pending: #d97706;
+	--chart-contacted: #0284c7;
+	--chart-rejected: #dc2626;
+
+	--color-background: #0a0a0a;
+	--color-surface: #0a0a0a;
+	--color-surface-2: #202020;
+	--color-surface-dim: #050505;
+	--color-surface-bright: #161616;
+	--color-surface-variant: #262626;
+	--color-surface-container-lowest: #161616;
+	--color-surface-container-low: #1c1c1c;
+	--color-surface-container: #202020;
+	--color-surface-container-high: #262626;
+	--color-surface-container-highest: #2e2e2e;
+
+	--color-on-surface: #ffffff;
+	--color-on-surface-variant: #a8a8a8;
+	--color-on-background: #ffffff;
+
+	--color-outline: #4a4a4a;
+	--color-outline-variant: rgba(255, 255, 255, 0.08);
+}
+
+/* ── Dashboard card language (Linear × Vercel synthesis) ─────────────────
+   .tsd-card       — layered surface: hairline border + inner top-edge light
+                     (Linear's lit-edge) on dark; crisp 1px + soft shadow on
+                     light (Vercel). 12px radius — deliberately tighter than
+                     the old rounded-2xl bubble cards.
+   .tsd-card-hover — border brightens + depth grows on hover (no jumpy lift).
+   .tsd-card-glow  — radial accent bloom from the top edge, for ONE hero
+                     card per view.
+   .tsd-foot       — Vercel-style muted footer strip inside a card (actions
+                     live here, separated by a hairline). */
+.ts-dash .tsd-card {
+	background: var(--color-surface-container-lowest);
+	border: 1px solid var(--color-outline-variant);
+	border-radius: 12px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+	transition:
+		border-color 0.2s var(--ease-out),
+		box-shadow 0.2s var(--ease-out);
+}
+.dark .ts-dash .tsd-card {
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+.ts-dash .tsd-card-hover:hover {
+	border-color: color-mix(in srgb, var(--color-on-surface) 18%, transparent);
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+}
+.dark .ts-dash .tsd-card-hover:hover {
+	box-shadow:
+		inset 0 1px 0 rgba(255, 255, 255, 0.09),
+		0 8px 24px rgba(0, 0, 0, 0.35);
+}
+.ts-dash .tsd-card-glow {
+	position: relative;
+	overflow: hidden;
+}
+.ts-dash .tsd-card-glow::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(
+		70% 55% at 50% 0%,
+		color-mix(in srgb, var(--color-primary) 14%, transparent),
+		transparent 70%
+	);
+	pointer-events: none;
+}
+.ts-dash .tsd-foot {
+	border-top: 1px solid var(--color-outline-variant);
+	background: color-mix(in srgb, var(--color-surface-container-low) 55%, transparent);
+	border-radius: 0 0 11px 11px;
+}
+
+/* ── Dashboard fluid-motion utilities (scoped to .ts-dash) ───────────────
+   Server-rendered pages get entrance motion via CSS only: .tsd-rise on a
+   single element, .tsd-stagger on a container to cascade its children.
+   .tsd-empty-icon gives empty-state glyphs a slow idle float so empty
+   screens feel alive. All respect prefers-reduced-motion. */
+@keyframes tsd-rise {
+	from {
+		opacity: 0;
+		transform: translateY(12px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+@keyframes tsd-float {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-6px);
+	}
+}
+@keyframes tsd-ring {
+	from {
+		transform: scale(0.85);
+		opacity: 0.6;
+	}
+	to {
+		transform: scale(1.35);
+		opacity: 0;
+	}
+}
+.ts-dash .tsd-rise,
+.ts-dash .tsd-stagger > * {
+	/* `backwards` (not `both`): apply the start frame during the delay, but do
+	   NOT retain the end frame afterward. Retaining `transform: translateY(0)`
+	   left a lingering transform that made the element a containing block, which
+	   trapped `position: fixed` modals (How-it-works / FAQ) inside the card. */
+	animation: tsd-rise 0.55s var(--ease-out) backwards;
+}
+.ts-dash .tsd-stagger > *:nth-child(2) {
+	animation-delay: 0.06s;
+}
+.ts-dash .tsd-stagger > *:nth-child(3) {
+	animation-delay: 0.12s;
+}
+.ts-dash .tsd-stagger > *:nth-child(4) {
+	animation-delay: 0.18s;
+}
+.ts-dash .tsd-stagger > *:nth-child(5) {
+	animation-delay: 0.24s;
+}
+.ts-dash .tsd-stagger > *:nth-child(6) {
+	animation-delay: 0.3s;
+}
+.ts-dash .tsd-stagger > *:nth-child(7) {
+	animation-delay: 0.36s;
+}
+.ts-dash .tsd-stagger > *:nth-child(n + 8) {
+	animation-delay: 0.42s;
+}
+.ts-dash .tsd-empty-icon {
+	animation: tsd-float 3.4s ease-in-out infinite;
+}
+.ts-dash .tsd-empty-ring {
+	animation: tsd-ring 2.6s var(--ease-out) infinite;
+}
+
+/* Sparkline draw-in — the line strokes in left→right (pathLength normalised
+   to 1), then the fill + end dot fade up. Purely decorative reveal that echoes
+   the AreaChart's clip-path draw, so the trend strips feel authored, not static. */
+@keyframes tsd-spark-draw {
+	from {
+		stroke-dashoffset: 1;
+	}
+	to {
+		stroke-dashoffset: 0;
+	}
+}
+@keyframes tsd-fade-up {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+.ts-dash .tsd-spark-line {
+	stroke-dasharray: 1;
+	stroke-dashoffset: 1;
+	animation: tsd-spark-draw 0.85s var(--ease-out) 0.15s forwards;
+}
+.ts-dash .tsd-spark-area,
+.ts-dash .tsd-spark-dot {
+	opacity: 0;
+	animation: tsd-fade-up 0.5s var(--ease-out) 0.75s forwards;
+}
+
+/* Icon-chip nudge — the coloured glyph chip inside a hoverable card scales a
+   hair on hover. Motion lives on the chip, not the card, so there is no jumpy
+   lift (the card keeps its border/shadow response). */
+.ts-dash .tsd-card-hover .tsd-chip {
+	transition: transform 0.25s var(--ease-out);
+}
+.ts-dash .tsd-card-hover:hover .tsd-chip {
+	transform: scale(1.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.ts-dash .tsd-rise,
+	.ts-dash .tsd-stagger > *,
+	.ts-dash .tsd-empty-icon,
+	.ts-dash .tsd-empty-ring,
+	.ts-dash .tsd-spark-line,
+	.ts-dash .tsd-spark-area,
+	.ts-dash .tsd-spark-dot {
+		animation: none;
+	}
+	.ts-dash .tsd-spark-line {
+		stroke-dashoffset: 0;
+	}
+	.ts-dash .tsd-spark-area,
+	.ts-dash .tsd-spark-dot {
+		opacity: 1;
+	}
+	.ts-dash .tsd-card-hover:hover .tsd-chip {
+		transform: none;
+	}
+}
+
 /* Onboarding wizard step transition (motivated: signals step change). */
 @keyframes funnel-step-in {
 	from {
@@ -233,6 +507,65 @@
 @media (prefers-reduced-motion: reduce) {
 	.funnel-step-in {
 		animation: none;
+	}
+}
+
+/* ── Brand loader (global, portal-agnostic) ─────────────────────────────
+   Used by <Loader/> across every portal + route-level loading.tsx. Pure CSS
+   so it renders instantly with zero JS during a Suspense fallback. A brand
+   tile breathes behind a rotating accent arc, over an indeterminate shimmer
+   track. Layered so the motion reads as authored, not a bare spinner. */
+@keyframes ckld-orbit {
+	to {
+		transform: rotate(360deg);
+	}
+}
+@keyframes ckld-breathe {
+	0%,
+	100% {
+		transform: scale(1);
+		box-shadow: 0 0 0 0 rgba(255, 90, 46, 0);
+	}
+	50% {
+		transform: scale(1.05);
+		box-shadow: 0 8px 30px -6px rgba(255, 90, 46, 0.45);
+	}
+}
+@keyframes ckld-dot {
+	0%,
+	80%,
+	100% {
+		opacity: 0.2;
+	}
+	40% {
+		opacity: 1;
+	}
+}
+.ckld-ring {
+	animation: ckld-orbit 1s linear infinite;
+}
+.ckld-tile {
+	animation: ckld-breathe 2.2s ease-in-out infinite;
+}
+.ckld-dots > span {
+	animation: ckld-dot 1.4s ease-in-out infinite;
+}
+.ckld-dots > span:nth-child(2) {
+	animation-delay: 0.18s;
+}
+.ckld-dots > span:nth-child(3) {
+	animation-delay: 0.36s;
+}
+@media (prefers-reduced-motion: reduce) {
+	.ckld-ring {
+		animation-duration: 2.4s;
+	}
+	.ckld-tile,
+	.ckld-dots > span {
+		animation: none;
+	}
+	.ckld-dots > span {
+		opacity: 0.7;
 	}
 }
 
@@ -290,16 +623,27 @@ h3 { letter-spacing: -0.02em; line-height: 1.2; font-weight: 600; }
 	overflow: hidden;
 	min-width: 300px;
 	max-width: 380px;
-	border: none;
+	border: 1px solid rgba(12, 12, 12, 0.08);
 	/* driver.js repositions the popover between steps by updating its inline
 	   top/left — transitioning those lets it glide to the next anchor instead
 	   of snapping there instantly. */
 	transition: top 0.25s ease, left 0.25s ease, opacity 0.15s ease;
 }
 
-/* Coloured header strip */
+/* Dark-theme popover surface (JS inline styles cover most of this per render;
+   these are robust fallbacks so there's no light flash before onPopoverRender). */
+.dark .driver-popover {
+	background: #161616;
+	border-color: rgba(255, 255, 255, 0.1);
+	box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+}
+.dark .driver-popover-description {
+	color: #d7d7d7;
+}
+
+/* Solid header strip (gradient-free) */
 .driver-popover-title {
-	background: linear-gradient(135deg, #ff5a2e, #cc4825);
+	background: #ff5a2e;
 	color: #ffffff;
 	font-size: 15px;
 	font-weight: 600;
@@ -386,19 +730,20 @@ h3 { letter-spacing: -0.02em; line-height: 1.2; font-weight: 600; }
 	opacity: 0.9;
 }
 
-/* Arrow matches body white */
+/* Arrow follows the themed popover body (--tour-arrow is set per render on the
+   popover wrapper in applyTourStyles; falls back to white for light theme). */
 .driver-popover-arrow-side-top .driver-popover-arrow {
-	border-top-color: #ffffff;
+	border-top-color: var(--tour-arrow, #ffffff);
 }
 
 .driver-popover-arrow-side-bottom .driver-popover-arrow {
-	border-bottom-color: #ffffff;
+	border-bottom-color: var(--tour-arrow, #ffffff);
 }
 
 .driver-popover-arrow-side-left .driver-popover-arrow {
-	border-left-color: #ffffff;
+	border-left-color: var(--tour-arrow, #ffffff);
 }
 
 .driver-popover-arrow-side-right .driver-popover-arrow {
-	border-right-color: #ffffff;
+	border-right-color: var(--tour-arrow, #ffffff);
 }

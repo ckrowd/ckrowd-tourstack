@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import Icon from "@/components/icons";
 import { useEffect } from "react";
 import type { getTourstackVenues } from "@/app/actions";
 
@@ -63,7 +64,7 @@ export default function VenueDetailsModal({
 					href={String(venue.google_maps_url)}
 					target="_blank"
 					rel="noopener noreferrer"
-					className="text-[#FF5A2E] hover:underline break-all"
+					className="text-primary hover:underline break-all"
 				>
 					{String(venue.google_maps_url)}
 				</a>
@@ -116,7 +117,7 @@ export default function VenueDetailsModal({
 						aria-label={t("viewModal.close")}
 						className="text-on-surface-variant hover:text-on-surface transition-colors shrink-0"
 					>
-						<span className="material-symbols-outlined">close</span>
+						<Icon name="x" size={18} />
 					</button>
 				</div>
 				<div className="px-6 py-5">

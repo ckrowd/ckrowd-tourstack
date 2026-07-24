@@ -1,6 +1,7 @@
 "use client";
 
 import { useMutation, useQuery } from "@tanstack/react-query";
+import Icon from "@/components/icons";
 import Image from "next/image";
 import { useParams, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
@@ -145,12 +146,7 @@ export default function SettingsSecurityTab() {
 				</div>
 				{passwordMutation.data?.success && (
 					<div className="flex items-start gap-3 rounded-xl bg-emerald-50 border border-emerald-200 px-4 py-3">
-						<span
-							className="material-symbols-outlined text-emerald-600 text-base mt-0.5 shrink-0"
-							style={{ fontVariationSettings: "'FILL' 1" }}
-						>
-							mark_email_read
-						</span>
+						<Icon name="mail-check" size={16} className="text-emerald-600 mt-0.5 shrink-0" />
 						<div>
 							<p className="text-sm font-semibold text-emerald-800">
 								{t("password.success")}
@@ -176,7 +172,7 @@ export default function SettingsSecurityTab() {
 							!newPw ||
 							!confirmPw
 						}
-						className="bg-[#FF5A2E] text-white px-8 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-[#FF5A2E]/20 hover:opacity-90 transition-all disabled:cursor-not-allowed disabled:opacity-60"
+						className="bg-primary text-white px-8 py-3 rounded-xl font-semibold text-sm shadow-lg shadow-primary/20 hover:opacity-90 transition-all disabled:cursor-not-allowed disabled:opacity-60"
 					>
 						{passwordMutation.isPending
 							? t("password.updating")
@@ -193,9 +189,7 @@ export default function SettingsSecurityTab() {
 					<div className="flex items-center justify-between p-5 bg-surface-container-low rounded-xl">
 						<div className="flex items-center gap-4">
 							<div className="w-10 h-10 rounded-xl bg-surface-container-high flex items-center justify-center">
-								<span className="material-symbols-outlined text-on-surface-variant">
-									smartphone
-								</span>
+								<Icon name="smartphone" size={18} className="text-on-surface-variant" />
 							</div>
 							<div>
 								<p className="font-semibold text-sm text-on-surface">
@@ -224,7 +218,7 @@ export default function SettingsSecurityTab() {
 								type="button"
 								onClick={() => setupMutation.mutate()}
 								disabled={setupMutation.isPending || showSetup}
-								className="text-sm font-semibold text-[#FF5A2E] border border-[#FF5A2E]/30 px-4 py-2 rounded-lg hover:bg-[#FF5A2E]/5 transition-colors disabled:opacity-50"
+								className="text-sm font-semibold text-primary border border-primary/30 px-4 py-2 rounded-lg hover:bg-primary/5 transition-colors disabled:opacity-50"
 							>
 								{setupMutation.isPending ? "…" : t("twoFactor.actions.enable")}
 							</button>
@@ -251,9 +245,7 @@ export default function SettingsSecurityTab() {
 								</div>
 							) : (
 								<div className="w-40 h-40 mx-auto rounded-xl bg-surface-container-high flex items-center justify-center">
-									<span className="material-symbols-outlined text-3xl text-on-surface-variant">
-										qr_code_2
-									</span>
+									<Icon name="qr-code" size={30} className="text-on-surface-variant" />
 								</div>
 							)}
 
@@ -270,7 +262,7 @@ export default function SettingsSecurityTab() {
 								value={totpCode}
 								onChange={(e) => setTotpCode(e.target.value.replace(/\D/g, ""))}
 								placeholder={t("twoFactor.setup.codePlaceholder")}
-								className="w-full bg-surface-container border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-center tracking-widest focus:outline-none focus:ring-2 focus:ring-[#FF5A2E]/30"
+								className="w-full bg-surface-container border border-outline-variant/30 rounded-xl px-4 py-3 text-sm text-center tracking-widest focus:outline-none focus:ring-2 focus:ring-primary/30"
 							/>
 
 							{verifyMutation.data && !verifyMutation.data.success && (
@@ -295,7 +287,7 @@ export default function SettingsSecurityTab() {
 									type="button"
 									onClick={() => verifyMutation.mutate()}
 									disabled={totpCode.length < 6 || verifyMutation.isPending}
-									className="flex-1 py-2.5 bg-[#FF5A2E] text-white rounded-xl text-sm font-semibold hover:opacity-90 transition-all disabled:opacity-50"
+									className="flex-1 py-2.5 bg-primary text-white rounded-xl text-sm font-semibold hover:opacity-90 transition-all disabled:opacity-50"
 								>
 									{verifyMutation.isPending
 										? "…"
@@ -314,9 +306,7 @@ export default function SettingsSecurityTab() {
 				<div className="space-y-3">
 					{session && (
 						<div className="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl">
-							<span className="material-symbols-outlined text-on-surface-variant">
-								laptop_mac
-							</span>
+							<Icon name="laptop" size={18} className="text-on-surface-variant" />
 							<div className="flex-1">
 								<p className="text-sm font-semibold text-on-surface">
 									{session.user.email ?? session.user.name ?? "—"}

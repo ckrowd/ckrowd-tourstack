@@ -1,6 +1,9 @@
 // Shared driver.js popover styling applied via onPopoverRender.
-// Using inline styles guarantees the orange header / clean-card look regardless
-// of CSS loading order or specificity wars with driver.js defaults.
+// Using inline styles guarantees the look regardless of CSS loading order or
+// specificity wars with driver.js defaults. The popover renders at
+// document.body (outside the .ts-dash token scope), so we resolve concrete
+// colours per theme here — reading the `.dark` class next-themes sets on
+// <html> — to keep the guide theme-appropriate in both light and dark.
 
 type PopoverEl = Record<string, Element | undefined>;
 
@@ -10,24 +13,41 @@ function s(popover: PopoverEl, key: string): HTMLElement | null {
 }
 
 export function applyTourStyles(popover: PopoverEl) {
+	const isDark =
+		typeof document !== "undefined" &&
+		document.documentElement.classList.contains("dark");
+
+	const surface = isDark ? "#161616" : "#ffffff";
+	const onSurface = isDark ? "#d7d7d7" : "#374151";
+	const outline = isDark ? "rgba(255,255,255,0.10)" : "rgba(12,12,12,0.08)";
+	const prevText = isDark ? "#a8a8a8" : "#6b7280";
+	const prevBorder = isDark ? "rgba(255,255,255,0.16)" : "#e5e7eb";
+	const shadow = isDark
+		? "0 24px 64px rgba(0,0,0,0.55)"
+		: "0 24px 64px rgba(0,0,0,0.18)";
+
 	const wrapper = s(popover, "wrapper");
 	if (wrapper) {
 		Object.assign(wrapper.style, {
 			padding: "0",
 			overflow: "hidden",
 			borderRadius: "16px",
-			boxShadow: "0 24px 64px rgba(0,0,0,0.22)",
+			boxShadow: shadow,
 			minWidth: "300px",
 			maxWidth: "380px",
-			border: "none",
+			background: surface,
+			border: `1px solid ${outline}`,
 			fontFamily: "system-ui, -apple-system, sans-serif",
 		});
+		// Arrow (driver.js colours it via border-*-color) reads this var — set in
+		// globals.css — so the pointer matches the themed popover body.
+		wrapper.style.setProperty("--tour-arrow", surface);
 	}
 
 	const title = s(popover, "title");
 	if (title) {
 		Object.assign(title.style, {
-			background: "linear-gradient(135deg, #FF5A30, #E04820)",
+			background: "#FF5A30", // solid — deliberately gradient-free
 			color: "#ffffff",
 			padding: "18px 46px 14px 22px",
 			margin: "0",
@@ -45,7 +65,8 @@ export function applyTourStyles(popover: PopoverEl) {
 			margin: "0",
 			fontSize: "14px",
 			lineHeight: "1.65",
-			color: "#374151",
+			color: onSurface,
+			background: surface,
 		});
 	}
 
@@ -54,6 +75,7 @@ export function applyTourStyles(popover: PopoverEl) {
 		Object.assign(footer.style, {
 			padding: "12px 22px 18px",
 			borderTop: "none",
+			background: surface,
 			display: "flex",
 			alignItems: "center",
 			justifyContent: "space-between",
@@ -81,8 +103,8 @@ export function applyTourStyles(popover: PopoverEl) {
 	if (prev) {
 		Object.assign(prev.style, {
 			background: "transparent",
-			color: "#6b7280",
-			border: "1px solid #e5e7eb",
+			color: prevText,
+			border: `1px solid ${prevBorder}`,
 			borderRadius: "10px",
 			padding: "8px 16px",
 			fontSize: "12px",
@@ -105,7 +127,7 @@ export function applyTourStyles(popover: PopoverEl) {
 	const progress = s(popover, "progress");
 	if (progress) {
 		Object.assign(progress.style, {
-			color: "#9ca3af",
+			color: isDark ? "#8a8a8a" : "#9ca3af",
 			fontSize: "11px",
 			fontWeight: "600",
 		});

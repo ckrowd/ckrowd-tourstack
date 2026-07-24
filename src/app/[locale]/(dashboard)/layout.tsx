@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getSession, getTourstackProfile } from "@/app/actions";
 import { adminHomePath, isArtmgmtProfile, stripLocalePrefix } from "@/lib/auth";
 import ProfileSetupGate from "@/components/ProfileSetupGate";
+import ScrollReveal from "@/components/dashboard/ScrollReveal";
 
 export const dynamic = "force-dynamic";
 
@@ -31,9 +32,10 @@ export default async function DashboardLayout({
 	}
 
 	return (
-		<>
+		<div className="ts-dash">
 			<ProfileSetupGate />
+			<ScrollReveal />
 			{children}
-		</>
+		</div>
 	);
 }

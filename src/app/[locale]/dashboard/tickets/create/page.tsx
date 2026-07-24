@@ -104,7 +104,7 @@ export default function CreateTicketEventPage() {
 	return (
 		<div className="p-6 max-w-2xl mx-auto">
 			<div className="mb-8">
-				<p className="text-xs font-black uppercase tracking-widest text-[#FF5A2E] mb-1">{t("badge")}</p>
+				<p className="text-xs font-black uppercase tracking-widest text-primary mb-1">{t("badge")}</p>
 				<h1 className="text-2xl font-black text-on-surface">{t("title")}</h1>
 				<p className="text-sm text-on-surface-variant mt-1">{t("description")}</p>
 			</div>
@@ -115,7 +115,7 @@ export default function CreateTicketEventPage() {
 					<div key={s} className="flex items-center gap-2">
 						<div
 							className={`w-6 h-6 rounded-full text-xs font-black flex items-center justify-center ${
-								i <= stepIdx ? "bg-[#FF5A2E] text-white" : "bg-surface-container text-on-surface-variant"
+								i <= stepIdx ? "bg-primary text-white" : "bg-surface-container text-on-surface-variant"
 							}`}
 						>
 							{i + 1}
@@ -134,7 +134,7 @@ export default function CreateTicketEventPage() {
 					<div>
 						<label className="block text-sm font-semibold mb-1">{t("form.title")}</label>
 						<input
-							className="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm bg-surface focus:outline-none focus:border-[#FF5A2E]"
+							className="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm bg-surface focus:outline-none focus:border-primary"
 							placeholder={t("form.titlePlaceholder")}
 							value={title}
 							onChange={(e) => setTitle(e.target.value)}
@@ -144,7 +144,7 @@ export default function CreateTicketEventPage() {
 						<label className="block text-sm font-semibold mb-1">{t("form.description")}</label>
 						<textarea
 							rows={3}
-							className="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm bg-surface focus:outline-none focus:border-[#FF5A2E] resize-none"
+							className="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm bg-surface focus:outline-none focus:border-primary resize-none"
 							placeholder={t("form.descriptionPlaceholder")}
 							value={description}
 							onChange={(e) => setDescription(e.target.value)}
@@ -153,7 +153,7 @@ export default function CreateTicketEventPage() {
 					<div>
 						<label className="block text-sm font-semibold mb-1">{t("form.linkTour")}</label>
 						<select
-							className="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm bg-surface focus:outline-none focus:border-[#FF5A2E]"
+							className="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm bg-surface focus:outline-none focus:border-primary"
 							value={tourId}
 							onChange={(e) => handleTourChange(e.target.value)}
 						>
@@ -171,7 +171,7 @@ export default function CreateTicketEventPage() {
 						<div>
 							<label className="block text-sm font-semibold mb-1">{t("form.venue")}</label>
 							<input
-								className="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm bg-surface focus:outline-none focus:border-[#FF5A2E] disabled:bg-surface-container disabled:text-on-surface-variant disabled:cursor-not-allowed"
+								className="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm bg-surface focus:outline-none focus:border-primary disabled:bg-surface-container disabled:text-on-surface-variant disabled:cursor-not-allowed"
 								placeholder={t("form.venuePlaceholder")}
 								value={venue}
 								disabled={!!tourId}
@@ -181,7 +181,7 @@ export default function CreateTicketEventPage() {
 						<div>
 							<label className="block text-sm font-semibold mb-1">{t("form.city")}</label>
 							<input
-								className="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm bg-surface focus:outline-none focus:border-[#FF5A2E] disabled:bg-surface-container disabled:text-on-surface-variant disabled:cursor-not-allowed"
+								className="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm bg-surface focus:outline-none focus:border-primary disabled:bg-surface-container disabled:text-on-surface-variant disabled:cursor-not-allowed"
 								placeholder={t("form.cityPlaceholder")}
 								value={city}
 								disabled={!!tourId}
@@ -194,7 +194,7 @@ export default function CreateTicketEventPage() {
 						<input
 							disabled={!!tourId}
 							type="datetime-local"
-							className="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm bg-surface focus:outline-none focus:border-[#FF5A2E] disabled:bg-surface-container disabled:text-on-surface-variant disabled:cursor-not-allowed"
+							className="w-full border border-outline-variant rounded-xl px-4 py-3 text-sm bg-surface focus:outline-none focus:border-primary disabled:bg-surface-container disabled:text-on-surface-variant disabled:cursor-not-allowed"
 							value={eventDate}
 							onChange={(e) => setEventDate(e.target.value)}
 						/>
@@ -204,7 +204,7 @@ export default function CreateTicketEventPage() {
 							type="button"
 							disabled={!canNextFromDetails}
 							onClick={() => setStep("tiers")}
-							className="bg-[#FF5A2E] text-white font-bold text-sm px-6 py-2.5 rounded-xl hover:opacity-90 disabled:opacity-40 transition"
+							className="bg-primary text-white font-bold text-sm px-6 py-2.5 rounded-xl hover:opacity-90 disabled:opacity-40 transition"
 						>
 							{t("form.next")}
 						</button>
@@ -216,7 +216,7 @@ export default function CreateTicketEventPage() {
 			{step === "tiers" && (
 				<div className="space-y-4">
 					{tiers.map((tier, i) => (
-						<div key={i} className="bg-surface-container-low rounded-2xl p-4 border border-outline-variant space-y-3">
+						<div key={i} className="tsd-card p-4 space-y-3">
 							<div className="flex items-center justify-between">
 								<span className="text-sm font-bold">Tier {i + 1}</span>
 								{tiers.length > 1 && (
@@ -233,7 +233,7 @@ export default function CreateTicketEventPage() {
 								<div>
 									<label className="block text-xs font-semibold mb-1">{t("tiers.name")}</label>
 									<input
-										className="w-full border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-[#FF5A2E]"
+										className="w-full border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-primary"
 										placeholder={t("tiers.namePlaceholder")}
 										value={tier.name}
 										onChange={(e) => updateTier(i, "name", e.target.value)}
@@ -242,7 +242,7 @@ export default function CreateTicketEventPage() {
 								<div>
 									<label className="block text-xs font-semibold mb-1">{t("tiers.price")}</label>
 									<FormattedNumberInput
-										className="w-full border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-[#FF5A2E]"
+										className="w-full border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-primary"
 										placeholder="0"
 										value={tier.price}
 										onChange={(v) => updateTier(i, "price", v)}
@@ -251,7 +251,7 @@ export default function CreateTicketEventPage() {
 								<div>
 									<label className="block text-xs font-semibold mb-1">{t("tiers.capacity")}</label>
 									<FormattedNumberInput
-										className="w-full border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-[#FF5A2E]"
+										className="w-full border border-outline-variant rounded-xl px-3 py-2 text-sm bg-surface focus:outline-none focus:border-primary"
 										placeholder={t("tiers.capacityPlaceholder")}
 										value={tier.capacity}
 										onChange={(v) => updateTier(i, "capacity", v)}
@@ -268,7 +268,7 @@ export default function CreateTicketEventPage() {
 					<button
 						type="button"
 						onClick={addTier}
-						className="w-full border-2 border-dashed border-outline-variant rounded-xl py-3 text-sm font-semibold text-on-surface-variant hover:border-[#FF5A2E] hover:text-[#FF5A2E] transition"
+						className="w-full border-2 border-dashed border-outline-variant rounded-xl py-3 text-sm font-semibold text-on-surface-variant hover:border-primary hover:text-primary transition"
 					>
 						+ {t("tiers.add")}
 					</button>
@@ -285,7 +285,7 @@ export default function CreateTicketEventPage() {
 							type="button"
 							disabled={!canNextFromTiers}
 							onClick={() => setStep("review")}
-							className="bg-[#FF5A2E] text-white font-bold text-sm px-6 py-2.5 rounded-xl hover:opacity-90 disabled:opacity-40 transition"
+							className="bg-primary text-white font-bold text-sm px-6 py-2.5 rounded-xl hover:opacity-90 disabled:opacity-40 transition"
 						>
 							{t("form.next")}
 						</button>
@@ -296,7 +296,7 @@ export default function CreateTicketEventPage() {
 			{/* Step 3: Review */}
 			{step === "review" && (
 				<div className="space-y-6">
-					<div className="bg-surface-container-low rounded-2xl p-5 border border-outline-variant space-y-2">
+					<div className="tsd-card p-5 space-y-2">
 						<p className="text-xs font-bold uppercase tracking-wide text-on-surface-variant">{t("review.event")}</p>
 						<p className="text-lg font-black">{title}</p>
 						{description && <p className="text-sm text-on-surface-variant">{description}</p>}
@@ -328,18 +328,18 @@ export default function CreateTicketEventPage() {
 					</div>
 
 					{/* Commission agreement */}
-					<div className="bg-orange-50 border border-orange-200 rounded-2xl p-5 space-y-3">
+					<div className="bg-primary/10 border border-orange-200 rounded-2xl p-5 space-y-3">
 						<div className="flex items-center gap-2">
-							<svg className="w-4 h-4 text-[#FF5A2E] shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+							<svg className="w-4 h-4 text-primary shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
 								<path d="M9 12l2 2 4-4M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
 							</svg>
-							<p className="text-sm font-black text-[#FF5A2E]">{t("review.commissionTitle")}</p>
+							<p className="text-sm font-black text-primary">{t("review.commissionTitle")}</p>
 						</div>
 						<p className="text-xs text-orange-800 leading-relaxed">{t("review.commissionBody")}</p>
 						<ul className="space-y-2">
 							{(["commissionPoint1", "commissionPoint2", "commissionPoint3", "commissionPoint4", "commissionPoint5"] as const).map((key) => (
 								<li key={key} className="flex items-start gap-2 text-xs text-orange-800 leading-relaxed">
-									<span className="text-[#FF5A2E] font-black mt-0.5 shrink-0">•</span>
+									<span className="text-primary font-black mt-0.5 shrink-0">•</span>
 									{t(`review.${key}`)}
 								</li>
 							))}
@@ -347,7 +347,7 @@ export default function CreateTicketEventPage() {
 						<label className="flex items-start gap-3 pt-1 cursor-pointer">
 							<input
 								type="checkbox"
-								className="mt-0.5 h-4 w-4 accent-[#FF5A2E] shrink-0 cursor-pointer"
+								className="mt-0.5 h-4 w-4 accent-primary shrink-0 cursor-pointer"
 								checked={commissionAccepted}
 								onChange={(e) => setCommissionAccepted(e.target.checked)}
 							/>
@@ -378,7 +378,7 @@ export default function CreateTicketEventPage() {
 								type="button"
 								disabled={createMutation.isPending || !commissionAccepted}
 								onClick={() => createMutation.mutate(true)}
-								className="bg-[#FF5A2E] text-white font-bold text-sm px-6 py-2.5 rounded-xl hover:opacity-90 disabled:opacity-50 transition"
+								className="bg-primary text-white font-bold text-sm px-6 py-2.5 rounded-xl hover:opacity-90 disabled:opacity-50 transition"
 								title={!commissionAccepted ? t("review.commissionRequired") : undefined}
 							>
 								{createMutation.isPending ? t("publishing") : t("review.publish")}
