@@ -683,7 +683,7 @@
         },
         "insuranceSection": "Event Insurance",
         "insuranceCompulsoryTitle": "Insurance is compulsory for this tour",
-        "insuranceCompulsoryText": "TourStack has partnered with Insurance Partner to provide event insurance. Taking cover through this partnership is a condition of accessing TourStack financing and running this tour — select the products that apply below.",
+        "insuranceCompulsoryText": "TourStack has partnered with Sanlam Allianz to provide event insurance. Taking cover through this partnership is a condition of accessing TourStack financing and running this tour — select the products that apply below.",
         "insuranceProducts": {
           "label": "Insurance Products",
           "eventCancellation": "Event Cancellation",
@@ -718,7 +718,7 @@
           "label": "Additional Notes (optional)",
           "placeholder": "Any other information relevant to your application..."
         },
-        "declarationText": "By submitting this Expression of Interest, I confirm that all information provided is accurate and complete, and I acknowledge that event insurance — provided through TourStack's partnership with Insurance Partner — is compulsory and a condition of accessing TourStack financing and running this tour. I authorise Ckrowd to use this information to assess financing and insurance requirements for this tour.",
+        "declarationText": "By submitting this Expression of Interest, I confirm that all information provided is accurate and complete, and I acknowledge that event insurance — provided through TourStack's partnership with Sanlam Allianz — is compulsory and a condition of accessing TourStack financing and running this tour. I authorise Ckrowd to use this information to assess financing and insurance requirements for this tour.",
         "declarationAgree": "I have read and agree to the declaration above.",
         "reviewSection": "Application Summary"
       }
@@ -1339,7 +1339,7 @@
       },
       "insurance": {
         "title": "Insurance Included",
-        "body": "Tier 2+ crew receive group insurance coverage via Insurance Partner."
+        "body": "Tier 2+ crew receive group insurance coverage via SanlamAllianz."
       }
     },
     "success": {
@@ -1386,7 +1386,7 @@
         "perks": {
           "local": "Single-city tour deployment eligibility",
           "payment": "Banking Partner payment onboarding & day rate locked",
-          "insurance": "Group insurance coverage via Insurance Partner"
+          "insurance": "Group insurance coverage via SanlamAllianz"
         },
         "aya": "Eligible as local crew (per city)"
       },
@@ -1985,7 +1985,7 @@
         "perks": {
           "local": "Single-city tour deployment eligibility",
           "payment": "Banking Partner payment onboarding & day rate locked",
-          "insurance": "Group insurance coverage via Insurance Partner"
+          "insurance": "Group insurance coverage via SanlamAllianz"
         },
         "aya": "Eligible as local crew (per city)"
       },
@@ -2147,7 +2147,7 @@
     "hub": "TourStack · Insurance Hub",
     "hero": {
       "title": "Insurance for <spanHighlight>Every Role.</spanHighlight><br></br>Built Into the Pipeline.",
-      "description": "Insurance Partner-powered coverage embedded in the CTaaS certification pipeline — activating automatically as you onboard.",
+      "description": "SanlamAllianz-powered coverage embedded in the CTaaS certification pipeline — activating automatically as you onboard.",
       "startOnboarding": "Start Onboarding",
       "viewProducts": "View Products"
     },
@@ -2165,7 +2165,7 @@
     },
     "stats": {
       "portfolio": "Insurable Portfolio",
-      "markets": "Partner Markets",
+      "markets": "SanlamAllianz Markets",
       "lines": "Coverage Lines",
       "roles": "Certified Roles",
       "values": {
@@ -2201,7 +2201,7 @@
       "partners": "Insurance Partners",
       "partnersList": [
         {
-          "name": "Insurance Partner (TBC)",
+          "name": "SanlamAllianz Nigeria",
           "sub": "Pan-Africa · All Insurance Lines"
         },
         {
@@ -2216,7 +2216,7 @@
       "step": "Step {current} of {total}",
       "activates": {
         "title": "Insurance Activates at This Step",
-        "description": "Insurance Partner coverage activates automatically upon certification completion. No separate application required."
+        "description": "SanlamAllianz coverage activates automatically upon certification completion. No separate application required."
       },
       "finance": {
         "title": "Finance Products Unlocked",
@@ -2237,7 +2237,7 @@
         "description": "Pan-African insurance leader. 27 markets. All product lines underwritten and managed in-partnership with Ckrowd.",
         "portfolio": "Insurable Portfolio",
         "scale": "at 5-year scale",
-        "brand": "Insurance Partner (TBC)",
+        "brand": "SanlamAllianz",
         "portfolioValue": "$600M"
       }
     },
@@ -2275,7 +2275,7 @@
         },
         {
           "q": "What happens if the event is cancelled?",
-          "a": "Promoter-initiated cancellation triggers the Event Cancellation policy. Claims are processed within 30 days via Insurance Partner."
+          "a": "Promoter-initiated cancellation triggers the Event Cancellation policy. Claims are processed within 30 days via SanlamAllianz."
         },
         {
           "q": "Is a bank account in Africa required?",
@@ -2309,7 +2309,7 @@
           },
           {
             "label": "Insurance Activation",
-            "detail": "Insurance Partner Business Insurance activates upon certification completion. Coverage includes event cancellation, liability, and credit guarantee."
+            "detail": "SanlamAllianz Business Insurance activates upon certification completion. Coverage includes event cancellation, liability, and credit guarantee."
           },
           {
             "label": "Finance Eligibility",
@@ -2385,7 +2385,7 @@
           },
           {
             "label": "Group Insurance Activation",
-            "detail": "Personal accident, employer liability, and contractor coverage activated via Insurance Partner group policy."
+            "detail": "Personal accident, employer liability, and contractor coverage activated via SanlamAllianz group policy."
           },
           {
             "label": "Cross-Border Deployment",
@@ -2448,7 +2448,7 @@
           },
           {
             "label": "Insurance Profile Creation",
-            "detail": "SME business insurance bundle activated via Insurance Partner. Covers equipment, cargo, and business interruption."
+            "detail": "SME business insurance bundle activated via SanlamAllianz. Covers equipment, cargo, and business interruption."
           },
           {
             "label": "Finance Access",
@@ -2570,7 +2570,7 @@
       },
       {
         "label": "Insurance Activation",
-        "desc": "Insurance Partner product suite activates automatically."
+        "desc": "SanlamAllianz product suite activates automatically."
       },
       {
         "label": "Finance Eligibility",
@@ -5254,7 +5254,7 @@
       },
       "step4": {
         "startDate": "Coverage Start Date",
-        "terms": "I agree to the Insurance Partner terms of service and authorize automatic premium deduction from my enterprise account."
+        "terms": "I agree to the SanlamAllianz terms of service and authorize automatic premium deduction from my enterprise account."
       },
       "step5": {
         "acknowledgement": "I acknowledge that Tour Finance facilities are unlocked and agree to submit event budgets for underwriting."

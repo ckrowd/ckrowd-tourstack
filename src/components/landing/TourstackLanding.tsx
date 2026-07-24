@@ -530,11 +530,17 @@ export default function TourstackLanding({ fontClass }: { fontClass: string }) {
 				<section className="hair-b">
 					<div className="max-w-[1760px] mx-auto px-6 sm:px-10 py-12 flex flex-col lg:flex-row items-center justify-between gap-8 reveal">
 						<p className="eyebrow text-muted shrink-0">{t("trust.eyebrow")}</p>
-						{/* Partner names/logos withheld until confirmation is received */}
+						{/* Banking partner name/logo withheld until confirmation is received */}
 						<div className="flex items-center gap-10 sm:gap-14 flex-wrap justify-center">
 							<span className="text-sm font-semibold uppercase tracking-widest text-muted opacity-90">{t("trust.bankingPartner")}</span>
 							<span className="hidden sm:block h-8 w-px" style={{ background: "var(--hair)" }} />
-							<span className="text-sm font-semibold uppercase tracking-widest text-muted opacity-90">{t("trust.insurancePartner")}</span>
+							<img
+								src="/sanlam-allianz.png"
+								alt="Sanlam Allianz"
+								className="h-8 sm:h-9 w-auto object-contain opacity-90"
+								loading="lazy"
+								decoding="async"
+							/>
 						</div>
 					</div>
 				</section>

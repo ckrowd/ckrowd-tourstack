@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/routing";
 import TourGuide from "@/components/TourGuide";
 import Icon from "@/components/icons";
+import NavIcon from "@/components/icons/NavIcon";
 import { getTourstackProfile } from "@/app/actions";
 import { isProfileComplete } from "@/components/ProfileSetupGate";
 
@@ -66,7 +67,7 @@ export default function SideNavClient({ navItems, startNewTourLabel }: Props) {
 					title={t("profileRequired")}
 					className="relative flex items-center gap-3 px-3 py-2 rounded-lg mx-3 text-sm font-medium text-on-surface-variant/40 cursor-not-allowed select-none"
 				>
-					<Icon name={item.icon} size={18} className="shrink-0" />
+					<NavIcon name={item.key} size={18} className="grayscale opacity-40" />
 					<span className="flex-1 truncate">{item.label}</span>
 					<Icon name="lock" size={13} className="shrink-0" />
 				</div>
@@ -87,11 +88,10 @@ export default function SideNavClient({ navItems, startNewTourLabel }: Props) {
 				{isActive && (
 					<span className="absolute -left-3 top-1/2 -translate-y-1/2 h-5 w-0.75 rounded-full bg-primary" />
 				)}
-				<Icon
-					name={item.icon}
+				<NavIcon
+					name={item.key}
 					size={18}
-					strokeWidth={isActive ? 2 : 1.75}
-					className="shrink-0 transition-transform duration-200 group-hover:scale-105"
+					className="transition-transform duration-200 group-hover:scale-105"
 				/>
 				<span className="truncate">{item.label}</span>
 			</Link>

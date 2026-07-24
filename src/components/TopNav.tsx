@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import Icon from "@/components/icons";
+import NavIcon from "@/components/icons/NavIcon";
 import Image from "next/image";
 import { useFormatter, useLocale, useNow, useTranslations } from "next-intl";
 import { useCallback, useSyncExternalStore, useState } from "react";
@@ -188,7 +189,7 @@ export default function TopNav() {
 		{ label: tSideNav("insurance"), icon: "insurance", href: "/insurance" },
 		{
 			label: tSideNav("tickets"),
-			icon: "tours",
+			icon: "tickets",
 			href: "/dashboard/tickets",
 		},
 		{
@@ -202,7 +203,7 @@ export default function TopNav() {
 		{ label: tAdminSideNav("overview"), icon: "overview", href: "/admin" },
 		{
 			label: tAdminSideNav("artists"),
-			icon: "music",
+			icon: "artists",
 			href: "/admin/artists",
 		},
 		{
@@ -210,10 +211,10 @@ export default function TopNav() {
 			icon: "tours",
 			href: "/admin/tours",
 		},
-		{ label: tAdminSideNav("eoi"), icon: "send", href: "/admin/eoi" },
+		{ label: tAdminSideNav("eoi"), icon: "eoi", href: "/admin/eoi" },
 		{
 			label: tAdminSideNav("financing"),
-			icon: "wallet",
+			icon: "financing",
 			href: "/admin/financing",
 		},
 		{
@@ -223,37 +224,37 @@ export default function TopNav() {
 		},
 		{
 			label: tAdminSideNav("claims"),
-			icon: "shield-check",
+			icon: "claims",
 			href: "/admin/claims",
 		},
 		{
 			label: tAdminSideNav("tickets"),
-			icon: "tours",
+			icon: "tickets",
 			href: "/admin/tickets",
 		},
 		{
 			label: tAdminSideNav("payments"),
-			icon: "wallet",
+			icon: "payments",
 			href: "/admin/payments",
 		},
 		{
 			label: tAdminSideNav("payouts"),
-			icon: "financing",
+			icon: "payouts",
 			href: "/admin/payouts",
 		},
 		{
 			label: tAdminSideNav("directory"),
-			icon: "stakeholders",
+			icon: "directory",
 			href: "/admin/directory",
 		},
 		{
 			label: tAdminSideNav("submissions"),
-			icon: "folder",
+			icon: "submissions",
 			href: "/admin/submissions",
 		},
 		{
 			label: tAdminSideNav("reports"),
-			icon: "chart",
+			icon: "reports",
 			href: "/admin/reports",
 		},
 		{
@@ -271,17 +272,17 @@ export default function TopNav() {
 		},
 		{
 			label: tFinancingAdminSideNav("applications"),
-			icon: "file-text",
+			icon: "applications",
 			href: "/financing-admin/applications",
 		},
 		{
 			label: tFinancingAdminSideNav("partners"),
-			icon: "financing",
+			icon: "partners",
 			href: "/financing-admin/partners",
 		},
 		{
 			label: tFinancingAdminSideNav("settings"),
-			icon: "sliders",
+			icon: "settings",
 			href: "/financing-admin/settings",
 		},
 	];
@@ -289,30 +290,30 @@ export default function TopNav() {
 	const insuranceAdminNavItems = [
 		{
 			label: tInsuranceAdminSideNav("overview"),
-			icon: "insurance",
+			icon: "overview",
 			href: "/insurance-admin",
 		},
 		{
 			label: tInsuranceAdminSideNav("applications"),
-			icon: "file-text",
+			icon: "applications",
 			href: "/insurance-admin/applications",
 		},
 		{
 			label: tInsuranceAdminSideNav("claims"),
-			icon: "alert-triangle",
+			icon: "claims",
 			href: "/insurance-admin/claims",
 		},
 		{
 			label: tInsuranceAdminSideNav("partners"),
-			icon: "handshake",
+			icon: "partners",
 			href: "/insurance-admin/partners",
 		},
 	];
 
 	const artmgmtNavItems = [
-		{ label: tArtmgmtSideNav("artists"), icon: "star", href: "/artmgmt" },
-		{ label: tArtmgmtSideNav("submissions"), icon: "send", href: "/artmgmt/submissions" },
-		{ label: tArtmgmtSideNav("reports"), icon: "chart", href: "/artmgmt/reports" },
+		{ label: tArtmgmtSideNav("artists"), icon: "artists", href: "/artmgmt" },
+		{ label: tArtmgmtSideNav("submissions"), icon: "submissions", href: "/artmgmt/submissions" },
+		{ label: tArtmgmtSideNav("reports"), icon: "reports", href: "/artmgmt/reports" },
 	];
 
 	const mobileNavItems = isAdminPortal
@@ -516,7 +517,7 @@ export default function TopNav() {
 												onClick={() => setProfileOpen(false)}
 												className="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-on-surface-variant hover:bg-surface-container-low transition-colors font-(family-name:--font-manrope)"
 											>
-												<Icon name="profile" size={16} className="text-on-surface-variant" />
+												<NavIcon name="profile" size={16} />
 												{tCommon("profile")}
 											</Link>
 											{!isArtmgmtPortal && (
@@ -525,7 +526,7 @@ export default function TopNav() {
 													onClick={() => setProfileOpen(false)}
 													className="flex items-center gap-3 px-4 py-3 text-sm font-semibold text-on-surface-variant hover:bg-surface-container-low transition-colors font-(family-name:--font-manrope)"
 												>
-													<Icon name="settings" size={16} className="text-on-surface-variant" />
+													<NavIcon name="settings" size={16} />
 													{tCommon("settings")}
 												</Link>
 											)}
@@ -661,7 +662,7 @@ export default function TopNav() {
 											: "text-on-surface-variant hover:bg-surface-container-low"
 									}`}
 								>
-									<Icon name={item.icon} size={20} />
+									<NavIcon name={item.icon} size={20} />
 									<span>{item.label}</span>
 								</Link>
 							))}
@@ -720,7 +721,7 @@ export default function TopNav() {
 										onClick={() => setMobileMenuOpen(false)}
 										className="flex items-center gap-3 px-4 py-3 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
 									>
-										<Icon name="profile" size={20} className="text-on-surface-variant" />
+										<NavIcon name="profile" size={20} />
 										<span>{tCommon("profile")}</span>
 									</Link>
 
@@ -731,7 +732,7 @@ export default function TopNav() {
 											onClick={() => setMobileMenuOpen(false)}
 											className="flex items-center gap-3 px-4 py-3 rounded-xl font-(family-name:--font-manrope) font-semibold text-sm text-on-surface-variant hover:bg-surface-container-low transition-colors"
 										>
-											<Icon name="settings" size={20} className="text-on-surface-variant" />
+											<NavIcon name="settings" size={20} />
 											<span>{tCommon("settings")}</span>
 										</Link>
 									)}
