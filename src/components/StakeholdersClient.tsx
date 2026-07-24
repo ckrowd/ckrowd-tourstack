@@ -287,11 +287,13 @@ export default function StakeholdersClient() {
 		<>
 			<main className="flex-1 lg:ml-64 bg-surface p-6 md:px-10 md:pt-5 md:pb-10">
 				<PageTour pageId="stakeholders" />
-				<div className="w-full space-y-10">
+				<div className="w-full space-y-6">
 
-					{/* Header */}
+					{/* Header — !mb-6 (not !mb-0): Tailwind v4 `space-y` spaces via
+					    margin-bottom on non-last children, so the hero must carry its
+					    own 24px to match the gap below the invite banner. */}
 					<PageHero
-						className="!mb-0"
+						className="!mb-6"
 						image="/landing-market.jpg"
 						eyebrow={t("header.platform")}
 						title={t("header.title")}
